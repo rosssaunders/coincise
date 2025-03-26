@@ -1,0 +1,8 @@
+{
+  "name": "coinbaseprime-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@mendable/firecrawl-js": "^1.21.0"
+  }
+}

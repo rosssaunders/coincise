@@ -1,9 +1,10 @@
 use std::error::Error;
 use clap::{Parser, ValueEnum};
 
-mod exchanges;
+// Import from local modules
 mod utils;
 mod token_counter;
+mod processor_registry;
 
 #[derive(Debug, Clone, ValueEnum)]
 enum Command {
@@ -22,9 +23,7 @@ enum Exchange {
     #[value(name = "binancecoinm")]
     BinanceCoinM,
     #[value(name = "binanceoptions")]
-    BinanceOptions,
-    #[value(name = "bybit")]
-    ByBit,
+    BinanceOptions
 }
 
 #[derive(Parser, Debug)]
@@ -48,18 +47,17 @@ struct ExchangeResult {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
+async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let args = Args::parse();
 
     match args.command {
         Command::Process => {
             // Get processors based on exchange type
             let processors = match args.exchange.unwrap() {
-                Exchange::BinanceUSDM => exchanges::processor_registry::create_processors_by_exchange("binanceusdm"),
-                Exchange::BinanceSpot => exchanges::processor_registry::create_processors_by_exchange("binancespot"),
-                Exchange::BinanceCoinM => exchanges::processor_registry::create_processors_by_exchange("binancecoinm"),
-                Exchange::BinanceOptions => exchanges::processor_registry::create_processors_by_exchange("binanceoptions"),
-                Exchange::ByBit => exchanges::processor_registry::create_processors_by_exchange("bybit"),
+                Exchange::BinanceUSDM => processor_registry::create_processors_by_exchange("binanceusdm"),
+                Exchange::BinanceSpot => processor_registry::create_processors_by_exchange("binancespot"),
+                Exchange::BinanceCoinM => processor_registry::create_processors_by_exchange("binancecoinm"),
+                Exchange::BinanceOptions => processor_registry::create_processors_by_exchange("binanceoptions"),
             };
 
             // Process each exchange and collect results
@@ -89,7 +87,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
             }
         }
         Command::Count => {
-            token_counter::process_all_docs()?;
+            // Convert the error type explicitly to include Send + Sync
+            token_counter::process_all_docs()
+                .map_err(|e| -> Box<dyn Error + Send + Sync> { 
+                    Box::new(std::io::Error::new(std::io::ErrorKind::Other, e.to_string())) 
+                })?;
         }
     }
 
