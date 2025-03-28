@@ -84,7 +84,7 @@ turndownService.addRule('codeBlock', {
 
 // Path to the HTML file
 const htmlFilePath = path.join(__dirname, 'gateio.html');
-const outputFilePath = path.join(__dirname, 'gateio.md');
+const outputFilePath = path.join(__dirname, '../../../docs/gateio/rest_api.md');
 
 // Function to download HTML file
 function downloadHtml(url, filePath) {
@@ -189,6 +189,15 @@ function processHtml(html) {
   } catch (error) {
     console.error('Error processing HTML:', error);
   }
+
+  // Delete the downloaded HTML file
+  fs.unlink(htmlFilePath, (err) => {
+    if (err) {
+      console.error('Error deleting HTML file:', err);
+    } else {
+      console.log('HTML file deleted successfully.');
+    }
+  });
 }
 
 // Main execution

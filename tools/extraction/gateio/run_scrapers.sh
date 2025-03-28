@@ -14,6 +14,7 @@ run_scraper() {
 }
 
 # Run each scraper in sequence
+run_scraper "rest_api.js"
 run_scraper "websocket_spot_api.js"
 run_scraper "websocket_futures_docs.js"
 run_scraper "websocket_perps_api.js"

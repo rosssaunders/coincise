@@ -1,52 +1,32 @@
+# [#](#gate-io-delivery-websocket-v4) Gate.io Delivery WebSocket v4
 
+Gate.io provides a simple and robust Websocket API to integrate gate.io BTC/USDT delivery contract trade status into your business or application.
 
-# DELIVERY/WS/EN/
+We have language bindings in `Python`, more in the future! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#gate-io-delivery-websocket-v4) Gate.io Delivery WebSocket v4
+## [#](#server-url) Server URL
 
-Gate.io provides a simple and robust Websocket API to integrate gate.io BTC/USDT delivery contract
-trade status into your business or application.
+We provide BTC/USDT delivery contract trade server urls, you can choose one of them according to your condition.
 
-We have language bindings in `Python`, more in the future! You can view code
-examples in the dark area to the right, and you can switch the programming language of the examples
-with the tabs in the top right.
-
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#server-url) Server URL
-
-We provide BTC/USDT delivery contract trade server urls, you can choose one of them according to your
-condition.
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#usdt-contract) USDT Contract
+### [#](#usdt-contract) USDT Contract
 
 Base URLs:
 
-- Real Trading: `wss://fx-ws.gateio.ws/v4/ws/delivery/usdt`
+*   Real Trading: `wss://fx-ws.gateio.ws/v4/ws/delivery/usdt`
+    
+*   TestNet: `wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt`
+    
 
-- TestNet: `wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt`
-
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#btc-contract) BTC Contract
+### [#](#btc-contract) BTC Contract
 
 Base URLs:
 
-- Real Trading: `wss://fx-ws.gateio.ws/v4/ws/delivery/btc`
+*   Real Trading: `wss://fx-ws.gateio.ws/v4/ws/delivery/btc`
+    
+*   TestNet Trading: `wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/btc`
+    
 
-- TestNet Trading: `wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/btc`
-
-
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#changelog) Changelog
-
-2021-08-06
-
-Add BTC settled delivery contracts support
-
-2020-08-08
-
-Add a complete code demo(golang, python)
-
-2020-08-07
-
-Add auto orders subscription
+## [#](#changelog) Changelog
 
 ```
 # !/usr/bin/env python
@@ -62,6 +42,7 @@ from websocket import WebSocketApp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 
 class GateWebSocketApp(WebSocketApp):
 
@@ -113,16 +94,19 @@ class GateWebSocketApp(WebSocketApp):
     def unsubscribe(self, channel, payload=None, auth_required=True):
         self._request(channel, "unsubscribe", payload, auth_required)
 
+
 def on_message(ws, message):
     # type: (GateWebSocketApp, str) -> None
     # handle message received
     logger.info("message received from server: {}".format(message))
+
 
 def on_open(ws):
     # type: (GateWebSocketApp) -> None
     # subscribe to channels interested
     logger.info('websocket connected')
     ws.subscribe("futures.tickers", ['BTC_USDT_20230630'], False)
+
 
 if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
@@ -132,7 +116,6 @@ if __name__ == "__main__":
                            on_open=on_open,
                            on_message=on_message)
     app.run_forever(ping_interval=5)
-
 ```
 
 ```
@@ -249,96 +232,90 @@ func main() {
 
 	select {}
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#api-overview) API Overview
+2021-08-06
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#method) Method
+Add BTC settled delivery contracts support
+
+2020-08-08
+
+Add a complete code demo(golang, python)
+
+2020-08-07
+
+Add auto orders subscription
+
+## [#](#api-overview) API Overview
+
+### [#](#method) Method
 
 Each general api (such as ticker, order book etc.) supports 4 different event messages, they are:
 
-1. **`subscribe`** ( **RECOMMENDED TO USE**)
+1.  **`subscribe`** (**RECOMMENDED TO USE**)
+    
+    Subscribe to receive notification from server when new data is available.
+    
+2.  **`unsubscribe`**
+    
+    Server will not send new data notification if unsubscribed.
+    
+3.  **`update`**
+    
+    If new subscribed data(incremental data) is available, server will send a notification to client.
+    
+4.  **`all`**
+    
+    If new subscribed data(all data) is available, server will send a notification to client.
+    
 
-Subscribe to receive notification from server when new data is available.
-
-2. **`unsubscribe`**
-
-Server will not send new data notification if unsubscribed.
-
-3. **`update`**
-
-If new subscribed data(incremental data) is available, server will send a notification to client.
-
-4. **`all`**
-
-If new subscribed data(all data) is available, server will send a notification to client.
-
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request) Request
+### [#](#request) Request
 
 Each request follows a common format, which contains `time`, `channel`, `event` and `payload`.
 
 | parameter | type | required | description |
 | --- | --- | --- | --- |
-| `time` | Integer | Yes | request time |
-| `channel` | String | Yes | request subscribe/unsubscribe channel |
-| `auth` | String | no | request auth info, see Authentication section for details |
-| `event` | String | Yes | request event (subscribe/unsubscribe/update/all) |
-| `payload` | Array | Yes | request detail parameters |
+| time | Integer | Yes | request time |
+| channel | String | Yes | request subscribe/unsubscribe channel |
+| auth | String | no | request auth info, see Authentication section for details |
+| event | String | Yes | request event (subscribe/unsubscribe/update/all) |
+| payload | Array | Yes | request detail parameters |
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#response) Response
+### [#](#response) Response
 
-Similar with request, response follows a common format composed of `time`, `channel`, `event`
-, `error` and `result`.
+Similar with request, response follows a common format composed of `time`, `channel`, `event` , `error` and `result`.
 
 | field | type | required | description |
 | --- | --- | --- | --- |
-| `time` | Integer | Yes | response time |
-| `channel` | String | Yes | response channel |
-| `event` | String | Yes | response channel event (update/all) |
-| `error` | Object | Yes | response channel event (update/all) |
-| `result` | Any | Yes | New data notification from the server, or response to client requests. Null if `error` is not null. |
+| time | Integer | Yes | response time |
+| channel | String | Yes | response channel |
+| event | String | Yes | response channel event (update/all) |
+| error | Object | Yes | response channel event (update/all) |
+| result | Any | Yes | New data notification from the server, or response to client requests. Null iferror is not null. |
 
-Note: type of `result` is channel specific if it's server-initiated data update notification, but
-response to client subscription request always set the `result` to `{"status": "success"}`. To
-verify if subscription request is successful or not, you only need to check if `error` field is
-null. Parsing `result` field is not necessary.
+Note: type of `result` is channel specific if it's server-initiated data update notification, but response to client subscription request always set the `result` to `{"status": "success"}`. To verify if subscription request is successful or not, you only need to check if `error` field is null. Parsing `result` field is not necessary.
 
-Channel specific description below will only give the server-initiated data update notification
-format for simplicity.
+Channel specific description below will only give the server-initiated data update notification format for simplicity.
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#error) Error
+### [#](#error) Error
 
-In case of error, you receive a message containing the proper error code and message within an error
-object.
+In case of error, you receive a message containing the proper error code and message within an error object.
 
 | Code | Message |
 | --- | --- |
-| `1` | `invalid argument struct` |
-| `2` | `invalid argument` |
-| `3` | `service error` |
-| `4` | `authentication fail` |
+| 1 | invalid argument struct |
+| 2 | invalid argument |
+| 3 | service error |
+| 4 | authentication fail |
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#authentication) Authentication
+## [#](#authentication) Authentication
 
-Request body needs to carry authentication information if channels are private,
-e.g. `futures.usertrades`
+Request body needs to carry authentication information if channels are private, e.g. `futures.usertrades`
 
-WebSocket authentication uses the same signature calculation method with HTTP API, but has the
-following differences:
+WebSocket authentication uses the same signature calculation method with HTTP API, but has the following differences:
 
-1. Signature string concatenation method: `channel=<channel>&event=<event>&time=<time>`,
-where `<channel>`, `<event>`, `<time>` are corresponding request information
-2. Authentication information are sent in request body in field `auth`.
-
-You can log into the console to retrieve delivery API key and secret.
-
-| field | type | description |
-| --- | --- | --- |
-| `method` | String | allowed value: `api_key` |
-| `KEY` | String | user key string |
-| `SIGN` | String | user sign string |
+1.  Signature string concatenation method: `channel=<channel>&event=<event>&time=<time>`, where `<channel>`, `<event>`, `<time>` are corresponding request information
+2.  Authentication information are sent in request body in field `auth`.
 
 ```
 # example WebSocket signature calculation implementation in Python
@@ -348,31 +325,29 @@ import hmac, hashlib, time
 secret = 'xxxx'
 message = 'channel=%s&event=%s&time=%s' % ('futures.orders', 'subscribe', int(time.time()))
 print(hmac.new(secret, message, hashlib.sha512).hexdigest())  ## Generating signature
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#system-api) System API
+You can log into the console to retrieve delivery API key and secret.
+
+| field | type | description |
+| --- | --- | --- |
+| method | String | allowed value: api_key |
+| KEY | String | user key string |
+| SIGN | String | user sign string |
+
+# [#](#system-api) System API
 
 **Provides system status check, such as ping-pong.**
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#ping-and-pong) Ping and Pong
+## [#](#ping-and-pong) Ping and Pong
 
 **Check Server/Client connectivity.**
 
-**gate.io delivery contract use the protocol layer ping/pong message.The server will initiate a ping**
-**message actively. If the client does not reply, the client will be disconnected.**
+**gate.io delivery contract use the protocol layer ping/pong message.The server will initiate a ping message actively. If the client does not reply, the client will be disconnected.**
 
-[websocket rfc(opens new window)](https://tools.ietf.org/html/rfc6455)
+[websocket rfc (opens new window)](https://tools.ietf.org/html/rfc6455)
 
-**if you want to actively detect the connection status, you can send application layer ping message**
-**and receive pong message.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-2) Request
-
-- channel
-
-`futures.ping`
-
+**if you want to actively detect the connection status, you can send application layer ping message and receive pong message.**
 
 ```
 from websocket import create_connection
@@ -380,7 +355,6 @@ from websocket import create_connection
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send('{"time" : 123456, "channel" : "futures.ping"}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -393,37 +367,20 @@ The above command returns JSON structured like this:
   "error": null,
   "result": null
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#tickers-api) Tickers API
+### [#](#request-2) Request
 
-**The ticker is a high level overview of the state of the contract. It shows you the highest,**
-**lowest, last trade price. It also includes information such as daily volume and how much the price**
-**has moved over the last day.**
+*   channel
+    
+    `futures.ping`
+    
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#tickers-subscription) Tickers subscription
+# [#](#tickers-api) Tickers API
 
-**Subscribe delivery contract ticker.**
+**The ticker is a high level overview of the state of the contract. It shows you the highest, lowest, last trade price. It also includes information such as daily volume and how much the price has moved over the last day.**
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-3) Request
-
-- channel
-
-`futures.tickers`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `payload` | Array | Yes | contract list |
-
+## [#](#tickers-subscription) Tickers subscription
 
 ```
 from websocket import create_connection
@@ -432,7 +389,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.tickers", "event": "subscribe", "payload" : ["BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -447,52 +403,27 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#tickers-notification) Tickers notification
+**Subscribe delivery contract ticker.**
 
-**Notify subscribed contract ticker.**
+### [#](#request-3) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify) Notify
-
-- channel
-
-`futures.tickers`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.tickers`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | payload | Array | Yes | contract list |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `contract` | String | delivery contract name |
-| `last` | String | last price |
-| `change_percentage` | String | change percentage |
-| `funding_rate` | String | funding rate |
-| `funding_rate_indicative` | String | funding rate indicative |
-| `mark_price` | String | mark price |
-| `index_price` | String | index price |
-| `total_size` | String | total size |
-| `volume_24h` | String | volume 24h |
-| `quanto_base_rate` | String | quanto base rate |
-| `volume_24h_btc` | String | watch http api |
-| `volume_24h_usd` | String | watch http api |
-| `volume_24h_quote` | String | watch http api |
-| `volume_24h_settle` | String | watch http api |
-| `volume_24h_base` | String | watch http api |
-
+## [#](#tickers-notification) Tickers notification
 
 ```
 {
@@ -500,43 +431,65 @@ The above command returns JSON structured like this:
   "channel": "futures.tickers",
   "event": "update",
   "error": null,
-  "result": [\
-    {\
-      "contract": "BTC_USDT_20230630",\
-      "last": "118.4",\
-      "change_percentage": "0.77",\
-      "funding_rate": "-0.000114",\
-      "funding_rate_indicative": "0.01875",\
-      "mark_price": "118.35",\
-      "index_price": "118.36",\
-      "total_size": "73648",\
-      "volume_24h": "745487577",\
-      "volume_24h_btc": "117",\
-      "volume_24h_usd": "419950",\
-      "quanto_base_rate": "",\
-      "volume_24h_quote": "1665006",\
-      "volume_24h_settle": "178",\
-      "volume_24h_base": "5526"\
-    }\
+  "result": [
+    {
+      "contract": "BTC_USDT_20230630",
+      "last": "118.4",
+      "change_percentage": "0.77",
+      "funding_rate": "-0.000114",
+      "funding_rate_indicative": "0.01875",
+      "mark_price": "118.35",
+      "index_price": "118.36",
+      "total_size": "73648",
+      "volume_24h": "745487577",
+      "volume_24h_btc": "117",
+      "volume_24h_usd": "419950",
+      "quanto_base_rate": "",
+      "volume_24h_quote": "1665006",
+      "volume_24h_settle": "178",
+      "volume_24h_base": "5526"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription) Cancel subscription
+**Notify subscribed contract ticker.**
 
-**Unsubscribe contract ticker.**
+### [#](#notify) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-4) Request
+*   channel
+    
+    `futures.tickers`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | contract | String | delivery contract name |
+  | last | String | last price |
+  | change_percentage | String | change percentage |
+  | funding_rate | String | funding rate |
+  | funding_rate_indicative | String | funding rate indicative |
+  | mark_price | String | mark price |
+  | index_price | String | index price |
+  | total_size | String | total size |
+  | volume_24h | String | volume 24h |
+  | quanto_base_rate | String | quanto base rate |
+  | volume_24h_btc | String | watch http api |
+  | volume_24h_usd | String | watch http api |
+  | volume_24h_quote | String | watch http api |
+  | volume_24h_settle | String | watch http api |
+  | volume_24h_base | String | watch http api |
 
-- channel
-
-`futures.tickers`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription) Cancel subscription
 
 ```
 import json
@@ -551,7 +504,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -566,36 +518,26 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#trades-api) Trades API
+**Unsubscribe contract ticker.**
 
-**This channel sends a trade message whenever a trade occurs at gate.io. It includes details of the**
-**trade, such as price, amount, time and type.**
+### [#](#request-4) Request
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#trades-subscription) Trades subscription
+*   channel
+    
+    `futures.tickers`
+    
+*   event
+    
+    `unsubscribe`
+    
 
-**Subscribe trades update notification.**
+# [#](#trades-api) Trades API
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-5) Request
+**This channel sends a trade message whenever a trade occurs at gate.io. It includes details of the trade, such as price, amount, time and type.**
 
-- channel
-
-`futures.trades`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `payload` | Array | Yes | contract list |
-
+## [#](#trades-subscription) Trades subscription
 
 ```
 from websocket import create_connection
@@ -604,7 +546,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.trades", "event": "subscribe", "payload" : ["BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -619,43 +560,27 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#trades-notification) Trades notification
+**Subscribe trades update notification.**
 
-**Notify latest trades update.**
+### [#](#request-5) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-2) Notify
-
-- channel
-
-`futures.trades`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.trades`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | payload | Array | Yes | contract list |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `contract` | String | delivery contract name |
-| `size` | int | trades size |
-| `id` | int | trades id |
-| `create_time` | int | trades msg create time |
-| `create_time_ms` | int | trades msg create time in milliseconds |
-| `price` | string | trades price |
-
+## [#](#trades-notification) Trades notification
 
 Positive size means taker is buyer，negative seller
 
@@ -664,34 +589,47 @@ Positive size means taker is buyer，negative seller
   "channel": "futures.trades",
   "event": "update",
   "time": 1541503698,
-  "result": [\
-    {\
-      "size": -108,\
-      "id": 27753479,\
-      "create_time": 1545136464,\
-      "create_time_ms": 1545136464123,\
-      "price": "96.4",\
-      "contract": "BTC_USDT_20230630"\
-    }\
+  "result": [
+    {
+      "size": -108,
+      "id": 27753479,
+      "create_time": 1545136464,
+      "create_time_ms": 1545136464123,
+      "price": "96.4",
+      "contract": "BTC_USDT_20230630"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-2) Cancel subscription
+**Notify latest trades update.**
 
-**Unsubscribe trades update notification.**
+### [#](#notify-2) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-6) Request
+*   channel
+    
+    `futures.trades`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | contract | String | delivery contract name |
+  | size | int | trades size |
+  | id | int | trades id |
+  | create_time | int | trades msg create time |
+  | create_time_ms | int | trades msg create time in milliseconds |
+  | price | string | trades price |
 
-- channel
-
-`futures.trades`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-2) Cancel subscription
 
 ```
 from websocket import create_connection
@@ -700,7 +638,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.trades", "event": "subscribe", "payload" : ["BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -715,79 +652,54 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#order-book-api) Order Book API
+**Unsubscribe trades update notification.**
 
-**The order\_book channel allow you to keep track of the state of the gate.io order book depth. It is**
-**provided on a price aggregated basis, with customizable precision.**
+### [#](#request-6) Request
+
+*   channel
+    
+    `futures.trades`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#order-book-api) Order Book API
+
+**The order\_book channel allow you to keep track of the state of the gate.io order book depth. It is provided on a price aggregated basis, with customizable precision.**
 
 There are three different order book channels for subscription:
 
-- `futures.order_book`
-
-Legacy channel, which uses `all` to push full limited-level order book, and `update` to send every
-order book change event.
-
-- `futures.book_ticker`
-
-Push best bid and ask in real-time.
-
-- `futures.order_book_update`
-
-Push order book change with user-specified update frequency.
-
+*   `futures.order_book`
+    
+    Legacy channel, which uses `all` to push full limited-level order book, and `update` to send every order book change event.
+    
+*   `futures.book_ticker`
+    
+    Push best bid and ask in real-time.
+    
+*   `futures.order_book_update`
+    
+    Push order book change with user-specified update frequency.
+    
 
 WARNING
 
-Receiving order book update through `futures.order_book` is not recommended
-to use. `futures.order_book_update` can provide more timely update with less traffic
+Receiving order book update through `futures.order_book` is not recommended to use. `futures.order_book_update` can provide more timely update with less traffic
 
 How to maintain local order book:
 
-1. Subscribe `futures.order_book_update` with specified level and update frequency, e.g.
-`["BTC_USDT_20230630", "1000ms", "10"]` pushes the first 10 levels' update in BTC\_USDT order book every 1s
-2. Cache WebSocket notifications. Every notification use `U` and `u` to tell the first and last
-update ID since last notification.
-3. Retrieve base order book using REST API, and make sure the order book ID is recorded(referred
-as `baseID` below)
-e.g. `https://api.gateio.ws/api/v4/delivery/usdt/order_book?contract=BTC_USDT_20230630&limit=10&with_id=true`
-retrieves the 10-level base order book of BTC\_USDT\_20230630
-4. Iterate the cached WebSocket notifications, and find the first one which contains the baseID,
-i.e. `U <= baseId+1` and `u >= baseId+1`, then start consuming from it. Note that sizes in
-notifications are all absolute values. Use them to replace original sizes in corresponding price.
-If size equals to 0, delete the price from the order book.
-5. Dump all notifications which satisfy `u < baseID+1`. If `baseID+1 < first notification U`, it
-means current base order book falls behind notifications. Start from step 3 to retrieve newer
-base order book.
-6. If any subsequent notification which satisfy `U > baseID+1` is found, it means some updates are
-lost. Reconstruct local order book from step 3.
+1.  Subscribe `futures.order_book_update` with specified level and update frequency, e.g. `["BTC_USDT_20230630", "1000ms", "10"]` pushes the first 10 levels' update in BTC\_USDT order book every 1s
+2.  Cache WebSocket notifications. Every notification use `U` and `u` to tell the first and last update ID since last notification.
+3.  Retrieve base order book using REST API, and make sure the order book ID is recorded(referred as `baseID` below) e.g. `https://api.gateio.ws/api/v4/delivery/usdt/order_book?contract=BTC_USDT_20230630&limit=10&with_id=true` retrieves the 10-level base order book of BTC\_USDT\_20230630
+4.  Iterate the cached WebSocket notifications, and find the first one which contains the baseID, i.e. `U <= baseId+1` and `u >= baseId+1`, then start consuming from it. Note that sizes in notifications are all absolute values. Use them to replace original sizes in corresponding price. If size equals to 0, delete the price from the order book.
+5.  Dump all notifications which satisfy `u < baseID+1`. If `baseID+1 < first notification U`, it means current base order book falls behind notifications. Start from step 3 to retrieve newer base order book.
+6.  If any subsequent notification which satisfy `U > baseID+1` is found, it means some updates are lost. Reconstruct local order book from step 3.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#legacy-order-book-subscription) Legacy order book subscription
-
-**Subscribe order\_book.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-7) Request
-
-- channel
-
-`futures.order_book`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `contract` | String | Yes | contract name |
-| `limit` | String | Yes | limit, legal limits: 100, 50, 20, 10, 5, 1 |
-| `interval` | String | Yes | legal intervals: "0" |
-
+## [#](#legacy-order-book-subscription) Legacy order book subscription
 
 ```
 from websocket import create_connection
@@ -796,7 +708,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.order_book", "event": "subscribe", "payload" : ["BTC_USDT_20230630", "20", "0"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -812,41 +723,29 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#legacy-order-book-notification) Legacy order book notification
+**Subscribe order\_book.**
 
-**Notify contract order book update information**
+### [#](#request-7) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-3) Notify
-
-- channel
-
-`futures.order_book`
-
-- event
-
-`update/all`
-
+*   channel
+    
+    `futures.order_book`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | contract | String | Yes | contract name |
+  | limit | String | Yes | limit, legal limits: 100, 50, 20, 10, 5, 1 |
+  | interval | String | Yes | legal intervals: "0" |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `contract` | String | delivery contract name |
-| `s` | Integer | this number is the final value, the calculated value. Positive Numbers represent long(bids), Negative number represent short(asks) |
-| `p` | String | this order book price |
-| `id` | Integer | this price order book id |
-
+## [#](#legacy-order-book-notification) Legacy order book notification
 
 ```
 {
@@ -858,29 +757,28 @@ The above command returns JSON structured like this:
     "t": 1541500161123,
     "contract": "BTC_USDT_20230630",
     "id": 93973511,
-    "asks": [\
-      {\
-        "p": "97.1",\
-        "s": 2245\
-      },\
-      {\
-        "p": "97.1",\
-        "s": 2245\
-      }\
+    "asks": [
+      {
+        "p": "97.1",
+        "s": 2245
+      },
+      {
+        "p": "97.1",
+        "s": 2245
+      }
     ],
-    "bids": [\
-      {\
-        "p": "97.1",\
-        "s": 2245\
-      },\
-      {\
-        "p": "97.1",\
-        "s": 2245\
-      }\
+    "bids": [
+      {
+        "p": "97.1",
+        "s": 2245
+      },
+      {
+        "p": "97.1",
+        "s": 2245
+      }
     ]
   }
 }
-
 ```
 
 Or
@@ -891,32 +789,43 @@ Or
   "event": "update",
   "time": 1541500167,
   "time_ms": 1541500167123,
-  "result": [\
-    {\
-      "p": "97.5",\
-      "s": 6541,\
-      "contract": "BTC_USDT_20230630",\
-      "id": 93973512\
-    }\
+  "result": [
+    {
+      "p": "97.5",
+      "s": 6541,
+      "contract": "BTC_USDT_20230630",
+      "id": 93973512
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#legacy-order-book-unsubscription) Legacy order book unsubscription
+**Notify contract order book update information**
 
-**Unsubscribe specified contract order book.**
+### [#](#notify-3) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-8) Request
+*   channel
+    
+    `futures.order_book`
+    
+*   event
+    
+    `update/all`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | contract | String | delivery contract name |
+  | s | Integer | this number is the final value, the calculated value. Positive Numbers represent long(bids), Negative number represent short(asks) |
+  | p | String | this order book price |
+  | id | Integer | this price order book id |
 
-- channel
-
-`futures.order_book`
-
-- event
-
-`unsubscribe`
-
+## [#](#legacy-order-book-unsubscription) Legacy order book unsubscription
 
 ```
 from websocket import create_connection
@@ -925,7 +834,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.order_book", "event": "unsubscribe", "payload" : ["BTC_USDT_20230630", "20", "0"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -941,27 +849,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#best-ask-bid-subscription) Best ask/bid subscription
+**Unsubscribe specified contract order book.**
 
-**Subscribe book\_ticker.**
+### [#](#request-8) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-9) Request
+*   channel
+    
+    `futures.order_book`
+    
+*   event
+    
+    `unsubscribe`
+    
 
-- channel
-
-`futures.book_ticker`
-
-- event
-
-`subscribe`
-
-- params
-
-`payload` is an array contains contracts interested.
-
+## [#](#best-ask-bid-subscription) Best ask/bid subscription
 
 ```
 from websocket import create_connection
@@ -970,7 +873,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.book_ticker", "event": "subscribe", "payload" : ["BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -986,40 +888,28 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#best-ask-bid-notification) Best ask/bid notification
+**Subscribe book\_ticker.**
+
+### [#](#request-9) Request
+
+*   channel
+    
+    `futures.book_ticker`
+    
+*   event
+    
+    `subscribe`
+    
+*   params
+    
+    `payload` is an array contains contracts interested.
+    
+
+## [#](#best-ask-bid-notification) Best ask/bid notification
 
 If `a` is empty string, it means empty asks; if `b` is empty string, it means empty bids.
-
-**Notify contract order book best bid and ask**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-4) Notify
-
-- channel
-
-`futures.book_ticker`
-
-- event
-
-`update`
-
-- params
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | object | Best bid and ask |
-| » `t` | Integer | Book ticker generated timestamp in milliseconds |
-| » `u` | String | Order book update ID |
-| » `s` | String | Contract name |
-| » `b` | String | Best bid price. If no bids, it's empty string |
-| » `B` | Integer | Best bid size. If no bids, it will be 0 |
-| » `a` | String | Best ask price. If no asks, it's empty string |
-| » `A` | Integer | Best ask size. If no asks, it will be 0 |
-
 
 ```
 {
@@ -1038,23 +928,34 @@ If `a` is empty string, it means empty asks; if `b` is empty string, it means em
     "A": 47061
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#best-ask-bid-unsubscription) Best ask/bid unsubscription
+**Notify contract order book best bid and ask**
 
-**Unsubscribe specified contract order book.**
+### [#](#notify-4) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-10) Request
+*   channel
+    
+    `futures.book_ticker`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | object | Best bid and ask |
+  | » t | Integer | Book ticker generated timestamp in milliseconds |
+  | » u | String | Order book update ID |
+  | » s | String | Contract name |
+  | » b | String | Best bid price. If no bids, it's empty string |
+  | » B | Integer | Best bid size. If no bids, it will be 0 |
+  | » a | String | Best ask price. If no asks, it's empty string |
+  | » A | Integer | Best ask size. If no asks, it will be 0 |
 
-- channel
-
-`futures.book_ticker`
-
-- event
-
-`unsubscribe`
-
+## [#](#best-ask-bid-unsubscription) Best ask/bid unsubscription
 
 ```
 from websocket import create_connection
@@ -1063,7 +964,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.book_ticker", "event": "unsubscribe", "payload" : ["BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1079,33 +979,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#order-book-update-subscription) Order book update subscription
+**Unsubscribe specified contract order book.**
 
-**Subscribe order\_book\_update.**
+### [#](#request-10) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-11) Request
+*   channel
+    
+    `futures.book_ticker`
+    
+*   event
+    
+    `unsubscribe`
+    
 
-- channel
-
-`futures.order_book_update`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `contract` | String | Yes | Contract name |
-| `frequency` | String | Yes | Update frequency, `100ms` or `1000ms` |
-| `level` | String | No | Optional level interested. Only updates within are notified. Allowed values: "100", "50", "20", "10" or "5" |
-
+## [#](#order-book-update-subscription) Order book update subscription
 
 ```
 from websocket import create_connection
@@ -1114,7 +1003,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/btc")
 ws.send(
     '{"time" : 123456, "channel" : "futures.order_book_update", "event": "subscribe", "payload" : ["BTC_USDT_20230630", "1000ms", "20"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1130,41 +1018,29 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#order-book-update-notification) Order book update notification
+**Subscribe order\_book\_update.**
 
-**Notify contract order book update**
+### [#](#request-11) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-5) Notify
-
-- channel
-
-`futures.order_book_update`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.order_book_update`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | contract | String | Yes | Contract name |
+  | frequency | String | Yes | Update frequency, 100ms or 1000ms |
+  | level | String | No | Optional level interested. Only updates within are notified. Allowed values: "100", "50", "20", "10" or "5" |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | object | Changed asks and bids since last update |
-| » `t` | Integer | Order book generation timestamp in milliseconds |
-| » `s` | String | Contract name |
-| » `U` | Integer | First order book update ID since last update |
-| » `u` | Integer | Last order book update ID since last update |
-| » `b` | String | Changed bids |
-| »» `p` | String | Changed price |
-| »» `s` | String | Absolute size value after change. If 0, remove this price from order book |
-| » `a` | String | Changed asks |
-| »» `p` | String | Changed price |
-| »» `s` | String | Absolute size value after change. If 0, remove this price from order book |
-
+## [#](#order-book-update-notification) Order book update notification
 
 ```
 {
@@ -1178,45 +1054,59 @@ The above command returns JSON structured like this:
     "s": "BTC_USDT_20230630",
     "U": 2517661101,
     "u": 2517661113,
-    "b": [\
-      {\
-        "p": "54672.1",\
-        "s": 0\
-      },\
-      {\
-        "p": "54664.5",\
-        "s": 58794\
-      }\
+    "b": [
+      {
+        "p": "54672.1",
+        "s": 0
+      },
+      {
+        "p": "54664.5",
+        "s": 58794
+      }
     ],
-    "a": [\
-      {\
-        "p": "54743.6",\
-        "s": 0\
-      },\
-      {\
-        "p": "54742",\
-        "s": 95\
-      }\
+    "a": [
+      {
+        "p": "54743.6",
+        "s": 0
+      },
+      {
+        "p": "54742",
+        "s": 95
+      }
     ]
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#order-book-update-unsubscription) Order book update unsubscription
+**Notify contract order book update**
 
-**Unsubscribe specified contract order book.**
+### [#](#notify-5) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-12) Request
+*   channel
+    
+    `futures.order_book_update`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | object | Changed asks and bids since last update |
+  | » t | Integer | Order book generation timestamp in milliseconds |
+  | » s | String | Contract name |
+  | » U | Integer | First order book update ID since last update |
+  | » u | Integer | Last order book update ID since last update |
+  | » b | String | Changed bids |
+  | »» p | String | Changed price |
+  | »» s | String | Absolute size value after change. If 0, remove this price from order book |
+  | » a | String | Changed asks |
+  | »» p | String | Changed price |
+  | »» s | String | Absolute size value after change. If 0, remove this price from order book |
 
-- channel
-
-`futures.order_book_update`
-
-- event
-
-`unsubscribe`
-
+## [#](#order-book-update-unsubscription) Order book update unsubscription
 
 ```
 from websocket import create_connection
@@ -1225,7 +1115,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/btc")
 ws.send(
     '{"time" : 123456, "channel" : "futures.order_book_update", "event": "unsubscribe", "payload" : ["BTC_USDT_20230630", "100ms"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1241,36 +1130,28 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#candlesticks-api) Candlesticks API
+**Unsubscribe specified contract order book.**
+
+### [#](#request-12) Request
+
+*   channel
+    
+    `futures.order_book_update`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#candlesticks-api) Candlesticks API
 
 **Provides a way to access charting candlestick info.**
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#candlesticks-subscription) Candlesticks subscription
+## [#](#candlesticks-subscription) Candlesticks subscription
 
 **_If prefix `contract` with `mark_`, the contract's mark price candlesticks will be subscribed._**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-13) Request
-
-- channel
-
-`futures.candlesticks`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `interval` | String | interval : "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
-| `contract` | String | delivery contract name |
-
 
 ```
 from websocket import create_connection
@@ -1279,7 +1160,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.candlesticks", "event": "subscribe", "payload" : ["1m", "BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1294,44 +1174,26 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#candlesticks-notification) Candlesticks notification
+### [#](#request-13) Request
 
-**Notify kline information of subscribed contract.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-6) Notify
-
-- channel
-
-`futures.candlesticks`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.candlesticks`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | interval | String | interval : "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
+  | contract | String | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `t` | Integer | time |
-| `o` | String | open |
-| `c` | String | close |
-| `h` | String | highest |
-| `l` | String | lowest |
-| `v` | Integer | volume |
-| `n` | String | delivery contract name |
-
+## [#](#candlesticks-notification) Candlesticks notification
 
 ```
 {
@@ -1339,44 +1201,58 @@ The above command returns JSON structured like this:
   "channel": "futures.candlesticks",
   "event": "update",
   "error": null,
-  "result": [\
-    {\
-      "t": 1545129300,\
-      "v": 27525555,\
-      "c": "95.4",\
-      "h": "96.9",\
-      "l": "89.5",\
-      "o": "94.3",\
-      "n": "1m_BTC_USDT_20230630"\
-    },\
-    {\
-      "t": 1545129300,\
-      "v": 27525555,\
-      "c": "95.4",\
-      "h": "96.9",\
-      "l": "89.5",\
-      "o": "94.3",\
-      "n": "1m_BTC_USDT_20230630"\
-    }\
+  "result": [
+    {
+      "t": 1545129300,
+      "v": 27525555,
+      "c": "95.4",
+      "h": "96.9",
+      "l": "89.5",
+      "o": "94.3",
+      "n": "1m_BTC_USDT_20230630"
+    },
+    {
+      "t": 1545129300,
+      "v": 27525555,
+      "c": "95.4",
+      "h": "96.9",
+      "l": "89.5",
+      "o": "94.3",
+      "n": "1m_BTC_USDT_20230630"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-3) Cancel subscription
+**Notify kline information of subscribed contract.**
 
-**Unsubscribe specified contract kline information.**
+### [#](#notify-6) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-14) Request
+*   channel
+    
+    `futures.candlesticks`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | t | Integer | time |
+  | o | String | open |
+  | c | String | close |
+  | h | String | highest |
+  | l | String | lowest |
+  | v | Integer | volume |
+  | n | String | delivery contract name |
 
-- channel
-
-`futures.candlesticks`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-3) Cancel subscription
 
 ```
 from websocket import create_connection
@@ -1385,7 +1261,6 @@ ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
 ws.send(
     '{"time" : 123456, "channel" : "futures.candlesticks", "event": "unsubscribe", "payload" : ["1m", "BTC_USDT_20230630"]}')
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1400,10 +1275,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#orders-api) Orders API
+**Unsubscribe specified contract kline information.**
+
+### [#](#request-14) Request
+
+*   channel
+    
+    `futures.candlesticks`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#orders-api) Orders API
 
 **Provides a way to receive user closed orders.**
 
@@ -1411,29 +1298,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#orders-subscription) Orders subscription
-
-**Subscribe user orders update**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-15) Request
-
-- channel
-
-`futures.orders`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#orders-subscription) Orders subscription
 
 ```
 import json
@@ -1453,7 +1318,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1468,111 +1332,109 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#orders-notification) Orders notification
+**Subscribe user orders update**
 
-**Notify user orders information when an order is put, updated or finished.**
+### [#](#request-15) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-7) Notify
-
-- channel
-
-`futures.orders`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.orders`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-`For the meaning of parameters, please refer to http interface.`
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `create_time` | Integer |  |
-| `create_time_ms` | Integer | create unix timestamp in milliseconds |
-| `fill_price` | Float |  |
-| `finish_as` | String |  |
-| `iceberg` | Integer |  |
-| `id` | Integer |  |
-| `is_close` | Integer |  |
-| `is_liq` | Integer |  |
-| `left` | Integer |  |
-| `mkfr` | Integer |  |
-| `is_reduce_only` | Bool |  |
-| `status` | String |  |
-| `tkfr` | Integer |  |
-| `price` | Integer |  |
-| `refu` | Integer |  |
-| `size` | Integer |  |
-| `text` | String |  |
-| `tif` | String |  |
-| `finish_time` | Integer | order update unix timestamp in milliseconds |
-| `finish_time_ms` | Integer | order update unix timestamp in milliseconds |
-| `user` | String |  |
-| `contract` | String |  |
-
+## [#](#orders-notification) Orders notification
 
 ```
 {
   "channel": "futures.orders",
   "event": "update",
   "time": 1541505434,
-  "result": [\
-    {\
-      "contract": "BTC_USDT_20230630",\
-      "user": "200XX",\
-      "create_time": 1545141817,\
-      "create_time_ms": 1545141817123,\
-      "fill_price": 4120,\
-      "finish_as": "filled",\
-      "iceberg": 0,\
-      "id": 93282759,\
-      "is_reduce_only": false,\
-      "status": "finished",\
-      "is_close": 0,\
-      "is_liq": 0,\
-      "left": 0,\
-      "mkfr": -0.00025,\
-      "price": 4120,\
-      "refu": 0,\
-      "size": 10,\
-      "text": "-",\
-      "tif": "gtc",\
-      "finish_time": 1545640868,\
-      "finish_time_ms": 1545640868123,\
-      "tkfr": 0.00075\
-    }\
+  "result": [
+    {
+      "contract": "BTC_USDT_20230630",
+      "user": "200XX",
+      "create_time": 1545141817,
+      "create_time_ms": 1545141817123,
+      "fill_price": 4120,
+      "finish_as": "filled",
+      "iceberg": 0,
+      "id": 93282759,
+      "is_reduce_only": false,
+      "status": "finished",
+      "is_close": 0,
+      "is_liq": 0,
+      "left": 0,
+      "mkfr": -0.00025,
+      "price": 4120,
+      "refu": 0,
+      "size": 10,
+      "text": "-",
+      "tif": "gtc",
+      "finish_time": 1545640868,
+      "finish_time_ms": 1545640868123,
+      "tkfr": 0.00075
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-4) Cancel subscription
+**Notify user orders information when an order is put, updated or finished.**
 
-**Unsubscribe user orders update notification, for all contract.**
+### [#](#notify-7) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-16) Request
+*   channel
+    
+    `futures.orders`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  `For the meaning of parameters, please refer to http interface.`
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | create_time | Integer |  |
+  | create_time_ms | Integer | create unix timestamp in milliseconds |
+  | fill_price | Float |  |
+  | finish_as | String |  |
+  | iceberg | Integer |  |
+  | id | Integer |  |
+  | is_close | Integer |  |
+  | is_liq | Integer |  |
+  | left | Integer |  |
+  | mkfr | Integer |  |
+  | is_reduce_only | Bool |  |
+  | status | String |  |
+  | tkfr | Integer |  |
+  | price | Integer |  |
+  | refu | Integer |  |
+  | size | Integer |  |
+  | text | String |  |
+  | tif | String |  |
+  | finish_time | Integer | order update unix timestamp in milliseconds |
+  | finish_time_ms | Integer | order update unix timestamp in milliseconds |
+  | user | String |  |
+  | contract | String |  |
 
-- channel
-
-`futures.orders`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-4) Cancel subscription
 
 ```
 import json
@@ -1592,7 +1454,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1607,10 +1468,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#user-trades-api) User trades API
+**Unsubscribe user orders update notification, for all contract.**
+
+### [#](#request-16) Request
+
+*   channel
+    
+    `futures.orders`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#user-trades-api) User trades API
 
 **Provides a way to receive user trades.**
 
@@ -1618,29 +1491,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#user-trades-subscription) User trades subscription
-
-**Subscribe for user trades update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-17) Request
-
-- channel
-
-`futures.usertrades`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#user-trades-subscription) User trades subscription
 
 ```
 import json
@@ -1660,7 +1511,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1675,45 +1525,28 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#user-trades-notification) User trades notification
+**Subscribe for user trades update.**
 
-**Notify user trades update.**
+### [#](#request-17) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-8) Notify
-
-- channel
-
-`futures.usertrades`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.usertrades`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `contract` | String | delivery contract name |
-| `create_time` | Integer | create time |
-| `create_time_ms` | Integer | create time in milliseconds |
-| `id` | String | trades id |
-| `order_id` | String | Order Id |
-| `price` | String | price |
-| `size` | Integer | trades size |
-| `role` | String | user role (maker/taker) |
-
+## [#](#user-trades-notification) User trades notification
 
 ```
 {
@@ -1721,36 +1554,51 @@ The above command returns JSON structured like this:
   "channel": "futures.usertrades",
   "event": "update",
   "error": null,
-  "result": [\
-    {\
-      "contract": "BTC_USDT_20230630",\
-      "create_time": 1545140672,\
-      "create_time_ms": 1545140672371,\
-      "id": "12651269",\
-      "order_id": "56945246",\
-      "price": "113.6",\
-      "size": 10,\
-      "role": "maker"\
-    }\
+  "result": [
+    {
+      "contract": "BTC_USDT_20230630",
+      "create_time": 1545140672,
+      "create_time_ms": 1545140672371,
+      "id": "12651269",
+      "order_id": "56945246",
+      "price": "113.6",
+      "size": 10,
+      "role": "maker"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-5) Cancel subscription
+**Notify user trades update.**
 
-**Unsubscribe user trades update.**
+### [#](#notify-8) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-18) Request
+*   channel
+    
+    `futures.usertrades`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | contract | String | delivery contract name |
+  | create_time | Integer | create time |
+  | create_time_ms | Integer | create time in milliseconds |
+  | id | String | trades id |
+  | order_id | String | Order Id |
+  | price | String | price |
+  | size | Integer | trades size |
+  | role | String | user role (maker/taker) |
 
-- channel
-
-`futures.usertrades`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-5) Cancel subscription
 
 ```
 import json
@@ -1770,7 +1618,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1785,10 +1632,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#liquidates-api) Liquidates API
+**Unsubscribe user trades update.**
+
+### [#](#request-18) Request
+
+*   channel
+    
+    `futures.usertrades`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#liquidates-api) Liquidates API
 
 **Provides a way to receive user liquidates info.**
 
@@ -1796,29 +1655,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#liquidates-subscription) Liquidates subscription
-
-**Subscribe for user liquidates update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-19) Request
-
-- channel
-
-`futures.liquidates`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#liquidates-subscription) Liquidates subscription
 
 ```
 import json
@@ -1838,7 +1675,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1853,93 +1689,91 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#liquidates-notification) Liquidates notification
+**Subscribe for user liquidates update.**
 
-**Notify liquidates update.**
+### [#](#request-19) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-9) Notify
-
-- channel
-
-`futures.liquidates`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.liquidates`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `entry_price` | Float | average entry price |
-| `fill_price` | Float | average execution price |
-| `leverage` | Float | leverage |
-| `liq_price` | Float | liquidates price |
-| `margin` | Float | margin |
-| `mark_price` | Float | mark price |
-| `order_id` | Integer | order id |
-| `order_price` | Float | commission price |
-| `left` | Integer | order unfilled quantity |
-| `size` | Integer | position original size |
-| `time` | Integer | time |
-| `time_ms` | Integer | time in milliseconds |
-| `user` | String | user id |
-| `contract` | String | delivery contract name |
-
+## [#](#liquidates-notification) Liquidates notification
 
 ```
 {
   "channel": "futures.liquidates",
   "event": "update",
   "time": 1541505434,
-  "result": [\
-    {\
-      "entry_price": 209,\
-      "fill_price": 215.1,\
-      "left": 0,\
-      "leverage": 0.0,\
-      "liq_price": 213,\
-      "margin": 0.007816722941,\
-      "mark_price": 213,\
-      "order_id": 4093362,\
-      "order_price": 215.1,\
-      "size": -124,\
-      "time": 1541486601,\
-      "time_ms": 1541486601123,\
-      "contract": "BTC_USDT_20230630",\
-      "user": "1040"\
-    }\
+  "result": [
+    {
+      "entry_price": 209,
+      "fill_price": 215.1,
+      "left": 0,
+      "leverage": 0.0,
+      "liq_price": 213,
+      "margin": 0.007816722941,
+      "mark_price": 213,
+      "order_id": 4093362,
+      "order_price": 215.1,
+      "size": -124,
+      "time": 1541486601,
+      "time_ms": 1541486601123,
+      "contract": "BTC_USDT_20230630",
+      "user": "1040"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-6) Cancel subscription
+**Notify liquidates update.**
 
-**Unsubscribe liquidates update.**
+### [#](#notify-9) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-20) Request
+*   channel
+    
+    `futures.liquidates`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | entry_price | Float | average entry price |
+  | fill_price | Float | average execution price |
+  | leverage | Float | leverage |
+  | liq_price | Float | liquidates price |
+  | margin | Float | margin |
+  | mark_price | Float | mark price |
+  | order_id | Integer | order id |
+  | order_price | Float | commission price |
+  | left | Integer | order unfilled quantity |
+  | size | Integer | position original size |
+  | time | Integer | time |
+  | time_ms | Integer | time in milliseconds |
+  | user | String | user id |
+  | contract | String | delivery contract name |
 
-- channel
-
-`futures.liquidates`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-6) Cancel subscription
 
 ```
 import json
@@ -1959,7 +1793,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -1974,10 +1807,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#auto-deleverages-api) Auto\_deleverages API
+**Unsubscribe liquidates update.**
+
+### [#](#request-20) Request
+
+*   channel
+    
+    `futures.liquidates`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#auto-deleverages-api) Auto\_deleverages API
 
 **Provides a way to receive user auto deleverages info.**
 
@@ -1985,29 +1830,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#auto-deleverages-subscription) Auto\_deleverages subscription
-
-**Subscribe for user auto\_deleverages update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-21) Request
-
-- channel
-
-`futures.auto_deleverages`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#auto-deleverages-subscription) Auto\_deleverages subscription
 
 ```
 import json
@@ -2027,7 +1850,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2042,81 +1864,79 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#auto-deleverages-notification) Auto\_deleverages notification
+**Subscribe for user auto\_deleverages update.**
 
-**Notify auto\_deleverages update.**
+### [#](#request-21) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-10) Notify
-
-- channel
-
-`futures.auto_deleverages`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.auto_deleverages`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `entry_price` | Float | entry price |
-| `fill_price` | Float | execution price |
-| `position_size` | Integer | position size |
-| `trade_size` | Integer | trade size |
-| `time` | Integer | time |
-| `time_ms` | Integer | time in milliseconds |
-| `user` | String | user id |
-| `contract` | String | delivery contract name |
-
+## [#](#auto-deleverages-notification) Auto\_deleverages notification
 
 ```
 {
   "channel": "futures.auto_deleverages",
   "event": "update",
   "time": 1541505434,
-  "result": [\
-    {\
-      "entry_price": 209,\
-      "fill_price": 215.1,\
-      "position_size": 10,\
-      "trade_size": 10,\
-      "time": 1541486601,\
-      "time_ms": 1541486601123,\
-      "contract": "BTC_USDT_20230630",\
-      "user": "1040"\
-    }\
+  "result": [
+    {
+      "entry_price": 209,
+      "fill_price": 215.1,
+      "position_size": 10,
+      "trade_size": 10,
+      "time": 1541486601,
+      "time_ms": 1541486601123,
+      "contract": "BTC_USDT_20230630",
+      "user": "1040"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-7) Cancel subscription
+**Notify auto\_deleverages update.**
 
-**Unsubscribe auto\_deleverages update.**
+### [#](#notify-10) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-22) Request
+*   channel
+    
+    `futures.auto_deleverages`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | entry_price | Float | entry price |
+  | fill_price | Float | execution price |
+  | position_size | Integer | position size |
+  | trade_size | Integer | trade size |
+  | time | Integer | time |
+  | time_ms | Integer | time in milliseconds |
+  | user | String | user id |
+  | contract | String | delivery contract name |
 
-- channel
-
-`futures.auto_deleverages`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-7) Cancel subscription
 
 ```
 import json
@@ -2136,7 +1956,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2151,10 +1970,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#position-closes-api) Position\_closes API
+**Unsubscribe auto\_deleverages update.**
+
+### [#](#request-22) Request
+
+*   channel
+    
+    `futures.auto_deleverages`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#position-closes-api) Position\_closes API
 
 **Provides a way to receive user position closes info.**
 
@@ -2162,29 +1993,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#position-closes-subscription) Position\_closes subscription
-
-**Subscribe for user position\_closes update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-23) Request
-
-- channel
-
-`futures.position_closes`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#position-closes-subscription) Position\_closes subscription
 
 ```
 import json
@@ -2204,7 +2013,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2219,79 +2027,77 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#position-closes-notification) Position\_closes notification
+**Subscribe for user position\_closes update.**
 
-**Notify position\_closes update.**
+### [#](#request-23) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-11) Notify
-
-- channel
-
-`futures.position_closes`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.position_closes`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `contract` | String | delivery contract name |
-| `pnl` | Number | profit & loss |
-| `side` | String | side (long or short) |
-| `text` | String | messages |
-| `time` | Integer | time |
-| `time_ms` | Integer | time in milliseconds |
-| `user` | String | user id |
-
+## [#](#position-closes-notification) Position\_closes notification
 
 ```
 {
   "channel": "futures.position_closes",
   "event": "update",
   "time": 1541505434,
-  "result": [\
-    {\
-      "contract": "BTC_USDT_20230630",\
-      "pnl": -0.000624354791,\
-      "side": "long",\
-      "text": "web",\
-      "time": 1547198562,\
-      "time_ms": 1547198562123,\
-      "user": "20011"\
-    }\
+  "result": [
+    {
+      "contract": "BTC_USDT_20230630",
+      "pnl": -0.000624354791,
+      "side": "long",
+      "text": "web",
+      "time": 1547198562,
+      "time_ms": 1547198562123,
+      "user": "20011"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-8) Cancel subscription
+**Notify position\_closes update.**
 
-**Unsubscribe position\_closes update.**
+### [#](#notify-11) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-24) Request
+*   channel
+    
+    `futures.position_closes`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | contract | String | delivery contract name |
+  | pnl | Number | profit & loss |
+  | side | String | side (long or short) |
+  | text | String | messages |
+  | time | Integer | time |
+  | time_ms | Integer | time in milliseconds |
+  | user | String | user id |
 
-- channel
-
-`futures.position_closes`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-8) Cancel subscription
 
 ```
 import json
@@ -2311,7 +2117,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2326,10 +2131,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#balances-api) Balances API
+**Unsubscribe position\_closes update.**
+
+### [#](#request-24) Request
+
+*   channel
+    
+    `futures.position_closes`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#balances-api) Balances API
 
 **Provides a way to receive user balances info.**
 
@@ -2337,28 +2154,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#balances-subscription) Balances subscription
-
-**Subscribe for user balances update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-25) Request
-
-- channel
-
-`futures.balances`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-
+## [#](#balances-subscription) Balances subscription
 
 ```
 import json
@@ -2378,7 +2174,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2393,66 +2188,76 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#balances-notification) balances notification
+**Subscribe for user balances update.**
 
-**Notify balances update.**
+### [#](#request-25) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-12) Notify
-
-- channel
-
-`futures.balances`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.balances`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `balance` | Number | balance after changed |
-| `change` | Number | change |
-| `text` | String | messages |
-| `time` | Integer | time |
-| `time_ms` | Integer | time in milliseconds |
-| `type` | String | type |
-| `user` | String | user id |
-
+## [#](#balances-notification) balances notification
 
 ```
 {
   "channel": "futures.balances",
   "event": "update",
   "time": 1541505434,
-  "result": [\
-    {\
-      "balance": 9.998739899488,\
-      "change": -0.000002074115,\
-      "text": "BTC_USDT_20230630:3914424",\
-      "time": 1547199246,\
-      "time_ms": 1547199246123,\
-      "type": "fee",\
-      "user": "20011"\
-    }\
+  "result": [
+    {
+      "balance": 9.998739899488,
+      "change": -0.000002074115,
+      "text": "BTC_USDT_20230630:3914424",
+      "time": 1547199246,
+      "time_ms": 1547199246123,
+      "type": "fee",
+      "user": "20011"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-9) Cancel subscription
+**Notify balances update.**
+
+### [#](#notify-12) Notify
+
+*   channel
+    
+    `futures.balances`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | balance | Number | balance after changed |
+  | change | Number | change |
+  | text | String | messages |
+  | time | Integer | time |
+  | time_ms | Integer | time in milliseconds |
+  | type | String | type |
+  | user | String | user id |
+
+## [#](#cancel-subscription-9) Cancel subscription
 
 ```
 import json
@@ -2472,7 +2277,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2487,10 +2291,9 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#reduce-risk-limits-api) Reduce\_risk\_limits API
+# [#](#reduce-risk-limits-api) Reduce\_risk\_limits API
 
 **Provides a way to receive user reduce risk limits info.**
 
@@ -2498,29 +2301,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#reduce-risk-limits-subscription) Reduce\_risk\_limits subscription
-
-**Subscribe for user reduce\_risk\_limits update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-26) Request
-
-- channel
-
-`futures.reduce_risk_limits`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#reduce-risk-limits-subscription) Reduce\_risk\_limits subscription
 
 ```
 import json
@@ -2540,7 +2321,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2555,46 +2335,28 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#reduce-risk-limits-notification) Reduce\_risk\_limits notification
+**Subscribe for user reduce\_risk\_limits update.**
 
-**Notify reduce risk limits update.**
+### [#](#request-26) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-13) Notify
-
-- channel
-
-`futures.reduce_risk_limits`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.reduce_risk_limits`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `cancel_orders` | Number | cancel orders |
-| `contract` | String | contract name |
-| `leverage_max` | Number | leverage max |
-| `liq_price` | Number | liquidates price |
-| `maintenance_rate` | Number | maintenance rate |
-| `risk_limit` | Number | risk limit |
-| `time` | Number | time |
-| `time_ms` | Number | time in milliseconds |
-| `user` | String | user id |
-
+## [#](#reduce-risk-limits-notification) Reduce\_risk\_limits notification
 
 ```
 {
@@ -2602,37 +2364,53 @@ The above command returns JSON structured like this:
   "channel": "futures.reduce_risk_limits",
   "event": "update",
   "error": null,
-  "result": [\
-    {\
-      "cancel_orders": 0,\
-      "contract": "ETH_USD",\
-      "leverage_max": 10,\
-      "liq_price": 136.53,\
-      "maintenance_rate": 0.09,\
-      "risk_limit": 450,\
-      "time": 1551858330,\
-      "time_ms": 1551858330123,\
-      "user": "20011"\
-    }\
+  "result": [
+    {
+      "cancel_orders": 0,
+      "contract": "ETH_USD",
+      "leverage_max": 10,
+      "liq_price": 136.53,
+      "maintenance_rate": 0.09,
+      "risk_limit": 450,
+      "time": 1551858330,
+      "time_ms": 1551858330123,
+      "user": "20011"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-10) Cancel subscription
+**Notify reduce risk limits update.**
 
-**Unsubscribe reduce risk limits update.**
+### [#](#notify-13) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-27) Request
+*   channel
+    
+    `futures.reduce_risk_limits`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | cancel_orders | Number | cancel orders |
+  | contract | String | contract name |
+  | leverage_max | Number | leverage max |
+  | liq_price | Number | liquidates price |
+  | maintenance_rate | Number | maintenance rate |
+  | risk_limit | Number | risk limit |
+  | time | Number | time |
+  | time_ms | Number | time in milliseconds |
+  | user | String | user id |
 
-- channel
-
-`futures.reduce_risk_limits`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-10) Cancel subscription
 
 ```
 import json
@@ -2652,10 +2430,22 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#positions-api) Positions API
+**Unsubscribe reduce risk limits update.**
+
+### [#](#request-27) Request
+
+*   channel
+    
+    `futures.reduce_risk_limits`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#positions-api) Positions API
 
 **Provides a way to receive user positions info.**
 
@@ -2663,29 +2453,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#positions-subscription) Positions subscription
-
-**Subscribe for user positions update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-28) Request
-
-- channel
-
-`futures.positions`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#positions-subscription) Positions subscription
 
 ```
 import json
@@ -2705,7 +2473,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2720,54 +2487,28 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#positions-notification) Positions notification
+**Subscribe for user positions update.**
 
-**Notify positions update.**
+### [#](#request-28) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-14) Notify
-
-- channel
-
-`futures.positions`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.positions`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `contract` | String | delivery contract name |
-| `entry_price` | Float | Entry price |
-| `history_pnl` | Float | History realized PNL |
-| `history_point` | Float | History realized POINT PNL |
-| `last_close_pnl` | Float | PNL of last position close |
-| `leverage` | Integer | Position leverage. 0 means cross margin; positive number means isolated margin |
-| `leverage_max` | Integer | Maximum leverage under current risk limit |
-| `liq_price` | Float | Liquidation price |
-| `maintenance_rate` | Float | Maintenance rate under current risk limit |
-| `margin` | Float | Position margin |
-| `realised_pnl` | Float | Realized PNL |
-| `realised_point` | Float | Realized POINT PNL |
-| `risk_limit` | Integer | Position risk limit |
-| `size` | Number | contract size |
-| `time` | Number | update unix timestamp |
-| `time_ms` | Number | update unix timestamp in milliseconds |
-| `user` | String | user id |
-
+## [#](#positions-notification) Positions notification
 
 ```
 {
@@ -2775,45 +2516,69 @@ The above command returns JSON structured like this:
   "channel": "futures.positions",
   "event": "update",
   "error": null,
-  "result": [\
-    {\
-      "contract": "BTC_USDT_20230630",\
-      "entry_price": 5999,\
-      "history_pnl": 9.99872821972,\
-      "history_point": -0.02954299895,\
-      "last_close_pnl": -0.00011406187,\
-      "leverage": 10,\
-      "leverage_max": 100,\
-      "liq_price": 5508.28,\
-      "maintenance_rate": 0.005,\
-      "margin": 0.001112608124,\
-      "realised_pnl": -0.000072631078,\
-      "realised_point": 0,\
-      "risk_limit": 100,\
-      "size": 70,\
-      "time": 1588212925,\
-      "time_ms": 1588212925123,\
-      "user": "10003"\
-    }\
+  "result": [
+    {
+      "contract": "BTC_USDT_20230630",
+      "entry_price": 5999,
+      "history_pnl": 9.99872821972,
+      "history_point": -0.02954299895,
+      "last_close_pnl": -0.00011406187,
+      "leverage": 10,
+      "leverage_max": 100,
+      "liq_price": 5508.28,
+      "maintenance_rate": 0.005,
+      "margin": 0.001112608124,
+      "realised_pnl": -0.000072631078,
+      "realised_point": 0,
+      "risk_limit": 100,
+      "size": 70,
+      "time": 1588212925,
+      "time_ms": 1588212925123,
+      "user": "10003"
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-11) Cancel subscription
+**Notify positions update.**
 
-**Unsubscribe positions update.**
+### [#](#notify-14) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-29) Request
+*   channel
+    
+    `futures.positions`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | contract | String | delivery contract name |
+  | entry_price | Float | Entry price |
+  | history_pnl | Float | History realized PNL |
+  | history_point | Float | History realized POINT PNL |
+  | last_close_pnl | Float | PNL of last position close |
+  | leverage | Integer | Position leverage. 0 means cross margin; positive number means isolated margin |
+  | leverage_max | Integer | Maximum leverage under current risk limit |
+  | liq_price | Float | Liquidation price |
+  | maintenance_rate | Float | Maintenance rate under current risk limit |
+  | margin | Float | Position margin |
+  | realised_pnl | Float | Realized PNL |
+  | realised_point | Float | Realized POINT PNL |
+  | risk_limit | Integer | Position risk limit |
+  | size | Number | contract size |
+  | time | Number | update unix timestamp |
+  | time_ms | Number | update unix timestamp in milliseconds |
+  | user | String | user id |
 
-- channel
-
-`futures.positions`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-11) Cancel subscription
 
 ```
 import json
@@ -2833,7 +2598,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2848,10 +2612,22 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-# [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#auto-orders-api) Auto orders API
+**Unsubscribe positions update.**
+
+### [#](#request-29) Request
+
+*   channel
+    
+    `futures.positions`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+# [#](#auto-orders-api) Auto orders API
 
 **Provides a way to receive user auto orders info.**
 
@@ -2859,29 +2635,7 @@ WARNING
 
 Authentication required.
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#auto-orders-subscription) Auto orders subscription
-
-**Subscribe for user auto orders update.**
-
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-30) Request
-
-- channel
-
-`futures.autoorders`
-
-- event
-
-`subscribe`
-
-- params
-
-
-
-| parameter | type | required | description |
-| --- | --- | --- | --- |
-| `user id` | String | yes | user id |
-| `contract` | String | yes | delivery contract name |
-
+## [#](#auto-orders-subscription) Auto orders subscription
 
 ```
 import json
@@ -2901,7 +2655,6 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -2916,48 +2669,28 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#auto-orders-notification) Auto orders notification
+**Subscribe for user auto orders update.**
 
-**Notify auto orders update.**
+### [#](#request-30) Request
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#notify-15) Notify
-
-- channel
-
-`futures.autoorders`
-
-- event
-
-`update`
-
+*   channel
+    
+    `futures.autoorders`
+    
+*   event
+    
+    `subscribe`
+    
 - params
+  
+  | parameter | type | required | description |
+  | --- | --- | --- | --- |
+  | user id | String | yes | user id |
+  | contract | String | yes | delivery contract name |
 
-
-
-| field | type | description |
-| --- | --- | --- |
-| `result` | Array | Array of objects |
-
-
-
-
-| field | type | description |
-| --- | --- | --- |
-| `user` | Number | user id |
-| `trigger` | Object | watch http api |
-| `initial` | Object | watch http api |
-| `id` | Number | auto order id |
-| `trade_id` | Number | trade id |
-| `status` | String | order status |
-| `reason` | String | change reason |
-| `create_time` | Number | create time |
-| `name` | String | name |
-| `is_stop_order` | boolean | is stop |
-| `stop_trigger` | Object | watch http api |
-
+## [#](#auto-orders-notification) Auto orders notification
 
 ```
 {
@@ -2965,58 +2698,76 @@ The above command returns JSON structured like this:
   "channel": "futures.autoorders",
   "event": "update",
   "error": null,
-  "result": [\
-    {\
-      "user": 1543255,\
-      "trigger": {\
-        "strategy_type": 0,\
-        "price_type": 0,\
-        "price": "10000",\
-        "rule": 2,\
-        "expiration": 86400\
-      },\
-      "initial": {\
-        "contract": "BTC_USDT_20230630",\
-        "size": 10,\
-        "price": "10000",\
-        "tif": "gtc",\
-        "text": "web",\
-        "iceberg": 0,\
-        "is_close": false,\
-        "is_reduce_only": false\
-      },\
-      "id": 9256,\
-      "trade_id": 0,\
-      "status": "open",\
-      "reason": "",\
-      "create_time": 1596798126,\
-      "name": "price_autoorders",\
-      "is_stop_order": false,\
-      "stop_trigger": {\
-        "rule": 0,\
-        "trigger_price": "",\
-        "order_price": ""\
-      }\
-    }\
+  "result": [
+    {
+      "user": 1543255,
+      "trigger": {
+        "strategy_type": 0,
+        "price_type": 0,
+        "price": "10000",
+        "rule": 2,
+        "expiration": 86400
+      },
+      "initial": {
+        "contract": "BTC_USDT_20230630",
+        "size": 10,
+        "price": "10000",
+        "tif": "gtc",
+        "text": "web",
+        "iceberg": 0,
+        "is_close": false,
+        "is_reduce_only": false
+      },
+      "id": 9256,
+      "trade_id": 0,
+      "status": "open",
+      "reason": "",
+      "create_time": 1596798126,
+      "name": "price_autoorders",
+      "is_stop_order": false,
+      "stop_trigger": {
+        "rule": 0,
+        "trigger_price": "",
+        "order_price": ""
+      }
+    }
   ]
 }
-
 ```
 
-## [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#cancel-subscription-12) Cancel subscription
+**Notify auto orders update.**
 
-**Unsubscribe auto orders update.**
+### [#](#notify-15) Notify
 
-### [\#](https://www.gate.io/docs/developers/delivery/ws/en/\#request-31) Request
+*   channel
+    
+    `futures.autoorders`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | field | type | description |
+  | --- | --- | --- |
+  | user | Number | user id |
+  | trigger | Object | watch http api |
+  | initial | Object | watch http api |
+  | id | Number | auto order id |
+  | trade_id | Number | trade id |
+  | status | String | order status |
+  | reason | String | change reason |
+  | create_time | Number | create time |
+  | name | String | name |
+  | is_stop_order | boolean | is stop |
+  | stop_trigger | Object | watch http api |
 
-- channel
-
-`futures.autoorders`
-
-- event
-
-`unsubscribe`
-
+## [#](#cancel-subscription-12) Cancel subscription
 
 ```
 import json
@@ -3035,7 +2786,6 @@ req = {
     }}
 ws.send(json.dumps(req))
 print(ws.recv())
-
 ```
 
 The above command returns JSON structured like this:
@@ -3050,7 +2800,19 @@ The above command returns JSON structured like this:
     "status": "success"
   }
 }
-
 ```
 
-Last Updated:11/28/2024, 3:06:07 AM
+**Unsubscribe auto orders update.**
+
+### [#](#request-31) Request
+
+*   channel
+    
+    `futures.autoorders`
+    
+*   event
+    
+    `unsubscribe`
+    
+
+Last Updated: 11/28/2024, 3:06:07 AM
