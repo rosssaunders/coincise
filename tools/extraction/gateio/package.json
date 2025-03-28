@@ -2,6 +2,9 @@
   "name": "gateio-scraper",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "start": "bash run_scrapers.sh"
+  },
   "dependencies": {
     "@mendable/firecrawl-js": "^1.21.0",
     "axios": "^1.8.4",

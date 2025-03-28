@@ -2,7 +2,7 @@
 
 Demo WebSocket application
 
-```
+```python
 # !/usr/bin/env python
 # coding: utf-8
 
@@ -17,7 +17,6 @@ from websocket import WebSocketApp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 class GateWebSocketApp(WebSocketApp):
 
@@ -69,19 +68,16 @@ class GateWebSocketApp(WebSocketApp):
     def unsubscribe(self, channel, payload=None, auth_required=True):
         self._request(channel, "unsubscribe", payload, auth_required)
 
-
 def on_message(ws, message):
     # type: (GateWebSocketApp, str) -> None
     # handle whatever message you received
     logger.info("message received from server: {}".format(message))
-
 
 def on_open(ws):
     # type: (GateWebSocketApp) -> None
     # subscribe to channels interested
     logger.info('websocket connected')
     ws.subscribe("spot.trades", ['BTC_USDT'], False)
-
 
 if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
@@ -93,7 +89,7 @@ if __name__ == "__main__":
     app.run_forever(ping_interval=5)
 ```
 
-```
+```go
 package main
 
 import (
@@ -310,7 +306,7 @@ All channels support the following events:
 
 Client request example
 
-```
+```json
 {
   "time": 1611541000,
   "id": 123456789,
@@ -344,7 +340,7 @@ Channel specific description below only gives the channel specific payload forma
 
 Server response example
 
-```
+```json
 {
   "time": 1611541000,
   "time_ms": 1611541000001,
@@ -396,10 +392,9 @@ WARNING
 
 Note: the GateAPIv4 key pair you used MUST have at least spot read permission enabled, and your outbound IP address must be in the key's IP whitelist if its whitelist is enabled.
 
-```
+```python
 # example WebSocket signature calculation implementation in Python
 import hmac, hashlib, json, time
-
 
 def gen_sign(channel, event, timestamp):
     # GateAPIv4 key pair
@@ -409,7 +404,6 @@ def gen_sign(channel, event, timestamp):
     s = 'channel=%s&event=%s&time=%d' % (channel, event, timestamp)
     sign = hmac.new(api_secret.encode('utf-8'), s.encode('utf-8'), hashlib.sha512).hexdigest()
     return {'method': 'api_key', 'KEY': api_key, 'SIGN': sign}
-
 
 request = {
     'id': int(time.time() * 1e6),
@@ -449,7 +443,7 @@ System APIs used to retrieve service meta information. **NOT** used for subscrip
 
 Code samples
 
-```
+```python
 import time
 # pip install websocket_client
 from websocket import create_connection
@@ -461,7 +455,7 @@ print(ws.recv())
 
 Response example
 
-```
+```json
 {
   "time": 1545404023,
   "channel": "spot.pong",
@@ -493,7 +487,7 @@ The ticker is a high level overview of the state of the spot trading. It shows y
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -522,7 +516,7 @@ You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier w
 
 Notification example
 
-```
+```json
 {
   "time": 1669107766,
   "time_ms": 1669107766406,
@@ -573,7 +567,7 @@ Note this is a public channel. For private trade notifications, refer to section
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -606,7 +600,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1606292218,
   "time_ms": 1606292218231,
@@ -664,7 +658,7 @@ Note this is a public channel. For private trade notifications, refer to section
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -697,7 +691,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1606292218,
   "time_ms": 1606292218231,
@@ -753,7 +747,7 @@ Provides a way to access charting candlestick info.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -803,7 +797,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1606292600,
   "time_ms": 1606292600376,
@@ -878,7 +872,7 @@ You can find example application implementing the methods above in the [SDK GitH
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -911,7 +905,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1606293275,
   "time_ms": 1606293275723,
@@ -952,7 +946,7 @@ Result format:
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -991,7 +985,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1606294781,
   "time_ms": 1606294781236,
@@ -1039,7 +1033,7 @@ Result format:
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1085,7 +1079,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1606295412,
   "time_ms": 1606295412213,
@@ -1138,7 +1132,7 @@ Notify changes of orders created in subscribed currency pairs. Including order c
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1176,7 +1170,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1694655225,
   "time_ms": 1694655225315,
@@ -1289,7 +1283,7 @@ Notify changes of orders created in subscribed currency pairs. Including order c
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1327,7 +1321,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1694655225,
   "time_ms": 1694655225315,
@@ -1432,7 +1426,7 @@ Notify user's personal trades in specified currency pairs. Unlike `spot.trades` 
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1470,7 +1464,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1605176741,
   "time_ms": 1605176741763,
@@ -1543,7 +1537,7 @@ Notify user's personal trades in specified currency pairs. Unlike `spot.trades` 
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1581,7 +1575,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1605176741,
   "time_ms": 1605176741763,
@@ -1648,7 +1642,7 @@ Notify user spot balance updates
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1677,7 +1671,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1605248616,
   "time_ms": 1605248616763,
@@ -1728,7 +1722,7 @@ Notify user margin balance updates. Any margin funding, borrowing will generate 
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1757,7 +1751,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1605248616,
   "time_ms": 1605248616763,
@@ -1808,7 +1802,7 @@ Notify user funding balance updates. Including new lending loan being created, c
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1837,7 +1831,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1605248616,
   "time_ms": 1605248616763,
@@ -1884,7 +1878,7 @@ Note that open orders will not trigger balance update until being partially or f
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1913,7 +1907,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1605248616,
   "time_ms": 1605248616763,
@@ -1971,7 +1965,7 @@ Any cross margin borrowing, repayment will generate a new notification.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -2000,7 +1994,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1658289372,
   "time_ms": 1658289372763,
@@ -2045,7 +2039,7 @@ Notify user spot priceOrders updates
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -2083,7 +2077,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1691847986,
   "time_ms": 1691847986454,
@@ -2158,8 +2152,7 @@ WebSocket API allows placing, canceling, amending, querying orders through a Web
 
 Client request example
 
-```
-
+```go
 package main
 
 import (
@@ -2297,7 +2290,6 @@ type OrderParam struct {
 	AutoBorrow   bool   `json:"auto_borrow,omitempty"`
 	StpAct       string `json:"stp_act,omitempty"`
 }
-
 ```
 
 `api` requests initiated from the client follow a common JSON format, which contains the following fields:
@@ -2318,7 +2310,7 @@ Note that the type of `payload.req_param` is channel specific, Take `spot.order_
 
 Server ack response example
 
-```
+```json
 {
   "request_id": "request-2",
   "ack": true,
@@ -2357,7 +2349,7 @@ Server ack response example
 
 Server api response example
 
-```
+```json
 {
   "request_id": "request-2",
   "header": {
@@ -2441,7 +2433,7 @@ Server response includes ack response to client requests and api result callback
 
 Error Response Notification example
 
-```
+```json
 {
   "request_id": "xxxx",
   "header": {
@@ -2467,7 +2459,7 @@ Error Response Notification example
 
 Error Response Notification example（rate limit）
 
-```
+```json
 {
   "request_id": "xxxx",
   "header": {
@@ -2518,7 +2510,7 @@ Note: the GateAPIv4 key pair you used MUST have spot Corresponding permissions(e
 
 Code samples
 
-```
+```go
 package main
 
 import (
@@ -2610,12 +2602,11 @@ type ApiPayload struct {
 	RequestId    string          `json:"req_id,omitempty"`
 	RequestParam json.RawMessage `json:"req_param,omitempty"`
 }
-
 ```
 
 Request example
 
-```
+```json
 {
   "time": 1681984544,
   "channel": "spot.login",
@@ -2647,7 +2638,7 @@ WebSocket api operation authentication uses the same signature calculation metho
 
 Login Response example
 
-```
+```json
 {
   "request_id": "request-1",
   "header": {
@@ -2702,7 +2693,7 @@ You can place orders with this channel and event `api`.
 
 **function as api below:**
 
-```
+```json
 POST /spot/orders
 POST /spot/batch_orders
 ```
@@ -2711,7 +2702,7 @@ POST /spot/batch_orders
 
 Code samples
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -2740,7 +2731,7 @@ for i in range(2):
     print("data: ", data)
 ```
 
-```
+```go
 package main
 
 import (
@@ -2848,7 +2839,7 @@ type OrderParam struct {
 
 Request example
 
-```
+```json
 {
   "time": 1681986203,
   "channel": "spot.order_place",
@@ -2958,7 +2949,7 @@ Payload format:
 
 Ack Notification example for an order
 
-```
+```json
 {
   "request_id": "request-2",
   "ack": true,
@@ -3000,7 +2991,7 @@ Ack Notification example for an order
 
 Ack Notification example for **order array**
 
-```
+```json
 {
   "request_id": "xxxx",
   "ack": true,
@@ -3056,7 +3047,7 @@ Response Notification example for an order
 
 > action\_mode: ACK
 
-```
+```json
 {
   "request_id": "request-2",
   "header": {
@@ -3086,7 +3077,7 @@ Response Notification example for an order
 
 > action\_mode: RESULT
 
-```
+```json
 {
   "request_id": "request-2",
   "header": {
@@ -3135,7 +3126,7 @@ Response Notification example for an order
 
 > action\_mode: FULL
 
-```
+```json
 {
   "request_id": "request-2",
   "header": {
@@ -3224,7 +3215,7 @@ You can cancel an open order with this channel and event `cancel`.
 
 **function as api below:**
 
-```
+```json
 DELETE /spot/orders/{order_id}
 ```
 
@@ -3232,7 +3223,7 @@ DELETE /spot/orders/{order_id}
 
 Code samples
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -3246,7 +3237,6 @@ cancelParam = {"order_id":"1694883366","currency_pair":"GT_USDT"}
 channel = "spot.order_cancel"
 
 ws = create_connection("wss://api.gateio.ws/ws/v4/")
-
 
 ws.send(json.dumps({
     "time":time,
@@ -3263,7 +3253,7 @@ print(ws.recv())
 
 Order cancel request example
 
-```
+```json
 {
   "time": 1681986206,
   "channel": "spot.order_cancel",
@@ -3304,7 +3294,7 @@ Payload format:
 
 Order cancel notification example
 
-```
+```json
 {
   "request_id": "request-5",
   "header": {
@@ -3384,7 +3374,7 @@ You can cancel all open orders with this channel and event `cancel_ids`.
 
 **function as api below:**
 
-```
+```json
 POST /spot/cancel_batch_orders
 ```
 
@@ -3392,7 +3382,7 @@ POST /spot/cancel_batch_orders
 
 Code samples
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -3406,7 +3396,6 @@ cancelWithIdsParam = [{"id":"1694883366","currency_pair":"GT_USDT"}]
 channel = "spot.order_cancel_ids"
 
 ws = create_connection("wss://api.gateio.ws/ws/v4/")
-
 
 ws.send(json.dumps({
     "time":time,
@@ -3423,7 +3412,7 @@ print(ws.recv())
 
 Client request example
 
-```
+```json
 {
   "time": 1681986208,
   "channel": "spot.order_cancel_ids",
@@ -3466,7 +3455,7 @@ Payload format:
 
 Order cancel notification example
 
-```
+```json
 {
   "request_id": "request-9",
   "header": {
@@ -3520,7 +3509,7 @@ You can cancel all open orders with this channel and event `cancel_cp`.
 
 **function as api below:**
 
-```
+```json
 DELETE /spot/orders
 ```
 
@@ -3528,7 +3517,7 @@ DELETE /spot/orders
 
 Code samples
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -3543,7 +3532,6 @@ channel = "spot.order_cancel_cp"
 
 ws = create_connection("wss://api.gateio.ws/ws/v4/")
 
-
 ws.send(json.dumps({
     "time":time,
     "channel":channel,
@@ -3557,7 +3545,7 @@ ws.send(json.dumps({
 print(ws.recv())
 ```
 
-```
+```json
 {
   "time": 1681986207,
   "channel": "spot.order_cancel_cp",
@@ -3598,7 +3586,7 @@ Payload format:
 
 Order cancel notification example
 
-```
+```json
 {
   "request_id": "request-7",
   "header": {
@@ -3680,7 +3668,7 @@ You can amend an open order with this channel and event `amend`.
 
 **function as api below:**
 
-```
+```text
 PATCH /spot/orders/{order_id}
 ```
 
@@ -3688,7 +3676,7 @@ PATCH /spot/orders/{order_id}
 
 Code samples
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -3702,7 +3690,6 @@ amendParam = {"order_id":"1694883366","currency_pair":"GT_USDT","price":"2"}
 channel = "spot.order_amend"
 
 ws = create_connection("wss://api.gateio.ws/ws/v4/")
-
 
 ws.send(json.dumps({
     "time":time,
@@ -3719,7 +3706,7 @@ print(ws.recv())
 
 Client request example
 
-```
+```json
 {
   "time": 1681986206,
   "channel": "spot.order_amend",
@@ -3764,7 +3751,7 @@ Payload format:
 
 Order amend notification example
 
-```
+```json
 {
   "request_id": "request-4",
   "header": {
@@ -3850,7 +3837,7 @@ You can query an order with this channel and event `status`.
 
 **function as api below:**
 
-```
+```text
 GET /spot/orders/{order_id}
 ```
 
@@ -3858,7 +3845,7 @@ GET /spot/orders/{order_id}
 
 Code samples
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -3872,7 +3859,6 @@ statusParam = {"order_id":"1694883366","currency_pair":"GT_USDT"}
 channel = "spot.order_status"
 
 ws = create_connection("wss://api.gateio.ws/ws/v4/")
-
 
 ws.send(json.dumps({
     "time":time,
@@ -3889,7 +3875,7 @@ print(ws.recv())
 
 Client request example
 
-```
+```json
 {
   "time": 1681986205,
   "channel": "spot.order_status",
@@ -3923,7 +3909,7 @@ Payload format:
 
 Order status notification example
 
-```
+```json
 {
   "request_id": "request-3",
   "header": {
@@ -4007,7 +3993,7 @@ You can use this channel and event `api` to query orders.
 
 **Following are the functions of the API:**
 
-```
+```text
 GET /spot/orders
 ```
 
@@ -4015,7 +4001,7 @@ GET /spot/orders
 
 代码示例
 
-```
+```python
 #!/usr/bin/python
 
 import time
@@ -4029,7 +4015,6 @@ statusParam = {"currency_pair": "BTC_USDT","status": "finished","limit": 3,"page
 channel = "spot.order_list"
 
 ws = create_connection("wss://api.gateio.ws/ws/v4/")
-
 
 ws.send(json.dumps({
     "time":time,
@@ -4046,7 +4031,7 @@ print(ws.recv())
 
 Request example
 
-```
+```json
 {
     "time": 1734400368,
     "channel": "spot.order_list",
@@ -4097,7 +4082,7 @@ Payload:
 
 Responses example
 
-```
+```json
 {
     "header": {
         "response_time": "1734486677912",

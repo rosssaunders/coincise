@@ -4,6 +4,8 @@ import { JSDOM } from 'jsdom';
 import TurndownService from 'turndown';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
+import { downloadHtml, processHtml } from './websocket_docs_utils.js';
+import { addTableRule, addListItemWithTableRule, addCodeBlockRule } from './websocket_docs_utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,61 +20,10 @@ async function run() {
     headingStyle: 'atx',
     codeBlockStyle: 'fenced'
   });
-
-  // Custom rules for tables
-  turndownService.addRule('table', {
-    filter: 'table',
-    replacement: function(content, node) {
-      const rows = Array.from(node.querySelectorAll('tr'));
-      if (rows.length === 0) return '';
-      
-      let markdown = '';
-      
-      // Process header
-      const headerCells = Array.from(rows[0].querySelectorAll('th'));
-      if (headerCells.length > 0) {
-        markdown += '|';
-        headerCells.forEach(cell => {
-          markdown += ` ${cell.textContent.trim()} |`;
-        });
-        markdown += '\n|';
-        headerCells.forEach(() => {
-          markdown += ' --- |';
-        });
-        markdown += '\n';
-      }
-      
-      // Process rows
-      const startRow = headerCells.length > 0 ? 1 : 0;
-      for (let i = startRow; i < rows.length; i++) {
-        const cells = Array.from(rows[i].querySelectorAll('td'));
-        if (cells.length > 0) {
-          markdown += '|';
-          cells.forEach(cell => {
-            markdown += ` ${cell.textContent.trim().replace(/\n/g, ' ')} |`;
-          });
-          markdown += '\n';
-        }
-      }
-      
-      return markdown + '\n';
-    }
-  });
-
-  // Custom rule for handling list items with tables
-  turndownService.addRule('listItemWithTable', {
-    filter: function (node) {
-      return (
-        node.nodeName === 'LI' &&
-        node.querySelector('table')
-      );
-    },
-    replacement: function (content, node) {
-      let markdown = '- ';
-      markdown += content.trim().replace(/\n/g, '\n  ');
-      return markdown + '\n';
-    }
-  });
+  
+  addTableRule(turndownService);
+  addListItemWithTableRule(turndownService);
+  addCodeBlockRule(turndownService);
 
   for (const endpoint of endpoints) {
     const url = `https://www.gate.io/docs/developers/${endpoint}`;
@@ -96,50 +47,6 @@ async function run() {
       console.error('Error processing HTML:', error);
     }
   }
-}
-
-function downloadHtml(url, filePath) {
-  return new Promise((resolve, reject) => {
-    console.log(`Downloading HTML from ${url}...`);
-    const file = fs.createWriteStream(filePath);
-    axios.get(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0',
-        'Accept': 'text/html',
-      },
-      responseType: 'stream'
-    }).then(response => {
-      if (response.status !== 200) {
-        reject(new Error(`Failed to download: HTTP status code ${response.status}`));
-        return;
-      }
-      response.data.pipe(file);
-      file.on('finish', () => {
-        file.close();
-        console.log('Download completed successfully.');
-        resolve();
-      });
-    }).catch(err => {
-      fs.unlink(filePath, () => {});
-      reject(err);
-    });
-    file.on('error', err => {
-      fs.unlink(filePath, () => {});
-      reject(err);
-    });
-  });
-}
-
-function processHtml(html, turndownService) {
-  const dom = new JSDOM(html);
-  const document = dom.window.document;
-  const contentContainer = document.querySelector('div.col-md-9.col-lg-10.content__container');
-  if (!contentContainer) {
-    console.error('Could not find main content container');
-    return '';
-  }
-  const content = contentContainer.innerHTML;
-  return turndownService.turndown(content);
 }
 
 run().catch(console.error);

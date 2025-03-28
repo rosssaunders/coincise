@@ -12,7 +12,7 @@ We have language bindings in `Python`, more in the future! You can view code exa
 
 ## [#](#changelog) Changelog
 
-```
+```python
 # !/usr/bin/env python
 # coding: utf-8
 
@@ -26,7 +26,6 @@ from websocket import WebSocketApp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 class GateWebSocketApp(WebSocketApp):
 
@@ -78,19 +77,16 @@ class GateWebSocketApp(WebSocketApp):
     def unsubscribe(self, channel, payload=None, auth_required=True):
         self._request(channel, "unsubscribe", payload, auth_required)
 
-
 def on_message(ws, message):
     # type: (GateWebSocketApp, str) -> None
     # handle message received
     logger.info("message received from server: {}".format(message))
-
 
 def on_open(ws):
     # type: (GateWebSocketApp) -> None
     # subscribe to channels interested
     logger.info('websocket connected')
     ws.subscribe("unified.assets", [], False)
-
 
 if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
@@ -102,7 +98,7 @@ if __name__ == "__main__":
     app.run_forever(ping_interval=5)
 ```
 
-```
+```go
 package main
 
 import (
@@ -275,7 +271,7 @@ WebSocket authentication uses the same signature calculation method with HTTP AP
 1.  Signature string concatenation method: `channel=<channel>&event=<event>&time=<time>`, where `<channel>`, `<event>`, `<time>` are corresponding request information
 2.  Authentication information are sent in request body in field `auth`.
 
-```
+```python
 # example WebSocket signature calculation implementation in Python
 import hmac, hashlib, time
 
@@ -307,7 +303,7 @@ You can log into the console to retrieve futures API key and secret.
 
 **if you want to actively detect the connection status, you can send application layer ping message and receive pong message.**
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://ws.gate.io/v4/ws/unified")
@@ -320,7 +316,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
     "time": 1701830644,
     "time_ms": 1701830644326,
@@ -347,7 +343,7 @@ Authentication required.
 
 ## [#](#assets-subscription) assets subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -369,7 +365,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1716796362,
   "time_ms": 1716796362915,
@@ -401,7 +397,7 @@ The above command returns JSON structured like this:
 
 ## [#](#assets-notification) assets notification
 
-```
+```json
 {
         "time": 1700625194,
         "channel": "unified.assets",
@@ -454,7 +450,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -476,7 +472,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1716796362,
   "time_ms": 1716796362915,
@@ -511,7 +507,7 @@ Authentication required.
 
 ## [#](#asset-detail-subscription) Asset\_detail subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -533,7 +529,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1716796362,
   "time_ms": 1716796362915,
@@ -563,7 +559,7 @@ The above command returns JSON structured like this:
 
 ## [#](#asset-detail-notification) asset detail notification
 
-```
+```json
 {
     "time": 1716796362,
     "time_ms": 1716796362915,
@@ -619,7 +615,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-2) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -641,7 +637,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1716796362,
   "time_ms": 1716796362689,

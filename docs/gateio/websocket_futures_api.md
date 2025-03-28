@@ -28,7 +28,7 @@ Base URLs:
 
 ## [#](#changelog) Changelog
 
-```
+```python
 # !/usr/bin/env python
 # coding: utf-8
 
@@ -42,7 +42,6 @@ from websocket import WebSocketApp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 class GateWebSocketApp(WebSocketApp):
 
@@ -94,19 +93,16 @@ class GateWebSocketApp(WebSocketApp):
     def unsubscribe(self, channel, payload=None, auth_required=True):
         self._request(channel, "unsubscribe", payload, auth_required)
 
-
 def on_message(ws, message):
     # type: (GateWebSocketApp, str) -> None
     # handle message received
     logger.info("message received from server: {}".format(message))
-
 
 def on_open(ws):
     # type: (GateWebSocketApp) -> None
     # subscribe to channels interested
     logger.info('websocket connected')
     ws.subscribe("futures.tickers", ['BTC_USDT_20230630'], False)
-
 
 if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
@@ -118,7 +114,7 @@ if __name__ == "__main__":
     app.run_forever(ping_interval=5)
 ```
 
-```
+```go
 package main
 
 import (
@@ -317,7 +313,7 @@ WebSocket authentication uses the same signature calculation method with HTTP AP
 1.  Signature string concatenation method: `channel=<channel>&event=<event>&time=<time>`, where `<channel>`, `<event>`, `<time>` are corresponding request information
 2.  Authentication information are sent in request body in field `auth`.
 
-```
+```python
 # example WebSocket signature calculation implementation in Python
 import hmac, hashlib, time
 
@@ -349,7 +345,7 @@ You can log into the console to retrieve delivery API key and secret.
 
 **if you want to actively detect the connection status, you can send application layer ping message and receive pong message.**
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -359,7 +355,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545404023,
   "channel": "futures.pong",
@@ -382,7 +378,7 @@ The above command returns JSON structured like this:
 
 ## [#](#tickers-subscription) Tickers subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -393,7 +389,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545404023,
   "channel": "futures.tickers",
@@ -425,7 +421,7 @@ The above command returns JSON structured like this:
 
 ## [#](#tickers-notification) Tickers notification
 
-```
+```json
 {
   "time": 1541659086,
   "channel": "futures.tickers",
@@ -491,7 +487,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -508,7 +504,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545404900,
   "channel": "futures.tickers",
@@ -539,7 +535,7 @@ The above command returns JSON structured like this:
 
 ## [#](#trades-subscription) Trades subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -550,7 +546,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545405058,
   "channel": "futures.trades",
@@ -584,7 +580,7 @@ The above command returns JSON structured like this:
 
 Positive size means taker is buyer，negative seller
 
-```
+```json
 {
   "channel": "futures.trades",
   "event": "update",
@@ -631,7 +627,7 @@ Positive size means taker is buyer，negative seller
 
 ## [#](#cancel-subscription-2) Cancel subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -642,7 +638,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545404900,
   "channel": "futures.trades",
@@ -701,7 +697,7 @@ How to maintain local order book:
 
 ## [#](#legacy-order-book-subscription) Legacy order book subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -712,7 +708,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545405058,
   "time_ms": 1545405058123,
@@ -747,7 +743,7 @@ The above command returns JSON structured like this:
 
 ## [#](#legacy-order-book-notification) Legacy order book notification
 
-```
+```json
 {
   "channel": "futures.order_book",
   "event": "all",
@@ -783,7 +779,7 @@ The above command returns JSON structured like this:
 
 Or
 
-```
+```json
 {
   "channel": "futures.order_book",
   "event": "update",
@@ -827,7 +823,7 @@ Or
 
 ## [#](#legacy-order-book-unsubscription) Legacy order book unsubscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -838,7 +834,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545445847,
   "time_ms": 1545445847123,
@@ -866,7 +862,7 @@ The above command returns JSON structured like this:
 
 ## [#](#best-ask-bid-subscription) Best ask/bid subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -877,7 +873,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545405058,
   "time_ms": 1545405058123,
@@ -911,7 +907,7 @@ The above command returns JSON structured like this:
 
 If `a` is empty string, it means empty asks; if `b` is empty string, it means empty bids.
 
-```
+```json
 {
   "time": 1615366379,
   "time_ms": 1615366379123,
@@ -957,7 +953,7 @@ If `a` is empty string, it means empty asks; if `b` is empty string, it means em
 
 ## [#](#best-ask-bid-unsubscription) Best ask/bid unsubscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -968,7 +964,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545445847,
   "time_ms": 1545445847123,
@@ -996,7 +992,7 @@ The above command returns JSON structured like this:
 
 ## [#](#order-book-update-subscription) Order book update subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/btc")
@@ -1007,7 +1003,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545405058,
   "time_ms": 1545405058123,
@@ -1042,7 +1038,7 @@ The above command returns JSON structured like this:
 
 ## [#](#order-book-update-notification) Order book update notification
 
-```
+```json
 {
   "time": 1615366381,
   "time_ms": 1615366381123,
@@ -1108,7 +1104,7 @@ The above command returns JSON structured like this:
 
 ## [#](#order-book-update-unsubscription) Order book update unsubscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/btc")
@@ -1119,7 +1115,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545445847,
   "time_ms": 1545445847123,
@@ -1153,7 +1149,7 @@ The above command returns JSON structured like this:
 
 **_If prefix `contract` with `mark_`, the contract's mark price candlesticks will be subscribed._**
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -1164,7 +1160,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545445847,
   "channel": "futures.candlesticks",
@@ -1195,7 +1191,7 @@ The above command returns JSON structured like this:
 
 ## [#](#candlesticks-notification) Candlesticks notification
 
-```
+```json
 {
   "time": 1542162490,
   "channel": "futures.candlesticks",
@@ -1254,7 +1250,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-3) Cancel subscription
 
-```
+```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/delivery/usdt")
@@ -1265,7 +1261,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545445847,
   "channel": "futures.candlesticks",
@@ -1300,7 +1296,7 @@ Authentication required.
 
 ## [#](#orders-subscription) Orders subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1322,7 +1318,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.orders",
@@ -1355,7 +1351,7 @@ The above command returns JSON structured like this:
 
 ## [#](#orders-notification) Orders notification
 
-```
+```json
 {
   "channel": "futures.orders",
   "event": "update",
@@ -1436,7 +1432,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-4) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1458,7 +1454,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.orders",
@@ -1493,7 +1489,7 @@ Authentication required.
 
 ## [#](#user-trades-subscription) User trades subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1515,7 +1511,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.usertrades",
@@ -1548,7 +1544,7 @@ The above command returns JSON structured like this:
 
 ## [#](#user-trades-notification) User trades notification
 
-```
+```json
 {
   "time": 1543205083,
   "channel": "futures.usertrades",
@@ -1600,7 +1596,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-5) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1622,7 +1618,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.usertrades",
@@ -1657,7 +1653,7 @@ Authentication required.
 
 ## [#](#liquidates-subscription) Liquidates subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1679,7 +1675,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.liquidates",
@@ -1712,7 +1708,7 @@ The above command returns JSON structured like this:
 
 ## [#](#liquidates-notification) Liquidates notification
 
-```
+```json
 {
   "channel": "futures.liquidates",
   "event": "update",
@@ -1775,7 +1771,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-6) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1797,7 +1793,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.liquidates",
@@ -1832,7 +1828,7 @@ Authentication required.
 
 ## [#](#auto-deleverages-subscription) Auto\_deleverages subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1854,7 +1850,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.auto_deleverages",
@@ -1887,7 +1883,7 @@ The above command returns JSON structured like this:
 
 ## [#](#auto-deleverages-notification) Auto\_deleverages notification
 
-```
+```json
 {
   "channel": "futures.auto_deleverages",
   "event": "update",
@@ -1938,7 +1934,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-7) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -1960,7 +1956,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.auto_deleverages",
@@ -1995,7 +1991,7 @@ Authentication required.
 
 ## [#](#position-closes-subscription) Position\_closes subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2017,7 +2013,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.position_closes",
@@ -2050,7 +2046,7 @@ The above command returns JSON structured like this:
 
 ## [#](#position-closes-notification) Position\_closes notification
 
-```
+```json
 {
   "channel": "futures.position_closes",
   "event": "update",
@@ -2099,7 +2095,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-8) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2121,7 +2117,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.position_closes",
@@ -2156,7 +2152,7 @@ Authentication required.
 
 ## [#](#balances-subscription) Balances subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2178,7 +2174,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.balances",
@@ -2210,7 +2206,7 @@ The above command returns JSON structured like this:
 
 ## [#](#balances-notification) balances notification
 
-```
+```json
 {
   "channel": "futures.balances",
   "event": "update",
@@ -2259,7 +2255,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-9) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2281,7 +2277,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.balances",
@@ -2303,7 +2299,7 @@ Authentication required.
 
 ## [#](#reduce-risk-limits-subscription) Reduce\_risk\_limits subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2325,7 +2321,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.reduce_risk_limits",
@@ -2358,7 +2354,7 @@ The above command returns JSON structured like this:
 
 ## [#](#reduce-risk-limits-notification) Reduce\_risk\_limits notification
 
-```
+```json
 {
   "time": 1551858330,
   "channel": "futures.reduce_risk_limits",
@@ -2412,7 +2408,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-10) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2455,7 +2451,7 @@ Authentication required.
 
 ## [#](#positions-subscription) Positions subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2477,7 +2473,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.positions",
@@ -2510,7 +2506,7 @@ The above command returns JSON structured like this:
 
 ## [#](#positions-notification) Positions notification
 
-```
+```json
 {
   "time": 1588212926,
   "channel": "futures.positions",
@@ -2580,7 +2576,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-11) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2602,7 +2598,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.positions",
@@ -2637,7 +2633,7 @@ Authentication required.
 
 ## [#](#auto-orders-subscription) Auto orders subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2659,7 +2655,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.autoorders",
@@ -2692,7 +2688,7 @@ The above command returns JSON structured like this:
 
 ## [#](#auto-orders-notification) Auto orders notification
 
-```
+```json
 {
   "time": 1596798126,
   "channel": "futures.autoorders",
@@ -2769,7 +2765,7 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-12) Cancel subscription
 
-```
+```python
 import json
 from websocket import create_connection
 
@@ -2790,7 +2786,7 @@ print(ws.recv())
 
 The above command returns JSON structured like this:
 
-```
+```json
 {
   "time": 1545459681,
   "channel": "futures.autoorders",

@@ -17,7 +17,7 @@ Base URLs:
 
 ## [#](#changelog) Changelog
 
-```
+```python
 # !/usr/bin/env python
 # coding: utf-8
 
@@ -31,7 +31,6 @@ from websocket import WebSocketApp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 class GateWebSocketApp(WebSocketApp):
 
@@ -83,19 +82,16 @@ class GateWebSocketApp(WebSocketApp):
    def unsubscribe(self, channel, payload=None, auth_required=True):
         self._request(channel, "unsubscribe", payload, auth_required)
 
-
 def on_message(ws, message):
     # type: (GateWebSocketApp, str) -> None
     # handle message received
     logger.info("message received from server: {}".format(message))
-
 
 def on_open(ws):
     # type: (GateWebSocketApp) -> None
     # subscribe to channels interested
     logger.info('websocket connected')
     ws.subscribe("options.contract_tickers", ['BTC_USDT-20211231-59800-C'], False)
-
 
 if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
@@ -107,7 +103,7 @@ if __name__ == "__main__":
     app.run_forever(ping_interval=5)
 ```
 
-```
+```go
 package main
 
 import (
@@ -299,10 +295,9 @@ WARNING
 
 Note: the GateAPIv4 key pair you used MUST have at least options read permission enabled, and your outbound IP address must be in the key's IP whitelist if its whitelist is enabled.
 
-```
+```python
 # example WebSocket signature calculation implementation in Python
 import hmac, hashlib, json, time
-
 
 def gen_sign(channel, event, timestamp):
     # GateAPIv4 key pair
@@ -312,7 +307,6 @@ def gen_sign(channel, event, timestamp):
     s = 'channel=%s&event=%s&time=%d' % (channel, event, timestamp)
     sign = hmac.new(api_secret.encode('utf-8'), s.encode('utf-8'), hashlib.sha512).hexdigest()
     return {'method': 'api_key', 'KEY': api_key, 'SIGN': sign}
-
 
 request = {
     'id': int(time.time() * 1e6),
@@ -352,7 +346,7 @@ System APIs used to retrieve service meta information. **NOT** used for subscrip
 
 Code samples
 
-```
+```python
 import time
 # pip install websocket_client
 from websocket import create_connection
@@ -364,7 +358,7 @@ print(ws.recv())
 
 Response example
 
-```
+```json
 {
   "time": 1630566602,
   "channel": "options.pong",
@@ -398,7 +392,7 @@ The ticker is a high level overview of the state of the contract. It shows you t
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -431,7 +425,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576352,
   "channel": "options.contract_tickers",
@@ -494,7 +488,7 @@ The underlying ticker shows put trades, call trades and index\_price of underlyi
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -527,7 +521,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576352,
   "channel": "options.ul_tickers",
@@ -565,7 +559,7 @@ This channel sends a trade message whenever a trade occurs at gate.io. It includ
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -598,7 +592,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576356,
   "channel": "options.trades",
@@ -646,7 +640,7 @@ This channel sends all trades message under underlying whenever a trade occurs a
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -679,7 +673,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576356,
   "channel": "options.ul_trades",
@@ -727,7 +721,7 @@ This channel sends underlying price update messages.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -760,7 +754,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576356,
   "channel": "options.ul_price",
@@ -798,7 +792,7 @@ This channel sends mark price update messages.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -831,7 +825,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576356,
   "channel": "options.mark_prices",
@@ -869,7 +863,7 @@ This channel sends contracts settlement update messages.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -902,7 +896,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576356,
   "channel": "options.settlements",
@@ -956,7 +950,7 @@ This channel sends contracts update messages.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -989,7 +983,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630576356,
   "channel": "options.contracts",
@@ -1069,7 +1063,7 @@ Provides a way to access charting candlestick info.
 
 **_If prefix `contract` with `mark_`, the contract's mark price candlesticks will be subscribed; if prefix with `index_`, index price candlesticks will be subscribed._**
 
-```
+```python
 import time
 import json
 
@@ -1119,7 +1113,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630650451,
   "channel": "options.contract_candlesticks",
@@ -1167,7 +1161,7 @@ Provides a way to access charting underlying candlestick info.
 
 **_If prefix `contract` with `mark_`, the contract's mark price candlesticks will be subscribed; if prefix with `index_`, index price candlesticks will be subscribed._**
 
-```
+```python
 import time
 import json
 
@@ -1217,7 +1211,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630650451,
   "channel": "options.ul_candlesticks",
@@ -1297,7 +1291,7 @@ You can find example application implementing the methods above in the [SDK GitH
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1332,7 +1326,7 @@ If `a` is empty string, it means empty asks; if `b` is empty string, it means em
 
 Notification example
 
-```
+```json
 {
   "time": 1630650452,
   "channel": "options.book_ticker",
@@ -1374,7 +1368,7 @@ Result format:
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1424,7 +1418,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630650445,
   "channel": "options.order_book_update",
@@ -1486,7 +1480,7 @@ Result format:
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1533,7 +1527,7 @@ This channel does not require authentication
 
 Notification example
 
-```
+```json
 {
   "time": 1630650445,
   "channel": "options.order_book",
@@ -1568,7 +1562,7 @@ Notification example
 
 Or
 
-```
+```json
 {
   "channel": "options.order_book",
   "event": "update",
@@ -1608,7 +1602,7 @@ Provides a way to receive user closed orders.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1647,7 +1641,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1630654851,
   "channel": "options.orders",
@@ -1726,7 +1720,7 @@ Provides a way to receive user trades.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1765,7 +1759,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "time": 1639144214,
   "channel": "options.usertrades",
@@ -1827,7 +1821,7 @@ Provides a way to receive user liquidates info. ()
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1864,7 +1858,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "channel": "options.liquidates",
   "event": "update",
@@ -1908,7 +1902,7 @@ Provides a way to receive user settlements info.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -1945,7 +1939,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "channel": "options.user_settlements",
   "event": "update",
@@ -1995,7 +1989,7 @@ Provides a way to receive user position closes info.
 
 Code samples
 
-```
+```python
 import time
 import json
 
@@ -2032,7 +2026,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "channel": "options.position_closes",
   "event": "update",
@@ -2088,7 +2082,7 @@ Provides a way to receive user balances info.
 
 Code samples
 
-```
+```python
 import json
 import time
 from websocket import create_connection
@@ -2120,7 +2114,7 @@ This channel requires authentication.
 
 Notification example
 
-```
+```json
 {
   "channel": "options.balances",
   "event": "update",
@@ -2166,7 +2160,7 @@ Provides a way to receive user positions info.
 
 Code samples
 
-```
+```python
 import json
 import time
 from websocket import create_connection
@@ -2199,7 +2193,7 @@ Authentication required.
 
 Notification example
 
-```
+```json
 {
   "time": 1630654851,
   "channel": "options.positions",
