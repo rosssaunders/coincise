@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { JSDOM } from 'jsdom';
 import TurndownService from 'turndown';
-import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { downloadHtml, processHtml } from './websocket_docs_utils.js';
 import { addTableRule, addListItemWithTableRule, addCodeBlockRule } from './websocket_docs_utils.js';

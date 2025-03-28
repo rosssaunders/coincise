@@ -3,7 +3,6 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 import path from 'path';
 import { JSDOM } from 'jsdom';
-import TurndownService from 'turndown';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
 
