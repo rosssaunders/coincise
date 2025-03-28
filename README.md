@@ -33,11 +33,12 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/okx.png" alt="OKX" height="16" style="vertical-align: middle;"> | OKX | Private Order Book WebSocket | [Private Order Book WebSocket Docs](docs/okx/private_order_book_trading_websocket_api.md) | 2025-03-15 |
 | <img src="assets/icons/okx.png" alt="OKX" height="16" style="vertical-align: middle;"> | OKX | Public Market Data REST | [Public Market Data REST](docs/okx/public_market_data_rest_api.md) | 2025-03-15 |
 | <img src="assets/icons/okx.png" alt="OKX" height="16" style="vertical-align: middle;"> | OKX | Public Market Data WebSocket | [Public Market Data WebSocket REST ](docs/okx/public_market_data_websocket_api.md) | 2025-03-15 |
-| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Spot WebSocket | [Spot WebSocket API Docs](docs/gateio/websocket_spot_api.md) | 2025-03-15 |
-| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Futures WebSocket | [Futures WebSocket API Docs](docs/gateio/websocket_futures_api.md) | 2025-03-15 |
-| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Perpetual WebSocket | [Perpetual WebSocket API Docs](docs/gateio/websocket_perps_api.md) | 2025-03-15 |
-| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Options WebSocket | [Options WebSocket API Docs](docs/gateio/websocket_options_api.md) | 2025-03-15 |
-| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Unified WebSocket | [Unified WebSocket API Docs](docs/gateio/websocket_unified_api.md) | 2025-03-15 |
+| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Spot WebSocket | [Spot WebSocket API Docs](docs/gateio/websocket_spot_api.md) | 2025-03-28 |
+| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Futures WebSocket | [Futures WebSocket API Docs](docs/gateio/websocket_futures_api.md) | 2025-03-28 |
+| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Perpetual WebSocket | [Perpetual WebSocket API Docs](docs/gateio/websocket_perps_api.md) | 2025-03-28 |
+| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Options WebSocket | [Options WebSocket API Docs](docs/gateio/websocket_options_api.md) | 2025-03-28 |
+| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Unified WebSocket | [Unified WebSocket API Docs](docs/gateio/websocket_unified_api.md) | 2025-03-28 |
+| <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | REST API | [REST API Docs](docs/gateio/rest_api.md) | 2025-03-28 |
 
 ## Contributing
 
