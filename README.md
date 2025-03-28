@@ -8,23 +8,23 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 
 | Exchange | API Type | Documentation | Last Updated |
 |----------|----------|---------------|-------------|
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Private REST | [Private REST API Docs](docs/binance/spot/private_rest_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Public REST | [Public REST API Docs](docs/binance/spot/public_rest_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | FIX | [FIX API Docs](docs/binance/spot/fix_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Private WebSocket | [Private WebSocket API Docs](docs/binance/spot/private_websocket_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Market Data SBE | [SBE API Docs](docs/binance/spot/market_data_sbe_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Private REST | [Private REST Docs](docs/binance/usdm/private_rest_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Public REST | [Public REST Docs](docs/binance/usdm/public_rest_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Private WebSocket | [Private WebSocket Docs](docs/binance/usdm/private_websocket_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Public WebSocket | [Public WebSocket Docs](docs/binance/usdm/public_websocket_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Private REST | [Private REST Docs](docs/binance/coinm/private_rest_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Public REST | [Public REST Docs](docs/binance/coinm/public_rest_api.md) | 2025-03-14 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Private WebSocket | [Private WebSocket Docs](docs/binance/coinm/private_websocket_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Public WebSocket | [Public WebSocket Docs](docs/binance/coinm/public_websocket_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Private REST | [Private REST Docs](docs/binance/options/private_rest_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Public REST | [Public REST Docs](docs/binance/options/public_rest_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Private WebSocket | [Private WebSocket Docs](docs/binance/options/private_websocket_api.md) | 2025-03-15 |
-| <img src="assets/icons/binance.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Public WebSocket | [Public WebSocket Docs](docs/binance/options/public_websocket_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancespot.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Private REST | [Private REST API Docs](docs/binance/spot/private_rest_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancespot.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Public REST | [Public REST API Docs](docs/binance/spot/public_rest_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancespot.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | FIX | [FIX API Docs](docs/binance/spot/fix_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancespot.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Private WebSocket | [Private WebSocket API Docs](docs/binance/spot/private_websocket_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancespot.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Spot | Market Data SBE | [SBE API Docs](docs/binance/spot/market_data_sbe_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Private REST | [Private REST Docs](docs/binance/usdm/private_rest_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Public REST | [Public REST Docs](docs/binance/usdm/public_rest_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Private WebSocket | [Private WebSocket Docs](docs/binance/usdm/private_websocket_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance USDM | Public WebSocket | [Public WebSocket Docs](docs/binance/usdm/public_websocket_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Private REST | [Private REST Docs](docs/binance/coinm/private_rest_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Public REST | [Public REST Docs](docs/binance/coinm/public_rest_api.md) | 2025-03-14 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Private WebSocket | [Private WebSocket Docs](docs/binance/coinm/private_websocket_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance CoinM | Public WebSocket | [Public WebSocket Docs](docs/binance/coinm/public_websocket_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Private REST | [Private REST Docs](docs/binance/options/private_rest_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Public REST | [Public REST Docs](docs/binance/options/public_rest_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Private WebSocket | [Private WebSocket Docs](docs/binance/options/private_websocket_api.md) | 2025-03-15 |
+| <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> Binance Options | Public WebSocket | [Public WebSocket Docs](docs/binance/options/public_websocket_api.md) | 2025-03-15 |
 | <img src="assets/icons/bybit.png" alt="ByBit" height="16" style="vertical-align: middle;"> ByBit V5 | Private REST | [Private REST Docs](docs/bybit/v5/private_rest_api.md) | 2025-03-15 |
 | <img src="assets/icons/bybit.png" alt="ByBit" height="16" style="vertical-align: middle;"> ByBit V5 | Public REST | [Public REST Docs](docs/bybit/v5/public_rest_api.md) | 2025-03-15 |
 | <img src="assets/icons/bybit.png" alt="ByBit" height="16" style="vertical-align: middle;"> ByBit V5 | Private WebSocket | [Private WebSocket Docs](docs/bybit/v5/private_websocket_api.md) | 2025-03-15 |
