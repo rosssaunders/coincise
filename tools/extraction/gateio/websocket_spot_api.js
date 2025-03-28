@@ -1,9 +1,12 @@
-import FireCrawlApp from '@mendable/firecrawl-js';
 import fs from 'fs';
-import dotenv from 'dotenv';
+import path from 'path';
+import TurndownService from 'turndown';
+import { fileURLToPath } from 'url';
+import { downloadHtml, processHtml } from './websocket_docs_utils.js';
+import { addTableRule, addListItemWithTableRule, addCodeBlockRule } from './websocket_docs_utils.js';
 
-// Load environment variables from .env file
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // List of endpoints to scrape
 const endpoints = [
@@ -11,43 +14,35 @@ const endpoints = [
 ];
 
 async function run() {
-  const app = new FireCrawlApp({apiKey: process.env.FIRECRAWL_API_KEY});
-  let combinedContent = '';
+  const turndownService = new TurndownService({
+    headingStyle: 'atx',
+    codeBlockStyle: 'fenced'
+  });
+  addTableRule(turndownService);
+  addListItemWithTableRule(turndownService);
+  addCodeBlockRule(turndownService);
 
-  // Iterate through each endpoint
   for (const endpoint of endpoints) {
-    console.log(`Scraping endpoint: ${endpoint}`);
     const url = `https://www.gate.io/docs/developers/${endpoint}`;
-  
-    const scrapeResult = await app.scrapeUrl(url, {
-      formats: [ "markdown" ],
-      onlyMainContent: false,
-      includeTags: [ "div.page__container" ],
-    });
+    const htmlFilePath = path.join(__dirname, `gateio_${endpoint.replace(/\//g, '_')}.html`);
+    const outputFilePath = path.join(__dirname, `../../../docs/gateio/websocket_spot_api.md`);
 
-    // Extract the content
-    let content = '';
-    if (scrapeResult.markdown) {
-      content = scrapeResult.markdown;
+    try {
+      await downloadHtml(url, htmlFilePath);
+      const html = fs.readFileSync(htmlFilePath, 'utf8');
+      const markdown = processHtml(html, turndownService);
+      fs.writeFileSync(outputFilePath, markdown);
+      console.log(`Markdown file created at: ${outputFilePath}`);
+      fs.unlink(htmlFilePath, (err) => {
+        if (err) {
+          console.error('Error deleting HTML file:', err);
+        } else {
+          console.log('HTML file deleted successfully.');
+        }
+      });
+    } catch (error) {
+      console.error('Error processing HTML:', error);
     }
-
-    if (content) {
-      // Add a header for each section
-      combinedContent += `\n\n# ${endpoint.toUpperCase()}\n\n`;
-      combinedContent += content;
-      console.log(`Successfully scraped ${endpoint}`);
-    } else {
-      console.error(`No content found for endpoint: ${endpoint}`);
-    }
-  }
-
-  // Write the combined content to a single file
-  if (combinedContent) {
-    const outputPath = '../../../docs/gateio/websocket_spot_api.md';
-    fs.writeFileSync(outputPath, combinedContent);
-    console.log('All documentation combined and saved successfully.');
-  } else {
-    console.error('No content found in any of the scrape results.');
   }
 }
 
