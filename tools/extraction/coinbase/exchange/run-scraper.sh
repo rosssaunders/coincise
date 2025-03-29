@@ -49,6 +49,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
   echo "Please create a JSON config file with the following format:"
   echo '{
   "output_directory": "output",
+  "combined_filename": "combined_api_documentation.md",
   "urls": [
     {
       "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
@@ -111,8 +112,9 @@ done
 echo ""
 echo "All URLs processed. Results saved to $OUTPUT_DIR/"
 
-# Combine all markdown files into a single file
-COMBINED_FILE="$OUTPUT_DIR/combined_api_documentation.md"
+# Get combined filename from config or use default
+COMBINED_FILENAME=$(jq -r '.combined_filename // "combined_api_documentation.md"' "$CONFIG_FILE")
+COMBINED_FILE="$OUTPUT_DIR/$COMBINED_FILENAME"
 echo "Combining all markdown files into $COMBINED_FILE..."
 
 # Create a new file with a header
@@ -125,10 +127,20 @@ echo "" >> "$COMBINED_FILE"
 echo "## Table of Contents" >> "$COMBINED_FILE"
 echo "" >> "$COMBINED_FILE"
 
-# Loop through each markdown file to build the TOC
-for md_file in "$OUTPUT_DIR"/*.md; do
-  # Skip the combined file itself
-  if [ "$(basename "$md_file")" == "$(basename "$COMBINED_FILE")" ]; then
+# Loop through each file in config order to build the TOC
+for i in $(seq 0 $(($URL_COUNT - 1))); do
+  FILENAME=$(jq -r ".urls[$i].filename" "$CONFIG_FILE")
+  
+  # Add .md extension if not present
+  if [[ ! "$FILENAME" =~ \.md$ ]]; then
+    FILENAME="${FILENAME}.md"
+  fi
+  
+  md_file="$OUTPUT_DIR/$FILENAME"
+  
+  # Skip if file doesn't exist
+  if [ ! -f "$md_file" ]; then
+    echo "Warning: File $md_file does not exist, skipping in TOC"
     continue
   fi
   
@@ -150,10 +162,20 @@ echo "" >> "$COMBINED_FILE"
 echo "---" >> "$COMBINED_FILE"
 echo "" >> "$COMBINED_FILE"
 
-# Loop through each markdown file and append its contents
-for md_file in "$OUTPUT_DIR"/*.md; do
-  # Skip the combined file itself
-  if [ "$(basename "$md_file")" == "$(basename "$COMBINED_FILE")" ]; then
+# Loop through each file in config order and append its contents
+for i in $(seq 0 $(($URL_COUNT - 1))); do
+  FILENAME=$(jq -r ".urls[$i].filename" "$CONFIG_FILE")
+  
+  # Add .md extension if not present
+  if [[ ! "$FILENAME" =~ \.md$ ]]; then
+    FILENAME="${FILENAME}.md"
+  fi
+  
+  md_file="$OUTPUT_DIR/$FILENAME"
+  
+  # Skip if file doesn't exist
+  if [ ! -f "$md_file" ]; then
+    echo "Warning: File $md_file does not exist, skipping in combined file"
     continue
   fi
   
@@ -178,4 +200,25 @@ for md_file in "$OUTPUT_DIR"/*.md; do
   echo "" >> "$COMBINED_FILE"
 done
 
-echo "✅ Combined API documentation created at $COMBINED_FILE" 
+echo "✅ Combined API documentation created at $COMBINED_FILE"
+
+# Delete individual markdown files
+echo "Deleting individual markdown files..."
+for i in $(seq 0 $(($URL_COUNT - 1))); do
+  FILENAME=$(jq -r ".urls[$i].filename" "$CONFIG_FILE")
+  
+  # Add .md extension if not present
+  if [[ ! "$FILENAME" =~ \.md$ ]]; then
+    FILENAME="${FILENAME}.md"
+  fi
+  
+  md_file="$OUTPUT_DIR/$FILENAME"
+  
+  # Delete the file if it exists and is not the combined file
+  if [ -f "$md_file" ] && [ "$md_file" != "$COMBINED_FILE" ]; then
+    rm "$md_file"
+    echo "Deleted: $md_file"
+  fi
+done
+
+echo "✅ Cleanup completed. Only combined file remains." 

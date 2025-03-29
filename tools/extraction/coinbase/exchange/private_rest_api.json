@@ -1,5 +1,6 @@
 {
   "output_directory": "../../../../docs/coinbase/exchange",
+  "combined_filename": "private_rest_api.md",
   "urls": [
     {
       "url": "https://docs.cdp.coinbase.com/exchange/docs/welcome",
