@@ -668,19 +668,20 @@ Retrieve the open interest. Data will be pushed every 3 seconds when there are u
 
 ```
 {
-  "arg": {
-    "channel": "open-interest",
-    "instId": "LTC-USD-SWAP"
-  },
-  "data": [
-    {
-      "instType": "SWAP",
-      "instId": "LTC-USD-SWAP",
-      "oi": "5000",
-      "oiCcy": "555.55",
-      "ts": "1597026383085"
-    }
-  ]
+    "arg": {
+        "channel": "open-interest",
+        "instId": "BTC-USDT-SWAP"
+    },
+    "data": [
+        {
+            "instId": "BTC-USDT-SWAP",
+            "instType": "SWAP",
+            "oi": "2216113.01000000309",
+            "oiCcy": "22161.1301000000309",
+            "oiUsd": "1939251795.54769270396321",
+            "ts": "1743041250440"
+        }
+    ]
 }
 
 ```
@@ -697,6 +698,7 @@ Retrieve the open interest. Data will be pushed every 3 seconds when there are u
 |  \> instId  |     String     |                              Instrument ID, e.g. `BTC-USDT-SWAP`                              |
 |    \> oi    |     String     |                             Open interest, in units of contracts.                             |
 |  \> oiCcy   |     String     |                          Open interest, in currency units, like BTC.                          |
+|  \> oiUsd   |     String     |                                Open interest in number of USD                                 |
 |    \> ts    |     String     |The time when the data was updated, Unix timestamp format in milliseconds, e.g. `1597026383085`|
 
 ---

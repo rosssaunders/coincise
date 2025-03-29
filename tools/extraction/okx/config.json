@@ -66,7 +66,7 @@
           "include_h2_html": false
         }
       ],
-      "output_file": "private_order_book_trading_rest_api.md"
+      "output_file": "../../../docs/okx/private_order_book_trading_rest_api.md"
     },
     "Private Orderbook Trading WebSocket API": {
       "sections": [
@@ -115,7 +115,7 @@
           "include_h2_html": false
         }
       ],
-      "output_file": "private_order_book_trading_websocket_api.md"
+      "output_file": "../../../docs/okx/private_order_book_trading_websocket_api.md"
     },
     "Public Market Data REST API": {
       "sections": [
@@ -126,7 +126,7 @@
           "include_h2_html": false
         }
       ],
-      "output_file": "public_market_data_rest_api.md"
+      "output_file": "../../../docs/okx/public_market_data_rest_api.md"
     },
     "Public Market Data WebSocket API": {
       "sections": [
@@ -143,7 +143,7 @@
           "include_h2_html": false
         }
       ],
-      "output_file": "public_market_data_websocket_api.md"
+      "output_file": "../../../docs/okx/public_market_data_websocket_api.md"
     }
   }
 }

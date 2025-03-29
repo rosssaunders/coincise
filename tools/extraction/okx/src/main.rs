@@ -168,5 +168,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     }
 
+    std::fs::remove_file("okx.html")?;
+
     Ok(())
 }
