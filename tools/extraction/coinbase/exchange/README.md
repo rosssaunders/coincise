@@ -275,3 +275,13 @@ https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postwrappedasse
 https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedassetstakewrap
 https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedasset
 https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedassetconversionrate
+
+
+## Websocket
+
+https://docs.cdp.coinbase.com/exchange/docs/websocket-overview
+https://docs.cdp.coinbase.com/exchange/docs/websocket-best-practices
+https://docs.cdp.coinbase.com/exchange/docs/websocket-auth
+https://docs.cdp.coinbase.com/exchange/docs/websocket-channels
+https://docs.cdp.coinbase.com/exchange/docs/websocket-rate-limits
+https://docs.cdp.coinbase.com/exchange/docs/websocket-errors

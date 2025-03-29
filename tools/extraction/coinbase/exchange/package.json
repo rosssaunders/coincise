@@ -18,8 +18,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "jsdom": "^22.1.0",
-    "puppeteer": "^21.6.0"
+    "jsdom": "26.0.0",
+    "puppeteer": "24.4.0",
+    "turndown": "7.0.0"
   },
   "bin": {
     "coinbase-scraper": "./index.js"
