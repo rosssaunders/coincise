@@ -599,6 +599,12 @@ Error Code from 50000 to 53999
 |  54012   |      200       |                                                                                                                                                                                                                                                            Due to insufficient order book depth, we are now taking measures to protect your positions. Currently, you can only cancel orders, add margin to your positions, and place post-only orders. Your positions will not be liquidated. Trade will resume once order book depth returns to a safe level.                                                                                                                                                                                                                                                             |
 |  54018   |      200       |                                                                                                                                                                                                                                                                                                                                                             Buy limit of {param0} USD exceeded. Your remaining limit is {param1} USD. (During the call auction)                                                                                                                                                                                                                                                                                                                                                             |
 |  54019   |      200       |                                                                                                                                                                                                                                                                                                                                                             Buy limit of {param0} USD exceeded. Your remaining limit is {param1} USD. (After the call auction)                                                                                                                                                                                                                                                                                                                                                              |
+|  54024   |      200       |                                                                                                                                                                                                                                                                                                                                         Your order failed because you must enable {ccy} as collateral to trade expiry futures, perpetual futures, and options in cross-margin mode.                                                                                                                                                                                                                                                                                                                                         |
+|  54025   |      200       |                                                                                                                                                                                                                                                                                                                                   Your order failed because you must enable {ccy} as collateral to trade margin, expiry futures, perpetual futures, and options in isolated margin mode.                                                                                                                                                                                                                                                                                                                                    |
+|  54026   |      200       |                                                                                                                                                                                                                                                                                                                                                 Your order failed because you must enable {ccy} and {ccy1} as collateral to trade the margin pair in isolated margin mode.                                                                                                                                                                                                                                                                                                                                                  |
+|  54027   |      200       |                                                                                                                                                                                                                                                                                                                                                                       Your order failed because you must enable {ccy} as collateral to trade options.                                                                                                                                                                                                                                                                                                                                                                       |
+|  54028   |      200       |                                                                                                                                                                                                                                                                                                                                                            Your order failed because you must enable {ccy} as collateral to trade spot in isolated margin mode.                                                                                                                                                                                                                                                                                                                                                             |
+|  54029   |      200       |                                                                                                                                                                                                                                                                                                                                                                                           {param0} doesn’t exist within {param1}.                                                                                                                                                                                                                                                                                                                                                                                           |
 
 #### Data class ####
 
@@ -1198,67 +1204,67 @@ print(result)
 
 #### Response Parameters ####
 
-|   **Parameters**    |**Types**|                                                                                                                                                                                                                                                                                               **Description**                                                                                                                                                                                                                                                                                               |
-|---------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|        uTime        | String  |                                                                                                                                                                                                                                                       Update time of account information, millisecond format of Unix timestamp, e.g. `1597026383085`                                                                                                                                                                                                                                                        |
-|       totalEq       | String  |                                                                                                                                                                                                                                                                                     The total amount of equity in `USD`                                                                                                                                                                                                                                                                                     |
-|        isoEq        | String  |                                                                                                                                                                                                                                           Isolated margin equity in `USD`  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                            |
-|        adjEq        | String  |Adjusted / Effective equity in `USD`   <br/>The net fiat value of the assets in the account that can provide margins for spot, expiry futures, perpetual futures and options under the cross-margin mode.   <br/>In multi-ccy or PM mode, the asset and margin requirement will all be converted to USD value to process the order check or liquidation.   <br/>Due to the volatility of each currency market, our platform calculates the actual USD value of each currency based on discount rates to balance market risks.   <br/>Applicable to `Spot mode`/`Multi-currency margin` and `Portfolio margin`|
-|       ordFroz       | String  |                                                                                                                                                                                                                                      Cross margin frozen for pending orders in `USD`   <br/>Only applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                       |
-|         imr         | String  |                                                                                                                                                                                        Initial margin requirement in `USD`   <br/>The sum of initial margins of all open positions and pending orders under cross-margin mode in `USD`.   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                         |
-|         mmr         | String  |                                                                                                                                                                                    Maintenance margin requirement in `USD`   <br/>The sum of maintenance margins of all open positions and pending orders under cross-margin mode in `USD`.   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                     |
-|     borrowFroz      | String  |                                                                                                                                                                                                                     Potential borrowing IMR of the account in `USD`   <br/>Only applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`. It is "" for other margin modes.                                                                                                                                                                                                                      |
-|      mgnRatio       | String  |                                                                                                                                                                                                                                                      Margin ratio in `USD`   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                      |
-|     notionalUsd     | String  |                                                                                                                                                                                                                                              Notional value of positions in `USD`   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                               |
-|notionalUsdForBorrow | String  |                                                                                                                                                                                                                                                Notional value for `Borrow` in USD  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                |
-| notionalUsdForSwap  | String  |                                                                                                                                                                                                                                          Notional value of positions for `Perpetual Futures` in USD  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                          |
-|notionalUsdForFutures| String  |                                                                                                                                                                                                                                           Notional value of positions for `Expiry Futures` in USD  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                            |
-|notionalUsdForOption | String  |                                                                                                                                                                                                                                         Notional value of positions for `Option` in USD  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                          |
-|         upl         | String  |                                                                                                                                                                                                                                Cross-margin info of unrealized profit and loss at the account level in `USD`  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                 |
-|       details       |  Array  |                                                                                                                                                                                                                                                                                Detailed asset information in all currencies                                                                                                                                                                                                                                                                                 |
-|       \> ccy        | String  |                                                                                                                                                                                                                                                                                                  Currency                                                                                                                                                                                                                                                                                                   |
-|        \> eq        | String  |                                                                                                                                                                                                                                                                                             Equity of currency                                                                                                                                                                                                                                                                                              |
-|     \> cashBal      | String  |                                                                                                                                                                                                                                                                                                Cash balance                                                                                                                                                                                                                                                                                                 |
-|      \> uTime       | String  |                                                                                                                                                                                                                                                  Update time of currency balance information, Unix timestamp format in milliseconds, e.g. `1597026383085`                                                                                                                                                                                                                                                   |
-|      \> isoEq       | String  |                                                                                                                                                                                                                                          Isolated margin equity of currency  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                          |
-|     \> availEq      | String  |                                                                                                                                                                                                                                             Available equity of currency  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                             |
-|      \> disEq       | String  |                                                                                                                                                                                                                                                                                    Discount equity of currency in `USD`.                                                                                                                                                                                                                                                                                    |
-|     \> fixedBal     | String  |                                                                                                                                                                                                                                                                              Frozen balance for `Dip Sniper` and `Peak Sniper`                                                                                                                                                                                                                                                                              |
-|     \> availBal     | String  |                                                                                                                                                                                                                                                                                        Available balance of currency                                                                                                                                                                                                                                                                                        |
-|    \> frozenBal     | String  |                                                                                                                                                                                                                                                                                         Frozen balance of currency                                                                                                                                                                                                                                                                                          |
-|    \> ordFrozen     | String  |                                                                                                                                                                                                                                               Margin frozen for open orders   <br/>Applicable to `Spot mode`/`Spot and futures mode`/`Multi-currency margin`                                                                                                                                                                                                                                                |
-|       \> liab       | String  |                                                                                                                                                                                                                              Liabilities of currency  <br/>It is a positive value, e.g. `21625.64`  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                               |
-|       \> upl        | String  |                                                                                                                                                                                                            The sum of the unrealized profit & loss of all margin and derivatives positions of currency.   <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                             |
-|     \> uplLiab      | String  |                                                                                                                                                                                                                                                Liabilities due to Unrealized loss of currency  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                |
-|    \> crossLiab     | String  |                                                                                                                                                                                                                                                  Cross liabilities of currency  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                   |
-|    \> rewardBal     | String  |                                                                                                                                                                                                                                                                                             Trial fund balance                                                                                                                                                                                                                                                                                              |
-|     \> isoLiab      | String  |                                                                                                                                                                                                                                                       Isolated liabilities of currency  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                       |
-|     \> mgnRatio     | String  |                                                                                                                                                                                                           Cross margin ratio of currency   <br/>The index for measuring the risk of a certain asset in the account.   <br/>Applicable to `Spot and futures mode` and when there is cross position                                                                                                                                                                                                           |
-|       \> imr        | String  |                                                                                                                                                                                                                                     Cross initial margin requirement at the currency level  <br/>Applicable to `Spot and futures mode` and when there is cross position                                                                                                                                                                                                                                     |
-|       \> mmr        | String  |                                                                                                                                                                                                                                   Cross maintenance margin requirement at the currency level  <br/>Applicable to `Spot and futures mode` and when there is cross position                                                                                                                                                                                                                                   |
-|     \> interest     | String  |                                                                                                                                                                                                                              Accrued interest of currency  <br/>It is a positive value, e.g. `9.01`  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                              |
-|       \> twap       | String  |                                                                                                                                                                             Risk indicator of auto liability repayment  <br/>Divided into multiple levels from 0 to 5, the larger the number, the more likely the auto repayment will be triggered.   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                             |
-|     \> maxLoan      | String  |                                                                                                                                                                                                                                                 Max loan of currency  <br/>Applicable to `cross` of `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                  |
-|      \> eqUsd       | String  |                                                                                                                                                                                                                                                                                         Equity in `USD` of currency                                                                                                                                                                                                                                                                                         |
-|    \> borrowFroz    | String  |                                                                                                                                                                                                                               Potential borrowing IMR of currency in `USD`   <br/>Applicable to `Multi-currency margin`/`Portfolio margin`. It is "" for other margin modes.                                                                                                                                                                                                                                |
-|  \> notionalLever   | String  |                                                                                                                                                                                                                                                                      Leverage of currency  <br/>Applicable to `Spot and futures mode`                                                                                                                                                                                                                                                                       |
-|      \> stgyEq      | String  |                                                                                                                                                                                                                                                                                               Strategy equity                                                                                                                                                                                                                                                                                               |
-|      \> isoUpl      | String  |                                                                                                                                                                                                                                   Isolated unrealized profit and loss of currency  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                    |
-|   \> spotInUseAmt   | String  |                                                                                                                                                                                                                                                                          Spot in use amount  <br/>Applicable to `Portfolio margin`                                                                                                                                                                                                                                                                          |
-|  \> clSpotInUseAmt  | String  |                                                                                                                                                                                                                                                                 User-defined spot risk offset amount  <br/>Applicable to `Portfolio margin`                                                                                                                                                                                                                                                                 |
-|   \> maxSpotInUse   | String  |                                                                                                                                                                                                                                                                 Max possible spot risk offset amount  <br/>Applicable to `Portfolio margin`                                                                                                                                                                                                                                                                 |
-|    \> spotIsoBal    | String  |                                                                                                                                                                                                                                               Spot isolated balance  <br/>Applicable to copy trading  <br/>Applicable to `Spot mode`/`Spot and futures mode`.                                                                                                                                                                                                                                               |
-|    \> smtSyncEq     | String  |                                                                                                                                                                                                                                                                 Smart sync equity  <br/>The default is "0", only applicable to copy trader.                                                                                                                                                                                                                                                                 |
-|\> spotCopyTradingEq | String  |                                                                                                                                                                                                                                                             Spot smart sync equity.   <br/>The default is "0", only applicable to copy trader.                                                                                                                                                                                                                                                              |
-|     \> spotBal      | String  |                                                                                                                                                                                                                                                Spot balance. The unit is currency, e.g. BTC. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                |
-|    \> openAvgPx     | String  |                                                                                                                                                                                                                                                  Spot average cost price. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                  |
-|     \> accAvgPx     | String  |                                                                                                                                                                                                                                                Spot accumulated cost price. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                |
-|     \> spotUpl      | String  |                                                                                                                                                                                                                                              Spot unrealized profit and loss. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                              |
-|   \> spotUplRatio   | String  |                                                                                                                                                                                                                                                   Spot unrealized profit and loss ratio. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                    |
-|     \> totalPnl     | String  |                                                                                                                                                                                                                                             Spot accumulated profit and loss. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                              |
-|  \> totalPnlRatio   | String  |                                                                                                                                                                                                                                                   Spot accumulated profit and loss ratio. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                   |
-|  \> totalPnlRatio   | String  |                                                                                                                                                                                                                                                   Spot accumulated profit and loss ratio. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                   |
-|\> collateralEnabled | Boolean |                                                                                                                                                                                                  `true`: Collateral enabled  <br/>`false`: Collateral disabled  <br/>Applicable to `Multi-currency margin`  <br/>[More details](/help/setting-collateral-cryptocurrencies-in-multi-currency-account-mode)                                                                                                                                                                                                   |
+|   **Parameters**    |   **Types**    |                                                                                                                                                                                                                                                                                               **Description**                                                                                                                                                                                                                                                                                               |
+|---------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        uTime        |     String     |                                                                                                                                                                                                                                                       Update time of account information, millisecond format of Unix timestamp, e.g. `1597026383085`                                                                                                                                                                                                                                                        |
+|       totalEq       |     String     |                                                                                                                                                                                                                                                                                     The total amount of equity in `USD`                                                                                                                                                                                                                                                                                     |
+|        isoEq        |     String     |                                                                                                                                                                                                                                           Isolated margin equity in `USD`  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                            |
+|        adjEq        |     String     |Adjusted / Effective equity in `USD`   <br/>The net fiat value of the assets in the account that can provide margins for spot, expiry futures, perpetual futures and options under the cross-margin mode.   <br/>In multi-ccy or PM mode, the asset and margin requirement will all be converted to USD value to process the order check or liquidation.   <br/>Due to the volatility of each currency market, our platform calculates the actual USD value of each currency based on discount rates to balance market risks.   <br/>Applicable to `Spot mode`/`Multi-currency margin` and `Portfolio margin`|
+|       ordFroz       |     String     |                                                                                                                                                                                                                                      Cross margin frozen for pending orders in `USD`   <br/>Only applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                       |
+|         imr         |     String     |                                                                                                                                                                                        Initial margin requirement in `USD`   <br/>The sum of initial margins of all open positions and pending orders under cross-margin mode in `USD`.   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                         |
+|         mmr         |     String     |                                                                                                                                                                                    Maintenance margin requirement in `USD`   <br/>The sum of maintenance margins of all open positions and pending orders under cross-margin mode in `USD`.   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                     |
+|     borrowFroz      |     String     |                                                                                                                                                                                                                     Potential borrowing IMR of the account in `USD`   <br/>Only applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`. It is "" for other margin modes.                                                                                                                                                                                                                      |
+|      mgnRatio       |     String     |                                                                                                                                                                                                                                                      Margin ratio in `USD`   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                      |
+|     notionalUsd     |     String     |                                                                                                                                                                                                                                              Notional value of positions in `USD`   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                               |
+|notionalUsdForBorrow |     String     |                                                                                                                                                                                                                                                Notional value for `Borrow` in USD  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                |
+| notionalUsdForSwap  |     String     |                                                                                                                                                                                                                                          Notional value of positions for `Perpetual Futures` in USD  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                          |
+|notionalUsdForFutures|     String     |                                                                                                                                                                                                                                           Notional value of positions for `Expiry Futures` in USD  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                            |
+|notionalUsdForOption |     String     |                                                                                                                                                                                                                                         Notional value of positions for `Option` in USD  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                          |
+|         upl         |     String     |                                                                                                                                                                                                                                Cross-margin info of unrealized profit and loss at the account level in `USD`  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                 |
+|       details       |Array of objects|                                                                                                                                                                                                                                                                                Detailed asset information in all currencies                                                                                                                                                                                                                                                                                 |
+|       \> ccy        |     String     |                                                                                                                                                                                                                                                                                                  Currency                                                                                                                                                                                                                                                                                                   |
+|        \> eq        |     String     |                                                                                                                                                                                                                                                                                             Equity of currency                                                                                                                                                                                                                                                                                              |
+|     \> cashBal      |     String     |                                                                                                                                                                                                                                                                                                Cash balance                                                                                                                                                                                                                                                                                                 |
+|      \> uTime       |     String     |                                                                                                                                                                                                                                                  Update time of currency balance information, Unix timestamp format in milliseconds, e.g. `1597026383085`                                                                                                                                                                                                                                                   |
+|      \> isoEq       |     String     |                                                                                                                                                                                                                                          Isolated margin equity of currency  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                          |
+|     \> availEq      |     String     |                                                                                                                                                                                                                                             Available equity of currency  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                             |
+|      \> disEq       |     String     |                                                                                                                                                                                                                                    Discount equity of currency in `USD`.  <br/>Applicable to `Spot mode`(enabled spot borrow)/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                    |
+|     \> fixedBal     |     String     |                                                                                                                                                                                                                                                                              Frozen balance for `Dip Sniper` and `Peak Sniper`                                                                                                                                                                                                                                                                              |
+|     \> availBal     |     String     |                                                                                                                                                                                                                                                                                        Available balance of currency                                                                                                                                                                                                                                                                                        |
+|    \> frozenBal     |     String     |                                                                                                                                                                                                                                                                                         Frozen balance of currency                                                                                                                                                                                                                                                                                          |
+|    \> ordFrozen     |     String     |                                                                                                                                                                                                                                                Margin frozen for open orders  <br/>Applicable to `Spot mode`/`Spot and futures mode`/`Multi-currency margin`                                                                                                                                                                                                                                                |
+|       \> liab       |     String     |                                                                                                                                                                                                                              Liabilities of currency  <br/>It is a positive value, e.g. `21625.64`  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                               |
+|       \> upl        |     String     |                                                                                                                                                                                                            The sum of the unrealized profit & loss of all margin and derivatives positions of currency.   <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                             |
+|     \> uplLiab      |     String     |                                                                                                                                                                                                                                                Liabilities due to Unrealized loss of currency  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                |
+|    \> crossLiab     |     String     |                                                                                                                                                                                                                                                  Cross liabilities of currency  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                   |
+|    \> rewardBal     |     String     |                                                                                                                                                                                                                                                                                             Trial fund balance                                                                                                                                                                                                                                                                                              |
+|     \> isoLiab      |     String     |                                                                                                                                                                                                                                                       Isolated liabilities of currency  <br/>Applicable to `Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                       |
+|     \> mgnRatio     |     String     |                                                                                                                                                                                                           Cross margin ratio of currency   <br/>The index for measuring the risk of a certain asset in the account.   <br/>Applicable to `Spot and futures mode` and when there is cross position                                                                                                                                                                                                           |
+|       \> imr        |     String     |                                                                                                                                                                                                                                     Cross initial margin requirement at the currency level  <br/>Applicable to `Spot and futures mode` and when there is cross position                                                                                                                                                                                                                                     |
+|       \> mmr        |     String     |                                                                                                                                                                                                                                   Cross maintenance margin requirement at the currency level  <br/>Applicable to `Spot and futures mode` and when there is cross position                                                                                                                                                                                                                                   |
+|     \> interest     |     String     |                                                                                                                                                                                                                              Accrued interest of currency  <br/>It is a positive value, e.g. `9.01`  <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                              |
+|       \> twap       |     String     |                                                                                                                                                                             Risk indicator of auto liability repayment  <br/>Divided into multiple levels from 0 to 5, the larger the number, the more likely the auto repayment will be triggered.   <br/>Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                             |
+|     \> maxLoan      |     String     |                                                                                                                                                                                                                                                 Max loan of currency  <br/>Applicable to `cross` of `Spot mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                                  |
+|      \> eqUsd       |     String     |                                                                                                                                                                                                                                                                                         Equity in `USD` of currency                                                                                                                                                                                                                                                                                         |
+|    \> borrowFroz    |     String     |                                                                                                                                                                                                                               Potential borrowing IMR of currency in `USD`   <br/>Applicable to `Multi-currency margin`/`Portfolio margin`. It is "" for other margin modes.                                                                                                                                                                                                                                |
+|  \> notionalLever   |     String     |                                                                                                                                                                                                                                                                      Leverage of currency  <br/>Applicable to `Spot and futures mode`                                                                                                                                                                                                                                                                       |
+|      \> stgyEq      |     String     |                                                                                                                                                                                                                                                                                               Strategy equity                                                                                                                                                                                                                                                                                               |
+|      \> isoUpl      |     String     |                                                                                                                                                                                                                                   Isolated unrealized profit and loss of currency  <br/>Applicable to `Spot and futures mode`/`Multi-currency margin`/`Portfolio margin`                                                                                                                                                                                                                                    |
+|   \> spotInUseAmt   |     String     |                                                                                                                                                                                                                                                                          Spot in use amount  <br/>Applicable to `Portfolio margin`                                                                                                                                                                                                                                                                          |
+|  \> clSpotInUseAmt  |     String     |                                                                                                                                                                                                                                                                 User-defined spot risk offset amount  <br/>Applicable to `Portfolio margin`                                                                                                                                                                                                                                                                 |
+|   \> maxSpotInUse   |     String     |                                                                                                                                                                                                                                                                 Max possible spot risk offset amount  <br/>Applicable to `Portfolio margin`                                                                                                                                                                                                                                                                 |
+|    \> spotIsoBal    |     String     |                                                                                                                                                                                                                                               Spot isolated balance  <br/>Applicable to copy trading  <br/>Applicable to `Spot mode`/`Spot and futures mode`.                                                                                                                                                                                                                                               |
+|    \> smtSyncEq     |     String     |                                                                                                                                                                                                                                                                 Smart sync equity  <br/>The default is "0", only applicable to copy trader.                                                                                                                                                                                                                                                                 |
+|\> spotCopyTradingEq |     String     |                                                                                                                                                                                                                                                             Spot smart sync equity.   <br/>The default is "0", only applicable to copy trader.                                                                                                                                                                                                                                                              |
+|     \> spotBal      |     String     |                                                                                                                                                                                                                                                Spot balance. The unit is currency, e.g. BTC. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                |
+|    \> openAvgPx     |     String     |                                                                                                                                                                                                                                                  Spot average cost price. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                  |
+|     \> accAvgPx     |     String     |                                                                                                                                                                                                                                                Spot accumulated cost price. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                |
+|     \> spotUpl      |     String     |                                                                                                                                                                                                                                              Spot unrealized profit and loss. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                              |
+|   \> spotUplRatio   |     String     |                                                                                                                                                                                                                                                   Spot unrealized profit and loss ratio. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                    |
+|     \> totalPnl     |     String     |                                                                                                                                                                                                                                             Spot accumulated profit and loss. The unit is USD. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                              |
+|  \> totalPnlRatio   |     String     |                                                                                                                                                                                                                                                   Spot accumulated profit and loss ratio. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                   |
+|  \> totalPnlRatio   |     String     |                                                                                                                                                                                                                                                   Spot accumulated profit and loss ratio. [More details](https://www.okx.com/help/i-introduction-of-spot)                                                                                                                                                                                                                                                   |
+|\> collateralEnabled |    Boolean     |                                                                                                                                                                                                  `true`: Collateral enabled  <br/>`false`: Collateral disabled  <br/>Applicable to `Multi-currency margin`  <br/>[More details](/help/setting-collateral-cryptocurrencies-in-multi-currency-account-mode)                                                                                                                                                                                                   |
 
 * Regarding more parameter details, you can refer to product documentations below:  
   [Spot and futures mode: cross margin trading](https://www.okx.com/help/iii-single-currency-margin-cross-margin-trading)   
@@ -1293,7 +1299,7 @@ Distribution of applicable fields under each account level are as follows:
 |      \> uTime       |     Yes     |           Yes           |             Yes              |           Yes           |
 |      \> isoEq       |             |           Yes           |             Yes              |           Yes           |
 |     \> availEq      |             |           Yes           |             Yes              |           Yes           |
-|      \> disEq       |     Yes     |           No            |             Yes              |           Yes           |
+|      \> disEq       |     Yes     |                         |             Yes              |           Yes           |
 |     \> availBal     |     Yes     |           Yes           |             Yes              |           Yes           |
 |    \> frozenBal     |     Yes     |           Yes           |             Yes              |           Yes           |
 |    \> ordFrozen     |     Yes     |           Yes           |             Yes              |           Yes           |
@@ -1947,9 +1953,9 @@ You may refer to "pnl" for the fee payment
 
 ---
 
-### Get bills details (last 3 months) ###
+### Get bills details (last 1 year) ###
 
-Retrieve the account’s bills. The bill refers to all transaction records that result in changing the balance of an account. Pagination is supported, and the response is sorted with most recent first. This endpoint can retrieve data from the last 3 months.
+Retrieve the account’s bills. The bill refers to all transaction records that result in changing the balance of an account. Pagination is supported, and the response is sorted with most recent first. This endpoint can retrieve data from the last 1 year since July 1, 2024.
 
 #### Rate Limit: 5 requests per 2 seconds ####
 
@@ -4788,7 +4794,7 @@ print(result)
 |    \>\> pnl     |    String     |                                                                                                                                                 MR1 stress P&L (`USD`)                                                                                                                                                  |
 | \>\> spotShock  |    String     |                                                                                                                    MR1 worst-case scenario spot shock (in percentage), e.g. `0.01` representing `1%`                                                                                                                    |
 |  \>\> volShock  |    String     |                                                                                   MR1 worst-case scenario volatility shock  <br/>`down`: volatility shock down  <br/>`unchange`: volatility unchanged  <br/>`up`: volatility shock up                                                                                   |
-|\> mr6FinalResult|    String     |                                                                                                                                                  MR6 scenario analysis                                                                                                                                                  |
+|\> mr6FinalResult|    Object     |                                                                                                                                                  MR6 scenario analysis                                                                                                                                                  |
 |    \>\> pnl     |    String     |                                                                                                                                                 MR6 stress P&L (`USD`)                                                                                                                                                  |
 | \>\> spotShock  |    String     |                                                                                                                    MR6 worst-case scenario spot shock (in percentage), e.g. `0.01` representing `1%`                                                                                                                    |
 |    \> delta     |    String     |                                               (Risk unit) The rate of change in the contract’s price with respect to changes in the underlying asset’s price.   <br/>When the price of the underlying changes by x, the option’s price changes by delta multiplied by x.                                                |
@@ -5597,6 +5603,146 @@ body
 |Parameter| Type |Description |
 |---------|------|------------|
 | acctLv  |String|Account mode|
+
+---
+
+### Set collateral assets ###
+
+#### Rate Limit: 5 requests per 2 seconds ####
+
+#### Rate limit rule: User ID ####
+
+#### Permission: Trade ####
+
+#### HTTP Request ####
+
+`POST /api/v5/account/set-collateral-assets`
+
+>
+>
+> Request Example
+>
+>
+
+```
+# Set all assets to be collateral
+POST /api/v5/account/set-collateral-assets
+body
+{
+    "type":"all",
+    "collateralEnabled":true
+}
+
+# Set custom assets to be non-collateral
+POST /api/v5/account/set-collateral-assets
+body
+{
+    "type":"custom",
+    "ccyList":["BTC","ETH"],
+    "collateralEnabled":false
+}
+
+```
+
+#### Request Parameters ####
+
+|    Parameter    |     Type      | Required  |                                                       Description                                                       |
+|-----------------|---------------|-----------|-------------------------------------------------------------------------------------------------------------------------|
+|      type       |    String     |   true    |                                             Type  <br/>`all`  <br/>`custom`                                             |
+|collateralEnabled|    Boolean    |   true    |Whether or not set the assets to be collateral  <br/>`true`: Set to be collateral  <br/>`false`: Set to be non-collateral|
+|     ccyList     |Array of string|conditional|                  Currency list, e.g. ["BTC","ETH"]  <br/>If type=`custom`, the parameter is required.                   |
+
+>
+>
+> Response Example
+>
+>
+
+```
+{
+    "code":"0",
+    "msg":"",
+    "data" :[
+      {
+        "type":"all",
+        "ccyList":["BTC","ETH"],
+        "collateralEnabled":false
+      }
+    ]  
+}
+
+```
+
+#### Response Parameters ####
+
+|    Parameter    |     Type      |                                                       Description                                                       |
+|-----------------|---------------|-------------------------------------------------------------------------------------------------------------------------|
+|      type       |    String     |                                             Type  <br/>`all`  <br/>`custom`                                             |
+|collateralEnabled|    Boolean    |Whether or not set the assets to be collateral  <br/>`true`: Set to be collateral  <br/>`false`: Set to be non-collateral|
+|     ccyList     |Array of string|                                            Currency list, e.g. ["BTC","ETH"]                                            |
+
+---
+
+### Get collateral assets ###
+
+#### Rate Limit: 5 requests per 2 seconds ####
+
+#### Rate limit rule: User ID ####
+
+#### Permission: Read ####
+
+#### HTTP Request ####
+
+`GET /api/v5/account/collateral-assets`
+
+>
+>
+> Request Example
+>
+>
+
+```
+GET /api/v5/account/collateral-assets
+
+```
+
+#### Request Parameters ####
+
+| **Parameters**  |**Types**|**Required**|                                            **Description**                                            |
+|-----------------|---------|------------|-------------------------------------------------------------------------------------------------------|
+|       ccy       | String  |     No     |Single currency or multiple currencies (no more than 20) separated with comma, e.g. "BTC" or "BTC,ETH".|
+|collateralEnabled| Boolean |     No     |                                Whether or not to be a collateral asset                                |
+
+>
+>
+> Response Example
+>
+>
+
+```
+{
+    "code":"0",
+    "msg":"",
+    "data" :[
+          {
+            "ccy":"BTC",
+            "collateralEnabled": true
+          },
+          {
+            "ccy":"ETH",
+            "collateralEnabled": false
+          }
+    ]  
+}
+
+```
+
+#### Response Parameters ####
+
+|  **Parameter**  |**Type**|            **Description**            |
+|-----------------|--------|---------------------------------------|
+|       ccy       | String |         Currency, e.g. `BTC`          |
+|collateralEnabled|Boolean |Whether or not to be a collateral asset|
 
 ---
 
@@ -7773,8 +7919,7 @@ print(result)
 |  fillTime   | String |                                                                Trade time which is the same as `fillTime` for the order channel.                                                                |
 |   feeRate   | String |                                                                  Fee rate. This field is returned for `SPOT` and `MARGIN` only                                                                  |
 tradeId  
-When the order category to which the transaction details belong is partial\_liquidation, full\_liquidation, or adl, this field will be assigned a negative value to distinguish it from other matching transaction scenarios.  
-ordId  
+For partial\_liquidation, full\_liquidation, or adl, when it comes to fill information, this field will be assigned a negative value to distinguish it from other matching transaction scenarios, when it comes to order information, this field will be 0. ordId  
 Order ID, always "" for block trading.  
 clOrdId  
 Client-supplied order ID, always "" for block trading.
@@ -8222,7 +8367,7 @@ print(result)
 
 ### GET / One-click repay currency list ###
 
-Get list of debt currency data and repay currencies. Debt currencies include both cross and isolated debts.
+Get list of debt currency data and repay currencies. Debt currencies include both cross and isolated debts. Only applicable to `Multi-currency margin`/`Portfolio margin`.
 
 #### Rate Limit: 1 request per 2 seconds ####
 
@@ -8309,11 +8454,11 @@ print(result)
 | Parameter |      Type      |                        Description                         |
 |-----------|----------------|------------------------------------------------------------|
 | debtData  |Array of objects|                  Debt currency data list                   |
-|\> debtCcy |     String     |                     Debt currency type                     |
+|\> debtCcy |     String     |                       Debt currency                        |
 |\> debtAmt |     String     |Debt currency amount   <br/>Including principal and interest|
 | debtType  |     String     |Debt type   <br/>`cross`: cross   <br/>`isolated`: isolated |
 | repayData |Array of objects|                  Repay currency data list                  |
-|\> repayCcy|     String     |                    Repay currency type                     |
+|\> repayCcy|     String     |                       Repay currency                       |
 |\> repayAmt|     String     |         Repay currency's available balance amount          |
 
 ---
@@ -8322,6 +8467,7 @@ print(result)
 
 Trade one-click repay to repay cross debts. Isolated debts are not applicable.
 The maximum repayment amount is based on the remaining available balance of funding and trading accounts.
+Only applicable to `Multi-currency margin`/`Portfolio margin`.
 
 #### Rate Limit: 1 request per 2 seconds ####
 
@@ -8424,7 +8570,7 @@ print(result)
 
 ### GET / One-click repay history ###
 
-Get the history and status of one-click repay trades in the past 7 days.
+Get the history and status of one-click repay trades in the past 7 days. Only applicable to `Multi-currency margin`/`Portfolio margin`.
 
 #### Rate Limit: 1 request per 2 seconds ####
 
@@ -8507,6 +8653,292 @@ print(result)
 |fillRepaySz|String|                                    Amount of repay currency transacted                                    |
 |  status   |String|Current status of one-click repay   <br/>`running`: Running   <br/>`filled`: Filled   <br/>`failed`: Failed|
 |   uTime   |String|                   Trade time, Unix timestamp format in milliseconds, e.g. 1597026383085                   |
+
+---
+
+### GET / One-click repay currency list (New) ###
+
+Get list of debt currency data and repay currencies. Only applicable to `SPOT mode`.
+
+#### Rate Limit: 1 request per 2 seconds ####
+
+#### Rate limit rule: User ID ####
+
+#### Permission: Read ####
+
+#### HTTP Request ####
+
+`GET /api/v5/trade/one-click-repay-currency-list-v2`
+
+>
+>
+> Request Example
+>
+>
+
+```
+GET /api/v5/trade/one-click-repay-currency-list-v2
+
+```
+
+```
+
+```
+
+>
+>
+> Response Example
+>
+>
+
+```
+{
+    "code": "0",
+    "data": [
+        {
+            "debtData": [
+                {
+                    "debtAmt": "100",
+                    "debtCcy": "USDC"
+                }
+            ],
+            "repayData": [
+                {
+                    "repayAmt": "1.000022977",
+                    "repayCcy": "BTC"
+                },
+                {
+                    "repayAmt": "4998.0002397",
+                    "repayCcy": "USDT"
+                },
+                {
+                    "repayAmt": "100",
+                    "repayCcy": "OKB"
+                },
+                {
+                    "repayAmt": "1",
+                    "repayCcy": "ETH"
+                },
+                {
+                    "repayAmt": "100",
+                    "repayCcy": "USDC"
+                }
+            ]
+        }
+    ],
+    "msg": ""
+}
+
+```
+
+#### Response Parameters ####
+
+| Parameter |      Type      |                        Description                        |
+|-----------|----------------|-----------------------------------------------------------|
+| debtData  |Array of objects|                  Debt currency data list                  |
+|\> debtCcy |     String     |                       Debt currency                       |
+|\> debtAmt |     String     |Debt currency amount  <br/>Including principal and interest|
+| repayData |Array of objects|                 Repay currency data list                  |
+|\> repayCcy|     String     |                      Repay currency                       |
+|\> repayAmt|     String     |         Repay currency's available balance amount         |
+
+---
+
+### POST / Trade one-click repay (New) ###
+
+Trade one-click repay to repay debts. Only applicable to `SPOT mode`.
+
+#### Rate Limit: 1 request per 2 seconds ####
+
+#### Rate limit rule: User ID ####
+
+#### Permission: Trade ####
+
+#### HTTP Request ####
+
+`POST /api/v5/trade/one-click-repay-v2`
+
+>
+>
+> Request Example
+>
+>
+
+```
+POST /api/v5/trade/one-click-repay-v2
+body
+{
+    "debtCcy": "USDC",
+    "repayCcyList": ["USDC","BTC"]
+}
+
+```
+
+```
+
+```
+
+#### Request Parameters ####
+
+| Parameter  |     Type      |Required|                                                                             Description                                                                             |
+|------------|---------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  debtCcy   |    String     |  Yes   |                                                                            Debt currency                                                                            |
+|repayCcyList|Array of string|  Yes   |Repay currency list, e.g. ["USDC","BTC"]  <br/>The priority of currency to repay is consistent with the order in the array. (The first item has the highest priority)|
+
+>
+>
+> Response Example
+>
+>
+
+```
+{
+    "code": "0",
+    "data": [
+        {
+            "debtCcy": "USDC",
+            "repayCcyList": [
+                "USDC",
+                "BTC"
+            ],
+            "ts": "1742192217514"
+        }
+    ],
+    "msg": ""
+}
+
+```
+
+#### Response Parameters ####
+
+| Parameter  |     Type      |                               Description                               |
+|------------|---------------|-------------------------------------------------------------------------|
+|  debtCcy   |    String     |                              Debt currency                              |
+|repayCcyList|Array of string|                Repay currency list, e.g. ["USDC","BTC"]                 |
+|     ts     |    String     |Request time, Unix timestamp format in milliseconds, e.g. `1597026383085`|
+
+---
+
+### GET / One-click repay history (New) ###
+
+Get the history and status of one-click repay trades in the past 7 days. Only applicable to `SPOT mode`.
+
+#### Rate Limit: 1 request per 2 seconds ####
+
+#### Rate limit rule: User ID ####
+
+#### Permission: Read ####
+
+#### HTTP Request ####
+
+`GET /api/v5/trade/one-click-repay-history-v2`
+
+>
+>
+> Request Example
+>
+>
+
+```
+GET /api/v5/trade/one-click-repay-history-v2
+
+```
+
+```
+
+```
+
+#### Request Parameters ####
+
+|Parameter| Type |Required|                                                                   Description                                                                    |
+|---------|------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+|  after  |String|   No   |Pagination of data to return records earlier than (included) the requested time `ts` , Unix timestamp format in milliseconds, e.g. `1597026383085`|
+| before  |String|   No   | Pagination of data to return records newer than (included) the requested time `ts`, Unix timestamp format in milliseconds, e.g. `1597026383085`  |
+|  limit  |String|   No   |                                      Number of results per request. The maximum is 100. The default is 100.                                      |
+
+>
+>
+> Response Example
+>
+>
+
+```
+{
+    "code": "0",
+    "data": [
+        {
+            "debtCcy": "USDC",
+            "fillDebtSz": "9.079631989",
+            "ordIdInfo": [
+                {
+                    "cTime": "1742194485439",
+                    "fillPx": "1",
+                    "fillSz": "9.088651",
+                    "instId": "USDC-USDT",
+                    "ordId": "2338478342062235648",
+                    "ordType": "ioc",
+                    "px": "1.0049",
+                    "side": "buy",
+                    "state": "filled",
+                    "sz": "9.0886514537313433"
+                },
+                {
+                    "cTime": "1742194482326",
+                    "fillPx": "83271.9",
+                    "fillSz": "0.00010969",
+                    "instId": "BTC-USDT",
+                    "ordId": "2338478237607288832",
+                    "ordType": "ioc",
+                    "px": "82856.7",
+                    "side": "sell",
+                    "state": "filled",
+                    "sz": "0.000109696512171"
+                }
+            ],
+            "repayCcyList": [
+                "USDC",
+                "BTC"
+            ],
+            "status": "filled",
+            "ts": "1742194481852"
+        },
+        {
+            "debtCcy": "USDC",
+            "fillDebtSz": "100",
+            "ordIdInfo": [],
+            "repayCcyList": [
+                "USDC",
+                "BTC"
+            ],
+            "status": "filled",
+            "ts": "1742192217511"
+        }
+    ],
+    "msg": ""
+}
+
+```
+
+#### Response Parameters ####
+
+| Parameter  |      Type      |                                                Description                                                |
+|------------|----------------|-----------------------------------------------------------------------------------------------------------|
+|  debtCcy   |     String     |                                               Debt currency                                               |
+|repayCcyList|Array of strings|                                 Repay currency list, e.g. ["USDC","BTC"]                                  |
+| fillDebtSz |     String     |                                    Amount of debt currency transacted                                     |
+|   status   |     String     |Current status of one-click repay   <br/>`running`: Running   <br/>`filled`: Filled   <br/>`failed`: Failed|
+| ordIdInfo  |Array of object |                                                Order info                                                 |
+|  \> ordId  |     String     |                                                 Order ID                                                  |
+| \> instId  |     String     |                                      Instrument ID, e.g. `BTC-USDT`                                       |
+| \> ordType |     String     |                             Order type  <br/>`ioc`: Immediate-or-cancel order                             |
+|  \> side   |     String     |                                       Side  <br/>`buy`  <br/>`sell`                                       |
+|   \> px    |     String     |                                                   Price                                                   |
+|   \> sz    |     String     |                                          Quantity to buy or sell                                          |
+| \> fillPx  |     String     |                      Last filled price.  <br/>If none is filled, it will return "".                       |
+| \> fillSz  |     String     |                                           Last filled quantity                                            |
+|  \> state  |     String     |                                   State  <br/>`filled`  <br/>`canceled`                                   |
+|  \> cTime  |     String     |           Creation time for order, Unix timestamp format in milliseconds, e.g. `1597026383085`            |
+|     ts     |     String     |                 Request time, Unix timestamp format in milliseconds, e.g. `1597026383085`                 |
 
 ---
 
