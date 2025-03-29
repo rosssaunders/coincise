@@ -4,6 +4,26 @@
     {
       "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
       "filename": "post-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfills",
+      "filename": "get-fills.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders",
+      "filename": "get-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorders",
+      "filename": "delete-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorder",
+      "filename": "get-order.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorder",
+      "filename": "delete-order.md"
     }
   ]
 }

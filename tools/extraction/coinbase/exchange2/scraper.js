@@ -128,7 +128,7 @@ const convertHtmlToMarkdown = (html) => {
 const scrapeApiDocumentation = async (url, outputPath) => {
   // Launch a headless browser
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     defaultViewport: null,
     args: ['--start-maximized']
   });

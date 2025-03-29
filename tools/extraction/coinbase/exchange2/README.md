@@ -122,3 +122,135 @@ scrapeApiDocumentation(
 - Puppeteer - For browser automation and scraping
 - JSDOM - For parsing HTML outside the browser context
 - jq - For JSON processing in the bash script (required for run-scraper.sh) 
+
+# URLS
+
+### Accounts
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounts
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccount
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccountholds
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccountledger
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounttransfers
+
+### Address book
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaddressbook
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postaddressbook
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteaddressbookentry
+
+### Coinbase accounts
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getcoinbaseaccounts
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postcoinbaseaccountaddresses
+
+### Conversions
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postconversion
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getconversions
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getconversionfees
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getconversion
+
+### Currencies
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getcurrencies
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getcurrency
+
+### Transfers
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postdepositcoinbaseaccount
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postdepositpaymentmethod
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getpaymentmethods
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_gettransfers
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_gettransfer
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_posttransfertravelrule
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postwithdrawcoinbaseaccount
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postwithdrawcrypto
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwithdrawfeeestimate
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postwithdrawpaymentmethod
+
+### Fees
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfees
+
+### Orders
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfills
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorders
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorder
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorder
+
+### Loans
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getloans
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getloanassets
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getinterestsummary
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getinteresthistory
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getinterestcharges
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getloanlendingoverview
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getloanpreview
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_openloan
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getnewloanoptions
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_repayinterest
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_repayprincipal
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getrepaymentpreview
+
+### Futures
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfcmautoloan
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postfcmautoloan
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfcmusdcmargin
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postfcmusdcmargin
+
+### Coinbase Oracle Prices
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getcoinbasepriceoracle
+
+### Products
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproducts
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductsvolume
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproduct
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductbook
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductcandles
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductstats
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductticker
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproducttrades
+
+### Profiles
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getprofiles
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postprofile
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postprofiletransfer
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getprofile
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_putprofile
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_putprofiledeactivate
+
+### Reports
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getreports
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postreports
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getreport
+
+### Travel Rules
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_gettravelrules
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_posttravelrule
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deletetravelrule
+
+### Users
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getuserexchangelimits
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postuserlevelsettlementpreferences
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getusertradingvolumes
+
+### Wrapped Assets
+
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedassets
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getallwrappedassetstakewraps
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postwrappedassetstakewrap
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedassetstakewrap
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedasset
+https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getwrappedassetconversionrate
