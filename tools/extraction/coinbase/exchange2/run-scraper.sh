@@ -109,4 +109,73 @@ for i in $(seq 0 $(($URL_COUNT - 1))); do
 done
 
 echo ""
-echo "All URLs processed. Results saved to $OUTPUT_DIR/" 
+echo "All URLs processed. Results saved to $OUTPUT_DIR/"
+
+# Combine all markdown files into a single file
+COMBINED_FILE="$OUTPUT_DIR/combined_api_documentation.md"
+echo "Combining all markdown files into $COMBINED_FILE..."
+
+# Create a new file with a header
+echo "# Coinbase Exchange API Documentation" > "$COMBINED_FILE"
+echo "" >> "$COMBINED_FILE"
+echo "Generated on $(date)" >> "$COMBINED_FILE"
+echo "" >> "$COMBINED_FILE"
+
+# Create a table of contents
+echo "## Table of Contents" >> "$COMBINED_FILE"
+echo "" >> "$COMBINED_FILE"
+
+# Loop through each markdown file to build the TOC
+for md_file in "$OUTPUT_DIR"/*.md; do
+  # Skip the combined file itself
+  if [ "$(basename "$md_file")" == "$(basename "$COMBINED_FILE")" ]; then
+    continue
+  fi
+  
+  # Extract the title from the first heading in the file
+  TITLE=$(grep -m 1 "^#" "$md_file" | sed 's/^#\+\s*//')
+  if [ -z "$TITLE" ]; then
+    # If no heading found, use the filename without extension
+    TITLE=$(basename "$md_file" .md)
+  fi
+  
+  # Generate an anchor link from the title
+  ANCHOR=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/-\+/-/g' | sed 's/^-\|-$//g')
+  
+  # Add an entry to the TOC
+  echo "* [$TITLE](#$ANCHOR)" >> "$COMBINED_FILE"
+done
+
+echo "" >> "$COMBINED_FILE"
+echo "---" >> "$COMBINED_FILE"
+echo "" >> "$COMBINED_FILE"
+
+# Loop through each markdown file and append its contents
+for md_file in "$OUTPUT_DIR"/*.md; do
+  # Skip the combined file itself
+  if [ "$(basename "$md_file")" == "$(basename "$COMBINED_FILE")" ]; then
+    continue
+  fi
+  
+  echo "Adding $(basename "$md_file") to combined file..."
+  
+  # Extract the title for section header
+  TITLE=$(grep -m 1 "^#" "$md_file" | sed 's/^#\+\s*//')
+  if [ -z "$TITLE" ]; then
+    TITLE=$(basename "$md_file" .md)
+  fi
+  
+  # Add a section divider and title
+  echo "# $TITLE" >> "$COMBINED_FILE"
+  echo "" >> "$COMBINED_FILE"
+  
+  # Append the file content, skipping the first heading (already used as section title)
+  tail -n +2 "$md_file" | sed '/^$/N;/^\n$/D' >> "$COMBINED_FILE"
+  
+  # Add a separator between files
+  echo "" >> "$COMBINED_FILE"
+  echo "---" >> "$COMBINED_FILE"
+  echo "" >> "$COMBINED_FILE"
+done
+
+echo "✅ Combined API documentation created at $COMBINED_FILE" 

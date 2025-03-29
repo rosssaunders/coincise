@@ -1,12 +1,54 @@
 {
-  "output_directory": "output/coinbase-api-docs",
-  "urls2": [
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders",
-      "filename": "get-orders.md"
-    }
-  ],
+  "output_directory": "../../../../docs/coinbase/exchange",
   "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/welcome",
+      "filename": "welcome.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/getting-started",
+      "filename": "getting-started.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/sandbox",
+      "filename": "sandbox.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/matching-engine",
+      "filename": "matching-engine.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/rate-limits",
+      "filename": "rate-limits.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/runbook",
+      "filename": "runbook.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-requests",
+      "filename": "rest-requests.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-auth",
+      "filename": "rest-auth.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-rate-limits",
+      "filename": "rest-rate-limits.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-pagination",
+      "filename": "rest-pagination.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/profiles",
+      "filename": "profiles.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/docs/types",
+      "filename": "types.md"
+    },
     {
       "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
       "filename": "post-orders.md"

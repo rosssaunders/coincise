@@ -125,6 +125,27 @@ scrapeApiDocumentation(
 
 # URLS
 
+## General
+
+https://docs.cdp.coinbase.com/exchange/docs/welcome
+https://docs.cdp.coinbase.com/exchange/docs/getting-started
+https://docs.cdp.coinbase.com/exchange/docs/sandbox
+https://docs.cdp.coinbase.com/exchange/docs/matching-engine
+https://docs.cdp.coinbase.com/exchange/docs/rate-limits
+https://docs.cdp.coinbase.com/exchange/docs/runbook
+
+## REST API
+
+https://docs.cdp.coinbase.com/exchange/docs/rest-requests
+https://docs.cdp.coinbase.com/exchange/docs/rest-auth
+https://docs.cdp.coinbase.com/exchange/docs/rest-rate-limits
+https://docs.cdp.coinbase.com/exchange/docs/rest-pagination
+https://docs.cdp.coinbase.com/exchange/docs/profiles
+https://docs.cdp.coinbase.com/exchange/docs/types
+
+
+## Endpoints
+
 ### Accounts
 
 https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounts
