@@ -1,0 +1,9 @@
+{
+  "output_directory": "output/coinbase-api-docs",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
+      "filename": "post-orders.md"
+    }
+  ]
+}
