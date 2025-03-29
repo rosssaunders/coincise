@@ -39,6 +39,8 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Options WebSocket | [Options WebSocket API Docs](docs/gateio/websocket_options_api.md) | 2025-03-28 |
 | <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | Unified WebSocket | [Unified WebSocket API Docs](docs/gateio/websocket_unified_api.md) | 2025-03-28 |
 | <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | Gate.io | REST API | [REST API Docs](docs/gateio/rest_api.md) | 2025-03-28 |
+| <img src="assets/icons/coinbaseexchange.png" alt="Coinbase" height="16" style="vertical-align: middle;"> | Coinbase Exchange | Public REST | [Public REST API Docs](docs/coinbase/exchange/public_rest_api.md) | 2025-03-29 |
+| <img src="assets/icons/coinbaseexchange.png" alt="Coinbase" height="16" style="vertical-align: middle;"> | Coinbase Exchange | Private REST | [Private REST API Docs](docs/coinbase/exchange/private_rest_api.md) | 2025-03-29 |
 
 ## Contributing
 
