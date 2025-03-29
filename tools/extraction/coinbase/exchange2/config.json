@@ -1,5 +1,11 @@
 {
   "output_directory": "output/coinbase-api-docs",
+  "urls2": [
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders",
+      "filename": "get-orders.md"
+    }
+  ],
   "urls": [
     {
       "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",

@@ -1,4 +1,3 @@
-
 # Cancel an order
 
 DELETE
@@ -36,30 +35,6 @@ A successfully cancelled order response includes:
 
 If the order could not be canceled (already filled or previously canceled, etc.), then an error response indicates the reason in the `message` field.
 
-### Path Params
-
-order\_id
-
-string
-
-required
-
-Orders may be canceled using either the exchange assigned id or the client assigned client\_oid. When using client\_oid it must be preceded by the `client:` namespace.
-
-### Query Params
-
-profile\_id
-
-string
-
-Cancels orders on a specific profile
-
-product\_id
-
-string
-
-Optional product id of order
-
 
 ## Authentication
 
@@ -72,24 +47,39 @@ Optional product id of order
 
 
 
+## Path Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| order_id | string | Yes | Orders may be canceled using either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the `client:` namespace. |
+
+
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| profile_id | string | No | Cancels orders on a specific profile |
+| product_id | string | No | Optional product id of order |
+
+
+
 
 ## API Response Details
 
-### Response: 200the id of the order that was cancelled`
+### Response: 200 the id of the order that was cancelled`
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 
-### Response: 401Unauthorized.
-
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
-
-### Response: 500An unexpected error response.
+### Response: 401 Unauthorized.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
 
+### Response: 500 An unexpected error response.
 
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| message | string |  |

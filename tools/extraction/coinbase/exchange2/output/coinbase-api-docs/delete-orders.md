@@ -1,4 +1,3 @@
-
 # Cancel all orders
 
 DELETE
@@ -20,22 +19,6 @@ This endpoint requires the "trade" permission.
 | `/orders?Product_id=BTC-USD` | (400) Return BadRequest Error |
 | `/orders` | (200) Cancel all orders for all products |
 
-  
-
-### Query Params
-
-profile\_id
-
-string
-
-Cancels orders on a specific profile
-
-product\_id
-
-string
-
-Cancels orders on a specific product only
-
 
 ## Authentication
 
@@ -49,23 +32,32 @@ Cancels orders on a specific product only
 
 
 
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| profile_id | string | No | Cancels orders on a specific profile |
+| product_id | string | No | Cancels orders on a specific product only |
+
+
+
+
 ## API Response Details
 
-### Response: 200A list of the ids of open orders that were successfully cancelled
+### Response: 200 A list of the ids of open orders that were successfully cancelled
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 
-### Response: 401Unauthorized.
-
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
-
-### Response: 500An unexpected error response.
+### Response: 401 Unauthorized.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
 
+### Response: 500 An unexpected error response.
 
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| message | string |  |

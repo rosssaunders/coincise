@@ -11,7 +11,8 @@ const {
   extractArticleContent, 
   extractAuthSection, 
   extractRequestParams, 
-  extractModalContent 
+  extractModalContent,
+  extractPathAndQueryParams 
 } = require('./extractors');
 const { 
   processAuthSection, 
@@ -29,6 +30,14 @@ const convertHtmlToMarkdown = (html) => {
   const turndownService = new TurndownService({
     headingStyle: 'atx',
     codeBlockStyle: 'fenced'
+  });
+  
+  // Add custom rule for code tags
+  turndownService.addRule('code', {
+    filter: 'code',
+    replacement: function(content) {
+      return '`' + content + '`';
+    }
   });
   
   // Add a custom table processing rule that handles complex nested tables
@@ -167,6 +176,30 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       }
     }
     
+    // Extract path and query parameters sections if they exist
+    console.log('Extracting path and query parameters...');
+    const paramsResults = await extractPathAndQueryParams(page);
+    let pathParamsMarkdown = null;
+    let queryParamsMarkdown = null;
+    
+    if (paramsResults.pathParams) {
+      // Process the path params HTML to create markdown
+      try {
+        pathParamsMarkdown = processRequestParams(paramsResults.pathParams);
+      } catch (error) {
+        console.error('Error processing path parameters section:', error);
+      }
+    }
+    
+    if (paramsResults.queryParams) {
+      // Process the query params HTML to create markdown
+      try {
+        queryParamsMarkdown = processRequestParams(paramsResults.queryParams);
+      } catch (error) {
+        console.error('Error processing query parameters section:', error);
+      }
+    }
+    
     // Extract request parameters section if it exists
     console.log('Extracting request parameters...');
     const requestParamsHtml = await extractRequestParams(page);
@@ -251,7 +284,9 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       articleContent, 
       modalResults,
       authMarkdown, 
-      requestParamsMarkdown
+      requestParamsMarkdown,
+      pathParamsMarkdown,
+      queryParamsMarkdown
     );
     
     // Ensure the output directory exists

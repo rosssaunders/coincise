@@ -52,31 +52,43 @@ const processRequestParams = (paramsHtml) => {
   const dom = new JSDOM(paramsHtml);
   const document = dom.window.document;
   
+  // First determine if this is for query params or body params or path params
+  const sectionTitle = document.querySelector('h3')?.textContent.trim();
+  const isQueryParams = sectionTitle === 'Query Params';
+  const isPathParams = sectionTitle === 'Path Params';
+  const isBodyParams = sectionTitle === 'Body params';
+  
   // Find all param items
-  const paramItems = document.querySelectorAll('.listItem_mkJa');
+  // Support both paramItem_Izrs (newer UI) and listItem_mkJa (older UI)
+  const paramItems = document.querySelectorAll('.paramItem_Izrs, .listItem_mkJa');
   
   if (paramItems.length === 0) return null;
   
-  // Create the markdown table
+  // Create the markdown table with appropriate title
   let markdownTable = `
-## Request Parameters
+## ${isPathParams ? 'Path Parameters' : isQueryParams ? 'Query Parameters' : 'Request Parameters'}
 
-| Parameter | Type | Description |
-| --------- | ---- | ----------- |
+| Parameter | Type | ${isQueryParams || isPathParams ? 'Required | ' : ''}Description |
+| --------- | ---- | ${isQueryParams || isPathParams ? '-------- | ' : ''}----------- |
 `;
   
   // Process each param item
   paramItems.forEach(item => {
-    const paramName = item.querySelector('.paramName__NgG')?.textContent.trim() || '';
-    const paramType = item.querySelector('.paramType_KuQf')?.textContent.trim() || '';
+    // Support both newer and older UI class names
+    const paramName = item.querySelector('.paramName_MlmJ, .paramName__NgG')?.textContent.trim() || '';
+    const paramType = item.querySelector('.paramType_HWMI, .paramType_KuQf')?.textContent.trim() || '';
+    const isRequired = item.querySelector('.paramRequired_Dtof') !== null ? 'Yes' : 'No';
     
-    // Get description - either from paragraph or possible values
+    // Get description from paragraph
     let description = '';
     const paragraph = item.querySelector('.paragraph_nrmP');
     const possibleValues = item.querySelector('.possibleValues_iyE0');
     
     if (paragraph) {
-      description = paragraph.textContent.trim();
+      // Extract description and handle code tags
+      description = paragraph.innerHTML
+        .replace(/<code>(.*?)<\/code>/g, '`$1`')
+        .replace(/<\/?[^>]+(>|$)/g, ''); // Remove other HTML tags
     } else if (possibleValues) {
       description = possibleValues.textContent.trim();
     }
@@ -86,7 +98,11 @@ const processRequestParams = (paramsHtml) => {
     const escapedType = paramType.replace(/\|/g, '\\|');
     const escapedDesc = description.replace(/\|/g, '\\|');
     
-    markdownTable += `| ${escapedName} | ${escapedType} | ${escapedDesc} |\n`;
+    if (isQueryParams || isPathParams) {
+      markdownTable += `| ${escapedName} | ${escapedType} | ${isRequired} | ${escapedDesc} |\n`;
+    } else {
+      markdownTable += `| ${escapedName} | ${escapedType} | ${escapedDesc} |\n`;
+    }
   });
   
   return markdownTable;
@@ -109,7 +125,22 @@ const generateResponseMarkdown = (modalResults) => {
       return;
     }
     
-    markdown += `### Response: ${result.buttonText}\n\n`;
+    // Ensure proper spacing between HTTP status code and description
+    // Extract and format HTTP status code and description
+    // This handles cases like "401Unauthorized" or "200OK" and formats to "401 Unauthorized"
+    let formattedButtonText = result.buttonText;
+    
+    // First clean up the text (remove any extraneous content)
+    formattedButtonText = formattedButtonText.replace(/OpenInFull|[\r\n]+/g, '').trim();
+    
+    // Format HTTP status codes - handle various patterns
+    // 1. Match digit sequence followed by uppercase letter and insert space
+    formattedButtonText = formattedButtonText.replace(/(\d+)([A-Z][a-z])/g, '$1 $2');
+    
+    // 2. Match digit sequence followed immediately by any letter (catches additional cases)
+    formattedButtonText = formattedButtonText.replace(/(\d+)([a-zA-Z])/g, '$1 $2');
+    
+    markdown += `### Response: ${formattedButtonText}\n\n`;
     markdown += '| Property | Type | Description |\n';
     markdown += '| -------- | ---- | ----------- |\n';
     
@@ -134,18 +165,24 @@ const generateResponseMarkdown = (modalResults) => {
  * @param {Array} modalResults - Array of response modal results
  * @param {string} authMarkdown - Authentication markdown
  * @param {string} requestParamsMarkdown - Request parameters markdown
+ * @param {string} pathParamsMarkdown - Path parameters markdown
+ * @param {string} queryParamsMarkdown - Query parameters markdown
  * @returns {string} - Complete markdown document
  */
-const generateMarkdownDocument = (articleContent, modalResults, authMarkdown = '', requestParamsMarkdown = '') => {
+const generateMarkdownDocument = (articleContent, modalResults, authMarkdown = '', requestParamsMarkdown = '', pathParamsMarkdown = '', queryParamsMarkdown = '') => {
   return `
 ${articleContent}
 
 ${authMarkdown || ''}
 
+${pathParamsMarkdown || ''}
+
+${queryParamsMarkdown || ''}
+
 ${requestParamsMarkdown || ''}
 
 ${generateResponseMarkdown(modalResults)}
-`;
+`.trim();
 };
 
 module.exports = {

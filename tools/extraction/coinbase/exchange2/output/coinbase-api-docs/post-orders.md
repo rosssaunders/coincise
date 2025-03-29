@@ -1,4 +1,3 @@
-
 # Create a new order
 
 POST
@@ -181,23 +180,27 @@ Open orders do not expire and remain open until they are either filled or cancel
 
 
 
+
+
+
+
 ## Request Parameters
 
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
-| profile_id | string | Create order on a specific profile_id. If none is passed, defaults to default profile. |
+| profile_id | string | Create order on a specific `profile_id`. If none is passed, defaults to `default` profile. |
 | type | string | Possible values: [limit, market, stop] |
 | side | string | Possible values: [buy, sell] |
 | product_id | string | Book on which to place an order |
 | stp | string | Possible values: [dc, co, cn, cb] |
 | stop | string | Possible values: [loss, entry] |
-| stop_price | string | Price threshold at which a stop order will be placed on the book |
-| price | string | Price per unit of cryptocurrency - required for limit/stop orders |
-| size | string | Amount of base currency to buy or sell - required for limit/stop orders and market sells |
-| funds | string | Amount of quote currency to buy - required for market buys |
+| stop_price | string | Price threshold at which a `stop` order will be placed on the book |
+| price | string | Price per unit of cryptocurrency - required for `limit`/`stop` orders |
+| size | string | Amount of base currency to buy or sell - required for `limit`/`stop` orders and `market` `sell`s |
+| funds | string | Amount of quote currency to buy - required for `market` `buy`s |
 | time_in_force | string | Possible values: [GTC, GTT, IOC, FOK] |
 | cancel_after | string | Possible values: [min, hour, day] |
-| post_only | boolean | If true, order will only execute as a maker order |
+| post_only | boolean | If true, order will only execute as a `maker` order |
 | client_oid | string | Optional Order ID selected by the user or the frontend client to identify their order |
 | max_floor | string | Placing an iceberg order. Use this to specify how much to show |
 | stop_limit_price | string | Required for take profit/stop loss orders. Denotes the updated limit price upon the activation of the stop loss trigger |
@@ -205,7 +208,7 @@ Open orders do not expire and remain open until they are either filled or cancel
 
 ## API Response Details
 
-### Response: 200The new order that was successfully created
+### Response: 200 The new order that was successfully created
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
@@ -239,16 +242,14 @@ Open orders do not expire and remain open until they are either filled or cancel
 | secondary_order_id | string | order id for the visible order for iceberg order |
 | stop_limit_price | string | stop limit price for TPSL order |
 
-### Response: 401Unauthorized.
+### Response: 401 Unauthorized.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
 
-### Response: 500An unexpected error response.
+### Response: 500 An unexpected error response.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
-
-

@@ -1,4 +1,3 @@
-
 # Get single order
 
 GET
@@ -21,24 +20,6 @@ Info
 
 Open orders can change state between the request and the response depending on market conditions.
 
-### Path Params
-
-order\_id
-
-string
-
-required
-
-`order_id` is either the exchange assigned id or the client assigned client\_oid. When using client\_oid it must be preceded by the client: namespace.
-
-### Query Params
-
-market\_type
-
-string
-
-Market type which the order was traded in.
-
 
 ## Authentication
 
@@ -48,6 +29,22 @@ Market type which the order was traded in.
 | cb-access-passphrase | string | required |
 | cb-access-sign | string | required |
 | cb-access-timestamp | string | required |
+
+
+
+## Path Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| order_id | string | Yes | `order_id` is either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the client: namespace. |
+
+
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| market_type | string | No | Market type which the order was traded in. |
 
 
 
@@ -88,16 +85,14 @@ Market type which the order was traded in.
 | secondary_order_id | string | order id for the visible order for iceberg order |
 | stop_limit_price | string | stop limit price for TPSL order |
 
-### Response: 401Unauthorized.
+### Response: 401 Unauthorized.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
 
-### Response: 500An unexpected error response.
+### Response: 500 An unexpected error response.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
-
-

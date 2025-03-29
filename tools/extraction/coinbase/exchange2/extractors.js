@@ -28,6 +28,12 @@ const extractArticleContent = async (page, options = {}) => {
         authSection.remove();
       }
       
+      // Remove query parameters section (already extracted by extractQueryParams)
+      const pathParamsSections = clone.querySelectorAll('#path-params');
+      pathParamsSections.forEach(section => {
+        section.remove();
+      });
+      
       // Remove request parameters section (already extracted by extractRequestParams)
       const bodyParamsHeadings = Array.from(clone.querySelectorAll('h3')).filter(h => 
         h.textContent.trim() === 'Body params');
@@ -90,6 +96,39 @@ const extractRequestParams = async (page) => {
 };
 
 /**
+ * Extract path and query parameters sections HTML
+ * @param {Page} page - Puppeteer page object
+ * @returns {Promise<Object>} - Object with pathParams and queryParams HTML
+ */
+const extractPathAndQueryParams = async (page) => {
+  return await page.evaluate(() => {
+    const result = {
+      pathParams: null,
+      queryParams: null
+    };
+    
+    // Look for all path-params sections
+    const paramSections = document.querySelectorAll('#path-params');
+    
+    paramSections.forEach(section => {
+      // Check the heading to determine if it's path params or query params
+      const heading = section.querySelector('h3');
+      if (heading) {
+        const headingText = heading.textContent.trim();
+        
+        if (headingText === 'Path Params') {
+          result.pathParams = section.outerHTML;
+        } else if (headingText === 'Query Params') {
+          result.queryParams = section.outerHTML;
+        }
+      }
+    });
+    
+    return result;
+  });
+};
+
+/**
  * Extract modal content for a specific response button
  * @param {Page} page - Puppeteer page object
  * @returns {Promise<Object>} - Structured modal content
@@ -143,5 +182,6 @@ module.exports = {
   extractArticleContent,
   extractAuthSection,
   extractRequestParams,
-  extractModalContent
+  extractModalContent,
+  extractPathAndQueryParams
 }; 

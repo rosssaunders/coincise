@@ -1,4 +1,3 @@
-
 # List fills
 
 GET
@@ -29,60 +28,6 @@ Fills are returned sorted by descending `trade_id` from the largest `trade_id` t
 
 See [Pagination](/exchange/docs/rest-pagination) for more information.
 
-### Query Params
-
-order\_id
-
-string
-
-limit to fills on a specific order. Either `order_id` or `product_id` is required.
-
-product\_id
-
-string
-
-limit to fills on a specific product. Either `order_id` or `product_id` is required.
-
-limit
-
-int64
-
-Limit on number of results to return.
-
-before
-
-string
-
-Used for pagination. Sets start cursor to `before` id.
-
-after
-
-string
-
-Used for pagination. Sets end cursor to `after` id.
-
-market\_type
-
-string
-
-Market type which the order was filled in.
-
-spot
-
-​
-
-start\_date
-
-string
-
-Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time.
-
-end\_date
-
-string
-
-Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time.
-
 
 ## Authentication
 
@@ -92,6 +37,23 @@ Search by maximum posted date time and is inclusive of time provided. Valid form
 | cb-access-passphrase | string | required |
 | cb-access-sign | string | required |
 | cb-access-timestamp | string | required |
+
+
+
+
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| order_id | string | No | limit to fills on a specific order. Either `order_id` or `product_id` is required. |
+| product_id | string | No | limit to fills on a specific product. Either `order_id` or `product_id` is required. |
+| limit | int64 | No | Limit on number of results to return. |
+| before | string | No | Used for pagination. Sets start cursor to `before` id. |
+| after | string | No | Used for pagination. Sets end cursor to `after` id. |
+| market_type | string | No | Market type which the order was filled in. |
+| start_date | string | No | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| end_date | string | No | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
 
 
 
@@ -118,16 +80,14 @@ Search by maximum posted date time and is inclusive of time provided. Valid form
 | market_type | string | market type which the order was filled in |
 | funding_currency | string | funding currency which the order was filled in |
 
-### Response: 401Unauthorized.
+### Response: 401 Unauthorized.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
 
-### Response: 500An unexpected error response.
+### Response: 500 An unexpected error response.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
-
-

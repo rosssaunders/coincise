@@ -1,4 +1,3 @@
-
 # List orders
 
 GET
@@ -53,88 +52,6 @@ Open orders can change state between the request and the response depending on m
 
 This request is paginated. See [Pagination](/exchange/docs/rest-pagination) for more information.
 
-### Query Params
-
-profile\_id
-
-string
-
-Filter results by a specific profile\_id
-
-product\_id
-
-string
-
-Filter results by a specific product\_id
-
-sortedBy
-
-string
-
-Sort criteria for results.
-
-created\_at
-
-​
-
-sorting
-
-string
-
-Ascending or descending order, by `sortedBy`
-
-desc
-
-​
-
-start\_date
-
-date-time
-
-Filter results by minimum posted date
-
-end\_date
-
-date-time
-
-Filter results by maximum posted date
-
-before
-
-string
-
-Used for pagination. Sets start cursor to `before` date.
-
-after
-
-string
-
-Used for pagination. Sets end cursor to `after` date.
-
-limit
-
-int64
-
-required
-
-Limit on number of results to return.
-
-status
-
-string\[\]
-
-required
-
-Array with order statuses to filter by.
-
-Add string
-
-market\_type
-
-string
-
-Market type which the order was traded in.
-
 
 ## Authentication
 
@@ -144,6 +61,26 @@ Market type which the order was traded in.
 | cb-access-passphrase | string | required |
 | cb-access-sign | string | required |
 | cb-access-timestamp | string | required |
+
+
+
+
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| profile_id | string | No | Filter results by a specific profile_id |
+| product_id | string | No | Filter results by a specific product_id |
+| sortedBy | string | No | Sort criteria for results. |
+| sorting | string | No | Ascending or descending order, by `sortedBy` |
+| start_date | date-time | No | Filter results by minimum posted date |
+| end_date | date-time | No | Filter results by maximum posted date |
+| before | string | No | Used for pagination. Sets start cursor to `before` date. |
+| after | string | No | Used for pagination. Sets end cursor to `after` date. |
+| limit | int64 | Yes | Limit on number of results to return. |
+| status | string[] | Yes | Array with order statuses to filter by. |
+| market_type | string | No | Market type which the order was traded in. |
 
 
 
@@ -184,16 +121,14 @@ Market type which the order was traded in.
 | secondary_order_id | string | order id for the visible order for iceberg order |
 | stop_limit_price | string | stop limit price for TPSL order |
 
-### Response: 401Unauthorized.
+### Response: 401 Unauthorized.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
 
-### Response: 500An unexpected error response.
+### Response: 500 An unexpected error response.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | message | string |  |
-
-
