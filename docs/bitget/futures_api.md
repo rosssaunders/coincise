@@ -1,0 +1,4662 @@
+# Bitget Futures API Documentation
+
+
+
+# Futures Trading API
+
+This section introduces the API documentation for Futures trading.
+
+For more details, please refer to the menu on the left.
+
+Please note that there are 3 product types under Futures trading for RestAPI and Websocket
+
+| Product Type | Desc |
+| --- | --- |
+| USDT-FUTURES | USDT-M Futures, Futures settled in USDT 
+| USDC-FUTURES | USDC-M Futures, Futures settled in USDC 
+| COIN-FUTURES | Coin-M Futures, Futures settled in cryptocurrencies 
+
+Specially, these are the product type value for [demo trading](/api-doc/common/demotrading/restapi) in RestAPI and Websocket
+
+| Product Type | Desc |
+| --- | --- |
+| SUSDT-FUTURES | USDT-M Futures Demo(Try out USDT-M futures trading) 
+| SUSDC-FUTURES | USDC-M Futures Demo(Try out USDC-M futures) 
+| SCOIN-FUTURES | Coin-M Futures Demo(Try out Coin-M futures trading) 
+
+Every account has certain demo coins, you could check your demo coin balance by calling the [Account List](/api-doc/contract/account/Get-Account-List) API with above demo trading product type
+
+# VIP Fee Rate
+
+Rate limit:10 req/sec/IP
+
+### Description[​](#description "Direct link to Description")
+
+Get VIP fee rate
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/vip-fee-rate
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/vip-fee-rate"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+N/A
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695794449789,    "data": [        {            "level": "1",            "dealAmount": "100000",            "assetAmount": "50000",            "takerFeeRate": "0.0006",            "makerFeeRate": "0.0004",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        },        {            "level": "2",            "dealAmount": "200000",            "assetAmount": "500000",            "takerFeeRate": "0.0006",            "makerFeeRate": "0.0004",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; level | String | VIP level 
+| &gt; dealAmount | String | Total trading volume of the last 30 days, USDT 
+| &gt; assetAmount | String | Total assets, USDT 
+| &gt; takerFeeRate | String | Taker rate, '0.000425' means 4.25 with four decimal places ahead 
+| &gt; makerFeeRate | String | Maker rate, '0.00006' means 0.6 with four decimal places ahead 
+| &gt; btcWithdrawAmount | String | 24-hour withdrawal limit (BTC) 
+| &gt; usdtWithdrawAmount | String | 24-hour withdrawal limit (USDT)
+
+# Get Interest rate history
+
+Frequency limit:5 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get Interest rate history
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/union-interest-rate-history
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/union-interest-rate-history?coin=USDT"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| coin | String | Yes | Coin asset 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1725948522731,    "data": {        "coin": "USDT",        "historyInterestRateList": [            {                "ts": "1723533015946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            },            {                "ts": "1723446615946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            },            {                "ts": "1723360215946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            }        ]    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| coin | String | Assets 
+| historyInterestRateList | List | History Interest list 
+| &gt; annualInterestRate | String | Annual interest rate 
+| &gt; dailyInterestRate | String | Daily interest rate 
+| &gt; ts | String | Interest time
+
+# Get Interest Exchange Rate
+
+Rate limit:5 requests/sec/IP
+
+### Description[​](#description "Direct link to Description")
+
+Get Interest exchange rate
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/exchange-rate
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/exchange-rate"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+N/A
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1725948315516,    "data": [        {            "coin": "BTC",            "exchangeRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "1000",                    "exchangeRate": "0.99"                },                {                    "tier": "2",                    "minAmount": "1000",                    "maxAmount": "5000",                    "exchangeRate": "0.98"                },                {                    "tier": "3",                    "minAmount": "5000",                    "maxAmount": "10000",                    "exchangeRate": "0.97"                },                {                    "tier": "4",                    "minAmount": "10000",                    "maxAmount": "50000",                    "exchangeRate": "0.96"                },                {                    "tier": "5",                    "minAmount": "50000",                    "maxAmount": "-1",                    "exchangeRate": "0.95"                }            ]        },        {            "coin": "ETH",            "exchangeRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "1000",                    "exchangeRate": "0.99"                },                {                    "tier": "2",                    "minAmount": "1000",                    "maxAmount": "5000",                    "exchangeRate": "0.98"                },                {                    "tier": "3",                    "minAmount": "5000",                    "maxAmount": "10000",                    "exchangeRate": "0.97"                },                {                    "tier": "4",                    "minAmount": "10000",                    "maxAmount": "50000",                    "exchangeRate": "0.96"                },                {                    "tier": "5",                    "minAmount": "50000",                    "maxAmount": "-1",                    "exchangeRate": "0.95"                }            ]        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| coin | String | Assets 
+| exchangeRateList | List | Tier exchange rate 
+| &gt; tier | String | Tier 
+| &gt; minAmount | String | Min 
+| &gt; maxAmount | String | Max<br><code>-1</code> means there is no limitation 
+| &gt; exchangeRate | String | Exchange rate
+
+# Get Discount Rate
+
+Frequency limit:5 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get Discount Rate
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/discount-rate
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/discount-rate"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+N/A
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1725848381845,    "data": [        {            "coin": "BTC",            "userLimit": "100",            "totalLimit": "1500",            "discountRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "10000",                    "discountRate": "0.99"                },                {                    "tier": "2",                    "minAmount": "10000",                    "maxAmount": "100000",                    "discountRate": "0.95"                },                {                    "tier": "3",                    "minAmount": "100000",                    "maxAmount": "200000",                    "discountRate": "0.9"                },                {                    "tier": "4",                    "minAmount": "200000",                    "maxAmount": "-1",                    "discountRate": "0.8"                }            ]        },        {            "coin": "ETH",            "userLimit": "50000",            "totalLimit": "500000000",            "discountRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "100",                    "discountRate": "0.9"                },                {                    "tier": "2",                    "minAmount": "100",                    "maxAmount": "5000",                    "discountRate": "0.7"                },                {                    "tier": "3",                    "minAmount": "5000",                    "maxAmount": "-1",                    "discountRate": "0.5"                }            ]        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| coin | String | Assets 
+| userLimit | String | Individual limit 
+| totalLimit | String | Total platform limit 
+| discountRateList | List | Tier discount rate 
+| &gt; tier | String | Tier 
+| &gt; minAmount | String | Min 
+| &gt; maxAmount | String | Max 
+| &gt; discountRate | String | Discount rate
+
+# Get Merge Market Depth
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get merge depth data
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/merge-depth
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/merge-depth?productType=usdt-futures&symbol=BTCUSDT"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| precision | String | No | Price accuracy, according to the selected accuracy as the step size to return the cumulative depth, enumeration value:<br>scale0/scale1/scale2/scale3<br>'scale0' is not merged, the default value<br>In general, 'scale1' is the merged depth of the transaction pair’s quotation accuracy<em>10<br>Generally, 'scale2' is the quotation precision </em>100<br>'scale3' is the quotation precision *1000<br>The precision corresponding to 0/1/2/3 is subject to the actual return parameter "scale". The quotation precision of each trading pair is different, and some trading pairs does not have 'scale2', and the request for a scale that does not exist for the currency pair will be processed according to the maximum scale. Example: A certain trading pair only has scale 0/1, and when scale2 is requested, it will be automatically reduced to 'scale1'. 
+| limit | String | No | Fixed gear enumeration value: 1/5/15/50/max, the default gear is 100, passing max returns the maximum gear of the trading pair<br>When the actual depth does not meet the limit, return according to the actual gear . If max is passed in, the maximum level of the trading pair will be returned. 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695870963008,    "data": {        "asks": [            [                26347.5,                0.25            ],            [                26348.0,                0.16            ]        ],        "bids": [            [                26346.5,                0.16            ],            [                26346.0,                0.32            ]        ],        "ts": "1695870968804",        "scale": "0.1",        "precision": "scale0",        "isMaxPrecision": "NO"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| asks | List&lt;String&gt; | The selling price<br>elements are price and quantity. 
+| &gt; Index 0 | String | Price 
+| &gt; Index 1 | String | Quantity 
+| bids | List&lt;String&gt; | Buying price<br>The elements are price and quantity. 
+| &gt; Index 0 | String | Price 
+| &gt; Index 1 | String | Quantity 
+| precision | String | Requested precision 
+| scale | String | Actual precision value 
+| isMaxPrecision | String | YES indicates that the current accuracy is the maximum, NO indicates that it is not the maximum accuracy. 
+| ts | String | Timestamp
+
+# Get Ticker
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get ticker data of the given 'productType' and 'symbol'
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/ticker
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/ticker?productType=COIN-FUTURES&symbol=ETHUSDM24"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695794095685,    "data": [        {            "symbol": "ETHUSD_231229",            "lastPr": "1829.3",            "askPr": "1829.8",            "bidPr": "1829.3",            "bidSz": "0.054",            "askSz": "0.785",            "high24h": "0",            "low24h": "0",            "ts": "1695794098184",            "change24h": "0",            "baseVolume": "0",            "quoteVolume": "0",            "usdtVolume": "0",            "openUtc": "0",            "changeUtc24h": "0",            "indexPrice": "1822.15",            "fundingRate": "0",            "holdingAmount": "9488.49",            "deliveryStartTime": "1693538723186",            "deliveryTime": "1703836799000",            "deliveryStatus": "delivery_normal",            "open24h": "0",            "markPrice": "1829"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Trading pair name 
+| &gt; lastPr | String | Last price 
+| &gt; askPr | String | Ask price 
+| &gt; bidPr | String | Bid price 
+| &gt; bidSz | String | Buying amount 
+| &gt; askSz | String | Selling amount 
+| &gt; high24h | String | 24h high 
+| &gt; low24h | String | 24h low 
+| &gt; ts | String | Milliseconds format of current data timestamp Unix, e.g. 1597026383085 
+| &gt; change24h | String | Price increase or decrease (24 hours) 
+| &gt; baseVolume | String | Trading volume of the coin 
+| &gt; quoteVolume | String | Trading volume of quote currency 
+| &gt; usdtVolume | String | Trading volume of USDT 
+| &gt; openUtc | String | UTC0 opening price 
+| &gt; changeUtc24h | String | UTC0 24-hour price increase and decrease 
+| &gt; indexPrice | String | Index price 
+| &gt; fundingRate | String | Funding rate 
+| &gt; holdingAmount | String | Current holding positions(base coin) 
+| &gt; open24h | String | Entry price of the last 24 hours<br>The opening time is compared on a 24-hour basis. i.e.: Now it is 7:00 PM of the 2nd day of the month, then the corresponding opening time is 7:00 PM of the 1st day of the month. 
+| &gt; deliveryStartTime | String | Delivery start time (only for delivery contracts) 
+| &gt; deliveryTime | String | Delivery time (only for delivery contracts） 
+| &gt; deliveryStatus | String | Delivery status (only for delivery contracts; <code>delivery_config_period</code>: Newly listed currency pairs are configured<br><code>delivery_normal</code>: Trading normally<br><code>delivery_before</code>: 10 minutes before delivery, opening positions are prohibited<br><code>delivery_period</code>: Delivery, opening, closing, and canceling orders are prohibited 
+| &gt; markPrice | String | Mark price
+
+# Get All Tickers
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get all ticker data of the given 'productType'
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/tickers
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/tickers?productType=COIN-FUTURES"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695794269124,    "data": [        {            "symbol": "BTCUSD",            "lastPr": "29904.5",            "askPr": "29904.5",            "bidPr": "29903.5",            "bidSz": "0.5091",            "askSz": "2.2694",            "high24h": "0",            "low24h": "0",            "ts": "1695794271400",            "change24h": "0",            "baseVolume": "0",            "quoteVolume": "0",            "usdtVolume": "0",            "openUtc": "0",            "changeUtc24h": "0",            "indexPrice": "29132.353333",            "fundingRate": "-0.0007",            "holdingAmount": "125.6844",            "deliveryStartTime": null,            "deliveryTime": null,            "deliveryStatus": "delivery_normal",            "open24h": "0",            "markPrice": "12345"        },        {            "symbol": "ETHUSD_231229",            "lastPr": "1829.3",            "askPr": "1829.8",            "bidPr": "1829.3",            "bidSz": "0.054",            "askSz": "0.785",            "high24h": "0",            "low24h": "0",            "ts": "1695794271400",            "change24h": "0",            "baseVolume": "0",            "quoteVolume": "0",            "usdtVolume": "0",            "openUtc": "0",            "changeUtc24h": "0",            "indexPrice": "1822.15",            "fundingRate": "0",            "holdingAmount": "9488.49",            "deliveryStartTime": "1693538723186",            "deliveryTime": "1703836799000",            "deliveryStatus": "delivery_normal",            "open24h": "0",            "markPrice": "1234"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Trading pair name 
+| &gt; lastPr | String | Last price 
+| &gt; askPr | String | Ask price 
+| &gt; bidPr | String | Bid price 
+| &gt; bidSz | String | Buying amount 
+| &gt; askSz | String | Selling amount 
+| &gt; high24h | String | 24h high 
+| &gt; low24h | String | 24h low 
+| &gt; ts | String | Milliseconds format of current data timestamp Unix, e.g. 1597026383085 
+| &gt; change24h | String | Price increase or decrease (24 hours) 
+| &gt; baseVolume | String | Trading volume of the coin 
+| &gt; quoteVolume | String | Trading volume of quote currency 
+| &gt; usdtVolume | String | Trading volume of USDT 
+| &gt; openUtc | String | UTC0 opening price 
+| &gt; changeUtc24h | String | UTC0 24-hour price increase and decrease 
+| &gt; indexPrice | String | Index price 
+| &gt; fundingRate | String | Funding rate 
+| &gt; holdingAmount | String | Current positions in the unit of number of coins traded. 
+| &gt; open24h | String | Entry price of the last 24 hours<br>The opening time is compared on a 24-hour basis. i.e.: Now it is 7:00 PM of the 2nd day of the month, then the corresponding opening time is 7:00 PM of the 1st day of the month. 
+| &gt; deliveryStartTime | String | Delivery start time (only for delivery contracts) 
+| &gt; deliveryTime | String | Delivery time (only for delivery contracts） 
+| &gt; deliveryStatus | String | Delivery status (only for delivery contracts; <code>delivery_config_period</code>: Newly listed currency pairs are configured<br><code>delivery_normal</code>: Trading normally<br><code>delivery_before</code>: 10 minutes before delivery, opening positions are prohibited<br><code>delivery_period</code>: Delivery, opening, closing, and canceling orders are prohibited 
+| &gt; markPrice | String | Mark price
+
+# Get Recent Transactions
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get the record of last 100 transactions
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/fills
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/fills?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| limit | String | No | Number of queries: Default: 100, maximum: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "data": [        {            "tradeId": "1",            "price": "29990.5",            "size": "0.0166",            "side": "sell",            "ts": "1627116776464",            "symbol": "BTCUSDT"        },        {            "tradeId": "2",            "price": "30007.0",            "size": "0.0166",            "side": "buy",            "ts": "1627116600875",            "symbol": "BTCUSDT"        }    ],    "msg": "success",    "requestTime": 1690313813709}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;&gt; tradeId | String | Transaction ID 
+| &gt;&gt; price | String | Price 
+| &gt;&gt; size | String | Quantity 
+| &gt;&gt; side | String | Direction 
+| &gt;&gt; ts | String | Milliseconds format of current data timestamp Unix, e.g. 1597026383085 
+| &gt;&gt; symbol | String | Trading Pair name e.g. ETHUSDT
+
+# Get History Transactions
+
+Frequency limit: 10 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get transaction records of the last 7 days
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/fills-history
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/fills-history?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| limit | String | No | Number of queries: Default: 500, maximum: 1000 
+| idLessThan | String | No | Separate page content before this ID is requested (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is a week. The default end time is a week if no value is set for the end time. ) 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is a week. The default start time is a week ago if no value is set for the start time. ) 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695865481335,    "data": [        {            "tradeId": "1",            "price": "26372.5",            "size": "9.25",            "side": "Sell",            "ts": "1695865151000",            "symbol": "BTCUSDT"        },        {            "tradeId": "2",            "price": "26383",            "size": "12.12",            "side": "Buy",            "ts": "1695865115000",            "symbol": "BTCUSDT"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; tradeId | String | tradeId, descending order 
+| &gt; price | String | Price 
+| &gt; size | String | Amount, specific base coin 
+| &gt; side | String | Trading direction<br><code>sell</code>: Sell<br><code>buy</code>: Buy 
+| &gt; ts | String | Current data timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085 
+| &gt; symbol | String | Trading pair name
+
+# Get Candlestick Data
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+By default, 100 records are returned. If there is no data, an empty array is returned. The queryable data history varies depending on the k-line granularity.
+
+  
+The rules are as follows:  
+1m, 3m, and 5m can be checked for up to one month;  
+15m can be checked for up to 52 days;  
+30m can be searched for up to 62 days;  
+1H can be checked for up to 83 days;  
+2H can be checked for up to 120 days;  
+4H can be checked for up to 240 days;  
+6H can be checked for up to 360 days
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/candles
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/candles?symbol=BTCUSDT&granularity=5m&limit=100&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| granularity | String | Yes | K-line particle size<br>- 1m(1 minute)<br>- 3m(3 minutes)<br>- 5m(5 minutes)<br>- 15m(15 minutes)<br>- 30m(30 minutes)<br>- 1H( 1 hour)<br>- 4H(4 hours)<br>- 6H(6 hours)<br>- 12H(12 hours)<br>- 1D(1 day)<br>- 3D ( 3 days)<br>- 1W (1 week)<br>- 1M (monthly line)<br>- 6Hutc (UTC 6 hour line)<br>- 12Hutc (UTC 12 hour line)<br>- 1Dutc (UTC 1-day line)<br>- 3Dutc (UTC 3-day line)<br>- 1Wutc (UTC weekly line)<br>- 1Mutc (UTC monthly line) 
+| startTime | String | No | The start time is to query the k-lines after this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data after this start time (the maximum time query range is 90 days) 
+| endTime | String | No | The end time is to query the k-lines before this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data before this end time (the maximum time query range is 90 days) 
+| kLineType | String | No | Candlestick chart types: MARKET tick; MARK mark; INDEX index;<br>MARKET by default 
+| limit | String | No | Default: 100, maximum: 1000 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695865615662,    "data": [        [            "1695835800000",            "26210.5",            "26210.5",            "26194.5",            "26194.5",            "26.26",            "687897.63"        ],        [            "1695836100000",            "26194.5",            "26194.5",            "26171",            "26171",            "17.98",            "470618.72"        ]    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| index[0] | String | Milliseconds format of timestamp Unix, e.g. 1597026383085 
+| index[1] | String | Entry price 
+| index[2] | String | Highest price 
+| index[3] | String | Lowest price 
+| index[4] | String | Exit price. The latest exit price may be updated in the future. Subscribe to WebSocket to track the latest price. 
+| index[5] | String | Trading volume of the base coin 
+| index[6] | String | Trading volume of quote currency
+
+# Get Historical Candlestick
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Query all historical K-line data and return a maximum of 200 pieces of data.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/history-candles
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/history-candles?symbol=BTCUSDT&granularity=1W&limit=200&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| granularity | String | Yes | K-line particle size<br>- 1m(1 minute)<br>- 3m(3 minutes)<br>- 5m(5 minutes)<br>- 15m(15 minutes)<br>- 30m(30 minutes)<br>- 1H( 1 hour)<br>- 4H(4 hours)<br>- 6H(6 hours)<br>- 12H(12 hours)<br>- 1D(1 day)<br>- 3D ( 3 days)<br>- 1W (1 week)<br>- 1M (monthly line)<br>- 6Hutc (UTC 6 hour line)<br>- 12Hutc (UTC 12 hour line)<br>- 1Dutc (UTC 1-day line)<br>- 3Dutc (UTC 3-day line)<br>- 1Wutc (UTC weekly line)<br>- 1Mutc (UTC monthly line) 
+| startTime | String | No | The start time is to query the k-lines after this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data after this start time (the maximum time query range is 90 days) 
+| endTime | String | No | The end time is to query the k-lines before this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data before this end time (the maximum time query range is 90 days) 
+| limit | String | No | Default: 100, maximum: 200 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695865864944,    "data": [        [            "1687708800000",            "27176.93",            "27177.43",            "27166.93",            "27177.43",            "2990.08",            "81246917.3294"        ],        [            "1688313600000",            "27177.43",            "27177.43",            "24000",            "24001",            "2989.1",            "72450031.0448"        ]    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| index[0] | String | Milliseconds format of timestamp Unix, e.g. 1597026383085 
+| index[1] | String | Entry price 
+| index[2] | String | Highest price 
+| index[3] | String | Lowest price 
+| index[4] | String | Exit price(Only include the finished K line data) 
+| index[5] | String | Trading volume of the base coin 
+| index[6] | String | Trading volume of quote currency
+
+# Get Historical Index Price Candlestick
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Query the historical K-line data of contract index price, and return a maximum of 200 pieces of data.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/history-index-candles
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/history-index-candles?symbol=BTCUSDT&granularity=5m&endTime=1691329771000&limit=100&startTime=1688824171000&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| granularity | String | Yes | K-line particle size<br>- 1m(1 minute)<br>- 3m(3 minutes)<br>- 5m(5 minutes)<br>- 15m(15 minutes)<br>- 30m(30 minutes)<br>- 1H( 1 hour)<br>- 4H(4 hours)<br>- 6H(6 hours)<br>- 12H(12 hours)<br>- 1D(1 day)<br>- 3D ( 3 days)<br>- 1W (1 week)<br>- 1M (monthly line)<br>- 6Hutc (UTC 6 hour line)<br>- 12Hutc (UTC 12 hour line)<br>- 1Dutc (UTC 1-day line)<br>- 3Dutc (UTC 3-day line)<br>- 1Wutc (UTC weekly line)<br>- 1Mutc (UTC monthly line) 
+| startTime | String | No | The start time is to query the k-lines after this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data after this start time (the maximum time query range is 90 days) 
+| endTime | String | No | The end time is to query the k-lines before this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data before this end time (the maximum time query range is 90 days) 
+| limit | String | No | Default: 100, maximum: 200 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695795177323,    "data": [        [            "1691328900000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ],        [            "1691329200000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ]    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| index[0] | String | Milliseconds format of timestamp Unix, e.g. 1597026383085 
+| index[1] | String | Entry price 
+| index[2] | String | Highest price 
+| index[3] | String | Lowest price 
+| index[4] | String | Exit price(Only include the finished K line data) 
+| index[5] | String | Trading volume of the base coin 
+| index[6] | String | Trading volume of quote currency
+
+# Get Historical Mark Price Candlestick
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get historical mark price candle data
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/history-mark-candles
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/history-mark-candles?symbol=BTCUSDT&granularity=5m&endTime=1691329771000&limit=100&startTime=1688824171000&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| granularity | String | Yes | K-line particle size<br>- 1m(1 minute)<br>- 3m(3 minutes)<br>- 5m(5 minutes)<br>- 15m(15 minutes)<br>- 30m(30 minutes)<br>- 1H( 1 hour)<br>- 4H(4 hours)<br>- 6H(6 hours)<br>- 12H(12 hours)<br>- 1D(1 day)<br>- 3D ( 3 days)<br>- 1W (1 week)<br>- 1M (monthly line)<br>- 6Hutc (UTC 6 hour line)<br>- 12Hutc (UTC 12 hour line)<br>- 1Dutc (UTC 1-day line)<br>- 3Dutc (UTC 3-day line)<br>- 1Wutc (UTC weekly line)<br>- 1Mutc (UTC monthly line) 
+| startTime | String | No | The start time is to query the k-lines after this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data after this start time (the maximum time query range is 90 days) 
+| endTime | String | No | The end time is to query the k-lines before this time<br>According to the different time granularity, the corresponding time unit must be rounded down to be queried.<br>The millisecond format of the Unix timestamp, such as 1672410780000<br>Request data before this end time (the maximum time query range is 90 days) 
+| limit | String | No | Default: 100, maximum: 200 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695795362764,    "data": [        [            "1691299500000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ],        [            "1691299800000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ]    ]  }
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| index[0] | String | Milliseconds format of timestamp Unix, e.g. 1597026383085 
+| index[1] | String | Entry price 
+| index[2] | String | Highest price 
+| index[3] | String | Lowest price 
+| index[4] | String | Exit price(Only include the finished K line data) 
+| index[5] | String | Trading volume of the base coin 
+| index[6] | String | Trading volume of quote currency
+
+# Get Open Interest
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get the total positions of a certain trading pair on the platform
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/open-interest
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/open-interest?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695796780343,    "data": {        "openInterestList": [            {                "symbol": "BTCUSDT",                "size": "34278.06"            }        ],        "ts": "1695796781616"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;ts | String | Milliseconds format of data time Unix timestamp, e.g.<br>1672410780000 
+| &gt;openInterestList | String | Open interest data collection 
+| &gt;&gt;symbol | String | Trading pair name 
+| &gt;&gt;size | String | Total open interest of the platform<br>Specific coins, eg.: ETH in ETHUSDT
+
+# Get Next Funding Time
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get the next settlement time of the contract and the settlement period of the contract
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/funding-time
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/funding-time?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695796425096,    "data": [        {            "symbol": "BTCUSDT",            "nextFundingTime": "1695801600000",            "ratePeriod": "8"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Trading pair name 
+| &gt; nextFundingTime | String | Next settlement time(ms) 
+| &gt; ratePeriod | String | Rate settlement cycle<br>The unit is hour.
+
+# Get Mark/Index/Market Prices
+
+20 times/s, frequency is limited according to user ID
+
+### Description[​](#description "Direct link to Description")
+
+Get market/index/mark prices
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/symbol-price
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/symbol-price?productType=usdt-futures&symbol=BTCUSDT"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695793384294,    "data": [        {            "symbol": "BTCUSDT",            "price": "26242",            "indexPrice": "34867",            "markPrice": "25555",            "ts": "1695793390482"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Trading pair name 
+| &gt; price | String | Latest price of the exchange 
+| &gt; indexPrice | String | Index price 
+| &gt; markPrice | String | Mark price 
+| &gt; ts | String | Milliseconds format of current data timestamp Unix, e.g.<br>1672410780000
+
+# Get Historical Funding Rates
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get the historical funding rate of the contract
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/history-fund-rate
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/history-fund-rate?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| pageSize | String | No | Number of queries: Default: 20, maximum: 100. 
+| pageNo | String | No | page number 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695796546319,    "data": [        {            "symbol": "BTCUSDT",            "fundingRate": "0.0005",            "fundingTime": "1695776400000"        },        {            "symbol": "BTCUSDT",            "fundingRate": "0.000013",            "fundingTime": "1695715200000"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;symbol | String | Trading pair name 
+| &gt;fundingRate | String | Funding rate 
+| &gt;fundingTime | String | Settlement time
+
+# Get Current Funding Rate
+
+Frequency limit: 20 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get the current funding rate of the contract
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/current-fund-rate
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/current-fund-rate?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{  "code": "00000",  "msg": "success",  "requestTime": 1743054548546,  "data": [    {      "symbol": "BTCUSDT",      "fundingRate": "0.000068",      "fundingRateInterval": "8",      "nextUpdate": "1743062400000",      "minFundingRate": "-0.003",      "maxFundingRate": "0.003"    }  ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;symbol | String | Trading pair name 
+| &gt;fundingRate | String | Current funding rates 
+| &gt;fundingRateInterval | String | Funding rate settlement period<br>Unit: hour. Enumeration values include 1, 2, 4, 8. 1 represents 1 hour, 2 represents 2 hours, and so on. 
+| &gt;nextUpdate | String | Next update time<br>Unix timestamp in milliseconds 
+| &gt;minFundingRate | String | Lower limit of funding rate<br>Returned in decimal form. 0.025 represents 2.5%. 
+| &gt;maxFundingRate | String | Upper limit of funding rate<br>Returned in decimal form. 0.025 represents 2.5%.
+
+# Get Contract OI Limit
+
+Rate Limit: 10 req/sec/IP
+
+### Description[​](#description "Direct link to Description")
+
+Interface is used to get future contract OI Limit.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/oi-limit
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/oi-limit?productType=usdt-futures&symbol=BTCUSDT"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | No | Trading pair, based on the symbolName, i.e. BTCUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br> 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1741596239587,    "data": [        {            "symbol": "BTCUSDT",            "notionalValue": "100000",            "totalNotionalValue": "200000"        },        {            "symbol": "BCHUSDT",            "notionalValue": "100000",            "totalNotionalValue": "200000"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Product name 
+| &gt; notionalValue | String | Individual User Position Notional Value 
+| &gt; totalNotionalValue | String | Sub-account and Main-account Position Notional Value
+
+# Get Contract Config
+
+Rate Limit: 20 req/sec/IP
+
+### Description[​](#description "Direct link to Description")
+
+Interface is used to get future contract details.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/contracts
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/contracts?productType=usdt-futures&symbol=BTCUSDT"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | No | Trading pair, based on the symbolName, i.e. BTCUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695793701269,    "data": [        {            "symbol": "BTCUSDT",            "baseCoin": "BTC",            "quoteCoin": "USDT",            "buyLimitPriceRatio": "0.9",            "sellLimitPriceRatio": "0.9",            "feeRateUpRatio": "0.1",            "makerFeeRate": "0.0004",            "takerFeeRate": "0.0006",            "openCostUpRatio": "0.1",            "supportMarginCoins": [                "USDT"            ],            "minTradeNum": "0.01",            "priceEndStep": "1",            "volumePlace": "2",            "pricePlace": "1",            "sizeMultiplier": "0.01",            "symbolType": "perpetual",            "minTradeUSDT": "5",            "maxSymbolOrderNum": "999999",            "maxProductOrderNum": "999999",            "maxPositionNum": "150",            "symbolStatus": "normal",            "offTime": "-1",            "limitOpenTime": "-1",            "deliveryTime": "",            "deliveryStartTime": "",            "launchTime": "",            "fundInterval": "8",            "minLever": "1",            "maxLever": "125",            "posLimit": "0.05",            "maintainTime": "1680165535278"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Product name 
+| &gt; baseCoin | String | Base currency<br>Specifically refers to ETH as in ETHUSDT 
+| &gt; quoteCoin | String | Quote currency<br>Specifically refers to USDT as in ETHUSDT 
+| &gt; buyLimitPriceRatio | String | Ratio of bid price to limit price 
+| &gt; sellLimitPriceRatio | String | Ratio of ask price to limit price 
+| &gt; feeRateUpRatio | String | Transaction fee increase ratio 
+| &gt; makerFeeRate | String | Maker rate 
+| &gt; takerFeeRate | String | Taker rate 
+| &gt; openCostUpRatio | String | Opening cost increase ratio 
+| &gt; &gt;supportMarginCoins | List&lt;String&gt; | Supported margin coins 
+| &gt; minTradeNum | String | Minimum opening amount (base currency) 
+| &gt; priceEndStep | String | price step length 
+| &gt; volumePlace | String | Decimal places of the quantity 
+| &gt; pricePlace | String | Decimal places of the price 
+| &gt; sizeMultiplier | String | Quantity multiplier, the quantity of the order must be greater than minTradeNum and is a multiple of sizeMulti. 
+| &gt; symbolType | String | Futures types: perpetual; delivery 
+| &gt; minTradeUSDT | String | Minimum USDT transaction amount 
+| &gt; maxSymbolOrderNum | String | Maximum number of orders held-symbol dimension 
+| &gt; maxProductOrderNum | String | Maximum number of held orders-product type dimension 
+| &gt; maxPositionNum | String | Maximum number of positions held 
+| &gt; symbolStatus | String | Trading pair status<br><code>listed</code> Listing symbol<br><code>normal</code> trade normal<br><code>maintain</code> can't open/close position<br><code>limit_open</code>: can't place orders(can close position)<br><code>restrictedAPI</code>:can't place orders with API<br><code>off</code>: offline 
+| &gt; offTime | String | Removal time, '-1' means normal 
+| &gt; limitOpenTime | String | Time to open positions, '-1' means normal; other values indicate that the symbol is under maintenance or to be maintained and trading is prohibited after the specified time. 
+| &gt; deliveryTime | String | Delivery time 
+| &gt; deliveryStartTime | String | Delivery start time 
+| &gt; deliveryPeriod | String | Delivery period<br><code>this_quarter</code> current quarter<br><code>next_quarter</code> second quarter 
+| &gt; launchTime | String | Listing time 
+| &gt; fundInterval | String | Funding fee settlement cycle, hourly/every 8 hours 
+| &gt; minLever | String | minimum leverage 
+| &gt; maxLever | String | Maximum leverage 
+| &gt; posLimit | String | Position limits 
+| &gt; maintainTime | String | Maintenance time (there will be a value when the status is under maintenance/upcoming maintenance)
+
+# Get Single Account
+
+Frequency limit: 10 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Get account details with the given 'marginCoin' and 'productType'
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/account/account
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/account/account?symbol=btcusdt&productType=USDT-FUTURES&marginCoin=usdt" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | Yes | Margin coin 
+
+Response Example
+
+```
+{  "code": "00000",  "data": {    "marginCoin": "USDT",    "locked": "0",    "available": "13168.86110692",    "crossedMaxAvailable": "13168.86110692",    "isolatedMaxAvailable": "13168.86110692",    "maxTransferOut": "13168.86110692",    "accountEquity": "13178.86110692",    "usdtEquity": "13178.861106922",    "btcEquity": "0.344746495477",    "crossedRiskRate": "0",    "crossedMarginLeverage": "20",    "isolatedLongLever": "20",    "isolatedShortLever": "20",    "marginMode": "crossed",    "posMode": "hedge_mode",    "unrealizedPL": "",    "coupon": "0",    "crossedUnrealizedPL":"23",    "isolatedUnrealizedPL":"0",    "assetMode": "union"  },  "msg": "success",  "requestTime": 1627292199523}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;marginCoin | String | Margin coin 
+| &gt;locked | String | Locked quantity (margin coin). Lockup will be triggered when there is a position to be closed. 
+| &gt;available | String | Available quantity in the account 
+| &gt;crossedMaxAvailable | String | Maximum available balance to open positions under the cross margin mode (margin coin) 
+| &gt;isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) 
+| &gt;maxTransferOut | String | Maximum transferable amount 
+| &gt;accountEquity | String | Account equity (margin coin), including unrealized PnL (based on mark price) 
+| &gt;usdtEquity | String | Account equity in USDT 
+| &gt;btcEquity | String | Account equity in BTC 
+| &gt;crossedRiskRate | String | Risk ratio in cross margin mode 
+| &gt;crossedMarginLeverage | String | Leverage in cross margin mode 
+| &gt;isolatedLongLever | String | Leverage of long positions in isolated margin mode 
+| &gt;isolatedShortLever | String | Leverage of short positions in isolated margin mode 
+| &gt;marginMode | String | Margin mode.<br>isolated – isolated margin mode;<br>crossed – cross margin mode 
+| &gt;posMode | String | Position mode<br>one_way_mode: one-way mode<br>hedge_mode: hedge mode 
+| &gt;unrealizedPL | String | Unrealized PnL 
+| &gt;coupon | String | Trading bonus 
+| &gt;crossedUnrealizedPL | String | unrealizedPL for croessed 
+| &gt;isolatedUnrealizedPL | String | unrealizedPL for isolated 
+| &gt;assetMode | String | Assets mode<br><code>union</code> Multi-assets mode<br><code>single</code> Single-assets mode
+
+# Get Account List
+
+Frequency limit: 10 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Query all account information under a certain product type
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/account/accounts
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/account/accounts?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "data": [        {            "marginCoin": "USDT",            "locked": "0.31876482",            "available": "10575.26735771",            "crossedMaxAvailable": "10580.56434289",            "isolatedMaxAvailable": "10580.56434289",            "maxTransferOut": "10572.92904289",            "accountEquity": "10582.90265771",            "usdtEquity": "10582.902657719473",            "btcEquity": "0.204885807029",            "crossedRiskRate": "0",            "unrealizedPL": "",            "coupon": "0",            "unionTotalMagin": "111,1",            "unionAvailable": "1111.1",            "unionMm": "111",            "assetList": [                {                    "coin": "BTC",                    "balance": "1.2",                    "available": "1.2"                }            ],            "isolatedMargin": "23.43",            "crossedMargin": "34.34",            "crossedUnrealizedPL":"23",            "isolatedUnrealizedPL":"0",            "assetMode": "union"        }    ],    "msg": "success",    "requestTime": 1630901215622}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;marginCoin | String | Margin coin 
+| &gt;locked | String | Locked quantity (margin coin) 
+| &gt;available | String | Available quantity in the account 
+| &gt;crossedMaxAvailable | String | Maximum available balance to open positions under the cross margin mode (margin coin) 
+| &gt;isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) 
+| &gt;maxTransferOut | String | Maximum transferable amount 
+| &gt;accountEquity | String | Account equity (margin coin),<br>Includes unrealized PnL (based on mark price) 
+| &gt;usdtEquity | String | Account equity in USDT 
+| &gt;btcEquity | String | Account equity in BTC 
+| &gt;crossedRiskRate | String | Risk ratio in cross margin mode 
+| &gt;unrealizedPL | String | Unrealized PnL 
+| &gt;coupon | String | Trading bonus 
+| &gt;unionTotalMargin | String | Multi-assets 
+| &gt;unionAvailable | String | Total available 
+| &gt;unionMm | String | Maintenance margin 
+| &gt;assetList | List | Asset list 
+| &gt;&gt;coin | String | Asset 
+| &gt;&gt;balance | String | Balance 
+| &gt;&gt;available | String | Maximum transferable amount<br>Unit: current coin 
+| &gt;isolatedMargin | String | Isolated Margin Occupied 
+| &gt;crossedMargin | String | Crossed Margin Occupied 
+| &gt;crossedUnrealizedPL | String | unrealizedPL for croessed 
+| &gt;isolatedUnrealizedPL | String | unrealizedPL for isolated 
+| &gt;assetMode | String | Assets mode<br><code>union</code> Multi-assets mode<br><code>single</code> Single-assets mode
+
+# Get Subaccount Assets
+
+Frequency limit: 1 time/10s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Query the contract asset information of all sub-accounts. **ND Brokers are not allowed to call this endpoint**
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/account/sub-account-assets
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/account/sub-account-assets?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "data": [        {            "userId": 1234567890,            "assetList": [                {                    "marginCoin": "USDT",                    "locked": "0",                    "available": "23.123",                    "crossedMaxAvailable": "23.123",                    "isolatedMaxAvailable": "23.123",                    "maxTransferOut": "23.123",                    "accountEquity": "23.123",                    "usdtEquity": "23.123",                    "btcEquity": "0.001403612744",                    "unrealizedPL": "0",                    "coupon": ""                }            ]        },        {            "userId": 1234567890,            "assetList": [                {                    "marginCoin": "USDT",                    "locked": "0",                    "available": "11",                    "crossedMaxAvailable": "11",                    "isolatedMaxAvailable": "11",                    "maxTransferOut": "11",                    "accountEquity": "11",                    "usdtEquity": "11",                    "btcEquity": "0.000667722189",                    "unrealizedPL": "0",                    "coupon": ""                }            ]        }    ],    "msg": "success",    "requestTime": 1630901215622}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;userId | String | Sub account userId 
+| &gt;assetList | String | Collection of all futures assets under sub-accounts 
+| &gt;&gt;marginCoin | String | Margin coin 
+| &gt;&gt;locked | String | Locked quantity (margin coin) 
+| &gt;&gt;available | String | Available quantity in the account 
+| &gt;&gt;crossedMaxAvailable | String | Maximum available balance to open positions under the cross margin mode (margin coin) 
+| &gt;&gt;isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) 
+| &gt;&gt;maxTransferOut | String | Maximum transferable amount 
+| &gt;&gt;equity | String | Account equity (margin coin) 
+| &gt;&gt;usdtEquity | String | Account equity in USDT 
+| &gt;&gt;btcEquity | String | Account equity in BTC 
+| &gt;&gt;unrealizedPL | String | PnL of open positions 
+| &gt;&gt;coupon | String | Trading bonus
+
+# Get USDT-M futures Interest history
+
+Frequency limit： 5 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Get USDT-M futures Interest history
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/account/interest-history
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/account/interest-history?productType=usdt-futures&startTime=1725330167000&endTime=1725848567893" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| coin | String | No | coin 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085 
+| limit | String | No | Number of queries: Default: 20, maximum: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1725875190690,    "data": {        "nextSettleTime": "1725876300000",        "borrowAmount": "0",        "borrowLimit": "600000",        "interestList": [            {                "coin": "USDT",                "liability": "100",                "interestFreeLimit": "100",                "interestLimit": "500",                "hourInterestRate": "0.12",                "interest": "0.12",                "cTime": "1725848567893"            }         ],        "endId": "xxxxxxxxxxxxxxx"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| nextSettleTime | String | Next interest payment time 
+| borrowAmount | String | Current USDT-M Futures debt 
+| borrowLimit | String | Loan limit 
+| interestList | List&lt;Object&gt; | interest data 
+| &gt;coin | String | Coin 
+| &gt;liability | String | Total debt 
+| &gt;interestFreeLimit | String | Interest-free amount 
+| &gt;interestLimit | String | Interest-accruing amount 
+| &gt;hourInterestRate | String | Hourly interest rate 
+| &gt;interset | String | interset 
+| &gt;cTime | String | create time 
+| endId | String | This is used when 'idLessThan' is set as a range.
+
+# My Estimated Open Count
+
+Frequency limit: 10 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Get estimated open count per UID
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/account/open-count
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/account/open-count?productType=usdt-futures&symbol=ethusdt&marginCoin=USDT&openPrice=23189.5&leverage=20&openAmount=5000" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | Yes | Margin coin 
+| openAmount | String | Yes | Margin amount 
+| openPrice | String | Yes | Price of the order 
+| leverage | String | No | Leverage<br>default 20 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695812285073,    "data": {        "size": "0.47"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| size | String | Estimated open size
+
+# Set Isolated Position Auto Margin
+
+Frequency limit: 5 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Adjust isolated position auto margin
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/account/set-auto-margin
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/account/set-auto-margin" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "btcusdt","autoMargin": "on","marginCoin": "usdt","holdSide": "long"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| autoMargin | String | Yes | Auto margin flag<br><code>on</code> auto margin on<br><code>off</code> auto margin off 
+| marginCoin | String | Yes | Margin coin must be capitalized 
+| holdSide | String | Yes | Position direction (no need in cross margin mode).<br>long – long position; short – short position 
+
+Response Example
+
+```
+{    "code": "00000",    "data": "success",    "msg": "success",    "requestTime": 1627293357336}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| code | String | ‘00000’: success; others: fail
+
+# Change Leverage
+
+Frequency limit: 5 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Adjust the leverage on the given symbol and productType
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/account/set-leverage
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/account/set-leverage" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol":"btcusdt","productType":"USDT-FUTURES","marginCoin":"usdt","leverage":"20","holdSide":"long"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | Yes | Margin coin must be capitalized 
+| leverage | String | Yes | Leverage 
+| holdSide | String | No | Position direction<br><code>long</code>: long position;<br><code>short</code>: short position<br>In crossed Margin, the holdSide parameter is not required.<br>In Isolated Margin, for one_way_mode, the holdSide parameter is not required. for hedge_mode, the holdSide parameter is required. 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "symbol": "BTCUSDT",        "marginCoin": "USDT",        "longLeverage": "25",        "shortLeverage": "20",        "crossMarginLeverage": "20",        "marginMode": "crossed"    },    "msg": "success",    "requestTime": 1627293049406}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| symbol | String | Trading pair name 
+| marginCoin | String | Margin coin 
+| longLeverage | String | Leverage of long positions 
+| shortLeveage | String | Leverage of short positions 
+| crossMarginLeverage | String | Leverage of 'crossed' margin mode 
+| marginMode | String | Margin mode.<br>isolated – isolated margin mode;<br>crossed – cross margin mode
+
+# Adjust Position Margin
+
+Rate limit: 5 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Add or reduce the margin（**only for isolated margin mode**）
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/account/set-margin
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "btcusdt","productType": "USDT-FUTURES","marginCoin": "usdt","amount": "20","holdSide": "long"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | Yes | Margin coin must be capitalized 
+| holdSide | String | Yes | Position direction<br>long – long position; short – short position 
+| amount | String | Yes | Margin amount, positive means increase, and negative means decrease 
+
+Response Example
+
+```
+{    "code": "00000",    "data": "",    "msg": "success",    "requestTime": 1627293357336}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| code | String | ‘00000’: success; others: fail
+
+# Set USDT-M Futures Asset Mode
+
+Frequency limit: 2 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Set USDT-M Futures Asset Mode
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/account/set-asset-mode
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/account/set-asset-mode" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"productType": "USDT-FUTURES","assetMode": "union"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo 
+| assetMode | String | Yes | Asset mode<br><code>single</code>: Single asset mode<br><code>union</code>: Multi-assets mode 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1725848356656,    "data": "success"}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| data | String | 'success' mean set the asset mode success
+
+# Change Margin Mode
+
+Frequency limit: 5 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+This interface cannot be used when the users have an open position or an order
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/account/set-margin-mode
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin-mode" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "btcusdt","productType": "USDT-FUTURES","marginCoin": "usdt","marginMode": "isolated"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair. e.g. BTCUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | Yes | Margin coin, must be capitalized 
+| marginMode | String | Yes | Margin mode.<br><code>isolated</code>: isolated margin mode<br><code>crossed</code>: crossed margin mode 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "symbol": "BTCUSDT",        "marginCoin": "USDT",        "longLeverage": "25",        "shortLeverage": "20",        "marginMode": "isolated"    },    "msg": "success",    "requestTime": 1627293445916}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| symbol | String | Trading pair name 
+| marginCoin | String | Margin coin 
+| longLeverage | String | Leverage of long positions 
+| shortLeveage | String | Leverage of short positions 
+| marginMode | String | Margin mode.<br><code>isolated</code>: isolated margin mode<br><code>crossed</code>: crossed margin mode
+
+# Change Position Mode
+
+Frequency limit: 5 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Adjust the position mode between 'one way mode' and 'hedge mode'
+
+  
+If you want to change the user's position mode on all symbol contracts, you need to specify hedge mode positions or one-way positions.  
+Note: The position mode can't be adjusted when there is an open position order under the product type. Changes the user's position mode for all symbol futures: hedging mode or one-way mode.When users hold positions or orders on any side of any trading pair in the specific product type, the request may fail.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/account/set-position-mode
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/account/set-position-mode" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"productType": "USDT-FUTURES","posMode": "one_way_mode"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| posMode | String | Yes | Position mode<br>one_way_mode: one-way mode<br>hedge_mode: hedge mode 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "data": {        "posMode": "one_way_mode"    },    "requestTime": 1627293445916}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| posMode | String | Position mode<br>one_way_mode: one-way mode<br>hedge_mode: hedge mode
+
+# Get Account Bills
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Get Account bills(It only supports to get the data within 90days. The older data can be downloaded from web)
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/account/bill
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/account/bill?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| coin | String | No | Currency<br>It's valid only when the <code>businessType</code> is "trans_from_exchange" or "trans_to_exchange" 
+| businessType | String | No | unknown: unknown<br>trans_from_exchange: transfer in from SPOT account<br>trans_to_exchange: transfer out to SPOT account<br>open_long: open long<br>open_short: open short<br>close_long: close long<br>close_short: close short<br>force_close_long: force close long (when burst)<br>force_close_short: force close short (when burst)<br>contract_settle_fee: funding fee<br>append_margin: adjust margin<br>adjust_down_lever_append_margin: reduce leverage add margin<br>reduce_margin: reduce margin<br>auto_append_margin: automatic margin call<br>cash_gift_issue: distribute coupon/gift/card<br>cash_gift_recycle: recycling coupon/gift/card<br>tracking_follow_pay: follower tracking order pay<br>tracking_follow_back: follower tracking order cashback<br>tracking_trader_income: tracking order income<br>burst_long_loss_query: burst close long<br>burst_short_loss_query: burst close short<br>trans_from_contract: transfer in from FUTURE account<br>trans_to_contract: transfer out to FUTURE account<br>trans_from_otc: transfer in from OCT account<br>trans_to_otc: transfer out to OCT account<br>buy: buy in one_way_mode<br>sell: sell in one_way_mode<br>force_buy: force buy in one_way_mode<br>force_sell: force sell in one_way_mode<br>burst_buy: burst buy<br>burst_sell: burst sell<br>bonus_issue: bonus/coupon issue<br>bonus_recycle: bonus/coupon recycle<br>bonus_expired: bonus/coupon expired<br>delivery_long: delivery future settle long<br>delivery_short: delivery future settle short<br>trans_from_cross: transfer in from CROSS account<br>trans_to_cross: transfer out to CROSS account<br>trans_from_isolated: transfer in from ISOLATED account<br>trans_to_isolated: transfer out to ISOLATED account 
+| onlyFunding | String | No | The following four types of non-financial businessType will be excluded.,default：no，<br><code>yes</code>：excluded<br><code>no</code>: included;<br>The following four businessType ：<code>append_margin</code>,<code>adjust_down_lever_append_margin</code>, <code>reduce_margin</code>, <code>auto_append_margin</code> 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start time, ms<br>The interval between the <code>startTime</code> and the <code>endTime</code> should be &lt;= 30 days 
+| endTime | String | No | End time, ms<br>The interval between the <code>startTime</code> and the <code>endTime</code> should be &lt;= 30 days 
+| limit | String | No | Page size, max 100, default 20 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695809161807,    "data": {        "bills": [            {                "billId": "1",                "symbol": "BTCUSDT",                "amount": "-0.004992",                "fee": "0",                "feeByCoupon": "",                "businessType": "contract_settle_fee",                "coin": "USDT",                "balance":"232.21",                "cTime": "1695715200654"            },            {                "billId": "2",                "symbol": "ETHUSDT",                "amount": "0",                "fee": "-0.222012",                "feeByCoupon": "",                "businessType": "open_long",                "coin": "USDT",                "balance":"232.21",                "cTime": "1695714563516"            }        ],        "endId": "2"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| bills | Array | Bill list 
+| endId | String | The final transaction order ID.<br>This is used when idLessThan/idGreaterThan is set as a range. 
+| &gt;billId | String | Bill ID 
+| &gt;symbol | String | Symbol 
+| &gt;amount | String | Amount 
+| &gt;fee | String | Fee 
+| &gt;feeByCoupon | String | Fee paid by the coupon 
+| &gt;businessType | String | unknown: unknown<br>trans_from_exchange: transfer in from SPOT account<br>trans_to_exchange: transfer out to SPOT account<br>open_long: open long<br>open_short: open short<br>close_long: close long<br>close_short: close short<br>force_close_long: force close long (when burst)<br>force_close_short: force close short (when burst)<br>contract_settle_fee: funding fee<br>append_margin: adjust margin<br>adjust_down_lever_append_margin: reduce leverage add margin<br>reduce_margin: reduce margin<br>auto_append_margin: automatic margin call<br>cash_gift_issue: distribute coupon/gift/card<br>cash_gift_recycle: recycling coupon/gift/card<br>tracking_follow_pay: follower tracking order pay<br>tracking_follow_back: follower tracking order cashback<br>tracking_trader_income: tracking order income<br>burst_long_loss_query: burst close long<br>burst_short_loss_query: burst close short<br>trans_from_contract: transfer in from FUTURE account<br>trans_to_contract: transfer out to FUTURE account<br>trans_from_otc: transfer in from OCT account<br>trans_to_otc: transfer out to OCT account<br>buy: buy in one_way_mode<br>sell: sell in one_way_mode<br>force_buy: force buy in one_way_mode<br>force_sell: force sell in one_way_mode<br>burst_buy: burst buy<br>burst_sell: burst sell<br>bonus_issue: bonus/coupon issue<br>bonus_recycle: bonus/coupon recycle<br>bonus_expired: bonus/coupon expired<br>delivery_long: delivery future settle long<br>delivery_short: delivery future settle short<br>trans_from_cross: transfer in from CROSS account<br>trans_to_cross: transfer out to CROSS account<br>trans_from_isolated: transfer in from ISOLATED account<br>trans_to_isolated: transfer out to ISOLATED account 
+| &gt;coin | String | Coin: USDT 
+| &gt;balance | String | Balance 
+| &gt;cTime | String | Created Time, ms
+
+# Get Position Tier
+
+Frequency limit: 10 times/1s (IP)
+
+### Description[​](#description "Direct link to Description")
+
+Get the position gradient configuration of a certain trading pair
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/query-position-lever
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/query-position-lever?symbol=BTCUSDT&productType=usdt-futures"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| symbol | String | Yes | Trading pair 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695796884470,    "data": [        {            "symbol": "BTCUSDT",            "level": "1",            "startUnit": "0",            "endUnit": "50000",            "leverage": "125",            "keepMarginRate": "0.004"        },        {            "symbol": "BTCUSDT",            "level": "2",            "startUnit": "50000",            "endUnit": "200000",            "leverage": "100",            "keepMarginRate": "0.005"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;&gt;symbol | String | Trading pair name 
+| &gt;&gt;level | String | Tier 
+| &gt;&gt;startUnit | String | Minimum value 
+| &gt;&gt;endUnit | String | Maximum value 
+| &gt;&gt;leverage | String | Leverage 
+| &gt;&gt;keepMarginRate | String | Maintenance margin rate: The margin amount corresponds to the position quantity tier. When the margin rate of a position is less than the maintenance margin rate, it will trigger a forced partial liquidation or full liquidation.
+
+# Get Single Position
+
+Rate limit: 10 requests/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Returns position information of a single symbol, response including estimated liquidation price.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/position/single-position
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/position/single-position?symbol=btcusdt&productType=USDT-FUTURES&marginCoin=usdt" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| symbol | String | Yes | Trading pair, e.g. BTCUSDT 
+| marginCoin | String | Yes | Margin coin, capitalized, e.g. USDT 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 21312312312321,    "data": [        {            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openDelegateSize": "0.01",            "marginSize": "9.6695050093373343",            "available": "0.01",            "locked": "0.09",            "total": "0.01",            "leverage": "20",            "achievedProfits": "0",            "openPriceAvg": "25000",            "marginMode": "isolated",            "posMode": "hedge_mode",            "unrealizedPL": "1",            "liquidationPrice": "24144.1124161806977798",            "keepMarginRate": "0.004",            "markPrice": "25100",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "marginRatio": "0.1082149545822005",            "assetMode":"single",            "uTime": "1691382137999",            "autoMargin": "on",            "cTime": "1691382137448"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;symbol | String | Trading pair name 
+| &gt;marginCoin | String | Margin coin 
+| &gt;holdSide | String | Position direction<br><code>long</code>: long position<br><code>short</code>: short position 
+| &gt;openDelegateSize | String | Amount to be filled of the current order (base coin) 
+| &gt;marginSize | String | Margin amount (margin coin) 
+| &gt;available | String | Available amount for positions (base currency) 
+| &gt;locked | String | Frozen amount in the position (base currency) 
+| &gt;total | String | Total amount of all positions (available amount + locked amount) 
+| &gt;leverage | String | Leverage 
+| &gt;achievedProfits | String | Realized PnL(exclude funding fee and transaction fee) 
+| &gt;openPriceAvg | String | Average entry price 
+| &gt;marginMode | String | Margin mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| &gt;posMode | String | Position mode<br><code>one_way_mode</code>: positions in one-way mode<br><code>hedge_mode</code>: positions in hedge-mode 
+| &gt;unrealizedPL | String | Unrealized PnL 
+| &gt;liquidationPrice | String | Estimated liquidation price<br>If the value &lt;= 0, it means the position is at low risk and there is no liquidation price at this time 
+| &gt;keepMarginRate | String | Tiered maintenance margin rate 
+| &gt;markPrice | String | Mark price 
+| &gt;marginRatio | String | Maintenance margin rate (MMR), 0.1 represents 10% 
+| &gt;breakEvenPrice | String | Position breakeven price 
+| &gt;totalFee | String | Funding fee, the accumulated value of funding fee during the position,The initial value is empty, indicating that no funding fee has been charged yet. 
+| &gt;deductedFee | String | Deducted transaction fees: transaction fees deducted during the position 
+| &gt;cTime | String | Creation time, timestamp, milliseconds 
+| &gt;assetMode | String | <code>single</code> : single asset mode<br><code>union</code> multi-Assets mode 
+| &gt;uTime | String | Last updated time, timestamp, milliseconds 
+| &gt;autoMargin | String | Auto Margin<br><code>on</code> Auto Margin Call<br><code>off</code> No Auto Margin Call<br>
+
+# Get All Positions
+
+Rate limit: 5 requests/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Returns information about all current positions with the given `productType`
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/position/all-position
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/position/all-position?productType=USDT-FUTURES&marginCoin=USDT" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | No | Margin coin, capitalized. e.g. USDT 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 21312312312321,    "data": [        {            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openDelegateSize": "0.01",            "marginSize": "9.6695050093373343",            "available": "0.01",            "locked": "0.09",            "total": "0.01",            "leverage": "20",            "achievedProfits": "0",            "openPriceAvg": "25000",            "marginMode": "isolated",            "posMode": "hedge_mode",            "unrealizedPL": "1",            "liquidationPrice": "24144.1124161806977798",            "keepMarginRate": "0.004",            "markPrice": "25100",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "takeProfit": "3",            "stopLoss": "2",            "takeProfitId": "11111111",            "stopLossId": "11111111",            "marginRatio": "0.1082149545822005",            "assetMode":"single",            "cTime": "1691382137448",            "uTime": "1691382137999"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt;symbol | String | Trading pair name 
+| &gt;marginCoin | String | Margin coin 
+| &gt;holdSide | String | Position direction<br><code>long</code>: long position<br><code>short</code>: short position 
+| &gt;openDelegateSize | String | Amount to be filled of the current order (base coin) 
+| &gt;marginSize | String | Margin amount (margin coin) 
+| &gt;available | String | Available amount for positions (base currency) 
+| &gt;locked | String | Frozen amount in the position (base currency) 
+| &gt;total | String | Total amount of all positions (available amount + locked amount) 
+| &gt;leverage | String | Leverage 
+| &gt;achievedProfits | String | Realized PnL(exclude the funding fee and transaction fee) 
+| &gt;openPriceAvg | String | Average entry price 
+| &gt;marginMode | String | Margin mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| &gt;posMode | String | Position mode<br><code>one_way_mode</code> positions in one-way mode<br><code>hedge_mode</code> positions in hedge-mode 
+| &gt;unrealizedPL | String | Unrealized PnL 
+| &gt;liquidationPrice | String | Estimated liquidation price<br>If the value &lt;= 0, it means the position is at low risk and there is no liquidation price at this time 
+| &gt;keepMarginRate | String | Tiered maintenance margin rate 
+| &gt;markPrice | String | Mark price 
+| &gt;marginRatio | String | Maintenance margin rate (MMR), 0.1 represents 10% 
+| &gt;breakEvenPrice | String | Position breakeven price 
+| &gt;totalFee | String | Funding fee, the accumulated value of funding fee during the position,The initial value is empty, indicating that no funding fee has been charged yet. 
+| &gt;takeProfit | String | Take profit price 
+| &gt;stopLoss | String | Stop loss price 
+| &gt;takeProfitId | String | Take profit order ID 
+| &gt;stopLossId | String | Stop loss order ID 
+| &gt;deductedFee | String | Deducted transaction fees: transaction fees deducted during the position 
+| &gt;cTime | String | Creation time, timestamp, milliseconds<br>The set is in descending order from the latest time. 
+| &gt;assetMode | String | <code>single</code> : single asset mode<br><code>union</code> multi-Assets mode 
+| &gt;uTime | String | Last updated time, timestamp, milliseconds
+
+# Get Historical Position
+
+20times/S （uid）
+
+### Description[​](#description "Direct link to Description")
+
+Check position history (Only check the data within 3 months)
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/position/history-position
+
+Request
+
+```
+curl "https://api.bitget.com/api/v2/mix/position/history-position?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | No | Trading pair 
+| productType | String | No | Product type, default:<code>USDT-FUTURES</code>, if symbol parameter reuqest, then this parameter will not take effect<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start time(timestamp in milliseconds)<br>timestampis Unix time in milliseconds，for example 1597026383085<br>（Wildest time range is 3 months，if this field is empty then the default time range is 3 months.） 
+| endTime | String | No | Start time (timestamp in milliseconds)<br>timestampis Unix time in milliseconds，for example 1597026383085<br>（Wildest time range is 3 months，if this field is empty then the default time range is 3 months.） 
+| limit | String | No | Default 20 Max 100 
+
+Response
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1312312312321,    "data": {        "list":[{            "positionId": "xxxxxxxxxxx",            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openAvgPrice": "32000",            "closeAvgPrice": "32500",            "marginMode": "isolated",            "openTotalPos": "0.01",            "closeTotalPos": "0.01",            "pnl": "14.1",            "netProfit": "12.1",            "totalFunding": "0.1",            "openFee": "0.01",            "closeFee": "0.01",            "cTime": "1988824171000",            "uTime": "1988824171000"        }],        "endId":"23423432423423234"    }}
+```
+
+### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| list | Array | Historical Position Data 
+| &gt;positionId | String | History position ID 
+| &gt;symbol | String | Trading pair 
+| &gt;marginCoin | String | Margin coin 
+| &gt;holdSide | String | Position direction<br>long: long position<br>short: short position 
+| &gt;openAvgPrice | String | Average price of opening position 
+| &gt;closeAvgPrice | String | Average price of closing position 
+| &gt;marginMode | String | Margin Mode<br><code>isolated</code>: Isolated margin<br><code>crossed</code>: Cross margin 
+| &gt;openTotalPos | String | Accumulated amount of long positions 
+| &gt;closeTotalPos | String | Accumulated amount of short positions 
+| &gt;pnl | String | realized profit and loss 
+| &gt;netProfit | String | net profit 
+| &gt;totalFunding | String | Accumulated funding costs 
+| &gt;openFee | String | Total handling fee for position opening 
+| &gt;closeFee | String | Total handling fee for position closing 
+| &gt;uTime | String | Last update time Timestamp milliseconds 
+| &gt;cTime | String | Create time Timestamp milliseconds 
+| endId | String | ID of the last data。id value is tracking No and use it to check based on idLessThan
+
+# Place Order
+
+*   Rate limit: 10 requests/second/UID
+*   Rate limit: 1 request/second/UID for **copy trading traders**
+
+### Description[​](#description "Direct link to Description")
+
+*   Ignore the `tradeSide` parameter when position mode is in `one-way-mode`
+*   In “hedge-mode”, when there is limit close order occupying the position, if the size of next market close order and limit close orders exceeds the position size, it will return an “insufficient position error” instead of cancelling the current limit order and executing the market order
+*   **hedge position mode**: **Open long**: "side"=`buy`, "tradeSide"=`open`; **Close long**: "side"=`buy`, "tradeSide"=`close`; **Open short**: "side"=`sell`, "tradeSide"=`open`; **Close short**: "side"=`sell`, "tradeSide"=`close`; **one-way position mode**: "side"=`buy` and `sell`, tradeSide: ignore
+*   In `one-way-mode` position mode, if the total size of the new reduce-only order and the existing reduce-only orders exceeds the position size, the system will cancel the existing reduce-only orders sequentially based on their creation order until the total size of the new and existing reduce-only orders is less than or equal to the position size. Additionally, the response for the latest reduce-only order request will not include an `orderId`. You can use the `clientOid` set in the request to query order details or retrieve the orderId from the current pending orders.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/place-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/place-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{ "symbol": "ETHUSDT", "productType": "USDT-FUTURES", "marginMode": "isolated", "marginCoin": "USDT", "size": "0.1", "price": "2000", "side": "sell", "tradeSide": "open", "orderType": "limit", "force": "gtc", "clientOid": "121211212122" }'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginMode | String | Yes | Position mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: crossed margin 
+| marginCoin | String | Yes | Margin coin(capitalized) 
+| size | String | Yes | Amount (base coin)<br>To get the decimal places of size:<a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts" target="_blank" rel="noopener noreferrer">Get Contract Config</a> 
+| price | String | No | Price of the order.<br>Required if the "orderType" is <code>limit</code><br>To get the decimal places of size:<a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts" target="_blank" rel="noopener noreferrer">Get Contract Config</a> 
+| side | String | Yes | Trade side<br><code>buy</code>: Buy(<strong>one-way-mode</strong>); Long position direction(<strong>hedge-mode</strong>)<br><code>sell</code>: Sell(<strong>one-way-mode</strong>); Short position direction(<strong>hedge-mode</strong>) 
+| tradeSide | String | No | Trade type<br><strong>Only required in hedge-mode</strong><br><code>open</code>: Open position<br><code>close</code>: Close position 
+| orderType | String | Yes | Order type<br><code>limit</code>: limit orders<br><code>market</code>: market orders 
+| force | String | No | Order expiration date.<br>Required if the orderType is <code>limit</code><br><code>ioc</code>: Immediate or cancel<br><code>fok</code>: Fill or kill<br><code>gtc</code>: Good till canceled(<strong>default value</strong>)<br><code>post_only</code>: Post only 
+| clientOid | String | No | Customize order ID 
+| reduceOnly | String | No | Whether or not to just reduce the position: <code>YES</code>, <code>NO</code><br>Default: <code>NO</code>.<br>Applicable only in <strong>one-way-position</strong> mode 
+| presetStopSurplusPrice | String | No | Take-profit value<br>No take-profit is set if the field is empty. 
+| presetStopLossPrice | String | No | Stop-loss value<br>No stop-loss is set if the field is empty. 
+| stpMode | String | No | STP Mode(Self Trade Prevention)<br><code>none</code>: not setting STP(default value)<br><code>cancel_taker</code>: cancel taker order<br><code>cancel_maker</code>: cancel maker order<br><code>cancel_both</code>: cancel both of taker and maker orders 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695806875837,    "data": {        "clientOid": "121211212122",        "orderId": "121211212122"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Order ID 
+| clientOid | String | Customize order ID
+
+# Reversal
+
+*   Rate limit: 10 req/sec/UID
+*   Rate limit: 1 req/sec/UID for **copy trading traders**
+
+### Description[​](#description "Direct link to Description")
+
+*   `side` and `tradeSide`：
+    *   In `one-way-mode`, do NOT add the `tradeSide` parameter in request
+    *   In `hedge-mode`, `tradeSide` is required
+        *   Reversal the current long position and open a short position: `side`\=buy, `tradeSide`
+        *   Reversal the current short position and open a long position: `side`\=sell, `tradeSide`
+*   `size`: represents the reversal size
+    *   In `one-way-mode`, the whole position will be reversed if no `size` was set in the request
+    *   In `hedge-mode`:
+        *   If the `size` set is less than the current position size, the `size` of position will be closed and the same size reversal position will be opened For example, for a ETHUSDT size 20 long position, if the `size` was set 3 in request, then the current long position size will be reduced to 17, and a new size 3 short position will be opened
+        *   If the `size` set is equal to or more than the current position size, the whole position will be reversed For example, for a ETHUSDT size 10 long position, if the `size` was set 10 or 11 in request, then the current position will be closed and a new 10 size short position will be opened
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/click-backhand
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/click-backhand" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "symbol": "ethusdt",     "productType": "USDT-FUTURES",     "marginCoin": "usdt",     "size": "30",     "clientOid": "12345"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| marginCoin | String | Yes | marginCoin e.g: USDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| size | String | Yes | Amount 
+| side | String | No | Order direction<br>buy: Buy<br>sell: Sell 
+| tradeSide | String | No | Direction<br>Required in open and close (hedge mode) position .<br>For one-way positions, this field will be ignored<br>Open and Close<br>Notes:<br>For open long, fill in"Buy"; tradeSide should be "Open"<br>For open short, fill in "Sell"; tradeSide should be "Open"<br>For close long, fill in "Buy"; tradeSide should be "Close"<br>For close short, fill in "Sell"; tradeSide should be "Close" 
+| clientOid | String | No | Customize order ID 
+| marginCoin | String | Yes | margin coin 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695806875837,    "data": {        "clientOid": "121211212122",        "orderId": "1"    }}
+```
+
+### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Order ID 
+| clientOid | String | Customize order ID
+
+# Batch Order
+
+*   Rate limit: 5 requests/second/UID
+*   Rate limit: 1 request/second/UID for **copy trading traders**
+
+### Description[​](#description "Direct link to Description")
+
+*   Supports TP/SL feature. If the current underlying asset does not exist in the position, it is intended to preset the TP/SL. If the current underlying exists in the position, it is intended to modify the TP/SL
+*   Ignore the `tradeSide` parameter when position mode is in `one-way-mode`
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/batch-place-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/batch-place-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{     "symbol": "BTCUSDT",     "productType": "usdt-futures",     "marginMode": "crossed",     "marginCoin": "USDT",     "orderList": [{             "size": "1",             "side": "buy",             "tradeSide": "open",             "orderType": "market",             "force": "gtc",             "clientOid": "123456",             "reduceOnly": "NO",             "presetStopSurplusPrice": "20000",             "presetStopLossPrice": "10000"         }     ] }'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | Yes | Margin coin, must be capitalized 
+| marginMode | String | Yes | Position mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: crossed margin 
+| orderList | List&lt;String&gt; | Yes | Order list, maximum length: 50 
+| &gt;size | String | Yes | Amount 
+| &gt;price | String | No | Price of the order.<br>Required if the order type is <code>limit</code> 
+| &gt;side | String | Yes | Order direction<br><code>buy</code>: Buy<br><code>sell</code>: Sell 
+| &gt;tradeSide | String | No | Direction<br><strong>Only required in hedge-mode</strong><br>Open and Close Notes:<br>For open long, <code>side</code> fill in"buy"; <code>tradeSide</code> should be "Open"<br>For open short, <code>side</code> fill in "sell"; <code>tradeSide</code> should be "open"<br>For close long, <code>side</code> fill in "buy"; <code>tradeSide</code> should be "close"<br>For close short, <code>side</code> fill in "sell";<code>tradeSide</code> should be "close" 
+| &gt;orderType | String | Yes | Order type<br><code>limit</code>: limit orders<br><code>market</code>: market orders 
+| &gt;force | String | No | Order expiration date.<br>Required if the orderType is <code>limit</code>, default value is <code>gtc</code><br><code>ioc</code>: Immediate or cancel<br><code>fok</code>: Fill or kill<br><code>gtc</code>: Good till canceled<br><code>post_only</code>: Post only 
+| &gt;clientOid | String | No | Custom order ID 
+| &gt;reduceOnly | String | No | Whether or not to just reduce the position: <code>YES</code>, <code>NO</code><br>Default: <code>NO</code><br>Applicable only in <strong>one-way-position</strong> mode 
+| &gt;presetStopSurplusPrice | String | No | Take-profit value<br>No take-profit is set if the field is empty. 
+| &gt;presetStopLossPrice | String | No | Stop-loss value<br>No stop-loss is set if the field is empty. 
+| &gt;stpMode | String | No | STP Mode, default <code>none</code><br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": []    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| successList | List&lt;Object&gt; | Successful order list 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| failureList | List&lt;Object&gt; | Failed order list 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| &gt;errorMsg | String | Failure reason 
+| &gt;errorCode | String | Failure code
+
+# Modify Order
+
+Speed limit is 10 times/s for average users. Frequency limit imposed according to user ID
+
+### Description[​](#description "Direct link to Description")
+
+Interface for order modification, used to modify an pending order, such as its TP/SL and/or price/size.
+
+*   Modifying size and price will cancel the old order; then create a **new order** asynchronously, modify the preset TPSL will not cancel the old order.
+*   Modifying size and price, please pass in both, not just one of them
+*   Modify the order price, size and preset TPSL according to orderId or clientOId
+*   It is only allowed to modify the new status limit order. If the size, price and TPSL all is set in the request, then the TPSL will not work
+*   Modify the limit order price and size, please be sure to provide newClientOid, because the orderId of the new order cannot be returned synchronously, so you need to use newClientOid to help you query order information
+*   Modifying the order size needs to meet the minimum order quantity
+*   If you only modify the TPSL, please do not pass price and size. If you only pass one of TP or SL, the other one will be cancelled
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/modify-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{ "orderId": "1","newClientOid": "1212112121223", "symbol": "ETHUSDT", "productType": "usdt-futures", "marginCoin": "USDT", "newSize": "0.04", "newPrice": "1800.00" }'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| clientOid | String | No | Customize order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| newClientOid | String | Yes | New customized order ID after order modification 
+| newSize | String | No | Amount of the modified transaction<br>The amount stays unchanged if the field if left blank. 
+| newPrice | String | No | Modified price for placing new orders.<br>1. When the existing order type is Limit, the original price will be maintained if the field is left empty.<br>2. When the existing order type is Limit market, the field should not be set. 
+| newPresetStopSurplusPrice | String | No | Modifying take-profit<br>1. If the original order has take-profit set and the field is empty, the original value will be kept.<br>2. If the original order has take-profit set and the field is filled in with a value, TP will be updated; if the original order has take-profit set and the field is not set, a new take-profit value will be added.<br>If there was a TP value and a 0 is filled in the filled, the existing TP will be deleted. 
+| newPresetStopLossPrice | String | No | Modifying stop-loss<br>1. If the original order has stop-loss set and the field is empty, the original value will be kept.<br>2. If the original order has stop-loss set and the field is filled in with a value, TP will be updated; if the original order has stop-loss set and the field is not set, a new stop-loss value will be added.<br>If there was a SL value and a 0 is filled in the filled, the existing SL will be deleted. 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#121212121212"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Order ID 
+| clientOid | String | Customize order ID
+
+# Cancel Order
+
+Frequency limit: 10 times/1s
+
+### Description[​](#description "Direct link to Description")
+
+Cancel a pending order
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/cancel-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "orderId": "1",    "symbol": "BTCUSDT",    "productType": "usdt-futures",    "marginCoin": "USDT"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Trading pair 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | No | Margin coin must be capitalized 
+| orderId | String | No | Order ID<br>Either orderId or clientOid is required.<br>If both are present, orderId prevails. 
+| clientOid | String | No | Customize order ID<br>Either orderId or clientOid is required.<br>If both are present, orderId prevails. 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "orderId": "123",        "clientOid": ""    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Order ID 
+| clientOid | String | Client customized ID
+
+# Batch Cancel
+
+Speed limit is 10 times/s for average users. Frequency limit imposed according to user ID
+
+### Description[​](#description "Direct link to Description")
+
+Order cancelling interface, can be used to cancel by product type and trading pair.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/batch-cancel-orders
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/batch-cancel-orders" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "symbol": "BTCUSDT",    "productType": "usdt-futures",    "marginCoin": "USDT",    "orderIdList": [        {            "orderId":"121211212122"        }    ]}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderIdList | List | No | Order ID list.maximum length: 50<br>If filled in, symbol must not be null and must be aligned with symbol/productType. 
+| &gt;orderId | String | No | Order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| &gt;clientOid | String | No | Customize order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| symbol | String | No | Trading pair, e.g. ETHUSDT<br>It's required when <code>orderIdList</code> is set 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | No | Margin coin must be capitalized 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": [            {                "orderId": "232",                "clientOid": "321342",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| successList | List&lt;Object&gt; | The collection of successfully cancelled orders. 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| failureList | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| &gt;errorMsg | String | Failure reason 
+| &gt;errorCode | String | Error code
+
+# Flash Close Position
+
+Frequency limit: 1 time/1s (User ID)
+
+### Description[​](#description "Direct link to Description")
+
+close position at market price
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/close-positions
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/close-positions" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{"symbol": "BTCUSDT","productType":"USDT-FUTURES","holdSide": "long"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | No | Trading pair 
+| holdSide | String | Optional | Position direction<br>1. In one-way position mode(buy or sell): This field should be left blank. Will be ignored if filled in.<br>2. In hedge-mode position(open or close): All positions will be closed if the field is left blank; Positions of the specified direction will be closed is the field is filled in.<br><code>long</code>: Long position; <code>short</code>: Short position 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",     "data": {        "successList": [            {                "orderId": "123",                 "clientOid": "xxxxx",                "symbol": "BTCUSDT"            }        ],         "failureList": [            {                "orderId": "1234",                 "clientOid": "321",                 "symbol": "BTCUSDT",                "errorMsg": "xxx",                 "errorCode": "xxxx"            }        ]    },     "msg": "success",     "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| successList | List&lt;Object&gt; | The collection of successfully closed orders 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| &gt;symbol | String | The Symbol 
+| failureList | List&lt;Object&gt; | The collection of unsuccessfully closed orders<br>The close order may fail when the pair is in delivery or in risk control handling 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| &gt;symbol | String | The Symbol 
+| &gt;errorMsg | String | Failure reason 
+| &gt;errorCode | String | Failure code
+
+# Get Order Detail
+
+Frequency limit: 10 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Get order detail
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/detail
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/detail?symbol=ETHUSDT&orderId=1&clientOid=1&productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | Yes | Product ID must be capitalized 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| orderId | String | No | Order ID<br>Either 'orderId' or 'clientOid' is required. 
+| clientOid | String | No | Custom order ID<br>Either 'orderId' or 'clientOid' is required. 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695823012595,    "data": {        "symbol": "ethusdt",        "size": "2",        "orderId": "123456",        "clientOid": "77777",        "baseVolume": "2",        "priceAvg": "1900",        "fee": "",        "price": "1900",        "state": "filled",        "side": "buy",        "force": "gtc",        "totalProfits": "2112",        "posSide": "long",        "marginCoin": "usdt",        "presetStopSurplusPrice": "1910",        "presetStopLossPrice": "1890",        "quoteVolume": "1900",        "orderType": "limit",        "leverage": "20",        "marginMode": "cross",        "reduceOnly": "yes",        "enterPointSource": "api",        "tradeSide": "",        "posMode": "one_way_mode",        "orderSource": "normal",        "cancelReason": "",        "cTime": "1627300098776",        "uTime": "1627300098776"    }}
+```
+
+### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| symbol | String | Trading pair 
+| size | String | Amount 
+| orderId | String | Order ID 
+| clientOid | String | Customize order ID 
+| baseVolume | String | Amount of coins traded 
+| priceAvg | String | Average price 
+| fee | String | Transaction fee 
+| price | String | Order price 
+| status | String | Order status<br><code>live</code>: New order, waiting for a match in orderbook<br><code>partially_filled</code>: Partially filled<br><code>filled</code>: All filled<br><code>canceled</code>: the order is cancelled 
+| side | String | Direction<br><code>buy</code><br><code>sell</code> 
+| force | String | Order expiration date<br><code>ioc</code>: Immediate or cancel<br><code>fok</code>: Fill or kill<br><code>gtc</code>: Good till canceled<br><code>post only</code>: post only orders 
+| totalProfits | String | Total PnL 
+| posSide | String | Position direction<br><code>long</code>: hedge mode long position<br><code>short</code>: hedge mode short position<br><code>net</code>: one-way position 
+| marginCoin | String | Margin coin 
+| presetStopSurplusPrice | String | Set TP 
+| presetStopLossPrice | String | Set SL 
+| quoteVolume | String | Trading amount in quoting coin 
+| orderType | String | Order type<br><code>limit</code><br><code>market</code> 
+| leverage | String | Leverage 
+| marginMode | String | Margin mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| reduceOnly | String | Whether or not to just reduce the position.<br><code>YES</code><br><code>NO</code> 
+| enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| tradeSide | String | Direction<br>open (open and close mode)<br>close (open and close mode)<br>reduce_close_long Liquidate partial long positions<br>reduce_close_short Liquidate partial short positions<br>offset_close_long Liquidate partial long positions for netting<br>offset_close_short Liquidate partial short positions for netting<br>burst_close_long Liquidate long positions<br>burst_close_short Liquidate short positions<br>delivery_close_long Close long positions<br>delivery_close_short Close short positions 
+| posMode | String | Position mode<br><code>one_way_mode</code>: one-way position<br><code>hedge_mode</code>: two-way position 
+| orderSource | String | Order source<br>normal: Normal order<br>market: market order<br>profit_market: Market TP order<br>loss_market: Market SL order<br>Trader_delegate: Elite trade order<br>trader_profit: Trader takes profit<br>trader_loss: Trader stops loss<br>reverse: Reversed orders<br>trader_reverse: Reversed elite trades<br>profit_limit: Take-profit limit order<br>loss_limit: Stop-loss limit order<br>liquidation: Liquidation order<br>delivery_close_long: close long positions<br>delivery_close_short: close short positions<br>pos_profit_limit: Position take-profit limit order<br>pos_profit_market: Position take-profit market order<br>pos_loss_limit: Position stop-loss limit order<br>pos_loss_market: Position stop-loss market order 
+| cancelReason | String | Cancel reason<br><code>normal_cancel</code>: Normal cancel<br><code>stp_cancel</code>: Cancelled by STP 
+| cTime | String | Creation time, ms 
+| uTime | String | Update time, ms
+
+# Get Order Fill Details
+
+Speed limit is 10 times/s for average users. Frequency limit imposed according to user ID
+
+### Description[​](#description "Direct link to Description")
+
+Get order fill details
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/fills
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/fills?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Order ID 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| idLessThan | String | No | Requests the content on the page before the <code>tradeId</code> (older data). 
+| startTime | String | No | Start time (time stamp in milliseconds)<br>(The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )<br>(For Managed Sub-Account, the StartTime cannot be earlier than the binding time) 
+| endTime | String | No | End time (time stamp in milliseconds)<br>(The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. ) 
+| limit | String | No | Number of queries: Default: 100, maximum: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "fillList": [            {                "tradeId": "123",                "symbol": "ethusdt",                "orderId": "121212",                "price": "1900",                "baseVolume": "1",                "feeDetail": [                    {                        "deduction": "yes",                        "feeCoin": "BGB",                        "totalDeductionFee": "-0.017118519726",                        "totalFee": "-0.017118519726"                    }                ],                "side": "buy",                "quoteVolume": "1902",                "profit": "102",                "enterPointSource": "api",                "tradeSide": "close",                "posMode": "hedge_mode",                "tradeScope": "taker",                "cTime": "1627293509612"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| fillList | List&lt;Object&gt; | Transaction details 
+| &gt;tradeId | String | Transaction id 
+| &gt;symbol | String | Trading pair 
+| &gt;orderId | String | Order no. 
+| &gt;price | String | Order price 
+| &gt;baseVolume | String | Amount of coins traded 
+| &gt;feeDetail | String | Transaction fee 
+| &gt;&gt;deduction | String | Whether or not to deduct (vouchers) 
+| &gt;&gt;feeCoin | String | Crypto ticker 
+| &gt;&gt;totalDeductionFee | String | Total transaction fee discount 
+| &gt;&gt;totalFee | String | Total transaction fee 
+| &gt;side | String | Type of transaction<br>buy: Buy<br>sell: Sell 
+| &gt;quoteVolume | String | Trading amount in quote currency 
+| &gt;profit | String | Profit 
+| &gt;enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt;tradeSide | String | Direction<br><code>close</code>: Close (open and close mode)<br><code>open</code>: Open (open and close mode)<br><code>reduce_close_long</code>: Liquidate partial long positions for hedge position mode<br><code>reduce_close_short</code>：Liquidate partial short positions for hedge position mode<br><code>burst_close_long</code>：Liquidate long positions for hedge position mode<br><code>burst_close_short</code>：Liquidate short positions for hedge position mode<br><code>offset_close_long</code>：Liquidate partial long positions for netting for hedge position mode<br><code>offset_close_short</code>：Liquidate partial short positions for netting for hedge position mode<br><code>delivery_close_long</code>：Delivery long positions for hedge position mode<br><code>delivery_close_short</code>：Delivery short positions for hedge position mode<br><code>dte_sys_adl_close_long</code>：ADL close long position for hedge position mode<br><code>dte_sys_adl_close_short</code>：ADL close short position for hedge position mode<br><code>buy_single</code>：Buy, one way postion mode<br><code>sell_single</code>：Sell, one way postion mode<br><code>reduce_buy_single</code>：Liquidate partial positions, buy, one way position mode<br><code>reduce_sell_single</code>：Liquidate partial positions, sell, one way position mode<br><code>burst_buy_single</code>：Liquidate short positions, buy, one way postion mode<br><code>burst_sell_single</code>：Liquidate partial positions, sell, one way position mode<br><code>delivery_sell_single</code>：Delivery sell, one way position mode<br><code>delivery_buy_single</code>：Delivery buy, one way position mode<br><code>dte_sys_adl_buy_in_single_side_mode</code>：ADL close position, buy, one way position mode<br><code>dte_sys_adl_sell_in_single_side_mode</code>：ADL close position, sell, one way position mode 
+| &gt;posMode | String | Position mode<br><code>one_way_mode</code>: one-way position<br><code>hedge_mode</code>: two-way position 
+| &gt;tradeScope | String | Trader tag<br>taker: Taker<br>maker: Maker 
+| &gt;cTime | String | Date of transaction<br>endId<br>String<br>The final order ID.<br>This is used when idLessThan/idGreaterThan is set as a range. 
+| endId | String | The final Transaction ID.<br>This is used when idLessThan/idGreaterThan is set as a range.
+
+# Get Historical Transaction Details
+
+Frequency limit: 10 times/1s (uid)
+
+### Description[​](#description "Direct link to Description")
+
+Get order fill history
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/fill-history
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/fill-history?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br>It does not support to query the data in demo trading 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is a week. The default end time is a week if no value is set for the end time. )<br>(For Managed Sub-Account, the StartTime cannot be earlier than the binding time) 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is a week. The default start time is a week ago if no value is set for the start time. ) 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| limit | String | No | Number of queries: Maximum: 100, default: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1699267238892,    "data": {        "fillList": [            {                "tradeId": "xxxx",                "symbol": "ETHUSDT",                "orderId": "xxxx",                "price": "1801.33",                "baseVolume": "0.02",                "feeDetail": [                    {                        "deduction": "no",                        "feeCoin": "USDT",                        "totalDeductionFee": "0",                        "totalFee": "-0.02161596"                    }                ],                "side": "sell",                "quoteVolume": "36.0266",                "profit": "0.0252",                "enterPointSource": "ios",                "tradeSide": "sell_single",                "posMode": "one_way_mode",                "tradeScope": "taker",                "cTime": "1698730804882"            }        ],        "endId": "123456789"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| endId | String | Last query ended order ID 
+| fillList | List&lt;Object&gt; | Order list 
+| &gt;symbol | String | Trading pair 
+| &gt;tradeId | String | Transaction ID 
+| &gt;orderId | String | order id 
+| &gt;price | String | deal price 
+| &gt;baseVolume | String | Amount of coins traded 
+| &gt;feeDetail | String | Transaction fee 
+| &gt;&gt;deduction | String | Whether or not to deduct (vouchers) 
+| &gt;&gt;feeCoin | String | Crypto ticker 
+| &gt;&gt;totalDeductionFee | String | Total transaction fee discount 
+| &gt;&gt;totalFee | String | Total transaction fee 
+| &gt;side | String | Direction<br>Buy; Sell 
+| &gt;quoteVolume | String | Trading amount in quoting coin 
+| &gt;profit | String | profit 
+| &gt;enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt;tradeSide | String | Direction<br><code>close</code>: Close (open and close mode)<br><code>open</code>: Open (open and close mode)<br><code>reduce_close_long</code>: Liquidate partial long positions for hedge position mode<br><code>reduce_close_short</code>：Liquidate partial short positions for hedge position mode<br><code>burst_close_long</code>：Liquidate long positions for hedge position mode<br><code>burst_close_short</code>：Liquidate short positions for hedge position mode<br><code>offset_close_long</code>：Liquidate partial long positions for netting for hedge position mode<br><code>offset_close_short</code>：Liquidate partial short positions for netting for hedge position mode<br><code>delivery_close_long</code>：Delivery long positions for hedge position mode<br><code>delivery_close_short</code>：Delivery short positions for hedge position mode<br><code>dte_sys_adl_close_long</code>：ADL close long position for hedge position mode<br><code>dte_sys_adl_close_short</code>：ADL close short position for hedge position mode<br><code>buy_single</code>：Buy, one way postion mode<br><code>sell_single</code>：Sell, one way postion mode<br><code>reduce_buy_single</code>：Liquidate partial positions, buy, one way position mode<br><code>reduce_sell_single</code>：Liquidate partial positions, sell, one way position mode<br><code>burst_buy_single</code>：Liquidate short positions, buy, one way postion mode<br><code>burst_sell_single</code>：Liquidate partial positions, sell, one way position mode<br><code>delivery_sell_single</code>：Delivery sell, one way position mode<br><code>delivery_buy_single</code>：Delivery buy, one way position mode<br><code>dte_sys_adl_buy_in_single_side_mode</code>：ADL close position, buy, one way position mode<br><code>dte_sys_adl_sell_in_single_side_mode</code>：ADL close position, sell, one way position mode 
+| &gt;posMode | String | Position mode<br>one_way_mode: one-way position<br>hedge_mode: two-way position 
+| &gt;tradeScope | String | Trader tag<br>taker: Taker<br>maker: Maker 
+| &gt;cTime | String | Date of transaction<br>endId<br>String<br>The final order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.
+
+# Get Pending Orders
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+To query all existing pending orders.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/orders-pending
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/orders-pending?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Order ID;<br>If both orderId and clientOidare entered, orderId prevails. 
+| clientOid | String | No | Customize order ID;<br>If both orderId and clientOid are entered, orderId prevails. 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| status | String | No | Order status<br>If not specified, all ordered with a status of live (not filled yet) will be returned.<br><code>live</code>: pending orders<br><code>partially_filled</code>: Partially filled 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is three months. The default end time is three months if no value is set for the end time. ) 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. ) 
+| limit | String | No | Number of queries: Maximum: 100, default: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "entrustedList": [            {                "symbol": "ethusdt",                "size": "100",                "orderId": "123",                "clientOid": "12321",                "baseVolume": "12.1",                "fee": "",                "price": "1900",                "priceAvg": "1903",                "status": "partially_filled",                "side": "buy",                "force": "gtc",                "totalProfits": "0",                "posSide": "long",                "marginCoin": "usdt",                "quoteVolume": "22001.21",                "leverage": "20",                "marginMode": "cross",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "1627293505612",                "presetStopSurplusPrice": "2001",                "presetStopSurplusType": "mark_price",                "presetStopSurplusExecutePrice": "2201",                "presetStopLossPrice": "1800",                "presetStopLossType": "mark_price",                "presetStopLossExecutePrice":"1900"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| entrustedList | List&lt;Object&gt; | Order list 
+| &gt;symbol | String | Trading pair 
+| &gt;size | String | Amount 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Custom id 
+| &gt;baseVolume | String | Amount of coins traded 
+| &gt;fee | String | Transaction fee 
+| &gt;price | String | Order price 
+| &gt;priceAvg | String | Average order price<br>Empty when status is <code>live</code> 
+| &gt; status | String | Order status<br><code>live</code>: Waiting to be filled (not filled yet)<br><code>partially_filled</code>: Partially filled 
+| &gt;side | String | Direction<br><code>buy</code>: Buy; <code>sell</code>: Sell 
+| &gt;force | String | Order expiration date<br><code>ioc</code> (Immediate or cancel)<br><code>fok</code> (Fill or kill)<br><code>gtc</code> (Good till canceled)<br><code>post_only</code>: Post only 
+| &gt;totalProfits | String | Total PnL<br>Empty when status is live. 
+| &gt;posSide | String | Position direction<br><code>long</code>: two-way long position<br><code>short</code>: two-way short position<br><code>net</code>: one-way position 
+| &gt;marginCoin | String | Margin coin 
+| &gt;quoteVolume | String | Trading amount in quoting coin 
+| &gt;leverage | String | Leverage 
+| &gt;marginMode | String | Margin mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| &gt;reduceOnly | String | Reduce only<br><code>YES</code>: yes, <code>NO</code>: no 
+| &gt;enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt;tradeSide | String | Direction<br>open (open and close mode)<br>close (open and close mode)<br>reduce_close_long<br>Liquidate partial long positions<br>reduce_close_short<br>Liquidate partial short positions<br>offset_close_long<br>Liquidate partial long positions for netting<br>offset_close_short<br>Liquidate partial short positions for netting<br>burst_close_long<br>Liquidate long positions<br>burst_close_short<br>Liquidate short positions<br>delivery_close_long<br>Long position delivery<br>delivery_close_short<br>Short position delivery 
+| &gt;posMode | String | Position mode<br><code>one_way_mode</code>: one-way position<br><code>hedge_mode</code>: two-way position 
+| &gt;orderType | String | Order type<br>limit: limit order<br>market: market order 
+| &gt;orderSource | String | Order sources<br>normal: Normal order<br>market: market order<br>profit_market: Market TP order<br>loss_market: Market SL order<br>Trader_delegate: Elite trade order<br>trader_profit: Trader takes profit<br>trader_loss: Trader stops loss<br>reverse: Reversed orders<br>trader_reverse: Reversed elite trades<br>profit_limit: Take-profit limit order<br>loss_limit: Stop-loss limit order<br>liquidation: Liquidation order<br>delivery_close_long: close long positions<br>delivery_close_short: close short positions<br>pos_profit_limit: Position take-profit limit order<br>pos_profit_market: Position take-profit market order<br>pos_loss_limit: Position stop-loss limit order<br>pos_loss_market: Position stop-loss market order 
+| &gt;cTime | String | Creation time, ms 
+| &gt;uTime | String | Last updated time, ms 
+| &gt;presetStopSurplusPrice | String | Take Profit Trigger Price 
+| &gt;presetStopSurplusType | String | Setting take-profit trigger type<br>fill_price: filled price<br>mark_price: mark price 
+| &gt;presetStopSurplusExecutePrice | String | Take Profit Execution price<br>If it is 0 or not filled in, it means market price execution.If it is greater than 0, it means limit price execution.<br> 
+| &gt;presetStopLossPrice | String | Stop Loss Trigger Price 
+| &gt;presetStopLossType | String | Setting stop-loss trigger type<br>fill_price: filled price<br>mark_price: mark price 
+| &gt;presetStopLossExecutePrice | String | Stop Loss Execution price<br>If it is 0 or not filled in, it means market price execution.If it is greater than 0, it means limit price execution.<br> 
+| endId | String | The final order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.
+
+# Get History Order
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Get history order(It only supports to get the data within 90days. The older data can be downloaded from web)
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/orders-history
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/orders-history?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Order ID<br>If both orderId and clientOid are entered, orderId prevails. 
+| clientOid | String | No | Customize order ID<br>If both orderId and clientOid are entered, orderId prevails. 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the previous request response 
+| orderSource | String | No | Order sources<br>normal: Normal order<br>market: market order<br>profit_market: Market TP order<br>loss_market: Market SL order<br>Trader_delegate: Elite trade order<br>trader_profit: Trader takes profit<br>trader_loss: Trader stops loss<br>reverse: Reversed orders<br>trader_reverse: Reversed elite trades<br>profit_limit: Take-profit limit order<br>loss_limit: Stop-loss limit order<br>liquidation: Liquidation order<br>delivery_close_long: close long positions<br>delivery_close_short: close short positions<br>pos_profit_limit: Position take-profit limit order<br>pos_profit_market: Position take-profit market order<br>pos_loss_limit: Position stop-loss limit order<br>pos_loss_market: Position stop-loss market order 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(For Managed Sub-Account, the StartTime cannot be earlier than the binding time) 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br> 
+| limit | String | No | Number of queries: Maximum: 100, default: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "entrustedList": [            {                "symbol": "ethusdt",                "size": "100",                "orderId": "123",                "clientOid": "12321",                "baseVolume": "12.1",                "fee": "-0.00854",                "price": "1900",                "priceAvg": "1903",                "status": "filled",                "side": "buy",                "force": "gtc",                "totalProfits": "0",                "posSide": "long",                "marginCoin": "usdt",                "quoteVolume": "22001.21",                "leverage": "20",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "1627293505612",                "presetStopSurplusPrice": "2001",                "presetStopLossPrice": "1800"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| endId | String | Last query ended order ID 
+| entrustedList | List&lt;Object&gt; | Order list 
+| &gt;symbol | String | Trading pair 
+| &gt;size | String | Amount 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Custom id 
+| &gt;baseVolume | String | Amount of coins traded 
+| &gt;fee | String | Transaction fee 
+| &gt;price | String | Order price 
+| &gt;priceAvg | String | Average order price 
+| &gt;status | String | Order status<br><code>filled</code>: All filled<br><code>canceled</code>: the order is cancelled 
+| &gt;side | String | Direction<br><code>buy</code>: buy, <code>sell</code>: sell 
+| &gt;force | String | Order expiration date<br>(Confirm that if maker is supported)<br><code>ioc</code>: Immediate or cancel<br><code>fok</code>: Fill or kill<br><code>gtc</code>: Good till canceled<br><code>post_only</code>: Post only 
+| &gt;totalProfits | String | Total PnL 
+| &gt;posSide | String | Position direction<br><code>long</code>: two-way long position<br><code>short</code>: two-way short position<br><code>net</code>: one-way position 
+| &gt;marginCoin | String | Margin coin 
+| &gt;quoteVolume | String | Trading amount in quoting coin 
+| &gt;leverage | String | Leverage 
+| &gt;marginMode | String | Margin mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| &gt;reduceOnly | String | Reduce only<br><code>YES</code>: Yes,<code>NO</code>: No 
+| &gt;enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt;tradeSide | String | Direction<br>open (open and close mode)<br>close (open and close mode)<br>reduce_close_long<br>Liquidate partial long positions<br>reduce_close_short<br>Liquidate partial short positions<br>offset_close_long<br>Liquidate partial long positions for netting<br>offset_close_short<br>Liquidate partial short positions for netting<br>burst_close_long<br>Liquidate long positions<br>burst_close_short<br>Liquidate short positions<br>delivery_close_long<br>Long position delivery<br>delivery_close_short<br>Short position delivery 
+| &gt;posMode | String | Position mode<br><code>one_way_mode</code>: one-way position<br><code>hedge_mode</code>: two-way position 
+| &gt;orderType | String | Order type<br>limit: limit order<br>market: market order 
+| &gt;orderSource | String | Order sources<br>normal: Normal order<br>market: market order<br>profit_market: Market TP order<br>loss_market: Market SL order<br>Trader_delegate: Elite trade order<br>trader_profit: Trader takes profit<br>trader_loss: Trader stops loss<br>reverse: Reversed orders<br>trader_reverse: Reversed elite trades<br>profit_limit: Take-profit limit order<br>loss_limit: Stop-loss limit order<br>liquidation: Liquidation order<br>delivery_close_long: close long positions<br>delivery_close_short: close short positions<br>pos_profit_limit: Position take-profit limit order<br>pos_profit_market: Position take-profit market order<br>pos_loss_limit: Position stop-loss limit order<br>pos_loss_market: Position stop-loss market order 
+| &gt;cTime | String | Creation time 
+| &gt;uTime | String | Last updated time 
+| &gt;presetStopSurplusPrice | String | Take profit price 
+| &gt;presetStopLossPrice | String | Stop loss price
+
+# Cancel All Orders
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/cancel-all-orders
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-all-orders" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "productType": "USDT-FUTURES",    "marginCoin": "USDT"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | No | Margin coin, must be capitalized 
+| requestTime | String | No | request Time Unix millisecond timestamp 
+| receiveWindow | String | No | valid window period Unix millisecond timestamp Unix millisecond timestamp 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": [            {                "orderId": "232",                "clientOid": "321342",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| successList | List&lt;Object&gt; | The collection of successfully cancelled orders. 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| failureList | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. 
+| &gt;orderId | String | Order ID 
+| &gt;clientOid | String | Customize order ID 
+| &gt;errorMsg | String | Failure reason 
+| &gt;errorCode | String | Error code
+
+# Trigger Sub Order
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Get trigger executed futures orders
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/plan-sub-order
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/plan-sub-order?planOrderId=xxxxxxxxxxxxxxxxxx&productType=USDT-FUTURES&planType=normal_plan" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| planType | String | Yes | Trigger order type<br>normal_plan: average trigger order<br>track_plan: trailing stop order 
+| planOrderId | String | Yes | Trigger order ID 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1710813939206,    "data": [        {            "orderId": "xxxxxxxxxxxxx",            "price": "0.4188",            "type": "limit",            "status": "success"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Futures order ID 
+| price | String | Price of the futures order 
+| type | String | Order type<br>limit<br>market 
+| status | String | Plan order trigger status<br>success: trigger success<br>fail: trigger failed<br>cancelled: cancelled<br>in_progress: trigger spot placing order<br>in_progress_tracking: tracking trigger
+
+# Stop-profit and stop-loss plan orders
+
+Speed limit is 10 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Place a stop-profit and stop-loss plan order
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/place-tpsl-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/place-tpsl-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"marginCoin": "USDT","productType": "usdt-futures","symbol": "ethusdt","planType": "profit_plan","triggerPrice": "2000","triggerType": "mark_price","executePrice": "0","holdSide": "long","size": "1","rangeRate": "","clientOid": "1234"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| marginCoin | String | Yes | Margin currency (Capitalized) 
+| productType | String | Yes | Product type<br>usdt-futures USDT professional futures<br>coin-futures Mixed futures<br>usdc-futures USDC professional futures<br>susdt-futures USDT professional futures demo<br>scoin-futures Mixed futures demo<br>susdc-futures USDC professional futures demo 
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| planType | String | Yes | Take profit and stop loss type<br>profit_plan: take profit plan;<br>loss_plan: stop loss plan;<br>moving_plan: trailing stop;<br>pos_profit: position take profit;<br>pos_loss: position stop loss 
+| triggerPrice | String | Yes | Trigger price 
+| triggerType | String | No | Trigger type<br>fill_price: market price;<br>mark_price: mark price 
+| executePrice | String | No | Execution price<br>If it is 0 or not filled in, it means market price execution.If it is greater than 0, it means limit price execution.<br>Do not fill in this parameters when <code>planType</code> is moving_plan, it only executs in market price. 
+| holdSide | String | Yes | Two-way position:(long: long position, short: short position)<br>one-way position: (buy: long position, sell: short position) 
+| size | String | Yes | Order quantity(base coin)<br>It's required when <code>planType</code> is profit_plan, loss_plan or moving_plan,and should be greater than 0;<br>It's NOT required when <code>planType</code> is pos_profit or pos_loss 
+| rangeRate | String | No | Callback range<br>It's required only in <code>planType</code> is moving_plan 
+| clientOid | String | No | Customize order ID 
+| stpMode | String | No | STP Mode, default <code>none</code><br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Trigger order ID 
+| clientOid | String | Customized trigger order ID
+
+# Simultaneous Stop-profit and stop-loss plan orders
+
+Speed limit is 10 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Place a stop-profit and stop-loss plan order
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/place-pos-tpsl
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/place-pos-tpsl" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{        "marginCoin": "USDT",        "productType": "usdt-futures",        "symbol": "BTCUSDT",        "stopSurplusTriggerPrice": "69000",        "stopSurplusTriggerType": "mark_price",        "stopSurplusExecutePrice": "69001",        "stopLossTriggerPrice": "55001",        "stopLossTriggerType": "mark_price",        "stopLossExecutePrice": "55000",        "holdSide": "long"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| marginCoin | String | Yes | Margin currency 
+| productType | String | Yes | Product type<br>usdt-futures USDT professional futures<br>coin-futures Mixed futures<br>usdc-futures USDC professional futures<br>susdt-futures USDT professional futures demo<br>scoin-futures Mixed futures demo<br>susdc-futures USDC professional futures demo 
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| stopSurplusTriggerPrice | String | Yes | Take Profit Trigger price 
+| stopSurplusTriggerType | String | No | Take Profit Trigger type<br>fill_price: market price;<br>mark_price: mark price 
+| stopSurplusExecutePrice | String | No | Take Profit Execution price<br>If it is 0 or not filled in, it means market price execution.If it is greater than 0, it means limit price execution. 
+| stopLossTriggerPrice | String | Yes | Stop Loss Trigger price 
+| stopLossTriggerType | String | No | Stop Loss Trigger type<br>fill_price: market price;<br>mark_price: mark price 
+| stopLossExecutePrice | String | No | Stop Loss Execution price<br>If it is 0 or not filled in, it means market price execution.If it is greater than 0, it means limit price execution.<br> 
+| holdSide | String | Yes | Two-way position:(long: long position, short: short position)<br>one-way position: (buy: long position, sell: short position) 
+| stpMode | String | No | STP Mode, default <code>none</code><br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders 
+
+Response Example
+
+```
+{    "code": "00000",    "data": [        {            "orderId": "xxxxxxxxxxx"        },        {            "orderId": "xxxxxxxxxxx"        }    ],    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Trigger order ID
+
+# Place Trigger Order
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+The interface for placing an trigger or trailing stop order with TP/SL setting feature.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/place-plan-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/place-plan-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{ "planType":"normal_plan", "symbol": "BTCUSDT", "productType": "USDT-FUTURES", "marginMode": "isolated", "marginCoin": "USDT", "size": "0.01", "price": "24000", "callbackRatio": "", "triggerPrice": "24100", "triggerType": "mark_price", "side": "buy", "tradeSide": "open", "orderType":"limit", "clientOid": "121212121212", "reduceOnly": "NO", "presetStopSurplusPrice": "", "stopSurplusTriggerPrice": "", "stopSurplusTriggerType": "", "presetStopLossPrice": "", "stopLossTriggerPrice": "", "stopLossTriggerType": "" }'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| planType | String | Yes | Trigger order type<br><code>normal_plan</code>: Trigger order<br><code>track_plan</code>: Trailing stop order 
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginMode | String | Yes | Position mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| marginCoin | String | Yes | Margin coin 
+| size | String | Yes | Amount(base coin) 
+| price | String | No | Price<br>1. For <code>track_plan</code>, it must be empty.<br>2. For <code>normal_plan</code>, it is required when orderType is <code>limit</code>;It must be empty when orderType is <code>market</code>. 
+| callbackRatio | String | No | Callback rate (applies to trailing stop orders only)<br>1. Required for trailing stop orders and the rate cannot be greater than 10. 
+| triggerPrice | String | Yes | Trigger price 
+| triggerType | String | Yes | Trigger type<br>1. Required when placing a trigger order or a trailing stop order.<br>mark_price: Mark price<br>fill_price: Lastest price 
+| side | String | Yes | Order direction<br><code>buy</code>; <code>sell</code> 
+| tradeSide | String | No | Direction<br><code>open</code>: Open; <code>close</code>: Close<br>1. Only required in hedge position mode<br>Notes:<br>For open long, "side" fill in "buy"; tradeSide should be "open"<br>For open short, "side" fill in "sell"; tradeSide should be "open"<br>For close long, "side" fill in "buy"; "tradeSide" should be "close"<br>For close short, "side" fill in "sell"; "tradeSide" should be "close" 
+| orderType | String | Yes | Order type<br><code>limit</code>: limit order<br><code>market</code>: market order<br>1. For <code>track_plan</code>, it is required and must be <code>market</code> 
+| clientOid | String | No | Customize order ID 
+| reduceOnly | String | No | Whether or not to just reduce the position.<br><code>yes</code>: Yes; <code>no</code>: No(default)<br>1. Only applicable in buy/sell (one-way position) mode 
+| stopSurplusTriggerPrice | String | No | Take-profit trigger price/Take-profit ratio<br>1. For <code>normal_plan</code>, it represents the take-profit trigger price<br>2. For <code>track_plan</code>, it represents the take-profit percentage, with a maximum of 999.99 and a minimum of 0.01<br>3. If left empty or set to 0, no take-profit will be set by default 
+| stopSurplusExecutePrice | String | No | Take-profit execute price<br>1. For <code>track_plan</code>, it must be empty.<br>2. For a <code>normal_plan</code> that has stopSurplusTriggerPrice parameter set, if it is empty or set to 0, it represents a market order execution; if not empty and greater than 0, it represents a limit order execution 
+| stopSurplusTriggerType | String | No | Take-profit trigger type<br><code>fill_price</code>: Lastest price<br><code>mark_price</code>: Mark price<br>1. For orders that have stopSurplusTriggerPrice parameter set, it is required<br>2. For <code>track_plan</code>, it only accepts <code>fill_price</code> 
+| stopLossTriggerPrice | String | No | Stop-loss trigger price/Stop-loss ratio<br>1. For <code>normal_plan</code>, it represents the stop-loss trigger price<br>2. For <code>track_plan</code>, it represents the stop-loss percentage, with a maximum of 999.99 and a minimum of 0.01<br>3. If left empty or set to 0, no stop-loss will be set by default 
+| stopLossExecutePrice | String | No | Stop-loss execute price<br>1. For <code>track_plan</code>, it must be empty.<br>2. For a <code>normal_plan</code> that has stopLossTriggerPrice parameter set, if it is empty or set to 0, it represents a market order execution; if not empty and greater than 0, it represents a limit order execution 
+| stopLossTriggerType | String | No | Stop-loss trigger type<br><code>fill_price</code>: Lastest price<br><code>mark_price</code>: Mark price<br>1. For orders that have stopLossTriggerPrice parameter set, it is required<br>2. For <code>track_plan</code>, it only accepts <code>fill_price</code> 
+| stpMode | String | No | STP Mode<br><code>none</code> not setting STP(default)<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#121212121212"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Trigger order ID 
+| clientOid | String | Customized trigger order ID
+
+# Modify the stop-profit and stop-loss plan order
+
+Speed limit is 10 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Modify the stop-profit and stop-loss plan order
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/modify-tpsl-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-tpsl-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"orderId": "1","clientOid": "2","marginCoin": "USDT","productType": "usdt-futures","symbol": "ethusdt","triggerPrice": "2001","triggerType": "fill_price","executePrice": "0","size": "2","rangeRate": ""}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Take profit and stop loss order number, 'orderId' and 'clientOid' must provide one 
+| clientOid | String | No | Take profit and stop loss client order number, 'orderId' and 'clientOid' must provide one 
+| marginCoin | String | Yes | Margin currency 
+| productType | String | Yes | Product type<br>usdt-futures USDT professional futures<br>coin-futures Mixed futures<br>usdc-futures USDC professional futures<br>susdt-futures USDT professional futures demo<br>scoin-futures Mixed futures demo<br>susdc-futures USDC professional futures demo 
+| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
+| triggerPrice | String | Yes | trigger price 
+| triggerType | String | No | Trigger type (fill_price (transaction price) mark_price (mark price) 
+| executePrice | String | No | Execution price (if it is 0 or not filled in, it means market price execution. If it is greater than 0, it means limit price execution. When planType (stop-profit and stop-loss type) is moving_plan (moving take-profit and stop-loss), it is not filled in and is fixed to the market price. implement.) 
+| size | String | Yes | Order quantity<br>For the position take profit and position stop loss orders, the size should be <code>"size":""</code> 
+| rangeRate | String | No | callback range 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Trigger order ID 
+| clientOid | String | Customized trigger order ID
+
+# Modify Trigger Order
+
+Speed limit is 10 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Interface for trigger order modification, used to modify an pending order, such as its TP/SL and/or triggerPrice.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/modify-plan-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-plan-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{        "planType":"normal_plan",        "orderId": "123",        "clientOid": "321123",        "symbol": "ethusdt",        "productType": "usdt-futures",        "newSize": "3",        "newPrice": "2001",        "newCallbackRatio": "",        "newTriggerPrice": "2000",        "newTriggerType": "fill_price",        "newStopSurplusExecutePrice": "2049",        "newStopSurplusTriggerPrice": "2050",        "newStopSurplusTriggerType": "mark_price",        "newStopLossExecutePrice": "5",        "newStopLossTriggerPrice": "1970",        "newStopLossTriggerType": "mark_price"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| clientOid | String | No | Customized trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| newSize | String | No | Amount of the modified transaction<br>If it is empty, the amount remains unchanged. 
+| newPrice | String | No | Modified price for executing orders.<br>1: When the original order is a trigger order and its type is Limit, the original price remains unchanged when this field is empty.<br>Must be empty if the order type is Market.<br>2: When the original order is a trailing order, it must be empty. 
+| newCallbackRatio | String | No | Modified callback rate (for trailing stop orders only)<br>1. When the original order is a trailing stop order, it must be filled in, and the rate must not be greater than 10.<br>2: When the original order is a trigger order, it must be empty. 
+| newTriggerPrice | String | No | Modified trigger price<br>1. When the original order is a trigger order or a trailing stop order, if the field is not set, the price stays unchanged; if it is set, the price updates. 
+| newTriggerType | String | No | Modified trigger type<br>1. When the original order is a trigger order or a trailing stop order, if the field is not set, the type stays unchanged; if it is set, the type updates.<br>Setting this parameter requires the setting of newTriggerPrice.<br>fill_price: filled price<br>mark_price: mark price 
+| newStopSurplusTriggerPrice | String | No | Modified take-profit trigger price<br>1. If the field is left empty: when the original order has the TP set, the original value will be maintained.<br>2. If it is not empty: when the original order has the TP set, the TP will update; when the original order doesn't have the TP set, the TP will be added. If 0 is filled in, the original TP setting will be removed. 
+| newStopSurplusExecutePrice | String | No | Modified take-profit strike price<br>1. This parameter must be empty when the original order is a trailing stop order.<br>2.For a trigger order, if this field is filled in, the price will update; if not filled in, the price stays unchanged; if 0 is filled in, the price setting will be removed. 
+| newStopSurplusTriggerType | String | No | Modified take-profit trigger type<br>Default to the transaction price<br>1. This parameter must be empty when the original order is a trailing stop order.<br>2. For a trigger order that has newStopSurplusTriggerPrice parameter set, it is required.<br>fill_price: filled price<br>mark_price: mark price 
+| newStopLossTriggerPrice | String | No | Modified stop-loss trigger price<br>1. If the field is left empty: when the original order has the SL set, the original value will be maintained.<br>2. If it is not empty: when the original order has the SL set, the SL will update; when the original order doesn't have the SL set, the SL will be added. If 0 is filled in, the original SL setting will be removed. 
+| newStopLossExecutePrice | String | No | Modified stop-loss strike price<br>1. This parameter must be empty when the original order is a trailing stop order.<br>2.For a trigger order, if this field is filled in, the price will update; if not filled in, the price stays unchanged; if 0 is filled in, the SL setting will be removed. 
+| newStopLossTriggerType | String | No | Modified stop-loss trigger type<br>Default to the transaction price<br>1. This parameter must be empty when the original order is a trailing stop order.<br>2. For a trigger order that has newStopLossTriggerPrice parameter set, it is required.<br>fill_price: filled price<br>mark_price: mark price 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "orderId": "21627293504612",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| orderId | String | Trigger order ID 
+| clientOid | String | Customized trigger order ID
+
+# Get Pending Trigger Order
+
+Rate limit: 10 req/sec/UID
+
+### Description[​](#description "Direct link to Description")
+
+Can be used to query one or all current trigger orders.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/orders-plan-pending
+
+Request Example
+
+```
+curl -X GET "https://api.bitget.com/api/v2/mix/order/orders-plan-pending?orderId=123&clientOid=1234&planType=profit_loss&productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| clientOid | String | No | Customized trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| planType | String | Yes | Trigger order type<br>normal_plan: average trigger order<br>track_plan: trailing stop order<br>profit_loss: take profit and stop loss orders(including the profit_plan, loss_plan, moving_plan, pos_profit and pos_loss) 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is three months. The default end time is three months if no value is set for the end time. ) 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. ) 
+| limit | String | No | Number of queries: Default: 100, maximum: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "entrustedList": [            {                "planType": "normal_plan",                "symbol": "ethusdt",                "size": "1",                "orderId": "123",                "clientOid": "121212",                "price": "1900",                "executePrice": "1900",                "callbackRatio": "",                "triggerPrice": "1901",                "triggerType": "mark_price",                "planStatus": "not_trigger",                "side": "buy",                "posSide": "long",                "marginCoin": "usdt",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "",                "stopSurplusExecutePrice": "2001",                "stopSurplusTriggerPrice": "2002",                "stopSurplusTriggerType": "fill_price",                "stopLossExecutePrice": "1800",                "stopLossTriggerPrice": "1820",                "stopLossTriggerType": "fill_price"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| entrustedList | List&lt;String&gt; | Order list 
+| &gt;planType | String | Trigger order type<br>normal_plan: average trigger order<br>track_plan: trailing stop order 
+| &gt;symbol | String | Trading pair 
+| &gt;size | String | Amount 
+| &gt;orderId | String | Trigger order ID 
+| &gt;clientOid | String | Customized trigger order ID 
+| &gt;price | String | Order execute price<br>For a common trigger order, it represents the order execute price.<br>For a trailing stop order, the value doesn't exist. 
+| &gt;executePrice | String | Execute Price 
+| &gt;callbackRatio | String | Implementation of the callback rate. (Range 1-10)<br>Only exists when the order is a trailing stop order. 
+| &gt;triggerPrice | String | Trigger price<br>It appears for both common trigger orders and trailing stop orders. 
+| &gt;triggerType | String | Trigger type<br>It appears for both common trigger orders and trailing stop orders.<br>fill_price: filled price<br>mark_price: mark price<br>index_price: index price 
+| &gt;planStatus | String | Order status<br>For a current trigger order, the status will only be <code>live</code> 
+| &gt;side | String | Direction<br>Buy; Sell 
+| &gt;posSide | String | Position direction<br>long: hedge mode long position<br>short: hedge mode short position<br>net: one-way position 
+| &gt;marginCoin | String | Margin coin 
+| &gt;marginMode | String | Margin mode<br><code>isolated</code>: isolated margin mode<br><code>crossed</code>: crossed margin 
+| &gt;enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt;tradeSide | String | Direction<br>open: Open (hedge-mode)<br>close: Close (hedge-mode) 
+| &gt;posMode | String | Position mode<br>one_way_mode: one-way mode<br>hedge_mode: hedge mode 
+| &gt;orderType | String | Order type<br><code>limit</code>: limit order<br><code>market</code>: market order 
+| &gt;orderSource | String | Order sources<br>normal: Normal order<br>market: Market order<br>profit_market: Market TP order<br>loss_market: Market SL order<br>Trader_delegate: Elite trade order<br>trader_profit: Trader takes profit<br>trader_loss: Trader stops loss<br>trader_reverse: Reversed elite trades<br>profit_limit: Take-profit limit order<br>loss_limit: Stop-loss limit order<br>delivery_close_short: close short positions<br>pos_profit_limit: Position take-profit limit order<br>pos_profit_market: Position take-profit market order<br>pos_loss_limit: Position stop-loss limit order<br>pos_loss_market: Position stop-loss market order 
+| &gt;cTime | String | Creation time 
+| &gt;uTime | String | Last updated time 
+| &gt;stopSurplusExecutePrice | String | Setting take profit execution price 
+| &gt;stopSurplusTriggerPrice | String | Setting take-profit trigger price 
+| &gt;stopSurplusTriggerType | String | Setting take-profit trigger type<br>fill_price: filled price<br>mark_price: mark price<br>index_price: index price 
+| &gt;stopLossExecutePrice | String | Setting stop loss execution price 
+| &gt;stopLossTriggerPrice | String | Setting stop-loss trigger price 
+| &gt;stopLossTriggerType | String | Setting stop-loss trigger type<br>fill_price: filled price<br>mark_price: mark price<br>index_price: index price 
+| endId | String | This is used when idLessThan/idGreaterThan is set as a range.
+
+# Cancel Trigger Order
+
+Speed limit is 10 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Interface for cancelling trigger orders, can be used to cancel by 'productType', 'symbol' and/or trigger ID list.
+
+All orders that fall under that'productType' and 'symbol' will be cancelled.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   POST /api/v2/mix/order/cancel-plan-order
+
+Request Example
+
+```
+curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-plan-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{  "orderIdList": [    {      "orderId": "123",      "clientOid": "321"    },    {      "orderId": "",      "clientOid": "666"    },    {      "orderId": "123",      "clientOid": ""    }  ],  "symbol": "ETHUSDT",  "productType": "usdt-futures",  "marginCoin": "USDT"}'
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderIdList | List | No | Trigger order id list.<br>If it is passed, symbol must not be null and must be aligned with symbol/productType/planType. 
+| &gt;orderId | String | No | Trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| &gt;clientOid | String | No | Customized trigger order ID<br>Either orderId or clientOid is required. If both are entered, triggerId prevails. 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| marginCoin | String | No | Margin coin must be capitalized 
+| planType | String | No | Trigger order type<br>normal_plan plan order(default)<br>profit_plan batch profit order<br>loss_plan batch loss order<br>pos_profit position profit order<br>pos_loss position loss order<br>moving_plan trailing order 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121212121212",                "clientOid": "123"            },            {                "orderId": "123",                "clientOid": ""            }        ],        "failureList": [            {                "orderId": "3",                "clientOid": "123",                "errorMsg": "notExistend"            },            {                "orderId": "21221",                "clientOid": "",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| successList | List&lt;Object&gt; | The collection of successfully cancelled orders. 
+| &gt; orderId | String | Order ID 
+| &gt; clientOid | String | Customize order ID 
+| failureList | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. 
+| &gt; orderId | String | Order ID 
+| &gt; clientOid | String | Customize order ID 
+| &gt;errorMsg | String | Failure reason
+
+# Get History Trigger Order
+
+Speed limit is 10 times/s (UID)
+
+### Description[​](#description "Direct link to Description")
+
+Can be used to query one or all previous common orders and trigger orders.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/order/orders-plan-history
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/order/orders-plan-history?planType=normal_plan&symbol=ETHUSDT&productType=usdt-futures" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| orderId | String | No | Order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| clientOid | String | No | Customize order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
+| planType | String | Yes | Order type<br><code>normal_plan</code>: trigger order<br><code>track_plan</code>: trailing stop order<br><code>profit_loss</code>: take profit and stop loss orders(including the profit_plan, loss_plan, moving_plan, pos_profit and pos_loss) 
+| planStatus | String | No | Trigger order status<br>If not specified, all states will be queried<br>executed: the order triggered<br>fail_execute: Failed to trigger<br>cancelled: Cancelled 
+| symbol | String | No | Trading pair, e.g. ETHUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. 
+| startTime | String | No | Start timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )<br>(For Managed Sub-Account, the StartTime cannot be earlier than the binding time) 
+| endTime | String | No | End timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085<br>(The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. ) 
+| limit | String | No | Number of queries: Default: 100, maximum: 100 
+
+Response Example
+
+```
+{    "code": "00000",    "data": {        "entrustedList": [            {                "planType": "normal_plan",                "symbol": "ethusdt",                "size": "1",                "orderId": "123",                "executeOrderId": "123456",                "clientOid": "",                "planStatus": "executed",                "price": "1990",                "executePrice"： "1990"，                "priceAvg": "1999.2",                "baseVolume": "1",                "callbackRatio": "",                "triggerPrice": "1989",                "triggerType": "fill_price",                "side": "buy",                "posSide": "long",                "marginCoin": "usdt",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "cTime": "1627293504612",                "uTime": "",                "stopSurplusExecutePrice": "2001",                "stopSurplusTriggerPrice": "2002",                "stopSurplusTriggerType": "fill_price",                "stopLossExecutePrice": "1800",                "stopLossTriggerPrice": "1820",                "stopLossTriggerType": "fill_price"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| entrustedList | List&lt;String&gt; | Order list 
+| &gt;planType | String | Trigger order type<br>normal_plan: average trigger order<br>track_plan: trailing stop order 
+| &gt;symbol | String | Trading pair 
+| &gt;size | String | Amount 
+| &gt;orderId | String | Trigger order ID 
+| &gt;executeOrderId | String | the order ID after plan triggered 
+| &gt;clientOid | String | Customized trigger order ID 
+| &gt;planStatus | String | Order status<br><code>executed</code>: the order triggered<br><code>fail_execute</code>: Failed to trigger<br><code>cancelled</code>: Cancelled 
+| &gt;price | String | Order price<br>For a common trigger order, it represents the order price.<br>For a trailing stop order, this field doesn't exist. 
+| &gt;executePrice | String | Execute Price 
+| &gt;baseVolume | String | Amount of coins traded<br>It is only available when the order status is triggered. 
+| callbackRatio | String | Implementation of the callback rate. (Maximum 1-10)<br>Only exists for trailing stop orders. 
+| &gt;triggerPrice | String | Trigger price<br>It appears for both common trigger orders and trailing stop orders. 
+| &gt;triggerType | String | Trigger type<br>It appears for both common trigger orders and trailing stop orders.<br>fill_price: filled price<br>mark_price: mark price 
+| &gt;side | String | Direction<br>Buy; Sell 
+| &gt;posSide | String | Position direction<br><code>long</code>: hedge mode long position<br><code>short</code>: hedge mode short position<br><code>net</code>: one-way position 
+| &gt;marginCoin | String | Margin coin 
+| &gt;marginMode | String | Margin mode<br><code>isolated</code>: isolated margin<br><code>crossed</code>: cross margin 
+| &gt;enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt;tradeSide | String | Direction<br>open (open and close mode)<br>close: Close (open and close mode) 
+| &gt;posMode | String | Position mode<br>one_way_mode: one-way mode<br>hedge_mode: hedge mode 
+| &gt;orderType | String | Order type<br>limit: limit order<br>market 
+| &gt;cTime | String | Creation time 
+| &gt;uTime | String | Last updated time 
+| &gt;stopSurplusExecutePrice | String | Setting take-profit strike price 
+| &gt;stopSurplusTriggerPrice | String | Setting take-profit trigger price 
+| &gt;stopSurplusTriggerType | String | Setting take-profit trigger type<br>fill_price: filled price<br>mark_price: mark price 
+| &gt;stopLossExecutePrice | String | Setting stop-loss strike price 
+| &gt;stopLossTriggerPrice | String | Setting stop-loss trigger price 
+| &gt;stopLossTriggerType | String | Setting stop-loss trigger type<br>fill_price: filled price<br>mark_price: mark price 
+| endId | String | The last Trigger order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.
+
+# Market Channel
+
+### Description[​](#description "Direct link to Description")
+
+Retrieve the latest traded price, bid price, ask price and 24-hour trading volume of the instruments. When there is a change (deal, buy, sell, issue): 100ms to 300ms.
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "ticker",            "instId": "BTCUSDT"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; instType | String | Yes | Product type 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instId | String | Yes | Product ID<br>E.g. ETHUSDT 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "ticker",        "instId": "BTCUSDT"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; instType | String | Product type 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Product ID<br>E.g. ETHUSDT 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "ticker",        "instId": "BTCUSDT"    },    "data": [        {            "instId": "BTCUSDT",            "lastPr": "27000.5",            "bidPr": "27000",            "askPr": "27000.5",            "bidSz": "2.71",            "askSz": "8.76",            "open24h": "27000.5",            "high24h": "30668.5",            "low24h": "26999.0",            "change24h": "-0.00002",            "fundingRate": "0.000010",            "nextFundingTime": "1695722400000",            "markPrice": "27000.0",            "indexPrice": "25702.4",            "holdingAmount": "929.502",            "baseVolume": "368.900",            "quoteVolume": "10152429.961",            "openUtc": "27000.5",            "symbolType": 1,            "symbol": "BTCUSDT",            "deliveryPrice": "0",            "ts": "1695715383021"        }    ],    "ts": 1695715383039}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| arg | Object | Channels with successful subscription 
+| &gt; instType | String | Product type 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Product ID 
+| action | String | Push data action, <code>snapshot</code> or <code>update</code> 
+| data | List | Subscription data 
+| &gt; instId | String | Product ID, BTCUSDT 
+| &gt;lastPr | String | Latest price 
+| &gt;askPr | String | Ask price 
+| &gt;bidPr | String | Bid price 
+| &gt;high24h | String | 24h high 
+| &gt;low24h | String | 24h low 
+| &gt;change24h | String | 24h change 
+| &gt;fundingRate | String | Funding rate 
+| &gt;nextFundingTime | String | Next funding rate settlement time, Milliseconds format of timestamp Unix, e.g. 1597026383085 
+| &gt;ts | String | System time, Milliseconds format of current data timestamp Unix, e.g. 1597026383085 
+| &gt;markPrice | String | Mark price 
+| &gt;indexPrice | String | Index price 
+| &gt;holdingAmount | String | Open interest 
+| &gt;baseVolume | String | Trading volume of the coin 
+| &gt;quoteVolume | String | Trading volume of quote currency 
+| &gt;openUtc | String | Price at 00:00 (UTC) 
+| &gt;symbolType | Integer | SymbolType: 1-&gt;perpetual 2-&gt;delivery 
+| &gt;symbol | String | Trading pair 
+| &gt;deliveryPrice | String | Delivery price of the delivery futures, when symbolType = 1(perpetual) it is always 0<br>It will be pushed 1 hour before delivery 
+| &gt;bidSz | String | Buying amount 
+| &gt;askSz | String | selling amount 
+| &gt;open24h | String | Entry price of the last 24 hours, The opening time is compared on a 24-hour basis. i.e.: Now it is 7:00 PM of the 2nd day of the month, then the corresponding opening time is 7:00 PM of the 1st day of the month.
+
+# Candlestick Channel
+
+### Description[​](#description "Direct link to Description")
+
+Retrieve the candlesticks data of a symbol. Data will be pushed every 500 ms.
+
+The channel will push a snapshot after successful subscribed, later on the updates will be pushed
+
+If intended to query history data in a customized time range, please refer to [Get Candle Data](/api-doc/contract/market/Get-Candle-Data)
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "candle1m",            "instId": "BTCUSDT"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; instType | String | Yes | Product type 
+| &gt; channel | String | Yes | Channel name, candle1m (1 minute) candle5m (5 minutes) candle15m (15 minutes) candle30m (30 minutes) candle1H (1 hour) candle4H (4 hours) candle12H (12 hours)<br>candle1D (1 day) candle1W (1 week) candle6H (6 hours) candle3D (3 days) candle1M (1-month line) candle6Hutc (6-hour line, UTC) candle12Hutc (12-hour line, UTC)<br>candle1Dutc (1-day line, UTC) candle3Dutc (3-day line, UTC) candle1Wutc (weekly line, UTC) candle1Mutc (monthly line. UTC) 
+| &gt; instId | String | Yes | Product ID<br>E.g. ETHUSDT 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "candle1m",        "instId": "BTCUSDT"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Yes<br>Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name, candle1m (1 minute) candle5m (5 minutes) candle15m (15 minutes) candle30m (30 minutes) candle1H (1 hour) candle4H (4 hours) candle12H (12 hours)<br>candle1D (1 day) candle1W (1 week) candle6H (6 hours) candle3D (3 days) candle1M (1-month line) candle6Hutc (6-hour line, UTC) candle12Hutc (12-hour line, UTC)<br>candle1Dutc (1-day line, UTC) candle3Dutc (3-day line, UTC) candle1Wutc (weekly line, UTC) candle1Mutc (monthly line. UTC) 
+| &gt; instType | String | Product type 
+| &gt; instId | String | Yes<br>E.g. ETHUSDT 
+| code | String | Error code, returned only on error 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "candle1m",        "instId": "BTCUSDT"    },    "data": [        [            "1695685500000",            "27000",            "27000.5",            "27000",            "27000.5",            "0.057",            "1539.0155",            "1539.0155"        ]    ],    "ts": 1695715462250}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Product ID 
+| &gt; instType | String | Product type 
+| data | List&lt;String&gt; | Subscription data 
+| &gt; index[0] | String | Start time, milliseconds format of Unix timestamp, e.g.1597026383085 
+| &gt; index[1] | String | Opening price 
+| &gt; index[2] | String | Highest price 
+| &gt; index[3] | String | Lowest price 
+| &gt; index[4] | String | Closing price 
+| &gt; index[5] | String | The value is the trading volume of left coin 
+| &gt; index[6] | String | Trading volume of quote currency 
+| &gt; index[7] | String | Trading volume of USDT
+
+# Depth Channel
+
+### Description[​](#description "Direct link to Description")
+
+This is the channel to get the depth data  
+Default data push frequency for `books`, `books5`, `books15` is **150ms**  
+Default data push frequency for `books1`:**100ms**
+
+*   `books`: All levels of depth. First update pushed is full data: `snapshot`, and then push the update data: `update`
+*   `books1`: 1st level of depth. Push `snapshot` each time
+*   `books5`: 5 depth levels. Push `snapshot` each time
+*   `books15`: 15 depth levels. Push `snapshot` each time
+
+#### Checksum[​](#checksum "Direct link to Checksum")
+
+Calculate Checksum
+
+```
+1. More than 25 levels of bid and askA local snapshot of market depth (only 2 levels of the orderbook are shown here, while 25 levels of orderbook should actually be intercepted):    "bids": [      [ 43231.1, 4 ],   //bid1      [ 43231,   6 ]    //bid2    ]    "asks": [      [ 43232.8, 9 ],   //ask1      [ 43232.9, 8 ]    //ask2    ]Build the string to check CRC32:"43231.1:4:43232.8:9:43231:6:43232.9:8"The sequence:"bid1[price:amount]:ask1[price:amount]:bid2[price:amount]:ask2[price:amount]"2. Less than 25 levels of bid or askA local snapshot of market depth:    "bids": [      [ 3366.1, 7 ] //bid1    ]    "asks": [      [ 3366.8, 9 ],    //ask1      [ 3368  , 8 ],    //ask2      [ 3372  , 8 ]     //ask3    ]Build the string to check CRC32:"3366.1:7:3366.8:9:3368:8:3372:8"The sequence:"bid1[price:amount]:ask1[price:amount]:ask2[price:amount]:ask3[price:amount]"
+```
+
+This mechanism can assist users in checking the accuracy of depth(order book) data.
+
+**Merging update data into snapshot**
+
+After subscribe to the channel (such as `books` 400 levels) of [Order book](#order-book-channel) , user first receive the initial snapshot of market depth. Afterwards the incremental update is subsequently received, user are responsible to update the snapshot from client side.
+
+1.  If there are any levels with same price from the updates, compare the amount with the snapshot order book:
+    
+    If the amount is 0, delete this depth data.
+    
+    If the amount changes, replace the depth data.
+    
+2.  If there is no level in the snapshot with same price from the update, insert the update depth information into the snapshot sort by price (bid in descending order, ask in ascending order).
+    
+
+**Calculate Checksum**
+
+Use the first 25 bids and asks in the local snapshot to build a string (where a colon connects the price and amount in an ask or a bid), and then calculate the CRC32 value (32-bit signed integer).
+
+1.  When the bid and ask depth data exceeds 25 levels, each of them will intercept 25 levels of data, and the string to be checked is queued in a way that the bid and ask depth data are alternately arranged. Such as: `bid1[price:amount]`:`ask1[price:amount]`:`bid2[price:amount]`:`ask2[price:amount]`...
+2.  When the bid or ask depth data is less than 25 levels, the missing depth data will be ignored. Such as: `bid1[price:amount]`:`ask1[price:amount]`:`ask2[price:amount]`:`ask3[price:amount]`...
+3.  If price is '0.5000', DO NOT calculate the checksum by '0.5', please DO use the original value
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "books5",            "instId": "BTCUSDT"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Yes | Channel name: <code>books/books1/books5/books15</code> 
+| &gt; instId | String | Yes | Product ID 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "books5",        "instId": "BTCUSDT"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event, 
+| arg | Object | Subscribed channels 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Channel name, <code>books/books1/books5/books15</code> 
+| &gt; instId | String | Product ID, e.g. ETHUSDT 
+| msg | String | Error message 
+| code | String | Error code, returned only on error 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "books5",        "instId": "BTCUSDT"    },    "data": [        {            "asks": [                [                    "27000.5",                    "8.760"                ],                [                    "27001.0",                    "0.400"                ]            ],            "bids": [                [                    "27000.0",                    "2.710"                ],                [                    "26999.5",                    "1.460"                ]            ],            "checksum": 0,            "ts": "1695716059516"        }    ],    "ts": 1695716059516}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| arg | Object | Channels with successful subscription 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Channel name, <code>books/books1/books5/books15</code> 
+| &gt; instId | String | Product ID 
+| action | String | Push data action, Incremental push data or full volume push data 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; asks | List&lt;String&gt; | Seller depth 
+| &gt; bids | List&lt;String&gt; | Buyer depth 
+| &gt; ts | String | Match engine timestamp(ms), e.g. 1597026383085 
+| &gt; checksum | Long | Testing and
+
+# Public Trade Channel
+
+### Description[​](#description "Direct link to Description")
+
+Get the public trade data(taker orders)
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "trade",            "instId": "BTCUSDT"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | op list 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Yes | Channel, <code>trade</code> 
+| &gt; instId | String | Yes | Product ID<br>e.g: ETHUSDT 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "trade",        "instId": "BTCUSDT"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | event 
+| arg | Object | arg list 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Channel, <code>trade</code> 
+| &gt; instId | String | Symbol name<br>e.g: ETHUSDT 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "trade",        "instId": "BTCUSDT"    },    "data": [        {            "ts": "1695716760565",            "price": "27000.5",            "size": "0.001",            "side": "buy",            "tradeId": "1111111111"        },        {            "ts": "1695716759514",            "price": "27000.0",            "size": "0.001",            "side": "sell",            "tradeId": "1111111111"        }    ],    "ts": 1695716761589}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| action | String | action 
+| arg | Object | arg 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Channel, <code>trade</code> 
+| &gt; instId | String | Symbol: ETHUSDT 
+| data | List&lt;Object&gt; | Data 
+| &gt; ts | String | Fill time: 1597026383085 
+| &gt; price | String | Filled price 
+| &gt; size | String | Filled amount 
+| &gt; side | String | Filled side, sell/buy 
+| &gt; tradeId | String | tradeId
+
+# Account channel
+
+### Description[​](#description "Direct link to Description")
+
+Subscribe account channel
+
+Data will be pushed when the following events occurred:
+
+1.  Transfer balance to Futures account
+2.  Trading voucher deposit
+3.  Open/close orders are filled
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "account",            "coin": "default"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; channel | String | Yes | Channel name 
+| &gt; coin | String | Yes | Coin name，<code>default</code> represents all the coins，Only default is supported now 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "account",        "coin": "default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Yes<br>Operation 
+| arg | Object | Subscribed channels 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Futures settled in cryptocurrencies<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo trading<br><code>SCOIN-FUTURES</code> Futures settled in cryptocurrencies demo traing<br><code>SUSDC-FUTURES</code> USDC professional futures demo trading 
+| &gt; channel | String | Channel name 
+| &gt; coin | String | <code>default</code> 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "account",        "coin": "default"    },    "data": [      {        "marginCoin": "USDT",        "frozen": "0.00000000",        "available": "11.98545761",        "maxOpenPosAvailable": "11.98545761",        "maxTransferOut": "11.98545761",        "equity": "11.98545761",        "usdtEquity": "11.985457617660",        "crossedRiskRate": "0",        "unrealizedPL": "0.000000000000"      }    ],    "ts": 1695717225146}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| action | String | <code>snapshot</code> 
+| arg | Object | Channels to request subscription 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Futures settled in cryptocurrencies<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo trading<br><code>SCOIN-FUTURES</code> Futures settled in cryptocurrencies demo traing<br><code>SUSDC-FUTURES</code> USDC professional futures demo trading 
+| &gt; channel | String | Channel name 
+| &gt; coin | String | <code>default</code> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt;marginCoin | String | Margin coin 
+| &gt;frozen | String | Locked quantity (margin coin) 
+| &gt;available | String | Currently available assets 
+| &gt;maxOpenPosAvailable | String | Maximum available balance to open positions 
+| &gt;maxTransferOut | String | Maximum transferable amount 
+| &gt;equity | String | Account assets 
+| &gt;usdtEquity | String | Account equity in USD 
+| &gt;crossedRiskRate | String | Risk ratio in cross margin mode 
+| &gt;unrealizedPL | String | Unrealized PnL
+
+# Position Channel
+
+### Description[​](#description "Direct link to Description")
+
+Subscribe the position channel
+
+Data will be pushed when the following events occurred:
+
+1.  Open/Close orders are created
+2.  Open/Close orders are filled
+3.  Orders are canceled
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "positions",            "instId": "default"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; channel | String | Yes | Channel name: <code>positions</code> 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Yes | Symbol name,<code>default</code>represents all the symbols，Only default is supported now 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "positions",        "instId": "default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name: <code>positions</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | <code>default</code> 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "positions",        "instId": "default"    },    "data": [        {            "posId": "1",            "instId": "ETHUSDT",            "marginCoin": "USDT",            "marginSize": "9.5",            "marginMode": "crossed",            "holdSide": "short",            "posMode": "hedge_mode",            "total": "0.1",            "available": "0.1",            "frozen": "0",            "openPriceAvg": "1900",            "leverage": 20,            "achievedProfits": "0",            "unrealizedPL": "0",            "unrealizedPLR": "0",            "liquidationPrice": "5788.108475905242",            "keepMarginRate": "0.005",            "marginRate": "0.004416374196",            "cTime": "1695649246169",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "uTime": "1695711602568",            "autoMargin": "off"        }    ],    "ts": 1695717430441}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| action | String | 'snapshot' 
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name: <code>positions</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | <code>default</code> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; posId | String | Position ID 
+| &gt; instId | String | Product ID,<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| &gt; marginCoin | String | Currency of occupied margin 
+| &gt; marginSize | String | Occupied margin (amount) 
+| &gt; marginMode | String | Margin mode 
+| &gt; holdSide | String | Position direction 
+| &gt; posMode | String | Position mode 
+| &gt; total | String | Open position size 
+| &gt; available | String | Size of positions that can be closed 
+| &gt; frozen | String | Amount of frozen margin 
+| &gt; openPriceAvg | String | Average entry price 
+| &gt; leverage | String | Leverage 
+| &gt; achievedProfits | String | Realized PnL 
+| &gt; unrealizedPL | String | Unrealized PnL 
+| &gt; unrealizedPLR | String | Unrealized ROI 
+| &gt; liquidationPrice | String | Estimated liquidation price 
+| &gt; keepMarginRate | String | Maintenance margin rate 
+| &gt; isolatedMarginRate | String | Actual margin ratio under isolated margin mode 
+| &gt; marginRate | String | Occupancy rate of margin 
+| &gt; breakEvenPrice | String | Position breakeven price 
+| &gt; totalFee | String | Funding fee, the accumulated value of funding fee during the position,The initial value is empty, indicating that no funding fee has been charged yet. 
+| &gt; deductedFee | String | Deducted transaction fees: transaction fees deducted during the position 
+| &gt; cTime | String | Position creation time, milliseconds format of Unix timestamp, e.g.1597026383085 
+| &gt; uTime | String | Lastest position update time, milliseconds format of Unix timestamp, e.g.1597026383085
+
+# Fill Channel
+
+### Description[​](#description "Direct link to Description")
+
+Trade details channel
+
+Data will be pushed when order filled.
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "fill",            "instId": "default"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; channel | String | Yes | Channel name: <code>fill</code> 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | No | Product ID or default，<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures</a> 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "fill",        "instId": "default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name: <code>fill</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Product ID or default<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures</a> 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action":"snapshot",    "arg":{        "instType":"USDT-FUTURES",        "channel":"fill",        "instId":"default"    },    "data":[        {            "orderId":"111",            "tradeId":"222",            "symbol":"BTCUSDT",            "side":"buy",            "orderType":"market",            "posMode":"one_way_mode",            "price":"51000.5",            "baseVolume":"0.01",            "quoteVolume":"510.005",            "profit":"0",            "tradeSide":"open",            "tradeScope":"taker",            "feeDetail":[                {                    "feeCoin":"USDT",                    "deduction":"no",                    "totalDeductionFee":"0",                    "totalFee":"-0.183717"                }            ],            "cTime":"1703577336606",            "uTime":"1703577336606"        }    ],    "ts":1703577336700}
+```
+
+### 推送数据参数[​](#推送数据参数 "Direct link to 推送数据参数")
+
+| 返回字段 | 参数类型 | 字段说明 |
+| :-- | :-- | :-- |
+| action | String | <code>snapshot</code> 
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name: <code>fill</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Product ID or default<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures</a> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; orderId | String | Order ID 
+| &gt; tradeId | String | Trade ID 
+| &gt; symbol | String | Symbol Name 
+| &gt; side | String | Trade direction<br><code>buy</code>: Buy<br><code>sell</code>: Sell<br>Please note, for this channel, in hedge position mode, <strong>Open Long</strong> and <strong>Close Short</strong>, the "side" will be <code>buy</code>; <strong>Close Long</strong> and <strong>Open Short</strong>, the "side" will be <code>sell</code> 
+| &gt; orderType | String | Order type<br><code>limit </code>limit order<br><code>market</code> market order 
+| &gt; posMode | String | Hold Mode<br><code>one_way_mode</code><br><code>hedge_mode</code> 
+| &gt; price | String | Order price 
+| &gt; baseVolume | String | Amount of base coin 
+| &gt; quoteVolume | String | Amount of denomination coin 
+| &gt; profit | String | Realized PnL 
+| &gt; tradeSide | String | Trade type<br><code>close</code>: Close (open and close mode)<br><code>open</code>: Open (open and close mode)<br><code>reduce_close_long</code>: Liquidate partial long positions for hedge position mode<br><code>reduce_close_short</code>：Liquidate partial short positions for hedge position mode<br><code>burst_close_long</code>：Liquidate long positions for hedge position mode<br><code>burst_close_short</code>：Liquidate short positions for hedge position mode<br><code>offset_close_long</code>：Liquidate partial long positions for netting for hedge position mode<br><code>offset_close_short</code>：Liquidate partial short positions for netting for hedge position mode<br><code>delivery_close_long</code>：Delivery long positions for hedge position mode<br><code>delivery_close_short</code>：Delivery short positions for hedge position mode<br><code>dte_sys_adl_close_long</code>：ADL close long position for hedge position mode<br><code>dte_sys_adl_close_short</code>：ADL close short position for hedge position mode<br><code>buy_single</code>：Buy, one way postion mode<br><code>sell_single</code>：Sell, one way postion mode<br><code>reduce_buy_single</code>：Liquidate partial positions, buy, one way position mode<br><code>reduce_sell_single</code>：Liquidate partial positions, sell, one way position mode<br><code>burst_buy_single</code>：Liquidate short positions, buy, one way postion mode<br><code>burst_sell_single</code>：Liquidate partial positions, sell, one way position mode<br><code>delivery_sell_single</code>：Delivery sell, one way position mode<br><code>delivery_buy_single</code>：Delivery buy, one way position mode<br><code>dte_sys_adl_buy_in_single_side_mode</code>：ADL close position, buy, one way position mode<br><code>dte_sys_adl_sell_in_single_side_mode</code>：ADL close position, sell, one way position mode 
+| &gt; tradeScope | String | The liquidity direction<br><code>taker</code><br><code>maker</code> 
+| &gt; feeDetail | List&lt;Object&gt; | Transaction fee of the order 
+| &nbsp;&nbsp;&gt;&gt; deduction | String | deduction<br><code>yes</code><br><code>no</code> 
+| &nbsp;&nbsp;&gt;&gt; totalDeductionFee | String | Fee of deduction 
+| &nbsp;&nbsp;&gt;&gt; totalFee | String | Fee of all 
+| &nbsp;&nbsp;&gt;&gt; feeCoin | String | Currency of transaction fee 
+| &gt; cTime | String | Create Time，milliseconds format of Unix timestamp, e.g.1597026383085 
+| &gt; uTime | String | Update Time，milliseconds format of Unix timestamp, e.g.1597026383085
+
+# Order Channel
+
+### Description[​](#description "Direct link to Description")
+
+Subscribe the order channel
+
+Data will be pushed when the following events occured:
+
+1.  Open/Close orders are created
+2.  Open/Close orders are filled
+3.  Orders canceled
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "orders",            "instId": "default"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; channel | String | Yes | Channel name: <code>orders</code> 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | No | Trading pair, e.g. BTCUSDT<br><code>default</code>: All trading pairs<br>For settled Futures, it only supports <code>default</code> 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders",        "instId": "default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name: <code>orders</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Product ID 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders",        "instId": "default"    },    "data": [        {            "accBaseVolume": "0.01",            "cTime": "1695718781129",            "clientOId": "1",            "feeDetail": [                {                    "feeCoin": "USDT",                    "fee": "-0.162003"                }            ],            "fillFee": "-0.162003",            "fillFeeCoin": "USDT",            "fillNotionalUsd": "270.005",            "fillPrice": "27000.5",            "baseVolume": "0.01",            "fillTime": "1695718781146",            "force": "gtc",            "instId": "BTCUSDT",            "leverage": "20",            "marginCoin": "USDT",            "marginMode": "crossed",            "notionalUsd": "270",            "orderId": "1",            "orderType": "market",            "pnl": "0",            "posMode": "hedge_mode",            "posSide": "long",            "price": "0",            "priceAvg": "27000.5",            "reduceOnly": "no",            "stpMode": "cancel_taker",            "side": "buy",            "size": "0.01",            "enterPointSource": "WEB",            "status": "filled",            "tradeScope": "T",            "tradeId": "1111111111",            "tradeSide": "open",            "presetStopSurplusPrice": "21.4",            "totalProfits": "11221.45",            "presetStopLossPrice": "21.5",            "uTime": "1695718781146"        }    ],    "ts": 1695718781206}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name: <code>orders</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; orderId | String | Order ID 
+| &gt; clientOId | String | Customized order ID 
+| &gt; price | String | Order price 
+| &gt; size | String | Original order amount in coin 
+| &gt; posMode | String | Position Mode<br><code>one_way_mode</code>：one-way mode<br><code>hedge-mode</code>: hedge mode 
+| &gt; enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt; tradeSide | String | Trade Side trading direction 
+| &gt; notionalUsd | String | Estimated USD value of orders 
+| &gt; orderType | String | Order type<br><code>limit</code>: limit order<br><code>market</code>: market order 
+| &gt; force | String | Order validity period 
+| &gt; side | String | Order direction 
+| &gt; posSide | String | Position direction<br><code>long</code>: hedge-mode, long position<br><code>short</code>: hedge-mode, short position<br><code>net</code>: one-way-mode position 
+| &gt; marginMode | String | Margin mode<br><code>crossed</code>: crossed mode<br><code>isolated</code>: isolated mode 
+| &gt; marginCoin | String | Margin coin 
+| &gt; fillPrice | String | Latest filled price 
+| &gt; tradeId | String | Latest transaction ID 
+| &gt; baseVolume | String | Number of latest filled orders 
+| &gt; fillTime | String | Latest transaction time. Unix millisecond timestamp, e.g. 1690196141868 
+| &gt; fillFee | String | Transaction fee of the latest transaction, negative value 
+| &gt; fillFeeCoin | String | Currency of transaction fee of the latest transaction 
+| &gt; tradeScope | String | The liquidity direction of the latest transaction T: taker M maker 
+| &gt; accBaseVolume | String | Total filled quantity 
+| &gt; fillNotionalUsd | String | USD value of filled orders 
+| &gt; priceAvg | String | Average filled price<br>If the filled size is 0, the field is 0; if the order is not filled, the field is also 0; This field will not be pushed if the order is cancelled 
+| &gt; status | String | Order status<br>live: New order, waiting for a match in orderbook<br>partially_filled: Partially filled<br>filled: All filled<br>canceled: the order is cancelled 
+| &gt; leverage | String | Leverage 
+| &gt; feeDetail | List&lt;Object&gt; | Transaction fee of the order 
+| &gt;&gt; feeCoin | String | The currency of the transaction fee. The margin is charged. 
+| &gt;&gt; fee | String | Order transaction fee, the transaction fee charged by the platform from the user. 
+| &gt; pnl | String | Profit 
+| &gt; uTime | String | Order update time, Milliseconds format of updated data timestamp Unix, e.g. 1597026383085 
+| &gt; cTime | String | Order creation time, milliseconds format of Unix timestamp, e.g.1597026383085 
+| &gt; reduceOnly | String | Reduce-only<br><code>yes</code>: Yes<br><code>no</code>: No 
+| &gt; presetStopSurplusPrice | String | Set TP price 
+| &gt; presetStopLossPrice | String | Set SL price 
+| &gt; stpMode | String | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders 
+| &gt; totalProfits | String | Total profits
+
+# Trigger Order Channel
+
+### Description[​](#description "Direct link to Description")
+
+Subscribe trigger order channel
+
+Data will be pushed when the trigger plans are opened,cancelled,modified,triggered.
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "orders-algo",            "instId": "default"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; channel | String | Yes | Channel name:<code>orders-algo</code> 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | No | Trading pair 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name: orders-algo 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Product ID 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    },    "data": [        {            "instId": "BTCUSDT",            "orderId": "1",            "clientOid": "1",            "triggerPrice": "27000.000000000",            "triggerType": "fill_price",            "triggerTime": "1695719197612",            "planType": "pl",            "price": "27000.000000000",            "executePrice": "27000.000000000",            "size": "0.020000000",            "actualSize": "0.000000000",            "orderType": "market",            "side": "buy",            "tradeSide": "open",            "posSide": "long",            "marginCoin": "USDT",            "status": "live",            "posMode": "hedge_mode",            "enterPointSource": "web",            "stopSurplusTriggerType": "fill_price",            "stopLossTriggerType": "fill_price",            "stpMode": "cancel_taker",            "cTime": "1695719197612",            "uTime": "1695719197612"        }    ],    "ts": 1695719197733}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| action | String | Push action 
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name: orders-algo 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| &gt; orderId | String | Bot order ID 
+| &gt; clientOid | String | Customized bot order ID 
+| &gt; triggerPrice | String | Trigger price 
+| &gt; triggerType | String | Trigger type<br>fill_price: filled price<br>mark_price: mark price 
+| &gt; triggerTime | String | Trigger time, ms 
+| &gt; planType | String | Websocket trigger order type. Data will be pushed when modify,cancel,open,triggered the plan types below<br><code>pl</code>:Default value, trigger order<br><code>tp</code>:Partial take profit<br><code>sl</code>:Partial stop loss<br><code>ptp</code>:Position take profit<br><code>psl</code>:Position stop loss<br><code>track</code>:Trailing stop<br><code>mtpsl</code>:Trailing TP/SL 
+| &gt; price | String | Order price 
+| &gt; executePrice | String | Execute price 
+| &gt; size | String | Original order amount in coin 
+| &gt; actualSize | String | Actual number of orders in coin 
+| &gt; orderType | String | Order type<br>limit: limit order<br>market 
+| &gt; side | String | Order direction, 
+| &gt; tradeSide | String | Trade Side trading direction 
+| &gt; posSide | String | Position direction; 
+| &gt; marginCoin | String | Margin coin 
+| &gt; status | String | Order status<br><code>live</code>: plan order created<br><code>executed</code>: executed<br><code>fail_execute</code>: execute failed<br><code>cancelled</code>: cancelled<br><code>executing</code>: executing 
+| &gt; posMode | String | Position mode<br><code>one_way_mode</code>: one-way position mode<br><code>hedge_mode</code>: hedge postion mode 
+| &gt; enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt; stopSurplusPrice | String | Preset/Partial/Position position take-profit execution price;<br>1. When planType is pl, it represents the preset take-profit execution price.<br>2. When planType is tp, it represents the partial take-profit execution price.<br>3. When planType is ptp, it represents the position take-profit execution price. 
+| &gt; stopSurplusTriggerPrice | String | Preset/Partial/Position take-profit trigger price;<br>1. When planType is pl, it represents the preset take-profit trigger price.<br>2. When planType is tp, it represents the partial take-profit trigger price.<br>3. When planType is ptp, it represents the position take-profit trigger price.<br>It is empty when there is nothing. 
+| &gt; stopSurplusTriggerType | String | Preset/Partial/Position take-profit trigger type;<br>1. When planType is pl, it represents the preset take-profit trigger type.<br>2. When planType is tp, it represents the partial take-profit trigger type.<br>3. When planType is ptp, it represents the position take-profit trigger type.<br>It is empty when there is nothing. 
+| &gt; stopLossPrice | String | Preset/Partial/Position stop-loss execution price;<br>1. When planType is pl, it represents the preset stop-loss execution price.<br>2. When planType is sl, it represents the partial stop-loss execution price.<br>3. When planType is psl, it represents the position stop-loss execution price.<br>It is empty when there is nothing. 
+| &gt; stopLossTriggerPrice | String | Preset/Partial/Position stop-loss trigger price;<br>1. When planType is pl, it represents the preset stop-loss trigger price.<br>2. When planType is sl, it represents the partial stop-loss trigger price.<br>3. When planType is psl, it represents the position stop-loss trigger price. 
+| &gt; stopLossTriggerType | String | Preset/Partial/Position stop-loss trigger type;<br>1. When planType is pl, it represents the preset stop-loss trigger type.<br>2. When planType is sl, it represents the partial stop-loss trigger type.<br>3. When planType is psl, it represents the position stop-loss trigger type.<br>It is empty when there is nothing. 
+| &gt; uTime | String | Order update time, Milliseconds format of updated data timestamp Unix, e.g. 1597026383085 
+| &gt; stpMode | String | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders
+
+# History Position Channel
+
+### Description[​](#description "Direct link to Description")
+
+Subscribe the position channel
+
+Data will be pushed when the position totally closed
+
+Request Example
+
+```
+{    "args":[        {            "channel":"positions-history",            "instId":"default",            "instType":"USDT-FUTURES"        }    ],    "op":"subscribe"}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; channel | String | Yes | Channel name: <code>positions-history</code> 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | Yes | Symbol name,<code>default</code>represents all the symbols，Only default is supported now 
+
+Response Example
+
+```
+{    "event":"subscribe",    "arg":{        "instType":"USDT-FUTURES",        "channel":"positions-history",        "instId":"default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name: <code>positions-history</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | <code>default</code> 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action":"snapshot",    "arg":{        "instType":"USDT-FUTURES",        "channel":"positions-history",        "instId":"default"    },    "data":[        {            "posId":"1",            "instId":"BTCUSDT",            "marginCoin":"USDT",            "marginMode":"crossed",            "holdSide":"short",            "posMode":"one_way_mode",            "openPriceAvg":"20000.0",            "closePriceAvg":"26221.0",            "openSize":"0.010",            "closeSize":"0.010",            "achievedProfits":"-62.21000000",            "settleFee":"-0.02277989",            "openFee":"-0.12000000",            "closeFee":"-0.15732600",            "cTime":"1696907951177",            "uTime":"1697090609976"        }    ],    "ts":1697099840122}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| action | String | 'snapshot' 
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name: <code>positions-history</code> 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
+| &gt; instId | String | <code>default</code> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; posId | String | Position ID 
+| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| &gt; marginCoin | String | Currency of occupied margin 
+| &gt; marginMode | String | Margin mode<br><code>fixed</code>: isolated mode<br><code>crossed</code>: crossed mode 
+| &gt; holdSide | String | Position direction 
+| &gt; posMode | String | Position mode 
+| &gt; openPriceAvg | String | Average entry price 
+| &gt; closePriceAvg | String | Average close price 
+| &gt; openSize | String | Open size 
+| &gt; closeSize | String | Close size 
+| &gt; achievedProfits | String | Realized PnL 
+| &gt; settleFee | String | Settle fee 
+| &gt; openFee | String | Total open fee 
+| &gt; closeFee | String | Total close fee 
+| &gt; cTime | String | Position creation time, milliseconds format of Unix timestamp, e.g.1597026383085 
+| &gt; uTime | String | Lastest position update time, milliseconds format of Unix timestamp, e.g.1597026383085
+
+# Rest API Error Code
+
+| Error message | Error code | http status code |
+| --- | --- | --- |
+| 00000 | success! | 400 
+| 40001 | ACCESS_KEY cannot be empty | 400 
+| 40002 | ACCESS_SIGN cannot be empty | 400 
+| 40003 | Signature cannot be empty | 400 
+| 40004 | Request timestamp expired | 400 
+| 40005 | Invalid ACCESS_TIMESTAMP | 400 
+| 40006 | Invalid ACCESS_KEY | 400 
+| 40007 | Invalid Content_Type | 400 
+| 40008 | Request timestamp expired | 400 
+| 40009 | sign signature error | 400 
+| 40010 | Request timed out | 400 
+| 40011 | ACCESS_PASSPHRASE cannot be empty | 400 
+| 40012 | apikey/password is incorrect | 400 
+| 40013 | User status is abnormal | 400 
+| 40014 | Incorrect permissions, need {0} permissions | 400 
+| 40015 | System is abnormal, please try again later | 400 
+| 40016 | The user must bind the phone or Google | 400 
+| 40017 | Parameter verification failed {0} | 400 
+| 00171 | Parameter verification failed {0}{1} | 400 
+| 00172 | Parameter verification failed | 400 
+| 40018 | Invalid IP | 400 
+| 40019 | Parameter {0} cannot be empty | 400 
+| 40020 | Parameter {0} error | 400 
+| 40021 | User disable withdraw | 400 
+| 40022 | The business of this account has been restricted | 400 
+| 40023 | The business of this account has been restricted | 400 
+| 40024 | Account has been frozen | 400 
+| 40025 | The business of this account has been restricted | 400 
+| 40026 | User is disabled | 400 
+| 40027 | Withdrawals in this account area must be kyc | 400 
+| 40028 | This subUid does not belong to this account | 400 
+| 40029 | This account is not a Broker, please apply to become a Broker first | 400 
+| 40031 | The account has been cancelled and cannot be used again | 400 
+| 40032 | The Max of sub-account created has reached the limit | 400 
+| 40033 | This email has been bound | 400 
+| 40034 | Parameter {0} does not exist | 400 
+| 50001 | coin {0} does not support cross | 400 
+| 50002 | symbol {0} does not support isolated | 400 
+| 50003 | coin {0} does not support isolated | 400 
+| 50004 | symbol {0} does not support cross | 400 
+| 40035 | Judging from your login information, you are required to complete KYC first for compliance reasons. | 400 
+| 40036 | passphrase is error | 400 
+| 40037 | Apikey does not exist | 400 
+| 40038 | The current ip is not in the apikey ip whitelist | 400 
+| 40039 | FD Broker's user signature error | 400 
+| 40040 | user api key permission setting error | 400 
+| 40041 | User's ApiKey does not exist | 400 
+| 40043 | FD Broker does not exist | 400 
+| 40045 | The bound user cannot be an FD broker | 400 
+| 40047 | FD Broker binding related interface call frequency limit | 400 
+| 40048 | The user's ApiKey must be the parent account | 400 
+| 40049 | User related fields decrypt error | 400 
+| 40051 | This account is not a FD Broker, please apply to become a FD Broker first | 400 
+| 40052 | Security settings have been modified for this account. For the safety of your account, withdrawals are prohibited within 24 hours | 400 
+| 40053 | Value range verification failed: {0} should be between {1} | 400 
+| 40054 | The data fetched by {0} is empty | 400 
+| 40055 | subName must be an English letter with a length of 8 | 400 
+| 40056 | remark must be length of 1 ~ 20 | 400 
+| 40057 | Parameter {0} {1} does not meet specification | 400 
+| 40058 | Parameter {0} Only a maximum of {1} is allowed | 400 
+| 40059 | Parameter {0} should be less than {1} | 400 
+| 40060 | subNames already exists | 400 
+| 40061 | sub-account not allow access | 400 
+| 40063 | API exceeds the maximum limit added | 400 
+| 40064 | Sub-account creation failed, please check if there is a duplicate | 400 
+| 40065 | This subApikey does not exist | 400 
+| 40066 | This subUid does not belong to the account or is not a virtual sub-account | 400 
+| 40067 | sub-account create failed, please check if there is a duplicate | 400 
+| 40068 | Disable subaccount access | 400 
+| 40069 | The maximum number of sub-accounts created has been reached | 400 
+| 40070 | passphrase 8-32 characters with letters and numbers | 400 
+| 40071 | subName exist duplication | 400 
+| 40072 | symbol {0} is Invalid or not supported mix contract trade | 400 
+| 40102 | Symbol does not exist | 400 
+| 40109 | The data of the order cannot be found, please confirm the order number | 400 
+| 40200 | Server upgrade, please try again later | 400 
+| 40301 | Permission has not been obtained yet. If you need to use it, please contact customer service | 400 
+| 40303 | Can only query up to 20,000 data | 400 
+| 40304 | clientOid or clientOrderId length cannot greater than 50 | 400 
+| 40305 | clientOid or clientOrderId length cannot greater than 64, and cannot be Martian characters | 400 
+| 40306 | Batch processing orders can only process up to 20 | 400 
+| 40308 | The contract is being temporarily maintained | 400 
+| 40309 | The contract has been removed | 400 
+| 40400 | Status check abnormal | 400 
+| 40401 | The operation cannot be performed | 400 
+| 40402 | orderId or clientOId format error | 400 
+| 40407 | The query direction is not the direction entrusted by the plan | 400 
+| 40408 | Range error | 400 
+| 40409 | wrong format | 400 
+| 40704 | Can only check the data of the last three months | 400 
+| 40705 | The start and end time cannot exceed 90 days | 400 
+| 40706 | Wrong order price | 400 
+| 40707 | Start time is greater than end time | 400 
+| 40708 | client_oid duplicate | 400 
+| 40709 | There is no position in this position, and no automatic margin call can be set | 400 
+| 40710 | Abnormal account status | 400 
+| 40711 | Insufficient contract account balance | 400 
+| 40712 | Insufficient margin | 400 
+| 40713 | Cannot exceed the maximum transferable margin amount | 400 
+| 40714 | No direct margin call is allowed | 400 
+| 40715 | delegate count can not high max of open count | 400 
+| 40716 | This trading pair not support Cross Margin mode | 400 
+| 40717 | The number of closed positions cannot exceed the number of sheets held | 400 
+| 40718 | The entrusted price of Pingduo shall not be lower than the bursting price | 400 
+| 40719 | Flat empty entrustment price is not allowed to be higher than explosion price | 400 
+| 40720 | swap hand depth does not exist | 400 
+| 40721 | Market price list is not allowed at present | 400 
+| 40722 | Due to excessive price fluctuations and the insufficient market price entrusted cost, the opening commission is failed. | 400 
+| 40723 | The total number of unexecuted orders is too high | 400 
+| 40724 | Parameter is empty | 400 
+| 40725 | service return an error | 400 
+| 40726 | Cross margin not support Auto Margin Replenishment (AMR) | 400 
+| 40727 | Cross margin not support margin adjustment | 400 
+| 40728 | You’re log in as trader, please close position for current copy trade orders | 400 
+| 40729 | Failed to adjust the position, the current position or order or plan order | 400 
+| 40730 | There is currently a commission or a planned commission, and the leverage cannot be adjusted | 400 
+| 40731 | This product does not support copy trading | 400 
+| 40732 | Not currently a trader | 400 
+| 40199 | Traders are prohibited from calling the API | 400 
+| 40733 | The order closing has been processed | 400 
+| 40734 | Failed to place an order, the minimum number of traders to open a position {0} | 400 
+| 40735 | Long position take profit price should be greater than the average opening price | 400 
+| 40736 | Long position take profit price is greater than the current price | 400 
+| 40737 | The short position take profit price should be less than the average opening price | 400 
+| 40738 | The short position take profit price should be less than the current price | 400 
+| 40739 | The stop loss price of a long position should be less than the average opening price | 400 
+| 40740 | The stop loss price of a long position should be less than the current price | 400 
+| 40741 | The stop loss price of a short position should be greater than the average opening price | 400 
+| 40742 | The stop loss price of the short position should be greater than the current price | 400 
+| 40743 | The order is being closed and cannot be closed again | 400 
+| 40744 | The tracking order status is wrong | 400 
+| 40745 | This order is being commissioned, and liquidation is not supported temporarily | 400 
+| 40746 | The current maximum number of positions that can be closed is {0}, if you exceed the number, please go to the current order to close the position | 400 
+| 40747 | The bonus is not allowed to hold two-way positions | 400 
+| 40748 | The commission price is higher than the highest bid price | 400 
+| 40749 | The commission price is lower than the lowest selling price | 400 
+| 40750 | The plan commission for this contract has reached the upper limit | 400 
+| 40751 | The contract's stop profit and stop loss order has reached the upper limit | 400 
+| 40752 | You are disabled for current business, if you have any questions, please contact customer service | 400 
+| 40753 | The contract transaction business is disabled, if you have any questions, please contact customer service | 400 
+| 40754 | balance not enough | 400 
+| 40755 | Not enough open positions are available. | 400 
+| 40756 | The balance lock is insufficient. | 400 
+| 40757 | Not enough position is available. | 400 
+| 40758 | The position lock is insufficient. | 400 
+| 40759 | No assets | 400 
+| 40760 | Account abnormal status | 400 
+| 40761 | The total number of unfilled orders is too high | 400 
+| 40762 | The order size is greater than the max open size | 400 
+| 40763 | The number of orders cannot exceed the maximum amount of the corresponding gear | 400 
+| 40764 | The remaining amount of the order is less than the current transaction volume | 400 
+| 40765 | The remaining volume of the position is less than the current transaction volume | 400 
+| 40766 | The number of open orders is less than this transaction volume | 400 
+| 40767 | Position does not exist when opening a position | 400 
+| 40768 | Order does not exist | 400 
+| 40769 | Reject order has been completed | 400 
+| 40770 | The settlement or fee currency configuration was not found. | 400 
+| 40771 | When there is a gap, you cannot have a position closing order. | 400 
+| 40772 | The account does not exist | 400 
+| 40773 | Closed positions can only occur in two-way positions. | 400 
+| 40774 | The order type for unilateral position must also be the unilateral position type. | 400 
+| 40775 | The market-making account can only be a unilateral position type. | 400 
+| 40776 | Error creating order. | 400 
+| 40777 | Cancel order error. | 400 
+| 40778 | Coin pair {0} does not support {1} currency as margin | 400 
+| 40779 | Please check that the correct delegateType is used | 400 
+| 40780 | There are multiple risk handling records for the same symbolId at the same time | 400 
+| 40781 | The transfer order was not found | 400 
+| 40782 | Internal transfer error | 400 
+| 40783 | No gear found | 400 
+| 40784 | Need to configure modify depth account | 400 
+| 40785 | Need to configure draw line account | 400 
+| 40786 | Duplicate clientOid | 400 
+| 40787 | The price step does not match | 400 
+| 40788 | Internal batch transfer error | 400 
+| 40789 | The tokenId is duplicated in the configuration item | 400 
+| 40790 | Duplicate symbolCode in configuration item | 400 
+| 40791 | The baseToken or quoteToken of symbolCode does not exist | 400 
+| 40792 | The symbol in the configuration item is duplicated | 400 
+| 40793 | The symbolCode of BusinessSymbol does not exist | 400 
+| 40794 | The supportMarginToken of BusinessSymbol is not configured | 400 
+| 40795 | The transaction is suspended due to settlement or maintenance reasons | 400 
+| 40796 | The adjusted leverage is not within the appropriate range | 400 
+| 40797 | Exceeded the maximum settable leverage | 400 
+| 40798 | Insufficient contract account balance | 400 
+| 40799 | Cannot be less than the minimum transfer amount | 400 
+| 40800 | Insufficient amount of margin | 400 
+| 40801 | Cannot exceed the maximum transferable deposit amount | 400 
+| 40802 | Position is zero and direct margin call is not allowed | 400 
+| 40803 | The leverage is reduced and the amount of margin call is incorrect | 400 
+| 40804 | The number of closed positions cannot exceed the number of positions held | 400 
+| 40805 | Unsupported operation | 400 
+| 40806 | Unsupported currency | 400 
+| 40807 | The account does not exist | 400 
+| 40808 | Parameter verification exception {0} | 400 
+| 40809 | Execution price parameter verification exception | 400 
+| 40810 | Triggered price parameter verification exception | 400 
+| 40811 | The parameter {0} should not be null | 400 
+| 40812 | The condition {0} is not met | 400 
+| 40813 | The parameter {0} must have a value and cannot be empty | 400 
+| 40814 | No change in leverage | 400 
+| 40815 | The order price is higher than the highest bid price | 400 
+| 40816 | The order price is lower than the lowest selling price | 400 
+| 40817 | The current order status cannot be cancelled | 400 
+| 40818 | The current order type cannot be cancelled | 400 
+| 40819 | The order does not exist! | 400 
+| 40820 | The order price for closing a long position is not allowed to be lower than the liquidation price | 400 
+| 40821 | The closing order price cannot be higher than the liquidation price | 400 
+| 40822 | The contract configuration does not exist | 400 
+| 40823 | The transaction or reasonable marked price does not exist | 400 
+| 40824 | Currently, it is not allowed to list market orders | 400 
+| 40825 | Contract opponent depth does not exist | 400 
+| 40826 | Due to excessive price fluctuations, the market order cost is insufficient, and the position opening order failed. | 400 
+| 40827 | The bonus is not allowed to hold two-way positions | 400 
+| 40828 | Special market making accounts cannot manually place orders | 400 
+| 40829 | The take profit price of a long position should be greater than the average open price | 400 
+| 40830 | The take profit price of the long position should be greater than the current price | 400 
+| 40831 | The short position take profit price should be less than the average open price | 400 
+| 40832 | The take profit price of short positions should be less than the current price | 400 
+| 40833 | The stop loss price of a long position should be less than the average opening price | 400 
+| 40834 | The stop loss price of the long position should be less than the current price | 400 
+| 40835 | The stop loss price of the short position should be greater than the average opening price | 400 
+| 40836 | The stop loss price of the short position should be greater than the current price | 400 
+| 40837 | There is no position in this position, so stop-profit and stop-loss orders cannot be made | 400 
+| 40838 | There is no position in this position, and automatic margin call cannot be set | 400 
+| 40839 | The automatic margin call function of this contract has been suspended | 400 
+| 40840 | Duplicate shard market making account | 400 
+| 40841 | Online environment does not allow execution | 400 
+| 40842 | Current configuration does not allow adjustment, please try again later | 400 
+| 40843 | no_datasource_key_exists | 400 
+| 40844 | This contract is under temporary maintenance | 400 
+| 40845 | This contract has been removed | 400 
+| 40846 | Status verification abnormal | 400 
+| 40847 | The operation cannot be performed | 400 
+| 40848 | Cannot open a copy transaction if there is a position | 400 
+| 40849 | This user already has an ongoing copy | 400 
+| 40850 | The copy is in progress, the balance cannot be transferred | 400 
+| 40851 | Account status is wrong, cannot end copying | 400 
+| 40852 | There are unfilled orders, cannot end the copy | 400 
+| 40853 | There is an unexecuted plan order, cannot end the copy | 400 
+| 40854 | This product does not support copy trading | 400 
+| 40855 | The user has ended copying and cannot end copying again | 400 
+| 40856 | Data abnormal | 400 
+| 40857 | Document number error | 400 
+| 40858 | Error tracking order status | 400 
+| 40859 | This order is being closed and cannot be closed again | 400 
+| 40860 | The trader does not exist and cannot be set to follow | 400 
+| 40861 | The trader has been disabled and cannot be set to follow | 400 
+| 40862 | Please cancel the current order | 400 
+| 40863 | Please cancel the current plan | 400 
+| 40864 | Please close the current position with orders | 400 
+| 40865 | This order is being commissioned, and it is not currently supported to close the position | 400 
+| 40866 | You are currently a trader, please close the position under the current order | 400 
+| 40867 | Currently the maximum number of positions that can be closed is {0}, please go to the current order to close the position if the amount exceeds | 400 
+| 40868 | You are currently a trader and currently do not support liquidation through planned orders | 400 
+| 40869 | You are currently a trader and currently do not support modification of leverage | 400 
+| 40870 | You are currently copying an order and currently do not support modifying the leverage | 400 
+| 40871 | The leverage does not meet the configuration, and you cannot become a trader | 400 
+| 40872 | Failed to adjust position, currently holding position or order or plan order | 400 
+| 40873 | The account has a margin and needs to be transferred out | 400 
+| 40874 | Whole position mode does not support automatic margin call | 400 
+| 40875 | Whole position mode does not support margin adjustment | 400 
+| 40876 | Too many tracking orders | 400 
+| 40877 | Too many follow-up orders | 400 
+| 40878 | The contract index data is abnormal. In order to avoid causing your loss, please try again later. | 400 
+| 40879 | The risk is being processed, and the funds cannot be adjusted. | 400 
+| 40880 | The risk is being processed and the leverage cannot be adjusted. | 400 
+| 40881 | There is currently an order, or an order is planned, and the leverage cannot be adjusted. | 400 
+| 40882 | You are currently a trader and you cannot switch to the full position mode | 400 
+| 40883 | When the currencies are mixed, it cannot be adjusted to the warehouse-by-warehouse mode | 400 
+| 40884 | When a one-way position is held, it cannot be adjusted to a position-by-position mode | 400 
+| 40885 | In the case of position by position mode, it cannot be adjusted to one-way position | 400 
+| 40886 | The automatic margin call cannot be adjusted in the full position mode | 400 
+| 40887 | Failed to place the order, the number of single lightning open positions is at most {0} | 400 
+| 40888 | Failed to place the order, the maximum amount of single lightning closing is {0} | 400 
+| 40889 | The plan order of this contract has reached the upper limit | 400 
+| 40890 | The order of stop-profit and stop-loss for this contract has reached the upper limit | 400 
+| 40891 | Insufficient position, can not set take profit or stop loss | 400 
+| 40892 | Failed to place the order, the minimum number of positions opened by the trader is {0} | 400 
+| 40893 | Unable to update the leverage factor of this position, there is not enough margin! | 400 
+| 40894 | The documentary closing has been processed | 400 
+| 40895 | The preset price does not match the order/execution price | 400 
+| 40896 | The default stop profit and stop loss has been partially fulfilled and cannot be modified | 400 
+| 40897 | The system experience gold account does not exist | 400 
+| 40898 | The system experience gold account balance is insufficient | 400 
+| 40899 | The number of stored users exceeds the limit | 400 
+| 40900 | The system experience gold account is inconsistent | 400 
+| 40901 | The contract experience fund balance is insufficient | 400 
+| 40902 | Future time is not allowed | 400 
+| 40903 | Failed to obtain leverage information | 400 
+| 40904 | Failed to collect funds | 400 
+| 40905 | Failed to collect user funds | 400 
+| 40906 | Failed to pay user funds | 400 
+| 40907 | The payment cannot be transferred | 400 
+| 40908 | Concurrent operation failed | 400 
+| 40909 | Transfer processing | 400 
+| 40910 | Operation timed out | 400 
+| 40911 | Request timestamp expired | 400 
+| 40912 | single cancel cannot exceed 50 | 400 
+| 40913 | {0} must be passed one | 400 
+| 40914 | Trader the maximum leverage can use is {0} | 400 
+| 40915 | Long position take profit price please &gt; mark price | 400 
+| 40916 | The business of this account has been restricted | 400 
+| 40917 | Stop price for long positions please &lt; mark price {0} | 400 
+| 40918 | Traders open positions with orders too frequently | 400 
+| 40919 | This function is not open yet | 400 
+| 40920 | Position or order exists, the position mode cannot be switched | 400 
+| 40921 | The order size cannot exceed the maximum size of the positionLevel | 400 
+| 40922 | Only work order modifications are allowed | 400 
+| 40923 | Order size and price have not changed | 400 
+| 40924 | orderId and clientOid must have one | 400 
+| 40925 | price or size must be passed in together | 400 
+| 43013 | Take profit price needs&gt; current price | 400 
+| 43014 | Take profit price needs to be &lt;current price | 400 
+| 43015 | Stop loss price needs to be &lt;current price | 400 
+| 43016 | Stop loss price needs to be&gt; current price | 400 
+| 43017 | You are currently a trader and currently do not support liquidation through planned orders | 400 
+| 43020 | Stop profit and stop loss order does not exist | 400 
+| 43021 | The stop-profit and stop-loss order has been closed | 400 
+| 43022 | Failed to trigger the default stop loss | 400 
+| 43023 | Insufficient position, can not set profit or stop loss | 400 
+| 43024 | Take profit/stop loss in an existing order, please change it after canceling all | 400 
+| 43025 | Plan order does not exist | 400 
+| 43026 | The planned order has been closed | 400 
+| 43027 | The minimum order value {0} is not met | 400 
+| 43028 | Please enter an integer multiple of {0} for price | 400 
+| 43029 | The size of the current Order &gt; the maximum number of positions that can be closed | 400 
+| 43030 | Take profit order already existed | 400 
+| 43031 | Stop loss order already existed | 400 
+| 43032 | rangeRate is smaller than {0} | 400 
+| 43033 | Trailing order does not exist | 400 
+| 43034 | The trigger price should be ≤ the current market price | 400 
+| 43035 | The trigger price should be ≥ the current market price | 400 
+| 43036 | Trader modify tpsl can only be operated once within 300ms | 400 
+| 43037 | The minimum order amount allowed for trading is {0} | 400 
+| 43038 | The maximum order amount allowed for trading is {0} | 400 
+| 43039 | Maximum price limit exceeded {0} | 400 
+| 43040 | Minimum price limit exceeded {0} | 400 
+| 43041 | Maximum transaction amount {0} | 400 
+| 43042 | Minimum transaction amount {0} | 400 
+| 43043 | There is no position | 400 
+| 43044 | The follow order status error | 400 
+| 43045 | The trader is ful | 400 
+| 43046 | User does not exist | 400 
+| 43047 | Followers are not allowed to follow again within xx minutes after being removed, please try again later! | 400 
+| 43048 | The symbol is null | 400 
+| 43049 | Margin coin is not allowed | 400 
+| 43050 | Leverage exceeds the effective range | 400 
+| 43051 | Maximum limit exceeded | 400 
+| 43052 | Follow order count can not less than {0} | 400 
+| 43053 | The copy ratio cannot exceed {0} | 400 
+| 43054 | The copy ratio cannot be less than {0} | 400 
+| 43055 | The take loss ratio must be between {0}-{1} | 400 
+| 43056 | The take profit ratio must be between {0}-{1} | 400 
+| 43057 | It is not allowed to bring orders or copy orders between sub-accounts | 400 
+| 43058 | Parameter verification failed | 400 
+| 43059 | Request failed, please try again | 400 
+| 43060 | Sort rule must send | 400 
+| 43061 | Sort Flag must send | 400 
+| 43062 | not to follow | 400 
+| 43063 | Can not follow trade with yourself | 400 
+| 43064 | Tracking order status error | 400 
+| 43065 | Tracking No does not exist | 400 
+| 43066 | operation failed | 400 
+| 43067 | The loaded data has reached the upper limit, and the maximum support for loading {0} data | 400 
+| 43068 | The status of the current follower is abnormal and removal is not allowed for now | 400 
+| 43069 | A follower account can only be removed when its equity is lower than {0} USDT | 400 
+| 43001 | The order does not exist | 400 
+| 43002 | Pending order failed | 400 
+| 43003 | Pending order failed | 400 
+| 43004 | There is no order to cancel | 400 
+| 43005 | Exceed the maximum number of orders | 400 
+| 43006 | The order quantity is less than the minimum transaction quantity | 400 
+| 43007 | The order quantity is greater than the maximum transaction quantity | 400 
+| 43008 | The current order price cannot be less than {0}{1} | 400 
+| 43009 | The current order price exceeds the limit {0}{1} | 400 
+| 43010 | The transaction amount cannot be less than {0}{1} | 400 
+| 43011 | The parameter does not meet the specification {0} | 400 
+| 43012 | Insufficient balance | 400 
+| 41103 | param {0} error | 400 
+| 41101 | param {0} error | 400 
+| 41113 | symbol is offline | 400 
+| 41114 | The current trading pair is under maintenance, please refer to the official announcement for the opening time | 400 
+| 42013 | transfer fail | 400 
+| 42014 | The current currency does not support deposit | 400 
+| 42015 | The current currency does not support withdrawal | 400 
+| 42016 | symbol {0} is Invalid or not supported spot trade | 400 
+| 41100 | error {0} | 400 
+| 43111 | param error {0} | 400 
+| 43112 | The amount of coins withdrawn is less than the handling fee {0} | 400 
+| 43113 | The daily limit {0} is exceeded in a single transaction | 400 
+| 43114 | Withdrawal is less than the minimum withdrawal count {0} | 400 
+| 43115 | The current trading pair is opening soon, please refer to the official announcement for the opening time | 400 
+| 43116 | This chain requires a tag to withdraw coins | 400 
+| 43117 | Exceeds the maximum amount that can be transferred | 400 
+| 43118 | clientOrderId duplicate | 400 
+| 43119 | Trading is not open | 400 
+| 43120 | symbol is not open trade | 400 
+| 43121 | Withdrawal address cannot be your own | 400 
+| 43122 | The purchase limit of this currency is {0}, and there is still {1} left | 400 
+| 43123 | param error {0} | 400 
+| 43124 | withdraw step is error | 400 
+| 43125 | No more than 8 decimal places | 400 
+| 43126 | This currency does not support withdrawals | 400 
+| 43127 | Sub transfer not by main account, or main/sub relationship error | 400 
+| 43128 | Exceeded the limit of the maximum number of orders for the total transaction pair {0} | 400 
+| 45034 | clientOid duplicate | 400 
+| 47001 | Currency recharge is not enabled | 400 
+| 47002 | Address verification failed | 400 
+| 45001 | Unknown error | 400 
+| 45002 | Insufficient asset | 400 
+| 45003 | Insufficient position | 400 
+| 45004 | Insufficient lock-in asset | 400 
+| 45005 | Insufficient available positions | 400 
+| 45006 | Insufficient position | 400 
+| 45007 | Insufficient lock position | 400 
+| 45008 | No assets | 400 
+| 45009 | The account is at risk and cannot perform trades temporarily | 400 
+| 45010 | The number of orders cannot exceed the maximum amount of the corresponding leverage | 400 
+| 45011 | Order remaining volume &lt; Current transaction volume | 400 
+| 45012 | Remaining volume of position &lt; Volume of current transaction | 400 
+| 45013 | The number of open orders &lt; Current transaction volume | 400 
+| 45014 | Position does not exist during opening | 400 
+| 45017 | Settlement or the coin for transaction configuration not found | 400 
+| 45018 | In the case of a netting, you cannot have a liquidation order | 400 
+| 45019 | Account does not exist | 400 
+| 45020 | Liquidation can only occur under two-way positions | 400 
+| 45021 | When one-way position is held, the order type must also be one-way position type | 400 
+| 45023 | Error creating order | 400 
+| 45024 | Cancel order error | 400 
+| 45025 | The currency pair does not support the currency as a margin | 400 
+| 45026 | Please check that the correct delegateType is used | 400 
+| 45031 | The order is finalized | 400 
+| 45035 | Price step mismatch | 400 
+| 45043 | Due to settlement or maintenance reasons, the trade is suspended | 400 
+| 45044 | Leverage is not within the suitable range after adjustment | 400 
+| 45045 | Exceeds the maximum possible leverage | 400 
+| 45047 | Reduce the leverage and the amount of additional margin is incorrect | 400 
+| 45051 | Execution price parameter verification is abnormal | 400 
+| 45052 | Trigger price parameter verification anbormal | 400 
+| 45054 | No change in leverage | 400 
+| 45055 | The current order status cannot be cancelled | 400 
+| 45056 | The current order type cannot be cancelled | 400 
+| 45057 | The order does not exist! | 400 
+| 45060 | TP price of long position &gt; Current price {0} | 400 
+| 45061 | TP price of short position &lt; Current price {0} | 400 
+| 45062 | SL price of long position &lt; Current price {0} | 400 
+| 45064 | TP price of long position &gt; order price {0} | 400 
+| 45065 | TP price of short position &lt; order price {0} | 400 
+| 45066 | SL price of long position &lt; order price {0} | 400 
+| 45067 | SL price of short position &gt; order price {0} | 400 
+| 45068 | There is no position temporarily, and the order of TP and SL cannot be carried out | 400 
+| 45075 | The user already has an ongoing copy trade | 400 
+| 45082 | Copy trade number error | 400 
+| 45089 | You are currently copy trading, leverage cannot be changed | 400 
+| 45091 | Too many tracking orders | 400 
+| 45097 | There is currently an order or a limit order, and the leverage cannot be adjusted | 400 
+| 45098 | You are currently a trader and cannot be switched to the full position mode | 400 
+| 45099 | When there are different coins, it cannot be adjusted to Isolated Margin mode | 400 
+| 45100 | When a one-way position is held, it cannot be adjusted to the Isolated Margin mode | 400 
+| 45101 | In Isolated Margin mode, it cannot be adjusted to a one-way position | 400 
+| 45102 | In the full position mode, the automatic margin call cannot be adjusted | 400 
+| 45103 | Failed to place the order, the maximum amount of single flash opening position is %s | 400 
+| 45104 | Failed to place the order, the maximum amount of single flash closing position is %s | 400 
+| 45106 | copy trade liquidation has been processed | 400 
+| 45107 | API is restricted to open positions. If you have any questions, please contact our customer service | 400 
+| 45108 | API is restricted to close position. If you have any questions, please contact our customer service | 400 
+| 45109 | The current account is a two-way position | 400 
+| 45110 | less than the minimum amount {0} USDT | 400 
+| 45111 | less than the minimum order quantity | 400 
+| 45112 | more than the maximum order quantity | 400 
+| 45113 | Maximum order value limit triggered | 400 
+| 45114 | The minimum order requirement is not met | 400 
+| 45115 | The price you enter should be a multiple of {0} | 400 
+| 45116 | The count of positions hold by the account exceeds the maximum count {0} | 400 
+| 45117 | Currently holding positions or orders, the margin mode cannot be adjusted | 400 
+| 45118 | Reached the upper limit of the order of transactions (the current number of order + the current number of orders) {0} | 400 
+| 45119 | This symbol does not support position opening operation | 400 
+| 45120 | size &gt; max can open order size | 400 
+| 45121 | The reasonable mark price deviates too much from the market, and your current leveraged position opening risk is high | 400 
+| 45122 | Short position stop loss price please &gt; mark price {0} | 400 
+| 45123 | Insufficient availability, currently only market orders can be placed | 400 
+| 45124 | Please edit and submit again. | 400 
+| 45125 | Order cancellation is unavailable for inactive orders. Please cancel parent order and place a new order. | 400 
+| 45126 | Order cancellation is unavailable for inactive orders. Please cancel parent order and place a new order. | 400 
+| 45127 | Position brackets disabled TP SL | 400 
+| 45128 | Position brackets disabled modify qty | 400 
+| 45129 | Cancel order is too frequent, the same orderId is only allowed to be canceled once in a second | 400 
+| 49000 | apiKey and userId mismatch | 400 
+| 49001 | not custody account, operation deny | 400 
+| 49002 | missing http header: ACCESS-BROKER-KEY or ACCESS-BROKER-SIGN | 400 
+| 49003 | illegal IP, access deny | 400 
+| 49004 | illegal ACCESS-BROKER-KEY | 400 
+| 49005 | access deny: sub account | 400 
+| 49006 | ACCESS-BROKER-SIGN check sign fail | 400 
+| 49007 | account is unbound | 400 
+| 49008 | account is bound | 400 
+| 49009 | clientUserId check mismatch with the bound user ID | 400 
+| 49010 | account: {0} still have assets: {1} | 400 
+| 49011 | kyc must be done before bind | 400 
+| 49020 | unsupported coin | 400 
+| 49021 | operation accepted | 400 
+| 49022 | access deny | 400 
+| 49023 | insufficient fund | 400 
+| 49024 | {0} decimal precision error | 400 
+| 49025 | Parameter mismatch with the initial requestId, request body: {0} | 400 
+| 49026 | {0} maximum {1} digits | 400 
+| 49030 | custody account, operation deny | 400 
+| 49040 | Unknown Error | 400 
+| 60001 | StartTime not empty | 400 
+| 60002 | MerchantId not empty | 400 
+| 60003 | Not found the p2p order | 400 
+| 60004 | Not found the p2p advertisement | 400 
+| 60005 | Not found the p2p merchant | 400 
+| 70001 | Activity ID not correct | 400 
+| 70002 | rankType error | 400 
+| 40000 | Bitget is providing services to many countries and regions around the world and strictly adheres to the rules and regulatory requirements of each country and region. According to the relevant regulations, Bitget is currently unable to provide services to your region (Mainland China) and you do not have access to open positions.Apologies for any inconvenience caused! | 400 
+| 48001 | Parameter validation failed {0} | 400 
+| 48002 | Missing request Parameter | 400 
+| 46013 | This symbol limits the selling amount{0}，Remaining{0} | 400 
+| 40404 | Request URL NOT FOUND | 400 
+| 50010 | Unknown error | 400 
+| 50012 | The account has been suspended or deleted. Please contact our Customer Support | 400 
+| 50013 | The account has been suspended and deleted. Please contact our Customer Support | 400 
+| 50019 | The user is forbidden to trade. | 400 
+| 50059 | This currency cannot be transferred | 400 
+| 50052 | The asset balance will be less than 0 after transferring | 400 
+| 50048 | The maximum number of orders is exceeded | 400 
+| 50046 | The price is too low | 400 
+| 50047 | The price is too high | 400 
+| 50026 | The trading pair is currently unavailable | 400 
+| 50025 | The trading pair is currently unavailable | 400 
+| 50016 | The number of open orders is smaller than the minimum limit of the trading pair | 400 
+| 50017 | The number of open orders is bigger than the maximum limit of the trading pair | 400 
+| 50023 | The account has been suspended due to abnormal behavior. Please contact our Customer Support is you have any questions. | 400 
+| 50031 | System error | 400 
+| 50044 | The system account is not found | 400 
+| 50049 | The request body of the system user is empty | 400 
+| 50050 | The system loan collection has been done | 400 
+| 50027 | The trading pair is suspended for maintenance | 400 
+| 50030 | The trading pair will soon be available | 400 
+| 50029 | The trading pair has no order price | 400 
+| 50028 | The trading pair is removed | 400 
+| 50040 | The repayment amount must be more than 0 | 400 
+| 50042 | The repayment amount must be more than the interest | 400 
+| 50041 | The repayment amount must be less than your available balance | 400 
+| 50051 | The user in reconciliation is not in the system (cache) | 400 
+| 50024 | The trading pair does not exist | 400 
+| 50011 | Parameter verification error | 400 
+| 50053 | The amount is less than 0 when making loan repayment | 400 
+| 50056 | The amount is less than 0 when paying liquidation fees | 400 
+| 50054 | The amount is less than 0 when making interest repayment | 400 
+| 50055 | The amount is less than 0 when paying trading fees | 400 
+| 50033 | The topic of the websocket query does not exist | 400 
+| 50057 | The amount is less than 0 when paying the excessive loss resulted from liquidation | 400 
+| 50032 | The currency does not exist | 400 
+| 50036 | The loan configuration does not exist | 400 
+| 50037 | This currency cannot be borrowed | 400 
+| 50038 | The system limit is exceeded | 400 
+| 50034 | The borrowing amount must be over 0.00000001 | 400 
+| 50035 | The maximum borrowing amount is exceeded | 400 
+| 50020 | Insufficient balance | 400 
+| 50045 | Insufficient locked asset | 400 
+| 50015 | Currently, sub-accounts cannot engage in margin trading | 400 
+| 50021 | The margin trading account does not exist | 400 
+| 50022 | The account is liquidated | 400 
+| 50014 | The account already exists | 400 
+| 50060 | Duplicated clientOid | 400 
+| 50058 | After the profit is used to cover the excessive loss resulted from liquidation, the balance will be less than 0 | 400 
+| 50039 | The currency and the trading pair do not match | 400 
+| 50018 | The price must be 0 or higher | 400 
+| 50043 | Unknown transaction type | 400 
+| 50061 | There is a problem with the parameter you requested | 400 
+| 50062 | The order status is cancelled or fullFill | 400 
+| 50063 | Token precision must less than or equal to eight | 400 
+| 50064 | Your account is temporarily frozen. Please contact customer support if you have any questions | 400 
+| 50065 | symbol_off_shelf | 400 
+| 50066 | Position closing, please try again later | 400 
+| 31001 | The user is not a trader | 400 
+| 31002 | Condition {0} is not satisfied | 400 
+| 31003 | Parameter {0} must have a value, cannot be empty | 400 
+| 31004 | Take profit price must be &gt; current price | 400 
+| 31005 | Stop loss price must be &lt; current price | 400 
+| 31006 | The order is in the process of being placed, closing of the position is not supported at the moment | 400 
+| 31007 | Order does not exist | 400 
+| 31008 | There is no position in this position, no take profit or stop loss order can be made | 400 
+| 31009 | Tracking order status error | 400 
+| 31010 | Clear user prompt | 400 
+| 31011 | The order is not completely filled and the order is closed prompting the cancellation of the commission | 400 
+| 31012 | Pullback greater than {0} | 400 
+| 31013 | Pullback range is less than {0} | 400 
+| 31014 | Stop gain yield greater than {0} | 400 
+| 31015 | Stop loss yield less than {0} | 400 
+| 31016 | Batch execution exception | 400 
+| 31017 | Maximum price limit exceeded {0} | 400 
+| 31018 | Minimum price change of {0} | 400 
+| 31019 | Support trading currency pair does not exist | 400 
+| 31020 | Business is restricted | 400 
+| 31021 | The currency pair is not available for trading, please select another currency pair | 400 
+| 31022 | Minimum order size for this trading area is not met, please select another trading area | 400 
+| 31023 | Ending order processing | 400 
+| 31024 | The order is not completely filled, please go to \"Spot trading\"-\"Current orders\" to cancel the order and then sell or close the operation! | 400 
+| 31025 | The user is not a trader | 400 
+| 31026 | The user is not exist | 400 
+| 31027 | Operation failed, please try again | 400 
+| 31028 | Parameter verification failed | 400 
+| 31029 | User is not existed | 400 
+| 31030 | Chosen trading pair is empty | 400 
+| 31031 | You’re log in as trader,can not follow trade | 400 
+| 31032 | Can not follow trade with yourself | 400 
+| 31033 | Fail to remove | 400 
+| 31034 | This trader’s no. of follower has reached limit, please select other trader | 400 
+| 31035 | Follow order ratio can not less than{0} | 400 
+| 31036 | Follow order ratio can not greater than{0} | 400 
+| 31037 | Follow order count can not less than{0} | 400 
+| 31038 | Exceeds max. limit | 400 
+| 31039 | Can not set reminder as your Elite Trader status has been revoked | 400 
+| 31040 | T/P ratio must between {0}%%-{1}%% | 400 
+| 31041 | S/L ratio must between {0}%%-{1}%% | 400 
+| 31042 | The status of your Elite Trader has been suspended, please contact online customer service to resume. | 400 
+| 31043 | Your copy trade follower cap is too high. Please contact customer support to lower it if you want to enable this function! | 400 
+| 31044 | You are applying to become a trader now. Copying trade is not allowed | 400 
+| 31045 | The max. quantity for TP/SL is {0}. For any quantity exceeding this limit, please operate under “Initiated Copies”. | 400 
+| 31046 | No copy trade relationship is allowed between a parent account and its sub-account | 400 
+| 31047 | No copying is allowed within {0} minutes after the copier has been removed. Please try again later. | 400 
+| 31048 | Only this trader's referrals are allowed to follow this trader at the moment. Please create an account with the trader's referral link! | 400 
+| 31049 | The trader's status is abnormal or has been revoked, and cannot be viewed at this time! | 400 
+| 31050 | This trader UID is already set for the region. | 400 
+| 31051 | traderUserId error | 400 
+| 31052 | Cannot set trading symbol that have not been opened by traders. | 400 
+| 31053 | executePrice cannot exceed triggerPrice 的{0} | 400 
+| 31054 | No order to cancel | 400 
+| 20001 | startTime should be less than endTime | 400 
+| 22001 | No order to cancel | 400 
+| 22002 | No position to close | 400 
+| 22003 | modify price and size, please pass in newClientOid | 400 
+| 22004 | This symbol {0} not support API trade | 400 
+| 22005 | This symbol does not support cross mode | 400 
+| 22006 | limit price &gt; risk price | 400 
+| 22007 | limit price &lt; risk price | 400 
+| 22008 | market price &gt; risk price | 400 
+| 22009 | market price &lt; risk price | 400 
+| 22010 | Please bind ip whitelist address | 400 
+| 40100 | Due to regulatory requirements, Hong Kong IPs are required to complete identity verification first | 400 
+| 40101 | Please complete KYC | 400 
+| 00001 | startTime and endTime interval cannot be greater than 366 days | 400 
+| 12001 | {0} can be used at most | 400 
+| 12002 | Current currency {0}, limit net sell value {1} USD | 400 
+| 12003 | Current currency {0}, limit net buy value {1} USD | 400 
+| 13001 | Withdraw is too frequent | 400 
+| 13002 | Currency does not exist | 400 
+| 13003 | Withdrawal exceeds the monthly limit | 400 
+| 13004 | Your remaining withdrawal amount{0} | 400 
+| 13005 | Failed to generate address | 400 
+| 60006 | Parameter error | 400 
+| 60007 | upload image cannot exceed 5M | 400 
+| 60008 | The image format must be [". jpg", ". jpeg", ". png"] | 400 
+| 60009 | The image format error | 400 
+| 60010 | upload error | 400 
+| 60011 | Ordinary users can not post ads | 400 
+| 60012 | Please change your status from offline to online before posting your ads！ | 400 
+| 60013 | Insufficient balance | 400 
+| 60014 | Fiat info not found | 400 
+| 60015 | Digital currency info not found | 400 
+| 60016 | Only supports publish CNY advertisement | 400 
+| 60017 | Not support publish CNY advertisement | 400 
+| 60018 | Your KYC certification only supports publishing {0} | 400 
+| 60019 | Post failed. Unable to obtain preference price | 400 
+| 60020 | advertisement type error | 400 
+| 60021 | Payment method is empty | 400 
+| 60022 | Trading amount incorrect | 400 
+| 60023 | Beyond fiat limit ({0}-{1}) | 400 
+| 60024 | Fund reconciliation errors | 400 
+| 60025 | The remark length cannot be longer than the configuration length | 400 
+| 60026 | Exclusive country error | 400 
+| 60027 | Payment time limit error | 400 
+| 60028 | Payment method error | 400 
+| 60029 | publish advertisement error | 400 
+| 60030 | status error | 400 
+| 60031 | The advertisement number is too long | 400 
+| 60032 | The advertisement not exist | 400 
+| 60033 | Posted ad amount incorrect | 400 
+| 60034 | Number of images attached in the remark cannot exceed the allocation limit. | 400 
+| 60035 | Edit advertisement error | 400 
+| 60036 | payTimeLimit cannot be empty | 400 
+| 60037 | Post failed. Price is significantly deviated from preference price | 400 
+| 60038 | Post failed. Incorrect floating rate | 400 
+| 60039 | User does not exist | 400 
+| 60040 | Unauthorized access not supported | 400 
+| 60041 | Edit advertisement price error | 400 
+| 60042 | limitPrice not empty | 400 
+| 60043 | The advertisement status update fail | 400 
+| 60044 | The advertisement status in editing can be edited | 400 
+| 60045 | Exceeding the number of advertisement that can be published | 400 
+| 60046 | priceValue not empty | 400 
+| 60047 | userPayMethodId not empty | 400 
+| 40927 | The return field type or dest of this order does not meet expectations | 400 
+| 40172 | Illegal position open or close type | 400 
+| 43071 | Trigger order limit for a single trading pair is {0} | 400 
+| 43075 | Position pattern mismatch | 400 
+| 41104 | Unsupported coin: {0} | 400 
+| 43129 | Transfer coin not support or invalid coin | 400 
+| 43130 | StartTime params error | 400 
+| 41001 | the account not exist | 400 
+| 41002 | param error {0} | 400 
+| 49050 | unsupported chain | 400 
+| 49051 | Missing callback signature request header | 400 
+| 49052 | callback signature verification failed | 400 
+| 49053 | can not bind other platforms | 400 
+| 49060 | The switch of adding money to cobo is not turned on | 400 
+| 49061 | The custody currency is not allowed | 400 
+| 49062 | fundId is invalid or not exist {0} | 400 
+| 49063 | The custody currency already exists | 400 
+| 49064 | Insufficient amount of shadow account | 400 
+| 49065 | User withdrawal address already exists | 400 
+| 49066 | The switch of cobo money reduction is not turned on | 400 
+| 49067 | fundSupplementId is invalid {0} | 400 
+| 49068 | No currency available for settlement | 400 
+| 49069 | There is an unfinished fund process, which cannot be cleared and settled | 400 
+| 49070 | Clearing settlement must include all currencies | 400 
+| 49071 | fundSettlementId is invalid {0} | 400 
+| 49072 | Failed to get user assets | 400 
+| 49073 | Confirm that the set of fundIds receivable for clearing and settlement is not all fundIds | 400 
+| 49074 | The settlement process has not been completed, and fund operations cannot be performed | 400 
+| 49075 | Failed to query the address list of bg clearing and settlement account | 400 
+| 49076 | cobo callback params error | 400 
+| 49077 | Failed to call the cobo transaction query interface | 400 
+| 49078 | cobo withdrawal transaction callback requestId is invalid {0} | 400 
+| 49079 | supplement type illegal | 400 
+| 49080 | cobo confirms settlement, txId is invalid | 400 
+| 49081 | Request amount parameter error | 400 
+| 70020 | Account does not exist | 400 
+| 31057 | user has not follow order | 400 
+| 22011 | It is not allowed to set auto add margin in cross mode | 400 
+| 22012 | There are different business lines, {0} does not belong to {1} product | 400 
+| 22013 | Abnormal status of position experience coupon | 400 
+| 22014 | This position experience coupon does not exist | 400 
+| 22015 | This user has no position experience coupon sub-account | 400 
+| 22016 | This user is not a sub-account for position experience coupons and cannot operate experience coupons | 400 
+| 22017 | The position experience coupon does not support this tokenId | 400 
+| 22018 | The face value of the position experience coupon is a negative number | 400 
+| 22019 | The position experience coupon has not expired yet | 400 
+| 22020 | The leverage multiple is the leverage multiple of the current position and cannot be adjusted. | 400 
+| 22021 | Limit orders are not supported when placing orders with position experience coupons | 400 
+| 22022 | The position experience coupon has been used | 400 
+| 22023 | The trial coupon for this position has expired | 400 
+| 22024 | The experience coupon for this position has been recycled | 400 
+| 22025 | Margin cannot be added to the experience coupon account | 400 
+| 22026 | The position mode cannot be adjusted for the experience coupon account | 400 
+| 22027 | The position experience coupon does not support this currency pair | 400 
+| 22028 | The position experience coupon does not support this type of order | 400 
+| 40104 | Based on your IP address , it appears that you are located in a country or region where we are currently unable to provide services | 400 
+| 01002 | {0} precision must be less than or equal to {1} | 400 
+| 70006 | Parameter value range verification failed: {0} | 400 
+| 70007 | Parameter verification failed: {0}, please make sure the time is within 30 days | 400 
+| 70008 | Parameter verification failed: {0}, please make sure the time is within 30 days | 400 
+| 40172 | traderId cannot be empty | 400 
+| 40172 | settings cannot be empty | 400 
+| 40172 | update trace setting cannot exceed 50 | 400 
+| 40172 | maxHoldSize cannot be empty | 400 
+| 40172 | trackingNoList cannot be empty | 400 
+| 40172 | settingType cannot be empty | 400 
+| 80001 | illegal params | 400 
+| 80002 | system error | 400 
+| 80003 | Loan coin not exist | 400 
+| 80004 | Place coin not exist | 400 
+| 80005 | Place single minimum limit | 400 
+| 80006 | Place single Maximum limit | 400 
+| 80007 | Loan single minimum limit | 400 
+| 80008 | Loan single maximum limit | 400 
+| 80009 | Loan pool not enough | 400 
+| 80010 | place float exceed | 400 
+| 80011 | Order not exist | 400 
+| 80012 | Pledge not exist | 400 
+| 80013 | Extract exceed maximum limit | 400 
+| 80014 | Operate limit amount is {0} USDT | 400 
+| 80015 | Order count maximum limit | 400 
+| 80016 | Order status illegal | 400 
+| 59001 | Product does not exist | 400 
+| 59002 | Insufficient product balance | 400 
+| 59003 | This product is not available for purchase yet | 400 
+| 59004 | You are not a VIP and cannot purchase this product | 400 
+| 59005 | KYC verification not performed | 400 
+| 59006 | The country where KYC is located cannot apply for subscription | 400 
+| 59007 | Minimum limit for single currency subscription | 400 
+| 59008 | Maximum single currency subscription limit | 400 
+| 59009 | The subscription amount does not meet the step size verification | 400 
+| 59010 | The precision of the subscription amount cannot exceed {0} digits | 400 
+| 59011 | Insufficient balance | 400 
+| 59012 | Product does not exist | 400 
+| 59013 | Parameter exception: {0} | 400 
+| 59014 | Parameter precision exception | 400 
+| 59015 | The product is not online and cannot be purchased. | 400 
+| 59016 | The total position of a single person is exceeded | 400 
+| 59017 | Product subscription has been suspended | 400 
+| 59018 | The subscription start time has not been reached | 400 
+| 59019 | The subscription time range is {0} ~ {1} | 400 
+| 59020 | Minimum limit for single subscription | 400 
+| 59021 | Operation failed | 400 
+| 59022 | Insufficient balance | 400 
+| 59023 | Insufficient product remaining quota, remaining {0} | 400 
+| 59024 | Amount cannot be empty when redeeming current financial management | 400 
+| 59025 | orderId cannot be empty when redeeming regular financial management | 400 
+| 59026 | Product does not exist | 400 
+| 59027 | This product is a novice product. You are not a novice user. Please choose another product. | 400 
+| 59028 | Product hidden | 400 
+| 59029 | Product cannot be subscribe | 400 
+| 59030 | Exceeding the max amount for once subscribe | 400 
+| 59031 | Cannot perform redemption operation | 400 
+| 59033 | Less than redemption minimum limit | 400 
+| 59034 | The redemption amount accuracy cannot exceed {0} digits | 400 
+| 59035 | The redemption amount must be greater than the minimum limit | 400 
+| 59036 | Exceeded maximum single transaction limit | 400 
+| 59037 | The current order status does not allow operation | 400 
+| 59038 | Redemption is not allowed on the day of expiration | 400 
+| 59039 | Cannot perform redemption operation | 400 
+| 59040 | The redemption time range is {0}-{1} | 400 
+| 59041 | The accuracy of the subscription amount is not met | 400 
+| 59042 | Insufficient balance | 400 
+| 59043 | Insufficient product remaining quota, remaining {0} {1} | 400 
+| 59044 | Operations are frequent, please try again later. | 400 
+| 59045 | subscription time range is {0}~{1} | 400 
+| 59046 | Operation failed | 400 
+| 59047 | redemption time range is {0}-{1} | 400 
+| 59048 | fixed redemption not pass amount | 400 
+| 59049 | Product does not exist | 400 
+| 40172 | orderId cannot be empty | 400 
+| 40172 | repayAll cannot be empty | 400 
+| 40172 | repayAll illegal value | 400 
+| 40172 | daily illegal value | 400 
+| 40172 | daily cannot be empty | 400 
+| 40172 | loanCoin cannot be empty | 400 
+| 40172 | pledgeCoin cannot be empty | 400 
+| 40172 | reviseType cannot be empty | 400 
+| 40172 | reviseType illegal value | 400 
+| 70101 | illegal parameter | 400 
+| 70102 | Parameter verification failed-brokerUserId | 400 
+| 70103 | Parameter verification failed-startTime | 400 
+| 70104 | Parameter verification failed-endTime | 400 
+| 40172 | coinNameList length should be in 1-100 | 400 
+| 40172 | symbolList length should be in 1-100 | 400 
+| 40172 | transferType not empty | 400 
+| 40172 | dest not empty | 400 
+| 40172 | symbolList length should be in 1-100 | 400 
+| 40172 | productType not empty | 400 
+| 40172 | symbolList not empty | 400 
+| 40172 | planType not empty | 400 
+| 40172 | planType Illegal type | 400 
+| 40172 | The price cannot be less than or equal to 0 | 400 
+| 40172 | newTriggerPrice not empty | 400 
+| 40172 | The triggerPrice cannot be less than or equal to 0 | 400 
+| 40172 | newTriggerType not empty | 400 
+| 40172 | followerUid not empty | 400 
+| 19000 | operation failed | 400 
+| 40074 | {0} MatchRunServer not exist | 400 
+| 40078 | Timestamp for this request is outside of the ME receiveWindow. | 400 
+| 40079 | receiveWindow timestamp must be less than 60s | 400 
+| 20002 | {0} Only one is allowed to be passed | 400 
+| 40928 | Risk control, currently your max open size is {0} {1}. The size was calculated with all the main-sub accounts | 400 
+| 22029 | Risk control, you can currently open a maximum position of {0} {1}. The risk control proportion limit for a uid is calculated including all main accounts and sub-accounts. | 400 
+| 40929 | TraderPro Maximum leverage is {0}X | 400 
+| 22030 | {0} Demo trading mode，can not use:{1} | 400 
+| 40930 | The remaining quantity for your normal order is {0}{1}, and the quantity for post only order is {2}{3} | 400 
+| 40931 | Trigger the risk control of position closing , prohibiting position closing | 400 
+| 22034 | Less than the minimum order amount | 400 
+| 22035 | Demo account open position too frequently | 400 
+| 22036 | API limits opening positions | 400 
+| 22037 | API limits closing positions | 400 
+| 22038 | Please enter the quantity as an integral multiple of {0} | 400 
+| 22039 | Limit open position when delivery is approaching. | 400 
+| 22040 | Limit open order when delivery is approaching. | 400 
+| 22041 | Limit close order when delivery is approaching. | 400 
+| 22042 | When a one-way position is held, trigger order cannot only reduce positions. | 400 
+| 22043 | ADL processing，{0} is limit close position | 400 
+| 22044 | ADL processing，cannot flash close Position | 400 
+| 22045 | Insufficient liquidity in the market, please operate later | 400 
+| 22067 | ADL processing，forbid operate the symbol:{0} | 400
+
+# WebSocket Error Code
+
+| Error Message | Error Code |
+| :-- | :-- |
+| Channel does not exist | 30001 
+| Illegal request | 30002 
+| Invalid op | 30003 
+| User needs to log in | 30004 
+| Login failed | 30005 
+| request too many | 30006 
+| request over limit,connection close | 30007 
+| Invalid ACCESS_KEY | 30011 
+| Invalid ACCESS_PASSPHRASE | 30012 
+| Invalid ACCESS_TIMESTAMP | 30013 
+| Request timestamp expired | 30014 
+| Invalid signature | 30015 
+| Param error | 30016
