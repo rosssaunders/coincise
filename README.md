@@ -42,6 +42,9 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/coinbaseexchange.png" alt="Coinbase" height="16" style="vertical-align: middle;"> | Coinbase Exchange | Public REST | [Public REST API Docs](docs/coinbase/exchange/public_rest_api.md) | 2025-03-29 |
 | <img src="assets/icons/coinbaseexchange.png" alt="Coinbase" height="16" style="vertical-align: middle;"> | Coinbase Exchange | Private REST | [Private REST API Docs](docs/coinbase/exchange/private_rest_api.md) | 2025-03-29 |
 | <img src="assets/icons/coinbaseexchange.png" alt="Coinbase" height="16" style="vertical-align: middle;"> | Coinbase Exchange | WebSocket | [WebSocket API Docs](docs/coinbase/exchange/websocket_api.md) | 2025-03-29 |
+| <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Common | [Common API Docs](docs/bitget/common_api.md) | 2025-03-31 |
+| <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Spot | [Spot API Docs](docs/bitget/spot_api.md) | 2025-03-31 |
+| <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Contract | [Contract API Docs](docs/bitget/contract_api.md) | 2025-03-31 |
 
 ## Contributing
 
