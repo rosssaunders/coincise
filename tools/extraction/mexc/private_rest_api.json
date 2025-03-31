@@ -1,0 +1,22 @@
+{
+  "output_directory": "../../../../docs/mexc",
+  "combined_filename": "private_rest_api.md",
+  "urls": [
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#private-endpoints",
+      "filename": "private_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-endpoints",
+      "filename": "account_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#order-endpoints",
+      "filename": "order_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints",
+      "filename": "wallet_endpoints.md"
+    }
+  ]
+}

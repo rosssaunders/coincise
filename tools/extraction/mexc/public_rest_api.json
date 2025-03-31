@@ -1,0 +1,18 @@
+{
+  "output_directory": "../../../../docs/mexc",
+  "combined_filename": "public_rest_api.md",
+  "urls": [
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#public-endpoints",
+      "filename": "public_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#market-endpoints",
+      "filename": "market_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#public-market-data",
+      "filename": "public_market_data.md"
+    }
+  ]
+}

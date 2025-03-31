@@ -1,0 +1,28 @@
+{
+  "name": "mexc-api-scraper",
+  "version": "1.0.0",
+  "description": "Scraper for MEXC API documentation with markdown output",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "scrape": "node index.js scrape",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mexc",
+    "api",
+    "documentation",
+    "scraper",
+    "markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^24.4.0",
+    "turndown": "^7.0.0",
+    "jsdom": "^26.0.0"
+  },
+  "bin": {
+    "mexc-scraper": "./index.js"
+  }
+}

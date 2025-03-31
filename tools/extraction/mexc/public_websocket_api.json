@@ -1,0 +1,18 @@
+{
+  "output_directory": "../../../../docs/mexc",
+  "combined_filename": "public_websocket_api.md",
+  "urls": [
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#public-websocket-endpoints",
+      "filename": "public_websocket_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#market-websocket-endpoints",
+      "filename": "market_websocket_endpoints.md"
+    },
+    {
+      "url": "https://mexcdevelop.github.io/apidocs/spot_v3_en/#ticker-websocket-endpoints",
+      "filename": "ticker_websocket_endpoints.md"
+    }
+  ]
+}
