@@ -1,0 +1,3 @@
+use puppeteer and node to scrape all exchange apis
+use puppeteer "^24.4.0"
+use turndown "7.0.0"
