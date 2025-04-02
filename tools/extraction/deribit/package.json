@@ -1,0 +1,14 @@
+{
+  "name": "deribit-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "bash run_scrapers.sh"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "24.5.0",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}
