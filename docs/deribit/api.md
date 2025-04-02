@@ -8,15 +8,15 @@ Overview
 
 Deribit provides three different interfaces to access the API:
 
-*   [JSON-RPC over Websocket](index.html#json-rpc)
-*   [JSON-RPC over HTTP](index.html#json-rpc)
-*   [FIX](index.html#fix-api) (Financial Information eXchange)
+*   [JSON-RPC over Websocket](#json-rpc)
+*   [JSON-RPC over HTTP](#json-rpc)
+*   [FIX](#fix-api) (Financial Information eXchange)
 
 Deribit features a testing environment, `test.deribit.com`, which can be used to test the API. For this reason all examples in this documentation refer to that environment. To reach the production environment it should be changed to `www.deribit.com`. Note that both environments are separate, which means that they require separate accounts and credentials (API keys) to authenticate using private methods - test credentials do not work in production environment and vice versa.
 
 To see the list of your API keys check **Account > API** tab, where you'll also find a link to API Console (`>_ Api Console`) which allows you to test JSON-RPC API, both via HTTP and Websocket.
 
-*   [Error Codes](index.html#rpc-error-codes) (HTTP and Websocket RPC Error codes)
+*   [Error Codes](#rpc-error-codes) (HTTP and Websocket RPC Error codes)
 
 Naming
 ------
@@ -168,9 +168,9 @@ Notifications
 
 API users can subscribe to certain types of notifications. This means that they will receive JSON-RPC notification-messages from the server when certain events occur, such as changes to the index price or changes to the order book for a certain instrument.
 
-The API methods [public/subscribe](index.html#public-subscribe) and [private/subscribe](index.html#private-subscribe) are used to set up a subscription. Since HTTP does not support the sending of messages from server to client, these methods are only available when using the Websocket transport mechanism.
+The API methods [public/subscribe](#public-subscribe) and [private/subscribe](#private-subscribe) are used to set up a subscription. Since HTTP does not support the sending of messages from server to client, these methods are only available when using the Websocket transport mechanism.
 
-At the moment of subscription a "channel" must be specified. The channel determines the type of events that will be received. See [Subscriptions](index.html#subscriptions) for more details about the channels.
+At the moment of subscription a "channel" must be specified. The channel determines the type of events that will be received. See [Subscriptions](#subscriptions) for more details about the channels.
 
 In accordance with the JSON-RPC specification, the format of a notification is that of a request message without an `id` field. The value of the `method` field will always be `"subscription"`. The `params` field will always be an object with 2 members: `channel` and `data`. The value of the `channel` member is the name of the channel (a string). The value of the `data` member is an object that contains data that is specific for the channel.
 
@@ -179,7 +179,7 @@ Authentication
 
 > An example of a JSON request with token:
 
-The API consists of `public` and `private` methods. The public methods do not require authentication. The private methods use OAuth 2.0 authentication. This means that a valid OAuth access token must be included in the request, which can be achieved by calling method [public/auth](index.html#public-auth).
+The API consists of `public` and `private` methods. The public methods do not require authentication. The private methods use OAuth 2.0 authentication. This means that a valid OAuth access token must be included in the request, which can be achieved by calling method [public/auth](#public-auth).
 
 When the token was assigned to the user, it should be passed along, with other request parameters, back to the server:
 
@@ -317,7 +317,7 @@ Creating, editing and removing API Keys is available only with access tokens wit
 JSON-RPC over websocket
 -----------------------
 
-Websocket is the preferred transport mechanism for the JSON-RPC API, because it is faster and because it can support [subscriptions](index.html#subscriptions) and [cancel on disconnect](index.html#private-enable_cancel_on_disconnect). The code examples that can be found next to each of the methods show how websockets can be used from Python or Javascript/node.js.
+Websocket is the preferred transport mechanism for the JSON-RPC API, because it is faster and because it can support [subscriptions](#subscriptions) and [cancel on disconnect](#private-enable_cancel_on_disconnect). The code examples that can be found next to each of the methods show how websockets can be used from Python or Javascript/node.js.
 
 JSON-RPC over HTTP
 ------------------
@@ -338,7 +338,7 @@ Retrieve an Oauth access token, to be used for authentication of 'private' reque
 Three methods of authentication are supported:
 
 *   `client_credentials` - using the client id and client secret that can be found on the API page on the website
-*   `client_signature` - using the client id that can be found on the API page on the website and user generated signature. The signature is calculated using some fields provided in the request, using formula described here [Deribit signature credentials](index.html#additional-authorization-method-signature-credentials-websocket-api)
+*   `client_signature` - using the client id that can be found on the API page on the website and user generated signature. The signature is calculated using some fields provided in the request, using formula described here [Deribit signature credentials](#additional-authorization-method-signature-credentials-websocket-api)
 *   `refresh_token` - using a refresh token that was received from an earlier invocation
 
 The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.
@@ -356,7 +356,7 @@ The response will contain an access token, expiration period (number of seconds 
 | nonce | false | string |  | Optional for grant type <code>client_signature</code>; delivers user generated initialization vector for the server token 
 | data | false | string |  | Optional for grant type <code>client_signature</code>; contains any user specific value 
 | state | false | string |  | Will be passed back in the response 
-| scope | false | string |  | Describes type of the access for assigned token, possible values: <code>connection</code>, <code>session:name</code>, <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>expires:NUMBER</code>, <code>ip:ADDR</code>.<br><br>Details are elucidated in <a href="index.html#access-scope">Access scope</a> 
+| scope | false | string |  | Describes type of the access for assigned token, possible values: <code>connection</code>, <code>session:name</code>, <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>expires:NUMBER</code>, <code>ip:ADDR</code>.<br><br>Details are elucidated in <a href="#access-scope">Access scope</a> 
 
 ### Response
 
@@ -654,7 +654,7 @@ Tests the connection to the API server, and returns its version. You can use thi
 Subscription management
 =======================
 
-Subscription works as [notifications](index.html#notifications), so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in [subscriptions](index.html#subscriptions) section.
+Subscription works as [notifications](#notifications), so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in [subscriptions](#subscriptions) section.
 
 /public/subscribe
 -----------------
@@ -663,7 +663,7 @@ Subscription works as [notifications](index.html#notifications), so users will a
 
 Subscribe to one or more channels.
 
-This is the same method as [/private/subscribe](index.html#private_subscribe), but it can only be used for 'public' channels.
+This is the same method as [/private/subscribe](#private_subscribe), but it can only be used for 'public' channels.
 
 ### Parameters
 
@@ -1514,7 +1514,7 @@ Retrieves the order book, along with other market values for a given instrument.
 
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
-| instrument_name | true | string |  | The instrument name for which to retrieve the order book, see <a href="index.html#public-get_instruments"><code>public/get_instruments</code></a> to obtain instrument names. 
+| instrument_name | true | string |  | The instrument name for which to retrieve the order book, see <a href="#public-get_instruments"><code>public/get_instruments</code></a> to obtain instrument names. 
 | depth | false | integer | <code>1</code><br><code>5</code><br><code>10</code><br><code>20</code><br><code>50</code><br><code>100</code><br><code>1000</code><br><code>10000</code> | The number of entries to return for bids and asks. 
 
 ### Response
@@ -1571,7 +1571,7 @@ Retrieves the order book, along with other market values for a given instrument 
 
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
-| instrument_id | true | integer |  | The instrument ID for which to retrieve the order book, see <a href="index.html#public-get_instruments"><code>public/get_instruments</code></a> to obtain instrument IDs. 
+| instrument_id | true | integer |  | The instrument ID for which to retrieve the order book, see <a href="#public-get_instruments"><code>public/get_instruments</code></a> to obtain instrument IDs. 
 | depth | false | integer | <code>1</code><br><code>5</code><br><code>10</code><br><code>20</code><br><code>50</code><br><code>100</code><br><code>1000</code><br><code>10000</code> | The number of entries to return for bids and asks. 
 
 ### Response
@@ -1839,7 +1839,7 @@ This is a matching engine method.
 | trigger | false | string | <code>index_price</code><br><code>mark_price</code><br><code>last_price</code> | Defines the trigger type. Required for <code>"Stop-Loss"</code>, <code>"Take-Profit"</code> and <code>"Trailing"</code> trigger orders 
 | advanced | false | string | <code>usd</code><br><code>implv</code> | Advanced option order type. (Only for options. Advanced USD orders are not supported for linear options.) 
 | mmp | false | boolean |  | Order MMP flag, only for order_type 'limit' 
-| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="index.html#public-get_time">/public/time</a> method to obtain current server time. 
+| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="#public-get_time">/public/time</a> method to obtain current server time. 
 | linked_order_type | false | string | <code>one_triggers_other</code><br><code>one_cancels_other</code><br><code>one_triggers_one_cancels_other</code> | <p>The type of the linked order.</p><ul><li><code>"one_triggers_other"</code> - Execution of primary order triggers the placement of one or more secondary orders.</li><li><code>"one_cancels_other"</code> - The execution of one order in a pair automatically cancels the other, typically used to set a stop-loss and take-profit simultaneously.</li><li><code>"one_triggers_one_cancels_other"</code> - The execution of a primary order triggers two secondary orders (a stop-loss and take-profit pair), where the execution of one secondary order cancels the other.</li></ul> 
 | trigger_fill_condition | false | string | <code>first_hit</code><br><code>complete_fill</code><br><code>incremental</code> | <p>The fill condition of the linked order (Only for linked order types), default: <code>first_hit</code>.</p><ul><li><code>"first_hit"</code> - any execution of the primary order will fully cancel/place all secondary orders.</li><li><code>"complete_fill"</code> - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li><li><code>"incremental"</code> - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li></ul> 
 | otoco_config | false | array of objects |  | <p>List of trades to create or cancel when this order is filled.</p> 
@@ -1986,7 +1986,7 @@ This is a matching engine method.
 | trigger | false | string | <code>index_price</code><br><code>mark_price</code><br><code>last_price</code> | Defines the trigger type. Required for <code>"Stop-Loss"</code>, <code>"Take-Profit"</code> and <code>"Trailing"</code> trigger orders 
 | advanced | false | string | <code>usd</code><br><code>implv</code> | Advanced option order type. (Only for options. Advanced USD orders are not supported for linear options.) 
 | mmp | false | boolean |  | Order MMP flag, only for order_type 'limit' 
-| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="index.html#public-get_time">/public/time</a> method to obtain current server time. 
+| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="#public-get_time">/public/time</a> method to obtain current server time. 
 | linked_order_type | false | string | <code>one_triggers_other</code><br><code>one_cancels_other</code><br><code>one_triggers_one_cancels_other</code> | <p>The type of the linked order.</p><ul><li><code>"one_triggers_other"</code> - Execution of primary order triggers the placement of one or more secondary orders.</li><li><code>"one_cancels_other"</code> - The execution of one order in a pair automatically cancels the other, typically used to set a stop-loss and take-profit simultaneously.</li><li><code>"one_triggers_one_cancels_other"</code> - The execution of a primary order triggers two secondary orders (a stop-loss and take-profit pair), where the execution of one secondary order cancels the other.</li></ul> 
 | trigger_fill_condition | false | string | <code>first_hit</code><br><code>complete_fill</code><br><code>incremental</code> | <p>The fill condition of the linked order (Only for linked order types), default: <code>first_hit</code>.</p><ul><li><code>"first_hit"</code> - any execution of the primary order will fully cancel/place all secondary orders.</li><li><code>"complete_fill"</code> - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li><li><code>"incremental"</code> - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li></ul> 
 | otoco_config | false | array of objects |  | <p>List of trades to create or cancel when this order is filled.</p> 
@@ -2128,7 +2128,7 @@ This is a matching engine method.
 | trigger_price | false | number |  | Trigger price, required for trigger orders only (Stop-loss or Take-profit orders) 
 | trigger_offset | false | number |  | The maximum deviation from the price peak beyond which the order will be triggered 
 | mmp | false | boolean |  | Order MMP flag, only for order_type 'limit' 
-| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="index.html#public-get_time">/public/time</a> method to obtain current server time. 
+| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="#public-get_time">/public/time</a> method to obtain current server time. 
 
 ### Response
 
@@ -2255,7 +2255,7 @@ This is a matching engine method.
 | advanced | false | string | <code>usd</code><br><code>implv</code> | Advanced option order type. If you have posted an advanced option order, it is necessary to re-supply this parameter when editing it (Only for options) 
 | trigger_price | false | number |  | Trigger price, required for trigger orders only (Stop-loss or Take-profit orders) 
 | mmp | false | boolean |  | Order MMP flag, only for order_type 'limit' 
-| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="index.html#public-get_time">/public/time</a> method to obtain current server time. 
+| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="#public-get_time">/public/time</a> method to obtain current server time. 
 
 ### Response
 
@@ -2448,7 +2448,7 @@ This is a matching engine method.
 
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 | freeze_quotes | false | boolean |  | Whether or not to reject incoming quotes for 1 second after cancelling (<code>false</code> by default). Related to <code>private/mass_quote</code> request. 
 
 ### Response
@@ -2477,7 +2477,7 @@ This is a matching engine method.
 | currency | true | string | <code>BTC</code><br><code>ETH</code><br><code>USDC</code><br><code>USDT</code><br><code>EURR</code> | The currency symbol 
 | kind | false | string | <code>future</code><br><code>option</code><br><code>spot</code><br><code>future_combo</code><br><code>option_combo</code><br><code>combo</code><br><code>any</code> | Instrument kind, <code>"combo"</code> for any combo or <code>"any"</code> for all. If not provided instruments of all kinds are considered 
 | type | false | string | <code>all</code><br><code>limit</code><br><code>trigger_all</code><br><code>stop</code><br><code>take</code><br><code>trailing_stop</code> | Order type - <code>limit</code>, <code>stop</code>, <code>take</code>, <code>trigger_all</code> or <code>all</code>, default - <code>all</code> 
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 | freeze_quotes | false | boolean |  | Whether or not to reject incoming quotes for 1 second after cancelling (<code>false</code> by default). Related to <code>private/mass_quote</code> request. 
 
 ### Response
@@ -2506,7 +2506,7 @@ This is a matching engine method.
 | currency_pair | true | string | <code>ada_usd</code><br><code>algo_usd</code><br><code>avax_usd</code><br><code>bch_usd</code><br><code>btc_usd</code><br><code>doge_usd</code><br><code>dot_usd</code><br><code>eth_usd</code><br><code>link_usd</code><br><code>ltc_usd</code><br><code>matic_usd</code><br><code>near_usd</code><br><code>shib_usd</code><br><code>sol_usd</code><br><code>steth_usd</code><br><code>trx_usd</code><br><code>uni_usd</code><br><code>usdc_usd</code><br><code>xrp_usd</code><br><code>paxg_usd</code><br><code>usde_usd</code><br><code>ada_usdc</code><br><code>bch_usdc</code><br><code>algo_usdc</code><br><code>avax_usdc</code><br><code>btc_usdc</code><br><code>doge_usdc</code><br><code>dot_usdc</code><br><code>bch_usdc</code><br><code>eth_usdc</code><br><code>link_usdc</code><br><code>ltc_usdc</code><br><code>matic_usdc</code><br><code>near_usdc</code><br><code>shib_usdc</code><br><code>sol_usdc</code><br><code>steth_usdc</code><br><code>trx_usdc</code><br><code>usyc_usdc</code><br><code>uni_usdc</code><br><code>xrp_usdc</code><br><code>paxg_usdc</code><br><code>usde_usdc</code><br><code>ada_usdt</code><br><code>algo_usdt</code><br><code>avax_usdt</code><br><code>bch_usdt</code><br><code>bnb_usdt</code><br><code>bnb_usdt</code><br><code>btc_usdt</code><br><code>btc_usdt</code><br><code>doge_usdt</code><br><code>dot_usdt</code><br><code>eth_usdt</code><br><code>link_usdt</code><br><code>ltc_usdt</code><br><code>luna_usdt</code><br><code>matic_usdt</code><br><code>near_usdt</code><br><code>shib_usdt</code><br><code>sol_usdt</code><br><code>steth_usdt</code><br><code>trx_usdt</code><br><code>uni_usdt</code><br><code>xrp_usdt</code><br><code>paxg_usdt</code><br><code>usde_usdt</code><br><code>btcdvol_usdc</code><br><code>ethdvol_usdc</code><br><code>steth_eth</code><br><code>paxg_btc</code><br><code>btc_usyc</code><br><code>eth_usyc</code><br><code>btc_usde</code><br><code>eth_usde</code> | The currency pair symbol 
 | kind | false | string | <code>future</code><br><code>option</code><br><code>spot</code><br><code>future_combo</code><br><code>option_combo</code><br><code>combo</code><br><code>any</code> | Instrument kind, <code>"combo"</code> for any combo or <code>"any"</code> for all. If not provided instruments of all kinds are considered 
 | type | false | string | <code>all</code><br><code>limit</code><br><code>trigger_all</code><br><code>stop</code><br><code>take</code><br><code>trailing_stop</code> | Order type - <code>limit</code>, <code>stop</code>, <code>take</code>, <code>trigger_all</code> or <code>all</code>, default - <code>all</code> 
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 | freeze_quotes | false | boolean |  | Whether or not to reject incoming quotes for 1 second after cancelling (<code>false</code> by default). Related to <code>private/mass_quote</code> request. 
 
 ### Response
@@ -2534,7 +2534,7 @@ This is a matching engine method.
 | --- | --- | --- | --- | --- |
 | instrument_name | true | string |  | Instrument name 
 | type | false | string | <code>all</code><br><code>limit</code><br><code>trigger_all</code><br><code>stop</code><br><code>take</code><br><code>trailing_stop</code> | Order type - <code>limit</code>, <code>stop</code>, <code>take</code>, <code>trigger_all</code> or <code>all</code>, default - <code>all</code> 
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 | include_combos | false | boolean |  | When set to <code>true</code> orders in combo instruments affecting a given position will also be cancelled. Default: <code>false</code> 
 | freeze_quotes | false | boolean |  | Whether or not to reject incoming quotes for 1 second after cancelling (<code>false</code> by default). Related to <code>private/mass_quote</code> request. 
 
@@ -2564,7 +2564,7 @@ This is a matching engine method.
 | currency | true | string or array of strings |  | The currency symbol, list of currency symbols or <code>"any"</code> for all 
 | kind | false | string | <code>future</code><br><code>option</code><br><code>spot</code><br><code>future_combo</code><br><code>option_combo</code><br><code>combo</code><br><code>any</code> | Instrument kind, <code>"combo"</code> for any combo or <code>"any"</code> for all. If not provided instruments of all kinds are considered 
 | type | false | string | <code>all</code><br><code>limit</code><br><code>trigger_all</code><br><code>stop</code><br><code>take</code><br><code>trailing_stop</code> | Order type - <code>limit</code>, <code>stop</code>, <code>take</code>, <code>trigger_all</code> or <code>all</code>, default - <code>all</code> 
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 | freeze_quotes | false | boolean |  | Whether or not to reject incoming quotes for 1 second after cancelling (<code>false</code> by default). Related to <code>private/mass_quote</code> request. 
 
 ### Response
@@ -2616,7 +2616,7 @@ This is a matching engine method.
 
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 | freeze_quotes | false | boolean |  | Whether or not to reject incoming quotes for 1 second after cancelling (<code>false</code> by default). Related to <code>private/mass_quote</code> request. 
 | cancel_type | true | string | <code>delta</code><br><code>quote_set_id</code><br><code>instrument</code><br><code>instrument_kind</code><br><code>currency</code><br><code>currency_pair</code><br><code>all</code> | Type of cancel criteria. 
 | min_delta | false | number |  | Min delta to cancel by delta (for <code>cancel_type</code>: <code>delta</code>). 
@@ -3865,7 +3865,7 @@ This is a matching engine method.
 | detailed | false | boolean |  | Flag to receive a list of all order changes and a list of errors, or to only receive a list of errors. Default - <code>false</code>. 
 | quote_id | true | string |  | Identifier of a mass quote message. Can be used to match trades to requests. We recommend using an incrementing counter. 
 | mmp_group | true | string |  | Name of the MMP group. An MMP group has to be used and only one quote can exist per instrument per side per MMP group. 
-| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="index.html#public-get_time">/public/time</a> method to obtain current server time. 
+| valid_until | false | integer |  | Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases <code>timed_out</code> error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href="#public-get_time">/public/time</a> method to obtain current server time. 
 | quotes | true | array of objects |  | List of quotes. 
 | &nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | true | string |  | The name of the instrument. 
 | &nbsp;&nbsp;›&nbsp;&nbsp;quote_set_id | true | string |  | User-defined label that can be used for targeted cancels using private/cancel_quotes. 
@@ -4865,7 +4865,7 @@ This is a private method; it can only be used after authentication.
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
 | block_rfq_id | false | integer |  | ID of the Block RFQ 
-| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="index.html#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
+| detailed | false | boolean |  | When detailed is set to <code>true</code> output format is changed. See <a href="#detailed-response-for-private-cancel_all-and-private-cancel_by_label-methods">description</a>. Default: <code>false</code> 
 
 ### Response
 
@@ -6010,7 +6010,7 @@ Public version of the method calculates portfolio margin info for simulated posi
 /private/change\_api\_key\_name
 -------------------------------
 
-Changes name for key with given id. [Important notes](index.html#creating-editing-removing-api-keys).
+Changes name for key with given id. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read_write`
 
@@ -6037,7 +6037,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -6079,7 +6079,7 @@ This is a private method; it can only be used after authentication.
 /private/change\_scope\_in\_api\_key
 ------------------------------------
 
-Changes scope for key with given id. [Important notes](index.html#creating-editing-removing-api-keys).
+Changes scope for key with given id. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read_write`
 
@@ -6089,7 +6089,7 @@ This is a private method; it can only be used after authentication.
 
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
-| max_scope | true | string |  | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| max_scope | true | string |  | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | id | true | integer |  | Id of key 
 
 ### Response
@@ -6106,7 +6106,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -6138,7 +6138,7 @@ This is a private method; it can only be used after authentication.
 /private/create\_api\_key
 -------------------------
 
-Creates a new api key with a given scope. [Important notes](index.html#creating-editing-removing-api-keys)
+Creates a new api key with a given scope. [Important notes](#creating-editing-removing-api-keys)
 
 **Scope:** `account:read_write`
 
@@ -6148,7 +6148,7 @@ This is a private method; it can only be used after authentication.
 
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
-| max_scope | true | string |  | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| max_scope | true | string |  | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | name | false | string |  | Name of key (only letters, numbers and underscores allowed; maximum length - 16 characters) 
 | public_key | false | string |  | ED25519 or RSA PEM Encoded public key that should be used to create asymmetric API Key for signing requests/authentication requests with user's private key. 
 | enabled_features | false | array |  | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
@@ -6167,7 +6167,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -6228,7 +6228,7 @@ _This method takes no parameters_
 /private/disable\_api\_key
 --------------------------
 
-Disables api key with given id. [Important notes](index.html#creating-editing-removing-api-keys).
+Disables api key with given id. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read_write`
 
@@ -6254,7 +6254,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -6262,7 +6262,7 @@ This is a private method; it can only be used after authentication.
 /private/edit\_api\_key
 -----------------------
 
-Edits existing API key. At least one parameter is required. [Important notes](index.html#creating-editing-removing-api-keys)
+Edits existing API key. At least one parameter is required. [Important notes](#creating-editing-removing-api-keys)
 
 **Scope:** `account:read_write`
 
@@ -6273,7 +6273,7 @@ This is a private method; it can only be used after authentication.
 | Parameter | Required | Type | Enum | Description |
 | --- | --- | --- | --- | --- |
 | id | true | integer |  | Id of key 
-| max_scope | true | string |  | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| max_scope | true | string |  | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | name | false | string |  | Name of key (only letters, numbers and underscores allowed; maximum length - 16 characters) 
 | enabled | false | boolean |  | Enables/disables the API key. <code>true</code> to enable, <code>false</code> to disable 
 | enabled_features | false | array |  | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
@@ -6293,7 +6293,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -6322,7 +6322,7 @@ _This method takes no parameters_
 /private/enable\_api\_key
 -------------------------
 
-Enables api key with given id. [Important notes](index.html#creating-editing-removing-api-keys).
+Enables api key with given id. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read_write`
 
@@ -6348,7 +6348,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -7011,7 +7011,7 @@ _This method takes no parameters_
 /private/list\_api\_keys
 ------------------------
 
-Retrieves list of api keys. [Important notes](index.html#creating-editing-removing-api-keys).
+Retrieves list of api keys. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read`
 
@@ -7035,7 +7035,7 @@ _This method takes no parameters_
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -7100,7 +7100,7 @@ This is a private method; it can only be used after authentication.
 /private/remove\_api\_key
 -------------------------
 
-Removes api key. [Important notes](index.html#creating-editing-removing-api-keys).
+Removes api key. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read_write`
 
@@ -7146,7 +7146,7 @@ This is a private method; it can only be used after authentication.
 /private/reset\_api\_key
 ------------------------
 
-Resets secret in api key. [Important notes](index.html#creating-editing-removing-api-keys).
+Resets secret in api key. [Important notes](#creating-editing-removing-api-keys).
 
 **Scope:** `account:read_write`
 
@@ -7172,7 +7172,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;enabled_features | array of string | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;id | integer | key identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;ip_whitelist | array | List of IP addresses whitelisted for a selected key 
-| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="index.html#access-scope">Access scope</a> 
+| &nbsp;&nbsp;›&nbsp;&nbsp;max_scope | string | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>, <code>block_rfq:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;name | string | Api key name that can be displayed in transaction log 
 | &nbsp;&nbsp;›&nbsp;&nbsp;public_key | string | PEM encoded public key (Ed25519/RSA) used for asymmetric signatures (optional) 
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
@@ -7373,13 +7373,13 @@ This is a private method; it can only be used after authentication.
 Subscriptions
 =============
 
-The [subscribe](index.html#private-subscribe) method can be used to subscribe to one or more _channels_. This section provides an overview of the channels and the notifications that the subscriber will receive for each of those channels.
+The [subscribe](#private-subscribe) method can be used to subscribe to one or more _channels_. This section provides an overview of the channels and the notifications that the subscriber will receive for each of those channels.
 
 In most cases the channel name is constructed from a couple of elements. This makes it possible to specify exactly which information is required, and/or the frequency or aggregation level. These elements are considered parameters for the subscription.
 
-For example, when subscribing to the channel `book.BTC-27JUL18.10.20.100ms`, the element `BTC-27JUL18` specifies that the name of the instrument (see [naming](index.html#naming)), `10` means that the results should be grouped to that precision, etc.
+For example, when subscribing to the channel `book.BTC-27JUL18.10.20.100ms`, the element `BTC-27JUL18` specifies that the name of the instrument (see [naming](#naming)), `10` means that the results should be grouped to that precision, etc.
 
-As described in [notifications](index.html#notifications), response data includes fields required by JSON-RPC and part dedicated for subscription data.
+As described in [notifications](#notifications), response data includes fields required by JSON-RPC and part dedicated for subscription data.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -7980,7 +7980,7 @@ instrument.state.{kind}.{currency}
 
 > This subscription will send next notifications like this:
 
-Get notifications about new or terminated instruments of given kind in given currency. **(Please note that our system does not send notifications when currencies are locked. Users are advised to subscribe to the [platform\_state](index.html#platform_state) channel to monitor the state of currencies actively.)**
+Get notifications about new or terminated instruments of given kind in given currency. **(Please note that our system does not send notifications when currencies are locked. Users are advised to subscribe to the [platform\_state](https://docs.deribit.com/#platform_state) channel to monitor the state of currencies actively.)**
 
 ### Channel Parameters
 
@@ -9443,7 +9443,7 @@ Responses sent by the server will at least include:
 `Logon`(`A`)
 ------------
 
-`Logon`(`A`) must be the first message sent by the client to initiate a session. If authentication succeeds, the exchange should echo the message back to the client. If authentication fails, the exchange will respond with a [`LogOut`(`5`)](index.html#logout-5) message with an appropriate reason.
+`Logon`(`A`) must be the first message sent by the client to initiate a session. If authentication succeeds, the exchange should echo the message back to the client. If authentication fails, the exchange will respond with a [`LogOut`(`5`)](#logout-5) message with an appropriate reason.
 
 ### Arguments
 
@@ -9475,7 +9475,7 @@ Optional custom tag `DeribitAppSig`(`9005`) contains a base64 encoded SHA256 has
 
 When the login is successful, the server will echo back the request.
 
-If the login was not successful, the server will respond with a [`Logout`(`5`)](index.html#logout-5) message, and close the connection.
+If the login was not successful, the server will respond with a [`Logout`(`5`)](#logout-5) message, and close the connection.
 
 `Logout`(`5`)
 -------------
@@ -9492,13 +9492,13 @@ If the login was not successful, the server will respond with a [`Logout`(`5`)](
 `Heartbeat`(`0`)
 ----------------
 
-When either end of a FIX connection has not sent or received any data for `HeartBtInt` seconds (as specified in the [`Logon`(`A`)](index.html#logon-a) message), it will transmit a `Heartbeat`(`0`) message. When either end of a FIX connection has not received any data for `HeartBtInt` seconds, it will transmit a [`TestRequest`(`1`)](index.html#test-request-1) message. If there is still no response, the session should be considered lost and corrective action should be initiated.
+When either end of a FIX connection has not sent or received any data for `HeartBtInt` seconds (as specified in the [`Logon`(`A`)](#logon-a) message), it will transmit a `Heartbeat`(`0`) message. When either end of a FIX connection has not received any data for `HeartBtInt` seconds, it will transmit a [`TestRequest`(`1`)](#test-request-1) message. If there is still no response, the session should be considered lost and corrective action should be initiated.
 
 ### Arguments
 
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
-| 112 | <code>TestReqId</code> | String | Varies | The identifier when responding to the <a href="index.html#test-request-1"><code>Test Request</code>(<code>1</code>)</a> message. When not responding to a <code>Test Request</code>(<code>1</code>) message, this tag can be left out 
+| 112 | <code>TestReqId</code> | String | Varies | The identifier when responding to the <a href="#test-request-1"><code>Test Request</code>(<code>1</code>)</a> message. When not responding to a <code>Test Request</code>(<code>1</code>) message, this tag can be left out 
 
 ### Response
 
@@ -9507,7 +9507,7 @@ When the heartbeat has been received successfully, the server will echo back the
 `Test Request`(`1`)
 -------------------
 
-The Test `Request`(`1`) message forces a heartbeat from the opposing application. The opposing application responds with a [`Heartbeat`(`0`)](index.html#heartbeat-0) containing the `TestReqID`(`112`).
+The Test `Request`(`1`) message forces a heartbeat from the opposing application. The opposing application responds with a [`Heartbeat`(`0`)](#heartbeat-0) containing the `TestReqID`(`112`).
 
 ### Arguments
 
@@ -9580,12 +9580,12 @@ The `SecurityListRequest`(`x`) message is used to return a list of securities (i
 
 ### Response
 
-The server will respond with a [`Security List`(`y`)](index.html#security-list-y) message, where the `SecurityReq`(`320`) is equal to that of the request.
+The server will respond with a [`Security List`(`y`)](#security-list-y) message, where the `SecurityReq`(`320`) is equal to that of the request.
 
 `Security List`(`y`)
 --------------------
 
-The `SecurityList`(`y`) message is used to return a list of securities that matches the criteria specified in a [`Security List Request`(`x`)](index.html#security-list-request-x).
+The `SecurityList`(`y`) message is used to return a list of securities that matches the criteria specified in a [`Security List Request`(`x`)](#security-list-request-x).
 
 ### Arguments
 
@@ -9615,10 +9615,10 @@ The `SecurityList`(`y`) message is used to return a list of securities that matc
 | =&gt;120 | <code>SettlCurrency</code> | Currency | No | Currency code of settlement denomination 
 | =&gt;479 | <code>CommCurrency</code> | Currency | No | Specifies currency to be used for Commission 
 | =&gt;231 | <code>ContractMultiplier</code> | float | No | Specifies the ratio or multiply factor to convert from contracts to total units 
-| =&gt;454 | <code>NoSecurityAltID</code> | NumInGroup | No | Number of alternate security identifier.<p>It is present only if <a href="index.html#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a> has <code>DisplayMulticastInstrumentID</code> = <code>Y</code></p> 
+| =&gt;454 | <code>NoSecurityAltID</code> | NumInGroup | No | Number of alternate security identifier.<p>It is present only if <a href="#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a> has <code>DisplayMulticastInstrumentID</code> = <code>Y</code></p> 
 | =&gt;=&gt;455 | <code>SecurityAltID</code> | String | No | The security identifier 
 | =&gt;=&gt;456 | <code>SecurityAltIDSource</code> | String | No | Identifies the class or source of the <code>SecurityAltID</code>(<code>455</code>) value. Required if SecurityAltID is specified.<p>Possible values:</p><ul><li><code>101</code> = Multicast identifier</li><li><code>102</code> = Combo instrument identifier</li></ul> 
-| =&gt;1205 | <code>NoTickRules</code> | NumInGroup | No | Number of price increment steps.<p>It is present only if <a href="index.html#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a> has <code>DisplayIncrementSteps</code> = <code>Y</code></p> 
+| =&gt;1205 | <code>NoTickRules</code> | NumInGroup | No | Number of price increment steps.<p>It is present only if <a href="#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a> has <code>DisplayIncrementSteps</code> = <code>Y</code></p> 
 | =&gt;=&gt;1206 | <code>StartTickPriceRange</code> | Price | No | Above this price, the <code>TickIncrement</code> applies 
 | =&gt;=&gt;1208 | <code>TickIncrement</code> | Price | No | Valid price increment for prices above the <code>StartTickPriceRange</code> 
 | =&gt;965 | <code>SecurityStatus</code> | String | No | (*) It is present in notifications about new or terminated instruments.<p>Possible values:</p><ul><li><code>1</code> = active/started,</li><li><code>10</code> = published/created,</li><li><code>4</code> = closed,</li><li><code>2</code> = terminated/inactive,</li><li><code>12</code> = settled</li></ul><p></p> 
@@ -9659,23 +9659,23 @@ For example:
 
 When requesting a subscription (`SubscriptionRequestType`\=1), the only supported combinations are:
 
-*   `MDUpdateType`\=1, `MarketDepth`\=0. This will result a [`Market Data - Snapshot`(`W`)](index.html#market-data-snapshotfull-refresh-w) with the whole order book, followed by incremental updates (X messages) through the whole order book depth.
-*   `MDUpdateType`\=0, `MarketDepth`\=(1,10,20). This results in [`Market Data - Full Refresh`(`W`)](index.html#market-data-snapshotfull-refresh-w) messages, containing the entire specified order book depth. Valid values for `MarketDepth` are 1, 10, 20.
+*   `MDUpdateType`\=1, `MarketDepth`\=0. This will result a [`Market Data - Snapshot`(`W`)](#market-data-snapshotfull-refresh-w) with the whole order book, followed by incremental updates (X messages) through the whole order book depth.
+*   `MDUpdateType`\=0, `MarketDepth`\=(1,10,20). This results in [`Market Data - Full Refresh`(`W`)](#market-data-snapshotfull-refresh-w) messages, containing the entire specified order book depth. Valid values for `MarketDepth` are 1, 10, 20.
 
 If multiple instrument symbols are specified then the system responds with multiple market data messages corresponding to those instruments.
 
 ### Response
 
-If the server is unable to supply the requested data, it will respond with a [`Market Data Request Reject`(`Y`)](index.html#market-data-request-reject-y) message.
+If the server is unable to supply the requested data, it will respond with a [`Market Data Request Reject`(`Y`)](#market-data-request-reject-y) message.
 
-If the request called for a snapshot (`SubscriptionRequestType`(`263`)=0), the server will respond with a [`Market Data - Snapshot/Full Refresh`(`W`)](index.html#market-data-snapshotfull-refresh-w) message.
+If the request called for a snapshot (`SubscriptionRequestType`(`263`)=0), the server will respond with a [`Market Data - Snapshot/Full Refresh`(`W`)](#market-data-snapshotfull-refresh-w) message.
 
-If the request called for a snapshot and subscription (`SubscriptionRequestType`(`263`)=1), the server will start sending [`Market Data - Incremental Refresh`(`X`)](index.html#market-data-incremental-refresh-x) messages.
+If the request called for a snapshot and subscription (`SubscriptionRequestType`(`263`)=1), the server will start sending [`Market Data - Incremental Refresh`(`X`)](#market-data-incremental-refresh-x) messages.
 
 `Market Data Request Reject`(`Y`)
 ---------------------------------
 
-If a [`Market Data Request`(`V`)](index.html#market-data-request-v) message is not accepted, the exchange responds with a `Market Data Request Reject`(`Y`) message
+If a [`Market Data Request`(`V`)](#market-data-request-v) message is not accepted, the exchange responds with a `Market Data Request Reject`(`Y`) message
 
 ### Arguments
 
@@ -9688,7 +9688,7 @@ If a [`Market Data Request`(`V`)](index.html#market-data-request-v) message is n
 `Market Data Snapshot/Full Refresh`(`W`)
 ----------------------------------------
 
-`Market Data Snapshot/Full Refresh`(`W`) is used as the response to a [`Market Data Request`(`V`)](index.html#market-data-request-v) message.
+`Market Data Snapshot/Full Refresh`(`W`) is used as the response to a [`Market Data Request`(`V`)](#market-data-request-v) message.
 
 ### Arguments
 
@@ -9727,7 +9727,7 @@ CurrentFunding and Funding8h are present only in `W` message, not in `X` message
 `Market Data Incremental Refresh`(`X`)
 --------------------------------------
 
-`Market Data – Incremental Refresh`(`X`) message is used for incremental updates in case of [`Market Data Request`(`V`)](index.html#market-data-request-v) for Snapshot + Subscribe
+`Market Data – Incremental Refresh`(`X`) message is used for incremental updates in case of [`Market Data Request`(`V`)](#market-data-request-v) for Snapshot + Subscribe
 
 ### Arguments
 
@@ -9781,7 +9781,7 @@ The `NEW ORDER SINGLE`(`D`) is used by the client to submit new orders to the ex
 | 854 | <code>QtyType</code> | Int | No | Type of quantity. Valid values:<p></p><ul><li><code>0</code> = <code>Units</code>,</li><li><code>1</code> = <code>Contracts</code></li></ul><p></p>Default is <code>Contracts</code>.<p>When <code>QtyType</code> is <code>Units</code>, then for perpetual and inverse futures the <code>OrderQty</code> is in USD units, and for linear futures it is the underlying base currency coin, and for options it is the amount of corresponding cryptocurrency contracts, e.g., BTC or ETH. The <code>Units</code> will be recalculated into the system's <code>Contracts</code> on server automatically when the order is placed.</p> 
 | 211 | <code>PegOffsetValue</code> | Float | No | Amount (signed) added to the peg for a pegged order in the context of the <code>PegOffsetType</code>(836) 
 | 1094 | <code>PegPriceType</code> | Int | No | Needs to be set for Trailing Stop order. Valid value:<p></p><ul><li><code>8</code> = Trailing Stop Peg</li></ul><p></p> 
-| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="index.html#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on 
+| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on 
 | 100012 | <code>DeribitAdvOrderType</code> | char | No | Used to create advanced order for options. If it is present:<ul><li><code>0</code> = Implied Volatility Order (price defines fixed implied volatility in %),</li><li><code>1</code> = USD Order (price defines fixed USD price of the option, advanced USD orders are not supported for linear options)</li></ul> 
 | 9008 | <code>DeribitMMProtection</code> | Boolean | No | Order Market Maker Protection (MMP) flag, default is <code>N</code>. <strong>Important: manual admin action is necessary to activate Market Maker Protection (MMP) for an account</strong> 
 | 5127 | <code>DeribitConditionTriggerMethod</code> | Int | No | Selects condition trigger method for algo orders. Valid values:<p></p><ul><li><code>1</code> = mark price,</li><li><code>2</code> = trade,</li><li><code>3</code> = index</li></ul><p></p> 
@@ -9794,8 +9794,8 @@ Upon receiving a new order, the exchange responds with the `Execution Report`(`8
 | --- | --- | --- | --- | --- |
 | 527 | <code>SecondaryExecID</code> | String | No | ID of the last order change 
 | 37 | <code>OrderId</code> | String | No | Unique identifier of the order, assigned by the Deribit 
-| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the <code>ClOrdID</code>(<code>11</code>) from <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
-| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
+| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the <code>ClOrdID</code>(<code>11</code>) from <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
+| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
 | 39 | <code>OrdStatus</code> | char | Yes | For trade – order status.<p>Possible values:</p><ul><li><code>0</code> = New,</li><li><code>1</code> = Partially filled,</li><li><code>2</code> = Filled,</li><li><code>4</code> = Cancelled</li><li><code>8</code> = Rejected</li></ul> 
 | 54 | <code>Side</code> | char | Yes | Side of order.<p>Possible values:</p><ul><li><code>1</code> = Buy,</li><li><code>2</code> = Sell</li></ul> 
 | 60 | <code>TransactTime</code> | UTCTimestamp | Yes | Timestamp when the transaction represented by this <code>Execution Report</code>(<code>8</code>) message occurred. Fix timestamp 
@@ -9824,7 +9824,7 @@ Upon receiving a new order, the exchange responds with the `Execution Report`(`8
 | 839 | <code>PeggedPrice</code> | Price | No | Value of fixed USD price for USD Orders (options orders with fixed USD price) 
 | 31 | <code>LastPx</code> | Price | No | Price of this last fill 
 | 32 | <code>LastQty</code> | Qty | No | Quantity bought/sold on this last fill 
-| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="index.html#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on 
+| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on 
 | 9019 | <code>MMPGroup</code> | String | No | A custom tag of MMP Group. This tag is present only for orders from Mass Quote. 
 | 9034 | <code>IsLiquidation</code> | Boolean | No | A custom tag, <code>9034=Y</code> if the order was automatically created during liquidation. 
 | 9035 | <code>IsRebalance</code> | Boolean | No | A custom tag, <code>9035=Y</code> if the order was automatically created during cross-collateral balance restoration. 
@@ -9848,7 +9848,7 @@ From Release 1.3.10, it is possible to cancel orders by `ClOrdID` or `DeribitLab
 
 #### IMPORTANT:
 
-*   to cancel an order by `ClOrdID` or `DeribitLabel`, this must be the only open order (with such `ClOrdID` or `DeribitLabel` respectively). To cancel many orders by `DeribitLabel`, use [`Order MassCancel Request`(`q`)](index.html#order-mass-cancel-request-q).
+*   to cancel an order by `ClOrdID` or `DeribitLabel`, this must be the only open order (with such `ClOrdID` or `DeribitLabel` respectively). To cancel many orders by `DeribitLabel`, use [`Order MassCancel Request`(`q`)](#order-mass-cancel-request-q).
 *   when possible it is recommended to use faster `OrigClOrdId`
 
 ### Arguments
@@ -9857,7 +9857,7 @@ From Release 1.3.10, it is possible to cancel orders by `ClOrdID` or `DeribitLab
 | --- | --- | --- | --- | --- |
 | 11 | <code>ClOrdID</code> | String | Required if <code>OrigClOrdId</code>, <code>DeribitLabel</code> are absent | Original order identifier assigned by the user. There must be the only open order with such <code>ClOrdID</code> 
 | 41 | <code>OrigClOrdId</code> | String | Required if <code>DeribitLabel</code>, <code>ClOrdID</code> are absent | Order identifier assigned by Deribit over the user one 
-| 100010 | <code>DeribitLabel</code> | String | Required if <code>OrigClOrdId</code>, <code>ClOrdID</code> are absent | A custom label for your order, max 64 grapheme clusters. There must be the only open order with this <code>DeribitLabel</code> otherwise use <a href="index.html#order-mass-cancel-request-q"><code>Order MassCancel Request</code>(<code>q</code>)</a>. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
+| 100010 | <code>DeribitLabel</code> | String | Required if <code>OrigClOrdId</code>, <code>ClOrdID</code> are absent | A custom label for your order, max 64 grapheme clusters. There must be the only open order with this <code>DeribitLabel</code> otherwise use <a href="#order-mass-cancel-request-q"><code>Order MassCancel Request</code>(<code>q</code>)</a>. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
 | 55 | <code>Symbol</code> | String | Required if <code>OrigClOrdId</code> is absent | Instrument symbol, e.g., <b>BTC-1JAN16</b> 
 | 15 | <code>Currency</code> | String | No | To speed up the search of the order by <code>DeribitLabel</code> or <code>ClOrdID</code> 
 
@@ -9866,9 +9866,9 @@ From Release 1.3.10, it is possible to cancel orders by `ClOrdID` or `DeribitLab
 `Order Cancel Reject`(`9`)
 --------------------------
 
-`Order Cancel Reject`(`9`) is issued by the exchange upon receipt of [`Order Cancel Request`(`F`)](index.html#order-cancel-request-f) message which cannot be executed.
+`Order Cancel Reject`(`9`) is issued by the exchange upon receipt of [`Order Cancel Request`(`F`)](#order-cancel-request-f) message which cannot be executed.
 
-Alongside tags listed below, `Order Cancel Reject`(`9`) also sends corresponding tag (`ClOrdID`, `OrigClOrdId` or `DeribitLabel`), used by the user to cancel the order in [`Order Cancel Request`(`F`)](index.html#order-cancel-request-f) or [`Order Cancel/Replace Request`(`G`)](index.html#order-cancel-replace-request-g).
+Alongside tags listed below, `Order Cancel Reject`(`9`) also sends corresponding tag (`ClOrdID`, `OrigClOrdId` or `DeribitLabel`), used by the user to cancel the order in [`Order Cancel Request`(`F`)](#order-cancel-request-f) or [`Order Cancel/Replace Request`(`G`)](#order-cancel-replace-request-g).
 
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
@@ -9886,8 +9886,8 @@ The following `Execution Report`(`8`) is sent by the exchange upon successfully 
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
 | 52 | <code>SendingTime</code> | UTCTimestamp | Yes | Time of message transmission expressed in UTC 
-| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the client id from <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
-| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
+| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the client id from <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
+| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
 | 150 | <code>ExecType</code> | char | No | Describes the specific Execution Report.<p>Possible values:</p><ul><li><code>4</code> = Cancelled,</li><li><code>6</code> = Pending Cancel</li></ul> 
 | 39 | <code>OrdStatus</code> | char | Yes | For trade – order status.<p>Possible values:</p><ul><li><code>0</code> = New,</li><li><code>1</code> = Partially filled,</li><li><code>4</code> = Cancelled,</li><li><code>6</code> = Pending cancel,</li><li><code>8</code> = Rejected</li></ul> 
 | 58 | <code>Text</code> | String | Yes | Text string describing the result 
@@ -9909,10 +9909,10 @@ From Release 1.3.10, it is possible to cancel orders by DeribitLabel, and the op
 | --- | --- | --- | --- | --- |
 | 11 | <code>ClOrdID</code> | String | Yes | Unique ID of <code>Order Mass Cancel Request</code>(<code>q</code>) as assigned by the client, max 64 grapheme clusters. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
 | 530 | <code>MassCancelRequestType</code> | int | Yes | Specifies the type of cancellation requested.<p>Valid values:</p><ul><li><code>7</code> = all orders,</li><li><code>5</code> = orders by security type,</li><li><code>1</code> = orders by symbol,</li><li><code>10</code> = orders by DeribitLabel</li></ul><p></p> 
-| 100010 | <code>DeribitLabel</code> | String | if <code>MassCancelRequestType</code>(<code>530</code>)=10 | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="index.html#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on. Equivalent of REST/WS <code>cancel_by_label</code> 
+| 100010 | <code>DeribitLabel</code> | String | if <code>MassCancelRequestType</code>(<code>530</code>)=10 | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on. Equivalent of REST/WS <code>cancel_by_label</code> 
 | 167 | <code>SecurityType</code> | String | If <code>MassCancelRequestType</code>(<code>530</code>)=5 | Describes type of security.<p>Possible values:</p><ul><li><code>FUT</code> for futures,</li><li><code>OPT</code> for options,</li><li><code>FUTCO</code> for future combo,</li><li><code>OPTCO</code> for option combo</li></ul> 
 | 55 | <code>Symbol</code> | String | If <code>MassCancelRequestType</code>(<code>530</code>)=1 | The symbols for which to cancel all orders 
-| 15 | <code>Currency</code> | String | No | To cancel only certain currency if it is applicable. See <a href="index.html#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a> 
+| 15 | <code>Currency</code> | String | No | To cancel only certain currency if it is applicable. See <a href="#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a> 
 | 9031 | <code>FreezeQuotes</code> | Boolean | No | Whether or not to reject incoming quotes for 1 second after cancelling 
 
 ### Response
@@ -9924,17 +9924,17 @@ After the cancellation, the server responds with an `Order Mass Cancel Report`(`
 
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
-| 11 | <code>ClOrdID</code> | String | No | Unique Identifier assigned by the client in the <a href="index.html#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
+| 11 | <code>ClOrdID</code> | String | No | Unique Identifier assigned by the client in the <a href="#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
 | 37 | <code>OrderID</code> | String | No | Unique ID assigned by Deribit for this order 
 | 530 | <code>MassCancelRequestType</code> | int | Yes | Specifies the type of cancellation request.<p>Possible values:</p><ul><li><code>7</code> = all orders,</li><li><code>5</code> = orders by security type,</li><li><code>1</code> = orders by symbol,</li><li><code>10</code> = orders by DeribitLabel</li><li><code>11</code> = quote cancel -- response to <code>Quote Cancel</code> (<code>Z</code>) request used in mass quoting</li></ul><p></p> 
 | 531 | <code>MassCancelResponse</code> | int | No | If successful, echoes the <code>MassCancelRequestType</code>(<code>530</code>) 
 | 298 | <code>QuoteCancelType</code> | int | No | May be present in case of reply to <code>Quote Cancel</code> (<code>Z</code>) request. 1 = Cancel for <code>Symbol</code>(<code>55</code>), 2 = Cancel for <code>SecurityType</code> (<code>167</code>), 4 = Cancel All Quotes, 5 = for <code>Currency</code> (<code>5</code>), 6 = for <code>QuoteSetID</code> (<code>302</code>), 7 = for Delta range 
 | 58 | <code>Text</code> | String | No | 'success', if deletion was successful 
 | 532 | <code>MassCancelRejectReason</code> | String | No | Reason why deletion failed.<p>Possible values:</p><ul><li><code>1</code> = Unknown security,</li><li><code>5</code> = Unknown security type</li></ul> 
-| 533 | <code>TotalAffectedOrders</code> | int | No | Total number of orders affected by <a href="index.html#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
+| 533 | <code>TotalAffectedOrders</code> | int | No | Total number of orders affected by <a href="#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
 |  | Group <code>AffectedOrdGrp</code> |  |  |  
-| 534 | <code>NoAffectedOrders</code> | int | No | Optional field used to indicate the number of order identifiers for orders affected by the <a href="index.html#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
-| =&gt;41 | <code>OrigClOrdID</code> | String | No | Required if <code>NoAffectedOrders</code>(<code>534</code>) &gt; 0. Indicates the client order id of an order affected by the <a href="index.html#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
+| 534 | <code>NoAffectedOrders</code> | int | No | Optional field used to indicate the number of order identifiers for orders affected by the <a href="#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
+| =&gt;41 | <code>OrigClOrdID</code> | String | No | Required if <code>NoAffectedOrders</code>(<code>534</code>) &gt; 0. Indicates the client order id of an order affected by the <a href="#order-mass-cancel-request-q"><code>Order Mass Cancel Request</code>(<code>q</code>)</a> 
 
 `Order Mass Status Request`(`AF`)
 ---------------------------------
@@ -9969,8 +9969,8 @@ When the client requests the status of current orders, the exchange should reply
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
 | 37 | <code>OrderId</code> | String | No | Unique identifier for Order as assigned by the Deribit 
-| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the client id from <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
-| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
+| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the client id from <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
+| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
 | 39 | <code>OrdStatus</code> | char | Yes | For trade – order status.<p>Possible values:</p><ul><li><code>0</code> = New,</li><li><code>1</code> = Partially filled,</li><li><code>2</code> = Filled,</li><li><code>4</code> = Cancelled</li><li><code>8</code> = Rejected</li></ul> 
 | 54 | <code>Side</code> | char | Yes | Side of order.<p>Possible values:</p><ul><li><code>1</code> = Buy,</li><li><code>2</code> = Sell</li></ul> 
 | 60 | <code>TransactTime</code> | UTCTimestamp | Yes | Timestamp when the transaction represented by this Execution Report occurred. Fix timestamp 
@@ -9996,7 +9996,7 @@ When the client requests the status of current orders, the exchange should reply
 | 839 | <code>PeggedPrice</code> | Price | No | Value of fixed USD price for USD Orders (options orders with fixed USD price) 
 | 31 | <code>LastPx</code> | Price | No | Price of this last fill 
 | 32 | <code>LastQty</code> | Qty | No | Quantity bought/sold on this last fill. 
-| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="index.html#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
+| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
 | 9019 | <code>MMPGroup</code> | String | No | A custom tag of MMP Group. This tag is present only for orders from Mass Quote 
 | 302 | QuoteSetID | String | No | identifier for the Quote Set. This tag is present only for orders from Mass Quote. 
 | 117 | QuoteID | String | No | identifier for the Quote. This tag is present only for orders from Mass Quote. 
@@ -10032,12 +10032,12 @@ When responding to a `MassStatusReqType`\=`7` request, the server precedes the `
 
 ### Response
 
-The server will respond with a [`Position Report`(`AP`)](index.html#position-report-ap) message.
+The server will respond with a [`Position Report`(`AP`)](#position-report-ap) message.
 
 `Position Report`(`AP`)
 -----------------------
 
-The `Position Report`(`AP`) message is returned by the holder of a position in response to a [`Request For Positions`(`AN`)](index.html#request-for-positions-an) message.
+The `Position Report`(`AP`) message is returned by the holder of a position in response to a [`Request For Positions`(`AN`)](#request-for-positions-an) message.
 
 ### Arguments
 
@@ -10074,7 +10074,7 @@ This message is used to request a report on a user's status and user account inf
 | 923 | <code>UserRequestID</code> | String | Yes | The request ID 
 | 924 | <code>UserRequestType</code> | int | Yes | Should be equal to <code>4</code> (Request individual user status), only <code>UserRequestType</code>=<code>4</code> supported for now 
 | 553 | <code>Username</code> | String | Yes | API authenticated 'Client ID', user can request only own info, should be the same as for <code>LOGON</code>(<code>A</code>) 
-| 15 | <code>Currency</code> | String | No | Currency of the report. See <a href="index.html#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a>. Default is BTC.<p>If <code>CROSS</code> is given as currency and user has cross collateral enabled, only the following fields are returned:</p><p></p><ul><li>100001 <code>DeribitUserEquity</code></li><li>100003 <code>DeribitUserInitialMargin</code></li><li>100004 <code>DeribitUserMaintenanceMargin</code></li><li>100013 <code>DeribitMarginBalance</code></li></ul><p></p> 
+| 15 | <code>Currency</code> | String | No | Currency of the report. See <a href="#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a>. Default is BTC.<p>If <code>CROSS</code> is given as currency and user has cross collateral enabled, only the following fields are returned:</p><p></p><ul><li>100001 <code>DeribitUserEquity</code></li><li>100003 <code>DeribitUserInitialMargin</code></li><li>100004 <code>DeribitUserMaintenanceMargin</code></li><li>100013 <code>DeribitMarginBalance</code></li></ul><p></p> 
 
 ### Response
 
@@ -10083,7 +10083,7 @@ The server will respond with a `User Response`(`BF`) message.
 `User Response`(`BF`)
 ---------------------
 
-This message is used to respond to a [`USER REQUEST`(`BE`)](index.html#user-request-be) message, it reports the status of the user and user's account info.
+This message is used to respond to a [`USER REQUEST`(`BE`)](#user-request-be) message, it reports the status of the user and user's account info.
 
 ### Response
 
@@ -10092,7 +10092,7 @@ This message is used to respond to a [`USER REQUEST`(`BE`)](index.html#user-requ
 | 923 | <code>UserRequestID</code> | String | Yes | The request ID 
 | 553 | <code>Username</code> | String | Yes | User's API 'Client ID' 
 | 926 | <code>UserStatus</code> | int | No | <code>1</code> = logged in, current implementation accepts USER REQUEST-s only from logged in users 
-| 15 | <code>Currency</code> | String | No | Currency of the report. See <a href="index.html#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a>. Default is BTC.<p>If <code>CROSS</code> is given as currency and user has cross collateral enabled, only the following fields are returned:</p><p></p><ul><li>100001 <code>DeribitUserEquity</code></li><li>100003 <code>DeribitUserInitialMargin</code></li><li>100004 <code>DeribitUserMaintenanceMargin</code></li><li>100013 <code>DeribitMarginBalance</code></li></ul><p></p> 
+| 15 | <code>Currency</code> | String | No | Currency of the report. See <a href="#security-list-request-x"><code>Security List Request</code>(<code>x</code>)</a>. Default is BTC.<p>If <code>CROSS</code> is given as currency and user has cross collateral enabled, only the following fields are returned:</p><p></p><ul><li>100001 <code>DeribitUserEquity</code></li><li>100003 <code>DeribitUserInitialMargin</code></li><li>100004 <code>DeribitUserMaintenanceMargin</code></li><li>100013 <code>DeribitMarginBalance</code></li></ul><p></p> 
 | 100001 | <code>DeribitUserEquity</code> | float | No | Equity of the user 
 | 100002 | <code>DeribitUserBalance</code> | float | No | Balance of the user 
 | 100003 | <code>DeribitUserInitialMargin</code> | float | No | Initial margin of the user 
@@ -10120,7 +10120,7 @@ From Release 1.3.10, it is possible to amend order by `ClOrdID` or `DeribitLabel
 | --- | --- | --- | --- | --- |
 | 11 | <code>ClOrdID</code> | String | Required if <code>DeribitLabel</code>, <code>OrigClOrdId</code> are absent | Original order identifier assigned by the user, max 64 grapheme clusters. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
 | 41 | <code>OrigClOrdId</code> | String | Required if <code>DeribitLabel</code>, <code>ClOrdID</code> are absent | Order identifier assigned by Deribit over the user one 
-| 100010 | <code>DeribitLabel</code> | String | Required if <code>OrigClOrdId</code>, <code>ClOrdID</code> are absent | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="index.html#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on 
+| 100010 | <code>DeribitLabel</code> | String | Required if <code>OrigClOrdId</code>, <code>ClOrdID</code> are absent | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on 
 | 55 | <code>Symbol</code> | String | Yes | Instrument symbol, e.g., <b>BTC-1JAN16</b> 
 | 62 | <code>ValidUntilTime</code> | UTCTimestamp | No | Indicates expiration time of indication message, in UTC 
 | 15 | <code>Currency</code> | String | No | To speed up the search of the order by <code>DeribitLabel</code> or <code>ClOrdID</code> 
@@ -10147,8 +10147,8 @@ The report `Execution Reports`(`8`) is similar to New Order Single or Cancel/Rep
 | --- | --- | --- | --- | --- |
 | 527 | <code>SecondaryExecID</code> | String | No | ID of the order change, may be absent in case of status reports 
 | 37 | <code>OrderId</code> | String | No | Unique identifier for Order as assigned by the Deribit 
-| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the client id from <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
-| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="index.html#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
+| 11 | <code>ClOrdID</code> | String | No | Deribit replaces this field with the own value assigned by the server (it is not the client id from <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a>) 
+| 41 | <code>OrigClOrdId</code> | String | No | The original value assigned by the client in the <a href="#new-order-single-d"><code>New Order Single</code>(<code>D</code>)</a> message 
 | 39 | <code>OrdStatus</code> | char | Yes | For trade – order status.<p>Possible values:</p><ul><li><code>0</code> = New,</li><li><code>1</code> = Partially filled,</li><li><code>2</code> = Filled,</li><li><code>4</code> = Cancelled</li><li><code>8</code> = Rejected</li></ul> 
 | 54 | <code>Side</code> | char | Yes | Side of order.<p>Possible values:</p><ul><li><code>1</code> = Buy,</li><li><code>2</code> = Sell</li></ul> 
 | 60 | <code>TransactTime</code> | UTCTimestamp | Yes | Time the transaction represented by this Execution Report occurred. Fix timestamp 
@@ -10175,7 +10175,7 @@ The report `Execution Reports`(`8`) is similar to New Order Single or Cancel/Rep
 | 839 | <code>PeggedPrice</code> | Price | No | Value of fixed USD price for USD Orders (options orders with fixed USD price) 
 | 31 | <code>LastPx</code> | Price | No | Price of this last fill 
 | 32 | <code>LastQty</code> | Qty | No | Quantity bought/sold on this last fill 
-| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="index.html#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
+| 100010 | <code>DeribitLabel</code> | String | No | A custom label for your order, max 64 grapheme clusters. Can be used by <a href="#order-cancel-request-f"><code>Order Cancel Request</code>(<code>F</code>)</a> to amend the order later on. <b>This tag operates on grapheme clusters. A grapheme cluster is a user-perceived character, which can be represented by several unicode codepoints. Please refer to <a href="https://unicode.org/reports/tr29/">Unicode specification</a> for more details about the grapheme clusters</b> 
 | 9008 | <code>DeribitMMProtection</code> | Boolean | No | Order Market Maker Protection (MMP) flag 
 | 9019 | <code>MMPGroup</code> | String | No | A custom tag of MMP Group. This tag is present only for orders from Mass Quote 
 | 302 | QuoteSetID | String | No | identifier for the Quote Set. This tag is present only for orders from Mass Quote. 
@@ -10199,11 +10199,11 @@ This message provides for the ability to request the status of a security.
 | --- | --- | --- | --- | --- |
 | 324 | <code>SecurityStatusReqID</code> | String | Yes | ID of the request 
 | 55 | <code>Symbol</code> | String | Yes | Instrument symbol. See instrument naming convention for more details 
-| 263 | <code>SubscriptionRequestType</code> | char | Yes | <code>0</code> = <code>Snapshot</code>, <code>1</code> = <code>Snapshot + Updates</code> (<code>Subscribe</code>), <code>2</code> = <code>Unsubscribe</code><p>(Please note that our system does not send notifications when currencies are <b>locked</b>. Users are advised to subscribe to the <a href="index.html#platform_state">platform_state</a> channel to monitor the state of currencies actively.)</p> 
+| 263 | <code>SubscriptionRequestType</code> | char | Yes | <code>0</code> = <code>Snapshot</code>, <code>1</code> = <code>Snapshot + Updates</code> (<code>Subscribe</code>), <code>2</code> = <code>Unsubscribe</code><p>(Please note that our system does not send notifications when currencies are <b>locked</b>. Users are advised to subscribe to the <a href="https://docs.deribit.com/#platform_state">platform_state</a> channel to monitor the state of currencies actively.)</p> 
 
 ### Response
 
-The server will respond with a [`Security Status` (`f`)](index.html#security-status-f) message.
+The server will respond with a [`Security Status` (`f`)](#security-status-f) message.
 
 `Security Status` (`f`)
 -----------------------
@@ -10243,19 +10243,19 @@ The `Security Status` (`f`) message provides for the ability to report changes i
 | 20118 | <code>ProtectionVegaLimit</code> | float | No | The limit of the vega value per underlying within the exposure time interval when market maker protection is triggered. When this value is met or exceeded the system automatically removes the quotes for the instruments connected to the underlying 
 | 9019 | <code>MMPGroup</code> | String | No | A custom tag of MMP Group 
 
-*   To set `MMProtection Limits`, the message must contain all fields. In reply to this message, the server sends [`MMProtection Limits Result/Reject` (`MR`)](index.html#mmprotection-limits-resultreject-mr).
+*   To set `MMProtection Limits`, the message must contain all fields. In reply to this message, the server sends [`MMProtection Limits Result/Reject` (`MR`)](#mmprotection-limits-resultreject-mr).
 *   To get current `MMProtection Limits`, the message must contain only `ProtectionRequestID` (`20114`) and `Currency` (`15`) fields (without all limits). In reply to this message, the server sends `MMProtection Limits (MM)` message with filled limits.
 
 `MMProtection Limits Result/Reject` (`MR`)
 ------------------------------------------
 
-**Important: manual admin action is necessary to activate Market Maker Protection (MMP) for an account.** This message is sent by the server in reply to [`MMProtection Limits` (`MM`)](index.html#mmprotection-limits-mm) or [`MMProtectionReset` (`MZ`)](index.html#mmprotection-reset-mz)
+**Important: manual admin action is necessary to activate Market Maker Protection (MMP) for an account.** This message is sent by the server in reply to [`MMProtection Limits` (`MM`)](#mmprotection-limits-mm) or [`MMProtectionReset` (`MZ`)](#mmprotection-reset-mz)
 
 ### Response
 
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
-| 20114 | <code>ProtectionRequestID</code> | String | Yes | Identifier taken from corresponding <a href="index.html#mmprotection-limits-mm"><code>MM</code></a> or <a href="index.html#mmprotection-reset-mz"><code>MZ</code></a> message 
+| 20114 | <code>ProtectionRequestID</code> | String | Yes | Identifier taken from corresponding <a href="#mmprotection-limits-mm"><code>MM</code></a> or <a href="#mmprotection-reset-mz"><code>MZ</code></a> message 
 | 20117 | <code>ProtectionRequestResult</code> | Boolean | Yes | <code>Y</code> = applied or succeeded, <code>N</code> = rejected 
 | 58 | <code>Text</code> | String | No | Text describes reject reason or equal to <code>"success"</code> 
 
@@ -10298,14 +10298,14 @@ Request a specific Security to be traded with the second party. The request secu
 
 ### Response
 
-The server sends [`Security Definition (d)`](index.html#security-definition-d) message as a response, or rejects the request
+The server sends [`Security Definition (d)`](#security-definition-d) message as a response, or rejects the request
 
 `Security Definition` (`d`)
 ---------------------------
 
 The Security Definition message is used for the following:
 
-*   Accept the security defined in a [`Security Definition Request (c)`](index.html#security-definition-request-c) message with changes to the definition and/or identity of the security.
+*   Accept the security defined in a [`Security Definition Request (c)`](#security-definition-request-c) message with changes to the definition and/or identity of the security.
 *   Reject the security requested in a Security Definition Request message
 
 | Tag | Name | Type | Required | Comments |
@@ -10320,8 +10320,8 @@ The Security Definition message is used for the following:
 | 873 | <code>DatedDate</code> | UTCTimestamp | No | State timestamp 
 | 58 | <code>Text</code> | String | No | Explanatory text string 
 |  | Group <code>UnderlyingInstrument</code> |  |  |  
-| 711 | <code>NoUnderlyings</code> | int | No | Number of underlying items in the group, if applicable. Underlying group is present in reply to <a href="index.html#security-definition-request-c"><code>Security Definition Request (c)</code></a> with <code>SecurityRequestType(321)</code> = 3 
-| =&gt;311 | <code>UnderlyingSymbol</code> | String | No | Combo-instrument symbols in reply to <a href="index.html#security-definition-request-c"><code>Security Definition Request (c)</code></a> with <code>SecurityRequestType(321)</code> = 3 
+| 711 | <code>NoUnderlyings</code> | int | No | Number of underlying items in the group, if applicable. Underlying group is present in reply to <a href="#security-definition-request-c"><code>Security Definition Request (c)</code></a> with <code>SecurityRequestType(321)</code> = 3 
+| =&gt;311 | <code>UnderlyingSymbol</code> | String | No | Combo-instrument symbols in reply to <a href="#security-definition-request-c"><code>Security Definition Request (c)</code></a> with <code>SecurityRequestType(321)</code> = 3 
 | 965 | <code>SecurityStatus</code> | String | No | Denotes the current state of the Instrument.<p>Valid values:</p><ul><li><code>1</code> = Active,</li><li><code>2</code> = Inactive,</li><li><code>3</code> = RFQ,</li><li><code>4</code> = Closed,</li><li><code>12</code> = Archivized</li></ul><p></p> 
 |  | Group <code>InstrmtLegGrp</code> |  |  |  
 | 555 | <code>NoLegs</code> | int | Yes | Number of legs that make up the Security 
@@ -10348,7 +10348,7 @@ The message for requesting for quotes from Deribit RFQ market. The request can b
 
 ### Response
 
-In case of success, the response will be a [`Quote Status Report (AI)`](index.html#quote-status-report-ai). If the request fails, the [`Quote Request Reject (AG)`](index.html#quote-request-reject-ag) will be sent, or session level [`Reject(3)`](index.html#reject3) if processing of request is impossible.
+In case of success, the response will be a [`Quote Status Report (AI)`](#quote-status-report-ai). If the request fails, the [`Quote Request Reject (AG)`](#quote-request-reject-ag) will be sent, or session level [`Reject(3)`](#reject3) if processing of request is impossible.
 
 `Quote Request Reject` (`AG`)
 -----------------------------
@@ -10356,7 +10356,7 @@ In case of success, the response will be a [`Quote Status Report (AI)`](index.ht
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
 | 131 | <code>QuoteReqID</code> | String | Yes | Request identifier 
-| 658 | <code>QuoteRequestRejectReason</code> | int | Yes | Reason <a href="index.html#quote-request-r"><code>QuoteRequest (R)</code></a> was rejected:<ul><li><code>101</code> = exceeded rate limit,</li><li><code>102</code> = service unavailable temporary,</li><li><code>3</code> = limit exceeded,</li><li><code>1</code> = non-implemented feature requested,</li><li><code>6</code> = account is not authorized to request quote,</li><li><code>99</code> = other reason of reject</li></ul> 
+| 658 | <code>QuoteRequestRejectReason</code> | int | Yes | Reason <a href="#quote-request-r"><code>QuoteRequest (R)</code></a> was rejected:<ul><li><code>101</code> = exceeded rate limit,</li><li><code>102</code> = service unavailable temporary,</li><li><code>3</code> = limit exceeded,</li><li><code>1</code> = non-implemented feature requested,</li><li><code>6</code> = account is not authorized to request quote,</li><li><code>99</code> = other reason of reject</li></ul> 
 | 58 | <code>Text</code> | String | No | Text describes the reject reason.<p>Possible values:</p><ul><li><code>1</code> = missing or unknown symbol,</li><li><code>3</code> = quote request exceeds limit,</li><li><code>6</code> = account is locked,</li><li><code>99</code> = other reason,</li><li><code>101</code> = rate limit exceeded,</li><li><code>102</code> = temporary unavailable</li></ul> 
 |  | Group <code>QuotReqRjctGrp</code> |  |  |  
 | 146 | <code>NoRelatedSym</code> | int | Yes | Number of related symbols in Request 
@@ -10365,7 +10365,7 @@ In case of success, the response will be a [`Quote Status Report (AI)`](index.ht
 `Quote Status Report` (`AI`)
 ----------------------------
 
-The message is used in response to [`Quote Request (R)`](index.html#quote-request-r) and also for reporting expired quotes when a user subscribes for quotes via [`RFQ Request (AH)`](index.html#rfq-request-ah).
+The message is used in response to [`Quote Request (R)`](#quote-request-r) and also for reporting expired quotes when a user subscribes for quotes via [`RFQ Request (AH)`](#rfq-request-ah).
 
 | Tag | Name | Type | Required | Comments |
 | --- | --- | --- | --- | --- |
@@ -10391,7 +10391,7 @@ RFQ request is sent by trader interested in receiving quote requests from other 
 
 ### Response
 
-RFQ request can be used to request existing [`Quote Requests (R)`](index.html#quote-request-r) as well as to subscribe for new [`Quote Requests (R)`](index.html#quote-request-r) and [`Quote Status Reports (AI)`](index.html#quote-status-report-ai) about expiration of the requests.
+RFQ request can be used to request existing [`Quote Requests (R)`](#quote-request-r) as well as to subscribe for new [`Quote Requests (R)`](#quote-request-r) and [`Quote Status Reports (AI)`](#quote-status-report-ai) about expiration of the requests.
 
 `TradeCaptureReportRequest` (`AD`)
 ----------------------------------
@@ -11435,24 +11435,8 @@ As with any service provider/service consumer model, AWS PrivateLink will only a
     
      |
     | --- | --- |
-    | 
-    
-    eu-west-2 (London)
-    
-     | 
-    
-    com.amazonaws.vpce.eu-west-2.vpce-svc-040cd502947f69842
-    
-     |
-    | 
-    
-    ap-northeast-1 (Tokyo)
-    
-     | 
-    
-    com.amazonaws.vpce.ap-northeast-1.vpce-svc-04de4df0469ee98af
-    
-     |
+    | <p>eu-west-2 (London)</p> | <p>com.amazonaws.vpce.eu-west-2.vpce-svc-040cd502947f69842</p> 
+    | <p>ap-northeast-1 (Tokyo)</p> | <p>com.amazonaws.vpce.ap-northeast-1.vpce-svc-04de4df0469ee98af</p> 
     
       
     
@@ -11477,24 +11461,8 @@ As with any service provider/service consumer model, AWS PrivateLink will only a
     
      |
     | --- | --- |
-    | 
-    
-    eu-west-2 (London)
-    
-     | 
-    
-    euw-az2 & euw-az3
-    
-     |
-    | 
-    
-    ap-northeast-1 (Tokyo)
-    
-     | 
-    
-    apne1-az1 & apne1-az4
-    
-     |
+    | <p>eu-west-2 (London)</p> | <p>euw-az2 &amp; euw-az3</p> 
+    | <p>ap-northeast-1 (Tokyo)</p> | <p>apne1-az1 &amp; apne1-az4</p> 
     
       
     
