@@ -45,6 +45,7 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Common | [Common API Docs](docs/bitget/common_api.md) | 2025-03-31 |
 | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Spot | [Spot API Docs](docs/bitget/spot_api.md) | 2025-03-31 |
 | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Contract | [Contract API Docs](docs/bitget/contract_api.md) | 2025-03-31 |
+| <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;"> | Deribit | Combined | [API Docs](docs/deribit/api.md) | 2025-03-31 |
 
 ## Contributing
 
