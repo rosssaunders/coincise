@@ -1,0 +1,17 @@
+{
+    "source": {
+        "include": ["src"],
+        "includePattern": ".+\\.js$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": [],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+    "opts": {
+        "destination": "./docs",
+        "recurse": true,
+        "template": "node_modules/minami"
+    }
+} 
