@@ -1,0 +1,19 @@
+{
+    "endpoints": [
+        "rate-limit",
+        "enum",
+        "error",
+        "ws/connect",
+        "websocket/public/orderbook",
+        "websocket/public/trade",
+        "websocket/public/ticker",
+        "websocket/public/kline",
+        "websocket/public/all-liquidation",
+        "websocket/public/etp-kline",
+        "websocket/public/etp-ticker",
+        "websocket/public/etp-nav",
+        "websocket/public/liquidation"
+    ],
+    "output_file": "bybit/v5/public_websocket_api.md",
+    "title": "ByBit V5 Public Websocket API Documentation"
+} 

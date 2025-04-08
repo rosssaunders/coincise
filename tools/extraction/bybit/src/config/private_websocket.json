@@ -1,0 +1,18 @@
+{
+    "endpoints": [
+        "rate-limit",
+        "enum",
+        "error",
+        "ws/connect",
+        "websocket/private/position",
+        "websocket/private/execution",
+        "websocket/private/fast-execution",
+        "websocket/private/order",
+        "websocket/private/wallet",
+        "websocket/private/greek",
+        "websocket/private/dcp",
+        "websocket/trade/guideline"
+    ],
+    "output_file": "bybit/v5/private_websocket_api.md",
+    "title": "ByBit V5 Private Websocket API Documentation"
+} 

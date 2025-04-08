@@ -1,0 +1,31 @@
+{
+    "endpoints": [
+        "rate-limit",
+        "enum",
+        "error",
+        "market/time",
+        "market/kline",
+        "market/mark-kline",
+        "market/index-kline",
+        "market/premium-index-kline",
+        "market/instrument",
+        "market/orderbook",
+        "market/tickers",
+        "market/history-fund-rate",
+        "market/recent-trade",
+        "market/open-interest",
+        "market/iv",
+        "market/insurance",
+        "market/risk-limit",
+        "market/delivery-price",
+        "market/long-short-ratio",
+        "spot-margin-uta/vip-margin",
+        "spot-margin-uta/tier-collateral-ratio",
+        "crypto-loan/collateral-coin",
+        "crypto-loan/loan-coin",
+        "otc/margin-product-info",
+        "otc/margin-coin-convert-info"
+    ],
+    "output_file": "bybit/v5/public_rest_api.md",
+    "title": "ByBit V5 Public REST API Documentation"
+} 
