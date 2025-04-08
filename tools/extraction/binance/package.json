@@ -1,0 +1,25 @@
+{
+  "name": "binance-extractor",
+  "version": "1.0.0",
+  "description": "CLI to extract and process Binance API documentation",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "binance",
+    "api",
+    "documentation",
+    "extractor"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "24.6.0",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "26.0.0"
+  }
+}
