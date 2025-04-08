@@ -23,14 +23,18 @@ if ! command -v node &> /dev/null; then
     exit 1
 fi
 
+# Install dependencies
+print_status "Installing Node.js dependencies..."
+(cd "$SCRIPT_DIR" && npm install)
+
 # Directory containing the script and config files
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Array of config files to process
 CONFIG_FILES=(
-    "links/common.json"
-    "links/spot.json"
-    "links/future.json"
+    "src/config/common.json"
+    "src/config/spot.json"
+    "src/config/future.json"
 )
 
 # Process each config file
@@ -47,7 +51,7 @@ for config_file in "${CONFIG_FILES[@]}"; do
     fi
     
     # Run the conversion script
-    if node convert_to_markdown.js "$config_path"; then
+    if node src/index.js "$config_path"; then
         print_status "Successfully processed $config_file"
     else
         print_error "Failed to process $config_file"

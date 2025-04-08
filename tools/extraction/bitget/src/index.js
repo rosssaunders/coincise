@@ -1,9 +1,10 @@
-const fs = require('fs').promises;
-const puppeteer = require('puppeteer');
-const cheerio = require('cheerio');
-const path = require('path');
-const TurndownService = require('turndown');
-const { gfm, tables } = require('turndown-plugin-gfm');
+import { promises as fs } from 'fs';
+import puppeteer from 'puppeteer';
+import * as cheerio from 'cheerio';
+import path from 'path';
+import TurndownService from 'turndown';
+import { gfm, tables } from 'turndown-plugin-gfm';
+import { argv } from 'process';
 
 // Add delay between requests
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -79,8 +80,10 @@ async function convertToMarkdown(configPath) {
         // Read the config file
         const config = JSON.parse(await fs.readFile(configPath, 'utf8'));
         
+        const outputDir = '../../../docs/bitget';
+
         // Create output directory if it doesn't exist
-        await fs.mkdir('markdown', { recursive: true });
+        await fs.mkdir(outputDir, { recursive: true });
 
         // Initialize markdown content with a header
         let markdownContent = `# ${config.title}\n\n`;
@@ -134,8 +137,9 @@ async function convertToMarkdown(configPath) {
         }
 
         // Save the markdown content
-        await fs.writeFile(`markdown/${config.output_file}`, markdownContent);
-        console.log(`\nMarkdown file has been created successfully at markdown/${config.output_file}!`);
+        const outputPath = path.join(outputDir, config.output_file);
+        await fs.writeFile(outputPath, markdownContent);
+        console.log(`\nMarkdown file has been created successfully at ${outputPath}!`);
     } catch (error) {
         console.error('Error converting to markdown:', error);
         process.exit(1);
@@ -148,11 +152,11 @@ async function convertToMarkdown(configPath) {
 }
 
 // Check if config file path is provided
-if (process.argv.length < 3) {
+if (argv.length < 3) {
     console.error('Please provide the path to the links config file');
-    console.error('Usage: node convert_to_markdown.js <path_to_links_file>');
+    console.error('Usage: node index.js <path_to_links_file>');
     process.exit(1);
 }
 
 // Run the converter with the provided config file
-convertToMarkdown(process.argv[2]);
+convertToMarkdown(argv[2]);

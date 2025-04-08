@@ -5,7 +5,7 @@ Each extraction project must follow this directory structure:
 ```
 project-name/
 ├── src/
-│   ├── main.js           # Entry point
+│   ├── index.js           # Entry point
 │   ├── types.js          # Type definitions
 │   ├── config/           # Configuration files
 │   ├── processors/       # Data processing modules
@@ -14,6 +14,7 @@ project-name/
 ├── package.json
 ├── package-lock.json
 └── README.md
+└── run.sh # Runs ALL the doc generators for this venue
 ```
 
 ## Dependencies
@@ -23,7 +24,7 @@ Required dependencies for all extraction projects:
 - turndown-plugin-gfm: ^1.0.2
 - jsdom: ^26.0.0
 
-Optional dependencies must be justified in the project's README.md.
+Optional dependencies must be justified in the projects README.md.
 
 ## JavaScript Standards
 - Use pure ES6 JavaScript only
