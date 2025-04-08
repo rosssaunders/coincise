@@ -1,32 +1,5 @@
-use std::error::Error;
-use async_trait::async_trait;
-use crate::exchanges::ApiProcessor;
-use super::doc_processor::DocProcessor;
-use cryptoapidocs_macros::ProcessorRegistration;
-
-#[derive(Default, ProcessorRegistration)]
-#[processor("bybit_private_rest")]
-#[exchange("bybit")]
-pub struct PrivateREST;
-
-#[async_trait]
-impl ApiProcessor for PrivateREST {
-    async fn process_docs(&self) -> Result<(u32, String, String), Box<dyn Error>> {
-        let processor = DocProcessor::new(
-            Self::ENDPOINTS,
-            Self::OUTPUT_FILE,
-            Self::TITLE
-        );
-        processor.process_docs().await
-    }
-
-    fn get_output_filename(&self) -> String {
-        String::from(Self::OUTPUT_FILE)
-    }
-}
-
-impl PrivateREST {
-    const ENDPOINTS: &'static [&'static str] = &[
+{
+    "endpoints": [
         "rate-limit",
         "enum",
         "error",
@@ -146,9 +119,8 @@ impl PrivateREST {
         "broker/reward/get-issue-voucher",
         "earn/create-order",
         "earn/order-history",
-        "earn/position",
-    ];
-
-    const OUTPUT_FILE: &'static str = "bybit/v5/private_rest_api.md";
-    const TITLE: &'static str = "ByBit V5 Private REST API Documentation";
-}
+        "earn/position"
+    ],
+    "output_file": "bybit/v5/private_rest_api.md",
+    "title": "ByBit V5 Private REST API Documentation"
+} 
