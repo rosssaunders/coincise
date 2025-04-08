@@ -1,0 +1,157 @@
+{
+  "baseURL": "https://docs.kraken.com/api/docs",
+  "categories": {
+    "Market Data": [
+      "rest-api/get-server-time",
+      "rest-api/get-system-status",
+      "rest-api/get-asset-info",
+      "rest-api/get-tradable-asset-pairs",
+      "rest-api/get-ticker-information",
+      "rest-api/get-ohlc-data",
+      "rest-api/get-order-book",
+      "rest-api/get-recent-trades",
+      "rest-api/get-recent-spreads",
+      "websocket-v2/ticker",
+      "websocket-v2/book",
+      "websocket-v2/level3",
+      "websocket-v2/ohlc",
+      "websocket-v2/trade",
+      "websocket-v2/instrument",
+      "fix-api/slr-fix",
+      "fix-api/sl-fix",
+      "fix-api/mdr-fix",
+      "fix-api/mdrr-fix",
+      "fix-api/mdsfr-fix",
+      "fix-api/mdir-fix",
+      "fix-api/tssr-fix",
+      "fix-api/tss-fix"
+    ],
+    "Account Data": [
+      "rest-api/get-account-balance",
+      "rest-api/get-extended-balance",
+      "rest-api/get-trade-balance",
+      "rest-api/get-open-orders",
+      "rest-api/get-closed-orders",
+      "rest-api/get-orders-info",
+      "rest-api/get-order-amends",
+      "rest-api/get-trade-history",
+      "rest-api/get-trades-info",
+      "rest-api/get-open-positions",
+      "rest-api/get-ledgers",
+      "rest-api/get-ledgers-info",
+      "rest-api/get-trade-volume",
+      "rest-api/add-export",
+      "rest-api/export-status",
+      "rest-api/retrieve-export",
+      "rest-api/remove-export"
+    ],
+    "Trading": [
+      "rest-api/add-order",
+      "rest-api/add-order-batch",
+      "rest-api/amend-order",
+      "rest-api/edit-order",
+      "rest-api/cancel-order",
+      "rest-api/cancel-all-orders",
+      "rest-api/cancel-all-orders-after",
+      "rest-api/cancel-order-batch",
+      "rest-api/get-websockets-token",
+      "fix-api/nos-fix",
+      "fix-api/ocr-fix",
+      "fix-api/ocrr-fix",
+      "fix-api/osr-fix",
+      "fix-api/omcr-fix",
+      "fix-api/er-fix"
+    ],
+    "OTC": [
+      "rest-api/create-otc-quote-request",
+      "rest-api/update-otc-quote",
+      "rest-api/get-otc-pairs",
+      "rest-api/get-otc-active-quotes",
+      "rest-api/get-otc-historical-quotes",
+      "rest-api/get-otc-exposures",
+      "rest-api/check-otc-client"
+    ],
+    "Funding": [
+      "rest-api/get-deposit-methods",
+      "rest-api/get-deposit-addresses",
+      "rest-api/get-status-recent-deposits",
+      "rest-api/get-withdrawal-methods",
+      "rest-api/get-withdrawal-addresses",
+      "rest-api/get-withdrawal-information",
+      "rest-api/withdraw-funds",
+      "rest-api/get-status-recent-withdrawals",
+      "rest-api/cancel-withdrawal",
+      "rest-api/wallet-transfer"
+    ],
+    "Subaccounts": [
+      "rest-api/create-subaccount",
+      "rest-api/account-transfer"
+    ],
+    "Earn": [
+      "rest-api/allocate-strategy",
+      "rest-api/deallocate-strategy",
+      "rest-api/get-allocate-strategy-status",
+      "rest-api/get-deallocate-strategy-status",
+      "rest-api/list-strategies",
+      "rest-api/list-allocations"
+    ],
+    "User Trading": [
+      "websocket-v2/add_order",
+      "websocket-v2/amend_order",
+      "websocket-v2/edit_order",
+      "websocket-v2/cancel_order",
+      "websocket-v2/cancel_all",
+      "websocket-v2/cancel_after",
+      "websocket-v2/batch_add",
+      "websocket-v2/batch_cancel"
+    ],
+    "User Data": [
+      "websocket-v2/executions",
+      "websocket-v2/balances"
+    ],
+    "Admin": [
+      "websocket-v2/status",
+      "websocket-v2/heartbeat",
+      "websocket-v2/ping",
+      "fix-api/session-fix",
+      "fix-api/logon-fix",
+      "fix-api/reject-session_level-fix",
+      "fix-api/reject-business_level-fix",
+      "fix-api/sequence-reset-fix",
+      "fix-api/logout-fix"
+    ],
+    "Guides": [
+      "guides/global-intro"
+    ],
+    "General": [
+      "guides/spot-amends",
+      "guides/spot-ratelimits",
+      "guides/spot-errors",
+      "guides/spot-examples"
+    ],
+    "REST": [
+      "guides/spot-rest-intro",
+      "guides/spot-rest-auth",
+      "guides/spot-rest-ratelimits",
+      "guides/spot-rest-earn"
+    ],
+    "Websockets": [
+      "guides/spot-ws-intro",
+      "guides/spot-ws-auth",
+      "guides/spot-ws-book-v2",
+      "guides/spot-ws-l3-v2",
+      "guides/spot-ws-book-v1"
+    ],
+    "FIX": [
+      "guides/fix-intro",
+      "guides/fix-auth",
+      "guides/fix-checksums",
+      "guides/futures-introduction",
+      "guides/futures-rate-limits",
+      "guides/futures-rest",
+      "guides/futures-websockets",
+      "guides/custody-rest-auth",
+      "guides/custody-rest-ratelimits"
+    ]
+  }
+}

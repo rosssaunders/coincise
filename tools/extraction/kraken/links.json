@@ -1,0 +1,9 @@
+{
+  "baseURL": "https://docs.kraken.com/api/docs",
+  "categories": {
+    "Trading": [
+      "rest-api/add-order",
+      "rest-api/add-order-batch"
+    ]
+  }
+}
