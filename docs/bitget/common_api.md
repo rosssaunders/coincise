@@ -415,6 +415,27 @@ The Bitget Crypto Loan API aims to help users get additional funds instantly wit
 
 # Changelog
 
+## \[Apr 08, 2025\] Added APIs for new order initiator key creation & follower order setup.[​](#apr-08-2025-added-apis-for-new-order-initiator-key-creation--follower-order-setup "Direct link to apr-08-2025-added-apis-for-new-order-initiator-key-creation--follower-order-setup")
+
+Endpoints：/api/v2/copy/mix-trader/create-copy-api  
+Additional content：
+
+*   New version interface for order initiators to create order API keys.
+
+Endpoints：/api/v2/copy/mix-follower/copy-settings  
+Additional content：
+
+*   New version interface for follower order-following setup.
+
+## \[Apr 02, 2025\] Adjustment of input parameters for estimated interest and loanable amount[​](#apr-02-2025-adjustment-of-input-parameters-for-estimated-interest-and-loanable-amount "Direct link to apr-02-2025-adjustment-of-input-parameters-for-estimated-interest-and-loanable-amount")
+
+Endpoints：/api/v2/earn/loan/public/hour-interest, /api/v2/earn/loan/borrow
+
+*   Additional content： Adjust the input parameter for the daily to  
+    `SEVEN`: 7 days  
+    `THIRTY`: 30 days  
+    `FLEXIBLE`: Flexible
+
 ## \[Mar 27, 2025\] Updates include new fields in futures contract & funding rate interfaces' return values, and adjusted input params for spot transaction details.[​](#mar-27-2025-updates-include-new-fields-in-futures-contract--funding-rate-interfaces-return-values-and-adjusted-input-params-for-spot-transaction-details "Direct link to mar-27-2025-updates-include-new-fields-in-futures-contract--funding-rate-interfaces-return-values-and-adjusted-input-params-for-spot-transaction-details")
 
 Endpoints：/api/v2/mix/account/accounts  
