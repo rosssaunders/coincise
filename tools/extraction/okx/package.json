@@ -1,0 +1,19 @@
+{
+  "name": "okx-api-docs-extractor",
+  "version": "1.0.0",
+  "description": "OKX API Documentation Extractor",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "puppeteer": "^24.6.0",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "^26.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

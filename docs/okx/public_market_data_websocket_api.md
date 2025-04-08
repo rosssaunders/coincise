@@ -1,18 +1,18 @@
 # OKX API Documentation - Public Market Data WebSocket API
 
-### Overview ###
+### Overview
 
 WebSocket is a new HTML5 protocol that achieves full-duplex data transmission between the client and server, allowing data to be transferred effectively in both directions. A connection between the client and server can be established with just one handshake. The server will then be able to push data to the client according to preset rules. Its advantages include:
 
-* The WebSocket request header size for data transmission between client and server is only 2 bytes.
-* Either the client or server can initiate data transmission.
-* There's no need to repeatedly create and delete TCP connections, saving resources on bandwidth and server.
+*   The WebSocket request header size for data transmission between client and server is only 2 bytes.
+*   Either the client or server can initiate data transmission.
+*   There's no need to repeatedly create and delete TCP connections, saving resources on bandwidth and server.
 
 We recommend developers use WebSocket API to retrieve market data and order book depth.
 
 ---
 
-### Connect ###
+### Connect
 
 **Connection limit**: 3 requests per second (based on IP)
 
@@ -28,143 +28,70 @@ The connection will break automatically if the subscription is not established o
 
 To keep the connection stable:
 
-1. Set a timer of N seconds whenever a response message is received, where N is less than 30.
+1\. Set a timer of N seconds whenever a response message is received, where N is less than 30.
 
-2. If the timer is triggered, which means that no new message is received within N seconds, send the String 'ping'.
+2\. If the timer is triggered, which means that no new message is received within N seconds, send the String 'ping'.
 
-3. Expect a 'pong' as a response. If the response message is not received within N seconds, please raise an error or reconnect.
+3\. Expect a 'pong' as a response. If the response message is not received within N seconds, please raise an error or reconnect.
 
 ---
 
-### Connection count limit ###
+### Connection count limit
 
 The limit will be set at 30 WebSocket connections per specific WebSocket channel per sub-account. Each WebSocket connection is identified by the unique `connId`.
 
+  
+
 The WebSocket channels subject to this limitation are as follows:
 
-1. [Orders channel](/docs-v5/en/#order-book-trading-trade-ws-order-channel)
-2. [Account channel](/docs-v5/en/#trading-account-websocket-account-channel)
-3. [Positions channel](/docs-v5/en/#trading-account-websocket-positions-channel)
-4. [Balance and positions channel](/docs-v5/en/#trading-account-websocket-balance-and-position-channel)
-5. [Position risk warning channel](/docs-v5/en/#trading-account-websocket-position-risk-warning)
-6. [Account greeks channel](/docs-v5/en/#trading-account-websocket-account-greeks-channel)
+1.  [Orders channel](/docs-v5/en/#order-book-trading-trade-ws-order-channel)
+2.  [Account channel](/docs-v5/en/#trading-account-websocket-account-channel)
+3.  [Positions channel](/docs-v5/en/#trading-account-websocket-positions-channel)
+4.  [Balance and positions channel](/docs-v5/en/#trading-account-websocket-balance-and-position-channel)
+5.  [Position risk warning channel](/docs-v5/en/#trading-account-websocket-position-risk-warning)
+6.  [Account greeks channel](/docs-v5/en/#trading-account-websocket-account-greeks-channel)
 
 If users subscribe to the same channel through the same WebSocket connection through multiple arguments, for example, by using `{"channel": "orders", "instType": "ANY"}` and `{"channel": "orders", "instType": "SWAP"}`, it will be counted once only. If users subscribe to the listed channels (such as orders and accounts) using either the same or different connections, it will not affect the counting, as these are considered as two different channels. The system calculates the number of WebSocket connections per channel.
 
+  
+
 The platform will send the number of active connections to clients through the `channel-conn-count` event message **to new channel subscriptions**.
 
->
->
 > Connection count update
->
->
 
-```
-{
-    "event":"channel-conn-count",
-    "channel":"orders",
-    "connCount": "2",
-    "connId":"abcd1234"
-}
-
-```
+  
 
 When the limit is breached, generally the latest connection that sends the subscription request will be rejected. Client will receive the usual subscription acknowledgement followed by the `channel-conn-count-error` from the connection that the subscription has been terminated. In exceptional circumstances the platform may unsubscribe existing connections.
 
->
->
 > Connection limit error
->
->
 
-```
-{
-    "event": "channel-conn-count-error",
-    "channel": "orders",
-    "connCount": "20",
-    "connId":"a4d3ae55"
-}
-
-```
+  
 
 Order operations through WebSocket, including place, amend and cancel orders, are not impacted through this change.
 
 ---
 
-### Login ###
+### Login
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "login",
-  "args": [
-    {
-      "apiKey": "985d5b66-57ce-40fb-b714-afc0b9787083",
-      "passphrase": "123456",
-      "timestamp": "1538054050",
-      "sign": "7L+zFQ+CEgGu5rzCj4+BdV2/uUHGqddA9pI6ztsRRPs="
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>login</code> 
+| args | Array of objects | Yes | List of account to login 
+| &gt; apiKey | String | Yes | API Key 
+| &gt; passphrase | String | Yes | API Key password 
+| &gt; timestamp | String | Yes | Unix Epoch time, the unit is seconds 
+| &gt; sign | String | Yes | Signature string 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
-
-|  Parameter  |      Type      |Required|            Description             |
-|-------------|----------------|--------|------------------------------------|
-|     op      |     String     |  Yes   |      Operation  <br/>`login`       |
-|    args     |Array of objects|  Yes   |      List of account to login      |
-|  \> apiKey  |     String     |  Yes   |              API Key               |
-|\> passphrase|     String     |  Yes   |          API Key password          |
-|\> timestamp |     String     |  Yes   |Unix Epoch time, the unit is seconds|
-|   \> sign   |     String     |  Yes   |          Signature string          |
-
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "login",
-  "code": "0",
-  "msg": "",
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60009",
-  "msg": "Login failed.",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter| Type |Required|             Description             |
-|---------|------|--------|-------------------------------------|
-|  event  |String|  Yes   |Operation  <br/>`login`  <br/>`error`|
-|  code   |String|   No   |             Error code              |
-|   msg   |String|   No   |            Error message            |
-| connId  |String|  Yes   |       WebSocket connection ID       |
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Operation<br><code>login</code><br><code>error</code> 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
 **apiKey**: Unique identification for invoking API. Requires user to apply one manually.
 
@@ -190,23 +117,9 @@ The request will expire 30 seconds after the timestamp. If your server time diff
 
 ---
 
-### Subscribe ###
+### Subscribe
 
 **Subscription Instructions**
-
->
->
-> Request format description
->
->
-
-```
-{
-  "op": "subscribe",
-  "args": ["<SubscriptionTopic>"]
-}
-
-```
 
 WebSocket channels are divided into two categories: `public` and `private` channels.
 
@@ -218,1616 +131,651 @@ Users can choose to subscribe to one or more channels, and the total length of m
 
 Below is an example of subscription parameters. The requirement of subscription parameters for each channel is different. For details please refer to the specification of each channels.
 
->
->
-> Request Example
->
->
-
-```
-{
-    "op":"subscribe",
-    "args":[
-        {
-            "channel":"tickers",
-            "instId":"BTC-USDT"
-        }
-    ]
-}
-
-```
-
 **Request parameters**
 
-|  Parameter  |      Type      |Required|                                            Description                                            |
-|-------------|----------------|--------|---------------------------------------------------------------------------------------------------|
-|     op      |     String     |  Yes   |                                    Operation  <br/>`subscribe`                                    |
-|    args     |Array of objects|  Yes   |                                    List of subscribed channels                                    |
-| \> channel  |     String     |  Yes   |                                           Channel name                                            |
-| \> instType |     String     |   No   |Instrument type  <br/>`SPOT`  <br/>`MARGIN`  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`  <br/>`ANY`|
-|\> instFamily|     String     |   No   |                  Instrument family  <br/>Applicable to `FUTURES`/`SWAP`/`OPTION`                  |
-|  \> instId  |     String     |   No   |                                           Instrument ID                                           |
-
->
->
-> Response Example
->
->
-
-```
-{
-    "event": "subscribe",
-    "arg": {
-        "channel": "tickers",
-        "instId": "BTC-USDT"
-    },
-    "connId": "accb8e21"
-}
-
-```
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instType | String | No | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code><br><code>ANY</code> 
+| &gt; instFamily | String | No | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; instId | String | No | Instrument ID 
 
 **Return parameters**
 
-|  Parameter  | Type |Required|                                            Description                                            |
-|-------------|------|--------|---------------------------------------------------------------------------------------------------|
-|    event    |String|  Yes   |                               Event  <br/>`subscribe`  <br/>`error`                               |
-|     arg     |Object|   No   |                                        Subscribed channel                                         |
-| \> channel  |String|  Yes   |                                           Channel name                                            |
-| \> instType |String|   No   |Instrument type  <br/>`SPOT`  <br/>`MARGIN`  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`  <br/>`ANY`|
-|\> instFamily|String|   No   |                  Instrument family  <br/>Applicable to `FUTURES`/`SWAP`/`OPTION`                  |
-|  \> instId  |String|   No   |                                           Instrument ID                                           |
-|    code     |String|   No   |                                            Error code                                             |
-|     msg     |String|   No   |                                           Error message                                           |
-|   connId    |String|  Yes   |                                      WebSocket connection ID                                      |
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instType | String | No | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code><br><code>ANY</code> 
+| &gt; instFamily | String | No | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; instId | String | No | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID
 
 ---
 
-### Unsubscribe ###
+### Unsubscribe
 
 Unsubscribe from one or more channels.
 
->
->
-> Request format description
->
->
-
-```
-{
-  "op": "unsubscribe",
-  "args": ["< SubscriptionTopic> "]
-}
-
-```
-
->
->
-> Request Example
->
->
-
-```
-{
-  "op": "unsubscribe",
-  "args": [
-    {
-      "channel": "tickers",
-      "instId": "BTC-USDT"
-    }
-  ]
-}
-
-```
-
 **Request parameters**
 
-|  Parameter  |      Type      |Required|                                            Description                                            |
-|-------------|----------------|--------|---------------------------------------------------------------------------------------------------|
-|     op      |     String     |  Yes   |                                   Operation  <br/>`unsubscribe`                                   |
-|    args     |Array of objects|  Yes   |                               List of channels to unsubscribe from                                |
-| \> channel  |     String     |  Yes   |                                           Channel name                                            |
-| \> instType |     String     |   No   |Instrument type  <br/>`SPOT`  <br/>`MARGIN`  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`  <br/>`ANY`|
-|\> instFamily|     String     |   No   |                  Instrument family  <br/>Applicable to `FUTURES`/`SWAP`/`OPTION`                  |
-|  \> instId  |     String     |   No   |                                           Instrument ID                                           |
-
->
->
-> Response Example
->
->
-
-```
-{
-    "event": "unsubscribe",
-    "arg": {
-        "channel": "tickers",
-        "instId": "BTC-USDT"
-    },
-    "connId": "d0b44253"
-}
-
-```
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>unsubscribe</code> 
+| args | Array of objects | Yes | List of channels to unsubscribe from 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instType | String | No | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code><br><code>ANY</code> 
+| &gt; instFamily | String | No | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; instId | String | No | Instrument ID 
 
 **Response parameters**
 
-|  Parameter  | Type |Required|                                      Description                                      |
-|-------------|------|--------|---------------------------------------------------------------------------------------|
-|    event    |String|  Yes   |                        Event  <br/>`unsubscribe`  <br/>`error`                        |
-|     arg     |Object|   No   |                                 Unsubscribed channel                                  |
-| \> channel  |String|  Yes   |                                     Channel name                                      |
-| \> instType |String|   No   |Instrument type  <br/>`SPOT`  <br/>`MARGIN`  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`|
-|\> instFamily|String|   No   |            Instrument family  <br/>Applicable to `FUTURES`/`SWAP`/`OPTION`            |
-|  \> instId  |String|   No   |                                     Instrument ID                                     |
-|    code     |String|   No   |                                      Error code                                       |
-|     msg     |String|   No   |                                     Error message                                     |
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Unsubscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instType | String | No | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> 
+| &gt; instFamily | String | No | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; instId | String | No | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message
 
 ---
 
-### Notification ###
+### Notification
 
-WebSocket has introduced a new message type (event = `notice`).   
+WebSocket has introduced a new message type (event = `notice`).  
+  
 
 Client will receive the information in the following scenarios:
 
-* Websocket disconnect for service upgrade  
+*   Websocket disconnect for service upgrade  
+    
 
 30 seconds prior to the upgrade of the WebSocket service, the notification message will be sent to users indicating that the connection will soon be disconnected. Users are encouraged to establish a new connection to prevent any disruptions caused by disconnection.
 
->
->
-> Response Example
->
->
-
-```
-{
-    "event": "notice",
-    "code": "64008",
-    "msg": "The connection will soon be closed for a service upgrade. Please reconnect.",
-    "connId": "a4d3ae55"
-}
-
-```
-
+  
+  
 The feature is supported by WebSocket Public (/ws/v5/public) and Private (/ws/v5/private) for now.
 
 ---
 
-### Instruments channel ###
+### Instruments channel
 
 The instruments will be pushed if there is any change to the instrument’s state (such as delivery of FUTURES, exercise of OPTION, listing of new contracts / trading pairs, trading suspension, etc.).  
 (The full instrument list is not pushed since December 28, 2022, [you can click here to view details](/docs-v5/log_en/#2022-12-06))
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "instruments",
-      "instType": "SPOT"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>instruments</code> 
+| &gt; instType | String | Yes | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instType | String | Yes | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-| Parameter |      Type      |Required|                                      Description                                      |
-|-----------|----------------|--------|---------------------------------------------------------------------------------------|
-|    op     |     String     |  Yes   |                    Operation  <br/>`subscribe`  <br/>`unsubscribe`                    |
-|   args    |Array of objects|  Yes   |                              List of subscribed channels                              |
-|\> channel |     String     |  Yes   |                           Channel name  <br/>`instruments`                            |
-|\> instType|     String     |  Yes   |Instrument type  <br/>`SPOT`  <br/>`MARGIN`  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`|
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instType | String | Instrument type 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instId | String | Instrument ID, e.g. <code>BTC-UST</code> 
+| &gt; uly | String | Underlying, e.g. <code>BTC-USD</code><br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; instFamily | String | Instrument family, e.g. <code>BTC-USD</code><br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; category | String | Currency category. Note: this parameter is already deprecated 
+| &gt; baseCcy | String | Base currency, e.g. <code>BTC</code> in <code>BTC-USDT</code><br>Only applicable to <code>SPOT</code>/<code>MARGIN</code> 
+| &gt; quoteCcy | String | Quote currency, e.g. <code>USDT</code> in <code>BTC-USDT</code><br>Only applicable to <code>SPOT</code>/<code>MARGIN</code> 
+| &gt; settleCcy | String | Settlement and margin currency, e.g. <code>BTC</code><br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; ctVal | String | Contract value 
+| &gt; ctMult | String | Contract multiplier 
+| &gt; ctValCcy | String | Contract value currency 
+| &gt; optType | String | Option type<br><code>C</code>: Call<br><code>P</code>: Put<br>Only applicable to <code>OPTION</code> 
+| &gt; stk | String | Strike price<br>Only applicable to <code>OPTION</code> 
+| &gt; listTime | String | Listing time<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; auctionEndTime | String | The end time of call auction, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code><br>Only applicable to <code>SPOT</code> that are listed through call auctions, return "" in other cases 
+| &gt; expTime | String | Expiry time<br>Applicable to <code>SPOT</code>/<code>MARGIN</code>/<code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>. For <code>FUTURES</code>/<code>OPTION</code>, it is the delivery/exercise time. It can also be the delisting time of the trading instrument. Update once change. 
+| &gt; lever | String | Max Leverage<br>Not applicable to <code>SPOT</code>/<code>OPTION</code>, used to distinguish between <code>MARGIN</code> and <code>SPOT</code>. 
+| &gt; tickSz | String | Tick size, e.g. <code>0.0001</code><br>For Option, it is minimum tickSz among tick band. 
+| &gt; lotSz | String | Lot size<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>base currency</code> 
+| &gt; minSz | String | Minimum order size<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>base currency</code> 
+| &gt; ctType | String | Contract type<br><code>linear</code>: linear contract<br><code>inverse</code>: inverse contract<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code> 
+| &gt; alias | String | Alias<br><code>this_week</code><br><code>next_week</code><br><code>this_month</code><br><code>next_month</code><br><code>quarter</code><br><code>next_quarter</code><br>Only applicable to <code>FUTURES</code><br><strong>Not recommended for use, users are encouraged to rely on the expTime field to determine the delivery time of the contract</strong> 
+| &gt; state | String | Instrument status<br><code>live</code><br><code>suspend</code><br><code>expired</code><br><code>preopen</code>. e.g. There will be preopen before the Futures and Options new contracts state is live.<br><code>test</code>: Test pairs, can't be traded 
+| &gt; state | String | Instrument status<br><code>live</code><br><code>suspend</code><br><code>expired</code><br><code>preopen</code> e.g. Futures and options contracts rollover from generation to trading start; certain symbols before they go live<br><code>test</code>: Test pairs, can't be traded 
+| &gt; ruleType | String | Trading rule types<br><code>normal</code>: normal trading<br><code>pre_market</code>: pre-market trading 
+| &gt; maxLmtSz | String | The maximum order quantity of a single limit order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>base currency</code>. 
+| &gt; maxMktSz | String | The maximum order quantity of a single market order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>USDT</code>. 
+| &gt; maxTwapSz | String | The maximum order quantity of a single TWAP order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>base currency</code>. 
+| &gt; maxIcebergSz | String | The maximum order quantity of a single iceBerg order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>base currency</code>. 
+| &gt; maxTriggerSz | String | The maximum order quantity of a single trigger order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>base currency</code>. 
+| &gt; maxStopSz | String | The maximum order quantity of a single stop market order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>USDT</code>. 
+| &gt; futureSettlement | Boolean | Whether daily settlement for expiry feature is enabled<br>Applicable to <code>FUTURES</code> <code>cross</code> 
 
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "instruments",
-    "instType": "SPOT"
-  },
-  "connId": "a4d3ae55"
-}
+Instrument status will trigger pushing of incremental data from instruments channel. When a new contract is going to be listed, the instrument data of the new contract will be available with status preopen. When a product is going to be delisted (e.g. when a FUTURES contract is settled or OPTION contract is exercised), the instrument status will be changed to expired.
 
-```
+listTime and auctionEndTime  
+For spot symbols listed through a call auction, listTime represents the start time of the auction, and auctionEndTime indicates the end of the auction and the start of continuous trading. For other scenarios, listTime will mark the beginning of continuous trading, and auctionEndTime will return an empty value "".
 
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"instruments\", \"instType\" : \"FUTURES\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-| Parameter | Type |Required|                                      Description                                      |
-|-----------|------|--------|---------------------------------------------------------------------------------------|
-|   event   |String|  Yes   |               Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`               |
-|    arg    |Object|   No   |                                  Subscribed channel                                   |
-|\> channel |String|  Yes   |                                     Channel name                                      |
-|\> instType|String|  Yes   |Instrument type  <br/>`SPOT`  <br/>`MARGIN`  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`|
-|   code    |String|   No   |                                      Error code                                       |
-|    msg    |String|   No   |                                     Error message                                     |
-|  connId   |String|  Yes   |                                WebSocket connection ID                                |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-  "arg": {
-    "channel": "instruments",
-    "instType": "SPOT"
-  },
-  "data": [
-    {
-        "alias": "",
-        "auctionEndTime": "",
-        "baseCcy": "BTC",
-        "category": "1",
-        "ctMult": "",
-        "ctType": "",
-        "ctVal": "",
-        "ctValCcy": "",
-        "expTime": "",
-        "futureSettlement": false,
-        "instFamily": "",
-        "instId": "BTC-USDT",
-        "instType": "SPOT",
-        "lever": "10",
-        "listTime": "1606468572000",
-        "lotSz": "0.00000001",
-        "maxIcebergSz": "9999999999.0000000000000000",
-        "maxLmtAmt": "1000000",
-        "maxLmtSz": "9999999999",
-        "maxMktAmt": "1000000",
-        "maxMktSz": "",
-        "maxStopSz": "",
-        "maxTriggerSz": "9999999999.0000000000000000",
-        "maxTwapSz": "9999999999.0000000000000000",
-        "minSz": "0.00001",
-        "optType": "",
-        "quoteCcy": "USDT",
-        "settleCcy": "",
-        "state": "live",
-        "ruleType": "normal",
-        "stk": "",
-        "tickSz": "0.1",
-        "uly": ""
-    }
-  ]
-}
-
-```
-
-#### Push data parameters ####
-
-|     Parameter     |      Type      |                                                                                                                                        Description                                                                                                                                         |
-|-------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|        arg        |     Object     |                                                                                                                                     Subscribed channel                                                                                                                                     |
-|    \> channel     |     String     |                                                                                                                                        Channel name                                                                                                                                        |
-|    \> instType    |     String     |                                                                                                                                      Instrument type                                                                                                                                       |
-|       data        |Array of objects|                                                                                                                                      Subscribed data                                                                                                                                       |
-|    \> instType    |     String     |                                                                                                                                      Instrument type                                                                                                                                       |
-|     \> instId     |     String     |                                                                                                                               Instrument ID, e.g. `BTC-UST`                                                                                                                                |
-|      \> uly       |     String     |                                                                                                       Underlying, e.g. `BTC-USD`   <br/>Only applicable to `FUTURES`/`SWAP`/`OPTION`                                                                                                       |
-|   \> instFamily   |     String     |                                                                                                   Instrument family, e.g. `BTC-USD`   <br/>Only applicable to `FUTURES`/`SWAP`/`OPTION`                                                                                                    |
-|    \> category    |     String     |                                                                                                               Currency category. Note: this parameter is already deprecated                                                                                                                |
-|    \> baseCcy     |     String     |                                                                                                     Base currency, e.g. `BTC` in `BTC-USDT`   <br/>Only applicable to `SPOT`/`MARGIN`                                                                                                      |
-|    \> quoteCcy    |     String     |                                                                                                    Quote currency, e.g. `USDT` in `BTC-USDT`   <br/>Only applicable to `SPOT`/`MARGIN`                                                                                                     |
-|   \> settleCcy    |     String     |                                                                                               Settlement and margin currency, e.g. `BTC`   <br/>Only applicable to `FUTURES`/`SWAP`/`OPTION`                                                                                               |
-|     \> ctVal      |     String     |                                                                                                                                       Contract value                                                                                                                                       |
-|     \> ctMult     |     String     |                                                                                                                                    Contract multiplier                                                                                                                                     |
-|    \> ctValCcy    |     String     |                                                                                                                                  Contract value currency                                                                                                                                   |
-|    \> optType     |     String     |                                                                                                        Option type  <br/>`C`: Call  <br/>`P`: Put  <br/>Only applicable to `OPTION`                                                                                                        |
-|      \> stk       |     String     |                                                                                                                       Strike price  <br/>Only applicable to `OPTION`                                                                                                                       |
-|    \> listTime    |     String     |                                                                                                              Listing time  <br/>Only applicable to `FUTURES`/`SWAP`/`OPTION`                                                                                                               |
-| \> auctionEndTime |     String     |                                                 The end time of call auction, Unix timestamp format in milliseconds, e.g. `1597026383085`   <br/>Only applicable to `SPOT` that are listed through call auctions, return "" in other cases                                                 |
-|    \> expTime     |     String     |                                   Expiry time  <br/>Applicable to `SPOT`/`MARGIN`/`FUTURES`/`SWAP`/`OPTION`. For `FUTURES`/`OPTION`, it is the delivery/exercise time. It can also be the delisting time of the trading instrument. Update once change.                                    |
-|     \> lever      |     String     |                                                                                           Max Leverage  <br/>Not applicable to `SPOT`/`OPTION`, used to distinguish between `MARGIN` and `SPOT`.                                                                                           |
-|     \> tickSz     |     String     |                                                                                                      Tick size, e.g. `0.0001`  <br/>For Option, it is minimum tickSz among tick band.                                                                                                      |
-|     \> lotSz      |     String     |                                                             Lot size  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `base currency`                                                             |
-|     \> minSz      |     String     |                                                        Minimum order size  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `base currency`                                                        |
-|     \> ctType     |     String     |                                                                                 Contract type  <br/>`linear`: linear contract  <br/>`inverse`: inverse contract  <br/>Only applicable to `FUTURES`/`SWAP`                                                                                  |
-|     \> alias      |     String     |Alias  <br/>`this_week`  <br/>`next_week`  <br/>`this_month`  <br/>`next_month`  <br/>`quarter`  <br/>`next_quarter`  <br/>Only applicable to `FUTURES`   <br/>**Not recommended for use, users are encouraged to rely on the expTime field to determine the delivery time of the contract**|
-|     \> state      |     String     |                                     Instrument status  <br/>`live`  <br/>`suspend`  <br/>`expired`  <br/>`preopen`. e.g. There will be preopen before the Futures and Options new contracts state is live.   <br/>`test`: Test pairs, can't be traded                                      |
-|     \> state      |     String     |                         Instrument status  <br/>`live`  <br/>`suspend`  <br/>`expired`  <br/>`preopen` e.g. Futures and options contracts rollover from generation to trading start; certain symbols before they go live  <br/>`test`: Test pairs, can't be traded                         |
-|    \> ruleType    |     String     |                                                                                                  Trading rule types  <br/>`normal`: normal trading  <br/>`pre_market`: pre-market trading                                                                                                  |
-|    \> maxLmtSz    |     String     |                                       The maximum order quantity of a single limit order.  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `base currency`.                                       |
-|    \> maxMktSz    |     String     |                                           The maximum order quantity of a single market order.  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `USDT`.                                           |
-|   \> maxTwapSz    |     String     |                                       The maximum order quantity of a single TWAP order.  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `base currency`.                                        |
-|  \> maxIcebergSz  |     String     |                                      The maximum order quantity of a single iceBerg order.  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `base currency`.                                      |
-|  \> maxTriggerSz  |     String     |                                      The maximum order quantity of a single trigger order.  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `base currency`.                                      |
-|   \> maxStopSz    |     String     |                                        The maximum order quantity of a single stop market order.  <br/>If it is a derivatives contract, the value is the number of contracts.  <br/>If it is `SPOT`/`MARGIN`, the value is the quantity in `USDT`.                                         |
-|\> futureSettlement|    Boolean     |                                                                                                Whether daily settlement for expiry feature is enabled  <br/>Applicable to `FUTURES` `cross`                                                                                                |
- Instrument status will trigger pushing of incremental data from instruments channel.
-When a new contract is going to be listed, the instrument data of the new contract will be available with status preopen.
-When a product is going to be delisted (e.g. when a FUTURES contract is settled or OPTION contract is exercised), the instrument status will be changed to expired. listTime and auctionEndTime  
-For spot symbols listed through a call auction, listTime represents the start time of the auction, and auctionEndTime indicates the end of the auction and the start of continuous trading. For other scenarios, listTime will mark the beginning of continuous trading, and auctionEndTime will return an empty value "". state  
-The state will always change from `preopen` to `live` when the listTime is reached. Certain symbols will now have `state:preopen` before they go live. Before going live, the instruments channel will push data for pre-listing symbols with `state:preopen`. If the listing is cancelled, the channel will send full data excluding the cancelled symbol, without additional notification. When the symbol goes live (reaching listTime), the channel will push data with `state:live`. Users can also query the corresponding data via the REST endpoint.  
+state  
+The state will always change from \`preopen\` to \`live\` when the listTime is reached. Certain symbols will now have \`state:preopen\` before they go live. Before going live, the instruments channel will push data for pre-listing symbols with \`state:preopen\`. If the listing is cancelled, the channel will send full data excluding the cancelled symbol, without additional notification. When the symbol goes live (reaching listTime), the channel will push data with \`state:live\`. Users can also query the corresponding data via the REST endpoint.  
 When a product is going to be delisted (e.g. when a FUTURES contract is settled or OPTION contract is exercised), the instrument will not be available.
 
 ---
 
-### Open interest channel ###
+### Open interest channel
 
 Retrieve the open interest. Data will be pushed every 3 seconds when there are updates.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "open-interest",
-      "instId": "LTC-USD-SWAP"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>open-interest</code> 
+| &gt; instId | String | Yes | Instrument ID 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instId | String | Yes | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                  Description                  |
-|----------|----------------|--------|-----------------------------------------------|
-|    op    |     String     |  Yes   |Operation  <br/>`subscribe`  <br/>`unsubscribe`|
-|   args   |Array of objects|  Yes   |          List of subscribed channels          |
-|\> channel|     String     |  Yes   |      Channel name  <br/>`open-interest`       |
-|\> instId |     String     |  Yes   |                 Instrument ID                 |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-      "channel": "open-interest",
-      "instId": "LTC-USD-SWAP"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"open-interest\", \"instId\" : \"LTC-USD-SWAP\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                       Description                       |
-|----------|------|--------|---------------------------------------------------------|
-|  event   |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|   arg    |Object|   No   |                   Subscribed channel                    |
-|\> channel|String|  Yes   |                      Channel name                       |
-|\> instId |String|  Yes   |                      Instrument ID                      |
-|   code   |String|   No   |                       Error code                        |
-|   msg    |String|   No   |                      Error message                      |
-|  connId  |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-    "arg": {
-        "channel": "open-interest",
-        "instId": "BTC-USDT-SWAP"
-    },
-    "data": [
-        {
-            "instId": "BTC-USDT-SWAP",
-            "instType": "SWAP",
-            "oi": "2216113.01000000309",
-            "oiCcy": "22161.1301000000309",
-            "oiUsd": "1939251795.54769270396321",
-            "ts": "1743041250440"
-        }
-    ]
-}
-
-```
-
-#### Push data parameters ####
-
-|**Parameter**|    **Type**    |                                        **Description**                                        |
-|-------------|----------------|-----------------------------------------------------------------------------------------------|
-|     arg     |     Object     |                                Successfully subscribed channel                                |
-| \> channel  |     String     |                                         Channel name                                          |
-|  \> instId  |     String     |                                         Instrument ID                                         |
-|    data     |Array of objects|                                        Subscribed data                                        |
-| \> instType |     String     |                                        Instrument type                                        |
-|  \> instId  |     String     |                              Instrument ID, e.g. `BTC-USDT-SWAP`                              |
-|    \> oi    |     String     |                             Open interest, in units of contracts.                             |
-|  \> oiCcy   |     String     |                          Open interest, in currency units, like BTC.                          |
-|  \> oiUsd   |     String     |                                Open interest in number of USD                                 |
-|    \> ts    |     String     |The time when the data was updated, Unix timestamp format in milliseconds, e.g. `1597026383085`|
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Instrument ID 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instId | String | Instrument ID, e.g. <code>BTC-USDT-SWAP</code> 
+| &gt; oi | String | Open interest, in units of contracts. 
+| &gt; oiCcy | String | Open interest, in currency units, like BTC. 
+| &gt; oiUsd | String | Open interest in number of USD 
+| &gt; ts | String | The time when the data was updated, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>
 
 ---
 
-### Funding rate channel ###
+### Funding rate channel
 
 Retrieve funding rate. Data will be pushed in 30s to 90s.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "funding-rate",
-      "instId": "BTC-USD-SWAP"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>funding-rate</code> 
+| &gt; instId | String | Yes | Instrument ID 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | yes | Channel name 
+| &gt; instId | String | No | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                  Description                  |
-|----------|----------------|--------|-----------------------------------------------|
-|    op    |     String     |  Yes   |Operation  <br/>`subscribe`  <br/>`unsubscribe`|
-|   args   |Array of objects|  Yes   |          List of subscribed channels          |
-|\> channel|     String     |  Yes   |       Channel name  <br/>`funding-rate`       |
-|\> instId |     String     |  Yes   |                 Instrument ID                 |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Instrument ID 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type, <code>SWAP</code> 
+| &gt; instId | String | Instrument ID, e.g. <code>BTC-USD-SWAP</code> 
+| &gt; method | String | Funding rate mechanism<br><code>current_period</code><del><br><code>next_period</code></del>(no longer supported) 
+| &gt; formulaType | String | Formula type<br><code>noRate</code>: old funding rate formula<br><code>withRate</code>: new funding rate formula 
+| &gt; fundingRate | String | Current funding rate 
+| &gt; fundingTime | String | <del>Funding time of the upcoming settlement, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>.</del>(no longer supported) 
+| &gt; nextFundingRate | String | Forecasted funding rate for the next period 
+| &gt; nextFundingTime | String | Forecasted funding time for the next period, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
+| &gt; minFundingRate | String | The lower limit of the predicted funding rate of the next cycle 
+| &gt; maxFundingRate | String | The upper limit of the predicted funding rate of the next cycle 
+| &gt; interestRate | String | Interest rate 
+| &gt; impactValue | String | Depth weighted amount (in the unit of quote currency) 
+| &gt; settState | String | Settlement state of funding rate<br><code>processing</code><br><code>settled</code> 
+| &gt; settFundingRate | String | If settState = <code>processing</code>, it is the funding rate that is being used for current settlement cycle.<br>If settState = <code>settled</code>, it is the funding rate that is being used for previous settlement cycle 
+| &gt; premium | String | Premium between the mid price of perps market and the index price 
+| &gt; ts | String | Data return time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
 
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "funding-rate",
-    "instId": "BTC-USD-SWAP"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"funding-rate\", \"instId\" : \"BTC-USD-SWAP\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                       Description                       |
-|----------|------|--------|---------------------------------------------------------|
-|  event   |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|   arg    |Object|   No   |                   Subscribed channel                    |
-|\> channel|String|  yes   |                      Channel name                       |
-|\> instId |String|   No   |                      Instrument ID                      |
-|   code   |String|   No   |                       Error code                        |
-|   msg    |String|   No   |                      Error message                      |
-|  connId  |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-   "arg":{
-      "channel":"funding-rate",
-      "instId":"BTC-USD-SWAP"
-   },
-   "data":[
-      {
-         "fundingRate":"0.0001875391284828",
-         "fundingTime":"1700726400000",
-         "instId":"BTC-USD-SWAP",
-         "instType":"SWAP",
-         "method": "current_period",
-         "maxFundingRate":"0.00375",
-         "minFundingRate":"-0.00375",
-         "nextFundingRate":"",
-         "nextFundingTime":"1700755200000",
-         "premium": "0.0001233824646391",
-         "settFundingRate":"0.0001699799259033",
-         "settState":"settled",
-         "ts":"1700724675402"
-      }
-   ]
-}
-
-```
-
-#### Push data parameters ####
-
-|  **Parameter**   |    **Type**    |                                                                                               **Description**                                                                                               |
-|------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|       arg        |     Object     |                                                                                       Successfully subscribed channel                                                                                       |
-|    \> channel    |     String     |                                                                                                Channel name                                                                                                 |
-|    \> instId     |     String     |                                                                                                Instrument ID                                                                                                |
-|       data       |Array of objects|                                                                                               Subscribed data                                                                                               |
-|   \> instType    |     String     |                                                                                           Instrument type, `SWAP`                                                                                           |
-|    \> instId     |     String     |                                                                                     Instrument ID, e.g. `BTC-USD-SWAP`                                                                                      |
-|    \> method     |     String     |                                                        Funding rate mechanism   <br/>`current_period`   <br/>~~`next_period`~~(no longer supported)                                                         |
-|  \> fundingRate  |     String     |                                                                                            Current funding rate                                                                                             |
-|  \> fundingTime  |     String     |                                       ~~Funding time of the upcoming settlement, Unix timestamp format in milliseconds, e.g. `1597026383085`.~~(no longer supported)                                        |
-|\> nextFundingRate|     String     |                                                                                 Forecasted funding rate for the next period                                                                                 |
-|\> nextFundingTime|     String     |                                                  Forecasted funding time for the next period, Unix timestamp format in milliseconds, e.g. `1597026383085`                                                   |
-|\> minFundingRate |     String     |                                                                       The lower limit of the predicted funding rate of the next cycle                                                                       |
-|\> maxFundingRate |     String     |                                                                       The upper limit of the predicted funding rate of the next cycle                                                                       |
-|   \> settState   |     String     |                                                                    Settlement state of funding rate   <br/>`processing`   <br/>`settled`                                                                    |
-|\> settFundingRate|     String     |If settState = `processing`, it is the funding rate that is being used for current settlement cycle.   <br/>If settState = `settled`, it is the funding rate that is being used for previous settlement cycle|
-|    \> premium    |     String     |                                                                      Premium between the mid price of perps market and the index price                                                                      |
-|      \> ts       |     String     |                                                                Data return time, Unix timestamp format in milliseconds, e.g. `1597026383085`                                                                |
-For some altcoins perpetual swaps with significant fluctuations in funding rates, OKX will closely monitor market changes. When necessary, the funding rate collection frequency, currently set at 8 hours, may be adjusted to higher frequencies such as 6 hours, 4 hours, 2 hours, or 1 hour. Thus, users should focus on the difference between `fundingTime` and `nextFundingTime` fields to determine the funding fee interval of a contract.
+For some altcoins perpetual swaps with significant fluctuations in funding rates, OKX will closely monitor market changes. When necessary, the funding rate collection frequency, currently set at 8 hours, may be adjusted to higher frequencies such as 6 hours, 4 hours, 2 hours, or 1 hour. Thus, users should focus on the difference between \`fundingTime\` and \`nextFundingTime\` fields to determine the funding fee interval of a contract.
 
 ---
 
-### Price limit channel ###
+### Price limit channel
 
 Retrieve the maximum buy price and minimum sell price of instruments. Data will be pushed every 200ms when there are changes in limits, and will not be pushed when there is no changes on limit.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "price-limit",
-      "instId": "LTC-USD-190628"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>price-limit</code> 
+| &gt; instId | String | Yes | Instrument ID 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instId | String | Yes | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                  Description                  |
-|----------|----------------|--------|-----------------------------------------------|
-|    op    |     String     |  Yes   |Operation  <br/>`subscribe`  <br/>`unsubscribe`|
-|   args   |Array of objects|  Yes   |          List of subscribed channels          |
-|\> channel|     String     |  Yes   |       Channel name  <br/>`price-limit`        |
-|\> instId |     String     |  Yes   |                 Instrument ID                 |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "price-limit",
-    "instId": "LTC-USD-190628"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"price-limit\", \"instId\" : \"LTC-USD-190628\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                       Description                       |
-|----------|------|--------|---------------------------------------------------------|
-|  event   |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|   arg    |Object|   No   |                   Subscribed channel                    |
-|\> channel|String|  Yes   |                      Channel name                       |
-|\> instId |String|  Yes   |                      Instrument ID                      |
-|   code   |String|   No   |                       Error code                        |
-|   msg    |String|   No   |                      Error message                      |
-|  connId  |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-    "arg": {
-        "channel": "price-limit",
-        "instId": "LTC-USD-190628"
-    },
-    "data": [{
-        "instId": "LTC-USD-190628",
-        "buyLmt": "200",
-        "sellLmt": "300",
-        "ts": "1597026383085",
-        "enabled": true
-    }]
-}
-
-```
-
-#### Push data parameters ####
-
-|**Parameter**|    **Type**    |                                                       **Description**                                                       |
-|-------------|----------------|-----------------------------------------------------------------------------------------------------------------------------|
-|     arg     |     Object     |                                               Successfully subscribed channel                                               |
-| \> channel  |     String     |                                                        Channel name                                                         |
-|  \> instId  |     String     |                                                        Instrument ID                                                        |
-|    data     |Array of objects|                                                       Subscribed data                                                       |
-| \> instType |     String     |                                                       Instrument type                                                       |
-|  \> instId  |     String     |                                               Instrument ID, e.g. `BTC-USDT`                                                |
-|  \> buyLmt  |     String     |                                  Maximum buy price   <br/>Return "" when enabled is false                                   |
-| \> sellLmt  |     String     |                                  Minimum sell price   <br/>Return "" when enabled is false                                  |
-|    \> ts    |     String     |                       Price update time, Unix timestamp format in milliseconds, e.g. `1597026383085`                        |
-| \> enabled  |    Boolean     |Whether price limit is effective   <br/>`true`: the price limit is effective   <br/>`false`: the price limit is not effective|
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Instrument ID 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instId | String | Instrument ID, e.g. <code>BTC-USDT</code> 
+| &gt; buyLmt | String | Maximum buy price<br>Return "" when enabled is false 
+| &gt; sellLmt | String | Minimum sell price<br>Return "" when enabled is false 
+| &gt; ts | String | Price update time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
+| &gt; enabled | Boolean | Whether price limit is effective<br><code>true</code>: the price limit is effective<br><code>false</code>: the price limit is not effective
 
 ---
 
-### Option summary channel ###
+### Option summary channel
 
 Retrieve detailed pricing information of all OPTION contracts. Data will be pushed at once.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "opt-summary",
-      "instFamily": "BTC-USD"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>opt-summary</code> 
+| &gt; instFamily | String | Yes | Instrument family 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instFamily | String | Yes | Instrument family 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|  Parameter  |      Type      |Required|                  Description                  |
-|-------------|----------------|--------|-----------------------------------------------|
-|     op      |     String     |  Yes   |Operation  <br/>`subscribe`  <br/>`unsubscribe`|
-|    args     |Array of objects|  Yes   |          List of subscribed channels          |
-| \> channel  |     String     |  Yes   |       Channel name  <br/>`opt-summary`        |
-|\> instFamily|     String     |  Yes   |               Instrument family               |
+#### Push data parameters
 
->
->
-> Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "opt-summary",
-    "instFamily": "BTC-USD"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"opt-summary\", \"uly\" : \"BTC-USD\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|  Parameter  | Type |Required|                       Description                       |
-|-------------|------|--------|---------------------------------------------------------|
-|    event    |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|     arg     |Object|   No   |                   Subscribed channel                    |
-| \> channel  |String|  Yes   |                      Channel name                       |
-|\> instFamily|String|  Yes   |                    Instrument family                    |
-|    code     |String|   No   |                       Error code                        |
-|     msg     |String|   No   |                      Error message                      |
-|   connId    |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-    "arg": {
-        "channel": "opt-summary",
-        "instFamily": "BTC-USD"
-    },
-    "data": [
-        {
-            "instType": "OPTION",
-            "instId": "BTC-USD-241013-70000-P",
-            "uly": "BTC-USD",
-            "delta": "-1.1180902625",
-            "gamma": "2.2361957091",
-            "vega": "0.0000000001",
-            "theta": "0.0000032334",
-            "lever": "8.465747567",
-            "markVol": "0.3675503331",
-            "bidVol": "0",
-            "askVol": "1.1669998535",
-            "realVol": "",
-            "deltaBS": "-0.9999672034",
-            "gammaBS": "0.0000000002",
-            "thetaBS": "28.2649858387",
-            "vegaBS": "0.0000114332",
-            "ts": "1728703155650",
-            "fwdPx": "62604.6993093463",
-            "volLv": "0.2044711229"
-        }
-    ]
-}
-
-```
-
-#### Push data parameters ####
-
-|**Parameter**|    **Type**    |                               **Description**                                |
-|-------------|----------------|------------------------------------------------------------------------------|
-|     arg     |     Object     |                       Successfully subscribed channel                        |
-| \> channel  |     String     |                                 Channel name                                 |
-|\> instFamily|     String     |                              Instrument family                               |
-|    data     |Array of objects|                               Subscribed data                                |
-| \> instType |     String     |                          Instrument type, `OPTION`                           |
-|  \> instId  |     String     |                                Instrument ID                                 |
-|   \> uly    |     String     |                                  Underlying                                  |
-|  \> delta   |     String     |                  Sensitivity of option price to `uly` price                  |
-|  \> gamma   |     String     |                   The delta is sensitivity to `uly` price                    |
-|   \> vega   |     String     |              Sensitivity of option price to implied volatility               |
-|  \> theta   |     String     |               Sensitivity of option priceo remaining maturity                |
-| \> deltaBS  |     String     |            Sensitivity of option price to `uly` price in BS mode             |
-| \> gammaBS  |     String     |              The delta is sensitivity to `uly` price in BS mode              |
-|  \> vegaBS  |     String     |         Sensitivity of option price to implied volatility in BS mode         |
-| \> thetaBS  |     String     |         Sensitivity of option price to remaining maturity in BS mode         |
-|  \> lever   |     String     |                                   Leverage                                   |
-| \> markVol  |     String     |                               Mark volatility                                |
-|  \> bidVol  |     String     |                                Bid volatility                                |
-|  \> askVol  |     String     |                                Ask Volatility                                |
-| \> realVol  |     String     |                   Realized volatility (not currently used)                   |
-|  \> volLv   |     String     |                  Implied volatility of at-the-money options                  |
-|  \> fwdPx   |     String     |                                Forward price                                 |
-|    \> ts    |     String     |Price update time, Unix timestamp format in milliseconds, e.g. `1597026383085`|
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instFamily | String | Instrument family 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type, <code>OPTION</code> 
+| &gt; instId | String | Instrument ID 
+| &gt; uly | String | Underlying 
+| &gt; delta | String | Sensitivity of option price to <code>uly</code> price 
+| &gt; gamma | String | The delta is sensitivity to <code>uly</code> price 
+| &gt; vega | String | Sensitivity of option price to implied volatility 
+| &gt; theta | String | Sensitivity of option priceo remaining maturity 
+| &gt; deltaBS | String | Sensitivity of option price to <code>uly</code> price in BS mode 
+| &gt; gammaBS | String | The delta is sensitivity to <code>uly</code> price in BS mode 
+| &gt; vegaBS | String | Sensitivity of option price to implied volatility in BS mode 
+| &gt; thetaBS | String | Sensitivity of option price to remaining maturity in BS mode 
+| &gt; lever | String | Leverage 
+| &gt; markVol | String | Mark volatility 
+| &gt; bidVol | String | Bid volatility 
+| &gt; askVol | String | Ask Volatility 
+| &gt; realVol | String | Realized volatility (not currently used) 
+| &gt; volLv | String | Implied volatility of at-the-money options 
+| &gt; fwdPx | String | Forward price 
+| &gt; ts | String | Price update time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>
 
 ---
 
-### Estimated delivery/exercise/settlement price channel ###
+### Estimated delivery/exercise/settlement price channel
 
 Retrieve the estimated delivery/exercise/settlement price of `FUTURES` and `OPTION` contracts.
 
 Only the estimated price will be pushed in an hour before delivery/exercise/settlement, and will be pushed if there is any price change.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "estimated-price",
-      "instType": "FUTURES",
-      "instFamily": "BTC-USD"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>estimated-price</code> 
+| &gt; instType | String | Yes | Instrument type<br><code>OPTION</code><br><code>FUTURES</code> 
+| &gt; instFamily | String | Conditional | Instrument family<br>Either <code>instFamily</code> or <code>instId</code> is required. 
+| &gt; instId | String | Conditional | Instrument ID<br>Either <code>instFamily</code> or <code>instId</code> is required. 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instType | String | Yes | Instrument type<br><code>OPTION</code><br><code>FUTURES</code> 
+| &gt; instFamily | String | Conditional | Instrument family 
+| &gt; instId | String | Conditional | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|  Parameter  |      Type      | Required  |                            Description                             |
-|-------------|----------------|-----------|--------------------------------------------------------------------|
-|     op      |     String     |    Yes    |          Operation  <br/>`subscribe`  <br/>`unsubscribe`           |
-|    args     |Array of objects|    Yes    |                    List of subscribed channels                     |
-| \> channel  |     String     |    Yes    |                Channel name  <br/>`estimated-price`                |
-| \> instType |     String     |    Yes    |           Instrument type  <br/>`OPTION`  <br/>`FUTURES`           |
-|\> instFamily|     String     |Conditional|Instrument family  <br/>Either `instFamily` or `instId` is required.|
-|  \> instId  |     String     |Conditional|  Instrument ID  <br/>Either `instFamily` or `instId` is required.  |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "estimated-price",
-    "instType": "FUTURES",
-    "instFamily": "BTC-USD"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"estimated-price\", \"instId\" : \"FUTURES\",\"uly\" :\"BTC-USD\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|  Parameter  | Type | Required  |                       Description                       |
-|-------------|------|-----------|---------------------------------------------------------|
-|    event    |String|    Yes    |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|     arg     |Object|    No     |                   Subscribed channel                    |
-| \> channel  |String|    Yes    |                      Channel name                       |
-| \> instType |String|    Yes    |     Instrument type  <br/>`OPTION`  <br/>`FUTURES`      |
-|\> instFamily|String|Conditional|                    Instrument family                    |
-|  \> instId  |String|Conditional|                      Instrument ID                      |
-|    code     |String|    No     |                       Error code                        |
-|     msg     |String|    No     |                      Error message                      |
-|   connId    |String|    Yes    |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-    "arg": {
-        "channel": "estimated-price",
-        "instType": "FUTURES",
-        "instFamily": "XRP-USDT"
-    },
-    "data": [{
-        "instId": "XRP-USDT-250307",
-        "instType": "FUTURES",
-        "settlePx": "2.4230631578947368",
-        "settleType": "settlement",
-        "ts": "1741244598708"
-    }]
-}
-
-```
-
-#### Push data parameters ####
-
-|**Parameter**|    **Type**    |                                                **Description**                                                 |
-|-------------|----------------|----------------------------------------------------------------------------------------------------------------|
-|     arg     |     Object     |                                        Successfully subscribed channel                                         |
-| \> channel  |     String     |                                                  Channel name                                                  |
-| \> instType |     String     |                                 Instrument type  <br/>`FUTURES`  <br/>`OPTION`                                 |
-|\> instFamily|     String     |                                               Instrument family                                                |
-|  \> instId  |     String     |                                                 Instrument ID                                                  |
-|    data     |Array of objects|                                                Subscribed data                                                 |
-| \> instType |     String     |                                                Instrument type                                                 |
-|  \> instId  |     String     |                                      Instrument ID, e.g. `BTC-USD-170310`                                      |
-|\> settleType|     String     |Type  <br/>`settlement`: Futures settlement  <br/>`delivery`: Futures delivery  <br/>`exercise`: Option exercise|
-| \> settlePx |     String     |                                                Estimated price                                                 |
-|    \> ts    |     String     |                 Data update time, Unix timestamp format in milliseconds, e.g. `1597026383085`                  |
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instType | String | Instrument type<br><code>FUTURES</code><br><code>OPTION</code> 
+| &gt; instFamily | String | Instrument family 
+| &gt; instId | String | Instrument ID 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instId | String | Instrument ID, e.g. <code>BTC-USD-170310</code> 
+| &gt; settleType | String | Type<br><code>settlement</code>: Futures settlement<br><code>delivery</code>: Futures delivery<br><code>exercise</code>: Option exercise 
+| &gt; settlePx | String | Estimated price 
+| &gt; ts | String | Data update time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>
 
 ---
 
-### Mark price channel ###
+### Mark price channel
 
 Retrieve the mark price. Data will be pushed every 200 ms when the mark price changes, and will be pushed every 10 seconds when the mark price does not change.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "mark-price",
-      "instId": "LTC-USD-190628"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>mark-price</code> 
+| &gt; instId | String | Yes | Instrument ID 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instId | String | No | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                  Description                  |
-|----------|----------------|--------|-----------------------------------------------|
-|    op    |     String     |  Yes   |Operation  <br/>`subscribe`  <br/>`unsubscribe`|
-|   args   |Array of objects|  Yes   |          List of subscribed channels          |
-|\> channel|     String     |  Yes   |        Channel name  <br/>`mark-price`        |
-|\> instId |     String     |  Yes   |                 Instrument ID                 |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "mark-price",
-    "instId": "LTC-USD-190628"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"mark-price\", \"instId\" : \"LTC-USD-190628\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                       Description                       |
-|----------|------|--------|---------------------------------------------------------|
-|  event   |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|   arg    |Object|   No   |                   Subscribed channel                    |
-|\> channel|String|  Yes   |                      Channel name                       |
-|\> instId |String|   No   |                      Instrument ID                      |
-|   code   |String|   No   |                       Error code                        |
-|   msg    |String|   No   |                      Error message                      |
-|  connId  |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-  "arg": {
-    "channel": "mark-price",
-    "instId": "LTC-USD-190628"
-  },
-  "data": [
-    {
-      "instType": "FUTURES",
-      "instId": "LTC-USD-190628",
-      "markPx": "0.1",
-      "ts": "1597026383085"
-    }
-  ]
-}
-
-```
-
-#### Push data parameters ####
-
-| Parameter |      Type      |                                 Description                                  |
-|-----------|----------------|------------------------------------------------------------------------------|
-|    arg    |     Object     |                       Successfully subscribed channel                        |
-|\> channel |     String     |                                 Channel name                                 |
-| \> instId |     String     |                                Instrument ID                                 |
-|   data    |Array of objects|                               Subscribed data                                |
-|\> instType|     String     |                               Instrument type                                |
-| \> instId |     String     |                                Instrument ID                                 |
-| \> markPx |     String     |                                  Mark price                                  |
-|   \> ts   |     String     |Price update time, Unix timestamp format in milliseconds, e.g. `1597026383085`|
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Instrument ID 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instId | String | Instrument ID 
+| &gt; markPx | String | Mark price 
+| &gt; ts | String | Price update time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>
 
 ---
 
-### Index tickers channel ###
+### Index tickers channel
 
 Retrieve index tickers data. Push data every 100ms if there are any changes, otherwise push once a minute.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "index-tickers",
-      "instId": "BTC-USDT"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | <code>subscribe</code> <code>unsubscribe</code> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>index-tickers</code> 
+| &gt; instId | String | Yes | Index with USD, USDT, BTC, USDC as the quote currency, e.g. <code>BTC-USDT</code> 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | <code>subscribe</code> <code>unsubscribe</code> <code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name<br><code>index-tickers</code> 
+| &gt; instId | String | Yes | Index with USD, USDT, BTC, USDC as the quote currency, e.g. <code>BTC-USDT</code> 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                             Description                              |
-|----------|----------------|--------|----------------------------------------------------------------------|
-|    op    |     String     |  Yes   |                      `subscribe` `unsubscribe`                       |
-|   args   |Array of objects|  Yes   |                     List of subscribed channels                      |
-|\> channel|     String     |  Yes   |                  Channel name  <br/>`index-tickers`                  |
-|\> instId |     String     |  Yes   |Index with USD, USDT, BTC, USDC as the quote currency, e.g. `BTC-USDT`|
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "index-tickers",
-    "instId": "BTC-USDT"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"index-tickers\", \"instId\" : \"BTC-USDT\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                             Description                              |
-|----------|------|--------|----------------------------------------------------------------------|
-|  event   |String|  Yes   |                  `subscribe` `unsubscribe` `error`                   |
-|   arg    |Object|   No   |                          Subscribed channel                          |
-|\> channel|String|  Yes   |                  Channel name  <br/>`index-tickers`                  |
-|\> instId |String|  Yes   |Index with USD, USDT, BTC, USDC as the quote currency, e.g. `BTC-USDT`|
-|   code   |String|   No   |                              Error code                              |
-|   msg    |String|   No   |                            Error message                             |
-|  connId  |String|  Yes   |                       WebSocket connection ID                        |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-  "arg": {
-    "channel": "index-tickers",
-    "instId": "BTC-USDT"
-  },
-  "data": [
-    {
-      "instId": "BTC-USDT",
-      "idxPx": "0.1",
-      "high24h": "0.5",
-      "low24h": "0.1",
-      "open24h": "0.1",
-      "sodUtc0": "0.1",
-      "sodUtc8": "0.1",
-      "ts": "1597026383085"
-    }
-  ]
-}
-
-```
-
-#### Push data parameters ####
-
-|Parameter |      Type      |                                        Description                                         |
-|----------|----------------|--------------------------------------------------------------------------------------------|
-|   arg    |     Object     |                              Successfully subscribed channel                               |
-|\> channel|     String     |                                        Channel name                                        |
-|\> instId |     String     |              Index with USD, USDT, or BTC as quote currency, e.g. `BTC-USDT`.              |
-|   data   |Array of objects|                                      Subscribed data                                       |
-|\> instId |     String     |                                           Index                                            |
-| \> idxPx |     String     |                                     Latest Index Price                                     |
-|\> open24h|     String     |                              Open price in the past 24 hours                               |
-|\> high24h|     String     |                             Highest price in the past 24 hours                             |
-|\> low24h |     String     |                             Lowest price in the past 24 hours                              |
-|\> sodUtc0|     String     |                                  Open price in the UTC 0                                   |
-|\> sodUtc8|     String     |                                  Open price in the UTC 8                                   |
-|  \> ts   |     String     |Update time of the index ticker, Unix timestamp format in milliseconds, e.g. `1597026383085`|
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Index with USD, USDT, or BTC as quote currency, e.g. <code>BTC-USDT</code>. 
+| data | Array of objects | Subscribed data 
+| &gt; instId | String | Index 
+| &gt; idxPx | String | Latest Index Price 
+| &gt; open24h | String | Open price in the past 24 hours 
+| &gt; high24h | String | Highest price in the past 24 hours 
+| &gt; low24h | String | Lowest price in the past 24 hours 
+| &gt; sodUtc0 | String | Open price in the UTC 0 
+| &gt; sodUtc8 | String | Open price in the UTC 8 
+| &gt; ts | String | Update time of the index ticker, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>
 
 ---
 
-### Mark price candlesticks channel ###
+### Mark price candlesticks channel
 
 Retrieve the candlesticks data of the mark price. The push frequency is the fastest interval 1 second push the data.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/business
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "mark-price-candle1D",
-      "instId": "BTC-USD-190628"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code> <code>unsubscribe</code> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>mark-price-candle3M</code><br><code>mark-price-candle1M</code><br><code>mark-price-candle1W</code><br><code>mark-price-candle1D</code><br><code>mark-price-candle2D</code><br><code>mark-price-candle3D</code><br><code>mark-price-candle5D</code><br><code>mark-price-candle12H</code><br><code>mark-price-candle6H</code><br><code>mark-price-candle4H</code><br><code>mark-price-candle2H</code><br><code>mark-price-candle1H</code><br><code>mark-price-candle30m</code><br><code>mark-price-candle15m</code><br><code>mark-price-candle5m</code><br><code>mark-price-candle3m</code><br><code>mark-price-candle1m</code><br><code>mark-price-candle1Yutc</code><br><code>mark-price-candle3Mutc</code><br><code>mark-price-candle1Mutc</code><br><code>mark-price-candle1Wutc</code><br><code>mark-price-candle1Dutc</code><br><code>mark-price-candle2Dutc</code><br><code>mark-price-candle3Dutc</code><br><code>mark-price-candle5Dutc</code><br><code>mark-price-candle12Hutc</code><br><code>mark-price-candle6Hutc</code> 
+| &gt; instId | String | Yes | Instrument ID 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instId | String | Yes | Instrument ID 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                                                                                                                                                                                                                                                                                                                                                                                                                         Description                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|----------|----------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|    op    |     String     |  Yes   |                                                                                                                                                                                                                                                                                                                                                                                                          Operation  <br/>`subscribe` `unsubscribe`                                                                                                                                                                                                                                                                                                                                                                                                          |
-|   args   |Array of objects|  Yes   |                                                                                                                                                                                                                                                                                                                                                                                                                 List of subscribed channels                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|\> channel|     String     |  Yes   |Channel name   <br/>`mark-price-candle3M`   <br/>`mark-price-candle1M`   <br/>`mark-price-candle1W`   <br/>`mark-price-candle1D`   <br/>`mark-price-candle2D`   <br/>`mark-price-candle3D`   <br/>`mark-price-candle5D`   <br/>`mark-price-candle12H`   <br/>`mark-price-candle6H`   <br/>`mark-price-candle4H`   <br/>`mark-price-candle2H`   <br/>`mark-price-candle1H`   <br/>`mark-price-candle30m`   <br/>`mark-price-candle15m`   <br/>`mark-price-candle5m`   <br/>`mark-price-candle3m`   <br/>`mark-price-candle1m`   <br/>`mark-price-candle1Yutc`   <br/>`mark-price-candle3Mutc`   <br/>`mark-price-candle1Mutc`   <br/>`mark-price-candle1Wutc`   <br/>`mark-price-candle1Dutc`   <br/>`mark-price-candle2Dutc`   <br/>`mark-price-candle3Dutc`   <br/>`mark-price-candle5Dutc`   <br/>`mark-price-candle12Hutc`   <br/>`mark-price-candle6Hutc`|
-|\> instId |     String     |  Yes   |                                                                                                                                                                                                                                                                                                                                                                                                                        Instrument ID                                                                                                                                                                                                                                                                                                                                                                                                                        |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "mark-price-candle1D",
-    "instId": "BTC-USD-190628"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"mark-price-candle1D\", \"instId\" : \"BTC-USD-190628\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                       Description                       |
-|----------|------|--------|---------------------------------------------------------|
-|  event   |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|   arg    |Object|   No   |                   Subscribed channel                    |
-|\> channel|String|  Yes   |                      Channel name                       |
-|\> instId |String|  Yes   |                      Instrument ID                      |
-|   code   |String|   No   |                       Error code                        |
-|   msg    |String|   No   |                      Error message                      |
-|  connId  |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-  "arg": {
-    "channel": "mark-price-candle1D",
-    "instId": "BTC-USD-190628"
-  },
-  "data": [
-    ["1597026383085", "3.721", "3.743", "3.677", "3.708","0"],
-    ["1597026383085", "3.731", "3.799", "3.494", "3.72","1"]
-  ]
-}
-
-```
-
-#### Push data parameters ####
-
-|Parameter |     Type      |                                                Description                                                 |
-|----------|---------------|------------------------------------------------------------------------------------------------------------|
-|   arg    |    Object     |                                      Successfully subscribed channel                                       |
-|\> channel|    String     |                                                Channel name                                                |
-|\> instId |    String     |                                               Instrument ID                                                |
-|   data   |Array of Arrays|                                              Subscribed data                                               |
-|  \> ts   |    String     |        Opening time of the candlestick, Unix timestamp format in milliseconds, e.g. `1597026383085`        |
-|   \> o   |    String     |                                                 Open price                                                 |
-|   \> h   |    String     |                                               Highest price                                                |
-|   \> l   |    String     |                                                Lowest price                                                |
-|   \> c   |    String     |                                                Close price                                                 |
-|\> confirm|    String     |The state of candlesticks.  <br/>`0` represents that it is uncompleted, `1` represents that it is completed.|
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Instrument ID 
+| data | Array of Arrays | Subscribed data 
+| &gt; ts | String | Opening time of the candlestick, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
+| &gt; o | String | Open price 
+| &gt; h | String | Highest price 
+| &gt; l | String | Lowest price 
+| &gt; c | String | Close price 
+| &gt; confirm | String | The state of candlesticks.<br><code>0</code> represents that it is uncompleted, <code>1</code> represents that it is completed.
 
 ---
 
-### Index candlesticks channel ###
+### Index candlesticks channel
 
 Retrieve the candlesticks data of the index. The push frequency is the fastest interval 1 second push the data. .
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/business
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "index-candle30m",
-      "instId": "BTC-USD"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>index-candle3M</code><br><code>index-candle1M</code><br><code>index-candle1W</code><br><code>index-candle1D</code><br><code>index-candle2D</code><br><code>index-candle3D</code><br><code>index-candle5D</code><br><code>index-candle12H</code><br><code>index-candle6H</code><br><code>index-candle4H</code><br><code>index -candle2H</code><br><code>index-candle1H</code><br><code>index-candle30m</code><br><code>index-candle15m</code><br><code>index-candle5m</code><br><code>index-candle3m</code><br><code>index-candle1m</code><br><code>index-candle3Mutc</code><br><code>index-candle1Mutc</code><br><code>index-candle1Wutc</code><br><code>index-candle1Dutc</code><br><code>index-candle2Dutc</code><br><code>index-candle3Dutc</code><br><code>index-candle5Dutc</code><br><code>index-candle12Hutc</code><br><code>index-candle6Hutc</code> 
+| &gt; instId | String | Yes | Index, e.g. <code>BTC-USD</code> 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | <code>subscribe</code> <code>unsubscribe</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| &gt; instId | String | No | Index, e.g. <code>BTC-USD</code> 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                                                                                                                                                                                                                                                                                                                                        Description                                                                                                                                                                                                                                                                                                                                         |
-|----------|----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|    op    |     String     |  Yes   |                                                                                                                                                                                                                                                                                                                      Operation  <br/>`subscribe`  <br/>`unsubscribe`                                                                                                                                                                                                                                                                                                                       |
-|   args   |Array of objects|  Yes   |                                                                                                                                                                                                                                                                                                                                List of subscribed channels                                                                                                                                                                                                                                                                                                                                 |
-|\> channel|     String     |  Yes   |Channel name   <br/>`index-candle3M`   <br/>`index-candle1M`   <br/>`index-candle1W`   <br/>`index-candle1D`   <br/>`index-candle2D`   <br/>`index-candle3D`   <br/>`index-candle5D`   <br/>`index-candle12H`   <br/>`index-candle6H`   <br/>`index-candle4H`   <br/>`index -candle2H`   <br/>`index-candle1H`   <br/>`index-candle30m`   <br/>`index-candle15m`   <br/>`index-candle5m`   <br/>`index-candle3m`   <br/>`index-candle1m`   <br/>`index-candle3Mutc`   <br/>`index-candle1Mutc`   <br/>`index-candle1Wutc`   <br/>`index-candle1Dutc`   <br/>`index-candle2Dutc`   <br/>`index-candle3Dutc`   <br/>`index-candle5Dutc`   <br/>`index-candle12Hutc`   <br/>`index-candle6Hutc`|
-|\> instId |     String     |  Yes   |                                                                                                                                                                                                                                                                                                                                   Index, e.g. `BTC-USD`                                                                                                                                                                                                                                                                                                                                    |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Index 
+| data | Array of Arrays | Subscribed data 
+| &gt; ts | String | Opening time of the candlestick, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
+| &gt; o | String | Open price 
+| &gt; h | String | Highest price 
+| &gt; l | String | Lowest price 
+| &gt; c | String | Close price 
+| &gt; confirm | String | The state of candlesticks.<br><code>0</code> represents that it is uncompleted, <code>1</code> represents that it is completed. 
 
-```
-{
-  "event": "subscribe",
-  "arg": {
-    "channel": "index-candle30m",
-    "instId": "BTC-USD"
-  },
-  "connId": "a4d3ae55"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"index-candle30m\", \"instId\" : \"BTC-USD\"}]}",
-  "connId": "a4d3ae55"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|       Description       |
-|----------|------|--------|-------------------------|
-|  event   |String|  Yes   |`subscribe` `unsubscribe`|
-|   arg    |Object|   No   |   Subscribed channel    |
-|\> channel|String|  Yes   |      Channel name       |
-|\> instId |String|   No   |  Index, e.g. `BTC-USD`  |
-|   code   |String|   No   |       Error code        |
-|   msg    |String|   No   |      Error message      |
-|  connId  |String|  Yes   | WebSocket connection ID |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-  "arg": {
-    "channel": "index-candle30m",
-    "instId": "BTC-USD"
-  },
-  "data": [["1597026383085", "3811.31", "3811.31", "3811.31", "3811.31", "0"]]
-}
-
-```
-
-#### Push data parameters ####
-
-|Parameter |     Type      |                                                Description                                                 |
-|----------|---------------|------------------------------------------------------------------------------------------------------------|
-|   arg    |    Object     |                                      Successfully subscribed channel                                       |
-|\> channel|    String     |                                                Channel name                                                |
-|\> instId |    String     |                                                   Index                                                    |
-|   data   |Array of Arrays|                                              Subscribed data                                               |
-|  \> ts   |    String     |        Opening time of the candlestick, Unix timestamp format in milliseconds, e.g. `1597026383085`        |
-|   \> o   |    String     |                                                 Open price                                                 |
-|   \> h   |    String     |                                               Highest price                                                |
-|   \> l   |    String     |                                                Lowest price                                                |
-|   \> c   |    String     |                                                Close price                                                 |
-|\> confirm|    String     |The state of candlesticks.  <br/>`0` represents that it is uncompleted, `1` represents that it is completed.|
-The order of the returned values is: [ts,o,h,l,c,confirm]
+The order of the returned values is: \[ts,o,h,l,c,confirm\]
 
 ---
 
-### Liquidation orders channel ###
+### Liquidation orders channel
 
 Retrieve the recent liquidation orders. For futures and swaps, each contract will only show a maximum of one order per one-second period. This data doesn’t represent the total number of liquidations on OKX.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-  "op": "subscribe",
-  "args": [
-    {
-      "channel": "liquidation-orders",
-      "instType": "SWAP"
-    }
-  ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of object | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>liquidation-orders</code> 
+| &gt; instType | String | Yes | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>MARGIN</code><br><code>OPTION</code> 
 
-```
+#### Response Parameters
 
-#### Request Parameters ####
-
-| Parameter |     Type      |Required|                               Description                                |
-|-----------|---------------|--------|--------------------------------------------------------------------------|
-|    op     |    String     |  Yes   |             Operation  <br/>`subscribe`  <br/>`unsubscribe`              |
-|   args    |Array of object|  Yes   |                       List of subscribed channels                        |
-|\> channel |    String     |  Yes   |                 Channel name  <br/>`liquidation-orders`                  |
-|\> instType|    String     |  Yes   |Instrument type  <br/>`SWAP`  <br/>`FUTURES`  <br/>`MARGIN`  <br/>`OPTION`|
-
->
->
-> Response Example
->
->
-
-```
-{
-    "arg": {
-        "channel": "liquidation-orders",
-        "instType": "SWAP"
-    },
-    "data": [
-        {
-            "details": [
-                {
-                    "bkLoss": "0",
-                    "bkPx": "0.007831",
-                    "ccy": "",
-                    "posSide": "short",
-                    "side": "buy",
-                    "sz": "13",
-                    "ts": "1692266434010"
-                }
-            ],
-            "instFamily": "IOST-USDT",
-            "instId": "IOST-USDT-SWAP",
-            "instType": "SWAP",
-            "uly": "IOST-USDT"
-        }
-    ]
-}
-
-```
-
-#### Response Parameters ####
-
-|**Parameter**|    **Type**    |                                                                          **Description**                                                                           |
-|-------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     arg     |     Object     |                                                                  Successfully subscribed channel                                                                   |
-| \> channel  |     String     |                                                                            Channel name                                                                            |
-|  \> instId  |     String     |                                                                           Instrument ID                                                                            |
-|    data     |Array of objects|                                                                          Subscribed data                                                                           |
-| \> instType |     String     |                                                                          Instrument type                                                                           |
-|  \> instId  |     String     |                                                                 Instrument ID, e.g. `BTC-USD-SWAP`                                                                 |
-|   \> uly    |     String     |                                                      Underlying, only applicable to `FUTURES`/`SWAP`/`OPTION`                                                      |
-| \> details  |Array of objects|                                                                        Liquidation details                                                                         |
-|  \>\> side  |     String     |                                                   Order side, `buy` `sell`, only applicable to `FUTURES`/`SWAP`                                                    |
-|\>\> posSide |     String     |                               Position mode side  <br/>`long`: Hedge mode long  <br/>`short`: Hedge mode short  <br/>`net`: Net mode                               |
-|  \>\> bkPx  |     String     |                     Bankruptcy price. The price of the transaction with the system's liquidation account, only applicable to `FUTURES`/`SWAP`                      |
-|   \>\> sz   |     String     |Quantity of liquidation, only applicable to `MARGIN/FUTURES/SWAP`.  <br/> For `MARGIN`, the unit is base currency.   <br/> For `FUTURES/SWAP`, the unit is contract.|
-| \>\> bkLoss |     String     |                                                                          Bankruptcy loss                                                                           |
-|  \>\> ccy   |     String     |                                                         Liquidation currency, only applicable to `MARGIN`                                                          |
-|   \>\> ts   |     String     |                                           Liquidation time, Unix timestamp format in milliseconds, e.g. `1597026383085`                                            |
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| &gt; instId | String | Instrument ID 
+| data | Array of objects | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instId | String | Instrument ID, e.g. <code>BTC-USD-SWAP</code> 
+| &gt; uly | String | Underlying, only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
+| &gt; details | Array of objects | Liquidation details 
+| &gt;&gt; side | String | Order side, <code>buy</code> <code>sell</code>, only applicable to <code>FUTURES</code>/<code>SWAP</code> 
+| &gt;&gt; posSide | String | Position mode side<br><code>long</code>: Hedge mode long<br><code>short</code>: Hedge mode short<br><code>net</code>: Net mode 
+| &gt;&gt; bkPx | String | Bankruptcy price. The price of the transaction with the system's liquidation account, only applicable to <code>FUTURES</code>/<code>SWAP</code> 
+| &gt;&gt; sz | String | Quantity of liquidation, only applicable to <code>MARGIN/FUTURES/SWAP</code>.<br>For <code>MARGIN</code>, the unit is base currency.<br>For <code>FUTURES/SWAP</code>, the unit is contract. 
+| &gt;&gt; bkLoss | String | Bankruptcy loss 
+| &gt;&gt; ccy | String | Liquidation currency, only applicable to <code>MARGIN</code> 
+| &gt;&gt; ts | String | Liquidation time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>
 
 ---
 
-### ADL warning channel ###
+### ADL warning channel
 
 Auto-deleveraging warning channel.
 
@@ -1837,279 +785,109 @@ In the warning state or when there is ADL risk (`warning/adl`), data will be pus
 
 For more ADL details, please refer to [Introduction to Auto-deleveraging](https://www.okx.com/help/iv-introduction-to-auto-deleveraging-adl)
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/public
 
->
->
-> Request Example
->
->
+#### Request Parameters
 
-```
-{
-    "op": "subscribe",
-    "args": [{
-        "channel": "adl-warning",
-        "instType": "FUTURES",
-        "instFamily": "BTC-USDT"
-    }]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of object | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>adl-warning</code> 
+| &gt; instType | String | Yes | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> 
+| &gt; instFamily | String | No | Instrument family 
 
-```
+#### Response parameters
 
-#### Request Parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name<br><code>adl-warning</code> 
+| &gt; instType | String | Yes | Instrument type 
+| &gt; instFamily | String | No | Instrument family 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|  Parameter  |     Type      |Required|                        Description                        |
-|-------------|---------------|--------|-----------------------------------------------------------|
-|     op      |    String     |  Yes   |      Operation  <br/>`subscribe`  <br/>`unsubscribe`      |
-|    args     |Array of object|  Yes   |                List of subscribed channels                |
-| \> channel  |    String     |  Yes   |             Channel name  <br/>`adl-warning`              |
-| \> instType |    String     |  Yes   |Instrument type  <br/>`SWAP`  <br/>`FUTURES`  <br/>`OPTION`|
-|\> instFamily|    String     |   No   |                     Instrument family                     |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-   "event":"subscribe",
-   "arg":{
-      "channel":"adl-warning",
-      "instType":"FUTURES",
-      "instFamily":"BTC-USDT"
-   },
-   "connId":"48d8960a"
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-   "event":"error",
-   "msg":"Illegal request: { \"event\": \"subscribe\", \"arg\": { \"channel\": \"adl-warning\", \"instType\": \"FUTURES\", \"instFamily\": \"BTC-USDT\" } }",
-   "code":"60012",
-   "connId":"48d8960a"
-}
-
-```
-
-#### Response parameters ####
-
-|  Parameter  | Type |Required|                       Description                       |
-|-------------|------|--------|---------------------------------------------------------|
-|    event    |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|     arg     |Object|   No   |                   Subscribed channel                    |
-| \> channel  |String|  Yes   |            Channel name  <br/>`adl-warning`             |
-| \> instType |String|  Yes   |                     Instrument type                     |
-|\> instFamily|String|   No   |                    Instrument family                    |
-|    code     |String|   No   |                       Error code                        |
-|     msg     |String|   No   |                      Error message                      |
-|   connId    |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-   "arg":{
-      "channel":"adl-warning",
-      "instType":"FUTURES",
-      "instFamily":"BTC-USDT"
-   },
-   "data":[
-      {
-         "decRate":"",
-         "maxBal":"",
-         "adlRecRate":"0.25",
-         "adlRecBal":"8000.0",
-         "bal":"280784384.9564228289548144",
-         "instType":"FUTURES",
-         "adlRate":"0.5",
-         "ccy": "USDT",
-         "instFamily":"BTC-USDT",
-         "maxBalTs":"",
-         "adlType":"",
-         "state":"normal",
-         "adlBal":"0",
-         "ts":"1700210763001"
-      }
-   ]
-}
-
-```
-
-#### Push data parameters ####
-
-|  Parameter  |     Type      |                                                                                                                                                                Description                                                                                                                                                                 |
-|-------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     arg     |    Object     |                                                                                                                                                             Subscribed channel                                                                                                                                                             |
-| \> channel  |    String     |                                                                                                                                                      Channel name  <br/>`adl-warning`                                                                                                                                                      |
-| \> instType |    String     |                                                                                                                                                              Instrument type                                                                                                                                                               |
-|\> instFamily|    String     |                                                                                                                                                             Instrument family                                                                                                                                                              |
-|    data     |Array of object|                                                                                                                                                              Subscribed data                                                                                                                                                               |
-| \> instType |    String     |                                                                                                                                                              Instrument type                                                                                                                                                               |
-|\> instFamily|    String     |                                                                                                                                                             Instrument family                                                                                                                                                              |
-|  \> state   |    String     |                                                                                                                                            state   <br/>`normal`   <br/>`warning`   <br/>`adl`                                                                                                                                             |
-|   \> bal    |    String     |                                                                                                                                                      Real-time insurance fund balance                                                                                                                                                      |
-|   \> ccy    |    String     |                                                                                                                                            The corresponding currency of insurance fund balance                                                                                                                                            |
-|  \> maxBal  |    String     |                                                                                                               Maximum insurance fund balance in the past eight hours   <br/><br/>Applicable when state is `warning` or `adl`                                                                                                               |
-| \> maxBalTs |    String     |                                                                                                 Timestamp when insurance fund balance reached maximum in the past eight hours, Unix timestamp format in milliseconds, e.g. `1597026383085`                                                                                                 |
-| \> decRate  |    String     |                                                                                                           Real-time insurance fund decline rate (compare bal and maxBal)   <br/><br/>Applicable when state is `warning` or `adl`                                                                                                           |
-| \> adlType  |    String     |ADL related events   <br/>`rate_adl_start`: ADL begins due to high insurance fund decline rate   <br/>`bal_adl_start`: ADL begins due to insurance fund balance falling   <br/>`pos_adl_start`：ADL begins due to the volume of liquidation orders falls to a certain level (only applicable to premarket symbols)   <br/>`adl_end`: ADL ends|
-|  \> adlBal  |    String     |                                                                                                                                                  Insurance fund balance that triggers ADL                                                                                                                                                  |
-| \> adlRate  |    String     |                                                                                                                                               Insurance fund decline rate that triggers ADL                                                                                                                                                |
-|\> adlRecBal |    String     |                                                                                                                                                 Insurance fund balance that turns off ADL                                                                                                                                                  |
-|\> adlRecRate|    String     |                                                                                                                                               Insurance fund decline rate that turns off ADL                                                                                                                                               |
-|    \> ts    |    String     |                                                                                                                                Data push time, Unix timestamp format in milliseconds, e.g. `1597026383085`                                                                                                                                 |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Subscribed channel 
+| &gt; channel | String | Channel name<br><code>adl-warning</code> 
+| &gt; instType | String | Instrument type 
+| &gt; instFamily | String | Instrument family 
+| data | Array of object | Subscribed data 
+| &gt; instType | String | Instrument type 
+| &gt; instFamily | String | Instrument family 
+| &gt; state | String | state<br><code>normal</code><br><code>warning</code><br><code>adl</code> 
+| &gt; bal | String | Real-time insurance fund balance 
+| &gt; ccy | String | The corresponding currency of insurance fund balance 
+| &gt; maxBal | String | Maximum insurance fund balance in the past eight hours<br><br>Applicable when state is <code>warning</code> or <code>adl</code> 
+| &gt; maxBalTs | String | Timestamp when insurance fund balance reached maximum in the past eight hours, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
+| &gt; adlType | String | ADL related events<br><code>rate_adl_start</code>: ADL begins due to high insurance fund decline rate<br><code>bal_adl_start</code>: ADL begins due to insurance fund balance falling<br><code>pos_adl_start</code>：ADL begins due to the volume of liquidation orders falls to a certain level (only applicable to premarket symbols)<br><code>adl_end</code>: ADL ends 
+| &gt; adlBal | String | Insurance fund balance that triggers ADL 
+| &gt; adlRecBal | String | Insurance fund balance that turns off ADL 
+| &gt; ts | String | Data push time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
+| &gt; decRate | String | <del>Real-time insurance fund decline rate (compare bal and maxBal)<br><br>Applicable when state is <code>warning</code> or <code>adl</code></del>(Deprecated) 
+| &gt; adlRate | String | <del>Insurance fund decline rate that triggers ADL</del>(Deprecated) 
+| &gt; adlRecRate | String | <del>Insurance fund decline rate that turns off ADL</del>(Deprecated)
 
 ---
 
-### Economic calendar channel ###
+### Economic calendar channel
 
 This endpoint is only supported in production environment.
 
 Retrieve the most up-to-date economic calendar data. This endpoint is only applicable to VIP 1 and above users in the trading fee tier.
 
-#### URL Path ####
+#### URL Path
 
 /ws/v5/business (required login)
 
->
->
-> Request Example
->
->
+#### Request parameters
 
-```
-{
-    "op": "subscribe",
-    "args": [
-      {
-          "channel": "economic-calendar"
-      }
-    ]
-}
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
+| args | Array of objects | Yes | List of subscribed channels 
+| &gt; channel | String | Yes | Channel name<br><code>economic-calendar</code> 
 
-```
+#### Response parameters
 
-#### Request parameters ####
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| event | String | Yes | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> 
+| arg | Object | No | Subscribed channel 
+| &gt; channel | String | Yes | Channel name 
+| code | String | No | Error code 
+| msg | String | No | Error message 
+| connId | String | Yes | WebSocket connection ID 
 
-|Parameter |      Type      |Required|                  Description                  |
-|----------|----------------|--------|-----------------------------------------------|
-|    op    |     String     |  Yes   |Operation  <br/>`subscribe`  <br/>`unsubscribe`|
-|   args   |Array of objects|  Yes   |          List of subscribed channels          |
-|\> channel|     String     |  Yes   |    Channel name  <br/>`economic-calendar`     |
+#### Push data parameters
 
->
->
-> Successful Response Example
->
->
-
-```
-{
-    "event": "subscribe",
-    "arg": {
-        "channel": "economic-calendar"
-    }
-}
-
-```
-
->
->
-> Failure Response Example
->
->
-
-```
-{
-  "event": "error",
-  "code": "60012",
-  "msg": "Invalid request: {\"op\": \"subscribe\", \"argss\":[{ \"channel\" : \"economic-calendar\", \"instId\" : \"LTC-USD-190628\"}]}"
-}
-
-```
-
-#### Response parameters ####
-
-|Parameter | Type |Required|                       Description                       |
-|----------|------|--------|---------------------------------------------------------|
-|  event   |String|  Yes   |Event  <br/>`subscribe`  <br/>`unsubscribe`  <br/>`error`|
-|   arg    |Object|   No   |                   Subscribed channel                    |
-|\> channel|String|  Yes   |                      Channel name                       |
-|   code   |String|   No   |                       Error code                        |
-|   msg    |String|   No   |                      Error message                      |
-|  connId  |String|  Yes   |                 WebSocket connection ID                 |
-
->
->
-> Push Data Example
->
->
-
-```
-{
-    "arg": {
-        "channel": "economic-calendar"
-    },
-    "data": [
-        {
-            "calendarId": "319275",
-            "date": "1597026383085",
-            "region": "United States",
-            "category": "Manufacturing PMI",
-            "event": "S&P Global Manufacturing PMI Final",
-            "refDate": "1597026383085",
-            "actual": "49.2",
-            "previous": "47.3",
-            "forecast": "49.3",
-            "importance": "2",
-            "prevInitial": "",
-            "ccy": "",
-            "unit": "",
-            "ts": "1698648096590"
-        }
-    ]
-}
-
-```
-
-#### Push data parameters ####
-
-|  Parameter   |      Type      |                                                  Description                                                  |
-|--------------|----------------|---------------------------------------------------------------------------------------------------------------|
-|     arg      |     Object     |                                        Successfully subscribed channel                                        |
-|  \> channel  |     String     |                                                 Channel name                                                  |
-|     data     |Array of objects|                                                Subscribed data                                                |
-|   \> event   |     string     |                                                  Event name                                                   |
-|  \> region   |     string     |                                           Country, region or entity                                           |
-| \> category  |     string     |                                                 Category name                                                 |
-|  \> actual   |     string     |                                        The actual value of this event                                         |
-| \> previous  |     string     |     Latest actual value of the previous period   <br/>The value will be revised if revision is applicable     |
-| \> forecast  |     string     |                          Average forecast among a representative group of economists                          |
-|\> prevInitial|     string     |             The initial value of the previous period   <br/>Only applicable when revision happens             |
-|   \> date    |     string     |Estimated release time of the value of actual field, millisecond format of Unix timestamp, e.g. `1597026383085`|
-|  \> refDate  |     string     |                                    Date for which the datapoint refers to                                     |
-|\> calendarId |     string     |                                                  Calendar ID                                                  |
-|   \> unit    |     string     |                                               Unit of the data                                                |
-|    \> ccy    |     string     |                                             Currency of the data                                              |
-|\> importance |     string     |                    Level of importance  <br/>`1`: low   <br/>`2`: medium   <br/>`3`: high                     |
-|    \> ts     |     string     |                                         The time of the latest update                                         |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| arg | Object | Successfully subscribed channel 
+| &gt; channel | String | Channel name 
+| data | Array of objects | Subscribed data 
+| &gt; event | string | Event name 
+| &gt; region | string | Country, region or entity 
+| &gt; category | string | Category name 
+| &gt; actual | string | The actual value of this event 
+| &gt; previous | string | Latest actual value of the previous period<br>The value will be revised if revision is applicable 
+| &gt; forecast | string | Average forecast among a representative group of economists 
+| &gt; prevInitial | string | The initial value of the previous period<br>Only applicable when revision happens 
+| &gt; date | string | Estimated release time of the value of actual field, millisecond format of Unix timestamp, e.g. <code>1597026383085</code> 
+| &gt; refDate | string | Date for which the datapoint refers to 
+| &gt; calendarId | string | Calendar ID 
+| &gt; unit | string | Unit of the data 
+| &gt; ccy | string | Currency of the data 
+| &gt; importance | string | Level of importance<br><code>1</code>: low<br><code>2</code>: medium<br><code>3</code>: high 
+| &gt; ts | string | The time of the latest update
 
 ---
 
