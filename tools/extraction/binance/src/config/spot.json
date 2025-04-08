@@ -1,0 +1,98 @@
+{
+    "public_rest": {
+        "endpoints": [
+            "binance-spot-api-docs/filters",
+            "binance-spot-api-docs/enums",
+            "binance-spot-api-docs/errors",
+            "binance-spot-api-docs/rest-api/general-api-information",
+            "binance-spot-api-docs/rest-api/http-return-codes",
+            "binance-spot-api-docs/rest-api/error-codes",
+            "binance-spot-api-docs/rest-api/general-information-on-endpoints",
+            "binance-spot-api-docs/rest-api/limits",
+            "binance-spot-api-docs/rest-api/data-sources",
+            "binance-spot-api-docs/rest-api/endpoint-security-type",
+            "binance-spot-api-docs/rest-api/general-endpoints",
+            "binance-spot-api-docs/rest-api/market-data-endpoints"
+        ],
+        "output_file": "binance/spot/public_rest_api.md",
+        "title": "Binance Spot Public REST API Documentation"
+    },
+    "private_rest": {
+        "endpoints": [
+            "binance-spot-api-docs/filters",
+            "binance-spot-api-docs/enums",
+            "binance-spot-api-docs/errors",
+            "binance-spot-api-docs/rest-api/general-api-information",
+            "binance-spot-api-docs/rest-api/http-return-codes",
+            "binance-spot-api-docs/rest-api/error-codes",
+            "binance-spot-api-docs/rest-api/general-information-on-endpoints",
+            "binance-spot-api-docs/rest-api/limits",
+            "binance-spot-api-docs/rest-api/data-sources",
+            "binance-spot-api-docs/rest-api/endpoint-security-type",
+            "binance-spot-api-docs/rest-api/general-endpoints",
+            "binance-spot-api-docs/rest-api/trading-endpoints",
+            "binance-spot-api-docs/rest-api/account-endpoints",
+            "binance-spot-api-docs/user-data-stream",
+            "binance-spot-api-docs/rest-api/user-data-stream-endpoints"
+        ],
+        "output_file": "binance/spot/private_rest_api.md",
+        "title": "Binance Spot Private REST API Documentation"
+    },
+    "public_websocket": {
+        "endpoints": [
+            "binance-spot-api-docs/errors",
+            "binance-spot-api-docs/filters",
+            "binance-spot-api-docs/enums",
+            "binance-spot-api-docs/web-socket-streams",
+            "binance-spot-api-docs/web-socket-api/general-api-information",
+            "binance-spot-api-docs/web-socket-api/request-format",
+            "binance-spot-api-docs/web-socket-api/response-format",
+            "binance-spot-api-docs/web-socket-api/event-format",
+            "binance-spot-api-docs/web-socket-api/rate-limits",
+            "binance-spot-api-docs/web-socket-api/request-security",
+            "binance-spot-api-docs/web-socket-api/session-authentication",
+            "binance-spot-api-docs/web-socket-api/data-sources",
+            "binance-spot-api-docs/web-socket-api/general-requests",
+            "binance-spot-api-docs/web-socket-api/market-data-requests"
+        ],
+        "output_file": "binance/spot/public_websocket_api.md",
+        "title": "Binance Spot Public Websocket API Documentation"
+    },
+    "private_websocket": {
+        "endpoints": [
+            "binance-spot-api-docs/user-data-stream",
+            "binance-spot-api-docs/errors",
+            "binance-spot-api-docs/filters",
+            "binance-spot-api-docs/enums",
+            "binance-spot-api-docs/web-socket-streams",
+            "binance-spot-api-docs/web-socket-api/general-api-information",
+            "binance-spot-api-docs/web-socket-api/request-format",
+            "binance-spot-api-docs/web-socket-api/response-format",
+            "binance-spot-api-docs/web-socket-api/event-format",
+            "binance-spot-api-docs/web-socket-api/request-security",
+            "binance-spot-api-docs/web-socket-api/session-authentication",
+            "binance-spot-api-docs/web-socket-api/data-sources",
+            "binance-spot-api-docs/web-socket-api/general-requests",
+            "binance-spot-api-docs/web-socket-api/authentication-requests",
+            "binance-spot-api-docs/web-socket-api/trading-requests",
+            "binance-spot-api-docs/web-socket-api/account-requests",
+            "binance-spot-api-docs/web-socket-api/user-data-stream-requests"
+        ],
+        "output_file": "binance/spot/private_websocket_api.md",
+        "title": "Binance Spot Private Websocket API Documentation"
+    },
+    "fix": {
+        "endpoints": [
+            "binance-spot-api-docs/fix-api"
+        ],
+        "output_file": "binance/spot/fix_api.md",
+        "title": "Binance Spot FIX API Documentation"
+    },
+    "sbe": {
+        "endpoints": [
+            "binance-spot-api-docs/sbe-market-data-streams"
+        ],
+        "output_file": "binance/spot/market_data_sbe_api.md",
+        "title": "Binance Spot SBE API Documentation"
+    }
+}
