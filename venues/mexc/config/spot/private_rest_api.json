@@ -1,0 +1,12 @@
+{
+  "title": "Private REST API Endpoints",
+  "includeSections": [
+    "General Info",
+    "FAQs",
+    "Public API Definitions",
+    "Spot Account/Trade",
+    "Wallet Endpoints",
+    "Sub-Account Endpoints",
+    "Rebate Endpoints"
+  ]
+} 
