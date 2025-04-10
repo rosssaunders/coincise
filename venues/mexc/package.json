@@ -1,0 +1,19 @@
+{
+  "name": "mexc-api-docs-converter",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Convert HTML API docs to Markdown",
+  "scripts": {
+    "start": "npm run all",
+    "spot": "node src/index.js spot",
+    "contract": "node src/index.js contract",
+    "broker": "node src/index.js broker",
+    "all": "npm run spot && npm run contract && npm run broker"
+  },
+  "dependencies": {
+    "puppeteer": "24.6.1",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "26.0.0"
+  }
+}
