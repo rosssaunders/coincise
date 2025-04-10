@@ -46,6 +46,14 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Spot | [Spot API Docs](docs/bitget/spot_api.md) | 2025-03-31 |
 | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | Bitget | Contract | [Contract API Docs](docs/bitget/contract_api.md) | 2025-03-31 |
 | <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;"> | Deribit | Combined | [API Docs](docs/deribit/api.md) | 2025-03-31 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Spot Private REST | [Private REST API Docs](docs/mexc/spot/private_rest_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Spot Public REST | [Public REST API Docs](docs/mexc/spot/public_rest_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Spot Private WebSocket | [Private WebSocket API Docs](docs/mexc/spot/private_websocket_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Spot Public WebSocket | [Public WebSocket API Docs](docs/mexc/spot/public_websocket_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Contract Private REST | [Private REST API Docs](docs/mexc/contract/private_rest_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Contract Public REST | [Public REST API Docs](docs/mexc/contract/public_rest_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Contract WebSocket | [WebSocket API Docs](docs/mexc/contract/websocket_api.md) | 2025-04-11 |
+| <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | MEXC | Broker Private REST | [Private REST API Docs](docs/mexc/broker/private_rest_api.md) | 2025-04-11 |
 
 ## Contributing
 
