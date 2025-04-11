@@ -230,17 +230,21 @@ func main() {
 }
 ```
 
+2025-03-21
+
+*   The documentation for all private channel subscription parameters has been updated.
+
 2021-08-06
 
-Add BTC settled delivery contracts support
+*   Add BTC settled delivery contracts support
 
 2020-08-08
 
-Add a complete code demo(golang, python)
+*   Add a complete code demo(golang, python)
 
 2020-08-07
 
-Add auto orders subscription
+*   Add auto orders subscription
 
 ## [#](#api-overview) API Overview
 
@@ -1346,8 +1350,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#orders-notification) Orders notification
 
@@ -1539,8 +1543,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#user-trades-notification) User trades notification
 
@@ -1703,8 +1707,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#liquidates-notification) Liquidates notification
 
@@ -1878,8 +1882,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#auto-deleverages-notification) Auto\_deleverages notification
 
@@ -2041,8 +2045,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#position-closes-notification) Position\_closes notification
 
@@ -2202,7 +2206,7 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
+  | user id | String | no | user id |
 
 ## [#](#balances-notification) balances notification
 
@@ -2349,8 +2353,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#reduce-risk-limits-notification) Reduce\_risk\_limits notification
 
@@ -2501,8 +2505,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#positions-notification) Positions notification
 
@@ -2683,8 +2687,8 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | user id |
-  | contract | String | yes | delivery contract name |
+  | user id | String | no | user id |
+  | contract | String | yes | delivery contract name. !all——Subscribe to all contracts. |
 
 ## [#](#auto-orders-notification) Auto orders notification
 
@@ -2811,4 +2815,4 @@ The above command returns JSON structured like this:
     `unsubscribe`
     
 
-Last Updated: 11/28/2024, 3:06:07 AM
+Last Updated: 3/21/2025, 6:23:28 AM
