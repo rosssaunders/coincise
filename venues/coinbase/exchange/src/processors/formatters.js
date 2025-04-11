@@ -2,15 +2,16 @@
  * Functions to format extracted data to markdown
  */
 
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
+import { JSDOM } from 'jsdom';
+// const jsdom = require('jsdom');
+// const { JSDOM } = jsdom;
 
 /**
  * Process authentication HTML to markdown table
  * @param {string} authHtml - HTML content of auth section
  * @returns {string|null} - Markdown table or null
  */
-const processAuthSection = (authHtml) => {
+export const processAuthSection = (authHtml) => {
   if (!authHtml) return null;
   
   const dom = new JSDOM(authHtml);
@@ -46,7 +47,7 @@ const processAuthSection = (authHtml) => {
  * @param {string} paramsHtml - HTML content of request params section
  * @returns {string|null} - Markdown table or null
  */
-const processRequestParams = (paramsHtml) => {
+export const processRequestParams = (paramsHtml) => {
   if (!paramsHtml) return null;
   
   const dom = new JSDOM(paramsHtml);
@@ -113,7 +114,7 @@ const processRequestParams = (paramsHtml) => {
  * @param {Array} modalResults - Array of response modal results
  * @returns {string} - Markdown content
  */
-const generateResponseMarkdown = (modalResults) => {
+export const generateResponseMarkdown = (modalResults) => {
   if (!modalResults || modalResults.length === 0) {
     return '';
   }
@@ -169,7 +170,7 @@ const generateResponseMarkdown = (modalResults) => {
  * @param {string} queryParamsMarkdown - Query parameters markdown
  * @returns {string} - Complete markdown document
  */
-const generateMarkdownDocument = (articleContent, modalResults, authMarkdown = '', requestParamsMarkdown = '', pathParamsMarkdown = '', queryParamsMarkdown = '') => {
+export const generateMarkdownDocument = (articleContent, modalResults, authMarkdown = '', requestParamsMarkdown = '', pathParamsMarkdown = '', queryParamsMarkdown = '') => {
   return `
 ${articleContent}
 
@@ -184,10 +185,3 @@ ${requestParamsMarkdown || ''}
 ${generateResponseMarkdown(modalResults)}
 `.trim();
 };
-
-module.exports = {
-  processAuthSection,
-  processRequestParams,
-  generateResponseMarkdown,
-  generateMarkdownDocument
-}; 

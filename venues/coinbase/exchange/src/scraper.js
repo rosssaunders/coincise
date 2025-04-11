@@ -2,24 +2,23 @@
  * Main scraper for Coinbase Exchange API documentation
  */
 
-const puppeteer = require('puppeteer');
-const fs = require('fs');
-const path = require('path');
-const { JSDOM } = require('jsdom');
-const { delay, ensureDirectoryExists } = require('./utils');
-const { 
+import puppeteer from 'puppeteer';
+import fs from 'fs';
+import path from 'path';
+import { delay, ensureDirectoryExists } from './utils/utils.js';
+import { 
   extractArticleContent, 
   extractAuthSection, 
   extractRequestParams, 
   extractModalContent,
   extractPathAndQueryParams 
-} = require('./extractors');
-const { 
+} from './processors/extractors.js';
+import { 
   processAuthSection, 
   processRequestParams, 
   generateMarkdownDocument 
-} = require('./formatters');
-const TurndownService = require('turndown');
+} from './processors/formatters.js';
+import TurndownService from 'turndown';
 
 /**
  * Convert HTML content to Markdown
@@ -290,11 +289,10 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     );
     
     // Ensure the output directory exists
-    const outputDir = path.dirname(outputPath);
-    ensureDirectoryExists(outputDir);
+    ensureDirectoryExists(path.dirname(outputPath));
     
     // Write the markdown file
-    fs.writeFileSync(outputPath, markdownContent);
+    fs.writeFileSync(outputPath, markdownContent, 'utf8');
     console.log(`Markdown documentation saved to: ${outputPath}`);
 
   } catch (error) {
@@ -306,4 +304,4 @@ const scrapeApiDocumentation = async (url, outputPath) => {
   }
 };
 
-module.exports = { scrapeApiDocumentation }; 
+export { scrapeApiDocumentation }; 

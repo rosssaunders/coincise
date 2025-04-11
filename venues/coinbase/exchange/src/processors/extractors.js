@@ -9,7 +9,7 @@
  * @param {boolean} options.html - Whether to return HTML instead of text
  * @returns {Promise<string>} - Article content as text or HTML
  */
-const extractArticleContent = async (page, options = {}) => {
+export const extractArticleContent = async (page, options = {}) => {
   return await page.evaluate((returnHtml) => {
     const article = document.querySelector('article');
     if (!article) return 'Article content not available';
@@ -68,7 +68,7 @@ const extractArticleContent = async (page, options = {}) => {
  * @param {Page} page - Puppeteer page object
  * @returns {Promise<string|null>} - HTML content or null
  */
-const extractAuthSection = async (page) => {
+export const extractAuthSection = async (page) => {
   return await page.evaluate(() => {
     const authSection = document.querySelector('#authorization');
     return authSection ? authSection.outerHTML : null;
@@ -80,7 +80,7 @@ const extractAuthSection = async (page) => {
  * @param {Page} page - Puppeteer page object
  * @returns {Promise<string|null>} - HTML content or null
  */
-const extractRequestParams = async (page) => {
+export const extractRequestParams = async (page) => {
   return await page.evaluate(() => {
     // Look for the section with "Body params" heading
     const bodyParamsHeadings = Array.from(document.querySelectorAll('h3')).filter(h => 
@@ -100,7 +100,7 @@ const extractRequestParams = async (page) => {
  * @param {Page} page - Puppeteer page object
  * @returns {Promise<Object>} - Object with pathParams and queryParams HTML
  */
-const extractPathAndQueryParams = async (page) => {
+export const extractPathAndQueryParams = async (page) => {
   return await page.evaluate(() => {
     const result = {
       pathParams: null,
@@ -133,7 +133,7 @@ const extractPathAndQueryParams = async (page) => {
  * @param {Page} page - Puppeteer page object
  * @returns {Promise<Object>} - Structured modal content
  */
-const extractModalContent = async (page) => {
+export const extractModalContent = async (page) => {
   return await page.evaluate(() => {
     // Try to extract structured data from the Mui paper component
     const muiPaper = document.querySelector('.MuiPaper-root');
@@ -176,12 +176,4 @@ const extractModalContent = async (page) => {
     
     return { error: 'Modal content not found' };
   });
-};
-
-module.exports = {
-  extractArticleContent,
-  extractAuthSection,
-  extractRequestParams,
-  extractModalContent,
-  extractPathAndQueryParams
 }; 
