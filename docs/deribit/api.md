@@ -10711,7 +10711,7 @@ Added RFQ API:
 Rate Limits
 ===========
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 Deribit uses a volume-tiered rate limit system, focusing primarily on matching engine requests. These rate limits are implemented to ensure the robustness of our system's order processing capabilities.
 
@@ -11008,7 +11008,7 @@ quote\_cancel
 Connection Management
 =====================
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 Connection[](#heading-1)
 ------------------------
@@ -11079,7 +11079,7 @@ Upon initiating a session with the `Logon (A)` message, users have the option to
 Accessing historical trades and orders using API
 ================================================
 
-*   Updated 2 days ago
+*   Updated 11 days ago
 
 #### Overview
 
@@ -11205,7 +11205,7 @@ To retrieve historical trades and orders, use `historical` parameter in your API
 API Usage Policy
 ================
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 Deribit is committed to providing a fast, reliable, and efficient trading platform for all users. To maintain the integrity and performance of our system, we are introducing new guidelines for API usage. These guidelines are aimed at ensuring that all users have fair access to the platform without unnecessary strain on resources.
 
@@ -11284,7 +11284,7 @@ If you have any questions or need assistance optimizing your API usage, please r
 Server Infrastructure
 =====================
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 Server Infrastructure[](#heading-1)
 -----------------------------------
@@ -11395,7 +11395,7 @@ LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
 Asia Gateway
 ============
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 To offer faster access to the Deribit platform for clients located in Asia, we offer a gateway connecting to Deribit from Hong Kong.
 
@@ -11410,7 +11410,7 @@ Please use [asia.deribit.com](http://asia.deribit.com) to access the gateway.
 Deribit AWS Endpoint Service instruction
 ========================================
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 In order to offer its customers residing in AWS a direct connection to its backend systems, Deribit has created an AWS Endpoint Service for customers to directly connect to. The solution is based on AWS PrivateLink, a managed service built for service provider/service consumer connectivity models. This instruction describes how customers can connect to the Deribit Endpoint Service from their AWS environment. The Service is available within several AWS regions. 
 
@@ -11556,7 +11556,7 @@ This can be done via the API itself directly without our intervening, If you wis
 Deribit AWS Multicast Service Instruction
 =========================================
 
-*   Updated 15 days ago
+*   Updated 23 days ago
 
 Introduction[](#heading-1)
 --------------------------
