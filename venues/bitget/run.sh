@@ -32,9 +32,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Array of config files to process
 CONFIG_FILES=(
-    "src/config/common.json"
-    "src/config/spot.json"
-    "src/config/future.json"
+    "config/common.json"
+    "config/spot.json"
+    "config/future.json"
 )
 
 # Process each config file

@@ -1052,11 +1052,11 @@ Response Example
 | &gt;crossedRiskRate | String | Risk ratio in cross margin mode 
 | &gt;unrealizedPL | String | Unrealized PnL 
 | &gt;coupon | String | Trading bonus 
-| &gt;unionTotalMargin | String | Multi-assets 
-| &gt;unionAvailable | String | Total available 
-| &gt;unionMm | String | Maintenance margin 
-| &gt;assetList | List | Asset list 
-| &gt;&gt;coin | String | Asset 
+| &gt;unionTotalMargin | String | Multi-assets multi-assets mode 
+| &gt;unionAvailable | String | Available under multi-assets mode 
+| &gt;unionMm | String | Maintenance margin under multi-assets mode 
+| &gt;assetList | List | Assets list under multi-assets mode 
+| &gt;&gt;coin | String | Coin name 
 | &gt;&gt;balance | String | Balance 
 | &gt;&gt;available | String | Maximum transferable amount<br>Unit: current coin 
 | &gt;isolatedMargin | String | Isolated Margin Occupied 
@@ -1820,11 +1820,10 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/click-backhand" \  -H "ACC
 | symbol | String | Yes | Trading pair, e.g. ETHUSDT 
 | marginCoin | String | Yes | marginCoin e.g: USDT 
 | productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo 
-| size | String | Yes | Amount 
-| side | String | No | Order direction<br>buy: Buy<br>sell: Sell 
+| size | String | No | Amount 
+| side | String | Yes | Order direction<br>buy: Buy<br>sell: Sell 
 | tradeSide | String | No | Direction<br>Required in open and close (hedge mode) position .<br>For one-way positions, this field will be ignored<br>Open and Close<br>Notes:<br>For open long, fill in"Buy"; tradeSide should be "Open"<br>For open short, fill in "Sell"; tradeSide should be "Open"<br>For close long, fill in "Buy"; tradeSide should be "Close"<br>For close short, fill in "Sell"; tradeSide should be "Close" 
 | clientOid | String | No | Customize order ID 
-| marginCoin | String | Yes | margin coin 
 
 Response Example
 
@@ -3550,7 +3549,7 @@ Response Example
 Push Data
 
 ```
-{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders",        "instId": "default"    },    "data": [        {            "accBaseVolume": "0.01",            "cTime": "1695718781129",            "clientOId": "1",            "feeDetail": [                {                    "feeCoin": "USDT",                    "fee": "-0.162003"                }            ],            "fillFee": "-0.162003",            "fillFeeCoin": "USDT",            "fillNotionalUsd": "270.005",            "fillPrice": "27000.5",            "baseVolume": "0.01",            "fillTime": "1695718781146",            "force": "gtc",            "instId": "BTCUSDT",            "leverage": "20",            "marginCoin": "USDT",            "marginMode": "crossed",            "notionalUsd": "270",            "orderId": "1",            "orderType": "market",            "pnl": "0",            "posMode": "hedge_mode",            "posSide": "long",            "price": "0",            "priceAvg": "27000.5",            "reduceOnly": "no",            "stpMode": "cancel_taker",            "side": "buy",            "size": "0.01",            "enterPointSource": "WEB",            "status": "filled",            "tradeScope": "T",            "tradeId": "1111111111",            "tradeSide": "open",            "presetStopSurplusPrice": "21.4",            "totalProfits": "11221.45",            "presetStopLossPrice": "21.5",            "uTime": "1695718781146"        }    ],    "ts": 1695718781206}
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders",        "instId": "default"    },    "data": [        {            "accBaseVolume": "0.01",            "cTime": "1695718781129",            "clientOId": "1",            "feeDetail": [                {                    "feeCoin": "USDT",                    "fee": "-0.162003"                }            ],            "fillFee": "-0.162003",            "fillFeeCoin": "USDT",            "fillNotionalUsd": "270.005",            "fillPrice": "27000.5",            "baseVolume": "0.01",            "fillTime": "1695718781146",            "force": "gtc",            "instId": "BTCUSDT",            "leverage": "20",            "marginCoin": "USDT",            "marginMode": "crossed",            "notionalUsd": "270",            "orderId": "1",            "orderType": "market",            "pnl": "0",            "posMode": "hedge_mode",            "posSide": "long",            "price": "0",            "priceAvg": "27000.5",            "reduceOnly": "no",            "stpMode": "cancel_taker",            "side": "buy",            "size": "0.01",            "enterPointSource": "WEB",            "status": "filled",            "tradeScope": "T",            "tradeId": "1111111111",            "tradeSide": "open",            "presetStopSurplusPrice": "21.4",            "totalProfits": "11221.45",            "presetStopLossPrice": "21.5",            "cancelReason": "normal_cancel",            "uTime": "1695718781146"        }    ],    "ts": 1695718781206}
 ```
 
 ### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
@@ -3587,6 +3586,7 @@ Push Data
 | &gt; fillNotionalUsd | String | USD value of filled orders 
 | &gt; priceAvg | String | Average filled price<br>If the filled size is 0, the field is 0; if the order is not filled, the field is also 0; This field will not be pushed if the order is cancelled 
 | &gt; status | String | Order status<br>live: New order, waiting for a match in orderbook<br>partially_filled: Partially filled<br>filled: All filled<br>canceled: the order is cancelled 
+| &gt; cancelReason | String | Cancel reason<br><code>normal_cancel</code> Normal cancel<br><code>stp_cancel</code> Cancelled by STP 
 | &gt; leverage | String | Leverage 
 | &gt; feeDetail | List&lt;Object&gt; | Transaction fee of the order 
 | &gt;&gt; feeCoin | String | The currency of the transaction fee. The margin is charged. 

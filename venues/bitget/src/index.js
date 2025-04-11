@@ -80,7 +80,7 @@ async function convertToMarkdown(configPath) {
         // Read the config file
         const config = JSON.parse(await fs.readFile(configPath, 'utf8'));
         
-        const outputDir = '../../../docs/bitget';
+        const outputDir = '../../docs/bitget';
 
         // Create output directory if it doesn't exist
         await fs.mkdir(outputDir, { recursive: true });

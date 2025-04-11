@@ -104,7 +104,7 @@ curl "https://api.bitget.com/api/v2/spot/public/symbols"
 Response Example
 
 ```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": [        {            "symbol": "BTCUSDT",            "baseCoin": "BTC",            "quoteCoin": "USDT",            "minTradeAmount": "0.0001",            "maxTradeAmount": "10000",            "takerFeeRate": "0.001",            "makerFeeRate": "0.001",            "pricePrecision": "4",            "quantityPrecision": "8",            "quotePrecision":"4",            "minTradeUSDT": "5",            "status": "online",            "buyLimitPriceRatio": "0.05",            "sellLimitPriceRatio": "0.05",            "orderQuantity": "100",            "areaSymbol": "no"        }    ]}
+{  "code": "00000",  "msg": "success",  "requestTime": 1744276707885,  "data": [    {      "symbol": "BTCUSDT",      "baseCoin": "BTC",      "quoteCoin": "USDT",      "minTradeAmount": "0",      "maxTradeAmount": "0",      "takerFeeRate": "0.002",      "makerFeeRate": "0.002",      "pricePrecision": "2",      "quantityPrecision": "6",      "quotePrecision": "8",      "status": "online",      "minTradeUSDT": "1",      "buyLimitPriceRatio": "0.05",      "sellLimitPriceRatio": "0.05",      "areaSymbol": "no",      "orderQuantity": "200",      "openTime": "1532454360000",      "offTime": ""    }  ]}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
@@ -114,8 +114,8 @@ Response Example
 | symbol | String | Trading pair 
 | baseCoin | String | Base currency, e.g. "BTC" in the pair "BTCUSDT". 
 | quoteCoin | String | Quoting currency, e.g. "USDT" in the trading pair "BTCUSDT". 
-| minTradeAmount | String | Minimum order 
-| maxTradeAmount | String | Maximum order 
+| minTradeAmount | String | Minimum order(obsolete)<br>Please refer to <code>minTradeUSDT</code> 
+| maxTradeAmount | String | Maximum order(obsolete)<br>The maximum quantity is generally unlimited 
 | takerFeeRate | String | Default taker transaction fee, can be overridden by individual transaction fee 
 | makerFeeRate | String | Default maker transaction fee, can be overridden by individual transaction fee 
 | pricePrecision | String | Pricing precision 
@@ -126,7 +126,8 @@ Response Example
 | buyLimitPriceRatio | String | Percentage spread between bid and ask, in decimal form<br>E.g. 0.05 means 5% 
 | sellLimitPriceRatio | String | Percentage spread between sell and current price, in decimal form<br>E.g. 0.05 means 5% 
 | orderQuantity | String | The maximum number of orders allowed for the current symbol 
-| areaSymbol | String | Area symbol<br><code>yes</code>, <code>no</code>
+| areaSymbol | String | Area symbol<br><code>yes</code>, <code>no</code> 
+| offTime | String | Symbol off time, e.g: 1744797600000
 
 # Get VIP Fee Rate
 
@@ -469,7 +470,7 @@ curl "https://api.bitget.com/api/v2/spot/market/fills-history?symbol=BTCUSDT&lim
 Response Example
 
 ```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": [        {            "symbol": "BTCUSDT",            "tradeId": "1",            "side": "buy",            "price": "2.38735",            "size": "2470.6224",            "ts": "1622097282536"        },        {            "symbol": "BFTUSDT",            "tradeId": "2",            "side": "sell",            "price": "2.38649",            "size": "3239.7976",            "ts": "1622097280642"        }    ]}
+{  "code": "00000",  "msg": "success",  "requestTime": 1744275754521,  "data": [    {      "symbol": "ETHUSDT",      "tradeId": "1294151170843025500",      "side": "Buy",      "price": "1592.58",      "size": "2.1982",      "ts": "1744275603000"    },    {      "symbol": "ETHUSDT",      "tradeId": "1294151170834636801",      "side": "Sell",      "price": "1592.57",      "size": "0.0045",      "ts": "1744275603000"    }  ]}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
@@ -478,10 +479,10 @@ Response Example
 | :-- | :-- | :-- |
 | symbol | String | Trading pair 
 | tradeId | String | Order ID<br>Descending 
-| side | String | Direction<br>Buy<br>Sell 
+| side | String | Direction<br><code>Buy</code><br><code>Sell</code> 
 | price | String | Order price 
 | size | String | Filled quantity 
-| ts | String | Transaction time, Unix millisecond timestamp, e.g. 1690196141868
+| ts | String | Transaction time(second level)<br>Unix millisecond timestamp, e.g. 1744275603000
 
 # Place Order
 
