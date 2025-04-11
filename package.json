@@ -1,0 +1,15 @@
+{
+  "name": "cryptoapidocs",
+  "version": "1.0.0",
+  "description": "Cryptocurrency exchange API documentation scraper",
+  "scripts": {
+    "scrape:binance": "cd venues/binance && npm run start"
+  },
+  "dependencies": {
+    "puppeteer": "^24.6.1",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "^26.0.0"
+  },
+  "type": "module"
+} 
