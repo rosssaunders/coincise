@@ -356,7 +356,7 @@ Error Code from 50000 to 53999
 | 51155 | 200 | Trading of this pair or contract is restricted due to local compliance requirements. 
 | 51158 | 200 | Manual transfer unavailable. To proceed, please switch to Quick margin mode (isoMode = quick_margin) 
 | 51164 | 200 | As lead trader, you can't switch to portfolio margin mode. 
-| 51169 | 200 | Failed to place order. You don’t have any positions of this contract. Turn off the Reduce-only to continue. 
+| 51169 | 200 | Order failed. You don't have any positions in this contract that can be closed. 
 | 51170 | 200 | Failed to place order. A reduce-only order can’t be the same trading direction as your existing positions. 
 | 51171 | 200 | Failed to edit order. The edited order may execute an opposite trading direction of your existing reduce-only positions. Cancel or edit pending orders to continue. 
 | 51173 | 200 | Unable to close all at market price. Your current positions don't have any liabilities. 
