@@ -20,7 +20,7 @@ echo "Processing Binance documentation..."
 # Process each exchange type
 for exchange in binancespot binanceusdm binancecoinm binanceoptions; do
     echo "Processing $exchange..."
-    node src/main.js process "$exchange"
+    node src/index.js process "$exchange"
 done
 
 echo "Done!" 

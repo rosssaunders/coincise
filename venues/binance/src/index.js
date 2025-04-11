@@ -24,7 +24,7 @@ async function processExchangeDocs(exchange) {
         const outputDir = path.dirname(outputFile);
 
         // Save the file to the root of this repo
-        const rootDir = path.resolve(__dirname, '..', '..', '..', '..', 'docs');
+        const rootDir = path.resolve(__dirname, '..', '..', '..', 'docs');
         outputFile = path.join(rootDir, outputFile);
 
         if (!fs.existsSync(outputDir)) {
