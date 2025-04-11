@@ -1,31 +1,35 @@
 # Exchange TODO List
 
+This file lists the top exchanges based on rankings from CoinMarketCap as of the time of generation, presented in table format. API Documentation links have been added based on search results (please verify). Icon URLs from the ccxt repository have been added where available.
+
+*Note: Icon display depends on the Markdown viewer's ability to render images.*
+
 ## Top 20 Spot Exchanges
 
 Source: https://coinmarketcap.com/rankings/exchanges/
 
 | Rank | Exchange             | API Documentation                                                               | Icon URL | Implemented |
 |------|----------------------|---------------------------------------------------------------------------------|----------|-------------|
-| 1    | Binance              | [API Docs](https://binance-docs.github.io/apidocs/spot/en/)                     | ![Binance](./assets/icons/binancespot.jpg) | ✅ |
-| 2    | Bybit                | [API Docs](https://bybit-exchange.github.io/docs/v5/intro)                      | ![Bybit](../assets/icons/bybit.jpg) | ✅ |
-| 3    | Coinbase Exchange    | [API Docs](https://docs.cdp.coinbase.com/exchange/docs/welcome)                 | ![Coinbase Exchange](../assets/icons/coinbasepro.png) | ✅ |
-| 4    | Upbit                | [API Docs](https://docs.upbit.com/)                                             | ![Upbit](../assets/icons/upbit.png) | ❌ |
-| 5    | OKX                  | [API Docs](https://www.okx.com/docs-v5/en/)                                     | ![OKX](../assets/icons/okx.png) | ✅ |
-| 6    | Bitget               | [API Docs](https://bitgetlimited.github.io/apidoc/en/mix)                       | ![Bitget](../assets/icons/bitget.jpg) | ✅ |
-| 7    | MEXC                 | [API Docs](https://mexcdev.github.io/apidocs/spot_v3_en/)                       | ![MEXC](../assets/icons/mexc.jpg) | ✅ |
-| 8    | Gate.io              | [API Docs](https://www.gate.io/docs/apiv4/en/)                                  | ![Gate.io](../assets/icons/gateio.jpg) | ✅ |
-| 9    | KuCoin               | [API Docs](https://docs.kucoin.com/)                                            | ![KuCoin](../assets/icons/kucoin.png) | ✅ |
-| 10   | Crypto.com Exchange  | [API Docs](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html)     | ![Crypto.com Exchange](../assets/icons/cryptocom.jpg) | ❌ |
-| 11   | Bitfinex             | [API Docs](https://docs.bitfinex.com/docs/introduction)                         | ![Bitfinex](../assets/icons/bitfinex.jpg) | ❌ |
-| 12   | BingX                | [Link]                                                                          | ![BingX](../assets/icons/bingx.png) | ❌ |
-| 13   | Kraken               | [API Docs](https://docs.kraken.com/rest/)                                       | ![Kraken](../assets/icons/kraken.png) | ✅ |
+| 1    | Binance              | [API Docs](https://developers.binance.com/docs/binance-spot-api-docs)                     | <img src="assets/icons/binancespot.png" alt="Binance" height="16" style="vertical-align: middle;"> | ✅ |
+| 2    | Bybit                | [API Docs](https://bybit-exchange.github.io/docs/v5/intro)                      | <img src="assets/icons/bybit.png" alt="Bybit" height="16" style="vertical-align: middle;"> | ✅ |
+| 3    | Coinbase Exchange    | [API Docs](https://docs.cdp.coinbase.com/exchange/docs/welcome)                 | <img src="assets/icons/coinbasepro.png" alt="Coinbase Exchange" height="16" style="vertical-align: middle;"> | ✅ |
+| 4    | Upbit                | [API Docs](https://docs.upbit.com/)                                             | <img src="assets/icons/upbit.png" alt="Upbit" height="16" style="vertical-align: middle;"> | ❌ |
+| 5    | OKX                  | [API Docs](https://www.okx.com/docs-v5/en/)                                     | <img src="assets/icons/okx.png" alt="OKX" height="16" style="vertical-align: middle;"> | ✅ |
+| 6    | Bitget               | [API Docs](https://bitgetlimited.github.io/apidoc/en/mix)                       | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | ✅ |
+| 7    | MEXC                 | [API Docs](https://mexcdev.github.io/apidocs/spot_v3_en/)                       | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | ✅ |
+| 8    | Gate.io              | [API Docs](https://www.gate.io/docs/apiv4/en/)                                  | <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | ✅ |
+| 9    | KuCoin               | [API Docs](https://docs.kucoin.com/)                                            | <img src="assets/icons/kucoin.png" alt="KuCoin" height="16" style="vertical-align: middle;"> | ✅ |
+| 10   | Crypto.com Exchange  | [API Docs](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html)     | <img src="assets/icons/cryptocom.png" alt="Crypto.com Exchange" height="16" style="vertical-align: middle;"> | ❌ |
+| 11   | Bitfinex             | [API Docs](https://docs.bitfinex.com/docs/introduction)                         | <img src="assets/icons/bitfinex.png" alt="Bitfinex" height="16" style="vertical-align: middle;"> | ❌ |
+| 12   | BingX                | [Link]                                                                          | <img src="assets/icons/bingx.png" alt="BingX" height="16" style="vertical-align: middle;"> | ❌ |
+| 13   | Kraken               | [API Docs](https://docs.kraken.com/rest/)                                       | <img src="assets/icons/kraken.png" alt="Kraken" height="16" style="vertical-align: middle;"> | ✅ |
 | 14   | Binance TR           | [Link]                                                                          | [Icon]   | ❌ |
-| 15   | HTX                  | [API Docs](https://huobiapi.github.io/docs/spot/v1/en/)                         | ![HTX](../assets/icons/htx.jpg) | ✅ |
-| 16   | BitMart              | [Link]                                                                          | ![BitMart](../assets/icons/bitmart.png) | ❌ |
-| 17   | LBank                | [Link]                                                                          | ![LBank](../assets/icons/lbank.png) | ❌ |
-| 18   | Bitstamp             | [API Docs](https://www.bitstamp.net/api/)                                       | ![Bitstamp](../assets/icons/bitstamp.png) | ❌ |
-| 19   | Bithumb              | [API Docs](https://apidocs.bithumb.com/)                                        | ![Bithumb](../assets/icons/bithumb.png) | ❌ |
-| 20   | XT.COM               | [Link]                                                                          | ![XT.COM](../assets/icons/xt.jpg) | ❌ |
+| 15   | HTX                  | [API Docs](https://huobiapi.github.io/docs/spot/v1/en/)                         | <img src="assets/icons/htx.png" alt="HTX" height="16" style="vertical-align: middle;"> | ✅ |
+| 16   | BitMart              | [Link]                                                                          | <img src="assets/icons/bitmart.png" alt="BitMart" height="16" style="vertical-align: middle;"> | ❌ |
+| 17   | LBank                | [Link]                                                                          | <img src="assets/icons/lbank.png" alt="LBank" height="16" style="vertical-align: middle;"> | ❌ |
+| 18   | Bitstamp             | [API Docs](https://www.bitstamp.net/api/)                                       | <img src="assets/icons/bitstamp.png" alt="Bitstamp" height="16" style="vertical-align: middle;"> | ❌ |
+| 19   | Bithumb              | [API Docs](https://apidocs.bithumb.com/)                                        | <img src="assets/icons/bithumb.png" alt="Bithumb" height="16" style="vertical-align: middle;"> | ❌ |
+| 20   | XT.COM               | [Link]                                                                          | <img src="assets/icons/xt.png" alt="XT.COM" height="16" style="vertical-align: middle;"> | ❌ |
 
 ## Top 20 Derivatives Exchanges
 
@@ -33,26 +37,26 @@ Source: https://coinmarketcap.com/rankings/exchanges/derivatives/
 
 | Rank | Exchange             | API Documentation                                                               | Icon URL | Implemented |
 |------|----------------------|---------------------------------------------------------------------------------|----------|-------------|
-| 1    | Binance              | [API Docs](https://binance-docs.github.io/apidocs/futures/en/)                  | ![Binance](../assets/icons/binance.jpg) | ✅ |
-| 2    | OKX                  | [API Docs](https://www.okx.com/docs-v5/en/)                                     | ![OKX](../assets/icons/okx.png) | ✅ |
-| 3    | Bybit                | [API Docs](https://bybit-exchange.github.io/docs/v5/intro)                      | ![Bybit](../assets/icons/bybit.jpg) | ✅ |
-| 4    | Bitget               | [API Docs](https://bitgetlimited.github.io/apidoc/en/mix)                       | ![Bitget](../assets/icons/bitget.jpg) | ✅ |
-| 5    | Deribit              | [API Docs](https://docs.deribit.com/)                                           | ![Deribit](../assets/icons/deribit.png) | ✅ |
-| 6    | XT.COM               | [Link]                                                                          | ![XT.COM](../assets/icons/xt.jpg) | ❌ |
-| 7    | Kraken               | [API Docs](https://docs.kraken.com/rest/)                                       | ![Kraken](../assets/icons/kraken.png) | ✅ |
-| 8    | Deepcoin             | [Link]                                                                          | ![Deepcoin](../assets/icons/deepcoin.png) | ❌ |
-| 9    | KuCoin               | [API Docs](https://docs.kucoin.com/)                                            | ![KuCoin](../assets/icons/kucoin.png) | ✅ |
-| 10   | MEXC                 | [API Docs](https://mexcdev.github.io/apidocs/contract_v1_en/)                   | ![MEXC](../assets/icons/mexc.jpg) | ✅ |
-| 11   | Bitfinex             | [API Docs](https://docs.bitfinex.com/docs/introduction)                         | ![Bitfinex](../assets/icons/bitfinex.jpg) | ❌ |
-| 12   | Gate.io              | [API Docs](https://www.gate.io/docs/apiv4/en/)                                  | ![Gate.io](../assets/icons/gateio.jpg) | ✅ |
-| 13   | BitMart              | [Link]                                                                          | ![BitMart](../assets/icons/bitmart.png) | ❌ |
-| 14   | Gemini               | [Link]                                                                          | ![Gemini](../assets/icons/gemini.png) | ❌ |
-| 15   | Crypto.com Exchange  | [API Docs](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html)     | ![Crypto.com Exchange](../assets/icons/cryptocom.jpg) | ❌ |
-| 16   | HTX                  | [API Docs](https://huobiapi.github.io/docs/dm/v1/en/)                           | ![HTX](../assets/icons/htx.jpg) | ✅ |
-| 17   | bitFlyer             | [Link]                                                                          | ![bitFlyer](../assets/icons/bitflyer.jpg) | ❌ |
-| 18   | BingX                | [Link]                                                                          | ![BingX](../assets/icons/bingx.png) | ❌ |
-| 19   | LBank                | [Link]                                                                          | ![LBank](../assets/icons/lbank.png) | ❌ |
-| 20   | DigiFinex            | [Link]                                                                          | ![DigiFinex](../assets/icons/digifinex.png) | ❌ |
+| 1    | Binance              | [API Docs](https://developers.binance.com/docs/derivatives/Introduction)                  | <img src="assets/icons/binancefutures.png" alt="Binance" height="16" style="vertical-align: middle;"> | ✅ |
+| 2    | OKX                  | [API Docs](https://www.okx.com/docs-v5/en/)                                     | <img src="assets/icons/okx.png" alt="OKX" height="16" style="vertical-align: middle;"> | ✅ |
+| 3    | Bybit                | [API Docs](https://bybit-exchange.github.io/docs/v5/intro)                      | <img src="assets/icons/bybit.png" alt="Bybit" height="16" style="vertical-align: middle;"> | ✅ |
+| 4    | Bitget               | [API Docs](https://bitgetlimited.github.io/apidoc/en/mix)                       | <img src="assets/icons/bitget.png" alt="Bitget" height="16" style="vertical-align: middle;"> | ✅ |
+| 5    | Deribit              | [API Docs](https://docs.deribit.com/)                                           | <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;"> | ✅ |
+| 6    | XT.COM               | [Link]                                                                          | <img src="assets/icons/xt.png" alt="XT.COM" height="16" style="vertical-align: middle;"> | ❌ |
+| 7    | Kraken               | [API Docs](https://docs.kraken.com/rest/)                                       | <img src="assets/icons/kraken.png" alt="Kraken" height="16" style="vertical-align: middle;"> | ✅ |
+| 8    | Deepcoin             | [Link]                                                                          | <img src="assets/icons/deepcoin.png" alt="Deepcoin" height="16" style="vertical-align: middle;"> | ❌ |
+| 9    | KuCoin               | [API Docs](https://docs.kucoin.com/)                                            | <img src="assets/icons/kucoin.png" alt="KuCoin" height="16" style="vertical-align: middle;"> | ✅ |
+| 10   | MEXC                 | [API Docs](https://mexcdev.github.io/apidocs/contract_v1_en/)                   | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;"> | ✅ |
+| 11   | Bitfinex             | [API Docs](https://docs.bitfinex.com/docs/introduction)                         | <img src="assets/icons/bitfinex.png" alt="Bitfinex" height="16" style="vertical-align: middle;"> | ❌ |
+| 12   | Gate.io              | [API Docs](https://www.gate.io/docs/apiv4/en/)                                  | <img src="assets/icons/gateio.png" alt="Gate.io" height="16" style="vertical-align: middle;"> | ✅ |
+| 13   | BitMart              | [Link]                                                                          | <img src="assets/icons/bitmart.png" alt="BitMart" height="16" style="vertical-align: middle;"> | ❌ |
+| 14   | Gemini               | [Link]                                                                          | <img src="assets/icons/gemini.png" alt="Gemini" height="16" style="vertical-align: middle;"> | ❌ |
+| 15   | Crypto.com Exchange  | [API Docs](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html)     | <img src="assets/icons/cryptocom.png" alt="Crypto.com Exchange" height="16" style="vertical-align: middle;"> | ❌ |
+| 16   | HTX                  | [API Docs](https://huobiapi.github.io/docs/dm/v1/en/)                           | <img src="assets/icons/htx.png" alt="HTX" height="16" style="vertical-align: middle;"> | ✅ |
+| 17   | bitFlyer             | [Link]                                                                          | <img src="assets/icons/bitflyer.png" alt="bitFlyer" height="16" style="vertical-align: middle;"> | ❌ |
+| 18   | BingX                | [Link]                                                                          | <img src="assets/icons/bingx.png" alt="BingX" height="16" style="vertical-align: middle;"> | ❌ |
+| 19   | LBank                | [Link]                                                                          | <img src="assets/icons/lbank.png" alt="LBank" height="16" style="vertical-align: middle;"> | ❌ |
+| 20   | DigiFinex            | [Link]                                                                          | <img src="assets/icons/digifinex.png" alt="DigiFinex" height="16" style="vertical-align: middle;"> | ❌ |
 
 ## Top 20 DEX Spot Exchanges
 
@@ -61,25 +65,25 @@ Source: https://coinmarketcap.com/rankings/exchanges/dex/?type=spot
 | Rank | Exchange                | API Documentation                               | Icon URL | Implemented |
 |------|-------------------------|-------------------------------------------------|----------|-------------|
 | 1    | Hyperliquid             | [Link]                                          | [Icon]   | ❌ |
-| 2    | OpenOcean               | [Link]                                          | ![OpenOcean](../assets/icons/openocean.png) | ❌ |
-| 3    | Uniswap v3 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | ![Uniswap v3 (Ethereum)](../assets/icons/uniswap.png) | ❌ |
-| 4    | Raydium (CLMM)          | [Link]                                          | ![Raydium (CLMM)](../assets/icons/raydium.png) | ❌ |
-| 5    | Uniswap v3 (Arbitrum)   | [API Docs](https://docs.uniswap.org/)           | ![Uniswap v3 (Arbitrum)](../assets/icons/uniswap.png) | ❌ |
-| 6    | Orca                    | [Link]                                          | ![Orca](../assets/icons/orca.png) | ❌ |
+| 2    | OpenOcean               | [Link]                                          | <img src="assets/icons/openocean.png" alt="OpenOcean" height="16" style="vertical-align: middle;"> | ❌ |
+| 3    | Uniswap v3 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | <img src="assets/icons/uniswap.png" alt="Uniswap v3 (Ethereum)" height="16" style="vertical-align: middle;"> | ❌ |
+| 4    | Raydium (CLMM)          | [Link]                                          | <img src="assets/icons/raydium.png" alt="Raydium (CLMM)" height="16" style="vertical-align: middle;"> | ❌ |
+| 5    | Uniswap v3 (Arbitrum)   | [API Docs](https://docs.uniswap.org/)           | <img src="assets/icons/uniswap.png" alt="Uniswap v3 (Arbitrum)" height="16" style="vertical-align: middle;"> | ❌ |
+| 6    | Orca                    | [Link]                                          | <img src="assets/icons/orca.png" alt="Orca" height="16" style="vertical-align: middle;"> | ❌ |
 | 7    | Aerodrome SlipStream    | [Link]                                          | [Icon]   | ❌ |
 | 8    | Meteora VD              | [Link]                                          | [Icon]   | ❌ |
-| 9    | Uniswap v4 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | ![Uniswap v4 (Ethereum)](../assets/icons/uniswap.png) | ❌ |
+| 9    | Uniswap v4 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | <img src="assets/icons/uniswap.png" alt="Uniswap v4 (Ethereum)" height="16" style="vertical-align: middle;"> | ❌ |
 | 10   | SynFutures v3           | [Link]                                          | [Icon]   | ❌ |
 | 11   | Kine Protocol (Polygon) | [Link]                                          | [Icon]   | ❌ |
 | 12   | Vertex Protocol         | [Link]                                          | [Icon]   | ❌ |
 | 13   | PumpSwap                | [Link]                                          | [Icon]   | ❌ |
-| 14   | PancakeSwap v3 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | ![PancakeSwap v3 (BSC)](../assets/icons/pancakeswap.png) | ❌ |
-| 15   | Curve (Ethereum)        | [API Docs](https://docs.curve.fi/)              | ![Curve (Ethereum)](../assets/icons/curve.png) | ❌ |
+| 14   | PancakeSwap v3 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | <img src="assets/icons/pancakeswap.png" alt="PancakeSwap v3 (BSC)" height="16" style="vertical-align: middle;"> | ❌ |
+| 15   | Curve (Ethereum)        | [API Docs](https://docs.curve.fi/)              | <img src="assets/icons/curve.png" alt="Curve (Ethereum)" height="16" style="vertical-align: middle;"> | ❌ |
 | 16   | Aster Simple (BSC)      | [Link]                                          | [Icon]   | ❌ |
-| 17   | PancakeSwap v2 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | ![PancakeSwap v2 (BSC)](../assets/icons/pancakeswap.png) | ❌ |
+| 17   | PancakeSwap v2 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | <img src="assets/icons/pancakeswap.png" alt="PancakeSwap v2 (BSC)" height="16" style="vertical-align: middle;"> | ❌ |
 | 18   | RabbitX                 | [Link]                                          | [Icon]   | ❌ |
-| 19   | dYdX v4                 | [Link]                                          | ![dYdX v4](../assets/icons/dydx.png) | ❌ |
-| 20   | Raydium                 | [Link]                                          | ![Raydium](../assets/icons/raydium.png) | ❌ |
+| 19   | dYdX v4                 | [Link]                                          | <img src="assets/icons/dydx.png" alt="dYdX v4" height="16" style="vertical-align: middle;"> | ❌ |
+| 20   | Raydium                 | [Link]                                          | <img src="assets/icons/raydium.png" alt="Raydium" height="16" style="vertical-align: middle;"> | ❌ |
 
 ## Top 20 DEX Derivatives Exchanges
 
@@ -90,25 +94,25 @@ Source: https://coinmarketcap.com/rankings/exchanges/dex/?type=derivatives
 | Rank | Exchange                | API Documentation                               | Icon URL | Implemented |
 |------|-------------------------|-------------------------------------------------|----------|-------------|
 | 1    | Hyperliquid             | [Link]                                          | [Icon]   | ❌ |
-| 2    | OpenOcean               | [Link]                                          | ![OpenOcean](../assets/icons/openocean.png) | ❌ |
-| 3    | Uniswap v3 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | ![Uniswap v3 (Ethereum)](../assets/icons/uniswap.png) | ❌ |
-| 4    | Raydium (CLMM)          | [Link]                                          | ![Raydium (CLMM)](../assets/icons/raydium.png) | ❌ |
-| 5    | Uniswap v3 (Arbitrum)   | [API Docs](https://docs.uniswap.org/)           | ![Uniswap v3 (Arbitrum)](../assets/icons/uniswap.png) | ❌ |
-| 6    | Orca                    | [Link]                                          | ![Orca](../assets/icons/orca.png) | ❌ |
+| 2    | OpenOcean               | [Link]                                          | <img src="assets/icons/openocean.png" alt="OpenOcean" height="16" style="vertical-align: middle;"> | ❌ |
+| 3    | Uniswap v3 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | <img src="assets/icons/uniswap.png" alt="Uniswap v3 (Ethereum)" height="16" style="vertical-align: middle;"> | ❌ |
+| 4    | Raydium (CLMM)          | [Link]                                          | <img src="assets/icons/raydium.png" alt="Raydium (CLMM)" height="16" style="vertical-align: middle;"> | ❌ |
+| 5    | Uniswap v3 (Arbitrum)   | [API Docs](https://docs.uniswap.org/)           | <img src="assets/icons/uniswap.png" alt="Uniswap v3 (Arbitrum)" height="16" style="vertical-align: middle;"> | ❌ |
+| 6    | Orca                    | [Link]                                          | <img src="assets/icons/orca.png" alt="Orca" height="16" style="vertical-align: middle;"> | ❌ |
 | 7    | Aerodrome SlipStream    | [Link]                                          | [Icon]   | ❌ |
 | 8    | Meteora VD              | [Link]                                          | [Icon]   | ❌ |
-| 9    | Uniswap v4 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | ![Uniswap v4 (Ethereum)](../assets/icons/uniswap.png) | ❌ |
+| 9    | Uniswap v4 (Ethereum)   | [API Docs](https://docs.uniswap.org/)           | <img src="assets/icons/uniswap.png" alt="Uniswap v4 (Ethereum)" height="16" style="vertical-align: middle;"> | ❌ |
 | 10   | SynFutures v3           | [Link]                                          | [Icon]   | ❌ |
 | 11   | Kine Protocol (Polygon) | [Link]                                          | [Icon]   | ❌ |
 | 12   | Vertex Protocol         | [Link]                                          | [Icon]   | ❌ |
 | 13   | PumpSwap                | [Link]                                          | [Icon]   | ❌ |
-| 14   | PancakeSwap v3 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | ![PancakeSwap v3 (BSC)](../assets/icons/pancakeswap.png) | ❌ |
-| 15   | Curve (Ethereum)        | [API Docs](https://docs.curve.fi/)              | ![Curve (Ethereum)](../assets/icons/curve.png) | ❌ |
+| 14   | PancakeSwap v3 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | <img src="assets/icons/pancakeswap.png" alt="PancakeSwap v3 (BSC)" height="16" style="vertical-align: middle;"> | ❌ |
+| 15   | Curve (Ethereum)        | [API Docs](https://docs.curve.fi/)              | <img src="assets/icons/curve.png" alt="Curve (Ethereum)" height="16" style="vertical-align: middle;"> | ❌ |
 | 16   | Aster Simple (BSC)      | [Link]                                          | [Icon]   | ❌ |
-| 17   | PancakeSwap v2 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | ![PancakeSwap v2 (BSC)](../assets/icons/pancakeswap.png) | ❌ |
+| 17   | PancakeSwap v2 (BSC)    | [API Docs](https://docs.pancakeswap.finance/)   | <img src="assets/icons/pancakeswap.png" alt="PancakeSwap v2 (BSC)" height="16" style="vertical-align: middle;"> | ❌ |
 | 18   | RabbitX                 | [Link]                                          | [Icon]   | ❌ |
-| 19   | dYdX v4                 | [Link]                                          | ![dYdX v4](../assets/icons/dydx.png) | ❌ |
-| 20   | Raydium                 | [Link]                                          | ![Raydium](../assets/icons/raydium.png) | ❌ |
+| 19   | dYdX v4                 | [Link]                                          | <img src="assets/icons/dydx.png" alt="dYdX v4" height="16" style="vertical-align: middle;"> | ❌ |
+| 20   | Raydium                 | [Link]                                          | <img src="assets/icons/raydium.png" alt="Raydium" height="16" style="vertical-align: middle;"> | ❌ |
 
 ## Top Lending Exchanges
 
@@ -118,4 +122,4 @@ Source: https://coinmarketcap.com/rankings/exchanges/lending/
 
 | Rank | Exchange | API Documentation                     | Icon URL | Implemented |
 |------|----------|---------------------------------------|----------|-------------|
-| 1    | Venus    | [API Docs](https://docs.venus.io/)    | ![Venus](../assets/icons/venus.png) | ❌ |
+| 1    | Venus    | [API Docs](https://docs.venus.io/)    | <img src="assets/icons/venus.png" alt="Venus" height="16" style="vertical-align: middle;"> | ❌ |
