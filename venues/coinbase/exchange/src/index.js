@@ -3,10 +3,9 @@
  * CLI for the Coinbase Exchange API documentation scraper
  */
 
-const fs = require('fs');
-const path = require('path');
-const { scrapeApiDocumentation } = require('./scraper');
-const { processAuthSection, processRequestParams } = require('./formatters');
+import fs from 'fs';
+import { scrapeApiDocumentation } from './scraper.js';
+import { processAuthSection, processRequestParams } from './processors/formatters.js';
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -47,15 +46,6 @@ const main = async () => {
     } 
     else if (command === 'convert-auth' && args[1]) {
       try {
-        // Install jsdom if not already installed
-        try {
-          require('jsdom');
-        } catch (e) {
-          console.log('Installing jsdom...');
-          const { execSync } = require('child_process');
-          execSync('npm install jsdom');
-        }
-        
         const inputFile = args[1];
         const outputFile = args[2];
         
@@ -81,15 +71,6 @@ const main = async () => {
     } 
     else if (command === 'convert-params' && args[1]) {
       try {
-        // Install jsdom if not already installed
-        try {
-          require('jsdom');
-        } catch (e) {
-          console.log('Installing jsdom...');
-          const { execSync } = require('child_process');
-          execSync('npm install jsdom');
-        }
-        
         const inputFile = args[1];
         const outputFile = args[2];
         
@@ -129,12 +110,9 @@ main().catch(error => {
   process.exit(1);
 });
 
-// If this file is being executed directly
-if (require.main === module) {
-  // Make CLI executable
-}
-
 // Export the main functionality for use as a module
-module.exports = {
-  scrapeApiDocumentation
+export { 
+  scrapeApiDocumentation, 
+  processAuthSection, 
+  processRequestParams 
 }; 

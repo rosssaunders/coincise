@@ -3,7 +3,9 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { processRequestParams } = require('./formatters');
+const { scrapeApiDocumentation } = require('../../src/coinbase/exchange/scraper');
+const { processAuthSection, processRequestParams } = require('../../src/processors/formatters');
+const { generateMarkdownDocument } = require('../../src/processors/formatters');
 
 // Sample HTML content (replace with your sample if needed)
 const sampleHtml = `

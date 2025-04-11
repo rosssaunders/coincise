@@ -99,7 +99,7 @@ for i in $(seq 0 $(($URL_COUNT - 1))); do
   echo "Output file: $OUTPUT_PATH"
   
   # Run the scraper
-  node index.js scrape "$URL" "$OUTPUT_PATH"
+  node src/index.js scrape "$URL" "$OUTPUT_PATH"
   
   # Check if scraping was successful
   if [ $? -eq 0 ]; then

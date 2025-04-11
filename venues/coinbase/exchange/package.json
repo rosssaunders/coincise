@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Scraper for Coinbase Exchange API documentation with markdown output",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "scrape": "node index.js scrape",
+    "start": "node src/index.js",
+    "scrape": "node src/index.js scrape",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -19,8 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "jsdom": "26.0.0",
-    "puppeteer": "24.4.0",
-    "turndown": "7.0.0"
+    "puppeteer": "24.6.1",
+    "turndown": "7.2.0"
   },
   "bin": {
     "coinbase-scraper": "./index.js"
