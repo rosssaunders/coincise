@@ -4,22 +4,21 @@
 Each extraction project must follow this directory structure:
 ```
 project-name/
+├── config/ # Configuration files
 ├── src/
 │   ├── index.js           # Entry point
-│   ├── types.js          # Type definitions
-│   ├── config/           # Configuration files
+│   ├── types.js          # Type definitions     
 │   ├── processors/       # Data processing modules
 │   ├── utils/           # Utility functions
 │   └── [api-name]/      # API-specific modules
 ├── package.json
 ├── package-lock.json
 └── README.md
-└── run.sh # Runs ALL the doc generators for this venue
 ```
 
 ## Dependencies
 Required dependencies for all extraction projects:
-- puppeteer: ^24.6.0
+- puppeteer: ^24.6.1
 - turndown: ^7.1.2
 - turndown-plugin-gfm: ^1.0.2
 - jsdom: ^26.0.0

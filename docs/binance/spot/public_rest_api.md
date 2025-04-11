@@ -423,7 +423,7 @@ STP Modes[​](/docs/binance-spot-api-docs/enums#stp-modes "Direct link to STP M
 Error codes for Binance
 =======================
 
-**Last Updated: 2025-04-07**
+**Last Updated: 2025-04-08**
 
 Errors consist of two parts: an error code and a message. Codes are universal, but messages can vary. Here is the error JSON payload:
 
@@ -501,7 +501,9 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 ### \-1034 TOO\_MANY\_CONNECTIONS[​](/docs/binance-spot-api-docs/errors#-1034-too_many_connections "Direct link to -1034 TOO_MANY_CONNECTIONS")
 
-*   Too many concurrent connections; current limit is '%d'.
+*   Too many concurrent connections; current limit is '%s'.
+*   Too many connection attempts for account; current limit is %s per '%s'.
+*   Too many connection attempts from IP; current limit is %s per '%s'.
 
 ### \-1035 LOGGED\_OUT[​](/docs/binance-spot-api-docs/errors#-1035-logged_out "Direct link to -1035 LOGGED_OUT")
 
@@ -613,7 +615,7 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 *   Combination of optional parameters invalid.
 *   Combination of optional fields invalid. Recommendation: '%s' and '%s' must both be sent.
 *   Fields \[%s\] must be sent together or omitted entirely.
-*   Invalid 'MDEntryType (269)' combination. BID and OFFER must be requested together.
+*   Invalid `MDEntryType (269)` combination. BID and OFFER must be requested together.
 
 ### \-1130 INVALID\_PARAMETER[​](/docs/binance-spot-api-docs/errors#-1130-invalid_parameter "Direct link to -1130 INVALID_PARAMETER")
 
@@ -771,8 +773,8 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 ### \-1190 INVALID\_REQUEST\_ID[​](/docs/binance-spot-api-docs/errors#-1190-invalid_request_id "Direct link to -1190 INVALID_REQUEST_ID")
 
-*   'MDReqID (262)' contains a subscription request id that is already in use on this connection.
-*   'MDReqID (262)' contains an unsubscription request id that does not match any active subscription.
+*   `MDReqID (262)` contains a subscription request id that is already in use on this connection.
+*   `MDReqID (262)` contains an unsubscription request id that does not match any active subscription.
 
 ### \-1191 TOO\_MANY\_SUBSCRIPTIONS[​](/docs/binance-spot-api-docs/errors#-1191-too_many_subscriptions "Direct link to -1191 TOO_MANY_SUBSCRIPTIONS")
 
@@ -827,8 +829,12 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 *   Order was canceled or expired with no executed qty over 90 days ago and has been archived.
 
-Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, and -2011 CANCEL\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected-and--2011-cancel_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, and -2011 CANCEL_REJECTED")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### \-2039 CLIENT\_ORDER\_ID\_INVALID[​](/docs/binance-spot-api-docs/errors#-2039-client_order_id_invalid "Direct link to -2039 CLIENT_ORDER_ID_INVALID")
+
+*   Client order ID is not correct for this order ID.
+
+Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, -2011 CANCEL\_REJECTED, and -2038 ORDER\_AMEND\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected--2011-cancel_rejected-and--2038-order_amend_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, -2011 CANCEL_REJECTED, and -2038 ORDER_AMEND_REJECTED")
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This code is sent when an error has been returned by the matching engine. The following messages which will indicate the specific error:
 

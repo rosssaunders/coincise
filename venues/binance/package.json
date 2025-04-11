@@ -5,7 +5,7 @@
   "type": "module",
   "main": "src/main.js",
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node src/index.js process binancespot && node src/index.js process binanceusdm && node src/index.js process binancecoinm && node src/index.js process binanceoptions",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "24.6.0",
+    "puppeteer": "24.6.1",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2",
     "jsdom": "26.0.0"
