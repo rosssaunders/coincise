@@ -9,17 +9,17 @@ run_scraper() {
         exit 1
     fi
     echo "Completed $1 successfully"
-    echo "----------------------------------------"
+    echo "-------------------------------------------"
 }
 
 # Run each scraper in sequence
 scrapers=(
-    "rest_api.js"
-    "websocket_spot_api.js"
-    "websocket_futures_docs.js"
-    "websocket_perps_api.js"
-    "websocket_options_api.js"
-    "websocket_unified_api.js"
+    "src/rest_api.js"
+    "src/websocket_spot_api.js"
+    "src/websocket_futures_docs.js"
+    "src/websocket_perps_api.js"
+    "src/websocket_options_api.js"
+    "src/websocket_unified_api.js"
 )
 
 for scraper in "${scrapers[@]}"; do

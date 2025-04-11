@@ -230,11 +230,24 @@ func main() {
 }
 ```
 
+2025-03-24
+
+*   Fixed the incorrect descriptions in some documents of the order\_book channel.
+*   Fixed the incorrect descriptions in some documents of the orders channel.
+
+2025-03-21
+
+*   The documentation for channel `futures.orders` has been updated, with new explanations added for fields such as `update_id`, `update_time`, `biz_info`, `stop_profit_price`, `stop_loss_price`.
+
 2025-03-12
 
 *   Add new field `contract` in channel `contract_stats`
 *   Updated the Futures Account Trade module and added the `x-gate-exptime` field
 *   Fixed some descriptive errors in the Futures Account Trade documentation
+
+2025-02-19
+
+*   Added channel `futures.public_liquidates` to push liquidate orders snapshot
 
 2025-02-10
 
@@ -796,7 +809,7 @@ Receiving order book update through `futures.order_book` is not recommended to u
 
 How to maintain local order book:
 
-1.  Subscribe `futures.order_book_update` with specified level and update frequency, e.g. `["BTC_USDT", "100ms", "100"]` pushes the first 10 levels' update in BTC\_USDT order book every 1s
+1.  Subscribe `futures.order_book_update` with specified level and update frequency, e.g. `["BTC_USDT", "100ms", "100"]` pushes the first 100 levels' update in BTC\_USDT order book every 100ms
 2.  Cache WebSocket notifications. Every notification use `U` and `u` to tell the first and last update ID since last notification.
 3.  Retrieve base order book using REST API, and make sure the order book ID is recorded(referred as `baseID` below) e.g. `https://api.gateio.ws/api/v4/futures/usdt/order_book?contract=BTC_USDT&limit=10&with_id=true` retrieves the 10-level base order book of BTC\_USDT
 4.  Iterate the cached WebSocket notifications, and find the first one which contains the baseID, i.e. `U <= baseId+1` and `u >= baseId+1`, then start consuming from it. Note that sizes in notifications are all absolute values. Use them to replace original sizes in corresponding price. If size equals to 0, delete the price from the order book.
@@ -1372,6 +1385,147 @@ The above command returns JSON structured like this:
     `unsubscribe`
     
 
+# [#](#public-liquidates-order-api) public liquidates order API
+
+**Provide a way to receive Gate liquidate order information, and each contract can push up to one liquidate order data every 1 second**
+
+## [#](#public-liquidate-order-subscription) public liquidate order subscription
+
+If you want to subscribe to liquidates order push in all contracts, use `!all` in the subscription request list
+
+```python
+import json
+from websocket import create_connection
+
+ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
+req = {
+    "time": 123456,
+    "channel": "futures.public_liquidates",
+    "event": "subscribe",
+    "payload": ["BTC_USD","ETH_USD"],
+}
+ws.send(json.dumps(req))
+print(ws.recv())
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+    "time": 1545459681,
+    "time_ms": 1545459681123,
+    "channel": "futures.public_liquidates",
+    "event": "subscribe",
+    "result": {
+    "status": "success"
+    }
+}
+```
+
+**public liquidates order notify**
+
+### [#](#request-parameters) request parameters
+
+*   channel
+    
+    `futures.public_liquidates`
+    
+*   event `subscribe`
+    
+- params
+  
+  | name | type | required | describe |
+  | --- | --- | --- | --- |
+  | contract | String | yes | contract list |
+
+## [#](#public-liquidate-order-notification) public liquidate order notification
+
+```json
+{
+    "channel": "futures.public_liquidates",
+    "event": "update",
+    "time": 1541505434,
+    "time_ms": 1541505434123,
+    "result": [
+        {
+        "price": 215.1,
+        "size": -124,
+        "time_ms": 1541486601123,
+        "contract": "BTC_USD",
+        }
+    ]
+}
+```
+
+**Push public liquidate order updates**
+
+### [#](#notify-params) Notify params
+
+*   channel
+    
+    `futures.public_liquidates`
+    
+*   event
+    
+    `update`
+    
+- params
+  
+  | name | type | describe |
+  | --- | --- | --- |
+  | result | Array | Array of objects |
+  
+  | parameter | type | description |
+  | --- | --- | --- |
+  | price | Float | order price |
+  | size | Integer | liquidate order quantity |
+  | time_ms | Integer | time_in_milliseconds |
+  | contract | String | contract |
+
+## [#](#cancel-subscription-4) Cancel subscription
+
+```python
+import json
+from websocket import create_connection
+
+ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
+req = {
+    "time": 123456,
+    "channel": "futures.public_liquidates",
+    "event": "unsubscribe",
+    "payload": ["BTC_USD"],
+}
+ws.send(json.dumps(req))
+print(ws.recv())
+```
+
+The above command returns the JSON structure as follows：
+
+```json
+{
+    "time": 1545459681,
+    "time_ms": 1545459681123,
+    "channel": "futures.public_liquidates",
+    "event": "unsubscribe",
+    "result": {
+    "status": "success"
+    }
+}
+```
+
+**public liquidate order Unsubscribe**
+
+### [#](#params) params
+
+*   channel
+    
+    `futures.public_liquidates`
+    
+*   event
+    
+    `unsubscribe`
+    
+
 # [#](#contract-stats-api) Contract Stats API
 
 **The contract\_stats channel allows you to obtain contract statistics.**
@@ -1486,7 +1640,7 @@ The above command returns JSON structured like this:
   | top_lsr_account | Float | Top trader long/short account ratio |
   | top_lsr_size | Float | Top trader long/short position ratio |
 
-## [#](#cancel-subscription-4) Cancel subscription
+## [#](#cancel-subscription-5) Cancel subscription
 
 ```python
 import json
@@ -1635,7 +1789,11 @@ The above command returns JSON structured like this:
       "text": "-",
       "tif": "gtc",
       "tkfr": 0.0005,
-      "user": "110xxxxx"
+      "user": "110xxxxx",
+      "update_id": 1,
+      "update_time": 1541505434123,
+      "stop_loss_price": "",
+      "stop_profit_price": ""
     }
   ]
 }
@@ -1682,15 +1840,20 @@ The above command returns JSON structured like this:
   | size | Integer | Order size. Specify positive number to make a bid, and negative number to ask |
   | text | String | User defined information. |
   | tif | String | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee- fok: FillOrKill, fill either completely or noneOnly ioc and fok are supported when type=market |
-  | finish_time | Integer | Order update unix timestamp in seconds |
-  | finish_time_ms | Integer | Order update unix timestamp in milliseconds |
+  | finish_time | Integer | Order finished unix timestamp in seconds. For unfinished orders, this field returns a value of 0. |
+  | finish_time_ms | Integer | Order finished unix timestamp in milliseconds. For unfinished orders, this field returns a value of 0. |
   | user | String | User ID |
   | contract | String | Futures contract |
   | stp_id | String | Orders between users in the same stp_id group are not allowed to be self-traded1. If the stp_id of two orders being matched is non-zero and equal, they will not be executed. Instead, the corresponding strategy will be executed based on the stp_act of the taker.2. stp_id returns 0 by default for orders that have not been set for STP group |
   | stp_act | String | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies1. After users join the STP Group, he can pass stp_act to limit the user's self-trade prevetion strategy. If stp_act is not passed, the default is cn strategy。2. When the user does not join the STP group, an error will be returned when passing the stp_act parameter。3. If the user did not use 'stp_act' when placing the order, 'stp_act' will return '-'- cn: Cancel newest, Cancel new orders and keep old ones- co: Cancel oldest, Cancel old orders and keep new ones- cb: Cancel both, Both old and new orders will be cancelled |
   | amend_text | String | The custom data that the user remarked when amending the order |
+  | update_id | Integer | Update ID |
+  | update_time | Integer | Update Time (Milliseconds Timestamp) |
+  | biz_info | String | Users can annotate this modification with information. |
+  | stop_profit_price | String | Stop Profit Price |
+  | stop_loss_price | String | Stop Loss Price |
 
-## [#](#cancel-subscription-5) Cancel subscription
+## [#](#cancel-subscription-6) Cancel subscription
 
 ```python
 import json
@@ -1862,7 +2025,7 @@ The above command returns JSON structured like this:
   | fee | Float | Fee deducted |
   | point_fee | Float | Points used to deduct fee |
 
-## [#](#cancel-subscription-6) Cancel subscription
+## [#](#cancel-subscription-7) Cancel subscription
 
 ```python
 import json
@@ -2040,7 +2203,7 @@ The above command returns JSON structured like this:
   | user | String | User id |
   | contract | String | Futures contract name |
 
-## [#](#cancel-subscription-7) Cancel subscription
+## [#](#cancel-subscription-8) Cancel subscription
 
 ```python
 import json
@@ -2206,7 +2369,7 @@ The above command returns JSON structured like this:
   | user | String | User id |
   | contract | String | Futures contract name |
 
-## [#](#cancel-subscription-8) Cancel subscription
+## [#](#cancel-subscription-9) Cancel subscription
 
 ```python
 import json
@@ -2370,7 +2533,7 @@ The above command returns JSON structured like this:
   | time_ms | Integer | Time in milliseconds |
   | user | String | User id |
 
-## [#](#cancel-subscription-9) Cancel subscription
+## [#](#cancel-subscription-10) Cancel subscription
 
 ```python
 import json
@@ -2533,7 +2696,7 @@ The above command returns JSON structured like this:
   | user | String | User id |
   | currency | String | Transfer unit |
 
-## [#](#cancel-subscription-10) Cancel subscription
+## [#](#cancel-subscription-11) Cancel subscription
 
 ```python
 import json
@@ -2688,7 +2851,7 @@ The above command returns JSON structured like this:
   | time_ms | Integer | Time in milliseconds |
   | user | String | User id |
 
-## [#](#cancel-subscription-11) Cancel subscription
+## [#](#cancel-subscription-12) Cancel subscription
 
 ```python
 import json
@@ -2862,7 +3025,7 @@ The above command returns JSON structured like this:
   | user | String | User id |
   | update_id | Integer | Message sequence number |
 
-## [#](#cancel-subscription-12) Cancel subscription
+## [#](#cancel-subscription-13) Cancel subscription
 
 ```python
 import json
@@ -3058,7 +3221,7 @@ The above command returns JSON structured like this:
   | order_type | String | Take-profit/stop-loss types, detail to http api |
   | me_order_id | Number | Corresponding order ID of order take-profit/stop-loss. |
 
-## [#](#cancel-subscription-13) Cancel subscription
+## [#](#cancel-subscription-14) Cancel subscription
 
 ```python
 import json
@@ -3341,6 +3504,88 @@ Note: the GateAPIv4 key pair you used MUST have future Corresponding permissions
 Client Api Request
 
 Code samples
+
+```python
+import hmac
+import hashlib
+import json
+import time
+import websocket
+import ssl
+
+def get_api_signature(secret, channel, request_param, ts):
+    key = f"api\n{channel}\n{request_param}\n{ts}"
+    hash_object = hmac.new(secret.encode(), key.encode(), hashlib.sha512)
+    return hash_object.hexdigest()
+
+class ApiPayload:
+    def __init__(self, api_key, signature, timestamp, req_id, request_param):
+        self.api_key = api_key
+        self.signature = signature
+        self.timestamp = timestamp
+        self.req_id = req_id
+        self.request_param = request_param
+
+class ApiRequest:
+    def __init__(self, ts, channel, event, payload):
+        self.time = ts
+        self.channel = channel
+        self.event = event
+        self.payload = payload
+
+def main():
+    api_key = "YOUR_API_KEY"
+    secret = "YOUR_API_SECRET"
+    request_param = ""
+    channel = "futures.login"
+    ts = int(time.time())
+    request_id = f"{int(time.time() * 1000)}-1"
+
+    payload = ApiPayload(
+        api_key=api_key,
+        signature=get_api_signature(secret, channel, request_param, ts),
+        timestamp=str(ts),
+        req_id=request_id,
+        request_param=request_param
+    )
+
+    req = ApiRequest(ts=ts, channel=channel, event="api", payload=payload)
+
+    print(get_api_signature(secret, channel, request_param, ts))
+
+    req_json = json.dumps(req, default=lambda o: o.__dict__)
+    print(req_json)
+
+    # Connect to WebSocket
+    ws_url = "wss://fx-ws.gateio.ws/v4/ws/usdt"  # Replace with your WebSocket URL
+    websocket.enableTrace(False)
+    ws = websocket.create_connection(ws_url, sslopt={"cert_reqs": ssl.CERT_NONE})
+
+    # Function to receive messages
+    def recv_messages():
+        while True:
+            try:
+                message = ws.recv()
+                print(f"recv: {message}")
+            except Exception as e:
+                print(f"Error receiving message: {e}")
+                ws.close()
+                break
+
+    # Start receiving messages in a separate thread
+    import threading
+    receive_thread = threading.Thread(target=recv_messages)
+    receive_thread.start()
+
+    # Send the request
+    ws.send(req_json)
+
+    # Keep the main thread running
+    receive_thread.join()
+
+if __name__ == "__main__":
+    main()
+```
 
 ```go
 package main
@@ -4579,4 +4824,4 @@ Result format:
 | »»label | String | Denotes error type in string format |
 | »»message | String | Detailed error message |
 
-Last Updated: 3/12/2025, 10:42:24 AM
+Last Updated: 3/28/2025, 2:56:38 AM
