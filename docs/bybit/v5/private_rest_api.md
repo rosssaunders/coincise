@@ -51,7 +51,7 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 | POST | /v5/order/create | 10/s | 20/s | Y 
 | /v5/order/amend | 10/s | 10/s | Y 
 | /v5/order/cancel | 10/s | 20/s | Y 
-| /v5/order/cancel-all | 10/s | 20/s | N 
+| /v5/order/cancel-all | 10/s | 20/s | Y 
 | GET | /v5/order/realtime | 10/s | 20/s | N 
 | /v5/order/history | 10/s | 20/s | N 
 | /v5/execution/list | 10/s | 20/s | N 
@@ -62,7 +62,7 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 | POST | /v5/order/create | 10/s | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend | 10/s | 10/s | 10/s | 20/s | Y 
 | /v5/order/cancel | 10/s | 10/s | 10/s | 20/s | Y 
-| /v5/order/cancel-all | 10/s | 10/s | 1/s | 20/s | N 
+| /v5/order/cancel-all | 10/s | 10/s | 1/s | 20/s | Y 
 | /v5/order/create-batch | - | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend-batch | - | 10/s | 10/s | 20/s | Y 
 | /v5/order/cancel-batch | - | 10/s | 10/s | 20/s | Y 
@@ -78,7 +78,7 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 | POST | /v5/order/create | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend | 10/s | 10/s | 10/s | Y 
 | /v5/order/cancel | 10/s | 10/s | 20/s | Y 
-| /v5/order/cancel-all | 10/s | 1/s | 20/s | N 
+| /v5/order/cancel-all | 10/s | 1/s | 20/s | Y 
 | /v5/order/create-batch | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend-batch | 10/s | 10/s | 20/s | Y 
 | /v5/order/cancel-batch | 10/s | 10/s | 20/s | Y 
@@ -9052,7 +9052,7 @@ API key needs "Earn" permission
 
 note
 
-In times of high demand for loans in the market for a specific cryptocurrency, the redemption of the principal may encounter delays and is expected to be processed within 48 hours. Once the redemption request is initiated, it cannot be canceled, and your principal will continue to earn interest until the process is completed.
+In times of high demand for loans in the market for a specific cryptocurrency, the redemption of the principal may encounter delays and is expected to be processed within 48 hours. The redemption of on-chain products may take up to a few days to complete. Once the redemption request is initiated, it cannot be canceled.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -9062,13 +9062,14 @@ POST `/v5/earn/place-order`
 
 | Parameter | Required | Type | Comments |
 | :-- | :-- | :-- | --- |
-| category | <strong>true</strong> | string | <code>FlexibleSaving</code><br><strong>Remarks</strong>: currently, only flexible savings is supported 
+| category | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and on chain is supported 
 | orderType | <strong>true</strong> | string | <code>Stake</code>, <code>Redeem</code> 
-| accountType | <strong>true</strong> | string | <code>FUND</code>, <code>UNIFIED</code> 
+| accountType | <strong>true</strong> | string | <code>FUND</code>, <code>UNIFIED</code>. Onchain only supports FUND 
 | amount | <strong>true</strong> | string | <li>Stake amount needs to satisfy minStake and maxStake</li><li>Both stake and redeem amount need to satify precision requirement</li> 
 | coin | <strong>true</strong> | string | Coin name 
 | productId | <strong>true</strong> | string | Product ID 
 | orderLinkId | <strong>true</strong> | string | Customised order ID, used to prevent from replay<li>support up to 36 characters</li><li>The same orderLinkId can't be used in 30 mins</li> 
+| redeemPositionId | false | string | The position ID that the user needs to redeem. Only is required in Onchain non-LST mode 
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -9116,7 +9117,7 @@ GET `/v5/earn/order`
 
 | Parameter | Required | Type | Comments |
 | :-- | :-- | :-- | --- |
-| category | <strong>true</strong> | string | <code>FlexibleSaving</code><br><strong>Remarks</strong>: currently, only flexible savings is supported 
+| category | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and OnChain is supported 
 | orderId | false | string | Order ID<li>either orderId or orderLinkId is <strong>required</strong></li><li>if both are passed, make sure they're matched, otherwise returning empty result</li> 
 | orderLinkId | false | string | Order link ID<br><strong>Remarks</strong>: Always return the latest one if order link id is ever reused when querying by orderLinkId only 
 
@@ -9134,6 +9135,9 @@ GET `/v5/earn/order`
 | &gt; createdAt | string | Order created time, in milliseconds 
 | &gt; productId | string | Product ID 
 | &gt; updatedAt | string | Order updated time, in milliseconds 
+| &gt; swapOrderValue | string | Swap order value. Only for LST Onchain. 
+| &gt; estimateRedeemTime | string | Estimate redeem time, in milliseconds. Only for Onchain 
+| &gt; estimateStakeTime | string | Estimate stake time, in milliseconds. Only for Onchain 
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -9142,11 +9146,11 @@ GET `/v5/earn/order`
 *   Node.js
 
 ```
-GET /v5/earn/order?orderId=0572b030-6a0b-423f-88c4-b6ce31c0c82d&category=FlexibleSaving HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1739937044221X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/earn/order?orderId=9640dc23-df1a-448a-ad24-e1a48028a51f&category=OnChain HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1739937044221X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_stake_or_redemption_history(    category="FlexibleSaving",    orderId="0572b030-6a0b-423f-88c4-b6ce31c0c82d",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_stake_or_redemption_history(    category="OnChain",    orderId="9640dc23-df1a-448a-ad24-e1a48028a51f",))
 ```
 
 ```
@@ -9156,7 +9160,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "BTC",                "orderValue": "0.35",                "orderType": "Redeem",                "orderId": "0572b030-6a0b-423f-88c4-b6ce31c0c82d",                "orderLinkId": "btc-earn-001",                "status": "Success",                "createdAt": "1739936607000",                "productId": "430",                "updatedAt": "1739936607000"            }        ]    },    "retExtInfo": {},    "time": 1739937045520}
+{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "BTC",                "orderValue": "1",                "orderType": "Stake",                "orderId": "9640dc23-df1a-448a-ad24-e1a48028a51f",                "orderLinkId": "cjm2",                "status": "Success",                "createdAt": "1744166831000",                "productId": "8",                "updatedAt": "1744166832000",                "swapOrderValue": "",                "estimateRedeemTime": "",                "estimateStakeTime": ""            }        ]    },    "retExtInfo": {},    "time": 1739937045520}
 ```
 
 Get Staked Position
@@ -9168,7 +9172,7 @@ API key needs "Earn" permission
 
 note
 
-Fully redeemed position is also returned in the response
+For Flexible Saving, fully redeemed position is also returned in the response For Onchain, only active position will be returned in the response
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -9178,7 +9182,7 @@ GET `/v5/earn/position`
 
 | Parameter | Required | Type | Comments |
 | :-- | :-- | :-- | --- |
-| category | <strong>true</strong> | string | <code>FlexibleSaving</code> 
+| category | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code> 
 | productId | false | string | Product ID 
 | coin | false | string | Coin name 
 
@@ -9190,8 +9194,15 @@ GET `/v5/earn/position`
 | &gt; coin | string | Coin name 
 | &gt; productId | string | Product ID 
 | &gt; amount | string | Total staked amount 
-| &gt; totalPnl | string | Total yields 
-| &gt; claimableYield | string | Yield accrues on an hourly basis and is distributed at 00:30 UTC daily. If you unstake your assets before yield distribution, any undistributed yield will be credited to your account along with your principal. 
+| &gt; totalPnl | string | Return the profit of the current position. Only has value in Onchain non-LST mode 
+| &gt; claimableYield | string | Yield accrues on an hourly basis and is distributed at 00:30 UTC daily. If you unstake your assets before yield distribution, any undistributed yield will be credited to your account along with your principal. Onchain products do not return values 
+| &gt; id | string | Position Id. Only for Onchain 
+| &gt; status | string | <code>Processing</code>,<code>Active</code>. Only for Onchain 
+| &gt; orderId | string | Order Id. Only for Onchain 
+| &gt; estimateRedeemTime | string | Estimate redeem time, in milliseconds. Only for Onchain 
+| &gt; estimateStakeTime | string | Estimate stake time, in milliseconds. Only for Onchain 
+| &gt; estimateInterestCalculationTime | string | Estimated Interest accrual time, in milliseconds. Only for Onchain 
+| &gt; settlementTime | string | Settlement time, in milliseconds. Only has value for Onchain <code>Fixed</code> product 
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -9214,6 +9225,6 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "USDT",                "productId": "428",                "amount": "3000",                "totalPnl": "125.6208",                "claimableYield": "0"            }        ]    },    "retExtInfo": {},    "time": 1739944577575}
+{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "BTC",                "productId": "8",                "amount": "0.1",                "totalPnl": "0.000027397260273973",                "claimableYield": "0",                "id": "326",                "status": "Active",                "orderId": "1a5a8945-e042-4dd5-a93f-c0f0577377ad",                "estimateRedeemTime": "",                "estimateStakeTime": "",                "estimateInterestCalculationTime": "1744243200000",                "settlementTime": "1744675200000"            }        ]    },    "retExtInfo": {},    "time": 1739944577575}
 ```
 

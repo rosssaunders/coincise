@@ -11,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export class BaseProcessor {
   constructor(configPath, processorType) {
-    this.configPath = path.join(__dirname, '../config', configPath);
+    this.configPath = path.join(__dirname, '../../config', configPath);
     this.processorType = processorType;
     this.browser = null;
     this.page = null;
@@ -100,7 +100,7 @@ export class BaseProcessor {
         }
       }
 
-      const outputPath = path.join(__dirname, '../../../../../docs/', output_file);
+      const outputPath = path.join(__dirname, '../../../../docs/', output_file);
       fs.mkdirSync(path.dirname(outputPath), { recursive: true });
       fs.writeFileSync(outputPath, markdownContent);
 

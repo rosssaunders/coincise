@@ -51,7 +51,7 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 | POST | /v5/order/create | 10/s | 20/s | Y 
 | /v5/order/amend | 10/s | 10/s | Y 
 | /v5/order/cancel | 10/s | 20/s | Y 
-| /v5/order/cancel-all | 10/s | 20/s | N 
+| /v5/order/cancel-all | 10/s | 20/s | Y 
 | GET | /v5/order/realtime | 10/s | 20/s | N 
 | /v5/order/history | 10/s | 20/s | N 
 | /v5/execution/list | 10/s | 20/s | N 
@@ -62,7 +62,7 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 | POST | /v5/order/create | 10/s | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend | 10/s | 10/s | 10/s | 20/s | Y 
 | /v5/order/cancel | 10/s | 10/s | 10/s | 20/s | Y 
-| /v5/order/cancel-all | 10/s | 10/s | 1/s | 20/s | N 
+| /v5/order/cancel-all | 10/s | 10/s | 1/s | 20/s | Y 
 | /v5/order/create-batch | - | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend-batch | - | 10/s | 10/s | 20/s | Y 
 | /v5/order/cancel-batch | - | 10/s | 10/s | 20/s | Y 
@@ -78,7 +78,7 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 | POST | /v5/order/create | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend | 10/s | 10/s | 10/s | Y 
 | /v5/order/cancel | 10/s | 10/s | 20/s | Y 
-| /v5/order/cancel-all | 10/s | 1/s | 20/s | N 
+| /v5/order/cancel-all | 10/s | 1/s | 20/s | Y 
 | /v5/order/create-batch | 10/s | 10/s | 20/s | Y 
 | /v5/order/amend-batch | 10/s | 10/s | 20/s | Y 
 | /v5/order/cancel-batch | 10/s | 10/s | 20/s | Y 
