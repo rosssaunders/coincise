@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Bybit API Documentation Generator",
   "type": "module",
-  "main": "src/main.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
-    "puppeteer": "^24.6.0",
+    "puppeteer": "^24.6.1",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2",
     "jsdom": "^26.0.0"
