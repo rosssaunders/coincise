@@ -88,11 +88,21 @@ async function scrapePage(browser, url, ids) {
       const listItems = document.querySelectorAll('li[role="menuitem"]')
       console.log('Found list items:', listItems.length)
 
-      const items = Array.from(listItems).map(item => ({
-        menuIds: item.getAttribute('keys'),
-        desc: item.getAttribute('desc'),
-        text: `${item.parentElement?.parentElement?.firstElementChild?.textContent.trim() ?? ''} > ${item.textContent.trim() ?? ''}`,
-      }))
+      const items = Array.from(listItems).map(item => {
+        // Extract the category text safely
+        let categoryText = 'Unknown Category'
+        const categoryElement = item.parentElement?.parentElement?.firstElementChild
+        if (categoryElement) {
+          categoryText = categoryElement.textContent.trim() ?? 'Unknown Category'
+        }
+
+        return {
+          menuIds: item.getAttribute('keys'),
+          desc: item.getAttribute('desc'),
+          text: item.textContent.trim() ?? '', // Just the item text now
+          category: categoryText,
+        }
+      })
 
       if (ids) {
         items.forEach(item => {
@@ -107,15 +117,31 @@ async function scrapePage(browser, url, ids) {
       }
 
       const result = []
+      let currentCategory = null // Track the current category
+
       if (ids) {
         ids.forEach(id => {
           const item = descriptions.get(id.toString()) || {
             menuIds: '',
-            desc: `Not found ${id}`,
-            text: `Not found ${id}`,
+            desc: `Description not found for ID ${id}`,
+            text: `Item not found for ID ${id}`,
+            category: 'Error', // Assign a category for not found items
           }
+
+          // Check if the category has changed
+          if (item.category !== currentCategory) {
+            currentCategory = item.category
+            // Add the category header if it's not null or empty
+            if (currentCategory) {
+              result.push(`<h2>${currentCategory}</h2>`)
+            }
+          }
+
+          // Add the item description (previously was category > item text)
           if (item) {
-            result.push(`<h2>${item.text}</h2><div>${item.desc}</div>`)
+            // Ensure description exists before pushing
+            const itemDescription = item.desc ? `<div>${item.desc}</div>` : ''
+            result.push(`<div>${item.text}</div>${itemDescription}`)
           }
         })
       }
@@ -379,7 +405,7 @@ async function main() {
 
     // Write the combined markdown content to the single output file
     if (allMarkdownContent.length > 0) {
-      const allMarkdownContentString = allMarkdownContent.join('\n\n---\n\n')
+      const allMarkdownContentString = allMarkdownContent.join('\n\n')
 
       await writeFile(outputPath, allMarkdownContentString)
       logger.success(`Saved combined API documentation to ${outputPath}`)
