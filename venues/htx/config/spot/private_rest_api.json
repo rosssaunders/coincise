@@ -1,5 +1,10 @@
 {
   "baseUrl": "https://www.htx.com/en-us/opend/newApiPages/",
+  "output": {
+    "directory": "../../../docs/htx",
+    "filename": "private_rest_api.md",
+    "title": "HTX Private REST API Documentation"
+  },
   "numericIds": [
     666, 668, 669, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 649, 650,
     654, 655, 656, 657, 658, 659, 660, 661, 652, 653

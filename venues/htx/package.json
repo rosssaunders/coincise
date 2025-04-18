@@ -5,12 +5,22 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "privaterest": "node src/index.js config/spot/private_rest_api.json",
+    "privatefix": "node src/index.js config/spot/fix_api.json",
+    "test": "node test/html-conversion.test.js",
+    "test:watch": "nodemon test/html-conversion.test.js"
   },
   "dependencies": {
+    "jsdom": "26.1.0",
     "puppeteer": "^24.6.1",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2",
-    "jsdom": "26.1.0"
+    "prettier": "3.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "prettier": "3.5.3",
+    "prettier-plugin-java": "2.6.7"
   }
 }
