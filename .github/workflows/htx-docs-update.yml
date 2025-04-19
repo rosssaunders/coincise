@@ -29,8 +29,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run HTX scraper
-        run: npm run start
+      - name: Run HTX scraper for private REST API
+        run: npm run privaterest
+
+      - name: Run HTX scraper for FIX API
+        run: npm run fix
 
       - name: Check for changes
         id: git-check
