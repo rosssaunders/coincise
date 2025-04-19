@@ -6,9 +6,9 @@ import { join } from 'path'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 import puppeteer from 'puppeteer'
-import TurndownService from 'turndown'
-import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
 import { logger } from './utils/logger.js'
+import { cleanHtml } from './utils/html-cleaner.js'
+import { convertToMarkdown } from './utils/markdown-converter.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -16,13 +16,15 @@ const __dirname = dirname(__filename)
 // Add sleep function at the top level
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-async function loadConfig() {
-  const configPath = join(__dirname, '../config/spot/private_rest_api.json')
+async function loadConfig(configPath) {
+  if (!configPath) {
+    throw new Error('Config file path is required')
+  }
   const configData = await readFile(configPath, 'utf-8')
   return JSON.parse(configData)
 }
 
-async function scrapePage(browser, url, ids) {
+async function scrapePageForId(browser, url, ids) {
   const page = await browser.newPage()
   try {
     // Enable console logging
@@ -47,7 +49,7 @@ async function scrapePage(browser, url, ids) {
     await page.waitForSelector('ul#sliderMenu.ant-menu', { timeout: 30000 })
     logger.info('Menu element loaded successfully')
 
-    // Click through all menu items and submenus
+    // Click through all menu items and submenus recursively
     await page.evaluate(async () => {
       const siderChildren = document.querySelector('.ant-layout-sider-children')
       if (!siderChildren) {
@@ -55,36 +57,40 @@ async function scrapePage(browser, url, ids) {
         return
       }
 
-      const menuItems = siderChildren.querySelectorAll('div[role="menuitem"]')
-      console.log('Found menu items:', menuItems.length)
-
-      for (const item of menuItems) {
-        console.log('Clicking menu item:', item.textContent.trim())
-        // Click the menu item
-        item.click()
-
-        // Wait for any animations or content loading
-        await new Promise(resolve => setTimeout(resolve, 500))
-
-        // Load all the new children of this item that has been loaded
-        const parentNode = item.parentElement
-        if (parentNode) {
-          const subItems = parentNode.querySelectorAll('div[role="menuitem"]')
-          console.log('Found parent menu items:', subItems.length)
-
-          for (const subItem of subItems) {
-            console.log('Clicking >', subItem.textContent.trim())
-            subItem.click()
-            await new Promise(resolve => setTimeout(resolve, 500))
+      /* Updated recursive function to build a hierarchy of menu items */
+      async function getMenuTree(parentElement, depth = 0) {
+        const indent = '  '.repeat(depth)
+        const menuItems = parentElement.querySelectorAll('div[role="menuitem"]')
+        console.log(`${indent}Found menu items at depth ${depth}:`, menuItems.length)
+        const result = []
+        for (const item of menuItems) {
+          const itemText = item.textContent.trim()
+          console.log(`${indent}Clicking menu item:`, itemText)
+          // Click the menu item
+          item.click()
+          // Wait for any animations or content loading
+          await new Promise(resolve => setTimeout(resolve, 500))
+          let children = []
+          const itemParent = item.parentElement
+          if (itemParent) {
+            // Look for new menu items that might have appeared
+            const subMenu = itemParent.querySelector('ul.ant-menu')
+            if (subMenu) {
+              console.log(`${indent}Found submenu for:`, itemText)
+              children = await getMenuTree(subMenu, depth + 1)
+            }
           }
+          result.push({ text: itemText, children })
         }
+        return result
       }
+
+      // Replace the original recursive call with the new function call that builds a tree
+      const menuTree = await getMenuTree(siderChildren)
+      return menuTree
     })
 
     const content = await page.evaluate(ids => {
-      // Extract content from list items
-      const descriptions = new Map()
-
       const listItems = document.querySelectorAll('li[role="menuitem"]')
       console.log('Found list items:', listItems.length)
 
@@ -104,47 +110,42 @@ async function scrapePage(browser, url, ids) {
         }
       })
 
+      let filteredItems = []
       if (ids) {
-        items.forEach(item => {
-          // For numeric IDs, check data-menu-id
-          const menuId = item.menuIds
-          // Split keys into array and map descriptions to IDs
-          const keyParts = menuId ? menuId.split(',') : []
-          keyParts.forEach(keyPart => {
-            descriptions.set(keyPart, item)
-          })
+        // Create a filtered list of items where at least one keyPart is in the provided ids array.
+        const idsStr = ids.map(id => id.toString())
+        filteredItems = items.filter(item => {
+          const keyParts = item.menuIds ? item.menuIds.split(',') : []
+          return keyParts.some(keyPart => idsStr.includes(keyPart.trim()))
         })
       }
 
       const result = []
       let currentCategory = null // Track the current category
 
-      if (ids) {
-        ids.forEach(id => {
-          const item = descriptions.get(id.toString()) || {
-            menuIds: '',
-            desc: `Description not found for ID ${id}`,
-            text: `Item not found for ID ${id}`,
-            category: 'Error', // Assign a category for not found items
+      filteredItems.forEach(item => {
+        if (item.category !== currentCategory) {
+          currentCategory = item.category
+          // Add the category header if it's not null or empty
+          if (currentCategory) {
+            result.push({
+              isCategory: true,
+              title: currentCategory,
+              body: '',
+            })
           }
+        }
 
-          // Check if the category has changed
-          if (item.category !== currentCategory) {
-            currentCategory = item.category
-            // Add the category header if it's not null or empty
-            if (currentCategory) {
-              result.push(`<h2>${currentCategory}</h2>`)
-            }
-          }
+        // Add the item description (previously was category > item text)
+        const itemDescription = item.desc ? `<div>${item.desc}</div>` : ''
 
-          // Add the item description (previously was category > item text)
-          if (item) {
-            // Ensure description exists before pushing
-            const itemDescription = item.desc ? `<div>${item.desc}</div>` : ''
-            result.push(`<div>${item.text}</div>${itemDescription}`)
-          }
+        result.push({
+          isCategory: false,
+          title: item.text,
+          body: itemDescription,
         })
-      }
+      })
+
       return result
     }, ids)
 
@@ -230,19 +231,19 @@ async function scrapePageForEndpoint(browser, url) {
 
       // FINISH REMOVAL... START CONVERSION
 
-      // Convert h3 panel titles to h2
+      // Convert h3 panel titles to h3
       const panelTitles = contentDiv.querySelectorAll('h3.newApiPages_panelWrapTitle__kLXE_')
       panelTitles.forEach(title => {
-        const h2 = document.createElement('h2')
+        const h2 = document.createElement('h3')
         h2.innerHTML = title.innerHTML
         h2.className = title.className
         title.parentNode.replaceChild(h2, title)
       })
 
-      // Convert specific h2 titles to h3
+      // Convert specific h2 titles to h4
       let requestAddressTitles = contentDiv.querySelectorAll('h2.newApiPages_wrapTitle__UqglL')
       requestAddressTitles.forEach(title => {
-        const h3 = document.createElement('h3')
+        const h3 = document.createElement('h4')
         h3.innerHTML = title.innerHTML
         h3.className = title.className
         title.parentNode.replaceChild(h3, title)
@@ -252,7 +253,7 @@ async function scrapePageForEndpoint(browser, url) {
       requestAddressTitles = contentDiv.querySelectorAll('h2')
       requestAddressTitles.forEach(title => {
         if (title.textContent.trim() === 'Success Example') {
-          const h4 = document.createElement('h4')
+          const h4 = document.createElement('h5')
           h4.innerHTML = title.innerHTML
           h4.className = title.className
           title.parentNode.replaceChild(h4, title)
@@ -340,19 +341,15 @@ async function scrapePageForEndpoint(browser, url) {
   }
 }
 
-function convertToMarkdown(html) {
-  const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
-    fence: '```',
-  })
-  turndownService.use([gfm, tables, strikethrough])
-
-  return turndownService.turndown(html)
-}
-
 async function main() {
-  const config = await loadConfig()
+  // Get config path from command line arguments
+  const configPath = process.argv[2]
+  if (!configPath) {
+    logger.error('Please provide a config file path as an argument')
+    process.exit(1)
+  }
+
+  const config = await loadConfig(configPath)
   const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -362,20 +359,29 @@ async function main() {
 
   try {
     // Define the final output directory and ensure it exists
-    // Go up 4 levels from src to the repo root, then into docs/htx
-    const outputDir = join(__dirname, '../../../docs/htx')
+    const outputDir = join(__dirname, config.output.directory)
     await mkdir(outputDir, { recursive: true })
-    const outputPath = join(outputDir, 'private_rest_api.md')
+    const outputPath = join(outputDir, config.output.filename)
 
     // Process base URL for numeric IDs (often category descriptions)
     logger.info(`Processing base URL for category descriptions: ${config.baseUrl}`)
-    const numericContents = await scrapePage(browser, config.baseUrl, config.numericIds)
 
-    allMarkdownContent.push(`# HTX Private REST API API Documentation`)
+    allMarkdownContent.push(`# ${config.output.title}`)
 
+    const numericContents = await scrapePageForId(browser, config.baseUrl, config.numericIds)
     if (numericContents && numericContents.length > 0) {
-      for (const item of numericContents) {
-        const markdown = convertToMarkdown(item)
+      for (const doc of numericContents) {
+        if (doc.isCategory) {
+          allMarkdownContent.push(`## ${doc.title}`)
+          continue
+        }
+
+        // Clean the HTML tables for FIX
+        const cleanedHtml = await cleanHtml(doc.body)
+
+        const allHtml = `<h3>${doc.title}</h3>\n\n${cleanedHtml}`
+
+        const markdown = convertToMarkdown(allHtml)
         allMarkdownContent.push(markdown)
       }
       logger.info(`Processed ${numericContents.length} category descriptions.`)
@@ -383,7 +389,9 @@ async function main() {
       logger.info('No matching content found for numeric IDs (category descriptions).')
     }
 
-    allMarkdownContent.push(`# Endpoints`)
+    if (config.otherUrls.length > 0) {
+      allMarkdownContent.push(`## Endpoints`)
+    }
 
     // Process other URLs (specific endpoints)
     for (const urlPath of config.otherUrls) {
@@ -420,4 +428,7 @@ async function main() {
   }
 }
 
-main().catch(error => logger.error('Unhandled error in main:', error))
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => logger.error('Unhandled error in main:', error))
+}
