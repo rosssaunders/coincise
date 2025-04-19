@@ -2,7 +2,7 @@
   "baseUrl": "https://www.htx.com/en-us/opend/newApiPages/",
   "numericIds": [5504, 5505, 5509, 5543, 5510, 5511, 5512, 5513, 5514, 5515, 5516, 5517, 5518],
   "output": {
-    "directory": "../../../docs/htx",
+    "directory": "../../../docs/htx/spot",
     "filename": "fix_api.md",
     "title": "HTX Spot FIX API Documentation"
   },
