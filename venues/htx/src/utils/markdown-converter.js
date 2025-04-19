@@ -21,6 +21,11 @@ function convertToMarkdown(html) {
   })
   turndownService.use([gfm, tables, strikethrough])
 
+  const originalEscape = turndownService.escape
+  turndownService.escape = function (string) {
+    return originalEscape(string).replace(/\$/g, '\\$')
+  }
+
   return turndownService.turndown(html)
 }
 

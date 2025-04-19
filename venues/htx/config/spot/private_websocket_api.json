@@ -1,0 +1,22 @@
+{
+  "baseUrl": "https://www.htx.com/en-us/opend/newApiPages/",
+  "output": {
+    "directory": "../../../docs/htx/spot",
+    "filename": "private_websocket_api.md",
+    "title": "HTX Private WebSocket API Documentation"
+  },
+  "numericIds": [
+    666, 665, 669, 414, 415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 427, 649, 650, 654, 655,
+    656, 652, 653, 647, 648, 664
+  ],
+  "otherUrls": [
+    "7ec52e28-7773-11ed-9966-0242ac110003",
+    "7ec53c8f-7773-11ed-9966-0242ac110003",
+    "7ec53dd5-7773-11ed-9966-0242ac110003",
+    "8cb89359-77b5-11ed-9966-1928f079ab6",
+    "8cb89359-77b5-11ed-9966-1928f115372",
+    "8cb89359-77b5-11ed-9966-1928f216d9e",
+    "8cb89359-77b5-11ed-9966-1928f2962a5",
+    "8cb89359-77b5-11ed-9966-1928f2fa07f"
+  ]
+}

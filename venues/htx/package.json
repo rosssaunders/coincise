@@ -7,6 +7,9 @@
   "scripts": {
     "start": "node src/index.js",
     "privaterest": "node src/index.js config/spot/private_rest_api.json",
+    "publicrest": "node src/index.js config/spot/public_rest_api.json",
+    "privatewebsocket": "node src/index.js config/spot/private_websocket_api.json",
+    "publicwebsocket": "node src/index.js config/spot/public_websocket_api.json",
     "fix": "node src/index.js config/spot/fix_api.json",
     "test": "node test/html-conversion.test.js",
     "test:watch": "nodemon test/html-conversion.test.js"
