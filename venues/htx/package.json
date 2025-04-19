@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/index.js",
     "privaterest": "node src/index.js config/spot/private_rest_api.json",
-    "privatefix": "node src/index.js config/spot/fix_api.json",
+    "fix": "node src/index.js config/spot/fix_api.json",
     "test": "node test/html-conversion.test.js",
     "test:watch": "nodemon test/html-conversion.test.js"
   },

@@ -6,10 +6,10 @@ import { join } from 'path'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 import puppeteer from 'puppeteer'
-import TurndownService from 'turndown'
-import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
 import { logger } from './utils/logger.js'
 import { cleanHtml } from './utils/html-cleaner.js'
+import { convertToMarkdown } from './utils/markdown-converter.js'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -57,42 +57,40 @@ async function scrapePageForId(browser, url, ids) {
         return
       }
 
-      async function clickMenuItemsRecursively(parentElement, depth = 0) {
+      /* Updated recursive function to build a hierarchy of menu items */
+      async function getMenuTree(parentElement, depth = 0) {
         const indent = '  '.repeat(depth)
         const menuItems = parentElement.querySelectorAll('div[role="menuitem"]')
         console.log(`${indent}Found menu items at depth ${depth}:`, menuItems.length)
-
+        const result = []
         for (const item of menuItems) {
           const itemText = item.textContent.trim()
           console.log(`${indent}Clicking menu item:`, itemText)
-
           // Click the menu item
           item.click()
-
           // Wait for any animations or content loading
           await new Promise(resolve => setTimeout(resolve, 500))
-
-          // Check for any new submenus that appear after clicking
+          let children = []
           const itemParent = item.parentElement
           if (itemParent) {
             // Look for new menu items that might have appeared
             const subMenu = itemParent.querySelector('ul.ant-menu')
             if (subMenu) {
               console.log(`${indent}Found submenu for:`, itemText)
-              await clickMenuItemsRecursively(subMenu, depth + 1)
+              children = await getMenuTree(subMenu, depth + 1)
             }
           }
+          result.push({ text: itemText, children })
         }
+        return result
       }
 
-      // Start the recursive process from the top level
-      await clickMenuItemsRecursively(siderChildren)
+      // Replace the original recursive call with the new function call that builds a tree
+      const menuTree = await getMenuTree(siderChildren)
+      return menuTree
     })
 
     const content = await page.evaluate(ids => {
-      // Extract content from list items
-      const descriptions = new Map()
-
       const listItems = document.querySelectorAll('li[role="menuitem"]')
       console.log('Found list items:', listItems.length)
 
@@ -112,48 +110,42 @@ async function scrapePageForId(browser, url, ids) {
         }
       })
 
+      let filteredItems = []
       if (ids) {
-        items.forEach(item => {
-          // For numeric IDs, check data-menu-id
-          const menuId = item.menuIds
-          // Split keys into array and map descriptions to IDs
-          const keyParts = menuId ? menuId.split(',') : []
-          keyParts.forEach(keyPart => {
-            descriptions.set(keyPart, item)
-          })
+        // Create a filtered list of items where at least one keyPart is in the provided ids array.
+        const idsStr = ids.map(id => id.toString())
+        filteredItems = items.filter(item => {
+          const keyParts = item.menuIds ? item.menuIds.split(',') : []
+          return keyParts.some(keyPart => idsStr.includes(keyPart.trim()))
         })
       }
 
       const result = []
       let currentCategory = null // Track the current category
 
-      if (ids) {
-        ids.forEach(id => {
-          const item = descriptions.get(id.toString()) || {
-            menuIds: '',
-            desc: `Description not found for ID ${id}`,
-            text: `Item not found for ID ${id}`,
-            category: 'Error', // Assign a category for not found items
+      filteredItems.forEach(item => {
+        if (item.category !== currentCategory) {
+          currentCategory = item.category
+          // Add the category header if it's not null or empty
+          if (currentCategory) {
+            result.push({
+              isCategory: true,
+              title: currentCategory,
+              body: '',
+            })
           }
+        }
 
-          // Check if the category has changed
-          if (item.category !== currentCategory) {
-            currentCategory = item.category
-            // Add the category header if it's not null or empty
-            if (currentCategory) {
-              result.push(`<h2>${currentCategory}</h2>`)
-            }
-          }
+        // Add the item description (previously was category > item text)
+        const itemDescription = item.desc ? `<div>${item.desc}</div>` : ''
 
-          // Add the item description (previously was category > item text)
-          if (item) {
-            // Ensure description exists before pushing
-            const itemDescription = item.desc ? `<div>${item.desc}</div>` : ''
-
-            result.push(`<h3>${item.text}</h3>${itemDescription}`)
-          }
+        result.push({
+          isCategory: false,
+          title: item.text,
+          body: itemDescription,
         })
-      }
+      })
+
       return result
     }, ids)
 
@@ -239,19 +231,19 @@ async function scrapePageForEndpoint(browser, url) {
 
       // FINISH REMOVAL... START CONVERSION
 
-      // Convert h3 panel titles to h2
+      // Convert h3 panel titles to h3
       const panelTitles = contentDiv.querySelectorAll('h3.newApiPages_panelWrapTitle__kLXE_')
       panelTitles.forEach(title => {
-        const h2 = document.createElement('h2')
+        const h2 = document.createElement('h3')
         h2.innerHTML = title.innerHTML
         h2.className = title.className
         title.parentNode.replaceChild(h2, title)
       })
 
-      // Convert specific h2 titles to h3
+      // Convert specific h2 titles to h4
       let requestAddressTitles = contentDiv.querySelectorAll('h2.newApiPages_wrapTitle__UqglL')
       requestAddressTitles.forEach(title => {
-        const h3 = document.createElement('h3')
+        const h3 = document.createElement('h4')
         h3.innerHTML = title.innerHTML
         h3.className = title.className
         title.parentNode.replaceChild(h3, title)
@@ -261,7 +253,7 @@ async function scrapePageForEndpoint(browser, url) {
       requestAddressTitles = contentDiv.querySelectorAll('h2')
       requestAddressTitles.forEach(title => {
         if (title.textContent.trim() === 'Success Example') {
-          const h4 = document.createElement('h4')
+          const h4 = document.createElement('h5')
           h4.innerHTML = title.innerHTML
           h4.className = title.className
           title.parentNode.replaceChild(h4, title)
@@ -349,35 +341,6 @@ async function scrapePageForEndpoint(browser, url) {
   }
 }
 
-function convertToMarkdown(html) {
-  const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
-    fence: '```',
-  })
-  turndownService.use([gfm, tables, strikethrough])
-
-  // Add custom rule for table cells to preserve formatting
-  turndownService.addRule('tableCellWithFormatting', {
-    filter: 'td',
-    replacement: function (content, node) {
-      // Preserve code blocks and other formatting in cells
-      const cellContent = node.innerHTML
-        .replace(/<code>(.*?)<\/code>/g, '`$1`')
-        .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
-        .replace(/<em>(.*?)<\/em>/g, '_$1_')
-        .replace(/<br\s*\/?>/gi, '<br>')
-        .trim()
-      return `| ${cellContent} `
-    },
-  })
-
-  return turndownService.turndown(html)
-}
-
-// Export the function
-export { convertToMarkdown }
-
 async function main() {
   // Get config path from command line arguments
   const configPath = process.argv[2]
@@ -402,19 +365,23 @@ async function main() {
 
     // Process base URL for numeric IDs (often category descriptions)
     logger.info(`Processing base URL for category descriptions: ${config.baseUrl}`)
-    const numericContents = await scrapePageForId(browser, config.baseUrl, config.numericIds)
 
     allMarkdownContent.push(`# ${config.output.title}`)
 
+    const numericContents = await scrapePageForId(browser, config.baseUrl, config.numericIds)
     if (numericContents && numericContents.length > 0) {
-      for (const htmlContent of numericContents) {
+      for (const doc of numericContents) {
+        if (doc.isCategory) {
+          allMarkdownContent.push(`## ${doc.title}`)
+          continue
+        }
+
         // Clean the HTML tables for FIX
-        const cleanedHtml = await cleanHtml(htmlContent)
+        const cleanedHtml = await cleanHtml(doc.body)
 
-        // save the cleanedhtml to a file for debugging
-        // await writeFile(join(outputDir, 'cleanedHtml.html'), cleanedHtml)
+        const allHtml = `<h3>${doc.title}</h3>\n\n${cleanedHtml}`
 
-        const markdown = convertToMarkdown(cleanedHtml)
+        const markdown = convertToMarkdown(allHtml)
         allMarkdownContent.push(markdown)
       }
       logger.info(`Processed ${numericContents.length} category descriptions.`)
@@ -423,7 +390,7 @@ async function main() {
     }
 
     if (config.otherUrls.length > 0) {
-      allMarkdownContent.push(`# Endpoints`)
+      allMarkdownContent.push(`## Endpoints`)
     }
 
     // Process other URLs (specific endpoints)

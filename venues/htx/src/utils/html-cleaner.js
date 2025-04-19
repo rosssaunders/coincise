@@ -69,8 +69,8 @@ export async function cleanHtml(html) {
     if (p.textContent.startsWith('public static')) {
       const codeBlock = document.createElement('code')
       codeBlock.classList.add('language-java')
-      const codeBlockContent = document.createElement('pre')
-      codeBlock.appendChild(codeBlockContent)
+      const preContent = document.createElement('pre')
+      preContent.appendChild(codeBlock)
 
       try {
         const formatted = await prettier.format(p.textContent, {
@@ -78,12 +78,12 @@ export async function cleanHtml(html) {
           plugins: [javaPlugin],
         })
 
-        codeBlockContent.textContent = formatted
-        p.parentNode.replaceChild(codeBlock, p)
+        codeBlock.textContent = formatted
+        p.parentNode.replaceChild(preContent, p)
       } catch (error) {
         console.error('Error formatting Java code:', error)
         codeBlock.textContent = p.textContent // Fallback to unformatted text
-        p.parentNode.replaceChild(codeBlock, p)
+        p.parentNode.replaceChild(preContent, p)
       }
     }
   }
@@ -98,6 +98,13 @@ export async function cleanHtml(html) {
   // Remove empty cells
   document.querySelectorAll('td').forEach(td => {
     td.innerHTML = td.textContent.trim()
+  })
+
+  // Remove empty spans
+  document.querySelectorAll('h3').forEach(h3 => {
+    const strongContent = document.createElement('h4')
+    strongContent.textContent = h3.textContent.trim()
+    h3.parentNode.replaceChild(strongContent, h3)
   })
 
   // Get the cleaned HTML
