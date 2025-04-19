@@ -54,7 +54,8 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;">                 | MEXC              | Contract Public REST         | [Public REST API Docs](docs/mexc/contract/public_rest_api.md)                             | 2025-04-11   |
 | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;">                 | MEXC              | Contract WebSocket           | [WebSocket API Docs](docs/mexc/contract/websocket_api.md)                                 | 2025-04-11   |
 | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;">                 | MEXC              | Broker Private REST          | [Private REST API Docs](docs/mexc/broker/private_rest_api.md)                             | 2025-04-11   |
-| <img src="assets/icons/htx.jpg" alt="HTX" height="16" style="vertical-align: middle;">                   | HTX               | Private REST                 | [Private REST API Docs](docs/htx/private_rest_api.md)                                     | 2025-04-17   |
+| <img src="assets/icons/htx.jpg" alt="HTX" height="16" style="vertical-align: middle;">                   | HTX Spot          | Private REST                 | [Private REST API Docs](docs/htx/spot/private_rest_api.md)                                | 2025-04-17   |
+| <img src="assets/icons/htx.jpg" alt="HTX" height="16" style="vertical-align: middle;">                   | HTX Spot          | FIX                          | [FIX API Docs](docs/htx/spot/fix_api.md)                                                  | 2025-04-17   |
 
 ## Contributing
 
