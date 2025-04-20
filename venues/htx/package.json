@@ -10,6 +10,10 @@
     "publicrest": "node src/index.js config/spot/public_rest_api.json",
     "privatewebsocket": "node src/index.js config/spot/private_websocket_api.json",
     "publicwebsocket": "node src/index.js config/spot/public_websocket_api.json",
+    "privaterestusdtm": "node src/index.js config/usdtm/private_rest_api.json",
+    "publicrestusdtm": "node src/index.js config/usdtm/public_rest_api.json",
+    "privatewebsocketusdtm": "node src/index.js config/usdtm/private_websocket_api.json",
+    "publicwebsocketusdtm": "node src/index.js config/usdtm/public_websocket_api.json",
     "fix": "node src/index.js config/spot/fix_api.json",
     "test": "node test/html-conversion.test.js",
     "test:watch": "nodemon test/html-conversion.test.js"

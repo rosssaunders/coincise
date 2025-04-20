@@ -1,0 +1,29 @@
+{
+  "baseUrl": "https://www.htx.com/en-us/opend/newApiPages/",
+  "output": {
+    "directory": "../../../docs/htx/usdtm",
+    "filename": "public_websocket_api.md",
+    "title": "HTX Public WebSocket API Documentation"
+  },
+  "numericIds": [536, 537, 538, 539, 541, 575, 576, 578, 579, 580, 581, 582, 691, 692, 693],
+  "otherUrls": [
+    "8cb7bf6d-77b5-11ed-9966-0242ac110003",
+    "8cb7c23e-77b5-11ed-9966-0242ac110003",
+    "8cb7c385-77b5-11ed-9966-0242ac110003",
+    "8cb7c51d-77b5-11ed-9966-0242ac110003",
+    "8cb7c694-77b5-11ed-9966-0242ac110003",
+    "8cb7c802-77b5-11ed-9966-0242ac110003",
+    "8cb7c960-77b5-11ed-9966-0242ac110003",
+    "8cb7cab7-77b5-11ed-9966-0242ac110003",
+    "8cb7cc15-77b5-11ed-9966-0242ac110003",
+    "8cb7cd6f-77b5-11ed-9966-0242ac110003",
+    "8cb7cecd-77b5-11ed-9966-0242ac110003",
+    "8cb7d029-77b5-11ed-9966-0242ac110003",
+    "8cb7d138-77b5-11ed-9966-0242ac110003",
+    "8cb7d291-77b5-11ed-9966-0242ac110003",
+    "8cb7d374-77b5-11ed-9966-0242ac110003",
+    "8cb7d4c7-77b5-11ed-9966-0242ac110003",
+    "8cb7d626-77b5-11ed-9966-0242ac110003",
+    "8cb7d77f-77b5-11ed-9966-0242ac110003"
+  ]
+}
