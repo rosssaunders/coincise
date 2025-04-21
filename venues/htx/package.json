@@ -6,17 +6,17 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "privaterest": "node src/index.js config/spot/private_rest_api.json",
-    "publicrest": "node src/index.js config/spot/public_rest_api.json",
-    "privatewebsocket": "node src/index.js config/spot/private_websocket_api.json",
-    "publicwebsocket": "node src/index.js config/spot/public_websocket_api.json",
+    "privaterestspot": "node src/index.js config/spot/private_rest_api.json",
+    "publicrestspot": "node src/index.js config/spot/public_rest_api.json",
+    "privatewebsocketspot": "node src/index.js config/spot/private_websocket_api.json",
+    "publicwebsocketspot": "node src/index.js config/spot/public_websocket_api.json",
+    "fixspot": "node src/index.js config/spot/fix_api.json",
     "privaterestusdtm": "node src/index.js config/usdtm/private_rest_api.json",
     "publicrestusdtm": "node src/index.js config/usdtm/public_rest_api.json",
     "privatewebsocketusdtm": "node src/index.js config/usdtm/private_websocket_api.json",
     "publicwebsocketusdtm": "node src/index.js config/usdtm/public_websocket_api.json",
-    "fix": "node src/index.js config/spot/fix_api.json",
-    "test": "node test/html-conversion.test.js",
-    "test:watch": "nodemon test/html-conversion.test.js"
+    "privaterestcoinm": "node src/index.js config/coinm/private_rest_api.json",
+    "publicrestcoinm": "node src/index.js config/coinm/public_rest_api.json"
   },
   "dependencies": {
     "jsdom": "26.1.0",

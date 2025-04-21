@@ -61,7 +61,7 @@ async function scrapePageForId(browser, url, ids) {
       async function getMenuTree(parentElement, depth = 0) {
         const indent = '  '.repeat(depth)
         const menuItems = parentElement.querySelectorAll('div[role="menuitem"]')
-        console.log(`${indent}Found menu items at depth ${depth}:`, menuItems.length)
+        console.log(`${indent}Found child parent menu items at depth ${depth}:`, menuItems.length)
         const result = []
         for (const item of menuItems) {
           const itemText = item.textContent.trim()
@@ -70,6 +70,7 @@ async function scrapePageForId(browser, url, ids) {
           item.click()
           // Wait for any animations or content loading
           await new Promise(resolve => setTimeout(resolve, 500))
+
           let children = []
           const itemParent = item.parentElement
           if (itemParent) {
@@ -81,6 +82,24 @@ async function scrapePageForId(browser, url, ids) {
             }
           }
           result.push({ text: itemText, children })
+        }
+
+        // Print out the keys for each li[role="menuitem"] under this parent
+        // Print the full path each log line
+        if (depth > 0) {
+          const liMenuItems = parentElement.querySelectorAll(':scope > li[role="menuitem"]')
+          for (const liMenuItem of liMenuItems) {
+            const keys = liMenuItem.getAttribute('keys')
+            const parentItemText =
+              liMenuItem.parentElement.previousElementSibling.textContent.trim()
+            const keyArray = keys ? keys.split(',') : []
+            const lastKey = keyArray[keyArray.length - 1] || ''
+            const isGuid = lastKey.includes('-')
+            console.log(
+              `${indent}Keys for ${parentItemText} > ${liMenuItem.textContent.trim()}:`,
+              isGuid ? `"${lastKey}"` : lastKey
+            )
+          }
         }
         return result
       }
@@ -190,7 +209,7 @@ async function scrapePageForEndpoint(browser, url) {
 
     // Extract content from the main API documentation container
     logger.info('Extracting content from API documentation container...')
-    const content = await page.evaluate(async scrapeJsonCode => {
+    const content = await page.evaluate(async () => {
       const contentDiv = document.querySelector(
         'div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h'
       )
@@ -265,17 +284,17 @@ async function scrapePageForEndpoint(browser, url) {
       const dataCells = contentDiv.querySelectorAll('td.ant-table-cell')
       dataCells.forEach(cell => {
         // First replace the data tags with placeholders
-        cell.innerHTML = cell.innerHTML
-          .replace(/&lt;data&gt;/g, 'DATA_START')
-          .replace(/&lt;\/data&gt;/g, 'DATA_END')
+        if (cell.textContent.startsWith('</')) {
+          const strippedContents = cell.textContent.substring(2, cell.textContent.length - 1)
+          cell.textContent = strippedContents.toUpperCase() + '_END'
+          return
+        }
 
-        // Remove all < and > from the td cells
-
-        // Then replace the HTML entities with their actual characters
-        cell.innerHTML = cell.innerHTML
-          .replace(/&lt;/g, '__')
-          .replace(/\/&gt;/g, '__')
-          .replace(/&gt;/g, '__')
+        // First replace the data tags with placeholders
+        if (cell.textContent.startsWith('<')) {
+          const strippedContents = cell.textContent.substring(1, cell.textContent.length - 1)
+          cell.textContent = strippedContents.toUpperCase() + '_START'
+        }
       })
 
       // Convert the <div class="react-json-view"> blocks to a <code> block
