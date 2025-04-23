@@ -1091,14 +1091,14 @@ Notes:
 | id | long | false | Unique account id |  |
 | state | string | false | Account state | working, lock |
 | type | string | false | The type of this account | spot, margin, otc, point, super-margin, investment, borrow, grid-trading, otc-options,trust-credit ( third-party trust account )， |
-| \_\_list\_\_ | Array | false |  |  |
+| LIST\_START | Array | false |  |  |
 | currency | string | false | The currency of this balance |  |
 | type | string | false | The balance type | trade, frozen, loan, interest, lock, bank,credit-repay,trust-asset |
 | balance | string | false | The balance in the main currency unit |  |
 | debt | string | false | Invalid field |  |
 | available | string | false | Invalid field |  |
 | seq-num | string | false | Serial Number of Account Change |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 
 #### Request example
 
@@ -1180,16 +1180,16 @@ Interface description: Obtain the total asset valuation of the platform account 
 | totalBalance | string | false | total balance |  |
 | todayProfit | string | false | today profit |  |
 | todayProfitRate | string | false | today profit rate |  |
-| \_\_profitAccountBalanceList\_\_ | list | false |  |  |
+| PROFITACCOUNTBALANCELIST\_START | list | false |  |  |
 | distributionType | string | false | distribution type | 1 spot 2 Isolated 3 cross 4 coin futures 5 flat 6 minepool 7 coin swaps 8 investment 9 borrow 10 earn 11 usdt swaps 12 option 13 otc-options 14 crypto-loans 15 grid-trading 16 minepool |
 | balance | float | false | balance |  |
 | success | boolean | false | get data successful or not. When fails, the accountBalance and balance are 0 |  |
 | accountBalance | string | false | account balance |  |
-| \_\_/profitAccountBalanceList\_\_ |  | false |  |  |
-| \_\_updated\_\_ | list | false |  |  |
+| PROFITACCOUNTBALANCELIST\_END |  | false |  |  |
+| UPDATED\_START | list | false |  |  |
 | success | boolean | false | updated today, yes or not |  |
 | time | long | false | updated time |  |
-| \_\_/updated\_\_ |  | false |  |  |
+| UPDATED\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | success | boolean | false |  |  |
 
@@ -1720,11 +1720,11 @@ Interface description: Via this endpoint, user should be able to query ‘termle
 | accountId | string | false | Account ID |  |
 | accountStatus | string | false | Account status (working, lock, fl-sys, fl-mgt, fl-end, fl-negative) |  |
 | acctBalance | string | false | Account balance |  |
-| \_\_groupIds\_\_ | object | false | Group ID list |  |
+| GROUPIDS\_START | object | false | Group ID list |  |
 | groupId | long | false | Group ID |  |
 | expiryDate | long | false | Expiration date (unix time in millisecond) |  |
 | remainAmt | string | false | Remaining amount |  |
-| \_\_/groupIds\_\_ |  | false |  |  |
+| GROUPIDS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 Notes:
@@ -2114,7 +2114,7 @@ Interface description: A batch contains at most 10 orders.
 | client-order-id | string | false | Client order ID |  | NA |
 | self-match-prevent | int | false | self match prevent. 0: no, means allowing self-trading; 1: yes, means not allowing self-trading |  | 0 |
 | stop-price | string | false | Trigger price of stop limit order |  | NA |
-| operator}\] | string | false | Operation character of stop price, use 'gte' for greater than and equal (\_\_=), use 'lte' for less than and equal (\_\_=) |  | NA |
+| operator}\] | string | false | Operation character of stop price, use 'gte' for greater than and equal (>=), use 'lte' for less than and equal (<=) |  | NA |
 
 Notes:
 
@@ -2601,13 +2601,13 @@ Interface description: This endpoint submit cancellation for multiple orders at 
 | status | string | false |  |  |
 | DATA\_START | object | false |  |  |
 | success | array | false |  |  |
-| \_\_failed\_\_ | object | false |  |  |
+| FAILED\_START | object | false |  |  |
 | order-id | string | false |  |  |
 | client-order-id | string | false |  |  |
 | err-code | string | false |  |  |
 | err-msg | string | false |  |  |
 | order-state | string | false |  |  |
-| \_\_/failed\_\_ |  | false |  |  |
+| FAILED\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -2666,7 +2666,7 @@ Interface description: The Dead man’s switch protects the user’s assets when
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
 | --- | --- | --- | --- | --- | --- |
-| timeout | int | false |  | 0 or \_\_=5 seconds | time out duration (unit：second); see notes for details |
+| timeout | int | false |  | 0 or >=5 seconds | time out duration (unit：second); see notes for details |
 
 #### Response Parameter
 
@@ -3970,14 +3970,14 @@ Interface description: The endpoint returns loan interest rates and quota applie
 | status | string | false | status |  |
 | DATA\_START | object | false |  |  |
 | symbol | string | false | Trading symbol |  |
-| \_\_currencies\_\_ | object | false |  |  |
+| CURRENCIES\_START | object | false |  |  |
 | currency | string | false | Currency |  |
 | interest-rate | string | false | Basic daily interest rate |  |
 | min-loan-amt | string | false | Minimal loanable amount |  |
 | max-loan-amt | string | false | Maximum loanable amount |  |
 | loanable-amt | string | false | Remaining loanable amount |  |
 | actual-rate | string | false | Actual interest rate (if deduction is inapplicable or disabled, return basic daily interest rate) |  |
-| \_\_/currencies\_\_ |  | false |  |  |
+| CURRENCIES\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -4260,11 +4260,11 @@ Interface description: This endpoint returns the balance of the margin loan acco
 | risk-rate | string | false | The risk rate |  |
 | fl-type | string | false | safe,sell,buy |  |
 | fl-price | string | false | The price which margin closeout was triggered |  |
-| \_\_list\_\_ | array | false | The list of margin accounts and their details |  |
+| LIST\_START | array | false | The list of margin accounts and their details |  |
 | currency | string | false | The currency name |  |
 | type | string | false | The sub account type, possible values: trade, frozen, loan, interest ,transfer-out-available, loan-available |  |
 | balance | string | false | The negative balance means the loan or interest that need to repay. All trade balance can be transferred out if transfer-out-available balance is -1 |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -4767,11 +4767,11 @@ Interface description: This endpoint returns the balance of the margin loan acco
 | risk-rate | string | false |  |  |
 | acct-balance-sum | string | false |  |  |
 | debt-balance-sum | string | false |  |  |
-| \_\_list\_\_ | array | false |  |  |
+| LIST\_START | array | false |  |  |
 | currency | string | false |  |  |
 | type | string | false | account type: trade, frozen, loan, interest, transfer-out-available, loan-available |  |
 | balance | string | false | The negative balance means the loan or interest that need to repay. All trade balance can be transferred out if transfer-out-available balance is -1 |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -4938,13 +4938,13 @@ Interface description: Available Accounts: Main and Sub-Accounts Sort by "repayT
 | accountId | string | false | repayment account ID |  |
 | currency | string | false | repayment currency |  |
 | repaidAmount | string | false | repaid amount |  |
-| \_\_transactIds\_\_ | object | false | ID list of original loan transactions (arranged by order of repaymen time) |  |
+| TRANSACTIDS\_START | object | false | ID list of original loan transactions (arranged by order of repaymen time) |  |
 | transactId | long | false | original loan transaction ID |  |
 | repaidPrincipal | string | false | principal repaid |  |
 | repaidInterest | string | false | interest repaid |  |
 | paidHt | string | false | HT paid |  |
 | paidPoint | string | false | point paid |  |
-| \_\_/transactIds\_\_ |  | false |  |  |
+| TRANSACTIDS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | nextId | long | false | search the start ID in the next page (return only when there is data in the next page) |  |
 
@@ -5196,10 +5196,10 @@ Interface description: This endpoint is used by the parent user to create sub us
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
 | --- | --- | --- | --- | --- | --- |
-| \_\_userList\_\_ | object | true |  |  |  |
+| USERLIST\_START | object | true |  |  |  |
 | userName | string | true | Sub user name, an important identifier of the sub user's identity, requires unique within the HTX platform | The combination of 6 to 20 letters and numbers, or only letters. Letter is not case sensitive. The first character has to be a letter. |  |
 | note | string | false | Sub user note, no unique requirements | Up to 20 characters, unlimited character types |  |
-| \_\_/userList\_\_ |  | false |  |  |  |
+| USERLIST\_END |  | false |  |  |  |
 | subAccountType | String | false | Sub account type, GENERAL general type (default to general type if no value), CONTACT contract type, GRID contract grid type, FIRE-BLOCK fireblock custody account. It indicates that sub account types cannot be specified in accounts, which means that all sub account types within a batch are the same |  |  |
 
 #### Response Parameter
@@ -5611,16 +5611,16 @@ Interface description: Via this endpoint parent user is able to query account li
 | DATA\_START | object | false |  |  |
 | uid | long | false | Sub user’s UID |  |
 | deductMode |  | false | deduct mode |  |
-| \_\_list\_\_ | object | false |  |  |
+| LIST\_START | object | false |  |  |
 | accountType | string | false | Account type | spot, isolated-margin, cross-margin |
 | activation | string | false | Account’s activation | activated, deactivated |
 | transferrable | bool | false | Transfer permission (only valid for accountType=spot) | true, false |
-| \_\_accountIds\_\_ | object | false |  |  |
+| ACCOUNTIDS\_START | object | false |  |  |
 | accountId | string | false | Account ID |  |
 | subType | string | false | Account sub type (only valid for accountType=isolated-margin) |  |
 | accountStatus | string | false | Account status | normal, locked |
-| \_\_/accountIds\_\_ |  | false |  |  |
-| \_\_/list\_\_ |  | false |  |  |
+| ACCOUNTIDS\_END |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -6185,13 +6185,13 @@ Interface description: This endpoint returns the balance of a sub-user specified
 | DATA\_START | object | false |  |  |
 | id | long | false | account's ID |  |
 | type | string | false | The type of this account: spot, margin, otc, point,super-margin |  |
-| \_\_list\_\_ | string | false |  |  |
+| LIST\_START | string | false |  |  |
 | currency | object | false | The currency of this balance |  |
 | type | string | false | The balance type: trade, frozen, loan, interest, lock, bank |  |
 | balance | string | false | The balance in the main currency unit |  |
 | debt | string | false | Invalid field |  |
 | available | string | false | Invalid field |  |
-| \_\_/list\_\_ | decimal | false |  |  |
+| LIST\_END | decimal | false |  |  |
 | symbol |  | false |  |  |
 | DATA\_END | string | false |  |  |
 

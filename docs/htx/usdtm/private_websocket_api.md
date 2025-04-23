@@ -1194,17 +1194,17 @@ Notes: "limit"，"post\_only"，"ioc" and "fok" the four order price type need p
 | --- | --- | --- | --- | --- |
 | status | string | true | Request processing result | ok , "error" |
 | DATA\_START | object array | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | index | int | true | Index of orders |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error massage |  |
-| \_\_/errors\_\_ |  | false |  |  |
-| \_\_success\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
+| SUCCESS\_START |  | false |  |  |
 | index | int | true | Index of orders |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | The order ID is in string format |  |
 | client\_order\_id | long | true | The client order ID filled in by the user when placing an order. If not filled, it will not be returned |  |
-| \_\_/success\_\_ |  | false |  |  |
+| SUCCESS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true |  |  |
 
@@ -1355,17 +1355,17 @@ Notes: "limit"，"post\_only"，"ioc" and "fok" the four order price type need p
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | index | int | true | order index |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
-| \_\_success\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
+| SUCCESS\_START |  | false |  |  |
 | index | int | true | order index |  |
 | order\_id | long | true | order ID |  |
 | order\_id\_str | string | true | order ID |  |
 | client\_order\_id | long | true | the client ID that is filled in when the order is placed, if it’s not filled, it won’t be returned |  |
-| \_\_/success\_\_ |  | false |  |  |
+| SUCCESS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -1502,11 +1502,11 @@ Notes: Both order\_id and client\_order\_id can be used for order withdrawl，on
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | false |  |  |
-| \_\_errors\_\_ | array | false |  |  |
+| ERRORS\_START | array | false |  |  |
 | order\_id | string | true | Order ID |  |
 | err\_code | int | true | Error code |  |
 | err\_msg | string | true | Error information |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | Successfully withdrew list of order\_id or client\_order\_id |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -1606,11 +1606,11 @@ Notes: Both order\_id and client\_order\_id can be used for order withdrawl，on
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | array | true |  |  |
+| ERRORS\_START | array | true |  |  |
 | order\_id | string | true | order ID |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successfully withdrew list of order\_id or client\_order\_id |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -1710,11 +1710,11 @@ Notes: You can fill in only one of direction and offset to cancel the orders. (s
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | false |  |  |
-| \_\_errors\_\_ | array | false |  |  |
+| ERRORS\_START | array | false |  |  |
 | order\_id | string | true | Order ID |  |
 | err\_code | int | true | failed order error messageError code |  |
 | err\_msg | string | true | failed order information |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | Successful order |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -1814,11 +1814,11 @@ Notes: You can fill in only one of direction and offset to cancel the orders. (s
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | array | true |  |  |
+| ERRORS\_START | array | true |  |  |
 | order\_id | string | true | order ID |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the list order which's successful |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -1952,7 +1952,7 @@ Interface description: This interface only supports isolated margin mode.
 | real\_profit | decimal | true | total real profit of order (calculated with the opening average price, include profit in history settlement.) |  |
 | reduce\_only | int | true | reduce only 0: no, 1: yes |  |
 | canceled\_source | string | false | timeout-canceled-order |  |
-| \_\_trade\_\_ | object array | true |  |  |
+| TRADE\_START | object array | true |  |  |
 | id | string | true | the global unique ID of the trade. |  |
 | trade\_id | long | true | In this interface, trade\_id is the same with match\_id of linear-swap-api/v1/swap\_matchresults. trade\_id is the result of sets of order execution and trade confirmation. NOTE: trade\_id is not unique, which includes all trade records of a taker order and N maker orders. If the taker order matches with N maker orders, it will create N trades with same trade\_id. |  |
 | trade\_volume | decimal | true | trade volume |  |
@@ -1965,7 +1965,7 @@ Interface description: This interface only supports isolated margin mode.
 | profit | decimal | true | profit or loss of the transaction (calculated with the average price of position, exclude profit in history settlement.) |  |
 | fee\_asset | string | true | the corresponding cryptocurrency to the given fee |  |
 | price | string | false | deduction currency price(USDT) |  |
-| \_\_/trade\_\_ |  | false |  |  |
+| TRADE\_END |  | false |  |  |
 
 Notes:
 
@@ -2146,7 +2146,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
 | canceled\_source | string | false | timeout-canceled-order |  |
-| \_\_trade\_\_ | object array | true |  |  |
+| TRADE\_START | object array | true |  |  |
 | id | string | true | the global unique ID of the trade. |  |
 | trade\_id | long | true | In this interface, trade\_id is the same with match\_id of linear-swap-api/v1/swap\_cross\_matchresults. trade\_id is the result of sets of order execution and trade confirmation. NOTE: trade\_id is not unique, which includes all trade records of a taker order and N maker orders. If the taker order matches with N maker orders, it will create N trades with same trade\_id. |  |
 | trade\_volume | decimal | true | trade quantity |  |
@@ -2159,7 +2159,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | profit | decimal | true | profit or loss of the transaction (calculated with the average price of position, exclude profit in history settlement.) |  |
 | fee\_asset | string | true | fee asset | “USDT” |
 | price | string | false | deduction currency price(USDT) |  |
-| \_\_/trade\_\_ | string | true |  |  |
+| TRADE\_END | string | true |  |  |
 
 Notes:
 
@@ -2465,7 +2465,7 @@ A regular push of account is performed every 5 sedconds.The event field of the r
 | withdraw\_available | decimal | true | available transfer amount |  |
 | risk\_rate | decimal | true | margin rate |  |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -2478,8 +2478,8 @@ A regular push of account is performed every 5 sedconds.The event field of the r
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/contract\_detail\_\_ |  | false |  |  |
-| \_\_futures\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_END |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | future: "BTC-USDT-210625" ... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -2492,7 +2492,7 @@ A regular push of account is performed every 5 sedconds.The event field of the r
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/futures\_contract\_detail\_\_ |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -2971,7 +2971,7 @@ If there is an order with N trades,including 1 taker and N maker,it will push N+
 | margin\_account | string | true | margin account | "BTC-USDT"... |
 | is\_tpsl | int | true | whether to set take-profit and stop-loss order | 1：yes；0：no |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_trade\_\_ | object array | true |  |  |
+| TRADE\_START | object array | true |  |  |
 | id | string | true | the global unique id of the trade. |  |
 | trade\_id | long | true | In this interface, trade\_id is the same with match\_id of linear-swap-api/v1/swap\_matchresults. trade\_id is the result of sets of order execution and trade confirmation. NOTE: trade\_id is not unique, which includes all trade records of a taker order and N maker orders. If the taker order matches with N maker orders, it will create N trades with same trade\_id. |  |
 | trade\_price | decimal | true | trade price |  |
@@ -2979,7 +2979,7 @@ If there is an order with N trades,including 1 taker and N maker,it will push N+
 | trade\_turnover | decimal | true | trade turnover |  |
 | created\_at | long | true | created time |  |
 | role | string | true | taker or maker |  |
-| \_\_/trade\_\_ |  | false |  |  |
+| TRADE\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -3143,7 +3143,7 @@ If there is an order with N trades,including 1 taker and N maker,it will push N+
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_trade\_\_ | object array | true |  |  |
+| TRADE\_START | object array | true |  |  |
 | id | string | true | the global unique id of the trade |  |
 | trade\_id | long | true | In this interface, trade\_id is the same with match\_id of linear-swap-api/v1/swap\_cross\_matchresults. trade\_id is the result of sets of order execution and trade confirmation. NOTE: trade\_id is not unique, which includes all trade records of a taker order and N maker orders. If the taker order matches with N maker orders, it will create N trades with same trade\_id. |  |
 | trade\_price | decimal | true | trade price |  |
@@ -3151,7 +3151,7 @@ If there is an order with N trades,including 1 taker and N maker,it will push N+
 | trade\_turnover | decimal | true | trade amount |  |
 | created\_at | long | true | created time |  |
 | role | string | true | taker/maker |  |
-| \_\_/trade\_\_ |  | false |  |  |
+| TRADE\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -4038,7 +4038,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | settle\_period | int | true | settle period |  |
 | funding\_rate\_cap | int | true | funding rate cap |  |
 | funding\_rate\_floor | int | true | funding rate floor |  |
-| \_\_contract\_infos\_\_ |  | false |  |  |
+| CONTRACT\_INFOS\_START |  | false |  |  |
 | contract\_code |  | false |  |  |
 | instrument\_type |  | false |  |  |
 | settlement\_date | string | true |  |  |
@@ -4046,31 +4046,31 @@ Interface description: The interface supports cross margin mode and isolated mar
 | create\_date | string | true | Listing Date | eg "20190808" |
 | contract\_status | int | true | Contract Status | contract status ： 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,6: Delivering,8: Delivered |
 | delivery\_date | string | true | delivery date, empty string when swap | such as: "20180720" |
-| \_\_contract\_infos\_\_ |  | false |  |  |
+| CONTRACT\_INFOS\_START |  | false |  |  |
 | long\_position\_limit |  | false | long position limit |  |
 | offset\_order\_limit |  | false | offset order limit |  |
 | open\_order\_limit |  | false | open order limit |  |
 | short\_position\_limit |  | false | short position limit |  |
-| \_\_price\_ticks\_\_ | object array | false | The Minimum Price Change |  |
+| PRICE\_TICKS\_START | object array | false | The Minimum Price Change |  |
 | business\_type | Integer | true | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures |  |
 | price | String | true | The Minimum Price Change |  |
-| \_\_instrument\_values\_\_ |  | true | contract Face Value |  |
+| INSTRUMENT\_VALUES\_START |  | true | contract Face Value |  |
 | business\_type | Integer | true | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures |  |
 | price | String | true | contract Face Value |  |
-| \_\_order\_limits\_\_ | object array | true | The maximum quantity of single order (Cont) |  |
+| ORDER\_LIMITS\_START | object array | true | The maximum quantity of single order (Cont) |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
 | open\_after\_closing | String | true | open after closing |  |
-| \_\_normal\_limits\_\_ |  | false | Hard Price Limit |  |
+| NORMAL\_LIMITS\_START |  | false | Hard Price Limit |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
-| \_\_open\_limits\_\_ | object | false | Non-basis Price Limit |  |
+| OPEN\_LIMITS\_START | object | false | Non-basis Price Limit |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
-| \_\_trade\_limits\_\_ |  | false | Basis Price Limit |  |
+| TRADE\_LIMITS\_START |  | false | Basis Price Limit |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |

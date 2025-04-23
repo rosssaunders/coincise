@@ -16,7 +16,8 @@
     "privatewebsocketusdtm": "node src/index.js config/usdtm/private_websocket_api.json",
     "publicwebsocketusdtm": "node src/index.js config/usdtm/public_websocket_api.json",
     "privaterestcoinm": "node src/index.js config/coinm/private_rest_api.json",
-    "publicrestcoinm": "node src/index.js config/coinm/public_rest_api.json"
+    "publicrestcoinm": "node src/index.js config/coinm/public_rest_api.json",
+    "runall": "npm run privaterestspot && npm run publicrestspot && npm run privatewebsocketspot && npm run publicwebsocketspot && npm run fixspot && npm run privaterestusdtm && npm run publicrestusdtm && npm run privatewebsocketusdtm && npm run publicwebsocketusdtm && npm run privaterestcoinm && npm run publicrestcoinm"
   },
   "dependencies": {
     "jsdom": "26.1.0",

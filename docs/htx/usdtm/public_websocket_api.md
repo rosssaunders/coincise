@@ -827,7 +827,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | --- | --- | --- | --- | --- |
 | ch | string | true | Request Parameter |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | id | long | true | kline id,the same as kline timestamp, kline start timestamp |  |
 | mrid | long | true | ID Order ID |  |
 | vol | decimal | true | Trade Volume(Cont.). Sum of both buy and sell sides |  |
@@ -838,7 +838,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | high | decimal | true | High Price |  |
 | amount | decimal | true | Trade Amount(Coin), trade amount(coin)=sum(order quantity of a single order \* face value of the coin/order price). Sum of both buy and sell sides |  |
 | trade\_turnover | decimal | true | Transaction amount, that is, sum (transaction quantity \* contract face value \* transaction price). Sum of both buy and sell sides |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1084,7 +1084,7 @@ step15、step13 10
 | --- | --- | --- | --- | --- |
 | ts | string | true | Time of Respond Generation, Unit: Millisecond |  |
 | ch | long | true | Data channel, Format： market.period |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | mrid | long | true | Order ID |  |
 | id | long | true | tick ID |  |
 | asks | object | false | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |  |
@@ -1092,7 +1092,7 @@ step15、step13 10
 | ts | long | true | Timestamp for depth generation; generated once every 100ms, unit: millisecond |  |
 | version | long | true | version ID |  |
 | ch | string | true | Data channel, Format： market.period |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1199,7 +1199,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | --- | --- | --- | --- | --- |
 | ts | string | true | Timestamp of Respond Generation, Unit: Millisecond |  |
 | ch | long | true | Data channel, Format：market.\$contract\_code.depth.size\_\${size}.high\_freq |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | mrid | long | true | Order ID |  |
 | id | long | true | tick ID，system timestamp.seconds |  |
 | asks | object | true | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |  |
@@ -1208,7 +1208,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | version | long | true | version ID,auto increment ID. |  |
 | event | string | true | event type: update or snapshot |  |
 | ch | string | true | Data channel, Format： market.\$contract\_code.depth.size\_\${size}.high\_freq |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 Notes:
 
@@ -1330,7 +1330,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | --- | --- | --- | --- | --- |
 | ch | string | true | Data channel，Format： market.\$contract\_code.detail |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | id | long | true | ID |  |
 | mrid | long | true | Order ID |  |
 | open | decimal | true | Open Price |  |
@@ -1343,7 +1343,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | trade\_turnover | decimal | true | Transaction amount, that is, sum (transaction quantity \* contract face value \* transaction price). Sum of both buy and sell sides |  |
 | ask | array | true | Sell,\[price(Ask price), vol(Ask orders (cont.) )\] |  |
 | bid | array | true | Buy,\[price(Bid price), vol(Bid orders(Cont.))\] |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 Notes:
 
@@ -1448,7 +1448,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | --- | --- | --- | --- | --- |
 | ch | string | true | Data channel, Format： market.\$contract\_code.bbo |  |
 | ts | long | true | Timestamp of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | true |  |  |
+| TICK\_START | object | true |  |  |
 | ch | string | true | Data channel, Format： market.\$contract\_code.bbo |  |
 | mrid | string | true | Order ID |  |
 | id | long | true | tick ID |  |
@@ -1456,7 +1456,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | bid | array | false | Best Bid Quotation,\[price(Bid price), vol(Bid order(Cont.))\] |  |
 | version | long | true | version ID. |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_\\tick\_\_ |  | false |  |  |
+| \\TICK\_START |  | false |  |  |
 
 Notes:
 
@@ -1664,7 +1664,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | --- | --- | --- | --- | --- |
 | ch | string | true | Data channel,format: market.\$contract\_code.trade.detail |  |
 | ts | long | true | Request time |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | id | long | true | Unique Order Id(symbol level). |  |
 | ts | long | true | tick time |  |
 | DATA\_START |  | false |  |  |
@@ -1676,7 +1676,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | quantity | decimal | true | trading quantity(coin) |  |
 | trade\_turnover | decimal | true | trade turnover(quoted currency) |  |
 | DATA\_END |  | false |  |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1777,7 +1777,7 @@ Periodical Push when the index data hasn't changed according to the kline period
 | --- | --- | --- | --- | --- |
 | ch | string | false | Data channel，Format：market.\$contract\_code.index.\$period |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object array | false |  |  |
+| TICK\_START | object array | false |  |  |
 | id | string | false | index kline id,the same as kline timestamp,kline start timestamp |  |
 | vol | string | false | Trade Volume. The value is 0. |  |
 | count | decimal | false | count. The value is 0. |  |
@@ -1786,7 +1786,7 @@ Periodical Push when the index data hasn't changed according to the kline period
 | low | string | false | lowest index price |  |
 | high | string | false | highest index price |  |
 | amount | string | false | amount based on coins. |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1992,7 +1992,7 @@ Periodical Push when the index data hasn't changed according to the kline period
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | ch | string | true | Data channel，Format： market.period |  |
-| \_\_tick\_\_ | object array | true |  |  |
+| TICK\_START | object array | true |  |  |
 | id | long | true | index kline id,the same as kline timestamp, kline start timestamp |  |
 | vol | string | true | Trade Volume(Cont.). The value is 0. |  |
 | count | string | true | count. The value is 0. |  |
@@ -2001,7 +2001,7 @@ Periodical Push when the index data hasn't changed according to the kline period
 | low | string | true | lowest index price |  |
 | high | string | true | highest index price |  |
 | amount | string | true | amount based on coins. |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
 #### Subscription Example
@@ -2198,7 +2198,7 @@ Periodical Push when the kline data hasn't changed according to the kline period
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | ch | string | true | Data channel，Format： market.period |  |
-| \_\_tick\_\_ | object array | true |  |  |
+| TICK\_START | object array | true |  |  |
 | id | long | true | index kline id,the same as kline timestamp |  |
 | vol | string | true | Trade Volume(Cont.). The value is 0. |  |
 | count | string | true | count. The value is 0. |  |
@@ -2208,7 +2208,7 @@ Periodical Push when the kline data hasn't changed according to the kline period
 | high | string | true | highest index price |  |
 | amount | string | true | amount based on coins. |  |
 | trade\_turnover | string | true | Transaction amount, the value is 0. |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
 #### Subscription Example
@@ -2399,13 +2399,13 @@ Interface description: The interface supports cross margin mode and isolated mar
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | ch | string | false |  |  |
-| \_\_tick\_\_ | object array | false |  |  |
+| TICK\_START | object array | false |  |  |
 | id | long | false |  |  |
 | contract\_price | string | false |  |  |
 | index\_price | string | false |  |  |
 | basis | string | false |  |  |
 | basis\_rate | string | false |  |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 | ts | long | false |  |  |
 
 #### Subscription Example
@@ -2584,7 +2584,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | ch | string | true | channel, format: market.period |  |
-| \_\_tick\_\_ | object array | true |  |  |
+| TICK\_START | object array | true |  |  |
 | id | long | true | id |  |
 | vol | string | true | trade vol(cont), value is 0 |  |
 | count | string | true | trade count, value is 0 |  |
@@ -2594,7 +2594,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | high | string | true | high price |  |
 | amount | string | true | trade amount, value is 0 |  |
 | trade\_turnover | string | true | trade turnover, value is 0 |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
 #### Subscription Example

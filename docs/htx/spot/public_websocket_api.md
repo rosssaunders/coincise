@@ -424,7 +424,7 @@ Interface description: This topic sends a new candlestick whenever it is availab
 | --- | --- | --- | --- | --- |
 | ch | string | false | Data belonged channel，Format：market.\$symbol.kline.\$period |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | id | integer | false | UNIX epoch timestamp in second as response id |  |
 | amount | float | false | Aggregated trading volume during the interval (in base currency) |  |
 | count | integer | false | Number of trades during the interval |  |
@@ -433,7 +433,7 @@ Interface description: This topic sends a new candlestick whenever it is availab
 | low | float | false | Low price during the interval |  |
 | high | float | false | High price during the interval |  |
 | vol | float | false | Aggregated trading value during the interval (in quote currency) |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -631,12 +631,12 @@ Interface description: This topic sends the latest market by price order book in
 | --- | --- | --- | --- | --- |
 | ch | string | false | Data belonged channel，Format：market.\$symbol.depth.\$type |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | bids | object | false | The current all bids in format \[price, size\] |  |
 | asks | object | false | The current all asks in format \[price, size\] |  |
 | version | integer | false | Internal data |  |
 | ts | integer | false | The UNIX timestamp in milliseconds adjusted to Singapore time |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -745,7 +745,7 @@ Interface description: This topic sends the latest market stats with 24h summary
 | --- | --- | --- | --- | --- |
 | ch | string | false | Data belonged channel，Format：market.btcusdt.detail |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | id | integer | false | UNIX epoch timestamp in second as response id |  |
 | amount | float | false | Aggregated trading volume in past 24H (in base currency) |  |
 | count | integer | false | Number of trades in past 24H |  |
@@ -755,7 +755,7 @@ Interface description: This topic sends the latest market stats with 24h summary
 | high | float | false | High price in past 24H |  |
 | vol | float | false | Aggregated trading value in past 24H (in quote currency) |  |
 | version | long | false | version |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1083,7 +1083,7 @@ Interface description: Retrieve the market ticker,data is pushed every 100ms.
 | --- | --- | --- | --- | --- |
 | ch | string | false | Data belonged channel，Format：market.\$symbol.ticker |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | amount | float | false | Accumulated trading volume of last 24 hours (rotating 24h), in base currency |  |
 | count | integer | false | The number of completed trades (rotating 24h) |  |
 | open | float | false | The opening price of last 24 hours (rotating 24h) |  |
@@ -1097,7 +1097,7 @@ Interface description: Retrieve the market ticker,data is pushed every 100ms.
 | askSize | float | false | Best ask size |  |
 | lastPrice | float | false | Last traded price |  |
 | lastSize | float | false | Last traded size |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1195,7 +1195,7 @@ Interface description: This topic sends the latest completed trades. It updates 
 | --- | --- | --- | --- | --- |
 | ch | string | false | Data belonged channel，Format：market.\$symbol.trade.detail |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | id | long | false | global transaction ID |  |
 | ts | long | false | Latest Creation Time |  |
 | DATA\_START | object | false |  |  |
@@ -1206,7 +1206,7 @@ Interface description: This topic sends the latest completed trades. It updates 
 | ts | long | false | timestamp (UNIX epoch time in millisecond) |  |
 | direction | string | false | direction of the trade (taker): 'buy' or 'sell' |  |
 | DATA\_END |  | false |  |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Subscription Example
 

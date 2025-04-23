@@ -1739,7 +1739,7 @@ Interface description: API user could query static reference information for eac
 | message | string | false | Error message (if any) |  |
 | DATA\_START | object | false |  |  |
 | currency | string | false | Currency |  |
-| \_\_chains\_\_ | object | false |  |  |
+| CHAINS\_START | object | false |  |  |
 | chain | string | false | Chain name |  |
 | displayName | string | false | Chain display name |  |
 | baseChain | string | false | Base chain name |  |
@@ -1763,7 +1763,7 @@ Interface description: API user could query static reference information for eac
 | withdrawStatus | string | false | Withdraw status | allowed,prohibited |
 | DATA\_END |  | false |  |  |
 | instStatus | string | false | Instrument status | normal,delisted |
-| \_\_/chains\_\_ |  | false |  |  |
+| CHAINS\_END |  | false |  |  |
 
 #### Request example
 
@@ -1924,7 +1924,7 @@ Interface description: This endpoint retrieves all klines in a specific range.
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format：market.$symbol.kline.$period |  |
+| ch | string | false | Data belonged channel，Format：market.\$symbol.kline.\$period |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
 | DATA\_START | object | false |  |  |
 | id | long | false | The UNIX timestamp in seconds as response id |  |
@@ -2003,9 +2003,9 @@ Interface description: This endpoint retrieves the latest ticker with some impor
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format：market.$symbol.detail.merged |  |
+| ch | string | false | Data belonged channel，Format：market.\$symbol.detail.merged |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | id | long | false | The internal identity |  |
 | amount | float | false | Accumulated trading volume of last 24 hours (rotating 24h), in base currency |  |
 | count | integer | false | The number of completed trades (rotating 24h) |  |
@@ -2016,7 +2016,7 @@ Interface description: This endpoint retrieves the latest ticker with some impor
 | vol | float | false | Accumulated trading value of last 24 hours (rotating 24h), in quote currency |  |
 | bid | object | false | The current best bid in format \[price, size\] |  |
 | ask | object | false | The current best ask in format \[price, size\] |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Request example
 
@@ -2179,14 +2179,14 @@ When the type value is 'step0', if 'depth' is not entered, the default value is 
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format： market.$symbol.depth.$type |  |
+| ch | string | false | Data belonged channel，Format： market.\$symbol.depth.\$type |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | ts | integer | false | The UNIX timestamp in milliseconds is adjusted to Singapore time |  |
 | version | integer | false | Internal data |  |
 | bids | object | false | The current all bids in format \[price, size\] |  |
 | asks | object | false | The current all asks in format \[price, size\] |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Request example
 
@@ -2280,9 +2280,9 @@ Interface description: This endpoint retrieves the latest trade with its price, 
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format：market.$symbol.trade.detail |  |
+| ch | string | false | Data belonged channel，Format：market.\$symbol.trade.detail |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | id | long | false | global transaction ID |  |
 | ts | long | false | Latest Creation Time |  |
 | DATA\_START | object | false |  |  |
@@ -2293,7 +2293,7 @@ Interface description: This endpoint retrieves the latest trade with its price, 
 | ts | integer | false | The UNIX timestamp in milliseconds adjusted to Singapore time |  |
 | direction | string | false | The direction of the taker trade: 'buy' or 'sell' |  |
 | DATA\_END |  | false |  |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Request example
 
@@ -2362,7 +2362,7 @@ Interface description: This endpoint retrieves the most recent trades with their
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format：market.$symbol.trade.detail |  |
+| ch | string | false | Data belonged channel，Format：market.\$symbol.trade.detail |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
 | DATA\_START | object | false |  |  |
 | id | long | false | global transaction ID |  |
@@ -2463,9 +2463,9 @@ Interface description: This endpoint retrieves the summary of trading in the mar
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format： market.$symbol.detail |  |
+| ch | string | false | Data belonged channel，Format： market.\$symbol.detail |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | false |  |  |
+| TICK\_START | object | false |  |  |
 | id | integer | false | The internal identity |  |
 | amount | float | false | The aggregated trading volume in USDT of last 24 hours (rotating 24h) |  |
 | count | integer | false | The number of completed trades of last 24 hours (rotating 24h) |  |
@@ -2475,7 +2475,7 @@ Interface description: This endpoint retrieves the summary of trading in the mar
 | high | float | false | The highest price of last 24 hours (rotating 24h) |  |
 | vol | float | false | The trading volume in base currency of last 24 hours (rotating 24h) |  |
 | version | integer | false | Internal data |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Request example
 
@@ -2534,14 +2534,14 @@ Interface description: Query the complete market depth data, Updated once per se
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format： market.$symbol.depth.$type |  |
+| ch | string | false | Data belonged channel，Format： market.\$symbol.depth.\$type |  |
 | ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK>\_START |  | false |  |  |
 | ts | 调整为新加坡时间的时间戳，单位毫秒 | false | The UNIX timestamp in milliseconds is adjusted to Singapore time |  |
 | version | 内部字段 | false | Internal data |  |
 | bids | 当前的所有买单 \[price, size\] | false | The current all bids in format \[price, size\] |  |
 | asks | 当前的所有卖单 \[price, size\] | false | The current all asks in format \[price, size\] |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK>\_END |  | false |  |  |
 
 #### Request example
 

@@ -857,11 +857,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 | contract\_code | string | true | contract code | e.g. swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_list\_\_ |  | false |  |  |
+| LIST\_START |  | false |  |  |
 | buy\_ratio | decimal | true | Net long position ratio |  |
 | sell\_ratio | decimal | true | Net short position ratio |  |
 | ts | long | true | Time of Respond Generation |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -870,12 +870,12 @@ Interface description: The interface supports cross margin mode and isolated mar
 | contract\_code | string | true | contract code | e.g. swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_list\_\_ |  | false |  |  |
+| LIST\_START |  | false |  |  |
 | buy\_ratio | decimal | true | net long accounts ratio |  |
 | sell\_ratio | decimal | true | net short accounts ratio |  |
 | locked\_ratio | decimal | true | locked accounts ratio |  |
 | ts | long | true | Time of Respond Generation |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -944,11 +944,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 | contract\_code | string | true | contract code | e.g. swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_list\_\_ |  | false |  |  |
+| LIST\_START |  | false |  |  |
 | buy\_ratio | decimal | true | Net long position ratio |  |
 | sell\_ratio | decimal | true | Net short position ratio |  |
 | ts | long | true | Time of Respond Generation |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -1107,15 +1107,15 @@ Interface description: The interface only supports cross margin mode. The reques
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_list\_\_ | object array | true |  |  |
+| LIST\_START | object array | true |  |  |
 | lever\_rate | int | true | lever rate |  |
-| \_\_ladders\_\_ | object array | true | ladders for margin |  |
+| LADDERS\_START | object array | true | ladders for margin |  |
 | min\_margin\_balance | decimal | true | min margin balance(the starting point in this ladder, included in this ladder) |  |
 | max\_margin\_balance | decimal | true | max margin balance(the end point in this ladder, excluded in this ladder, is next ladder's min\_margin\_balance) |  |
 | min\_margin\_available | decimal | true | min margin available(in the range of this ladder margin balance) |  |
 | max\_margin\_available | decimal | true | max margin available（not in the range of this ladder margin balance, is next ladder's min\_margin\_available) |  |
-| \_\_/ladders\_\_ |  | false |  |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LADDERS\_END |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
 
@@ -1193,15 +1193,15 @@ Interface description: This interface only supports isolated margin mode.
 | contract\_code | string | true | contract code | such as: "BTC-USDT" |
 | margin\_mode | string | true | margin mode | isolated: isolated |
 | margin\_account | string | true | margin account | such as: “BTC-USDT” |
-| \_\_list\_\_ | object array | true |  |  |
+| LIST\_START | object array | true |  |  |
 | lever\_rate | int | true | lever rate |  |
-| \_\_ladders\_\_ | object array | true | ladders for margin |  |
+| LADDERS\_START | object array | true | ladders for margin |  |
 | min\_margin\_balance | decimal | true | min margin balance(the starting point in this ladder, included in this ladder) |  |
 | max\_margin\_balance | decimal | true | max margin balance(the end point in this ladder, excluded in this ladder, is next ladder's min\_margin\_balance) |  |
 | min\_margin\_available | decimal | true | min margin available(in the range of this ladder margin balance) |  |
 | max\_margin\_available | decimal | true | max margin available（not in the range of this ladder margin balance, is next ladder's min\_margin\_available) |  |
-| \_\_/ladders\_\_ |  | false |  |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LADDERS\_END |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
 
@@ -1400,15 +1400,15 @@ Interface description: This interface only supports isolated margin mode.
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | e.g. "BTC-USDT" |
 | margin\_mode | string | true | margin mode | isolated : "isolated" |
-| \_\_list\_\_ |  | false |  |  |
+| LIST\_START |  | false |  |  |
 | lever\_rate | decimal | true | Leverage |  |
-| \_\_ladders\_\_ |  | false |  |  |
+| LADDERS\_START |  | false |  |  |
 | min\_size | decimal | true | Min net position limit |  |
 | max\_size | decimal | true | Max net position limit |  |
 | ladder | int | true | Tier |  |
 | adjust\_factor | decimal | true | Adjustment Factor |  |
-| \_\_/ladders\_\_ |  | false |  |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LADDERS\_END |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -1499,15 +1499,15 @@ Interface description: The interface only supports cross margin mode. The reques
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_list\_\_ | object array | true |  |  |
+| LIST\_START | object array | true |  |  |
 | lever\_rate | decimal | true | lever rate |  |
-| \_\_ladders\_\_ | object array | true |  |  |
+| LADDERS\_START | object array | true |  |  |
 | min\_size | decimal | true | min net position limit |  |
 | max\_size | decimal | true | max net position limit |  |
 | ladder | int | true | tier | from 0 |
 | adjust\_factor | decimal | true | adjustment factor |  |
-| \_\_/ladders\_\_ |  | false |  |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LADDERS\_END |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -2280,7 +2280,7 @@ Interface description: Get Contract Elements info
 | offset\_order\_limit |  | false | offset order limit |  |
 | open\_order\_limit |  | false | open order limit |  |
 | short\_position\_limit |  | false | short position limit |  |
-| \_\_contract\_infos\_\_ | object array | true |  |  |
+| CONTRACT\_INFOS\_START | object array | true |  |  |
 | contract\_code | string | true | contract code |  |
 | instrument\_type | list | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | settlement\_date | string | true | The next settlement time of the contract | Timestamps, such as "1490759594752" |
@@ -2288,27 +2288,27 @@ Interface description: Get Contract Elements info
 | create\_date | string | true | Listing Date | eg "20190808" |
 | contract\_status | int | true | Contract Status | contract status ： 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,6: Delivering,8: Delivered |
 | delivery\_date | string | true | delivery date, empty string when swap | such as: "20180720" |
-| \_\_contract\_infos\_\_ | object array | true |  |  |
-| \_\_price\_ticks\_\_ | object array | false | The Minimum Price Change |  |
+| CONTRACT\_INFOS\_START | object array | true |  |  |
+| PRICE\_TICKS\_START | object array | false | The Minimum Price Change |  |
 | business\_type | Integer | true | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures |  |
 | price | String | true | The Minimum Price Change |  |
-| \_\_instrument\_values\_\_ |  | true | contract Face Value |  |
+| INSTRUMENT\_VALUES\_START |  | true | contract Face Value |  |
 | business\_type | Integer | true | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures |  |
 | price | String | true | contract Face Value |  |
-| \_\_order\_limits\_\_ | object array | true | The maximum quantity of single order (Cont) |  |
+| ORDER\_LIMITS\_START | object array | true | The maximum quantity of single order (Cont) |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
 | open\_after\_closing | String | true | open after closing |  |
-| \_\_normal\_limits\_\_ |  | false | Hard Price Limit |  |
+| NORMAL\_LIMITS\_START |  | false | Hard Price Limit |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
-| \_\_open\_limits\_\_ | object | false | Non-basis Price Limit |  |
+| OPEN\_LIMITS\_START | object | false | Non-basis Price Limit |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
-| \_\_trade\_limits\_\_ |  | false | Basis Price Limit |  |
+| TRADE\_LIMITS\_START |  | false | Basis Price Limit |  |
 | instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
 | open | String | true | open |  |
 | close | String | true | close |  |
@@ -2667,7 +2667,7 @@ step16, step17, step18, and step19 are only for SHIB-USDT contract, and the othe
 | ch | string | true | Data belonged channel，Format： market.period |  |
 | status | string | true | Request Processing Result |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond | "ok" , "error" |
-| \_\_tick\_\_ | object array | false |  |  |
+| TICK>\_START | object array | false |  |  |
 | mrid | long | true | Order ID |  |
 | id | long | true | tick ID |  |
 | asks | object | false | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |  |
@@ -2675,7 +2675,7 @@ step16, step17, step18, and step19 are only for SHIB-USDT contract, and the othe
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 | version | long | true | version ID |  |
 | ch | string | true | Data channel, Format： market.period |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK>\_END |  | false |  |  |
 
 #### Request example
 
@@ -2751,14 +2751,14 @@ Interface description: he interface supports cross margin mode and isolated marg
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | true | the result of server handling to request | "ok" , "error" |
-| \_\_ticks\_\_ | object array | true |  |  |
+| TICKS\_START | object array | true |  |  |
 | contract\_code | string | true | contract code or contract type | swap: "BTC-USDT"... , future: "BTC-USDT-220325" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |
 | business\_type | string | true | business type | futures, swap |
 | mrid | long | true | Match ID, unique identification |  |
 | ask | array | false | \[Ask 1 price, Ask 1 qty (cont)\] |  |
 | bid | array | false | \[Bid 1 price, Bid 1 qty (cont)\] |  |
 | ts | long | true | The system detects the orderbook time point, unit: milliseconds |  |
-| \_\_/ticks\_\_ |  | false |  |  |
+| TICKS\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
 #### Request example
@@ -3046,7 +3046,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | ch | string | true | Data belonged channel，format： market.\$contract\_code.detail.merged |  |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| \_\_tick\_\_ | object | true | kline data (Start at 00:00(UTC+8) of the day) |  |
+| TICK\_START | object | true | kline data (Start at 00:00(UTC+8) of the day) |  |
 | id | long | true | kline id,the same as kline timestamp |  |
 | vol | string | true | Trade Volume(Cont.), from nowtime - 24 hours. Sum of both buy and sell sides |  |
 | count | decimal | true | Order Quantity, from nowtime - 24 hours. Sum of both buy and sell sides |  |
@@ -3059,7 +3059,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | bid | object | true | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence |  |
 | trade\_turnover | string | true | Transaction amount, that is, sum (transaction quantity \* contract face value \* transaction price),from nowtime - 24 hours. Sum of both buy and sell sides |  |
 | ts | long | true | Timestamp |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Request example
 
@@ -3128,7 +3128,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | Parameter | Data Type | Required | Description | Value Range |
 | --- | --- | --- | --- | --- |
 | status | string | true | status | "ok" , "error" |
-| \_\_ticks\_\_ | object array | true |  |  |
+| TICKS\_START | object array | true |  |  |
 | contract\_code | string | true | contract code or contract type | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |
 | business\_type | string | true | business type | futures, swap |
 | id | long | true | id |  |
@@ -3143,7 +3143,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | vol | string | true | Transaction amount, from nowtime - 24 hours. Sum of both buy and sell sides |  |
 | number\_of | string | true | number of(cont), from nowtime - 24 hours. Sum of both buy and sell sides |  |
 | ts | long | true | timestamp |  |
-| \_\_/ticks\_\_ |  | false |  |  |
+| TICKS\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
 #### Request example
@@ -3218,7 +3218,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | ch | string | true | Data belonged channel，Format： market.\$contract\_code.trade.detail |  |
 | status | string | true |  | "ok","error" |
 | ts | long | true | Sending time |  |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | id | long | true | Unique Order Id(symbol level). |  |
 | ts | long | true | Latest Creation Time |  |
 | DATA\_START |  | false |  |  |
@@ -3232,7 +3232,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | business\_type | string | true | business type | futures, swap |
 | trade\_turnover | string | true | trade turnover(quoted currency) |  |
 | DATA\_END |  | false |  |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 
 #### Request example
 
@@ -3389,12 +3389,12 @@ Interface description: The interface supports cross margin mode and isolated mar
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_tick\_\_ |  | false |  |  |
+| TICK\_START |  | false |  |  |
 | volume | decimal | true | Open Interest. |  |
 | amount\_type | int | true | Open Interest Unit | 1:-cont，2:- cryptocurrency |
 | value | decimal | true | Total position volume (the unit shall be the denominated currency of the contract, eg, USDT) |  |
 | ts | long | true | Recording Time |  |
-| \_\_/tick\_\_ |  | false |  |  |
+| TICK\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 Notes:

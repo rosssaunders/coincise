@@ -2164,7 +2164,7 @@ Interface description: The interface only supports cross margin mode.
 | money\_out | bigdecimal | true | money out |  |
 | new\_risk\_rate | bigdecimal | true | new risk rate |  |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -2179,8 +2179,8 @@ Interface description: The interface only supports cross margin mode.
 | trade\_partition | string | true | trade partition |  |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/contract\_detail\_\_ |  | false |  |  |
-| \_\_futures\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_END |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | future: "BTC-USDT-210625" ... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -2195,7 +2195,7 @@ Interface description: The interface only supports cross margin mode.
 | trade\_partition | string | true | trade partition |  |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/futures\_contract\_detail\_\_ |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -2582,7 +2582,7 @@ Interface description: This interface only supports isolated margin mode.
 | margin\_mode | string | true | margin mode | isolated : "isolated" |
 | margin\_account | string | true | margin account | "BTC-USDT"... |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_positions\_\_ | object array | true |  |  |
+| POSITIONS\_START | object array | true |  |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | new\_risk\_rate | bigdecimal | true | new risk rate |  |
 | trade\_partition | string | true | trade partition |  |
@@ -2603,7 +2603,7 @@ Interface description: This interface only supports isolated margin mode.
 | margin\_mode | string | true | margin mode | isolated : "isolated" |
 | margin\_account | string | true | margin account | "BTC-USDT"... |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_/positions\_\_ |  | false |  |  |
+| POSITIONS\_END |  | false |  |  |
 | adl\_risk\_percent | decimal | false | The risk level of the current position being forced to reduce the position by “adl\_risk\_percent” | 1、2、3、4、5 |
 | DATA\_END |  | false |  |  |
 
@@ -2722,7 +2722,7 @@ Interface description: The interface only supports cross margin mode.
 | money\_out | bigdecimal | true | money out |  |
 | new\_risk\_rate | bigdecimal | true | new risk rate |  |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -2737,8 +2737,8 @@ Interface description: The interface only supports cross margin mode.
 | trade\_partition | string | true | trade partition |  |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/contract\_detail\_\_ |  | false |  |  |
-| \_\_futures\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_END |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | future: "BTC-USDT-210625" ... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -2753,8 +2753,8 @@ Interface description: The interface only supports cross margin mode.
 | trade\_partition | string | true | trade partition |  |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/futures\_contract\_detail\_\_ |  | false |  |  |
-| \_\_positions\_\_ | object array | true |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_END |  | false |  |  |
+| POSITIONS\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | new\_risk\_rate | bigdecimal | true | cross max available |  |
 | trade\_partition | string | true | trade partition |  |
@@ -2778,7 +2778,7 @@ Interface description: The interface only supports cross margin mode.
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_/positions\_\_ |  | false |  |  |
+| POSITIONS\_END |  | false |  |  |
 | adl\_risk\_percent | decimal | false | The risk level of the current position being forced to reduce the position by “adl\_risk\_percent” | 1、2、3、4、5 |
 | DATA\_END |  | false |  |  |
 
@@ -2975,11 +2975,11 @@ When enable the transaction authority on the sub-account for the first time, dee
 | --- | --- | --- | --- | --- |
 | status | string | true | result of server handled request | "ok" , "error" |
 | DATA\_START |  | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | sub\_uid | string | true | the list of sub uid which failed |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error msg |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the list of sub uid which successes |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
@@ -3050,15 +3050,15 @@ Interface description: This interface is used to query the contract sub-account 
 | status | string | true | Request the processing result | ok , "error" |
 | DATA\_START |  | true |  |  |
 | query\_id |  | false |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | sub\_uid | string | true | sub uid |  |
 | err\_code | string | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
-| \_\_successes\_\_ | object array | false |  |  |
+| ERRORS\_END |  | false |  |  |
+| SUCCESSES\_START | object array | false |  |  |
 | sub\_uid | string | true | sub uid |  |
 | sub\_auth | string | true | sub auth, 1:enable, 0:disable |  |
-| \_\_successes\_\_ |  | false |  |  |
+| SUCCESSES\_START |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true |  |  |
 
@@ -3133,7 +3133,7 @@ Interface description: This interface only supports isolated margin mode.
 | ts | long | true | the create time point of response, unit: ms |  |
 | DATA\_START |  | false |  |  |
 | sub\_uid | long | true | sub-account UID |  |
-| \_\_list\_\_ |  | false |  |  |
+| LIST\_START |  | false |  |  |
 | symbol | string | true | type code | "BTC","ETH"... |
 | contract\_code | string | true | contract code | e.g. "BTC-USDT" |
 | margin\_asset | string | true | margin asset |  |
@@ -3143,7 +3143,7 @@ Interface description: This interface only supports isolated margin mode.
 | margin\_mode | string | true | margin mode | isolated : "isolated" |
 | margin\_account | string | true | margin account | "BTC-USDT"... |
 | query\_id | long | true | Query id, which can be used as the from\_id field for the next query request. |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 Notes:
@@ -3221,14 +3221,14 @@ Interface description: The interface only supports cross margin mode.
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 | DATA\_START | object array | true |  |  |
 | sub\_uid | long | true | sub-account UID |  |
-| \_\_list\_\_ | object array | true |  |  |
+| LIST\_START | object array | true |  |  |
 | margin\_mode | string | true | margin mode | cross: cross margin mode |
 | margin\_account | string | true | margin account | "USDT"... |
 | margin\_asset | string | true | margin asset |  |
 | margin\_balance | decimal | true | account equity |  |
 | risk\_rate | decimal | true | margin rate |  |
 | query\_id | long | true | Query id, which can be used as the from\_id field for the next query request. |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 Notes:
@@ -3308,9 +3308,9 @@ By default, the list of sub-accounts is in ascending order according to the time
 | status | string | true | result of server handled request | "ok" , "error" |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
 | DATA\_START | object | true |  |  |
-| \_\_sub\_list\_\_ | object array | true |  |  |
+| SUB\_LIST\_START | object array | true |  |  |
 | sub\_uid | long | true | sub uid |  |
-| \_\_account\_info\_list\_\_ | object array | true |  |  |
+| ACCOUNT\_INFO\_LIST\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | "BTC-USDT" ... |
 | margin\_account | string | true | margin account | such as:BTC-USDT” |
@@ -3319,8 +3319,8 @@ By default, the list of sub-accounts is in ascending order according to the time
 | margin\_balance | decimal | true | margin balance |  |
 | liquidation\_price | decimal | true | liquidation price |  |
 | risk\_rate | decimal | true | risk rate |  |
-| \_\_/account\_info\_list\_\_ |  | false |  |  |
-| \_\_/sub\_list\_\_ |  | false |  |  |
+| ACCOUNT\_INFO\_LIST\_END |  | false |  |  |
+| SUB\_LIST\_END |  | false |  |  |
 | current\_page | int | true | current page |  |
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
@@ -3409,16 +3409,16 @@ By default, the list of sub-accounts is in ascending order according to the time
 | status | string | true | result of server handled request | "ok" , "error" |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
 | DATA\_START | object | true |  |  |
-| \_\_sub\_list\_\_ | object array | true |  |  |
+| SUB\_LIST\_START | object array | true |  |  |
 | sub\_uid | long | true | sub uid |  |
-| \_\_account\_info\_list\_\_ | object array | true |  |  |
+| ACCOUNT\_INFO\_LIST\_START | object array | true |  |  |
 | margin\_mode | string | true | margin mode | cross； |
 | margin\_account | string | true | margin account | such as:USDT” |
 | margin\_asset | string | true | margin asset |  |
 | margin\_balance | decimal | true | margin balance |  |
 | risk\_rate | decimal | true | risk rate |  |
-| \_\_/account\_info\_list\_\_ |  | false |  |  |
-| \_\_/sub\_list\_\_ |  | false |  |  |
+| ACCOUNT\_INFO\_LIST\_END |  | false |  |  |
+| SUB\_LIST\_END |  | false |  |  |
 | current\_page | int | true | current page |  |
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
@@ -3615,7 +3615,7 @@ Interface description: The interface only supports cross margin mode.
 | money\_out | bigdecimal | true | money out |  |
 | new\_risk\_rate | bigdecimal | true | new risk rate |  |
 | position\_mode | string | true | position mode | single\_side，dual\_side |
-| \_\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | swap:"BTC-USDT" ... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -3630,8 +3630,8 @@ Interface description: The interface only supports cross margin mode.
 | trade\_partition | string | true | trade partition |  |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/contract\_detail\_\_ |  | false |  |  |
-| \_\_futures\_contract\_detail\_\_ | object array | true |  |  |
+| CONTRACT\_DETAIL\_END |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_START | object array | true |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | future:"BTC-USDT-211231" ... |
 | margin\_position | decimal | true | position margin (the margin used by current positions) |  |
@@ -3646,7 +3646,7 @@ Interface description: The interface only supports cross margin mode.
 | trade\_partition | string | true | trade partition |  |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/futures\_contract\_detail\_\_ |  | false |  |  |
+| FUTURES\_CONTRACT\_DETAIL\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 Notes:
@@ -4347,7 +4347,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 | DATA\_START |  | false |  |  |
 | order\_price\_type | string | true | Order Type | "limit": Limit Order，"opponent":BBO，"lightning": Lightning Close，"optimal\_5": Optimal top 5 price，"optimal\_10":Optimal top 10 price，"optimal\_20":Optimal top 20 price,"fok":FOK order,"ioc":ioc order, "opponent\_ioc"：IOC order using the BBO price，"lightning\_ioc"：lightning IOC，"optimal\_5\_ioc"：optimal\_5 IOC，"optimal\_10\_ioc"：optimal\_10 IOC，"optimal\_20\_ioc"：optimal\_20 IOC, "opponent\_fok"：FOK order using the BBO price，"lightning\_fok"：lightning FOK，"optimal\_5\_fok"：optimal\_5 FOK，"optimal\_10\_fok"：optimal\_10 FOK，"optimal\_20\_fok"：optimal\_20 FOK |
-| \_\_list\_\_ |  | false |  |  |
+| LIST\_START |  | false |  |  |
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract type code | swap:"BTC-USDT"... , future:"BTC-USDT-210625"... |
 | open\_limit | decimal | true | Max open order limit |  |
@@ -4355,7 +4355,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -4921,11 +4921,11 @@ Interface description: \\This interface only supports isolated margin mode. If t
 | symbol | string | true | symbol | "BTC","ETH"... |
 | contract\_code | string | true | contract code | "BTC-USDT" ... |
 | margin\_mode | string | true | margin mode | isolated |
-| \_\_list\_\_ | object array | true |  |  |
+| LIST\_START | object array | true |  |  |
 | lever\_rate | int | true | leverage rate |  |
 | buy\_limit\_value | decimal | true | upper limit on long positions, unit: usdt |  |
 | sell\_limit\_value | decimal | true | upper limit on short positions, unit: usdt |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
 
@@ -5014,11 +5014,11 @@ business\_type is a required parameter when querying the contract of futures. An
 | business\_type | string | true | business type | futures, swap |
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: "BTC-USDT" |
-| \_\_list\_\_ | object array | true |  |  |
+| LIST\_START | object array | true |  |  |
 | lever\_rate | int | true | leverage rate |  |
 | buy\_limit\_value | decimal | true | upper limit on long positions, unit: usdt |  |
 | sell\_limit\_value | decimal | true | upper limit on short positions, unit: usdt |  |
-| \_\_/list\_\_ |  | false |  |  |
+| LIST\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
 
@@ -5225,7 +5225,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | status | string | true | respone status | "ok" , "error" |
 | ts | long | true | response millionseconds. |  |
 | DATA\_START | object | true |  |  |
-| \_\_transfer\_record\_\_ | object array | true |  |  |
+| TRANSFER\_RECORD\_START | object array | true |  |  |
 | id | long | true | transfer id |  |
 | ts | long | true | create timestamp |  |
 | asset | string | true | asset | "USDT"... |
@@ -5236,7 +5236,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 | sub\_account\_name | string | true | subaccount name |  |
 | transfer\_type | int | true | transfer type | 35:transfer from subaccount; 34:transfer to subaccount; |
 | amount | decimal | true | amount |  |
-| \_\_/transfer\_record\_\_ |  | false |  |  |
+| TRANSFER\_RECORD\_END |  | false |  |  |
 | total\_page | int | true | total page |  |
 | current\_page | int | true | current page |  |
 | total\_size | int | true | total size |  |
@@ -5402,7 +5402,7 @@ No parameters are needed for this endpoint.
 | disable\_reason | string | true | disable reason | "COR":（Cancel Order Ratio），“TDN”：（Total Disable Number） |
 | disable\_interval | long | true | disable millionseconds |  |
 | recovery\_time | long | true | recovery millionseconds |  |
-| \_\_COR\_\_ | dict object | true | （Cancel Order Ratio） |  |
+| COR\_START | dict object | true | （Cancel Order Ratio） |  |
 | orders\_threshold | long | true | orders threshold |  |
 | orders | long | true | total pending orders |  |
 | invalid\_cancel\_orders | long | true | numbers of invalid cancel orders |  |
@@ -5410,13 +5410,13 @@ No parameters are needed for this endpoint.
 | cancel\_ratio | decimal | true | cancel ratio |  |
 | is\_trigger | int | true |  | 1: triggered，0: not triggered |
 | is\_active | int | true |  | 1: active，0：not active |
-| \_\_/COR\_\_ | dict object | true |  |  |
-| \_\_TDN\_\_ | dict object | true | Total Disable Number |  |
+| COR\_END | dict object | true |  |  |
+| TDN\_START | dict object | true | Total Disable Number |  |
 | disables\_threshold | long | true | disable threshold |  |
 | disables | long | true | total disable number |  |
 | is\_trigger | int | true |  | 1：triggered，0：not triggered |
 | is\_active | int | true |  | 1：active，0：not active |
-| \_\_/TDN\_\_ | dict object | true |  |  |
+| TDN\_END | dict object | true |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -5493,7 +5493,7 @@ The system checks all countdowns approximately every 10 ms. Therefore, please be
 | code | int | false | Status code |  |
 | msg | string | false | Error description |  |
 | ts | long | false | Time of responding, unit: millisecond (ms) |  |
-| DATA\_START | object | false |  |  |
+| DATA> \_START | object | false |  |  |
 | current\_time | long | false | Current time (subject to platform server time) |  |
 | trigger\_time | long | false | Trigger time (subject to platform server time) |  |
 | DATA\_END |  | false |  |  |
@@ -6009,7 +6009,7 @@ Interface description: This interface only supports isolated margin mode.
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
 | --- | --- | --- | --- | --- | --- |
-| \_\_orders\_data\_\_ |  | false |  |  |  |
+| ORDERS\_DATA\_START |  | false |  |  |  |
 | contract\_code | string | true | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USDT" |  |  |
 | reduce\_only | int | false | reduce only(in hedge mode it is invalid, and in one-way mode it's value is 0 when not filled.) 0: no, 1: yes |  |  |
 | client\_order\_id | long | false | Clients fill and maintain themselves. the value must be in \[1, 9223372036854775807\] |  |  |
@@ -6026,7 +6026,7 @@ Interface description: This interface only supports isolated margin mode.
 | sl\_order\_price | decimal | false | Order price of stop-loss order（The order price is not required to fill in for Optimal N） |  |  |
 | sl\_order\_price\_type | string | false | Order type of stop-loss order default is limit; limit，optimal\_5，optimal\_10，optimal\_20 | default is market; market，limit，optimal\_5，optimal\_10，optimal\_20 |  |
 | price\_protect | booleanint | false | price protection, default is false. This parameter is only required when setting tp/sl | true or false |  |
-| \_\_/orders\_data\_\_ |  | false |  |  |  |
+| ORDERS\_DATA\_END |  | false |  |  |  |
 
 Notes:
 
@@ -6054,17 +6054,17 @@ Risk Reminder:By using Best Bid/Offer( bbo ), you are to place limit orders at t
 | --- | --- | --- | --- | --- |
 | status | string | true | Request processing result | ok , "error" |
 | DATA\_START | object array | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | index | int | true | Index of orders |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error massage |  |
-| \_\_/errors\_\_ |  | false |  |  |
-| \_\_success\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
+| SUCCESS\_START |  | false |  |  |
 | index | int | true | Index of orders |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | The order ID is in string format |  |
 | client\_order\_id | long | true | The client order ID filled in by the user when placing an order. If not filled, it will not be returned |  |
-| \_\_/success\_\_ |  | false |  |  |
+| SUCCESS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true |  |  |
 
@@ -6162,7 +6162,7 @@ Interface description: The interface only supports cross margin mode. The reques
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
 | --- | --- | --- | --- | --- | --- |
-| \_\_orders\_data\_\_ | object array | true |  |  |  |
+| ORDERS\_DATA\_START | object array | true |  |  |  |
 | contract\_code | string | false | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |  |
 | pair | string | false | pair | BTC-USDT |  |
 | contract\_type | string | false | contract type | swap, this\_week, next\_week, quarter, next\_quarter |  |
@@ -6181,7 +6181,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | sl\_order\_price | decimal | false | Order price of stop-loss order（The order price is not required to fill in for Optimal N） |  |  |
 | sl\_order\_price\_type | string | false | Order type of stop-loss order default is limit; | default is market; market，limit，optimal\_5，optimal\_10，optimal\_20，optimal\_5，optimal\_10，optimal\_20 |  |
 | price\_protect | boolean | false | price protection, default is false. This parameter is only required when setting tp/sl | true or false |  |
-| \_\_/orders\_data\_\_ |  | false |  |  |  |
+| ORDERS\_DATA\_END |  | false |  |  |  |
 
 Notes:
 
@@ -6209,17 +6209,17 @@ Risk Reminder:By using Best Bid/Offer( bbo ), you are to place limit orders at t
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | index | int | true | order index |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
-| \_\_success\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
+| SUCCESS\_START |  | false |  |  |
 | index | int | true | order index |  |
 | order\_id | long | true | order ID |  |
 | order\_id\_str | string | true | order ID |  |
 | client\_order\_id | long | true | the client ID that is filled in when the order is placed, if it’s not filled, it won’t be returned |  |
-| \_\_/success\_\_ |  | false |  |  |
+| SUCCESS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -6334,11 +6334,11 @@ client\_order\_id, order status query is available for orders placed within 8 ho
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | false |  |  |
-| \_\_errors\_\_ | array | false |  |  |
+| ERRORS\_START | array | false |  |  |
 | order\_id | string | true | Order ID |  |
 | err\_code | int | true | Error code |  |
 | err\_msg | string | true | Error information |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | Successfully withdrew list of order\_id or client\_order\_id |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -6417,11 +6417,11 @@ client\_order\_id, order status query is available for orders placed within 8 ho
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | array | true |  |  |
+| ERRORS\_START | array | true |  |  |
 | order\_id | string | true | order ID |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successfully withdrew list of order\_id or client\_order\_id |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -6496,11 +6496,11 @@ You can fill in only one of direction and offset to cancel the orders. (such as 
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | false |  |  |
-| \_\_errors\_\_ | array | false |  |  |
+| ERRORS\_START | array | false |  |  |
 | order\_id | string | true | Order ID |  |
 | err\_code | int | true | failed order error messageError code |  |
 | err\_msg | string | true | failed order information |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | Successful order |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -6569,11 +6569,11 @@ You can fill in only one of direction and offset to cancel the orders. (such as 
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | array | true |  |  |
+| ERRORS\_START | array | true |  |  |
 | order\_id | string | true | order ID |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the list order which's successful |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -7107,7 +7107,7 @@ Please note that created\_at can't be "0"
 | real\_profit | decimal | true | total real profit of order (calculated with the opening average price, include profit in history settlement.) |  |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
 | canceled\_source | string | false | timeout-canceled-order |  |
-| \_\_trades\_\_ |  | false |  |  |
+| TRADES\_START |  | false |  |  |
 | id | string | true | the global unique ID of the trade. |  |
 | fee\_asse | string | false | fee asset |  |
 | price | string | false | deduction currency price(USDT) |  |
@@ -7120,8 +7120,8 @@ Please note that created\_at can't be "0"
 | created\_at | long | true | Creation time |  |
 | profit | decimal | true | profit or loss of the transaction (calculated with the average price of position, exclude profit in history settlement.) |  |
 | real\_profit | decimal | true | real profit of the transaction (calculated with the opening average price, include profit in history settlement.) |  |
-| \_\_/trades\_\_ |  | false |  |  |
-| \_\_/data \_\_ |  | false |  |  |
+| TRADES\_END |  | false |  |  |
+| DATA \_END |  | false |  |  |
 | ts | long | true | Timestamp |  |
 
 Notes:
@@ -7297,7 +7297,7 @@ Please note that created\_at can't be "0"
 | real\_profit | decimal | true | total real profit of order (calculated with the opening average price, include profit in history settlement.) |  |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
 | canceled\_source | string | false | timeout-canceled-order |  |
-| \_\_trades\_\_ | object array | true |  |  |
+| TRADES\_START | object array | true |  |  |
 | id | string | true | the global unique ID of the trade |  |
 | fee\_asse | string | false | fee asset |  |
 | price | string | false | deduction currency price(USDT) |  |
@@ -7310,7 +7310,7 @@ Please note that created\_at can't be "0"
 | created\_at | long | true | created time |  |
 | profit | decimal | true | profit or loss of the transaction (calculated with the average price of position, exclude profit in history settlement.) |  |
 | real\_profit | decimal | true | real profit of the transaction (calculated with the opening average price, include profit in history settlement.) |  |
-| \_\_/trades\_\_ |  | false |  |  |
+| TRADES\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | timestamp |  |
 
@@ -7436,7 +7436,7 @@ Interface description: This interface only supports isolated margin mode.
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result |  |
 | DATA\_START | object | false |  |  |
-| \_\_orders\_\_ | array | false |  |  |
+| ORDERS\_START | array | false |  |  |
 | symbol | string | true | Variety code |  |
 | contract\_code | string | true | Contract Code | "BTC-USDT" ... |
 | volume | decimal | true | Number of Order |  |
@@ -7468,7 +7468,7 @@ Interface description: This interface only supports isolated margin mode.
 | real\_profit | decimal | true | real profit (calculated with the opening average price, include profit in history settlement.) |  |
 | update\_time | Long | true | order update time ，millesecond timestamp |  |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | total\_page | int | true | Total Pages |  |
 | current\_page | int | true | Current Page |  |
 | total\_size | int | true | Total Size |  |
@@ -7580,7 +7580,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result |  |
 | DATA\_START | object | true |  |  |
-| \_\_orders\_\_ | object | true |  |  |
+| ORDERS\_START | object | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | margin\_mode | string | true | margin mode | cross: cross margin mode |
@@ -7615,7 +7615,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | total\_page | int | true | total page |  |
 | current\_page | int | true | current page |  |
 | total\_size | int | true | total size |  |
@@ -9181,11 +9181,11 @@ Interface description: This interface only supports isolated margin mode. The fr
 | --- | --- | --- | --- | --- |
 | status | string | true | response status | "ok" , "error" |
 | DATA\_START |  | false |  |  |
-| \_\_errors\_\_ |  | false |  |  |
+| ERRORS\_START |  | false |  |  |
 | order\_id | string | true | order id |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error messages |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successful orders |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | response timestamp millseconds |  |
@@ -9254,11 +9254,11 @@ Interface description: The interface only supports cross margin mode. The freque
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | order\_id | string | false | order ID |  |
 | err\_code | int | false | error code |  |
 | err\_msg | string | false | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the list order which's successful，joined by "," |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -9333,11 +9333,11 @@ You can fill in only one of direction and offset to cancel the orders. (such as 
 | --- | --- | --- | --- | --- |
 | status | string | true | status | "ok" , "error" |
 | DATA\_START |  | false |  |  |
-| \_\_errors\_\_ |  | false |  |  |
+| ERRORS\_START |  | false |  |  |
 | order\_id | string | true | order id |  |
 | err\_code | int | true | error code |  |
 | err\_msg | string | true | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successful orders |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | response timestamp in millseconds |  |
@@ -9406,11 +9406,11 @@ You can fill in only one of direction and offset to cancel the orders. (such as 
 | --- | --- | --- | --- | --- |
 | status | string | true | Request Processing Result | "ok" , "error" |
 | DATA\_START | object | true |  |  |
-| \_\_errors\_\_ | object array | true |  |  |
+| ERRORS\_START | object array | true |  |  |
 | order\_id | string | false | order ID |  |
 | err\_code | int | false | error code |  |
 | err\_msg | string | false | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the list order which's successful，joined by "," |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -9479,7 +9479,7 @@ Interface description: This interface only supports isolated margin mode.
 | total\_page | int | true | total page |  |
 | current\_page | int | true | current page |  |
 | total\_size | int | true | total size |  |
-| \_\_orders\_\_ |  | false |  |  |
+| ORDERS\_START |  | false |  |  |
 | symbol | string | true | Cryptocurrency |  |
 | contract\_code | string | true | contract code |  |
 | trigger\_type | string | true | trigger type： gegreat than or equal to；leless than or equal to |  |
@@ -9499,7 +9499,7 @@ Interface description: This interface only supports isolated margin mode.
 | margin\_mode | string | true | margin mode | isolated : "isolated" |
 | margin\_account | string | true | margin account | "BTC-USDT"... |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time stamp of response, Unit: millisecond |  |
 
@@ -9591,7 +9591,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | total\_page | int | true | total page |  |
 | current\_page | int | true | current page |  |
 | total\_size | int | true | total size |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | margin\_mode | string | true | margin mode | cross: cross margin mode |
@@ -9614,7 +9614,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -9716,7 +9716,7 @@ Default to query completed orders (order status is one of 4, 5, 6);
 | total\_page | int | true | Total page |  |
 | current\_page | int | true | Current page |  |
 | total\_size | int | true | Total Size |  |
-| \_\_orders\_\_ |  | false |  |  |
+| ORDERS\_START |  | false |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | Contract Code |  |
 | trigger\_type | string | true | trigger： ge Equal to or Greater than；le Less than or Equal to |  |
@@ -9744,7 +9744,7 @@ Default to query completed orders (order status is one of 4, 5, 6);
 | margin\_mode | string | true | margin mode | isolated : "isolated" |
 | margin\_account | string | true | margin account | "BTC-USDT"... |
 | reduce\_only | int | false | 0: no, 1: yes |  |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -9853,7 +9853,7 @@ Default to query completed orders (order status is one of 4, 5, 6);
 | total\_page | int | true | total page |  |
 | current\_page | int | true | current page |  |
 | total\_size | int | true | total size |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | margin\_mode | string | true | margin mode | cross: cross margin mode |
@@ -9884,7 +9884,7 @@ Default to query completed orders (order status is one of 4, 5, 6);
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -9994,14 +9994,14 @@ Interface description: All take-profit and stop-loss orders are position closing
 | status | string | true | status | "ok" , "error" |
 | ts | long | true | time stamp |  |
 | DATA\_START | object | false | Returned data when order is placed successfully, and will not be returned when order fails to be placed. |  |
-| \_\_tp\_order\_\_ | object | true | Order placing result of take-profit order |  |
+| TP\_ORDER\_START | object | true | Order placing result of take-profit order |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | order id (string) |  |
-| \_\_/tp\_order\_\_ |  | false |  |  |
-| \_\_sl\_order\_\_ | object | true | Order placing result of stop-loss order |  |
+| TP\_ORDER\_END |  | false |  |  |
+| SL\_ORDER\_START | object | true | Order placing result of stop-loss order |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | order id (string) |  |
-| \_\_/sl\_order\_\_ |  | false |  |  |
+| SL\_ORDER\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | err\_code | int | false | error code（only when order fails to be placed） |  |
 | err\_msg | string | false | error message（only when order fails to be placed） |  |
@@ -10103,28 +10103,28 @@ All take-profit and stop-loss orders are position closing orders.
 | status | string | true | status |  |
 | ts | long | true | time stamp |  |
 | DATA\_START | object | false | Returned data when order is placed successfully, and will not be returned when order fails to be placed. |  |
-| \_\_tp\_order\_\_ | object | true | Order placing result of take-profit order |  |
+| TP\_ORDER\_START | object | true | Order placing result of take-profit order |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | order id (string) |  |
-| \_\_/tp\_order\_\_ |  | false |  |  |
-| \_\_sl\_order\_\_ | object | true | Order placing result of stop-loss order |  |
+| TP\_ORDER\_END |  | false |  |  |
+| SL\_ORDER\_START | object | true | Order placing result of stop-loss order |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | order id (string) |  |
-| \_\_/sl\_order\_\_ |  | false |  |  |
+| SL\_ORDER\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | err\_code | int | false | error code（only when order fails to be placed） |  |
 | err\_msg | string | false | error message（only when order fails to be placed） |  |
 | status | string | true | status | "ok" , "error" |
 | ts | long | true | time stamp |  |
 | DATA\_START | object | false | Returned data when order is placed successfully, and will not be returned when order fails to be placed. |  |
-| \_\_tp\_order\_\_ | object | true | Order placing result of take-profit order |  |
+| TP\_ORDER\_START | object | true | Order placing result of take-profit order |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | order id (string) |  |
-| \_\_/tp\_order\_\_ |  | false |  |  |
-| \_\_sl\_order\_\_ | object | true | Order placing result of stop-loss order |  |
+| TP\_ORDER\_END |  | false |  |  |
+| SL\_ORDER\_START | object | true | Order placing result of stop-loss order |  |
 | order\_id | long | true | order id |  |
 | order\_id\_str | string | true | order id (string) |  |
-| \_\_/sl\_order\_\_ |  | false |  |  |
+| SL\_ORDER\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | err\_code | int | false | error code（only when order fails to be placed） |  |
 | err\_msg | string | false | error message（only when order fails to be placed） |  |
@@ -10202,11 +10202,11 @@ Interface description: This interface only supports isolated margin mode. The fr
 | --- | --- | --- | --- | --- |
 | status | string | true | status | "ok", "error" |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | order id |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successes orders |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
@@ -10275,11 +10275,11 @@ Interface description: This interface only supports cross margin mode. The frequ
 | --- | --- | --- | --- | --- |
 | status | string | true | status | "ok", "error" |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | order id |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successes orders |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
@@ -10348,11 +10348,11 @@ Interface description: This interface only supports isolated margin mode. The fr
 | --- | --- | --- | --- | --- |
 | status | string | true | status | "ok", "error" |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | order id |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successes orders |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
@@ -10415,11 +10415,11 @@ Interface description: This interface only supports cross margin mode. The frequ
 | --- | --- | --- | --- | --- |
 | status | string | true | status | "ok", "error" |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | order id |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error message |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | successes orders |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
@@ -10487,7 +10487,7 @@ Interface description: This interface only supports isolated margin mode.
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | "BTC-USDT" ... |
 | margin\_mode | string | true | margin mode | cross, isolated |
@@ -10508,7 +10508,7 @@ Interface description: This interface only supports isolated margin mode.
 | status | int | true | status: | 1.Not Activated, 2.Ready to submit the orders, 3.Submitting the orders, 4.Submit the orders success, 5.Submit the orders failed, 6.Orders cancelled, 8.Cancelled order not found, 9.Orders cancelling, 10.Failed, 11.Expired |
 | source\_order\_id | string | true | Order id of source limit order (the field will have a value only when the order placed is a take-profit and stop-loss order; it is used to indicate that a certain limit order that triggered current take-profit and stop-loss order.) |  |
 | relation\_tpsl\_order\_id | string | true | related take-profit and stop loss order id（The field will have a value when users set take-profit and stop loss order stimulatenously, otherwise, the value will be "-1".） |  |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
 
@@ -10600,7 +10600,7 @@ Interface description: This interface only supports cross margin mode. The reque
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | margin\_mode | string | true | margin mode | cross, isolated |
@@ -10624,7 +10624,7 @@ Interface description: This interface only supports cross margin mode. The reque
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
 
@@ -10745,7 +10745,7 @@ Interface description: This interface only supports isolated margin mode.
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | "BTC-USDT" ... |
 | margin\_mode | string | true | margin mode | cross, isolated |
@@ -10772,7 +10772,7 @@ Interface description: This interface only supports isolated margin mode.
 | triggered\_price | decimal | true | triggered price |  |
 | relation\_order\_id | string | true | Relation order ID is the string related to the limit orders， The value is -1 before the trigger orders executed. |  |
 | update\_time | long | true | update time, unit: Millisecond |  |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
 
@@ -10874,7 +10874,7 @@ Interface description: This interface only supports cross margin mode. The reque
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | margin\_mode | string | true | margin mode | cross, isolated |
@@ -10904,7 +10904,7 @@ Interface description: This interface only supports cross margin mode. The reque
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
 
@@ -11027,7 +11027,7 @@ Interface description: This interface only supports isolated margin mode.
 | order\_source | string | true | order source | system. web. api. m. risk. settlement. ios. android. windows. mac. trigger |
 | fee\_asset | string | true | fee asset | （"BTC","ETH"...） |
 | canceled\_at | long | true | canceled at |  |
-| \_\_tpsl\_order\_info\_\_ | object array | true | related take-profit and stop loss order info |  |
+| TPSL\_ORDER\_INFO\_START | object array | true | related take-profit and stop loss order info |  |
 | volume | decimal | true | Numbers of orders (volume) |  |
 | tpsl\_order\_type | string | true | Order type(take-profit order/stop-loss order) | “tp”:take-profit order；"sl"stop-loss order |
 | direction | string | true | direction | "buy", "sell" |
@@ -11045,7 +11045,7 @@ Interface description: This interface only supports isolated margin mode.
 | fail\_reason | string | true | fail reason when triggered |  |
 | triggered\_price | decimal | true | triggered price |  |
 | relation\_order\_id | string | true | Relation order ID is the string related to the limit orders， The value is -1 before the trigger orders executed. |  |
-| \_\_/tpsl\_order\_info\_\_ |  | false |  |  |
+| TPSL\_ORDER\_INFO\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
 
@@ -11197,7 +11197,7 @@ Interface description: This interface only supports cross margin mode. The reque
 | contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
-| \_\_tpsl\_order\_info\_\_ | object array | true | related take-profit and stop loss order info |  |
+| TPSL\_ORDER\_INFO\_START | object array | true | related take-profit and stop loss order info |  |
 | volume | decimal | true | Numbers of orders (volume) |  |
 | tpsl\_order\_type | string | true | Order type(take-profit order/stop-loss order) | “tp”:take-profit order；"sl"stop-loss order |
 | direction | string | true | direction | "buy", "sell" |
@@ -11215,7 +11215,7 @@ Interface description: This interface only supports cross margin mode. The reque
 | fail\_reason | string | true | fail reason when triggered |  |
 | triggered\_price | decimal | true | triggered price |  |
 | relation\_order\_id | string | true | Relation order ID is the string related to the limit orders， The value is -1 before the trigger orders executed. |  |
-| \_\_/tpsl\_order\_info\_\_ |  | false |  |  |
+| TPSL\_ORDER\_INFO\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
 
@@ -11516,11 +11516,11 @@ Interface description: This interface only supports isolated margin mode. The fr
 | --- | --- | --- | --- | --- |
 | status | string | true | the result of server handling to request | "ok" :success, "error": failed |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | trailing order id\[Globally Unique\] |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error msg |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the orders that are success |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -11589,11 +11589,11 @@ Interface description: The interface only supports cross margin mode. The freque
 | --- | --- | --- | --- | --- |
 | status | string | true | the result of server handling to request | "ok" :success, "error": failed |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | trailing order id\[Globally Unique\] |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error msg |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the orders that are success |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -11663,11 +11663,11 @@ Interface description: This interface only supports isolated margin mode. The fr
 | --- | --- | --- | --- | --- |
 | status | string | true | the result of server handling to request | "ok" :success, "error": failed |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | trailing order id\[Globally Unique\] |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error msg |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the orders that are success |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -11732,11 +11732,11 @@ Interface description: The interface only supports cross margin mode. The freque
 | --- | --- | --- | --- | --- |
 | status | string | true | the result of server handling to request | "ok" :success, "error": failed |
 | DATA\_START | object | true |  | dictionary |
-| \_\_errors\_\_ | object | true |  | dictionary |
+| ERRORS\_START | object | true |  | dictionary |
 | order\_id | string | true | trailing order id\[Globally Unique\] |  |
 | err\_code | long | false | error code |  |
 | err\_msg | string | false | error msg |  |
-| \_\_/errors\_\_ |  | false |  |  |
+| ERRORS\_END |  | false |  |  |
 | successes | string | true | the orders that are success |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
@@ -11805,7 +11805,7 @@ Interface description: This interface only supports isolated margin mode.
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | BTC-USDT |
 | volume | decimal | true | volume |  |
@@ -11825,7 +11825,7 @@ Interface description: This interface only supports isolated margin mode.
 | margin\_mode | string | true | margin mode | isolated |
 | margin\_account | string | true | margin account | e.g：“BTC-USDT” |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -11917,7 +11917,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | volume | decimal | true | volume |  |
@@ -11940,7 +11940,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -12038,7 +12038,7 @@ Interface description: This interface only supports isolated margin mode.
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | BTC-USDT |
 | volume | decimal | true | volume |  |
@@ -12067,7 +12067,7 @@ Interface description: This interface only supports isolated margin mode.
 | margin\_mode | string | true | margin mode | isolated |
 | margin\_account | string | true | margin account | e.g：“BTC-USDT” |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -12174,7 +12174,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | total\_page | int | true | total page |  |
 | total\_size | int | true | total size |  |
 | current\_page | int | true | current page |  |
-| \_\_orders\_\_ | object array | true |  |  |
+| ORDERS\_START | object array | true |  |  |
 | symbol | string | true | symbol |  |
 | contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
 | volume | decimal | true | volume |  |
@@ -12206,7 +12206,7 @@ Interface description: The interface only supports cross margin mode. The reques
 | pair | string | true | pair | such as: “BTC-USDT” |
 | business\_type | string | true | business type | futures, swap |
 | reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| \_\_/orders\_\_ |  | false |  |  |
+| ORDERS\_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 | ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
 
@@ -12453,7 +12453,7 @@ Interface description: Used to query the total assets of the account of the USTD
 | margin\_frozen | decimal | true | Freeze Margin (Frozen Quantity of Cross Margin & Isolated Margin) |  |
 | withdraw\_available | decimal | true | Transferable quantity (the amount of assets that users can transfer out of the account) |  |
 | cross\_risk\_rate | decimal | true | Cross Margin Rate (%) |  |
-| \_\_cross\_swap \_\_ | object array | true | Contract-related fields of cross-position swap |  |
+| CROSS\_SWAP \_START | object array | true | Contract-related fields of cross-position swap |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | contract\_code | string | true | Contract code | Swap："BTC-USDT" ... |
 | margin\_mode | string | true | Margin model | Cross Margin Mode：cross |
@@ -12462,8 +12462,8 @@ Interface description: Used to query the total assets of the account of the USTD
 | lever\_rate | decimal | true | Lever rate |  |
 | contract\_type | string | true | Contract type | swap |
 | business\_type | string | true | Business type | swap |
-| \_\_/cross\_swap \_\_ |  | false |  |  |
-| \_\_cross\_futures \_\_ | object array | true | Fields related to cross-position future contracts |  |
+| CROSS\_SWAP \_END |  | false |  |  |
+| CROSS\_FUTURES \_START | object array | true | Fields related to cross-position future contracts |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | contract\_code | string | true | Contract code | future："BTC-USDT-211231" ... |
 | margin\_mode | string | true | Margin model | Cross Margin Mode：cross |
@@ -12471,8 +12471,8 @@ Interface description: Used to query the total assets of the account of the USTD
 | lever\_rate | decimal | true | Lever rate |  |
 | contract\_type | string | true | Contract type | this\_week、next\_week、quarter、next\_quarter |
 | business\_type | string | true | Business type | futures |
-| \_\_/cross\_futures \_\_ |  | false |  |  |
-| \_\_isolated\_swap\_\_ | object array | true | Unified Account Isolated Margin Contract |  |
+| CROSS\_FUTURES \_END |  | false |  |  |
+| ISOLATED\_SWAP\_START | object array | true | Unified Account Isolated Margin Contract |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | contract\_code | string | true | Contract code | "BTC-USDT","ETH-USDT"... |
 | margin\_mode | string | true | Margin model | Isolated Margin Mode：isolated |
@@ -12480,7 +12480,7 @@ Interface description: Used to query the total assets of the account of the USTD
 | withdraw\_available | decimal | true | Maximum amount that can be reduced | Hedge is superposition of long-short isolation, one- way is normal calculation |
 | lever\_rate | int | true | Lever rate |  |
 | position\_mode | string | true | Position mode | single\_side,dual\_side |
-| \_\_/isolated\_swap \_\_ |  | false |  |  |
+| ISOLATED\_SWAP \_END |  | false |  |  |
 | DATA\_END |  | false |  |  |
 
 #### Request example
@@ -12912,7 +12912,7 @@ Interface description: It is used for real-time monitoring of asset changes in t
 | margin\_frozen | decimal | true | Freeze Margin(Frozen Quantity of Cross Margin & Isolated Margin) |  |
 | withdraw\_available | decimal | true | Transferabl e quantity (the amount of assets that users can transfer out of the account) |  |
 | cross\_risk\_rate | decimal | true | Cross Margin Rate (%) |  |
-| \_\_cross\_swap \_\_ | object array | true | Contract-related fields of cross-position swap |  |
+| CROSS\_SWAP \_START | object array | true | Contract-related fields of cross-position swap |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | contract\_code | string | true | Contract code | swap："BTC-USDT" ... |
 | margin\_mode | string | true | Margin model | Cross Margin Mode：cross |
@@ -12921,8 +12921,8 @@ Interface description: It is used for real-time monitoring of asset changes in t
 | lever\_rate | decimal | true | Lever rate |  |
 | contract\_type | string | true | Contract type | swap |
 | business\_type | string | true | Business type | swap |
-| \_\_/cross\_swap \_\_ |  | true |  |  |
-| \_\_cross\_futures \_\_ | object array | true | Fields related to cross position future contracts |  |
+| CROSS\_SWAP \_END |  | true |  |  |
+| CROSS\_FUTURES \_START | object array | true | Fields related to cross position future contracts |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | contract\_code | string | true | Contract code | future："BTC-USDT-211231" ... |
 | margin\_mode | string | true | margin model | Cross Margin Mode：cross |
@@ -12930,8 +12930,8 @@ Interface description: It is used for real-time monitoring of asset changes in t
 | lever\_rate | decimal | true | Lever rate |  |
 | contract\_type | string | true | Contract type | this\_week、next\_week、quarter、next\_quarter |
 | business\_type | string | true | Business type | futures |
-| \_\_/cross\_futures \_\_ |  | true |  |  |
-| \_\_isolated\_swap\_\_ | object array | true | Unified Account Isolated Margin Contract |  |
+| CROSS\_FUTURES \_END |  | true |  |  |
+| ISOLATED\_SWAP\_START | object array | true | Unified Account Isolated Margin Contract |  |
 | symbol | string | true | Variety Code | "BTC","ETH"... |
 | contract\_code | string | true | Contract code | "BTC-USDT","ETH-USDT"... |
 | margin\_mode | string | true | margin model | Isolated Margin Mode：isolated |
@@ -12939,7 +12939,7 @@ Interface description: It is used for real-time monitoring of asset changes in t
 | withdraw\_available | decimal | true | Maximum amount that can be reduced | Hedge is superposition of long-short isolation, one-way is normal calculation |
 | lever\_rate | int | true | Lever rate |  |
 | position\_mode | string | true | Position mode | single\_side；dual\_side |
-| \_\_/isolated\_swap \_\_ |  | true |  |  |
+| ISOLATED\_SWAP \_END |  | true |  |  |
 | DATA\_END |  | true |  |  |
 
 #### Subscription Example

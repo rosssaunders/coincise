@@ -10,14 +10,16 @@ You can manage your API Keys [here](https://www.htx.com/apikey/).
 
 Every user can create at most 20 API Keys, each can be applied with either permission below:
 
-- Read permission: It is used to query the data, such as order query, trade query.
-- Trade permission: It is used to create order, cancel order and transfer, etc.
-- Withdraw permission: It is used to create withdraw order, cancel withdraw order, etc.
+-   Read permission: It is used to query the data, such as order query, trade query.
+-   Trade permission: It is used to create order, cancel order and transfer, etc.
+-   Withdraw permission: It is used to create withdraw order, cancel withdraw order, etc.
 
 Please remember below information after creation:
 
-- `Access Key` It is used in API request
-- `Secret Key` It is used to generate the signature (only visible once after creation)
+-   `Access Key` It is used in API request
+    
+-   `Secret Key` It is used to generate the signature (only visible once after creation)
+    
 
 The API Key can bind maximum 20 IP addresses (either host IP or network IP), we strongly suggest you bind IP address for security purpose. The API Key without IP binding will be expired after 90 days.
 
@@ -109,15 +111,15 @@ The trading symbols are consist of base currency and quote currency. Take the sy
 
 The `account-id` defines the Identity for different business type, it can be retrieved from API `/v1/account/accounts` , where the `account-type` is the business types.The types include:
 
-- spot: Spot account
-- otc: OTC account
-- margin: Isolated margin account, the detailed currency type is defined in `subType`
-- super-margin / cross-margin: Cross-margin account
-- investment: c2c margin lending account
-- borrow: c2c margin borrowing account
-- point: Point card account
-- minepool: Minepool account
-- etf: ETF account
+-   spot: Spot account
+-   otc: OTC account
+-   margin: Isolated margin account, the detailed currency type is defined in `subType`
+-   super-margin / cross-margin: Cross-margin account
+-   investment: c2c margin lending account
+-   borrow: c2c margin borrowing account
+-   point: Point card account
+-   minepool: Minepool account
+-   etf: ETF account
 
 You can refer to [HTX Course](https://www.huobi.com/en-us/guide/) to get detailed information
 
@@ -125,28 +127,29 @@ You can refer to [HTX Course](https://www.huobi.com/en-us/guide/) to get detaile
 
 ### Overview
 
-| Category     | URL Path                      | Description                                                         |
-| ------------ | ----------------------------- | ------------------------------------------------------------------- |
-| Common       | /v1/common/\*                 | Common interface, including currency, currency pair, timestamp, etc |
-| Market Data  | /market/\*                    | Market data interface, including trading, depth, quotation, etc     |
-| Account      | /v1/account/\* /v1/subuser/\* | Account interface, including account information, sub-user ,etc     |
-| Order        | /v1/order/\*                  | Order interface, including order creation, cancellation, query, etc |
-| Margin       | /v1/margin/\*                 | Margin interface, including debit, payment, query, etc              |
-| Cross Margin | /v1/cross-margin/\*           | Cross margin interface, including debit, payment, query, etc        |
+| Category | URL Path | Description |
+| --- | --- | --- |
+| Common | /v1/common/\* | Common interface, including currency, currency pair, timestamp, etc |
+| Market Data | /market/\* | Market data interface, including trading, depth, quotation, etc |
+| Account | /v1/account/\* /v1/subuser/\* | Account interface, including account information, sub-user ,etc |
+| Order | /v1/order/\* | Order interface, including order creation, cancellation, query, etc |
+| Margin | /v1/margin/\* | Margin interface, including debit, payment, query, etc |
+| Cross Margin | /v1/cross-margin/\* | Cross margin interface, including debit, payment, query, etc |
 
 Above is a general category, it doesn't cover all API, you can refer to detailed API document according to your requirement.
 
 ### New Version Rate limit Rule
 
-- The new version rate limit is applied on UID basis, which means, the overall access rate, from all API keys under same UID, to single endpoint, shouldn’t exceed the rate limit applied on that endpoint.
-- It is suggested to read HTTP Header `X-HB-RateLimit-Requests-Remain` and `X-HB-RateLimit-Requests-Expire` to get the remaining count of request and the expire time for current rate limit time window, then you can adjust the API access rate dynamically.
+-   The new version rate limit is applied on UID basis, which means, the overall access rate, from all API keys under same UID, to single endpoint, shouldn’t exceed the rate limit applied on that endpoint.
+    
+-   It is suggested to read HTTP Header `X-HB-RateLimit-Requests-Remain` and `X-HB-RateLimit-Requests-Expire` to get the remaining count of request and the expire time for current rate limit time window, then you can adjust the API access rate dynamically.
 
 ### Request Format
 
 The API is restful and there are two method: GET and POST.
 
-- GET request: All parameters are included in URL, and do not carry body(content-length>0), in otherwise will return 403 error code.
-- POST request: All parameters are formatted as JSON and put int the request body
+-   GET request: All parameters are included in URL, and do not carry body(content-length>0), in otherwise will return 403 error code.
+-   POST request: All parameters are formatted as JSON and put int the request body
 
 ### Response Format
 
@@ -158,83 +161,86 @@ Below is an example of response:
 {"status":"ok","ch":"market.btcusdt.kline.1day","ts":1499223904680,"data"://perAPIresponsedatainnestedJSONobject}
 ```
 
-| Field  | Data Type | Description                                                           |
-| ------ | --------- | --------------------------------------------------------------------- |
-| status | string    | Status of API response                                                |
-| ch     | string    | The data stream. It may be empty as some API doesn't have data stream |
-| ts     | int       | The UTC timestamp when API respond, the unit is millisecond           |
-| data   | object    | The body data in response                                             |
+| Field | Data Type | Description |
+| --- | --- | --- |
+| status | string | Status of API response |
+| ch | string | The data stream. It may be empty as some API doesn't have data stream |
+| ts | int | The UTC timestamp when API respond, the unit is millisecond |
+| data | object | The body data in response |
 
 ### Data Type
 
 The JSON data type described in this document is defined as below:
 
-- `string`: a sequence of characters that are quoted
-- `int`: a 32-bit integer, mainly used for status code, size and count
-- `long`: a 64-bit integer, mainly used for Id and timestamp
-- `float`: a fraction represented in decimal format, mainly used for volume and price, recommend to use high precision decimal data types in program
+-   `string`: a sequence of characters that are quoted
+-   `int`: a 32-bit integer, mainly used for status code, size and count
+-   `long`: a 64-bit integer, mainly used for Id and timestamp
+-   `float`: a fraction represented in decimal format, mainly used for volume and price, recommend to use high precision decimal data types in program
 
 ### Best Practice
 
 #### Security
 
-- It is strongly suggested to bind your IP with your API Key to ensure that your API Key can only be used in your machine. Furthermore, your API Key will be expired after 90 days if it is not binded with any IP.
-- It is strongly suggested not to share your API Key with any body or third-party software, otherwise your personal information and asset may be stolen. If your expose your API Key by accident, please do delete the API Key and create a new one.
+-   It is strongly suggested to bind your IP with your API Key to ensure that your API Key can only be used in your machine. Furthermore, your API Key will be expired after 90 days if it is not binded with any IP.
+-   It is strongly suggested not to share your API Key with any body or third-party software, otherwise your personal information and asset may be stolen. If your expose your API Key by accident, please do delete the API Key and create a new one.
 
 #### General
 
 **API Access**
 
-- It is suggested not to use temporary domain or proxy, which may be not stable.
-- It is suggested to use AWS Japan to access API for lower latency
-- It is suggested to connect to domain `api-aws.huobi.pro` if your server is based on AWS, because this domain is optimized for AWS client, the latency will be lower.
+-   It is suggested not to use temporary domain or proxy, which may be not stable.
+-   It is suggested to use AWS Japan to access API for lower latency
+-   It is suggested to connect to domain `api-aws.huobi.pro` if your server is based on AWS, because this domain is optimized for AWS client, the latency will be lower.
 
 **New Version Rate limit Rule**
 
-- Only those endpoints marked with rate limit value separately are applied with new rate limit rule.
-- It is suggested to read HTTP Header `X-HB-RateLimit-Requests-Remain` and `X-HB-RateLimit-Requests-Expire` to get the remaining count of request and the expire time for current rate limit time window, then you can adjust the API access rate dynamically.
-- The overall access rate, from all API keys under same UID, to single endpoint, shouldn’t exceed the rate limit applied on that endpoint.
+-   Only those endpoints marked with rate limit value separately are applied with new rate limit rule.
+    
+-   It is suggested to read HTTP Header `X-HB-RateLimit-Requests-Remain` and `X-HB-RateLimit-Requests-Expire` to get the remaining count of request and the expire time for current rate limit time window, then you can adjust the API access rate dynamically.
+    
+-   The overall access rate, from all API keys under same UID, to single endpoint, shouldn’t exceed the rate limit applied on that endpoint.
+    
 
 #### Market
 
 **Market data**
 
-- It is suggested to use WebSocket interface to subscribe the market update and then cache the data locally, because WebSocket notification has lower latency and not have rate limit.
-- It is suggested not to subscribe too many topics in a single websocket connection, it may generate more notifications and cause network latency and disconnection.
+-   It is suggested to use WebSocket interface to subscribe the market update and then cache the data locally, because WebSocket notification has lower latency and not have rate limit.
+-   It is suggested not to subscribe too many topics in a single websocket connection, it may generate more notifications and cause network latency and disconnection.
 
 **Latest trade**
 
-- It is suggested to subscribe WebSocket topic `market.$symbol.trade.detail`, the response field `price` represents the latest price, and it has lower latency.
-- It is suggested to use `tradeId` to de-duplicate if you subscribe WebSocket topic `market.$symbol.trade.detail`.
+-   It is suggested to subscribe WebSocket topic `market.$symbol.trade.detail`, the response field `price` represents the latest price, and it has lower latency.
+-   It is suggested to use `tradeId` to de-duplicate if you subscribe WebSocket topic `market.$symbol.trade.detail`.
 
 **Depth**
 
-- It is suggested to subscribe WebSocket topic `market.$symbol.bbo` if you only need the best bid and best offer.
-- It is suggested to subscribe WebSocket topic `market.$symbol.depth.$type` if you need multiple bid and offer with normal latency.
-- It is suggested to subscribe WebSocket topic `market.$symbol.mbp.$level` if you need multiple bid and offer with lower latency
-- It is suggested to use `version` field to de-duplicate and discard the smaller data if you use Rest interface `/market/depth` and WebSocket topic `market.$symbol.depth.$type`. It is suggest to use `seqNum` to de-duplicate and discard the smaller data if yo subscribe WebSocket topic `market.$symbol.mbp.$levels`.
+-   It is suggested to subscribe WebSocket topic `market.$symbol.bbo` if you only need the best bid and best offer.
+-   It is suggested to subscribe WebSocket topic `market.$symbol.depth.$type` if you need multiple bid and offer with normal latency.
+-   It is suggested to subscribe WebSocket topic `market.$symbol.mbp.$level` if you need multiple bid and offer with lower latency
+-   It is suggested to use `version` field to de-duplicate and discard the smaller data if you use Rest interface `/market/depth` and WebSocket topic `market.$symbol.depth.$type`. It is suggest to use `seqNum` to de-duplicate and discard the smaller data if yo subscribe WebSocket topic `market.$symbol.mbp.$levels`.
 
 #### Order
 
 **Place an order (/v1/order/orders/place)**
 
-- It is suggested to follow the symbol reference (`/v1/common/symbols`) to validate the amount and value before placing the older, otherwise you may place an invalid order and waste your time.
-- It is suggested to provide an unique `client-order-id` field when placing the order, it is useful to track your orders status if you fail to get the order id response. Later you can use the `client-order-id` to match the WebSocket order notification or query order detail by interface `/v1/order/orders/getClientOrder`.The uniqueness of the clientOrderId passed in when you place an order will no longer be verified. We recommend you to manage clientOrderId by yourself to ensure its uniqueness. If multiple orders use the same clientOrderId, the latest order corresponding to the clientOrderId will be returned when querying/canceling an order.
+-   It is suggested to follow the symbol reference (`/v1/common/symbols`) to validate the amount and value before placing the older, otherwise you may place an invalid order and waste your time.
+-   It is suggested to provide an unique `client-order-id` field when placing the order, it is useful to track your orders status if you fail to get the order id response. Later you can use the `client-order-id` to match the WebSocket order notification or query order detail by interface `/v1/order/orders/getClientOrder`.The uniqueness of the clientOrderId passed in when you place an order will no longer be verified. We recommend you to manage clientOrderId by yourself to ensure its uniqueness. If multiple orders use the same clientOrderId, the latest order corresponding to the clientOrderId will be returned when querying/canceling an order.
 
 **Search history olders (/v1/order/orders)**
 
-- It is recommended to use `start-time` and `end-time` to query, that are two timestamps with 13 digits (millisecond). The maximum query time window is 48 hours (2 days), the more precision you provide, the better performance you will get. You can query for multiple iterations.
+-   It is recommended to use `start-time` and `end-time` to query, that are two timestamps with 13 digits (millisecond). The maximum query time window is 48 hours (2 days), the more precision you provide, the better performance you will get. You can query for multiple iterations.
 
 **Order update**
 
-- It is suggested to subscribe WebSocket topic `orders.$symbol`, which has lower latency and more accurate sequence.
+-   It is suggested to subscribe WebSocket topic `orders.$symbol`, which has lower latency and more accurate sequence.
 
 #### Account
 
 **Asset update**
 
-- It is suggested to subscribe both WebSocket topic `orders.$symbol` and `account.update#${mode}`. The former one tells the order status update and arrives earlier than the latter one, and the latter one confirms the final asset balance.
-- It is suggested not to subscribe WebSocket topic `accounts`, which is replaced by `accounts.update#${mode}`, and will be retired later.
+-   It is suggested to subscribe both WebSocket topic `orders.$symbol` and `account.update#${mode}`. The former one tells the order status update and arrives earlier than the latter one, and the latter one confirms the final asset balance.
+-   It is suggested not to subscribe WebSocket topic `accounts`, which is replaced by `accounts.update#${mode}`, and will be retired later.
 
 ## Reference Data
 
@@ -262,26 +268,26 @@ All endpoints in this section require authentication
 
 Below is the error code, error message and description returned by Account APIs.
 
-| Error Code | Error Message                             | Description                                                              |
-| ---------- | ----------------------------------------- | ------------------------------------------------------------------------ |
-| 500        | system error                              | Server internal error                                                    |
-| 1002       | forbidden                                 | Operation is forbidden, such as the account Id and UID doesn't match     |
-| 2002       | "invalid field value in currency"         | Parameter currency is invalid                                            |
-| 2002       | "invalid field value in transactTypes"    | Parameter transactTypes is invalid (should be transfer)                  |
-| 2002       | "invalid field value in sort"             | Parameter sort is invalid (should be 'asc' or 'desc')                    |
-| 2002       | "value in fromId is not found in record"  | Value fromId doesn't exist                                               |
-| 2002       | "invalid field value in accountId"        | Parameter accountId is invalid (should not be empty)                     |
-| 2002       | "value in startTime exceeded valid range" | Value startTime is later than current time or earlier than 180 days ago  |
-| 2002       | "value in endTime exceeded valid range")  | Value endTime is earlier than startTime, or 10 days later than startTime |
-| 40401      |                                           | Deduction is unavailable for sub-accounts.                               |
-| 40402      |                                           | Deduction currency cannot be empty                                       |
-| 40403      |                                           | Too many requests.                                                       |
-| 40404      |                                           | Point Cards are unavailable in the current country or region.            |
-| 40405      |                                           | The crypto is unavailable for deduction.                                 |
-| 40406      |                                           | User's Point Card balance is zero.                                       |
-| 40407      |                                           | Invalid deduction type.                                                  |
-| 40408      |                                           | Duplicate request. Please try again later                                |
-| 3011       |                                           | Verification failure                                                     |
+| Error Code | Error Message | Description |
+| --- | --- | --- |
+| 500 | system error | Server internal error |
+| 1002 | forbidden | Operation is forbidden, such as the account Id and UID doesn't match |
+| 2002 | "invalid field value in currency" | Parameter currency is invalid |
+| 2002 | "invalid field value in transactTypes" | Parameter transactTypes is invalid (should be transfer) |
+| 2002 | "invalid field value in sort" | Parameter sort is invalid (should be 'asc' or 'desc') |
+| 2002 | "value in fromId is not found in record" | Value fromId doesn't exist |
+| 2002 | "invalid field value in accountId" | Parameter accountId is invalid (should not be empty) |
+| 2002 | "value in startTime exceeded valid range" | Value startTime is later than current time or earlier than 180 days ago |
+| 2002 | "value in endTime exceeded valid range") | Value endTime is earlier than startTime, or 10 days later than startTime |
+| 40401 |  | Deduction is unavailable for sub-accounts. |
+| 40402 |  | Deduction currency cannot be empty |
+| 40403 |  | Too many requests. |
+| 40404 |  | Point Cards are unavailable in the current country or region. |
+| 40405 |  | The crypto is unavailable for deduction. |
+| 40406 |  | User's Point Card balance is zero. |
+| 40407 |  | Invalid deduction type. |
+| 40408 |  | Duplicate request. Please try again later |
+| 3011 |  | Verification failure |
 
 ## Trading
 
@@ -299,107 +305,107 @@ Below is the glossary of trading related field:
 
 direction:
 
-- buy
-- sell
+-   buy
+-   sell
 
 type:
 
-- market : The price is not required in order creation request, you only need to specify either volume or amount. The matching and trade will happen automatically according to the request.
-- limit: Both of the price and amount should be specified in order creation request.
-- limit-maker: The price is specified in order creation request as market maker. It will not be matched in the matching queue.
-- ioc: ioc stands for "immediately or cancel", it means the order will be canceled if it couldn't be matched. If the order is partially traded, the remaining part will be canceled.
-- limit-fok: fok stands for "fill or kill", it means the order will be cancelled if it couldn't be **fully** matched. Even if the order can be partially filled, the entire order will be cancelled.
-- market-grid: Grid trading market order (not supported by API)
-- limit-grid: Grid trading limit order (not supported by API)
-- stop-limit: The price in order creation request is the trigger price. The order will be put into matching queue only when the market price reaches the trigger price. This type is replaced by conditional order, please use conditional order APIs
+-   market : The price is not required in order creation request, you only need to specify either volume or amount. The matching and trade will happen automatically according to the request.
+-   limit: Both of the price and amount should be specified in order creation request.
+-   limit-maker: The price is specified in order creation request as market maker. It will not be matched in the matching queue.
+-   ioc: ioc stands for "immediately or cancel", it means the order will be canceled if it couldn't be matched. If the order is partially traded, the remaining part will be canceled.
+-   limit-fok: fok stands for "fill or kill", it means the order will be cancelled if it couldn't be **fully** matched. Even if the order can be partially filled, the entire order will be cancelled.
+-   market-grid: Grid trading market order (not supported by API)
+-   limit-grid: Grid trading limit order (not supported by API)
+-   stop-limit: The price in order creation request is the trigger price. The order will be put into matching queue only when the market price reaches the trigger price. This type is replaced by conditional order, please use conditional order APIs
 
 **order source**: the origin of the order
 
-- spot-api: API order from spot account
-- margin-api：API order from margin account
-- super-margin-api：API order from cross-margin account
-- c2c-margin-api：API order from c2c account
-- grid-trading-sys：grid order (not supported by API)
+-   spot-api: API order from spot account
+-   margin-api：API order from margin account
+-   super-margin-api：API order from cross-margin account
+-   c2c-margin-api：API order from c2c account
+-   grid-trading-sys：grid order (not supported by API)
 
 **order state**:
 
-- created: The order is created, and not in the matching queue yet.
-- submitted: The order is submitted, and already in the matching queue, waiting for deal.
-- partial-filled: The order is already in the matching queue and partially traded, and is waiting for further matching and trade.
-- filled: The order is already traded and not in the matching queue any more.
-- partial-canceled: The order is not in the matching queue any more. The status is transferred from 'partial-filled', the order is partially trade, but remaining is canceled.
-- canceling: The order is under canceling, but haven't been removed from matching queue yet.
-- canceled: The order is not in the matching queue any more, and completely canceled. There is no trade associated with this order.
+-   created: The order is created, and not in the matching queue yet.
+-   submitted: The order is submitted, and already in the matching queue, waiting for deal.
+-   partial-filled: The order is already in the matching queue and partially traded, and is waiting for further matching and trade.
+-   filled: The order is already traded and not in the matching queue any more.
+-   partial-canceled: The order is not in the matching queue any more. The status is transferred from 'partial-filled', the order is partially trade, but remaining is canceled.
+-   canceling: The order is under canceling, but haven't been removed from matching queue yet.
+-   canceled: The order is not in the matching queue any more, and completely canceled. There is no trade associated with this order.
 
 **IDs**: The frequently used identities are listed below:
 
-- order-id: The unique identity for order.
-- client-order-id: The identity defined by the client. This id is included in order creation request, and will be returned as order-id. For completed orders, clientOrderId will be valid for 2 hours since the order creation (it is still valid for 8 hours concerning other orders). That is to say, if an order has been created for more than 2 hours, clientOrderId can’t be used to query the completed order (It is recommended to check it with orderid). Among them, the status of the completed order includes partially canceled, canceled, and fully executed. The allowed characters are letters (case sensitive), digit, underscore (\_) and hyphen (-), no more than 64 chars.
-- match-id : The identity for order matching.
-- trade-id : The unique identity for the trade.
+-   order-id: The unique identity for order.
+-   client-order-id: The identity defined by the client. This id is included in order creation request, and will be returned as order-id. For completed orders, clientOrderId will be valid for 2 hours since the order creation (it is still valid for 8 hours concerning other orders). That is to say, if an order has been created for more than 2 hours, clientOrderId can’t be used to query the completed order (It is recommended to check it with orderid). Among them, the status of the completed order includes partially canceled, canceled, and fully executed. The allowed characters are letters (case sensitive), digit, underscore (\_) and hyphen (-), no more than 64 chars.
+-   match-id : The identity for order matching.
+-   trade-id : The unique identity for the trade.
 
 ### Error Code
 
 Below is the error code and description returned by Trading APIs
 
-| Error Code                                                    | Description                                                                                                       |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| forbidden-trade-for-open-protect                              | The current protection phase is open. You can place orders after the protection period ends (GMT+8)               |
-| base-argument-unsupported                                     | The specified parameter is not supported                                                                          |
-| base-system-error                                             | System internel error. For placing or canceling order, it is mostly due to cache issue, please try again later.   |
-| login-required                                                | Signature is missing, or user not find (key and uid not match).                                                   |
-| parameter-required                                            | Stop-price or operator parameter is missing for stop-order type                                                   |
-| base-record-invalid                                           | Failed to get data, please try again later                                                                        |
-| order-amount-over-limit                                       | The amount of order exceeds the limitation                                                                        |
-| base-symbol-trade-disabled                                    | The symbol is disabled for trading                                                                                |
-| base-operation-forbidden                                      | The operation is forbidden for current user or the symbol is not allowed to trade over OTC                        |
-| account-get-accounts-inexistent-error                         | The account doesn't exist in current user                                                                         |
-| account-account-id-inexistent                                 | The account id doesn't exist                                                                                      |
-| sub-user-auth-required                                        | Isolated margin account is not enabled for sub user                                                               |
-| order-disabled                                                | The symbol is pending and not allowed to place order                                                              |
-| cancel-disabled                                               | The symbol is pending and not allowed to cancel order                                                             |
-| order-invalid-price                                           | The order price is invalid, usually exceeds the 10% of latest trade price                                         |
-| order-accountbalance-error                                    | The account balance is insufficient                                                                               |
-| order-limitorder-price-min-error                              | Sell price cannot be lower than specific price(limit price to sell cannot be lower than 90% of the market price)  |
-| order-limitorder-price-max-error                              | Buy price cannot be higher than specific price(limit price to buy cannot be higher than 110% of the market price) |
-| order-limitorder-amount-min-error                             | Limit order amount can not be less than specific number                                                           |
-| order-limitorder-amount-max-error                             | Limit order amount can not be more than specific number                                                           |
-| order-etp-nav-price-min-error                                 | Order price cannot be lower than specific percentage                                                              |
-| order-etp-nav-price-max-error                                 | Order price cannot be higher than specific percentage                                                             |
-| order-orderprice-precision-error                              | Order price precision error                                                                                       |
-| order-orderamount-precision-error                             | Order amount precision error                                                                                      |
-| order-value-min-error                                         | Order value cannot be lower than specific value                                                                   |
-| order-marketorder-amount-min-error                            | Market order sell amount cannot be less than specific amount                                                      |
-| order-marketorder-amount-buy-max-error                        | Market order buy amount(value) cannot be more than specific amount(value)                                         |
-| order-marketorder-amount-sell-max-error                       | Market order sell amount cannot be more than specific amount                                                      |
-| order-holding-limit-failed                                    | Exceed the holding limit of the currency                                                                          |
-| order-type-invalid                                            | Order type is invalid                                                                                             |
-| order-orderstate-error                                        | Order state is invalid                                                                                            |
-| order-date-limit-error                                        | Order query date exceed the limit                                                                                 |
-| order-source-invalid                                          | Order source is invalid                                                                                           |
-| order-update-error                                            | Order update error                                                                                                |
-| order-fl-cancellation-is-disallowed                           | Liquidation order cannot be canceled                                                                              |
-| operation-forbidden-for-fl-account-state                      | The operation is forbidden when the account is in liquidation                                                     |
-| operation-forbidden-for-lock-account-state                    | The operation is forbidden when the account is locked                                                             |
-| fl-order-already-existed                                      | An unfilled liquidation order already exists                                                                      |
-| order-user-cancel-forbidden                                   | IOC or FOK order is not allowed to cancel                                                                         |
-| account-state-invalid                                         | Invalid status of liquidation account                                                                             |
-| order-price-greater-than-limit                                | Order price is higher than the limitation before market opens                                                     |
-| order-price-less-than-limit                                   | Order price is lower than the limitation before market opens                                                      |
-| order-stop-order-hit-trigger                                  | The stop orders triggered immediately are not allowed                                                             |
-| market-orders-not-support-during-limit-price-trading          | Market orders are not supported during limit-price trading                                                        |
-| price-exceeds-the-protective-price-during-limit-price-trading | The price exceeds the protective price during limit-price trading                                                 |
-| invalid-client-order-id                                       | The parameter client order id is duplicated (within last 24h) in place or cancel order request                    |
-| invalid-interval                                              | Query window is zero, negative or greater than limitation                                                         |
-| invalid-start-date                                            | The start date is invalid                                                                                         |
-| invalid-end-date                                              | The end date is invalid                                                                                           |
-| invalid-start-time                                            | The start time is invalid                                                                                         |
-| invalid-end-time                                              | The end time is invalid                                                                                           |
-| validation-constraints-required                               | The specified parameters is missing                                                                               |
-| symbol-not-support                                            | The symbol is not support for cross margin or C2C                                                                 |
-| not-found                                                     | The order id is not found                                                                                         |
-| base-not-found                                                | The record is not found                                                                                           |
-| 510                                                           | You request too often, please try again later                                                                     |
+| Error Code | Description |
+| --- | --- |
+| forbidden-trade-for-open-protect | The current protection phase is open. You can place orders after the protection period ends (GMT+8) |
+| base-argument-unsupported | The specified parameter is not supported |
+| base-system-error | System internel error. For placing or canceling order, it is mostly due to cache issue, please try again later. |
+| login-required | Signature is missing, or user not find (key and uid not match). |
+| parameter-required | Stop-price or operator parameter is missing for stop-order type |
+| base-record-invalid | Failed to get data, please try again later |
+| order-amount-over-limit | The amount of order exceeds the limitation |
+| base-symbol-trade-disabled | The symbol is disabled for trading |
+| base-operation-forbidden | The operation is forbidden for current user or the symbol is not allowed to trade over OTC |
+| account-get-accounts-inexistent-error | The account doesn't exist in current user |
+| account-account-id-inexistent | The account id doesn't exist |
+| sub-user-auth-required | Isolated margin account is not enabled for sub user |
+| order-disabled | The symbol is pending and not allowed to place order |
+| cancel-disabled | The symbol is pending and not allowed to cancel order |
+| order-invalid-price | The order price is invalid, usually exceeds the 10% of latest trade price |
+| order-accountbalance-error | The account balance is insufficient |
+| order-limitorder-price-min-error | Sell price cannot be lower than specific price(limit price to sell cannot be lower than 90% of the market price) |
+| order-limitorder-price-max-error | Buy price cannot be higher than specific price(limit price to buy cannot be higher than 110% of the market price) |
+| order-limitorder-amount-min-error | Limit order amount can not be less than specific number |
+| order-limitorder-amount-max-error | Limit order amount can not be more than specific number |
+| order-etp-nav-price-min-error | Order price cannot be lower than specific percentage |
+| order-etp-nav-price-max-error | Order price cannot be higher than specific percentage |
+| order-orderprice-precision-error | Order price precision error |
+| order-orderamount-precision-error | Order amount precision error |
+| order-value-min-error | Order value cannot be lower than specific value |
+| order-marketorder-amount-min-error | Market order sell amount cannot be less than specific amount |
+| order-marketorder-amount-buy-max-error | Market order buy amount(value) cannot be more than specific amount(value) |
+| order-marketorder-amount-sell-max-error | Market order sell amount cannot be more than specific amount |
+| order-holding-limit-failed | Exceed the holding limit of the currency |
+| order-type-invalid | Order type is invalid |
+| order-orderstate-error | Order state is invalid |
+| order-date-limit-error | Order query date exceed the limit |
+| order-source-invalid | Order source is invalid |
+| order-update-error | Order update error |
+| order-fl-cancellation-is-disallowed | Liquidation order cannot be canceled |
+| operation-forbidden-for-fl-account-state | The operation is forbidden when the account is in liquidation |
+| operation-forbidden-for-lock-account-state | The operation is forbidden when the account is locked |
+| fl-order-already-existed | An unfilled liquidation order already exists |
+| order-user-cancel-forbidden | IOC or FOK order is not allowed to cancel |
+| account-state-invalid | Invalid status of liquidation account |
+| order-price-greater-than-limit | Order price is higher than the limitation before market opens |
+| order-price-less-than-limit | Order price is lower than the limitation before market opens |
+| order-stop-order-hit-trigger | The stop orders triggered immediately are not allowed |
+| market-orders-not-support-during-limit-price-trading | Market orders are not supported during limit-price trading |
+| price-exceeds-the-protective-price-during-limit-price-trading | The price exceeds the protective price during limit-price trading |
+| invalid-client-order-id | The parameter client order id is duplicated (within last 24h) in place or cancel order request |
+| invalid-interval | Query window is zero, negative or greater than limitation |
+| invalid-start-date | The start date is invalid |
+| invalid-end-date | The end date is invalid |
+| invalid-start-time | The start time is invalid |
+| invalid-end-time | The end time is invalid |
+| validation-constraints-required | The specified parameters is missing |
+| symbol-not-support | The symbol is not support for cross margin or C2C |
+| not-found | The order id is not found |
+| base-not-found | The record is not found |
+| 510 | You request too often, please try again later |
 
 ### FAQ
 
@@ -413,13 +419,14 @@ A： You can call API `GET /v1/common/symbols` to get the currency pair informat
 
 Below are common errors:
 
-- order-value-min-error: The order price is less than minimum price
-- order-orderprice-precision-error : The precision for limited order price is wrong
-- order-orderamount-precision-error : The precision for limited order amount is wrong
-- order-limitorder-price-max-error : The limited order price is higher than the threshold(limit price to buy cannot be higher than 110% of the market price)
-- order-limitorder-price-min-error : The limited order price is lower than the threshold(limit price to sell cannot be lower than 90% of the market price)
-- order-limitorder-amount-max-error : The limited order amount is larger than the threshold
-- order-limitorder-amount-min-error : The limited order amount is smaller than the threshold
+-   order-value-min-error: The order price is less than minimum price
+-   order-orderprice-precision-error : The precision for limited order price is wrong
+-   order-orderamount-precision-error : The precision for limited order amount is wrong
+-   order-limitorder-price-max-error : The limited order price is higher than the threshold(limit price to buy cannot be higher than 110% of the market price)
+-   order-limitorder-price-min-error : The limited order price is lower than the threshold(limit price to sell cannot be lower than 90% of the market price)
+-   order-limitorder-amount-max-error : The limited order amount is larger than the threshold
+-   order-limitorder-amount-min-error : The limited order amount is smaller than the threshold
+    
 
 #### Q3：Why I got insufficient balance error while placing an order just after a successful order matching?
 
@@ -483,35 +490,35 @@ Once client receives "ping", it should respond "pong" message back with the same
 
 #### Valid Values of action
 
-| Valid Values | Description                               |
-| ------------ | ----------------------------------------- |
-| sub          | Subscribe                                 |
-| req          | Request                                   |
-| ping,pong    | Heartbeat                                 |
-| push         | Push (from HTX server to client's server) |
+| Valid Values | Description |
+| --- | --- |
+| sub | Subscribe |
+| req | Request |
+| ping,pong | Heartbeat |
+| push | Push (from HTX server to client's server) |
 
 #### Rate Limit
 
 There are multiple limitations for this version:
 
-- The limitation of single connection for **valid** request (including req, sub, unsub, excluding ping/pong or other invalid request) is **50 per second**. It will return "too many request" when the limit is exceeded.
-- A single API Key can establish **10** connections. It will return "too many connection" when the limit is exceeded.
-- The limitation of requests from single IP is **100 per second**. It will return "too many request" when the limitation is exceeded.
+-   The limitation of single connection for **valid** request (including req, sub, unsub, excluding ping/pong or other invalid request) is **50 per second**. It will return "too many request" when the limit is exceeded.
+-   A single API Key can establish **10** connections. It will return "too many connection" when the limit is exceeded.
+-   The limitation of requests from single IP is **100 per second**. It will return "too many request" when the limitation is exceeded.
 
 #### Authentication
 
 Authentication request field list
 
-| Field            | Required | Data Type | Description                                                                              |
-| ---------------- | -------- | --------- | ---------------------------------------------------------------------------------------- |
-| action           | true     | string    | Action type, valid value: "req"                                                          |
-| ch               | true     | string    | Channel, valid value: "auth"                                                             |
-| authType         | true     | string    | Authentication type, valid value: "api". Note: this is not part of signature calculation |
-| accessKey        | true     | string    | Access key                                                                               |
-| signatureMethod  | true     | string    | Signature method, valid value: "HmacSHA256"                                              |
-| signatureVersion | true     | string    | Signature version, valid value: "2.1"                                                    |
-| timestamp        | true     | string    | Timestamp in UTC in format like 2017-05-11T16:22:06                                      |
-| signature        | true     | string    | Signature                                                                                |
+| Field | Required | Data Type | Description |
+| --- | --- | --- | --- |
+| action | true | string | Action type, valid value: "req" |
+| ch | true | string | Channel, valid value: "auth" |
+| authType | true | string | Authentication type, valid value: "api". Note: this is not part of signature calculation |
+| accessKey | true | string | Access key |
+| signatureMethod | true | string | Signature method, valid value: "HmacSHA256" |
+| signatureVersion | true | string | Signature version, valid value: "2.1" |
+| timestamp | true | string | Timestamp in UTC in format like 2017-05-11T16:22:06 |
+| signature | true | string | Signature |
 
 { "action": "req", "ch": "auth", "params": { "authType":"api", "accessKey": "e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx", "signatureMethod": "HmacSHA256", "signatureVersion": "2.1", "timestamp": "2019-09-01T18:16:16", "signature": "4F65x5A2bLyMWVQj3Aqp+B4w+ivaA7n5Oi2SuYtCJ9o=" } }
 
@@ -583,25 +590,25 @@ When the first push msg is "message":"系统异常:", accounts update infotmatio
 
 Below is the return code, return message and the description returend from Asset and Order WebSocket
 
-| Return Code | Return Message           | Description                                                                                   |
-| ----------- | ------------------------ | --------------------------------------------------------------------------------------------- |
-| 200         | Success                  | Successful                                                                                    |
-| 100         | time out close           | The connection is timeout and closed                                                          |
-| 400         | Bad Request              | The request is invalid                                                                        |
-| 404         | Not Found                | The service is not found                                                                      |
-| 429         | Too Many Requests        | Connection number exceed limit                                                                |
-| 500         | system error             | System internal error                                                                         |
-| 2000        | invalid.ip               | The IP is invalid                                                                             |
-| 2001        | nvalid.json              | The JSON request is invalid                                                                   |
-| 2001        | invalid.action           | Parameter action is invalid                                                                   |
-| 2001        | invalid.symbol           | Parameter symbol is invalid                                                                   |
-| 2001        | invalid.ch               | Parameter channel is invalid                                                                  |
-| 2001        | missing.param.auth       | Parameter auth is missing                                                                     |
-| 2002        | invalid.auth.state       | Authentication state is invalid                                                               |
-| 2002        | auth.fail                | Authentication failed, including wrong IP address binding in API Key                          |
-| 2003        | query.account.list.error | Account query error                                                                           |
-| 4000        | too.many.request         | Request exceed limit (a single instance limit to 50 per second)                               |
-| 4000        | too.many.connection      | Connection number exceed limit for single API Key (a single instance limit to 10 connections) |
+| Return Code | Return Message | Description |
+| --- | --- | --- |
+| 200 | Success | Successful |
+| 100 | time out close | The connection is timeout and closed |
+| 400 | Bad Request | The request is invalid |
+| 404 | Not Found | The service is not found |
+| 429 | Too Many Requests | Connection number exceed limit |
+| 500 | system error | System internal error |
+| 2000 | invalid.ip | The IP is invalid |
+| 2001 | nvalid.json | The JSON request is invalid |
+| 2001 | invalid.action | Parameter action is invalid |
+| 2001 | invalid.symbol | Parameter symbol is invalid |
+| 2001 | invalid.ch | Parameter channel is invalid |
+| 2001 | missing.param.auth | Parameter auth is missing |
+| 2002 | invalid.auth.state | Authentication state is invalid |
+| 2002 | auth.fail | Authentication failed, including wrong IP address binding in API Key |
+| 2003 | query.account.list.error | Account query error |
+| 4000 | too.many.request | Request exceed limit (a single instance limit to 50 per second) |
+| 4000 | too.many.connection | Connection number exceed limit for single API Key (a single instance limit to 10 connections) |
 
 ## Spot
 
@@ -621,17 +628,17 @@ Below is the content for Spot API document
 
 The first part is the overview:
 
-- **Quick Start**: It introduces the overall knowledge of HTX API, and suitability for new HTX API user
-- **API Explorer**: It introduces the API Explorer online tool, which is convenient for user to invoke and observe the API
-- **FAQ**: It lists the frequently asked questions regardless the specific API
-- **Contact Us**: It introduces how to contact us according to different subjects
+-   **Quick Start**: It introduces the overall knowledge of HTX API, and suitability for new HTX API user
+-   **API Explorer**: It introduces the API Explorer online tool, which is convenient for user to invoke and observe the API
+-   **FAQ**: It lists the frequently asked questions regardless the specific API
+-   **Contact Us**: It introduces how to contact us according to different subjects
 
 The second part is detail for each API. Each API category is listed in one section, and each each section has below contents:
 
-- **Introduction**: It introduces notes and description for this API category
-- **_Specific API_**: It introduces the usage, rate limit, request, parameters and response for each API
-- **Error Code**: It lists the common error code and the description for this API category
-- **FAQ**: It lists the frequently asked questions for this API category
+-   **Introduction**: It introduces notes and description for this API category
+-   **_Specific API_**: It introduces the usage, rate limit, request, parameters and response for each API
+-   **Error Code**: It lists the common error code and the description for this API category
+-   **FAQ**: It lists the frequently asked questions for this API category
 
 ## Contact Us
 
@@ -639,8 +646,8 @@ The second part is detail for each API. Each API category is listed in one secti
 
 If you have any other questions on API, you can contact us by below ways:
 
-- Join official **Telegram** group: [API技术交流群01](https://t.me/htx_api)
-- Contact customer support from Help Center or send email to [support@huobigroup.com](mailto:support@huobigroup.com).
+-   Join official **Telegram** group: [API技术交流群01](https://t.me/htx_api)
+-   Contact customer support from Help Center or send email to [support@huobigroup.com](mailto:support@huobigroup.com).
 
 If you encounter API errors, please use below template in your feedback:
 
@@ -696,14 +703,14 @@ All endpoints in this section require authentication
 
 Below is the error code, error message and description returned by Sub user management APIs
 
-| Error Code | Error Message                                             | Description                                                                       |
-| ---------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| 1002       | forbidden                                                 | Operation is forbidden, such as sub user creation is not allowed for current user |
-| 1003       | unauthorized                                              | Signature is wrong                                                                |
-| 2002       | invalid field value                                       | Parameter is invalid                                                              |
-| 2014       | number of sub account in the request exceeded valid range | number of sub account exceeded                                                    |
-| 2014       | number of api key in the request exceeded valid range     | number of API Key exceeded                                                        |
-| 2016       | invalid request while value specified in sub user states  | lock or unlock failure                                                            |
+| Error Code | Error Message | Description |
+| --- | --- | --- |
+| 1002 | forbidden | Operation is forbidden, such as sub user creation is not allowed for current user |
+| 1003 | unauthorized | Signature is wrong |
+| 2002 | invalid field value | Parameter is invalid |
+| 2014 | number of sub account in the request exceeded valid range | number of sub account exceeded |
+| 2014 | number of api key in the request exceeded valid range | number of API Key exceeded |
+| 2016 | invalid request while value specified in sub user states | lock or unlock failure |
 
 ## Endpoints
 
@@ -717,26 +724,26 @@ Interface description: The topic updates account change details.
 
 #### Subscription Address
 
-| Environment                         | Address                       |
-| ----------------------------------- | ----------------------------- |
-| Online                              | wss://api.huobi.pro/ws/v2     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/v2 |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/v2 |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| ---------- | ---- | ----------- |
+| --- | --- | --- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description                                       | Value Range | Default Value |
-| --------- | --------- | -------- | ------------------------------------------------- | ----------- | ------------- |
-| mode      | integer   | false    | Trigger mode, valid value: 0, 1, default value: 0 |             |               |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| mode | integer | false | Trigger mode, valid value: 0, 1, default value: 0 |  |  |
 
 Notes:
 
@@ -770,16 +777,16 @@ Note: The topic disseminates the current static value of individual accounts fir
 
 #### Data Update
 
-| Parameter   | Data Type | Required | Description                                                                                                                                                                  | Value Range |
-| ----------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| currency    | string    | false    | Currency                                                                                                                                                                     |             |
-| accountId   | long      | false    | Account ID                                                                                                                                                                   |             |
-| balance     | string    | false    | Account balance (only exists when account balance changed)                                                                                                                   |             |
-| available   | string    | false    | Available balance (only exists when available balance changed)                                                                                                               |             |
-| changeType  | string    | false    | Change type, valid value: order-place,order-match,order-refund,order-cancel,order-fee-refund,margin-transfer,margin-loan,margin-interest,margin-repay,deposit,withdraw,other |             |
-| accountType | string    | false    | account type, valid value: trade, loan, interest                                                                                                                             |             |
-| changeTime  | long      | false    | Change time, unix time in millisecond                                                                                                                                        |             |
-| seqNum      | long      | false    | Serial Number of Account Change                                                                                                                                              |             |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| currency | string | false | Currency |  |
+| accountId | long | false | Account ID |  |
+| balance | string | false | Account balance (only exists when account balance changed) |  |
+| available | string | false | Available balance (only exists when available balance changed) |  |
+| changeType | string | false | Change type, valid value: order-place,order-match,order-refund,order-cancel,order-fee-refund,margin-transfer,margin-loan,margin-interest,margin-repay,deposit,withdraw,other |  |
+| accountType | string | false | account type, valid value: trade, loan, interest |  |
+| changeTime | long | false | Change time, unix time in millisecond |  |
+| seqNum | long | false | Serial Number of Account Change |  |
 
 Notes:
 
@@ -830,94 +837,94 @@ Interface description: An order update can be triggered by any of following: - C
 
 #### Subscription Address
 
-| Environment                         | Address                       |
-| ----------------------------------- | ----------------------------- |
-| Online                              | wss://api.huobi.pro/ws/v2     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/v2 |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/v2 |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| ---------- | ---- | ----------- |
+| --- | --- | --- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description                             | Value Range | Default Value |
-| --------- | --------- | -------- | --------------------------------------- | ----------- | ------------- |
-| symbol    | string    | false    | Trading symbol (wildcard \* is allowed) |             |               |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| symbol | string | false | Trading symbol (wildcard \* is allowed) |  |  |
 
 #### Data Update
 
-| Parameter                                                 | Data Type | Required | Description                                                                                                                                                  | Value Range |
-| --------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
-| After conditional order triggering failure                |           | false    |                                                                                                                                                              |             |
-| eventType                                                 | string    | false    | Event type, valid value: trigger (only applicable for conditional order)                                                                                     |             |
-| symbol                                                    | string    | false    | Trading symbol                                                                                                                                               |             |
-| clientOrderId                                             | string    | false    | Client order ID                                                                                                                                              |             |
-| orderSide                                                 | string    | false    | Order side, valid value: buy, sell                                                                                                                           |             |
-| orderStatus                                               | string    | false    | Order status, valid value: rejected                                                                                                                          |             |
-| errCode                                                   | int       | false    | Error code for triggering failure                                                                                                                            |             |
-| errMessage                                                | string    | false    | Error message for triggering failure                                                                                                                         |             |
-| lastActTime                                               | long      | false    | Order triggering failure time                                                                                                                                |             |
-| After conditional order being cancelled before triggering |           | false    |                                                                                                                                                              |             |
-| eventType                                                 | string    | false    | Event type, valid value: deletion (only applicable for conditional order)                                                                                    |             |
-| symbol                                                    | string    | false    | Trading symbol                                                                                                                                               |             |
-| clientOrderId                                             | string    | false    | Client order ID                                                                                                                                              |             |
-| orderSide                                                 | string    | false    | Order side, valid value: buy, sell                                                                                                                           |             |
-| orderStatus                                               | string    | false    | Order status, valid value: canceled                                                                                                                          |             |
-| lastActTime                                               | long      | false    | Order trigger time                                                                                                                                           |             |
-| After order is submitted                                  |           | false    |                                                                                                                                                              |             |
-| eventType                                                 | string    | false    | Event type, valid value: creation                                                                                                                            |             |
-| symbol                                                    | string    | false    | Trading symbol                                                                                                                                               |             |
-| accountId                                                 | long      | false    | account ID                                                                                                                                                   |             |
-| orderId                                                   | long      | false    | Order ID                                                                                                                                                     |             |
-| clientOrderId                                             | string    | false    | Client order ID (if any)                                                                                                                                     |             |
-| orderSource                                               | string    | false    | Order source                                                                                                                                                 |             |
-| orderPrice                                                | string    | false    | Order price                                                                                                                                                  |             |
-| orderSize                                                 | string    | false    | Order size (inapplicable for market buy order)                                                                                                               |             |
-| orderValue                                                | string    | false    | Order value (only applicable for market buy order)                                                                                                           |             |
-| type                                                      | string    | false    | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok |             |
-| orderStatus                                               | string    | false    | Order status, valid value: submitted                                                                                                                         |             |
-| orderCreateTime                                           | long      | false    | Order creation time                                                                                                                                          |             |
-| After order matching                                      |           | false    |                                                                                                                                                              |             |
-| eventType                                                 | string    | false    | Event type, valid value: trade                                                                                                                               |             |
-| symbol                                                    | string    | false    | Trading symbol                                                                                                                                               |             |
-| tradePrice                                                | string    | false    | Trade price                                                                                                                                                  |             |
-| tradeVolume                                               | string    | false    | Trade volume                                                                                                                                                 |             |
-| orderId                                                   | long      | false    | Order ID                                                                                                                                                     |             |
-| type                                                      | string    | false    | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok |             |
-| clientOrderId                                             | string    | false    | Client order ID (if any)                                                                                                                                     |             |
-| orderSource                                               | string    | false    | Order source                                                                                                                                                 |             |
-| orderPrice                                                | string    | false    | Original order price (not available for market order)                                                                                                        |             |
-| orderSize                                                 | string    | false    | Original order amount (not available for buy-market order)                                                                                                   |             |
-| orderValue                                                | string    | false    | Original order value (only available for buy-market order)                                                                                                   |             |
-| tradeId                                                   | long      | false    | Trade ID                                                                                                                                                     |             |
-| tradeTime                                                 | long      | false    | Trade time                                                                                                                                                   |             |
-| aggressor                                                 | bool      | false    | Aggressor or not, valid value: true (taker), false (maker)                                                                                                   |             |
-| orderStatus                                               | string    | false    | Order status, valid value: partial-filled, filled                                                                                                            |             |
-| remainAmt                                                 | string    | false    | Remaining amount (for buy-market order it's remaining value)                                                                                                 |             |
-| execAmt                                                   | string    | false    | Accumulative amount (for buy-market order it is accumulative value)                                                                                          |             |
-| totalTradeAmount                                          | string    | false    | Total transaction amount--This field must be a newly completed order on December 6, 2024. The historical data is empty.                                      |             |
-| After order cancellation                                  |           | false    |                                                                                                                                                              |             |
-| eventType                                                 | string    | false    | Event type, valid value: cancellation                                                                                                                        |             |
-| symbol                                                    | string    | false    | Trading symbol                                                                                                                                               |             |
-| orderId                                                   | long      | false    | Order ID                                                                                                                                                     |             |
-| type                                                      | string    | false    | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok |             |
-| clientOrderId                                             | string    | false    | Client order ID (if any)                                                                                                                                     |             |
-| orderSource                                               | string    | false    | Order source                                                                                                                                                 |             |
-| orderPrice                                                | string    | false    | Original order price (not available for market order)                                                                                                        |             |
-| orderSize                                                 | string    | false    | Original order amount (not available for buy-market order)                                                                                                   |             |
-| orderValue                                                | string    | false    | Original order value (only available for buy-market order)                                                                                                   |             |
-| orderStatus                                               | string    | false    | Order status, valid value: partial-canceled, canceled                                                                                                        |             |
-| remainAmt                                                 | string    | false    | Remaining amount (for buy-market order it's remaining value)                                                                                                 |             |
-| execAmt                                                   | string    | false    | Accumulative amount (for buy-market order it is accumulative value)                                                                                          |             |
-| totalTradeAmount                                          | string    | false    | Total transaction amount--This field must be a newly completed order on December 6, 2024. The historical data is empty.                                      |             |
-| lastActTime                                               | long      | false    | Last activity time                                                                                                                                           |             |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| After conditional order triggering failure |  | false |  |  |
+| eventType | string | false | Event type, valid value: trigger (only applicable for conditional order) |  |
+| symbol | string | false | Trading symbol |  |
+| clientOrderId | string | false | Client order ID |  |
+| orderSide | string | false | Order side, valid value: buy, sell |  |
+| orderStatus | string | false | Order status, valid value: rejected |  |
+| errCode | int | false | Error code for triggering failure |  |
+| errMessage | string | false | Error message for triggering failure |  |
+| lastActTime | long | false | Order triggering failure time |  |
+| After conditional order being cancelled before triggering |  | false |  |  |
+| eventType | string | false | Event type, valid value: deletion (only applicable for conditional order) |  |
+| symbol | string | false | Trading symbol |  |
+| clientOrderId | string | false | Client order ID |  |
+| orderSide | string | false | Order side, valid value: buy, sell |  |
+| orderStatus | string | false | Order status, valid value: canceled |  |
+| lastActTime | long | false | Order trigger time |  |
+| After order is submitted |  | false |  |  |
+| eventType | string | false | Event type, valid value: creation |  |
+| symbol | string | false | Trading symbol |  |
+| accountId | long | false | account ID |  |
+| orderId | long | false | Order ID |  |
+| clientOrderId | string | false | Client order ID (if any) |  |
+| orderSource | string | false | Order source |  |
+| orderPrice | string | false | Order price |  |
+| orderSize | string | false | Order size (inapplicable for market buy order) |  |
+| orderValue | string | false | Order value (only applicable for market buy order) |  |
+| type | string | false | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok |  |
+| orderStatus | string | false | Order status, valid value: submitted |  |
+| orderCreateTime | long | false | Order creation time |  |
+| After order matching  |  | false |  |  |
+| eventType | string | false | Event type, valid value: trade |  |
+| symbol | string | false | Trading symbol |  |
+| tradePrice | string | false | Trade price |  |
+| tradeVolume | string | false | Trade volume |  |
+| orderId | long | false | Order ID |  |
+| type | string | false | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok |  |
+| clientOrderId | string | false | Client order ID (if any) |  |
+| orderSource | string | false | Order source |  |
+| orderPrice | string | false | Original order price (not available for market order) |  |
+| orderSize | string | false | Original order amount (not available for buy-market order) |  |
+| orderValue | string | false | Original order value (only available for buy-market order) |  |
+| tradeId | long | false | Trade ID |  |
+| tradeTime | long | false | Trade time |  |
+| aggressor | bool | false | Aggressor or not, valid value: true (taker), false (maker) |  |
+| orderStatus | string | false | Order status, valid value: partial-filled, filled |  |
+| remainAmt | string | false | Remaining amount (for buy-market order it's remaining value) |  |
+| execAmt | string | false | Accumulative amount (for buy-market order it is accumulative value) |  |
+| totalTradeAmount | string | false | Total transaction amount--This field must be a newly completed order on December 6, 2024. The historical data is empty. |  |
+| After order cancellation |  | false |  |  |
+| eventType | string | false | Event type, valid value: cancellation |  |
+| symbol | string | false | Trading symbol |  |
+| orderId | long | false | Order ID |  |
+| type | string | false | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc, buy-limit-fok, sell-limit-fok |  |
+| clientOrderId | string | false | Client order ID (if any) |  |
+| orderSource | string | false | Order source |  |
+| orderPrice | string | false | Original order price (not available for market order) |  |
+| orderSize | string | false | Original order amount (not available for buy-market order) |  |
+| orderValue | string | false | Original order value (only available for buy-market order) |  |
+| orderStatus | string | false | Order status, valid value: partial-canceled, canceled |  |
+| remainAmt | string | false | Remaining amount (for buy-market order it's remaining value) |  |
+| execAmt | string | false | Accumulative amount (for buy-market order it is accumulative value) |  |
+| totalTradeAmount | string | false | Total transaction amount--This field must be a newly completed order on December 6, 2024. The historical data is empty. |  |
+| lastActTime | long | false | Last activity time |  |
 
 #### Subscription Example
 
@@ -962,27 +969,27 @@ Interface description: Only update when order is in transaction or cancellation.
 
 #### Subscription Address
 
-| Environment                         | Address                       |
-| ----------------------------------- | ----------------------------- |
-| Online                              | wss://api.huobi.pro/ws/v2     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/v2 |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/v2 |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| ---------- | ---- | ----------- |
+| --- | --- | --- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description                                                                                                            | Value Range | Default Value |
-| --------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
-| symbol    | string    | false    | Trading symbol (wildcard \* is allowed)                                                                                |             |               |
-| mode      | int       | false    | Subscription mode (0 – subscribe only trade event; 1 – subscribe both trade and cancellation events; default value: 0) |             |               |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| symbol | string | false | Trading symbol (wildcard \* is allowed) |  |  |
+| mode | int | false | Subscription mode (0 – subscribe only trade event; 1 – subscribe both trade and cancellation events; default value: 0) |  |  |
 
 Notes:
 
@@ -990,32 +997,32 @@ About optional field ‘mode’: If not filled, or filled with 0, it implicates 
 
 #### Data Update
 
-| Parameter       | Data Type | Required | Description                                                                                                                                                                                                                                                                                              | Value Range |
-| --------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| eventType       | string    | false    | Event type (trade)                                                                                                                                                                                                                                                                                       |             |
-| symbol          | string    | false    | Trading symbol                                                                                                                                                                                                                                                                                           |             |
-| orderId         | long      | false    | Order ID                                                                                                                                                                                                                                                                                                 |             |
-| tradePrice      | string    | false    | Trade price                                                                                                                                                                                                                                                                                              |             |
-| tradeVolume     | string    | false    | Trade volume                                                                                                                                                                                                                                                                                             |             |
-| orderSide       | string    | false    | Order side, valid value: buy, sell                                                                                                                                                                                                                                                                       |             |
-| orderType       | string    | false    | Order type, valid value: buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit,buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok                                                                            |             |
-| aggressor       | bool      | false    | Aggressor or not, valid value: true, false                                                                                                                                                                                                                                                               |             |
-| tradeId         | long      | false    | Trade ID                                                                                                                                                                                                                                                                                                 |             |
-| tradeTime       | long      | false    | Trade time, unix time in millisecond                                                                                                                                                                                                                                                                     |             |
-| transactFee     | string    | false    | Transaction fee (positive value) or Transaction rebate (negative value)                                                                                                                                                                                                                                  |             |
-| feeCurrency     | string    | false    | Currency of transaction fee or transaction fee rebate (transaction fee of buy order is based on base currency, transaction fee of sell order is based on quote currency; transaction fee rebate of buy order is based on quote currency, transaction fee rebate of sell order is based on base currency) |             |
-| feeDeduct       | string    | false    | Transaction fee deduction                                                                                                                                                                                                                                                                                |             |
-| feeDeductType   | string    | false    | Transaction fee deduction type, valid value: ht, point                                                                                                                                                                                                                                                   |             |
-| accountId       | long      | false    | Account ID                                                                                                                                                                                                                                                                                               |             |
-| source          | string    | false    | Order source                                                                                                                                                                                                                                                                                             |             |
-| orderPrice      | string    | false    | Order price (invalid for market order)                                                                                                                                                                                                                                                                   |             |
-| orderSize       | string    | false    | Order size (invalid for market buy order)                                                                                                                                                                                                                                                                |             |
-| orderValue      | string    | false    | Order value (only valid for market buy order)                                                                                                                                                                                                                                                            |             |
-| clientOrderId   | string    | false    | Client order ID                                                                                                                                                                                                                                                                                          |             |
-| stopPrice       | string    | false    | Stop price (only valid for stop limit order)                                                                                                                                                                                                                                                             |             |
-| operator        | string    | false    | Operation character (only valid for stop limit order)                                                                                                                                                                                                                                                    |             |
-| orderCreateTime | long      | false    | Order creation time                                                                                                                                                                                                                                                                                      |             |
-| orderStatus     | string    | false    | Order status, valid value: filled, partial-filled                                                                                                                                                                                                                                                        |             |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| eventType | string | false | Event type (trade) |  |
+| symbol | string | false | Trading symbol |  |
+| orderId | long | false | Order ID |  |
+| tradePrice | string | false | Trade price |  |
+| tradeVolume | string | false | Trade volume |  |
+| orderSide | string | false | Order side, valid value: buy, sell |  |
+| orderType | string | false | Order type, valid value: buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit,buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |  |
+| aggressor | bool | false | Aggressor or not, valid value: true, false |  |
+| tradeId | long | false | Trade ID |  |
+| tradeTime | long | false | Trade time, unix time in millisecond |  |
+| transactFee | string | false | Transaction fee (positive value) or Transaction rebate (negative value) |  |
+| feeCurrency | string | false | Currency of transaction fee or transaction fee rebate (transaction fee of buy order is based on base currency, transaction fee of sell order is based on quote currency; transaction fee rebate of buy order is based on quote currency, transaction fee rebate of sell order is based on base currency) |  |
+| feeDeduct | string | false | Transaction fee deduction |  |
+| feeDeductType | string | false | Transaction fee deduction type, valid value: ht, point |  |
+| accountId | long | false | Account ID |  |
+| source | string | false | Order source |  |
+| orderPrice | string | false | Order price (invalid for market order) |  |
+| orderSize | string | false | Order size (invalid for market buy order) |  |
+| orderValue | string | false | Order value (only valid for market buy order) |  |
+| clientOrderId | string | false | Client order ID |  |
+| stopPrice | string | false | Stop price (only valid for stop limit order) |  |
+| operator | string | false | Operation character (only valid for stop limit order) |  |
+| orderCreateTime | long | false | Order creation time |  |
+| orderStatus | string | false | Order status, valid value: filled, partial-filled |  |
 
 Notes:
 
@@ -1092,47 +1099,47 @@ Interface description: Support spot order transactions through websocket.
 
 #### Subscription Address
 
-| Environment                         | Address                          |
-| ----------------------------------- | -------------------------------- |
-| Online                              | wss://api.huobi.pro/ws/trade     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/trade |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/trade |
 
 #### Request Parameter
 
-| Field Name | Type   | Description                             |
-| ---------- | ------ | --------------------------------------- |
-| ch         | string | Required； Operator Name，create-order; |
-| params     | string | Order parameters                        |
-| cid        | string | request id                              |
+| Field Name | Type | Description |
+| --- | --- | --- |
+| ch | string | Required； Operator Name，create-order; |
+| params | string | Order parameters |
+| cid | string | request id |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter          | Data Type | Required | Description                                                                                                                                                                                                                   | Value Range | Default Value |
-| ------------------ | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
-| account-id         | string    | false    | The account id used for this trade                                                                                                                                                                                            |             |               |
-| symbol             | string    | false    | The trading symbol to trade                                                                                                                                                                                                   |             |               |
-| type               | string    | false    | The order type。buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-limit-maker, sell-limit-maker, buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |             |               |
-| amount             | string    | false    | order size (for buy market order, it's order value)                                                                                                                                                                           |             |               |
-| price              | string    | false    | The order price (not available for market order)                                                                                                                                                                              |             |               |
-| source             | string    | false    | When trade with spot use 'spot-api';When trade with isolated margin use 'margin-api'; When trade with cross margin use 'super-margin-api';When trade with c2c-margin use 'c2c-margin-api';                                    |             | spot-api      |
-| client-order-id    | string    | false    | Client order ID                                                                                                                                                                                                               |             |               |
-| self-match-prevent | int       | false    | self match prevent. 0: no, means allowing self-trading; 1: yes, means not allowing self-trading                                                                                                                               |             | 0             |
-| stop-price         | string    | false    | Trigger price of stop limit order                                                                                                                                                                                             |             |               |
-| operator           | string    | false    | operation charactor of stop price                                                                                                                                                                                             |             |               |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| account-id | string | false | The account id used for this trade |  |  |
+| symbol | string | false | The trading symbol to trade |  |  |
+| type | string | false | The order type。buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-limit-maker, sell-limit-maker, buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |  |  |
+| amount | string | false | order size (for buy market order, it's order value) |  |  |
+| price | string | false | The order price (not available for market order) |  |  |
+| source | string | false | When trade with spot use 'spot-api';When trade with isolated margin use 'margin-api'; When trade with cross margin use 'super-margin-api';When trade with c2c-margin use 'c2c-margin-api'; |  | spot-api |
+| client-order-id | string | false | Client order ID |  |  |
+| self-match-prevent | int | false | self match prevent. 0: no, means allowing self-trading; 1: yes, means not allowing self-trading |  | 0 |
+| stop-price | string | false | Trigger price of stop limit order |  |  |
+| operator | string | false | operation charactor of stop price |  |  |
 
 Notes: buy-limit-maker If the order price is greater than or equal to the lowest selling price in the market, the order will be rejected. If the order price is less than the lowest selling price in the market, the order will be accepted. sell-limit-maker If the order price is less than or equal to the highest buy price in the market, the order will be rejected. If the order price is greater than the highest buy price in the market, the order will be accepted.
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description  | Value Range    |
-| --------- | --------- | -------- | ------------ | -------------- |
-| status    | string    | false    | status       | OK" or "Error" |
-| data      | long      | false    | order number |                |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| status | string | false | status | OK" or "Error" |
+| data | long | false | order number |  |
 
 Notes: Notes: The returned data object is a single string which represents the order id
 
@@ -1185,52 +1192,52 @@ Interface description: Supports spot batch order transactions via websocket.
 
 #### Subscription Address
 
-| Environment                         | Address                          |
-| ----------------------------------- | -------------------------------- |
-| Online                              | wss://api.huobi.pro/ws/trade     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/trade |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/trade |
 
 #### Request Parameter
 
-| Field Name | Type   | Description                                  |
-| ---------- | ------ | -------------------------------------------- |
-| ch         | string | Required； Operator Name，create-batchorder; |
-| params     | string | Order parameters                             |
-| cid        | string | request id                                   |
+| Field Name | Type | Description |
+| --- | --- | --- |
+| ch | string | Required； Operator Name，create-batchorder; |
+| params | string | Order parameters |
+| cid | string | request id |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter          | Data Type | Required | Description                                                                                                                                                                                                                   | Value Range | Default Value |
-| ------------------ | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
-| account-id         | string    | false    | The account id used for this trade                                                                                                                                                                                            |             |               |
-| symbol             | string    | false    | The trading symbol to trade                                                                                                                                                                                                   |             |               |
-| type               | string    | false    | The order type。buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-limit-maker, sell-limit-maker, buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |             |               |
-| amount             | string    | false    | order size (for buy market order, it's order value)                                                                                                                                                                           |             |               |
-| price              | string    | false    | The order price (not available for market order)                                                                                                                                                                              |             |               |
-| source             | string    | false    | When trade with spot use 'spot-api';When trade with isolated margin use 'margin-api'; When trade with cross margin use 'super-margin-api';When trade with c2c-margin use 'c2c-margin-api';                                    |             | spot-api      |
-| client-order-id    | string    | false    | Client order ID                                                                                                                                                                                                               |             |               |
-| self-match-prevent | int       | false    | self match prevent. 0: no, means allowing self-trading; 1: yes, means not allowing self-trading                                                                                                                               |             | 0             |
-| stop-price         | string    | false    | Trigger price of stop limit order                                                                                                                                                                                             |             |               |
-| operator           | string    | false    | operation charactor of stop price                                                                                                                                                                                             |             |               |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| account-id | string | false | The account id used for this trade |  |  |
+| symbol | string | false | The trading symbol to trade |  |  |
+| type | string | false | The order type。buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-limit-maker, sell-limit-maker, buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |  |  |
+| amount | string | false | order size (for buy market order, it's order value) |  |  |
+| price | string | false | The order price (not available for market order) |  |  |
+| source | string | false | When trade with spot use 'spot-api';When trade with isolated margin use 'margin-api'; When trade with cross margin use 'super-margin-api';When trade with c2c-margin use 'c2c-margin-api'; |  | spot-api |
+| client-order-id | string | false | Client order ID |  |  |
+| self-match-prevent | int | false | self match prevent. 0: no, means allowing self-trading; 1: yes, means not allowing self-trading |  | 0 |
+| stop-price | string | false | Trigger price of stop limit order |  |  |
+| operator | string | false | operation charactor of stop price |  |  |
 
 Notes: buy-limit-maker If the order price is greater than or equal to the lowest selling price in the market, the order will be rejected. If the order price is less than the lowest selling price in the market, the order will be accepted. sell-limit-maker If the order price is less than or equal to the highest buy price in the market, the order will be rejected. If the order price is greater than the highest buy price in the market, the order will be accepted.
 
 #### Data Update
 
-| Parameter       | Data Type | Required | Description                                 | Value Range |
-| --------------- | --------- | -------- | ------------------------------------------- | ----------- |
-| status          | string    | false    | status                                      |             |
-| DATA_START      | object    | false    |                                             |             |
-| order-id        | long      | false    | The order id                                |             |
-| client-order-id | string    | false    | The client order id (if available)          |             |
-| err-code        | string    | false    | The error code (only for rejected order)    |             |
-| err-msg         | string    | false    | The error message (only for rejected order) |             |
-| DATA_END        |           | false    |                                             |             |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| status | string | false | status |  |
+| DATA\_START | object | false |  |  |
+| order-id | long | false | The order id |  |
+| client-order-id | string | false | The client order id (if available) |  |
+| err-code | string | false | The error code (only for rejected order) |  |
+| err-msg | string | false | The error message (only for rejected order) |  |
+| DATA\_END |  | false |  |  |
 
 Notes: Notes: The returned data object is a single string which represents the order id
 
@@ -1304,49 +1311,49 @@ Interface description: Support margin order transactions through websocket.
 
 #### Subscription Address
 
-| Environment                         | Address                          |
-| ----------------------------------- | -------------------------------- |
-| Online                              | wss://api.huobi.pro/ws/trade     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/trade |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/trade |
 
 #### Request Parameter
 
-| Field Name | Type   | Description                                    |
-| ---------- | ------ | ---------------------------------------------- |
-| ch         | string | Required； Operator Name，create-margin-order; |
-| params     | string | Order parameters                               |
-| cid        | string | request id                                     |
+| Field Name | Type | Description |
+| --- | --- | --- |
+| ch | string | Required； Operator Name，create-margin-order; |
+| params | string | Order parameters |
+| cid | string | request id |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter     | Data Type | Required | Description                                                                                                                                                                                                                                                                           | Value Range | Default Value |
-| ------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
-| symbol        | string    | true     | The trading symbol to trade                                                                                                                                                                                                                                                           |             |               |
-| account-id    | string    | true     | The account id used for this trade                                                                                                                                                                                                                                                    |             |               |
-| amount        | string    | false    | Order transaction volume (market buy order is the order transaction amount); for market orders, you can only choose one of the two amounts, amount and market-amount, 0 means not to transmit;                                                                                        |             |               |
-| market-amount | string    | false    | The market price order buy order is the order transaction volume, and the sell unit order transaction amount; amount and market-amount can only be selected from the two, 0 means not to be transmitted;                                                                              |             |               |
-| borrow-amount | string    | false    | The currency or quantity that needs to be borrowed (buying at market price represents the amount, and the rest represents the quantity) (borrowing needs to be uploaded). The maximum precision is 3 digits, if it exceeds, it will be rounded up. Such as: 6.12345 should pass 6.124 |             |               |
-| type          | string    | true     | buy-market, sell-market, buy-limit, sell-limit,, buy-stop-limit, sell-stop-limit                                                                                                                                                                                                      |             |               |
-| trade-purpose | string    | true     | Transaction purpose {1: automatic loan, 2: automatic repayment}                                                                                                                                                                                                                       |             |               |
-| price         | string    | false    | The order price (not available for market order)                                                                                                                                                                                                                                      |             |               |
-| stop-price    | string    | false    | Trigger price of stop limit order                                                                                                                                                                                                                                                     |             |               |
-| operator      | string    | false    | operation charactor of stop price                                                                                                                                                                                                                                                     |             |               |
-| source        | string    | true     | When trade with spot use 'spot-api';When trade with isolated margin use 'margin-api'; When trade with cross margin use 'super-margin-api';When trade with c2c-margin use 'c2c-margin-api';                                                                                            |             |               |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| symbol | string | true | The trading symbol to trade |  |  |
+| account-id | string | true | The account id used for this trade |  |  |
+| amount | string | false | Order transaction volume (market buy order is the order transaction amount); for market orders, you can only choose one of the two amounts, amount and market-amount, 0 means not to transmit; |  |  |
+| market-amount | string | false | The market price order buy order is the order transaction volume, and the sell unit order transaction amount; amount and market-amount can only be selected from the two, 0 means not to be transmitted; |  |  |
+| borrow-amount | string | false | The currency or quantity that needs to be borrowed (buying at market price represents the amount, and the rest represents the quantity) (borrowing needs to be uploaded). The maximum precision is 3 digits, if it exceeds, it will be rounded up. Such as: 6.12345 should pass 6.124 |  |  |
+| type | string | true | buy-market, sell-market, buy-limit, sell-limit,, buy-stop-limit, sell-stop-limit |  |  |
+| trade-purpose | string | true | Transaction purpose {1: automatic loan, 2: automatic repayment} |  |  |
+| price | string | false | The order price (not available for market order) |  |  |
+| stop-price | string | false | Trigger price of stop limit order |  |  |
+| operator | string | false | operation charactor of stop price |  |  |
+| source | string | true | When trade with spot use 'spot-api';When trade with isolated margin use 'margin-api'; When trade with cross margin use 'super-margin-api';When trade with c2c-margin use 'c2c-margin-api'; |  |  |
 
 #### Data Update
 
 | Parameter | Data Type | Required | Description | Value Range |
-| --------- | --------- | -------- | ----------- | ----------- |
-| code      | Integer   | true     |             |             |
-| success   | Boolean   | true     |             |             |
-| message   | String    | false    |             |             |
-| data      | OrderResp | false    |             |             |
-| order-id  | long      | true     |             |             |
+| --- | --- | --- | --- | --- |
+| code | Integer | true |  |  |
+| success | Boolean | true |  |  |
+| message | String | false |  |  |
+| data | OrderResp | false |  |  |
+| order-id | long | true |  |  |
 
 #### Subscription Example
 
@@ -1402,44 +1409,44 @@ Interface description: Support for cancelling all (Maximum 100 at a time) orders
 
 #### Subscription Address
 
-| Environment                         | Address                          |
-| ----------------------------------- | -------------------------------- |
-| Online                              | wss://api.huobi.pro/ws/trade     |
+| Environment | Address |
+| --- | --- |
+| Online | wss://api.huobi.pro/ws/trade |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/trade |
 
 #### Request Parameter
 
-| Field Name | Type   | Description                          |
-| ---------- | ------ | ------------------------------------ |
-| ch         | string | Required； Operator Name，cancelall; |
-| params     | string | Order parameters                     |
-| cid        | string | request id                           |
+| Field Name | Type | Description |
+| --- | --- | --- |
+| ch | string | Required； Operator Name，cancelall; |
+| params | string | Order parameters |
+| cid | string | request id |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter  | Data Type | Required | Description                                                                                 | Value Range                                                                                                                                                                | Default Value |
-| ---------- | --------- | -------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| account-id | string    | false    | The account id used for this cancel                                                         | Refer to GET /v1/account/accounts                                                                                                                                          |               |
-| symbol     | string    | false    | The trading symbol list (maximum 10 symbols, separated by comma, default value all symbols) | All supported trading symbol, e.g. btcusdt, bccbtc.Refer to GET /v1/common/symbols                                                                                         | all           |
-| types      | string    | false    | One or more types of order to include in the search, use comma to separate.                 | buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |               |
-| size       | string    | false    | Filter on the direction of the trade                                                        | buy, sell                                                                                                                                                                  |               |
-| size       | ion       | false    | The number of orders to cancel                                                              | \[1, 100\]                                                                                                                                                                 | 100           |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| account-id | string | false | The account id used for this cancel | Refer to GET /v1/account/accounts |  |
+| symbol | string | false | The trading symbol list (maximum 10 symbols, separated by comma, default value all symbols) | All supported trading symbol, e.g. btcusdt, bccbtc.Refer to GET /v1/common/symbols | all |
+| types | string | false | One or more types of order to include in the search, use comma to separate. | buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-stop-limit, sell-stop-limit, buy-limit-fok, sell-limit-fok, buy-stop-limit-fok, sell-stop-limit-fok |  |
+| size | string | false | Filter on the direction of the trade | buy, sell |  |
+| size | ion | false | The number of orders to cancel | \[1, 100\] | 100 |
 
 #### Data Update
 
-| Parameter     | Data Type | Required | Description                                                          | Value Range |
-| ------------- | --------- | -------- | -------------------------------------------------------------------- | ----------- |
-| status        | string    | false    | status                                                               |             |
-| DATA_START    | object    | false    |                                                                      |             |
-| success-count | int       | false    | The number of cancel request sent successfully                       |             |
-| failed-count  | int       | false    | The number of cancel request failed                                  |             |
-| next-id       | long      | false    | the next order id that can be cancelled, -1 indicates no open orders |             |
-| DATA_END      |           | false    |                                                                      |             |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| status | string | false | status |  |
+| DATA\_START | object | false |  |  |
+| success-count | int | false | The number of cancel request sent successfully |  |
+| failed-count | int | false | The number of cancel request failed |  |
+| next-id | long | false | the next order id that can be cancelled, -1 indicates no open orders |  |
+| DATA\_END |  | false |  |  |
 
 #### Subscription Example
 
@@ -1488,46 +1495,46 @@ Interface description: Supports batch cancellation of specified orders via webso
 
 #### Subscription Address
 
-| Environment                         | Address                          |
-| ----------------------------------- | -------------------------------- |
+| Environment | Address |
+| --- | --- |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws/trade |
-| Online                              | wss://api.huobi.pro/ws/trade     |
+| Online | wss://api.huobi.pro/ws/trade |
 
 #### Request Parameter
 
-| Field Name | Type   | Description                       |
-| ---------- | ------ | --------------------------------- |
-| ch         | string | Required； Operator Name，cancel; |
-| params     | string | Order parameters                  |
-| cid        | string | request id                        |
+| Field Name | Type | Description |
+| --- | --- | --- |
+| ch | string | Required； Operator Name，cancel; |
+| params | string | Order parameters |
+| cid | string | request id |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| -------------- | -------------------- | ---- |
+| --- | --- | --- |
 
 #### Subscription Parameter
 
-| Parameter        | Data Type | Required | Description                                                                                                                                                                                          | Value Range | Default Value                      |
-| ---------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ---------------------------------- |
-| order-ids        | string    | false    | The order ids to cancel (Either order-ids or client-order-ids can be filled in one batch request). It is suggest to use order-ids rather than client-order-ids, the former is faster and more stable |             | No more than 50 orders per request |
-| client-order-ids | string    | false    | The client order ids to cancel (Either order-ids or client-order-ids can be filled in one batch request), it must exist already, otherwise it is not allowed to use when placing a new order         |             | No more than 50 orders per request |
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| order-ids | string | false | The order ids to cancel (Either order-ids or client-order-ids can be filled in one batch request). It is suggest to use order-ids rather than client-order-ids, the former is faster and more stable |  | No more than 50 orders per request |
+| client-order-ids | string | false | The client order ids to cancel (Either order-ids or client-order-ids can be filled in one batch request), it must exist already, otherwise it is not allowed to use when placing a new order |  | No more than 50 orders per request |
 
 #### Data Update
 
-| Parameter       | Data Type | Required | Description | Value Range |
-| --------------- | --------- | -------- | ----------- | ----------- |
-| status          | string    | false    |             |             |
-| DATA_START      | object    | false    |             |             |
-| success         | array     | false    |             |             |
-| \_\_failed\_\_  | object    | false    |             |             |
-| order-id        | string    | false    |             |             |
-| client-order-id | string    | false    |             |             |
-| err-code        | string    | false    |             |             |
-| err-msg         | string    | false    |             |             |
-| order-state     | string    | false    |             |             |
-| \_\_/failed\_\_ |           | false    |             |             |
-| DATA_END        |           | false    |             |             |
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| status | string | false |  |  |
+| DATA\_START | object | false |  |  |
+| success | array | false |  |  |
+| FAILED\_START | object | false |  |  |
+| order-id | string | false |  |  |
+| client-order-id | string | false |  |  |
+| err-code | string | false |  |  |
+| err-msg | string | false |  |  |
+| order-state | string | false |  |  |
+| FAILED\_END |  | false |  |  |
+| DATA\_END |  | false |  |  |
 
 #### Subscription Example
 
