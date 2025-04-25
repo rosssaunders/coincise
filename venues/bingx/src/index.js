@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer'
 import TurndownService from 'turndown'
 import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
 import fs from 'fs'
-import { urls, outputConfig } from './config/bingx.js'
+import { getConfig } from './config/bingx.js'
 
 async function loadBrowser() {
   const browser = await puppeteer.launch({ headless: false })
@@ -13,7 +13,15 @@ async function getPageHTML(pageURL, browser) {
   const page = await browser.newPage()
 
   // Add console event listener
-  page.on('console', msg => console.log('Browser Console:', msg.text()))
+  page.on('console', msg => {
+    if (
+      msg.text() !== 'JSHandle@object' &&
+      !msg.text().startsWith('A preload for ') &&
+      !msg.text().startsWith('The resource ')
+    ) {
+      console.log('Browser Console:', msg.text())
+    }
+  })
 
   // Set viewport to browser window size
   await page.setViewport({ width: 1400, height: 1200 })
@@ -135,7 +143,7 @@ async function getPageHTML(pageURL, browser) {
         if (!table) return
 
         const tables = table.querySelectorAll('table')
-        console.log('tables', tables.length)
+        console.log(`Found ${tables.length} tables in the Payload section`)
         if (tables.length >= 2) {
           const headerTable = tables[0].cloneNode(true)
           const bodyTable = tables[1].cloneNode(true)
@@ -189,25 +197,44 @@ async function getPageHTML(pageURL, browser) {
           bodyTable.removeAttribute('cellspacing')
           bodyTable.removeAttribute('cellpadding')
 
-          const bodyHead = bodyTable.querySelector('thead')
-          if (bodyHead) {
-            const headerRow = bodyHead.querySelector('tr')
-            if (headerRow) {
-              const firstCell = headerRow.querySelector('th')
-              if (firstCell) {
-                firstCell.remove()
-              }
-            }
-          }
-
+          let removeFirstColumn = false
           if (tbody) {
             const rows = tbody.querySelectorAll('tr')
+            // Check if any first cell contains the specific HTML
             rows.forEach(row => {
               const firstCell = row.querySelector('td')
-              if (firstCell) {
-                firstCell.remove()
+              if (
+                firstCell &&
+                firstCell.innerHTML.includes('<i class="el-icon el-icon-arrow-right"></i>')
+              ) {
+                removeFirstColumn = true
               }
             })
+
+            if (removeFirstColumn) {
+              // Remove first header cell if it contains the icon in tbody cells
+              const bodyHead = bodyTable.querySelector('thead')
+              if (bodyHead) {
+                const headerRow = bodyHead.querySelector('tr')
+                if (headerRow) {
+                  const firstHeaderCell = headerRow.querySelector('th')
+                  if (firstHeaderCell) {
+                    firstHeaderCell.remove()
+                  }
+                }
+              }
+
+              // Remove the first cell from each tbody row if it contains the icon
+              rows.forEach(row => {
+                const firstCell = row.querySelector('td')
+                if (
+                  firstCell &&
+                  firstCell.innerHTML.includes('<i class="el-icon el-icon-arrow-right"></i>')
+                ) {
+                  firstCell.remove()
+                }
+              })
+            }
           }
 
           const dataRows = bodyTable.querySelectorAll('tr')
@@ -264,18 +291,14 @@ async function getPageHTML(pageURL, browser) {
       )
 
       if (errorLabel) {
-        console.log('Found the error label')
+        console.log('Found the errors section')
         const label = errorLabel.parentElement
         if (label) {
           label.click()
 
           await new Promise(resolve => setTimeout(resolve, 100))
 
-          console.log('error label clicked')
-
           const section = label.parentElement.parentElement.parentElement
-
-          //console.log('section', section.innerHTML)
 
           const tablist = section.querySelector('[role="tablist"]')
 
@@ -338,7 +361,7 @@ async function getPageHTML(pageURL, browser) {
 
       // Copy any remaining content to the empty placeholder div
       sectionElement.querySelectorAll('div.content-item').forEach(div => {
-        console.log('cleaning up')
+        console.log('Moving all remaining content to the catch all div')
         emptyDiv.appendChild(div)
       })
     }
@@ -410,9 +433,31 @@ async function main() {
   const result = []
 
   try {
+    // Get configuration based on command line argument
+    const arg = process.argv[2] || 'private'
+    let type = arg
+
+    // Map command line arguments to configuration types
+    if (arg === 'privateWs') {
+      type = 'privateWebSocket'
+    } else if (arg === 'publicWs') {
+      type = 'publicWebSocket'
+    }
+
+    const { urls, outputConfig } = getConfig(type)
+
+    console.log(`\x1b[34m%s\x1b[0m`, `📚 Generating ${type} API documentation`)
+
     // Process all URLs from the configuration
     for (const url of urls) {
+      console.log('\x1b[34m%s\x1b[0m', `🌐 Processing URL: ${url}`)
+      const startTime = Date.now()
+
       const html = await getPageHTML(url, browser)
+
+      const endTime = Date.now()
+      console.log('\x1b[36m%s\x1b[0m', `⏱️ Time taken: ${(endTime - startTime) / 1000} seconds`)
+
       result.push(html)
     }
 
