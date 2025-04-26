@@ -2,28 +2,26 @@
   "name": "coinbase-exchange-api-scraper",
   "version": "1.0.0",
   "description": "Scraper for Coinbase Exchange API documentation with markdown output",
-  "main": "index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "scrape": "node src/index.js scrape",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "batch": "node src/index.js batch",
+    "batch:config": "node src/index.js batch -c",
+    "all": "node src/index.js batch -c config/config.json",
+    "batch:output": "node src/index.js batch -o",
+    "help": "node src/index.js help"
   },
-  "keywords": [
-    "coinbase",
-    "api",
-    "documentation",
-    "scraper",
-    "markdown"
-  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "jsdom": "26.0.0",
-    "puppeteer": "24.6.1",
-    "turndown": "7.2.0"
+    "jsdom": "26.1.0",
+    "puppeteer": "24.7.2",
+    "turndown": "7.2.0",
+    "turndown-plugin-gfm": "1.0.2"
   },
   "bin": {
-    "coinbase-scraper": "./index.js"
+    "coinbase-scraper": "./src/index.js"
   }
 }
