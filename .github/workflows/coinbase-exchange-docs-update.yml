@@ -38,11 +38,18 @@ jobs:
       - name: Check for changes
         id: git-check
         run: |
-          cd ../..  # Move back to root directory for git operations
-          # Explicitly add the docs/coinbase/exchange directory to staging
-          git add docs/coinbase/exchange
-          # Check if there are any changes
-          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+          cd ../../../  # Move back to root directory for git operations
+          # Verify docs directory exists
+          if [ -d "docs/coinbase/exchange" ]; then
+            # Explicitly add the docs/coinbase/exchange directory to staging
+            git add docs/coinbase/exchange
+            # Check if there are any changes
+            git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "Warning: docs/coinbase/exchange directory not found"
+            mkdir -p docs/coinbase/exchange
+            echo "Created docs/coinbase/exchange directory"
+          fi
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
