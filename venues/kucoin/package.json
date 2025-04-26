@@ -1,0 +1,20 @@
+{
+  "name": "kucoin",
+  "version": "1.0.0",
+  "description": "Kucoin API documentation extraction project",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "puppeteer": "^24.6.0",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "26.1.0",
+    "node-fetch": "^3.3.2",
+    "widdershins": "^4.0.1"
+  },
+  "author": "",
+  "license": "ISC"
+}

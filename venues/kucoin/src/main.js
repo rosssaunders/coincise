@@ -1,0 +1,33 @@
+'use strict'
+
+import { downloadOpenApiSpecs } from './processors/downloader.js'
+import { convertSpecsToMarkdown } from './processors/converter.js'
+import { config } from './config/config.js'
+import { createOutputDirectories } from './utils/fileUtils.js'
+
+/**
+ * Main function to download OpenAPI specs and convert them to Markdown
+ */
+async function main() {
+  try {
+    console.log('Starting KuCoin API documentation extraction...')
+
+    // Create output directories if they don't exist
+    await createOutputDirectories(config.outputDir)
+
+    // Download OpenAPI specs from KuCoin GitHub repository
+    console.log('Downloading OpenAPI specifications...')
+    const downloadedSpecs = await downloadOpenApiSpecs(config.apiSpecUrls)
+
+    // Convert the downloaded specs to Markdown
+    console.log('Converting specifications to Markdown...')
+    await convertSpecsToMarkdown(downloadedSpecs, config.outputDir)
+
+    console.log('KuCoin API documentation extraction completed successfully!')
+  } catch (error) {
+    console.error('Error in KuCoin extraction process:', error)
+    process.exit(1)
+  }
+}
+
+main()
