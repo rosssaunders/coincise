@@ -9,7 +9,6 @@ on:
 jobs:
   update-docs:
     runs-on: ubuntu-latest
-    # Add permissions to the job
     permissions:
       contents: write
       pull-requests: write
@@ -58,4 +57,4 @@ jobs:
           branch: 'htx-docs-update'
           base: 'main'
           delete-branch: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_GITHUB }}

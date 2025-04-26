@@ -4,19 +4,18 @@ on:
   schedule:
     # Run every Sunday at 00:00 UTC
     - cron: '0 0 * * 0'
-  workflow_dispatch: # Allow manual triggering
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   update-docs:
     runs-on: ubuntu-latest
-    # Add permissions to the job
     permissions:
       contents: write
       pull-requests: write
     defaults:
       run:
         working-directory: venues/binance
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -55,4 +54,4 @@ jobs:
           branch: 'binance-docs-update'
           base: 'main'
           delete-branch: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_GITHUB }}
