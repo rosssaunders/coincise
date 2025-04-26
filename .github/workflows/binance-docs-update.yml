@@ -4,7 +4,7 @@ on:
   schedule:
     # Run every Sunday at 00:00 UTC
     - cron: '0 0 * * 0'
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch: # Allow manual triggering
 
 jobs:
   update-docs:
@@ -12,12 +12,12 @@ jobs:
     defaults:
       run:
         working-directory: venues/binance
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history for git diff
+          fetch-depth: 0 # Fetch all history for git diff
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -36,8 +36,10 @@ jobs:
         id: git-check
         run: |
           cd ../..  # Move back to root directory for git operations
-          git add .
-          git diff --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+          # Explicitly add the docs/binance directory to staging
+          git add docs/binance
+          # Check if there are any changes
+          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
@@ -48,4 +50,4 @@ jobs:
           body: 'Automated weekly update of Binance API documentation'
           branch: 'binance-docs-update'
           base: 'main'
-          delete-branch: true 
+          delete-branch: true

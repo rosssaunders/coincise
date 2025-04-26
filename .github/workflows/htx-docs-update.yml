@@ -39,8 +39,10 @@ jobs:
         id: git-check
         run: |
           cd ../..  # Move back to root directory for git operations
-          git add .
-          git diff --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+          # Explicitly add the docs/htx directory to staging
+          git add docs/htx
+          # Check if there are any changes
+          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
