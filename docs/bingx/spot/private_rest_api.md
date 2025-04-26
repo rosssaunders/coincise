@@ -281,8 +281,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | no | coin name |
 | status | int | no | Status (0-In progress 6-Chain uploaded 1-Completed) |
 | startTime | LONG | no | Starting time1658748648396 |
@@ -294,8 +294,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | amount | DECIMAL | Recharge amount |
 | coin | string | coin name |
 | network | string | recharge network |
@@ -333,8 +333,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | id | string | no | Unique id of the withdrawal record returned by the platform |
 | coin | string | no | coin name |
 | withdrawOrderId | string | no | Custom ID, if there is none, this field will not be returned,When both the platform ID and withdraw order ID are passed as parameters, the query will be based on the platform ID |
@@ -348,8 +348,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | address | string | address |
 | amount | DECIMAL | Withdrawal amount |
 | applyTime | Date | withdraw time |
@@ -392,24 +392,24 @@ Get information of coins,And query the limit corresponding to the coins
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | no | Coin identification |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | coin | string | Coin identification |
 | name | string | Coin name |
 | networkList | Network | Network information |
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | name | Network name |
 | network | Network identification |
 | depositEnable | Whether the currency is enabled for deposit |
@@ -452,8 +452,8 @@ Specify user account to initiate coin withdrawal
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | yes | Coin name |
 | network | string | no | Network name, use default network if not transmitted |
 | address | string | yes | Withdrawal address |
@@ -466,8 +466,8 @@ Specify user account to initiate coin withdrawal
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | id | string | The platform returns the unique ID of the internal transfer record. |
 | withdrawOrderId | string | Customer-defined withdrawal ID, a combination of numbers and letters, with a length of less than 100 characters |
 
@@ -497,8 +497,8 @@ This endpoint is used for a mother account to query the deposit address of a spe
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | Yes | Name of the coin for transfer |
 | offset | int | No | Starting record number, default is 0 |
 | limit | int | No | Page size, default is 100, maximum is 1000 |
@@ -507,8 +507,8 @@ This endpoint is used for a mother account to query the deposit address of a spe
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | data | object | List of deposit addresses |
 | total | int | Total number of addresses |
 | coin | string | Name of the coin |
@@ -544,13 +544,13 @@ Used to query the recharge records in risk control for users and their sub-accou
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
+|  | Parameter Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | uid | string | User ID |
 | coin | string | Currency name |
 | amount | decimal | Amount |
@@ -586,21 +586,21 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | balances | Array | Asset list, element fields refer to the following table |
 
 ### Order Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | asset | string | Asset name |
 | free | string | Available asset |
 | locked | string | Freeze asset |
@@ -633,8 +633,8 @@ request parameters https://open-api.bingx.com
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | type | ENUM | yes | transfer tpye |
 | asset | string | yes | coin name e.g. USDT |
 | amount | DECIMAL | yes | amount |
@@ -643,14 +643,14 @@ request parameters https://open-api.bingx.com
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | tranId | LONG | Transaction ID |
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | FUND\_SFUTURES | Funding Account->Standard Contract |
 | SFUTURES\_FUND | Standard Contract->Funding Account |
 | FUND\_PFUTURES | Funding Account->Perpetual Futures |
@@ -682,8 +682,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | type | ENUM | yes | transfer type, (query by type or tranId) |
 | tranId | LONG | no | transaction ID, (query by type or tranId) |
 | startTime | LONG | no | Starting time1658748648396 |
@@ -695,8 +695,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | total | LONG | total |
 | rows | Array | Array |
 | asset | string | coin name |
@@ -708,8 +708,8 @@ Content-Type:request body(application/json)
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | FUND\_SFUTURES | Funding Account->Standard Contract |
 | SFUTURES\_FUND | Standard Contract->Funding Account |
 | FUND\_PFUTURES | Funding Account->Perpetual Futures |
@@ -753,8 +753,8 @@ For internal transfers within sub-accounts, please use the dedicated interface: 
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | Yes | Name of the transferred currency |
 | userAccountType | int | Yes | User account type 1=UID 2=phone number 3=email |
 | userAccount | string | Yes | User account: UID, phone number, email |
@@ -767,8 +767,8 @@ For internal transfers within sub-accounts, please use the dedicated interface: 
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | id | string | The platform returns the unique ID of the internal transfer record. |
 | transferClientId | string | Custom ID for internal transfer by the client, combination of numbers and letters, length less than 100 characters |
 
@@ -798,8 +798,8 @@ This endpoint is used for the parent user to query their own inner transfer reco
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | Yes | Transfer coin name |
 | transferClientId | string | no | Client's self-defined internal transfer ID. When both platform ID and transferClientId are provided as input, the query will be based on the platform ID. |
 | startTime | long | No | Start time |
@@ -811,8 +811,8 @@ This endpoint is used for the parent user to query their own inner transfer reco
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | data | object | Inner transfer records list |
 | total | int | Total number of addresses |
 | id | long | Inner transfer ID |
@@ -849,16 +849,16 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | accountType | string | 否 | Account type, if left blank, all assets of the account will be checked by default. spot: spot (fund account), stdFutures: standard futures account, coinMPerp: coin base account, USDTMPerp: U base account, copyTrading: copy trading account, grid: grid account, eran: wealth account, c2c: c2c account. |
 | timestamp | int64 | 是 | Request valid time window value, Unit: milliseconds |
 | recvWindow | int64 | 否 | Timestamp of initiating the request, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | accountType | string | Account type, if left blank, all assets of the account will be checked by default. spot: spot (fund account), stdFutures: standard futures account, coinMPerp: coin base account, USDTMPerp: U base account, copyTrading: copy trading account, grid: grid account, eran: wealth account, c2c: c2c account. |
 | usdtBalance | string | Equivalent to USDT amount |
 
@@ -930,13 +930,13 @@ TRIGGER\_ Market: Market price plan commission
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT |
 | side | string | yes | BUY/SELL |
 | type | string | yes | MARKET/LIMIT/TAKE\_STOP\_LIMIT/TAKE\_STOP\_MARKET/TRIGGER\_LIMIT/TRIGGER\_MARKET |
 | stopPrice | string | 是 | order trigger price, used for TAKE\_ STOP\_ LIMITED,TAKE\_ STOP\_ MARKET, TRIGGER\_ LIMITED, TRIGGER\_ Market type orders. |
-| quantity | float64 | no | Original quantity, e.g., 0.1BTC |
+| quantity | float64 | no |  |
 | quoteOrderQty | float64 | no | Quote order quantity, e.g., 100USDT,if quantity and quoteOrderQty are input at the same time, quantity will be used first, and quoteOrderQty will be discarded |
 | price | float64 | no | Price, e.g., 10000USDT |
 | newClientOrderId | string | no | Only letters, numbers and \_,Customized order ID for users, with a limit of characters from 1 to 40. Different orders cannot use the same newClientOrderId,Only supports a query range of 2 hours |
@@ -946,8 +946,8 @@ TRIGGER\_ Market: Market price plan commission
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | transactTime | int64 | Transaction timestamp |
@@ -1023,21 +1023,21 @@ Trading Rules:
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | data | array | Yes | The request array for placing orders, limited to 5 orders. |
 | sync | bool | no | sync=false (default false if not filled in): parallel ordering (but all orders need to have the same symbol/side/type), sync = true (multiple orders are ordered serially, all orders do not require the same symbol/side/type) |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | orders | array | Response array for a single order |
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | symbol | Trading symbol, for example: BTC-USDT, please use capital letters. |
 | side | Transaction type, BUY = buy SELL = sell |
 | type | MARKET/LIMIT/TAKE\_STOP\_LIMIT/TAKE\_STOP\_MARKET/TRIGGER\_LIMIT/TRIGGER\_MARKET |
@@ -1052,8 +1052,8 @@ Trading Rules:
 
 ### Order Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | symbol | Trading symbol, for example: BTC-USDT, please use capital letters. |
 | orderId | Order number, please watch out for numeric overflow |
 | transactTime | Transaction timestamp, in milliseconds |
@@ -1090,8 +1090,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT |
 | orderId | int64 | no | Order ID |
 | clientOrderID | string | no | Customized order ID for users, with a limit of characters from 1 to 40. Different orders cannot use the same clientOrderID,Only supports a query range of 2 hours |
@@ -1101,8 +1101,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | price | string | Price |
@@ -1139,8 +1139,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT |
 | process | int | no | 0 or 1, default 0,if process=1,will handle valid orderIds partially, and return invalid orderIds in fails list, if process=0,if one of orderIds invalid, will all fail |
 | orderIds | string | yes | Order Ids: for example:orderIds=id1,id2,id3 |
@@ -1150,8 +1150,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | price | string | Price |
@@ -1188,16 +1188,16 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | no | Trading pair, e.g., BTC-USDT,If not filled out, cancel all orders. |
 | recvWindow | float64 | no | Request valid time window value, Unit: milliseconds |
 | timestamp | int64 | yes | Timestamp of initiating the request, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | price | string | Price |
@@ -1234,8 +1234,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | The trading pair, for example: BTC-USDT, please use uppercase letters |
 | cancelOrderId | int64 | no | The ID of the order to be canceled |
 | cancelClientOrderID | string | no | The user-defined ID of the order to be canceled, character length limit: 1-40, different orders cannot use the same clientOrderID, only supports a query range of 2 hours |
@@ -1253,8 +1253,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading symbol |
 | orderId | int64 | Order ID |
 | price | string | Order price |
@@ -1293,8 +1293,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT |
 | orderId | int64 | no | Order ID |
 | clientOrderID | string | no | Customized order ID for users, with a limit of characters from 1 to 40. Different orders cannot use the same clientOrderID,Only supports a query range of 2 hours |
@@ -1303,8 +1303,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | price | string | Price |
@@ -1347,22 +1347,22 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | no | Trading pair, e.g., BTC-USDT,Query all pending orders when left blank. |
 | recvWindow | float64 | no | Request valid time window value, Unit: milliseconds |
 | timestamp | int64 | yes | Timestamp of initiating the request, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | orders | Array | Order list,max length is 2000, refer to the table below for order fields |
 
 ### Order Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | price | string | Price |
@@ -1406,8 +1406,8 @@ Notice:
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | no | Trading pair, e.g., BTC-USDT |
 | orderId | int64 | no | If orderId is set, orders >= orderId. Otherwise, the most recent orders will be returned. |
 | startTime | int64 | no | Start timestamp, Unit: ms |
@@ -1421,14 +1421,14 @@ Notice:
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | orders | Array | Order list,max length is 2000, refer to the table below for order fields |
 
 ### Order Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | orderId | int64 | Order ID |
 | price | string | Price |
@@ -1477,8 +1477,8 @@ Content-Type:request body(application/json)
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g. BTC-USDT, please use uppercase letters |
 | orderId | long | no | Order ID |
 | startTime | long | No | Start timestamp, unit: ms |
@@ -1490,8 +1490,8 @@ Content-Type:request body(application/json)
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading symbol |
 | id | int | Trade ID |
 | orderId | int64 | Order ID |
@@ -1530,16 +1530,16 @@ Used to query the current trading commission rate for spot trading.
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g. BTC-USDT, please use uppercase letters |
 | recvWindow | float64 | No | Request valid time window in milliseconds |
 | timestamp | int64 | Yes | Request timestamp in milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | takerCommissionRate | float64 | Taker commission rate |
 | makerCommissionRate | float64 | Maker commission rate |
 
@@ -1577,15 +1577,15 @@ Interface parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | type | string | Yes | Request type: ACTIVATE-Activate, CLOSE-Close |
 | timeOut | int | Yes | Activate countdown time (seconds), range: 10s-120s |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | triggerTime | int | Trigger time for deleting all pending orders |
 | status | Status | ACTIVATED (Activation successful)/CLOSED (Closed successfully)/FAILED (Failed) |
 | note | string | Explanation |
@@ -1616,8 +1616,8 @@ Send a new one-cancels-the-other (OCO) order, and initiating one of them immedia
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g., BTC-USDT, please use uppercase letters |
 | side | string | Yes | Order type, BUY for buy, SELL for sell |
 | quantity | float64 | Yes | Order quantity, e.g., 0.1 BTC |
@@ -1632,8 +1632,8 @@ Send a new one-cancels-the-other (OCO) order, and initiating one of them immedia
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | orderId | string | Order ID |
 | clientOrderId | string | Custom order ID |
 | orderType | string | ocoLimit: OCO Limit Order, ocoTps: OCO Stop-Limit Order |
@@ -1670,8 +1670,8 @@ Used to cancel the entire OCOC order
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | orderId | string | No | The order ID of the limit order or the stop-limit order. Either orderId or clientOrderId must be provided. |
 | clientOrderId | string | No | The User-defined order ID of the limit order or the stop-limit order |
 | recvWindow | int64 | No | Request validity window, in milliseconds |
@@ -1679,8 +1679,8 @@ Used to cancel the entire OCOC order
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | orderId | string | Order ID |
 | clientOrderId | string | User-defined order ID |
 
@@ -1710,8 +1710,8 @@ Query the OCO order list
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | orderListId | string | No | OCO order group ID. Either \`orderListId\` or \`clientOrderId\` must be filled in. |
 | clientOrderId | string | No | User-defined OCO order group ID |
 | recvWindow | int64 | No | Request valid time window, in milliseconds |
@@ -1719,8 +1719,8 @@ Query the OCO order list
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | transactionTime | int64 | Order time |
 | orderId | string | Order ID |
 | clientOrderId | string | User-defined order ID |
@@ -1758,8 +1758,8 @@ Query the list of orders that are currently in the pending order state
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | pageIndex | int64 | Yes | Page number |
 | pageSize | int64 | Yes | Number of items per page |
 | recvWindow | int64 | No | Request validity window, in milliseconds |
@@ -1767,8 +1767,8 @@ Query the list of orders that are currently in the pending order state
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | transactionTime | int64 | Order time |
 | orderId | string | Order ID |
 | clientOrderId | string | User-defined order ID |
@@ -1806,8 +1806,8 @@ Query OCO historical order list
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | pageIndex | int64 | Yes | Page number |
 | pageSize | int64 | Yes | Number of items per page |
 | startTime | int64 | No | Start time, timestamp, in milliseconds |
@@ -1817,8 +1817,8 @@ Query OCO historical order list
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | transactionTime | int64 | Order time |
 | orderId | string | Order ID |
 | clientOrderId | string | User-defined order ID |
@@ -1860,20 +1860,20 @@ This API is used to create a sub-account, which needs to be implemented through 
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| string | yes | Sub account username(Starting with a letter, containing a number, and longer than 6 characters) |
-| string | no | notes |
-| long | yes |  |
-| long | yes |  |
+| subAccountString | string | yes | Sub account username(Starting with a letter, containing a number, and longer than 6 characters) |
+| note | string | no | notes |
+| recvWindow | long | yes |  |
+| timestamp | long | yes |  |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
-| long | Sub account uid |
-| string | Sub account username |
-| string | Sub account note information |
+| subUid | long | Sub account uid |
+| subAccountString | string | Sub account username |
+| note | string | Sub account note information |
 
 ## Query user API Key permissions
 
@@ -1889,15 +1889,15 @@ Query the user's APIKEY permissions, which can be used by both main and sub acco
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | apiKey | String | apiKey |
 | permissions | array | Permissions, 1-spot trading, 2-reading, 3-professional contract trading, 4-universal transfer, 5-coin withdrawal, 7-allow transfer within sub-account |
 | ipAddresses | array | ip whitelist |
@@ -1929,15 +1929,15 @@ Query account uid,which can be used by both main and sub account.
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | uid | long | uid |
 
 ### Errors
@@ -1966,8 +1966,8 @@ Through this api, the main user can obtain the UID list of all sub-users and the
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | subUid | long | no | Sub account uid |
 | subAccountString | string | no | Sub account username |
 | isFeeze | bool | no | Freeze or not |
@@ -1978,8 +1978,8 @@ Through this api, the main user can obtain the UID list of all sub-users and the
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | subUid | long | Sub account uid |
 | subAccountString | string | Sub account username |
 | note | string | Sub account note information |
@@ -2012,16 +2012,16 @@ To check the balance of the spot account of each currency of the sub-account. Th
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | subUid | long | yes | Sub account uid |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | asset | string | Asset Name |
 | free | double | Available limit |
 | locked | double | Lock in assets |
@@ -2052,24 +2052,24 @@ This API is used to create an API key for a sub-user of the main account. The us
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| long | yes | Sub account uid |
-| string | yes | notes |
-| Array | yes | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading,4-Universal Transfer,5-Widthdraw,7-Allow internal transfer of sub accounts |
-| Array | no | IP whitelist |
-| int64 | no | Timestamp of initiating the request, Unit: milliseconds |
-| int64 | yes | Request valid time window value, Unit: milliseconds |
+| subUid | long | yes | Sub account uid |
+| note | string | yes | notes |
+| permissions | Array | yes | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading,4-Universal Transfer,5-Widthdraw,7-Allow internal transfer of sub accounts |
+| ipAddresses | Array | no | IP whitelist |
+| recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
+| timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
-| string | apiKey |
-| string | apiSecret |
-| Array | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
-| Array | IP whitelist |
-| string | notes |
+| apiKey | string | apiKey |
+| apiSecret | string | apiSecret |
+| permissions | Array | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
+| ipAddresses | Array | IP whitelist |
+| note | string | notes |
 
 ## Query the API Key of a sub-account
 
@@ -2085,8 +2085,8 @@ This interface is used by the main account to query its own API key information,
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | uid | long | yes | User uid |
 | apiKey | string | no |  |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
@@ -2094,8 +2094,8 @@ This interface is used by the main account to query its own API key information,
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | apiKey | string |  |
 | note | string | notes |
 | permissions | Array | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
@@ -2129,23 +2129,23 @@ This API is used for the main account to edit the API key remarks, permissions, 
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| long | yes | Sub account uid |
-| string | yes |  |
-| string | yes | notes |
-| Array | yes | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
-| Array | no | IP whitelist |
-| int64 | no | Timestamp of initiating the request, Unit: milliseconds |
-| int64 | yes | Request valid time window value, Unit: milliseconds |
+| subUid | long | yes | Sub account uid |
+| apiKey | string | yes |  |
+| note | string | yes | notes |
+| permissions | Array | yes | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
+| ipAddresses | Array | no | IP whitelist |
+| recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
+| timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
-| Array | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
-| Array | IP whitelist |
-| string | notes |
+| permissions | Array | permissions，1-Spot Trading，2-Read，3-Perpetual Futures Trading，4-Universal Transfer，7-Allow internal transfer of sub accounts |
+| ipAddresses | Array | IP whitelist |
+| note | string | notes |
 
 ## Delete the API Key of sub-accounts
 
@@ -2161,16 +2161,16 @@ This API is used for the main user to delete the API key of the sub-account. The
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| long | yes | Sub account uid |
-| string | yes |  |
-| int64 | no | Timestamp of initiating the request, Unit: milliseconds |
-| int64 | yes | Request valid time window value, Unit: milliseconds |
+| subUid | long | yes | Sub account uid |
+| apiKey | string | yes |  |
+| recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
+| timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
 
 ## Freeze and unfreeze sub-accounts
@@ -2187,19 +2187,19 @@ This API is used for the main account to freeze and unfreeze the sub-accounts un
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| long | yes | Sub account uid |
-| bool | yes | Whether to freeze the account |
-| int64 | no | Timestamp of initiating the request, Unit: milliseconds |
-| int64 | yes | Request valid time window value, Unit: milliseconds |
+| subUid | long | yes | Sub account uid |
+| freeze | bool | yes | Whether to freeze the account |
+| recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
+| timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
-| long | Sub account uid |
-| bool | Has it been frozen |
+| subUid | long | Sub account uid |
+| freeze | bool | Has it been frozen |
 
 ## Authorize sub-account internal transfers
 
@@ -2215,8 +2215,8 @@ It is used for the main account to set the asset transfer permission of sub-acco
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | subUids | string | yes | User uid list, comma separated |
 | transferable | boolean | yes | Is it allowed? True allows false prohibits |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
@@ -2224,8 +2224,8 @@ It is used for the main account to set the asset transfer permission of sub-acco
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | subUids | string | yes | User uid list, comma separated |
 | transferable | boolean | yes | Is it allowed? True allows false prohibits |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
@@ -2261,8 +2261,8 @@ Note: Before using this interface, please make sure that the corresponding sub-a
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | yes | Transfer currency name |
 | userAccountType | int | yes | User account type 1=uid 2=phone number 3=email |
 | userAccount | string | yes | User account: uid, phone, email |
@@ -2274,8 +2274,8 @@ Note: Before using this interface, please make sure that the corresponding sub-a
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | id | string | The platform returns the unique ID of the internal transfer record. |
 
 ### Errors
@@ -2306,8 +2306,8 @@ For internal transfers within sub-accounts, please use the dedicated interface: 
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | Yes | Name of the transferred currency |
 | userAccountType | int | Yes | User account type 1=UID 2=phone number 3=email |
 | userAccount | string | Yes | User account: UID, phone number, email |
@@ -2320,8 +2320,8 @@ For internal transfers within sub-accounts, please use the dedicated interface: 
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | id | string | The platform returns the unique ID of the internal transfer record. |
 | transferClientId | string | Custom ID for internal transfer by the client, combination of numbers and letters, length less than 100 characters |
 
@@ -2351,8 +2351,8 @@ This node is used for the master user to create a recharge address for the sub-u
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | Yes | Currency name |
 | subUid | long | Yes | Sub-account UID |
 | network | string | Yes | Network name |
@@ -2362,8 +2362,8 @@ This node is used for the master user to create a recharge address for the sub-u
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | address | string | Address |
 | addressTag | string | Address tag |
 | addressWithPrefix | string | Deposit address with prefix |
@@ -2398,8 +2398,8 @@ This endpoint is used for the parent user to query the deposit address of a spec
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | Yes | Name of the transfer coin |
 | subUid | long | Yes | Sub-account UID |
 | offset | int | No | Starting record number, default is 0 |
@@ -2409,8 +2409,8 @@ This endpoint is used for the parent user to query the deposit address of a spec
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | data | object | List of deposit addresses |
 | total | int | Total number of addresses |
 | coin | string | Coin name |
@@ -2446,8 +2446,8 @@ This node is used for the main user to query the deposit history of the sub-user
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | no | Transfer currency name |
 | subUid | long | no | Sub-user UID, when not filled, query the deposit records of all sub-accounts under the parent username |
 | status | int | no | Status (0-In progress 6-Chain uploaded 1-Completed) |
@@ -2460,8 +2460,8 @@ This node is used for the main user to query the deposit history of the sub-user
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | data | object | Internal transfer record list |
 | total | int | Total number of addresses |
 | subUid | long | Sub-account UID |
@@ -2503,8 +2503,8 @@ This node is used for sub-accounts to query their own internal transfer records,
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | coin | string | yes | Transfer currency name |
 | transferClientId | string | no | Client's self-defined internal transfer ID. When both platform ID and transferClientId are provided as input, the query will be based on the platform ID. |
 | startTime | long | no | Start time |
@@ -2516,8 +2516,8 @@ This node is used for sub-accounts to query their own internal transfer records,
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | data | object | Internal transfer record list |
 | total | int | Total number of addresses |
 | id | long | Internal transfer ID |
@@ -2556,8 +2556,8 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | uid | LONG | Yes | UID to query |
 | type | ENUM | No | Transfer type |
 | tranId | STRING | No | Transfer ID |
@@ -2570,8 +2570,8 @@ rate limitation by IP in group Number: 1
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | total | LONG | Total count |
 | rows | Array | Data array |
 | asset | string | Name of the asset |
@@ -2585,8 +2585,8 @@ rate limitation by IP in group Number: 1
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | MAIN\_CAPITAL\_TO\_SUB\_CAPITAL | Master account capital to sub-account capital |
 | MAIN\_CAPITAL\_TO\_SUB\_CONTRACT | Master account capital to sub-account contract |
 | MAIN\_CAPITAL\_TO\_SUB\_SWAP | Master account capital to sub-account perpetual swap |
@@ -2634,23 +2634,23 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| LONG | Yes | Sender UID |
-| LONG | Yes | Sender account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
-| LONG | Yes | Receiver UID |
-| LONG | Yes | Receiver account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
-| LONG | No | Execution window time, cannot exceed 60000 |
-| LONG | Yes | Current timestamp, e.g., 1658748648396 |
+| fromUid | LONG | Yes | Sender UID |
+| fromAccountType | LONG | Yes | Sender account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
+| toUid | LONG | Yes | Receiver UID |
+| toAccountType | LONG | Yes | Receiver account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
+| recvWindow | LONG | No | Execution window time, cannot exceed 60000 |
+| timestamp | LONG | Yes | Current timestamp, e.g., 1658748648396 |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
-| ARRAY | List of supported coins |
-| LONG | Coin ID |
-| STRING | Coin name, e.g., USDT |
-| DECIMAL | Available transfer amount |
+| coins | ARRAY | List of supported coins |
+| id | LONG | Coin ID |
+| name | STRING | Coin name, e.g., USDT |
+| availableAmount | DECIMAL | Available transfer amount |
 
 ## Sub-Account Asset Transfer Interface (For Master Account Operations Only)
 
@@ -2668,25 +2668,25 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Type | Required | Field Description |  |
+| Parameter Name | Type | Required | Field Description |
 | --- | --- | --- | --- |
-| string | Yes | Name of the asset, e.g., USDT |
-| DECIMAL | Yes | Transfer amount |
-| LONG | Yes | Sender UID |
-| LONG | Yes | Sender sub/master account type: 1-Master account; 2-Sub-account |
-| LONG | Yes | Sender account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
-| LONG | Yes | Receiver UID |
-| LONG | Yes | Receiver sub/master account type: 1-Master account; 2-Sub-account |
-| LONG | Yes | Receiver account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
-| string | Yes | Transfer remark |
-| LONG | No | Execution window time, cannot exceed 60000 |
-| LONG | Yes | Current timestamp, e.g., 1658748648396 |
+| assetName | string | Yes | Name of the asset, e.g., USDT |
+| transferAmount | DECIMAL | Yes | Transfer amount |
+| fromUid | LONG | Yes | Sender UID |
+| fromType | LONG | Yes | Sender sub/master account type: 1-Master account; 2-Sub-account |
+| fromAccountType | LONG | Yes | Sender account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
+| toUid | LONG | Yes | Receiver UID |
+| toType | LONG | Yes | Receiver sub/master account type: 1-Master account; 2-Sub-account |
+| toAccountType | LONG | Yes | Receiver account type: 1-Fund account; 2-Contract account; 3-Perpetual USD-based account |
+| remark | string | Yes | Transfer remark |
+| recvWindow | LONG | No | Execution window time, cannot exceed 60000 |
+| timestamp | LONG | Yes | Current timestamp, e.g., 1658748648396 |
 
 ### Response Parameters
 
-| Type | Field Description |  |
+| Parameter Name | Type | Field Description |
 | --- | --- | --- |
-| STRING | Transfer record ID |
+| tranId | STRING | Transfer record ID |
 
 ## Batch inquiry of sub account asset overview
 
@@ -2702,8 +2702,8 @@ Batch inquiry of sub account asset overview, The user who verifies the signature
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | subUid | long | 否 | Sub account uid |
 | accountType | string | 否 | Account type, if left blank, all assets of the account will be checked by default. spot: spot (fund account), stdFutures: standard futures account, coinMPerp: coin base account, USDTMPerp: U base account, copyTrading: copy trading account, grid: grid account, eran: wealth account, c2c: c2c account. |
 | pageIndex | int64 | 是 | Page number, must be greater than 0 |
@@ -2713,8 +2713,8 @@ Batch inquiry of sub account asset overview, The user who verifies the signature
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | subUid | long | Sub account uid |
 | accountType | string | Account type, if left blank, all assets of the account will be checked by default. spot: spot (fund account), stdFutures: standard futures account, coinMPerp: coin base account, USDTMPerp: U base account, copyTrading: copy trading account, grid: grid account, eran: wealth account, c2c: c2c account. |
 | usdtBalance | string | Equivalent to USDT amount |

@@ -1,31 +1,31 @@
 # Extraction Projects Rules
 
 ## Project Structure
+
 Each extraction project must follow this directory structure:
+
 ```
 project-name/
+├── config/ # json based config files
 ├── src/
-│   ├── main.js           # Entry point
-│   ├── types.js          # Type definitions
-│   ├── config/           # Configuration files
-│   ├── processors/       # Data processing modules
+│   ├── index.js           # Entry point
 │   ├── utils/           # Utility functions
-│   └── [api-name]/      # API-specific modules
 ├── package.json
 ├── package-lock.json
 └── README.md
 ```
 
 ## Dependencies
+
 Required dependencies for all extraction projects:
-- puppeteer: ^24.6.0
+
 - turndown: ^7.1.2
 - turndown-plugin-gfm: ^1.0.2
-- jsdom: ^26.0.0
 
 Optional dependencies must be justified in the project's README.md.
 
 ## JavaScript Standards
+
 - Use pure ES6 JavaScript only
 - No TypeScript or other transpiled languages
 - All files must use `.js` extension
@@ -39,6 +39,7 @@ Optional dependencies must be justified in the project's README.md.
 - Use const/let instead of var
 
 ## Code Style
+
 - Use 2 spaces for indentation
 - Use semicolons
 - Maximum line length: 100 characters

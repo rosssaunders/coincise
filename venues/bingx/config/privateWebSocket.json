@@ -1,0 +1,11 @@
+{
+  "urls": [
+    "https://bingx-api.github.io/docs/#/en-us/spot/socket/",
+    "https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html",
+    "https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription%20order%20update%20data"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/spot",
+    "outputFileName": "private_websocket_api.md"
+  }
+}

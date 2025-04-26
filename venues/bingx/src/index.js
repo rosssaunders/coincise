@@ -5,7 +5,10 @@ import fs from 'fs'
 import { getConfig } from './config/bingx.js'
 
 async function loadBrowser() {
-  const browser = await puppeteer.launch({ headless: false })
+  const browser = await puppeteer.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  })
   return browser
 }
 
