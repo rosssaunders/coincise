@@ -1,0 +1,57 @@
+name: Weekly Bitget Documentation Update
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: venues/bitget
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for git diff
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: venues/bitget/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Bitget scraper
+        run: npm run start:sequential
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          cd ../..  # Move back to root directory for git operations
+          # Explicitly add the docs/bitget directory to staging
+          git add docs/bitget
+          # Check if there are any changes
+          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'docs: update Bitget API documentation'
+          title: 'Weekly Bitget API Documentation Update'
+          body: 'Automated weekly update of Bitget API documentation'
+          branch: 'bitget-docs-update'
+          base: 'main'
+          delete-branch: true
+          token: ${{ secrets.PAT_GITHUB }}
