@@ -1,0 +1,26 @@
+{
+  "name": "bingx-api-docs-extractor",
+  "version": "1.0.0",
+  "description": "BingX API Documentation Extractor",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "private": "node src/index.js private",
+    "public": "node src/index.js public",
+    "private": "node src/index.js privateWs",
+    "publicWs": "node src/index.js publicWs",
+    "all": "npm run private && npm run public && npm run privateWs && npm run publicWs"
+  },
+  "dependencies": {
+    "jsdom": "^26.1.0",
+    "puppeteer": "^24.6.1",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "prettier": "3.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "prettier": "3.5.3",
+    "prettier-plugin-java": "2.6.7"
+  }
+}
