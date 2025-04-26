@@ -9,6 +9,10 @@ on:
 jobs:
   update-docs:
     runs-on: ubuntu-latest
+    # Add permissions to the job
+    permissions:
+      contents: write
+      pull-requests: write
     defaults:
       run:
         working-directory: venues/htx
@@ -54,3 +58,4 @@ jobs:
           branch: 'htx-docs-update'
           base: 'main'
           delete-branch: true
+          token: ${{ secrets.GITHUB_TOKEN }}
