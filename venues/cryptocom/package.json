@@ -11,8 +11,7 @@
   "dependencies": {
     "puppeteer": "^24.6.0",
     "turndown": "^7.1.2",
-    "turndown-plugin-gfm": "^1.0.2",
-    "jsdom": "^26.0.0"
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "author": "",
   "license": "ISC"
