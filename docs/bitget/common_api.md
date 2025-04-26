@@ -415,6 +415,28 @@ The Bitget Crypto Loan API aims to help users get additional funds instantly wit
 
 # Changelog
 
+## \[Apr 23, 2025\] Added groupType enumeration for get account bills.[​](#apr-23-2025-added-grouptype-enumeration-for-get-account-bills "Direct link to apr-23-2025-added-grouptype-enumeration-for-get-account-bills")
+
+Interface：/api/v2/spot/account/bills
+
+Changes：
+
+*   Added a new bill type enumeration `groupType` for input parameters and return values when fetching bill transaction details.
+
+## \[Apr 21,2025\] Delete error code 40882[​](#apr-212025-delete-error-code-40882 "Direct link to apr-212025-delete-error-code-40882")
+
+Removed content:
+
+*   Removed error code `code 40882`:"You are currently a trader and you cannot switch to the full position mode|400|"
+
+## \[Apr 14,2025\] Add New Endpoint: Get ND Broker Sub-accounts Deposit and Withdrawal Records[​](#apr-142025-add-new-endpoint-get-nd-broker-sub-accounts-deposit-and-withdrawal-records "Direct link to apr-142025-add-new-endpoint-get-nd-broker-sub-accounts-deposit-and-withdrawal-records")
+
+Interface：/api/v2/broker/all-sub-deposit-withdrawal
+
+Changes：
+
+*   Adding new endpoint to get ND Broker sub-accounts deposit and withdrawal records within **90 days**
+
 ## \[Apr 10,2025\] Adjustment to virtual sub-account API key related endpoints[​](#apr-102025-adjustment-to-virtual-sub-account-api-key-related-endpoints "Direct link to apr-102025-adjustment-to-virtual-sub-account-api-key-related-endpoints")
 
 Interface：/api/v2/user/create-virtual-subaccount-apikey，/api/v2/user/modify-virtual-subaccount-apikey，/api/v2/user/virtual-subaccount-apikey-list
@@ -431,7 +453,7 @@ Interface：/api/v2/spot/public/symbols
 Changes:
 
 *   Added new field `offTime` in the response
-*   minTradeAmount & maxTradeAmount will be adjusted to 0, please ignore these two response parameters.
+*   The response parameter "maxTradeAmount" is fixed to return `900000000000000000000`; please disregard this response parameter.
 
 ## \[Apr 09, 2025\] Added ADL ranking interface.[​](#apr-09-2025-added-adl-ranking-interface "Direct link to apr-09-2025-added-adl-ranking-interface")
 

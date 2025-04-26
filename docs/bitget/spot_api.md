@@ -63,7 +63,7 @@ Response Example
 | chains | Array | Support chain list 
 | &gt; chain | String | Chain name 
 | &gt; needTag | Boolean | Need tag 
-| &gt; withdrawable | Boolean | Withdrawal supported 
+| &gt; withdrawable | Boolean | Withdrawal supported<br>(The withdrawal status is subject to the official announcement) 
 | &gt; rechargeable | Boolean | Deposit supported 
 | &gt; withdrawFee | String | Withdrawal transaction fee 
 | &gt; extraWithdrawFee | String | Extra charge. On chain destruction: <code>0.1</code> means <code>10%</code> 
@@ -104,7 +104,7 @@ curl "https://api.bitget.com/api/v2/spot/public/symbols"
 Response Example
 
 ```
-{  "code": "00000",  "msg": "success",  "requestTime": 1744276707885,  "data": [    {      "symbol": "BTCUSDT",      "baseCoin": "BTC",      "quoteCoin": "USDT",      "minTradeAmount": "0",      "maxTradeAmount": "0",      "takerFeeRate": "0.002",      "makerFeeRate": "0.002",      "pricePrecision": "2",      "quantityPrecision": "6",      "quotePrecision": "8",      "status": "online",      "minTradeUSDT": "1",      "buyLimitPriceRatio": "0.05",      "sellLimitPriceRatio": "0.05",      "areaSymbol": "no",      "orderQuantity": "200",      "openTime": "1532454360000",      "offTime": ""    }  ]}
+{  "code": "00000",  "msg": "success",  "requestTime": 1744276707885,  "data": [    {      "symbol": "BTCUSDT",      "baseCoin": "BTC",      "quoteCoin": "USDT",      "minTradeAmount": "0",      "maxTradeAmount": "900000000000000000000",      "takerFeeRate": "0.002",      "makerFeeRate": "0.002",      "pricePrecision": "2",      "quantityPrecision": "6",      "quotePrecision": "8",      "status": "online",      "minTradeUSDT": "1",      "buyLimitPriceRatio": "0.05",      "sellLimitPriceRatio": "0.05",      "areaSymbol": "no",      "orderQuantity": "200",      "openTime": "1532454360000",      "offTime": ""    }  ]}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
@@ -1585,7 +1585,7 @@ curl "https://api.bitget.com/api/v2/spot/account/bills" \   -H "ACCESS-KEY:*****
 | Parameter | Type | Required | Description |
 | :-- | :-- | :-- | :-- |
 | coin | String | No | Token name, e.g. USDT 
-| groupType | String | No | Billing type<br>deposit Deposit<br>withdraw Withdraw<br>transaction Transaction<br>transfer Transfer<br>other Other 
+| groupType | String | No | Billing type<br>deposit Deposit<br>withdraw Withdraw<br>transaction Transaction<br>transfer Transfer<br>loan Pledge loan<br>financial Wealth managemen<br>fait Fiat currency<br>convert Instant swap<br>c2c C2C token trading<br>pre_c2c Pre-market trading<br>on_chain On-chain transaction<br>strategy Trading strategy<br>other Other 
 | businessType | String | No | Business type<br>deposit: Deposit<br>withdraw: Withdraw<br>buy: Buy<br>sell: Sell<br>deduction of handling fee: Deduction of spot trading transaction fee<br>transfer-in: Transfer-in<br>transfer-out: Transfer-out<br>rebate rewards: Rebate<br>airdrop rewards: Airdrop rewards<br>USDT contract rewards: USDT futures promotion rewards<br>mix contract rewards: Mix contract promotion rewards<br>system lock: System lock-up<br>user lock: User lock-up 
 | startTime | String | No | The start time of the billing history, i.e., getting the billing history after that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868 
 | endTime | String | No | The end time of the billing history, i.e., getting the billing history before that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between startTime and endTime must not exceed 90 days. 
@@ -1604,7 +1604,7 @@ Response Example
 | :-- | :-- | :-- |
 | cTime | String | Creation time 
 | coin | String | Token name 
-| groupType | String | Billing type<br>deposit Deposit<br>withdraw Withdraw<br>transaction Transaction<br>transfer Transfer<br>other Other 
+| groupType | String | Billing type<br>deposit Deposit<br>withdraw Withdraw<br>transaction Transaction<br>transfer Transfer<br>loan Pledge loan<br>financial Wealth managemen<br>fait Fiat currency<br>convert Instant swap<br>c2c C2C token trading<br>pre_c2c Pre-market trading<br>on_chain On-chain transaction<br>strategy Trading strategy<br>other Other 
 | businessType | String | Business type of billing 
 | size | String | Quantity 
 | balance | String | Assets prior to transfer 
@@ -3130,7 +3130,6 @@ Push Data
 | 40879 | The risk is being processed, and the funds cannot be adjusted. | 400 
 | 40880 | The risk is being processed and the leverage cannot be adjusted. | 400 
 | 40881 | There is currently an order, or an order is planned, and the leverage cannot be adjusted. | 400 
-| 40882 | You are currently a trader and you cannot switch to the full position mode | 400 
 | 40883 | When the currencies are mixed, it cannot be adjusted to the warehouse-by-warehouse mode | 400 
 | 40884 | When a one-way position is held, it cannot be adjusted to a position-by-position mode | 400 
 | 40885 | In the case of position by position mode, it cannot be adjusted to one-way position | 400 

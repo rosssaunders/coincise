@@ -4033,7 +4033,6 @@ Push Data
 | 40879 | The risk is being processed, and the funds cannot be adjusted. | 400 
 | 40880 | The risk is being processed and the leverage cannot be adjusted. | 400 
 | 40881 | There is currently an order, or an order is planned, and the leverage cannot be adjusted. | 400 
-| 40882 | You are currently a trader and you cannot switch to the full position mode | 400 
 | 40883 | When the currencies are mixed, it cannot be adjusted to the warehouse-by-warehouse mode | 400 
 | 40884 | When a one-way position is held, it cannot be adjusted to a position-by-position mode | 400 
 | 40885 | In the case of position by position mode, it cannot be adjusted to one-way position | 400 
