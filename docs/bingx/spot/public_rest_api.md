@@ -194,22 +194,22 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | no | Trading pair, e.g., BTC-USDT |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbols | Array | Symbol list, refer to the table below for order fields |
 
 ### Order Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair |
 | tickSize | float64 | Price step |
 | stepSize | float64 | Quantity step |
@@ -248,8 +248,8 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT |
 | limit | int | no | default 100, max 500 |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
@@ -257,8 +257,8 @@ rate limitation by IP in group Number: 1
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | id | long | transaction id |
 | price | float64 | price |
 | qty | float64 | quantity |
@@ -289,8 +289,8 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT |
 | limit | int | no | default 20, max 1000 |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
@@ -298,8 +298,8 @@ rate limitation by IP in group Number: 1
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | bids | array | first element price, second element quantity |
 | asks | array | first element price, second element quantity |
 | ts | int | Timestamp of depth, Unit: milliseconds |
@@ -342,8 +342,8 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, for example: BTC-USDT, please use capital letters. |
 | interval | string | Yes | Time interval, refer to field description |
 | startTime | int64 | No | Start time, unit: milliseconds |
@@ -354,8 +354,8 @@ rate limitation by IP in group Number: 1
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | klines | array | Candlestick chart array |
 
 ### Errors
@@ -386,16 +386,16 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | no | Trading pairs, such as: BTC-USDT, will return all symbol data when no parameters are entered |
 | timestamp | int64 | yes | The timestamp of the request, in milliseconds |
 | recvWindow | int64 | no | Request valid time window value, unit: millisecond |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | Trading pair, for example: BTC-USDT |
 | openPrice | string | Opening price in the last 24 hours |
 | highPrice | string | The highest price in the last 24 hours |
@@ -438,16 +438,16 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, such as: BTC\_USDT |
 | depth | int64 | Yes | Query depth |
 | type | string | Yes | step0 default precision, step1 to step5 are 10 to 100000 times precision respectively |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | bids | array | Buy depth, where the first element of the array is the price and the second element is the quantity |
 | asks | array | Sell depth, where the first element of the array is the price and the second element is the quantity |
 | ts | int64 | Timestamp |
@@ -478,14 +478,14 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, such as: BTC\_USDT |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | price | string | Latest price |
 | symbol | string | Trading pair, such as: BTC\_USDT |
 | timestamp | int64 | Timestamp |
@@ -516,14 +516,14 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, such as: BTC\_USDT |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | eventType | string | Data type |
 | symbol | string | Trading pair, such as: BTC\_USDT |
 | bidPrice | string | Best bid price |
@@ -567,8 +567,8 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g., BTC-USDT, please use uppercase letters |
 | interval | string | Yes | Time interval, reference field description |
 | startTime | int64 | No | Start time, unit: milliseconds |
@@ -577,8 +577,8 @@ rate limitation by IP in group Number: 1
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | klines | array | K-line array |
 
 ### Errors
@@ -605,16 +605,16 @@ rate limitation by IP in group Number: 1
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | Trading pair, e.g., BTC-USDT, please use uppercase letters |
 | limit | int | no | Default 100, maximum 500 |
 | fromId | string | no | The last recorded tid |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | id | long | Trade id |
 | price | float64 | Price |
 | qty | float64 | Quantity |

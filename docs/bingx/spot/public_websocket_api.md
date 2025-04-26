@@ -128,14 +128,14 @@ response
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | X-BX-APIKEY | string | no | API KEY |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | listenKey | string | listen Key |
 
 ### Errors
@@ -178,8 +178,8 @@ PUT /openApi/user/auth/userDataStream
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | listenKey | string | yes | listen Key |
 
 ### Errors
@@ -222,8 +222,8 @@ DELETE /openApi/user/auth/userDataStream
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | listenKey | string | yes | listen Key |
 
 ### Errors
@@ -260,14 +260,14 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | e | Event Type |
 | E | event time |
 | s | trading pair |
@@ -293,15 +293,15 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
 | interval | string | yes | Reference field description, K-line type |
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | E | event time |
 | K | data |
 | e | Event Type |
@@ -309,8 +309,8 @@ Subscription Parameters
 
 ### Order Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | T | The end time of this K-line |
 | c | The last transaction price during this K-line period |
 | h | The highest transaction price during this K-line period |
@@ -339,14 +339,14 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | yes | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
 
 ### Order Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | level5 | level 5 |
 | level10 | level 10 |
 | level20 | level 20 |
@@ -369,8 +369,8 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g., BTC-USDT |
 
 ## Spot Latest Trade Price
@@ -389,8 +389,8 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g., BTC-USDT |
 
 ## Spot Best Order Book
@@ -409,8 +409,8 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Trading pair, e.g., BTC-USDT |
 
 ## Incremental and Full Depth Information
@@ -447,8 +447,8 @@ Subscription Parameters
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Field Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Field Description |
+| --- | --- | --- | --- |
 | symbol | string | Yes | Symbol name, the symbol must include a '-' like BTC-USDT |
 
 ---

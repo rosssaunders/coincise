@@ -936,7 +936,7 @@ TRIGGER\_ Market: Market price plan commission
 | side | string | yes | BUY/SELL |
 | type | string | yes | MARKET/LIMIT/TAKE\_STOP\_LIMIT/TAKE\_STOP\_MARKET/TRIGGER\_LIMIT/TRIGGER\_MARKET |
 | stopPrice | string | 是 | order trigger price, used for TAKE\_ STOP\_ LIMITED,TAKE\_ STOP\_ MARKET, TRIGGER\_ LIMITED, TRIGGER\_ Market type orders. |
-| quantity | float64 | no |  |
+| quantity | float64 | no | Original quantity, e.g., 0.1BTC |
 | quoteOrderQty | float64 | no | Quote order quantity, e.g., 100USDT,if quantity and quoteOrderQty are input at the same time, quantity will be used first, and quoteOrderQty will be discarded |
 | price | float64 | no | Price, e.g., 10000USDT |
 | newClientOrderId | string | no | Only letters, numbers and \_,Customized order ID for users, with a limit of characters from 1 to 40. Different orders cannot use the same newClientOrderId,Only supports a query range of 2 hours |
