@@ -1,0 +1,19 @@
+{
+  "name": "crypto-com",
+  "version": "1.0.0",
+  "description": "Crypto.com API documentation extraction project",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "puppeteer": "^24.6.0",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "^26.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

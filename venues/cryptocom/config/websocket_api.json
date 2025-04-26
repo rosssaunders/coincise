@@ -1,0 +1,5 @@
+{
+  "sections": ["Introduction", "Common API Reference", "Websocket Subscriptions"],
+  "outputFilename": "websocket_api.md",
+  "baseUrl": "https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#introduction"
+}

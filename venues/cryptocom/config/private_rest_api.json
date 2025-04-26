@@ -1,0 +1,14 @@
+{
+  "sections": [
+    "Introduction",
+    "Common API Reference",
+    "Account Balance and Position API",
+    "Trading API",
+    "Advanced Order Management API",
+    "Order, Trade, Transaction History API",
+    "Wallet API",
+    "Staking API"
+  ],
+  "outputFilename": "private_rest_api.md",
+  "baseUrl": "https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#introduction"
+}
