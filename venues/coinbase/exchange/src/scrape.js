@@ -5,7 +5,7 @@
  */
 
 // Import from the new structure
-import { scrapeApiDocumentation } from './scraper.js';
+import { scrapeApiDocumentation } from './scraper.js'
 // const { scrapeApiDocumentation } = require('./scraper');
 
 // For backward compatibility
@@ -20,4 +20,4 @@ if (require.main === module) {
 */
 
 // Export for backward compatibility
-export { scrapeApiDocumentation };
+export { scrapeApiDocumentation }

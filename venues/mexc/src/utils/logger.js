@@ -9,14 +9,14 @@ const colors = {
   red: '\x1b[31m',
   yellow: '\x1b[33m',
   cyan: '\x1b[36m',
-};
+}
 
 const symbols = {
   warning: '⚠️',
   info: 'ℹ️',
   error: '❌',
   success: '✅',
-};
+}
 
 /**
  * Creates a pretty formatted warning message
@@ -24,10 +24,10 @@ const symbols = {
  * @param {string[]} details - Array of detail lines
  */
 export function warn(message, details = []) {
-  console.warn(`${colors.yellow}${symbols.warning} ${colors.bright}${message}${colors.reset}`);
+  console.warn(`${colors.yellow}${symbols.warning} ${colors.bright}${message}${colors.reset}`)
   details.forEach(detail => {
-    console.warn(`${colors.dim}   ${detail}${colors.reset}`);
-  });
+    console.warn(`${colors.dim}   ${detail}${colors.reset}`)
+  })
 }
 
 /**
@@ -35,7 +35,7 @@ export function warn(message, details = []) {
  * @param {string} message - The main info message
  */
 export function info(message) {
-  console.log(`${colors.cyan}${symbols.info} ${colors.bright}${message}${colors.reset}`);
+  console.log(`${colors.cyan}${symbols.info} ${colors.bright}${message}${colors.reset}`)
 }
 
 /**
@@ -44,10 +44,10 @@ export function info(message) {
  * @param {string[]} details - Array of detail lines
  */
 export function error(message, details = []) {
-  console.error(`${colors.red}${symbols.error} ${colors.bright}${message}${colors.reset}`);
+  console.error(`${colors.red}${symbols.error} ${colors.bright}${message}${colors.reset}`)
   details.forEach(detail => {
-    console.error(`${colors.dim}   ${detail}${colors.reset}`);
-  });
+    console.error(`${colors.dim}   ${detail}${colors.reset}`)
+  })
 }
 
 /**
@@ -55,5 +55,5 @@ export function error(message, details = []) {
  * @param {string} message - The main success message
  */
 export function success(message) {
-  console.log(`${colors.cyan}${symbols.success} ${colors.bright}${message}${colors.reset}`);
+  console.log(`${colors.cyan}${symbols.success} ${colors.bright}${message}${colors.reset}`)
 }

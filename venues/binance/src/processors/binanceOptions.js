@@ -1,13 +1,13 @@
-import { BaseProcessor } from './baseProcessor.js';
+import { BaseProcessor } from './baseProcessor.js'
 
 /**
  * Processor for Binance Options Public REST API documentation
  * @extends BaseProcessor
  */
 export class BinanceOptionsPublicRESTProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'options.json', 'public_rest');
-    }
+  constructor() {
+    super('binance', 'options.json', 'public_rest')
+  }
 }
 
 /**
@@ -15,9 +15,9 @@ export class BinanceOptionsPublicRESTProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceOptionsPrivateRESTProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'options.json', 'private_rest');
-    }
+  constructor() {
+    super('binance', 'options.json', 'private_rest')
+  }
 }
 
 /**
@@ -25,9 +25,9 @@ export class BinanceOptionsPrivateRESTProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceOptionsPublicWebSocketProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'options.json', 'public_websocket');
-    }
+  constructor() {
+    super('binance', 'options.json', 'public_websocket')
+  }
 }
 
 /**
@@ -35,7 +35,7 @@ export class BinanceOptionsPublicWebSocketProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceOptionsPrivateWebSocketProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'options.json', 'private_websocket');
-    }
+  constructor() {
+    super('binance', 'options.json', 'private_websocket')
+  }
 }

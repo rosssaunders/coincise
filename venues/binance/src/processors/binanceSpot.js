@@ -1,13 +1,13 @@
-import { BaseProcessor } from './baseProcessor.js';
+import { BaseProcessor } from './baseProcessor.js'
 
 /**
  * Processor for Binance Spot Public REST API documentation
  * @extends BaseProcessor
  */
 export class BinanceSpotPublicRESTProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'spot.json', 'public_rest');
-    }
+  constructor() {
+    super('binance', 'spot.json', 'public_rest')
+  }
 }
 
 /**
@@ -15,9 +15,9 @@ export class BinanceSpotPublicRESTProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceSpotPrivateRESTProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'spot.json', 'private_rest');
-    }
+  constructor() {
+    super('binance', 'spot.json', 'private_rest')
+  }
 }
 
 /**
@@ -25,9 +25,9 @@ export class BinanceSpotPrivateRESTProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceSpotPublicWebSocketProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'spot.json', 'public_websocket');
-    }
+  constructor() {
+    super('binance', 'spot.json', 'public_websocket')
+  }
 }
 
 /**
@@ -35,9 +35,9 @@ export class BinanceSpotPublicWebSocketProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceSpotPrivateWebSocketProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'spot.json', 'private_websocket');
-    }
+  constructor() {
+    super('binance', 'spot.json', 'private_websocket')
+  }
 }
 
 /**
@@ -45,9 +45,9 @@ export class BinanceSpotPrivateWebSocketProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceSpotFIXProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'spot.json', 'fix');
-    }
+  constructor() {
+    super('binance', 'spot.json', 'fix')
+  }
 }
 
 /**
@@ -55,7 +55,7 @@ export class BinanceSpotFIXProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceSpotSBEProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'spot.json', 'sbe');
-    }
+  constructor() {
+    super('binance', 'spot.json', 'sbe')
+  }
 }

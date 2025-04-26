@@ -1,5 +1,5 @@
 {
-  "livePreview.defaultPreviewPath": "/coinbaseadvancedtrade.html",
+  "livePreview.defaultPreviewPath": "/venues/bingx/trading-api.html",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {

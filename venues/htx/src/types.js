@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @typedef {Object} Config
@@ -17,4 +17,4 @@
  * @property {string} url - The URL that was scraped
  * @property {string} content - The markdown content
  * @property {Date} timestamp - When the content was scraped
- */ 
+ */

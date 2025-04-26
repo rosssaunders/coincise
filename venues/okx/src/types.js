@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @typedef {Object} Section
@@ -18,4 +18,4 @@
  * @typedef {Object} Configs
  * @property {string} url - URL of the documentation page
  * @property {Object.<string, ConfigSection>} configs - Map of configuration names to their settings
- */ 
+ */

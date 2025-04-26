@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-import puppeteer from 'puppeteer';
-import { info } from './logger.js';
+import puppeteer from 'puppeteer'
+import { info } from './logger.js'
 
 /**
  * Launches a Puppeteer browser and loads the specified HTML file
@@ -9,18 +9,18 @@ import { info } from './logger.js';
  * @returns {Promise<{browser: puppeteer.Browser, page: puppeteer.Page}>}
  */
 export async function launchBrowserAndLoadPage(htmlFilePath) {
-  info('Launching Puppeteer...');
+  info('Launching Puppeteer...')
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  });
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  })
 
-  const page = await browser.newPage();
-  
+  const page = await browser.newPage()
+
   // Convert file path to file URL
-  info(`Loading HTML file: ${htmlFilePath}`);
-  
-  await page.goto(htmlFilePath, { waitUntil: 'networkidle0' });
-  
-  return { browser, page };
-} 
+  info(`Loading HTML file: ${htmlFilePath}`)
+
+  await page.goto(htmlFilePath, { waitUntil: 'networkidle0' })
+
+  return { browser, page }
+}

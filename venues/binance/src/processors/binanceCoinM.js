@@ -1,13 +1,13 @@
-import { BaseProcessor } from './baseProcessor.js';
+import { BaseProcessor } from './baseProcessor.js'
 
 /**
  * Processor for Binance COIN-M Public REST API documentation
  * @extends BaseProcessor
  */
 export class BinanceCoinMPublicRESTProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'coinm.json', 'public_rest');
-    }
+  constructor() {
+    super('binance', 'coinm.json', 'public_rest')
+  }
 }
 
 /**
@@ -15,9 +15,9 @@ export class BinanceCoinMPublicRESTProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceCoinMPrivateRESTProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'coinm.json', 'private_rest');
-    }
+  constructor() {
+    super('binance', 'coinm.json', 'private_rest')
+  }
 }
 
 /**
@@ -25,9 +25,9 @@ export class BinanceCoinMPrivateRESTProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceCoinMPublicWebSocketProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'coinm.json', 'public_websocket');
-    }
+  constructor() {
+    super('binance', 'coinm.json', 'public_websocket')
+  }
 }
 
 /**
@@ -35,7 +35,7 @@ export class BinanceCoinMPublicWebSocketProcessor extends BaseProcessor {
  * @extends BaseProcessor
  */
 export class BinanceCoinMPrivateWebSocketProcessor extends BaseProcessor {
-    constructor() {
-        super('binance', 'coinm.json', 'private_websocket');
-    }
+  constructor() {
+    super('binance', 'coinm.json', 'private_websocket')
+  }
 }

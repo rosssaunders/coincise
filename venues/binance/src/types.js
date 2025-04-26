@@ -22,12 +22,12 @@
 
 // Export the types for use in JSDoc comments
 export {
-    /** @type {Command} */
-    Command,
-    /** @type {Exchange} */
-    Exchange,
-    /** @type {ExchangeResult} */
-    ExchangeResult,
-    /** @type {DocumentProcessor} */
-    DocumentProcessor
-};
+  /** @type {Command} */
+  Command,
+  /** @type {Exchange} */
+  Exchange,
+  /** @type {ExchangeResult} */
+  ExchangeResult,
+  /** @type {DocumentProcessor} */
+  DocumentProcessor,
+}
