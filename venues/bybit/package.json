@@ -8,12 +8,12 @@
     "start": "node src/index.js"
   },
   "dependencies": {
-    "puppeteer": "^24.6.1",
+    "puppeteer": "24.7.2",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2",
-    "jsdom": "^26.0.0"
+    "jsdom": "26.1.0"
   },
   "engines": {
     "node": ">=18.0.0"
   }
-} 
+}
