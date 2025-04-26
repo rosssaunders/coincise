@@ -128,14 +128,14 @@ response
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | X-BX-APIKEY | string | no | API KEY |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |  |
-| --- | --- | --- | --- |
+| Parameter Name | Type | Description |
+| --- | --- | --- |
 | listenKey | string | listen Key |
 
 ### Errors
@@ -178,8 +178,8 @@ PUT /openApi/user/auth/userDataStream
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | listenKey | string | yes | listen Key |
 
 ### Errors
@@ -222,8 +222,8 @@ DELETE /openApi/user/auth/userDataStream
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |  |
-| --- | --- | --- | --- | --- |
+| Parameter Name | Type | Required | Description |
+| --- | --- | --- | --- |
 | listenKey | string | yes | listen Key |
 
 ### Errors
@@ -266,8 +266,8 @@ Push data
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | e | Event Type |
 | E | event time |
 | s | trading pair |
@@ -344,15 +344,15 @@ Push data
 
 ### Data Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | B | Array\[\] |
 | m | event launch reason |
 
 ### Order Parameters
 
-|  | Description |  |
-| --- | --- | --- |
+|  | Description |
+| --- | --- |
 | a | Asset Name |
 | bc | The amount of change in the asset account in this transaction |
 | cw | The total assets in the account after the change in the asset account |
