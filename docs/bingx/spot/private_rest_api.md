@@ -459,7 +459,7 @@ Specify user account to initiate coin withdrawal
 | address | string | yes | Withdrawal address |
 | addressTag | string | no | Tag or memo, some currencies support tag or memo |
 | amount | float64 | yes | Withdrawal amount |
-| walletType | int64 | yes | Account type: 1 fund account, 2 standard account, 3 perpetual account |
+| walletType | int64 | yes | Account type: 1 fund account, 2 standard account, 3 perpetual account, 15 spot account |
 | withdrawOrderId | string | no | Customer-defined withdrawal ID, a combination of numbers and letters, with a length of less than 100 characters |
 | recvWindow | int64 | no | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp | int64 | yes | Request valid time window value, Unit: milliseconds |
@@ -602,6 +602,7 @@ Content-Type:request body(application/json)
 | Parameter Name | Type | Description |
 | --- | --- | --- |
 | asset | string | Asset name |
+| displayName | string | Display Name |
 | free | string | Available asset |
 | locked | string | Freeze asset |
 
