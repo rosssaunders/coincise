@@ -1,5 +1,5 @@
 {
-  "output_directory": "../../../../docs/coinbase/exchange",
+  "output_directory": "../../../docs/coinbase/exchange",
   "combined_filename": "websocket_api.md",
   "urls": [
     {
