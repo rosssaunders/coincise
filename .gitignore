@@ -64,13 +64,6 @@ bower_components
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
 # misc
 .sass-cache
 connect.lock
@@ -150,7 +143,6 @@ out/
 
 # IDE and editor files
 .idea/
-.vscode/
 *.swp
 *.swo
 .DS_Store

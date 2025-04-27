@@ -1,31 +1,30 @@
-# Extraction Projects Rules
+# Coincise Projects Rules
 
 ## Project Structure
+
 Each extraction project must follow this directory structure:
+
 ```
 project-name/
-├── config/ # Configuration files
+├── config/ # json based config files
 ├── src/
 │   ├── index.js           # Entry point
-│   ├── types.js          # Type definitions     
-│   ├── processors/       # Data processing modules
-│   ├── utils/           # Utility functions
-│   └── [api-name]/      # API-specific modules
 ├── package.json
 ├── package-lock.json
 └── README.md
 ```
 
 ## Dependencies
+
 Required dependencies for all extraction projects:
-- puppeteer: ^24.6.1
+
 - turndown: ^7.1.2
 - turndown-plugin-gfm: ^1.0.2
-- jsdom: ^26.0.0
 
-Optional dependencies must be justified in the projects README.md.
+Optional dependencies must be justified in the project's README.md.
 
 ## JavaScript Standards
+
 - Use pure ES6 JavaScript only
 - No TypeScript or other transpiled languages
 - All files must use `.js` extension
@@ -39,6 +38,7 @@ Optional dependencies must be justified in the projects README.md.
 - Use const/let instead of var
 
 ## Code Style
+
 - Use 2 spaces for indentation
 - Use semicolons
 - Maximum line length: 100 characters
@@ -46,3 +46,8 @@ Optional dependencies must be justified in the projects README.md.
 - Use camelCase for variables and functions
 - Use PascalCase for classes
 - Use UPPER_SNAKE_CASE for constants
+
+## Github Workflows
+
+- Each venue has a seperate workflow file for automatically updating the documentation and raising a PR is anything has changed.
+- The workflow should run weekly at midnight on Saturday night / Sunday morning.

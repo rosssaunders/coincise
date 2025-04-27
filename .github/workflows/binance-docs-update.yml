@@ -4,7 +4,7 @@ on:
   schedule:
     # Run every Sunday at 00:00 UTC
     - cron: '0 0 * * 0'
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch: # Allow manual triggering
 
 jobs:
   update-docs:
@@ -15,7 +15,7 @@ jobs:
     defaults:
       run:
         working-directory: venues/binance
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
