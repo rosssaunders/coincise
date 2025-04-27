@@ -1485,23 +1485,11 @@ Interface description: This endpoint returns the amount changes of specified use
 | accountId | string | false | Account ID |  |  |
 | currency | string | false | Cryptocurrency (default value: all) |  |  |
 | transactTypes | string | false | Transaction types (multiple inputs are allowed; default value: all; enumerated values: transfer) | transfer |  |
-| startTime | long | false | Farthest time (please refer to note 1 for valid range and default value) |  |  |
-| endTime | long | false | Nearest time (please refer to note 2 for valid range and default value) |  |  |
-| sort | string | false | Sorting order (enumerated values: asc, desc) |  |  |
+| startTime | long | false | Farthest time (180 days) |  |  |
+| endTime | long | false | Nearest time (180 days) |  |  |
+| sort | string | false | Sorting order (enumerated values: asc, desc) | （Deprecated） |  |
 | limit | int | false | Maximum number of items in one page (valid range:\[1-500\]; default value:100) |  | 100 |
 | fromId | long | false | First record ID in this query (only valid for next page querying. please refer to note 3) |  |  |
-
-Notes:
-
-startTime valid range: \[(endTime – 10days), endTime\], unix time in millisecond
-
-startTime default value: (endTime – 10days)
-
-Note 2:
-
-endTime valid range: \[(current time – 180days), current time\], unix time in millisecond
-
-endTime default value: current time
 
 #### Response Parameter
 
