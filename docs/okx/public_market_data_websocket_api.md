@@ -376,8 +376,8 @@ Retrieve funding rate. Data will be pushed in 30s to 90s.
 | &gt; method | String | Funding rate mechanism<br><code>current_period</code><del><br><code>next_period</code></del>(no longer supported) 
 | &gt; formulaType | String | Formula type<br><code>noRate</code>: old funding rate formula<br><code>withRate</code>: new funding rate formula 
 | &gt; fundingRate | String | Current funding rate 
-| &gt; fundingTime | String | <del>Funding time of the upcoming settlement, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>.</del>(no longer supported) 
-| &gt; nextFundingRate | String | Forecasted funding rate for the next period 
+| &gt; nextFundingRate | String | <del>Forecasted funding rate for the next period<br>The nextFundingRate will be "" if the method is <code>current_period</code></del>(no longer supported) 
+| &gt; fundingTime | String | Settlement time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
 | &gt; nextFundingTime | String | Forecasted funding time for the next period, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
 | &gt; minFundingRate | String | The lower limit of the predicted funding rate of the next cycle 
 | &gt; maxFundingRate | String | The upper limit of the predicted funding rate of the next cycle 
@@ -749,7 +749,7 @@ Retrieve the recent liquidation orders. For futures and swaps, each contract wil
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>liquidation-orders</code> 
 | &gt; instType | String | Yes | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>MARGIN</code><br><code>OPTION</code> 
 
@@ -794,7 +794,7 @@ For more ADL details, please refer to [Introduction to Auto-deleveraging](https:
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>adl-warning</code> 
 | &gt; instType | String | Yes | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> 
 | &gt; instFamily | String | No | Instrument family 
@@ -820,7 +820,7 @@ For more ADL details, please refer to [Introduction to Auto-deleveraging](https:
 | &gt; channel | String | Channel name<br><code>adl-warning</code> 
 | &gt; instType | String | Instrument type 
 | &gt; instFamily | String | Instrument family 
-| data | Array of object | Subscribed data 
+| data | Array of objects | Subscribed data 
 | &gt; instType | String | Instrument type 
 | &gt; instFamily | String | Instrument family 
 | &gt; state | String | state<br><code>normal</code><br><code>warning</code><br><code>adl</code> 

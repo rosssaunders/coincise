@@ -103,7 +103,7 @@ Retrieve delivery records of Futures and exercise records of Options in the last
 
 #### Rate Limit: 40 requests per 2 seconds
 
-#### Rate limit rule: IP + (Instrument Type + uly)
+#### Rate limit rule: IP + (Instrument Type + Uly)
 
 #### HTTP Request
 
@@ -640,7 +640,7 @@ Convert the crypto value to the number of contracts, or vice versa
 | instId | String | Yes | Instrument ID<br>only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
 | sz | String | Yes | Quantity to buy or sell<br>It is quantity of currency while converting currency to contract;<br>It is quantity of contract while converting contract to currency. 
 | px | String | Conditional | Order price<br>For crypto-margined contracts, it is necessary while converting.<br>For USDT-margined contracts, it is necessary while converting between usdt and contract.<br>It is optional while converting between coin and contract.<br>For OPTION, it is optional. 
-| unit | String | No | The unit of currency<br><code>coin</code><br><code>usds</code>: USDT/USDC<br>only applicable to USDⓈ-margined contracts from <code>FUTURES</code>/<code>SWAP</code> 
+| unit | String | No | The unit of currency<br><code>coin</code><br><code>usds</code>: USDT/USDC<br>The default is <code>coin</code>, only applicable to USDⓈ-margined contracts from <code>FUTURES</code>/<code>SWAP</code> 
 | opType | String | No | Order type<br><code>open</code>: round down sz when opening positions<br><code>close</code>: round sz to the nearest when closing positions<br>The default is <code>close</code><br>Applicable to <code>FUTURES</code> <code>SWAP</code> 
 
 #### Response Parameters
@@ -871,7 +871,7 @@ The data returned will be arranged in an array like this: \[ts,o,h,l,c,confirm\]
 
 Retrieve the candlestick charts of mark price from recent years.
 
-#### Rate Limit: 10 requests per 2 seconds
+#### Rate Limit: 20 requests per 2 seconds
 
 #### Rate limit rule: IP
 
