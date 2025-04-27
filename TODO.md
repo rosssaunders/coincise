@@ -1,5 +1,7 @@
 # Exchange TODO List
 
+[] HTX Workflow needs a proxy
+
 This file lists the top exchanges based on rankings from CoinMarketCap as of the time of generation, presented in table format. API Documentation links have been added based on search results (please verify). Icon URLs from the ccxt repository have been added where available.
 
 _Note: Icon display depends on the Markdown viewer's ability to render images._
