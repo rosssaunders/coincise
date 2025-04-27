@@ -223,6 +223,10 @@ The SDK's source code are available in [gatews (opens new window)](https://githu
 
 ### [#](#changelog) Changelog
 
+2025-04-10
+
+*   Added description for the `filled_amount` field in both `spot.orders` and `spot.orders_v2` documents.
+
 2025-03-26
 
 *   Fix the documentation for the `auto_repay` and `auto_borrow` fields of `spot.order_place`.
@@ -235,8 +239,8 @@ The SDK's source code are available in [gatews (opens new window)](https://githu
 
 2025-01-08
 
-*   The `spot.usertrades` channel now includes the `id_market` field, which is unique inside the trading market (token). The `id` field will gradually be deprecated in the future.
-*   The `spot.trades` channel now includes the `id_market` field, which is unique inside the trading market (token). The `id` field will gradually be deprecated in the future.
+*   The `spot.usertrades` channel now includes the `id_market` field, which is unique inside the trading market (token).
+*   The `spot.trades` channel now includes the `id_market` field, which is unique inside the trading market (token).
 *   A new `spot.trades_v2` channel has been added.
 *   A new `spot.usertrades_v2` channel has been added.
 *   A new `spot.orders_v2` channel has been added.
@@ -619,7 +623,8 @@ Notification example
     "currency_pair": "GT_USDT",
     "amount": "16.4700000000",
     "price": "0.4705000000",
-    "range": "2390902-2390902"
+    "range": "2390902-2390902",
+    "id_market": 5736713
   }
 }
 ```
@@ -640,6 +645,7 @@ Result format:
 | »amount | String | Trade amount |
 | »price | String | Trade price |
 | »range | String | market Trade range (format: "start-end") |
+| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
 
 #### [#](#enumerated-values) Enumerated Values
 
@@ -710,7 +716,8 @@ Notification example
     "currency_pair": "GT_USDT",
     "amount": "16.4700000000",
     "price": "0.4705000000",
-    "range": "2390902-2390902"
+    "range": "2390902-2390902",
+    "id_market": 5736713
   }
 }
 ```
@@ -731,6 +738,7 @@ Result format:
 | »amount | String | Trade amount |
 | »price | String | Trade price |
 | »range | String | market Trade range (format: "start-end") |
+| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
 
 #### [#](#enumerated-values-2) Enumerated Values
 
@@ -857,7 +865,7 @@ Every currency pair's order book update has an internal update ID, which increme
 
 How to maintain local order book:
 
-1.  Subscribe `spot.order_book_update`, e.g. `["BTC_USDT", "100ms"]` pushes update in BTC\_USDT order book every 1s
+1.  Subscribe `spot.order_book_update`, e.g. `["BTC_USDT", "100ms"]` pushes update in BTC\_USDT order book every 100ms
 2.  Cache WebSocket notifications. Every notification use `U` and `u` to tell the first and last update ID since last notification.
 3.  Retrieve base order book using REST API, and make sure the order book ID is recorded(referred as `baseID` below) e.g. `https://api.gateio.ws/api/v4/spot/order_book?currency_pair=BTC_USDT&limit=100&with_id=true` retrieves the full base order book of BTC\_USDT
 4.  Iterate the cached WebSocket notifications, and find the first one which the baseID falls into, i.e. `U <= baseId+1` and `u >= baseId+1`, then start consuming from it. Note that amount in notifications are all absolute values. Use them to replace original value in corresponding price. If amount equals to 0, delete the price from the order book.
@@ -1195,6 +1203,7 @@ Notification example
       "time_in_force": "gtc",
       "left": "0.0001",
       "filled_total": "0",
+      "filled_amount": "812.8",
       "avg_deal_price": "0",
       "fee": "0",
       "fee_currency": "USDT",
@@ -1240,6 +1249,7 @@ Result format:
 | »time_in_force | String | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee |
 | »left | String | Amount left to fill |
 | »filled_total | String | Total filled in quote currency |
+| »filled_amount | String | Currency transaction volume |
 | »avg_deal_price | String | Average transaction price of orders |
 | »fee | String | Fee deducted |
 | »fee_currency | String | Fee currency unit |
@@ -1346,6 +1356,7 @@ Notification example
       "time_in_force": "gtc",
       "left": "0.0001",
       "filled_total": "0",
+      "filled_amount": "812.8",
       "avg_deal_price": "0",
       "fee_currency": "USDT",
       "rebated_fee_currency": "USDT",
@@ -1387,6 +1398,7 @@ Result format:
 | »time_in_force | String | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee |
 | »left | String | Amount left to fill |
 | »filled_total | String | Total filled in quote currency |
+| »filled_amount | String | Currency transaction volume |
 | »avg_deal_price | String | Average transaction price of orders |
 | »fee_currency | String | Fee currency unit |
 | »gt_discount | Boolean | Whether GT fee discount is used |
@@ -4225,4 +4237,4 @@ Result format:
 | »»label | String | denotes error type in string format |
 | »»message | String | detailed error message |
 
-Last Updated: 3/26/2025, 1:31:49 AM
+Last Updated: 4/10/2025, 2:57:05 AM

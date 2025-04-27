@@ -1437,7 +1437,7 @@ Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ```
-{	'e': 'listenKeyExpired',      // event type	'E': 1576653824250				// event time}
+{	'e': 'listenKeyExpired',      // event type	'E': 1576653824250				// event time	"listenKey":"WsCMN0a4KHUPTQuX6IUnqEZfB1inxmv1qR4kbf1LuEjur5VdbzqvyxqG9TSjVVxv"}
 ```
 
 Event: Margin Call
@@ -1712,7 +1712,7 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-
 | stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
 | closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. 
 | activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different workingType) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1% 
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% 
 | workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
 | priceProtect | ENUM | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
 | newOrderRespType | ENUM | NO | `ACK`,`RESULT`, default `ACK` 
