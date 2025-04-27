@@ -1,0 +1,13 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Public Market Data REST API",
+  "sections": [
+    {
+      "h1_match": "public-data",
+      "h2_match": "public-data-rest-api",
+      "h3_matches": ["public-data-rest-api-"],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/public_market_data_rest_api.md"
+}

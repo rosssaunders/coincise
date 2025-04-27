@@ -4,8 +4,8 @@ import puppeteer from 'puppeteer'
 import TurndownService from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
 import { JSDOM } from 'jsdom'
-import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs'
-import { join } from 'path'
+import { readFileSync, writeFileSync, existsSync, unlinkSync, readdirSync } from 'fs'
+import { join, resolve } from 'path'
 
 /**
  * Extracts sections from the document based on the section configuration
@@ -78,13 +78,12 @@ function extractSectionContent(node) {
 }
 
 /**
- * Processes a single configuration section
+ * Processes a single configuration file
  * @param {Document} document - The JSDOM document
- * @param {string} name - The configuration name
- * @param {ConfigSection} config - The configuration settings
+ * @param {Object} config - The configuration loaded from a file
  */
-async function processConfig(document, name, config) {
-  console.log(`Processing configuration: ${name}`)
+async function processConfig(document, config) {
+  console.log(`Processing configuration: ${config.name}`)
 
   // Extract sections based on each section configuration
   const allExtractedSections = []
@@ -94,12 +93,12 @@ async function processConfig(document, name, config) {
   }
 
   if (allExtractedSections.length === 0) {
-    console.log(`Warning: No sections found for configuration '${name}'`)
+    console.log(`Warning: No sections found for configuration '${config.name}'`)
     return
   }
 
   // Create a combined markdown string
-  let combinedMarkdown = `# OKX API Documentation - ${name}\n\n`
+  let combinedMarkdown = `# OKX API Documentation - ${config.name}\n\n`
 
   // Convert each section to markdown
   const turndownService = new TurndownService({
@@ -128,24 +127,78 @@ async function processConfig(document, name, config) {
 }
 
 /**
+ * Load all configuration files from the config directory
+ * @returns {Array<Object>} Array of configuration objects
+ */
+function loadConfigurations() {
+  const configDir = join(process.cwd(), 'config')
+  if (!existsSync(configDir)) {
+    console.error(
+      'Config directory not found. Please create a config directory with JSON configuration files.'
+    )
+    process.exit(1)
+  }
+
+  const configFiles = readdirSync(configDir)
+    .filter(file => file.endsWith('.json'))
+    .map(file => join(configDir, file))
+
+  if (configFiles.length === 0) {
+    console.error('No configuration files found in the config directory.')
+    process.exit(1)
+  }
+
+  return configFiles.map(file => {
+    try {
+      return JSON.parse(readFileSync(file, 'utf8'))
+    } catch (error) {
+      console.error(`Error parsing configuration file ${file}:`, error)
+      process.exit(1)
+    }
+  })
+}
+
+/**
  * Main function to run the extraction process
  */
 async function main() {
   try {
-    // Load configuration
-    const configPath = join(process.cwd(), 'config.json')
-    if (!existsSync(configPath)) {
-      console.error('Configuration file not found. Please create config.json')
+    let configs = []
+
+    // Check if a specific config file is provided as a command-line argument
+    if (process.argv.length > 2) {
+      const configPath = process.argv[2]
+      if (existsSync(configPath)) {
+        try {
+          const config = JSON.parse(readFileSync(configPath, 'utf8'))
+          configs = [config]
+          console.log(`Using config file: ${configPath}`)
+        } catch (error) {
+          console.error(`Error parsing configuration file ${configPath}:`, error)
+          process.exit(1)
+        }
+      } else {
+        console.error(`Configuration file not found: ${configPath}`)
+        process.exit(1)
+      }
+    } else {
+      // Load all configurations from the config directory
+      configs = loadConfigurations()
+    }
+
+    if (configs.length === 0) {
+      console.error('No valid configurations found.')
       process.exit(1)
     }
 
-    const configs = JSON.parse(readFileSync(configPath, 'utf8'))
+    // Get URL from the first config (all configs should have the same URL)
+    const url = configs[0].url
+    console.log(`Fetching documentation from ${url}`)
 
     // Launch browser and get page content
-    console.log(`Fetching documentation from ${configs.url}`)
     const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
-    await page.goto(configs.url, { waitUntil: 'networkidle0' })
+    await page.goto(url, { waitUntil: 'networkidle0' })
     const content = await page.content()
     await browser.close()
 
@@ -178,14 +231,16 @@ async function main() {
     highlights.forEach(highlight => highlight.remove())
 
     // Process each configuration
-    for (const [name, config] of Object.entries(configs.configs)) {
-      await processConfig(document, name, config)
+    for (const config of configs) {
+      await processConfig(document, config)
     }
 
     // Clean up
     if (existsSync('okx.html')) {
       unlinkSync('okx.html')
     }
+
+    console.log('All documentation files have been generated successfully!')
   } catch (error) {
     console.error('Error:', error)
     process.exit(1)
