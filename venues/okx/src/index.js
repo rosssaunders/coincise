@@ -143,7 +143,7 @@ async function main() {
 
     // Launch browser and get page content
     console.log(`Fetching documentation from ${configs.url}`)
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.goto(configs.url, { waitUntil: 'networkidle0' })
     const content = await page.content()
