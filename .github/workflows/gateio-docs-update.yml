@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Run Gate.io scraper
-        run: npm run all
+        run: npm start
 
       - name: Check for changes
         id: git-check
