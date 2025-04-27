@@ -961,6 +961,7 @@ Retrieves expirations for instruments. This method can be used to see instrument
 | --- | --- | --- | --- | --- |
 | currency | true | string | <code>BTC</code><br><code>ETH</code><br><code>USDC</code><br><code>USDT</code><br><code>any</code><br><code>grouped</code> | The currency symbol or <code>"any"</code> for all or '"grouped"' for all grouped by currency 
 | kind | true | string | <code>future</code><br><code>option</code><br><code>any</code> | Instrument kind, <code>"future"</code> or <code>"option"</code> or <code>"any"</code> 
+| currency_pair | false | string | <code>ada_usd</code><br><code>algo_usd</code><br><code>avax_usd</code><br><code>bch_usd</code><br><code>btc_usd</code><br><code>doge_usd</code><br><code>dot_usd</code><br><code>eth_usd</code><br><code>link_usd</code><br><code>ltc_usd</code><br><code>matic_usd</code><br><code>near_usd</code><br><code>shib_usd</code><br><code>sol_usd</code><br><code>steth_usd</code><br><code>trx_usd</code><br><code>uni_usd</code><br><code>usdc_usd</code><br><code>xrp_usd</code><br><code>paxg_usd</code><br><code>usde_usd</code><br><code>ada_usdc</code><br><code>bch_usdc</code><br><code>algo_usdc</code><br><code>avax_usdc</code><br><code>btc_usdc</code><br><code>doge_usdc</code><br><code>dot_usdc</code><br><code>bch_usdc</code><br><code>eth_usdc</code><br><code>link_usdc</code><br><code>ltc_usdc</code><br><code>matic_usdc</code><br><code>near_usdc</code><br><code>shib_usdc</code><br><code>sol_usdc</code><br><code>steth_usdc</code><br><code>trx_usdc</code><br><code>usyc_usdc</code><br><code>uni_usdc</code><br><code>xrp_usdc</code><br><code>paxg_usdc</code><br><code>usde_usdc</code><br><code>ada_usdt</code><br><code>algo_usdt</code><br><code>avax_usdt</code><br><code>bch_usdt</code><br><code>bnb_usdt</code><br><code>bnb_usdt</code><br><code>btc_usdt</code><br><code>btc_usdt</code><br><code>doge_usdt</code><br><code>dot_usdt</code><br><code>eth_usdt</code><br><code>link_usdt</code><br><code>ltc_usdt</code><br><code>luna_usdt</code><br><code>matic_usdt</code><br><code>near_usdt</code><br><code>shib_usdt</code><br><code>sol_usdt</code><br><code>steth_usdt</code><br><code>trx_usdt</code><br><code>uni_usdt</code><br><code>xrp_usdt</code><br><code>paxg_usdt</code><br><code>usde_usdt</code><br><code>btcdvol_usdc</code><br><code>ethdvol_usdc</code><br><code>steth_eth</code><br><code>paxg_btc</code><br><code>btc_usyc</code><br><code>eth_usyc</code><br><code>btc_usde</code><br><code>eth_usde</code> | The currency pair symbol 
 
 ### Response
 
@@ -2814,6 +2815,35 @@ This is a matching engine method.
 | &nbsp;&nbsp;›&nbsp;&nbsp;mmp_group | string | Specified MMP Group 
 | &nbsp;&nbsp;›&nbsp;&nbsp;quantity_limit | number | Quantity limit 
 | &nbsp;&nbsp;›&nbsp;&nbsp;vega_limit | number | Vega limit 
+
+/private/get\_mmp\_status
+-------------------------
+
+Get MMP status for triggred index (or group). If the parameter is not provided, a list of all triggered MMP statuses is returned.
+
+**Scope:** `trade:read`
+
+This is a private method; it can only be used after authentication.
+
+This is a matching engine method.
+
+### Parameters
+
+| Parameter | Required | Type | Enum | Description |
+| --- | --- | --- | --- | --- |
+| index_name | false | string | <code>btc_usd</code><br><code>eth_usd</code><br><code>btc_usdc</code><br><code>eth_usdc</code><br><code>ada_usdc</code><br><code>algo_usdc</code><br><code>avax_usdc</code><br><code>bch_usdc</code><br><code>bnb_usdc</code><br><code>doge_usdc</code><br><code>dot_usdc</code><br><code>link_usdc</code><br><code>ltc_usdc</code><br><code>matic_usdc</code><br><code>near_usdc</code><br><code>paxg_usdc</code><br><code>shib_usdc</code><br><code>sol_usdc</code><br><code>trx_usdc</code><br><code>uni_usdc</code><br><code>xrp_usdc</code><br><code>usde_usdc</code><br><code>buidl_usdc</code><br><code>ada_usdt</code><br><code>algo_usdt</code><br><code>avax_usdt</code><br><code>bch_usdt</code><br><code>bnb_usdt</code><br><code>btc_usdt</code><br><code>doge_usdt</code><br><code>dot_usdt</code><br><code>eth_usdt</code><br><code>link_usdt</code><br><code>ltc_usdt</code><br><code>luna_usdt</code><br><code>matic_usdt</code><br><code>near_usdt</code><br><code>shib_usdt</code><br><code>sol_usdt</code><br><code>trx_usdt</code><br><code>uni_usdt</code><br><code>xrp_usdt</code><br><code>btcdvol_usdc</code><br><code>ethdvol_usdc</code> | Index identifier of derivative instrument on the platform; skipping this parameter will return all configurations 
+| mmp_group | false | string |  | Specifies the MMP group for which the status is being retrieved. The <code>index_name</code> must be specified before using this parameter. 
+
+### Response
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | integer | The id that was sent in the request 
+| jsonrpc | string | The JSON-RPC version (2.0) 
+| result | array of <em>object</em> |  
+| &nbsp;&nbsp;›&nbsp;&nbsp;frozen_until | integer | Timestamp (milliseconds since the UNIX epoch) until the user will be frozen - 0 means that the user is frozen until manual reset. 
+| &nbsp;&nbsp;›&nbsp;&nbsp;index_name | string | Index identifier, matches (base) cryptocurrency with quote currency 
+| &nbsp;&nbsp;›&nbsp;&nbsp;mmp_group | string | Triggered mmp group, this parameter is optional (appears only for Mass Quote orders trigger) 
 
 /private/get\_open\_orders
 --------------------------
@@ -4816,6 +4846,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price | true | number |  | Hedge leg price 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount | true | number |  | It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. 
 | execution_instruction | false | string | <code>all_or_none</code><br><code>any_part_of</code> | <p>Execution instruction of the quote. Default - <code>any_part_of</code></p><ul><li><code>"all_or_none (AON)"</code> - The quote can only be filled entirely or not at all, ensuring that its amount matches the amount specified in the Block RFQ.</li><li><code>"any_part_of (APO)"</code> - The quote can be filled either partially or fully, with the filled amount potentially being less than the Block RFQ amount. Additionally, 'any_part_of' quotes have priority over 'all_or_none' quotes at the same price level.</li></ul> 
+| price | false | number |  | Aggregated price used for quoting future spreads. 
 
 ### Response
 
@@ -5102,6 +5133,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price | true | number |  | Hedge leg price 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount | true | number |  | It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. 
 | block_rfq_id | false | integer |  | ID of the Block RFQ 
+| price | false | number |  | Aggregated price used for quoting future spreads. 
 
 ### Response
 
@@ -6951,38 +6983,39 @@ This is a private method; it can only be used after authentication.
 | result | <em>object</em> |  
 | &nbsp;&nbsp;›&nbsp;&nbsp;continuation | integer | Continuation token for pagination. <code>NULL</code> when no continuation. 
 | &nbsp;&nbsp;›&nbsp;&nbsp;logs | array of <em>object</em> |  
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount | number | It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;balance | number | Cash balance after the transaction 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;block_rfq_id | integer | ID of the Block RFQ - when trade was part of the Block RFQ 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;cashflow | number | For futures and perpetual contracts: Realized session PNL (since last settlement). For options: the amount paid or received for the options traded. 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;change | number | Change in cash balance. For trades: fees and options premium paid/received. For settlement: Futures session PNL and perpetual session funding. 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;commission | number | Commission paid so far (in base currency) 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;cashflow | number | For futures and perpetual contracts: Realized session PNL (since last settlement). For options: the amount paid or received for the options traded. 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;user_id | integer | Unique user identifier 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;trade_id | string | Unique (per currency) trade identifier 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;type | string | Transaction category/type. The most common are: <code>trade</code>, <code>deposit</code>, <code>withdrawal</code>, <code>settlement</code>, <code>delivery</code>, <code>transfer</code>, <code>swap</code>, <code>correction</code>. New types can be added any time in the future 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;order_id | string | Unique order identifier 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;position | number | Updated position size after the transaction 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;side | string | One of: <code>short</code> or <code>long</code> in case of settlements, <code>close sell</code> or <code>close buy</code> in case of deliveries, <code>open sell</code>, <code>open buy</code>, <code>close sell</code>, <code>close buy</code> in case of trades 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;contracts | number | It represents the order size in contract units. (Optional, may be absent in historical data). 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;currency | string | Currency, i.e <code>"BTC"</code>, <code>"ETH"</code>, <code>"USDC"</code> 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;equity | number | Updated equity value after the transaction 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;interest_pl | number | Actual funding rate of trades and settlements on perpetual instruments 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;user_role | string | Trade role of the user: <code>maker</code> or <code>taker</code> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;id | integer | Unique identifier 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;index_price | number | The index price for the instrument during the delivery 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;info | object | Additional information regarding transaction. Strongly dependent on the log entry type 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string | Unique instrument identifier 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;interest_pl | number | Actual funding rate of trades and settlements on perpetual instruments 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;mark_price | number | Market price during the trade 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;order_id | string | Unique order identifier 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;position | number | Updated position size after the transaction 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;currency | string | Currency, i.e <code>"BTC"</code>, <code>"ETH"</code>, <code>"USDC"</code> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price | number | Settlement/delivery price or the price level of the traded contracts 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price_currency | string | Currency symbol associated with the <code>price</code> field value 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;profit_as_cashflow | boolean | Indicator informing whether the cashflow is waiting for settlement or not 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;session_rpl | number | Session realized profit and loss 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;session_upl | number | Session unrealized profit and loss 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;settlement_price | number | The settlement price for the instrument during the delivery 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;side | string | One of: <code>short</code> or <code>long</code> in case of settlements, <code>close sell</code> or <code>close buy</code> in case of deliveries, <code>open sell</code>, <code>open buy</code>, <code>close sell</code>, <code>close buy</code> in case of trades 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;total_interest_pl | number | Total session funding rate 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;trade_id | string | Unique (per currency) trade identifier 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;type | string | Transaction category/type. The most common are: <code>trade</code>, <code>deposit</code>, <code>withdrawal</code>, <code>settlement</code>, <code>delivery</code>, <code>transfer</code>, <code>swap</code>, <code>correction</code>. New types can be added any time in the future 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;user_id | integer | Unique user identifier 
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;user_role | string | Trade role of the user: <code>maker</code> or <code>taker</code> 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;user_seq | integer | Sequential identifier of user transaction 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;settlement_price | number | The settlement price for the instrument during the delivery 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price_currency | string | Currency symbol associated with the <code>price</code> field value 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;equity | number | Updated equity value after the transaction 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;total_interest_pl | number | Total session funding rate 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;balance | number | Cash balance after the transaction 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;session_upl | number | Session unrealized profit and loss 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;timestamp | integer | The timestamp (milliseconds since the Unix epoch) 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;profit_as_cashflow | boolean | Indicator informing whether the cashflow is waiting for settlement or not 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;commission | number | Commission paid so far (in base currency) 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;session_rpl | number | Session realized profit and loss 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;mark_price | number | Market price during the trade 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;block_rfq_id | integer | ID of the Block RFQ - when trade was part of the Block RFQ 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;ip | string | The IP address from which the trade was initiated 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount | number | It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. 
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;username | string | System name or user defined subaccount alias 
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string | Unique instrument identifier 
 
 /private/get\_user\_locks
 -------------------------
@@ -10711,7 +10744,7 @@ Added RFQ API:
 Rate Limits
 ===========
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 Deribit uses a volume-tiered rate limit system, focusing primarily on matching engine requests. These rate limits are implemented to ensure the robustness of our system's order processing capabilities.
 
@@ -11008,7 +11041,7 @@ quote\_cancel
 Connection Management
 =====================
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 Connection[](#heading-1)
 ------------------------
@@ -11079,7 +11112,7 @@ Upon initiating a session with the `Logon (A)` message, users have the option to
 Accessing historical trades and orders using API
 ================================================
 
-*   Updated 11 days ago
+*   Updated 27 days ago
 
 #### Overview
 
@@ -11205,7 +11238,7 @@ To retrieve historical trades and orders, use `historical` parameter in your API
 API Usage Policy
 ================
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 Deribit is committed to providing a fast, reliable, and efficient trading platform for all users. To maintain the integrity and performance of our system, we are introducing new guidelines for API usage. These guidelines are aimed at ensuring that all users have fair access to the platform without unnecessary strain on resources.
 
@@ -11284,7 +11317,7 @@ If you have any questions or need assistance optimizing your API usage, please r
 Server Infrastructure
 =====================
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 Server Infrastructure[](#heading-1)
 -----------------------------------
@@ -11395,7 +11428,7 @@ LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
 Asia Gateway
 ============
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 To offer faster access to the Deribit platform for clients located in Asia, we offer a gateway connecting to Deribit from Hong Kong.
 
@@ -11410,7 +11443,7 @@ Please use [asia.deribit.com](http://asia.deribit.com) to access the gateway.
 Deribit AWS Endpoint Service instruction
 ========================================
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 In order to offer its customers residing in AWS a direct connection to its backend systems, Deribit has created an AWS Endpoint Service for customers to directly connect to. The solution is based on AWS PrivateLink, a managed service built for service provider/service consumer connectivity models. This instruction describes how customers can connect to the Deribit Endpoint Service from their AWS environment. The Service is available within several AWS regions. 
 
@@ -11556,7 +11589,7 @@ This can be done via the API itself directly without our intervening, If you wis
 Deribit AWS Multicast Service Instruction
 =========================================
 
-*   Updated 23 days ago
+*   Updated 1 month ago
 
 Introduction[](#heading-1)
 --------------------------
