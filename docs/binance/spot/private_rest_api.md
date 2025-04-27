@@ -252,7 +252,7 @@ The `EXCHANGE_MAX_NUM_ICEBERG_ORDERS` filter defines the maximum number of icebe
 ENUM Definitions
 ================
 
-This will apply for both Rest API and WebSocket API.
+This will apply for both REST API and WebSocket API.
 
 Symbol status (status)[​](/docs/binance-spot-api-docs/enums#symbol-status-status "Direct link to Symbol status (status)")
 -------------------------------------------------------------------------------------------------------------------------
@@ -414,6 +414,8 @@ Rate limit intervals (interval)[​](/docs/binance-spot-api-docs/enums#rate-limi
 STP Modes[​](/docs/binance-spot-api-docs/enums#stp-modes "Direct link to STP Modes")
 ------------------------------------------------------------------------------------
 
+Read [Self Trade Prevention (STP) FAQ](/docs/binance-spot-api-docs/faqs/stp_faq) to learn more.
+
 *   `NONE`
 *   `EXPIRE_MAKER`
 *   `EXPIRE_TAKER`
@@ -423,7 +425,7 @@ STP Modes[​](/docs/binance-spot-api-docs/enums#stp-modes "Direct link to STP M
 Error codes for Binance
 =======================
 
-**Last Updated: 2025-04-07**
+**Last Updated: 2025-04-08**
 
 Errors consist of two parts: an error code and a message. Codes are universal, but messages can vary. Here is the error JSON payload:
 
@@ -501,7 +503,9 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 ### \-1034 TOO\_MANY\_CONNECTIONS[​](/docs/binance-spot-api-docs/errors#-1034-too_many_connections "Direct link to -1034 TOO_MANY_CONNECTIONS")
 
-*   Too many concurrent connections; current limit is '%d'.
+*   Too many concurrent connections; current limit is '%s'.
+*   Too many connection attempts for account; current limit is %s per '%s'.
+*   Too many connection attempts from IP; current limit is %s per '%s'.
 
 ### \-1035 LOGGED\_OUT[​](/docs/binance-spot-api-docs/errors#-1035-logged_out "Direct link to -1035 LOGGED_OUT")
 
@@ -613,7 +617,7 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 *   Combination of optional parameters invalid.
 *   Combination of optional fields invalid. Recommendation: '%s' and '%s' must both be sent.
 *   Fields \[%s\] must be sent together or omitted entirely.
-*   Invalid 'MDEntryType (269)' combination. BID and OFFER must be requested together.
+*   Invalid `MDEntryType (269)` combination. BID and OFFER must be requested together.
 
 ### \-1130 INVALID\_PARAMETER[​](/docs/binance-spot-api-docs/errors#-1130-invalid_parameter "Direct link to -1130 INVALID_PARAMETER")
 
@@ -771,8 +775,8 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 ### \-1190 INVALID\_REQUEST\_ID[​](/docs/binance-spot-api-docs/errors#-1190-invalid_request_id "Direct link to -1190 INVALID_REQUEST_ID")
 
-*   'MDReqID (262)' contains a subscription request id that is already in use on this connection.
-*   'MDReqID (262)' contains an unsubscription request id that does not match any active subscription.
+*   `MDReqID (262)` contains a subscription request id that is already in use on this connection.
+*   `MDReqID (262)` contains an unsubscription request id that does not match any active subscription.
 
 ### \-1191 TOO\_MANY\_SUBSCRIPTIONS[​](/docs/binance-spot-api-docs/errors#-1191-too_many_subscriptions "Direct link to -1191 TOO_MANY_SUBSCRIPTIONS")
 
@@ -827,8 +831,12 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 *   Order was canceled or expired with no executed qty over 90 days ago and has been archived.
 
-Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, and -2011 CANCEL\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected-and--2011-cancel_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, and -2011 CANCEL_REJECTED")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### \-2039 CLIENT\_ORDER\_ID\_INVALID[​](/docs/binance-spot-api-docs/errors#-2039-client_order_id_invalid "Direct link to -2039 CLIENT_ORDER_ID_INVALID")
+
+*   Client order ID is not correct for this order ID.
+
+Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, -2011 CANCEL\_REJECTED, and -2038 ORDER\_AMEND\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected--2011-cancel_rejected-and--2038-order_amend_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, -2011 CANCEL_REJECTED, and -2038 ORDER_AMEND_REJECTED")
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This code is sent when an error has been returned by the matching engine. The following messages which will indicate the specific error:
 
@@ -920,11 +928,12 @@ General API Information
     *   **[https://api3.binance.com](https://api3.binance.com)**
     *   **[https://api4.binance.com](https://api4.binance.com)**
 *   The last 4 endpoints in the point above (`api1`\-`api4`) should give better performance but have less stability.
-*   All endpoints return either a JSON object or array.
+*   Responses are in JSON by default. To receive responses in SBE, refer to the [SBE FAQ](/docs/binance-spot-api-docs/faqs/sbe_faq) page.
 *   Data is returned in **ascending** order. Oldest first, newest last.
 *   All time and timestamp related fields in the JSON responses are in **milliseconds by default.** To receive the information in microseconds, please add the header `X-MBX-TIME-UNIT:MICROSECOND` or `X-MBX-TIME-UNIT:microsecond`.
-*   Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp)` can be passed in milliseconds or microseconds.
+*   Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp`) can be passed in milliseconds or microseconds.
 *   For APIs that only send public market data, please use the base endpoint **[https://data-api.binance.vision](https://data-api.binance.vision)**. Please refer to [Market Data Only](/docs/binance-spot-api-docs/faqs/market_data_only) page.
+*   If there are enums or terms you want clarification on, please see the [SPOT Glossary](/docs/binance-spot-api-docs/faqs/spot_glossary) for more information.
 
 HTTP Return Codes
 =================
@@ -1217,13 +1226,6 @@ This is a sample code in Python to show how to sign the payload with an Ed25519 
 General endpoints
 =================
 
-### Terminology[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#terminology "Direct link to Terminology")
-
-These terms will be used throughout the documentation, so it is recommended especially for new users to read to help their understanding of the API.
-
-*   `base asset` refers to the asset that is the `quantity` of a symbol. For the symbol BTCUSDT, BTC would be the `base asset`.
-*   `quote asset` refers to the asset that is the `price` of a symbol. For the symbol BTCUSDT, USDT would be the `quote asset`.
-
 ### Test connectivity[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity "Direct link to Test connectivity")
 
 ```
@@ -1319,7 +1321,7 @@ Trading endpoints
 ### New order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-trade "Direct link to New order (TRADE)")
 
 ```
-POST /api/v3/order 
+POST /api/v3/order
 ```
 
 Send in a new order.
@@ -1345,7 +1347,7 @@ Orders with the same `newClientOrderID` can be accepted only when the previous o
 | trailingDelta | LONG | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders. 
 | icebergQty | DECIMAL | NO | Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order. 
 | newOrderRespType | ENUM | NO | Set the response JSON. `ACK`, `RESULT`, or `FULL`; `MARKET` and `LIMIT` order types default to `FULL`, all other orders default to `ACK`. 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes). 
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
 | recvWindow | LONG | NO | The value cannot be greater than `60000` 
 | timestamp | LONG | YES |  
 
@@ -1466,7 +1468,7 @@ With `computeCommissionRates`
 ### Query order (USER\_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data "Direct link to Query order (USER_DATA)")
 
 ```
-GET /api/v3/order 
+GET /api/v3/order
 ```
 
 Check an order's status.
@@ -1502,7 +1504,7 @@ Check an order's status.
 ### Cancel order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade "Direct link to Cancel order (TRADE)")
 
 ```
-DELETE /api/v3/order 
+DELETE /api/v3/order
 ```
 
 Cancel an active order.
@@ -1558,7 +1560,7 @@ Notes:
 ### Cancel All Open Orders on a Symbol (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade "Direct link to Cancel All Open Orders on a Symbol (TRADE)")
 
 ```
-DELETE /api/v3/openOrders 
+DELETE /api/v3/openOrders
 ```
 
 Cancels all active orders on a symbol. This includes orders that are part of an order list.
@@ -1624,12 +1626,12 @@ If both conditions are not met the request will be rejected.
 | strategyId | LONG | NO |  
 | strategyType | INT | NO | The value cannot be less than `1000000`. 
 | stopPrice | DECIMAL | NO |  
-| trailingDelta | LONG | NO |  
+| trailingDelta | LONG | NO | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq) 
 | icebergQty | DECIMAL | NO |  
 | newOrderRespType | ENUM | NO | Allowed values:  
 `ACK`, `RESULT`, `FULL`  
 `MARKET` and `LIMIT` orders types default to `FULL`; all other orders default to `ACK` 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes). 
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
 | cancelRestrictions | ENUM | NO | Supported values:  
 `ONLY_NEW` - Cancel will succeed if the order status is `NEW`.  
 `ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. For more information please refer to [Regarding `cancelRestrictions`](/docs/binance-spot-api-docs/rest-api/trading-endpoints#regarding-cancelrestrictions) 
@@ -1710,13 +1712,13 @@ Response format varies depending on whether the processing of the message succee
 **Response when using `orderRateLimitExceededMode=DO_NOTHING` and account's unfilled order count has been exceeded:**
 
 ```
-{  "code": -1015,  "msg": "Too many new orders; current limit is 1 orders per 10 SECOND." }
+{  "code": -1015,  "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."}
 ```
 
 **Response when using `orderRateLimitExceededMode=CANCEL_ONLY` and account's unfilled order count has been exceeded:**
 
 ```
-{  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "SUCCESS",    "newOrderResult": "FAILURE",    "cancelResponse": {      "symbol": "LTCBNB",      "origClientOrderId": "GKt5zzfOxRDSQLveDYCTkc",      "orderId": 64,      "orderListId": -1,      "clientOrderId": "loehOJF3FjoreUBDmv739R",      "transactTime": 1715779007228,      "price": "1.00",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT",      "side": "SELL",      "selfTradePreventionMode": "NONE"     },    "newOrderResponse": {      "code": -1015,      "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."     }  }}
+{  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "SUCCESS",    "newOrderResult": "FAILURE",    "cancelResponse": {      "symbol": "LTCBNB",      "origClientOrderId": "GKt5zzfOxRDSQLveDYCTkc",      "orderId": 64,      "orderListId": -1,      "clientOrderId": "loehOJF3FjoreUBDmv739R",      "transactTime": 1715779007228,      "price": "1.00",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT",      "side": "SELL",      "selfTradePreventionMode": "NONE"    },    "newOrderResponse": {      "code": -1015,      "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."    }  }}
 ```
 
 **Notes:**
@@ -1732,7 +1734,9 @@ PUT /api/v3/order/amend/keepPriority
 
 Reduce the quantity of an existing open order.
 
-**Weight**: 1
+Read [Order Amend Keep Priority FAQ](/docs/binance-spot-api-docs/faqs/order_amend_keep_priority) to learn more.
+
+**Weight**: 4
 
 **Parameters:**
 
@@ -1745,10 +1749,12 @@ Reduce the quantity of an existing open order.
 If not sent, one will be randomly generated.  
 It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`. 
 | newQty | DECIMAL | YES | `newQty` must be greater than 0 and less than the order's quantity. 
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
+| timestamp | LONG | YES |  
 
 **Data Source**: Matching Engine
 
-Response for a single order:
+**Response:** Response for a single order:
 
 ```
 {  "transactTime": 1741926410255,  "executionId": 75,  "amendedOrder":  {    "symbol": "BTCUSDT",    "orderId": 33,    "orderListId": -1,    "origClientOrderId": "5xrgbMyg6z36NzBn2pbT8H",    "clientOrderId": "PFaq6hIHxqFENGfdtn4J6Q",    "price": "6.00000000",    "qty": "5.00000000",    "executedQty": "0.00000000",    "preventedQty": "0.00000000",    "quoteOrderQty": "0.00000000",    "cumulativeQuoteQty": "0.00000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "SELL",    "workingTime": 1741926410242,    "selfTradePreventionMode": "NONE"  }}
@@ -1836,7 +1842,7 @@ Get all account orders; active, canceled, or filled.
 #### New OCO - Deprecated (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-oco---deprecated-trade "Direct link to New OCO - Deprecated (TRADE)")
 
 ```
-POST /api/v3/order/oco 
+POST /api/v3/order/oco
 ```
 
 Send in a new OCO.
@@ -1873,7 +1879,7 @@ Send in a new OCO.
 | stopIcebergQty | DECIMAL | NO | Used with `STOP_LOSS_LIMIT` leg to make an iceberg order. 
 | stopLimitTimeInForce | ENUM | NO | Valid values are `GTC`/`FOK`/`IOC` 
 | newOrderRespType | ENUM | NO | Set the response JSON. 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes). 
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
 | recvWindow | LONG | NO | The value cannot be greater than `60000` 
 | timestamp | LONG | YES |  
 
@@ -1939,7 +1945,7 @@ Either belowStopPrice or belowTrailingDelta or both, must be specified.
 | belowStrategyType | INT | No | Arbitrary numeric value identifying the below order strategy.  
 Values smaller than 1000000 are reserved and cannot be used. 
 | newOrderRespType | ENUM | No | Select response format: `ACK`, `RESULT`, `FULL` 
-| selfTradePreventionMode | ENUM | No | The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes) 
+| selfTradePreventionMode | ENUM | No | The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) 
 | recvWindow | LONG | No | The value cannot be greater than `60000`. 
 | timestamp | LONG | Yes |  
 
@@ -1978,22 +1984,22 @@ Places an OTO.
 | listClientOrderId | STRING | NO | Arbitrary unique ID among open order lists. Automatically generated if not sent.  
 A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired.  
 `listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`. 
-| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/rest-api/enums.md#orderresponsetype) 
-| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes) 
+| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype) 
+| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) 
 | workingType | ENUM | YES | Supported values: `LIMIT`,`LIMIT_MAKER` 
-| workingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/rest-api/enums.md#side) 
+| workingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side) 
 | workingClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the working order.  
 Automatically generated if not sent. 
 | workingPrice | DECIMAL | YES |  
 | workingQuantity | DECIMAL | YES | Sets the quantity for the working order. 
 | workingIcebergQty | DECIMAL | NO | This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`. 
-| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/rest-api/enums.md#timeinforce) 
+| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
 | workingStrategyId | LONG | NO | Arbitrary numeric value identifying the working order within an order strategy. 
 | workingStrategyType | INT | NO | Arbitrary numeric value identifying the working order strategy.  
 Values smaller than 1000000 are reserved and cannot be used. 
 | pendingType | ENUM | YES | Supported values: [Order Types](/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-type)  
 Note that `MARKET` orders using `quoteOrderQty` are not supported. 
-| pendingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/rest-api/enums.md#side) 
+| pendingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side) 
 | pendingClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the pending order.  
 Automatically generated if not sent. 
 | pendingPrice | DECIMAL | NO |  
@@ -2001,7 +2007,7 @@ Automatically generated if not sent.
 | pendingTrailingDelta | DECIMAL | NO |  
 | pendingQuantity | DECIMAL | YES | Sets the quantity for the pending order. 
 | pendingIcebergQty | DECIMAL | NO | This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`. 
-| pendingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/rest-api/enums.md#timeinforce) 
+| pendingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
 | pendingStrategyId | LONG | NO | Arbitrary numeric value identifying the pending order within an order strategy. 
 | pendingStrategyType | INT | NO | Arbitrary numeric value identifying the pending order strategy.  
 Values smaller than 1000000 are reserved and cannot be used. 
@@ -2060,20 +2066,20 @@ Place an OTOCO.
 | listClientOrderId | STRING | NO | Arbitrary unique ID among open order lists. Automatically generated if not sent.  
 A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired.  
 `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`. 
-| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/rest-api/enums.md#orderresponsetype) 
-| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes) 
+| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype) 
+| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) 
 | workingType | ENUM | YES | Supported values: `LIMIT`, `LIMIT_MAKER` 
-| workingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/rest-api/enums.md#side) 
+| workingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/enums#side) 
 | workingClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the working order.  
 Automatically generated if not sent. 
 | workingPrice | DECIMAL | YES |  
 | workingQuantity | DECIMAL | YES |  
 | workingIcebergQty | DECIMAL | NO | This can only be used if `workingTimeInForce` is `GTC`. 
-| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/rest-api/enums.md#timeinforce) 
+| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
 | workingStrategyId | LONG | NO | Arbitrary numeric value identifying the working order within an order strategy. 
 | workingStrategyType | INT | NO | Arbitrary numeric value identifying the working order strategy.  
 Values smaller than 1000000 are reserved and cannot be used. 
-| pendingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/rest-api/enums.md#side) 
+| pendingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/enums#side) 
 | pendingQuantity | DECIMAL | YES |  
 | pendingAboveType | ENUM | YES | Supported values: `STOP_LOSS_LIMIT`, `STOP_LOSS`, `LIMIT_MAKER`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` 
 | pendingAboveClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the pending above order.  
@@ -2130,7 +2136,7 @@ Matching Engine
 #### Cancel Order list (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-list-trade "Direct link to Cancel Order list (TRADE)")
 
 ```
-DELETE /api/v3/orderList 
+DELETE /api/v3/orderList
 ```
 
 Cancel an entire Order list
@@ -2164,7 +2170,7 @@ Cancel an entire Order list
 #### Query Order list (USER\_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-list-user_data "Direct link to Query Order list (USER_DATA)")
 
 ```
-GET /api/v3/orderList 
+GET /api/v3/orderList
 ```
 
 Retrieves a specific order list based on provided optional parameters.
@@ -2222,7 +2228,7 @@ Note that the time between `startTime` and `endTime` can't be longer than 24 hou
 #### Query Open Order lists (USER\_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-open-order-lists-user_data "Direct link to Query Open Order lists (USER_DATA)")
 
 ```
-GET /api/v3/openOrderList 
+GET /api/v3/openOrderList
 ```
 
 **Weight:** 6
@@ -2252,6 +2258,8 @@ POST /api/v3/sor/order
 
 Places an order using smart order routing (SOR).
 
+Read [SOR FAQ](/docs/binance-spot-api-docs/faqs/sor_faq) to learn more.
+
 **Weight:** 1
 
 **Parameters:**
@@ -2270,7 +2278,7 @@ Orders with the same `newClientOrderID` can be accepted only when the previous o
 | strategyType | INT | NO | The value cannot be less than `1000000`. 
 | icebergQty | DECIMAL | NO | Used with `LIMIT` to create an iceberg order. 
 | newOrderRespType | ENUM | NO | Set the response JSON. `ACK`, `RESULT`, or `FULL`. Default to `FULL` 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/rest-api/enums.md#stpmodes). 
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
 | recvWindow | LONG | NO | The value cannot be greater than `60000` 
 | timestamp | LONG | YES |  
 
@@ -2281,7 +2289,7 @@ Orders with the same `newClientOrderID` can be accepted only when the previous o
 **Response:**
 
 ```
-{  "symbol": "BTCUSDT",  "orderId": 2,  "orderListId": -1,  "clientOrderId": "sBI1KM6nNtOfj5tccZSKly",  "transactTime": 1689149087774,  "price": "31000.00000000",  "origQty": "0.50000000",  "executedQty": "0.50000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "14000.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "workingTime": 1689149087774,  "fills": [    {      "matchType": "ONE_PARTY_TRADE_REPORT",      "price": "28000.00000000",      "qty": "0.50000000",      "commission": "0.00000000",      "commissionAsset": "BTC",      "tradeId": -1,      "allocId": 0    }  ],  "workingFloor": "SOR",                "selfTradePreventionMode": "NONE",  "usedSor": true}
+{  "symbol": "BTCUSDT",  "orderId": 2,  "orderListId": -1,  "clientOrderId": "sBI1KM6nNtOfj5tccZSKly",  "transactTime": 1689149087774,  "price": "31000.00000000",  "origQty": "0.50000000",  "executedQty": "0.50000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "14000.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "workingTime": 1689149087774,  "fills": [    {      "matchType": "ONE_PARTY_TRADE_REPORT",      "price": "28000.00000000",      "qty": "0.50000000",      "commission": "0.00000000",      "commissionAsset": "BTC",      "tradeId": -1,      "allocId": 0    }  ],  "workingFloor": "SOR",  "selfTradePreventionMode": "NONE",  "usedSor": true}
 ```
 
 #### Test new order using SOR (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-using-sor-trade "Direct link to Test new order using SOR (TRADE)")
@@ -2329,7 +2337,7 @@ Account Endpoints
 ### Account information (USER\_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#account-information-user_data "Direct link to Account information (USER_DATA)")
 
 ```
-GET /api/v3/account 
+GET /api/v3/account
 ```
 
 Get current account information.
@@ -2356,7 +2364,7 @@ Default value: `false`
 ### Account trade list (USER\_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data "Direct link to Account trade list (USER_DATA)")
 
 ```
-GET /api/v3/myTrades 
+GET /api/v3/myTrades
 ```
 
 Get trades for a specific account and symbol.
@@ -2538,7 +2546,7 @@ Get current account commission rates.
 **Response:**
 
 ```
-{  "symbol": "BTCUSDT",  "standardCommission": {         //Commission rates on trades from the order.    "maker": "0.00000010",    "taker": "0.00000020",    "buyer": "0.00000030",    "seller": "0.00000040"   },  "taxCommission": {              //Tax commission rates for trades from the order.    "maker": "0.00000112",    "taker": "0.00000114",    "buyer": "0.00000118",    "seller": "0.00000116"   },  "discount": {                   //Discount commission when paying in BNB    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.75000000"      //Standard commission is reduced by this rate when paying commission in BNB.  }}
+{  "symbol": "BTCUSDT",  "standardCommission": {         //Commission rates on trades from the order.    "maker": "0.00000010",    "taker": "0.00000020",    "buyer": "0.00000030",    "seller": "0.00000040"  },  "taxCommission": {              //Tax commission rates for trades from the order.    "maker": "0.00000112",    "taker": "0.00000114",    "buyer": "0.00000118",    "seller": "0.00000116"  },  "discount": {                   //Discount commission when paying in BNB    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.75000000"      //Standard commission is reduced by this rate when paying commission in BNB.  }}
 ```
 
 ### Query Order Amendments (USER\_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data "Direct link to Query Order Amendments (USER_DATA)")
@@ -2559,290 +2567,16 @@ Queries all amendments of a single order.
 | orderId | LONG | YES |  
 | fromExecutionId | LONG | NO |  
 | limit | LONG | NO | Default:500; Maximum: 1000 
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
+| timestamp | LONG | YES |  
+
+**Data Source:**
+
+Database
 
 **Response:**
 
 ```
 [  {      "symbol": "BTCUSDT",      "orderId": 9,      "executionId": 22,      "origClientOrderId": "W0fJ9fiLKHOJutovPK3oJp",      "newClientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",      "origQty": "5.00000000",      "newQty": "4.00000000",      "time": 1741669661670  },  {      "symbol": "BTCUDST",      "orderId": 9,      "executionId": 25,      "origClientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",      "newClientOrderId": "5uS0r35ohuQyDlCzZuYXq2",      "origQty": "4.00000000",      "newQty": "3.00000000",      "time": 1741672924895  }]
-```
-
-User Data Streams for Binance
-=============================
-
-**Last Updated: 2025-04-07**
-
-*   The base API endpoint is: **[https://api.binance.com](https://api.binance.com)**
-*   A User Data Stream `listenKey` is valid for 60 minutes after creation.
-*   Doing a `PUT` on an active `listenKey` will extend its validity for 60 minutes.
-*   Doing a `DELETE` on an active `listenKey` will close the stream and invalidate the `listenKey`.
-*   Doing a `POST` on an account with an active `listenKey` will return the currently active `listenKey` and extend its validity for 60 minutes.
-*   The base websocket endpoint is: **wss://stream.binance.com:9443**
-*   User Data Streams are accessed at **/ws/<listenKey>** or **/stream?streams=<listenKey>**
-*   A single connection to **stream.binance.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark.
-*   All time and timestamp related fields in the JSON responses are **milliseconds by default**. To receive the information in microseconds, please add the parameter `timeUnit=MICROSECOND` or `timeUnit=microsecond` in the URL.
-    *   For example `/ws/<listenKey>?timeUnit=MICROSECOND`
-
-API Endpoints[​](/docs/binance-spot-api-docs/user-data-stream#api-endpoints "Direct link to API Endpoints")
------------------------------------------------------------------------------------------------------------
-
-### Create a listenKey (USER\_STREAM)[​](/docs/binance-spot-api-docs/user-data-stream#create-a-listenkey-user_stream "Direct link to Create a listenKey (USER_STREAM)")
-
-```
-POST /api/v3/userDataStream
-```
-
-Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
-
-**Weight:** 1
-
-**Parameters:** NONE
-
-**Response:**
-
-```
-{  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
-```
-
-### Ping/Keep-alive a listenKey (USER\_STREAM)[​](/docs/binance-spot-api-docs/user-data-stream#pingkeep-alive-a-listenkey-user_stream "Direct link to Ping/Keep-alive a listenKey (USER_STREAM)")
-
-```
-PUT /api/v3/userDataStream
-```
-
-Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
-
-**Weight:** 1
-
-**Parameters:**
-
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| listenKey | STRING | YES |  
-
-**Response:**
-
-```
-{}
-```
-
-### Close a listenKey (USER\_STREAM)[​](/docs/binance-spot-api-docs/user-data-stream#close-a-listenkey-user_stream "Direct link to Close a listenKey (USER_STREAM)")
-
-```
-DELETE /api/v3/userDataStream
-```
-
-Close out a user data stream.
-
-**Weight:** 1
-
-**Parameters:**
-
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| listenKey | STRING | YES |  
-
-**Response:**
-
-```
-{}
-```
-
-Web Socket Payloads[​](/docs/binance-spot-api-docs/user-data-stream#web-socket-payloads "Direct link to Web Socket Payloads")
------------------------------------------------------------------------------------------------------------------------------
-
-### Account Update[​](/docs/binance-spot-api-docs/user-data-stream#account-update "Direct link to Account Update")
-
-`outboundAccountPosition` is sent any time an account balance has changed and contains the assets that were possibly changed by the event that generated the balance change.
-
-```
-{  "e": "outboundAccountPosition", // Event type  "E": 1564034571105,             // Event Time  "u": 1564034571073,             // Time of last account update  "B": [                          // Balances Array    {      "a": "ETH",                 // Asset      "f": "10000.000000",        // Free      "l": "0.000000"             // Locked    }  ]}
-```
-
-### Balance Update[​](/docs/binance-spot-api-docs/user-data-stream#balance-update "Direct link to Balance Update")
-
-Balance Update occurs during the following:
-
-*   Deposits or withdrawals from the account
-*   Transfer of funds between accounts (e.g. Spot to Margin)
-
-**Payload**
-
-```
-{  "e": "balanceUpdate",         // Event Type  "E": 1573200697110,           // Event Time  "a": "BTC",                   // Asset  "d": "100.00000000",          // Balance Delta  "T": 1573200697068            // Clear Time}
-```
-
-### Order Update[​](/docs/binance-spot-api-docs/user-data-stream#order-update "Direct link to Order Update")
-
-Orders are updated with the `executionReport` event.
-
-We recommend using the [FIX API](/docs/binance-spot-api-docs/fix-api) for better performance compared to using the User Data Streams.
-
-**Payload:**
-
-```
-{  "e": "executionReport",        // Event type  "E": 1499405658658,            // Event time  "s": "ETHBTC",                 // Symbol  "c": "mUvoqJxFIILMdfAW5iGSOW", // Client order ID  "S": "BUY",                    // Side  "o": "LIMIT",                  // Order type  "f": "GTC",                    // Time in force  "q": "1.00000000",             // Order quantity  "p": "0.10264410",             // Order price  "P": "0.00000000",             // Stop price  "F": "0.00000000",             // Iceberg quantity  "g": -1,                       // OrderListId  "C": "",                       // Original client order ID; This is the ID of the order being canceled  "x": "NEW",                    // Current execution type  "X": "NEW",                    // Current order status  "r": "NONE",                   // Order reject reason; will be an error code.  "i": 4293153,                  // Order ID  "l": "0.00000000",             // Last executed quantity  "z": "0.00000000",             // Cumulative filled quantity  "L": "0.00000000",             // Last executed price  "n": "0",                      // Commission amount  "N": null,                     // Commission asset  "T": 1499405658657,            // Transaction time  "t": -1,                       // Trade ID  "v": 3,                        // Prevented Match Id; This is only visible if the order expired due to STP  "I": 8641984,                  // Execution Id  "w": true,                     // Is the order on the book?  "m": false,                    // Is this trade the maker side?  "M": false,                    // Ignore  "O": 1499405658657,            // Order creation time  "Z": "0.00000000",             // Cumulative quote asset transacted quantity  "Y": "0.00000000",             // Last quote asset transacted quantity (i.e. lastPrice * lastQty)  "Q": "0.00000000",             // Quote Order Quantity  "W": 1499405658657,            // Working Time; This is only visible if the order has been placed on the book.  "V": "NONE"                    // SelfTradePreventionMode}
-```
-
-**Note:** Average price can be found by doing `Z` divided by `z`.
-
-#### Conditional Fields in Execution Report[​](/docs/binance-spot-api-docs/user-data-stream#conditional-fields-in-execution-report "Direct link to Conditional Fields in Execution Report")
-
-These are fields that appear in the payload only if certain conditions are met.
-
-For additional information on these parameters, please refer to the [Spot Glossary](/docs/binance-spot-api-docs/faqs/spot_glossary).
-
-| Field | Name | Description | Examples |
-| --- | --- | --- | --- |
-| `d` | Trailing Delta | Appears only for trailing stop orders. | `"d": 4` 
-| `D` | Trailing Time | `"D": 1668680518494` 
-| `j` | Strategy Id | Appears only if the `strategyId` parameter was provided upon order placement. | `"j": 1` 
-| `J` | Strategy Type | Appears only if the `strategyType` parameter was provided upon order placement. | `"J": 1000000` 
-| `v` | Prevented Match Id | Appears only for orders that expired due to STP. | `"v": 3` 
-| `A` | Prevented Quantity | `"A":"3.000000"` 
-| `B` | Last Prevented Quantity | `"B":"3.000000"` 
-| `u` | Trade Group Id | `"u":1` 
-| `U` | Counter Order Id | `"U":37` 
-| `Cs` | Counter Symbol | `"Cs": "BTCUSDT"` 
-| `pl` | Prevented Execution Quantity | `"pl":"2.123456"` 
-| `pL` | Prevented Execution Price | `"pL":"0.10000001"` 
-| `pY` | Prevented Execution Quote Qty | `"pY":"0.21234562"` 
-| `W` | Working Time | Appears when the order is working on the book | `"W": 1668683798379` 
-| `b` | Match Type | Appears for orders that have allocations | `"b":"ONE_PARTY_TRADE_REPORT"` 
-| `a` | Allocation ID | `"a":1234` 
-| `k` | Working Floor | Appears for orders that potentially have allocations | `"k":"SOR"` 
-| `uS` | UsedSor | Appears for orders that used SOR | `"uS":true` 
-
-If the order is an order list, an event named `ListStatus` will be sent in addition to the `executionReport` event.
-
-**Payload**
-
-```
-{  "e": "listStatus",                // Event Type  "E": 1564035303637,               // Event Time  "s": "ETHBTC",                    // Symbol  "g": 2,                           // OrderListId  "c": "OCO",                       // Contingency Type  "l": "EXEC_STARTED",              // List Status Type  "L": "EXECUTING",                 // List Order Status  "r": "NONE",                      // List Reject Reason  "C": "F4QN4G8DlFATFlIUQ0cjdD",    // List Client Order ID  "T": 1564035303625,               // Transaction Time  "O": [                            // An array of objects    {      "s": "ETHBTC",                // Symbol      "i": 17,                      // OrderId      "c": "AJYsMjErWJesZvqlJCTUgL" // ClientOrderId    },    {      "s": "ETHBTC",      "i": 18,      "c": "bfYPSQdLoqAJeNrOr9adzq"    }  ]}
-```
-
-**Execution types:**
-
-*   `NEW` - The order has been accepted into the engine.
-*   `CANCELED` - The order has been canceled by the user.
-*   `REPLACED` - The order has been amended.
-*   `REJECTED` - The order has been rejected and was not processed (This message appears only with Cancel Replace Orders wherein the new order placement is rejected but the request to cancel request succeeds.)
-*   `TRADE` - Part of the order or all of the order's quantity has filled.
-*   `EXPIRED` - The order was canceled according to the order type's rules (e.g. LIMIT FOK orders with no fill, LIMIT IOC or MARKET orders that partially fill) or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance).
-*   `TRADE_PREVENTION` - The order has expired due to STP.
-
-Check the [Enums page](/docs/binance-spot-api-docs/enums) for more relevant enum definitions.
-
-### Listen Key Expired[​](/docs/binance-spot-api-docs/user-data-stream#listen-key-expired "Direct link to Listen Key Expired")
-
-This event is sent when the listen key expires.
-
-No more events will be sent after this until a new `listenKey` is created.
-
-This event will not be pushed when the stream is closed normally.
-
-**Payload:**
-
-```
-{  "e": "listenKeyExpired",  // Event type  "E": 1699596037418,      // Event time  "listenKey": "OfYGbUzi3PraNagEkdKuFwUHn48brFsItTdsuiIXrucEvD0rhRXZ7I6URWfE8YE8" }
-```
-
-Event Stream Terminated[​](/docs/binance-spot-api-docs/user-data-stream#event-stream-terminated "Direct link to Event Stream Terminated")
------------------------------------------------------------------------------------------------------------------------------------------
-
-This event appears only for WebSocket API.
-
-`eventStreamTerminated` is sent when the User Data Stream is stopped. For example, after you send a `userDataStream.unsubscribe` request, or a `session.logout` request.
-
-**Payload:**
-
-```
-{  "event": {    "e": "eventStreamTerminated", // Event Type    "E": 1728973001334            // Event Time  }}
-```
-
-External Lock Update[​](/docs/binance-spot-api-docs/user-data-stream#external-lock-update "Direct link to External Lock Update")
---------------------------------------------------------------------------------------------------------------------------------
-
-`externalLockUpdate` is sent when part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral.
-
-**Payload:**
-
-```
-{  "e": "externalLockUpdate",  // Event Type  "E": 1581557507324,         // Event Time  "a": "NEO",                 // Asset  "d": "10.00000000",         // Delta  "T": 1581557507268          // Transaction Time}
-```
-
-User data stream endpoints
-==========================
-
-> \[!IMPORTANT\]  
-> These requests have been deprecated, which means we will remove them in the future. Please subscribe to the User Data Stream through the [WebSocket API](/docs/binance-spot-api-docs/web-socket-api.md) instead.
-
-Specifics on how user data streams work can be found [here.](/docs/binance-spot-api-docs/user-data-stream)
-
-### Start user data stream (USER\_STREAM)[​](/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints#start-user-data-stream-user_stream "Direct link to Start user data stream (USER_STREAM)")
-
-```
-POST /api/v3/userDataStream
-```
-
-Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
-
-**Weight:** 2
-
-**Parameters:** NONE
-
-**Data Source:** Memory
-
-**Response:**
-
-```
-{  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
-```
-
-### Keepalive user data stream (USER\_STREAM)[​](/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints#keepalive-user-data-stream-user_stream "Direct link to Keepalive user data stream (USER_STREAM)")
-
-```
-PUT /api/v3/userDataStream
-```
-
-Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
-
-**Weight:** 2
-
-**Data Source:** Memory
-
-**Parameters:**
-
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| listenKey | STRING | YES |  
-
-**Response:**
-
-```
-{}
-```
-
-### Close user data stream (USER\_STREAM)[​](/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints#close-user-data-stream-user_stream "Direct link to Close user data stream (USER_STREAM)")
-
-```
-DELETE /api/v3/userDataStream
-```
-
-Close out a user data stream.
-
-**Weight:** 2
-
-**Parameters:**
-
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| listenKey | STRING | YES |  
-
-**Data Source:** Memory
-
-**Response:**
-
-```
-{}
 ```
 
