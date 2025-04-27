@@ -194,12 +194,20 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 
 <table border="0.8"><tbody><tr><td>For now, there is no limit for endpoints under this category</td></tr></tbody></table>
 
+#### Spread Trading[​](#spread-trading "Direct link to heading")
+
+| Method | Path | Limit | Upgradable |
+| :-- | :-: | --- | --- |
+| POST | <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a> | 100 req/min | N 
+| GET | <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a> | 50 req/s | N 
+| GET | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N 
+| GET | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N 
+
 API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 -----------------------------------------------------------------------------------------
-
-info
-
-The values in the table represent the application upper limit of the corresponding level, and do not mean that users at this level will automatically enjoy the corresponding API Rate Limit by default.
 
 instructions for batch endpoints
 
@@ -229,13 +237,7 @@ The batch order endpoint, which includes operations for creating, amending, and 
 | PRO3 | 200/s | 200/s | 100/s | 250/s | 250/s | 250/s 
 | PRO4 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
 | PRO5 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
-| PRO6 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
-
-How to increase API Limit[​](#how-to-increase-api-limit "Direct link to heading")
----------------------------------------------------------------------------------
-
-*   Institutional account will be automatically upgraded or downgraded according to the trading volume
-*   VIP account needs to contact your VIP relational manager to change the api rate limit
+| PRO6 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s
 
 Enums Definitions
 =================
@@ -388,6 +390,7 @@ _closed status_
 ### createType[​](#createtype "Direct link to heading")
 
 *   `CreateByUser`
+*   `CreateByFutureSpread` Spread order
 *   `CreateByAdminClosing`
 *   `CreateBySettle` USDC Futures delivery; Position closed by contract delisted
 *   `CreateByStopOrder` Futures conditional order
@@ -423,6 +426,7 @@ _closed status_
 *   `Settle` Inverse futures settlement; Position closed due to delisting
 *   `BlockTrade`
 *   `MovePosition`
+*   `FutureSpread` Spread leg execution
 *   `UNKNOWN` May be returned by a classic account. Cannot query by this type
 
 ### orderType[​](#ordertype "Direct link to heading")
@@ -1041,8 +1045,18 @@ UTA[​](#uta "Direct link to heading")
 | 110107 | Restrictions on ins Loan; leverage exceeding the limit for inverse contracts is not allowed. 
 | 110108 | Allowable range: 5 to 2000 tick size 
 | 110109 | Allowable range: 0.05% to 1% 
+| 110110 | Spread trading is not available in isolated margin trading mode 
+| 110111 | To access spread trading, upgrade to the latest version of UTA 
+| 110112 | Spread trading is not available for Copy Trading 
+| 110113 | Spread trading is not available in hedge mode 
+| 110114 | You have a Spread trading order in progress. Please try again later 
+| 110115 | The cancellation of a combo single-leg order can only be done by canceling the combo order 
+| 110116 | The entry price of a single leg, derived from the combo order price, exceeds the limit price 
+| 110117 | The modification of a combo single-leg order can only be done by modifying the combo order 
+| 110118 | Unable to retrieve a pruce of the market order due to low liquidity 
 | 110119 | Order failed. RPI orders are restricted to approved market makers only 
 | 170346 | Settle coin is not a collateral coin, cannot trade 
+| 170360 | symbol[XXXX] cannot trade. Used for spread trading in particular when collateral is not turned on 
 | 181017 | OrderStatus must be final status 
 | 182100 | Compulsory closing of positions, no repayment allowed 
 | 182101 | Failed repayment, insufficient collateral balance 
@@ -1168,6 +1182,8 @@ Spot Trade[​](#spot-trade "Direct link to heading")
 | 170344 | Symbol is not supported on Margin Trading 
 | 170348 | Please go to (<a href="https://www.bybit-tr.com" target="_blank" rel="noopener noreferrer">https://www.bybit-tr.com</a>) to proceed. 
 | 170355 | RPI orders are restricted to approved market makers only 
+| 170358 | The current site does not support ETP 
+| 170359 | TThe current site does not support leveraged trading 
 | 170709 | OTC loan: The select trading pair is not in the whitelist pair 
 | 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders. 
 
@@ -1566,11 +1582,11 @@ The ack of create order request indicates that the request is successfully accep
 *   Node.js
 
 ```
-POST /v5/order/create HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672211928338X-BAPI-RECV-WINDOW: 5000Content-Type: application/json// Spot Limit order with market tp sl{"category": "spot","symbol": "BTCUSDT","side": "Buy","orderType": "Limit","qty": "0.01","price": "28000","timeInForce": "PostOnly","takeProfit": "35000","stopLoss": "27000","tpOrderType": "Market","slOrderType": "Market"}// Spot Limit order with limit tp sl{"category": "spot","symbol": "BTCUSDT","side": "Buy","orderType": "Limit","qty": "0.01","price": "28000","timeInForce": "PostOnly","takeProfit": "35000","stopLoss": "27000","tpLimitPrice": "36000","slLimitPrice": "27500","tpOrderType": "Limit","slOrderType": "Limit"}// Spot PostOnly normal order{"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"0.1","price":"15600","timeInForce":"PostOnly","orderLinkId":"spot-test-01","isLeverage":0,"orderFilter":"Order"}// Spot TP/SL order{"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"0.1","price":"15600","triggerPrice": "15000", "timeInForce":"Limit","orderLinkId":"spot-test-02","isLeverage":0,"orderFilter":"tpslOrder"}// Spot margin normal order (UTA){"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"0.1","price":"15600","timeInForce":"GTC","orderLinkId":"spot-test-limit","isLeverage":1,"orderFilter":"Order"}// Spot Market Buy order, qty is quote currency{"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Market","qty":"200","timeInForce":"IOC","orderLinkId":"spot-test-04","isLeverage":0,"orderFilter":"Order"}// USDT Perp open long position (one-way mode){"category":"linear","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"1","price":"25000","timeInForce":"GTC","positionIdx":0,"orderLinkId":"usdt-test-01","reduceOnly":false,"takeProfit":"28000","stopLoss":"20000","tpslMode":"Partial","tpOrderType":"Limit","slOrderType":"Limit","tpLimitPrice":"27500","slLimitPrice":"20500"}// USDT Perp close long position (one-way mode){"category": "linear", "symbol": "BTCUSDT", "side": "Sell", "orderType": "Limit", "qty": "1", "price": "30000", "timeInForce": "GTC", "positionIdx": 0, "orderLinkId": "usdt-test-02", "reduceOnly": true}
+POST /v5/order/create HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672211928338X-BAPI-RECV-WINDOW: 5000Content-Type: application/json// Spot Limit order with market tp sl{"category": "spot","symbol": "BTCUSDT","side": "Buy","orderType": "Limit","qty": "0.01","price": "28000","timeInForce": "PostOnly","takeProfit": "35000","stopLoss": "27000","tpOrderType": "Market","slOrderType": "Market"}// Spot Limit order with limit tp sl{"category": "spot","symbol": "BTCUSDT","side": "Buy","orderType": "Limit","qty": "0.01","price": "28000","timeInForce": "PostOnly","takeProfit": "35000","stopLoss": "27000","tpLimitPrice": "36000","slLimitPrice": "27500","tpOrderType": "Limit","slOrderType": "Limit"}// Spot PostOnly normal order{"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"0.1","price":"15600","timeInForce":"PostOnly","orderLinkId":"spot-test-01","isLeverage":0,"orderFilter":"Order"}// Spot TP/SL order{"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"0.1","price":"15600","triggerPrice": "15000", "timeInForce":"Limit","orderLinkId":"spot-test-02","isLeverage":0,"orderFilter":"tpslOrder"}// Spot margin normal order (UTA){"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"0.1","price":"15600","timeInForce":"GTC","orderLinkId":"spot-test-limit","isLeverage":1,"orderFilter":"Order"}// Spot Market Buy order, qty is quote currency{"category":"spot","symbol":"BTCUSDT","side":"Buy","orderType":"Market","qty":"200","timeInForce":"IOC","orderLinkId":"spot-test-04","isLeverage":0,"orderFilter":"Order"}// USDT Perp open long position (one-way mode){"category":"linear","symbol":"BTCUSDT","side":"Buy","orderType":"Limit","qty":"1","price":"25000","timeInForce":"GTC","positionIdx":0,"orderLinkId":"usdt-test-01","reduceOnly":false,"takeProfit":"28000","stopLoss":"20000","tpslMode":"Partial","tpOrderType":"Limit","slOrderType":"Limit","tpLimitPrice":"27500","slLimitPrice":"20500"}// USDT Perp close long position (one-way mode){"category": "linear", "symbol": "BTCUSDT", "side": "Sell", "orderType": "Limit", "qty": "1", "price": "30000", "timeInForce": "GTC", "positionIdx": 0, "orderLinkId": "usdt-test-02", "reduceOnly": true}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.place_order(    category="spot",    symbol="BTCUSDT",    side="Buy",    orderType="Limit",    qty="0.1",    price="15600",    timeInForce="PostOnly",    orderLinkId="spot-test-postonly",    isLeverage=0,    orderFilter="Order",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.place_order(    category="spot",    symbol="BTCUSDT",    side="Buy",    orderType="Limit",    qty="0.1",    price="15600",    timeInForce="PostOnly",    orderLinkId="spot-test-postonly",    isLeverage=0,    orderFilter="Order",))
 ```
 
 ```
@@ -1586,7 +1602,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeSer
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});// Submit a market orderclient  .submitOrder({    category: 'spot',    symbol: 'BTCUSDT',    side: 'Buy',    orderType: 'Market',    qty: '1',  })  .then((response) => {    console.log('Market order result', response);  })  .catch((error) => {    console.error('Market order error', error);  });// Submit a limit orderclient  .submitOrder({    category: 'spot',    symbol: 'BTCUSDT',    side: 'Buy',    orderType: 'Limit',    qty: '1',    price: '55000',  })  .then((response) => {    console.log('Limit order result', response);  })  .catch((error) => {    console.error('Limit order error', error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});// Submit a market orderclient  .submitOrder({    category: 'spot',    symbol: 'BTCUSDT',    side: 'Buy',    orderType: 'Market',    qty: '1',  })  .then((response) => {    console.log('Market order result', response);  })  .catch((error) => {    console.error('Market order error', error);  });// Submit a limit orderclient  .submitOrder({    category: 'spot',    symbol: 'BTCUSDT',    side: 'Buy',    orderType: 'Limit',    qty: '1',    price: '55000',  })  .then((response) => {    console.log('Limit order result', response);  })  .catch((error) => {    console.error('Limit order error', error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -1651,11 +1667,11 @@ The ack of amend order request indicates that the request is successfully accept
 *   Node.js
 
 ```
-POST /v5/order/amend HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672217108106X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "ETHPERP",    "orderLinkId": "linear-004",    "triggerPrice": "1145",    "qty": "0.15",    "price": "1050",    "takeProfit": "0",    "stopLoss": "0"}
+POST /v5/order/amend HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672217108106X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "ETHPERP",    "orderLinkId": "linear-004",    "triggerPrice": "1145",    "qty": "0.15",    "price": "1050",    "takeProfit": "0",    "stopLoss": "0"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.amend_order(    category="linear",    symbol="ETHPERP",    orderLinkId="linear-004",    triggerPrice="1145",    qty="0.15",    price="1050",    takeProfit="0",    stopLoss="0",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.amend_order(    category="linear",    symbol="ETHPERP",    orderLinkId="linear-004",    triggerPrice="1145",    qty="0.15",    price="1050",    takeProfit="0",    stopLoss="0",))
 ```
 
 ```
@@ -1667,7 +1683,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeSer
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .amendOrder({        category: 'linear',        symbol: 'ETHPERP',        orderLinkId: 'linear-004',        triggerPrice: '1145',        qty: '0.15',        price: '1050',        takeProfit: '0',        stopLoss: '0',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .amendOrder({        category: 'linear',        symbol: 'ETHPERP',        orderLinkId: 'linear-004',        triggerPrice: '1145',        qty: '0.15',        price: '1050',        takeProfit: '0',        stopLoss: '0',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -1723,11 +1739,11 @@ The ack of cancel order request indicates that the request is successfully accep
 *   Node.js
 
 ```
-POST /v5/order/cancel HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672217376681X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{  "category": "linear",  "symbol": "BTCPERP",  "orderLinkId": null,  "orderId":"c6f055d9-7f21-4079-913d-e6523a9cfffa"}
+POST /v5/order/cancel HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672217376681X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{  "category": "linear",  "symbol": "BTCPERP",  "orderLinkId": null,  "orderId":"c6f055d9-7f21-4079-913d-e6523a9cfffa"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.cancel_order(    category="linear",    symbol="BTCPERP",    orderId="c6f055d9-7f21-4079-913d-e6523a9cfffa",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.cancel_order(    category="linear",    symbol="BTCPERP",    orderId="c6f055d9-7f21-4079-913d-e6523a9cfffa",))
 ```
 
 ```
@@ -1739,7 +1755,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeSer
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .cancelOrder({        category: 'linear',        symbol: 'BTCPERP',        orderId: 'c6f055d9-7f21-4079-913d-e6523a9cfffa',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .cancelOrder({        category: 'linear',        symbol: 'BTCPERP',        orderId: 'c6f055d9-7f21-4079-913d-e6523a9cfffa',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -1850,11 +1866,11 @@ GET `/v5/order/realtime`
 *   Node.js
 
 ```
-GET /v5/order/realtime?symbol=ETHUSDT&category=linear&openOnly=0&limit=1  HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672219525810X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/order/realtime?symbol=ETHUSDT&category=linear&openOnly=0&limit=1  HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672219525810X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_open_orders(    category="linear",    symbol="ETHUSDT",    openOnly=0,    limit=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_open_orders(    category="linear",    symbol="ETHUSDT",    openOnly=0,    limit=1,))
 ```
 
 ```
@@ -1862,7 +1878,7 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getActiveOrders({        category: 'linear',        symbol: 'ETHUSDT',        openOnly: 0,        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getActiveOrders({        category: 'linear',        symbol: 'ETHUSDT',        openOnly: 0,        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -1929,11 +1945,11 @@ The ack of cancel-all order request indicates that the request is successfully a
 *   Node.js
 
 ```
-POST /v5/order/cancel-all HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672219779140X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{  "category": "linear",  "symbol": null,  "settleCoin": "USDT"}
+POST /v5/order/cancel-all HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672219779140X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{  "category": "linear",  "symbol": null,  "settleCoin": "USDT"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.cancel_all_orders(    category="linear",    settleCoin="USDT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.cancel_all_orders(    category="linear",    settleCoin="USDT",))
 ```
 
 ```
@@ -1945,7 +1961,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeSer
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .cancelAllOrders({    category: 'linear',    settleCoin: 'USDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .cancelAllOrders({    category: 'linear',    settleCoin: 'USDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2062,11 +2078,11 @@ GET `/v5/order/history`
 *   Node.js
 
 ```
-GET /v5/order/history?category=linear&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672221263407X-BAPI-RECV-WINDOW: 5000
+GET /v5/order/history?category=linear&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672221263407X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_order_history(    category="linear",    limit=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_order_history(    category="linear",    limit=1,))
 ```
 
 ```
@@ -2074,7 +2090,7 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getHistoricOrders({        category: 'linear',        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getHistoricOrders({        category: 'linear',        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2165,11 +2181,11 @@ GET `/v5/execution/list`
 *   Node.js
 
 ```
-GET /v5/execution/list?category=linear&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672283754132X-BAPI-RECV-WINDOW: 5000
+GET /v5/execution/list?category=linear&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672283754132X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_executions(    category="linear",    limit=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_executions(    category="linear",    limit=1,))
 ```
 
 ```
@@ -2177,7 +2193,7 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getExecutionList({        category: 'linear',        symbol: 'BTCUSDT',        margin: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getExecutionList({        category: 'linear',        symbol: 'BTCUSDT',        margin: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2276,11 +2292,11 @@ The ack of create order request indicates that the request is successfully accep
 *   Node.js
 
 ```
-POST /v5/order/create-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672222064519X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "spot",    "request": [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        }    ]}
+POST /v5/order/create-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672222064519X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "spot",    "request": [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        }    ]}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.place_batch_order(    category="spot",    request=[        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        }    ]))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.place_batch_order(    category="spot",    request=[        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        }    ]))
 ```
 
 ```
@@ -2296,7 +2312,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;var order1 = 
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .batchSubmitOrders('spot', [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        },    ])        .then((response) => {        console.log(response);    })        .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .batchSubmitOrders('spot', [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        },    ])        .then((response) => {        console.log(response);    })        .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2373,11 +2389,11 @@ The ack of amend order request indicates that the request is successfully accept
 *   Node.js
 
 ```
-POST /v5/order/amend-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672222935987X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "option",    "request": [        {            "symbol": "ETH-30DEC22-500-C",            "qty": null,            "price": null,            "orderIv": "6.8",            "orderId": "b551f227-7059-4fb5-a6a6-699c04dbd2f2"        },        {            "symbol": "ETH-30DEC22-700-C",            "qty": null,            "price": "650",            "orderIv": null,            "orderId": "fa6a595f-1a57-483f-b9d3-30e9c8235a52"        }    ]}
+POST /v5/order/amend-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672222935987X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "option",    "request": [        {            "symbol": "ETH-30DEC22-500-C",            "qty": null,            "price": null,            "orderIv": "6.8",            "orderId": "b551f227-7059-4fb5-a6a6-699c04dbd2f2"        },        {            "symbol": "ETH-30DEC22-700-C",            "qty": null,            "price": "650",            "orderIv": null,            "orderId": "fa6a595f-1a57-483f-b9d3-30e9c8235a52"        }    ]}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.amend_batch_order(    category="option",    request=[        {            "category": "option",            "symbol": "ETH-30DEC22-500-C",            "orderIv": "6.8",            "orderId": "b551f227-7059-4fb5-a6a6-699c04dbd2f2"        },        {            "category": "option",            "symbol": "ETH-30DEC22-700-C",            "price": "650",            "orderId": "fa6a595f-1a57-483f-b9d3-30e9c8235a52"        }    ]))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.amend_batch_order(    category="option",    request=[        {            "category": "option",            "symbol": "ETH-30DEC22-500-C",            "orderIv": "6.8",            "orderId": "b551f227-7059-4fb5-a6a6-699c04dbd2f2"        },        {            "category": "option",            "symbol": "ETH-30DEC22-700-C",            "price": "650",            "orderId": "fa6a595f-1a57-483f-b9d3-30e9c8235a52"        }    ]))
 ```
 
 ```
@@ -2389,7 +2405,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;var order1 = 
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .batchAmendOrders('option', [        {            symbol: 'ETH-30DEC22-500-C',            orderIv: '6.8',            orderId: 'b551f227-7059-4fb5-a6a6-699c04dbd2f2',        },        {            symbol: 'ETH-30DEC22-700-C',            price: '650',            orderId: 'fa6a595f-1a57-483f-b9d3-30e9c8235a52',        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .batchAmendOrders('option', [        {            symbol: 'ETH-30DEC22-500-C',            orderIv: '6.8',            orderId: 'b551f227-7059-4fb5-a6a6-699c04dbd2f2',        },        {            symbol: 'ETH-30DEC22-700-C',            price: '650',            orderId: 'fa6a595f-1a57-483f-b9d3-30e9c8235a52',        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2456,11 +2472,11 @@ The ack of cancel order request indicates that the request is successfully accep
 *   Node.js
 
 ```
-POST /v5/order/cancel-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672223356634X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "spot",    "request": [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        }    ]}
+POST /v5/order/cancel-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672223356634X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "spot",    "request": [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        }    ]}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.cancel_batch_order(    category="spot",    request=[        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        }    ]))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.cancel_batch_order(    category="spot",    request=[        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        }    ]))
 ```
 
 ```
@@ -2472,7 +2488,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;var order1 = 
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .batchCancelOrders('spot', [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .batchCancelOrders('spot', [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2522,11 +2538,11 @@ GET `/v5/order/spot-borrow-check`
 *   Node.js
 
 ```
-GET /v5/order/spot-borrow-check?category=spot&symbol=BTCUSDT&side=Buy HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672228522214X-BAPI-RECV-WINDOW: 5000
+GET /v5/order/spot-borrow-check?category=spot&symbol=BTCUSDT&side=Buy HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672228522214X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_borrow_quota(    category="spot",    symbol="BTCUSDT",    side="Buy",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_borrow_quota(    category="spot",    symbol="BTCUSDT",    side="Buy",))
 ```
 
 ```
@@ -2534,7 +2550,7 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getSpotBorrowCheck('BTCUSDT', 'Buy')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getSpotBorrowCheck('BTCUSDT', 'Buy')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2594,11 +2610,11 @@ None
 *   Node.js
 
 ```
-POST v5/order/disconnected-cancel-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675852742375X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{  "timeWindow": 40}
+POST v5/order/disconnected-cancel-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675852742375X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{  "timeWindow": 40}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_dcp(    timeWindow=40,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_dcp(    timeWindow=40,))
 ```
 
 ```
@@ -2606,7 +2622,7 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setDisconnectCancelAllWindow('option', 40)    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setDisconnectCancelAllWindow('option', 40)    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2704,11 +2720,11 @@ GET `/v5/position/list`
 *   Node.js
 
 ```
-GET /v5/position/list?category=inverse&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672280218882X-BAPI-RECV-WINDOW: 5000
+GET /v5/position/list?category=inverse&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672280218882X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_positions(    category="inverse",    symbol="BTCUSD",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_positions(    category="inverse",    symbol="BTCUSD",))
 ```
 
 ```
@@ -2716,7 +2732,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getPositionInfo({        category: 'inverse',        symbol: 'BTCUSD',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getPositionInfo({        category: 'inverse',        symbol: 'BTCUSD',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2761,11 +2777,11 @@ None
 *   Node.js
 
 ```
-POST /v5/position/set-leverage HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672281605082X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "buyLeverage": "6",    "sellLeverage": "6"}
+POST /v5/position/set-leverage HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672281605082X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "buyLeverage": "6",    "sellLeverage": "6"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_leverage(    category="linear",    symbol="BTCUSDT",    buyLeverage="6",    sellLeverage="6",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_leverage(    category="linear",    symbol="BTCUSDT",    buyLeverage="6",    sellLeverage="6",))
 ```
 
 ```
@@ -2773,7 +2789,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setLeverage({        category: 'linear',        symbol: 'BTCUSDT',        buyLeverage: '6',        sellLeverage: '6',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setLeverage({        category: 'linear',        symbol: 'BTCUSDT',        buyLeverage: '6',        sellLeverage: '6',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2817,11 +2833,11 @@ None
 *   Node.js
 
 ```
-POST /v5/position/switch-isolated HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675248447965X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 121{    "category": "linear",    "symbol": "ETHUSDT",    "tradeMode": 1,    "buyLeverage": "10",    "sellLeverage": "10"}
+POST /v5/position/switch-isolated HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675248447965X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 121{    "category": "linear",    "symbol": "ETHUSDT",    "tradeMode": 1,    "buyLeverage": "10",    "sellLeverage": "10"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.switch_margin_mode(    category="linear",    symbol="ETHUSDT",    tradeMode=1,    buyLeverage="10",    sellLeverage="10",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.switch_margin_mode(    category="linear",    symbol="ETHUSDT",    tradeMode=1,    buyLeverage="10",    sellLeverage="10",))
 ```
 
 ```
@@ -2829,7 +2845,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .switchIsolatedMargin({        category: 'linear',        symbol: 'ETHUSDT',        tradeMode: 1,        buyLeverage: '10',        sellLeverage: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .switchIsolatedMargin({        category: 'linear',        symbol: 'ETHUSDT',        tradeMode: 1,        buyLeverage: '10',        sellLeverage: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2905,11 +2921,11 @@ None
 *   Node.js
 
 ```
-POST /v5/position/switch-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675249072041X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 87{    "category":"inverse",    "symbol":"BTCUSDH23",    "coin": null,    "mode": 0}
+POST /v5/position/switch-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675249072041X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 87{    "category":"inverse",    "symbol":"BTCUSDH23",    "coin": null,    "mode": 0}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.switch_position_mode(    category="inverse",    symbol="BTCUSDH23",    mode=0,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.switch_position_mode(    category="inverse",    symbol="BTCUSDH23",    mode=0,))
 ```
 
 ```
@@ -2917,7 +2933,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .switchPositionMode({        category: 'inverse',        symbol: 'BTCUSDH23',        mode: 0,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .switchPositionMode({        category: 'inverse',        symbol: 'BTCUSDH23',        mode: 0,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -2987,11 +3003,11 @@ None
 *   Node.js
 
 ```
-POST /v5/position/trading-stop HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672283124270X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category":"linear",    "symbol": "XRPUSDT",    "takeProfit": "0.6",    "stopLoss": "0.2",    "tpTriggerBy": "MarkPrice",    "slTriggerBy": "IndexPrice",    "tpslMode": "Partial",    "tpOrderType": "Limit",    "slOrderType": "Limit",    "tpSize": "50",    "slSize": "50",    "tpLimitPrice": "0.57",    "slLimitPrice": "0.21",    "positionIdx": 0}
+POST /v5/position/trading-stop HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672283124270X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category":"linear",    "symbol": "XRPUSDT",    "takeProfit": "0.6",    "stopLoss": "0.2",    "tpTriggerBy": "MarkPrice",    "slTriggerBy": "IndexPrice",    "tpslMode": "Partial",    "tpOrderType": "Limit",    "slOrderType": "Limit",    "tpSize": "50",    "slSize": "50",    "tpLimitPrice": "0.57",    "slLimitPrice": "0.21",    "positionIdx": 0}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_trading_stop(    category="linear",    symbol="XRPUSDT",    takeProfit="0.6",    stopLoss="0.2",    tpTriggerBy="MarkPrice",    slTriggerB="IndexPrice",    tpslMode="Partial",    tpOrderType="Limit",    slOrderType="Limit",    tpSize="50",    slSize="50",    tpLimitPrice="0.57",    slLimitPrice="0.21",    positionIdx=0,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_trading_stop(    category="linear",    symbol="XRPUSDT",    takeProfit="0.6",    stopLoss="0.2",    tpTriggerBy="MarkPrice",    slTriggerB="IndexPrice",    tpslMode="Partial",    tpOrderType="Limit",    slOrderType="Limit",    tpSize="50",    slSize="50",    tpLimitPrice="0.57",    slLimitPrice="0.21",    positionIdx=0,))
 ```
 
 ```
@@ -2999,7 +3015,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setTradingStop({        category: 'linear',        symbol: 'XRPUSDT',        takeProfit: '0.6',        stopLoss: '0.2',        tpTriggerBy: 'MarkPrice',        slTriggerBy: 'IndexPrice',        tpslMode: 'Partial',        tpOrderType: 'Limit',        slOrderType: 'Limit',        tpSize: '50',        slSize: '50',        tpLimitPrice: '0.57',        slLimitPrice: '0.21',        positionIdx: 0,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setTradingStop({        category: 'linear',        symbol: 'XRPUSDT',        takeProfit: '0.6',        stopLoss: '0.2',        tpTriggerBy: 'MarkPrice',        slTriggerBy: 'IndexPrice',        tpslMode: 'Partial',        tpOrderType: 'Limit',        slOrderType: 'Limit',        tpSize: '50',        slSize: '50',        tpLimitPrice: '0.57',        slLimitPrice: '0.21',        positionIdx: 0,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3042,11 +3058,11 @@ None
 *   Node.js
 
 ```
-POST /v5/position/set-auto-add-margin HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675255134857X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "autoAddmargin": 1,    "positionIdx": null}
+POST /v5/position/set-auto-add-margin HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675255134857X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "autoAddmargin": 1,    "positionIdx": null}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_auto_add_margin(    category="linear",    symbol="BTCUSDT",    autoAddmargin=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_auto_add_margin(    category="linear",    symbol="BTCUSDT",    autoAddmargin=1,))
 ```
 
 ```
@@ -3054,7 +3070,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setAutoAddMargin({        category: 'linear',        symbol: 'BTCUSDT',        autoAddMargin: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setAutoAddMargin({        category: 'linear',        symbol: 'BTCUSDT',        autoAddMargin: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3121,11 +3137,11 @@ POST `/v5/position/add-margin`
 *   Node.js
 
 ```
-POST /v5/position/add-margin HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1684234363665X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 97{    "category": "inverse",    "symbol": "ETHUSD",    "margin": "0.01",    "positionIdx": 0}
+POST /v5/position/add-margin HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1684234363665X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 97{    "category": "inverse",    "symbol": "ETHUSD",    "margin": "0.01",    "positionIdx": 0}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.add_or_reduce_margin(    category="linear",    symbol="BTCUSDT",    margin="10"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.add_or_reduce_margin(    category="linear",    symbol="BTCUSDT",    margin="10"))
 ```
 
 ```
@@ -3133,7 +3149,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .addOrReduceMargin({        category: 'linear',        symbol: 'BTCUSDT',        margin: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .addOrReduceMargin({        category: 'linear',        symbol: 'BTCUSDT',        margin: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3205,11 +3221,11 @@ GET `/v5/position/closed-pnl`
 *   Node.js
 
 ```
-GET /v5/position/closed-pnl?category=linear&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672284128523X-BAPI-RECV-WINDOW: 5000
+GET /v5/position/closed-pnl?category=linear&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672284128523X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_closed_pnl(    category="linear",    limit=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_closed_pnl(    category="linear",    limit=1,))
 ```
 
 ```
@@ -3217,7 +3233,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getClosedPnL({        category: 'linear',        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getClosedPnL({        category: 'linear',        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3280,7 +3296,7 @@ POST `/v5/position/move-positions`
 *   Node.js
 
 ```
-POST /v5/position/move-positions HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1697447928051X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "fromUid": "100307601",    "toUid": "592324",    "list": [        {            "category": "spot",            "symbol": "BTCUSDT",            "price": "100",            "side": "Sell",            "qty": "0.01"        }    ]}
+POST /v5/position/move-positions HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1697447928051X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "fromUid": "100307601",    "toUid": "592324",    "list": [        {            "category": "spot",            "symbol": "BTCUSDT",            "price": "100",            "side": "Sell",            "qty": "0.01"        }    ]}
 ```
 
 ```
@@ -3358,7 +3374,7 @@ GET `/v5/position/move-history`
 *   Node.js
 
 ```
-GET /v5/position/move-history?limit=1&status=Filled HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1697523024244X-BAPI-RECV-WINDOW: 5000
+GET /v5/position/move-history?limit=1&status=Filled HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1697523024244X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
@@ -3407,7 +3423,7 @@ None
 *   Node.js
 
 ```
-POST /v5/position/confirm-pending-mmr HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1698051123673X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 53{    "category": "linear",    "symbol": "BTCUSDT"}
+POST /v5/position/confirm-pending-mmr HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1698051123673X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 53{    "category": "linear",    "symbol": "BTCUSDT"}
 ```
 
 ```
@@ -3473,11 +3489,11 @@ POST `/v5/position/set-tpsl-mode`
 *   Node.js
 
 ```
-POST /v5/position/set-tpsl-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672279325035X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "symbol": "XRPUSDT",    "category": "linear",    "tpSlMode": "Full"}
+POST /v5/position/set-tpsl-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672279325035X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "symbol": "XRPUSDT",    "category": "linear",    "tpSlMode": "Full"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_tp_sl_mode(    symbol="XRPUSDT",    category="linear",    tpSlMode="Full",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_tp_sl_mode(    symbol="XRPUSDT",    category="linear",    tpSlMode="Full",))
 ```
 
 ```
@@ -3485,7 +3501,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setTPSLMode({        symbol: 'XRPUSDT',        category: 'linear',        tpSlMode: 'Full',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setTPSLMode({        symbol: 'XRPUSDT',        category: 'linear',        tpSlMode: 'Full',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3532,11 +3548,11 @@ POST `/v5/position/set-risk-limit`
 *   Node.js
 
 ```
-POST /v5/position/set-risk-limit HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672282269774X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "riskId": 4,    "positionIdx": null}
+POST /v5/position/set-risk-limit HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672282269774X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "riskId": 4,    "positionIdx": null}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_risk_limit(    category="linear",    symbol="BTCUSDT",    riskId=4,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_risk_limit(    category="linear",    symbol="BTCUSDT",    riskId=4,))
 ```
 
 ```
@@ -3544,7 +3560,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setRiskLimit({        category: 'linear',        symbol: 'BTCUSDT',        riskId: 4,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setRiskLimit({        category: 'linear',        symbol: 'BTCUSDT',        riskId: 4,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3617,15 +3633,15 @@ GET `/v5/account/wallet-balance`
 *   Node.js
 
 ```
-GET /v5/account/wallet-balance?accountType=UNIFIED&coin=BTC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672125440406X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/wallet-balance?accountType=UNIFIED&coin=BTC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672125440406X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_wallet_balance(    accountType="UNIFIED",    coin="BTC",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_wallet_balance(    accountType="UNIFIED",    coin="BTC",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');    const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getWalletBalance({        accountType: 'UNIFIED',        coin: 'BTC',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');    const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getWalletBalance({        accountType: 'UNIFIED',        coin: 'BTC',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3663,7 +3679,7 @@ GET `/v5/account/withdrawal`
 *   Node.js
 
 ```
-GET /v5/account/withdrawal?coinName=BTC,SOL,ETH,XRP HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1739861239242X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/account/withdrawal?coinName=BTC,SOL,ETH,XRP HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1739861239242X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
@@ -3751,11 +3767,11 @@ None
 *   Node.js
 
 ```
-POST /v5/account/upgrade-to-uta HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672125123533X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{}
+POST /v5/account/upgrade-to-uta HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672125123533X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.upgrade_to_unified_trading_account())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.upgrade_to_unified_trading_account())
 ```
 
 ```
@@ -3771,7 +3787,7 @@ using bybit.net.api;using bybit.net.api.ApiServiceImp;using bybit.net.api.Models
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .upgradeToUnifiedAccount()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .upgradeToUnifiedAccount()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3826,15 +3842,15 @@ GET `/v5/account/borrow-history`
 *   Node.js
 
 ```
-GET /v5/account/borrow-history?currency=BTC&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672277745427X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/borrow-history?currency=BTC&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672277745427X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_borrow_history(    currency="BTC",    limit=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_borrow_history(    currency="BTC",    limit=1,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getBorrowHistory({    currency: 'USDT',    startTime: 1670601600000,    endTime: 1673203200000,    limit: 30,    cursor: 'nextPageCursorToken',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getBorrowHistory({    currency: 'USDT',    startTime: 1670601600000,    endTime: 1673203200000,    limit: 30,    cursor: 'nextPageCursorToken',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3875,7 +3891,7 @@ POST `/v5/account/quick-repayment`
 *   Node.js
 
 ```
-POST /v5/account/quick-repayment HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1701848610019X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 22{    "coin": "USDT"}
+POST /v5/account/quick-repayment HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1701848610019X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 22{    "coin": "USDT"}
 ```
 
 ```
@@ -3883,7 +3899,7 @@ POST /v5/account/quick-repayment HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN:
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .repayLiability({    coin: 'USDT',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .repayLiability({    coin: 'USDT',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3923,15 +3939,15 @@ None
 *   Node.js
 
 ```
-POST /v5/account/set-collateral-switch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1690513916181X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 55{    "coin": "BTC",    "collateralSwitch": "ON"}
+POST /v5/account/set-collateral-switch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1690513916181X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 55{    "coin": "BTC",    "collateralSwitch": "ON"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_collateral_coin(    coin="BTC",    collateralSwitch="ON"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_collateral_coin(    coin="BTC",    collateralSwitch="ON"))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .setCollateralCoin({    coin: 'BTC',    collateralSwitch: 'ON',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .setCollateralCoin({    coin: 'BTC',    collateralSwitch: 'ON',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3971,15 +3987,15 @@ POST `/v5/account/set-collateral-switch-batch`
 *   Node.js
 
 ```
-POST /v5/account/set-collateral-switch-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1704782042755X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 371{    "request": [        {            "coin": "MATIC",            "collateralSwitch": "OFF"        },        {            "coin": "BTC",            "collateralSwitch": "OFF"        },        {            "coin": "ETH",            "collateralSwitch": "OFF"        },        {            "coin": "SOL",            "collateralSwitch": "OFF"        }    ]}
+POST /v5/account/set-collateral-switch-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1704782042755X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 371{    "request": [        {            "coin": "MATIC",            "collateralSwitch": "OFF"        },        {            "coin": "BTC",            "collateralSwitch": "OFF"        },        {            "coin": "ETH",            "collateralSwitch": "OFF"        },        {            "coin": "SOL",            "collateralSwitch": "OFF"        }    ]}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.batch_set_collateral_coin(  request=[    {      "coin": "BTC",      "collateralSwitch": "ON",    },    {      "coin": "ETH",      "collateralSwitch": "ON",    }  ]))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.batch_set_collateral_coin(  request=[    {      "coin": "BTC",      "collateralSwitch": "ON",    },    {      "coin": "ETH",      "collateralSwitch": "ON",    }  ]))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .batchSetCollateralCoin({    request: [      {        coin: 'BTC',        collateralSwitch: 'ON',      },      {        coin: 'ETH',        collateralSwitch: 'OFF',      },    ],  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .batchSetCollateralCoin({    request: [      {        coin: 'BTC',        collateralSwitch: 'ON',      },      {        coin: 'ETH',        collateralSwitch: 'OFF',      },    ],  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4034,15 +4050,15 @@ GET `/v5/account/collateral-info`
 *   Node.js
 
 ```
-GET /v5/account/collateral-info?currency=BTC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672127952719X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/collateral-info?currency=BTC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672127952719X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_collateral_info(    currency="BTC",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_collateral_info(    currency="BTC",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getCollateralInfo('BTC')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getCollateralInfo('BTC')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4088,15 +4104,15 @@ GET `/v5/asset/coin-greeks`
 *   Node.js
 
 ```
-GET /v5/asset/coin-greeks?baseCoin=BTC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672287887610X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/coin-greeks?baseCoin=BTC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672287887610X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_coin_greeks(    baseCoin="BTC",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_coin_greeks(    baseCoin="BTC",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getCoinGreeks('BTC')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getCoinGreeks('BTC')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4144,15 +4160,15 @@ GET `/v5/account/fee-rate`
 *   Node.js
 
 ```
-GET /v5/account/fee-rate?symbol=ETHUSDT HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: XXXXXXXX-BAPI-TIMESTAMP: 1676360412362X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/fee-rate?symbol=ETHUSDT HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676360412362X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_fee_rates(    symbol="ETHUSDT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_fee_rates(    symbol="ETHUSDT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getFeeRate({        category: 'linear',        symbol: 'ETHUSDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getFeeRate({        category: 'linear',        symbol: 'ETHUSDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4198,15 +4214,15 @@ None
 *   Node.js
 
 ```
-GET /v5/account/info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672129307221X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672129307221X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_account_info())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_account_info())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getAccountInfo()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getAccountInfo()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4259,11 +4275,11 @@ None
 *   Node.js
 
 ```
-GET /v5/account/query-dcp-info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1717065530867X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/query-dcp-info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1717065530867X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getDCPInfo()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getDCPInfo()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4292,7 +4308,7 @@ GET `/v5/account/transaction-log`
 | currency | false | string | Currency, uppercase only 
 | baseCoin | false | string | BaseCoin, uppercase only. e.g., BTC of BTCPERP 
 | <a href="/docs/v5/enum#typeuta-translog">type</a> | false | string | Types of transaction logs 
-| startTime | false | integer | The start timestamp (ms)<ul><li>startTime and endTime are not passed, return 7 days by default</li><li>Only startTime is passed, return range between startTime and startTime+7 days</li><li>Only endTime is passed, return range between endTime-7 days and endTime</li><li>If both are passed, the rule is endTime - startTime &lt;= 7 days</li></ul> 
+| startTime | false | integer | The start timestamp (ms)<ul><li>startTime and endTime are not passed, return 24 hours by default</li><li>Only startTime is passed, return range between startTime and startTime+7 days</li><li>Only endTime is passed, return range between endTime-7 days and endTime</li><li>If both are passed, the rule is endTime - startTime &lt;= 7 days</li></ul> 
 | endTime | false | integer | The end timestamp (ms) 
 | limit | false | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>20</code> 
 | cursor | false | string | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set 
@@ -4308,6 +4324,7 @@ GET `/v5/account/transaction-log`
 | &gt; side | string | Side. <code>Buy</code>,<code>Sell</code>,<code>None</code> 
 | &gt; transactionTime | string | Transaction timestamp (ms) 
 | &gt; <a href="/docs/v5/enum#typeuta-translog">type</a> | string | Type 
+| &gt; transSubType | string | Transaction sub type, <code>movePosition</code>, used for the logs generated by move position. <code>""</code> by default 
 | &gt; qty | string | Quantity<li>Spot: the negative means the qty of this currency is decreased, the positive means the qty of this currency is increased</li><li>Perps &amp; Futures: it is the quantity for each trade entry and it does not have direction</li> 
 | &gt; size | string | Size. The rest position size after the trade is executed, and it has direction, i.e., short with "-" 
 | &gt; currency | string | e.g., USDC, USDT, BTC, ETH 
@@ -4335,21 +4352,21 @@ GET `/v5/account/transaction-log`
 *   Node.js
 
 ```
-GET /v5/account/transaction-log?accountType=UNIFIED&category=linear&currency=USDT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672132480085X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/transaction-log?accountType=UNIFIED&category=linear&currency=USDT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672132480085X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_transaction_log(    accountType="UNIFIED",    category="linear",    currency="USDT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_transaction_log(    accountType="UNIFIED",    category="linear",    currency="USDT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getTransactionLog({        accountType: 'UNIFIED',        category: 'linear',        currency: 'USDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getTransactionLog({        accountType: 'UNIFIED',        category: 'linear',        currency: 'USDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "nextPageCursor": "21963%3A1%2C14954%3A1",        "list": [            {                "id": "592324_XRPUSDT_161440249321",                "symbol": "XRPUSDT",                "side": "Buy",                "funding": "-0.003676",                "orderLinkId": "",                "orderId": "1672128000-8-592324-1-2",                "fee": "0.00000000",                "change": "-0.003676",                "cashFlow": "0",                "transactionTime": "1672128000000",                "type": "SETTLEMENT",                "feeRate": "0.0001",                "bonusChange": "",                "size": "100",                "qty": "100",                "cashBalance": "5086.55825002",                "currency": "USDT",                "category": "linear",                "tradePrice": "0.3676",                "tradeId": "534c0003-4bf7-486f-aa02-78cee36825e4"            },            {                "id": "592324_XRPUSDT_161440249321",                "symbol": "XRPUSDT",                "side": "Buy",                "funding": "",                "orderLinkId": "linear-order",                "orderId": "592b7e41-78fd-42e2-9aa3-91e1835ef3e1",                "fee": "0.01908720",                "change": "-0.0190872",                "cashFlow": "0",                "transactionTime": "1672121182224",                "type": "TRADE",                "feeRate": "0.0006",                "bonusChange": "-0.1430544",                "size": "100",                "qty": "88",                "cashBalance": "5086.56192602",                "currency": "USDT",                "category": "linear",                "tradePrice": "0.3615",                "tradeId": "5184f079-88ec-54c7-8774-5173cafd2b4e"            },            {                "id": "592324_XRPUSDT_161407743011",                "symbol": "XRPUSDT",                "side": "Buy",                "funding": "",                "orderLinkId": "linear-order",                "orderId": "592b7e41-78fd-42e2-9aa3-91e1835ef3e1",                "fee": "0.00260280",                "change": "-0.0026028",                "cashFlow": "0",                "transactionTime": "1672121182224",                "type": "TRADE",                "feeRate": "0.0006",                "bonusChange": "",                "size": "12",                "qty": "12",                "cashBalance": "5086.58101322",                "currency": "USDT",                "category": "linear",                "tradePrice": "0.3615",                "tradeId": "8569c10f-5061-5891-81c4-a54929847eb3"            }        ]    },    "retExtInfo": {},    "time": 1672132481405}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "nextPageCursor": "21963%3A1%2C14954%3A1",        "list": [            {                "transSubType": "",                "id": "592324_XRPUSDT_161440249321",                "symbol": "XRPUSDT",                "side": "Buy",                "funding": "-0.003676",                "orderLinkId": "",                "orderId": "1672128000-8-592324-1-2",                "fee": "0.00000000",                "change": "-0.003676",                "cashFlow": "0",                "transactionTime": "1672128000000",                "type": "SETTLEMENT",                "feeRate": "0.0001",                "bonusChange": "",                "size": "100",                "qty": "100",                "cashBalance": "5086.55825002",                "currency": "USDT",                "category": "linear",                "tradePrice": "0.3676",                "tradeId": "534c0003-4bf7-486f-aa02-78cee36825e4"            },            {                "transSubType": "",                "id": "592324_XRPUSDT_161440249321",                "symbol": "XRPUSDT",                "side": "Buy",                "funding": "",                "orderLinkId": "linear-order",                "orderId": "592b7e41-78fd-42e2-9aa3-91e1835ef3e1",                "fee": "0.01908720",                "change": "-0.0190872",                "cashFlow": "0",                "transactionTime": "1672121182224",                "type": "TRADE",                "feeRate": "0.0006",                "bonusChange": "-0.1430544",                "size": "100",                "qty": "88",                "cashBalance": "5086.56192602",                "currency": "USDT",                "category": "linear",                "tradePrice": "0.3615",                "tradeId": "5184f079-88ec-54c7-8774-5173cafd2b4e"            },            {                "transSubType": "",                "id": "592324_XRPUSDT_161407743011",                "symbol": "XRPUSDT",                "side": "Buy",                "funding": "",                "orderLinkId": "linear-order",                "orderId": "592b7e41-78fd-42e2-9aa3-91e1835ef3e1",                "fee": "0.00260280",                "change": "-0.0026028",                "cashFlow": "0",                "transactionTime": "1672121182224",                "type": "TRADE",                "feeRate": "0.0006",                "bonusChange": "",                "size": "12",                "qty": "12",                "cashBalance": "5086.58101322",                "currency": "USDT",                "category": "linear",                "tradePrice": "0.3615",                "tradeId": "8569c10f-5061-5891-81c4-a54929847eb3"            }        ]    },    "retExtInfo": {},    "time": 1672132481405}
 ```
 
 Get Transaction Log
@@ -4410,7 +4427,7 @@ GET `/v5/account/contract-transaction-log`
 *   Node.js
 
 ```
-GET /v5/account/contract-transaction-log?limit=1&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1714035117255X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/contract-transaction-log?limit=1&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1714035117255X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
@@ -4418,7 +4435,7 @@ GET /v5/account/contract-transaction-log?limit=1&symbol=BTCUSD HTTP/1.1Host: api
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getClassicTransactionLogs({    limit: 1,    symbol: 'BTCUSD',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getClassicTransactionLogs({    limit: 1,    symbol: 'BTCUSD',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4453,7 +4470,7 @@ None
 *   Node.js
 
 ```
-GET /v5/account/smp-group HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1702363848192X-BAPI-RECV-WINDOW: 5000
+GET /v5/account/smp-group HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1702363848192X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
@@ -4461,7 +4478,7 @@ GET /v5/account/smp-group HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-A
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSMPGroup()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSMPGroup()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4508,15 +4525,15 @@ POST `/v5/account/set-margin-mode`
 *   Node.js
 
 ```
-POST /v5/account/set-margin-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672134396332X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "setMarginMode": "PORTFOLIO_MARGIN"}
+POST /v5/account/set-margin-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672134396332X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "setMarginMode": "PORTFOLIO_MARGIN"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_margin_mode(    setMarginMode="PORTFOLIO_MARGIN",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_margin_mode(    setMarginMode="PORTFOLIO_MARGIN",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setMarginMode('PORTFOLIO_MARGIN')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setMarginMode('PORTFOLIO_MARGIN')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4558,7 +4575,7 @@ POST `/v5/account/set-hedging-mode`
 *   Node.js
 
 ```
-POST /v5/account/set-hedging-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1700117968580X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 31{    "setHedgingMode": "OFF"}
+POST /v5/account/set-hedging-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1700117968580X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 31{    "setHedgingMode": "OFF"}
 ```
 
 ```
@@ -4566,7 +4583,7 @@ POST /v5/account/set-hedging-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .setSpotHedging({    setHedgingMode: 'ON' | 'OFF',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .setSpotHedging({    setHedgingMode: 'ON' | 'OFF',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4634,15 +4651,15 @@ None
 *   Node.js
 
 ```
-POST /v5/account/mmp-modify HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675833524616X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{    "baseCoin": "ETH",    "window": "5000",    "frozenPeriod": "100000",    "qtyLimit": "50",    "deltaLimit": "20"}
+POST /v5/account/mmp-modify HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675833524616X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{    "baseCoin": "ETH",    "window": "5000",    "frozenPeriod": "100000",    "qtyLimit": "50",    "deltaLimit": "20"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_mmp(    baseCoin="ETH",    window="5000",    frozenPeriod="100000",    qtyLimit="50",    deltaLimit="20"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_mmp(    baseCoin="ETH",    window="5000",    frozenPeriod="100000",    qtyLimit="50",    deltaLimit="20"))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .setMMP({        baseCoin: 'ETH',        window: '5000',        frozenPeriod: '100000',        qtyLimit: '50',        deltaLimit: '20',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setMMP({        baseCoin: 'ETH',        window: '5000',        frozenPeriod: '100000',        qtyLimit: '50',        deltaLimit: '20',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4680,15 +4697,15 @@ None
 *   Node.js
 
 ```
-POST /v5/account/mmp-reset HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675842997277X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "baseCoin": "ETH"}
+POST /v5/account/mmp-reset HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675842997277X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "baseCoin": "ETH"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.reset_mmp(    baseCoin="ETH",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.reset_mmp(    baseCoin="ETH",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .resetMMP('ETH')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .resetMMP('ETH')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4731,15 +4748,15 @@ GET `/v5/account/mmp-state`
 *   Node.js
 
 ```
-POST /v5/account/mmp-reset HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675842997277X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "baseCoin": "ETH"}
+POST /v5/account/mmp-reset HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675842997277X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "baseCoin": "ETH"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_mmp_state(    baseCoin="ETH",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_mmp_state(    baseCoin="ETH",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'apikey',    secret: 'apisecret',});client    .getMMPState('ETH')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getMMPState('ETH')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4796,15 +4813,15 @@ GET `/v5/asset/delivery-record`
 *   Node.js
 
 ```
-GET /v5/asset/delivery-record?expDate=29DEC22&category=option HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672362112944X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/delivery-record?expDate=29DEC22&category=option HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672362112944X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_option_delivery_record(    category="option",    expDate="29DEC22",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_option_delivery_record(    category="option",    expDate="29DEC22",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getDeliveryRecord({ category: 'option', expDate: '29DEC22' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getDeliveryRecord({ category: 'option', expDate: '29DEC22' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4859,15 +4876,15 @@ GET `/v5/asset/settlement-record`
 *   Node.js
 
 ```
-GET /v5/asset/settlement-record?category=linear HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672284883483X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/settlement-record?category=linear HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672284883483X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_usdc_contract_settlement(    category="linear",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_usdc_contract_settlement(    category="linear",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSettlementRecords({ category: 'linear' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSettlementRecords({ category: 'linear' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4923,15 +4940,15 @@ GET `/v5/asset/exchange/order-record`
 *   Node.js
 
 ```
-GET /v5/asset/exchange/order-record?limit=10 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672990462492X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/exchange/order-record?limit=10 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672990462492X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_coin_exchange_records(    limit=10,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_coin_exchange_records(    limit=10,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getCoinExchangeRecords({ limit: 10 })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getCoinExchangeRecords({ limit: 10 })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -4987,15 +5004,15 @@ GET `/v5/asset/coin/query-info`
 *   Node.js
 
 ```
-GET /v5/asset/coin/query-info?coin=MNT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672194580887X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/coin/query-info?coin=MNT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672194580887X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_coin_info(    coin="MNT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_coin_info(    coin="MNT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getCoinInfo('MNT')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getCoinInfo('MNT')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5039,15 +5056,15 @@ None
 *   Node.js
 
 ```
-GET /v5/asset/transfer/query-sub-member-list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672147239931X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/transfer/query-sub-member-list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672147239931X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_sub_uid())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_sub_uid())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSubUID()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSubUID()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5097,15 +5114,15 @@ GET `/v5/asset/transfer/query-asset-info`
 *   Node.js
 
 ```
-GET /v5/asset/transfer/query-asset-info?accountType=SPOT&coin=ETH HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672136538042X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/transfer/query-asset-info?accountType=SPOT&coin=ETH HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672136538042X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_spot_asset_info(    accountType="FUND",    coin="USDC",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_spot_asset_info(    accountType="FUND",    coin="USDC",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getAssetInfo({ accountType: 'FUND', coin: 'USDC' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getAssetInfo({ accountType: 'FUND', coin: 'USDC' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5155,15 +5172,15 @@ GET `/v5/asset/transfer/query-account-coins-balance`
 *   Node.js
 
 ```
-GET /v5/asset/transfer/query-account-coins-balance?accountType=FUND&coin=USDC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1675866354698X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/transfer/query-account-coins-balance?accountType=FUND&coin=USDC HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675866354698X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_coins_balance(    accountType="FUND",    coin="USDC",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_coins_balance(    accountType="FUND",    coin="USDC",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getAllCoinsBalance({ accountType: 'FUND', coin: 'USDC' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getAllCoinsBalance({ accountType: 'FUND', coin: 'USDC' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5221,15 +5238,15 @@ GET `/v5/asset/transfer/query-account-coin-balance`
 *   Node.js
 
 ```
-GET /v5/asset/transfer/query-account-coin-balance?accountType=UNIFIED&coin=USDT&toAccountType=FUND&withLtvTransferSafeAmount=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: xxxxxX-BAPI-API-KEY: xxxxxX-BAPI-TIMESTAMP: 1690254520644X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/transfer/query-account-coin-balance?accountType=UNIFIED&coin=USDT&toAccountType=FUND&withLtvTransferSafeAmount=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: xxxxxX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1690254520644X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_coin_balance(    accountType="UNIFIED",    coin="BTC",    memberId=592324,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_coin_balance(    accountType="UNIFIED",    coin="BTC",    memberId=592324,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getCoinBalance({    accountType: 'UNIFIED',    coin: 'USDT',    toAccountType: 'FUND',    withLtvTransferSafeAmount: 1,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getCoinBalance({    accountType: 'UNIFIED',    coin: 'USDT',    toAccountType: 'FUND',    withLtvTransferSafeAmount: 1,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5280,15 +5297,15 @@ GET `/v5/asset/withdraw/withdrawable-amount`
 *   Node.js
 
 ```
-GET /v5/asset/withdraw/withdrawable-amount?coin=USDT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1677565621998X-BAPI-RECV-WINDOW: 50000X-BAPI-SIGN: XXXXXX
+GET /v5/asset/withdraw/withdrawable-amount?coin=USDT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1677565621998X-BAPI-RECV-WINDOW: 50000X-BAPI-SIGN: XXXXXX
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_withdrawable_amount(    coin="USDT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_withdrawable_amount(    coin="USDT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getWithdrawableAmount({    coin: 'USDT',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getWithdrawableAmount({    coin: 'USDT',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5330,15 +5347,15 @@ GET `/v5/asset/transfer/query-transfer-coin-list`
 *   Node.js
 
 ```
-GET /v5/asset/transfer/query-transfer-coin-list?fromAccountType=UNIFIED&toAccountType=CONTRACT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672144322595X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/transfer/query-transfer-coin-list?fromAccountType=UNIFIED&toAccountType=CONTRACT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672144322595X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_transferable_coin(    fromAccountType="UNIFIED",    toAccountType="CONTRACT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_transferable_coin(    fromAccountType="UNIFIED",    toAccountType="CONTRACT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getTransferableCoinList('UNIFIED', 'CONTRACT')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getTransferableCoinList('UNIFIED', 'CONTRACT')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5388,15 +5405,15 @@ POST `/v5/asset/transfer/inter-transfer`
 *   Node.js
 
 ```
-POST v5/asset/transfer/inter-transfer HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1670986690556X-BAPI-RECV-WINDOW: 50000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "transferId": "42c0cfb0-6bca-c242-bc76-4e6df6cbcb16",    "coin": "BTC",    "amount": "0.05",    "fromAccountType": "UNIFIED",    "toAccountType": "CONTRACT"}
+POST v5/asset/transfer/inter-transfer HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1670986690556X-BAPI-RECV-WINDOW: 50000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "transferId": "42c0cfb0-6bca-c242-bc76-4e6df6cbcb16",    "coin": "BTC",    "amount": "0.05",    "fromAccountType": "UNIFIED",    "toAccountType": "CONTRACT"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.create_internal_transfer(    transferId="42c0cfb0-6bca-c242-bc76-4e6df6cbcb16",    coin="BTC",    amount="0.05",    fromAccountType="UNIFIED",    toAccountType="CONTRACT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.create_internal_transfer(    transferId="42c0cfb0-6bca-c242-bc76-4e6df6cbcb16",    coin="BTC",    amount="0.05",    fromAccountType="UNIFIED",    toAccountType="CONTRACT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .createInternalTransfer(    '42c0cfb0-6bca-c242-bc76-4e6df6cbcb16',    'BTC',    '0.05',    'UNIFIED',    'CONTRACT',  )  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .createInternalTransfer(    '42c0cfb0-6bca-c242-bc76-4e6df6cbcb16',    'BTC',    '0.05',    'UNIFIED',    'CONTRACT',  )  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5412,19 +5429,10 @@ Query the internal transfer records between different [account types](/docs/v5/e
 
 info
 
-When both `startTime` & `endTime` are not passed, API returns 30 days data by default
-
-### Upcoming changes[​](#upcoming-changes "Direct link to heading")
-
 *   If startTime and endTime are not provided, the API returns data from the past 7 days by default.
 *   If only startTime is provided, the API returns records from startTime to startTime + 7 days.
 *   If only endTime is provided, the API returns records from endTime - 7 days to endTime.
 *   If both are provided, the maximum allowed range is 7 days (endTime - startTime ≤ 7 days).
-
-Deployment timeline:
-
-1.  Accounts with UID ending in "0": April 15
-2.  All other accounts: April 16
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -5467,15 +5475,15 @@ GET `/v5/asset/transfer/query-inter-transfer-list`
 *   Node.js
 
 ```
-GET /v5/asset/transfer/inter-transfer-list-query?coin=USDT&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1670988271299X-BAPI-RECV-WINDOW: 50000
+GET /v5/asset/transfer/inter-transfer-list-query?coin=USDT&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1670988271299X-BAPI-RECV-WINDOW: 50000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_internal_transfer_records(    coin="USDT",    limit=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_internal_transfer_records(    coin="USDT",    limit=1,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInternalTransferRecords({    coin: 'USDT',    limit: 1,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInternalTransferRecords({    coin: 'USDT',    limit: 1,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5532,15 +5540,15 @@ POST `/v5/asset/transfer/universal-transfer`
 *   Node.js
 
 ```
-POST /v5/asset/transfer/universal-transfer HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672189449697X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "transferId": "be7a2462-1138-4e27-80b1-62653f24925e",    "coin": "ETH",    "amount": "0.5",    "fromMemberId": 592334,    "toMemberId": 691355,    "fromAccountType": "CONTRACT",    "toAccountType": "UNIFIED"}
+POST /v5/asset/transfer/universal-transfer HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672189449697X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "transferId": "be7a2462-1138-4e27-80b1-62653f24925e",    "coin": "ETH",    "amount": "0.5",    "fromMemberId": 592334,    "toMemberId": 691355,    "fromAccountType": "CONTRACT",    "toAccountType": "UNIFIED"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.create_universal_transfer(    transferId="be7a2462-1138-4e27-80b1-62653f24925e",    coin="ETH",    amount="0.5",    fromMemberId=592334,    toMemberId=691355,    fromAccountType="CONTRACT",    toAccountType="UNIFIED",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.create_universal_transfer(    transferId="be7a2462-1138-4e27-80b1-62653f24925e",    coin="ETH",    amount="0.5",    fromMemberId=592334,    toMemberId=691355,    fromAccountType="CONTRACT",    toAccountType="UNIFIED",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .createUniversalTransfer({    transferId: 'be7a2462-1138-4e27-80b1-62653f24925e',    coin: 'ETH',    amount: '0.5',    fromMemberId: 592334,    toMemberId: 691355,    fromAccountType: 'CONTRACT',    toAccountType: 'UNIFIED',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .createUniversalTransfer({    transferId: 'be7a2462-1138-4e27-80b1-62653f24925e',    coin: 'ETH',    amount: '0.5',    fromMemberId: 592334,    toMemberId: 691355,    fromAccountType: 'CONTRACT',    toAccountType: 'UNIFIED',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5562,19 +5570,10 @@ tip
 
 info
 
-When both `startTime` & `endTime` are not passed, API returns 30 days data by default
-
-### Upcoming changes[​](#upcoming-changes "Direct link to heading")
-
 *   If startTime and endTime are not provided, the API returns data from the past 7 days by default.
 *   If only startTime is provided, the API returns records from startTime to startTime + 7 days.
 *   If only endTime is provided, the API returns records from endTime - 7 days to endTime.
 *   If both are provided, the maximum allowed range is 7 days (endTime - startTime ≤ 7 days).
-
-Deployment timeline:
-
-1.  Accounts with UID ending in "0": April 15
-2.  All other accounts: April 16
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -5619,15 +5618,15 @@ GET `/v5/asset/transfer/query-universal-transfer-list`
 *   Node.js
 
 ```
-GET /v5/asset/transfer/query-universal-transfer-list?limit=1&cursor=eyJtaW5JRCI6MTc5NjU3OCwibWF4SUQiOjE3OTY1Nzh9 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672190762800X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/transfer/query-universal-transfer-list?limit=1&cursor=eyJtaW5JRCI6MTc5NjU3OCwibWF4SUQiOjE3OTY1Nzh9 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672190762800X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_universal_transfer_records(    limit=1,    cursor="eyJtaW5JRCI6MTc5NjU3OCwibWF4SUQiOjE3OTY1Nzh9",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_universal_transfer_records(    limit=1,    cursor="eyJtaW5JRCI6MTc5NjU3OCwibWF4SUQiOjE3OTY1Nzh9",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getUniversalTransferRecords({    limit: 1,    cursor: 'eyJtaW5JRCI6MTc5NjU3OCwibWF4SUQiOjE3OTY1Nzh9',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getUniversalTransferRecords({    limit: 1,    cursor: 'eyJtaW5JRCI6MTc5NjU3OCwibWF4SUQiOjE3OTY1Nzh9',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5679,15 +5678,15 @@ POST `/v5/asset/deposit/deposit-to-account`
 *   Node.js
 
 ```
-POST /v5/asset/deposit/deposit-to-account HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1676887913670X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{    "accountType": "CONTRACT"}
+POST /v5/asset/deposit/deposit-to-account HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676887913670X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{    "accountType": "CONTRACT"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.set_deposit_account(    accountType="CONTRACT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.set_deposit_account(    accountType="CONTRACT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .setDepositAccount({    accountType: 'CONTRACT'  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .setDepositAccount({    accountType: 'CONTRACT'  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5753,15 +5752,15 @@ GET `/v5/asset/deposit/query-record`
 *   Node.js
 
 ```
-GET /v5/asset/deposit/query-record?coin=USDT&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672191991544X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/deposit/query-record?coin=USDT&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672191991544X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_deposit_records(    coin="USDT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_deposit_records(    coin="USDT",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getDepositRecords({    coin: 'USDT'  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getDepositRecords({    coin: 'USDT'  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5827,15 +5826,15 @@ GET `/v5/asset/deposit/query-sub-member-record`
 *   Node.js
 
 ```
-GET /v5/asset/deposit/query-sub-member-record?coin=USDT&limit=1&subMemberId=592334 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672192441294X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/deposit/query-sub-member-record?coin=USDT&limit=1&subMemberId=592334 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672192441294X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_sub_deposit_records(    coin="USDT",    limit=1,    subMemberId=592334,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_sub_deposit_records(    coin="USDT",    limit=1,    subMemberId=592334,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSubAccountDepositRecords({    coin: 'USDT',    limit: 1,    subMemberId: '592334',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSubAccountDepositRecords({    coin: 'USDT',    limit: 1,    subMemberId: '592334',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5895,15 +5894,15 @@ GET `/v5/asset/deposit/query-internal-record`
 *   Node.js
 
 ```
-GET /v5/asset/deposit/query-internal-record HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1682099024473X-BAPI-RECV-WINDOW: 50000
+GET /v5/asset/deposit/query-internal-record HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1682099024473X-BAPI-RECV-WINDOW: 50000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_internal_deposit_records(    startTime=1667260800000,    endTime=1667347200000,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_internal_deposit_records(    startTime=1667260800000,    endTime=1667347200000,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInternalDepositRecords({    startTime: 1667260800000,    endTime: 1667347200000,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInternalDepositRecords({    startTime: 1667260800000,    endTime: 1667347200000,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -5952,15 +5951,15 @@ GET `/v5/asset/deposit/query-address`
 *   Node.js
 
 ```
-GET /v5/asset/deposit/query-address?coin=USDT&chainType=ETH HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672192792371X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/deposit/query-address?coin=USDT&chainType=ETH HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672192792371X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_master_deposit_address(    coin="USDT",    chainType="ETH",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_master_deposit_address(    coin="USDT",    chainType="ETH",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getMasterDepositAddress('USDT', 'ETH')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getMasterDepositAddress('USDT', 'ETH')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6015,15 +6014,15 @@ GET `/v5/asset/deposit/query-sub-member-address`
 *   Node.js
 
 ```
-GET /v5/asset/deposit/query-sub-member-address?coin=USDT&chainType=TRX&subMemberId=592334 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672194349421X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/deposit/query-sub-member-address?coin=USDT&chainType=TRX&subMemberId=592334 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672194349421X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_sub_deposit_address(    coin="USDT",    chainType="TRX",    subMemberId=592334,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_sub_deposit_address(    coin="USDT",    chainType="TRX",    subMemberId=592334,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSubDepositAddress('USDT', 'TRX', '592334')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSubDepositAddress('USDT', 'TRX', '592334')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6089,15 +6088,15 @@ GET `/v5/asset/withdraw/query-record`
 *   Node.js
 
 ```
-GET /v5/asset/withdraw/query-record?coin=USDT&withdrawType=2&limit=2 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672194949557X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/withdraw/query-record?coin=USDT&withdrawType=2&limit=2 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672194949557X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_withdrawal_records(    coin="USDT",    withdrawType=2,    limit=2,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_withdrawal_records(    coin="USDT",    withdrawType=2,    limit=2,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getWithdrawalRecords({    coin: 'USDT',    withdrawType: 2,    limit: 2,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getWithdrawalRecords({    coin: 'USDT',    withdrawType: 2,    limit: 2,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6134,7 +6133,7 @@ None
 *   Node.js
 
 ```
-GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1715067106163X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
+GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1715067106163X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
 ```
 
 ```
@@ -6142,7 +6141,7 @@ GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-K
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getExchangeEntities()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getExchangeEntities()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6188,7 +6187,7 @@ POST `/v5/asset/withdraw/create`
 | amount | <strong>true</strong> | string | Withdraw amount 
 | timestamp | <strong>true</strong> | integer | Current timestamp (ms). Used for preventing from withdraw replay 
 | forceChain | false | integer | Whether or not to force an on-chain withdrawal<ul><li><code>0</code>(default): If the address is parsed out to be an internal address, then internal transfer (<strong>Bybit main account only</strong>)</li><li><code>1</code>: Force the withdrawal to occur on-chain</li><li><code>2</code>: Use UID to withdraw</li></ul> 
-| accountType | false | string | Select the wallet to be withdrawn from<ul><li><code>SPOT</code>: spot wallet (default)</li><li><code>FUND</code>: Funding wallet</li></ul> 
+| accountType | false | string | Select the wallet to be withdrawn from<ul><li><code>FUND</code>: Funding wallet</li></ul> 
 | feeType | false | integer | Handling fee option<ul><li><code>0</code>(default): input amount is the actual amount received, so you have to calculate handling fee manually</li><li><code>1</code>: input amount is not the actual amount you received, the system will help to deduct the handling fee automatically</li></ul> 
 | requestId | false | string | Customised ID, globally unique, it is used for idempotent verification<li>A combination of letters (case sensitive) and numbers, which can be pure letters or pure numbers and the length must be between 1 and 32 digits</li> 
 | beneficiary | false | Object | Travel rule info. It is <strong>required</strong> for kyc=KOR (Korean) users, and users who registered in <a href="https://www.bybit-tr.com/en-TR/" target="_blank" rel="noopener noreferrer">Bybit Turkey(TR)</a>, <a href="https://www.bybit.kz/kk-KAZ/" target="_blank" rel="noopener noreferrer">Bybit Kazakhstan(KZ)</a>, Bybit Indonesia (ID) 
@@ -6218,15 +6217,15 @@ POST `/v5/asset/withdraw/create`
 *   Node.js
 
 ```
-POST /v5/asset/withdraw/create HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672196570254X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "coin": "USDT",    "chain": "ETH",    "address": "0x99ced129603abc771c0dabe935c326ff6c86645d",    "amount": "24",    "timestamp": 1672196561407,    "forceChain": 0,    "accountType": "FUND"}
+POST /v5/asset/withdraw/create HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672196570254X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "coin": "USDT",    "chain": "ETH",    "address": "0x99ced129603abc771c0dabe935c326ff6c86645d",    "amount": "24",    "timestamp": 1672196561407,    "forceChain": 0,    "accountType": "FUND"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.withdraw(    coin="USDT",    chain="ETH",    address="0x99ced129603abc771c0dabe935c326ff6c86645d",    amount="24",    timestamp=1672196561407,    forceChain=0,    accountType="FUND",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.withdraw(    coin="USDT",    chain="ETH",    address="0x99ced129603abc771c0dabe935c326ff6c86645d",    amount="24",    timestamp=1672196561407,    forceChain=0,    accountType="FUND",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .submitWithdrawal({    coin: 'USDT',    chain: 'ETH',    address: '0x99ced129603abc771c0dabe935c326ff6c86645d',    amount: '24',    timestamp: 1672196561407,    forceChain: 0,    accountType: 'FUND',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .submitWithdrawal({    coin: 'USDT',    chain: 'ETH',    address: '0x99ced129603abc771c0dabe935c326ff6c86645d',    amount: '24',    timestamp: 1672196561407,    forceChain: 0,    accountType: 'FUND',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6263,15 +6262,15 @@ POST `/v5/asset/withdraw/cancel`
 *   Node.js
 
 ```
-POST /v5/asset/withdraw/cancel HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672197227732X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "id": "10197"}
+POST /v5/asset/withdraw/cancel HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672197227732X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "id": "10197"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.cancel_withdrawal(    id="10197",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.cancel_withdrawal(    id="10197",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .cancelWithdrawal('10197')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .cancelWithdrawal('10197')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6390,15 +6389,15 @@ GET `/v5/asset/exchange/query-coin-list`
 *   Node.js
 
 ```
-GET /v5/asset/exchange/query-coin-list?side=0&accountType=eb_convert_funding HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1720064061248X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/exchange/query-coin-list?side=0&accountType=eb_convert_funding HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1720064061248X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_convert_coin_list(    side="0",    accountType="eb_convert_funding",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_convert_coin_list(    side="0",    accountType="eb_convert_funding",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getConvertCoins({ accountType: 'eb_convert_spot' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getConvertCoins({ accountType: 'eb_convert_spot' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6443,6 +6442,7 @@ POST `/v5/asset/exchange/quote-apply`
 | toAmount | string | To coin amount (amount to buy according to exchange rate) 
 | expiredTime | string | The expiry time for this quote (15 seconds) 
 | requestId | string | Customised request ID 
+| extTaxAndFee | array | Compliance-related field. Currently returns an empty array, which may be used in the future 
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -6451,21 +6451,21 @@ POST `/v5/asset/exchange/quote-apply`
 *   Node.js
 
 ```
-POST /v5/asset/exchange/quote-apply HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1720071077014X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/jsonContent-Length: 172{    "requestId": "test-00002",    "fromCoin": "ETH",    "toCoin": "BTC",    "accountType": "eb_convert_funding",    "requestCoin": "ETH",    "requestAmount": "0.1",    "paramType": "opFrom",    "paramValue": "broker-id-001"}
+POST /v5/asset/exchange/quote-apply HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1720071077014X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/jsonContent-Length: 172{    "requestId": "test-00002",    "fromCoin": "ETH",    "toCoin": "BTC",    "accountType": "eb_convert_funding",    "requestCoin": "ETH",    "requestAmount": "0.1",    "paramType": "opFrom",    "paramValue": "broker-id-001"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.request_a_quote(    requestId="test-00002",    fromCoin="ETH",    toCoin="BTC",    accountType="eb_convert_funding",    requestCoin="ETH",    requestAmount="0.1",    paramType="opFrom",    paramValue="broker-id-001",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.request_a_quote(    requestId="test-00002",    fromCoin="ETH",    toCoin="BTC",    accountType="eb_convert_funding",    requestCoin="ETH",    requestAmount="0.1",    paramType="opFrom",    paramValue="broker-id-001",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .requestConvertQuote({    requestId: 'test-00002',    fromCoin: 'ETH',    toCoin: 'BTC',    accountType: 'eb_convert_funding',    requestCoin: 'ETH',    requestAmount: '0.1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .requestConvertQuote({    requestId: 'test-00002',    fromCoin: 'ETH',    toCoin: 'BTC',    accountType: 'eb_convert_funding',    requestCoin: 'ETH',    requestAmount: '0.1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "ok",    "result": {        "quoteTxId": "10100108106409340067234418688",        "exchangeRate": "0.053517914861880000",        "fromCoin": "ETH",        "fromCoinType": "crypto",        "toCoin": "BTC",        "toCoinType": "crypto",        "fromAmount": "0.1",        "toAmount": "0.005351791486188000",        "expiredTime": "1720071092225",        "requestId": "test-00002"    },    "retExtInfo": {},    "time": 1720071077265}
+{    "retCode": 0,    "retMsg": "ok",    "result": {        "quoteTxId": "10100108106409340067234418688",        "exchangeRate": "0.053517914861880000",        "fromCoin": "ETH",        "fromCoinType": "crypto",        "toCoin": "BTC",        "toCoinType": "crypto",        "fromAmount": "0.1",        "toAmount": "0.005351791486188000",        "expiredTime": "1720071092225",        "requestId": "test-00002",        "extTaxAndFee":[]    },    "retExtInfo": {},    "time": 1720071077265}
 ```
 
 Confirm a Quote
@@ -6500,15 +6500,15 @@ POST `/v5/asset/exchange/convert-execute`
 *   Node.js
 
 ```
-POST /v5/asset/exchange/convert-execute HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1720071899789X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 52{    "quoteTxId": "10100108106409343501030232064"}
+POST /v5/asset/exchange/convert-execute HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1720071899789X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 52{    "quoteTxId": "10100108106409343501030232064"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.confirm_a_quote(    quoteTxId="10100108106409343501030232064",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.confirm_a_quote(    quoteTxId="10100108106409343501030232064",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .confirmConvertQuote({    quoteTxId: '10100108106409343501030232064',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .confirmConvertQuote({    quoteTxId: '10100108106409343501030232064',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6559,15 +6559,15 @@ GET `/v5/asset/exchange/convert-result-query`
 *   Node.js
 
 ```
-GET /v5/asset/exchange/convert-result-query?quoteTxId=10100108106409343501030232064&accountType=eb_convert_funding HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1720073659847X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/exchange/convert-result-query?quoteTxId=10100108106409343501030232064&accountType=eb_convert_funding HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1720073659847X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_convert_status(    accountType="eb_convert_funding",    quoteTxId="10100108106409343501030232064",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_convert_status(    accountType="eb_convert_funding",    quoteTxId="10100108106409343501030232064",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getConvertStatus({    quoteTxId: 'quoteTransactionId',    accountType: 'eb_convert_funding',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getConvertStatus({    quoteTxId: 'quoteTransactionId',    accountType: 'eb_convert_funding',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6625,15 +6625,15 @@ GET `/v5/asset/exchange/query-convert-history`
 *   Node.js
 
 ```
-GET /v5/asset/exchange/query-convert-history?accountType=eb_convert_uta,eb_convert_funding HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1720074159814X-BAPI-RECV-WINDOW: 5000
+GET /v5/asset/exchange/query-convert-history?accountType=eb_convert_uta,eb_convert_funding HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1720074159814X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_convert_history(    accountType="eb_convert_uta,eb_convert_funding",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_convert_history(    accountType="eb_convert_uta,eb_convert_funding",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getConvertHistory()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getConvertHistory()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6685,15 +6685,15 @@ POST `/v5/user/create-sub-member`
 *   Node.js
 
 ```
-POST /v5/user/create-sub-member HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: XXXXXXXX-BAPI-TIMESTAMP: 1676429344202X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "username": "xxxxx",    "memberType": 1,    "switch": 1,    "note": "test"}
+POST /v5/user/create-sub-member HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676429344202X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "username": "xxxxx",    "memberType": 1,    "switch": 1,    "note": "test"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.create_sub_uid(    username="xxxxx",    memberType=1,    switch=1,    note="test",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.create_sub_uid(    username="xxxxx",    memberType=1,    switch=1,    note="test",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .createSubMember({    username: 'xxxxx',    memberType: 1,    switch: 1,    note: 'test',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .createSubMember({    username: 'xxxxx',    memberType: 1,    switch: 1,    note: 'test',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6754,7 +6754,7 @@ POST `/v5/user/create-sub-api`
 | &gt; Earn | array | Permission of earn product 
 | &gt; CopyTrading | array | Permission of copytrade, <strong>deprecated</strong> always <code>[]</code> 
 | &gt; BlockTrade | array | Permission of blocktrade. Not applicable to sub account, always <code>[]</code> 
-| &gt; NFT | array | Permission of NFT. Not applicable to sub account, always <code>[]</code> 
+| &gt; NFT | array | Deprecated, always <code>[]</code> 
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -6763,15 +6763,15 @@ POST `/v5/user/create-sub-api`
 *   Node.js
 
 ```
-POST /v5/user/create-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1676430005459X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "subuid": 53888000,    "note": "testxxx",    "readOnly": 0,    "permissions": {        "Wallet": [            "AccountTransfer"        ]    }}
+POST /v5/user/create-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430005459X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "subuid": 53888000,    "note": "testxxx",    "readOnly": 0,    "permissions": {        "Wallet": [            "AccountTransfer"        ]    }}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.create_sub_api_key(    subuid=53888000,    note="testxxx",    readOnly=0,    permissions={        "Wallet": [            "AccountTransfer"        ]    },))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.create_sub_api_key(    subuid=53888000,    note="testxxx",    readOnly=0,    permissions={        "Wallet": [            "AccountTransfer"        ]    },))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .createSubUIDAPIKey({    subuid: 53888000,    note: 'testxxx',    readOnly: 0,    permissions: {      Wallet: ['AccountTransfer'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .createSubUIDAPIKey({    subuid: 53888000,    note: 'testxxx',    readOnly: 0,    permissions: {      Wallet: ['AccountTransfer'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6818,15 +6818,15 @@ None
 *   Node.js
 
 ```
-GET /v5/user/query-sub-members HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1676430318405X-BAPI-RECV-WINDOW: 5000
+GET /v5/user/query-sub-members HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430318405X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_sub_uid())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_sub_uid())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSubUIDList()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSubUIDList()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -6876,7 +6876,7 @@ GET `/v5/user/submembers`
 *   Python
 
 ```
-GET /v5/user/submembers?pageSize=1 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1676430318405X-BAPI-RECV-WINDOW: 5000
+GET /v5/user/submembers?pageSize=1 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430318405X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
@@ -6931,7 +6931,7 @@ GET `/v5/user/escrow_sub_members`
 *   Node.js
 
 ```
-GET /v5/user/escrow_sub_members?pageSize=2 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1739763787703X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/user/escrow_sub_members?pageSize=2 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1739763787703X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
@@ -6981,15 +6981,15 @@ None
 *   Node.js
 
 ```
-POST /v5/user/frozen-sub-member HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1676430842094X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "subuid": 53888001,    "frozen": 1}
+POST /v5/user/frozen-sub-member HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430842094X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "subuid": 53888001,    "frozen": 1}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.freeze_sub_uid(    subuid=53888001,    frozen=1,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.freeze_sub_uid(    subuid=53888001,    frozen=1,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .setSubUIDFrozenState(53888001, 1)  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .setSubUIDFrozenState(53888001, 1)  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7032,7 +7032,7 @@ None
 | &gt; Derivatives | array | <li>Unified account has this permission by default <code>DerivativesTrade</code></li><li>For classic account, it is always <code>[]</code></li> 
 | &gt; Exchange | array | Permission of convert <code>ExchangeHistory</code> 
 | &gt; Earn | array | Permission of earn product <code>Earn</code> 
-| &gt; NFT | array | Permission of NFT <code>NFTQueryProductList</code>. Not applicable to sub account, always <code>[]</code> 
+| &gt; NFT | array | Deprecated, always <code>[]</code> 
 | &gt; BlockTrade | array | Permission of blocktrade. Not applicable to subaccount, always <code>[]</code> 
 | &gt; Affiliate | array | Permission of Affiliate. Only affiliate can have this permission, otherwise always <code>[]</code> 
 | &gt; CopyTrading | array | Always <code>[]</code> as Master Trader account just use <code>ContractTrade</code> to start CopyTrading 
@@ -7065,15 +7065,15 @@ None
 *   Node.js
 
 ```
-GET /v5/user/query-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1676430842094X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
+GET /v5/user/query-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430842094X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_api_key_information())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_api_key_information())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getQueryApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getQueryApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7127,7 +7127,7 @@ GET `/v5/user/sub-apikeys`
 | &gt;&gt; Earn | array | Permission of earn product <code>Earn</code> 
 | &gt;&gt; CopyTrading | array | Always <code>[]</code>, Master Trader uses "Contract" permission to start Copytrading 
 | &gt;&gt; BlockTrade | array | Permission of blocktrade. Not applicable to subaccount, always <code>[]</code> 
-| &gt;&gt; NFT | array | Permission of NFT. Not applicable to sub account, always <code>[]</code> 
+| &gt;&gt; NFT | array | Deprecated, always <code>[]</code> 
 | &gt;&gt; Affiliate | array | Permission of Affiliate. Not applicable to sub account, always <code>[]</code> 
 | &gt; secret | string | Always <code>"******"</code> 
 | &gt; readOnly | boolean | <code>true</code>, <code>false</code> 
@@ -7146,7 +7146,7 @@ GET `/v5/user/sub-apikeys`
 *   Node.js
 
 ```
-GET /v5/user/sub-apikeys?subMemberId=100400345 HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1699515251088X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json
+GET /v5/user/sub-apikeys?subMemberId=100400345 HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1699515251088X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json
 ```
 
 ```
@@ -7154,7 +7154,7 @@ GET /v5/user/sub-apikeys?subMemberId=100400345 HTTP/1.1Host: api.bybit.comX-BAPI
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSubAccountAllApiKeys({    subMemberId: 'subUID',    limit: 20,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSubAccountAllApiKeys({    subMemberId: 'subUID',    limit: 20,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7211,7 +7211,7 @@ GET `/v5/user/get-member-type`
 *   Node.js
 
 ```
-GET /v5/user/get-member-type HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1686884973961X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/user/get-member-type HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1686884973961X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
@@ -7219,7 +7219,7 @@ GET /v5/user/get-member-type HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXX
 ```
 
 ```
-// https://api.bybit.com/v5/user/get-member-typeconst { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getUIDWalletType({    memberIds: 'subUID1,subUID2',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+// https://api.bybit.com/v5/user/get-member-typeconst { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getUIDWalletType({    memberIds: 'subUID1,subUID2',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7263,7 +7263,7 @@ POST `/v5/user/update-api`
 | &gt; Earn | false | array | Earn product. <code>["Earn"]</code> 
 | &gt; CopyTrading | false | array | Copytrade. <code>["CopyTrading"]</code>, <strong>deprecated</strong> 
 | &gt; BlockTrade | false | array | Blocktrade. <code>["BlockTrade"]</code> 
-| &gt; NFT | false | array | NFT. <code>["NFTQueryProductList"]</code> 
+| &gt; NFT | false | array | Deprecated 
 | &gt; Affiliate | false | array | Affiliate. <code>["Affiliate"]</code><ul><li>This permission is only useful for affiliate</li><li>If you need this permission, make sure you remove all other permissions</li></ul> 
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
@@ -7285,7 +7285,7 @@ POST `/v5/user/update-api`
 | &gt; BlockTrade | array | Permission of blocktrade. Not applicable to sub account, always <code>[]</code> 
 | &gt; Exchange | array | Permission of convert 
 | &gt; Earn | array | Permission of Earn 
-| &gt; NFT | array | Permission of NFT. Not applicable to sub account, always <code>[]</code> 
+| &gt; NFT | array | Deprecated, always <code>[]</code> 
 | ips | array | IP bound 
 
 ### Request Example[​](#request-example "Direct link to heading")
@@ -7295,15 +7295,15 @@ POST `/v5/user/update-api`
 *   Node.js
 
 ```
-POST /v5/user/update-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1676431264739X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{    "readOnly": null,    "ips": "*",    "permissions": {            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }}
+POST /v5/user/update-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676431264739X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{    "readOnly": null,    "ips": "*",    "permissions": {            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.modify_master_api_key(    ips=["*"],    permissions={            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "Derivatives": [                "DerivativesTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.modify_master_api_key(    ips=["*"],    permissions={            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "Derivatives": [                "DerivativesTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .updateMasterApiKey({    ips: ['*'],    permissions: {      ContractTrade: ['Order', 'Position'],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer', 'SubMemberTransfer'],      Options: ['OptionsTrade'],      Derivatives: ['DerivativesTrade'],      CopyTrading: ['CopyTrading'],      BlockTrade: [],      Exchange: ['ExchangeHistory'],      NFT: ['NFTQueryProductList'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .updateMasterApiKey({    ips: ['*'],    permissions: {      ContractTrade: ['Order', 'Position'],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer', 'SubMemberTransfer'],      Options: ['OptionsTrade'],      Derivatives: ['DerivativesTrade'],      CopyTrading: ['CopyTrading'],      BlockTrade: [],      Exchange: ['ExchangeHistory'],      NFT: ['NFTQueryProductList'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7364,7 +7364,7 @@ POST `/v5/user/update-sub-api`
 | &gt; BlockTrade | array | Permission of blocktrade. Not applicable to sub account, always <code>[]</code> 
 | &gt; Exchange | array | Permission of convert 
 | &gt; Earn | array | Permission of Earn 
-| &gt; NFT | array | Permission of NFT. Not applicable to sub account, always <code>[]</code> 
+| &gt; NFT | array | Deprecated, always <code>[]</code> 
 | ips | array | IP bound 
 
 ### Request Example[​](#request-example "Direct link to heading")
@@ -7374,15 +7374,15 @@ POST `/v5/user/update-sub-api`
 *   Node.js
 
 ```
-POST /v5/user/update-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1676431795752X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "readOnly": 0,    "ips": "*",    "permissions": {            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }}
+POST /v5/user/update-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676431795752X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "readOnly": 0,    "ips": "*",    "permissions": {            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.modify_sub_api_key(    readOnly=0,    ips=["*"],    permissions={            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "Derivatives": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.modify_sub_api_key(    readOnly=0,    ips=["*"],    permissions={            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "Derivatives": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .updateSubApiKey({    readOnly: 0,    ips: ['*'],    permissions: {      ContractTrade: [],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer'],      Options: [],      Derivatives: [],      CopyTrading: [],      BlockTrade: [],      Exchange: [],      NFT: [],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .updateSubApiKey({    readOnly: 0,    ips: ['*'],    permissions: {      ContractTrade: [],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer'],      Options: [],      Derivatives: [],      CopyTrading: [],      BlockTrade: [],      Exchange: [],      NFT: [],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7424,7 +7424,7 @@ None
 *   Node.js
 
 ```
-POST /v5/user/del-submember HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1698907012755X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/jsonContent-Length: 34{    "subMemberId": "112725187"}
+POST /v5/user/del-submember HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1698907012755X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/jsonContent-Length: 34{    "subMemberId": "112725187"}
 ```
 
 ```
@@ -7432,7 +7432,7 @@ POST /v5/user/del-submember HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-B
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .deleteSubMember({    subMemberId: 'subUID',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .deleteSubMember({    subMemberId: 'subUID',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7475,15 +7475,15 @@ None
 *   Node.js
 
 ```
-POST /v5/user/delete-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1676431576621X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{}
+POST /v5/user/delete-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676431576621X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.delete_master_api_key())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.delete_master_api_key())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .deleteMasterApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .deleteMasterApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7529,15 +7529,15 @@ None
 *   Node.js
 
 ```
-POST /v5/user/delete-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1676431922953X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{}
+POST /v5/user/delete-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676431922953X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.delete_sub_api_key())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.delete_sub_api_key())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .deleteSubApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .deleteSubApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7586,11 +7586,11 @@ GET `/v5/spot-margin-trade/interest-rate-history`
 *   Python
 
 ```
-GET /v5/spot-margin-trade/interest-rate-history?currency=USDC&vipLevel=No%20VIP&startTime=1721458800000&endTime=1721469600000 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1721891663064X-BAPI-RECV-WINDOW: 5000
+GET /v5/spot-margin-trade/interest-rate-history?currency=USDC&vipLevel=No%20VIP&startTime=1721458800000&endTime=1721469600000 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1721891663064X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.spot_margin_trade_get_historical_interest_rate(    currency="BTC"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.spot_margin_trade_get_historical_interest_rate(    currency="BTC"))
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7637,15 +7637,15 @@ POST `/v5/spot-margin-trade/switch-mode`
 *   Node.js
 
 ```
-POST /v5/spot-margin-trade/switch-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672297794480X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "spotMarginMode": "0"}
+POST /v5/spot-margin-trade/switch-mode HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672297794480X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "spotMarginMode": "0"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.spot_margin_trade_toggle_margin_trade(    spotMarginMode="0",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.spot_margin_trade_toggle_margin_trade(    spotMarginMode="0",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .toggleSpotMarginTrade('0')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .toggleSpotMarginTrade('0')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7690,15 +7690,15 @@ None
 *   Node.js
 
 ```
-POST /v5/spot-margin-trade/set-leverage HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672299806626X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "leverage": "4"}
+POST /v5/spot-margin-trade/set-leverage HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672299806626X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "leverage": "4"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.spot_margin_trade_set_leverage(    leverage="4",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.spot_margin_trade_set_leverage(    leverage="4",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .setSpotMarginLeverage('4')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .setSpotMarginLeverage('4')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7741,15 +7741,15 @@ None
 *   Node.js
 
 ```
-GET /v5/spot-margin-trade/state HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1692696840996X-BAPI-RECV-WINDOW: 5000
+GET /v5/spot-margin-trade/state HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1692696840996X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.spot_margin_trade_get_status_and_leverage())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.spot_margin_trade_get_status_and_leverage())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getSpotMarginState()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSpotMarginState()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7794,15 +7794,15 @@ GET `/v5/crypto-loan/borrowable-collateralisable-number`
 *   Node.js
 
 ```
-GET /v5/crypto-loan/borrowable-collateralisable-number?loanCurrency=USDT&collateralCurrency=BTC HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728627083198X-BAPI-RECV-WINDOW: 5000
+GET /v5/crypto-loan/borrowable-collateralisable-number?loanCurrency=USDT&collateralCurrency=BTC HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728627083198X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_account_borrowable_or_collateralizable_limit(    loanCurrency="USDT",    collateralCurrency="BTC",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_account_borrowable_or_collateralizable_limit(    loanCurrency="USDT",    collateralCurrency="BTC",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getAccountBorrowCollateralLimit({    loanCurrency: 'USDT',    collateralCurrency: 'BTC',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getAccountBorrowCollateralLimit({    loanCurrency: 'USDT',    collateralCurrency: 'BTC',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7848,15 +7848,15 @@ POST `/v5/crypto-loan/borrow`
 *   Node.js
 
 ```
-POST /v5/crypto-loan/borrow HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: XXXXXXXX-BAPI-TIMESTAMP: 1728629356551X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 140{    "loanCurrency": "USDT",    "loanAmount": "550",    "collateralCurrency": "BTC",    "loanTerm": null,    "collateralAmount": null}
+POST /v5/crypto-loan/borrow HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728629356551X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 140{    "loanCurrency": "USDT",    "loanAmount": "550",    "collateralCurrency": "BTC",    "loanTerm": null,    "collateralAmount": null}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.borrow_crypto_loan(        loanCurrency="USDT",        loanAmount="550",        collateralCurrency="BTC",        loanTerm=None,        collateralAmount=None,))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.borrow_crypto_loan(        loanCurrency="USDT",        loanAmount="550",        collateralCurrency="BTC",        loanTerm=None,        collateralAmount=None,))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .borrowCryptoLoan({    loanCurrency: 'USDT',    loanAmount: '550',    collateralCurrency: 'BTC',    loanTerm: null,    collateralAmount: null,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .borrowCryptoLoan({    loanCurrency: 'USDT',    loanAmount: '550',    collateralCurrency: 'BTC',    loanTerm: null,    collateralAmount: null,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7901,15 +7901,15 @@ POST `/v5/crypto-loan/repay`
 *   Node.js
 
 ```
-POST /v5/crypto-loan/repay HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: XXXXXXXX-BAPI-TIMESTAMP: 1728629785224X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 61{    "orderId": "1794267532472646144",    "amount": "100"}
+POST /v5/crypto-loan/repay HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728629785224X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 61{    "orderId": "1794267532472646144",    "amount": "100"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.repay_crypto_loan(        orderId="1794267532472646144",        amount="100",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.repay_crypto_loan(        orderId="1794267532472646144",        amount="100",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .repayCryptoLoan({    orderId: '1794267532472646144',    amount: '100',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .repayCryptoLoan({    orderId: '1794267532472646144',    amount: '100',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -7966,15 +7966,15 @@ GET `/v5/crypto-loan/ongoing-orders`
 *   Node.js
 
 ```
-GET /v5/crypto-loan/ongoing-orders?orderId=1793683005081680384 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728630979731X-BAPI-RECV-WINDOW: 5000
+GET /v5/crypto-loan/ongoing-orders?orderId=1793683005081680384 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728630979731X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.repay_crypto_loan(        orderId="1794267532472646144",        amount="100",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.repay_crypto_loan(        orderId="1794267532472646144",        amount="100",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getUnpaidLoanOrders({ orderId: '1793683005081680384' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getUnpaidLoanOrders({ orderId: '1793683005081680384' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8033,15 +8033,15 @@ GET `/v5/crypto-loan/repayment-history`
 *   Node.js
 
 ```
-GET /v5/crypto-loan/repayment-history?repayId=1794271131730737664 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728633716794X-BAPI-RECV-WINDOW: 5000
+GET /v5/crypto-loan/repayment-history?repayId=1794271131730737664 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728633716794X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_loan_repayment_history(        repayId="1794271131730737664",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_loan_repayment_history(        repayId="1794271131730737664",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getRepaymentHistory({ repayId: '1794271131730737664' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getRepaymentHistory({ repayId: '1794271131730737664' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8097,15 +8097,15 @@ GET `/v5/crypto-loan/borrow-history`
 *   Node.js
 
 ```
-GET /v5/crypto-loan/borrow-history?orderId=1793683005081680384 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728630979731X-BAPI-RECV-WINDOW: 5000
+GET /v5/crypto-loan/borrow-history?orderId=1793683005081680384 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728630979731X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_completed_loan_history(        orderId="1793683005081680384",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_completed_loan_history(        orderId="1793683005081680384",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getCompletedLoanOrderHistory({ orderId: '1794267532472646144' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getCompletedLoanOrderHistory({ orderId: '1794267532472646144' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8144,15 +8144,15 @@ GET `/v5/crypto-loan/max-collateral-amount`
 *   Node.js
 
 ```
-GET /v5/crypto-loan/max-collateral-amount?orderId=1794267532472646144 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728634289933X-BAPI-RECV-WINDOW: 5000
+GET /v5/crypto-loan/max-collateral-amount?orderId=1794267532472646144 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728634289933X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_max_allowed_collateral_reduction_amount(        orderId="1794267532472646144",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_max_allowed_collateral_reduction_amount(        orderId="1794267532472646144",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getMaxAllowedReductionCollateralAmount({ orderId: '1794267532472646144' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getMaxAllowedReductionCollateralAmount({ orderId: '1794267532472646144' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8197,15 +8197,15 @@ POST `/v5/crypto-loan/adjust-ltv`
 *   Node.js
 
 ```
-POST /v5/crypto-loan/adjust-ltv HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728635421137X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 85{    "orderId": "1794267532472646144",    "amount": "0.001",    "direction": "1"}
+POST /v5/crypto-loan/adjust-ltv HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728635421137X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 85{    "orderId": "1794267532472646144",    "amount": "0.001",    "direction": "1"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.adjust_collateral_amount(    orderId="1794267532472646144",    amount="0.001",    direction="1",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.adjust_collateral_amount(    orderId="1794267532472646144",    amount="0.001",    direction="1",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .adjustCollateralAmount({    orderId: '1794267532472646144',    amount: '0.001',    direction: '1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .adjustCollateralAmount({    orderId: '1794267532472646144',    amount: '0.001',    direction: '1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8261,15 +8261,15 @@ GET `/v5/crypto-loan/adjustment-history`
 *   Node.js
 
 ```
-GET /v5/crypto-loan/adjustment-history?adjustId=1794318409405331968 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1728635871668X-BAPI-RECV-WINDOW: 5000
+GET /v5/crypto-loan/adjustment-history?adjustId=1794318409405331968 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728635871668X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_crypto_loan_ltv_adjustment_history(    adjustId="1794318409405331968",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_crypto_loan_ltv_adjustment_history(    adjustId="1794318409405331968",))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getLoanLTVAdjustmentHistory({ adjustId: '1794271131730737664' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getLoanLTVAdjustmentHistory({ adjustId: '1794271131730737664' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8349,11 +8349,11 @@ GET /v5/ins-loan/product-infos?productId=91 HTTP/1.1Host: api-testnet.bybit.com
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_product_info(productId="91"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_product_info(productId="91"))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingProductInfo({    productId: '91',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingProductInfo({    productId: '91',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8404,11 +8404,11 @@ GET /v5/ins-loan/ensure-tokens-convert HTTP/1.1Host: api-testnet.bybit.com
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_margin_coin_info())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_margin_coin_info())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingMarginCoinInfoWithConversionRate({    productId: '81',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingMarginCoinInfoWithConversionRate({    productId: '81',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8496,15 +8496,15 @@ GET `/v5/ins-loan/loan-order`
 *   Node.js
 
 ```
-GET /v5/ins-loan/loan-order HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1678687874060X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
+GET /v5/ins-loan/loan-order HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1678687874060X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_loan_orders())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_loan_orders())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingLoanOrders({    limit: 10,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingLoanOrders({    limit: 10,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8555,15 +8555,15 @@ GET `/v5/ins-loan/repaid-history`
 *   Node.js
 
 ```
-GET /v5/ins-loan/repaid-history HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1678687944725X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
+GET /v5/ins-loan/repaid-history HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN-TYPE: 2X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1678687944725X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_repayment_info())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_repayment_info())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingRepayOrders({    limit: 100,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingRepayOrders({    limit: 100,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8613,15 +8613,15 @@ None
 *   Node.js
 
 ```
-GET /v5/ins-loan/ltv-convert HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1686638165351X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
+GET /v5/ins-loan/ltv-convert HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1686638165351X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_ltv())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_ltv())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingLTVWithLadderConversionRate()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingLTVWithLadderConversionRate()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8665,15 +8665,15 @@ POST `/v5/ins-loan/association-uid`
 *   Node.js
 
 ```
-POST /v5/ins-loan/association-uid HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1699257853101X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/jsonContent-Length: 43{    "uid": "592324",    "operate": "0"}
+POST /v5/ins-loan/association-uid HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1699257853101X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/jsonContent-Length: 43{    "uid": "592324",    "operate": "0"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.bind_or_unbind_uid(uid="592324", operate="0"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.bind_or_unbind_uid(uid="592324", operate="0"))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .bindOrUnbindUID({    uid: 'yourUID',    operate: '0', // 0 for bind, 1 for unbind  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .bindOrUnbindUID({    uid: 'yourUID',    operate: '0', // 0 for bind, 1 for unbind  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8748,7 +8748,7 @@ GET `/v5/broker/earnings-info`
 *   Node.js
 
 ```
-GET /v5/broker/earnings-info?begin=20231129&end=20231129&uid=117894077 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1701399431920X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: 32d2aa1bc205ddfb89849b85e2a8b7e23b1f8f69fe95d6f2cb9c87562f9086a6Content-Type: application/json
+GET /v5/broker/earnings-info?begin=20231129&end=20231129&uid=117894077 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1701399431920X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: 32d2aa1bc205ddfb89849b85e2a8b7e23b1f8f69fe95d6f2cb9c87562f9086a6Content-Type: application/json
 ```
 
 ```
@@ -8756,7 +8756,7 @@ GET /v5/broker/earnings-info?begin=20231129&end=20231129&uid=117894077 HTTP/1.1H
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getExchangeBrokerEarnings({    bizType: 'SPOT',    begin: '20231201',    end: '20231207',    limit: 1000,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getExchangeBrokerEarnings({    bizType: 'SPOT',    begin: '20231201',    end: '20231207',    limit: 1000,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8804,7 +8804,7 @@ None
 *   Node.js
 
 ```
-GET /v5/broker/account-info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1701399431920X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/broker/account-info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1701399431920X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
@@ -8812,7 +8812,7 @@ GET /v5/broker/account-info HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXX
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getExchangeBrokerAccountInfo()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getExchangeBrokerAccountInfo()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8877,7 +8877,7 @@ GET `/v5/broker/asset/query-sub-member-deposit-record`
 *   Node.js
 
 ```
-GET /v5/broker/asset/query-sub-member-deposit-record?coin=USDT&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1672192441294X-BAPI-RECV-WINDOW: 5000
+GET /v5/broker/asset/query-sub-member-deposit-record?coin=USDT&limit=1 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672192441294X-BAPI-RECV-WINDOW: 5000
 ```
 
 ```
@@ -8885,7 +8885,7 @@ GET /v5/broker/asset/query-sub-member-deposit-record?coin=USDT&limit=1 HTTP/1.1H
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getBrokerSubAccountDeposits({    limit: 50,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getBrokerSubAccountDeposits({    limit: 50,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8926,7 +8926,7 @@ POST `/v5/broker/award/info`
 *   Node.js
 
 ```
-POST /v5/broker/award/info HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1726107086048X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 22{    "id": "80209"}
+POST /v5/broker/award/info HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1726107086048X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 22{    "id": "80209"}
 ```
 
 ```
@@ -8934,7 +8934,7 @@ POST /v5/broker/award/info HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getBrokerVoucherSpec({    accountId: '5714139',    awardId: '189528',    specCode: 'demo000',    withUsedAmount: false,})  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getBrokerVoucherSpec({    accountId: '5714139',    awardId: '189528',    specCode: 'demo000',    withUsedAmount: false,})  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -8971,7 +8971,7 @@ None
 *   Node.js
 
 ```
-POST /v5/broker/award/distribute-award HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1726110531734X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 128{    "accountId": "2846381",    "awardId": "123456",    "specCode": "award-001",    "amount": "100",    "brokerId": "v-28478"}
+POST /v5/broker/award/distribute-award HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1726110531734X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 128{    "accountId": "2846381",    "awardId": "123456",    "specCode": "award-001",    "amount": "100",    "brokerId": "v-28478"}
 ```
 
 ```
@@ -8979,7 +8979,7 @@ POST /v5/broker/award/distribute-award HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: X
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .issueBrokerVoucher({    accountId: '2846381',    awardId: '123456',    specCode: 'award-001',    amount: '100',    brokerId: 'v-28478',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .issueBrokerVoucher({    accountId: '2846381',    awardId: '123456',    specCode: 'award-001',    amount: '100',    brokerId: 'v-28478',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -9026,7 +9026,7 @@ POST `/v5/broker/award/distribution-record`
 *   Node.js
 
 ```
-POST /v5/broker/award/distribution-record HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1726112099846X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 111{    "accountId": "5714139",    "awardId": "189528",    "specCode": "demo000",    "withUsedAmount": false}
+POST /v5/broker/award/distribution-record HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1726112099846X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 111{    "accountId": "5714139",    "awardId": "189528",    "specCode": "demo000",    "withUsedAmount": false}
 ```
 
 ```
@@ -9034,7 +9034,7 @@ POST /v5/broker/award/distribution-record HTTP/1.1Host: api.bybit.comX-BAPI-SIGN
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getBrokerIssuedVoucher({    id: '80209',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getBrokerIssuedVoucher({    id: '80209',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -9085,11 +9085,11 @@ POST `/v5/earn/place-order`
 *   Node.js
 
 ```
-POST /v5/earn/place-order HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1739936605822X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 190{    "category": "FlexibleSaving",    "orderType": "Redeem",    "accountType": "FUND",    "amount": "0.35",    "coin": "BTC",    "productId": "430",    "orderLinkId": "btc-earn-001"}
+POST /v5/earn/place-order HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1739936605822X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 190{    "category": "FlexibleSaving",    "orderType": "Redeem",    "accountType": "FUND",    "amount": "0.35",    "coin": "BTC",    "productId": "430",    "orderLinkId": "btc-earn-001"}
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.stake_or_redeem(    category="FlexibleSaving",    orderType="Redeem",    accountType="FUND",    amount="0.35",    coin="BTC",    productId="430",    orderLinkId="btc-earn-001"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.stake_or_redeem(    category="FlexibleSaving",    orderType="Redeem",    accountType="FUND",    amount="0.35",    coin="BTC",    productId="430",    orderLinkId="btc-earn-001"))
 ```
 
 ```
@@ -9146,11 +9146,11 @@ GET `/v5/earn/order`
 *   Node.js
 
 ```
-GET /v5/earn/order?orderId=9640dc23-df1a-448a-ad24-e1a48028a51f&category=OnChain HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: XXXXXX-BAPI-TIMESTAMP: 1739937044221X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/earn/order?orderId=9640dc23-df1a-448a-ad24-e1a48028a51f&category=OnChain HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1739937044221X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_stake_or_redemption_history(    category="OnChain",    orderId="9640dc23-df1a-448a-ad24-e1a48028a51f",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_stake_or_redemption_history(    category="OnChain",    orderId="9640dc23-df1a-448a-ad24-e1a48028a51f",))
 ```
 
 ```
@@ -9211,11 +9211,11 @@ GET `/v5/earn/position`
 *   Node.js
 
 ```
-GET /v5/earn/position?category=FlexibleSaving&coin=USDT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: XXXXXXX-BAPI-TIMESTAMP: 1739944576277X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
+GET /v5/earn/position?category=FlexibleSaving&coin=USDT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1739944576277X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_staked_position(    category="FlexibleSaving",    coin="USDT",))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_staked_position(    category="FlexibleSaving",    coin="USDT",))
 ```
 
 ```
