@@ -1,11 +1,15 @@
 {
-  "name": "api-docs-converter",
+  "name": "deribit-api-docs-extractor",
   "version": "1.0.0",
-  "description": "Convert HTML API docs to Markdown",
+  "description": "Extract and convert Deribit API documentation to Markdown with configurable sections",
   "type": "module",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "privatetradingapi": "node src/index.js config/private_trading_api.json",
+    "publicapi": "node src/index.js config/public_api.json",
+    "privateblockapi": "node src/index.js config/private_block_api.json",
+    "privateaccountapi": "node src/index.js config/private_account_api.json",
+    "all": "npm run publicapi && npm run privatetradingapi && npm run privateblockapi && npm run privateaccountapi"
   },
   "dependencies": {
     "puppeteer": "24.7.2",

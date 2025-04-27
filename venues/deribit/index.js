@@ -4,28 +4,46 @@ import puppeteer from 'puppeteer'
 import TurndownService from 'turndown'
 import turndownPluginGfm from 'turndown-plugin-gfm'
 import { promises as fs } from 'fs'
-
-const urls = [
-  'https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits',
-  'https://support.deribit.com/hc/en-us/articles/25944603459613-Connection-Management',
-  'https://support.deribit.com/hc/en-us/articles/25973087226909-Accessing-historical-trades-and-orders-using-API',
-  'https://support.deribit.com/hc/en-us/articles/25944617449373-API-Usage-Policy',
-  'https://support.deribit.com/hc/en-us/articles/25944617582877-Server-Infrastructure',
-  'https://support.deribit.com/hc/en-us/articles/25944635815197-Asia-Gateway',
-  'https://support.deribit.com/hc/en-us/articles/25944588342941-Deribit-AWS-Endpoint-Service-instruction',
-  'https://support.deribit.com/hc/en-us/articles/25944617728285-Deribit-AWS-Multicast-Service-Instruction',
-]
+import path from 'path'
 
 // Add delay function
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 class App {
-  constructor() {
+  constructor(configPath) {
     this.browser = null
     this.turndownService = null
+    this.configPath = configPath
+    this.config = null
   }
 
   async initialize() {
+    // Load configuration
+    try {
+      const configData = await fs.readFile(this.configPath, 'utf8')
+      this.config = JSON.parse(configData)
+
+      if (
+        !this.config ||
+        !this.config.sections ||
+        !Array.isArray(this.config.sections) ||
+        this.config.sections.length === 0
+      ) {
+        throw new Error(
+          'Configuration file must contain a "sections" array with at least one section name'
+        )
+      }
+
+      if (!this.config.output) {
+        throw new Error('Configuration file must specify an "output" path')
+      }
+
+      console.log(`Loaded configuration with ${this.config.sections.length} sections to extract`)
+    } catch (error) {
+      console.error(`Failed to load configuration file: ${error.message}`)
+      throw error
+    }
+
     // Initialize Turndown with GFM
     this.turndownService = new TurndownService({
       codeBlockStyle: 'fenced',
@@ -74,77 +92,16 @@ class App {
     return page
   }
 
-  async convertSupportArticleToMarkdown(url) {
-    const page = await this.newPage()
-
-    try {
-      // Load the support article with a longer timeout
-      await page.goto(url, {
-        waitUntil: 'networkidle0',
-        timeout: 60000,
-      })
-
-      // Add a random delay to simulate human behavior
-      await delay(Math.random() * 2000 + 1000)
-
-      // Wait for the article to be present with a longer timeout
-      await page.waitForSelector('article', { timeout: 60000 })
-
-      // Extract the article content
-      const content = await page.evaluate(() => {
-        // Get the article element
-        const article = document.querySelector('article')
-        if (!article) {
-          console.log('Article not found in DOM')
-          return null
-        }
-
-        // Get the header and content section
-        const header = article.querySelector('header.mb-5')
-        const contentSection = article.querySelector('section.content[itemprop="articleBody"]')
-
-        if (!header || !contentSection) {
-          console.log('Required sections not found in article')
-          return null
-        }
-
-        // Create a container for the content
-        const container = document.createElement('div')
-        container.appendChild(header.cloneNode(true))
-        container.appendChild(contentSection.cloneNode(true))
-
-        return container.innerHTML
-      })
-
-      if (!content) {
-        console.error(`No article content found for ${url}`)
-        // Take a screenshot for debugging
-        await page.screenshot({ path: `debug-${url.split('/').pop()}.png` })
-        return null
-      }
-
-      // Convert to markdown
-      const markdown = this.turndownService.turndown(content)
-      return markdown
-    } catch (error) {
-      console.error(`Error processing ${url}:`, error)
-      // Take a screenshot on error
-      await page.screenshot({ path: `error-${url.split('/').pop()}.png` })
-      return null
-    } finally {
-      await page.close()
-    }
-  }
-
-  async convertDocsToMarkdown() {
+  async convertSelectedSectionsToMarkdown() {
     const page = await this.newPage()
 
     try {
       // Load the local HTML file
       await page.goto('https://docs.deribit.com')
 
-      // Extract all sections
-      const content = await page.evaluate(() => {
+      // Extract only the specified sections
+      const { sections } = this.config
+      const content = await page.evaluate(targetSections => {
         // First, remove all highlight divs from the document
         const highlightDivs = document.querySelectorAll('div.highlight')
         highlightDivs.forEach(div => div.remove())
@@ -170,26 +127,53 @@ class App {
 
         // Get all h1 sections
         const h1Sections = document.querySelectorAll('h1')
-        const allContent = []
+        const selectedContent = []
+        const matchedSections = []
 
         h1Sections.forEach(h1Section => {
-          const sectionContent = [h1Section.outerHTML]
-          let currentElement = h1Section
+          const sectionTitle = h1Section.textContent.trim()
 
-          // Get all elements until the next h1
-          while ((currentElement = currentElement.nextElementSibling) !== null) {
-            if (currentElement.tagName === 'H1') break
-            sectionContent.push(currentElement.outerHTML)
+          // Check if this section should be included
+          const shouldInclude = targetSections.some(targetSection => {
+            // Check for direct match or if the section title contains the target section name
+            return (
+              sectionTitle === targetSection ||
+              sectionTitle.includes(targetSection) ||
+              targetSection.includes(sectionTitle)
+            )
+          })
+
+          if (shouldInclude) {
+            matchedSections.push(sectionTitle)
+            const sectionContent = [h1Section.outerHTML]
+            let currentElement = h1Section
+
+            // Get all elements until the next h1
+            while ((currentElement = currentElement.nextElementSibling) !== null) {
+              if (currentElement.tagName === 'H1') break
+              sectionContent.push(currentElement.outerHTML)
+            }
+
+            selectedContent.push(sectionContent.join('\n'))
           }
-
-          allContent.push(sectionContent.join('\n'))
         })
 
-        return allContent.join('\n\n')
-      })
+        // For debugging - return both content and matched section names
+        return {
+          content: selectedContent.join('\n\n'),
+          matchedSections: matchedSections,
+        }
+      }, sections)
+
+      console.log(`Found and extracted ${content.matchedSections.length} sections:`)
+      content.matchedSections.forEach(section => console.log(`  - ${section}`))
+
+      if (content.matchedSections.length === 0) {
+        console.warn('No matching sections found. Check your section names in the config file.')
+      }
 
       // Convert to markdown
-      return this.turndownService.turndown(content)
+      return this.turndownService.turndown(content.content)
     } finally {
       await page.close()
     }
@@ -199,38 +183,26 @@ class App {
     try {
       console.log('Starting documentation conversion process...')
 
-      // First convert the main docs
-      console.log('Converting main API documentation...')
-      const mainDocsMarkdown = await this.convertDocsToMarkdown()
-      console.log('Main API documentation conversion complete')
+      // Convert the selected sections
+      console.log('Converting selected API documentation sections...')
+      const markdown = await this.convertSelectedSectionsToMarkdown()
+      console.log('API documentation conversion complete')
 
       // Create the combined markdown content
-      console.log('Creating combined documentation...')
-      let combinedMarkdown = '# Deribit API Documentation\n\n'
+      console.log('Creating documentation file...')
+      let combinedMarkdown = `# ${this.config.title || 'Deribit API Documentation'}\n\n`
 
-      // Add the main API documentation
-      combinedMarkdown += `${mainDocsMarkdown}\n\n`
+      // Add the converted documentation
+      combinedMarkdown += `${markdown}\n\n`
 
-      // Add support articles
-      console.log('Processing support articles...')
-      combinedMarkdown += '## Support Articles\n\n'
-      for (const url of urls) {
-        console.log(`Processing support article: ${url}`)
-        const articleMarkdown = await this.convertSupportArticleToMarkdown(url)
-        if (articleMarkdown) {
-          combinedMarkdown += `${articleMarkdown}\n\n`
-          console.log(`Successfully processed article: ${url}`)
-        } else {
-          console.log(`Failed to process article: ${url}`)
-        }
-        // Add a delay between articles
-        await delay(3000)
-      }
+      // Ensure output directory exists
+      const outputDir = path.dirname(this.config.output)
+      await fs.mkdir(outputDir, { recursive: true })
 
-      // Write the combined markdown to a single file
-      console.log('Writing combined documentation to file...')
-      await fs.writeFile('../../docs/deribit/api.md', combinedMarkdown)
-      console.log('Documentation conversion complete! Output file: deribit/api.md')
+      // Write the markdown to the output file
+      console.log(`Writing documentation to file: ${this.config.output}`)
+      await fs.writeFile(this.config.output, combinedMarkdown)
+      console.log('Documentation conversion complete!')
     } catch (error) {
       console.error('Error in main execution:', error)
       throw error
@@ -240,7 +212,16 @@ class App {
 
 // Main execution
 const main = async () => {
-  const app = new App()
+  // Get config file path from command line argument
+  const configPath = process.argv[2]
+
+  if (!configPath) {
+    console.error('Error: No configuration file specified')
+    console.log('Usage: node index.js <path-to-config-file>')
+    process.exit(1)
+  }
+
+  const app = new App(configPath)
   try {
     await app.initialize()
     await app.run()
