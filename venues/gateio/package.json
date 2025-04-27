@@ -3,13 +3,23 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "bash run_scrapers.sh"
+    "start": "npm-run-all --sequential scrape:*",
+    "scrape:rest": "node src/rest_api.js",
+    "scrape:spot": "node src/websocket_spot_api.js",
+    "scrape:futures": "node src/websocket_futures_docs.js",
+    "scrape:perps": "node src/websocket_perps_api.js",
+    "scrape:options": "node src/websocket_options_api.js",
+    "scrape:unified": "node src/websocket_unified_api.js"
   },
   "dependencies": {
     "@mendable/firecrawl-js": "1.24.0",
     "axios": "1.9.0",
     "dotenv": "16.5.0",
     "jsdom": "26.1.0",
-    "turndown": "^7.2.0"
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
