@@ -9,7 +9,10 @@
     "scrape": "node src/index.js scrape",
     "batch": "node src/index.js batch",
     "batch:config": "node src/index.js batch -c",
-    "all": "node src/index.js batch -c config/config.json",
+    "privaterestapi": "node src/index.js batch -c config/private_rest_api.json",
+    "publicrestapi": "node src/index.js batch -c config/public_rest_api.json",
+    "websocketapi": "node src/index.js batch -c config/websocket_api.json",
+    "all": "npm run privaterestapi && npm run publicrestapi && npm run websocketapi",
     "batch:output": "node src/index.js batch -o",
     "help": "node src/index.js help"
   },

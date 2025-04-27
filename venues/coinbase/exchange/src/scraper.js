@@ -21,6 +21,43 @@ import {
 import TurndownService from 'turndown'
 
 /**
+ * Detect if running in a CI environment
+ * @returns {boolean} - True if in CI environment
+ */
+const isRunningInCI = () => {
+  return Boolean(
+    process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITLAB_CI || process.env.JENKINS_URL
+  )
+}
+
+/**
+ * Get browser launch options based on environment
+ * @returns {Object} - Puppeteer launch options
+ */
+const getBrowserLaunchOptions = () => {
+  // Default options
+  const options = {
+    headless: true,
+    defaultViewport: null,
+    args: ['--start-maximized'],
+  }
+
+  // Add CI-specific options
+  if (isRunningInCI()) {
+    options.args = [
+      ...options.args,
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+    ]
+    console.log('Detected CI environment, using special Puppeteer configuration')
+  }
+
+  return options
+}
+
+/**
  * Convert HTML content to Markdown
  * @param {string} html - HTML content to convert
  * @returns {string} - Converted Markdown
@@ -131,14 +168,12 @@ const convertHtmlToMarkdown = html => {
  * @returns {Promise<void>}
  */
 const scrapeApiDocumentation = async (url, outputPath) => {
-  // Launch a headless browser
-  const browser = await puppeteer.launch({
-    headless: true,
-    defaultViewport: null,
-    args: ['--start-maximized', '--no-sandbox', '--disable-setuid-sandbox'],
-  })
+  let browser = null
 
   try {
+    // Launch a headless browser with appropriate options
+    browser = await puppeteer.launch(getBrowserLaunchOptions())
+
     const page = await browser.newPage()
 
     // Navigate to the Coinbase Exchange API documentation page
@@ -291,12 +326,18 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     // Write the markdown file
     fs.writeFileSync(outputPath, markdownContent, 'utf8')
     console.log(`Markdown documentation saved to: ${outputPath}`)
+
+    return outputPath
   } catch (error) {
-    console.error('Error during scraping:', error)
+    console.error(`Error during scraping: ${error.message}`)
+    // Propagate error to caller instead of swallowing it
+    throw error
   } finally {
-    // Close the browser
-    await browser.close()
-    console.log('Browser closed')
+    // Close the browser if it was opened
+    if (browser) {
+      await browser.close()
+      console.log('Browser closed')
+    }
   }
 }
 

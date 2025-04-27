@@ -18,11 +18,24 @@ export const processUrl = async (urlConfig, outputDir) => {
   const outputPath = path.join(outputDir, filename)
 
   try {
+    // Attempt to scrape the API documentation
     await scrapeApiDocumentation(url, outputPath)
     console.log(`✅ Scraping completed successfully for ${url}`)
     return outputPath
   } catch (error) {
+    // Log the error with more detail
     console.error(`❌ Error scraping ${url}: ${error.message}`)
+
+    // Create a minimal error file to indicate failure
+    try {
+      const errorContent = `# Error Scraping ${url}\n\nFailed to scrape this URL at ${new Date().toISOString()}\n\nError message: ${error.message}`
+      fs.writeFileSync(outputPath, errorContent, 'utf8')
+      console.log(`Created error placeholder file at ${outputPath}`)
+    } catch (writeError) {
+      console.error(`Failed to create error placeholder file: ${writeError.message}`)
+    }
+
+    // Re-throw the error to be handled by the caller
     throw error
   }
 }
@@ -185,6 +198,9 @@ export const cleanupIndividualFiles = (urlConfigs, outputDir, combinedFilename) 
  * @returns {Promise<void>}
  */
 export const processBatch = async (configPath, outputDirOverride = null) => {
+  // Track failures to exit with error code if needed
+  let hasFailures = false
+
   try {
     // Read the config file
     const config = readConfig(configPath)
@@ -204,6 +220,9 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
     console.log(`Found ${urlConfigs.length} URLs to process in ${configPath}`)
 
     // Process each URL
+    const successfulUrls = []
+    const failedUrls = []
+
     for (let i = 0; i < urlConfigs.length; i++) {
       const urlConfig = urlConfigs[i]
 
@@ -211,32 +230,59 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
 
       try {
         await processUrl(urlConfig, outputDir)
+        successfulUrls.push(urlConfig.url)
       } catch (error) {
         console.error(`Error processing URL ${urlConfig.url}: ${error.message}`)
-        // Continue with other URLs
+        failedUrls.push(urlConfig.url)
+        hasFailures = true
       }
     }
 
-    console.log(`\nAll URLs processed. Results saved to ${outputDir}/`)
+    // Log summary of results
+    console.log(`\nProcessing complete:`)
+    console.log(`- Successfully processed: ${successfulUrls.length} URLs`)
+    console.log(`- Failed to process: ${failedUrls.length} URLs`)
 
-    // Get combined filename from config or use default
-    const combinedFilename = config.combined_filename || 'combined_api_documentation.md'
+    if (failedUrls.length > 0) {
+      console.log('\nFailed URLs:')
+      failedUrls.forEach(url => console.log(`- ${url}`))
+    }
 
-    console.log(`Combining all markdown files into ${combinedFilename}...`)
+    // Only proceed with combining if we have at least one successful URL
+    if (successfulUrls.length > 0) {
+      console.log(`\nAll URLs processed. Results saved to ${outputDir}/`)
 
-    // Combine markdown files
-    const combinedFilePath = combineMarkdownFiles(urlConfigs, outputDir, combinedFilename)
+      // Get combined filename from config or use default
+      const combinedFilename = config.combined_filename || 'combined_api_documentation.md'
 
-    console.log(`✅ Combined API documentation created at ${combinedFilePath}`)
+      console.log(`Combining all markdown files into ${combinedFilename}...`)
 
-    // Clean up individual files if needed
-    if (config.delete_individual_files !== false) {
-      console.log('Deleting individual markdown files...')
-      cleanupIndividualFiles(urlConfigs, outputDir, combinedFilename)
-      console.log('✅ Cleanup completed. Only combined file remains.')
+      // Combine markdown files
+      const combinedFilePath = combineMarkdownFiles(urlConfigs, outputDir, combinedFilename)
+
+      console.log(`✅ Combined API documentation created at ${combinedFilePath}`)
+
+      // Clean up individual files if needed
+      if (config.delete_individual_files !== false) {
+        console.log('Deleting individual markdown files...')
+        cleanupIndividualFiles(urlConfigs, outputDir, combinedFilename)
+        console.log('✅ Cleanup completed. Only combined file remains.')
+      }
+    } else {
+      throw new Error('All URLs failed to process, cannot create combined file')
     }
   } catch (error) {
     console.error(`Error in batch processing: ${error.message}`)
+    hasFailures = true
     throw error
+  } finally {
+    // Exit with non-zero code if there were failures in GitHub Actions
+    if (hasFailures && (process.env.CI || process.env.GITHUB_ACTIONS)) {
+      console.error('\n❌ Some URLs failed to process. GitHub Actions should mark this as failed.')
+      // Setting a timeout to ensure logs are flushed before exit
+      setTimeout(() => {
+        process.exit(1)
+      }, 1000)
+    }
   }
 }

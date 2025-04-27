@@ -4,41 +4,27 @@ Generated on Sat Mar 29 13:12:36 GMT 2025
 
 ## Table of Contents
 
-* [# Welcome to Exchange APIs](#--welcome-to-exchange-apis)
-* [# Quickstart: Making Your First REST API Call](#--quickstart--making-your-first-rest-api-call)
-* [# Exchange Sandbox](#--exchange-sandbox)
-* [# Exchange Matching Engine](#--exchange-matching-engine)
-* [# Exchange Rate Limits Overview](#--exchange-rate-limits-overview)
-* [# Exchange Systems & Operations](#--exchange-systems---operations)
-* [# Exchange REST API Requests](#--exchange-rest-api-requests)
-* [# Exchange REST API Authentication](#--exchange-rest-api-authentication)
-* [# Exchange REST API Rate Limits](#--exchange-rest-api-rate-limits)
-* [# Exchange REST API Pagination](#--exchange-rest-api-pagination)
-* [# Exchange Profiles](#--exchange-profiles)
-* [# Exchange Types](#--exchange-types)
-* [# Create a new order](#--create-a-new-order)
-* [# List fills](#--list-fills)
-* [# List orders](#--list-orders)
-* [# Cancel all orders](#--cancel-all-orders)
-* [# Get single order](#--get-single-order)
-* [# Cancel an order](#--cancel-an-order)
+(#--list-orders)
+
+- [# Cancel all orders](#--cancel-all-orders)
+- [# Get single order](#--get-single-order)
+- [# Cancel an order](#--cancel-an-order)
 
 ---
 
 # # Welcome to Exchange APIs
 
-
 Welcome to Coinbase Exchange API documentation for traders and developers! The APIs are separated into two categories, trading and market data:
 
-*   **Trading APIs** require authentication and let you place orders and access account information.
-*   **Market Data APIs** provide market data and are public.
+- **Trading APIs** require authentication and let you place orders and access account information.
+- **Market Data APIs** provide market data and are public.
 
 Coinbase Exchange offers multiple connectivity options tailored to your trading and data needs:
 
-*   [REST API](/exchange/docs/rest-requests) for lower-frequency trading and general requests.
-*   [FIX Order Entry API](/exchange/docs/fix-msg-order-entry-50) for higher-frequency trading.
-*   [WebSocket Feed](/exchange/docs/websocket-overview) for market data.
-*   [FIX Market Data API](/exchange/docs/fix-msg-market-data) for latency sensitive market data feeds.
+- [REST API](/exchange/docs/rest-requests) for lower-frequency trading and general requests.
+- [FIX Order Entry API](/exchange/docs/fix-msg-order-entry-50) for higher-frequency trading.
+- [WebSocket Feed](/exchange/docs/websocket-overview) for market data.
+- [FIX Market Data API](/exchange/docs/fix-msg-market-data) for latency sensitive market data feeds.
 
 Exchange's developer docs are part of [Coinbase Developer Platform](/), the single portal from which to access Coinbase's full suite of APIs and blockchain infrastructure products.
 
@@ -48,11 +34,9 @@ Info
 
 By accessing the Exchange Market Data API, you agree to be bound by the [Market Data Terms of Use](https://www.coinbase.com/legal/market_data).
 
-Last updated on **Feb 25, 2025**
----
+## Last updated on **Feb 25, 2025**
 
 # # Quickstart: Making Your First REST API Call
-
 
 This quickstart walks through creating an API key, setting up the Exchange Go SDK, and making your first few REST API calls.
 
@@ -130,11 +114,9 @@ To get product details, initialize the products service, pass in the request obj
 func main() {    credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CREDENTIALS")    if err != nil {        panic(fmt.Sprintf("unable to read exchange credentials: %v", err))    }    httpClient, err := core.DefaultHttpClient()    if err != nil {        panic(fmt.Sprintf("unable to load default http client: %v", err))    }    client := client.NewRestClient(credentials, httpClient)    productsSvc := products.NewProductsService(client)    request := &products.GetProductRequest{        ProductId: "BTC-USD",    }    response, err := productsSvc.GetProduct(context.Background(), request)    if err != nil {        panic(fmt.Sprintf("unable to get product: %v", err))    }    jsonResponse, err := json.MarshalIndent(response, "", "  ")    if err != nil {        panic(fmt.Sprintf("error marshaling response to JSON: %v", err))    }    fmt.Println(string(jsonResponse))}
 ```
 
-Last updated on **Dec 17, 2024**
----
+## Last updated on **Dec 17, 2024**
 
 # # Exchange Sandbox
-
 
 A public sandbox is available for testing API connectivity and web trading.
 
@@ -154,16 +136,14 @@ Login sessions and API keys are separate from production. Log into the [sandbox 
 
 Use the following URLs to test your API connectivity. See the [Runbook](/exchange/docs/runbook#production-urls) for Production URLs.
 
-| API | URL |
-| --- | --- |
-| REST API | `https://api-public.sandbox.exchange.coinbase.com` |
-| Websocket Feed | `wss://ws-feed-public.sandbox.exchange.coinbase.com` |
-| Websocket Direct Feed | `wss://ws-direct.sandbox.exchange.coinbase.com` |
-| FIX API - Order Entry 4.2 | `tcp+ssl://fix-public.sandbox.exchange.coinbase.com:4198` |
-| FIX API - Order Entry 5.0 SP2 | `tcp+ssl://fix-ord.sandbox.exchange.coinbase.com:6121` |
-| FIX API - Market Data 5.0 SP2 | `tcp+ssl://fix-md.sandbox.exchange.coinbase.com:6121` |
-
-  
+| API                           | URL                                                       |
+| ----------------------------- | --------------------------------------------------------- |
+| REST API                      | `https://api-public.sandbox.exchange.coinbase.com`        |
+| Websocket Feed                | `wss://ws-feed-public.sandbox.exchange.coinbase.com`      |
+| Websocket Direct Feed         | `wss://ws-direct.sandbox.exchange.coinbase.com`           |
+| FIX API - Order Entry 4.2     | `tcp+ssl://fix-public.sandbox.exchange.coinbase.com:4198` |
+| FIX API - Order Entry 5.0 SP2 | `tcp+ssl://fix-ord.sandbox.exchange.coinbase.com:6121`    |
+| FIX API - Market Data 5.0 SP2 | `tcp+ssl://fix-md.sandbox.exchange.coinbase.com:6121`     |
 
 ## Sandbox SSL Certificate
 
@@ -177,11 +157,11 @@ Your FIX SSL client must validate the following sandbox FIX server SSL certifica
 
 The Transfer endpoints are _not_ available for testing in the Sandbox:
 
-*   [Withdraw to payment](/exchange/reference/exchangerestapi_postwithdrawpaymentmethod)
-*   [Deposit from payment](/exchange/reference/exchangerestapi_postdepositpaymentmethod)
-*   [Deposit from Coinbase account](/exchange/reference/exchangerestapi_postdepositcoinbaseaccount)
-*   [Withdraw to crypto address](/exchange/reference/exchangerestapi_postwithdrawcrypto)
-*   [Withdraw to Coinbase Account](/exchange/reference/exchangerestapi_postwithdrawcoinbaseaccount)
+- [Withdraw to payment](/exchange/reference/exchangerestapi_postwithdrawpaymentmethod)
+- [Deposit from payment](/exchange/reference/exchangerestapi_postdepositpaymentmethod)
+- [Deposit from Coinbase account](/exchange/reference/exchangerestapi_postdepositcoinbaseaccount)
+- [Withdraw to crypto address](/exchange/reference/exchangerestapi_postwithdrawcrypto)
+- [Withdraw to Coinbase Account](/exchange/reference/exchangerestapi_postwithdrawcoinbaseaccount)
 
 ## Creating API Keys
 
@@ -199,11 +179,9 @@ To add or remove funds in the sandbox web interface:
 1.  Go to the **Portfolios** tab.
 2.  Click the **Deposit** and **Withdraw** buttons as you would on the production web interface.
 
-Last updated on **Aug 27, 2024**
----
+## Last updated on **Aug 27, 2024**
 
 # # Exchange Matching Engine
-
 
 Coinbase Exchange operates a continuous first-come, first-serve order book. Orders are executed in price-time priority as received by the matching engine.
 
@@ -219,26 +197,25 @@ The STP instruction on the taker order (latest order) takes precedence over the 
 
 You can define your self-trade prevention behavior when [placing an order](/exchange/reference/exchangerestapi_postorders#self-trade-prevention) with the STP flag:
 
-| Self-Trade Prevention Option | STP Flag | Description |
-| --- | --- | --- |
-| Decrement &amp; cancel (default) | `dc` | Cancel smaller order and decrement larger order by the smaller size. If the same size, cancel both. |
-| Cancel oldest | `co` | Cancel older (resting) order in full. Continue to execute the newer taking order. |
-| Cancel newest | `cn` | Cancel newer (taking) order in full. Let the old resting order remain on the order book. |
-| Cancel both | `cb` | Cancel both orders immediately. |
-
-  
+| Self-Trade Prevention Option     | STP Flag | Description                                                                                         |
+| -------------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| Decrement &amp; cancel (default) | `dc`     | Cancel smaller order and decrement larger order by the smaller size. If the same size, cancel both. |
+| Cancel oldest                    | `co`     | Cancel older (resting) order in full. Continue to execute the newer taking order.                   |
+| Cancel newest                    | `cn`     | Cancel newer (taking) order in full. Let the old resting order remain on the order book.            |
+| Cancel both                      | `cb`     | Cancel both orders immediately.                                                                     |
 
 ## Market Orders
 
 When a `market` order using decrement and cancel (`dc` ) self-trade prevention encounters an open limit order, the behavior depends on which fields were specified for the market order.
 
-*   If `funds` and `size` are specified:
-    
-    *   For a market buy order, size is decremented internally within the matching engine and funds remain unchanged. The intent is to offset your target size without limiting your buying power.
-*   If `funds` is specified (and not `size`):
-    
-    *   For a market buy order, funds are decremented.
-    *   For a market sell order, size is decremented when encountering existing limit orders.
+- If `funds` and `size` are specified:
+
+  - For a market buy order, size is decremented internally within the matching engine and funds remain unchanged. The intent is to offset your target size without limiting your buying power.
+
+- If `funds` is specified (and not `size`):
+
+  - For a market buy order, funds are decremented.
+  - For a market sell order, size is decremented when encountering existing limit orders.
 
 ## Price Improvement
 
@@ -250,19 +227,15 @@ User A places a buy order for 1 BTC at 100 USD. Then User B places a sell order 
 
 ## Order Lifecycle
 
-| Order State | Description |
-| --- | --- |
-| `received` | Valid orders that are sent to the matching engine and confirmed immediately. |
-| `open` | Any part of the order not filled immediately. Orders stay open until canceled or filled by new orders. |
-| `done` | An full order executed against another order immediately. A partial order filled or canceled (and no longer eligible for matching) |
+| Order State | Description                                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `received`  | Valid orders that are sent to the matching engine and confirmed immediately.                                                       |
+| `open`      | Any part of the order not filled immediately. Orders stay open until canceled or filled by new orders.                             |
+| `done`      | An full order executed against another order immediately. A partial order filled or canceled (and no longer eligible for matching) |
 
-  
-
-Last updated on **Feb 25, 2025**
----
+## Last updated on **Feb 25, 2025**
 
 # # Exchange Rate Limits Overview
-
 
 ## Summary
 
@@ -276,22 +249,22 @@ Private endpoints are authenticated.
 
 #### Public Endpoints
 
-*   Requests per second per IP: 10
-*   Requests per second per IP in bursts: Up to 15
+- Requests per second per IP: 10
+- Requests per second per IP in bursts: Up to 15
 
 #### Private Endpoints
 
-*   Requests per second per profile: 15
-*   Requests per second per profile in bursts: Up to 30
+- Requests per second per profile: 15
+- Requests per second per profile in bursts: Up to 30
 
 #### Private `/fills` Endpoint
 
-*   Requests per second per profile: 10
-*   Requests per second per profile in bursts: Up to 20
+- Requests per second per profile: 10
+- Requests per second per profile in bursts: Up to 20
 
 #### Private `/loans` Endpoint
 
-*   Requests per second per profile: 10
+- Requests per second per profile: 10
 
 
 
@@ -303,13 +276,13 @@ Rate limits do not apply to [List loan assets](/exchange/reference/exchangeresta
 
 #### FIX 4.2 Rate Limits
 
-*   Requests per rolling second per session: 50
-*   Messages per second in bursts: 100
+- Requests per rolling second per session: 50
+- Messages per second in bursts: 100
 
 #### FIX 5.0 Rate Limits
 
-*   2 logons per second per API key
-*   100 requests per second
+- 2 logons per second per API key
+- 100 requests per second
 
 
 
@@ -319,21 +292,21 @@ Your FIX 5 session is disconnected if your messages exceed 200 messages per seco
 
 #### FIX Maximums
 
-*   Maximum API keys per session/connection: 1
-*   Maximum connections per profile: 75 . See [FIX Best Practices](/exchange/docs/fix-best-practices).
-*   Maximum connections per user across all profiles: 175
-*   Maximum profiles per user: 100
-*   Maximum orders per batch message message (new and cancelled): 15
+- Maximum API keys per session/connection: 1
+- Maximum connections per profile: 75 . See [FIX Best Practices](/exchange/docs/fix-best-practices).
+- Maximum connections per user across all profiles: 175
+- Maximum profiles per user: 100
+- Maximum orders per batch message message (new and cancelled): 15
 
 ### [Websocket Rate Limits](/exchange/docs/websocket-rate-limits)
 
-*   Requests per second per IP: 8
-*   Requests per second per IP in bursts: Up to 20
-*   Messages sent by the client every second per IP: 100
+- Requests per second per IP: 8
+- Requests per second per IP in bursts: Up to 20
+- Messages sent by the client every second per IP: 100
 
 ### Other
 
-*   Maximum open orders: 500
+- Maximum open orders: 500
 
 ## How Rate Limits Work
 
@@ -349,53 +322,45 @@ When a user sends a request, the TokenBucket calculates whether or not to rate l
 
 ### TokenBucket Example
 
-Let's say you have a TokenBucket with burst = 3 and refresh\_rate = 1. The table below represents the state of your token bucket after a series of requests:
+Let's say you have a TokenBucket with burst = 3 and refresh_rate = 1. The table below represents the state of your token bucket after a series of requests:
 
-| Action | Time | Tokens | Notes |
-| --- | --- | --- | --- |
-| Initial State | 0.0 | 3.0 | New TokenBucket is initialized to max capacity (burst) |
-| Request 1 | 0.5 | 2.0 | Fill TokenBucket, then remove a token, because we are at max capacity, and subtract 1 token from 3 |
-| Request 2 | 0.8 | 1.3 | Fill TokenBucket to 2.3 (`min(3, (2 + (.8 - .5) * 1.0)) = min(3, 2.3) = 2.3`), then subtract 1 |
-| Request 3 | 0.9 | 0.4 | Fill TokenBucket to 1.4 (`min(3, (1.3 + (.9 - .8) * 1.0)) = min(3, 1.4) = 1.4`), then subtract 1 |
-| Request 4 | 1.0 | 0.5 | Fill TokenBucket to 0.5 (`min(3, (.4 + (1.0 - .9) * 1.0)) = min(3, 0.5) = 0.5`). Ratelimit because we don't have enough tokens available |
-| Request 5 | 1.4 | 0.9 | Fill TokenBucket to 0.9 (`min(3, (0.5 + (1.4 - 1.0) * 1.0)) = min(3, 0.9) = 0.9`). Ratelimit because we don't have enough tokens available |
-| Request 6 | 1.8 | 0.3 | Fill TokenBucket to 1.3 (`min(3, (0.9 + (1.8 - 1.4) * 1.0)) = min(3, 1.3) = 1.3`), then remove 1 |
-| Request 7 | 5.0 | 2.0 | Fill TokenBucket to 3.0 (`min(3, (0.3 + (5.0 - 1.8) * 1.0)) = min(3, 3.5) = 3`), since we would "overflow" with our calculations, then subtract 1 |
+| Action        | Time | Tokens | Notes                                                                                                                                             |
+| ------------- | ---- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Initial State | 0.0  | 3.0    | New TokenBucket is initialized to max capacity (burst)                                                                                            |
+| Request 1     | 0.5  | 2.0    | Fill TokenBucket, then remove a token, because we are at max capacity, and subtract 1 token from 3                                                |
+| Request 2     | 0.8  | 1.3    | Fill TokenBucket to 2.3 (`min(3, (2 + (.8 - .5) * 1.0)) = min(3, 2.3) = 2.3`), then subtract 1                                                    |
+| Request 3     | 0.9  | 0.4    | Fill TokenBucket to 1.4 (`min(3, (1.3 + (.9 - .8) * 1.0)) = min(3, 1.4) = 1.4`), then subtract 1                                                  |
+| Request 4     | 1.0  | 0.5    | Fill TokenBucket to 0.5 (`min(3, (.4 + (1.0 - .9) * 1.0)) = min(3, 0.5) = 0.5`). Ratelimit because we don't have enough tokens available          |
+| Request 5     | 1.4  | 0.9    | Fill TokenBucket to 0.9 (`min(3, (0.5 + (1.4 - 1.0) * 1.0)) = min(3, 0.9) = 0.9`). Ratelimit because we don't have enough tokens available        |
+| Request 6     | 1.8  | 0.3    | Fill TokenBucket to 1.3 (`min(3, (0.9 + (1.8 - 1.4) * 1.0)) = min(3, 1.3) = 1.3`), then remove 1                                                  |
+| Request 7     | 5.0  | 2.0    | Fill TokenBucket to 3.0 (`min(3, (0.3 + (5.0 - 1.8) * 1.0)) = min(3, 3.5) = 3`), since we would "overflow" with our calculations, then subtract 1 |
 
-  
-
-Last updated on **Feb 25, 2025**
----
+## Last updated on **Feb 25, 2025**
 
 # # Exchange Systems & Operations
-
 
 ## Deployment
 
 The deployment schedules for different components vary and may change without notice.
 
-| API | Schedule |
-| --- | --- |
-| FIX | Monday, Thursday at 2PM ET |
+| API       | Schedule                              |
+| --------- | ------------------------------------- |
+| FIX       | Monday, Thursday at 2PM ET            |
 | WebSocket | Monday, Wednesday, Thursday at 2PM ET |
-| REST | Monday, Wednesday, Thursday at 2PM ET |
-
-  
+| REST      | Monday, Wednesday, Thursday at 2PM ET |
 
 ## Production URLs
 
 Use the following URLs to connect to Coinbase Exchange production APIs. See [Sandbox URLs](/exchange/docs/sandbox) for testing.
 
-| API | URL |
-| --- | --- |
-| REST API | `https://api.exchange.coinbase.com` |
-| Websocket Feed | `wss://ws-feed.exchange.coinbase.com` |
-| Websocket Direct Feed | `wss://ws-direct.exchange.coinbase.com` |
-| FIX API - Order Entry 4.2 | `tcp+ssl://fix.exchange.coinbase.com:4198` |
+| API                           | URL                                            |
+| ----------------------------- | ---------------------------------------------- |
+| REST API                      | `https://api.exchange.coinbase.com`            |
+| Websocket Feed                | `wss://ws-feed.exchange.coinbase.com`          |
+| Websocket Direct Feed         | `wss://ws-direct.exchange.coinbase.com`        |
+| FIX API - Order Entry 4.2     | `tcp+ssl://fix.exchange.coinbase.com:4198`     |
 | FIX API - Order Entry 5.0 SP2 | `tcp+ssl://fix-ord.exchange.coinbase.com:6121` |
-| FIX API - Market Data 5.0 SP2 | `tcp+ssl://fix-md.exchange.coinbase.com:6121` |
-
-  
+| FIX API - Market Data 5.0 SP2 | `tcp+ssl://fix-md.exchange.coinbase.com:6121`  |
 
 ## Availability Zones
 
@@ -407,51 +372,47 @@ Caution
 
 The following information is subject to change without notification, and there is no guarantee that it will remain static over time.
 
-| Product | Availability Zone ID |
-| --- | --- |
-| FIX Order Gateways | use1-az4 |
-| Order Entry Gateway | use1-az4 |
-| Trade Engine | use1-az4 |
-| Web Socket Market Data | use1-az4 |
-| FIX Market Data | use1-az4 |
-
-  
+| Product                | Availability Zone ID |
+| ---------------------- | -------------------- |
+| FIX Order Gateways     | use1-az4             |
+| Order Entry Gateway    | use1-az4             |
+| Trade Engine           | use1-az4             |
+| Web Socket Market Data | use1-az4             |
+| FIX Market Data        | use1-az4             |
 
 ## System Components
 
 ### REST Entry Gateways
 
-*   Requests are routed through Cloudflare.
-*   Requests are processed on a FIFO basis with no queuing.
-*   REST requires additional authentication because it's stateless (as opposed to FIX order gateways, which authenticate during login).
+- Requests are routed through Cloudflare.
+- Requests are processed on a FIFO basis with no queuing.
+- REST requires additional authentication because it's stateless (as opposed to FIX order gateways, which authenticate during login).
 
 ### FIX Order Gateways
 
-*   Each instance contains a per-user product based queue.
-*   Each per-user product-based queue can hold a maximum of 50 queued requests before requests are rejected.
-*   Each per-user product-based queue is processed on a FIFO basis.
+- Each instance contains a per-user product based queue.
+- Each per-user product-based queue can hold a maximum of 50 queued requests before requests are rejected.
+- Each per-user product-based queue is processed on a FIFO basis.
 
 ### Order Entry Gateway (Risk System)
 
-*   Each instance processes requests from FIX Order Gateways and REST in real time with no queuing.
-*   System performs real-time risk checks and account collateralization.
+- Each instance processes requests from FIX Order Gateways and REST in real time with no queuing.
+- System performs real-time risk checks and account collateralization.
 
 ### Trade Engine
 
-*   Clustered service that guarantees FIFO sequencing at a product level.
-*   Processes all requests from Order Entry Gateway.
-*   Publishes market data to WebSocket / FIX Market Data.
+- Clustered service that guarantees FIFO sequencing at a product level.
+- Processes all requests from Order Entry Gateway.
+- Publishes market data to WebSocket / FIX Market Data.
 
 ### Market Data (Websocket & FIX)
 
-*   Each instance can process all market data requests across all products.
-*   Messages are distributed to customers randomly, and there is no intended benefit to being “first to subscribe”.
+- Each instance can process all market data requests across all products.
+- Messages are distributed to customers randomly, and there is no intended benefit to being “first to subscribe”.
 
-Last updated on **Feb 25, 2025**
----
+## Last updated on **Feb 25, 2025**
 
 # # Exchange REST API Requests
-
 
 All requests and responses are `application/json` content type and follow typical HTTP response status codes for success and failure.
 
@@ -467,25 +428,21 @@ Unless otherwise stated, errors to bad requests respond with HTTP 4xx or status 
 
 ### Common Error Codes
 
-| Status Code | Reason |
-| --- | --- |
-| 400 | Bad Request -- Invalid request format |
-| 401 | Unauthorized -- Invalid API Key |
-| 403 | Forbidden -- You do not have access to the requested resource |
-| 404 | Not Found |
-| 500 | Internal Server Error -- We had a problem with our server |
-
-  
+| Status Code | Reason                                                        |
+| ----------- | ------------------------------------------------------------- |
+| 400         | Bad Request -- Invalid request format                         |
+| 401         | Unauthorized -- Invalid API Key                               |
+| 403         | Forbidden -- You do not have access to the requested resource |
+| 404         | Not Found                                                     |
+| 500         | Internal Server Error -- We had a problem with our server     |
 
 ## Success
 
 A successful response is indicated by HTTP status code 200 and may contain an optional body. If the response has a body it is documented under each resource below.
 
-Last updated on **Feb 25, 2025**
----
+## Last updated on **Feb 25, 2025**
 
 # # Exchange REST API Authentication
-
 
 This page explains how to sign and authenticate REST API endpoints with API keys that let you control authorization.
 
@@ -523,14 +480,12 @@ Coinbase Exchange stores the salted hash of your passphrase for verification and
 
 You can control access by restricting the functionality of API keys. Before creating the key, you must choose what permissions you would like the key to have:
 
-| Permission | Description |
-| --- | --- |
-| View | Key has read permissions for all endpoints (including GET) |
-| Transfer | Key can transfer value for accounts, including deposits/withdrawals (and bypasses 2FA) |
-| Trade | Key can post orders and get data |
-| Manage | Key can manage user settings and preferences such as address books entries |
-
-  
+| Permission | Description                                                                            |
+| ---------- | -------------------------------------------------------------------------------------- |
+| View       | Key has read permissions for all endpoints (including GET)                             |
+| Transfer   | Key can transfer value for accounts, including deposits/withdrawals (and bypasses 2FA) |
+| Trade      | Key can post orders and get data                                                       |
+| Manage     | Key can manage user settings and preferences such as address books entries             |
 
 Refer to the documentation below to see what API key permissions are required for a specific route.
 
@@ -538,14 +493,12 @@ Refer to the documentation below to see what API key permissions are required fo
 
 All REST requests must contain the following headers:
 
-| Header | Description |
-| --- | --- |
-| `CB-ACCESS-KEY` | API key as a string |
-| `CB-ACCESS-SIGN` | base64-encoded signature (see [Signing a Message](#signing-a-message)) |
-| `CB-ACCESS-TIMESTAMP` | Timestamp for your request |
-| `CB-ACCESS-PASSPHRASE` | Passphrase you specified when creating the API key |
-
-  
+| Header                 | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `CB-ACCESS-KEY`        | API key as a string                                                    |
+| `CB-ACCESS-SIGN`       | base64-encoded signature (see [Signing a Message](#signing-a-message)) |
+| `CB-ACCESS-TIMESTAMP`  | Timestamp for your request                                             |
+| `CB-ACCESS-PASSPHRASE` | Passphrase you specified when creating the API key                     |
 
 All request bodies should have content type `application/json` and be valid JSON.
 
@@ -565,14 +518,10 @@ Info
 
 Remember to base64-decode the alphanumeric secret string (resulting in 64 bytes) before using it as the key for HMAC. Also, base64-encode the digest output before sending in the header.
 
-*   `timestamp` is the same as the `CB-ACCESS-TIMESTAMP` header.
-    
-*   `method` should be UPPER CASE e.g., `GET` or `POST`.
-    
-*   `requestPath` should only include the path of the API endpoint.
-    
-*   `body` is the request body string or omitted if there is no request body (typically for `GET` requests).
-    
+- `timestamp` is the same as the `CB-ACCESS-TIMESTAMP` header.
+- `method` should be UPPER CASE e.g., `GET` or `POST`.
+- `requestPath` should only include the path of the API endpoint.
+- `body` is the request body string or omitted if there is no request body (typically for `GET` requests).
 
 ### Signature Example
 
@@ -582,11 +531,9 @@ The following example demonstrates how to generate a signature in Javascript:
 // import crypto libraryvar crypto = require("crypto");// create the json request objectvar cb_access_timestamp = Date.now() / 1000; // in msvar cb_access_passphrase = "...";var secret = "PYPd1Hv4J6/7x...";var requestPath = "/orders";var body = JSON.stringify({  price: "1.0",  size: "1.0",  side: "buy",  product_id: "BTC-USD",});var method = "POST";// create the prehash string by concatenating required partsvar message = cb_access_timestamp + method + requestPath + body;// decode the base64 secretvar key = Buffer.from(secret, "base64");// create a sha256 hmac with the secretvar hmac = crypto.createHmac("sha256", key);// sign the require message with the hmac and base64 encode the resultvar cb_access_sign = hmac.update(message).digest("base64");
 ```
 
-Last updated on **May 20, 2024**
----
+## Last updated on **May 20, 2024**
 
 # # Exchange REST API Rate Limits
-
 
 Public endpoints are throttled by IP and private endpoints by profile ID. Some endpoints (like `/fills`) may have custom rate limits.
 
@@ -594,24 +541,24 @@ When a REST API rate limit is exceeded, a status of `429 Too Many Requests` is r
 
 #### Public Endpoints
 
-*   Requests per second per IP: 10
-*   Requests per second per IP in bursts: Up to 15
+- Requests per second per IP: 10
+- Requests per second per IP in bursts: Up to 15
 
 #### Private Endpoints
 
 Private endpoints are authenticated.
 
-*   Requests per second per profile: 15
-*   Requests per second per profile in bursts: Up to 30
+- Requests per second per profile: 15
+- Requests per second per profile in bursts: Up to 30
 
 #### Private `/fills` Endpoint
 
-*   Requests per second per profile: 10
-*   Requests per second per profile in bursts: Up to 20
+- Requests per second per profile: 10
+- Requests per second per profile in bursts: Up to 20
 
 #### Private `/loans` Endpoint
 
-*   Requests per second per profile: 10
+- Requests per second per profile: 10
 
 
 
@@ -619,11 +566,9 @@ Info
 
 Rate limits do not apply to [List loan assets](/exchange/reference/exchangerestapi_getloanassets) (`/loans/assets`) which is not private.
 
-Last updated on **Dec 7, 2024**
----
+## Last updated on **Dec 7, 2024**
 
 # # Exchange REST API Pagination
-
 
 Coinbase Exchange uses cursor pagination for all REST requests which return arrays.
 
@@ -633,13 +578,11 @@ Cursor pagination allows for fetching results before and after the current page 
 
 ### Parameters
 
-| Parameter | Default | Description |
-| --- | --- | --- |
-| `before` |  | Request page before (newer) this pagination id |
-| `after` |  | Request page after (older) this pagination id |
-| `limit` | 1000 | Number of results per request. Maximum 1000 (default 1000) |
-
-  
+| Parameter | Default | Description                                                |
+| --------- | ------- | ---------------------------------------------------------- |
+| `before`  |         | Request page before (newer) this pagination id             |
+| `after`   |         | Request page after (older) this pagination id              |
+| `limit`   | 1000    | Number of results per request. Maximum 1000 (default 1000) |
 
 ### Example
 
@@ -661,11 +604,9 @@ The response also contains a `CB-AFTER` header which returns the cursor id to us
 
 Cursor pagination can be unintuitive at first. `before` and `after` cursor arguments should not be confused with before and after in chronological time. Most paginated requests return the latest information (newest) as the first page sorted by newest (in chronological time) first. To get older information you would request pages `after` the initial page. To get information newer, you would request pages `before` the first page.
 
-Last updated on **Feb 25, 2025**
----
+## Last updated on **Feb 25, 2025**
 
 # # Exchange Profiles
-
 
 Profiles are the equivalent of portfolios on the [Coinbase Exchange](https://exchange.coinbase.com/portfolios) website. The maximum number of profiles is 100 .
 
@@ -679,11 +620,9 @@ To access data or actions on a different profile, create a new API key on the Co
 
 Profiles can be deleted on the Coinbase Exchange website. The permissions of an API key associatd with a deleted profile are automatically set to "View."
 
-Last updated on **May 9, 2024**
----
+## Last updated on **May 9, 2024**
 
 # # Exchange Types
-
 
 ## Timestamps
 
@@ -705,11 +644,9 @@ Most identifiers are UUID unless otherwise specified. When making a request whic
 
 `132fb6ae-456b-4654-b4e0-d681ac05cea1` or `132fb6ae456b4654b4e0d681ac05cea1`
 
-Last updated on **May 8, 2024**
----
+## Last updated on **May 8, 2024**
 
 # # Create a new order
-
 
 POST
 
@@ -729,30 +666,26 @@ This endpoint requires the "trade" permission.
 
 ### Limit Order Parameters
 
-| Parameter | Description |
-| --- | --- |
-| price | Price per bitcoin |
-| size | [optional]* Amount of BTC to buy or sell |
-| funds | [optional]* Desired amount of quote currency to use (See [Limit Order With Funds](/exchange/docs/fix-msg-oe-lwf/) for details) |
-| time_in_force | [optional] `GTC`, `GTT`, `IOC`, or `FOK` (default is `GTC`) |
-| cancel_after | [optional]** `min`, `hour`, `day` |
-| post_only | [optional]*** Post only flag |
-| max_floor | [optional] Max size of iceberg order to display. Must be &gt; 10% of OrderQty. |
-
-  
+| Parameter     | Description                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| price         | Price per bitcoin                                                                                                               |
+| size          | [optional]\* Amount of BTC to buy or sell                                                                                       |
+| funds         | [optional]\* Desired amount of quote currency to use (See [Limit Order With Funds](/exchange/docs/fix-msg-oe-lwf/) for details) |
+| time_in_force | [optional] `GTC`, `GTT`, `IOC`, or `FOK` (default is `GTC`)                                                                     |
+| cancel_after  | [optional]\*\* `min`, `hour`, `day`                                                                                             |
+| post_only     | [optional]\*\*\* Post only flag                                                                                                 |
+| max_floor     | [optional] Max size of iceberg order to display. Must be &gt; 10% of OrderQty.                                                  |
 
 \* One of size or funds is required. Only one may be specified  
 \*\* Requires `time_in_force` to be `GTT`  
-\*\*\* Invalid when time\_in\_force is `IOC` or `FOK`
+\*\*\* Invalid when time_in_force is `IOC` or `FOK`
 
 ### Market Order Parameters
 
-| Parameter | Description |
-| --- | --- |
-| size | [optional]* Desired amount in BTC |
-| funds | [optional]* Desired amount of quote currency to use |
-
-  
+| Parameter | Description                                          |
+| --------- | ---------------------------------------------------- |
+| size      | [optional]\* Desired amount in BTC                   |
+| funds     | [optional]\* Desired amount of quote currency to use |
 
 \* One of `size` or `funds` is required.
 
@@ -852,14 +785,12 @@ For `market` `buy` orders where `funds` is specified, the `funds` amount is put 
 
 Self-trading is not allowed on the exchange. Two orders from the same user are not allowed to match with one another. To change the self-trade behavior, specify the `stp` flag.
 
-| Flag | Name |
-| --- | --- |
-| dc | Decrease and Cancel (default) |
-| co | Cancel oldest |
-| cn | Cancel newest |
-| cb | Cancel both |
-
-  
+| Flag | Name                          |
+| ---- | ----------------------------- |
+| dc   | Decrease and Cancel (default) |
+| co   | Cancel oldest                 |
+| cn   | Cancel newest                 |
+| cb   | Cancel both                   |
 
 See the [self-trade prevention](/exchange/docs/matching-engine#self-trade-prevention) documentation for details about these fields.
 
@@ -881,85 +812,85 @@ Open orders do not expire and remain open until they are either filled or cancel
 
 ## Authentication
 
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-| cb-access-key | string | required |
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | required |
 | cb-access-passphrase | string | required |
-| cb-access-sign | string | required |
-| cb-access-timestamp | string | required |
+| cb-access-sign       | string | required |
+| cb-access-timestamp  | string | required |
 
 ## Request Parameters
 
-| Parameter | Type | Description |
-| --------- | ---- | ----------- |
-| profile_id | string | Create order on a specific `profile_id`. If none is passed, defaults to `default` profile. |
-| type | string | Possible values: [limit, market, stop] |
-| side | string | Possible values: [buy, sell] |
-| product_id | string | Book on which to place an order |
-| stp | string | Possible values: [dc, co, cn, cb] |
-| stop | string | Possible values: [loss, entry] |
-| stop_price | string | Price threshold at which a `stop` order will be placed on the book |
-| price | string | Price per unit of cryptocurrency - required for `limit`/`stop` orders |
-| size | string | Amount of base currency to buy or sell - required for `limit`/`stop` orders and `market` `sell`s |
-| funds | string | Amount of quote currency to buy - required for `market` `buy`s |
-| time_in_force | string | Possible values: [GTC, GTT, IOC, FOK] |
-| cancel_after | string | Possible values: [min, hour, day] |
-| post_only | boolean | If true, order will only execute as a `maker` order |
-| client_oid | string | Optional Order ID selected by the user or the frontend client to identify their order |
-| max_floor | string | Placing an iceberg order. Use this to specify how much to show |
-| stop_limit_price | string | Required for take profit/stop loss orders. Denotes the updated limit price upon the activation of the stop loss trigger |
+| Parameter        | Type    | Description                                                                                                             |
+| ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| profile_id       | string  | Create order on a specific `profile_id`. If none is passed, defaults to `default` profile.                              |
+| type             | string  | Possible values: [limit, market, stop]                                                                                  |
+| side             | string  | Possible values: [buy, sell]                                                                                            |
+| product_id       | string  | Book on which to place an order                                                                                         |
+| stp              | string  | Possible values: [dc, co, cn, cb]                                                                                       |
+| stop             | string  | Possible values: [loss, entry]                                                                                          |
+| stop_price       | string  | Price threshold at which a `stop` order will be placed on the book                                                      |
+| price            | string  | Price per unit of cryptocurrency - required for `limit`/`stop` orders                                                   |
+| size             | string  | Amount of base currency to buy or sell - required for `limit`/`stop` orders and `market` `sell`s                        |
+| funds            | string  | Amount of quote currency to buy - required for `market` `buy`s                                                          |
+| time_in_force    | string  | Possible values: [GTC, GTT, IOC, FOK]                                                                                   |
+| cancel_after     | string  | Possible values: [min, hour, day]                                                                                       |
+| post_only        | boolean | If true, order will only execute as a `maker` order                                                                     |
+| client_oid       | string  | Optional Order ID selected by the user or the frontend client to identify their order                                   |
+| max_floor        | string  | Placing an iceberg order. Use this to specify how much to show                                                          |
+| stop_limit_price | string  | Required for take profit/stop loss orders. Denotes the updated limit price upon the activation of the stop loss trigger |
 
 ## API Response Details
 
 ### Response: 200 The new order that was successfully created
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| id | string | uuid |
-| price | string | price per unit of base currency |
-| size | string | amount of base currency to buy/sell |
-| product_id | string | book the order was placed on |
-| profile_id | string | profile_id that placed the order |
-| side | string | Possible values: [buy, sell] |
-| funds | string | amount of quote currency to spend (for market orders) |
-| specified_funds | string | funds with fees |
-| type | string | Possible values: [limit, market, stop] |
-| time_in_force | string | Possible values: [GTC, GTT, IOC, FOK] |
-| expire_time | date-time | timestamp at which order expires |
-| post_only | boolean | if true, forces order to be `maker` only |
-| created_at | date-time | timestamp at which order was placed |
-| done_at | date-time | timestamp at which order was done |
-| done_reason | string | reason order was done (filled, rejected, or otherwise) |
-| reject_reason | string | reason order was rejected by engine |
-| fill_fees | string | fees paid on current filled amount |
-| filled_size | string | amount (in base currency) of the order that has been filled |
-| executed_value | string |  |
-| status | string | Possible values: [open, pending, rejected, done, active, received, all] |
-| settled | boolean | true if funds have been exchanged and settled |
-| stop | string | Possible values: [loss, entry] |
-| stop_price | string | price (in quote currency) at which to execute the order |
-| funding_amount | string |  |
-| client_oid | string | client order id |
-| market_type | string | market type where order was traded |
-| max_floor | string | maximum visible quantity for iceberg order |
-| secondary_order_id | string | order id for the visible order for iceberg order |
-| stop_limit_price | string | stop limit price for TPSL order |
+| Property           | Type      | Description                                                             |
+| ------------------ | --------- | ----------------------------------------------------------------------- |
+| id                 | string    | uuid                                                                    |
+| price              | string    | price per unit of base currency                                         |
+| size               | string    | amount of base currency to buy/sell                                     |
+| product_id         | string    | book the order was placed on                                            |
+| profile_id         | string    | profile_id that placed the order                                        |
+| side               | string    | Possible values: [buy, sell]                                            |
+| funds              | string    | amount of quote currency to spend (for market orders)                   |
+| specified_funds    | string    | funds with fees                                                         |
+| type               | string    | Possible values: [limit, market, stop]                                  |
+| time_in_force      | string    | Possible values: [GTC, GTT, IOC, FOK]                                   |
+| expire_time        | date-time | timestamp at which order expires                                        |
+| post_only          | boolean   | if true, forces order to be `maker` only                                |
+| created_at         | date-time | timestamp at which order was placed                                     |
+| done_at            | date-time | timestamp at which order was done                                       |
+| done_reason        | string    | reason order was done (filled, rejected, or otherwise)                  |
+| reject_reason      | string    | reason order was rejected by engine                                     |
+| fill_fees          | string    | fees paid on current filled amount                                      |
+| filled_size        | string    | amount (in base currency) of the order that has been filled             |
+| executed_value     | string    |                                                                         |
+| status             | string    | Possible values: [open, pending, rejected, done, active, received, all] |
+| settled            | boolean   | true if funds have been exchanged and settled                           |
+| stop               | string    | Possible values: [loss, entry]                                          |
+| stop_price         | string    | price (in quote currency) at which to execute the order                 |
+| funding_amount     | string    |                                                                         |
+| client_oid         | string    | client order id                                                         |
+| market_type        | string    | market type where order was traded                                      |
+| max_floor          | string    | maximum visible quantity for iceberg order                              |
+| secondary_order_id | string    | order id for the visible order for iceberg order                        |
+| stop_limit_price   | string    | stop limit price for TPSL order                                         |
 
 ### Response: 401 Unauthorized.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ### Response: 500 An unexpected error response.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
+
 ---
 
 # # List fills
-
 
 GET
 
@@ -991,63 +922,63 @@ See [Pagination](/exchange/docs/rest-pagination) for more information.
 
 ## Authentication
 
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-| cb-access-key | string | required |
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | required |
 | cb-access-passphrase | string | required |
-| cb-access-sign | string | required |
-| cb-access-timestamp | string | required |
+| cb-access-sign       | string | required |
+| cb-access-timestamp  | string | required |
 
 ## Query Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| order_id | string | No | limit to fills on a specific order. Either `order_id` or `product_id` is required. |
-| product_id | string | No | limit to fills on a specific product. Either `order_id` or `product_id` is required. |
-| limit | int64 | No | Limit on number of results to return. |
-| before | string | No | Used for pagination. Sets start cursor to `before` id. |
-| after | string | No | Used for pagination. Sets end cursor to `after` id. |
-| market_type | string | No | Market type which the order was filled in. |
-| start_date | string | No | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
-| end_date | string | No | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| Parameter   | Type   | Required | Description                                                                                                                                                  |
+| ----------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| order_id    | string | No       | limit to fills on a specific order. Either `order_id` or `product_id` is required.                                                                           |
+| product_id  | string | No       | limit to fills on a specific product. Either `order_id` or `product_id` is required.                                                                         |
+| limit       | int64  | No       | Limit on number of results to return.                                                                                                                        |
+| before      | string | No       | Used for pagination. Sets start cursor to `before` id.                                                                                                       |
+| after       | string | No       | Used for pagination. Sets end cursor to `after` id.                                                                                                          |
+| market_type | string | No       | Market type which the order was filled in.                                                                                                                   |
+| start_date  | string | No       | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| end_date    | string | No       | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
 
 ## API Response Details
 
 ### Response: 200
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| trade_id | int32 | id of trade that created the fill |
-| product_id | string | book the order was placed on |
-| order_id | string | uuid |
-| user_id | string | id of user's account |
-| profile_id | string | profile_id that placed the order |
-| liquidity | string | Possible values: [M, T, O] |
-| price | string | price per unit of base currency |
-| size | string | amount of base currency to buy/sell |
-| fee | string | fees paid on current filled amount |
-| created_at | date-time | timestamp of fill |
-| side | string | Possible values: [buy, sell] |
-| settled | boolean | true if funds have been exchanged and settled |
-| usd_volume | string | true if funds have been exchanged and settled |
-| market_type | string | market type which the order was filled in |
-| funding_currency | string | funding currency which the order was filled in |
+| Property         | Type      | Description                                    |
+| ---------------- | --------- | ---------------------------------------------- |
+| trade_id         | int32     | id of trade that created the fill              |
+| product_id       | string    | book the order was placed on                   |
+| order_id         | string    | uuid                                           |
+| user_id          | string    | id of user's account                           |
+| profile_id       | string    | profile_id that placed the order               |
+| liquidity        | string    | Possible values: [M, T, O]                     |
+| price            | string    | price per unit of base currency                |
+| size             | string    | amount of base currency to buy/sell            |
+| fee              | string    | fees paid on current filled amount             |
+| created_at       | date-time | timestamp of fill                              |
+| side             | string    | Possible values: [buy, sell]                   |
+| settled          | boolean   | true if funds have been exchanged and settled  |
+| usd_volume       | string    | true if funds have been exchanged and settled  |
+| market_type      | string    | market type which the order was filled in      |
+| funding_currency | string    | funding currency which the order was filled in |
 
 ### Response: 401 Unauthorized.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ### Response: 500 An unexpected error response.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
+
 ---
 
 # # List orders
-
 
 GET
 
@@ -1059,17 +990,15 @@ List your current open orders. Only open or un-settled orders are returned by de
 
 Orders with a "pending" status have fewer fields in the response.
 
-*   Pending limit orders do not have `stp`, `time_in_force`, `expire_time`, and `post_only`.
-*   Pending market orders have the same fields as a pending limit order minus `price` and `size`, and no market specific fields (`funds`, `specified_funds`).
-*   Pending stop orders have the same fields as a pending limit order and no stop specific fields (`stop`, `stop_price`).
+- Pending limit orders do not have `stp`, `time_in_force`, `expire_time`, and `post_only`.
+- Pending market orders have the same fields as a pending limit order minus `price` and `size`, and no market specific fields (`funds`, `specified_funds`).
+- Pending stop orders have the same fields as a pending limit order and no stop specific fields (`stop`, `stop_price`).
 
-| Order Type | Does Not Have These Fields |
-| --- | --- |
-| Pending Limit Order | `stp`, `time_in_force`, `expire_time`, `post_only` |
+| Order Type           | Does Not Have These Fields                                                                      |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| Pending Limit Order  | `stp`, `time_in_force`, `expire_time`, `post_only`                                              |
 | Pending Market Order | `stp`, `time_in_force`, `expire_time`, `post_only`, `price`, `size`, `funds`, `specified_funds` |
-| Pending Stop Order | `stp`, `time_in_force`, `expire_time`, `post_only`, `stop`, `stop_price` |
-
-  
+| Pending Stop Order   | `stp`, `time_in_force`, `expire_time`, `post_only`, `stop`, `stop_price`                        |
 
 ## API Key Permissions
 
@@ -1103,80 +1032,80 @@ This request is paginated. See [Pagination](/exchange/docs/rest-pagination) for 
 
 ## Authentication
 
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-| cb-access-key | string | required |
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | required |
 | cb-access-passphrase | string | required |
-| cb-access-sign | string | required |
-| cb-access-timestamp | string | required |
+| cb-access-sign       | string | required |
+| cb-access-timestamp  | string | required |
 
 ## Query Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| profile_id | string | No | Filter results by a specific profile_id |
-| product_id | string | No | Filter results by a specific product_id |
-| sortedBy | string | No | Sort criteria for results. |
-| sorting | string | No | Ascending or descending order, by `sortedBy` |
-| start_date | date-time | No | Filter results by minimum posted date |
-| end_date | date-time | No | Filter results by maximum posted date |
-| before | string | No | Used for pagination. Sets start cursor to `before` date. |
-| after | string | No | Used for pagination. Sets end cursor to `after` date. |
-| limit | int64 | Yes | Limit on number of results to return. |
-| status | string[] | Yes | Array with order statuses to filter by. |
-| market_type | string | No | Market type which the order was traded in. |
+| Parameter   | Type      | Required | Description                                              |
+| ----------- | --------- | -------- | -------------------------------------------------------- |
+| profile_id  | string    | No       | Filter results by a specific profile_id                  |
+| product_id  | string    | No       | Filter results by a specific product_id                  |
+| sortedBy    | string    | No       | Sort criteria for results.                               |
+| sorting     | string    | No       | Ascending or descending order, by `sortedBy`             |
+| start_date  | date-time | No       | Filter results by minimum posted date                    |
+| end_date    | date-time | No       | Filter results by maximum posted date                    |
+| before      | string    | No       | Used for pagination. Sets start cursor to `before` date. |
+| after       | string    | No       | Used for pagination. Sets end cursor to `after` date.    |
+| limit       | int64     | Yes      | Limit on number of results to return.                    |
+| status      | string[]  | Yes      | Array with order statuses to filter by.                  |
+| market_type | string    | No       | Market type which the order was traded in.               |
 
 ## API Response Details
 
 ### Response: 200
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| id | string | uuid |
-| price | string | price per unit of base currency |
-| size | string | amount of base currency to buy/sell |
-| product_id | string | book the order was placed on |
-| profile_id | string | profile_id that placed the order |
-| side | string | Possible values: [buy, sell] |
-| funds | string | amount of quote currency to spend (for market orders) |
-| specified_funds | string | funds with fees |
-| type | string | Possible values: [limit, market, stop] |
-| time_in_force | string | Possible values: [GTC, GTT, IOC, FOK] |
-| expire_time | date-time | timestamp at which order expires |
-| post_only | boolean | if true, forces order to be `maker` only |
-| created_at | date-time | timestamp at which order was placed |
-| done_at | date-time | timestamp at which order was done |
-| done_reason | string | reason order was done (filled, rejected, or otherwise) |
-| reject_reason | string | reason order was rejected by engine |
-| fill_fees | string | fees paid on current filled amount |
-| filled_size | string | amount (in base currency) of the order that has been filled |
-| executed_value | string |  |
-| status | string | Possible values: [open, pending, rejected, done, active, received, all] |
-| settled | boolean | true if funds have been exchanged and settled |
-| stop | string | Possible values: [loss, entry] |
-| stop_price | string | price (in quote currency) at which to execute the order |
-| funding_amount | string |  |
-| client_oid | string | client order id |
-| market_type | string | market type where order was traded |
-| max_floor | string | maximum visible quantity for iceberg order |
-| secondary_order_id | string | order id for the visible order for iceberg order |
-| stop_limit_price | string | stop limit price for TPSL order |
+| Property           | Type      | Description                                                             |
+| ------------------ | --------- | ----------------------------------------------------------------------- |
+| id                 | string    | uuid                                                                    |
+| price              | string    | price per unit of base currency                                         |
+| size               | string    | amount of base currency to buy/sell                                     |
+| product_id         | string    | book the order was placed on                                            |
+| profile_id         | string    | profile_id that placed the order                                        |
+| side               | string    | Possible values: [buy, sell]                                            |
+| funds              | string    | amount of quote currency to spend (for market orders)                   |
+| specified_funds    | string    | funds with fees                                                         |
+| type               | string    | Possible values: [limit, market, stop]                                  |
+| time_in_force      | string    | Possible values: [GTC, GTT, IOC, FOK]                                   |
+| expire_time        | date-time | timestamp at which order expires                                        |
+| post_only          | boolean   | if true, forces order to be `maker` only                                |
+| created_at         | date-time | timestamp at which order was placed                                     |
+| done_at            | date-time | timestamp at which order was done                                       |
+| done_reason        | string    | reason order was done (filled, rejected, or otherwise)                  |
+| reject_reason      | string    | reason order was rejected by engine                                     |
+| fill_fees          | string    | fees paid on current filled amount                                      |
+| filled_size        | string    | amount (in base currency) of the order that has been filled             |
+| executed_value     | string    |                                                                         |
+| status             | string    | Possible values: [open, pending, rejected, done, active, received, all] |
+| settled            | boolean   | true if funds have been exchanged and settled                           |
+| stop               | string    | Possible values: [loss, entry]                                          |
+| stop_price         | string    | price (in quote currency) at which to execute the order                 |
+| funding_amount     | string    |                                                                         |
+| client_oid         | string    | client order id                                                         |
+| market_type        | string    | market type where order was traded                                      |
+| max_floor          | string    | maximum visible quantity for iceberg order                              |
+| secondary_order_id | string    | order id for the visible order for iceberg order                        |
+| stop_limit_price   | string    | stop limit price for TPSL order                                         |
 
 ### Response: 401 Unauthorized.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ### Response: 500 An unexpected error response.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
+
 ---
 
 # # Cancel all orders
-
 
 DELETE
 
@@ -1190,28 +1119,28 @@ This endpoint requires the "trade" permission.
 
 ## Examples
 
-| Example | Response |
-| --- | --- |
-| `/orders?product_id=FOO-BAR` | (404) ProductNotFound |
-| `/orders?product_id=BtC-uSd` | (200) Cancel all orders for BTC-USD |
-| `/orders?Product_id=BTC-USD` | (400) Return BadRequest Error |
-| `/orders` | (200) Cancel all orders for all products |
+| Example                      | Response                                 |
+| ---------------------------- | ---------------------------------------- |
+| `/orders?product_id=FOO-BAR` | (404) ProductNotFound                    |
+| `/orders?product_id=BtC-uSd` | (200) Cancel all orders for BTC-USD      |
+| `/orders?Product_id=BTC-USD` | (400) Return BadRequest Error            |
+| `/orders`                    | (200) Cancel all orders for all products |
 
 ## Authentication
 
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-| cb-access-key | string | required |
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | required |
 | cb-access-passphrase | string | required |
-| cb-access-sign | string | required |
-| cb-access-timestamp | string | required |
+| cb-access-sign       | string | required |
+| cb-access-timestamp  | string | required |
 
 ## Query Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| profile_id | string | No | Cancels orders on a specific profile |
-| product_id | string | No | Cancels orders on a specific product only |
+| Parameter  | Type   | Required | Description                               |
+| ---------- | ------ | -------- | ----------------------------------------- |
+| profile_id | string | No       | Cancels orders on a specific profile      |
+| product_id | string | No       | Cancels orders on a specific product only |
 
 ## API Response Details
 
@@ -1222,19 +1151,19 @@ This endpoint requires the "trade" permission.
 
 ### Response: 401 Unauthorized.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ### Response: 500 An unexpected error response.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
+
 ---
 
 # # Get single order
-
 
 GET
 
@@ -1258,76 +1187,76 @@ Open orders can change state between the request and the response depending on m
 
 ## Authentication
 
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-| cb-access-key | string | required |
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | required |
 | cb-access-passphrase | string | required |
-| cb-access-sign | string | required |
-| cb-access-timestamp | string | required |
+| cb-access-sign       | string | required |
+| cb-access-timestamp  | string | required |
 
 ## Path Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| order_id | string | Yes | `order_id` is either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the client: namespace. |
+| Parameter | Type   | Required | Description                                                                                                                                          |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id  | string | Yes      | `order_id` is either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the client: namespace. |
 
 ## Query Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| market_type | string | No | Market type which the order was traded in. |
+| Parameter   | Type   | Required | Description                                |
+| ----------- | ------ | -------- | ------------------------------------------ |
+| market_type | string | No       | Market type which the order was traded in. |
 
 ## API Response Details
 
 ### Response: 200
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| id | string | uuid |
-| price | string | price per unit of base currency |
-| size | string | amount of base currency to buy/sell |
-| product_id | string | book the order was placed on |
-| profile_id | string | profile_id that placed the order |
-| side | string | Possible values: [buy, sell] |
-| funds | string | amount of quote currency to spend (for market orders) |
-| specified_funds | string | funds with fees |
-| type | string | Possible values: [limit, market, stop] |
-| time_in_force | string | Possible values: [GTC, GTT, IOC, FOK] |
-| expire_time | date-time | timestamp at which order expires |
-| post_only | boolean | if true, forces order to be `maker` only |
-| created_at | date-time | timestamp at which order was placed |
-| done_at | date-time | timestamp at which order was done |
-| done_reason | string | reason order was done (filled, rejected, or otherwise) |
-| reject_reason | string | reason order was rejected by engine |
-| fill_fees | string | fees paid on current filled amount |
-| filled_size | string | amount (in base currency) of the order that has been filled |
-| executed_value | string |  |
-| status | string | Possible values: [open, pending, rejected, done, active, received, all] |
-| settled | boolean | true if funds have been exchanged and settled |
-| stop | string | Possible values: [loss, entry] |
-| stop_price | string | price (in quote currency) at which to execute the order |
-| funding_amount | string |  |
-| client_oid | string | client order id |
-| market_type | string | market type where order was traded |
-| max_floor | string | maximum visible quantity for iceberg order |
-| secondary_order_id | string | order id for the visible order for iceberg order |
-| stop_limit_price | string | stop limit price for TPSL order |
+| Property           | Type      | Description                                                             |
+| ------------------ | --------- | ----------------------------------------------------------------------- |
+| id                 | string    | uuid                                                                    |
+| price              | string    | price per unit of base currency                                         |
+| size               | string    | amount of base currency to buy/sell                                     |
+| product_id         | string    | book the order was placed on                                            |
+| profile_id         | string    | profile_id that placed the order                                        |
+| side               | string    | Possible values: [buy, sell]                                            |
+| funds              | string    | amount of quote currency to spend (for market orders)                   |
+| specified_funds    | string    | funds with fees                                                         |
+| type               | string    | Possible values: [limit, market, stop]                                  |
+| time_in_force      | string    | Possible values: [GTC, GTT, IOC, FOK]                                   |
+| expire_time        | date-time | timestamp at which order expires                                        |
+| post_only          | boolean   | if true, forces order to be `maker` only                                |
+| created_at         | date-time | timestamp at which order was placed                                     |
+| done_at            | date-time | timestamp at which order was done                                       |
+| done_reason        | string    | reason order was done (filled, rejected, or otherwise)                  |
+| reject_reason      | string    | reason order was rejected by engine                                     |
+| fill_fees          | string    | fees paid on current filled amount                                      |
+| filled_size        | string    | amount (in base currency) of the order that has been filled             |
+| executed_value     | string    |                                                                         |
+| status             | string    | Possible values: [open, pending, rejected, done, active, received, all] |
+| settled            | boolean   | true if funds have been exchanged and settled                           |
+| stop               | string    | Possible values: [loss, entry]                                          |
+| stop_price         | string    | price (in quote currency) at which to execute the order                 |
+| funding_amount     | string    |                                                                         |
+| client_oid         | string    | client order id                                                         |
+| market_type        | string    | market type where order was traded                                      |
+| max_floor          | string    | maximum visible quantity for iceberg order                              |
+| secondary_order_id | string    | order id for the visible order for iceberg order                        |
+| stop_limit_price   | string    | stop limit price for TPSL order                                         |
 
 ### Response: 401 Unauthorized.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ### Response: 500 An unexpected error response.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
+
 ---
 
 # # Cancel an order
-
 
 DELETE
 
@@ -1357,8 +1286,8 @@ Orders can be canceled using either the exchange assigned `id` or the client ass
 
 A successfully cancelled order response includes:
 
-*   the order ID if the order is cancelled with the exchange assigned `id`,
-*   the client assigned `client_oid` if the order is cancelled with client order ID.
+- the order ID if the order is cancelled with the exchange assigned `id`,
+- the client assigned `client_oid` if the order is cancelled with client order ID.
 
 ## Cancel Reject
 
@@ -1366,25 +1295,25 @@ If the order could not be canceled (already filled or previously canceled, etc.)
 
 ## Authentication
 
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-| cb-access-key | string | required |
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | required |
 | cb-access-passphrase | string | required |
-| cb-access-sign | string | required |
-| cb-access-timestamp | string | required |
+| cb-access-sign       | string | required |
+| cb-access-timestamp  | string | required |
 
 ## Path Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| order_id | string | Yes | Orders may be canceled using either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the `client:` namespace. |
+| Parameter | Type   | Required | Description                                                                                                                                                           |
+| --------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id  | string | Yes      | Orders may be canceled using either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the `client:` namespace. |
 
 ## Query Parameters
 
-| Parameter | Type | Required | Description |
-| --------- | ---- | -------- | ----------- |
-| profile_id | string | No | Cancels orders on a specific profile |
-| product_id | string | No | Optional product id of order |
+| Parameter  | Type   | Required | Description                          |
+| ---------- | ------ | -------- | ------------------------------------ |
+| profile_id | string | No       | Cancels orders on a specific profile |
+| product_id | string | No       | Optional product id of order         |
 
 ## API Response Details
 
@@ -1395,14 +1324,14 @@ If the order could not be canceled (already filled or previously canceled, etc.)
 
 ### Response: 401 Unauthorized.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ### Response: 500 An unexpected error response.
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| message | string |  |
----
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
+---

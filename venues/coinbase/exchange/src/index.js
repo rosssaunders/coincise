@@ -30,6 +30,7 @@ Usage:
 
 // Main function to handle CLI commands
 const main = async () => {
+  let exitCode = 0
   try {
     if (!command || command === 'help' || command === '--help' || command === '-h') {
       printHelp()
@@ -53,6 +54,7 @@ const main = async () => {
       if (!url || !outputFile) {
         console.error('Error: URL and output file are required')
         printHelp()
+        exitCode = 1
         return
       }
 
@@ -68,6 +70,7 @@ const main = async () => {
 
         if (!markdownTable) {
           console.error('Error: Could not extract authentication data from input file')
+          exitCode = 1
           return
         }
 
@@ -80,6 +83,7 @@ const main = async () => {
         }
       } catch (error) {
         console.error('Error converting auth file:', error.message)
+        exitCode = 1
       }
     } else if (command === 'convert-params' && args[1]) {
       try {
@@ -92,6 +96,7 @@ const main = async () => {
 
         if (!markdownTable) {
           console.error('Error: Could not extract request parameters from input file')
+          exitCode = 1
           return
         }
 
@@ -104,14 +109,22 @@ const main = async () => {
         }
       } catch (error) {
         console.error('Error converting params file:', error.message)
+        exitCode = 1
       }
     } else {
       console.error(`Unknown command: ${command}`)
       printHelp()
+      exitCode = 1
     }
   } catch (error) {
     console.error('Error:', error)
-    process.exit(1)
+    exitCode = 1
+  } finally {
+    // In CI environments, make sure errors are reported to the CI system
+    if (exitCode !== 0) {
+      console.error('Script completed with errors')
+      process.exit(exitCode)
+    }
   }
 }
 
