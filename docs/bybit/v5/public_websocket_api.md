@@ -194,12 +194,20 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 
 <table border="0.8"><tbody><tr><td>For now, there is no limit for endpoints under this category</td></tr></tbody></table>
 
+#### Spread Trading[​](#spread-trading "Direct link to heading")
+
+| Method | Path | Limit | Upgradable |
+| :-- | :-: | --- | --- |
+| POST | <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a> | 100 req/min | N 
+| GET | <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a> | 50 req/s | N 
+| GET | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N 
+| GET | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N 
+
 API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 -----------------------------------------------------------------------------------------
-
-info
-
-The values in the table represent the application upper limit of the corresponding level, and do not mean that users at this level will automatically enjoy the corresponding API Rate Limit by default.
 
 instructions for batch endpoints
 
@@ -229,13 +237,7 @@ The batch order endpoint, which includes operations for creating, amending, and 
 | PRO3 | 200/s | 200/s | 100/s | 250/s | 250/s | 250/s 
 | PRO4 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
 | PRO5 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
-| PRO6 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
-
-How to increase API Limit[​](#how-to-increase-api-limit "Direct link to heading")
----------------------------------------------------------------------------------
-
-*   Institutional account will be automatically upgraded or downgraded according to the trading volume
-*   VIP account needs to contact your VIP relational manager to change the api rate limit
+| PRO6 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s
 
 Enums Definitions
 =================
@@ -388,6 +390,7 @@ _closed status_
 ### createType[​](#createtype "Direct link to heading")
 
 *   `CreateByUser`
+*   `CreateByFutureSpread` Spread order
 *   `CreateByAdminClosing`
 *   `CreateBySettle` USDC Futures delivery; Position closed by contract delisted
 *   `CreateByStopOrder` Futures conditional order
@@ -423,6 +426,7 @@ _closed status_
 *   `Settle` Inverse futures settlement; Position closed due to delisting
 *   `BlockTrade`
 *   `MovePosition`
+*   `FutureSpread` Spread leg execution
 *   `UNKNOWN` May be returned by a classic account. Cannot query by this type
 
 ### orderType[​](#ordertype "Direct link to heading")
@@ -1041,8 +1045,18 @@ UTA[​](#uta "Direct link to heading")
 | 110107 | Restrictions on ins Loan; leverage exceeding the limit for inverse contracts is not allowed. 
 | 110108 | Allowable range: 5 to 2000 tick size 
 | 110109 | Allowable range: 0.05% to 1% 
+| 110110 | Spread trading is not available in isolated margin trading mode 
+| 110111 | To access spread trading, upgrade to the latest version of UTA 
+| 110112 | Spread trading is not available for Copy Trading 
+| 110113 | Spread trading is not available in hedge mode 
+| 110114 | You have a Spread trading order in progress. Please try again later 
+| 110115 | The cancellation of a combo single-leg order can only be done by canceling the combo order 
+| 110116 | The entry price of a single leg, derived from the combo order price, exceeds the limit price 
+| 110117 | The modification of a combo single-leg order can only be done by modifying the combo order 
+| 110118 | Unable to retrieve a pruce of the market order due to low liquidity 
 | 110119 | Order failed. RPI orders are restricted to approved market makers only 
 | 170346 | Settle coin is not a collateral coin, cannot trade 
+| 170360 | symbol[XXXX] cannot trade. Used for spread trading in particular when collateral is not turned on 
 | 181017 | OrderStatus must be final status 
 | 182100 | Compulsory closing of positions, no repayment allowed 
 | 182101 | Failed repayment, insufficient collateral balance 
@@ -1168,6 +1182,8 @@ Spot Trade[​](#spot-trade "Direct link to heading")
 | 170344 | Symbol is not supported on Margin Trading 
 | 170348 | Please go to (<a href="https://www.bybit-tr.com" target="_blank" rel="noopener noreferrer">https://www.bybit-tr.com</a>) to proceed. 
 | 170355 | RPI orders are restricted to approved market makers only 
+| 170358 | The current site does not support ETP 
+| 170359 | TThe current site does not support leveraged trading 
 | 170709 | OTC loan: The select trading pair is not in the whitelist pair 
 | 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders. 
 
@@ -1459,15 +1475,17 @@ Connect
 
 *   **Mainnet:**  
     Spot: `wss://stream.bybit.com/v5/public/spot`  
-    USDT, USDC perpetual & USDC Futures: `wss://stream.bybit.com/v5/public/linear`  
+    USDT, USDC perpetual & USDT Futures: `wss://stream.bybit.com/v5/public/linear`  
     Inverse contract: `wss://stream.bybit.com/v5/public/inverse`  
-    USDC Option: `wss://stream.bybit.com/v5/public/option`
+    USDT Option: `wss://stream.bybit.com/v5/public/option`  
+    Spread trading: `wss://stream.bybit.com/v5/public/spread`
     
 *   **Testnet:**  
     Spot: `wss://stream-testnet.bybit.com/v5/public/spot`  
-    USDT and USDC perpetual: `wss://stream-testnet.bybit.com/v5/public/linear`  
+    USDT,USDC perpetual & USDT Futures: `wss://stream-testnet.bybit.com/v5/public/linear`  
     Inverse contract: `wss://stream-testnet.bybit.com/v5/public/inverse`  
-    USDC Option: `wss://stream-testnet.bybit.com/v5/public/option`
+    USDT Option: `wss://stream-testnet.bybit.com/v5/public/option`  
+    Spread trading: `wss://stream-testnet.bybit.com/v5/public/spread`
     
 
 **[WebSocket private stream](/docs/v5/websocket/private/order):**
@@ -1482,10 +1500,10 @@ Connect
 **[WebSocket Order Entry](/docs/v5/websocket/trade/guideline):**
 
 *   **Mainnet:**  
-    `wss://stream.bybit.com/v5/trade`
+    `wss://stream.bybit.com/v5/trade` (Spread trading is not supported)
     
 *   **Testnet:**  
-    `wss://stream-testnet.bybit.com/v5/trade`
+    `wss://stream-testnet.bybit.com/v5/trade` (Spread trading is not supported)
     
 
 info
@@ -1565,7 +1583,7 @@ How to Send the Heartbeat Packet[​](#how-to-send-the-heartbeat-packet "Direct 
 
 *   Spot
 *   Linear/Inverse
-*   Option
+*   Option/Spread
 
 ```
 {    "success": true,    "ret_msg": "pong",    "conn_id": "0970e817-426e-429a-a679-ff7f55e0b16a",    "op": "ping"}
@@ -1622,7 +1640,7 @@ Understanding the Subscription Response[​](#understanding-the-subscription-res
 *   Private
 *   Public Spot
 *   Linear/Inverse
-*   Option
+*   Option/Spread
 
 ```
 {    "success": true,    "ret_msg": "",    "op": "subscribe",    "conn_id": "cejreassvfrsfvb9v1a0-2m"}

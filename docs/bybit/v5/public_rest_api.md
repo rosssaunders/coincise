@@ -194,12 +194,20 @@ The API rate limit is based on the **rolling time window per second and UID**. I
 
 <table border="0.8"><tbody><tr><td>For now, there is no limit for endpoints under this category</td></tr></tbody></table>
 
+#### Spread Trading[​](#spread-trading "Direct link to heading")
+
+| Method | Path | Limit | Upgradable |
+| :-- | :-: | --- | --- |
+| POST | <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a> | 100 req/min | N 
+| POST | <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a> | 100 req/min | N 
+| GET | <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a> | 50 req/s | N 
+| GET | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N 
+| GET | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N 
+
 API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 -----------------------------------------------------------------------------------------
-
-info
-
-The values in the table represent the application upper limit of the corresponding level, and do not mean that users at this level will automatically enjoy the corresponding API Rate Limit by default.
 
 instructions for batch endpoints
 
@@ -229,13 +237,7 @@ The batch order endpoint, which includes operations for creating, amending, and 
 | PRO3 | 200/s | 200/s | 100/s | 250/s | 250/s | 250/s 
 | PRO4 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
 | PRO5 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
-| PRO6 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s 
-
-How to increase API Limit[​](#how-to-increase-api-limit "Direct link to heading")
----------------------------------------------------------------------------------
-
-*   Institutional account will be automatically upgraded or downgraded according to the trading volume
-*   VIP account needs to contact your VIP relational manager to change the api rate limit
+| PRO6 | 200/s | 200/s | 100/s | 300/s | 300/s | 300/s
 
 Enums Definitions
 =================
@@ -388,6 +390,7 @@ _closed status_
 ### createType[​](#createtype "Direct link to heading")
 
 *   `CreateByUser`
+*   `CreateByFutureSpread` Spread order
 *   `CreateByAdminClosing`
 *   `CreateBySettle` USDC Futures delivery; Position closed by contract delisted
 *   `CreateByStopOrder` Futures conditional order
@@ -423,6 +426,7 @@ _closed status_
 *   `Settle` Inverse futures settlement; Position closed due to delisting
 *   `BlockTrade`
 *   `MovePosition`
+*   `FutureSpread` Spread leg execution
 *   `UNKNOWN` May be returned by a classic account. Cannot query by this type
 
 ### orderType[​](#ordertype "Direct link to heading")
@@ -1041,8 +1045,18 @@ UTA[​](#uta "Direct link to heading")
 | 110107 | Restrictions on ins Loan; leverage exceeding the limit for inverse contracts is not allowed. 
 | 110108 | Allowable range: 5 to 2000 tick size 
 | 110109 | Allowable range: 0.05% to 1% 
+| 110110 | Spread trading is not available in isolated margin trading mode 
+| 110111 | To access spread trading, upgrade to the latest version of UTA 
+| 110112 | Spread trading is not available for Copy Trading 
+| 110113 | Spread trading is not available in hedge mode 
+| 110114 | You have a Spread trading order in progress. Please try again later 
+| 110115 | The cancellation of a combo single-leg order can only be done by canceling the combo order 
+| 110116 | The entry price of a single leg, derived from the combo order price, exceeds the limit price 
+| 110117 | The modification of a combo single-leg order can only be done by modifying the combo order 
+| 110118 | Unable to retrieve a pruce of the market order due to low liquidity 
 | 110119 | Order failed. RPI orders are restricted to approved market makers only 
 | 170346 | Settle coin is not a collateral coin, cannot trade 
+| 170360 | symbol[XXXX] cannot trade. Used for spread trading in particular when collateral is not turned on 
 | 181017 | OrderStatus must be final status 
 | 182100 | Compulsory closing of positions, no repayment allowed 
 | 182101 | Failed repayment, insufficient collateral balance 
@@ -1168,6 +1182,8 @@ Spot Trade[​](#spot-trade "Direct link to heading")
 | 170344 | Symbol is not supported on Margin Trading 
 | 170348 | Please go to (<a href="https://www.bybit-tr.com" target="_blank" rel="noopener noreferrer">https://www.bybit-tr.com</a>) to proceed. 
 | 170355 | RPI orders are restricted to approved market makers only 
+| 170358 | The current site does not support ETP 
+| 170359 | TThe current site does not support leveraged trading 
 | 170709 | OTC loan: The select trading pair is not in the whitelist pair 
 | 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders. 
 
@@ -1874,6 +1890,7 @@ GET `/v5/market/instruments-info`
 | &gt; <a href="/docs/v5/enum#copytrading">copyTrading</a> | string | Copy trade symbol or not 
 | &gt; upperFundingRate | string | Upper limit of funding date 
 | &gt; lowerFundingRate | string | Lower limit of funding date 
+| &gt; displayName | string | The USDC futures &amp; perpetual name displayed in the Web or App 
 | &gt; riskParameters | object | Risk parameters for limit order price, refer to <a href="https://announcements.bybit.com/en/article/adjustments-to-bybit-s-derivative-trading-limit-order-mechanism-blt469228de1902fff6/" target="_blank" rel="noopener noreferrer">announcement</a> 
 | &gt;&gt; priceLimitRatioX | string | Ratio X 
 | &gt;&gt; priceLimitRatioY | string | Ratio Y 
@@ -1911,6 +1928,7 @@ GET `/v5/market/instruments-info`
 | &gt;&gt; maxOrderQty | string | Maximum order quantity 
 | &gt;&gt; minOrderQty | string | Minimum order quantity 
 | &gt;&gt; qtyStep | string | The step to increase/reduce order quantity 
+| &gt; displayName | string | The option name displayed in the Web or App 
 
 | Parameter | Type | Comments |
 | --- | --- | --- |
@@ -2035,7 +2053,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ```
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "option",        "nextPageCursor": "",        "list": [            {                "symbol": "ETH-3JAN23-1250-P",                "status": "Trading",                "baseCoin": "ETH",                "quoteCoin": "USD",                "settleCoin": "USDC",                "optionsType": "Put",                "launchTime": "1672560000000",                "deliveryTime": "1672732800000",                "deliveryFeeRate": "0.00015",                "priceFilter": {                    "minPrice": "0.1",                    "maxPrice": "10000000",                    "tickSize": "0.1"                },                "lotSizeFilter": {                    "maxOrderQty": "1500",                    "minOrderQty": "0.1",                    "qtyStep": "0.1"                }            }        ]    },    "retExtInfo": {},    "time": 1672712537130}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "option",        "nextPageCursor": "",        "list": [            {                "symbol": "BTC-27MAR26-70000-P-USDT",                "status": "Trading",                "baseCoin": "BTC",                "quoteCoin": "USDT",                "settleCoin": "USDT",                "optionsType": "Put",                "launchTime": "1743669649256",                "deliveryTime": "1774598400000",                "deliveryFeeRate": "0.00015",                "priceFilter": {                    "minPrice": "5",                    "maxPrice": "1110000",                    "tickSize": "5"                },                "lotSizeFilter": {                    "maxOrderQty": "500",                    "minOrderQty": "0.01",                    "qtyStep": "0.01"                },                "displayName": "BTCUSDT-27MAR26-70000-P"            }        ]    },    "retExtInfo": {},    "time": 1672712537130}
 ```
 
 ```
@@ -2982,11 +3000,11 @@ GET /v5/spot-margin-trade/data?vipLevel=No VIP&currency=BTC HTTP/1.1Host: api-te
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.spot_margin_trade_get_vip_margin_data())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.spot_margin_trade_get_vip_margin_data())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getVIPMarginData({    vipLevel: 'No VIP',    currency: 'BTC',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getVIPMarginData({    vipLevel: 'No VIP',    currency: 'BTC',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3095,7 +3113,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,)print(ses
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getCollateralCoins({    currency: 'ETH',    vipLevel: 'PRO1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getCollateralCoins({    currency: 'ETH',    vipLevel: 'PRO1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3159,7 +3177,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,)print(ses
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getBorrowableCoins({    currency: 'USDT',    vipLevel: 'VIP0',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getBorrowableCoins({    currency: 'USDT',    vipLevel: 'VIP0',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3239,11 +3257,11 @@ GET /v5/ins-loan/product-infos?productId=91 HTTP/1.1Host: api-testnet.bybit.com
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_product_info(productId="91"))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_product_info(productId="91"))
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingProductInfo({    productId: '91',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingProductInfo({    productId: '91',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -3294,11 +3312,11 @@ GET /v5/ins-loan/ensure-tokens-convert HTTP/1.1Host: api-testnet.bybit.com
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="XXXXX",    api_secret="XXXXX",)print(session.get_margin_coin_info())
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_margin_coin_info())
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'apikey',  secret: 'apisecret',});client  .getInstitutionalLendingMarginCoinInfoWithConversionRate({    productId: '81',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingMarginCoinInfoWithConversionRate({    productId: '81',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
