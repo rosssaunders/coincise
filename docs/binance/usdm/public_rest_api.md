@@ -64,7 +64,7 @@ testnet[​](/docs/derivatives/usds-margined-futures/general-info#testnet "Direc
 
 *   Most of the endpoints can be used in the testnet platform.
 *   The REST baseurl for **testnet** is "[https://testnet.binancefuture.com](https://testnet.binancefuture.com)"
-*   The Websocket baseurl for **testnet** is "wss://stream.binancefuture.com"
+*   The Websocket baseurl for **testnet** is "wss://fstream.binancefuture.com"
 
 SDK and Code Demonstration[​](/docs/derivatives/usds-margined-futures/general-info#sdk-and-code-demonstration "Direct link to SDK and Code Demonstration")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2657,6 +2657,6 @@ Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-a
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ```
-{    "symbol": "BTCUSDT",    "time": 1697421272043,    "constituents": [        {            "exchange": "binance",            "symbol": "BTCUSDT"        },        {            "exchange": "okex",            "symbol": "BTC-USDT"        },        {            "exchange": "huobi",            "symbol": "btcusdt"        },        {            "exchange": "coinbase",            "symbol": "BTC-USDT"        }    ]}
+{    "symbol": "BTCUSDT",    "time": 1745401553408,    "constituents": [        {            "exchange": "binance",            "symbol": "BTCUSDT",            "price": "94057.03000000",            "weight": "0.51282051"        },        {            "exchange": "coinbase",            "symbol": "BTC-USDT",            "price": "94140.58000000",            "weight": "0.15384615"        },        {            "exchange": "gateio",            "symbol": "BTC_USDT",            "price": "94060.10000000",            "weight": "0.02564103"        },        {            "exchange": "kucoin",            "symbol": "BTC-USDT",            "price": "94096.70000000",            "weight": "0.07692308"        },        {            "exchange": "mxc",            "symbol": "BTCUSDT",            "price": "94057.02000000",            "weight": "0.07692308"        },        {            "exchange": "bitget",            "symbol": "BTCUSDT",            "price": "94064.03000000",            "weight": "0.07692308"        },        {            "exchange": "bybit",            "symbol": "BTCUSDT",            "price": "94067.90000000",            "weight": "0.07692308"        }    ]}
 ```
 

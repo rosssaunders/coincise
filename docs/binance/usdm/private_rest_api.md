@@ -64,7 +64,7 @@ testnet[​](/docs/derivatives/usds-margined-futures/general-info#testnet "Direc
 
 *   Most of the endpoints can be used in the testnet platform.
 *   The REST baseurl for **testnet** is "[https://testnet.binancefuture.com](https://testnet.binancefuture.com)"
-*   The Websocket baseurl for **testnet** is "wss://stream.binancefuture.com"
+*   The Websocket baseurl for **testnet** is "wss://fstream.binancefuture.com"
 
 SDK and Code Demonstration[​](/docs/derivatives/usds-margined-futures/general-info#sdk-and-code-demonstration "Direct link to SDK and Code Demonstration")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1733,7 +1733,7 @@ Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api#r
 | stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
 | closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. 
 | activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1% 
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% 
 | workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
 | priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
 | newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" 
