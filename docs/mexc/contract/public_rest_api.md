@@ -1140,7 +1140,7 @@ Rate limit:20 times/2 seconds
 | --- | --- | --- | --- |
 | symbol | string | true | the name of the contract |
 | page\_num | int | true | current page number, default is 1 |
-| page\_size | int | true | the page size, default 20, maximum 100 |
+| page\_size | int | true | the page size, default 20, maximum 1000 |
 
 **Response parameters:**
 
