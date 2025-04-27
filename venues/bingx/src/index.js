@@ -7,13 +7,37 @@ import { getConfig } from './config/bingx.js'
 async function loadBrowser() {
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-web-security',
+      '--disable-features=IsolateOrigins',
+      '--disable-site-isolation-trials',
+      '--disable-features=BlockInsecurePrivateNetworkRequests',
+    ],
+    ignoreHTTPSErrors: true,
   })
   return browser
 }
 
 async function getPageHTML(pageURL, browser) {
   const page = await browser.newPage()
+
+  // Set a normal browser user-agent
+  await page.setUserAgent(
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
+  )
+
+  // Bypass CORS issues by intercepting requests that might fail
+  await page.setRequestInterception(true)
+  page.on('request', request => {
+    // Add origin and referer headers to make requests look legitimate
+    const headers = request.headers()
+    headers['Origin'] = new URL(pageURL).origin
+    headers['Referer'] = pageURL
+
+    request.continue({ headers })
+  })
 
   // Add console event listener
   page.on('console', msg => {
@@ -432,10 +456,12 @@ function convertToMarkdown(html) {
 }
 
 async function main() {
-  const browser = await loadBrowser()
-  const result = []
+  let browser
 
   try {
+    browser = await loadBrowser()
+    const result = []
+
     // Get configuration based on command line argument
     const arg = process.argv[2] || 'private'
     let type = arg
@@ -457,6 +483,10 @@ async function main() {
       const startTime = Date.now()
 
       const html = await getPageHTML(url, browser)
+
+      if (!html || html.trim() === '') {
+        throw new Error(`Failed to get HTML content from ${url}`)
+      }
 
       const endTime = Date.now()
       console.log('\x1b[36m%s\x1b[0m', `⏱️ Time taken: ${(endTime - startTime) / 1000} seconds`)
@@ -486,8 +516,14 @@ async function main() {
     console.log('\x1b[32m%s\x1b[0m', '✅ Success: Combined markdown file created successfully!')
     console.log(`📄 File: ${outputPath}`)
     console.log(`📦 Size: ${(combinedMarkdown.length / 1024).toFixed(2)} KB`)
+  } catch (error) {
+    console.error('\x1b[31m%s\x1b[0m', `❌ Error: ${error.message}`)
+    console.error(error)
+    process.exit(1) // Exit with error code
   } finally {
-    await browser.close()
+    if (browser) {
+      await browser.close()
+    }
   }
 }
 
