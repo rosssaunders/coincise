@@ -330,7 +330,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>account</code> 
 | &gt; ccy | String | No | Currency 
 | &gt; extraParams | String | No | Additional configuration 
@@ -516,7 +516,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | &gt; notionalUsd | String | Notional value of positions in <code>USD</code> 
 | &gt; optVal | String | Option Value, only applicable to <code>OPTION</code>. 
 | &gt; pendingCloseOrdLiabVal | String | The amount of close orders of isolated margin liability. 
-| &gt; adl | String | Auto decrease line, signal area<br>Divided into 5 levels, from 1 to 5, the smaller the number, the weaker the adl intensity. 
+| &gt; adl | String | Auto decrease line, signal area<br>Divided into 5 levels, from 1 to 5, the smaller the number, the weaker the adl intensity.<br>Only applicable to <code>FUTURES/SWAP/OPTION</code> 
 | &gt; bizRefId | String | External business id, e.g. experience coupon id 
 | &gt; bizRefType | String | External business type 
 | &gt; ccy | String | Currency used for margin 
@@ -541,7 +541,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | &gt; fee | String | Accumulated fee<br>Negative number represents the user transaction fee charged by the platform.Positive number represents rebate. 
 | &gt; fundingFee | String | Accumulated funding fee 
 | &gt; liqPenalty | String | Accumulated liquidation penalty. It is negative when there is a value. 
-| &gt; closeOrderAlgo | Array of object | Close position algo orders attached to the position. This array will have values only after you request "Place algo order" with <code>closeFraction</code>=1. 
+| &gt; closeOrderAlgo | Array of objects | Close position algo orders attached to the position. This array will have values only after you request "Place algo order" with <code>closeFraction</code>=1. 
 | &gt;&gt; algoId | String | Algo ID 
 | &gt;&gt; slTriggerPx | String | Stop-loss trigger price. 
 | &gt;&gt; slTriggerPxType | String | Stop-loss trigger price type.<br><code>last</code>: last price<br><code>index</code>: index price<br><code>mark</code>: mark price 
@@ -629,7 +629,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | &gt;&gt; nonSettleAvgPx | String | Non-Settlement entry price<br>The non-settlement entry price only reflects the average price at which the position is opened or increased.<br>Applicable to <code>FUTURES</code> <code>cross</code> 
 | &gt;&gt; settledPnl | String | Accumulated settled P&amp;L (calculated by settlement price)<br>Applicable to <code>FUTURES</code> <code>cross</code> 
 | &gt;&gt; uTime | String | Update time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> 
-| &gt; trades | Array of object | Details of trade 
+| &gt; trades | Array of objects | Details of trade 
 | &gt;&gt; instId | String | Instrument ID, e.g. <code>BTC-USDT</code> 
 | &gt;&gt; tradeId | String | Trade ID 
 
@@ -657,7 +657,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>liquidation-warning</code> 
 | &gt; instType | String | Yes | Instrument type<br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code><br><code>ANY</code> 
 | &gt; instFamily | String | No | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code> 
@@ -687,7 +687,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | &gt; instType | String | Instrument type 
 | &gt; instFamily | String | Instrument family 
 | &gt; instId | String | Instrument ID 
-| data | Array of object | Subscribed data 
+| data | Array of objects | Subscribed data 
 | &gt; instType | String | Instrument type 
 | &gt; mgnMode | String | Margin mode, <code>cross</code> <code>isolated</code> 
 | &gt; posId | String | Position ID 
@@ -721,7 +721,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code> <code>unsubscribe</code> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>account-greeks</code> 
 | &gt; ccy | String | No | Settlement currency<br>When the user specifies a settlement currency, event push will only be triggered when the position of the same settlement currency changes. For example, when ccy=BTC, if the position of <code>BTC-USDT-SWAP</code> changes, no event push will be triggered. 
 
@@ -856,7 +856,7 @@ Concurrent connection to this channel will be restricted by the following rules:
 | &gt; slTriggerPx | String | Stop-loss trigger price, it 
 | &gt; slTriggerPxType | String | Stop-loss trigger price type.<br><code>last</code>: last price<br><code>index</code>: index price<br><code>mark</code>: mark price 
 | &gt; slOrdPx | String | Stop-loss order price, it 
-| &gt; attachAlgoOrds | Array of object | TP/SL information attached when placing order 
+| &gt; attachAlgoOrds | Array of objects | TP/SL information attached when placing order 
 | &gt;&gt; attachAlgoId | String | The order ID of attached TP/SL order. It can be used to identity the TP/SL order when amending. It will not be posted to algoId when placing TP/SL order after the general order is filled completely. 
 | &gt;&gt; attachAlgoClOrdId | String | Client-supplied Algo ID when placing order attaching TP/SL<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.<br>It will be posted to <code>algoClOrdId</code> when placing TP/SL order once the general order is filled completely. 
 | &gt;&gt; tpOrdKind | String | TP order kind<br><code>condition</code><br><code>limit</code> 
@@ -913,7 +913,7 @@ The channel is exclusively available to users with trading fee tier VIP5 or abov
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code> <code>unsubscribe</code> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name <code>fills</code> 
 | &gt; instId | String | No | Instrument ID 
 
@@ -937,7 +937,7 @@ The channel is exclusively available to users with trading fee tier VIP5 or abov
 | &gt; channel | String | Channel name 
 | &gt; uid | String | User Identifier 
 | &gt; instId | String | Instrument ID 
-| data | Array of object | Subscribed data 
+| data | Array of objects | Subscribed data 
 | &gt; instId | String | Instrument ID 
 | &gt; fillSz | String | Filled quantity. If the trade is aggregated, the filled quantity will also be aggregated. 
 | &gt; fillPx | String | Last filled price 
@@ -991,7 +991,7 @@ Rate limit is shared with the \`Place order\` REST API endpoints
 | &gt; tag | String | No | Order tag<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters. 
 | &gt; side | String | Yes | Order side, <code>buy</code> <code>sell</code> 
 | &gt; posSide | String | Conditional | Position side<br>The default is <code>net</code> in the <code>net</code> mode<br>It is required in the <code>long/short</code> mode, and can only be <code>long</code> or <code>short</code>.<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>. 
-| &gt; ordType | String | Yes | Order type<br><code>market</code>: market order<br><code>limit</code>: limit order<br><code>post_only</code>: Post-only order<br><code>fok</code>: Fill-or-kill order<br><code>ioc</code>: Immediate-or-cancel order<br><code>optimal_limit_ioc</code>: Market order with immediate-or-cancel order<br><code>mmp</code>: Market Maker Protection (only applicable to Option in Portfolio Margin mode)<br><code>mmp_and_post_only</code>: Market Maker Protection and Post-only order(only applicable to Option in Portfolio Margin mode) 
+| &gt; ordType | String | Yes | Order type<br><code>market</code>: Market order, only applicable to <code>SPOT/MARGIN/FUTURES/SWAP</code><br><code>limit</code>: limit order<br><code>post_only</code>: Post-only order<br><code>fok</code>: Fill-or-kill order<br><code>ioc</code>: Immediate-or-cancel order<br><code>optimal_limit_ioc</code>: Market order with immediate-or-cancel order<br><code>mmp</code>: Market Maker Protection (only applicable to Option in Portfolio Margin mode)<br><code>mmp_and_post_only</code>: Market Maker Protection and Post-only order(only applicable to Option in Portfolio Margin mode) 
 | &gt; sz | String | Yes | Quantity to buy or sell. 
 | &gt; px | String | Conditional | Order price. Only applicable to <code>limit</code>,<code>post_only</code>,<code>fok</code>,<code>ioc</code>,<code>mmp</code>,<code>mmp_and_post_only</code> order.<br>When placing an option order, one of px/pxUsd/pxVol must be filled in, and only one can be filled in 
 | &gt; pxUsd | String | Conditional | Place options orders in <code>USD</code><br>Only applicable to options<br>When placing an option order, one of px/pxUsd/pxVol must be filled in, and only one can be filled in 
@@ -1147,7 +1147,7 @@ Rate limit is shared with the \`Place multiple orders\` REST API endpoints
 | &gt; tag | String | No | Order tag<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters. 
 | &gt; side | String | Yes | Order side, <code>buy</code> <code>sell</code> 
 | &gt; posSide | String | Conditional | Position side<br>The default <code>net</code> in the <code>net</code> mode<br>It is required in the <code>long/short</code> mode, and only be <code>long</code> or <code>short</code>.<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>. 
-| &gt; ordType | String | Yes | Order type<br><code>market</code>: market order<br><code>limit</code>: limit order<br><code>post_only</code>: Post-only order<br><code>fok</code>: Fill-or-kill order<br><code>ioc</code>: Immediate-or-cancel order<br><code>optimal_limit_ioc</code>: Market order with immediate-or-cancel order (applicable only to Expiry Futures and Perpetual Futures)<br><code>mmp</code>: Market Maker Protection (only applicable to Option in Portfolio Margin mode)<br><code>mmp_and_post_only</code>: Market Maker Protection and Post-only order(only applicable to Option in Portfolio Margin mode). 
+| &gt; ordType | String | Yes | Order type<br><code>market</code>: Market order, only applicable to <code>SPOT/MARGIN/FUTURES/SWAP</code><br><code>limit</code>: limit order<br><code>post_only</code>: Post-only order<br><code>fok</code>: Fill-or-kill order<br><code>ioc</code>: Immediate-or-cancel order<br><code>optimal_limit_ioc</code>: Market order with immediate-or-cancel order (applicable only to Expiry Futures and Perpetual Futures)<br><code>mmp</code>: Market Maker Protection (only applicable to Option in Portfolio Margin mode)<br><code>mmp_and_post_only</code>: Market Maker Protection and Post-only order(only applicable to Option in Portfolio Margin mode). 
 | &gt; sz | String | Yes | Quantity to buy or sell. 
 | &gt; px | String | Conditional | Order price. Only applicable to <code>limit</code>,<code>post_only</code>,<code>fok</code>,<code>ioc</code>,<code>mmp</code>,<code>mmp_and_post_only</code> order.<br>When placing an option order, one of px/pxUsd/pxVol must be filled in, and only one can be filled in 
 | &gt; pxUsd | String | Conditional | Place options orders in <code>USD</code><br>Only applicable to options<br>When placing an option order, one of px/pxUsd/pxVol must be filled in, and only one can be filled in 
@@ -1443,7 +1443,7 @@ Rate limit is shared with the \`Mass Cancel Order\` REST API endpoints
 | op | String | Operation 
 | code | String | Error Code 
 | msg | String | Error message 
-| data | Array of object | Data 
+| data | Array of objects | Data 
 | &gt; result | Boolean | Result of the request <code>true</code>, <code>false</code>
 
 ---
@@ -1625,7 +1625,7 @@ Retrieve the recent trades data. Data will be pushed whenever there is a trade. 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>trades-all</code> 
 | &gt; instId | String | Yes | Instrument ID 
 
@@ -1738,7 +1738,7 @@ The order book data will be updated around once a second during the call auction
 `seqId` is the sequence ID of the market data published. The set of sequence ID received by users is the same if users are connecting to the same channel through multiple websocket connections. Each `instId` has an unique set of sequence ID. Users can use `prevSeqId` and `seqId` to build the message sequencing for incremental order book updates. Generally the value of seqId is larger than prevSeqId. The `prevSeqId` in the new message matches with `seqId` of the previous message. The smallest possible sequence ID value is 0, except in snapshot messages where the prevSeqId is always -1.  
 
 Exceptions:  
-1\. If there are no updates to the depth for an extended period, OKX will send a message with `'asks': [], 'bids': []` to inform users that the connection is still active. `seqId` is the same as the last sent message and `prevSeqId` equals to `seqId`. 2. The sequence number may be reset due to maintenance, and in this case, users will receive an incremental message with `seqId` smaller than `prevSeqId`. However, subsequent messages will follow the regular sequencing rule.
+1\. If there are no updates to the depth for an extended period(Around 60 seconds), for the channel that always updates snapshot data, OKX will send the latest snapshot, for the channel that has incremental data, OKX will send a message with `'asks': [], 'bids': []` to inform users that the connection is still active. `seqId` is the same as the last sent message and `prevSeqId` equals to `seqId`. 2. The sequence number may be reset due to maintenance, and in this case, users will receive an incremental message with `seqId` smaller than `prevSeqId`. However, subsequent messages will follow the regular sequencing rule.
 
 ##### Example
 
@@ -1785,7 +1785,7 @@ Retrieve the recent trades data. Data will be pushed whenever there is a trade. 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | op | String | Yes | <code>subscribe</code> <code>unsubscribe</code> 
-| args | Array of object | Yes | List of subscribed channels 
+| args | Array of objects | Yes | List of subscribed channels 
 | &gt; channel | String | Yes | Channel name<br><code>option-trades</code> 
 | &gt; instType | String | Yes | Instrument type, <code>OPTION</code> 
 | &gt; instId | String | Conditional | Instrument ID, e.g. BTC-USD-221230-4000-C, Either <code>instId</code> or <code>instFamily</code> is required. If both are passed, <code>instId</code> will be used. 
@@ -1808,7 +1808,7 @@ Retrieve the recent trades data. Data will be pushed whenever there is a trade. 
 | --- | --- | --- |
 | arg | Object | Successfully subscribed channel 
 | &gt; channel | String | Channel name 
-| data | Array of object | Subscribed data 
+| data | Array of objects | Subscribed data 
 | &gt; instId | String | Instrument ID 
 | &gt; instFamily | String | Instrument family 
 | &gt; tradeId | String | Trade ID 
