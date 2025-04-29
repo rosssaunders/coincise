@@ -1,7 +1,7 @@
-import { ProcessorRegistry } from './processors/processorRegistry.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { ProcessorRegistry } from './processors/processorRegistry.js'
 
 /**
  * Process documentation for a specific exchange

@@ -3,7 +3,7 @@
  */
 
 /**
- * @typedef {'binancespot' | 'binanceusdm' | 'binancecoinm' | 'binanceoptions'} Exchange
+ * @typedef {'binanceusdm' | 'binancecoinm' | 'binanceoptions'} Exchange
  */
 
 /**
@@ -24,10 +24,11 @@
 export {
   /** @type {Command} */
   Command,
+  /** @type {DocumentProcessor} */
+  DocumentProcessor,
   /** @type {Exchange} */
   Exchange,
   /** @type {ExchangeResult} */
-  ExchangeResult,
-  /** @type {DocumentProcessor} */
-  DocumentProcessor,
-}
+  ExchangeResult
+};
+

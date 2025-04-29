@@ -1,0 +1,19 @@
+{
+  "name": "binance-futures-extractor",
+  "version": "1.0.0",
+  "description": "CLI to extract and process Binance Futures API documentation",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/index.js process binanceusdm && node src/index.js process binancecoinm && node src/index.js process binanceoptions",
+    "extract:binanceusdm": "node src/index.js extract binanceusdm",
+    "extract:binancecoinm": "node src/index.js extract binancecoinm",
+    "extract:binanceoptions": "node src/index.js extract binanceoptions"
+  },
+  "dependencies": {
+    "puppeteer": "24.7.2",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "jsdom": "26.1.0"
+  }
+}

@@ -1,0 +1,63 @@
+name: Weekly Binance Futures Documentation Update
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: venues/binancefutures
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for git diff
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: venues/binancefutures/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Binance Coinm scraper
+        run: npm run extract:binancecoinm
+
+      - name: Run Binance USDM scraper
+        run: npm run extract:binanceusdm
+
+      - name: Run Binance Options scraper
+        run: npm run extract:binanceoptions
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          cd ../..  # Move back to root directory for git operations
+          # Explicitly add the docs/binance directory to staging
+          git add docs/binance
+          # Check if there are any changes
+          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'docs: update Binance API documentation'
+          title: 'Weekly Binance API Documentation Update'
+          body: 'Automated weekly update of Binance API documentation'
+          branch: 'binance-docs-update'
+          base: 'main'
+          delete-branch: true
+          token: ${{ secrets.PAT_GITHUB }}

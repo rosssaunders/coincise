@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import { DocProcessor } from '../utils/docProcessor.js'
-import { MarkdownConverter } from '../utils/markdownConverter.js'
 import { fileURLToPath } from 'url'
+import { DocProcessor } from './docProcessor.js'
+import { MarkdownConverter } from './markdownConverter.js'
 
 /**
  * @typedef {Object} ProcessorConfig
@@ -40,7 +40,7 @@ export class BaseProcessor {
   loadConfig() {
     const __filename = fileURLToPath(import.meta.url)
     const __dirname = path.dirname(__filename)
-    const configFile = path.resolve(__dirname, '..', '..', 'config', this.configPath)
+    const configFile = path.resolve(__dirname, '..', 'config', this.configPath)
     return JSON.parse(fs.readFileSync(configFile, 'utf8'))
   }
 

@@ -1,32 +1,24 @@
 import { BaseProcessor } from './baseProcessor.js'
-import {
-  BinanceSpotPublicRESTProcessor,
-  BinanceSpotPrivateRESTProcessor,
-  BinanceSpotPublicWebSocketProcessor,
-  BinanceSpotPrivateWebSocketProcessor,
-  BinanceSpotFIXProcessor,
-  BinanceSpotSBEProcessor,
-} from './binanceSpot.js'
 
 import {
-  BinanceUSDMPublicRESTProcessor,
   BinanceUSDMPrivateRESTProcessor,
-  BinanceUSDMPublicWebSocketProcessor,
   BinanceUSDMPrivateWebSocketProcessor,
+  BinanceUSDMPublicRESTProcessor,
+  BinanceUSDMPublicWebSocketProcessor,
 } from './binanceUsdm.js'
 
 import {
-  BinanceCoinMPublicRESTProcessor,
   BinanceCoinMPrivateRESTProcessor,
-  BinanceCoinMPublicWebSocketProcessor,
   BinanceCoinMPrivateWebSocketProcessor,
+  BinanceCoinMPublicRESTProcessor,
+  BinanceCoinMPublicWebSocketProcessor,
 } from './binanceCoinM.js'
 
 import {
-  BinanceOptionsPublicRESTProcessor,
   BinanceOptionsPrivateRESTProcessor,
-  BinanceOptionsPublicWebSocketProcessor,
   BinanceOptionsPrivateWebSocketProcessor,
+  BinanceOptionsPublicRESTProcessor,
+  BinanceOptionsPublicWebSocketProcessor,
 } from './binanceOptions.js'
 
 /**
@@ -41,15 +33,6 @@ export class ProcessorRegistry {
    */
   static createProcessorsByExchange(exchangeType) {
     switch (exchangeType) {
-      case 'binancespot':
-        return [
-          new BinanceSpotPublicRESTProcessor(),
-          new BinanceSpotPrivateRESTProcessor(),
-          new BinanceSpotPublicWebSocketProcessor(),
-          new BinanceSpotPrivateWebSocketProcessor(),
-          new BinanceSpotFIXProcessor(),
-          new BinanceSpotSBEProcessor(),
-        ]
       case 'binanceusdm':
         return [
           new BinanceUSDMPublicRESTProcessor(),
