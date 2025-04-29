@@ -43,7 +43,8 @@ async function fetchAndConvert(url) {
     markdown = turndownService.turndown(html)
     await page.close()
   } catch (err) {
-    console.warn(`Failed to fetch or convert ${url}:`, err.message)
+    await browser.close()
+    throw new Error(`Failed to fetch or convert ${url}: ${err.message}`)
   } finally {
     await browser.close()
   }
@@ -53,17 +54,29 @@ async function fetchAndConvert(url) {
 async function processAll() {
   const { endpoints, output_file, title } = config
   let content = `# ${title}\n\n`
+  let hasError = false
+
   for (const endpoint of endpoints) {
     const url = `${BASE_URL}/${endpoint}`
     console.log(`Fetching: ${url}`)
-    const md = await fetchAndConvert(url)
-    if (md) content += md + '\n\n'
-    await new Promise(r => setTimeout(r, 1000)) // polite delay
+    try {
+      const md = await fetchAndConvert(url)
+      if (md) content += md + '\n\n'
+      await new Promise(r => setTimeout(r, 1000)) // polite delay
+    } catch (err) {
+      console.error(err.message)
+      hasError = true
+    }
   }
+
   const outPath = path.join(DOCS_ROOT, output_file)
   fs.mkdirSync(path.dirname(outPath), { recursive: true })
   fs.writeFileSync(outPath, content)
   console.log(`Wrote: ${outPath}`)
+
+  if (hasError) {
+    throw new Error('One or more endpoints failed to process')
+  }
 }
 
 // Run if called directly
