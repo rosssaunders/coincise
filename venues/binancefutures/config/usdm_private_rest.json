@@ -30,7 +30,6 @@
     "derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation",
     "derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History",
     "derivatives/usds-margined-futures/trade/rest-api/New-Order-Test",
-    "derivatives/usds-margined-futures/account/rest-api",
     "wallet/asset/user-universal-transfer",
     "derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3",
     "derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2",
