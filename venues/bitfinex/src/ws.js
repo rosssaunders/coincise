@@ -31,6 +31,13 @@ const fetchContent = async url => {
 
   const browser = await puppeteer.launch({
     headless: 'new',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
+    ],
   })
 
   try {
@@ -190,8 +197,12 @@ const main = async () => {
     console.log(`Successfully extracted WebSocket documentation to ${config.output}`)
   } catch (error) {
     console.error('Error extracting WebSocket documentation:', error)
+    process.exit(1)
   }
 }
 
 // Execute the main function
-main()
+main().catch(error => {
+  console.error('Fatal error:', error)
+  process.exit(1)
+})
