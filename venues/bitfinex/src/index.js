@@ -159,26 +159,35 @@ const extractEndpointsBySection = htmlContent => {
  */
 const fetchEndpointContent = async (url, baseUrl) => {
   const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
-
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--disable-gpu',
-    ],
-  })
+  let browser = null
+  let page = null
 
   try {
-    const page = await browser.newPage()
-    await page.goto(fullUrl, { waitUntil: 'networkidle2' })
+    browser = await puppeteer.launch({
+      headless: 'new',
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+      ],
+    })
+
+    page = await browser.newPage()
+    await page.goto(fullUrl, {
+      waitUntil: 'networkidle2',
+      timeout: 60000, // Increased timeout to 60 seconds
+    })
 
     // Wait for the main content to load
-    await page.waitForSelector('.content-body', { timeout: 5000 }).catch(() => {
-      console.warn(`Warning: Content not found on ${fullUrl}`)
-    })
+    await page
+      .waitForSelector('.content-body', {
+        timeout: 60000, // Increased timeout to 60 seconds
+      })
+      .catch(() => {
+        console.warn(`Warning: Content not found on ${fullUrl}`)
+      })
 
     // Extract the main content
     const content = await page.evaluate(() => {
@@ -191,7 +200,12 @@ const fetchEndpointContent = async (url, baseUrl) => {
     console.error(`Error fetching ${fullUrl}:`, error)
     return null
   } finally {
-    await browser.close()
+    if (page) {
+      await page.close().catch(console.error)
+    }
+    if (browser) {
+      await browser.close().catch(console.error)
+    }
   }
 }
 
@@ -233,9 +247,17 @@ const main = async () => {
 
     // Fetch HTML content from the URL instead of reading local file
     const htmlContent = await fetchMainDocContent(docUrl)
+    if (!htmlContent) {
+      console.error('Failed to fetch main documentation content')
+      process.exit(1)
+    }
 
     // Extract endpoints by section
     const sections = extractEndpointsBySection(htmlContent)
+    if (Object.keys(sections).length === 0) {
+      console.error('No sections found in the documentation')
+      process.exit(1)
+    }
 
     // Configure Turndown
     const turndownService = configureTurndown()
@@ -271,6 +293,15 @@ const main = async () => {
       const processedEndpoints = await Promise.all(
         endpoints.map(endpoint => processEndpoint(endpoint, config.baseUrl, turndownService))
       )
+
+      // Check if any endpoints failed to process
+      const failedEndpoints = processedEndpoints.filter(endpoint => !endpoint.markdown)
+      if (failedEndpoints.length > 0) {
+        console.error(
+          `Failed to process ${failedEndpoints.length} endpoints in section ${sectionName}`
+        )
+        process.exit(1)
+      }
 
       // Add each endpoint's markdown to the section
       for (const endpoint of processedEndpoints) {

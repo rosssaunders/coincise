@@ -28,24 +28,31 @@ const config = JSON.parse(
  */
 const fetchContent = async url => {
   console.log(`Fetching content from: ${url}`)
-
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--disable-gpu',
-    ],
-  })
+  let browser = null
+  let page = null
 
   try {
-    const page = await browser.newPage()
-    await page.goto(url, { waitUntil: 'networkidle2' })
+    browser = await puppeteer.launch({
+      headless: 'new',
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+      ],
+    })
+
+    page = await browser.newPage()
+    await page.goto(url, {
+      waitUntil: 'networkidle2',
+      timeout: 60000, // Increased timeout to 60 seconds
+    })
 
     // Wait for the content to load
-    await page.waitForSelector('body', { timeout: 5000 })
+    await page.waitForSelector('body', {
+      timeout: 60000, // Increased timeout to 60 seconds
+    })
 
     // Extract the page content
     const content = await page.evaluate(() => {
@@ -57,7 +64,12 @@ const fetchContent = async url => {
     console.error(`Error fetching content from ${url}:`, error)
     throw error
   } finally {
-    await browser.close()
+    if (page) {
+      await page.close().catch(console.error)
+    }
+    if (browser) {
+      await browser.close().catch(console.error)
+    }
   }
 }
 
@@ -162,6 +174,10 @@ const main = async () => {
 
       // Fetch content from the URL
       const content = await fetchContent(url)
+      if (!content) {
+        console.error(`Failed to fetch content from ${url}`)
+        process.exit(1)
+      }
 
       // Extract the main content
       const { document } = new JSDOM(content).window
@@ -174,12 +190,20 @@ const main = async () => {
       // If this is the main page with links to other pages, extract and process those links
       if (url === config.mainDocsUrl) {
         const links = extractLinks(content)
+        if (links.length === 0) {
+          console.error('No links found in the main documentation page')
+          process.exit(1)
+        }
 
         // Process each linked page
         for (const link of links) {
           console.log(`Processing endpoint: ${link.title}`)
 
           const endpointMarkdown = await processUrl(link.url, config.baseUrl, turndownService)
+          if (!endpointMarkdown) {
+            console.error(`Failed to process endpoint: ${link.title}`)
+            process.exit(1)
+          }
           markdown += `## ${link.title}\n\n${endpointMarkdown}\n\n---\n\n`
         }
       }
