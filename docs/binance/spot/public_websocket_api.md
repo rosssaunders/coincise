@@ -3,7 +3,7 @@
 Error codes for Binance
 =======================
 
-**Last Updated: 2025-04-07**
+**Last Updated: 2025-04-08**
 
 Errors consist of two parts: an error code and a message. Codes are universal, but messages can vary. Here is the error JSON payload:
 
@@ -81,7 +81,9 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 ### \-1034 TOO\_MANY\_CONNECTIONS[​](/docs/binance-spot-api-docs/errors#-1034-too_many_connections "Direct link to -1034 TOO_MANY_CONNECTIONS")
 
-*   Too many concurrent connections; current limit is '%d'.
+*   Too many concurrent connections; current limit is '%s'.
+*   Too many connection attempts for account; current limit is %s per '%s'.
+*   Too many connection attempts from IP; current limit is %s per '%s'.
 
 ### \-1035 LOGGED\_OUT[​](/docs/binance-spot-api-docs/errors#-1035-logged_out "Direct link to -1035 LOGGED_OUT")
 
@@ -193,7 +195,7 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 *   Combination of optional parameters invalid.
 *   Combination of optional fields invalid. Recommendation: '%s' and '%s' must both be sent.
 *   Fields \[%s\] must be sent together or omitted entirely.
-*   Invalid 'MDEntryType (269)' combination. BID and OFFER must be requested together.
+*   Invalid `MDEntryType (269)` combination. BID and OFFER must be requested together.
 
 ### \-1130 INVALID\_PARAMETER[​](/docs/binance-spot-api-docs/errors#-1130-invalid_parameter "Direct link to -1130 INVALID_PARAMETER")
 
@@ -351,8 +353,8 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 ### \-1190 INVALID\_REQUEST\_ID[​](/docs/binance-spot-api-docs/errors#-1190-invalid_request_id "Direct link to -1190 INVALID_REQUEST_ID")
 
-*   'MDReqID (262)' contains a subscription request id that is already in use on this connection.
-*   'MDReqID (262)' contains an unsubscription request id that does not match any active subscription.
+*   `MDReqID (262)` contains a subscription request id that is already in use on this connection.
+*   `MDReqID (262)` contains an unsubscription request id that does not match any active subscription.
 
 ### \-1191 TOO\_MANY\_SUBSCRIPTIONS[​](/docs/binance-spot-api-docs/errors#-1191-too_many_subscriptions "Direct link to -1191 TOO_MANY_SUBSCRIPTIONS")
 
@@ -407,8 +409,12 @@ Errors consist of two parts: an error code and a message. Codes are universal, b
 
 *   Order was canceled or expired with no executed qty over 90 days ago and has been archived.
 
-Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, and -2011 CANCEL\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected-and--2011-cancel_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, and -2011 CANCEL_REJECTED")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### \-2039 CLIENT\_ORDER\_ID\_INVALID[​](/docs/binance-spot-api-docs/errors#-2039-client_order_id_invalid "Direct link to -2039 CLIENT_ORDER_ID_INVALID")
+
+*   Client order ID is not correct for this order ID.
+
+Messages for -1010 ERROR\_MSG\_RECEIVED, -2010 NEW\_ORDER\_REJECTED, -2011 CANCEL\_REJECTED, and -2038 ORDER\_AMEND\_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected--2011-cancel_rejected-and--2038-order_amend_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, -2011 CANCEL_REJECTED, and -2038 ORDER_AMEND_REJECTED")
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This code is sent when an error has been returned by the matching engine. The following messages which will indicate the specific error:
 
@@ -741,7 +747,7 @@ The `EXCHANGE_MAX_NUM_ICEBERG_ORDERS` filter defines the maximum number of icebe
 ENUM Definitions
 ================
 
-This will apply for both Rest API and WebSocket API.
+This will apply for both REST API and WebSocket API.
 
 Symbol status (status)[​](/docs/binance-spot-api-docs/enums#symbol-status-status "Direct link to Symbol status (status)")
 -------------------------------------------------------------------------------------------------------------------------
@@ -903,14 +909,16 @@ Rate limit intervals (interval)[​](/docs/binance-spot-api-docs/enums#rate-limi
 STP Modes[​](/docs/binance-spot-api-docs/enums#stp-modes "Direct link to STP Modes")
 ------------------------------------------------------------------------------------
 
+Read [Self Trade Prevention (STP) FAQ](/docs/binance-spot-api-docs/faqs/stp_faq) to learn more.
+
 *   `NONE`
 *   `EXPIRE_MAKER`
 *   `EXPIRE_TAKER`
 *   `EXPIRE_BOTH`
 *   `DECREMENT`
 
-Web Socket Streams for Binance (2025-01-28)
-===========================================
+WebSocket Streams for Binance (2025-01-28)
+==========================================
 
 General WSS information[​](/docs/binance-spot-api-docs/web-socket-streams#general-wss-information "Direct link to General WSS information")
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -922,8 +930,8 @@ General WSS information[​](/docs/binance-spot-api-docs/web-socket-streams#gene
 *   Combined stream events are wrapped as follows: **{"stream":"<streamName>","data":<rawPayload>}**
 *   All symbols for streams are **lowercase**
 *   A single connection to **stream.binance.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark
-*   The websocket server will send a `ping frame` every 20 seconds.
-    *   If the websocket server does not receive a `pong frame` back from the connection within a minute the connection will be disconnected.
+*   The WebSocket server will send a `ping frame` every 20 seconds.
+    *   If the WebSocket server does not receive a `pong frame` back from the connection within a minute the connection will be disconnected.
     *   When you receive a ping, you must send a pong with a copy of ping's payload as soon as possible.
     *   Unsolicited `pong frames` are allowed, but will not prevent disconnection. **It is recommended that the payload for these pong frames are empty.**
 *   The base endpoint **wss://data-stream.binance.vision** can be subscribed to receive **only** market data messages.  
@@ -931,7 +939,7 @@ General WSS information[​](/docs/binance-spot-api-docs/web-socket-streams#gene
 *   All time and timestamp related fields are **milliseconds by default**. To receive the information in microseconds, please add the parameter `timeUnit=MICROSECOND or timeUnit=microsecond` in the URL.
     *   For example: `/stream?streams=btcusdt@trade&timeUnit=MICROSECOND`
 
-Websocket Limits[​](/docs/binance-spot-api-docs/web-socket-streams#websocket-limits "Direct link to Websocket Limits")
+WebSocket Limits[​](/docs/binance-spot-api-docs/web-socket-streams#websocket-limits "Direct link to WebSocket Limits")
 ----------------------------------------------------------------------------------------------------------------------
 
 *   WebSocket connections have a limit of 5 incoming messages per second. A message is considered:
@@ -945,7 +953,7 @@ Websocket Limits[​](/docs/binance-spot-api-docs/web-socket-streams#websocket-l
 Live Subscribing/Unsubscribing to streams[​](/docs/binance-spot-api-docs/web-socket-streams#live-subscribingunsubscribing-to-streams "Direct link to Live Subscribing/Unsubscribing to streams")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*   The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
+*   The following data can be sent through the WebSocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
 *   The `id` is used as an identifier to uniquely identify the messages going back and forth. The following formats are accepted:
     *   64-bit signed integer
     *   alphanumeric strings; max length 36
@@ -1323,14 +1331,16 @@ General API Information
     *   If you experience issues with the standard 443 port, alternative port 9443 is also available.
     *   The base endpoint for [testnet](https://testnet.binance.vision/) is: `wss://ws-api.testnet.binance.vision/ws-api/v3`
 *   A single connection to the API is only valid for 24 hours; expect to be disconnected after the 24-hour mark.
-*   The websocket server will send a `ping frame` every 20 seconds.\`
-    *   If the websocket server does not receive a `pong frame` back from the connection within a minute the connection will be disconnected.
+*   Responses are in JSON by default. To receive responses in SBE, refer to the [SBE FAQ](/docs/binance-spot-api-docs/faqs/sbe_faq) page.
+*   The WebSocket server will send a `ping frame` every 20 seconds.\`
+    *   If the WebSocket server does not receive a `pong frame` back from the connection within a minute the connection will be disconnected.
     *   When you receive a ping, you must send a pong with a copy of ping's payload as soon as possible.
     *   Unsolicited `pong frames` are allowed, but will not prevent disconnection. **It is recommended that the payload for these pong frames are empty.**
 *   Lists are returned in **chronological order**, unless noted otherwise.
 *   All timestamps in the JSON responses are in **milliseconds in UTC by default**. To receive the information in microseconds, please add the parameter `timeUnit=MICROSECOND` or `timeUnit=microsecond` in the URL.
 *   Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp)` can be passed in milliseconds or microseconds.
 *   All field names and values are **case-sensitive**, unless noted otherwise.
+*   If there are enums or terms you want clarification on, please see [SPOT Glossary](/docs/binance-spot-api-docs/faqs/spot_glossary) for more information.
 
 Request format
 ==============
@@ -1381,12 +1391,12 @@ Response fields:
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
 | `id` | INT / STRING / `null` | YES | Same as in the original request 
-| `status` | INT | YES | Response status. See [Status codes](/docs/binance-spot-api-docs/web-socket-api/response-format.md#status-codes) 
+| `status` | INT | YES | Response status. See [Status codes](/docs/binance-spot-api-docs/websocket-api/response-format#status-codes) 
 | `result` | OBJECT / ARRAY | YES | Response content. Present if request succeeded 
 | `error` | OBJECT | Error description. Present if request failed 
-| `rateLimits` | ARRAY | NO | Rate limiting status. See [Rate limits](/docs/binance-spot-api-docs/web-socket-api/response-format#rate-limits) 
+| `rateLimits` | ARRAY | NO | Rate limiting status. See [Rate limits](/docs/binance-spot-api-docs/websocket-api/response-format#rate-limits) 
 
-### Status codes[​](/docs/binance-spot-api-docs/web-socket-api/response-format#status-codes "Direct link to Status codes")
+### Status codes[​](/docs/binance-spot-api-docs/websocket-api/response-format#status-codes "Direct link to Status codes")
 
 Status codes in the `status` field are the same as in HTTP.
 
@@ -1411,7 +1421,7 @@ User Data Stream events for non-SBE sessions are sent as JSON in **text frames**
 
 Events in SBE sessions will be sent as **binary frames.**
 
-Please refer to [`userDataStream.subscribe`](/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#user_data_stream_susbcribe) for details on how to subscribe to User Data Stream in WebSocket API.
+Please refer to [`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe) for details on how to subscribe to User Data Stream in WebSocket API.
 
 Example of an event:
 
@@ -1428,20 +1438,20 @@ Event fields:
 Rate limits
 ===========
 
-### Connection limits[​](/docs/binance-spot-api-docs/web-socket-api/rate-limits#connection-limits "Direct link to Connection limits")
+### Connection limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#connection-limits "Direct link to Connection limits")
 
 There is a limit of **300 connections per attempt every 5 minutes**.
 
 The connection is per **IP address**.
 
-### General information on rate limits[​](/docs/binance-spot-api-docs/web-socket-api/rate-limits#general-information-on-rate-limits "Direct link to General information on rate limits")
+### General information on rate limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#general-information-on-rate-limits "Direct link to General information on rate limits")
 
-*   Current API rate limits can be queried using the [`exchangeInfo`](/docs/binance-spot-api-docs/web-socket-api/general-requests#exchange-information) request.
+*   Current API rate limits can be queried using the [`exchangeInfo`](/docs/binance-spot-api-docs/websocket-api/rate-limits#exchange-information) request.
 *   There are multiple rate limit types across multiple intervals.
 *   Responses can indicate current rate limit status in the optional `rateLimits` field.
 *   Requests fail with status `429` when unfilled order count or request rate limits are violated.
 
-#### How to interpret rate limits[​](/docs/binance-spot-api-docs/web-socket-api/rate-limits#how-to-interpret-rate-limits "Direct link to How to interpret rate limits")
+#### How to interpret rate limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#how-to-interpret-rate-limits "Direct link to How to interpret rate limits")
 
 A response with rate limit status may look like this:
 
@@ -1467,7 +1477,7 @@ Other intervals behave in a similar manner. For example, `1 DAY` rate limit rese
 
 APIs have multiple rate-limiting intervals. If you exhaust a shorter interval but the longer interval still allows requests, you will have to wait for the shorter interval to expire and reset. If you exhaust a longer interval, you will have to wait for that interval to reset, even if shorter rate limit count is zero.
 
-#### How to show/hide rate limit information[​](/docs/binance-spot-api-docs/web-socket-api/rate-limits#how-to-showhide-rate-limit-information "Direct link to How to show/hide rate limit information")
+#### How to show/hide rate limit information[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#how-to-showhide-rate-limit-information "Direct link to How to show/hide rate limit information")
 
 `rateLimits` field is included with every response by default.
 
@@ -1512,13 +1522,13 @@ However, rate limit information can be quite bulky. If you are not interested in
 
 **Note:** Your requests are still rate limited if you hide the `rateLimits` field in responses.
 
-### IP limits[​](/docs/binance-spot-api-docs/web-socket-api/rate-limits#ip-limits "Direct link to IP limits")
+### IP limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#ip-limits "Direct link to IP limits")
 
 *   Every request has a certain **weight**, added to your limit as you perform requests.
     *   The heavier the request (e.g. querying data from multiple symbols), the more weight the request will cost.
     *   Connecting to WebSocket API costs 2 weight.
 *   Current weight usage is indicated by the `REQUEST_WEIGHT` rate limit type.
-*   Use the [`exchangeInfo`](/docs/binance-spot-api-docs/web-socket-api/general-requests#exchange-information) request to keep track of the current weight limits.
+*   Use the [`exchangeInfo`](/docs/binance-spot-api-docs/websocket-api/rate-limits#exchange-information) request to keep track of the current weight limits.
 *   Weight is accumulated **per IP address** and is shared by all connections from that address.
 *   If you go over the weight limit, requests fail with status `429`.
     *   This status code indicates you should back off and stop spamming the API.
@@ -1540,12 +1550,12 @@ Failed response indicating that you are banned and the ban will last until epoch
 {  "id": "fc93a61a-a192-4cf4-bb2a-a8f0f0c51e06",  "status": 418,  "error": {    "code": -1003,    "msg": "Way too much request weight used; IP banned until 1659146400000. Please use WebSocket Streams for live updates to avoid bans.",    "data": {      "serverTime": 1659142907531,      "retryAfter": 1659146400000    }  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2411    }  ]}
 ```
 
-### Unfilled Order Count[​](/docs/binance-spot-api-docs/web-socket-api/rate-limits#unfilled-order-count "Direct link to Unfilled Order Count")
+### Unfilled Order Count[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#unfilled-order-count "Direct link to Unfilled Order Count")
 
 *   Successfully placed orders update the `ORDERS` rate limit type.
 *   Rejected or unsuccessful orders might or might not update the `ORDERS` rate limit type.
 *   **Please note that if your orders are consistently filled by trades, you can continuously place orders on the API**. For more information, please see [Spot Unfilled Order Count Rules](/docs/binance-spot-api-docs/faqs/order_count_decrement).
-*   Use the [`account.rateLimits.orders`](/docs/binance-spot-api-docs/web-socket-api/account-requests#query-unfilled-order-count) request to keep track of how many orders you have placed within this interval.
+*   Use the [`account.rateLimits.orders`](/docs/binance-spot-api-docs/websocket-api/account-requests#query-unfilled-order-count) request to keep track of how many orders you have placed within this interval.
 *   If you exceed this, requests fail with status `429`.
     *   This status code indicates you should back off and stop spamming the API.
     *   Responses that have a status `429` include a `retryAfter` field, indicating when you can retry the request.
@@ -1561,7 +1571,7 @@ Request security
 ================
 
 *   Every method has a security type which determines how to call it.
-    *   Security type is stated next to the method name. For example, [Place new order (TRADE)](/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-trade).
+    *   Security type is stated next to the method name. For example, [Place new order (TRADE)](/docs/binance-spot-api-docs/websocket-api/request-security#place-new-order-trade).
     *   If no security type is stated, the security type is NONE.
 
 | Security type | API key | Signature | Description |
@@ -1579,12 +1589,12 @@ Request security
     *   By default, an API key cannot `TRADE`. You need to enable trading in API Management first.
 *   `TRADE` and `USER_DATA` requests are also known as `SIGNED` requests.
 
-### SIGNED (TRADE and USER\_DATA) request security[​](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-trade-and-user_data-request-security "Direct link to SIGNED (TRADE and USER_DATA) request security")
+### SIGNED (TRADE and USER\_DATA) request security[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-trade-and-user_data-request-security "Direct link to SIGNED (TRADE and USER_DATA) request security")
 
 *   `SIGNED` requests require an additional parameter: `signature`, authorizing the request.
-*   Please consult [SIGNED request example (HMAC)](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-request-example-hmac), [SIGNED request example (RSA)](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-request-example-rsa), and [SIGNED request example (Ed25519)](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-request-example-ed25519) on how to compute signature, depending on which API key type you are using.
+*   Please consult [SIGNED request example (HMAC)](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-hmac), [SIGNED request example (RSA)](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-rsa), and [SIGNED request example (Ed25519)](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-ed25519) on how to compute signature, depending on which API key type you are using.
 
-### Timing security[​](/docs/binance-spot-api-docs/web-socket-api/request-security#timing-security "Direct link to Timing security")
+### Timing security[​](/docs/binance-spot-api-docs/websocket-api/request-security#timing-security "Direct link to Timing security")
 
 *   `SIGNED` requests also require a `timestamp` parameter which should be the current millisecond timestamp.
     
@@ -1603,7 +1613,7 @@ Request security
 
 **It is recommended to use a small `recvWindow` of 5000 or less!**
 
-### SIGNED request example (HMAC)[​](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-request-example-hmac "Direct link to SIGNED request example (HMAC)")
+### SIGNED request example (HMAC)[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-hmac "Direct link to SIGNED request example (HMAC)")
 
 Here is a step-by-step guide on how to sign requests using HMAC secret key.
 
@@ -1673,7 +1683,7 @@ Finally, complete the request by adding the `signature` parameter with the signa
 {  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",  "method": "order.place",  "params": {    "symbol":           "BTCUSDT",    "side":             "SELL",    "type":             "LIMIT",    "timeInForce":      "GTC",    "quantity":         "0.01000000",    "price":            "52000.00",    "newOrderRespType": "ACK",    "recvWindow":       100,    "timestamp":        1645423376532,    "apiKey":           "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature":        "cc15477742bd704c29492d96c7ead9414dfd8e0ec4a00f947bb5bb454ddbd08a"  }}
 ```
 
-### SIGNED request example (RSA)[​](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-request-example-rsa "Direct link to SIGNED request example (RSA)")
+### SIGNED request example (RSA)[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-rsa "Direct link to SIGNED request example (RSA)")
 
 Here is a step-by-step guide on how to sign requests using your RSA private key.
 
@@ -1740,7 +1750,7 @@ Finally, complete the request by adding the `signature` parameter with the signa
 {  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",  "method": "order.place",  "params": {    "symbol":           "BTCUSDT",    "side":             "SELL",    "type":             "LIMIT",    "timeInForce":      "GTC",    "quantity":         "0.01000000",    "price":            "52000.00",    "newOrderRespType": "ACK",    "recvWindow":       100,    "timestamp":        1645423376532,    "apiKey":           "CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ",    "signature":        "OJJaf8C/3VGrU4ATTR4GiUDqL2FboSE1Qw7UnnoYNfXTXHubIl1iaePGuGyfct4NPu5oVEZCH4Q6ZStfB1w4ssgu0uiB/Bg+fBrRFfVgVaLKBdYHMvT+ljUJzqVaeoThG9oXlduiw8PbS9U8DYAbDvWN3jqZLo4Z2YJbyovyDAvDTr/oC0+vssLqP7NmlNb3fF3Bj7StmOwJvQJTbRAtzxK5PP7OQe+0mbW+D7RqVkUiSswR8qJFWTeSe4nXXNIdZdueYhF/Xf25L+KitJS5IHdIHcKfEw3MQzHFb2ZsGWkjDQwxkwr7Noi0Zaa+gFtxCuatGFm9dFIyx217pmSHtA=="  }}
 ```
 
-### SIGNED Request Example (Ed25519)[​](/docs/binance-spot-api-docs/web-socket-api/request-security#signed-request-example-ed25519 "Direct link to SIGNED Request Example (Ed25519)")
+### SIGNED Request Example (Ed25519)[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-ed25519 "Direct link to SIGNED Request Example (Ed25519)")
 
 **Note: It is highly recommended to use Ed25519 API keys as it should provide the best performance and security out of all supported key types.**
 
@@ -1771,13 +1781,13 @@ Once authenticated, you no longer have to specify `apiKey` and `signature` for t
 
 **Note:** You still have to specify the `timestamp` parameter for `SIGNED` requests.
 
-### Authenticate after connection[​](/docs/binance-spot-api-docs/web-socket-api/session-authentication#authenticate-after-connection "Direct link to Authenticate after connection")
+### Authenticate after connection[​](/docs/binance-spot-api-docs/websocket-api/session-authentication#authenticate-after-connection "Direct link to Authenticate after connection")
 
 You can authenticate an already established connection using session authentication requests:
 
-*   [`session.logon`](/docs/binance-spot-api-docs/web-socket-api/authentication-requests#log-in-with-api-key-signed) – authenticate, or change the API key associated with the connection
-*   [`session.status`](/docs/binance-spot-api-docs/web-socket-api/authentication-requests#query-session-status) – check connection status and the current API key
-*   [`session.logout`](/docs/binance-spot-api-docs/web-socket-api/authentication-requests#log-out-of-the-session) – forget the API key associated with the connection
+*   [`session.logon`](/docs/binance-spot-api-docs/websocket-api/session-authentication#log-in-with-api-key-signed) – authenticate, or change the API key associated with the connection
+*   [`session.status`](/docs/binance-spot-api-docs/websocket-api/session-authentication#query-session-status) – check connection status and the current API key
+*   [`session.logout`](/docs/binance-spot-api-docs/websocket-api/session-authentication#log-out-of-the-session) – forget the API key associated with the connection
 
 **Regarding API key revocation:**
 
@@ -1787,7 +1797,7 @@ If during an active session the API key becomes invalid for _any reason_ (e.g. I
 {  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."  }}
 ```
 
-### Authorize _ad hoc_ requests[​](/docs/binance-spot-api-docs/web-socket-api/session-authentication#authorize-ad-hoc-requests "Direct link to authorize-ad-hoc-requests")
+### Authorize _ad hoc_ requests[​](/docs/binance-spot-api-docs/websocket-api/session-authentication#authorize-ad-hoc-requests "Direct link to authorize-ad-hoc-requests")
 
 Only one API key can be authenticated with the WebSocket connection. The authenticated API key is used by default for requests that require an `apiKey` parameter. However, you can always specify the `apiKey` and `signature` explicitly for individual requests, overriding the authenticated API key and using a different one to authorize a specific request.
 
@@ -1814,14 +1824,7 @@ Data sources
 General requests
 ================
 
-### Terminology[​](/docs/binance-spot-api-docs/web-socket-api/general-requests#terminology "Direct link to Terminology")
-
-These terms will be used throughout the documentation, so it is recommended especially for new users to read to help their understanding of the API.
-
-*   `base asset` refers to the asset that is the `quantity` of a symbol. For the symbol BTCUSDT, BTC would be the `base asset`.
-*   `quote asset` refers to the asset that is the `price` of a symbol. For the symbol BTCUSDT, USDT would be the `quote asset`.
-
-### Test connectivity[​](/docs/binance-spot-api-docs/web-socket-api/general-requests#test-connectivity "Direct link to Test connectivity")
+### Test connectivity[​](/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity "Direct link to Test connectivity")
 
 ```
 {  "id": "922bcc6e-9de8-440d-9e84-7c80933a8d0d",  "method": "ping"}
@@ -1843,7 +1846,7 @@ Test connectivity to the WebSocket API.
 {  "id": "922bcc6e-9de8-440d-9e84-7c80933a8d0d",  "status": 200,  "result": {},  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 1    }  ]}
 ```
 
-### Check server time[​](/docs/binance-spot-api-docs/web-socket-api/general-requests#check-server-time "Direct link to Check server time")
+### Check server time[​](/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time "Direct link to Check server time")
 
 ```
 {  "id": "187d3cb2-942d-484c-8271-4e2141bbadb1",  "method": "time"}
@@ -1863,7 +1866,7 @@ Test connectivity to the WebSocket API and get the current server time.
 {  "id": "187d3cb2-942d-484c-8271-4e2141bbadb1",  "status": 200,  "result": {    "serverTime": 1656400526260  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 1    }  ]}
 ```
 
-### Exchange information[​](/docs/binance-spot-api-docs/web-socket-api/general-requests#exchange-information "Direct link to Exchange information")
+### Exchange information[​](/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information "Direct link to Exchange information")
 
 ```
 {  "id": "5494febb-d167-46a2-996d-70533eb4d976",  "method": "exchangeInfo",  "params": {    "symbols": ["BNBBTC"]  }}
@@ -1895,7 +1898,7 @@ Notes:
     *   In order to list _all_ active symbols on the exchange, you need to explicitly request all permissions.
 *   `permissions` accepts either a list of permissions, or a single permission name. E.g. `"SPOT"`.
     
-*   [Available Permissions](/docs/binance-spot-api-docs/web-socket-api/enums.md#account-and-symbol-permissions)
+*   [Available Permissions](/docs/binance-spot-api-docs/enums#account-and-symbol-permissions)
     
 
 **Examples of Symbol Permissions Interpretation from the Response:**
@@ -1915,7 +1918,7 @@ Notes:
 Market data requests
 ====================
 
-### Order book[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#order-book "Direct link to Order book")
+### Order book[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book "Direct link to Order book")
 
 ```
 {  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",  "method": "depth",  "params": {    "symbol": "BNBBTC",    "limit": 5  }}
@@ -1956,7 +1959,7 @@ You can use `depth` request together with `<symbol>@depth` streams to [maintain 
 {  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",  "status": 200,  "result": {    "lastUpdateId": 2731179239,    // Bid levels are sorted from highest to lowest price.    "bids": [      [        "0.01379900",   // Price        "3.43200000"    // Quantity      ],      [        "0.01379800",        "3.24300000"      ],      [        "0.01379700",        "10.45500000"      ],      [        "0.01379600",        "3.82100000"      ],      [        "0.01379500",        "10.26200000"      ]    ],    // Ask levels are sorted from lowest to highest price.    "asks": [      [        "0.01380000",        "5.91700000"      ],      [        "0.01380100",        "6.01400000"      ],      [        "0.01380200",        "0.26800000"      ],      [        "0.01380300",        "0.33800000"      ],      [        "0.01380400",        "0.26800000"      ]    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### Recent trades[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#recent-trades "Direct link to Recent trades")
+### Recent trades[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades "Direct link to Recent trades")
 
 ```
 {  "id": "409a20bd-253d-41db-a6dd-687862a5882f",  "method": "trades.recent",  "params": {    "symbol": "BNBBTC",    "limit": 1  }}
@@ -1985,7 +1988,7 @@ If you need access to real-time trading activity, please consider using WebSocke
 {  "id": "409a20bd-253d-41db-a6dd-687862a5882f",  "status": 200,  "result": [    {      "id": 194686783,      "price": "0.01361000",      "qty": "0.01400000",      "quoteQty": "0.00019054",      "time": 1660009530807,      "isBuyerMaker": true,      "isBestMatch": true    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### Historical trades[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#historical-trades "Direct link to Historical trades")
+### Historical trades[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades "Direct link to Historical trades")
 
 ```
 {  "id": "cffc9c7d-4efc-4ce0-b587-6b87448f052a",  "method": "trades.historical",  "params": {    "symbol": "BNBBTC",    "fromId": 0,    "limit": 1  }}
@@ -2015,7 +2018,7 @@ Notes:
 {  "id": "cffc9c7d-4efc-4ce0-b587-6b87448f052a",  "status": 200,  "result": [    {      "id": 0,      "price": "0.00005000",      "qty": "40.00000000",      "quoteQty": "0.00200000",      "time": 1500004800376,      "isBuyerMaker": true,      "isBestMatch": true    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 10    }  ]}
 ```
 
-### Aggregate trades[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#aggregate-trades "Direct link to Aggregate trades")
+### Aggregate trades[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades "Direct link to Aggregate trades")
 
 ```
 {  "id": "189da436-d4bd-48ca-9f95-9f613d621717",  "method": "trades.aggregate",  "params": {    "symbol": "BNBBTC",    "fromId": 50000000,    "limit": 1  }}
@@ -2039,8 +2042,8 @@ If you need historical aggregate trade data, please consider using [data.binance
 | --- | --- | --- | --- |
 | `symbol` | STRING | YES |  
 | `fromId` | INT | NO | Aggregate trade ID to begin at 
-| `startTime` | INT | NO |  
-| `endTime` | INT | NO |  
+| `startTime` | LONG | NO |  
+| `endTime` | LONG | NO |  
 | `limit` | INT | NO | Default: 500; Maximum: 1000 
 
 Notes:
@@ -2064,7 +2067,7 @@ Notes:
 {  "id": "189da436-d4bd-48ca-9f95-9f613d621717",  "status": 200,  "result": [    {      "a": 50000000,        // Aggregate trade ID      "p": "0.00274100",    // Price      "q": "57.19000000",   // Quantity      "f": 59120167,        // First trade ID      "l": 59120170,        // Last trade ID      "T": 1565877971222,   // Timestamp      "m": true,            // Was the buyer the maker?      "M": true             // Was the trade the best price match?    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### Klines[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#klines "Direct link to Klines")
+### Klines[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines "Direct link to Klines")
 
 ```
 {  "id": "1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b",  "method": "klines",  "params": {    "symbol": "BNBBTC",    "interval": "1h",    "startTime": 1655969280000,    "limit": 1  }}
@@ -2078,7 +2081,7 @@ If you need access to real-time kline updates, please consider using WebSocket S
 
 *   [`<symbol>@kline_<interval>`](/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams)
 
-If you need historical kline data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/./market-data-requests.md#klines).
+If you need historical kline data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#klines).
 
 **Weight:** 2
 
@@ -2088,8 +2091,8 @@ If you need historical kline data, please consider using [data.binance.vision](h
 | --- | --- | --- | --- |
 | `symbol` | STRING | YES |  
 | `interval` | ENUM | YES |  
-| `startTime` | INT | NO |  
-| `endTime` | INT | NO |  
+| `startTime` | LONG | NO |  
+| `endTime` | LONG | NO |  
 | `timeZone` | STRING | NO | Default: 0 (UTC) 
 | `limit` | INT | NO | Default: 500; Maximum: 1000 
 
@@ -2122,7 +2125,7 @@ Notes:
 {  "id": "1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b",  "status": 200,  "result": [    [      1655971200000,      // Kline open time      "0.01086000",       // Open price      "0.01086600",       // High price      "0.01083600",       // Low price      "0.01083800",       // Close price      "2290.53800000",    // Volume      1655974799999,      // Kline close time      "24.85074442",      // Quote asset volume      2283,               // Number of trades      "1171.64000000",    // Taker buy base asset volume      "12.71225884",      // Taker buy quote asset volume      "0"                 // Unused field, ignore    ]  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### UI Klines[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#ui-klines "Direct link to UI Klines")
+### UI Klines[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines "Direct link to UI Klines")
 
 ```
 {  "id": "b137468a-fb20-4c06-bd6b-625148eec958",  "method": "uiKlines",  "params": {    "symbol": "BNBBTC",    "interval": "1h",    "startTime": 1655969280000,    "limit": 1  }}
@@ -2130,7 +2133,7 @@ Notes:
 
 Get klines (candlestick bars) optimized for presentation.
 
-This request is similar to [`klines`](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#klines), having the same parameters and response. `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
+This request is similar to [`klines`](/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines), having the same parameters and response. `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
 
 **Weight:** 2
 
@@ -2139,9 +2142,9 @@ This request is similar to [`klines`](/docs/binance-spot-api-docs/web-socket-api
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
 | `symbol` | STRING | YES |  
-| `interval` | ENUM | YES | See [`klines`](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#kline-intervals) 
-| `startTime` | INT | NO |  
-| `endTime` | INT | NO |  
+| `interval` | ENUM | YES | See [`klines`](/docs/binance-spot-api-docs/websocket-api/market-data-requests#kline-intervals) 
+| `startTime` | LONG | NO |  
+| `endTime` | LONG | NO |  
 | `timeZone` | STRING | NO | Default: 0 (UTC) 
 | `limit` | INT | NO | Default: 500; Maximum: 1000 
 
@@ -2163,7 +2166,7 @@ Notes:
 {  "id": "b137468a-fb20-4c06-bd6b-625148eec958",  "status": 200,  "result": [    [      1655971200000,      // Kline open time      "0.01086000",       // Open price      "0.01086600",       // High price      "0.01083600",       // Low price      "0.01083800",       // Close price      "2290.53800000",    // Volume      1655974799999,      // Kline close time      "24.85074442",      // Quote asset volume      2283,               // Number of trades      "1171.64000000",    // Taker buy base asset volume      "12.71225884",      // Taker buy quote asset volume      "0"                 // Unused field, ignore    ]  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### Current average price[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#current-average-price "Direct link to Current average price")
+### Current average price[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price "Direct link to Current average price")
 
 ```
 {  "id": "ddbfb65f-9ebf-42ec-8240-8f0f91de0867",  "method": "avgPrice",  "params": {    "symbol": "BNBBTC"  }}
@@ -2187,7 +2190,7 @@ Get current average price for a symbol.
 {  "id": "ddbfb65f-9ebf-42ec-8240-8f0f91de0867",  "status": 200,  "result": {    "mins": 5,                    // Average price interval (in minutes)    "price": "9.35751834",        // Average price    "closeTime": 1694061154503    // Last trade time  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### 24hr ticker price change statistics[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#24hr-ticker-price-change-statistics "Direct link to 24hr ticker price change statistics")
+### 24hr ticker price change statistics[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics "Direct link to 24hr ticker price change statistics")
 
 ```
 {  "id": "93fb61ef-89f8-4d6e-b022-4f035a3fadad",  "method": "ticker.24hr",  "params": {    "symbol": "BNBBTC"  }}
@@ -2200,7 +2203,7 @@ If you need to continuously monitor trading statistics, please consider using We
 *   [`<symbol>@ticker`](/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-ticker-streams) or [`!ticker@arr`](/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream)
 *   [`<symbol>@miniTicker`](/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-mini-ticker-stream) or [`!miniTicker@arr`](/docs/binance-spot-api-docs/web-socket-streams#all-market-mini-tickers-stream)
 
-If you need different window sizes, use the [`ticker`](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#rolling-window-price-change-statistics) request.
+If you need different window sizes, use the [`ticker`](/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics) request.
 
 **Weight:** Adjusted based on the number of requested symbols:
 
@@ -2248,7 +2251,7 @@ If more than one symbol is requested, response returns an array:
 {  "id": "901be0d9-fd3b-45e4-acd6-10c580d03430",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "priceChange": "0.00016500",      "priceChangePercent": "1.213",      "weightedAvgPrice": "0.01382508",      "prevClosePrice": "0.01360800",      "lastPrice": "0.01377200",      "lastQty": "1.01400000",      "bidPrice": "0.01377100",      "bidQty": "7.55700000",      "askPrice": "0.01377200",      "askQty": "4.37900000",      "openPrice": "0.01360700",      "highPrice": "0.01414900",      "lowPrice": "0.01346600",      "volume": "69376.27900000",      "quoteVolume": "959.13277091",      "openTime": 1660014615517,      "closeTime": 1660101015517,      "firstId": 194697254,      "lastId": 194969483,      "count": 272230    },    {      "symbol": "BTCUSDT",      "priceChange": "-938.06000000",      "priceChangePercent": "-3.938",      "weightedAvgPrice": "23265.34432003",      "prevClosePrice": "23819.17000000",      "lastPrice": "22880.91000000",      "lastQty": "0.00536000",      "bidPrice": "22880.40000000",      "bidQty": "0.00424000",      "askPrice": "22880.91000000",      "askQty": "0.04276000",      "openPrice": "23818.97000000",      "highPrice": "23933.25000000",      "lowPrice": "22664.69000000",      "volume": "153508.37606000",      "quoteVolume": "3571425225.04441220",      "openTime": 1660014615977,      "closeTime": 1660101015977,      "firstId": 1592019902,      "lastId": 1597301762,      "count": 5281861    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
-### Trading Day Ticker[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#trading-day-ticker "Direct link to Trading Day Ticker")
+### Trading Day Ticker[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#trading-day-ticker "Direct link to Trading Day Ticker")
 
 ```
 {  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "method": "ticker.tradingDay",  "params": {    "symbols": [      "BNBBTC",      "BTCUSDT"    ],    "timeZone": "00:00"  }}
@@ -2308,7 +2311,7 @@ With `symbols`:
 {  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": [    {      "symbol": "BTCUSDT",      "openPrice": "26304.80000000",      "highPrice": "26397.46000000",      "lowPrice": "26088.34000000",      "lastPrice": "26221.67000000",      "volume": "18495.35066000",      "quoteVolume": "485217905.04210480",      "openTime": 1695686400000,      "closeTime": 1695772799999,      "firstId": 3220151555,      "lastId": 3220849281,      "count": 697727    },    {      "symbol": "BNBUSDT",      "openPrice": "210.00000000",      "highPrice": "213.70000000",      "lowPrice": "209.70000000",      "lastPrice": "212.60000000",      "volume": "280709.58900000",      "quoteVolume": "59488753.54750000",      "openTime": 1695686400000,      "closeTime": 1695772799999,      "firstId": 672397461,      "lastId": 672496158,      "count": 98698    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 8    }  ]}
 ```
 
-### Rolling window price change statistics[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#rolling-window-price-change-statistics "Direct link to Rolling window price change statistics")
+### Rolling window price change statistics[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics "Direct link to Rolling window price change statistics")
 
 ```
 {  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "method": "ticker",  "params": {    "symbols": [      "BNBBTC",      "BTCUSDT"    ],    "windowSize": "7d"  }}
@@ -2316,7 +2319,7 @@ With `symbols`:
 
 Get rolling window price change statistics with a custom window.
 
-This request is similar to [`ticker.24hr`](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#24hr-ticker-price-change-statistics), but statistics are computed on demand using the arbitrary window you specify.
+This request is similar to [`ticker.24hr`](/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics), but statistics are computed on demand using the arbitrary window you specify.
 
 **Note:** Window size precision is limited to 1 minute. While the `closeTime` is the current time of the request, `openTime` always start on a minute boundary. As such, the effective window might be up to 59999 ms wider than the requested `windowSize`.
 
@@ -2389,7 +2392,7 @@ If more than one symbol is requested, response returns an array:
 {  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "priceChange": "0.00061500",      "priceChangePercent": "4.735",      "weightedAvgPrice": "0.01368242",      "openPrice": "0.01298900",      "highPrice": "0.01418800",      "lowPrice": "0.01296000",      "lastPrice": "0.01360400",      "volume": "587169.48600000",      "quoteVolume": "8033.90114517",      "openTime": 1659580020000,      "closeTime": 1660184820927,      "firstId": 192977765,      "lastId": 195365700,      "count": 2387936    },    {      "symbol": "BTCUSDT",      "priceChange": "1182.92000000",      "priceChangePercent": "5.113",      "weightedAvgPrice": "23349.27074846",      "openPrice": "23135.33000000",      "highPrice": "24491.22000000",      "lowPrice": "22400.00000000",      "lastPrice": "24318.25000000",      "volume": "1039498.10978000",      "quoteVolume": "24271522807.76838630",      "openTime": 1659580020000,      "closeTime": 1660184820927,      "firstId": 1568787779,      "lastId": 1604337406,      "count": 35549628    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 8    }  ]}
 ```
 
-### Symbol price ticker[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#symbol-price-ticker "Direct link to Symbol price ticker")
+### Symbol price ticker[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-price-ticker "Direct link to Symbol price ticker")
 
 ```
 {  "id": "043a7cf2-bde3-4888-9604-c8ac41fcba4d",  "method": "ticker.price",  "params": {    "symbol": "BNBBTC"  }}
@@ -2438,7 +2441,7 @@ If more than one symbol is requested, response returns an array:
 {  "id": "e739e673-24c8-4adf-9cfa-b81f30330b09",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "price": "0.01363700"    },    {      "symbol": "BTCUSDT",      "price": "24267.15000000"    },    {      "symbol": "BNBBUSD",      "price": "331.10000000"    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
 ```
 
-### Symbol order book ticker[​](/docs/binance-spot-api-docs/web-socket-api/market-data-requests#symbol-order-book-ticker "Direct link to Symbol order book ticker")
+### Symbol order book ticker[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker "Direct link to Symbol order book ticker")
 
 ```
 {  "id": "057deb3a-2990-41d1-b58b-98ea0f09e1b4",  "method": "ticker.book",  "params": {    "symbols": [      "BNBBTC",      "BTCUSDT"    ]  }}
