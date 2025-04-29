@@ -1,0 +1,8 @@
+{
+  "docUrl": "https://docs.bitfinex.com/docs/rest-auth",
+  "output": "../../../docs/bitfinex/private_rest_positions_api.md",
+  "title": "Bitfinex Positions",
+  "selector": "body",
+  "baseUrl": "https://docs.bitfinex.com",
+  "section": "Positions"
+}

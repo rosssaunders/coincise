@@ -1,0 +1,13 @@
+{
+  "title": "Bitfinex Private WebSocket API",
+  "output": "../../../docs/bitfinex/private_websocket_api.md",
+  "baseUrl": "https://docs.bitfinex.com",
+  "mainDocsUrl": "https://docs.bitfinex.com/docs/ws-auth",
+  "section": "Authenticated Websocket",
+  "urls": [
+    "https://docs.bitfinex.com/docs/ws-general",
+    "https://docs.bitfinex.com/docs/abbreviations-glossary",
+    "https://docs.bitfinex.com/docs/flag-values",
+    "https://docs.bitfinex.com/docs/ws-auth"
+  ]
+}

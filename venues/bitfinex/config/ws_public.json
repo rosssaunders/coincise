@@ -1,0 +1,14 @@
+{
+  "title": "Bitfinex Public WebSocket API",
+  "output": "../../../docs/bitfinex/public_websocket_api.md",
+  "baseUrl": "https://docs.bitfinex.com",
+  "mainDocsUrl": "https://docs.bitfinex.com/docs/ws-public",
+  "section": "Public Websocket",
+  "urls": [
+    "https://docs.bitfinex.com/docs/ws-general",
+    "https://docs.bitfinex.com/docs/abbreviations-glossary",
+    "https://docs.bitfinex.com/docs/flag-values",
+    "https://docs.bitfinex.com/docs/ws-websocket-checksum",
+    "https://docs.bitfinex.com/docs/ws-public"
+  ]
+}
