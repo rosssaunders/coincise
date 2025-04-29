@@ -192,7 +192,7 @@ Only printable ASCII characters and SOH are supported.
 | `NUMINGROUP` | Unsigned 64-bit integer. 
 | `PRICE` | Fixed-point number. Precision depends on the symbol definition. 
 | `QTY` | Fixed-point number. Precision depends on the symbol definition. 
-| `SEQNUM` | Unsigned 64-bit integer. 
+| `SEQNUM` | Unsigned 32-bit integer. Rolls over to 0 after reaching its maximum value of 4,294,967,295. 
 | `STRING` | Sequence of printable ASCII characters. 
 | `UTCTIMESTAMP` | String representing datetime in UTC. 
 
@@ -986,7 +986,7 @@ Sent by the client to cancel all open orders on a symbol.
 **Sample message:**
 
 ```
-8=FIX.4.4|9=94|35=q|34=2|49=dpYPesqv|52=20240613-01:24:36.948|56=SPOT|11=1718241876901971671|55=ABCDEF|530=1|10=110|
+8=FIX.4.4|9=95|35=q|34=2|49=dpYPesqv|52=20240613-01:24:36.948|56=SPOT|11=1718241876901971671|55=BTCUSDT|530=1|10=243|
 ```
 
 **Responses:**
@@ -1457,7 +1457,7 @@ Sent by the server whenever an order list state changes.
 **Sample message:**
 
 ```
-8=FIX.4.4|9=290|35=N|34=2|49=SPOT|52=20240607-02:19:07.837191|56=Eg13pOvN|55=ABCDEF|60=20240607-02:19:07.836000|66=25|73=2|55=LTCBNB|37=52|11=w1717726747805308656|55=ABCDEF|37=53|11=p1717726747805308656|25010=1|25011=3|25012=0|25013=1|429=4|431=3|1385=2|25014=1717726747805308656|25015=1717726747805308656|10=019|
+8=FIX.4.4|9=293|35=N|34=2|49=SPOT|52=20240607-02:19:07.837191|56=Eg13pOvN|55=BTCUSDT|60=20240607-02:19:07.836000|66=25|73=2|55=BTCUSDT|37=52|11=w1717726747805308656|55=BTCUSDT|37=53|11=p1717726747805308656|25010=1|25011=3|25012=0|25013=1|429=4|431=3|1385=2|25014=1717726747805308656|25015=1717726747805308656|10=162|
 ```
 
 #### OrderAmendKeepPriorityRequest`<XAK>`[​](/docs/binance-spot-api-docs/fix-api#orderamendkeeppriorityrequestxak "Direct link to orderamendkeeppriorityrequestxak")
