@@ -32,14 +32,44 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Binance Coinm scraper
-        run: npm run extract:binancecoinm
+      # USDM Processing
+      - name: Process USDM Public REST
+        run: npm run process:usdm:public:rest
 
-      - name: Run Binance USDM scraper
-        run: npm run extract:binanceusdm
+      - name: Process USDM Private REST
+        run: npm run process:usdm:private:rest
 
-      - name: Run Binance Options scraper
-        run: npm run extract:binanceoptions
+      - name: Process USDM Public WebSocket
+        run: npm run process:usdm:public:ws
+
+      - name: Process USDM Private WebSocket
+        run: npm run process:usdm:private:ws
+
+      # COINM Processing
+      - name: Process COINM Public REST
+        run: npm run process:coinm:public:rest
+
+      - name: Process COINM Private REST
+        run: npm run process:coinm:private:rest
+
+      - name: Process COINM Public WebSocket
+        run: npm run process:coinm:public:ws
+
+      - name: Process COINM Private WebSocket
+        run: npm run process:coinm:private:ws
+
+      # Options Processing
+      - name: Process Options Public REST
+        run: npm run process:options:public:rest
+
+      - name: Process Options Private REST
+        run: npm run process:options:private:rest
+
+      - name: Process Options Public WebSocket
+        run: npm run process:options:public:ws
+
+      - name: Process Options Private WebSocket
+        run: npm run process:options:private:ws
 
       - name: Check for changes
         id: git-check

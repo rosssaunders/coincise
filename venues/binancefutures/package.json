@@ -1,14 +1,23 @@
 {
-  "name": "binance-futures-extractor",
+  "name": "binancefutures",
   "version": "1.0.0",
-  "description": "CLI to extract and process Binance Futures API documentation",
+  "description": "Binance Futures API Documentation Extractor",
+  "main": "src/index.js",
   "type": "module",
-  "main": "src/main.js",
   "scripts": {
-    "start": "node src/index.js process binanceusdm && node src/index.js process binancecoinm && node src/index.js process binanceoptions",
-    "extract:binanceusdm": "node src/index.js extract binanceusdm",
-    "extract:binancecoinm": "node src/index.js extract binancecoinm",
-    "extract:binanceoptions": "node src/index.js extract binanceoptions"
+    "start": "npm run process:usdm:public:rest && npm run process:usdm:private:rest && npm run process:usdm:public:ws && npm run process:usdm:private:ws && npm run process:coinm:public:rest && npm run process:coinm:private:rest && npm run process:coinm:public:ws && npm run process:coinm:private:ws && npm run process:options:public:rest && npm run process:options:private:rest && npm run process:options:public:ws && npm run process:options:private:ws",
+    "process:usdm:public:rest": "node src/index.js config/usdm_public_rest.json",
+    "process:usdm:private:rest": "node src/index.js config/usdm_private_rest.json",
+    "process:usdm:public:ws": "node src/index.js config/usdm_public_websocket.json",
+    "process:usdm:private:ws": "node src/index.js config/usdm_private_websocket.json",
+    "process:coinm:public:rest": "node src/index.js config/coinm_public_rest.json",
+    "process:coinm:private:rest": "node src/index.js config/coinm_private_rest.json",
+    "process:coinm:public:ws": "node src/index.js config/coinm_public_websocket.json",
+    "process:coinm:private:ws": "node src/index.js config/coinm_private_websocket.json",
+    "process:options:public:rest": "node src/index.js config/options_public_rest.json",
+    "process:options:private:rest": "node src/index.js config/options_private_rest.json",
+    "process:options:public:ws": "node src/index.js config/options_public_websocket.json",
+    "process:options:private:ws": "node src/index.js config/options_private_websocket.json"
   },
   "dependencies": {
     "puppeteer": "24.7.2",

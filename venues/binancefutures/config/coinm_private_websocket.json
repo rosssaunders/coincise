@@ -1,0 +1,31 @@
+{
+  "endpoints": [
+    "derivatives/quick-start",
+    "derivatives/coin-margined-futures/websocket-api-general-info",
+    "derivatives/coin-margined-futures/common-definition",
+    "derivatives/coin-margined-futures/error-code",
+    "derivatives/coin-margined-futures/user-data-streams",
+    "derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream",
+    "derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream",
+    "derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream",
+    "derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp",
+    "derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp",
+    "derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp",
+    "derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired",
+    "derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call",
+    "derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update",
+    "derivatives/coin-margined-futures/user-data-streams/Event-Order-Update",
+    "derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update",
+    "derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE",
+    "derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE",
+    "derivatives/coin-margined-futures/trade/websocket-api",
+    "derivatives/coin-margined-futures/trade/websocket-api/Modify-Order",
+    "derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order",
+    "derivatives/coin-margined-futures/trade/websocket-api/Query-Order",
+    "derivatives/coin-margined-futures/trade/websocket-api/Position-Information",
+    "derivatives/coin-margined-futures/account/websocket-api",
+    "derivatives/coin-margined-futures/account/websocket-api/Account-Information"
+  ],
+  "output_file": "binance/coinm/private_websocket_api.md",
+  "title": "Binance COINM Futures Private Websocket API Documentation"
+}
