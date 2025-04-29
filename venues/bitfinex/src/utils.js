@@ -11,6 +11,7 @@ export const launchBrowser = async () => {
     headless: 'new',
     args: [
       '--no-sandbox',
+      '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
       '--disable-gpu',
       '--single-process',
