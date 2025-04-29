@@ -31,8 +31,9 @@ gfm(turndownService)
 async function fetchAndConvert(url) {
   const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] })
   let markdown = ''
+  let page = null
   try {
-    const page = await browser.newPage()
+    page = await browser.newPage()
     await page.setViewport({ width: 1920, height: 1080 })
     await page.goto(url, { waitUntil: 'networkidle0' })
     await page.waitForSelector('.theme-doc-markdown.markdown', { timeout: 30000 })
@@ -41,11 +42,12 @@ async function fetchAndConvert(url) {
       return el ? el.outerHTML : ''
     })
     markdown = turndownService.turndown(html)
-    await page.close()
   } catch (err) {
-    await browser.close()
     throw new Error(`Failed to fetch or convert ${url}: ${err.message}`)
   } finally {
+    if (page) {
+      await page.close()
+    }
     await browser.close()
   }
   return markdown
