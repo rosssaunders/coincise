@@ -1,6 +1,6 @@
 'use strict'
 
-import puppeteer from 'puppeteer'
+import { launchBrowser, configurePage } from '../../../../shared/utils.js'
 
 /**
  * Utility class to handle browser operations
@@ -11,17 +11,7 @@ class BrowserUtils {
    * @returns {Promise<Browser>} Puppeteer browser instance
    */
   static async initBrowser() {
-    return await puppeteer.launch({
-      headless: 'new',
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--disable-gpu',
-        '--window-size=1920x1080',
-      ],
-    })
+    return await launchBrowser()
   }
 
   /**
@@ -31,6 +21,7 @@ class BrowserUtils {
    */
   static async createPage(browser) {
     const page = await browser.newPage()
+    await configurePage(page)
     await page.setUserAgent(
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
     )

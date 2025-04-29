@@ -33,7 +33,7 @@ export const launchBrowser = async () => {
 }
 
 /**
- * Configure a new page with standardized settings
+ * Configure a Puppeteer page with standardized settings
  * @param {Page} page - Puppeteer page instance
  * @returns {Promise<void>}
  */
@@ -44,6 +44,8 @@ export const configurePage = async page => {
 
   // Enable request interception
   await page.setRequestInterception(true)
+
+  // Block unnecessary resources
   page.on('request', request => {
     const resourceType = request.resourceType()
     if (['document', 'script', 'xhr', 'fetch'].includes(resourceType)) {
@@ -52,6 +54,19 @@ export const configurePage = async page => {
       request.abort()
     }
   })
+}
+
+/**
+ * Create a new Turndown service instance with GFM support
+ * @returns {TurndownService} Configured Turndown service
+ */
+export const createTurndownService = () => {
+  const turndownService = new TurndownService({
+    codeBlockStyle: 'fenced',
+    fence: '```',
+  })
+  turndownService.use(gfm)
+  return turndownService
 }
 
 /**

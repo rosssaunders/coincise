@@ -6,6 +6,7 @@ import { gfm } from 'turndown-plugin-gfm'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { launchBrowser, configurePage } from '../../../../shared/utils.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -31,11 +32,9 @@ export class BaseProcessor {
   }
 
   async initialize() {
-    this.browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    })
+    this.browser = await launchBrowser()
     this.page = await this.browser.newPage()
+    await configurePage(this.page)
   }
 
   async cleanup() {

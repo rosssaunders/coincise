@@ -1,6 +1,6 @@
 'use strict'
 
-import puppeteer from 'puppeteer'
+import { launchBrowser, configurePage } from '../../../../shared/utils.js'
 import { info } from './logger.js'
 
 /**
@@ -10,16 +10,12 @@ import { info } from './logger.js'
  */
 export async function launchBrowserAndLoadPage(htmlFilePath) {
   info('Launching Puppeteer...')
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  })
-
+  const browser = await launchBrowser()
   const page = await browser.newPage()
+  await configurePage(page)
 
   // Convert file path to file URL
   info(`Loading HTML file: ${htmlFilePath}`)
-
   await page.goto(htmlFilePath, { waitUntil: 'networkidle0' })
 
   return { browser, page }

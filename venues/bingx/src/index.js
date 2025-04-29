@@ -1,23 +1,14 @@
-import puppeteer from 'puppeteer'
+import { launchBrowser, configurePage } from '../../shared/utils.js'
 import TurndownService from 'turndown'
 import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
 import fs from 'fs'
 import { getConfig } from './config/bingx.js'
 
 async function loadBrowser() {
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-web-security',
-      '--disable-features=IsolateOrigins',
-      '--disable-site-isolation-trials',
-      '--disable-features=BlockInsecurePrivateNetworkRequests',
-    ],
-    ignoreHTTPSErrors: true,
-  })
-  return browser
+  const browser = await launchBrowser()
+  const page = await browser.newPage()
+  await configurePage(page)
+  return { browser, page }
 }
 
 async function getPageHTML(pageURL, browser) {
@@ -522,7 +513,7 @@ async function main() {
     process.exit(1) // Exit with error code
   } finally {
     if (browser) {
-      await browser.close()
+      await browser.browser.close()
     }
   }
 }
