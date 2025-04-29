@@ -506,6 +506,10 @@ Application Messages[​](/docs/binance-spot-api-docs/fix-api#application-messag
 
 Sent by the client to submit a new order for execution.
 
+This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+
+**Unfilled Order Count:** 1
+
 Please refer to [Supported Order Types](/docs/binance-spot-api-docs/fix-api#ordertype) for supported field combinations.
 
 > \[!NOTE\] Many fields become required based on the order type. Please refer to [Supported Order Types](/docs/binance-spot-api-docs/fix-api#NewOrderSingle-required-fields).
@@ -865,6 +869,12 @@ Sent by the client to cancel an order and submit a new one for execution.
 *   To cancel an order either `OrderID (11)` or `OrigClOrdId (41)` are required.
 *   If both `OrderID (37)` and `OrigClOrdID (41)` are provided, the `OrderID` is searched first, then the `OrigClOrdID` from that result is checked against that order. If both conditions are not met the request will be rejected.
 
+Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
+
+A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+
+**Unfilled Order Count:** 1
+
 Please refer to [Supported Order Types](/docs/binance-spot-api-docs/fix-api#ordertype) for supported field combinations when describing the new order.
 
 > \[!NOTE\] Cancel is always processed first. Then immediately after that the new order is submitted.
@@ -1025,6 +1035,15 @@ Sent by the server in response to [OrderMassCancelRequest`<q>`](/docs/binance-sp
 #### NewOrderList`<E>`[​](/docs/binance-spot-api-docs/fix-api#neworderliste "Direct link to neworderliste")
 
 Sent by the client to submit a list of orders for execution.
+
+*   OCOs or OTOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+*   OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+
+**Unfilled Order Count:**
+
+*   OCO: 2
+*   OTO: 2
+*   OTOCO: 3
 
 Orders in an order list are contingent on one another. Please refer to [Supported Order List Types](/docs/binance-spot-api-docs/fix-api#order-list-types) for supported order types and triggering instructions.
 
@@ -1463,6 +1482,12 @@ Sent by the server whenever an order list state changes.
 #### OrderAmendKeepPriorityRequest`<XAK>`[​](/docs/binance-spot-api-docs/fix-api#orderamendkeeppriorityrequestxak "Direct link to orderamendkeeppriorityrequestxak")
 
 Sent by the client to reduce the original quantity of their order.
+
+This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+
+**Unfilled Order Count:** 0
+
+Read [Order Amend Keep Priority FAQ](/docs/binance-spot-api-docs/faqs/order_amend_keep_priority) to learn more.
 
 **Notes:**
 
