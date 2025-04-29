@@ -35,7 +35,7 @@ async function fetchAndConvert(url) {
     const page = await browser.newPage()
     await page.setViewport({ width: 1920, height: 1080 })
     await page.goto(url, { waitUntil: 'networkidle0' })
-    await page.waitForSelector('.theme-doc-markdown.markdown', { timeout: 10000 })
+    await page.waitForSelector('.theme-doc-markdown.markdown', { timeout: 30000 })
     const html = await page.evaluate(() => {
       const el = document.querySelector('.theme-doc-markdown.markdown')
       return el ? el.outerHTML : ''
@@ -61,7 +61,7 @@ async function processAll() {
     try {
       const md = await fetchAndConvert(url)
       if (md) content += md + '\n\n'
-      await new Promise(r => setTimeout(r, 1000)) // polite delay
+      await new Promise(r => setTimeout(r, 5000)) // polite delay
     } catch (err) {
       console.error(err.message)
       process.exit(1) // Exit immediately on error
