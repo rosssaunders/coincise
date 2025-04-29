@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 import { JSDOM } from 'jsdom'
 import TurndownService from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
-import puppeteer from 'puppeteer'
+import { launchBrowser, configurePage } from './utils.js'
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)
@@ -32,21 +32,14 @@ const fetchContent = async url => {
   let page = null
 
   try {
-    browser = await puppeteer.launch({
-      headless: 'new',
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--disable-gpu',
-      ],
-    })
+    browser = await launchBrowser()
 
     page = await browser.newPage()
+    await configurePage(page)
+
     await page.goto(url, {
       waitUntil: 'networkidle2',
-      timeout: 60000, // Increased timeout to 60 seconds
+      timeout: 30000,
     })
 
     // Wait for the content to load
@@ -68,11 +61,20 @@ const fetchContent = async url => {
     console.error(`Error fetching content from ${url}:`, error)
     throw error // Re-throw the error to be handled by the caller
   } finally {
-    if (page) {
-      await page.close().catch(console.error)
+    try {
+      if (page) {
+        await page.close()
+      }
+    } catch (error) {
+      console.error('Error closing page:', error)
     }
-    if (browser) {
-      await browser.close().catch(console.error)
+
+    try {
+      if (browser) {
+        await browser.close()
+      }
+    } catch (error) {
+      console.error('Error closing browser:', error)
     }
   }
 }

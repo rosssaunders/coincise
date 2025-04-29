@@ -7,6 +7,7 @@ import { JSDOM } from 'jsdom'
 import TurndownService from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
 import puppeteer from 'puppeteer'
+import { launchBrowser, configurePage } from './utils.js'
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)
@@ -29,19 +30,12 @@ const config = JSON.parse(
 const fetchMainDocContent = async url => {
   console.log(`Fetching main documentation from: ${url}`)
 
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--disable-gpu',
-    ],
-  })
+  const browser = await launchBrowser()
 
   try {
     const page = await browser.newPage()
+    await configurePage(page)
+
     await page.goto(url, { waitUntil: 'networkidle2' })
 
     // Wait for the content to load
@@ -163,21 +157,14 @@ const fetchEndpointContent = async (url, baseUrl) => {
   let page = null
 
   try {
-    browser = await puppeteer.launch({
-      headless: 'new',
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--disable-gpu',
-      ],
-    })
+    browser = await launchBrowser()
 
     page = await browser.newPage()
+    await configurePage(page)
+
     await page.goto(fullUrl, {
       waitUntil: 'networkidle2',
-      timeout: 60000, // Increased timeout to 60 seconds
+      timeout: 30000,
     })
 
     // Wait for the main content to load
@@ -291,44 +278,31 @@ const main = async () => {
 
       markdown += `## ${sectionName}\n\n`
 
-      // Process endpoints in parallel
-      const processedEndpoints = await Promise.all(
-        endpoints.map(endpoint => processEndpoint(endpoint, config.baseUrl, turndownService))
-      )
-
-      // Check if any endpoints failed to process
-      const failedEndpoints = processedEndpoints.filter(endpoint => !endpoint.markdown)
-      if (failedEndpoints.length > 0) {
-        console.error(
-          `Failed to process ${failedEndpoints.length} endpoints in section ${sectionName}`
-        )
-        process.exit(1)
-      }
-
-      // Add each endpoint's markdown to the section
-      for (const endpoint of processedEndpoints) {
-        markdown += `### ${endpoint.title}\n\n${endpoint.markdown}\n\n---\n\n`
+      // Process each endpoint in the section
+      for (const endpoint of endpoints) {
+        try {
+          const processedEndpoint = await processEndpoint(endpoint, config.baseUrl, turndownService)
+          markdown += `### ${processedEndpoint.title}\n\n${processedEndpoint.markdown}\n\n`
+        } catch (error) {
+          console.error(`Failed to process endpoint ${endpoint.title}:`, error)
+          // Continue with next endpoint even if one fails
+          continue
+        }
       }
     }
 
-    // Ensure output directory exists
-    const outputDir = path.dirname(path.join(__dirname, config.output))
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true })
-    }
-
-    // Write the markdown file
-    fs.writeFileSync(path.join(__dirname, config.output), markdown)
-
-    console.log(`Successfully extracted authenticated endpoints to ${config.output}`)
+    // Write the markdown to a file
+    const outputPath = path.join(__dirname, '../output.md')
+    fs.writeFileSync(outputPath, markdown)
+    console.log(`Documentation written to ${outputPath}`)
   } catch (error) {
-    console.error('Error extracting authenticated endpoints:', error)
+    console.error('Error in main function:', error)
     process.exit(1)
   }
 }
 
-// Execute the main function
+// Run the main function
 main().catch(error => {
-  console.error('Fatal error:', error)
+  console.error('Unhandled error:', error)
   process.exit(1)
 })
