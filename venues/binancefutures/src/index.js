@@ -54,7 +54,6 @@ async function fetchAndConvert(url) {
 async function processAll() {
   const { endpoints, output_file, title } = config
   let content = `# ${title}\n\n`
-  let hasError = false
 
   for (const endpoint of endpoints) {
     const url = `${BASE_URL}/${endpoint}`
@@ -65,7 +64,7 @@ async function processAll() {
       await new Promise(r => setTimeout(r, 1000)) // polite delay
     } catch (err) {
       console.error(err.message)
-      hasError = true
+      process.exit(1) // Exit immediately on error
     }
   }
 
@@ -73,10 +72,6 @@ async function processAll() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true })
   fs.writeFileSync(outPath, content)
   console.log(`Wrote: ${outPath}`)
-
-  if (hasError) {
-    throw new Error('One or more endpoints failed to process')
-  }
 }
 
 // Run if called directly
