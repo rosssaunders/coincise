@@ -33,22 +33,22 @@ jobs:
         run: npm ci
 
       - name: Run Binance Spot scraper (public_rest)
-        run: npm run start -- ./config/public_rest.json
+        run: npm run extract:public_rest
 
       - name: Run Binance Spot scraper (private_rest)
-        run: npm run start -- ./config/private_rest.json
+        run: npm run extract:private_rest
 
       - name: Run Binance Spot scraper (public_websocket)
-        run: npm run start -- ./config/public_websocket.json
+        run: npm run extract:public_websocket
 
       - name: Run Binance Spot scraper (private_websocket)
-        run: npm run start -- ./config/private_websocket.json
+        run: npm run extract:private_websocket
 
       - name: Run Binance Spot scraper (fix)
-        run: npm run start -- ./config/fix.json
+        run: npm run extract:fix
 
       - name: Run Binance Spot scraper (sbe)
-        run: npm run start -- ./config/sbe.json
+        run: npm run extract:sbe
 
       - name: Check for changes
         id: git-check
