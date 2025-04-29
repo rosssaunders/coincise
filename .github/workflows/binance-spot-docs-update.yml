@@ -32,8 +32,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Binance Spot scraper
-        run: npm run start
+      - name: Run Binance Spot scraper (public_rest)
+        run: npm run start -- ./config/public_rest.json
+
+      - name: Run Binance Spot scraper (private_rest)
+        run: npm run start -- ./config/private_rest.json
+
+      - name: Run Binance Spot scraper (public_websocket)
+        run: npm run start -- ./config/public_websocket.json
+
+      - name: Run Binance Spot scraper (private_websocket)
+        run: npm run start -- ./config/private_websocket.json
+
+      - name: Run Binance Spot scraper (fix)
+        run: npm run start -- ./config/fix.json
+
+      - name: Run Binance Spot scraper (sbe)
+        run: npm run start -- ./config/sbe.json
 
       - name: Check for changes
         id: git-check

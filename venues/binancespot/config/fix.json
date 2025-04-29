@@ -1,0 +1,5 @@
+{
+  "endpoints": ["binance-spot-api-docs/fix-api"],
+  "output_file": "binance/spot/fix_api.md",
+  "title": "Binance Spot FIX API Documentation"
+}

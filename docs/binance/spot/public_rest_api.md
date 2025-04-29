@@ -298,35 +298,35 @@ Order status (status)[​](/docs/binance-spot-api-docs/enums#order-status-status
 
 | Status | Description |
 | --- | --- |
-| `NEW` | The order has been accepted by the engine. 
-| `PENDING_NEW` | The order is in a pending phase until the working order of an order list has been fully filled. 
-| `PARTIALLY_FILLED` | A part of the order has been filled. 
-| `FILLED` | The order has been completed. 
-| `CANCELED` | The order has been canceled by the user. 
-| `PENDING_CANCEL` | Currently unused 
-| `REJECTED` | The order was not accepted by the engine and not processed. 
+| `NEW` | The order has been accepted by the engine. |
+| `PENDING_NEW` | The order is in a pending phase until the working order of an order list has been fully filled. |
+| `PARTIALLY_FILLED` | A part of the order has been filled. |
+| `FILLED` | The order has been completed. |
+| `CANCELED` | The order has been canceled by the user. |
+| `PENDING_CANCEL` | Currently unused |
+| `REJECTED` | The order was not accepted by the engine and not processed. |
 | `EXPIRED` | The order was canceled according to the order type's rules (e.g. LIMIT FOK orders with no fill, LIMIT IOC or MARKET orders that partially fill)  
-or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance) 
-| `EXPIRED_IN_MATCH` | The order was expired by the exchange due to STP. (e.g. an order with `EXPIRE_TAKER` will match with existing orders on the book with the same account or same `tradeGroupId`) 
+or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance) |
+| `EXPIRED_IN_MATCH` | The order was expired by the exchange due to STP. (e.g. an order with `EXPIRE_TAKER` will match with existing orders on the book with the same account or same `tradeGroupId`) |
 
 Order List Status (listStatusType)[​](/docs/binance-spot-api-docs/enums#order-list-status-liststatustype "Direct link to Order List Status (listStatusType)")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 | Status | Description |
 | --- | --- |
-| `RESPONSE` | This is used when the ListStatus is responding to a failed action. (E.g. order list placement or cancellation) 
-| `EXEC_STARTED` | The order list has been placed or there is an update to the order list status. 
-| `UPDATED` | The clientOrderId of an order in the order list has been changed. 
-| `ALL_DONE` | The order list has finished executing and thus is no longer active. 
+| `RESPONSE` | This is used when the ListStatus is responding to a failed action. (E.g. order list placement or cancellation) |
+| `EXEC_STARTED` | The order list has been placed or there is an update to the order list status. |
+| `UPDATED` | The clientOrderId of an order in the order list has been changed. |
+| `ALL_DONE` | The order list has finished executing and thus is no longer active. |
 
 Order List Order Status (listOrderStatus)[​](/docs/binance-spot-api-docs/enums#order-list-order-status-listorderstatus "Direct link to Order List Order Status (listOrderStatus)")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 | Status | Description |
 | --- | --- |
-| `EXECUTING` | Either an order list has been placed or there is an update to the status of the list. 
-| `ALL_DONE` | An order list has completed execution and thus no longer active. 
-| `REJECT` | The List Status is responding to a failed action either during order placement or order canceled. 
+| `EXECUTING` | Either an order list has been placed or there is an update to the status of the list. |
+| `ALL_DONE` | An order list has completed execution and thus no longer active. |
+| `REJECT` | The List Status is responding to a failed action either during order placement or order canceled. |
 
 ContingencyType[​](/docs/binance-spot-api-docs/enums#contingencytype "Direct link to ContingencyType")
 ------------------------------------------------------------------------------------------------------
@@ -377,11 +377,11 @@ This sets how long an order will be active before expiration.
 | Status | Description |
 | --- | --- |
 | `GTC` | Good Til Canceled  
-An order will be on the book unless the order is canceled. 
+An order will be on the book unless the order is canceled. |
 | `IOC` | Immediate Or Cancel  
-An order will try to fill the order as much as it can before the order expires. 
+An order will try to fill the order as much as it can before the order expires. |
 | `FOK` | Fill or Kill  
-An order will expire if the full order cannot be filled upon execution. 
+An order will expire if the full order cannot be filled upon execution. |
 
 Rate limiters (rateLimitType)[​](/docs/binance-spot-api-docs/enums#rate-limiters-ratelimittype "Direct link to Rate limiters (rateLimitType)")
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -842,47 +842,47 @@ This code is sent when an error has been returned by the matching engine. The fo
 
 | Error message | Description |
 | --- | --- |
-| "Unknown order sent." | The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found. 
-| "Duplicate order sent." | The `clOrdId` is already in use. 
-| "Market is closed." | The symbol is not trading. 
-| "Account has insufficient balance for requested action." | Not enough funds to complete the action. 
-| "Market orders are not supported for this symbol." | `MARKET` is not enabled on the symbol. 
-| "Iceberg orders are not supported for this symbol." | `icebergQty` is not enabled on the symbol. 
-| "Stop loss orders are not supported for this symbol." | `STOP_LOSS` is not enabled on the symbol. 
-| "Stop loss limit orders are not supported for this symbol." | `STOP_LOSS_LIMIT` is not enabled on the symbol. 
-| "Take profit orders are not supported for this symbol." | `TAKE_PROFIT` is not enabled on the symbol. 
-| "Take profit limit orders are not supported for this symbol." | `TAKE_PROFIT_LIMIT` is not enabled on the symbol. 
-| "Order amend is not supported for this symbol." | Order amend keep priority is not enabled on the symbol. 
-| "Price \* QTY is zero or less." | `price` \* `quantity` is too low. 
-| "IcebergQty exceeds QTY." | `icebergQty` must be less than the order quantity. 
-| "This action is disabled on this account." | Contact customer support; some actions have been disabled on the account. 
-| "This account may not place or cancel orders." | Contact customer support; the account has trading ability disabled. 
-| "Unsupported order combination" | The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed. 
-| "Order would trigger immediately." | The order's stop price is not valid when compared to the last traded price. 
-| "Cancel order is invalid. Check origClOrdId and orderId." | No `origClOrdId` or `orderId` was sent in. 
-| "Order would immediately match and take." | `LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order. 
+| "Unknown order sent." | The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found. |
+| "Duplicate order sent." | The `clOrdId` is already in use. |
+| "Market is closed." | The symbol is not trading. |
+| "Account has insufficient balance for requested action." | Not enough funds to complete the action. |
+| "Market orders are not supported for this symbol." | `MARKET` is not enabled on the symbol. |
+| "Iceberg orders are not supported for this symbol." | `icebergQty` is not enabled on the symbol. |
+| "Stop loss orders are not supported for this symbol." | `STOP_LOSS` is not enabled on the symbol. |
+| "Stop loss limit orders are not supported for this symbol." | `STOP_LOSS_LIMIT` is not enabled on the symbol. |
+| "Take profit orders are not supported for this symbol." | `TAKE_PROFIT` is not enabled on the symbol. |
+| "Take profit limit orders are not supported for this symbol." | `TAKE_PROFIT_LIMIT` is not enabled on the symbol. |
+| "Order amend is not supported for this symbol." | Order amend keep priority is not enabled on the symbol. |
+| "Price \* QTY is zero or less." | `price` \* `quantity` is too low. |
+| "IcebergQty exceeds QTY." | `icebergQty` must be less than the order quantity. |
+| "This action is disabled on this account." | Contact customer support; some actions have been disabled on the account. |
+| "This account may not place or cancel orders." | Contact customer support; the account has trading ability disabled. |
+| "Unsupported order combination" | The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed. |
+| "Order would trigger immediately." | The order's stop price is not valid when compared to the last traded price. |
+| "Cancel order is invalid. Check origClOrdId and orderId." | No `origClOrdId` or `orderId` was sent in. |
+| "Order would immediately match and take." | `LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order. |
 | "The relationship of the prices for the orders is not correct." | The prices set in the `OCO` is breaking the Price restrictions.  
 For reference:  
 `BUY` : `LIMIT_MAKER` `price` < Last Traded Price < `stopPrice`  
-`SELL` : `LIMIT_MAKER` `price` > Last Traded Price > `stopPrice` 
-| "OCO orders are not supported for this symbol" | `OCO` is not enabled on the symbol. 
-| "Quote order qty market orders are not support for this symbol." | `MARKET` orders using the parameter `quoteOrderQty` are not enabled on the symbol. 
-| "Trailing stop orders are not supported for this symbol." | Orders using `trailingDelta` are not enabled on the symbol. 
-| "Order cancel-replace is not supported for this symbol." | `POST /api/v3/order/cancelReplace` (REST API) or `order.cancelReplace` (WebSocket API) is not enabled on the symbol. 
-| "This symbol is not permitted for this account." | Account and symbol do not have the same permissions. (e.g. `SPOT`, `MARGIN`, etc) 
-| "This symbol is restricted for this account." | Account is unable to trade on that symbol. (e.g. An `ISOLATED_MARGIN` account cannot place `SPOT` orders.) 
+`SELL` : `LIMIT_MAKER` `price` > Last Traded Price > `stopPrice` |
+| "OCO orders are not supported for this symbol" | `OCO` is not enabled on the symbol. |
+| "Quote order qty market orders are not support for this symbol." | `MARKET` orders using the parameter `quoteOrderQty` are not enabled on the symbol. |
+| "Trailing stop orders are not supported for this symbol." | Orders using `trailingDelta` are not enabled on the symbol. |
+| "Order cancel-replace is not supported for this symbol." | `POST /api/v3/order/cancelReplace` (REST API) or `order.cancelReplace` (WebSocket API) is not enabled on the symbol. |
+| "This symbol is not permitted for this account." | Account and symbol do not have the same permissions. (e.g. `SPOT`, `MARGIN`, etc) |
+| "This symbol is restricted for this account." | Account is unable to trade on that symbol. (e.g. An `ISOLATED_MARGIN` account cannot place `SPOT` orders.) |
 | "Order was not canceled due to cancel restrictions." | Either `cancelRestrictions` was set to `ONLY_NEW` but the order status was not `NEW`  
 or  
-`cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was not `PARTIALLY_FILLED`. 
-| "Rest API trading is not enabled." / "WebSocket API trading is not enabled." | Order is being placed or a server that is not configured to allow access to `TRADE` endpoints. 
-| "FIX API trading is not enabled. | Order is placed on a FIX server that is not TRADE enabled. 
-| "Order book liquidity is less than `LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than minimum quantity configured for the `LOT_SIZE` filter. 
-| "Order book liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than the minimum quantity for `MARKET_LOT_SIZE` filter. 
-| "Order book liquidity is less than symbol minimum quantity." | Quote quantity market orders cannot be placed when there are no orders on the book. 
-| "Order amend (quantity increase) is not supported." | `newQty` must be less than the order quantity. 
+`cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was not `PARTIALLY_FILLED`. |
+| "Rest API trading is not enabled." / "WebSocket API trading is not enabled." | Order is being placed or a server that is not configured to allow access to `TRADE` endpoints. |
+| "FIX API trading is not enabled. | Order is placed on a FIX server that is not TRADE enabled. |
+| "Order book liquidity is less than `LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than minimum quantity configured for the `LOT_SIZE` filter. |
+| "Order book liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than the minimum quantity for `MARKET_LOT_SIZE` filter. |
+| "Order book liquidity is less than symbol minimum quantity." | Quote quantity market orders cannot be placed when there are no orders on the book. |
+| "Order amend (quantity increase) is not supported." | `newQty` must be less than the order quantity. |
 | "The requested action would change no state; rejecting". | The request sent would not have changed the status quo.  
   
-(e.g. `newQty` cannot equal the order quantity.) 
+(e.g. `newQty` cannot equal the order quantity.) |
 
 Errors regarding placing orders via cancelReplace[​](/docs/binance-spot-api-docs/errors#errors-regarding-placing-orders-via-cancelreplace "Direct link to Errors regarding placing orders via cancelReplace")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -900,22 +900,22 @@ Filter failures[​](/docs/binance-spot-api-docs/errors#filter-failures "Direct 
 
 | Error message | Description |
 | --- | --- |
-| "Filter failure: PRICE\_FILTER" | `price` is too high, too low, and/or not following the tick size rule for the symbol. 
-| "Filter failure: PERCENT\_PRICE" | `price` is X% too high or X% too low from the average weighted price over the last Y minutes. 
-| "Filter failure: LOT\_SIZE" | `quantity` is too high, too low, and/or not following the step size rule for the symbol. 
-| "Filter failure: MIN\_NOTIONAL" | `price` \* `quantity` is too low to be a valid order for the symbol. 
-| "Filter failure: NOTIONAL" | `price` \* `quantity` is not within range of the `minNotional` and `maxNotional` 
-| "Filter failure: ICEBERG\_PARTS" | `ICEBERG` order would break into too many parts; icebergQty is too small. 
-| "Filter failure: MARKET\_LOT\_SIZE" | `MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol. 
+| "Filter failure: PRICE\_FILTER" | `price` is too high, too low, and/or not following the tick size rule for the symbol. |
+| "Filter failure: PERCENT\_PRICE" | `price` is X% too high or X% too low from the average weighted price over the last Y minutes. |
+| "Filter failure: LOT\_SIZE" | `quantity` is too high, too low, and/or not following the step size rule for the symbol. |
+| "Filter failure: MIN\_NOTIONAL" | `price` \* `quantity` is too low to be a valid order for the symbol. |
+| "Filter failure: NOTIONAL" | `price` \* `quantity` is not within range of the `minNotional` and `maxNotional` |
+| "Filter failure: ICEBERG\_PARTS" | `ICEBERG` order would break into too many parts; icebergQty is too small. |
+| "Filter failure: MARKET\_LOT\_SIZE" | `MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol. |
 | "Filter failure: MAX\_POSITION" | The account's position has reached the maximum defined limit.  
-This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders. 
-| "Filter failure: MAX\_NUM\_ORDERS" | Account has too many open orders on the symbol. 
-| "Filter failure: MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the symbol. 
-| "Filter failure: MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the symbol. 
-| "Filter failure: TRAILING\_DELTA" | `trailingDelta` is not within the defined range of the filter for that order type. 
-| "Filter failure: EXCHANGE\_MAX\_NUM\_ORDERS" | Account has too many open orders on the exchange. 
-| "Filter failure: EXCHANGE\_MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the exchange. 
-| "Filter failure: EXCHANGE\_MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the exchange.
+This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders. |
+| "Filter failure: MAX\_NUM\_ORDERS" | Account has too many open orders on the symbol. |
+| "Filter failure: MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the symbol. |
+| "Filter failure: MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the symbol. |
+| "Filter failure: TRAILING\_DELTA" | `trailingDelta` is not within the defined range of the filter for that order type. |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ORDERS" | Account has too many open orders on the exchange. |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the exchange. |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the exchange. |
 
 General API Information
 =======================
@@ -1028,10 +1028,10 @@ Endpoint security type
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
@@ -1066,19 +1066,19 @@ Here is a step-by-step example of how to send a valid signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| `apiKey` | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A 
-| `secretKey` | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j 
+| `apiKey` | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
+| `secretKey` | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j |
 
 | Parameter | Value |
 | --- | --- |
-| `symbol` | LTCBTC 
-| `side` | BUY 
-| `type` | LIMIT 
-| `timeInForce` | GTC 
-| `quantity` | 1 
-| `price` | 0.1 
-| `recvWindow` | 5000 
-| `timestamp` | 1499827319559 
+| `symbol` | LTCBTC |
+| `side` | BUY |
+| `type` | LIMIT |
+| `timeInForce` | GTC |
+| `quantity` | 1 |
+| `price` | 0.1 |
+| `recvWindow` | 5000 |
+| `timestamp` | 1499827319559 |
 
 **Example 1: As a request body**
 
@@ -1147,18 +1147,18 @@ For this example, the private key will be referenced as `./test-prv-key.pem`
 
 | Key | Value |
 | --- | --- |
-| `apiKey` | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ 
+| `apiKey` | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
 
 | Parameter | Value |
 | --- | --- |
-| `symbol` | BTCUSDT 
-| `side` | SELL 
-| `type` | LIMIT 
-| `timeInForce` | GTC 
-| `quantity` | 1 
-| `price` | 0.2 
-| `timestamp` | 1668481559918 
-| `recvWindow` | 5000 
+| `symbol` | BTCUSDT |
+| `side` | SELL |
+| `type` | LIMIT |
+| `timeInForce` | GTC |
+| `quantity` | 1 |
+| `price` | 0.2 |
+| `timestamp` | 1668481559918 |
+| `recvWindow` | 5000 |
 
 **Step 1: Construct the payload**
 
@@ -1209,13 +1209,13 @@ API_KEY="put your own API Key here"PRIVATE_KEY_PATH="test-prv-key.pem"# Set up t
 
 | Parameter | Value |
 | --- | --- |
-| `symbol` | BTCUSDT 
-| `side` | SELL 
-| `type` | LIMIT 
-| `timeInForce` | GTC 
-| `quantity` | 1 
-| `price` | 0.2 
-| `timestamp` | 1668481559918 
+| `symbol` | BTCUSDT |
+| `side` | SELL |
+| `type` | LIMIT |
+| `timeInForce` | GTC |
+| `quantity` | 1 |
+| `price` | 0.2 |
+| `timestamp` | 1668481559918 |
 
 This is a sample code in Python to show how to sign the payload with an Ed25519 key.
 
@@ -1280,18 +1280,18 @@ Current exchange trading rules and symbol information
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | No | Example: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC)" 
+| symbol | STRING | No | Example: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC)" |
 | symbols | ARRAY OF STRING | No | Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D)"  
 or  
-curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?symbols=\["BTCUSDT","BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22,%22BNBBTC)"\]' 
+curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?symbols=\["BTCUSDT","BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22,%22BNBBTC)"\]' |
 | permissions | ENUM | No | Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT](https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT)"  
 or  
 curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D)"  
 or  
-curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?permissions=\["MARGIN","LEVERAGED](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22,%22LEVERAGED)"\]' 
-| showPermissionSets | BOOLEAN | No | Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true` 
+curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?permissions=\["MARGIN","LEVERAGED](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22,%22LEVERAGED)"\]' |
+| showPermissionSets | BOOLEAN | No | Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true` |
 | symbolStatus | ENUM | No | Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK`  
-Cannot be used in combination with `symbols` or `symbol`. 
+Cannot be used in combination with `symbols` or `symbol`. |
 
 **Notes:**
 
@@ -1328,18 +1328,18 @@ GET /api/v3/depth
 
 | Limit | Request Weight |
 | --- | --- |
-| 1-100 | 5 
-| 101-500 | 25 
-| 501-1000 | 50 
-| 1001-5000 | 250 
+| 1-100 | 5 |
+| 101-500 | 25 |
+| 501-1000 | 50 |
+| 1001-5000 | 250 |
 
 **Parameters:**
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 | limit | INT | NO | Default: 100; Maximum: 5000.  
-If limit > 5000, only 5000 entries will be returned. 
+If limit > 5000, only 5000 entries will be returned. |
 
 **Data Source:** Memory
 
@@ -1363,8 +1363,8 @@ Get recent trades.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| limit | INT | NO | Default: 500; Maximum: 1000. 
+| symbol | STRING | YES |  |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
 
 **Data Source:** Memory
 
@@ -1388,9 +1388,9 @@ Get older trades.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| limit | INT | NO | Default: 500; Maximum: 1000. 
-| fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades. 
+| symbol | STRING | YES |  |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
+| fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades. |
 
 **Data Source:** Database
 
@@ -1414,11 +1414,11 @@ Get compressed, aggregate trades. Trades that fill at the time, from the same ta
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| fromId | LONG | NO | ID to get aggregate trades from INCLUSIVE. 
-| startTime | LONG | NO | Timestamp in ms to get aggregate trades from INCLUSIVE. 
-| endTime | LONG | NO | Timestamp in ms to get aggregate trades until INCLUSIVE. 
-| limit | INT | NO | Default: 500; Maximum: 1000. 
+| symbol | STRING | YES |  |
+| fromId | LONG | NO | ID to get aggregate trades from INCLUSIVE. |
+| startTime | LONG | NO | Timestamp in ms to get aggregate trades from INCLUSIVE. |
+| endTime | LONG | NO | Timestamp in ms to get aggregate trades until INCLUSIVE. |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
 
 *   If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
 
@@ -1444,23 +1444,23 @@ Kline/candlestick bars for a symbol. Klines are uniquely identified by their ope
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| interval | ENUM | YES |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| timeZone | STRING | NO | Default: 0 (UTC) 
-| limit | INT | NO | Default: 500; Maximum: 1000. 
+| symbol | STRING | YES |  |
+| interval | ENUM | YES |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| timeZone | STRING | NO | Default: 0 (UTC) |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
 
 Supported kline intervals (case-sensitive):
 
 | Interval | `interval` value |
 | --- | --- |
-| seconds | `1s` 
-| minutes | `1m`, `3m`, `5m`, `15m`, `30m` 
-| hours | `1h`, `2h`, `4h`, `6h`, `8h`, `12h` 
-| days | `1d`, `3d` 
-| weeks | `1w` 
-| months | `1M` 
+| seconds | `1s` |
+| minutes | `1m`, `3m`, `5m`, `15m`, `30m` |
+| hours | `1h`, `2h`, `4h`, `6h`, `8h`, `12h` |
+| days | `1d`, `3d` |
+| weeks | `1w` |
+| months | `1M` |
 
 **Notes:**
 
@@ -1496,12 +1496,12 @@ The request is similar to klines having the same parameters and response.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| interval | ENUM | YES | See [`klines`](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#kline-intervals) 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| timeZone | STRING | NO | Default: 0 (UTC) 
-| limit | INT | NO | Default: 500; Maximum: 1000. 
+| symbol | STRING | YES |  |
+| interval | ENUM | YES | See [`klines`](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#kline-intervals) |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| timeZone | STRING | NO | Default: 0 (UTC) |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
 
 *   If `startTime` and `endTime` are not sent, the most recent klines are returned.
 *   Supported values for `timeZone`:
@@ -1533,7 +1533,7 @@ Current average price for a symbol.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 
 **Data Source:** Memory
 
@@ -1555,12 +1555,12 @@ GET /api/v3/ticker/24hr
 
 | Parameter | Symbols Provided | Weight |
 | --- | --- | --- |
-| symbol | 1 | 2 
-| symbol parameter is omitted | 80 
-| symbols | 1-20 | 2 
-| 21-100 | 40 
-| 101 or more | 80 
-| symbols parameter is omitted | 80 
+| symbol | 1 | 2 |
+| symbol parameter is omitted | 80 |
+| symbols | 1-20 | 2 |
+| 21-100 | 40 |
+| 101 or more | 80 |
+| symbols parameter is omitted | 80 |
 
 **Parameters:**
 
@@ -1571,10 +1571,10 @@ If neither parameter is sent, tickers for all symbols will be returned in an arr
   
 Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\]  
 or  
-%5B%22BTCUSDT%22,%22BNBUSDT%22%5D 
-| symbols | STRING | NO 
+%5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
+| symbols | STRING | NO |
 | type | ENUM | NO | Supported values: FULL or MINI.  
-If none provided, the default is FULL 
+If none provided, the default is FULL |
 
 **Data Source:** Memory
 
@@ -1627,11 +1627,11 @@ Examples of accepted format for the symbols parameter:
 or  
 %5B%22BTCUSDT%22,%22BNBUSDT%22%5D  
   
-The maximum number of symbols allowed in a request is 100. 
-| symbols 
-| timeZone | STRING | NO | Default: 0 (UTC) 
+The maximum number of symbols allowed in a request is 100. |
+| symbols |
+| timeZone | STRING | NO | Default: 0 (UTC) |
 | type | ENUM | NO | Supported values: FULL or MINI.  
-If none provided, the default is FULL 
+If none provided, the default is FULL |
 
 **Notes:**
 
@@ -1681,9 +1681,9 @@ Latest price for a symbol or symbols.
 
 | Parameter | Symbols Provided | Weight |
 | --- | --- | --- |
-| symbol | 1 | 2 
-| symbol parameter is omitted | 4 
-| symbols | Any | 4 
+| symbol | 1 | 2 |
+| symbol parameter is omitted | 4 |
+| symbols | Any | 4 |
 
 **Parameters:**
 
@@ -1694,8 +1694,8 @@ If neither parameter is sent, prices for all symbols will be returned in an arra
   
 Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\]  
 or  
-%5B%22BTCUSDT%22,%22BNBUSDT%22%5D 
-| symbols | STRING | NO 
+%5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
+| symbols | STRING | NO |
 
 **Data Source:** Memory
 
@@ -1723,9 +1723,9 @@ Best price/qty on the order book for a symbol or symbols.
 
 | Parameter | Symbols Provided | Weight |
 | --- | --- | --- |
-| symbol | 1 | 2 
-| symbol parameter is omitted | 4 
-| symbols | Any | 4 
+| symbol | 1 | 2 |
+| symbol parameter is omitted | 4 |
+| symbols | Any | 4 |
 
 **Parameters:**
 
@@ -1736,8 +1736,8 @@ If neither parameter is sent, bookTickers for all symbols will be returned in an
   
 Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\]  
 or  
-%5B%22BTCUSDT%22,%22BNBUSDT%22%5D 
-| symbols | STRING | NO 
+%5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
+| symbols | STRING | NO |
 
 **Data Source:** Memory
 
@@ -1784,17 +1784,17 @@ Examples of accepted format for the symbols parameter:
 or  
 %5B%22BTCUSDT%22,%22BNBUSDT%22%5D  
   
-The maximum number of symbols allowed in a request is 100. 
-| symbols 
+The maximum number of symbols allowed in a request is 100. |
+| symbols |
 | windowSize | ENUM | NO | Defaults to 1d if no parameter provided  
 Supported windowSize values:  
 1m,2m....59m for minutes  
 1h, 2h....23h - for hours  
 1d...7d - for days  
   
-Units cannot be combined (e.g. 1d2h is not allowed) 
+Units cannot be combined (e.g. 1d2h is not allowed) |
 | type | ENUM | NO | Supported values: FULL or MINI.  
-If none provided, the default is FULL 
+If none provided, the default is FULL |
 
 **Data Source:** Database
 

@@ -5,7 +5,13 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js process binancespot"
+    "start": "node src/index.js process binancespot",
+    "extract:public_rest": "node src/index.js ./config/public_rest.json",
+    "extract:private_rest": "node src/index.js ./config/private_rest.json",
+    "extract:public_websocket": "node src/index.js ./config/public_websocket.json",
+    "extract:private_websocket": "node src/index.js ./config/private_websocket.json",
+    "extract:fix": "node src/index.js ./config/fix.json",
+    "extract:sbe": "node src/index.js ./config/sbe.json"
   },
   "author": "",
   "license": "ISC",

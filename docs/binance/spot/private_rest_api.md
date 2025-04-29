@@ -298,35 +298,35 @@ Order status (status)[​](/docs/binance-spot-api-docs/enums#order-status-status
 
 | Status | Description |
 | --- | --- |
-| `NEW` | The order has been accepted by the engine. 
-| `PENDING_NEW` | The order is in a pending phase until the working order of an order list has been fully filled. 
-| `PARTIALLY_FILLED` | A part of the order has been filled. 
-| `FILLED` | The order has been completed. 
-| `CANCELED` | The order has been canceled by the user. 
-| `PENDING_CANCEL` | Currently unused 
-| `REJECTED` | The order was not accepted by the engine and not processed. 
+| `NEW` | The order has been accepted by the engine. |
+| `PENDING_NEW` | The order is in a pending phase until the working order of an order list has been fully filled. |
+| `PARTIALLY_FILLED` | A part of the order has been filled. |
+| `FILLED` | The order has been completed. |
+| `CANCELED` | The order has been canceled by the user. |
+| `PENDING_CANCEL` | Currently unused |
+| `REJECTED` | The order was not accepted by the engine and not processed. |
 | `EXPIRED` | The order was canceled according to the order type's rules (e.g. LIMIT FOK orders with no fill, LIMIT IOC or MARKET orders that partially fill)  
-or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance) 
-| `EXPIRED_IN_MATCH` | The order was expired by the exchange due to STP. (e.g. an order with `EXPIRE_TAKER` will match with existing orders on the book with the same account or same `tradeGroupId`) 
+or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance) |
+| `EXPIRED_IN_MATCH` | The order was expired by the exchange due to STP. (e.g. an order with `EXPIRE_TAKER` will match with existing orders on the book with the same account or same `tradeGroupId`) |
 
 Order List Status (listStatusType)[​](/docs/binance-spot-api-docs/enums#order-list-status-liststatustype "Direct link to Order List Status (listStatusType)")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 | Status | Description |
 | --- | --- |
-| `RESPONSE` | This is used when the ListStatus is responding to a failed action. (E.g. order list placement or cancellation) 
-| `EXEC_STARTED` | The order list has been placed or there is an update to the order list status. 
-| `UPDATED` | The clientOrderId of an order in the order list has been changed. 
-| `ALL_DONE` | The order list has finished executing and thus is no longer active. 
+| `RESPONSE` | This is used when the ListStatus is responding to a failed action. (E.g. order list placement or cancellation) |
+| `EXEC_STARTED` | The order list has been placed or there is an update to the order list status. |
+| `UPDATED` | The clientOrderId of an order in the order list has been changed. |
+| `ALL_DONE` | The order list has finished executing and thus is no longer active. |
 
 Order List Order Status (listOrderStatus)[​](/docs/binance-spot-api-docs/enums#order-list-order-status-listorderstatus "Direct link to Order List Order Status (listOrderStatus)")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 | Status | Description |
 | --- | --- |
-| `EXECUTING` | Either an order list has been placed or there is an update to the status of the list. 
-| `ALL_DONE` | An order list has completed execution and thus no longer active. 
-| `REJECT` | The List Status is responding to a failed action either during order placement or order canceled. 
+| `EXECUTING` | Either an order list has been placed or there is an update to the status of the list. |
+| `ALL_DONE` | An order list has completed execution and thus no longer active. |
+| `REJECT` | The List Status is responding to a failed action either during order placement or order canceled. |
 
 ContingencyType[​](/docs/binance-spot-api-docs/enums#contingencytype "Direct link to ContingencyType")
 ------------------------------------------------------------------------------------------------------
@@ -377,11 +377,11 @@ This sets how long an order will be active before expiration.
 | Status | Description |
 | --- | --- |
 | `GTC` | Good Til Canceled  
-An order will be on the book unless the order is canceled. 
+An order will be on the book unless the order is canceled. |
 | `IOC` | Immediate Or Cancel  
-An order will try to fill the order as much as it can before the order expires. 
+An order will try to fill the order as much as it can before the order expires. |
 | `FOK` | Fill or Kill  
-An order will expire if the full order cannot be filled upon execution. 
+An order will expire if the full order cannot be filled upon execution. |
 
 Rate limiters (rateLimitType)[​](/docs/binance-spot-api-docs/enums#rate-limiters-ratelimittype "Direct link to Rate limiters (rateLimitType)")
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -842,47 +842,47 @@ This code is sent when an error has been returned by the matching engine. The fo
 
 | Error message | Description |
 | --- | --- |
-| "Unknown order sent." | The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found. 
-| "Duplicate order sent." | The `clOrdId` is already in use. 
-| "Market is closed." | The symbol is not trading. 
-| "Account has insufficient balance for requested action." | Not enough funds to complete the action. 
-| "Market orders are not supported for this symbol." | `MARKET` is not enabled on the symbol. 
-| "Iceberg orders are not supported for this symbol." | `icebergQty` is not enabled on the symbol. 
-| "Stop loss orders are not supported for this symbol." | `STOP_LOSS` is not enabled on the symbol. 
-| "Stop loss limit orders are not supported for this symbol." | `STOP_LOSS_LIMIT` is not enabled on the symbol. 
-| "Take profit orders are not supported for this symbol." | `TAKE_PROFIT` is not enabled on the symbol. 
-| "Take profit limit orders are not supported for this symbol." | `TAKE_PROFIT_LIMIT` is not enabled on the symbol. 
-| "Order amend is not supported for this symbol." | Order amend keep priority is not enabled on the symbol. 
-| "Price \* QTY is zero or less." | `price` \* `quantity` is too low. 
-| "IcebergQty exceeds QTY." | `icebergQty` must be less than the order quantity. 
-| "This action is disabled on this account." | Contact customer support; some actions have been disabled on the account. 
-| "This account may not place or cancel orders." | Contact customer support; the account has trading ability disabled. 
-| "Unsupported order combination" | The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed. 
-| "Order would trigger immediately." | The order's stop price is not valid when compared to the last traded price. 
-| "Cancel order is invalid. Check origClOrdId and orderId." | No `origClOrdId` or `orderId` was sent in. 
-| "Order would immediately match and take." | `LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order. 
+| "Unknown order sent." | The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found. |
+| "Duplicate order sent." | The `clOrdId` is already in use. |
+| "Market is closed." | The symbol is not trading. |
+| "Account has insufficient balance for requested action." | Not enough funds to complete the action. |
+| "Market orders are not supported for this symbol." | `MARKET` is not enabled on the symbol. |
+| "Iceberg orders are not supported for this symbol." | `icebergQty` is not enabled on the symbol. |
+| "Stop loss orders are not supported for this symbol." | `STOP_LOSS` is not enabled on the symbol. |
+| "Stop loss limit orders are not supported for this symbol." | `STOP_LOSS_LIMIT` is not enabled on the symbol. |
+| "Take profit orders are not supported for this symbol." | `TAKE_PROFIT` is not enabled on the symbol. |
+| "Take profit limit orders are not supported for this symbol." | `TAKE_PROFIT_LIMIT` is not enabled on the symbol. |
+| "Order amend is not supported for this symbol." | Order amend keep priority is not enabled on the symbol. |
+| "Price \* QTY is zero or less." | `price` \* `quantity` is too low. |
+| "IcebergQty exceeds QTY." | `icebergQty` must be less than the order quantity. |
+| "This action is disabled on this account." | Contact customer support; some actions have been disabled on the account. |
+| "This account may not place or cancel orders." | Contact customer support; the account has trading ability disabled. |
+| "Unsupported order combination" | The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed. |
+| "Order would trigger immediately." | The order's stop price is not valid when compared to the last traded price. |
+| "Cancel order is invalid. Check origClOrdId and orderId." | No `origClOrdId` or `orderId` was sent in. |
+| "Order would immediately match and take." | `LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order. |
 | "The relationship of the prices for the orders is not correct." | The prices set in the `OCO` is breaking the Price restrictions.  
 For reference:  
 `BUY` : `LIMIT_MAKER` `price` < Last Traded Price < `stopPrice`  
-`SELL` : `LIMIT_MAKER` `price` > Last Traded Price > `stopPrice` 
-| "OCO orders are not supported for this symbol" | `OCO` is not enabled on the symbol. 
-| "Quote order qty market orders are not support for this symbol." | `MARKET` orders using the parameter `quoteOrderQty` are not enabled on the symbol. 
-| "Trailing stop orders are not supported for this symbol." | Orders using `trailingDelta` are not enabled on the symbol. 
-| "Order cancel-replace is not supported for this symbol." | `POST /api/v3/order/cancelReplace` (REST API) or `order.cancelReplace` (WebSocket API) is not enabled on the symbol. 
-| "This symbol is not permitted for this account." | Account and symbol do not have the same permissions. (e.g. `SPOT`, `MARGIN`, etc) 
-| "This symbol is restricted for this account." | Account is unable to trade on that symbol. (e.g. An `ISOLATED_MARGIN` account cannot place `SPOT` orders.) 
+`SELL` : `LIMIT_MAKER` `price` > Last Traded Price > `stopPrice` |
+| "OCO orders are not supported for this symbol" | `OCO` is not enabled on the symbol. |
+| "Quote order qty market orders are not support for this symbol." | `MARKET` orders using the parameter `quoteOrderQty` are not enabled on the symbol. |
+| "Trailing stop orders are not supported for this symbol." | Orders using `trailingDelta` are not enabled on the symbol. |
+| "Order cancel-replace is not supported for this symbol." | `POST /api/v3/order/cancelReplace` (REST API) or `order.cancelReplace` (WebSocket API) is not enabled on the symbol. |
+| "This symbol is not permitted for this account." | Account and symbol do not have the same permissions. (e.g. `SPOT`, `MARGIN`, etc) |
+| "This symbol is restricted for this account." | Account is unable to trade on that symbol. (e.g. An `ISOLATED_MARGIN` account cannot place `SPOT` orders.) |
 | "Order was not canceled due to cancel restrictions." | Either `cancelRestrictions` was set to `ONLY_NEW` but the order status was not `NEW`  
 or  
-`cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was not `PARTIALLY_FILLED`. 
-| "Rest API trading is not enabled." / "WebSocket API trading is not enabled." | Order is being placed or a server that is not configured to allow access to `TRADE` endpoints. 
-| "FIX API trading is not enabled. | Order is placed on a FIX server that is not TRADE enabled. 
-| "Order book liquidity is less than `LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than minimum quantity configured for the `LOT_SIZE` filter. 
-| "Order book liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than the minimum quantity for `MARKET_LOT_SIZE` filter. 
-| "Order book liquidity is less than symbol minimum quantity." | Quote quantity market orders cannot be placed when there are no orders on the book. 
-| "Order amend (quantity increase) is not supported." | `newQty` must be less than the order quantity. 
+`cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was not `PARTIALLY_FILLED`. |
+| "Rest API trading is not enabled." / "WebSocket API trading is not enabled." | Order is being placed or a server that is not configured to allow access to `TRADE` endpoints. |
+| "FIX API trading is not enabled. | Order is placed on a FIX server that is not TRADE enabled. |
+| "Order book liquidity is less than `LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than minimum quantity configured for the `LOT_SIZE` filter. |
+| "Order book liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity." | Quote quantity market orders cannot be placed when the order book liquidity is less than the minimum quantity for `MARKET_LOT_SIZE` filter. |
+| "Order book liquidity is less than symbol minimum quantity." | Quote quantity market orders cannot be placed when there are no orders on the book. |
+| "Order amend (quantity increase) is not supported." | `newQty` must be less than the order quantity. |
 | "The requested action would change no state; rejecting". | The request sent would not have changed the status quo.  
   
-(e.g. `newQty` cannot equal the order quantity.) 
+(e.g. `newQty` cannot equal the order quantity.) |
 
 Errors regarding placing orders via cancelReplace[​](/docs/binance-spot-api-docs/errors#errors-regarding-placing-orders-via-cancelreplace "Direct link to Errors regarding placing orders via cancelReplace")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -900,22 +900,22 @@ Filter failures[​](/docs/binance-spot-api-docs/errors#filter-failures "Direct 
 
 | Error message | Description |
 | --- | --- |
-| "Filter failure: PRICE\_FILTER" | `price` is too high, too low, and/or not following the tick size rule for the symbol. 
-| "Filter failure: PERCENT\_PRICE" | `price` is X% too high or X% too low from the average weighted price over the last Y minutes. 
-| "Filter failure: LOT\_SIZE" | `quantity` is too high, too low, and/or not following the step size rule for the symbol. 
-| "Filter failure: MIN\_NOTIONAL" | `price` \* `quantity` is too low to be a valid order for the symbol. 
-| "Filter failure: NOTIONAL" | `price` \* `quantity` is not within range of the `minNotional` and `maxNotional` 
-| "Filter failure: ICEBERG\_PARTS" | `ICEBERG` order would break into too many parts; icebergQty is too small. 
-| "Filter failure: MARKET\_LOT\_SIZE" | `MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol. 
+| "Filter failure: PRICE\_FILTER" | `price` is too high, too low, and/or not following the tick size rule for the symbol. |
+| "Filter failure: PERCENT\_PRICE" | `price` is X% too high or X% too low from the average weighted price over the last Y minutes. |
+| "Filter failure: LOT\_SIZE" | `quantity` is too high, too low, and/or not following the step size rule for the symbol. |
+| "Filter failure: MIN\_NOTIONAL" | `price` \* `quantity` is too low to be a valid order for the symbol. |
+| "Filter failure: NOTIONAL" | `price` \* `quantity` is not within range of the `minNotional` and `maxNotional` |
+| "Filter failure: ICEBERG\_PARTS" | `ICEBERG` order would break into too many parts; icebergQty is too small. |
+| "Filter failure: MARKET\_LOT\_SIZE" | `MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol. |
 | "Filter failure: MAX\_POSITION" | The account's position has reached the maximum defined limit.  
-This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders. 
-| "Filter failure: MAX\_NUM\_ORDERS" | Account has too many open orders on the symbol. 
-| "Filter failure: MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the symbol. 
-| "Filter failure: MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the symbol. 
-| "Filter failure: TRAILING\_DELTA" | `trailingDelta` is not within the defined range of the filter for that order type. 
-| "Filter failure: EXCHANGE\_MAX\_NUM\_ORDERS" | Account has too many open orders on the exchange. 
-| "Filter failure: EXCHANGE\_MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the exchange. 
-| "Filter failure: EXCHANGE\_MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the exchange.
+This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders. |
+| "Filter failure: MAX\_NUM\_ORDERS" | Account has too many open orders on the symbol. |
+| "Filter failure: MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the symbol. |
+| "Filter failure: MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the symbol. |
+| "Filter failure: TRAILING\_DELTA" | `trailingDelta` is not within the defined range of the filter for that order type. |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ORDERS" | Account has too many open orders on the exchange. |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ALGO\_ORDERS" | Account has too many open stop loss and/or take profit orders on the exchange. |
+| "Filter failure: EXCHANGE\_MAX\_NUM\_ICEBERG\_ORDERS" | Account has too many open iceberg orders on the exchange. |
 
 General API Information
 =======================
@@ -1028,10 +1028,10 @@ Endpoint security type
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
@@ -1066,19 +1066,19 @@ Here is a step-by-step example of how to send a valid signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| `apiKey` | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A 
-| `secretKey` | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j 
+| `apiKey` | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
+| `secretKey` | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j |
 
 | Parameter | Value |
 | --- | --- |
-| `symbol` | LTCBTC 
-| `side` | BUY 
-| `type` | LIMIT 
-| `timeInForce` | GTC 
-| `quantity` | 1 
-| `price` | 0.1 
-| `recvWindow` | 5000 
-| `timestamp` | 1499827319559 
+| `symbol` | LTCBTC |
+| `side` | BUY |
+| `type` | LIMIT |
+| `timeInForce` | GTC |
+| `quantity` | 1 |
+| `price` | 0.1 |
+| `recvWindow` | 5000 |
+| `timestamp` | 1499827319559 |
 
 **Example 1: As a request body**
 
@@ -1147,18 +1147,18 @@ For this example, the private key will be referenced as `./test-prv-key.pem`
 
 | Key | Value |
 | --- | --- |
-| `apiKey` | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ 
+| `apiKey` | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
 
 | Parameter | Value |
 | --- | --- |
-| `symbol` | BTCUSDT 
-| `side` | SELL 
-| `type` | LIMIT 
-| `timeInForce` | GTC 
-| `quantity` | 1 
-| `price` | 0.2 
-| `timestamp` | 1668481559918 
-| `recvWindow` | 5000 
+| `symbol` | BTCUSDT |
+| `side` | SELL |
+| `type` | LIMIT |
+| `timeInForce` | GTC |
+| `quantity` | 1 |
+| `price` | 0.2 |
+| `timestamp` | 1668481559918 |
+| `recvWindow` | 5000 |
 
 **Step 1: Construct the payload**
 
@@ -1209,13 +1209,13 @@ API_KEY="put your own API Key here"PRIVATE_KEY_PATH="test-prv-key.pem"# Set up t
 
 | Parameter | Value |
 | --- | --- |
-| `symbol` | BTCUSDT 
-| `side` | SELL 
-| `type` | LIMIT 
-| `timeInForce` | GTC 
-| `quantity` | 1 
-| `price` | 0.2 
-| `timestamp` | 1668481559918 
+| `symbol` | BTCUSDT |
+| `side` | SELL |
+| `type` | LIMIT |
+| `timeInForce` | GTC |
+| `quantity` | 1 |
+| `price` | 0.2 |
+| `timestamp` | 1668481559918 |
 
 This is a sample code in Python to show how to sign the payload with an Ed25519 key.
 
@@ -1280,18 +1280,18 @@ Current exchange trading rules and symbol information
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | No | Example: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC)" 
+| symbol | STRING | No | Example: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC)" |
 | symbols | ARRAY OF STRING | No | Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D)"  
 or  
-curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?symbols=\["BTCUSDT","BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22,%22BNBBTC)"\]' 
+curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?symbols=\["BTCUSDT","BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22,%22BNBBTC)"\]' |
 | permissions | ENUM | No | Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT](https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT)"  
 or  
 curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D)"  
 or  
-curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?permissions=\["MARGIN","LEVERAGED](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22,%22LEVERAGED)"\]' 
-| showPermissionSets | BOOLEAN | No | Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true` 
+curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?permissions=\["MARGIN","LEVERAGED](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22,%22LEVERAGED)"\]' |
+| showPermissionSets | BOOLEAN | No | Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true` |
 | symbolStatus | ENUM | No | Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK`  
-Cannot be used in combination with `symbols` or `symbol`. 
+Cannot be used in combination with `symbols` or `symbol`. |
 
 **Notes:**
 
@@ -1336,43 +1336,43 @@ This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` f
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES | Please see [Enums](/docs/binance-spot-api-docs/enums#side) for supported values. 
-| type | ENUM | YES | Please see [Enums](/docs/binance-spot-api-docs/enums#ordertypes) for supported values 
-| timeInForce | ENUM | NO | Please see [Enums](/docs/binance-spot-api-docs/enums#timeinforce) for supported values. 
-| quantity | DECIMAL | NO |  
-| quoteOrderQty | DECIMAL | NO |  
-| price | DECIMAL | NO |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES | Please see [Enums](/docs/binance-spot-api-docs/enums#side) for supported values. |
+| type | ENUM | YES | Please see [Enums](/docs/binance-spot-api-docs/enums#ordertypes) for supported values |
+| timeInForce | ENUM | NO | Please see [Enums](/docs/binance-spot-api-docs/enums#timeinforce) for supported values. |
+| quantity | DECIMAL | NO |  |
+| quoteOrderQty | DECIMAL | NO |  |
+| price | DECIMAL | NO |  |
 | newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent.  
-Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected. 
-| strategyId | LONG | NO |  
-| strategyType | INT | NO | The value cannot be less than `1000000`. 
-| stopPrice | DECIMAL | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders. 
-| trailingDelta | LONG | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders. 
-| icebergQty | DECIMAL | NO | Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order. 
-| newOrderRespType | ENUM | NO | Set the response JSON. `ACK`, `RESULT`, or `FULL`; `MARKET` and `LIMIT` order types default to `FULL`, all other orders default to `ACK`. 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected. |
+| strategyId | LONG | NO |  |
+| strategyType | INT | NO | The value cannot be less than `1000000`. |
+| stopPrice | DECIMAL | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders. |
+| trailingDelta | LONG | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders. |
+| icebergQty | DECIMAL | NO | Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order. |
+| newOrderRespType | ENUM | NO | Set the response JSON. `ACK`, `RESULT`, or `FULL`; `MARKET` and `LIMIT` order types default to `FULL`, all other orders default to `ACK`. |
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 Some additional mandatory parameters based on order `type`:
 
 | Type | Additional mandatory parameters | Additional Information |
 | --- | --- | --- |
-| `LIMIT` | `timeInForce`, `quantity`, `price` |  
+| `LIMIT` | `timeInForce`, `quantity`, `price` |  |
 | `MARKET` | `quantity` or `quoteOrderQty` | `MARKET` orders using the `quantity` field specifies the amount of the `base asset` the user wants to buy or sell at the market price.  
 E.g. MARKET order on BTCUSDT will specify how much BTC the user is buying or selling.  
   
 `MARKET` orders using `quoteOrderQty` specifies the amount the user wants to spend (when buying) or receive (when selling) the `quote` asset; the correct `quantity` will be determined based on the market liquidity and `quoteOrderQty`.  
 E.g. Using the symbol BTCUSDT:  
 `BUY` side, the order will buy as many BTC as `quoteOrderQty` USDT can.  
-`SELL` side, the order will sell as much BTC needed to receive `quoteOrderQty` USDT. 
-| `STOP_LOSS` | `quantity`, `stopPrice` or `trailingDelta` | This will execute a `MARKET` order when the conditions are met. (e.g. `stopPrice` is met or `trailingDelta` is activated) 
-| `STOP_LOSS_LIMIT` | `timeInForce`, `quantity`, `price`, `stopPrice` or `trailingDelta` |  
-| `TAKE_PROFIT` | `quantity`, `stopPrice` or `trailingDelta` | This will execute a `MARKET` order when the conditions are met. (e.g. `stopPrice` is met or `trailingDelta` is activated) 
-| `TAKE_PROFIT_LIMIT` | `timeInForce`, `quantity`, `price`, `stopPrice` or `trailingDelta` |  
+`SELL` side, the order will sell as much BTC needed to receive `quoteOrderQty` USDT. |
+| `STOP_LOSS` | `quantity`, `stopPrice` or `trailingDelta` | This will execute a `MARKET` order when the conditions are met. (e.g. `stopPrice` is met or `trailingDelta` is activated) |
+| `STOP_LOSS_LIMIT` | `timeInForce`, `quantity`, `price`, `stopPrice` or `trailingDelta` |  |
+| `TAKE_PROFIT` | `quantity`, `stopPrice` or `trailingDelta` | This will execute a `MARKET` order when the conditions are met. (e.g. `stopPrice` is met or `trailingDelta` is activated) |
+| `TAKE_PROFIT_LIMIT` | `timeInForce`, `quantity`, `price`, `stopPrice` or `trailingDelta` |  |
 | `LIMIT_MAKER` | `quantity`, `price` | This is a `LIMIT` order that will be rejected if the order immediately matches and trades as a taker.  
-This is also known as a POST-ONLY order. 
+This is also known as a POST-ONLY order. |
 
 Other info:
 
@@ -1419,16 +1419,16 @@ The fields are listed below:
 
 | Field | Description | Visibility conditions | Examples |
 | --- | --- | --- | --- |
-| `icebergQty` | Quantity for the iceberg order | Appears only if the parameter `icebergQty` was sent in the request. | `"icebergQty": "0.00000000"` 
-| `preventedMatchId` | When used in combination with `symbol`, can be used to query a prevented match. | Appears only if the order expired due to STP. | `"preventedMatchId": 0` 
-| `preventedQuantity` | Order quantity that expired due to STP | Appears only if the order expired due to STP. | `"preventedQuantity": "1.200000"` 
-| `stopPrice` | Price when the algorithmic order will be triggered | Appears for `STOP_LOSS`. `TAKE_PROFIT`, `STOP_LOSS_LIMIT` and `TAKE_PROFIT_LIMIT` orders. | `"stopPrice": "23500.00000000"` 
-| `strategyId` | Can be used to label an order that's part of an order strategy. | Appears if the parameter was populated in the request. | `"strategyId": 37463720` 
-| `strategyType` | Can be used to label an order that is using an order strategy. | Appears if the parameter was populated in the request. | `"strategyType": 1000000` 
-| `trailingDelta` | Delta price change required before order activation | Appears for Trailing Stop Orders. | `"trailingDelta": 10` 
-| `trailingTime` | Time when the trailing order is now active and tracking price changes | Appears only for Trailing Stop Orders. | `"trailingTime": -1` 
-| `usedSor` | Field that determines whether order used SOR | Appears when placing orders using SOR | `"usedSor": true` 
-| `workingFloor` | Field that determines whether the order is being filled by the SOR or by the order book the order was submitted to. | Appears when placing orders using SOR | `"workingFloor": "SOR"` 
+| `icebergQty` | Quantity for the iceberg order | Appears only if the parameter `icebergQty` was sent in the request. | `"icebergQty": "0.00000000"` |
+| `preventedMatchId` | When used in combination with `symbol`, can be used to query a prevented match. | Appears only if the order expired due to STP. | `"preventedMatchId": 0` |
+| `preventedQuantity` | Order quantity that expired due to STP | Appears only if the order expired due to STP. | `"preventedQuantity": "1.200000"` |
+| `stopPrice` | Price when the algorithmic order will be triggered | Appears for `STOP_LOSS`. `TAKE_PROFIT`, `STOP_LOSS_LIMIT` and `TAKE_PROFIT_LIMIT` orders. | `"stopPrice": "23500.00000000"` |
+| `strategyId` | Can be used to label an order that's part of an order strategy. | Appears if the parameter was populated in the request. | `"strategyId": 37463720` |
+| `strategyType` | Can be used to label an order that is using an order strategy. | Appears if the parameter was populated in the request. | `"strategyType": 1000000` |
+| `trailingDelta` | Delta price change required before order activation | Appears for Trailing Stop Orders. | `"trailingDelta": 10` |
+| `trailingTime` | Time when the trailing order is now active and tracking price changes | Appears only for Trailing Stop Orders. | `"trailingTime": -1` |
+| `usedSor` | Field that determines whether order used SOR | Appears when placing orders using SOR | `"usedSor": true` |
+| `workingFloor` | Field that determines whether the order is being filled by the SOR or by the order book the order was submitted to. | Appears when placing orders using SOR | `"workingFloor": "SOR"` |
 
 ### Test new order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade "Direct link to Test new order (TRADE)")
 
@@ -1442,8 +1442,8 @@ Test new order creation and signature/recvWindow long. Creates and validates a n
 
 | Condition | Request Weight |
 | --- | --- |
-| Without `computeCommissionRates` | 1 
-| With `computeCommissionRates` | 20 
+| Without `computeCommissionRates` | 1 |
+| With `computeCommissionRates` | 20 |
 
 **Parameters:**
 
@@ -1451,7 +1451,7 @@ In addition to all parameters accepted by [`POST /api/v3/order`](/docs/binance-s
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| computeCommissionRates | BOOLEAN | NO | Default: `false` 
+| computeCommissionRates | BOOLEAN | NO | Default: `false` |
 
 **Data Source:** Memory
 
@@ -1483,11 +1483,11 @@ Check an order's status.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Notes:**
 
@@ -1519,15 +1519,15 @@ Cancel an active order.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| newClientOrderId | STRING | NO | Used to uniquely identify this cancel. Automatically generated by default. 
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| newClientOrderId | STRING | NO | Used to uniquely identify this cancel. Automatically generated by default. |
 | cancelRestrictions | ENUM | NO | Supported values:  
 `ONLY_NEW` - Cancel will succeed if the order status is `NEW`.  
-`ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. 
-| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
-| timestamp | LONG | YES |  
+`ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. |
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. |
+| timestamp | LONG | YES |  |
 
 Notes:
 
@@ -1575,9 +1575,9 @@ Cancels all active orders on a symbol. This includes orders that are part of an 
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Matching Engine
 
@@ -1607,45 +1607,45 @@ A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), 
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| type | ENUM | YES |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| type | ENUM | YES |  |
 | cancelReplaceMode | ENUM | YES | The allowed values are:  
 `STOP_ON_FAILURE` - If the cancel request fails, the new order placement will not be attempted.  
-`ALLOW_FAILURE` - new order placement will be attempted even if cancel request fails. 
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | NO |  
-| quoteOrderQty | DECIMAL | NO |  
-| price | DECIMAL | NO |  
-| cancelNewClientOrderId | STRING | NO | Used to uniquely identify this cancel. Automatically generated by default. 
+`ALLOW_FAILURE` - new order placement will be attempted even if cancel request fails. |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | NO |  |
+| quoteOrderQty | DECIMAL | NO |  |
+| price | DECIMAL | NO |  |
+| cancelNewClientOrderId | STRING | NO | Used to uniquely identify this cancel. Automatically generated by default. |
 | cancelOrigClientOrderId | STRING | NO | Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent.  
   
 If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order.  
   
-If both conditions are not met the request will be rejected. 
+If both conditions are not met the request will be rejected. |
 | cancelOrderId | LONG | NO | Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent.  
   
 If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order.  
   
-If both conditions are not met the request will be rejected. 
-| newClientOrderId | STRING | NO | Used to identify the new order. 
-| strategyId | LONG | NO |  
-| strategyType | INT | NO | The value cannot be less than `1000000`. 
-| stopPrice | DECIMAL | NO |  
-| trailingDelta | LONG | NO | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq) 
-| icebergQty | DECIMAL | NO |  
+If both conditions are not met the request will be rejected. |
+| newClientOrderId | STRING | NO | Used to identify the new order. |
+| strategyId | LONG | NO |  |
+| strategyType | INT | NO | The value cannot be less than `1000000`. |
+| stopPrice | DECIMAL | NO |  |
+| trailingDelta | LONG | NO | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq) |
+| icebergQty | DECIMAL | NO |  |
 | newOrderRespType | ENUM | NO | Allowed values:  
 `ACK`, `RESULT`, `FULL`  
-`MARKET` and `LIMIT` orders types default to `FULL`; all other orders default to `ACK` 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
+`MARKET` and `LIMIT` orders types default to `FULL`; all other orders default to `ACK` |
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). |
 | cancelRestrictions | ENUM | NO | Supported values:  
 `ONLY_NEW` - Cancel will succeed if the order status is `NEW`.  
-`ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. For more information please refer to [Regarding `cancelRestrictions`](/docs/binance-spot-api-docs/rest-api/trading-endpoints#regarding-cancelrestrictions) 
+`ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. For more information please refer to [Regarding `cancelRestrictions`](/docs/binance-spot-api-docs/rest-api/trading-endpoints#regarding-cancelrestrictions) |
 | orderRateLimitExceededMode | ENUM | No | Supported values:  
 `DO_NOTHING` (default)- will only attempt to cancel the order if account has not exceeded the unfilled order rate limit  
-`CANCEL_ONLY` - will always cancel the order 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+`CANCEL_ONLY` - will always cancel the order |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 Similar to `POST /api/v3/order`, additional mandatory parameters are determined by `type`.
 
@@ -1657,33 +1657,33 @@ Response format varies depending on whether the processing of the message succee
 | --- | --- |
 | `cancelReplaceMode` | `orderRateLimitExceededMode` | Unfilled Order Count | `cancelResult` | `newOrderResult` | `status` |
 | --- | --- | --- | --- | --- | --- |
-| `STOP_ON_FAILURE` | `DO_NOTHING` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` 
-| ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | `400` 
-| ✅ `SUCCESS` | ❌ `FAILURE` | `409` 
-| Exceeds Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | N/A 
-| ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | N/A 
-| ✅ `SUCCESS` | ❌ `FAILURE` | N/A 
-| `CANCEL_ONLY` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` 
-| ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | `400` 
-| ✅ `SUCCESS` | ❌ `FAILURE` | `409` 
-| Exceeds Limits | ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | `429` 
-| ✅ `SUCCESS` | ❌ `FAILURE` | `429` 
-| `ALLOW_FAILURE` | `DO_NOTHING` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` 
-| ❌ `FAILURE` | ❌ `FAILURE` | `400` 
-| ❌ `FAILURE` | ✅ `SUCCESS` | `409` 
-| ✅ `SUCCESS` | ❌ `FAILURE` | `409` 
-| Exceeds Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | N/A 
-| ❌ `FAILURE` | ❌ `FAILURE` | N/A 
-| ❌ `FAILURE` | ✅ `SUCCESS` | N/A 
-| ✅ `SUCCESS` | ❌ `FAILURE` | N/A 
-| `CANCEL_ONLY` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` 
-| ❌ `FAILURE` | ❌ `FAILURE` | `400` 
-| ❌ `FAILURE` | ✅ `SUCCESS` | `409` 
-| ✅ `SUCCESS` | ❌ `FAILURE` | `409` 
-| Exceeds Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `N/A` 
-| ❌ `FAILURE` | ❌ `FAILURE` | `400` 
-| ❌ `FAILURE` | ✅ `SUCCESS` | N/A 
-| ✅ `SUCCESS` | ❌ `FAILURE` | `409` 
+| `STOP_ON_FAILURE` | `DO_NOTHING` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` |
+| ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | `400` |
+| ✅ `SUCCESS` | ❌ `FAILURE` | `409` |
+| Exceeds Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | N/A |
+| ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | N/A |
+| ✅ `SUCCESS` | ❌ `FAILURE` | N/A |
+| `CANCEL_ONLY` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` |
+| ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | `400` |
+| ✅ `SUCCESS` | ❌ `FAILURE` | `409` |
+| Exceeds Limits | ❌ `FAILURE` | ➖ `NOT_ATTEMPTED` | `429` |
+| ✅ `SUCCESS` | ❌ `FAILURE` | `429` |
+| `ALLOW_FAILURE` | `DO_NOTHING` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` |
+| ❌ `FAILURE` | ❌ `FAILURE` | `400` |
+| ❌ `FAILURE` | ✅ `SUCCESS` | `409` |
+| ✅ `SUCCESS` | ❌ `FAILURE` | `409` |
+| Exceeds Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | N/A |
+| ❌ `FAILURE` | ❌ `FAILURE` | N/A |
+| ❌ `FAILURE` | ✅ `SUCCESS` | N/A |
+| ✅ `SUCCESS` | ❌ `FAILURE` | N/A |
+| `CANCEL_ONLY` | Within Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `200` |
+| ❌ `FAILURE` | ❌ `FAILURE` | `400` |
+| ❌ `FAILURE` | ✅ `SUCCESS` | `409` |
+| ✅ `SUCCESS` | ❌ `FAILURE` | `409` |
+| Exceeds Limits | ✅ `SUCCESS` | ✅ `SUCCESS` | `N/A` |
+| ❌ `FAILURE` | ❌ `FAILURE` | `400` |
+| ❌ `FAILURE` | ✅ `SUCCESS` | N/A |
+| ✅ `SUCCESS` | ❌ `FAILURE` | `409` |
 
 **Response SUCCESS unfilled order count is not exceeded:**
 
@@ -1752,15 +1752,15 @@ Read [Order Amend Keep Priority FAQ](/docs/binance-spot-api-docs/faqs/order_amen
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO\* | `orderId` or `origClientOrderId` must be sent 
-| origClientOrderId | STRING | NO\* | `orderId` or `origClientOrderId` must be sent 
+| symbol | STRING | YES |  |
+| orderId | LONG | NO\* | `orderId` or `origClientOrderId` must be sent |
+| origClientOrderId | STRING | NO\* | `orderId` or `origClientOrderId` must be sent |
 | newClientOrderId | STRING | NO\* | The new client order ID for the order after being amended.  
 If not sent, one will be randomly generated.  
-It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`. 
-| newQty | DECIMAL | YES | `newQty` must be greater than 0 and less than the order's quantity. 
-| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
-| timestamp | LONG | YES |  
+It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`. |
+| newQty | DECIMAL | YES | `newQty` must be greater than 0 and less than the order's quantity. |
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. |
+| timestamp | LONG | YES |  |
 
 **Data Source**: Matching Engine
 
@@ -1792,9 +1792,9 @@ Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 *   If the symbol is not sent, orders for all symbols will be returned in an array.
 
@@ -1824,13 +1824,13 @@ Get all account orders; active, canceled, or filled.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default: 500; Maximum: 1000. 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Notes:**
 
@@ -1873,27 +1873,27 @@ Send in a new OCO.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| listClientOrderId | STRING | NO | A unique Id for the entire orderList 
-| side | ENUM | YES |  
-| quantity | DECIMAL | YES |  
-| limitClientOrderId | STRING | NO | A unique Id for the limit order 
-| price | DECIMAL | YES |  
-| limitStrategyId | LONG | NO |  
-| limitStrategyType | INT | NO | The value cannot be less than `1000000`. 
-| limitIcebergQty | DECIMAL | NO | Used to make the `LIMIT_MAKER` leg an iceberg order. 
-| trailingDelta | LONG | NO |  
-| stopClientOrderId | STRING | NO | A unique Id for the stop loss/stop loss limit leg 
-| stopPrice | DECIMAL | YES |  
-| stopStrategyId | LONG | NO |  
-| stopStrategyType | INT | NO | The value cannot be less than `1000000`. 
-| stopLimitPrice | DECIMAL | NO | If provided, `stopLimitTimeInForce` is required. 
-| stopIcebergQty | DECIMAL | NO | Used with `STOP_LOSS_LIMIT` leg to make an iceberg order. 
-| stopLimitTimeInForce | ENUM | NO | Valid values are `GTC`/`FOK`/`IOC` 
-| newOrderRespType | ENUM | NO | Set the response JSON. 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| listClientOrderId | STRING | NO | A unique Id for the entire orderList |
+| side | ENUM | YES |  |
+| quantity | DECIMAL | YES |  |
+| limitClientOrderId | STRING | NO | A unique Id for the limit order |
+| price | DECIMAL | YES |  |
+| limitStrategyId | LONG | NO |  |
+| limitStrategyType | INT | NO | The value cannot be less than `1000000`. |
+| limitIcebergQty | DECIMAL | NO | Used to make the `LIMIT_MAKER` leg an iceberg order. |
+| trailingDelta | LONG | NO |  |
+| stopClientOrderId | STRING | NO | A unique Id for the stop loss/stop loss limit leg |
+| stopPrice | DECIMAL | YES |  |
+| stopStrategyId | LONG | NO |  |
+| stopStrategyType | INT | NO | The value cannot be less than `1000000`. |
+| stopLimitPrice | DECIMAL | NO | If provided, `stopLimitTimeInForce` is required. |
+| stopIcebergQty | DECIMAL | NO | Used with `STOP_LOSS_LIMIT` leg to make an iceberg order. |
+| stopLimitTimeInForce | ENUM | NO | Valid values are `GTC`/`FOK`/`IOC` |
+| newOrderRespType | ENUM | NO | Set the response JSON. |
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Matching Engine
 
@@ -1930,38 +1930,38 @@ Send in an one-cancels-the-other (OCO) pair, where activation of one order immed
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | Yes |  
+| symbol | STRING | Yes |  |
 | listClientOrderId | STRING | No | Arbitrary unique ID among open order lists. Automatically generated if not sent.  
 A new order list with the same `listClientOrderId` is accepted only when the previous one is filled or completely expired.  
-`listClientOrderId` is distinct from the `aboveClientOrderId` and the `belowCLientOrderId`. 
-| side | ENUM | Yes | `BUY` or `SELL` 
-| quantity | DECIMAL | Yes | Quantity for both orders of the order list. 
-| aboveType | ENUM | Yes | Supported values: `STOP_LOSS_LIMIT`, `STOP_LOSS`, `LIMIT_MAKER`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` 
-| aboveClientOrderId | STRING | No | Arbitrary unique ID among open orders for the above order. Automatically generated if not sent 
-| aboveIcebergQty | LONG | No | Note that this can only be used if `aboveTimeInForce` is `GTC`. 
-| abovePrice | DECIMAL | No | Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price. 
+`listClientOrderId` is distinct from the `aboveClientOrderId` and the `belowCLientOrderId`. |
+| side | ENUM | Yes | `BUY` or `SELL` |
+| quantity | DECIMAL | Yes | Quantity for both orders of the order list. |
+| aboveType | ENUM | Yes | Supported values: `STOP_LOSS_LIMIT`, `STOP_LOSS`, `LIMIT_MAKER`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| aboveClientOrderId | STRING | No | Arbitrary unique ID among open orders for the above order. Automatically generated if not sent |
+| aboveIcebergQty | LONG | No | Note that this can only be used if `aboveTimeInForce` is `GTC`. |
+| abovePrice | DECIMAL | No | Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price. |
 | aboveStopPrice | DECIMAL | No | Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`  
-Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified. 
-| aboveTrailingDelta | LONG | No | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq). 
-| aboveTimeInForce | DECIMAL | No | Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` 
-| aboveStrategyId | LONG | No | Arbitrary numeric value identifying the above order within an order strategy. 
+Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified. |
+| aboveTrailingDelta | LONG | No | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq). |
+| aboveTimeInForce | DECIMAL | No | Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` |
+| aboveStrategyId | LONG | No | Arbitrary numeric value identifying the above order within an order strategy. |
 | aboveStrategyType | INT | No | Arbitrary numeric value identifying the above order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
-| belowType | ENUM | Yes | Supported values: `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`,`TAKE_PROFIT_LIMIT` 
-| belowClientOrderId | STRING | No | Arbitrary unique ID among open orders for the below order. Automatically generated if not sent 
-| belowIcebergQty | LONG | No | Note that this can only be used if `belowTimeInForce` is `GTC`. 
-| belowPrice | DECIMAL | No | Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price. 
+Values smaller than 1000000 are reserved and cannot be used. |
+| belowType | ENUM | Yes | Supported values: `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`,`TAKE_PROFIT_LIMIT` |
+| belowClientOrderId | STRING | No | Arbitrary unique ID among open orders for the below order. Automatically generated if not sent |
+| belowIcebergQty | LONG | No | Note that this can only be used if `belowTimeInForce` is `GTC`. |
+| belowPrice | DECIMAL | No | Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price. |
 | belowStopPrice | DECIMAL | No | Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT` or `TAKE_PROFIT_LIMIT`  
-Either belowStopPrice or belowTrailingDelta or both, must be specified. 
-| belowTrailingDelta | LONG | No | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq). 
-| belowTimeInForce | ENUM | No | Required if `belowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`. 
-| belowStrategyId | LONG | No | Arbitrary numeric value identifying the below order within an order strategy. 
+Either belowStopPrice or belowTrailingDelta or both, must be specified. |
+| belowTrailingDelta | LONG | No | See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq). |
+| belowTimeInForce | ENUM | No | Required if `belowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`. |
+| belowStrategyId | LONG | No | Arbitrary numeric value identifying the below order within an order strategy. |
 | belowStrategyType | INT | No | Arbitrary numeric value identifying the below order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
-| newOrderRespType | ENUM | No | Select response format: `ACK`, `RESULT`, `FULL` 
-| selfTradePreventionMode | ENUM | No | The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) 
-| recvWindow | LONG | No | The value cannot be greater than `60000`. 
-| timestamp | LONG | Yes |  
+Values smaller than 1000000 are reserved and cannot be used. |
+| newOrderRespType | ENUM | No | Select response format: `ACK`, `RESULT`, `FULL` |
+| selfTradePreventionMode | ENUM | No | The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) |
+| recvWindow | LONG | No | The value cannot be greater than `60000`. |
+| timestamp | LONG | Yes |  |
 
 **Data Source:** Matching Engine
 
@@ -1996,39 +1996,39 @@ Places an OTO.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 | listClientOrderId | STRING | NO | Arbitrary unique ID among open order lists. Automatically generated if not sent.  
 A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired.  
-`listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`. 
-| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype) 
-| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) 
-| workingType | ENUM | YES | Supported values: `LIMIT`,`LIMIT_MAKER` 
-| workingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side) 
+`listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`. |
+| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype) |
+| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) |
+| workingType | ENUM | YES | Supported values: `LIMIT`,`LIMIT_MAKER` |
+| workingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side) |
 | workingClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the working order.  
-Automatically generated if not sent. 
-| workingPrice | DECIMAL | YES |  
-| workingQuantity | DECIMAL | YES | Sets the quantity for the working order. 
-| workingIcebergQty | DECIMAL | NO | This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`. 
-| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
-| workingStrategyId | LONG | NO | Arbitrary numeric value identifying the working order within an order strategy. 
+Automatically generated if not sent. |
+| workingPrice | DECIMAL | YES |  |
+| workingQuantity | DECIMAL | YES | Sets the quantity for the working order. |
+| workingIcebergQty | DECIMAL | NO | This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`. |
+| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) |
+| workingStrategyId | LONG | NO | Arbitrary numeric value identifying the working order within an order strategy. |
 | workingStrategyType | INT | NO | Arbitrary numeric value identifying the working order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
+Values smaller than 1000000 are reserved and cannot be used. |
 | pendingType | ENUM | YES | Supported values: [Order Types](/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-type)  
-Note that `MARKET` orders using `quoteOrderQty` are not supported. 
-| pendingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side) 
+Note that `MARKET` orders using `quoteOrderQty` are not supported. |
+| pendingSide | ENUM | YES | Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side) |
 | pendingClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the pending order.  
-Automatically generated if not sent. 
-| pendingPrice | DECIMAL | NO |  
-| pendingStopPrice | DECIMAL | NO |  
-| pendingTrailingDelta | DECIMAL | NO |  
-| pendingQuantity | DECIMAL | YES | Sets the quantity for the pending order. 
-| pendingIcebergQty | DECIMAL | NO | This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`. 
-| pendingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
-| pendingStrategyId | LONG | NO | Arbitrary numeric value identifying the pending order within an order strategy. 
+Automatically generated if not sent. |
+| pendingPrice | DECIMAL | NO |  |
+| pendingStopPrice | DECIMAL | NO |  |
+| pendingTrailingDelta | DECIMAL | NO |  |
+| pendingQuantity | DECIMAL | YES | Sets the quantity for the pending order. |
+| pendingIcebergQty | DECIMAL | NO | This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`. |
+| pendingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) |
+| pendingStrategyId | LONG | NO | Arbitrary numeric value identifying the pending order within an order strategy. |
 | pendingStrategyType | INT | NO | Arbitrary numeric value identifying the pending order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
-| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
-| timestamp | LONG | YES |  
+Values smaller than 1000000 are reserved and cannot be used. |
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. |
+| timestamp | LONG | YES |  |
 
 **Mandatory parameters based on `pendingType` or `workingType`**
 
@@ -2036,10 +2036,10 @@ Depending on the `pendingType` or `workingType`, some optional parameters will b
 
 | Type | Additional mandatory parameters | Additional information |
 | --- | --- | --- |
-| `workingType` = `LIMIT` | `workingTimeInForce` |  
-| `pendingType` = `LIMIT` | `pendingPrice`, `pendingTimeInForce` |  
-| `pendingType` = `STOP_LOSS` or `TAKE_PROFIT` | `pendingStopPrice` and/or `pendingTrailingDelta` |  
-| `pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | `pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |  
+| `workingType` = `LIMIT` | `workingTimeInForce` |  |
+| `pendingType` = `LIMIT` | `pendingPrice`, `pendingTimeInForce` |  |
+| `pendingType` = `STOP_LOSS` or `TAKE_PROFIT` | `pendingStopPrice` and/or `pendingTrailingDelta` |  |
+| `pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | `pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |  |
 
 **Data Source:**
 
@@ -2076,50 +2076,50 @@ Place an OTOCO.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 | listClientOrderId | STRING | NO | Arbitrary unique ID among open order lists. Automatically generated if not sent.  
 A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired.  
-`listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`. 
-| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype) 
-| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) 
-| workingType | ENUM | YES | Supported values: `LIMIT`, `LIMIT_MAKER` 
-| workingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/enums#side) 
+`listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`. |
+| newOrderRespType | ENUM | NO | Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype) |
+| selfTradePreventionMode | ENUM | NO | The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes) |
+| workingType | ENUM | YES | Supported values: `LIMIT`, `LIMIT_MAKER` |
+| workingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/enums#side) |
 | workingClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the working order.  
-Automatically generated if not sent. 
-| workingPrice | DECIMAL | YES |  
-| workingQuantity | DECIMAL | YES |  
-| workingIcebergQty | DECIMAL | NO | This can only be used if `workingTimeInForce` is `GTC`. 
-| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
-| workingStrategyId | LONG | NO | Arbitrary numeric value identifying the working order within an order strategy. 
+Automatically generated if not sent. |
+| workingPrice | DECIMAL | YES |  |
+| workingQuantity | DECIMAL | YES |  |
+| workingIcebergQty | DECIMAL | NO | This can only be used if `workingTimeInForce` is `GTC`. |
+| workingTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) |
+| workingStrategyId | LONG | NO | Arbitrary numeric value identifying the working order within an order strategy. |
 | workingStrategyType | INT | NO | Arbitrary numeric value identifying the working order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
-| pendingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/enums#side) 
-| pendingQuantity | DECIMAL | YES |  
-| pendingAboveType | ENUM | YES | Supported values: `STOP_LOSS_LIMIT`, `STOP_LOSS`, `LIMIT_MAKER`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` 
+Values smaller than 1000000 are reserved and cannot be used. |
+| pendingSide | ENUM | YES | Supported values: [Order side](/docs/binance-spot-api-docs/enums#side) |
+| pendingQuantity | DECIMAL | YES |  |
+| pendingAboveType | ENUM | YES | Supported values: `STOP_LOSS_LIMIT`, `STOP_LOSS`, `LIMIT_MAKER`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
 | pendingAboveClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the pending above order.  
-Automatically generated if not sent. 
-| pendingAbovePrice | DECIMAL | NO | Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price. 
-| pendingAboveStopPrice | DECIMAL | NO | Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` 
-| pendingAboveTrailingDelta | DECIMAL | NO | See [Trailing Stop FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq) 
-| pendingAboveIcebergQty | DECIMAL | NO | This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`. 
-| pendingAboveTimeInForce | ENUM | NO |  
-| pendingAboveStrategyId | LONG | NO | Arbitrary numeric value identifying the pending above order within an order strategy. 
+Automatically generated if not sent. |
+| pendingAbovePrice | DECIMAL | NO | Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price. |
+| pendingAboveStopPrice | DECIMAL | NO | Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| pendingAboveTrailingDelta | DECIMAL | NO | See [Trailing Stop FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq) |
+| pendingAboveIcebergQty | DECIMAL | NO | This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`. |
+| pendingAboveTimeInForce | ENUM | NO |  |
+| pendingAboveStrategyId | LONG | NO | Arbitrary numeric value identifying the pending above order within an order strategy. |
 | pendingAboveStrategyType | INT | NO | Arbitrary numeric value identifying the pending above order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
-| pendingBelowType | ENUM | NO | Supported values: `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`,`TAKE_PROFIT_LIMIT` 
+Values smaller than 1000000 are reserved and cannot be used. |
+| pendingBelowType | ENUM | NO | Supported values: `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`,`TAKE_PROFIT_LIMIT` |
 | pendingBelowClientOrderId | STRING | NO | Arbitrary unique ID among open orders for the pending below order.  
-Automatically generated if not sent. 
-| pendingBelowPrice | DECIMAL | NO | Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price 
+Automatically generated if not sent. |
+| pendingBelowPrice | DECIMAL | NO | Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price |
 | pendingBelowStopPrice | DECIMAL | NO | Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`.  
-Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified. 
-| pendingBelowTrailingDelta | DECIMAL | NO |  
-| pendingBelowIcebergQty | DECIMAL | NO | This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`. 
-| pendingBelowTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) 
-| pendingBelowStrategyId | LONG | NO | Arbitrary numeric value identifying the pending below order within an order strategy. 
+Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified. |
+| pendingBelowTrailingDelta | DECIMAL | NO |  |
+| pendingBelowIcebergQty | DECIMAL | NO | This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`. |
+| pendingBelowTimeInForce | ENUM | NO | Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce) |
+| pendingBelowStrategyId | LONG | NO | Arbitrary numeric value identifying the pending below order within an order strategy. |
 | pendingBelowStrategyType | INT | NO | Arbitrary numeric value identifying the pending below order strategy.  
-Values smaller than 1000000 are reserved and cannot be used. 
-| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
-| timestamp | LONG | YES |  
+Values smaller than 1000000 are reserved and cannot be used. |
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. |
+| timestamp | LONG | YES |  |
 
 **Mandatory parameters based on `pendingAboveType`, `pendingBelowType` or `workingType`**
 
@@ -2127,13 +2127,13 @@ Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some op
 
 | Type | Additional mandatory parameters | Additional information |
 | --- | --- | --- |
-| `workingType` = `LIMIT` | `workingTimeInForce` |  
-| `pendingAboveType`\= `LIMIT_MAKER` | `pendingAbovePrice` |  
-| `pendingAboveType` = `STOP_LOSS/TAKE_PROFIT` | `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta` |  
-| `pendingAboveType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` | `pendingAbovePrice`, `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`, `pendingAboveTimeInForce` |  
-| `pendingBelowType`\= `LIMIT_MAKER` | `pendingBelowPrice` |  
-| `pendingBelowType= STOP_LOSS/TAKE_PROFIT` | `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta` |  
-| `pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` | `pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce` |  
+| `workingType` = `LIMIT` | `workingTimeInForce` |  |
+| `pendingAboveType`\= `LIMIT_MAKER` | `pendingAbovePrice` |  |
+| `pendingAboveType` = `STOP_LOSS/TAKE_PROFIT` | `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta` |  |
+| `pendingAboveType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` | `pendingAbovePrice`, `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`, `pendingAboveTimeInForce` |  |
+| `pendingBelowType`\= `LIMIT_MAKER` | `pendingBelowPrice` |  |
+| `pendingBelowType= STOP_LOSS/TAKE_PROFIT` | `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta` |  |
+| `pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` | `pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce` |  |
 
 **Data Source:**
 
@@ -2161,12 +2161,12 @@ Cancel an entire Order list
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderListId | LONG | NO | Either `orderListId` or `listClientOrderId` must be provided 
-| listClientOrderId | STRING | NO | Either `orderListId` or `listClientOrderId` must be provided 
-| newClientOrderId | STRING | NO | Used to uniquely identify this cancel. Automatically generated by default 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderListId | LONG | NO | Either `orderListId` or `listClientOrderId` must be provided |
+| listClientOrderId | STRING | NO | Either `orderListId` or `listClientOrderId` must be provided |
+| newClientOrderId | STRING | NO | Used to uniquely identify this cancel. Automatically generated by default |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Notes:**
 
@@ -2195,10 +2195,10 @@ Retrieves a specific order list based on provided optional parameters.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderListId | LONG | NO | Either `orderListId` or `listClientOrderId` must be provided 
-| origClientOrderId | STRING | NO | Either `orderListId` or `listClientOrderId` must be provided 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| orderListId | LONG | NO | Either `orderListId` or `listClientOrderId` must be provided |
+| origClientOrderId | STRING | NO | Either `orderListId` or `listClientOrderId` must be provided |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Database
 
@@ -2224,12 +2224,12 @@ Note that the time between `startTime` and `endTime` can't be longer than 24 hou
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| fromId | LONG | NO | If supplied, neither `startTime` or `endTime` can be provided 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default: 500; Maximum: 1000 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| fromId | LONG | NO | If supplied, neither `startTime` or `endTime` can be provided |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default: 500; Maximum: 1000 |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Database
 
@@ -2251,8 +2251,8 @@ GET /api/v3/openOrderList
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Database
 
@@ -2284,21 +2284,21 @@ Read [SOR FAQ](/docs/binance-spot-api-docs/faqs/sor_faq) to learn more.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| type | ENUM | YES |  
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | YES |  
-| price | DECIMAL | NO |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| type | ENUM | YES |  |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | YES |  |
+| price | DECIMAL | NO |  |
 | newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent.  
-Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected. 
-| strategyId | LONG | NO |  
-| strategyType | INT | NO | The value cannot be less than `1000000`. 
-| icebergQty | DECIMAL | NO | Used with `LIMIT` to create an iceberg order. 
-| newOrderRespType | ENUM | NO | Set the response JSON. `ACK`, `RESULT`, or `FULL`. Default to `FULL` 
-| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected. |
+| strategyId | LONG | NO |  |
+| strategyType | INT | NO | The value cannot be less than `1000000`. |
+| icebergQty | DECIMAL | NO | Used with `LIMIT` to create an iceberg order. |
+| newOrderRespType | ENUM | NO | Set the response JSON. `ACK`, `RESULT`, or `FULL`. Default to `FULL` |
+| selfTradePreventionMode | ENUM | NO | The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Note:** `POST /api/v3/sor/order` only supports `LIMIT` and `MARKET` orders. `quoteOrderQty` is not supported.
 
@@ -2322,8 +2322,8 @@ Test new order creation and signature/recvWindow using smart order routing (SOR)
 
 | Condition | Request Weight |
 | --- | --- |
-| Without `computeCommissionRates` | 1 
-| With `computeCommissionRates` | 20 
+| Without `computeCommissionRates` | 1 |
+| With `computeCommissionRates` | 20 |
 
 **Parameters:**
 
@@ -2331,7 +2331,7 @@ In addition to all parameters accepted by [`POST /api/v3/sor/order`](/docs/binan
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| computeCommissionRates | BOOLEAN | NO | Default: `false` 
+| computeCommissionRates | BOOLEAN | NO | Default: `false` |
 
 **Data Source:** Memory
 
@@ -2367,9 +2367,9 @@ Get current account information.
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
 | omitZeroBalances | BOOLEAN | NO | When set to `true`, emits only the non-zero balances of an account.  
-Default value: `false` 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+Default value: `false` |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Memory => Database
 
@@ -2391,21 +2391,21 @@ Get trades for a specific account and symbol.
 
 | Condition | Weight |
 | --- | --- |
-| Without orderId | 20 
-| With orderId | 5 
+| Without orderId | 20 |
+| With orderId | 5 |
 
 **Parameters:**
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO | This can only be used in combination with `symbol`. 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades. 
-| limit | INT | NO | Default: 500; Maximum: 1000. 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO | This can only be used in combination with `symbol`. |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades. |
+| limit | INT | NO | Default: 500; Maximum: 1000. |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Notes:**
 
@@ -2442,8 +2442,8 @@ Displays the user's unfilled order count for all intervals.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Data Source:** Memory
 
@@ -2472,21 +2472,21 @@ These are the combinations supported:
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| preventedMatchId | LONG | NO |  
-| orderId | LONG | NO |  
-| fromPreventedMatchId | LONG | NO |  
-| limit | INT | NO | Default: `500`; Maximum: `1000` 
-| recvWindow | LONG | NO | The value cannot be greater than `60000` 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| preventedMatchId | LONG | NO |  |
+| orderId | LONG | NO |  |
+| fromPreventedMatchId | LONG | NO |  |
+| limit | INT | NO | Default: `500`; Maximum: `1000` |
+| recvWindow | LONG | NO | The value cannot be greater than `60000` |
+| timestamp | LONG | YES |  |
 
 **Weight:**
 
 | Case | Weight |
 | --- | --- |
-| If `symbol` is invalid | 2 
-| Querying by `preventedMatchId` | 2 
-| Querying by `orderId` | 20 
+| If `symbol` is invalid | 2 |
+| Querying by `preventedMatchId` | 2 |
+| Querying by `orderId` | 20 |
 
 **Data Source:**
 
@@ -2512,26 +2512,26 @@ Retrieves allocations resulting from SOR order placement.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | Yes |  
-| startTime | LONG | No |  
-| endTime | LONG | No |  
-| fromAllocationId | INT | No |  
-| limit | INT | No | Default: 500; Maximum: 1000 
-| orderId | LONG | No |  
-| recvWindow | LONG | No | The value cannot be greater than `60000`. 
-| timestamp | LONG | No |  
+| symbol | STRING | Yes |  |
+| startTime | LONG | No |  |
+| endTime | LONG | No |  |
+| fromAllocationId | INT | No |  |
+| limit | INT | No | Default: 500; Maximum: 1000 |
+| orderId | LONG | No |  |
+| recvWindow | LONG | No | The value cannot be greater than `60000`. |
+| timestamp | LONG | No |  |
 
 Supported parameter combinations:
 
 | Parameters | Response |
 | --- | --- |
-| `symbol` | allocations from oldest to newest 
-| `symbol` + `startTime` | oldest allocations since `startTime` 
-| `symbol` + `endTime` | newest allocations until `endTime` 
-| `symbol` + `startTime` + `endTime` | allocations within the time range 
-| `symbol` + `fromAllocationId` | allocations by allocation ID 
-| `symbol` + `orderId` | allocations related to an order starting with oldest 
-| `symbol` + `orderId` + `fromAllocationId` | allocations related to an order by allocation ID 
+| `symbol` | allocations from oldest to newest |
+| `symbol` + `startTime` | oldest allocations since `startTime` |
+| `symbol` + `endTime` | newest allocations until `endTime` |
+| `symbol` + `startTime` + `endTime` | allocations within the time range |
+| `symbol` + `fromAllocationId` | allocations by allocation ID |
+| `symbol` + `orderId` | allocations related to an order starting with oldest |
+| `symbol` + `orderId` + `fromAllocationId` | allocations related to an order by allocation ID |
 
 **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
 
@@ -2557,7 +2557,7 @@ Get current account commission rates.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 
 **Data Source:** Database
 
@@ -2581,12 +2581,12 @@ Queries all amendments of a single order.
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | YES |  
-| fromExecutionId | LONG | NO |  
-| limit | LONG | NO | Default:500; Maximum: 1000 
-| recvWindow | LONG | NO | The value cannot be greater than `60000`. 
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | YES |  |
+| fromExecutionId | LONG | NO |  |
+| limit | LONG | NO | Default:500; Maximum: 1000 |
+| recvWindow | LONG | NO | The value cannot be greater than `60000`. |
+| timestamp | LONG | YES |  |
 
 **Data Source:**
 

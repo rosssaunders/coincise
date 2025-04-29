@@ -106,11 +106,11 @@ The values presented below can be used to validate the correctness of the signat
 
 | Field | Value |
 | --- | --- |
-| MsgType (35) | `A` 
-| SenderCompID (49) | `EXAMPLE` 
-| TargetCompID (56) | `SPOT` 
-| MsgSeqNum (34) | `1` 
-| SendingTime (52) | `20240627-11:17:25.223` 
+| MsgType (35) | `A` |
+| SenderCompID (49) | `EXAMPLE` |
+| TargetCompID (56) | `SPOT` |
+| MsgSeqNum (34) | `1` |
+| SendingTime (52) | `20240627-11:17:25.223` |
 
 The Ed25519 private key used in the example computation is shown below:
 
@@ -185,16 +185,16 @@ Only printable ASCII characters and SOH are supported.
 
 | Type | Description |
 | --- | --- |
-| `BOOLEAN` | Enum: `Y` or `N`. 
-| `CHAR` | Single character. 
-| `INT` | Signed 64-bit integer. 
-| `LENGTH` | Unsigned 64-bit integer. 
-| `NUMINGROUP` | Unsigned 64-bit integer. 
-| `PRICE` | Fixed-point number. Precision depends on the symbol definition. 
-| `QTY` | Fixed-point number. Precision depends on the symbol definition. 
-| `SEQNUM` | Unsigned 32-bit integer. Rolls over to 0 after reaching its maximum value of 4,294,967,295. 
-| `STRING` | Sequence of printable ASCII characters. 
-| `UTCTIMESTAMP` | String representing datetime in UTC. 
+| `BOOLEAN` | Enum: `Y` or `N`. |
+| `CHAR` | Single character. |
+| `INT` | Signed 64-bit integer. |
+| `LENGTH` | Unsigned 64-bit integer. |
+| `NUMINGROUP` | Unsigned 64-bit integer. |
+| `PRICE` | Fixed-point number. Precision depends on the symbol definition. |
+| `QTY` | Fixed-point number. Precision depends on the symbol definition. |
+| `SEQNUM` | Unsigned 32-bit integer. Rolls over to 0 after reaching its maximum value of 4,294,967,295. |
+| `STRING` | Sequence of printable ASCII characters. |
+| `UTCTIMESTAMP` | String representing datetime in UTC. |
 
 Supported `UTCTIMESTAMP` formats:
 
@@ -228,10 +228,10 @@ Appears at the start of every message.
 | --- | --- | --- | --- | --- |
 | 8 | BeginString | STRING | Y | Always `FIX.4.4`.  
   
-Must be the first field the message. 
+Must be the first field the message. |
 | 9 | BodyLength | LENGTH | Y | Message length in bytes.  
   
-Must be the second field in the message. 
+Must be the second field in the message. |
 | 35 | MsgType | STRING | Y | Must be the third field in the message.  
   
 Possible values:  
@@ -284,24 +284,24 @@ Possible values:
   
 `XAK` - [ORDER\_AMEND\_KEEP\_PRIORITY\_REQUEST](/docs/binance-spot-api-docs/fix-api#orderamendkeeppriorityrequest)  
   
-`XAR` - [ORDER\_AMEND\_REJECT](/docs/binance-spot-api-docs/fix-api#orderamendreject) 
+`XAR` - [ORDER\_AMEND\_REJECT](/docs/binance-spot-api-docs/fix-api#orderamendreject) |
 | 49 | SenderCompID | STRING | Y | Must be unique across an account's active sessions.  
   
-Must obey regex: `^[a-zA-Z0-9-_]{1,8}$` 
+Must obey regex: `^[a-zA-Z0-9-_]{1,8}$` |
 | 56 | TargetCompID | STRING | Y | A string identifying this TCP connection.  
   
 On messages from client required to be set to `SPOT`.  
   
 Must be unique across TCP connections.  
   
-Must conform to the regex: `^[a-zA-Z0-9-_]{1,8}$` 
+Must conform to the regex: `^[a-zA-Z0-9-_]{1,8}$` |
 | 34 | MsgSeqNum | SEQNUM | Y | Integer message sequence number.  
   
-Values that will cause a gap will be rejected. 
-| 52 | SendingTime | UTCTIMESTAMP | Y | Time of message transmission (always expressed in UTC). 
+Values that will cause a gap will be rejected. |
+| 52 | SendingTime | UTCTIMESTAMP | Y | Time of message transmission (always expressed in UTC). |
 | 25000 | RecvWindow | INT | N | Number of milliseconds after `SendingTime (52)` the request is valid for.  
   
-Defaults to `5000` milliseconds in [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-request) and has a max value of `60000` milliseconds. 
+Defaults to `5000` milliseconds in [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-request) and has a max value of `60000` milliseconds. |
 
 ### Trailer[​](/docs/binance-spot-api-docs/fix-api#trailer "Direct link to Trailer")
 
@@ -313,7 +313,7 @@ Appears at the end of every message.
   
 The resultant sum is divided by 256, with the remainder forming the CheckSum value.  
   
-To maintain a fixed length, the CheckSum field is right-justified and zero-padded as needed. 
+To maintain a fixed length, the CheckSum field is right-justified and zero-padded as needed. |
 
 Administrative Messages[​](/docs/binance-spot-api-docs/fix-api#administrative-messages "Direct link to Administrative Messages")
 --------------------------------------------------------------------------------------------------------------------------------
@@ -328,7 +328,7 @@ Sent by the client or the server in response to a [TestRequest`<1>`](/docs/binan
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 112 | TestReqID | STRING | N | When Heartbeat`<35>` is sent in response to TestRequest`<1>`, must mirror the value in TestRequest`<1>`. 
+| 112 | TestReqID | STRING | N | When Heartbeat`<35>` is sent in response to TestRequest`<1>`, must mirror the value in TestRequest`<1>`. |
 
 ### TestRequest`<1>`[​](/docs/binance-spot-api-docs/fix-api#testrequest1 "Direct link to testrequest1")
 
@@ -340,7 +340,7 @@ Sent by the client to request a [Heartbeat`<0>`](/docs/binance-spot-api-docs/fix
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 112 | TestReqID | STRING | Y | Arbitrary string that must be included in the Heartbeat`<0>` response. 
+| 112 | TestReqID | STRING | Y | Arbitrary string that must be included in the Heartbeat`<0>` response. |
 
 ### Reject`<3>`[​](/docs/binance-spot-api-docs/fix-api#reject3 "Direct link to reject3")
 
@@ -352,9 +352,9 @@ Please refer to the `Text (58)` and `ErrorCode (25016)` fields for the reject re
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 45 | RefSeqNum | INT | N | The `MsgSeqNum (34)` of the rejected message that caused issuance of this Reject`<3>`. 
-| 371 | RefTagID | INT | N | When present, identifies the field that directly caused the issuance of this Reject`<3>` message. 
-| 372 | RefMsgType | STRING | N | The `MsgType (35)` of the rejected message that caused issuance of this Reject`<3>`. 
+| 45 | RefSeqNum | INT | N | The `MsgSeqNum (34)` of the rejected message that caused issuance of this Reject`<3>`. |
+| 371 | RefTagID | INT | N | When present, identifies the field that directly caused the issuance of this Reject`<3>` message. |
+| 372 | RefMsgType | STRING | N | The `MsgType (35)` of the rejected message that caused issuance of this Reject`<3>`. |
 | 373 | SessionRejectReason | INT | N | A reason for the reject, can be one of the values below.  
   
 Usually accompanied by additional Text description  
@@ -387,9 +387,9 @@ Possible values:
   
 `16` - INCORRECT\_NUMINGROUP\_COUNT\_FOR\_REPEATING\_GROUP  
   
-`99` - OTHER 
-| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). 
-| 58 | Text | STRING | N | Human-readable error message. 
+`99` - OTHER |
+| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). |
+| 58 | Text | STRING | N | Human-readable error message. |
 
 ### Logon`<A>`[​](/docs/binance-spot-api-docs/fix-api#logona "Direct link to logona")
 
@@ -403,21 +403,21 @@ Sent by the server in response to a successful logon.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 98 | EncryptMethod | INT | Y | Required to be `0`. 
-| 108 | HeartBtInt | INT | Y | Required to be within range \[5, 60\]. Heartbeat interval in seconds. 
-| 95 | RawDataLength | LENGTH | Y | Length of the `RawData (96)` field that comes strictly after this field. 
-| 96 | RawData | DATA | Y | Signature. [How to sign Logon`<A>` request](/docs/binance-spot-api-docs/fix-api#signaturecomputation). 
-| 141 | ResetSeqNumFlag | BOOLEAN | Y | Required to be `Y`. 
-| 553 | Username | STRING | Y | API key. **Only Ed25519 API keys are supported.** 
+| 98 | EncryptMethod | INT | Y | Required to be `0`. |
+| 108 | HeartBtInt | INT | Y | Required to be within range \[5, 60\]. Heartbeat interval in seconds. |
+| 95 | RawDataLength | LENGTH | Y | Length of the `RawData (96)` field that comes strictly after this field. |
+| 96 | RawData | DATA | Y | Signature. [How to sign Logon`<A>` request](/docs/binance-spot-api-docs/fix-api#signaturecomputation). |
+| 141 | ResetSeqNumFlag | BOOLEAN | Y | Required to be `Y`. |
+| 553 | Username | STRING | Y | API key. **Only Ed25519 API keys are supported.** |
 | 25035 | MessageHandling | INT | Y | Possible values:  
   
 `1` - UNORDERED  
   
 `2` - SEQUENTIAL  
   
-Please refer to [On message order processing](/docs/binance-spot-api-docs/fix-api#orderedmode) for more information. 
-| 25036 | ResponseMode | INT | N | Please refer to [Response Mode](/docs/binance-spot-api-docs/fix-api#responsemode). 
-| 9406 | DropCopyFlag | BOOLEAN | N | Must be set to 'Y' when logging into Drop Copy sessions. 
+Please refer to [On message order processing](/docs/binance-spot-api-docs/fix-api#orderedmode) for more information. |
+| 25036 | ResponseMode | INT | N | Please refer to [Response Mode](/docs/binance-spot-api-docs/fix-api#responsemode). |
+| 9406 | DropCopyFlag | BOOLEAN | N | Must be set to 'Y' when logging into Drop Copy sessions. |
 
 **Sample message:**
 
@@ -429,9 +429,9 @@ Please refer to [On message order processing](/docs/binance-spot-api-docs/fix-ap
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 98 | EncryptMethod | INT | Y | Always `0`. 
-| 108 | HeartBtInt | INT | Y | Mirrors value from the Logon request. 
-| 25037 | UUID | STRING | Y | UUID of the FIX API serving the requests. 
+| 98 | EncryptMethod | INT | Y | Always `0`. |
+| 108 | HeartBtInt | INT | Y | Mirrors value from the Logon request. |
+| 25037 | UUID | STRING | Y | UUID of the FIX API serving the requests. |
 
 **Sample message:**
 
@@ -445,7 +445,7 @@ Sent to initiate the process of closing the connection, and also when responding
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 58 | Text | STRING | N |  
+| 58 | Text | STRING | N |  |
 
 **Sample messages:**
 
@@ -483,7 +483,7 @@ If the client does not close the old session within 10 seconds of receiving the 
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 148 | Headline | STRING | Y |  
+| 148 | Headline | STRING | Y |  |
 
 **Sample message:**
 
@@ -512,8 +512,8 @@ Please refer to [Supported Order Types](/docs/binance-spot-api-docs/fix-api#orde
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 11 | ClOrdID | STRING | Y | `ClOrdID` to be assigned to the order. 
-| 38 | OrderQty | QTY | N | Quantity of the order 
+| 11 | ClOrdID | STRING | Y | `ClOrdID` to be assigned to the order. |
+| 38 | OrderQty | QTY | N | Quantity of the order |
 | 40 | OrdType | CHAR | Y | See the [table](/docs/binance-spot-api-docs/fix-api#ordertype) to understand supported order types and the required fields to use them.  
   
 Possible values:  
@@ -524,30 +524,30 @@ Possible values:
   
 `3` - STOP  
   
-`4` - STOP\_LIMIT 
+`4` - STOP\_LIMIT |
 | 18 | ExecInst | CHAR | N | Possible values:  
   
-`6` - PARTICIPATE\_DONT\_INITIATE 
-| 44 | Price | PRICE | N | Price of the order 
+`6` - PARTICIPATE\_DONT\_INITIATE |
+| 44 | Price | PRICE | N | Price of the order |
 | 54 | Side | CHAR | Y | Side of the order.  
   
 Possible values:  
   
 `1` - BUY  
   
-`2` - SELL 
-| 55 | Symbol | STRING | Y | Symbol to place the order on. 
+`2` - SELL |
+| 55 | Symbol | STRING | Y | Symbol to place the order on. |
 | 59 | TimeInForce | CHAR | N | Possible values:  
   
 `1` - GOOD\_TILL\_CANCEL  
   
 `3` - IMMEDIATE\_OR\_CANCEL  
   
-`4` - FILL\_OR\_KILL 
-| 111 | MaxFloor | QTY | N | Used for iceberg orders, this specifies the visible quantity of the order on the book. 
-| 152 | CashOrderQty | QTY | N | Quantity of the order specified in the quote asset units, for reverse market orders. 
-| 847 | TargetStrategy | INT | N | The value cannot be less than `1000000`. 
-| 7940 | StrategyID | INT | N |  
+`4` - FILL\_OR\_KILL |
+| 111 | MaxFloor | QTY | N | Used for iceberg orders, this specifies the visible quantity of the order on the book. |
+| 152 | CashOrderQty | QTY | N | Quantity of the order specified in the quote asset units, for reverse market orders. |
+| 847 | TargetStrategy | INT | N | The value cannot be less than `1000000`. |
+| 7940 | StrategyID | INT | N |  |
 | 25001 | SelfTradePreventionMode | CHAR | N | Possible values:  
   
 `1` - NONE  
@@ -558,24 +558,24 @@ Possible values:
   
 `4` - EXPIRE\_BOTH  
   
-`5` - DECREMENT 
-| 1100 | TriggerType | CHAR | N | Possible values: `4` - PRICE\_MOVEMENT 
+`5` - DECREMENT |
+| 1100 | TriggerType | CHAR | N | Possible values: `4` - PRICE\_MOVEMENT |
 | 1101 | TriggerAction | CHAR | N | Possible values:  
   
-`1` - ACTIVATE 
-| 1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) 
+`1` - ACTIVATE |
+| 1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) |
 | 1107 | TriggerPriceType | CHAR | N | Possible values:  
   
-`2` - LAST\_TRADE 
+`2` - LAST\_TRADE |
 | 1109 | TriggerPriceDirection | CHAR | N | Used to differentiate between StopLoss and TakeProfit orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype).  
   
 Possible values:  
   
 `U` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_UP\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE  
   
-`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE 
-| 25009 | TriggerTrailingDeltaBips | INT | N | Provide to create trailing orders. 
-| 25032 | SOR | BOOLEAN | N | Whether to activate SOR for this order. 
+`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE |
+| 25009 | TriggerTrailingDeltaBips | INT | N | Provide to create trailing orders. |
+| 25032 | SOR | BOOLEAN | N | Whether to activate SOR for this order. |
 
 **Sample message:**
 
@@ -593,48 +593,48 @@ Possible values:
 
 | Order name | Binance OrderType | Side | required field values | required fields with user values |
 | --- | --- | --- | --- | --- |
-| Market order | `MARKET` | BUY or SELL | `40=1|` |  
-| Limit order | `LIMIT` | BUY or SELL | `40=2|` |  
-| Limit maker order | `LIMIT_MAKER` | BUY or SELL | `40=2|18=6|` |  
-| Buy stop loss order | `STOP_LOSS` | BUY | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102 
-| Buy trailing stop loss order | `STOP_LOSS` | BUY | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 
-| Buy stop loss limit order | `STOP_LOSS_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102 
-| Buy trailing stop loss limit order | `STOP_LOSS_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 
-| Sell stop loss order | `STOP_LOSS` | SELL | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102 
-| Sell trailing stop loss order | `STOP_LOSS` | SELL | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 
-| Sell stop loss limit order | `STOP_LOSS_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102 
-| Sell trailing stop loss limit order | `STOP_LOSS_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 
-| Buy take profit order | `TAKE_PROFIT` | BUY | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102 
-| Buy trailing take profit order | `TAKE_PROFIT` | BUY | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 
-| Buy trailing take profit order | `TAKE_PROFIT` | BUY | `40=3|1100=4|1101=1|1107=2|` | 25009 
-| Buy take profit order | `TAKE_PROFIT_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102 
-| Buy trailing take profit limit order | `TAKE_PROFIT_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 
-| Buy trailing take profit limit order | `TAKE_PROFIT_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|` | 25009 
-| Sell take profit order | `TAKE_PROFIT` | SELL | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102 
-| Sell trailing take profit order | `TAKE_PROFIT` | SELL | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 
-| Sell trailing take profit order | `TAKE_PROFIT` | SELL | `40=3|1100=4|1101=1|1107=2|` | 25009 
-| Sell take profit limit order | `TAKE_PROFIT_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102 
-| Sell trailing take profit limit order | `TAKE_PROFIT_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 
-| Sell trailing take profit limit order | `TAKE_PROFIT_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|` | 25009 
+| Market order | `MARKET` | BUY or SELL | `40=1|` |  |
+| Limit order | `LIMIT` | BUY or SELL | `40=2|` |  |
+| Limit maker order | `LIMIT_MAKER` | BUY or SELL | `40=2|18=6|` |  |
+| Buy stop loss order | `STOP_LOSS` | BUY | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102 |
+| Buy trailing stop loss order | `STOP_LOSS` | BUY | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 |
+| Buy stop loss limit order | `STOP_LOSS_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102 |
+| Buy trailing stop loss limit order | `STOP_LOSS_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 |
+| Sell stop loss order | `STOP_LOSS` | SELL | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102 |
+| Sell trailing stop loss order | `STOP_LOSS` | SELL | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 |
+| Sell stop loss limit order | `STOP_LOSS_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102 |
+| Sell trailing stop loss limit order | `STOP_LOSS_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 |
+| Buy take profit order | `TAKE_PROFIT` | BUY | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102 |
+| Buy trailing take profit order | `TAKE_PROFIT` | BUY | `40=3|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 |
+| Buy trailing take profit order | `TAKE_PROFIT` | BUY | `40=3|1100=4|1101=1|1107=2|` | 25009 |
+| Buy take profit order | `TAKE_PROFIT_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102 |
+| Buy trailing take profit limit order | `TAKE_PROFIT_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|1109=D|` | 1102,25009 |
+| Buy trailing take profit limit order | `TAKE_PROFIT_LIMIT` | BUY | `40=4|1100=4|1101=1|1107=2|` | 25009 |
+| Sell take profit order | `TAKE_PROFIT` | SELL | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102 |
+| Sell trailing take profit order | `TAKE_PROFIT` | SELL | `40=3|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 |
+| Sell trailing take profit order | `TAKE_PROFIT` | SELL | `40=3|1100=4|1101=1|1107=2|` | 25009 |
+| Sell take profit limit order | `TAKE_PROFIT_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102 |
+| Sell trailing take profit limit order | `TAKE_PROFIT_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|1109=U|` | 1102,25009 |
+| Sell trailing take profit limit order | `TAKE_PROFIT_LIMIT` | SELL | `40=4|1100=4|1101=1|1107=2|` | 25009 |
 
 Required fields based on Binance OrderType:
 
 | Binance OrderType | Additional mandatory parameters | Additional Information |
 | --- | --- | --- |
-| `LIMIT` | 38, 44, 59 |  
+| `LIMIT` | 38, 44, 59 |  |
 | `MARKET` | 38 OR 152 | `MARKET` orders using the `OrderQty (38)` field specifies the amount of the `base asset` the user wants to buy or sell at the market price.  
 E.g. `MARKET` order on BTCUSDT will specify how much BTC the user is buying or selling.  
   
 `MARKET` orders using `quoteOrderQty` specifies the amount the user wants to spend (when buying) or receive (when selling) the `quote` asset; the correct `quantity` will be determined based on the market liquidity and `quoteOrderQty`.  
 E.g. Using the symbol BTCUSDT:  
 `BUY` side, the order will buy as many BTC as `quoteOrderQty` USDT can.  
-`SELL` side, the order will sell as much BTC needed to receive `CashOrderQty (152)` USDT. 
-| `STOP_LOSS` | 38, 1102 or 25009 | This will execute a `MARKET` order when the conditions are met. (e.g. `TriggerPrice (1102)` is met or `TriggerTrailingDeltaBips (25009)` is activated) 
-| `STOP_LOSS_LIMIT` | 38, 44, 59, 1102 or 25009 |  
-| `TAKE_PROFIT` | 38, 1102 or 25009 | This will execute a `MARKET` order when the conditions are met. (e.g. `TriggerPrice (1102)` is met or `TriggerTrailingDeltaBips (25009)` is activated) 
-| `TAKE_PROFIT_LIMIT` | 38, 44, 59, 1102 or 25009 |  
+`SELL` side, the order will sell as much BTC needed to receive `CashOrderQty (152)` USDT. |
+| `STOP_LOSS` | 38, 1102 or 25009 | This will execute a `MARKET` order when the conditions are met. (e.g. `TriggerPrice (1102)` is met or `TriggerTrailingDeltaBips (25009)` is activated) |
+| `STOP_LOSS_LIMIT` | 38, 44, 59, 1102 or 25009 |  |
+| `TAKE_PROFIT` | 38, 1102 or 25009 | This will execute a `MARKET` order when the conditions are met. (e.g. `TriggerPrice (1102)` is met or `TriggerTrailingDeltaBips (25009)` is activated) |
+| `TAKE_PROFIT_LIMIT` | 38, 44, 59, 1102 or 25009 |  |
 | `LIMIT_MAKER` | 38, 44 | This is a `LIMIT` order that will be rejected if the order immediately matches and trades as a taker.  
-This is also known as a POST-ONLY order. 
+This is also known as a POST-ONLY order. |
 
 #### ExecutionReport`<8>`[​](/docs/binance-spot-api-docs/fix-api#executionreport8 "Direct link to executionreport8")
 
@@ -647,11 +647,11 @@ Sent by the server whenever an order state changes.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 17 | ExecID | STRING | N | Omitted on rejected orders. 
-| 11 | ClOrdID | STRING | N | `ClOrdID` of the list as assigned on the request. 
-| 41 | OrigClOrdID | STRING | N | Original `ClOrdID` of the order. 
-| 37 | OrderID | INT | N | Assigned by exchange. 
-| 38 | OrderQty | QTY | N | Quantity of the order. 
+| 17 | ExecID | STRING | N | Omitted on rejected orders. |
+| 11 | ClOrdID | STRING | N | `ClOrdID` of the list as assigned on the request. |
+| 41 | OrigClOrdID | STRING | N | Original `ClOrdID` of the order. |
+| 37 | OrderID | INT | N | Assigned by exchange. |
+| 38 | OrderQty | QTY | N | Quantity of the order. |
 | 40 | OrdType | CHAR | Y | Possible values:  
   
 `1` - MARKET  
@@ -660,31 +660,31 @@ Sent by the server whenever an order state changes.
   
 `3` - STOP\_LOSS  
   
-`4` - STOP\_LIMIT 
+`4` - STOP\_LIMIT |
 | 54 | Side | CHAR | Y | Possible values:  
   
 `1` - BUY  
   
-`2` - SELL 
-| 55 | Symbol | STRING | Y | Symbol of the order. 
+`2` - SELL |
+| 55 | Symbol | STRING | Y | Symbol of the order. |
 | 18 | ExecInst | CHAR | N | Possible values:  
   
-`6` - PARTICIPATE\_DONT\_INITIATE 
-| 44 | Price | PRICE | N | Price of the order. 
+`6` - PARTICIPATE\_DONT\_INITIATE |
+| 44 | Price | PRICE | N | Price of the order. |
 | 59 | TimeInForce | CHAR | N | Possible values:  
   
 `1` - GOOD\_TILL\_CANCEL  
   
 `3` - IMMEDIATE\_OR\_CANCEL  
   
-`4` - FILL\_OR\_KILL 
-| 60 | TransactTime | UTCTIMESTAMP | N | Timestamp when this event occurred. 
-| 25018 | OrderCreationTime | INT | N |  
-| 111 | MaxFloor | QTY | N | Appears on iceberg orders. 
-| 66 | ListID | STRING | N | Appears on list orders. 
-| 152 | CashOrderQty | QTY | N | OrderQty specified in the quote asset units. 
-| 847 | TargetStrategy | INT | N | `TargetStrategy (847)` from the order placement request. 
-| 7940 | StrategyID | INT | N | `StrategyID (7940)` from the order placement request. 
+`4` - FILL\_OR\_KILL |
+| 60 | TransactTime | UTCTIMESTAMP | N | Timestamp when this event occurred. |
+| 25018 | OrderCreationTime | INT | N |  |
+| 111 | MaxFloor | QTY | N | Appears on iceberg orders. |
+| 66 | ListID | STRING | N | Appears on list orders. |
+| 152 | CashOrderQty | QTY | N | OrderQty specified in the quote asset units. |
+| 847 | TargetStrategy | INT | N | `TargetStrategy (847)` from the order placement request. |
+| 7940 | StrategyID | INT | N | `StrategyID (7940)` from the order placement request. |
 | 25001 | SelfTradePreventionMode | CHAR | N | Possible values:  
   
 `1` - NONE  
@@ -695,7 +695,7 @@ Sent by the server whenever an order state changes.
   
 `4` - EXPIRE\_BOTH  
   
-`5` - DECREMENT 
+`5` - DECREMENT |
 | 150 | ExecType | CHAR | Y | **Note:** Field `PreventedMatchID(25024)` will be present if order has expired due to `SelfTradePreventionMode(25013)`  
   
 Possible values:  
@@ -710,16 +710,16 @@ Possible values:
   
 `F` - TRADE  
   
-`C` - EXPIRED 
-| 14 | CumQty | QTY | Y | Total number of base asset traded on this order. 
-| 151 | LeavesQty | QTY | N | Quantity remaining for further execution. 
-| 25017 | CumQuoteQty | QTY | N | Total number of quote asset traded on this order. 
+`C` - EXPIRED |
+| 14 | CumQty | QTY | Y | Total number of base asset traded on this order. |
+| 151 | LeavesQty | QTY | N | Quantity remaining for further execution. |
+| 25017 | CumQuoteQty | QTY | N | Total number of quote asset traded on this order. |
 | 1057 | AggressorIndicator | BOOLEAN | N | Appears on trade execution reports.  
   
-Indicates whether the order was a taker in the trade. 
-| 1003 | TradeID | STRING | N | Appears on trade execution reports. 
-| 31 | LastPx | PRICE | N | The price of the last execution. 
-| 32 | LastQty | QTY | Y | The quantity of the last execution. 
+Indicates whether the order was a taker in the trade. |
+| 1003 | TradeID | STRING | N | Appears on trade execution reports. |
+| 31 | LastPx | PRICE | N | The price of the last execution. |
+| 32 | LastQty | QTY | Y | The quantity of the last execution. |
 | 39 | OrdStatus | CHAR | Y | Possible values:  
   
 `0` - NEW  
@@ -736,52 +736,52 @@ Indicates whether the order was a taker in the trade.
   
 `C` - EXPIRED  
   
-Note that FIX does not support `EXPIRED_IN_MATCH` status, and get converted to `EXPIRED` in FIX. 
-| 70 | AllocID | INT | N | Allocation ID as assigned by the exchange. 
+Note that FIX does not support `EXPIRED_IN_MATCH` status, and get converted to `EXPIRED` in FIX. |
+| 70 | AllocID | INT | N | Allocation ID as assigned by the exchange. |
 | 574 | MatchType | INT | N | Possible values:  
   
 `1` - ONE\_PARTY\_TRADE\_REPORT  
   
-`4` - AUTO\_MATCH 
-| 25021 | WorkingFloor | INT | N | Appears for orders that potentially have allocations. 
-| 25022 | TrailingTime | UTCTIMESTAMP | N | Appears only for trailing stop orders. 
-| 636 | WorkingIndicator | BOOLEAN | N | Set to `Y` when this order enters order book. 
-| 25023 | WorkingTime | UTCTIMESTAMP | N | When this order appeared on the order book. 
-| 25024 | PreventedMatchID | INT | N | Appears only for orders that expired due to STP. 
-| 25025 | PreventedExecutionPrice | PRICE | N | Appears only for orders that expired due to STP. 
-| 25026 | PreventedExecutionQty | QTY | N | Appears only for orders that expired due to STP. 
-| 25027 | TradeGroupID | INT | N | Appears only for orders that expired due to STP. 
-| 25028 | CounterSymbol | STRING | N | Appears only for orders that expired due to STP. 
-| 25029 | CounterOrderID | INT | N | Appears only for orders that expired due to STP. 
-| 25030 | PreventedQty | QTY | N | Appears only for orders that expired due to STP. 
-| 25031 | LastPreventedQty | QTY | N | Appears only for orders that expired due to STP. 
-| 25032 | SOR | BOOLEAN | N | Appears for orders that used SOR. 
-| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). 
-| 58 | Text | STRING | N | Human-readable error message. 
-| 136 | NoMiscFees | NUMINGROUP | N | Number of repeating groups of miscellaneous fees. 
-| \=>137 | MiscFeeAmt | QTY | Y | Amount of fees denominated in `MiscFeeCurr(138)` asset 
-| \=>138 | MiscFeeCurr | STRING | Y | Currency of miscellaneous fee. 
+`4` - AUTO\_MATCH |
+| 25021 | WorkingFloor | INT | N | Appears for orders that potentially have allocations. |
+| 25022 | TrailingTime | UTCTIMESTAMP | N | Appears only for trailing stop orders. |
+| 636 | WorkingIndicator | BOOLEAN | N | Set to `Y` when this order enters order book. |
+| 25023 | WorkingTime | UTCTIMESTAMP | N | When this order appeared on the order book. |
+| 25024 | PreventedMatchID | INT | N | Appears only for orders that expired due to STP. |
+| 25025 | PreventedExecutionPrice | PRICE | N | Appears only for orders that expired due to STP. |
+| 25026 | PreventedExecutionQty | QTY | N | Appears only for orders that expired due to STP. |
+| 25027 | TradeGroupID | INT | N | Appears only for orders that expired due to STP. |
+| 25028 | CounterSymbol | STRING | N | Appears only for orders that expired due to STP. |
+| 25029 | CounterOrderID | INT | N | Appears only for orders that expired due to STP. |
+| 25030 | PreventedQty | QTY | N | Appears only for orders that expired due to STP. |
+| 25031 | LastPreventedQty | QTY | N | Appears only for orders that expired due to STP. |
+| 25032 | SOR | BOOLEAN | N | Appears for orders that used SOR. |
+| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). |
+| 58 | Text | STRING | N | Human-readable error message. |
+| 136 | NoMiscFees | NUMINGROUP | N | Number of repeating groups of miscellaneous fees. |
+| \=>137 | MiscFeeAmt | QTY | Y | Amount of fees denominated in `MiscFeeCurr(138)` asset |
+| \=>138 | MiscFeeCurr | STRING | Y | Currency of miscellaneous fee. |
 | \=>139 | MiscFeeType | INT | Y | Possible values:  
   
-`4` - EXCHANGE\_FEES 
+`4` - EXCHANGE\_FEES |
 | 1100 | TriggerType | CHAR | N | Possible values:  
   
-`4` - PRICE\_MOVEMENT 
+`4` - PRICE\_MOVEMENT |
 | 1101 | TriggerAction | CHAR | N | Possible values:  
   
-`1` - ACTIVATE 
-| 1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) 
+`1` - ACTIVATE |
+| 1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) |
 | 1107 | TriggerPriceType | CHAR | N | Possible values:  
   
-`2` - LAST\_TRADE 
+`2` - LAST\_TRADE |
 | 1109 | TriggerPriceDirection | CHAR | N | Used to differentiate between StopLoss and TakeProfit orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype).  
   
 Possible values:  
   
 `U` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_UP\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE  
   
-`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE 
-| 25009 | TriggerTrailingDeltaBips | INT | N | Appears only for trailing stop orders. 
+`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE |
+| 25009 | TriggerTrailingDeltaBips | INT | N | Appears only for trailing stop orders. |
 
 **Sample message:**
 
@@ -806,17 +806,17 @@ If the canceled order is part of an order list, the entire list will be canceled
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 11 | ClOrdID | STRING | Y | `ClOrdID` of this request. 
-| 41 | OrigClOrdID | STRING | N | `ClOrdID (11)` of the order to cancel. 
-| 37 | OrderID | INT | N | `OrderID (37)` of the order to cancel. 
-| 25015 | OrigClListID | STRING | N | `ClListID (25014)` of the order list to cancel. 
-| 66 | ListID | STRING | N | `ListID (66)` of the order list to cancel. 
-| 55 | Symbol | STRING | Y | Symbol on which to cancel order. 
+| 11 | ClOrdID | STRING | Y | `ClOrdID` of this request. |
+| 41 | OrigClOrdID | STRING | N | `ClOrdID (11)` of the order to cancel. |
+| 37 | OrderID | INT | N | `OrderID (37)` of the order to cancel. |
+| 25015 | OrigClListID | STRING | N | `ClListID (25014)` of the order list to cancel. |
+| 66 | ListID | STRING | N | `ListID (66)` of the order list to cancel. |
+| 55 | Symbol | STRING | Y | Symbol on which to cancel order. |
 | 25002 | CancelRestrictions | INT | N | Restrictions on the cancel. Possible values:  
   
 `1` - ONLY\_NEW  
   
-`2` - ONLY\_PARTIALLY\_FILLED 
+`2` - ONLY\_PARTIALLY\_FILLED |
 
 **Sample message:**
 
@@ -837,20 +837,20 @@ Sent by the server when [OrderCancelRequest`<F>`](/docs/binance-spot-api-docs/fi
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 11 | ClOrdID | STRING | Y | `ClOrdID (11)` of the cancel request. 
-| 41 | OrigClOrdID | STRING | N | `OrigClOrdID (41)` from the cancel request. 
-| 37 | OrderID | INT | N | `OrderID (37)` from the cancel request. 
-| 25015 | OrigClListID | STRING | N | `OrigClListID (25015)` from the cancel request. 
-| 66 | ListID | STRING | N | `ListID (66)` from the cancel request. 
-| 55 | Symbol | STRING | Y | `Symbol (55)` from the cancel request. 
-| 25002 | CancelRestrictions | INT | N | `CancelRestrictions (25002)` from the cancel request. 
+| 11 | ClOrdID | STRING | Y | `ClOrdID (11)` of the cancel request. |
+| 41 | OrigClOrdID | STRING | N | `OrigClOrdID (41)` from the cancel request. |
+| 37 | OrderID | INT | N | `OrderID (37)` from the cancel request. |
+| 25015 | OrigClListID | STRING | N | `OrigClListID (25015)` from the cancel request. |
+| 66 | ListID | STRING | N | `ListID (66)` from the cancel request. |
+| 55 | Symbol | STRING | Y | `Symbol (55)` from the cancel request. |
+| 25002 | CancelRestrictions | INT | N | `CancelRestrictions (25002)` from the cancel request. |
 | 434 | CxlRejResponseTo | CHAR | Y | Type of request that this OrderCancelReject`<9>` is in response to.  
   
 Possible values:  
   
-`1` - ORDER\_CANCEL\_REQUEST 
-| 25016 | ErrorCode | INT | Y | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). 
-| 58 | Text | STRING | Y | Human-readable error message. 
+`1` - ORDER\_CANCEL\_REQUEST |
+| 25016 | ErrorCode | INT | Y | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). |
+| 58 | Text | STRING | Y | Human-readable error message. |
 
 **Sample message:**
 
@@ -877,22 +877,22 @@ Possible values:
   
 `1` - STOP\_ON\_FAILURE  
   
-`2` - ALLOW\_FAILURE 
+`2` - ALLOW\_FAILURE |
 | 25038 | OrderRateLimitExceededMode | INT | N | What should be done to the cancellation request if you exceed the unfilled order rate limit.  
   
 Possible values: `1` - DO\_NOTHING  
   
-`2` - CANCEL\_ONLY 
-| 37 | OrderID | INT | N | `OrderID` of the order to cancel. 
-| 25034 | CancelClOrdID | STRING | N | `ClOrdID` of the cancel. 
-| 41 | OrigClOrdID | STRING | N | `ClOrdID` of the order to cancel. 
-| 11 | ClOrdID | STRING | Y | `ClOrdID` to be assigned to the new order. 
+`2` - CANCEL\_ONLY |
+| 37 | OrderID | INT | N | `OrderID` of the order to cancel. |
+| 25034 | CancelClOrdID | STRING | N | `ClOrdID` of the cancel. |
+| 41 | OrigClOrdID | STRING | N | `ClOrdID` of the order to cancel. |
+| 11 | ClOrdID | STRING | Y | `ClOrdID` to be assigned to the new order. |
 | 25002 | CancelRestrictions | INT | N | Restrictions on the cancel. Possible values:  
   
 `1` - ONLY\_NEW  
   
-`2` - ONLY\_PARTIALLY\_FILLED 
-| 38 | OrderQty | QTY | N | Quantity of the new order 
+`2` - ONLY\_PARTIALLY\_FILLED |
+| 38 | OrderQty | QTY | N | Quantity of the new order |
 | 40 | OrdType | CHAR | Y | See the [table](/docs/binance-spot-api-docs/fix-api#ordertype) to understand supported order types and the required fields to use them.  
   
 Possible values:  
@@ -903,30 +903,30 @@ Possible values:
   
 `3` - STOP  
   
-`4` - STOP\_LIMIT 
+`4` - STOP\_LIMIT |
 | 18 | ExecInst | CHAR | N | Possible values:  
   
-`6` - PARTICIPATE\_DONT\_INITIATE 
-| 44 | Price | PRICE | N | Price of the new order 
+`6` - PARTICIPATE\_DONT\_INITIATE |
+| 44 | Price | PRICE | N | Price of the new order |
 | 54 | Side | CHAR | Y | Side of the order.  
   
 Possible values:  
   
 `1` - BUY  
   
-`2` - SELL 
-| 55 | Symbol | STRING | Y | Symbol to cancel and place the order on. 
+`2` - SELL |
+| 55 | Symbol | STRING | Y | Symbol to cancel and place the order on. |
 | 59 | TimeInForce | CHAR | N | Possible values:  
   
 `1` - GOOD\_TILL\_CANCEL  
   
 `3` - IMMEDIATE\_OR\_CANCEL  
   
-`4` - FILL\_OR\_KILL 
-| 111 | MaxFloor | QTY | N | Used for iceberg orders, this specifies the visible quantity of the order on the book. 
-| 152 | CashOrderQty | QTY | N | Quantity of the order specified in the quote asset units, for reverse market orders. 
-| 847 | TargetStrategy | INT | N | The value cannot be less than `1000000`. 
-| 7940 | StrategyID | INT | N |  
+`4` - FILL\_OR\_KILL |
+| 111 | MaxFloor | QTY | N | Used for iceberg orders, this specifies the visible quantity of the order on the book. |
+| 152 | CashOrderQty | QTY | N | Quantity of the order specified in the quote asset units, for reverse market orders. |
+| 847 | TargetStrategy | INT | N | The value cannot be less than `1000000`. |
+| 7940 | StrategyID | INT | N |  |
 | 25001 | SelfTradePreventionMode | CHAR | N | Possible values:  
   
 `1` - NONE  
@@ -937,23 +937,23 @@ Possible values:
   
 `4` - EXPIRE\_BOTH  
   
-`5` - DECREMENT 
-| 1100 | TriggerType | CHAR | N | Possible values: `4` - PRICE\_MOVEMENT 
+`5` - DECREMENT |
+| 1100 | TriggerType | CHAR | N | Possible values: `4` - PRICE\_MOVEMENT |
 | 1101 | TriggerAction | CHAR | N | Possible values:  
   
-`1` - ACTIVATE 
-| 1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) 
+`1` - ACTIVATE |
+| 1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) |
 | 1107 | TriggerPriceType | CHAR | N | Possible values:  
   
-`2` - LAST\_TRADE 
+`2` - LAST\_TRADE |
 | 1109 | TriggerPriceDirection | CHAR | N | Used to differentiate between StopLoss and TakeProfit orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype).  
   
 Possible values:  
   
 `U` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_UP\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE  
   
-`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE 
-| 25009 | TriggerTrailingDeltaBips | INT | N | Provide to create trailing orders. 
+`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE |
+| 25009 | TriggerTrailingDeltaBips | INT | N | Provide to create trailing orders. |
 
 **Sample message:**
 
@@ -977,11 +977,11 @@ Sent by the client to cancel all open orders on a symbol.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 11 | ClOrdID | STRING | Y | `ClOrdId` of this mass cancel request. 
-| 55 | Symbol | STRING | Y | Symbol on which to cancel orders. 
+| 11 | ClOrdID | STRING | Y | `ClOrdId` of this mass cancel request. |
+| 55 | Symbol | STRING | Y | Symbol on which to cancel orders. |
 | 530 | MassCancelRequestType | CHAR | Y | Possible values:  
   
-`1` - CANCEL\_SYMBOL\_ORDERS 
+`1` - CANCEL\_SYMBOL\_ORDERS |
 
 **Sample message:**
 
@@ -1001,20 +1001,20 @@ Sent by the server in response to [OrderMassCancelRequest`<q>`](/docs/binance-sp
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 55 | Symbol | STRING | Y | `Symbol (55)` from the cancel request. 
-| 11 | ClOrdID | STRING | Y | `ClOrdID (11)` of the cancel request. 
-| 530 | MassCancelRequestType | CHAR | Y | `MassCancelRequestType (530)` from the cancel request. 
+| 55 | Symbol | STRING | Y | `Symbol (55)` from the cancel request. |
+| 11 | ClOrdID | STRING | Y | `ClOrdID (11)` of the cancel request. |
+| 530 | MassCancelRequestType | CHAR | Y | `MassCancelRequestType (530)` from the cancel request. |
 | 531 | MassCancelResponse | CHAR | Y | Possible values:  
   
 `0` - CANCEL\_REQUEST\_REJECTED  
   
-`1` - CANCEL\_SYMBOL\_ORDERS 
+`1` - CANCEL\_SYMBOL\_ORDERS |
 | 532 | MassCancelRejectReason | INT | N | Possible values:  
   
-`99` - OTHER 
-| 533 | TotalAffectedOrders | INT | N | How many orders were canceled. 
-| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). 
-| 58 | Text | STRING | N | Human-readable error message. 
+`99` - OTHER |
+| 533 | TotalAffectedOrders | INT | N | How many orders were canceled. |
+| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). |
+| 58 | Text | STRING | N | Human-readable error message. |
 
 **Sample message:**
 
@@ -1030,15 +1030,15 @@ Orders in an order list are contingent on one another. Please refer to [Supporte
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 25014 | ClListID | STRING | Y | `ClListID` to be assigned to the order list. 
+| 25014 | ClListID | STRING | Y | `ClListID` to be assigned to the order list. |
 | 1385 | ContingencyType | INT | N | Possible values:  
   
 `1` - ONE\_CANCELS\_THE\_OTHER  
   
-`2` - ONE\_TRIGGERS\_THE\_OTHER 
-| 73 | NoOrders | NUMINGROUP | N | The length of the array for Orders. Only 2 or 3 are allowed. 
-| \=>11 | ClOrdID | STRING | Y | `ClOrdID` to be assigned to the order 
-| \=>38 | OrderQty | QTY | N | Quantity of the order 
+`2` - ONE\_TRIGGERS\_THE\_OTHER |
+| 73 | NoOrders | NUMINGROUP | N | The length of the array for Orders. Only 2 or 3 are allowed. |
+| \=>11 | ClOrdID | STRING | Y | `ClOrdID` to be assigned to the order |
+| \=>38 | OrderQty | QTY | N | Quantity of the order |
 | \=>40 | OrdType | CHAR | Y | See the [table](/docs/binance-spot-api-docs/fix-api#ordertype) to understand supported order types and the required fields to use them.  
   
 Possible values:  
@@ -1049,28 +1049,28 @@ Possible values:
   
 `3` - STOP  
   
-`4` - STOP\_LIMIT 
+`4` - STOP\_LIMIT |
 | \=>18 | ExecInst | CHAR | N | Possible values:  
   
-`6` - PARTICIPATE\_DONT\_INITIATE 
-| \=>44 | Price | PRICE | N | Price of the order 
+`6` - PARTICIPATE\_DONT\_INITIATE |
+| \=>44 | Price | PRICE | N | Price of the order |
 | \=>54 | Side | CHAR | Y | Side of the order. Possible values:  
   
 `1` - BUY  
   
-`2` - SELL 
-| \=>55 | Symbol | STRING | Y | Symbol to place the order on. 
+`2` - SELL |
+| \=>55 | Symbol | STRING | Y | Symbol to place the order on. |
 | \=>59 | TimeInForce | CHAR | N | Possible values:  
   
 `1` - GOOD\_TILL\_CANCEL  
   
 `3` - IMMEDIATE\_OR\_CANCEL  
   
-`4` - FILL\_OR\_KILL 
-| \=>111 | MaxFloor | QTY | N | Used for iceberg orders, this specifies the visible quantity of the order on the book. 
-| \=>152 | CashOrderQty | QTY | N | Quantity of the order specified in the quote asset units, for reverse market orders. 
-| \=>847 | TargetStrategy | INT | N | The value cannot be less than `1000000`. 
-| \=>7940 | StrategyID | INT | N |  
+`4` - FILL\_OR\_KILL |
+| \=>111 | MaxFloor | QTY | N | Used for iceberg orders, this specifies the visible quantity of the order on the book. |
+| \=>152 | CashOrderQty | QTY | N | Quantity of the order specified in the quote asset units, for reverse market orders. |
+| \=>847 | TargetStrategy | INT | N | The value cannot be less than `1000000`. |
+| \=>7940 | StrategyID | INT | N |  |
 | \=>25001 | SelfTradePreventionMode | CHAR | N | Possible values:  
   
 `1` - NONE  
@@ -1081,26 +1081,26 @@ Possible values:
   
 `4` - EXPIRE\_BOTH  
   
-`5` - DECREMENT 
+`5` - DECREMENT |
 | \=>1100 | TriggerType | CHAR | N | Possible values:  
   
-`4` - PRICE\_MOVEMENT 
+`4` - PRICE\_MOVEMENT |
 | \=>1101 | TriggerAction | CHAR | N | Possible values:  
   
-`1` - ACTIVATE 
-| \=>1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) 
+`1` - ACTIVATE |
+| \=>1102 | TriggerPrice | PRICE | N | Activation price for contingent orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype) |
 | \=>1107 | TriggerPriceType | CHAR | N | Possible values:  
   
-`2` - LAST\_TRADE 
+`2` - LAST\_TRADE |
 | \=>1109 | TriggerPriceDirection | CHAR | N | Used to differentiate between StopLoss and TakeProfit orders. See [table](/docs/binance-spot-api-docs/fix-api#ordertype).  
   
 Possible values:  
   
 `U` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_UP\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE  
   
-`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE 
-| \=>25009 | TriggerTrailingDeltaBips | INT | N | Provide to create trailing orders. 
-| \=>25010 | NoListTriggeringInstructions | NUMINGROUP | N | The length of the array for ListTriggeringInstructions. 
+`D` - TRIGGER\_IF\_THE\_PRICE\_OF\_THE\_SPECIFIED\_TYPE\_GOES\_DOWN\_TO\_OR\_THROUGH\_THE\_SPECIFIED\_TRIGGER\_PRICE |
+| \=>25009 | TriggerTrailingDeltaBips | INT | N | Provide to create trailing orders. |
+| \=>25010 | NoListTriggeringInstructions | NUMINGROUP | N | The length of the array for ListTriggeringInstructions. |
 | \==>25011 | ListTriggerType | CHAR | N | What needs to happen to the order pointed to by ListTriggerTriggerIndex in order for the action to take place.  
   
 Possible values:  
@@ -1109,15 +1109,15 @@ Possible values:
   
 `2` - PARTIALLY\_FILLED  
   
-`3` - FILLED 
-| \==>25012 | ListTriggerTriggerIndex | INT | N | Index of the trigger order: 0-indexed. 
+`3` - FILLED |
+| \==>25012 | ListTriggerTriggerIndex | INT | N | Index of the trigger order: 0-indexed. |
 | \==>25013 | ListTriggerAction | CHAR | N | Action to take place on this order after the ListTriggerType has been fulfilled.  
   
 Possible values:  
   
 `1` - RELEASE  
   
-`2` - CANCEL 
+`2` - CANCEL |
 
 **Sample message:**
 
@@ -1151,7 +1151,7 @@ Possible values:
   
 2\. above order:  
   
-`25010=1|25011=1|25012=0|25013=2|` 
+`25010=1|25011=1|25012=0|25013=2|` |
 | OCO | `1` | 1\. below order  
   
   
@@ -1172,7 +1172,7 @@ Possible values:
   
 2\. above order:  
   
-`25010=1|25011=2|25012=0|25013=2|` 
+`25010=1|25011=2|25012=0|25013=2|` |
 | OCO | `1` | 1\. below order  
   
   
@@ -1193,7 +1193,7 @@ Possible values:
   
 2\. above order:  
   
-`25010=1|25011=1|25012=0|25013=2|` 
+`25010=1|25011=1|25012=0|25013=2|` |
 | OCO | `1` | 1\. below order  
   
   
@@ -1214,7 +1214,7 @@ Possible values:
   
 2\. above order:  
   
-`25010=1|25011=1|25012=0|25013=2|` 
+`25010=1|25011=1|25012=0|25013=2|` |
 | OTO | `2` | 1\. working order  
   
   
@@ -1235,7 +1235,7 @@ NONE
   
 2\. pending order:  
   
-`25010=1|25011=3|25012=0|25013=1|` 
+`25010=1|25011=3|25012=0|25013=1|` |
 | OTOCO | `2` | 1\. working order  
   
   
@@ -1274,7 +1274,7 @@ NONE
   
 3\. pending above order:  
   
-`25010=2|25011=3|25012=0|25013=2|25011=1|25012=1|25013=2|` 
+`25010=2|25011=3|25012=0|25013=2|25011=1|25012=1|25013=2|` |
 | OTOCO | `2` | 1\. working order  
   
   
@@ -1313,7 +1313,7 @@ NONE
   
 3\. pending above order:  
   
-`25010=2|25011=3|25012=0|25013=2|25011=2|25012=1|25013=2|` 
+`25010=2|25011=3|25012=0|25013=2|25011=2|25012=1|25013=2|` |
 | OTOCO | `2` | 1\. working order  
   
   
@@ -1352,7 +1352,7 @@ NONE
   
 3\. pending above order:  
   
-`25010=2|25011=3|25012=0|25013=2|25011=1|25012=1|25013=2|` 
+`25010=2|25011=3|25012=0|25013=2|25011=1|25012=1|25013=2|` |
 | OTOCO | `2` | 1\. working order  
   
   
@@ -1391,7 +1391,7 @@ NONE
   
 3\. pending above order:  
   
-`25010=2|25011=3|25012=0|25013=2|25011=1|25012=1|25013=2|` 
+`25010=2|25011=3|25012=0|25013=2|25011=1|25012=1|25013=2|` |
 
 #### ListStatus`<N>`[​](/docs/binance-spot-api-docs/fix-api#liststatusn "Direct link to liststatusn")
 
@@ -1401,15 +1401,15 @@ Sent by the server whenever an order list state changes.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 55 | Symbol | STRING | Y | Symbol of the order list. 
-| 66 | ListID | STRING | N | `ListID` of the list as assigned by the exchange. 
-| 25014 | ClListID | STRING | N | `ClListID` of the list as assigned on the request. 
-| 25015 | OrigClListID | STRING | N |  
+| 55 | Symbol | STRING | Y | Symbol of the order list. |
+| 66 | ListID | STRING | N | `ListID` of the list as assigned by the exchange. |
+| 25014 | ClListID | STRING | N | `ClListID` of the list as assigned on the request. |
+| 25015 | OrigClListID | STRING | N |  |
 | 1385 | ContingencyType | INT | N | Possible values:  
   
 `1` - ONE\_CANCELS\_THE\_OTHER  
   
-`2` - ONE\_TRIGGERS\_THE\_OTHER 
+`2` - ONE\_TRIGGERS\_THE\_OTHER |
 | 429 | ListStatusType | INT | Y | Possible values:  
   
 `2` - RESPONSE  
@@ -1418,41 +1418,41 @@ Sent by the server whenever an order list state changes.
   
 `5` - ALL\_DONE  
   
-`100` - UPDATED 
+`100` - UPDATED |
 | 431 | ListOrderStatus | INT | Y | Possible values:  
   
 `3` - EXECUTING  
   
 `6` - ALL\_DONE  
   
-`7` - REJECT 
+`7` - REJECT |
 | 1386 | ListRejectReason | INT | N | Possible values:  
   
-`99` - OTHER 
+`99` - OTHER |
 | 103 | OrdRejReason | INT | N | Possible values:  
   
-`99` - OTHER 
-| 60 | TransactTime | UTCTIMESTAMP | N | Timestamp when this event occurred. 
-| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). 
-| 58 | Text | STRING | N | Human-readable error message. 
-| 73 | NoOrders | NUMINGROUP | N | The length of the array for Orders. 
-| \=>55 | Symbol | STRING | Y | Symbol of the order. 
-| \=>37 | OrderID | INT | Y | `OrderID` of the order as assigned by the exchange. 
-| \=>11 | ClOrdID | STRING | Y | `ClOrdID` of the order as assigned on the request. 
-| \=>25010 | NoListTriggeringInstructions | NUMINGROUP | N | The length of the array for ListTriggeringInstructions. 
+`99` - OTHER |
+| 60 | TransactTime | UTCTIMESTAMP | N | Timestamp when this event occurred. |
+| 25016 | ErrorCode | INT | N | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). |
+| 58 | Text | STRING | N | Human-readable error message. |
+| 73 | NoOrders | NUMINGROUP | N | The length of the array for Orders. |
+| \=>55 | Symbol | STRING | Y | Symbol of the order. |
+| \=>37 | OrderID | INT | Y | `OrderID` of the order as assigned by the exchange. |
+| \=>11 | ClOrdID | STRING | Y | `ClOrdID` of the order as assigned on the request. |
+| \=>25010 | NoListTriggeringInstructions | NUMINGROUP | N | The length of the array for ListTriggeringInstructions. |
 | \==>25011 | ListTriggerType | CHAR | N | Possible values:  
   
 `1` - ACTIVATED  
   
 `2` - PARTIALLY\_FILLED  
   
-`3` - FILLED 
-| \==>25012 | ListTriggerTriggerIndex | INT | N |  
+`3` - FILLED |
+| \==>25012 | ListTriggerTriggerIndex | INT | N |  |
 | \==>25013 | ListTriggerAction | CHAR | N | Possible values:  
   
 `1` - RELEASE  
   
-`2` - CANCEL 
+`2` - CANCEL |
 
 **Sample message:**
 
@@ -1471,11 +1471,11 @@ Sent by the client to reduce the original quantity of their order.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 11 | ClOrdID | STRING | Y | The ClOrdID of this request. 
-| 41 | OrigClOrdID | STRING | N | `ClOrdID (11)` of the order to amend. Either `OrigClOrdID (41)` or `OrderId (37)` have to be specified. 
-| 37 | OrderID | INT | N | `OrderID (37)` of the order to amend. Either `OrigClOrdID (41)` or `OrderId (37)` have to be specified. 
-| 55 | Symbol | STRING | Y | Symbol on which to amend the order. 
-| 38 | OrderQty | QTY | N | New quantity of the order. Required to be smaller than the original OrderQty of the order. 
+| 11 | ClOrdID | STRING | Y | The ClOrdID of this request. |
+| 41 | OrigClOrdID | STRING | N | `ClOrdID (11)` of the order to amend. Either `OrigClOrdID (41)` or `OrderId (37)` have to be specified. |
+| 37 | OrderID | INT | N | `OrderID (37)` of the order to amend. Either `OrigClOrdID (41)` or `OrderId (37)` have to be specified. |
+| 55 | Symbol | STRING | Y | Symbol on which to amend the order. |
+| 38 | OrderQty | QTY | N | New quantity of the order. Required to be smaller than the original OrderQty of the order. |
 
 **Sample message:**
 
@@ -1496,13 +1496,13 @@ Sent by the server when the OrderAmendKeepPriorityRequest `<XAK>` has failed.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 11 | ClOrdID | STRING | Y | `ClOrdId` of the amend request. 
-| 41 | OrigClOrdID | STRING | N | `OrigClOrdId` (41) from the amend request. 
-| 37 | OrderID | INT | N | `OrderId (37)` from the amend request. 
-| 55 | Symbol | STRING | Y | `Symbol (55)` from the amend request. 
-| 38 | OrderQty | QTY | Y |  
-| 25016 | ErrorCode | INT | Y | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). 
-| 58 | Text | STRING | Y | Human-readable error message. 
+| 11 | ClOrdID | STRING | Y | `ClOrdId` of the amend request. |
+| 41 | OrigClOrdID | STRING | N | `OrigClOrdId` (41) from the amend request. |
+| 37 | OrderID | INT | N | `OrderId (37)` from the amend request. |
+| 55 | Symbol | STRING | Y | `Symbol (55)` from the amend request. |
+| 38 | OrderQty | QTY | Y |  |
+| 25016 | ErrorCode | INT | Y | API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)). |
+| 58 | Text | STRING | Y | Human-readable error message. |
 
 **Sample message:**
 
@@ -1518,7 +1518,7 @@ Sent by the client to query current limits.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 6136 | ReqID | STRING | Y | ID of this request 
+| 6136 | ReqID | STRING | Y | ID of this request |
 
 **Sample message:**
 
@@ -1532,16 +1532,16 @@ Sent by the server in response to [LimitQuery`<XLQ>`](/docs/binance-spot-api-doc
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 6136 | ReqID | STRING | Y | `ReqID` from the request. 
-| 25003 | NoLimitIndicators | NUMINGROUP | Y | The length of the array for LimitIndicators. 
+| 6136 | ReqID | STRING | Y | `ReqID` from the request. |
+| 25003 | NoLimitIndicators | NUMINGROUP | Y | The length of the array for LimitIndicators. |
 | \=>25004 | LimitType | CHAR | Y | Possible values:  
   
 `1` - ORDER\_LIMIT  
   
-`2` - MESSAGE\_LIMIT 
-| \=>25005 | LimitCount | INT | Y | The current use of this limit. 
-| \=>25006 | LimitMax | INT | Y | The maximum allowed for this limit. 
-| \=>25007 | LimitResetInterval | INT | N | How often the limit resets. 
+`2` - MESSAGE\_LIMIT |
+| \=>25005 | LimitCount | INT | Y | The current use of this limit. |
+| \=>25006 | LimitMax | INT | Y | The maximum allowed for this limit. |
+| \=>25007 | LimitResetInterval | INT | N | How often the limit resets. |
 | \=>25008 | LimitResetIntervalResolution | CHAR | N | Time unit of `LimitResetInterval`. Possible values:  
   
 `s` - SECOND  
@@ -1550,7 +1550,7 @@ Sent by the server in response to [LimitQuery`<XLQ>`](/docs/binance-spot-api-doc
   
 `h` - HOUR  
   
-`d` - DAY 
+`d` - DAY |
 
 **Sample message:**
 
@@ -1568,13 +1568,13 @@ Sent by the client to query information about active instruments (i.e., those th
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 320 | InstrumentReqID | STRING | Y | ID of this request 
+| 320 | InstrumentReqID | STRING | Y | ID of this request |
 | 559 | InstrumentListRequestType | INT | Y | Possible values:  
   
 `0` - SINGLE\_INSTRUMENT  
   
-`4` - ALL\_INSTRUMENTS 
-| 55 | Symbol | STRING | N | Required when the `InstrumentListRequestType` is set to `SINGLE_INSTRUMENT(0)` 
+`4` - ALL\_INSTRUMENTS |
+| 55 | Symbol | STRING | N | Required when the `InstrumentListRequestType` is set to `SINGLE_INSTRUMENT(0)` |
 
 **Sample message:**
 
@@ -1590,17 +1590,17 @@ Sent by the server in a response to the [InstrumentListRequest`<x>`](/docs/binan
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 320 | InstrumentReqID | STRING | Y | `InstrumentReqID` from the request. 
-| 146 | NoRelatedSym | NUMINGROUP | Y | Number of symbols 
-| \=>55 | Symbol | STRING | Y |  
-| \=>15 | Currency | STRING | Y | Quote asset of this symbol 
-| \=>562 | MinTradeVol | QTY | Y | The minimum trading quantity 
-| \=>1140 | MaxTradeVol | QTY | Y | The maximum trading quantity 
-| \=>25039 | MinQtyIncrement | QTY | Y | The minimum quantity increase 
-| \=>25040 | MarketMinTradeVol | QTY | Y | The minimum market order trading quantity 
-| \=>25041 | MarketMaxTradeVol | QTY | Y | The maximum market order trading quantity 
-| \=>25042 | MarketMinQtyIncrement | QTY | Y | The minimum market order quantity increase 
-| \=>969 | MinPriceIncrement | PRICE | Y | The minimum price increase 
+| 320 | InstrumentReqID | STRING | Y | `InstrumentReqID` from the request. |
+| 146 | NoRelatedSym | NUMINGROUP | Y | Number of symbols |
+| \=>55 | Symbol | STRING | Y |  |
+| \=>15 | Currency | STRING | Y | Quote asset of this symbol |
+| \=>562 | MinTradeVol | QTY | Y | The minimum trading quantity |
+| \=>1140 | MaxTradeVol | QTY | Y | The maximum trading quantity |
+| \=>25039 | MinQtyIncrement | QTY | Y | The minimum quantity increase |
+| \=>25040 | MarketMinTradeVol | QTY | Y | The minimum market order trading quantity |
+| \=>25041 | MarketMaxTradeVol | QTY | Y | The maximum market order trading quantity |
+| \=>25042 | MarketMinQtyIncrement | QTY | Y | The minimum market order quantity increase |
+| \=>969 | MinPriceIncrement | PRICE | Y | The minimum price increase |
 
 **Sample message:**
 
@@ -1655,32 +1655,32 @@ Order book price and quantity depth updates used to locally manage an order book
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 262 | MDReqID | STRING | Y | ID of this request 
+| 262 | MDReqID | STRING | Y | ID of this request |
 | 263 | SubscriptionRequestType | CHAR | Y | Subscription Request Type. Possible values:  
   
 `1` - SUBSCRIBE  
   
-`2` - UNSUBSCRIBE 
+`2` - UNSUBSCRIBE |
 | 264 | MarketDepth | INT | N | Subscription depth.  
   
 Possible values:  
   
 `1` - Book Ticker subscription  
   
-`2`\-`5000` - Diff. Depth Stream 
+`2`\-`5000` - Diff. Depth Stream |
 | 266 | AggregatedBook | NUMINGROUP | N | Possible values:  
   
-`Y` - one book entry per side per price 
-| 146 | NoRelatedSym | NUMINGROUP | N | Number of symbols 
-| \=>55 | Symbol | STRING | Y |  
-| 267 | NoMDEntryTypes | NUMINGROUP | N | Number of entry types 
+`Y` - one book entry per side per price |
+| 146 | NoRelatedSym | NUMINGROUP | N | Number of symbols |
+| \=>55 | Symbol | STRING | Y |  |
+| 267 | NoMDEntryTypes | NUMINGROUP | N | Number of entry types |
 | \=>269 | MDEntryType | CHAR | Y | Possible values:  
   
 `0` - BID  
   
 `1` - OFFER  
   
-`2` - TRADE 
+`2` - TRADE |
 
 **Sample message:**
 
@@ -1694,14 +1694,14 @@ Sent by the server in a response to an invalid MarketDataRequest `<V>`.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 262 | MDReqID | STRING | Y | ID of the invalid [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest) 
+| 262 | MDReqID | STRING | Y | ID of the invalid [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest) |
 | 281 | MDReqRejReason | CHAR | N | Possible values:  
   
 `1` - DUPLICATE\_MDREQID  
   
-`2` - TOO\_MANY\_SUBSCRIPTIONS 
-| 25016 | ErrorCode | INT | N | API Error code. See [Errors](/docs/binance-spot-api-docs/errors) 
-| 58 | Text | STRING | N | Human-readable error message. 
+`2` - TOO\_MANY\_SUBSCRIPTIONS |
+| 25016 | ErrorCode | INT | N | API Error code. See [Errors](/docs/binance-spot-api-docs/errors) |
+| 58 | Text | STRING | N | Human-readable error message. |
 
 **Sample message:**
 
@@ -1715,19 +1715,19 @@ Sent by the server in response to a [MarketDataRequest`<V>`](/docs/binance-spot-
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 262 | MDReqID | STRING | Y | ID of the [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest) that activated this subscription 
-| 55 | Symbol | STRING | Y |  
-| 25044 | LastBookUpdateID | INT | N |  
-| 268 | NoMDEntries | NUMINGROUP | Y | Number of entries 
+| 262 | MDReqID | STRING | Y | ID of the [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest) that activated this subscription |
+| 55 | Symbol | STRING | Y |  |
+| 25044 | LastBookUpdateID | INT | N |  |
+| 268 | NoMDEntries | NUMINGROUP | Y | Number of entries |
 | \=>269 | MDEntryType | CHAR | Y | Possible values:  
   
 `0` - BID  
   
 `1` - OFFER  
   
-`2` - TRADE 
-| \=>270 | MDEntryPx | PRICE | Y | Price 
-| \=>271 | MDEntrySize | QTY | Y | Quantity 
+`2` - TRADE |
+| \=>270 | MDEntryPx | PRICE | Y | Price |
+| \=>271 | MDEntrySize | QTY | Y | Quantity |
 
 **Sample message:**
 
@@ -1741,39 +1741,39 @@ Sent by the server when there is a change in a subscribed stream.
 
 | Tag | Name | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| 262 | MDReqID | STRING | Y | ID of the [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest) that activated this subscription 
-| 893 | LastFragment | BOOLEAN | N | When present, this indicates that the message was fragmented. Fragmentation occurs when `NoMDEntry` would exceed 10000 in a single [MarketDataIncrementalRefresh`<X>`](/docs/binance-spot-api-docs/fix-api#marketdataincrementalrefresh), in order to limit it to 10000. The fragments of a fragmented message are guaranteed to be consecutive in the stream. It can only appear in the [Trade Stream](/docs/binance-spot-api-docs/fix-api#tradestream) and [Diff. Depth Stream](/docs/binance-spot-api-docs/fix-api#diffdepthstream). 
-| 268 | NoMDEntries | NUMINGROUP | Y | Number of entries 
+| 262 | MDReqID | STRING | Y | ID of the [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest) that activated this subscription |
+| 893 | LastFragment | BOOLEAN | N | When present, this indicates that the message was fragmented. Fragmentation occurs when `NoMDEntry` would exceed 10000 in a single [MarketDataIncrementalRefresh`<X>`](/docs/binance-spot-api-docs/fix-api#marketdataincrementalrefresh), in order to limit it to 10000. The fragments of a fragmented message are guaranteed to be consecutive in the stream. It can only appear in the [Trade Stream](/docs/binance-spot-api-docs/fix-api#tradestream) and [Diff. Depth Stream](/docs/binance-spot-api-docs/fix-api#diffdepthstream). |
+| 268 | NoMDEntries | NUMINGROUP | Y | Number of entries |
 | \=>279 | MDUpdateAction | CHAR | Y | Possible values:  
   
 `0` - NEW  
   
 `1` - CHANGE  
   
-`2` - DELETE 
-| \=>270 | MDEntryPx | PRICE | Y | Price 
-| \=>271 | MDEntrySize | QTY | N | Quantity 
+`2` - DELETE |
+| \=>270 | MDEntryPx | PRICE | Y | Price |
+| \=>271 | MDEntrySize | QTY | N | Quantity |
 | \=>269 | MDEntryType | CHAR | Y | Possible values:  
   
 `0` - BID  
   
 `1` - OFFER  
   
-`2` - TRADE 
-| \=>55 | Symbol | STRING | N | Market Data Entry will default to the same `Symbol` of the previous Market Data Entry in the same Market Data message if `Symbol` is not specified 
-| \=>60 | TransactTime | UTCTIMESTAMP | N |  
-| \=>1003 | TradeID | INT | N |  
+`2` - TRADE |
+| \=>55 | Symbol | STRING | N | Market Data Entry will default to the same `Symbol` of the previous Market Data Entry in the same Market Data message if `Symbol` is not specified |
+| \=>60 | TransactTime | UTCTIMESTAMP | N |  |
+| \=>1003 | TradeID | INT | N |  |
 | \=>2446 | AggressorSide | CHAR | N | Possible values:  
   
 `1` - BUY  
   
-`2` - SELL 
+`2` - SELL |
 | \=>25043 | FirstBookUpdateID | INT | N | Only present in [Diff. Depth Stream](/docs/binance-spot-api-docs/fix-api#diffdepthstream).  
   
-Market Data Entry will default to the same `FirstBookUpdateID` of the previous Market Data Entry in the same Market Data message if `FirstBookUpdateID` is not specified 
+Market Data Entry will default to the same `FirstBookUpdateID` of the previous Market Data Entry in the same Market Data message if `FirstBookUpdateID` is not specified |
 | \=>25044 | LastBookUpdateID | INT | N | Only present in [Diff. Depth Stream](/docs/binance-spot-api-docs/fix-api#diffdepthstream) and [Individual Symbol Book Ticker Stream](/docs/binance-spot-api-docs/fix-api#symbolbooktickerstream).  
   
-Market Data Entry will default to the same `LastBookUpdateID` of the previous Market Data Entry in the same Market Data message if `LastBookUpdateID` is not specified 
+Market Data Entry will default to the same `LastBookUpdateID` of the previous Market Data Entry in the same Market Data message if `LastBookUpdateID` is not specified |
 
 **Sample message:**
 

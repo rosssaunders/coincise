@@ -1,62 +1,75 @@
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { ProcessorRegistry } from './processorRegistry.js'
+// Simplified Binance Spot extraction script
+'use strict';
 
-/**
- * Process documentation for a specific exchange
- * @param {string} exchange - The exchange name
- * @returns {Promise<void>}
- */
-async function processExchangeDocs(exchange) {
-  const processors = ProcessorRegistry.createProcessorsByExchange(exchange)
-  const results = []
+import fs from 'fs';
+import path from 'path';
+import puppeteer from 'puppeteer';
+import TurndownService from 'turndown';
+import { gfm } from 'turndown-plugin-gfm';
+import { fileURLToPath } from 'url';
 
-  // Get the current directory path
-  const __filename = fileURLToPath(import.meta.url)
-  const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-  for (const processor of processors) {
-    const markdownContent = await processor.process()
-    let outputFile = processor.getOutputFilename()
+const CONFIG_PATH = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : path.resolve(__dirname, '../config/spot.json');
 
-    // Ensure the output directory exists
-    const outputDir = path.dirname(outputFile)
+const DOCS_ROOT = path.resolve(__dirname, '../../../docs');
+const BASE_URL = 'https://developers.binance.com/docs';
 
-    // Save the file to the root of this repo
-    const rootDir = path.resolve(__dirname, '..', '..', '..', 'docs')
-    outputFile = path.join(rootDir, outputFile)
+// Load config
+const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true })
-    }
+// Setup Turndown with GFM
+const turndownService = new TurndownService({
+  codeBlockStyle: 'fenced',
+  fence: '```',
+});
+gfm(turndownService);
 
-    // Write the content to file
-    fs.writeFileSync(outputFile, markdownContent)
-    console.log(`Documentation written to ${outputFile}`)
-
-    results.push({
-      market: `${exchange}-${processor.apiType}`,
-      file: outputFile,
-      timestamp: new Date().toISOString(),
-    })
+async function fetchAndConvert(url) {
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+  let markdown = '';
+  try {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1920, height: 1080 });
+    await page.goto(url, { waitUntil: 'networkidle0' });
+    await page.waitForSelector('.theme-doc-markdown.markdown', { timeout: 10000 });
+    const html = await page.evaluate(() => {
+      const el = document.querySelector('.theme-doc-markdown.markdown');
+      return el ? el.outerHTML : '';
+    });
+    markdown = turndownService.turndown(html);
+    await page.close();
+  } catch (err) {
+    console.warn(`Failed to fetch or convert ${url}:`, err.message);
+  } finally {
+    await browser.close();
   }
-
-  console.table(results)
+  return markdown;
 }
 
-// Parse command line arguments
-const args = process.argv.slice(2)
-const command = args[0]
-
-if (command === 'process') {
-  const exchange = args[1]
-  if (!exchange) {
-    console.error('Please specify an exchange to process')
-    process.exit(1)
+async function processAll() {
+  const { endpoints, output_file, title } = config;
+  let content = `# ${title}\n\n`;
+  for (const endpoint of endpoints) {
+    const url = `${BASE_URL}/${endpoint}`;
+    console.log(`Fetching: ${url}`);
+    const md = await fetchAndConvert(url);
+    if (md) content += md + '\n\n';
+    await new Promise(r => setTimeout(r, 1000)); // polite delay
   }
-  processExchangeDocs(exchange).catch(console.error)
-} else {
-  console.error('Unknown command. Use "process <exchange>"')
-  process.exit(1)
+  const outPath = path.join(DOCS_ROOT, output_file);
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, content);
+  console.log(`Wrote: ${outPath}`);
+}
+
+// Run if called directly
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  processAll().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
 }
