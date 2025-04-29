@@ -6,13 +6,18 @@ Each extraction project must follow this directory structure:
 
 ```
 project-name/
-├── config/ # json based config files
-├── src/
-│   ├── index.js           # Entry point
+├── config/ # JSON based config files
+├── src/ # All source code goes here
+│   ├── index.js           # Main Entry point
 ├── package.json
 ├── package-lock.json
 └── README.md
 ```
+
+## Extraction Script Readability
+
+- Write each extraction script so that any human can easily read and understand it.
+- Make scripts simple to change and adapt quickly, even if this means the code is less organized or structured.
 
 ## Dependencies
 
