@@ -2772,8 +2772,6 @@ Notes:
     
 *   `trailingDelta` applies only to the `STOP_LOSS`/`STOP_LOSS_LIMIT` leg of the OCO.
     
-*   OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
-    
 
 **Data Source:** Matching Engine
 
@@ -3583,5 +3581,144 @@ Queries all amendments of a single order.
 
 ```
 {  "id": "6f5ebe91-01d9-43ac-be99-57cf062e0e30",  "status": 200,  "result":  [    {      "symbol": "BTCUSDT",      "orderId": 23,      "executionId": 60,      "origClientOrderId": "my_pending_order",      "newClientOrderId": "xbxXh5SSwaHS7oUEOCI88B",      "origQty": "7.00000000",      "newQty": "5.00000000",      "time": 1741924229819    }  ],  "rateLimits":  [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
+```
+
+User Data Stream requests
+=========================
+
+### User Data Stream subscription[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-subscription "Direct link to User Data Stream subscription")
+
+#### Subscribe to User Data Stream (USER\_STREAM)[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#subscribe-to-user-data-stream-user_stream "Direct link to Subscribe to User Data Stream (USER_STREAM)")
+
+```
+{  "id": "d3df8a21-98ea-4fe0-8f4e-0fcea5d418b7",  "method": "userDataStream.subscribe"}
+```
+
+Subscribe to the User Data Stream in the current WebSocket connection.
+
+**Notes:**
+
+*   This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to [`session.logon`](/docs/binance-spot-api-docs/websocket-api/authentication-requests#session-logon).
+*   To check the subscription status, use [`session.status`](/docs/binance-spot-api-docs/websocket-api/authentication-requests#session-status), see the `userDataStream` flag indicating you have have an active subscription.
+*   User Data Stream events are available in both JSON and [SBE](/docs/binance-spot-api-docs/faqs/sbe_faq) sessions.
+    *   Please refer to [User Data Streams](/docs/binance-spot-api-docs/user-data-stream) for the event format details.
+    *   For SBE, only SBE schema 2:1 or later is supported.
+
+**Weight**: 2
+
+**Parameters**: NONE
+
+**Response**:
+
+```
+{  "id": "d3df8a21-98ea-4fe0-8f4e-0fcea5d418b7",  "status": 200,  "result": {}}
+```
+
+#### Unsubscribe from User Data Stream (USER\_STREAM)[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#unsubscribe-from-user-data-stream-user_stream "Direct link to Unsubscribe from User Data Stream (USER_STREAM)")
+
+```
+{  "id": "d3df8a21-98ea-4fe0-8f4e-0fcea5d418b7",  "method": "userDataStream.unsubscribe"}
+```
+
+Stop listening to the User Data Stream in the current WebSocket connection.
+
+**Weight**: 2
+
+**Parameters**:
+
+NONE
+
+**Response**:
+
+```
+{  "id": "d3df8a21-98ea-4fe0-8f4e-0fcea5d418b7",  "status": 200,  "result": {}}
+```
+
+### Listen Key Management (Deprecated)[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#listen-key-management-deprecated "Direct link to Listen Key Management (Deprecated)")
+
+> \[!IMPORTANT\] These requests have been deprecated, which means we will remove them in the future. Please subscribe to the User Data Stream through the [WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe) instead.
+
+The following requests manage [User Data Stream](/docs/binance-spot-api-docs/user-data-stream) subscriptions.
+
+#### Start user data stream (USER\_STREAM) (Deprecated)[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#start-user-data-stream-user_stream-deprecated "Direct link to Start user data stream (USER_STREAM) (Deprecated)")
+
+```
+{  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "method": "userDataStream.start",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
+```
+
+Start a new user data stream.
+
+**Note:** the stream will close in 60 minutes unless [`userDataStream.ping`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#ping-user-data-stream-user_stream) requests are sent regularly.
+
+**Weight:** 2
+
+**Parameters:**
+
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| `apiKey` | STRING | YES |  |
+
+**Data Source:** Memory
+
+**Response:**
+
+Subscribe to the received listen key on WebSocket Stream afterwards.
+
+```
+{  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "status": 200,  "result": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```
+
+#### Ping user data stream (USER\_STREAM) (Deprecated)[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#ping-user-data-stream-user_stream-deprecated "Direct link to Ping user data stream (USER_STREAM) (Deprecated)")
+
+```
+{  "id": "815d5fce-0880-4287-a567-80badf004c74",  "method": "userDataStream.ping",  "params": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP",    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
+```
+
+Ping a user data stream to keep it alive.
+
+User data streams close automatically after 60 minutes, even if you're listening to them on WebSocket Streams. In order to keep the stream open, you have to regularly send pings using the `userDataStream.ping` request.
+
+It is recommended to send a ping once every 30 minutes.
+
+**Weight:** 2
+
+**Parameters:**
+
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| `listenKey` | STRING | YES |  |
+| `apiKey` | STRING | YES |  |
+
+**Data Source:** Memory
+
+**Response:**
+
+```
+{  "id": "815d5fce-0880-4287-a567-80badf004c74",  "status": 200,  "response": {},  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```
+
+#### Stop user data stream (USER\_STREAM) (Deprecated)[​](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#stop-user-data-stream-user_stream-deprecated "Direct link to Stop user data stream (USER_STREAM) (Deprecated)")
+
+```
+{  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "method": "userDataStream.stop",  "params": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP",    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
+```
+
+Explicitly stop and close the user data stream.
+
+**Weight:** 2
+
+**Parameters:**
+
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| `listenKey` | STRING | YES |  |
+| `apiKey` | STRING | YES |  |
+
+**Data Source:** Memory
+
+**Response:**
+
+```
+{  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "status": 200,  "response": {},  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
 ```
 
