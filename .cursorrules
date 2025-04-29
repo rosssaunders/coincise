@@ -52,7 +52,15 @@ Optional dependencies must be justified in the project's README.md.
 - Use PascalCase for classes
 - Use UPPER_SNAKE_CASE for constants
 
+## Package.json Scripts
+
+- All extraction scripts must be executed through package.json scripts
+- Scripts that take parameters must use the prefix `extract:` followed by the parameter name
+- Example: `"extract:config": "node src/index.js"`
+
 ## Github Workflows
 
-- Each venue has a seperate workflow file for automatically updating the documentation and raising a PR is anything has changed.
-- The workflow should run weekly at midnight on Saturday night / Sunday morning.
+- Each venue has a separate workflow file for automatically updating the documentation and raising a PR if anything has changed
+- The workflow should run weekly at midnight on Saturday night / Sunday morning
+- Workflows must execute the extraction scripts using the package.json scripts
+- Example workflow command: `npm run extract:config`
