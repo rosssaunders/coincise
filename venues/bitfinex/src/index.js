@@ -195,10 +195,14 @@ const fetchEndpointContent = async (url, baseUrl) => {
       return contentEl ? contentEl.innerHTML : null
     })
 
+    if (!content) {
+      throw new Error(`No content found on ${fullUrl}`)
+    }
+
     return content
   } catch (error) {
     console.error(`Error fetching ${fullUrl}:`, error)
-    return null
+    throw error // Re-throw the error to be handled by the caller
   } finally {
     if (page) {
       await page.close().catch(console.error)
@@ -219,21 +223,19 @@ const fetchEndpointContent = async (url, baseUrl) => {
 const processEndpoint = async (endpoint, baseUrl, turndownService) => {
   console.log(`Processing endpoint: ${endpoint.title}`)
 
-  const content = await fetchEndpointContent(endpoint.url, baseUrl)
+  try {
+    const content = await fetchEndpointContent(endpoint.url, baseUrl)
 
-  if (!content) {
+    // Convert HTML to Markdown
+    const markdown = turndownService.turndown(content)
+
     return {
       ...endpoint,
-      markdown: `Unable to fetch content for this endpoint.`,
+      markdown,
     }
-  }
-
-  // Convert HTML to Markdown
-  const markdown = turndownService.turndown(content)
-
-  return {
-    ...endpoint,
-    markdown,
+  } catch (error) {
+    console.error(`Failed to process endpoint ${endpoint.title}:`, error)
+    throw error // Re-throw to be handled by the main function
   }
 }
 

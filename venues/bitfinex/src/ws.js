@@ -59,10 +59,14 @@ const fetchContent = async url => {
       return document.body.innerHTML
     })
 
+    if (!content) {
+      throw new Error(`No content found on ${url}`)
+    }
+
     return content
   } catch (error) {
     console.error(`Error fetching content from ${url}:`, error)
-    throw error
+    throw error // Re-throw the error to be handled by the caller
   } finally {
     if (page) {
       await page.close().catch(console.error)
@@ -144,18 +148,24 @@ const extractLinks = htmlContent => {
  */
 const processUrl = async (url, baseUrl, turndownService) => {
   const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
-  const content = await fetchContent(fullUrl)
 
-  if (!content) {
-    return `# Error\n\nUnable to fetch content from ${fullUrl}.`
+  try {
+    const content = await fetchContent(fullUrl)
+
+    // Extract main content
+    const { document } = new JSDOM(content).window
+    const mainContent = document.querySelector('.content-body') || document.body
+
+    if (!mainContent) {
+      throw new Error(`No main content found on ${fullUrl}`)
+    }
+
+    // Convert HTML to Markdown
+    return turndownService.turndown(mainContent.innerHTML)
+  } catch (error) {
+    console.error(`Failed to process URL ${fullUrl}:`, error)
+    throw error // Re-throw to be handled by the main function
   }
-
-  // Extract main content
-  const { document } = new JSDOM(content).window
-  const mainContent = document.querySelector('.content-body') || document.body
-
-  // Convert HTML to Markdown
-  return turndownService.turndown(mainContent.innerHTML)
 }
 
 /**
