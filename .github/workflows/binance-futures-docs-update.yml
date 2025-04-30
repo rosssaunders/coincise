@@ -32,6 +32,12 @@ jobs:
           cache: 'npm'
           cache-dependency-path: venues/binancefutures/package-lock.json
 
+      - name: Install shared dependencies
+        run: |
+          cd ../shared
+          npm install
+          cd ../binancefutures
+
       - name: Install dependencies
         run: npm ci
 
