@@ -2531,7 +2531,7 @@ Response Example
 Push Data
 
 ```
-{  "action": "snapshot",  "arg": {    "instType": "SPOT",    "channel": "books5",    "instId": "BTCUSDT"  },  "data": [    {      "asks": [        [          "26274.9",          "0.0009"        ],        [          "26275.0",          "0.0500"        ]      ],      "bids": [        [          "26274.8",          "0.0009"        ],        [          "26274.7",          "0.0027"        ]      ],      "checksum": 0,      "ts": "1695710946294"    }  ],  "ts": 1695710946294}
+{  "action": "snapshot",  "arg": {    "instType": "SPOT",    "channel": "books5",    "instId": "BTCUSDT"  },  "data": [    {      "asks": [        [          "26274.9",          "0.0009"        ],        [          "26275.0",          "0.0500"        ]      ],      "bids": [        [          "26274.8",          "0.0009"        ],        [          "26274.7",          "0.0027"        ]      ],      "checksum": 0,       "seq": 123,      "ts": "1695710946294"    }  ],  "ts": 1695710946294}
 ```
 
 ### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
@@ -2548,7 +2548,8 @@ Push Data
 | &gt; asks | List&lt;String&gt; | Seller depth 
 | &gt; bids | List&lt;String&gt; | Buyer depth 
 | &gt; ts | String | Matching engine timestamp(ms), e.g. 1597026383085 
-| &gt; checksum | Long | Checksum
+| &gt; checksum | Long | Checksum 
+| &gt; seq | Long | Serial number.<br>It increases when the order book is updated and can be used to determine whether there is packet loss or out-of-order packets.
 
 # Fill Channel
 

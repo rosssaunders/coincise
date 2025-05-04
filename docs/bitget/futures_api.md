@@ -3183,7 +3183,7 @@ Response Example
 Push Data
 
 ```
-{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "books5",        "instId": "BTCUSDT"    },    "data": [        {            "asks": [                [                    "27000.5",                    "8.760"                ],                [                    "27001.0",                    "0.400"                ]            ],            "bids": [                [                    "27000.0",                    "2.710"                ],                [                    "26999.5",                    "1.460"                ]            ],            "checksum": 0,            "ts": "1695716059516"        }    ],    "ts": 1695716059516}
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "books5",        "instId": "BTCUSDT"    },    "data": [        {            "asks": [                [                    "27000.5",                    "8.760"                ],                [                    "27001.0",                    "0.400"                ]            ],            "bids": [                [                    "27000.0",                    "2.710"                ],                [                    "26999.5",                    "1.460"                ]            ],            "checksum": 0,            "seq": 123,            "ts": "1695716059516"        }    ],    "ts": 1695716059516}
 ```
 
 ### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
@@ -3199,7 +3199,8 @@ Push Data
 | &gt; asks | List&lt;String&gt; | Seller depth 
 | &gt; bids | List&lt;String&gt; | Buyer depth 
 | &gt; ts | String | Match engine timestamp(ms), e.g. 1597026383085 
-| &gt; checksum | Long | Testing and
+| &gt; checksum | Long | Testing and 
+| &gt; seq | Long | Serial number.<br>It increases when the order book is updated and can be used to determine whether there is packet loss or out-of-order packets.
 
 # Public Trade Channel
 
@@ -3467,7 +3468,7 @@ Response Example
 Push Data
 
 ```
-{    "action":"snapshot",    "arg":{        "instType":"USDT-FUTURES",        "channel":"fill",        "instId":"default"    },    "data":[        {            "orderId":"111",            "tradeId":"222",            "symbol":"BTCUSDT",            "side":"buy",            "orderType":"market",            "posMode":"one_way_mode",            "price":"51000.5",            "baseVolume":"0.01",            "quoteVolume":"510.005",            "profit":"0",            "tradeSide":"open",            "tradeScope":"taker",            "feeDetail":[                {                    "feeCoin":"USDT",                    "deduction":"no",                    "totalDeductionFee":"0",                    "totalFee":"-0.183717"                }            ],            "cTime":"1703577336606",            "uTime":"1703577336606"        }    ],    "ts":1703577336700}
+{    "action":"snapshot",    "arg":{        "instType":"USDT-FUTURES",        "channel":"fill",        "instId":"default"    },    "data":[        {            "orderId":"111",            "clientOid":"111",            "tradeId":"222",            "symbol":"BTCUSDT",            "side":"buy",            "orderType":"market",            "posMode":"one_way_mode",            "price":"51000.5",            "baseVolume":"0.01",            "quoteVolume":"510.005",            "profit":"0",            "tradeSide":"open",            "tradeScope":"taker",            "feeDetail":[                {                    "feeCoin":"USDT",                    "deduction":"no",                    "totalDeductionFee":"0",                    "totalFee":"-0.183717"                }            ],            "cTime":"1703577336606",            "uTime":"1703577336606"        }    ],    "ts":1703577336700}
 ```
 
 ### 推送数据参数[​](#推送数据参数 "Direct link to 推送数据参数")
@@ -3481,6 +3482,7 @@ Push Data
 | &gt; instId | String | Product ID or default<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note#optimization-of-delivery-futures</a> 
 | data | List&lt;Object&gt; | Subscription data 
 | &gt; orderId | String | Order ID 
+| &gt; clientOid | String | Customize order ID 
 | &gt; tradeId | String | Trade ID 
 | &gt; symbol | String | Symbol Name 
 | &gt; side | String | Trade direction<br><code>buy</code>: Buy<br><code>sell</code>: Sell<br>Please note, for this channel, in hedge position mode, <strong>Open Long</strong> and <strong>Close Short</strong>, the "side" will be <code>buy</code>; <strong>Close Long</strong> and <strong>Open Short</strong>, the "side" will be <code>sell</code> 
