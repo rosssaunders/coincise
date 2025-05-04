@@ -415,6 +415,15 @@ The Bitget Crypto Loan API aims to help users get additional funds instantly wit
 
 # Changelog
 
+## \[Apr 30,2025\] For the trading details of the WS futures, push fields are added to the spot/futures depth channels.[​](#apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels "Direct link to apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels")
+
+Channels: futures Trading Details Channel, Spot Depth Channel, Contract Depth Channel
+
+Changes:
+
+*   Add the `clientOid` field to the pushed information of the futures Trading Details Channel.
+*   Add the `seq` field to the pushed information of the Spot Depth Channel and the futures Depth Channel.
+
 ## \[Apr 23, 2025\] Added groupType enumeration for get account bills.[​](#apr-23-2025-added-grouptype-enumeration-for-get-account-bills "Direct link to apr-23-2025-added-grouptype-enumeration-for-get-account-bills")
 
 Interface：/api/v2/spot/account/bills
@@ -814,10 +823,15 @@ Frequency limit rules:
 *   Q10: What is the rate limit of API?
     
     *   A: 1. The rate limit of each API endpoint is marked on the doc page;2. The rate limit of each API interface is calculated independently;3. The overall rate limit is 6000/IP/Min
-*   Q11: Is there any currency with a different name in the spot market and the future market?
+*   Q11: How can I find out the remaining rate limit per second for the API?
+    
+
+A: Please refer to the `x-mbx-used-remain-limit` parameter in the response header.
+
+*   Q12: Is there any currency with a different name in the spot market and the future market?
     
     *   A: Yes, currently there are three currencies with this situation. 1.Luna2(Future) — Luna(Spot) 2.ALT(Future) — $ALT(Spot) 3.MEME(Future) — MEMECOIN(Spot)
-*   Q12: Which characters are supported for clientOid?
+*   Q13: Which characters are supported for clientOid?
     
     *   A: clientOid supports \[0-9\], \[a-z\],\[A-Z\] and \[-,+,\_,#\], length less than 50
 
