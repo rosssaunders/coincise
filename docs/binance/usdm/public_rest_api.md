@@ -1,10 +1,8 @@
 # Binance USDM Futures Public REST API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,18 +51,15 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-General Info
-============
+# General Info
 
-testnet[​](/docs/derivatives/usds-margined-futures/general-info#testnet "Direct link to testnet")
--------------------------------------------------------------------------------------------------
+## testnet[​](/docs/derivatives/usds-margined-futures/general-info#testnet "Direct link to testnet")
 
 *   Most of the endpoints can be used in the testnet platform.
 *   The REST baseurl for **testnet** is "[https://testnet.binancefuture.com](https://testnet.binancefuture.com)"
 *   The Websocket baseurl for **testnet** is "wss://fstream.binancefuture.com"
 
-SDK and Code Demonstration[​](/docs/derivatives/usds-margined-futures/general-info#sdk-and-code-demonstration "Direct link to SDK and Code Demonstration")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## SDK and Code Demonstration[​](/docs/derivatives/usds-margined-futures/general-info#sdk-and-code-demonstration "Direct link to SDK and Code Demonstration")
 
 **Disclaimer:**
 
@@ -88,8 +80,7 @@ please visit [https://github.com/binance/binance-futures-connector-java](https:/
 or use the command below:  
 `git clone https://github.com/binance/binance-futures-connector-java.git`
 
-General API Information[​](/docs/derivatives/usds-margined-futures/general-info#general-api-information "Direct link to General API Information")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## General API Information[​](/docs/derivatives/usds-margined-futures/general-info#general-api-information "Direct link to General API Information")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/articles/360002502072)
 *   The base endpoint is: **[https://fapi.binance.com](https://fapi.binance.com)**
@@ -119,8 +110,9 @@ General API Information[​](/docs/derivatives/usds-margined-futures/general-inf
 
 > **_The error payload is as follows:_**
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 *   Specific error codes and messages defined in [Error Codes](/docs/derivatives/usds-margined-futures/general-info#error-codes).
@@ -132,8 +124,7 @@ General API Information[​](/docs/derivatives/usds-margined-futures/general-inf
 *   Parameters may be sent in any order.
 *   If a parameter sent in both the `query string` and `request body`, the `query string` parameter will be used.
 
-LIMITS[​](/docs/derivatives/usds-margined-futures/general-info#limits "Direct link to LIMITS")
-----------------------------------------------------------------------------------------------
+## LIMITS[​](/docs/derivatives/usds-margined-futures/general-info#limits "Direct link to LIMITS")
 
 *   The `/fapi/v1/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 *   A `429` will be returned when either rate limit is violated.
@@ -157,8 +148,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 *   Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**` headers in the response.
 *   **The order rate limit is counted against each account**.
 
-Endpoint Security Type[​](/docs/derivatives/usds-margined-futures/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Endpoint Security Type[​](/docs/derivatives/usds-margined-futures/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
 
 *   Each endpoint has a security type that determines the how you will interact with it.
 *   API-keys are passed into the Rest API via the `X-MBX-APIKEY` header.
@@ -168,16 +158,15 @@ Endpoint Security Type[​](/docs/derivatives/usds-margined-futures/general-info
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
-| MARKET\_DATA | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
+| MARKET\_DATA | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 *   `SIGNED` endpoints require an additional parameter, `signature`, to be sent in the `query string` or `request body`.
 *   Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
@@ -192,8 +181,10 @@ SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-marg
 
 > The logic is as follows:
 
-```
-if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  // process request} else {  // reject request}
+```codeBlockLines_aHhF
+if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  
+  // process request} else {  
+  // reject request}
 ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable, which can lead to requests taking varying amounts of time to reach the servers. With `recvWindow`, you can specify that the request must be processed within a certain number of milliseconds or be rejected by the server.
@@ -206,19 +197,18 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 
-| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 
-
+| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 |
+| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | BUY 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 9000 
-| recvWindow | 5000 
-| timestamp | 1591702613943 
+| symbol | BTCUSDT |
+| side | BUY |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 9000 |
+| recvWindow | 5000 |
+| timestamp | 1591702613943 |
 
 #### Example 1: As a query string[​](/docs/derivatives/usds-margined-futures/general-info#example-1-as-a-query-string "Direct link to Example 1: As a query string")
 
@@ -226,14 +216,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
 ```
 
 *   **queryString:**
@@ -254,14 +244,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
 ```
 
 *   **requestBody:**
@@ -282,14 +272,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
 ```
 
 *   **queryString:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC
@@ -308,20 +298,19 @@ For this example, the private key will be referenced as `test-prv-key.pem`
 
 | Key | Value |
 | --- | --- |
-| apiKey | vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2 
-
+| apiKey | vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | SELL 
-| type | MARKET 
-| quantity | 1.23 
-| recvWindow | 9999999 
-| timestamp | 1671090801999 
+| symbol | BTCUSDT |
+| side | SELL |
+| type | MARKET |
+| quantity | 1.23 |
+| recvWindow | 9999999 |
+| timestamp | 1671090801999 |
 
 > **Signature payload (with the listed parameters):**
 
-```
+```codeBlockLines_aHhF
 timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23
 ```
 
@@ -335,31 +324,33 @@ Arrange the list of parameters into a string. Separate each parameter with a `&`
 
 > **Step 2.2**
 
-```
- $ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
+```codeBlockLines_aHhF
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
 ```
 
 2.2 - Sign payload using RSASSA-PKCS1-v1\_5 algorithm with SHA-256 hash function.
 
 > **Step 2.3**
 
-```
-$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+```codeBlockLines_aHhF
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64  
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 2.3 - Encode output as base64 string.
 
 > **Step 2.4**
 
-```
-$  echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64 | tr -d '\n'aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+```codeBlockLines_aHhF
+$  echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64 | tr -d '\n'  
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 2.4 - Delete any newlines in the signature.
 
 > **Step 2.5**
 
-```
+```codeBlockLines_aHhF
 aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
@@ -367,40 +358,52 @@ aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW
 
 > **Step 2.6**
 
-```
- curl -H "X-MBX-APIKEY: vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2" -X POST 'https://fapi.binance.com/fapi/v1/order?timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23&signature=aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D'
+```codeBlockLines_aHhF
+curl -H "X-MBX-APIKEY: vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2" -X POST 'https://fapi.binance.com/fapi/v1/order?timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23&signature=aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D'
 ```
 
 2.6 - curl command
 
 > **Bash script**
 
-```
-#!/usr/bin/env bash# Set up authentication:apiKey="vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2"   ### REPLACE THIS WITH YOUR API KEY# Set up the request:apiMethod="POST"apiCall="v1/order"apiParams="timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23"function rawurlencode {    local value="$1"    local len=${#value}    local encoded=""    local pos c o    for (( pos=0 ; pos<len ; pos++ ))    do        c=${value:$pos:1}        case "$c" in            [-_.~a-zA-Z0-9] ) o="${c}" ;;            * )   printf -v o '%%%02x' "'$c"        esac        encoded+="$o"    done    echo "$encoded"}ts=$(date +%s000)paramsWithTs="$apiParams&timestamp=$ts"rawSignature=$(echo -n "$paramsWithTs" \               | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem \  ### THIS IS YOUR PRIVATE KEY. DO NOT SHARE THIS FILE WITH ANYONE.               | openssl enc -base64 \               | tr -d '\n')signature=$(rawurlencode "$rawSignature")curl -H "X-MBX-APIKEY: $apiKey" -X $apiMethod \    "https://fapi.binance.com/fapi/$apiCall?$paramsWithTs&signature=$signature"
+```codeBlockLines_aHhF
+#!/usr/bin/env bash  
+  
+# Set up authentication:  
+apiKey="vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2"   ### REPLACE THIS WITH YOUR API KEY  
+  
+# Set up the request:  
+apiMethod="POST"  
+apiCall="v1/order"  
+apiParams="timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23"  
+function rawurlencode {  
+    local value="$1"    local len=${#value}    local encoded=""    local pos c o    for (( pos=0 ; pos<len ; pos++ ))    do        c=${value:$pos:1}        case "$c" in            [-_.~a-zA-Z0-9] ) o="${c}" ;;            * )   printf -v o '%%%02x' "'$c"        esac        encoded+="$o"    done    echo "$encoded"}  
+ts=$(date +%s000)  
+paramsWithTs="$apiParams&timestamp=$ts"  
+rawSignature=$(echo -n "$paramsWithTs" \  
+               | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem \  ### THIS IS YOUR PRIVATE KEY. DO NOT SHARE THIS FILE WITH ANYONE.               | openssl enc -base64 \               | tr -d '\n')signature=$(rawurlencode "$rawSignature")  
+curl -H "X-MBX-APIKEY: $apiKey" -X $apiMethod \  
+    "https://fapi.binance.com/fapi/$apiCall?$paramsWithTs&signature=$signature"
 ```
 
 A sample Bash script containing similar steps is available in the right side.
 
 * * *
 
-Postman Collections[​](/docs/derivatives/usds-margined-futures/general-info#postman-collections "Direct link to Postman Collections")
--------------------------------------------------------------------------------------------------------------------------------------
+## Postman Collections[​](/docs/derivatives/usds-margined-futures/general-info#postman-collections "Direct link to Postman Collections")
 
 There is now a Postman collection containing the API endpoints for quick and easy use.
 
 For more information please refer to this page: [Binance API Postman](https://github.com/binance-exchange/binance-api-postman)
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/usds-margined-futures/common-definition#terminology "Direct link to Terminology")
-------------------------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/usds-margined-futures/common-definition#terminology "Direct link to Terminology")
 
 *   `base asset` refers to the asset that is the `quantity` of a symbol.
 *   `quote asset` refers to the asset that is the `price` of a symbol.
 
-ENUM definitions[​](/docs/derivatives/usds-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
----------------------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/usds-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Symbol type:**
 
@@ -517,14 +520,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -536,20 +539,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/usds-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
----------------------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/usds-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/usds-margined-futures/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -568,8 +569,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -588,8 +589,8 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `MARKET_LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for `MARKET` orders on a symbol. There are 3 parts:
@@ -608,8 +609,8 @@ In order to pass the `market lot size`, the following must be true for `quantity
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
 ```
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
@@ -620,8 +621,8 @@ Note that both "algo" orders and normal orders are counted for this filter.
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ALGO_ORDERS",    "limit": 100  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ALGO_ORDERS",    "limit": 100  }
 ```
 
 The `MAX_NUM_ALGO_ORDERS` filter defines the maximum number of all kinds of algo orders an account is allowed to have open on a symbol.
@@ -632,8 +633,8 @@ The algo orders include `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKE
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.1500",    "multiplierDown": "0.8500",    "multiplierDecimal": 4  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.1500",    "multiplierDown": "0.8500",    "multiplierDecimal": 4  }
 ```
 
 The `PERCENT_PRICE` filter defines valid range for a price based on the mark price.
@@ -647,26 +648,25 @@ In order to pass the `percent price`, the following must be true for `price`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MIN_NOTIONAL",    "notional": "5.0"  }
+```codeBlockLines_aHhF
+{    "filterType": "MIN_NOTIONAL",    "notional": "5.0"  }
 ```
 
 The `MIN_NOTIONAL` filter defines the minimum notional value allowed for an order on a symbol. An order's notional value is the `price` \* `quantity`. Since `MARKET` orders have no price, the mark price is used.
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/usds-margined-futures/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -747,8 +747,7 @@ Codes are universal,but messages can vary.
 
 *   Not found, unauthenticated, or unauthorized.
 
-11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/usds-margined-futures/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -872,8 +871,7 @@ Codes are universal,but messages can vary.
 
 *   Invalid newOrderRespType.
 
-20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## 20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
 
 ### \-2010 NEW\_ORDER\_REJECTED[​](/docs/derivatives/usds-margined-futures/error-code#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
 
@@ -951,8 +949,7 @@ Codes are universal,but messages can vary.
 
 *   Leverage is smaller than permitted: insufficient margin balance.
 
-40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
 
 ### \-4000 INVALID\_ORDER\_STATUS[​](/docs/derivatives/usds-margined-futures/error-code#-4000-invalid_order_status "Direct link to -4000 INVALID_ORDER_STATUS")
 
@@ -1451,8 +1448,7 @@ Codes are universal,but messages can vary.
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to 10x in your region
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to %sx in your region
 
-50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
 
 ### \-5021 FOK\_ORDER\_REJECT[​](/docs/derivatives/usds-margined-futures/error-code#-5021-fok_order_reject "Direct link to -5021 FOK_ORDER_REJECT")
 
@@ -1506,236 +1502,211 @@ Codes are universal,but messages can vary.
 
 *   No depth matches this BBO order
 
-Test Connectivity
-=================
+# Test Connectivity
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#api-description "Direct link to API Description")
 
 Test connectivity to the Rest API.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/ping`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#request-weight "Direct link to Request Weight")
 
 1
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#request-parameters "Direct link to Request Parameters")
 
 NONE
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api#response-example "Direct link to Response Example")
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
-Check Server Time
-=================
+# Check Server Time
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#api-description "Direct link to API Description")
 
 Test connectivity to the Rest API and get the current server time.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/time`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#request-weight "Direct link to Request Weight")
 
 1
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#request-parameters "Direct link to Request Parameters")
 
 NONE
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "serverTime": 1499827319559}
 ```
-{  "serverTime": 1499827319559}
-```
 
-Exchange Information
-====================
+# Exchange Information
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#api-description "Direct link to API Description")
 
 Current exchange trading rules and symbol information
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/exchangeInfo`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#request-parameters "Direct link to Request Parameters")
 
 NONE
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"exchangeFilters": [], 	"rateLimits": [ 		{ 			"interval": "MINUTE",   			"intervalNum": 1,   			"limit": 2400,   			"rateLimitType": "REQUEST_WEIGHT"   		},  
+  		{  			"interval": "MINUTE",   			"intervalNum": 1,   			"limit": 1200,   			"rateLimitType": "ORDERS"   		}   	], 	"serverTime": 1565613908500,    // Ignore please. If you want to check current server time, please check via "GET /fapi/v1/time" 	"assets": [ // assets information 		{ 			"asset": "BUSD",   			"marginAvailable": true, // whether the asset can be used as margin in Multi-Assets mode   			"autoAssetExchange": 0 // auto-exchange threshold in Multi-Assets margin mode   		}, 		{ 			"asset": "USDT",   			"marginAvailable": true,   			"autoAssetExchange": 0   		}, 		{ 			"asset": "BNB",   			"marginAvailable": false,   			"autoAssetExchange": null   		}   	], 	"symbols": [ 		{ 			"symbol": "BLZUSDT", 			"pair": "BLZUSDT", 			"contractType": "PERPETUAL", 			"deliveryDate": 4133404800000, 			"onboardDate": 1598252400000, 			"status": "TRADING", 			"maintMarginPercent": "2.5000",   // ignore 			"requiredMarginPercent": "5.0000",  // ignore 			"baseAsset": "BLZ", 			"quoteAsset": "USDT",  
+ 			"marginAsset": "USDT", 			"pricePrecision": 5,	// please do not use it as tickSize 			"quantityPrecision": 0, // please do not use it as stepSize 			"baseAssetPrecision": 8, 			"quotePrecision": 8, 			"underlyingType": "COIN",  
+ 			"underlyingSubType": ["STORAGE"], 			"settlePlan": 0, 			"triggerProtect": "0.15", // threshold for algo order with "priceProtect" 			"filters": [ 				{ 					"filterType": "PRICE_FILTER",     				"maxPrice": "300",     				"minPrice": "0.0001",     				"tickSize": "0.0001"  
+     			},    			{    				"filterType": "LOT_SIZE",     				"maxQty": "10000000",  
+     				"minQty": "1",     				"stepSize": "1"     			},    			{    				"filterType": "MARKET_LOT_SIZE",     				"maxQty": "590119",     				"minQty": "1",     				"stepSize": "1"     			},     			{    				"filterType": "MAX_NUM_ORDERS",    				"limit": 200  				},  				{    				"filterType": "MAX_NUM_ALGO_ORDERS",    				"limit": 10  				},  				{  					"filterType": "MIN_NOTIONAL",  					"notional": "5.0",  				},  
+  				{    				"filterType": "PERCENT_PRICE",    				"multiplierUp": "1.1500",    				"multiplierDown": "0.8500",    				"multiplierDecimal": 4    			}   			], 			"OrderType": [   				"LIMIT",   				"MARKET",   				"STOP",   				"STOP_MARKET",   				"TAKE_PROFIT",   				"TAKE_PROFIT_MARKET",   				"TRAILING_STOP_MARKET"   			],  
+   			"timeInForce": [   				"GTC",   				"IOC",   
+   				"FOK",   
+   				"GTX"   
+ 			],  
+ 			"liquidationFee": "0.010000",	// liquidation fee rate   			"marketTakeBound": "0.30",	// the max price difference rate( from mark price) a market order can make 		}   	],	"timezone": "UTC" }
 ```
-{	"exchangeFilters": [], 	"rateLimits": [ 		{ 			"interval": "MINUTE",   			"intervalNum": 1,   			"limit": 2400,   			"rateLimitType": "REQUEST_WEIGHT"    		},  		{  			"interval": "MINUTE",   			"intervalNum": 1,   			"limit": 1200,   			"rateLimitType": "ORDERS"   		}   	], 	"serverTime": 1565613908500,    // Ignore please. If you want to check current server time, please check via "GET /fapi/v1/time" 	"assets": [ // assets information 		{ 			"asset": "BUSD",   			"marginAvailable": true, // whether the asset can be used as margin in Multi-Assets mode   			"autoAssetExchange": 0 // auto-exchange threshold in Multi-Assets margin mode   		}, 		{ 			"asset": "USDT",   			"marginAvailable": true,   			"autoAssetExchange": 0   		}, 		{ 			"asset": "BNB",   			"marginAvailable": false,   			"autoAssetExchange": null   		}   	], 	"symbols": [ 		{ 			"symbol": "BLZUSDT", 			"pair": "BLZUSDT", 			"contractType": "PERPETUAL", 			"deliveryDate": 4133404800000, 			"onboardDate": 1598252400000, 			"status": "TRADING", 			"maintMarginPercent": "2.5000",   // ignore 			"requiredMarginPercent": "5.0000",  // ignore 			"baseAsset": "BLZ",  			"quoteAsset": "USDT", 			"marginAsset": "USDT", 			"pricePrecision": 5,	// please do not use it as tickSize 			"quantityPrecision": 0, // please do not use it as stepSize 			"baseAssetPrecision": 8, 			"quotePrecision": 8,  			"underlyingType": "COIN", 			"underlyingSubType": ["STORAGE"], 			"settlePlan": 0, 			"triggerProtect": "0.15", // threshold for algo order with "priceProtect" 			"filters": [ 				{ 					"filterType": "PRICE_FILTER",     				"maxPrice": "300",     				"minPrice": "0.0001",      				"tickSize": "0.0001"     			},    			{    				"filterType": "LOT_SIZE",      				"maxQty": "10000000",     				"minQty": "1",     				"stepSize": "1"     			},    			{    				"filterType": "MARKET_LOT_SIZE",     				"maxQty": "590119",     				"minQty": "1",     				"stepSize": "1"     			},     			{    				"filterType": "MAX_NUM_ORDERS",    				"limit": 200  				},  				{    				"filterType": "MAX_NUM_ALGO_ORDERS",    				"limit": 10  				},  				{  					"filterType": "MIN_NOTIONAL",  					"notional": "5.0",   				},  				{    				"filterType": "PERCENT_PRICE",    				"multiplierUp": "1.1500",    				"multiplierDown": "0.8500",    				"multiplierDecimal": 4    			}   			], 			"OrderType": [   				"LIMIT",   				"MARKET",   				"STOP",   				"STOP_MARKET",   				"TAKE_PROFIT",   				"TAKE_PROFIT_MARKET",   				"TRAILING_STOP_MARKET"    			],   			"timeInForce": [   				"GTC",    				"IOC",    				"FOK",    				"GTX"  			], 			"liquidationFee": "0.010000",	// liquidation fee rate   			"marketTakeBound": "0.30",	// the max price difference rate( from mark price) a market order can make 		}   	],	"timezone": "UTC" }
-```
 
-Order Book
-==========
+# Order Book
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#api-description "Direct link to API Description")
 
 Query symbol orderbook
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/depth`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#request-weight "Direct link to Request Weight")
 
 Adjusted based on the limit:
 
 | Limit | Weight |
 | --- | --- |
-| 5, 10, 20, 50 | 2 
-| 100 | 5 
-| 500 | 10 
-| 1000 | 20 
+| 5, 10, 20, 50 | 2 |
+| 100 | 5 |
+| 500 | 10 |
+| 1000 | 20 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| limit | INT | NO | Default 500; Valid limits:\[5, 10, 20, 50, 100, 500, 1000\] 
+| symbol | STRING | YES |  |
+| limit | INT | NO | Default 500; Valid limits:\[5, 10, 20, 50, 100, 500, 1000\] |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "lastUpdateId": 1027024,  "E": 1589436922972,   // Message output time  "T": 1589436922959,   // Transaction time  "bids": [    [      "4.00000000",     // PRICE      "431.00000000"    // QTY    ]  ],  "asks": [    [      "4.00000200",      "12.00000000"    ]  ]}
 ```
-{  "lastUpdateId": 1027024,  "E": 1589436922972,   // Message output time  "T": 1589436922959,   // Transaction time  "bids": [    [      "4.00000000",     // PRICE      "431.00000000"    // QTY    ]  ],  "asks": [    [      "4.00000200",      "12.00000000"    ]  ]}
-```
 
-Recent Trades List
-==================
+# Recent Trades List
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#api-description "Direct link to API Description")
 
 Get recent market trades
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/trades`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| limit | INT | NO | Default 500; max 1000. 
+| symbol | STRING | YES |  |
+| limit | INT | NO | Default 500; max 1000. |
 
 > *   Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.00",    "time": 1499865549590,    "isBuyerMaker": true,  }]
 ```
-[  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.00",    "time": 1499865549590,    "isBuyerMaker": true,  }]
-```
 
-Old Trades Lookup (MARKET\_DATA)
-================================
+# Old Trades Lookup (MARKET\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#api-description "Direct link to API Description")
 
 Get older market historical trades.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/historicalTrades`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#request-weight "Direct link to Request Weight")
 
 **20**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| limit | INT | NO | Default 100; max 500. 
-| fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades. 
+| symbol | STRING | YES |  |
+| limit | INT | NO | Default 100; max 500. |
+| fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades. |
 
 > *   Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
 > *   Only supports data from within the last three months
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "8000.00",    "time": 1499865549590,    "isBuyerMaker": true,  }]
 ```
-[  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "8000.00",    "time": 1499865549590,    "isBuyerMaker": true,  }]
-```
 
-Compressed/Aggregate Trades List
-================================
+# Compressed/Aggregate Trades List
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#api-description "Direct link to API Description")
 
 Get compressed, aggregate market trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/aggTrades`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#request-weight "Direct link to Request Weight")
 
 20
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| fromId | LONG | NO | ID to get aggregate trades from INCLUSIVE. 
-| startTime | LONG | NO | Timestamp in ms to get aggregate trades from INCLUSIVE. 
-| endTime | LONG | NO | Timestamp in ms to get aggregate trades until INCLUSIVE. 
-| limit | INT | NO | Default 500; max 1000. 
+| symbol | STRING | YES |  |
+| fromId | LONG | NO | ID to get aggregate trades from INCLUSIVE. |
+| startTime | LONG | NO | Timestamp in ms to get aggregate trades from INCLUSIVE. |
+| endTime | LONG | NO | Timestamp in ms to get aggregate trades until INCLUSIVE. |
+| limit | INT | NO | Default 500; max 1000. |
 
 > *   support querying futures trade histories that are not older than one year
 > *   If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
@@ -1743,94 +1714,84 @@ Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest
 > *   Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
 > *   Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "a": 26129,         // Aggregate tradeId    "p": "0.01633102",  // Price    "q": "4.70443515",  // Quantity    "f": 27781,         // First tradeId    "l": 27781,         // Last tradeId    "T": 1498793709153, // Timestamp    "m": true,          // Was the buyer the maker?  }]
 ```
-[  {    "a": 26129,         // Aggregate tradeId    "p": "0.01633102",  // Price    "q": "4.70443515",  // Quantity    "f": 27781,         // First tradeId    "l": 27781,         // Last tradeId    "T": 1498793709153, // Timestamp    "m": true,          // Was the buyer the maker?  }]
-```
 
-Kline/Candlestick Data
-======================
+# Kline/Candlestick Data
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#api-description "Direct link to API Description")
 
 Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/klines`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
 
 based on parameter `LIMIT`
 
 | LIMIT | weight |
 | --- | --- |
-| \[1,100) | 1 
-| \[100, 500) | 2 
-| \[500, 1000\] | 5 
-| \> 1000 | 10 
+| \[1,100) | 1 |
+| \[100, 500) | 2 |
+| \[500, 1000\] | 5 |
+| \> 1000 | 10 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| interval | ENUM | YES |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 500; max 1500. 
+| symbol | STRING | YES |  |
+| interval | ENUM | YES |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 500; max 1500. |
 
 > *   If startTime and endTime are not sent, the most recent klines are returned.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  [    1499040000000,      // Open time    "0.01634790",       // Open    "0.80000000",       // High    "0.01575800",       // Low    "0.01577100",       // Close    "148976.11427815",  // Volume    1499644799999,      // Close time    "2434.19055334",    // Quote asset volume    308,                // Number of trades    "1756.87402397",    // Taker buy base asset volume    "28.46694368",      // Taker buy quote asset volume    "17928899.62484339" // Ignore.  ]]
 ```
-[  [    1499040000000,      // Open time    "0.01634790",       // Open    "0.80000000",       // High    "0.01575800",       // Low    "0.01577100",       // Close    "148976.11427815",  // Volume    1499644799999,      // Close time    "2434.19055334",    // Quote asset volume    308,                // Number of trades    "1756.87402397",    // Taker buy base asset volume    "28.46694368",      // Taker buy quote asset volume    "17928899.62484339" // Ignore.  ]]
-```
 
-Continuous Contract Kline/Candlestick Data
-==========================================
+# Continuous Contract Kline/Candlestick Data
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#api-description "Direct link to API Description")
 
 Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/continuousKlines`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
 
 based on parameter `LIMIT`
 
 | LIMIT | weight |
 | --- | --- |
-| \[1,100) | 1 
-| \[100, 500) | 2 
-| \[500, 1000\] | 5 
-| \> 1000 | 10 
+| \[1,100) | 1 |
+| \[100, 500) | 2 |
+| \[500, 1000\] | 5 |
+| \> 1000 | 10 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| pair | STRING | YES |  
-| contractType | ENUM | YES |  
-| interval | ENUM | YES |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 500; max 1500. 
+| pair | STRING | YES |  |
+| contractType | ENUM | YES |  |
+| interval | ENUM | YES |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 500; max 1500. |
 
 > *   If startTime and endTime are not sent, the most recent klines are returned.
 
@@ -1839,309 +1800,274 @@ Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest
 >     *   CURRENT\_QUARTER
 >     *   NEXT\_QUARTER
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  [    1607444700000,      	// Open time    "18879.99",       	 	// Open    "18900.00",       	 	// High    "18878.98",       	 	// Low    "18896.13",      	 	// Close (or latest price)    "492.363", 			 	// Volume    1607444759999,       	// Close time    "9302145.66080",    	// Quote asset volume    1874,             		// Number of trades    "385.983",    			// Taker buy volume    "7292402.33267",      	// Taker buy quote asset volume    "0" 					// Ignore.  ]]
 ```
-[  [    1607444700000,      	// Open time    "18879.99",       	 	// Open    "18900.00",       	 	// High    "18878.98",       	 	// Low    "18896.13",      	 	// Close (or latest price)    "492.363", 			 	// Volume    1607444759999,       	// Close time    "9302145.66080",    	// Quote asset volume    1874,             		// Number of trades    "385.983",    			// Taker buy volume    "7292402.33267",      	// Taker buy quote asset volume    "0" 					// Ignore.  ]]
-```
 
-Index Price Kline/Candlestick Data
-==================================
+# Index Price Kline/Candlestick Data
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#api-description "Direct link to API Description")
 
 Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/indexPriceKlines`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
 
 based on parameter `LIMIT`
 
 | LIMIT | weight |
 | --- | --- |
-| \[1,100) | 1 
-| \[100, 500) | 2 
-| \[500, 1000\] | 5 
-| \> 1000 | 10 
+| \[1,100) | 1 |
+| \[100, 500) | 2 |
+| \[500, 1000\] | 5 |
+| \> 1000 | 10 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| pair | STRING | YES |  
-| interval | ENUM | YES |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 500; max 1500. 
+| pair | STRING | YES |  |
+| interval | ENUM | YES |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 500; max 1500. |
 
 *   If startTime and endTime are not sent, the most recent klines are returned.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  [    1591256400000,      	// Open time    "9653.69440000",    	// Open    "9653.69640000",     	// High    "9651.38600000",     	// Low    "9651.55200000",     	// Close (or latest price)    "0	", 					// Ignore    1591256459999,      	// Close time    "0",    				// Ignore    60,                		// Ignore    "0",    				// Ignore    "0",      				// Ignore    "0" 					// Ignore  ]]
 ```
-[  [    1591256400000,      	// Open time    "9653.69440000",    	// Open    "9653.69640000",     	// High    "9651.38600000",     	// Low    "9651.55200000",     	// Close (or latest price)    "0	", 					// Ignore    1591256459999,      	// Close time    "0",    				// Ignore    60,                		// Ignore    "0",    				// Ignore    "0",      				// Ignore    "0" 					// Ignore  ]]
-```
 
-Mark Price Kline/Candlestick Data
-=================================
+# Mark Price Kline/Candlestick Data
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#api-description "Direct link to API Description")
 
 Kline/candlestick bars for the mark price of a symbol. Klines are uniquely identified by their open time.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/markPriceKlines`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
 
 based on parameter `LIMIT`
 
 | LIMIT | weight |
 | --- | --- |
-| \[1,100) | 1 
-| \[100, 500) | 2 
-| \[500, 1000\] | 5 
-| \> 1000 | 10 
+| \[1,100) | 1 |
+| \[100, 500) | 2 |
+| \[500, 1000\] | 5 |
+| \> 1000 | 10 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| interval | ENUM | YES |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 500; max 1500. 
+| symbol | STRING | YES |  |
+| interval | ENUM | YES |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 500; max 1500. |
 
 > *   If startTime and endTime are not sent, the most recent klines are returned.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  [    1591256460000,     		// Open time    "9653.29201333",    	// Open    "9654.56401333",     	// High    "9653.07367333",     	// Low    "9653.07367333",     	// Close (or latest price)    "0	", 					// Ignore    1591256519999,      	// Close time    "0",    				// Ignore    60,                	 	// Ignore    "0",    				// Ignore    "0",      			 	// Ignore    "0" 					// Ignore  ]]
 ```
-[  [    1591256460000,     		// Open time    "9653.29201333",    	// Open    "9654.56401333",     	// High    "9653.07367333",     	// Low    "9653.07367333",     	// Close (or latest price)    "0	", 					// Ignore    1591256519999,      	// Close time    "0",    				// Ignore    60,                	 	// Ignore    "0",    				// Ignore    "0",      			 	// Ignore    "0" 					// Ignore  ]]
-```
 
-Premium index Kline Data
-========================
+# Premium index Kline Data
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#api-description "Direct link to API Description")
 
 Premium index kline bars of a symbol. Klines are uniquely identified by their open time.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/premiumIndexKlines`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#request-weight "Direct link to Request Weight")
 
 based on parameter `LIMIT`
 
 | LIMIT | weight |
 | --- | --- |
-| \[1,100) | 1 
-| \[100, 500) | 2 
-| \[500, 1000\] | 5 
-| \> 1000 | 10 
+| \[1,100) | 1 |
+| \[100, 500) | 2 |
+| \[500, 1000\] | 5 |
+| \> 1000 | 10 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| interval | ENUM | YES |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 500; max 1500. 
+| symbol | STRING | YES |  |
+| interval | ENUM | YES |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 500; max 1500. |
 
 > *   If startTime and endTime are not sent, the most recent klines are returned.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  [    1691603820000,          // Open time    "-0.00042931",          // Open    "-0.00023641",          // High    "-0.00059406",          // Low    "-0.00043659",          // Close    "0",                    // Ignore    1691603879999,          // Close time    "0",                    // Ignore    12,                     // Ignore    "0",                    // Ignore    "0",                    // Ignore    "0"                     // Ignore  ]]
 ```
-[  [    1691603820000,          // Open time    "-0.00042931",          // Open    "-0.00023641",          // High    "-0.00059406",          // Low    "-0.00043659",          // Close    "0",                    // Ignore    1691603879999,          // Close time    "0",                    // Ignore    12,                     // Ignore    "0",                    // Ignore    "0",                    // Ignore    "0"                     // Ignore  ]]
-```
 
-Mark Price
-==========
+# Mark Price
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#api-description "Direct link to API Description")
 
 Mark Price and Funding Rate
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/premiumIndex`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"symbol": "BTCUSDT",	"markPrice": "11793.63104562",	// mark price	"indexPrice": "11781.80495970",	// index price	"estimatedSettlePrice": "11781.16138815", // Estimated Settle Price, only useful in the last hour before the settlement starts.	"lastFundingRate": "0.00038246",  // This is the Latest funding rate	"interestRate": "0.00010000",	"nextFundingTime": 1597392000000,	"time": 1597370495002}
+```codeBlockLines_aHhF
+{  
+	"symbol": "BTCUSDT",	"markPrice": "11793.63104562",	// mark price	"indexPrice": "11781.80495970",	// index price	"estimatedSettlePrice": "11781.16138815", // Estimated Settle Price, only useful in the last hour before the settlement starts.	"lastFundingRate": "0.00038246",  // This is the Latest funding rate	"interestRate": "0.00010000",	"nextFundingTime": 1597392000000,	"time": 1597370495002}
 ```
 
 > **OR (when symbol not sent)**
 
+```codeBlockLines_aHhF
+[  
+	{	    "symbol": "BTCUSDT",	    "markPrice": "11793.63104562",	// mark price	    "indexPrice": "11781.80495970",	// index price	    "estimatedSettlePrice": "11781.16138815", // Estimated Settle Price, only useful in the last hour before the settlement starts.	    "lastFundingRate": "0.00038246",  // This is the Latest funding rate	    "interestRate": "0.00010000",	    "nextFundingTime": 1597392000000,	    "time": 1597370495002	}]
 ```
-[	{	    "symbol": "BTCUSDT",	    "markPrice": "11793.63104562",	// mark price	    "indexPrice": "11781.80495970",	// index price	    "estimatedSettlePrice": "11781.16138815", // Estimated Settle Price, only useful in the last hour before the settlement starts.	    "lastFundingRate": "0.00038246",  // This is the Latest funding rate	    "interestRate": "0.00010000",	    "nextFundingTime": 1597392000000,	    "time": 1597370495002	}]
-```
+
+# Get Funding Rate History
+
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#api-description "Direct link to API Description")
 
 Get Funding Rate History
-========================
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Get Funding Rate History
-
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/fundingRate`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#request-weight "Direct link to Request Weight")
 
 share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| startTime | LONG | NO | Timestamp in ms to get funding rate from INCLUSIVE. 
-| endTime | LONG | NO | Timestamp in ms to get funding rate until INCLUSIVE. 
-| limit | INT | NO | Default 100; max 1000 
+| symbol | STRING | NO |  |
+| startTime | LONG | NO | Timestamp in ms to get funding rate from INCLUSIVE. |
+| endTime | LONG | NO | Timestamp in ms to get funding rate until INCLUSIVE. |
+| limit | INT | NO | Default 100; max 1000 |
 
 > *   If `startTime` and `endTime` are not sent, the most recent `limit` datas are returned.
 > *   If the number of data between `startTime` and `endTime` is larger than `limit`, return as `startTime` + `limit`.
 > *   In ascending order.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{    	"symbol": "BTCUSDT",    	"fundingRate": "-0.03750000",    	"fundingTime": 1570608000000,		"markPrice": "34287.54619963"   // mark price associated with a particular funding fee charge	},	{   		"symbol": "BTCUSDT",    	"fundingRate": "0.00010000",    	"fundingTime": 1570636800000,		"markPrice": "34287.54619963" 	}  
+]
 ```
-[	{    	"symbol": "BTCUSDT",    	"fundingRate": "-0.03750000",    	"fundingTime": 1570608000000,		"markPrice": "34287.54619963"   // mark price associated with a particular funding fee charge	},	{   		"symbol": "BTCUSDT",    	"fundingRate": "0.00010000",    	"fundingTime": 1570636800000,		"markPrice": "34287.54619963" 	}]
-```
 
-Get Funding Rate Info
-=====================
+# Get Funding Rate Info
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#api-description "Direct link to API Description")
 
 Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/fundingInfo`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#request-weight "Direct link to Request Weight")
 
 **0** share 500/5min/IP rate limit with `GET /fapi/v1/fundingInfo`
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#request-parameters "Direct link to Request Parameters")
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "symbol": "BLZUSDT",        "adjustedFundingRateCap": "0.02500000",        "adjustedFundingRateFloor": "-0.02500000",        "fundingIntervalHours": 8,        "disclaimer": false   // ingore    }]
 ```
-[    {        "symbol": "BLZUSDT",        "adjustedFundingRateCap": "0.02500000",        "adjustedFundingRateFloor": "-0.02500000",        "fundingIntervalHours": 8,        "disclaimer": false   // ingore    }]
-```
 
-24hr Ticker Price Change Statistics
-===================================
+# 24hr Ticker Price Change Statistics
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#api-description "Direct link to API Description")
 
 24 hour rolling window price change statistics.  
 **Careful** when accessing this with no symbol.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/ticker/24hr`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#request-weight "Direct link to Request Weight")
 
 **1** for a single symbol;  
 **40** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   If the symbol is not sent, tickers for all symbols will be returned in an array.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{  "symbol": "BTCUSDT",  "priceChange": "-94.99999800",  "priceChangePercent": "-95.960",  "weightedAvgPrice": "0.29628482",  "lastPrice": "4.00000200",  "lastQty": "200.00000000",  "openPrice": "99.00000000",  "highPrice": "100.00000000",  "lowPrice": "0.10000000",  "volume": "8913.30000000",  "quoteVolume": "15.30000000",  "openTime": 1499783499040,  "closeTime": 1499869899040,  "firstId": 28385,   // First tradeId  "lastId": 28460,    // Last tradeId  "count": 76         // Trade count}
+```codeBlockLines_aHhF
+{  
+  "symbol": "BTCUSDT",  "priceChange": "-94.99999800",  "priceChangePercent": "-95.960",  "weightedAvgPrice": "0.29628482",  "lastPrice": "4.00000200",  "lastQty": "200.00000000",  "openPrice": "99.00000000",  "highPrice": "100.00000000",  "lowPrice": "0.10000000",  "volume": "8913.30000000",  "quoteVolume": "15.30000000",  "openTime": 1499783499040,  "closeTime": 1499869899040,  "firstId": 28385,   // First tradeId  "lastId": 28460,    // Last tradeId  "count": 76         // Trade count}
 ```
 
 > OR
 
-```
-[	{  		"symbol": "BTCUSDT",  		"priceChange": "-94.99999800",  		"priceChangePercent": "-95.960",  		"weightedAvgPrice": "0.29628482",  		"lastPrice": "4.00000200",  		"lastQty": "200.00000000",  		"openPrice": "99.00000000",  		"highPrice": "100.00000000",  		"lowPrice": "0.10000000",  		"volume": "8913.30000000",  		"quoteVolume": "15.30000000",  		"openTime": 1499783499040,  		"closeTime": 1499869899040,  		"firstId": 28385,   // First tradeId  		"lastId": 28460,    // Last tradeId  		"count": 76         // Trade count	}]
+```codeBlockLines_aHhF
+[  
+	{  		"symbol": "BTCUSDT",  		"priceChange": "-94.99999800",  		"priceChangePercent": "-95.960",  		"weightedAvgPrice": "0.29628482",  		"lastPrice": "4.00000200",  		"lastQty": "200.00000000",  		"openPrice": "99.00000000",  		"highPrice": "100.00000000",  		"lowPrice": "0.10000000",  		"volume": "8913.30000000",  		"quoteVolume": "15.30000000",  		"openTime": 1499783499040,  		"closeTime": 1499869899040,  		"firstId": 28385,   // First tradeId  		"lastId": 28460,    // Last tradeId  		"count": 76         // Trade count	}]
 ```
 
-Symbol Price Ticker
-===================
+# Symbol Price Ticker
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#api-description "Direct link to API Description")
 
 Latest price for a symbol or symbols.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/ticker/price`
 
@@ -2150,38 +2076,35 @@ GET `/fapi/v1/ticker/price`
 **1** for a single symbol;  
 **2** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   If the symbol is not sent, prices for all symbols will be returned in an array.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker#response-example "Direct link to Response Example")
 
-```
-{  "symbol": "BTCUSDT",  "price": "6000.01",  "time": 1589437530011   // Transaction time}
+```codeBlockLines_aHhF
+{  
+  "symbol": "BTCUSDT",  "price": "6000.01",  "time": 1589437530011   // Transaction time}
 ```
 
 > OR
 
-```
-[	{  		"symbol": "BTCUSDT",  		"price": "6000.01",  		"time": 1589437530011	}]
+```codeBlockLines_aHhF
+[  
+	{  		"symbol": "BTCUSDT",  		"price": "6000.01",  		"time": 1589437530011	}]
 ```
 
-Symbol Price Ticker V2
-======================
+# Symbol Price Ticker V2
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#api-description "Direct link to API Description")
 
 Latest price for a symbol or symbols.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v2/ticker/price`
 
@@ -2190,473 +2113,447 @@ GET `/fapi/v2/ticker/price`
 **1** for a single symbol;  
 **2** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   If the symbol is not sent, prices for all symbols will be returned in an array.
 > *   The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2#response-example "Direct link to Response Example")
 
-```
-{  "symbol": "BTCUSDT",  "price": "6000.01",  "time": 1589437530011   // Transaction time}
+```codeBlockLines_aHhF
+{  
+  "symbol": "BTCUSDT",  "price": "6000.01",  "time": 1589437530011   // Transaction time}
 ```
 
 > OR
 
-```
-[	{  		"symbol": "BTCUSDT",  		"price": "6000.01",  		"time": 1589437530011	}]
+```codeBlockLines_aHhF
+[  
+	{  		"symbol": "BTCUSDT",  		"price": "6000.01",  		"time": 1589437530011	}]
 ```
 
-Symbol Order Book Ticker
-========================
+# Symbol Order Book Ticker
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#api-description "Direct link to API Description")
 
 Best price/qty on the order book for a symbol or symbols.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/ticker/bookTicker`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#request-weight "Direct link to Request Weight")
 
 **2** for a single symbol;  
 **5** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   If the symbol is not sent, bookTickers for all symbols will be returned in an array.
 > *   The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker#response-example "Direct link to Response Example")
 
-```
-{  "symbol": "BTCUSDT",  "bidPrice": "4.00000000",  "bidQty": "431.00000000",  "askPrice": "4.00000200",  "askQty": "9.00000000",  "time": 1589437530011   // Transaction time}
+```codeBlockLines_aHhF
+{  
+  "symbol": "BTCUSDT",  "bidPrice": "4.00000000",  "bidQty": "431.00000000",  "askPrice": "4.00000200",  "askQty": "9.00000000",  "time": 1589437530011   // Transaction time}
 ```
 
 > OR
 
-```
-[	{  		"symbol": "BTCUSDT",  		"bidPrice": "4.00000000",  		"bidQty": "431.00000000",  		"askPrice": "4.00000200",  		"askQty": "9.00000000",  		"time": 1589437530011	}]
+```codeBlockLines_aHhF
+[  
+	{  		"symbol": "BTCUSDT",  		"bidPrice": "4.00000000",  		"bidQty": "431.00000000",  		"askPrice": "4.00000200",  		"askQty": "9.00000000",  		"time": 1589437530011	}]
 ```
 
-Quarterly Contract Settlement Price
-===================================
+# Quarterly Contract Settlement Price
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#api-description "Direct link to API Description")
 
 Latest price for a symbol or symbols.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/delivery-price`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| pair | STRING | YES | e.g BTCUSDT 
+| pair | STRING | YES | e.g BTCUSDT |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "deliveryTime": 1695945600000,        "deliveryPrice": 27103.00000000    },    {        "deliveryTime": 1688083200000,        "deliveryPrice": 30733.60000000    },    {        "deliveryTime": 1680220800000,        "deliveryPrice": 27814.20000000    },    {        "deliveryTime": 1648166400000,        "deliveryPrice": 44066.30000000    }]
 ```
-[    {        "deliveryTime": 1695945600000,        "deliveryPrice": 27103.00000000    },    {        "deliveryTime": 1688083200000,        "deliveryPrice": 30733.60000000    },    {        "deliveryTime": 1680220800000,        "deliveryPrice": 27814.20000000    },    {        "deliveryTime": 1648166400000,        "deliveryPrice": 44066.30000000    }]
-```
 
-Open Interest
-=============
+# Open Interest
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#api-description "Direct link to API Description")
 
 Get present open interest of a specific symbol.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/openInterest`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"openInterest": "10659.509", 	"symbol": "BTCUSDT",  
+	"time": 1589437530011   // Transaction time}
 ```
-{	"openInterest": "10659.509", 	"symbol": "BTCUSDT",	"time": 1589437530011   // Transaction time}
-```
+
+# Open Interest Statistics
+
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#api-description "Direct link to API Description")
 
 Open Interest Statistics
-========================
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Open Interest Statistics
-
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/openInterestHist`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" 
-| limit | LONG | NO | default 30, max 500 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
+| symbol | STRING | YES |  |
+| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit | LONG | NO | default 30, max 500 |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
 
 > *   If startTime and endTime are not sent, the most recent data is returned.
 > *   Only the data of the latest 1 month is available.
 > *   IP rate limit 1000 requests/5min
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {         "symbol":"BTCUSDT",  
+	      "sumOpenInterest":"20403.63700000",  // total open interest 	      "sumOpenInterestValue": "150570784.07809979",   // total open interest value  
+	      "timestamp":"1583127900000"    },    {   
+         "symbol":"BTCUSDT",  
+         "sumOpenInterest":"20401.36700000",         "sumOpenInterestValue":"149940752.14464448",         "timestamp":"1583128200000"},   ]
 ```
-[    {          "symbol":"BTCUSDT",	      "sumOpenInterest":"20403.63700000",  // total open interest 	      "sumOpenInterestValue": "150570784.07809979",   // total open interest value	      "timestamp":"1583127900000"    },         {          "symbol":"BTCUSDT",         "sumOpenInterest":"20401.36700000",         "sumOpenInterestValue":"149940752.14464448",         "timestamp":"1583128200000"        },   ]
-```
 
-Top Trader Long/Short Ratio (Positions)
-=======================================
+# Top Trader Long/Short Ratio (Positions)
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#api-description "Direct link to API Description")
 
 The proportion of net long and net short positions to total open positions of the top 20% users with the highest margin balance. Long Position % = Long positions of top traders / Total open positions of top traders Short Position % = Short positions of top traders / Total open positions of top traders Long/Short Ratio (Positions) = Long Position % / Short Position %
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/topLongShortPositionRatio`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" 
-| limit | LONG | NO | default 30, max 500 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
+| symbol | STRING | YES |  |
+| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit | LONG | NO | default 30, max 500 |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
 
 > *   If startTime and endTime are not sent, the most recent data is returned.
 > *   Only the data of the latest 30 days is available.
 > *   IP rate limit 1000 requests/5min
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {         "symbol":"BTCUSDT",  
+	      "longShortRatio":"1.4342",// long/short position ratio of top traders	      "longAccount": "0.5891", // long positions ratio of top traders	      "shortAccount":"0.4108", // short positions ratio of top traders	      "timestamp":"1583139600000"         },  
+          {  
+                  "symbol":"BTCUSDT",  
+	      "longShortRatio":"1.4337",	      "longAccount": "0.3583", "shortAccount":"0.6417", 	                	      "timestamp":"1583139900000"  
+	               },   	      
+]
 ```
-[    {          "symbol":"BTCUSDT",	      "longShortRatio":"1.4342",// long/short position ratio of top traders	      "longAccount": "0.5891", // long positions ratio of top traders	      "shortAccount":"0.4108", // short positions ratio of top traders	      "timestamp":"1583139600000"         },          {                  "symbol":"BTCUSDT",	      "longShortRatio":"1.4337",	      "longAccount": "0.3583", 	      "shortAccount":"0.6417", 	                	      "timestamp":"1583139900000"	                       },   	    ]
-```
 
-Top Trader Long/Short Ratio (Accounts)
-======================================
+# Top Trader Long/Short Ratio (Accounts)
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#api-description "Direct link to API Description")
 
 The proportion of net long and net short accounts to total accounts of the top 20% users with the highest margin balance. Each account is counted once only. Long Account % = Accounts of top traders with net long positions / Total accounts of top traders with open positions Short Account % = Accounts of top traders with net short positions / Total accounts of top traders with open positions Long/Short Ratio (Accounts) = Long Account % / Short Account %
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/topLongShortAccountRatio`
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" 
-| limit | LONG | NO | default 30, max 500 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
+| symbol | STRING | YES |  |
+| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit | LONG | NO | default 30, max 500 |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
 
 > *   If startTime and endTime are not sent, the most recent data is returned.
 > *   Only the data of the latest 30 days is available.
 > *   IP rate limit 1000 requests/5min
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {         "symbol":"BTCUSDT",  
+	      "longShortRatio":"1.8105",  // long/short account num ratio of top traders	      "longAccount": "0.6442",   // long account num ratio of top traders "shortAccount":"0.3558",   // long account num ratio of top traders 	      "timestamp":"1583139600000"  
+    },    {       
+         "symbol":"BTCUSDT",  
+	      "longShortRatio":"0.5576",	      "longAccount": "0.3580", "shortAccount":"0.6420", 	                	      "timestamp":"1583139900000"           
+}  ]
 ```
-[    {          "symbol":"BTCUSDT",	      "longShortRatio":"1.8105",  // long/short account num ratio of top traders	      "longAccount": "0.6442",   // long account num ratio of top traders 	      "shortAccount":"0.3558",   // long account num ratio of top traders 	      "timestamp":"1583139600000"    },     {              "symbol":"BTCUSDT",	      "longShortRatio":"0.5576",	      "longAccount": "0.3580", 	      "shortAccount":"0.6420", 	                	      "timestamp":"1583139900000"             }  ]
-```
 
-Long/Short Ratio
-================
+# Long/Short Ratio
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#api-description "Direct link to API Description")
 
 Query symbol Long/Short Ratio
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/globalLongShortAccountRatio`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" 
-| limit | LONG | NO | default 30, max 500 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
+| symbol | STRING | YES |  |
+| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit | LONG | NO | default 30, max 500 |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
 
 > *   If startTime and endTime are not sent, the most recent data is returned.
 > *   Only the data of the latest 30 days is available.
 > *   IP rate limit 1000 requests/5min
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {         "symbol":"BTCUSDT",  // long/short account num ratio of all traders  
+	      "longShortRatio":"0.1960",  //long account num ratio of all traders	      "longAccount": "0.6622",   // short account num ratio of all traders	      "shortAccount":"0.3378", 	      "timestamp":"1583139600000"  
+         },  
+          {  
+                  "symbol":"BTCUSDT",  
+	      "longShortRatio":"1.9559",	      "longAccount": "0.6617", "shortAccount":"0.3382", 	                	      "timestamp":"1583139900000"  
+	               },   	      
+]
 ```
-[    {          "symbol":"BTCUSDT",  // long/short account num ratio of all traders	      "longShortRatio":"0.1960",  //long account num ratio of all traders	      "longAccount": "0.6622",   // short account num ratio of all traders	      "shortAccount":"0.3378", 	      "timestamp":"1583139600000"         },          {                  "symbol":"BTCUSDT",	      "longShortRatio":"1.9559",	      "longAccount": "0.6617", 	      "shortAccount":"0.3382", 	                	      "timestamp":"1583139900000"	                       },   	    ]
-```
+
+# Taker Buy/Sell Volume
+
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#api-description "Direct link to API Description")
 
 Taker Buy/Sell Volume
-=====================
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Taker Buy/Sell Volume
-
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/takerlongshortRatio`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" 
-| limit | LONG | NO | default 30, max 500 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
+| symbol | STRING | YES |  |
+| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit | LONG | NO | default 30, max 500 |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
 
 > *   If startTime and endTime are not sent, the most recent data is returned.
 > *   Only the data of the latest 30 days is available.
 > *   IP rate limit 1000 requests/5min
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    { 	    "buySellRatio":"1.5586",  
+	    "buyVol": "387.3300", "sellVol":"248.5030", 	    "timestamp":"1585614900000"  
+    },    { 	    "buySellRatio":"1.3104",  
+	    "buyVol": "343.9290", "sellVol":"248.5030", 	                	    "timestamp":"1583139900000"          
+},    ]
 ```
-[    { 	    "buySellRatio":"1.5586",	    "buyVol": "387.3300", 	    "sellVol":"248.5030", 	    "timestamp":"1585614900000"    },    { 	    "buySellRatio":"1.3104",	    "buyVol": "343.9290", 	    "sellVol":"248.5030", 	                	    "timestamp":"1583139900000"            },    ]
-```
 
-Basis
-=====
+# Basis
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#api-description "Direct link to API Description")
 
 Query future basis
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#http-request "Direct link to HTTP Request")
 
 GET `/futures/data/basis`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| pair | STRING | YES | BTCUSDT 
-| contractType | ENUM | YES | CURRENT\_QUARTER, NEXT\_QUARTER, PERPETUAL 
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" 
-| limit | LONG | YES | Default 30,Max 500 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
+| pair | STRING | YES | BTCUSDT |
+| contractType | ENUM | YES | CURRENT\_QUARTER, NEXT\_QUARTER, PERPETUAL |
+| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit | LONG | YES | Default 30,Max 500 |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
 
 > *   If startTime and endTime are not sent, the most recent data is returned.
 > *   Only the data of the latest 30 days is available.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[    
+    {  
+        "indexPrice": "34400.15945055",        "contractType": "PERPETUAL",        "basisRate": "0.0004",        "futuresPrice": "34414.10",        "annualizedBasisRate": "",        "basis": "13.94054945",        "pair": "BTCUSDT",        "timestamp": 1698742800000    }]
 ```
-[      {        "indexPrice": "34400.15945055",        "contractType": "PERPETUAL",        "basisRate": "0.0004",        "futuresPrice": "34414.10",        "annualizedBasisRate": "",        "basis": "13.94054945",        "pair": "BTCUSDT",        "timestamp": 1698742800000    }]
-```
 
-Composite Index Symbol Information
-==================================
+# Composite Index Symbol Information
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#api-description "Direct link to API Description")
 
 Query composite index symbol information
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/indexInfo`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   Only for composite index symbols
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{ 		"symbol": "DEFIUSDT",  
+		"time": 1589437530011,    // Current time		"component": "baseAsset", //Component asset		"baseAssetList":[			{				"baseAsset":"BAL",				"quoteAsset": "USDT",				"weightInQuantity":"1.04406228",				"weightInPercentage":"0.02783900"			},			{				"baseAsset":"BAND",				"quoteAsset": "USDT",				"weightInQuantity":"3.53782729",				"weightInPercentage":"0.03935200"			}		]	}]
 ```
-[	{ 		"symbol": "DEFIUSDT",		"time": 1589437530011,    // Current time		"component": "baseAsset", //Component asset		"baseAssetList":[			{				"baseAsset":"BAL",				"quoteAsset": "USDT",				"weightInQuantity":"1.04406228",				"weightInPercentage":"0.02783900"			},			{				"baseAsset":"BAND",				"quoteAsset": "USDT",				"weightInQuantity":"3.53782729",				"weightInPercentage":"0.03935200"			}		]	}]
-```
 
-Multi-Assets Mode Asset Index
-=============================
+# Multi-Assets Mode Asset Index
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#api-description "Direct link to API Description")
 
 asset index for Multi-Assets mode
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/assetIndex`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#request-weight "Direct link to Request Weight")
 
 **1** for a single symbol; **10** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO | Asset pair 
+| symbol | STRING | NO | Asset pair |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"symbol": "ADAUSD",	"time": 1635740268004,	"index": "1.92957370",	"bidBuffer": "0.10000000", 	"askBuffer": "0.10000000", 	"bidRate": "1.73661633",	"askRate": "2.12253107",	"autoExchangeBidBuffer": "0.05000000",	"autoExchangeAskBuffer": "0.05000000",	"autoExchangeBidRate": "1.83309501",	"autoExchangeAskRate": "2.02605238"}
+```codeBlockLines_aHhF
+{  
+	"symbol": "ADAUSD",	"time": 1635740268004,	"index": "1.92957370",	"bidBuffer": "0.10000000", "askBuffer": "0.10000000", 	"bidRate": "1.73661633",  
+	"askRate": "2.12253107",	"autoExchangeBidBuffer": "0.05000000",	"autoExchangeAskBuffer": "0.05000000",	"autoExchangeBidRate": "1.83309501",	"autoExchangeAskRate": "2.02605238"}
 ```
 
 > Or(without symbol)
 
-```
-[	{		"symbol": "ADAUSD",		"time": 1635740268004,		"index": "1.92957370",		"bidBuffer": "0.10000000", 		"askBuffer": "0.10000000", 		"bidRate": "1.73661633",		"askRate": "2.12253107",		"autoExchangeBidBuffer": "0.05000000",		"autoExchangeAskBuffer": "0.05000000",		"autoExchangeBidRate": "1.83309501",		"autoExchangeAskRate": "2.02605238"	}]
+```codeBlockLines_aHhF
+[  
+	{		"symbol": "ADAUSD",		"time": 1635740268004,		"index": "1.92957370",		"bidBuffer": "0.10000000", "askBuffer": "0.10000000", 		"bidRate": "1.73661633",  
+		"askRate": "2.12253107",		"autoExchangeBidBuffer": "0.05000000",		"autoExchangeAskBuffer": "0.05000000",		"autoExchangeBidRate": "1.83309501",		"autoExchangeAskRate": "2.02605238"	}]
 ```
 
-Query Index Price Constituents
-==============================
+# Query Index Price Constituents
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#api-description "Direct link to API Description")
 
 Query index price constituents
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/constituents`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#request-weight "Direct link to Request Weight")
 
 **2**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents#response-example "Direct link to Response Example")
 
-```
-{    "symbol": "BTCUSDT",    "time": 1745401553408,    "constituents": [        {            "exchange": "binance",            "symbol": "BTCUSDT",            "price": "94057.03000000",            "weight": "0.51282051"        },        {            "exchange": "coinbase",            "symbol": "BTC-USDT",            "price": "94140.58000000",            "weight": "0.15384615"        },        {            "exchange": "gateio",            "symbol": "BTC_USDT",            "price": "94060.10000000",            "weight": "0.02564103"        },        {            "exchange": "kucoin",            "symbol": "BTC-USDT",            "price": "94096.70000000",            "weight": "0.07692308"        },        {            "exchange": "mxc",            "symbol": "BTCUSDT",            "price": "94057.02000000",            "weight": "0.07692308"        },        {            "exchange": "bitget",            "symbol": "BTCUSDT",            "price": "94064.03000000",            "weight": "0.07692308"        },        {            "exchange": "bybit",            "symbol": "BTCUSDT",            "price": "94067.90000000",            "weight": "0.07692308"        }    ]}
+```codeBlockLines_aHhF
+{  
+    "symbol": "BTCUSDT",    "time": 1745401553408,    "constituents": [        {            "exchange": "binance",            "symbol": "BTCUSDT",            "price": "94057.03000000",            "weight": "0.51282051"        },        {            "exchange": "coinbase",            "symbol": "BTC-USDT",            "price": "94140.58000000",            "weight": "0.15384615"        },        {            "exchange": "gateio",            "symbol": "BTC_USDT",            "price": "94060.10000000",            "weight": "0.02564103"        },        {            "exchange": "kucoin",            "symbol": "BTC-USDT",            "price": "94096.70000000",            "weight": "0.07692308"        },        {            "exchange": "mxc",            "symbol": "BTCUSDT",            "price": "94057.02000000",            "weight": "0.07692308"        },        {            "exchange": "bitget",            "symbol": "BTCUSDT",            "price": "94064.03000000",            "weight": "0.07692308"        },        {            "exchange": "bybit",            "symbol": "BTCUSDT",            "price": "94067.90000000",            "weight": "0.07692308"        }    ]}
 ```
 

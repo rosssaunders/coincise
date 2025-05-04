@@ -1,10 +1,8 @@
 # Binance Options Public Websocket API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,11 +51,9 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-General Info
-============
+# General Info
 
-General API Information[​](/docs/derivatives/option/general-info#general-api-information "Direct link to General API Information")
-----------------------------------------------------------------------------------------------------------------------------------
+## General API Information[​](/docs/derivatives/option/general-info#general-api-information "Direct link to General API Information")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/articles/360002502072)
 *   The base endpoint is: \*\*[https://eapi.binance.com](https://eapi.binance.com)
@@ -87,8 +80,9 @@ General API Information[​](/docs/derivatives/option/general-info#general-api-i
 
 > **_The error payload is as follows:_**
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 *   Specific error codes and messages defined in [Error Codes](/docs/derivatives/option/general-info#error-codes).
@@ -100,8 +94,7 @@ General API Information[​](/docs/derivatives/option/general-info#general-api-i
 *   Parameters may be sent in any order.
 *   If a parameter sent in both the `query string` and `request body`, the `query string` parameter will be used.
 
-LIMITS[​](/docs/derivatives/option/general-info#limits "Direct link to LIMITS")
--------------------------------------------------------------------------------
+## LIMITS[​](/docs/derivatives/option/general-info#limits "Direct link to LIMITS")
 
 *   The `/eapi/v1/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 *   A `429` will be returned when either rate limit is violated.
@@ -125,8 +118,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 *   Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**` headers in the response.
 *   **The order rate limit is counted against each account**.
 
-Endpoint Security Type[​](/docs/derivatives/option/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
--------------------------------------------------------------------------------------------------------------------------------
+## Endpoint Security Type[​](/docs/derivatives/option/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
 
 *   Each endpoint has a security type that determines the how you will interact with it.
 *   API-keys are passed into the Rest API via the `X-MBX-APIKEY` header.
@@ -136,16 +128,15 @@ Endpoint Security Type[​](/docs/derivatives/option/general-info#endpoint-secur
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
-| MARKET\_DATA | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
+| MARKET\_DATA | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/option/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/option/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 *   `SIGNED` endpoints require an additional parameter, `signature`, to be sent in the `query string` or `request body`.
 *   Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
@@ -160,8 +151,10 @@ SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/option/ge
 
 > The logic is as follows:
 
-```
-if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  // process request} else {  // reject request}
+```codeBlockLines_aHhF
+if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  
+  // process request} else {  
+  // reject request}
 ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable, which can lead to requests taking varying amounts of time to reach the servers. With `recvWindow`, you can specify that the request must be processed within a certain number of milliseconds or be rejected by the server.
@@ -174,19 +167,18 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 
-| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 
-
+| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 |
+| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | BUY 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 9000 
-| recvWindow | 5000 
-| timestamp | 1591702613943 
+| symbol | BTCUSDT |
+| side | BUY |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 9000 |
+| recvWindow | 5000 |
+| timestamp | 1591702613943 |
 
 #### Example 1: As a query string[​](/docs/derivatives/option/general-info#example-1-as-a-query-string "Direct link to Example 1: As a query string")
 
@@ -194,14 +186,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order' -d 'symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order' -d 'symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
 ```
 
 *   **requestBody:**
@@ -221,14 +213,14 @@ symbol=BTC-210129-40000-C
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)   $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
+```codeBlockLines_aHhF
+(HMAC SHA256)   $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
 ```
 
 *   **queryString:**
@@ -248,14 +240,14 @@ symbol=BTC-210129-40000-C
 
 > **HMAC SHA256 signature:**
 
-```
-   $ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTCquantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTCquantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400&signature=fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400&signature=fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e'
 ```
 
 *   **queryString:**
@@ -268,19 +260,16 @@ quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400
 
 Note that the signature is different in example 3. There is no & between "GTC" and "quantity=1".
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/option/common-definition#terminology "Direct link to Terminology")
----------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/option/common-definition#terminology "Direct link to Terminology")
 
 *   `symbol` refers to the symbol name of a options contract symbol
 *   `underlying` refers to the underlying symbol of a options contract symbol
 *   `quoteAsset` refers to the asset that is the price of a symbol.
 *   `settleAsset` refers to the settlement asset when options are exercised
 
-ENUM definitions[​](/docs/derivatives/option/common-definition#enum-definitions "Direct link to ENUM definitions")
-------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/option/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Options contract type**
 
@@ -344,14 +333,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -363,20 +352,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/option/common-definition#symbol-filters "Direct link to Symbol filters")
-------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/option/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/option/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -395,8 +382,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -411,20 +398,19 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 *   `quantity` <= `maxQty`
 *   (`quantity`\-`minQty`) % `stepSize` == 0
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/option/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/option/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/option/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -471,8 +457,7 @@ Codes are universal,but messages can vary.
 
 *   Signature for this request is not valid.
 
-11xx - 2xxx Request issues[​](/docs/derivatives/option/error-code#11xx---2xxx-request-issues "Direct link to 11xx - 2xxx Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - 2xxx Request issues[​](/docs/derivatives/option/error-code#11xx---2xxx-request-issues "Direct link to 11xx - 2xxx Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/option/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -593,8 +578,7 @@ Codes are universal,but messages can vary.
 
 *   Option margin is insufficient.
 
-3xxx-5xxx Filters and other issues[​](/docs/derivatives/option/error-code#3xxx-5xxx-filters-and-other-issues "Direct link to 3xxx-5xxx Filters and other issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 3xxx-5xxx Filters and other issues[​](/docs/derivatives/option/error-code#3xxx-5xxx-filters-and-other-issues "Direct link to 3xxx-5xxx Filters and other issues")
 
 ### \-3029 TRANSFER\_FAILED[​](/docs/derivatives/option/error-code#-3029-transfer_failed "Direct link to -3029 TRANSFER_FAILED")
 
@@ -636,8 +620,7 @@ Codes are universal,but messages can vary.
 
 *   Amount must be positive.
 
-Connect
-=======
+# Connect
 
 *   The baseurl of the websocket interface is: ****wss://nbstream.binance.com/eoptions/****
     
@@ -681,19 +664,18 @@ Connect
     
 *   Considering the possible data latency from RESTful endpoints during an extremely volatile market, it is highly recommended to get the order status, position, etc from the Websocket user data stream.
 
-Live Subscribing/Unsubscribing to streams
-=========================================
+# Live Subscribing/Unsubscribing to streams
 
 *   The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
 *   The `id` used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.
 
-Subscribe to a stream[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#subscribe-to-a-stream "Direct link to Subscribe to a stream")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Subscribe to a stream[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#subscribe-to-a-stream "Direct link to Subscribe to a stream")
 
 > **Response**
 
-```
-{  "result": null,  "id": 1}
+```codeBlockLines_aHhF
+{  
+  "result": null,  "id": 1}
 ```
 
 *   **Request**
@@ -708,13 +690,13 @@ Subscribe to a stream[​](/docs/derivatives/option/websocket-market-streams/Liv
 "id": 1  
 }
 
-Unsubscribe to a stream[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#unsubscribe-to-a-stream "Direct link to Unsubscribe to a stream")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Unsubscribe to a stream[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#unsubscribe-to-a-stream "Direct link to Unsubscribe to a stream")
 
 > **Response**
 
-```
-{  "result": null,  "id": 312}
+```codeBlockLines_aHhF
+{  
+  "result": null,  "id": 312}
 ```
 
 *   **Request**
@@ -729,13 +711,13 @@ Unsubscribe to a stream[​](/docs/derivatives/option/websocket-market-streams/L
     }
     
 
-Listing Subscriptions[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#listing-subscriptions "Direct link to Listing Subscriptions")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Listing Subscriptions[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#listing-subscriptions "Direct link to Listing Subscriptions")
 
 > **Response**
 
-```
-{  "result": [    "BTC-210630-9000-P@ticker"  ],  "id": 3}
+```codeBlockLines_aHhF
+{  
+  "result": [    "BTC-210630-9000-P@ticker"  ],  "id": 3}
 ```
 
 *   **Request**
@@ -746,15 +728,15 @@ Listing Subscriptions[​](/docs/derivatives/option/websocket-market-streams/Liv
     }
     
 
-Setting Properties[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#setting-properties "Direct link to Setting Properties")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Setting Properties[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#setting-properties "Direct link to Setting Properties")
 
 Currently, the only property can be set is to set whether `combined` stream payloads are enabled are not. The combined property is set to `false` when connecting using `/ws/` ("raw streams") and `true` when connecting using `/stream/`.
 
 > **Response**
 
-```
-{  "result": null,  "id": 5}
+```codeBlockLines_aHhF
+{  
+  "result": null,  "id": 5}
 ```
 
 *   **Request**
@@ -770,13 +752,13 @@ Currently, the only property can be set is to set whether `combined` stream payl
     }
     
 
-Retrieving Properties[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#retrieving-properties "Direct link to Retrieving Properties")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Retrieving Properties[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#retrieving-properties "Direct link to Retrieving Properties")
 
 > **Response**
 
-```
-{  "result": true, // Indicates that combined is set to true.  "id": 2}
+```codeBlockLines_aHhF
+{  
+  "result": true, // Indicates that combined is set to true.  "id": 2}
 ```
 
 *   **Request**
@@ -791,101 +773,92 @@ Retrieving Properties[​](/docs/derivatives/option/websocket-market-streams/Liv
     }      
     
 
-Error Messages[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#error-messages "Direct link to Error Messages")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Error Messages[​](/docs/derivatives/option/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#error-messages "Direct link to Error Messages")
 
 | Error Message | Description |
 | --- | --- |
-| {"code": 0, "msg": "Unknown property"} | Parameter used in the `SET_PROPERTY` or `GET_PROPERTY` was invalid 
-| {"code": 1, "msg": "Invalid value type: expected Boolean"} | Value should only be `true` or `false` 
-| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name provided was invalid 
-| {"code": 2, "msg": "Invalid request: request ID must be an unsigned integer"} | Parameter `id` had to be provided or the value provided in the `id` parameter is an unsupported type 
-| {"code": 2, "msg": "Invalid request: unknown variant %s, expected one of `SUBSCRIBE`, `UNSUBSCRIBE`, `LIST_SUBSCRIPTIONS`, `SET_PROPERTY`, `GET_PROPERTY` at line 1 column 28"} | Possible typo in the provided method or provided method was neither of the expected values 
-| {"code": 2, "msg": "Invalid request: too many parameters"} | Unnecessary parameters provided in the data 
-| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name was not provided 
-| {"code": 2, "msg": "Invalid request: missing field `method` at line 1 column 73"} | `method` was not provided in the data 
-| {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"} | JSON data sent has incorrect syntax.    ## Trade Streams
+| {"code": 0, "msg": "Unknown property"} | Parameter used in the `SET_PROPERTY` or `GET_PROPERTY` was invalid |
+| {"code": 1, "msg": "Invalid value type: expected Boolean"} | Value should only be `true` or `false` |
+| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name provided was invalid |
+| {"code": 2, "msg": "Invalid request: request ID must be an unsigned integer"} | Parameter `id` had to be provided or the value provided in the `id` parameter is an unsupported type |
+| {"code": 2, "msg": "Invalid request: unknown variant %s, expected one of `SUBSCRIBE`, `UNSUBSCRIBE`, `LIST_SUBSCRIPTIONS`, `SET_PROPERTY`, `GET_PROPERTY` at line 1 column 28"} | Possible typo in the provided method or provided method was neither of the expected values |
+| {"code": 2, "msg": "Invalid request: too many parameters"} | Unnecessary parameters provided in the data |
+| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name was not provided |
+| {"code": 2, "msg": "Invalid request: missing field `method` at line 1 column 73"} | `method` was not provided in the data |
+| {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"} | JSON data sent has incorrect syntax.    ## Trade Streams |
 
-New Symbol Info
-===============
+# New Symbol Info
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#stream-description "Direct link to Stream Description")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#stream-description "Direct link to Stream Description")
 
 New symbol listing stream.
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#stream-name "Direct link to Stream Name")
---------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#stream-name "Direct link to Stream Name")
 
 `option_pair`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#update-speed "Direct link to Update Speed")
------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#update-speed "Direct link to Update Speed")
 
 **50ms**  
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/New-Symbol-Info#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"OPTION_PAIR",         //eventType    "E":1668573571842,         //eventTime     
+    "u":"BTCUSDT",             //Underlying index of the contract  
+    "qa":"USDT",               //Quotation asset    "s":"BTC-221116-21000-C",  //Trading pair name   
+    "unit":1,                  //Conversion ratio, the quantity of the underlying asset represented by a single contract.   
+    "mq":"0.01",               //Minimum trade volume of the underlying asset    
+    "d":"CALL",                //Option type  
+    "sp":"21000",              //Strike price"ed":1668585600000         //expiration time  }
 ```
-{    "e":"OPTION_PAIR",         //eventType       "E":1668573571842,         //eventTime       "u":"BTCUSDT",             //Underlying index of the contract    "qa":"USDT",               //Quotation asset     "s":"BTC-221116-21000-C",  //Trading pair name     "unit":1,                  //Conversion ratio, the quantity of the underlying asset represented by a single contract.     "mq":"0.01",               //Minimum trade volume of the underlying asset      "d":"CALL",                //Option type    "sp":"21000",              //Strike price      "ed":1668585600000         //expiration time  }
-```
 
-Open Interest
-=============
+# Open Interest
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#stream-description "Direct link to Stream Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#stream-description "Direct link to Stream Description")
 
 Option open interest for specific underlying asset on specific expiration date. E.g.[ETH@openInterest@221125](wss://nbstream.binance.com/eoptions/stream?streams=ETH@openInterest@221125)
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#stream-name "Direct link to Stream Name")
-------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#stream-name "Direct link to Stream Name")
 
 `<underlyingAsset>@openInterest@<expirationDate>`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#update-speed "Direct link to Update Speed")
----------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#update-speed "Direct link to Update Speed")
 
 **60s**
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/Open-Interest#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {      "e":"openInterest",         // Event type      "E":1668759300045,          // Event time      "s":"ETH-221125-2700-C",    // option symbol      "o":"1580.87",              // Open interest in contracts      "h":"1912992.178168204"     // Open interest in USDT    }]
 ```
-[    {      "e":"openInterest",         // Event type      "E":1668759300045,          // Event time      "s":"ETH-221125-2700-C",    // option symbol      "o":"1580.87",              // Open interest in contracts      "h":"1912992.178168204"     // Open interest in USDT    }]
-```
 
-Mark Price
-==========
+# Mark Price
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#stream-description "Direct link to Stream Description")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#stream-description "Direct link to Stream Description")
 
 The mark price for all option symbols on specific underlying asset. E.g.[ETH@markPrice](wss://nbstream.binance.com/eoptions/stream?streams=ETH@markPrice)
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#stream-name "Direct link to Stream Name")
----------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#stream-name "Direct link to Stream Name")
 
 `<underlyingAsset>@markPrice`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#update-speed "Direct link to Update Speed")
-------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/Mark-Price#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {      "e":"markPrice",         // Event Type      "E":1663684594227,       // Event time      "s":"ETH-220930-1500-C", // Symbol      "mp":"30.3"              // Option mark price    },    {      "e":"markPrice",      "E":1663684594228,      "s":"ETH-220923-1000-C",      "mp":"341.5"    }]
 ```
-[    {      "e":"markPrice",         // Event Type      "E":1663684594227,       // Event time      "s":"ETH-220930-1500-C", // Symbol      "mp":"30.3"              // Option mark price    },    {      "e":"markPrice",      "E":1663684594228,      "s":"ETH-220923-1000-C",      "mp":"341.5"    }]
-```
 
-Kline/Candlestick Streams
-=========================
+# Kline/Candlestick Streams
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#stream-description "Direct link to Stream Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#stream-description "Direct link to Stream Description")
 
 The Kline/Candlestick Stream push updates to the current klines/candlestick every 1000 milliseconds (if existing).
 
@@ -895,143 +868,175 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 "1m", "3m", "5m", "15m" "30m" "1h", "2h", "4h", "6h", "12h", "1d", "3d", "1w",
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#stream-name "Direct link to Stream Name")
-------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@kline_<interval>`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#update-speed "Direct link to Update Speed")
----------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"kline",                        // event type    "E":1638747660000,                  // event time     
+    "s":"BTC-200630-9000-P",            // Option trading symbol     
+    "k":{                               
+        "t":1638747660000,              // kline start time     
+        "T":1638747719999,              // kline end time    
+        "s":"BTC-200630-9000-P",        // Option trading symbol     
+        "i":"1m",                       // candle period     
+        "F":0,                          // first trade ID    
+        "L":0,                          // last trade ID     
+        "o":"1000",                     // open     
+        "c":"1000",                     // close     
+        "h":"1000",                     // high      
+        "l":"1000",                     // low     
+        "v":"0",                        // volume(in contracts)     
+        "n":0,                          // number of trades     
+        "x":false,                      // current candle has been completed Y/N     
+"q":"0",                        // completed trade amount   (in quote asset)           "V":"0",                        // taker completed trade volume (in contracts)                   "Q":"0"                         // taker trade amount(in quote asset)     
+    }  
+}
 ```
-{    "e":"kline",                        // event type       "E":1638747660000,                  // event time       "s":"BTC-200630-9000-P",            // Option trading symbol       "k":{                                     "t":1638747660000,              // kline start time           "T":1638747719999,              // kline end time          "s":"BTC-200630-9000-P",        // Option trading symbol           "i":"1m",                       // candle period           "F":0,                          // first trade ID          "L":0,                          // last trade ID           "o":"1000",                     // open           "c":"1000",                     // close           "h":"1000",                     // high            "l":"1000",                     // low           "v":"0",                        // volume(in contracts)           "n":0,                          // number of trades           "x":false,                      // current candle has been completed Y/N           "q":"0",                        // completed trade amount   (in quote asset)                    "V":"0",                        // taker completed trade volume (in contracts)                     "Q":"0"                         // taker trade amount(in quote asset)       }}
-```
 
-24-hour TICKER by underlying asset and expiration data
-======================================================
+# 24-hour TICKER by underlying asset and expiration data
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#stream-description "Direct link to Stream Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#stream-description "Direct link to Stream Description")
 
 24hr ticker info by underlying asset and expiration date. E.g.[ETH@ticker@220930](wss://nbstream.binance.com/eoptions/stream?streams=ETH@ticker@220930)
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#stream-name "Direct link to Stream Name")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#stream-name "Direct link to Stream Name")
 
 `<underlyingAsset>@ticker@<expirationDate>`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#update-speed "Direct link to Update Speed")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#update-speed "Direct link to Update Speed")
 
 **1000ms** 
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+{  
+      "e":"24hrTicker",           // event type      "E":1657706425200,          // event time      "T":1657706425220,          // transaction time    
+      "s":"ETH-220930-1600-C",    // Option symbol      
+      "o":"2000",                 // 24-hour opening price  
+      "h":"2020",                 // Highest price      "l":"2000",                 // Lowest price      "c":"2020",                 // latest price      "V":"1.42",                 // Trading volume(in contracts)  "A":"2841",                 // trade amount(in quote asset)  "P":"0.01",                 // price change percent      "p":"20",                   // price change      "Q":"0.01",                 // volume of last completed trade(in contracts)    
+  "F":"27",                   // first trade ID      "L":"48",                   // last trade ID      "n":22,                     // number of trades  
+      "bo":"2012",                // The best buy price      "ao":"2020",                // The best sell price      "bq":"4.9",                 // The best buy quantity      "aq":"0.03",                // The best sell quantity      "b":"0.1202",               // BuyImplied volatility      "a":"0.1318",               // SellImplied volatility  
+      "d":"0.98911",              // delta      "t":"-0.16961",             // theta      "g":"0.00004",              // gamma    
+      "v":"2.66584",              // vega  
+      "vo":"0.10001",             // Implied volatility      "mp":"2003.5102",           // Mark price    
+      "hl":"2023.511",            // Buy Maximum price  
+      "ll":"1983.511",            // Sell Minimum price       "eep":"0"                   // Estimated strike price (return estimated strike price half hour before exercise)    },    {      "e":"24hrTicker",      "E":1663685112123,      "s":"ETH-220930-1500-C",      "o":"34.9",      "h":"44.6",      "l":"26.8",      "c":"26.8",      "V":"11.84",      "A":"444.37",      "P":"-0.232",      "p":"-8.1",      "Q":"0",      "F":"91",      "L":"129",      "n":39,      "bo":"26.8",      "ao":"33.9",      "bq":"0.65",      "aq":"0.01",      "b":"0.88790536",      "a":"0.98729014",      "d":"0.2621153",      "t":"-3.44806807",      "g":"0.00158298",      "v":"0.7148147",      "vo":"0.93759775",      "mp":"30.3",      "hl":"228.7",      "ll":"0.1",      "eep":"0"    } ]
 ```
-[{      "e":"24hrTicker",           // event type      "E":1657706425200,          // event time       "T":1657706425220,          // transaction time        "s":"ETH-220930-1600-C",    // Option symbol          "o":"2000",                 // 24-hour opening price      "h":"2020",                 // Highest price      "l":"2000",                 // Lowest price      "c":"2020",                 // latest price      "V":"1.42",                 // Trading volume(in contracts)        "A":"2841",                 // trade amount(in quote asset)         "P":"0.01",                 // price change percent      "p":"20",                   // price change       "Q":"0.01",                 // volume of last completed trade(in contracts)        "F":"27",                   // first trade ID      "L":"48",                   // last trade ID        "n":22,                     // number of trades      "bo":"2012",                // The best buy price      "ao":"2020",                // The best sell price      "bq":"4.9",                 // The best buy quantity      "aq":"0.03",                // The best sell quantity      "b":"0.1202",               // BuyImplied volatility         "a":"0.1318",               // SellImplied volatility      "d":"0.98911",              // delta      "t":"-0.16961",             // theta       "g":"0.00004",              // gamma        "v":"2.66584",              // vega      "vo":"0.10001",             // Implied volatility       "mp":"2003.5102",           // Mark price        "hl":"2023.511",            // Buy Maximum price      "ll":"1983.511",            // Sell Minimum price       "eep":"0"                   // Estimated strike price (return estimated strike price half hour before exercise)    },    {      "e":"24hrTicker",      "E":1663685112123,      "s":"ETH-220930-1500-C",      "o":"34.9",      "h":"44.6",      "l":"26.8",      "c":"26.8",      "V":"11.84",      "A":"444.37",      "P":"-0.232",      "p":"-8.1",      "Q":"0",      "F":"91",      "L":"129",      "n":39,      "bo":"26.8",      "ao":"33.9",      "bq":"0.65",      "aq":"0.01",      "b":"0.88790536",      "a":"0.98729014",      "d":"0.2621153",      "t":"-3.44806807",      "g":"0.00158298",      "v":"0.7148147",      "vo":"0.93759775",      "mp":"30.3",      "hl":"228.7",      "ll":"0.1",      "eep":"0"    } ]
-```
 
-Index Price Streams
-===================
+# Index Price Streams
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/Index-Price-Streams#stream-description "Direct link to Stream Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/Index-Price-Streams#stream-description "Direct link to Stream Description")
 
 Underlying(e.g ETHUSDT) index stream.
 
 **Stream Name:**  
 `<symbol>@index`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/Index-Price-Streams#update-speed "Direct link to Update Speed")
----------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/Index-Price-Streams#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/Index-Price-Streams#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/Index-Price-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"index",         // event type    "E":1661415480351,   // time    "s":"ETHUSDT",       // underlying symbol    "p":"1707.89008607"  // index price}
 ```
-{    "e":"index",         // event type    "E":1661415480351,   // time    "s":"ETHUSDT",       // underlying symbol    "p":"1707.89008607"  // index price}
-```
 
-24-hour TICKER
-==============
+# 24-hour TICKER
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#stream-description "Direct link to Stream Description")
 
 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#stream-name "Direct link to Stream Name")
 
 `<symbol>@ticker`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/24-hour-TICKER#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"24hrTicker",           // event type    "E":1657706425200,          // event time    "T":1657706425220,          // transaction time    
+    "s":"BTC-220930-18000-C",   // Option symbol      
+    "o":"2000",                 // 24-hour opening price  
+    "h":"2020",                 // Highest price    "l":"2000",                 // Lowest price    "c":"2020",                 // latest price    "V":"1.42",                 // Trading volume(in contracts)  "A":"2841",                 // trade amount(in quote asset)  "P":"0.01",                 // price change percent    "p":"20",                   // price change    "Q":"0.01",                 // volume of last completed trade(in contracts)    
+  "F":"27",                   // first trade ID    "L":"48",                   // last trade ID    "n":22,                     // number of trades  
+    "bo":"2012",                // The best buy price    "ao":"2020",                // The best sell price    "bq":"4.9",                 // The best buy quantity    "aq":"0.03",                // The best sell quantity    "b":"0.1202",               // BuyImplied volatility    "a":"0.1318",               // SellImplied volatility  
+    "d":"0.98911",              // delta    "t":"-0.16961",             // theta    "g":"0.00004",              // gamma    
+    "v":"2.66584",              // vega  
+    "vo":"0.10001",             // Implied volatility    "mp":"2003.5102",           // Mark price    
+    "hl":"2023.511",            // Buy Maximum price  
+    "ll":"1983.511",            // Sell Minimum price     "eep":"0"                   // Estimated strike price (return estimated strike price half hour before exercise)  }
 ```
-{    "e":"24hrTicker",           // event type    "E":1657706425200,          // event time      "T":1657706425220,          // transaction time      "s":"BTC-220930-18000-C",   // Option symbol        "o":"2000",                 // 24-hour opening price    "h":"2020",                 // Highest price    "l":"2000",                 // Lowest price    "c":"2020",                 // latest price    "V":"1.42",                 // Trading volume(in contracts)      "A":"2841",                 // trade amount(in quote asset)       "P":"0.01",                 // price change percent    "p":"20",                   // price change     "Q":"0.01",                 // volume of last completed trade(in contracts)      "F":"27",                   // first trade ID    "L":"48",                   // last trade ID      "n":22,                     // number of trades    "bo":"2012",                // The best buy price    "ao":"2020",                // The best sell price    "bq":"4.9",                 // The best buy quantity    "aq":"0.03",                // The best sell quantity    "b":"0.1202",               // BuyImplied volatility       "a":"0.1318",               // SellImplied volatility    "d":"0.98911",              // delta    "t":"-0.16961",             // theta     "g":"0.00004",              // gamma      "v":"2.66584",              // vega    "vo":"0.10001",             // Implied volatility     "mp":"2003.5102",           // Mark price      "hl":"2023.511",            // Buy Maximum price    "ll":"1983.511",            // Sell Minimum price     "eep":"0"                   // Estimated strike price (return estimated strike price half hour before exercise)  }
-```
 
-Trade Streams
-=============
+# Trade Streams
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#stream-description "Direct link to Stream Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#stream-description "Direct link to Stream Description")
 
 The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[ETH@trade](wss://nbstream.binance.com/eoptions/stream?streams=ETH@trade)
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#stream-name "Direct link to Stream Name")
-------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@trade` or `<underlyingAsset>@trade`
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#update-speed "Direct link to Update Speed")
----------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#update-speed "Direct link to Update Speed")
 
 **50ms**
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/Trade-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"trade",                        // event type    "E":1591677941092,                  // event time     
+    "s":"BTC-200630-9000-P",            // Option trading symbol     
+    "t":1,                              // trade ID     
+    "p":"1000",                         // price     
+    "q":"-2",                           // quantity     
+    "b":4611781675939004417,            // buy order ID     
+    "a":4611781675939004418,            // sell order ID     
+    "T":1591677567872,                  // trade completed time    
+    "S":"-1"                            // direction     
+"X": "MARKET"                       // trade type enum, "MARKET" for Orderbook trading, "BLOCK" for Block trade	}
 ```
-{    "e":"trade",                        // event type       "E":1591677941092,                  // event time       "s":"BTC-200630-9000-P",            // Option trading symbol       "t":1,                              // trade ID       "p":"1000",                         // price       "q":"-2",                           // quantity       "b":4611781675939004417,            // buy order ID       "a":4611781675939004418,            // sell order ID       "T":1591677567872,                  // trade completed time      "S":"-1"                            // direction       "X": "MARKET"                       // trade type enum, "MARKET" for Orderbook trading, "BLOCK" for Block trade	}
-```
 
-Partial Book Depth Streams
-==========================
+# Partial Book Depth Streams
 
-Stream Description[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#stream-description "Direct link to Stream Description")
 
 Top **<levels>** bids and asks, Valid levels are **<levels>** are 10, 20, 50, 100.
 
-Stream Name[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@depth<levels>` OR `<symbol>@depth<levels>@100ms` OR `<symbol>@depth<levels>@1000ms`.
 
-Update Speed[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#update-speed "Direct link to Update Speed")
 
 **100ms** or **1000ms**, **500ms**(default when update speed isn't used)
 
-Response Example[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams#response-example "Direct link to Response Example")
 
-```
-{    "e":"depth",                    // event type     "E":1591695934010,              // event time    "T":1591695934000,              // transaction time     "s":"BTC-200630-9000-P",        // Option symbol      "u":162,					 	            // update id in event    "pu":162,				 		            // same as update id in event        "b":[                           // Buy order         [          "200",                    // Price          "3",                      // quantity      ],      [          "101",          "1"      ],      [          "100",          "2"      ]    ],    "a":[                           // Sell order           [            "1000",            "89"        ]    ]}
+```codeBlockLines_aHhF
+{  
+    "e":"depth",                    // event type    "E":1591695934010,              // event time  
+    "T":1591695934000,              // transaction time  "s":"BTC-200630-9000-P",        // Option symbol    "u":162,					 	            // update id in event  
+    "pu":162,				 		            // same as update id in event    "b":[                           // Buy order     
+      [  
+          "200",                    // Price          "3",                      // quantity      ],      [          "101",          "1"      ],      [          "100",          "2"      ]    ],    "a":[                           // Sell order        [  
+            "1000",            "89"        ]    ]}
 ```
 

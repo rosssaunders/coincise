@@ -1,10 +1,8 @@
 # Binance USDM Futures Private Websocket API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,20 +51,19 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/usds-margined-futures/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -150,8 +144,7 @@ Codes are universal,but messages can vary.
 
 *   Not found, unauthenticated, or unauthorized.
 
-11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/usds-margined-futures/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -275,8 +268,7 @@ Codes are universal,but messages can vary.
 
 *   Invalid newOrderRespType.
 
-20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## 20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
 
 ### \-2010 NEW\_ORDER\_REJECTED[​](/docs/derivatives/usds-margined-futures/error-code#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
 
@@ -354,8 +346,7 @@ Codes are universal,but messages can vary.
 
 *   Leverage is smaller than permitted: insufficient margin balance.
 
-40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
 
 ### \-4000 INVALID\_ORDER\_STATUS[​](/docs/derivatives/usds-margined-futures/error-code#-4000-invalid_order_status "Direct link to -4000 INVALID_ORDER_STATUS")
 
@@ -854,8 +845,7 @@ Codes are universal,but messages can vary.
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to 10x in your region
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to %sx in your region
 
-50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
 
 ### \-5021 FOK\_ORDER\_REJECT[​](/docs/derivatives/usds-margined-futures/error-code#-5021-fok_order_reject "Direct link to -5021 FOK_ORDER_REJECT")
 
@@ -909,8 +899,7 @@ Codes are universal,but messages can vary.
 
 *   No depth matches this BBO order
 
-WebSocket API General Info
-==========================
+# WebSocket API General Info
 
 *   The base endpoint is: **`wss://ws-fapi.binance.com/ws-fapi/v1`**
     *   The base endpoint for testnet is: `wss://testnet.binancefuture.com/ws-fapi/v1`
@@ -927,25 +916,25 @@ WebSocket API General Info
 *   **`DECIMAL` parameters such as price are expected as JSON strings, not floats.**
 *   **User Data Stream requests - you will need to establish a separate WebSocket connection to listen to [user data streams](https://binance-docs.github.io/apidocs/futures/en/#user-data-streams)**
 
-WebSocket API Request format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-request-format "Direct link to WebSocket API Request format")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Request format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-request-format "Direct link to WebSocket API Request format")
 
 Requests must be sent as JSON in **text frames**, one request per frame.
 
 > Example of request:
 
-```
-{  "id": "9ca10e58-7452-467e-9454-f669bb9c764e",  "method": "order.place",  "params": {    "apiKey": "yeqKcXjtA9Eu4Tr3nJk61UJAGzXsEmFqqfVterxpMpR4peNfqE7Zl7oans8Qj089",    "price": "42088.0",    "quantity": "0.1",    "recvWindow": 5000,    "side": "BUY",    "signature": "996962a19802b5a09d7bc6ab1524227894533322a2f8a1f8934991689cabf8fe",    "symbol": "BTCUSDT",    "timeInForce": "GTC",    "timestamp": 1705311512994,    "type": "LIMIT"  }}
+```codeBlockLines_aHhF
+{  
+  "id": "9ca10e58-7452-467e-9454-f669bb9c764e",  "method": "order.place",  "params": {    "apiKey": "yeqKcXjtA9Eu4Tr3nJk61UJAGzXsEmFqqfVterxpMpR4peNfqE7Zl7oans8Qj089",    "price": "42088.0",    "quantity": "0.1",    "recvWindow": 5000,    "side": "BUY",    "signature": "996962a19802b5a09d7bc6ab1524227894533322a2f8a1f8934991689cabf8fe",    "symbol": "BTCUSDT",    "timeInForce": "GTC",    "timestamp": 1705311512994,    "type": "LIMIT"  }}
 ```
 
 Request fields:
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `id` | INT/STRING/null | YES | Arbitrary ID used to match responses to requests 
-| `method` | STRING | YES | Request method name 
-| `params` | OBJECT | NO | Request parameters. May be omitted if there are no parameters 
-|    |  |  |  
+| `id` | INT/STRING/null | YES | Arbitrary ID used to match responses to requests |
+| `method` | STRING | YES | Request method name |
+| `params` | OBJECT | NO | Request parameters. May be omitted if there are no parameters |
+|    |  |  |  |
 
 *   Request `id` is truly arbitrary. You can use UUIDs, sequential IDs, current timestamp, etc. The server does not interpret `id` in any way, simply echoing it back in the response.
 
@@ -954,35 +943,35 @@ You can freely reuse IDs within a session. However, be careful to not send more 
 *   Request method names may be prefixed with explicit version: e.g., "`v3/order.place`".
 *   The order of `params` is not significant.
 
-Response format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#response-format "Direct link to Response format")
----------------------------------------------------------------------------------------------------------------------------------------
+## Response format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#response-format "Direct link to Response format")
 
 Responses are returned as JSON in text frames, one response per frame.
 
 > Example of successful response:
 
-```
-{  "id": "43a3843a-2321-4e45-8f79-351e5c354563",  "status": 200,  "result": {    "orderId": 336829446,    "symbol": "BTCUSDT",    "status": "NEW",    "clientOrderId": "FqEw6cn0vDhrkmfiwLYPeo",    "price": "42088.00",    "avgPrice": "0.00",    "origQty": "0.100",    "executedQty": "0.000",    "cumQty": "0.000",    "cumQuote": "0.00000",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0.00",    "workingType": "CONTRACT_PRICE",    "priceProtect": false,    "origType": "LIMIT",    "priceMatch": "NONE",    "selfTradePreventionMode": "NONE",    "goodTillDate": 0,    "updateTime": 1705385954229  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 0    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "43a3843a-2321-4e45-8f79-351e5c354563",  "status": 200,  "result": {    "orderId": 336829446,    "symbol": "BTCUSDT",    "status": "NEW",    "clientOrderId": "FqEw6cn0vDhrkmfiwLYPeo",    "price": "42088.00",    "avgPrice": "0.00",    "origQty": "0.100",    "executedQty": "0.000",    "cumQty": "0.000",    "cumQuote": "0.00000",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0.00",    "workingType": "CONTRACT_PRICE",    "priceProtect": false,    "origType": "LIMIT",    "priceMatch": "NONE",    "selfTradePreventionMode": "NONE",    "goodTillDate": 0,    "updateTime": 1705385954229  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 0    }  ]}
 ```
 
 > Example of failed response:
 
-```
-{  "id": "5761b939-27b1-4948-ab87-4a372a3f6b72",  "status": 400,  "error": {    "code": -1102,    "msg": "Mandatory parameter 'quantity' was not sent, was empty/null, or malformed."  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 1    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "5761b939-27b1-4948-ab87-4a372a3f6b72",  "status": 400,  "error": {    "code": -1102,    "msg": "Mandatory parameter 'quantity' was not sent, was empty/null, or malformed."  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 1    }  ]}
 ```
 
 Response fields:
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `id` | INT/STRING/null | YES | Same as in the original request 
-| `status` | INT | YES | Response status. See status codes 
-| `result` | OBJECT/ARRAY | YES | Response content. Present if request succeeded 
-| `error` | OBJECT | YES | Error description. Present if request failed 
-| `rateLimits` | ARRAY | NO | Rate limiting status. See Rate limits 
+| `id` | INT/STRING/null | YES | Same as in the original request |
+| `status` | INT | YES | Response status. See status codes |
+| `result` | OBJECT/ARRAY | YES | Response content. Present if request succeeded |
+| `error` | OBJECT | YES | Error description. Present if request failed |
+| `rateLimits` | ARRAY | NO | Rate limiting status. See Rate limits |
 
-WebSocket API Rate limits[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-rate-limits "Direct link to WebSocket API Rate limits")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Rate limits[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-rate-limits "Direct link to WebSocket API Rate limits")
 
 *   Rate limits are the same as on REST API and are shared with REST API.
 *   WebSocket handshake attempt costs 5 weight.
@@ -991,8 +980,7 @@ WebSocket API Rate limits[​](/docs/derivatives/usds-margined-futures/websocket
 *   `rateLimits` field visibility can be controlled with `returnRateLimits` boolean parameter in connection string or individual requests.
 *   E.g., use `wss://ws-fapi.binance.com/ws-fapi/v1?returnRateLimits=false` to hide `rateLimits` in responses by default. With that, you can pass extra `"returnRateLimits": true` parameter in requests to show rate limit in response when it is otherwise hidden by default.
 
-WebSocket API Authenticate after connection[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authenticate-after-connection "Direct link to WebSocket API Authenticate after connection")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authenticate after connection[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authenticate-after-connection "Direct link to WebSocket API Authenticate after connection")
 
 You can authenticate an already established connection using session authentication requests:
 
@@ -1000,24 +988,23 @@ You can authenticate an already established connection using session authenticat
 *   `session.status` - check connection status and the current API key
 *   `session.logout` - forget the API key associated with the connection
 
-WebSocket API API key revocation[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-api-key-revocation "Direct link to WebSocket API API key revocation")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API API key revocation[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-api-key-revocation "Direct link to WebSocket API API key revocation")
 
 If during an active session the API key becomes invalid for any reason (e.g. IP address is not whitelisted, API key was deleted, API key doesn't have correct permissions, etc), after the next request the session will be revoked with the following error message:
 
-```
-{  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."   }}
+```codeBlockLines_aHhF
+{  
+  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."  }  
+}
 ```
 
-WebSocket API Authorize ad hoc requests[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authorize-ad-hoc-requests "Direct link to WebSocket API Authorize ad hoc requests")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authorize ad hoc requests[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authorize-ad-hoc-requests "Direct link to WebSocket API Authorize ad hoc requests")
 
 Only one API key can be authenticated with the WebSocket connection. The authenticated API key is used by default for requests that require an apiKey parameter. However, you can always specify the apiKey and signature explicitly for individual requests, overriding the authenticated API key and using a different one to authorize a specific request.
 
 For example, you might want to authenticate your USER\_DATA key to be used by default, but specify the TRADE key with an explicit signature when placing orders.
 
-WebSocket API Authentication request[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authentication-request "Direct link to WebSocket API Authentication request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authentication request[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authentication-request "Direct link to WebSocket API Authentication request")
 
 **Note**:
 
@@ -1027,14 +1014,16 @@ WebSocket API Authentication request[​](/docs/derivatives/usds-margined-future
 
 > **Request**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logon",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature": "1cf54395b336b0a9727ef27d5d98987962bc47aca6e13fe978612d0adee066ed",    "timestamp": 1649729878532  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logon",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature": "1cf54395b336b0a9727ef27d5d98987962bc47aca6e13fe978612d0adee066ed",    "timestamp": 1649729878532  }}
 ```
 
 > **Response**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649729878630  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649729878630  }}
 ```
 
 Authenticate WebSocket connection using the provided API key.
@@ -1051,23 +1040,25 @@ Note that only one API key can be authenticated. Calling `session.logon` multipl
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `apiKey` | STRING | YES |  
-| `recvWindow` | INT | NO |  
-| `signature` | STRING | YES |  
-| `timestamp` | INT | YES |  
+| `apiKey` | STRING | YES |  |
+| `recvWindow` | INT | NO |  |
+| `signature` | STRING | YES |  |
+| `timestamp` | INT | YES |  |
 
 ### Query session status[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#query-session-status "Direct link to Query session status")
 
 > **Request**
 
-```
-{  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "method": "session.status"}
+```codeBlockLines_aHhF
+{  
+  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "method": "session.status"}
 ```
 
 > **Response**
 
-```
-{  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "status": 200,  "result": {    // if the connection is not authenticated, "apiKey" and "authorizedSince" will be shown as null    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
+```codeBlockLines_aHhF
+{  
+  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "status": 200,  "result": {    // if the connection is not authenticated, "apiKey" and "authorizedSince" will be shown as null    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
 ```
 
 Query the status of the WebSocket connection, inspecting which API key (if any) is used to authorize requests.
@@ -1082,14 +1073,16 @@ Query the status of the WebSocket connection, inspecting which API key (if any) 
 
 > **Request**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logout"}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logout"}
 ```
 
 > **Response**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": null,    "authorizedSince": null,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": null,    "authorizedSince": null,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
 ```
 
 Forget the API key previously authenticated. If the connection is not authenticated, this request does nothing.
@@ -1102,66 +1095,100 @@ Note that the WebSocket connection stays open after `session.logout` request. Yo
 
 **Parameters**: None
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 ### SIGNED request example (Ed25519)[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#signed-request-example-ed25519 "Direct link to SIGNED request example (Ed25519)")
 
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | SELL 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 0.2 
-| timestamp | 1668481559918 
+| symbol | BTCUSDT |
+| side | SELL |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 0.2 |
+| timestamp | 1668481559918 |
 
-```
-#!/usr/bin/env python3import base64import timeimport jsonfrom cryptography.hazmat.primitives.serialization import load_pem_private_keyfrom websocket import create_connection# Set up authenticationAPI_KEY='put your own API Key here'PRIVATE_KEY_PATH='test-prv-key.pem'# Load the private key.# In this example the key is expected to be stored without encryption,# but we recommend using a strong password for improved security.with open(PRIVATE_KEY_PATH, 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)# Set up the request parametersparams = {    'apiKey':        API_KEY,    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}# Timestamp the requesttimestamp = int(time.time() * 1000) # UNIX timestamp in millisecondsparams['timestamp'] = timestamp# Sign the requestpayload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))params['signature'] = signature.decode('ASCII')# Send the requestrequest = {    'id': 'my_new_order',    'method': 'order.place',    'params': params}ws = create_connection("wss://ws-fapi.binance.com/ws-fapi/v1")ws.send(json.dumps(request))result =  ws.recv()ws.close()print(result)
+```codeBlockLines_aHhF
+#!/usr/bin/env python3  
+  
+import base64  
+import time  
+import json  
+from cryptography.hazmat.primitives.serialization import load_pem_private_key  
+from websocket import create_connection  
+  
+# Set up authentication  
+API_KEY='put your own API Key here'  
+PRIVATE_KEY_PATH='test-prv-key.pem'  
+  
+# Load the private key.  
+# In this example the key is expected to be stored without encryption,  
+# but we recommend using a strong password for improved security.  
+with open(PRIVATE_KEY_PATH, 'rb') as f:  
+    private_key = load_pem_private_key(data=f.read(),                                       password=None)  
+# Set up the request parameters  
+params = {  
+    'apiKey':        API_KEY,    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}  
+  
+# Timestamp the request  
+timestamp = int(time.time() * 1000) # UNIX timestamp in milliseconds  
+params['timestamp'] = timestamp  
+  
+# Sign the request  
+payload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])  
+  
+signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))  
+params['signature'] = signature.decode('ASCII')  
+  
+# Send the request  
+request = {  
+    'id': 'my_new_order',    'method': 'order.place',    'params': params}  
+  
+ws = create_connection("wss://ws-fapi.binance.com/ws-fapi/v1")  
+ws.send(json.dumps(request))  
+result =  ws.recv()  
+ws.close()  
+  
+print(result)
 ```
 
 A sample code in Python to show how to sign the payload with an Ed25519 key is available on the right side.
 
-Modify Order (TRADE)
-====================
+# Modify Order (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#api-description "Direct link to API Description")
 
 Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
 
-Method[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#method "Direct link to Method")
 
 `order.modify`
 
-Request[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#request "Direct link to Request")
 
-```
-{    "id": "c8c271ba-de70-479e-870c-e64951c753d9",    "method": "order.modify",    "params": {        "apiKey": "HMOchcfiT9ZRZnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGPHQj1lGdTjR",        "orderId": 328971409,        "origType": "LIMIT",        "positionSide": "SHORT",        "price": "43769.1",        "priceMatch": "NONE",        "quantity": "0.11",        "side": "SELL",        "symbol": "BTCUSDT",        "timestamp": 1703426755754,        "signature": "d30c9f0736a307f5a9988d4a40b688662d18324b17367d51421da5484e835923"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "c8c271ba-de70-479e-870c-e64951c753d9",    "method": "order.modify",    "params": {        "apiKey": "HMOchcfiT9ZRZnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGPHQj1lGdTjR",        "orderId": 328971409,        "origType": "LIMIT",        "positionSide": "SHORT",        "price": "43769.1",        "priceMatch": "NONE",        "quantity": "0.11",        "side": "SELL",        "symbol": "BTCUSDT",        "timestamp": 1703426755754,        "signature": "d30c9f0736a307f5a9988d4a40b688662d18324b17367d51421da5484e835923"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#request-weight "Direct link to Request Weight")
 
 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M); 1 on IP rate limit(x-mbx-used-weight-1m)
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| symbol | STRING | YES |  
-| side | ENUM | YES | `SELL`, `BUY` 
-| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` 
-| price | DECIMAL | YES |  
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| symbol | STRING | YES |  |
+| side | ENUM | YES | `SELL`, `BUY` |
+| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` |
+| price | DECIMAL | YES |  |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
 > *   Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
@@ -1171,63 +1198,70 @@ Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-
 >     *   When the order is `GTX` and the new price will cause it to be executed immediately
 > *   One order can only be modfied for less than 10000 times
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "id": "c8c271ba-de70-479e-870c-e64951c753d9",    "status": 200,    "result": {        "orderId": 328971409,        "symbol": "BTCUSDT",        "status": "NEW",        "clientOrderId": "xGHfltUMExx0TbQstQQfRX",        "price": "43769.10",        "avgPrice": "0.00",        "origQty": "0.110",        "executedQty": "0.000",        "cumQty": "0.000",        "cumQuote": "0.00000",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "SELL",        "positionSide": "SHORT",        "stopPrice": "0.00",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "priceMatch": "NONE",        "selfTradePreventionMode": "NONE",        "goodTillDate": 0,        "updateTime": 1703426756190    },    "rateLimits": [        {            "rateLimitType": "ORDERS",            "interval": "SECOND",            "intervalNum": 10,            "limit": 300,            "count": 1        },        {            "rateLimitType": "ORDERS",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 1200,            "count": 1        },        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 1        }    ]}
 ```
-{    "id": "c8c271ba-de70-479e-870c-e64951c753d9",    "status": 200,    "result": {        "orderId": 328971409,        "symbol": "BTCUSDT",        "status": "NEW",        "clientOrderId": "xGHfltUMExx0TbQstQQfRX",        "price": "43769.10",        "avgPrice": "0.00",        "origQty": "0.110",        "executedQty": "0.000",        "cumQty": "0.000",        "cumQuote": "0.00000",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "SELL",        "positionSide": "SHORT",        "stopPrice": "0.00",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "priceMatch": "NONE",        "selfTradePreventionMode": "NONE",        "goodTillDate": 0,        "updateTime": 1703426756190    },    "rateLimits": [        {            "rateLimitType": "ORDERS",            "interval": "SECOND",            "intervalNum": 10,            "limit": 300,            "count": 1        },        {            "rateLimitType": "ORDERS",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 1200,            "count": 1        },        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 1        }    ]}
-```
 
-Cancel Order (TRADE)
-====================
+# Cancel Order (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#api-description "Direct link to API Description")
 
 Cancel an active order.
 
-Method[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#method "Direct link to Method")
 
 `order.cancel`
 
-Request[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#request "Direct link to Request")
 
-```
-{   	"id": "5633b6a2-90a9-4192-83e7-925c90b6a2fd",    "method": "order.cancel",     "params": {         "apiKey": "HsOehcfih8ZRxnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGOGQj1lGdTjR",         "orderId": 283194212,         "symbol": "BTCUSDT",         "timestamp": 1703439070722,         "signature": "b09c49815b4e3f1f6098cd9fbe26a933a9af79803deaaaae03c29f719c08a8a8"     }}
+```codeBlockLines_aHhF
+{  
+   	"id": "5633b6a2-90a9-4192-83e7-925c90b6a2fd",    "method": "order.cancel",    "params": {   
+        "apiKey": "HsOehcfih8ZRxnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGOGQj1lGdTjR",   
+        "orderId": 283194212,   
+        "symbol": "BTCUSDT",   
+        "timestamp": 1703439070722,   
+        "signature": "b09c49815b4e3f1f6098cd9fbe26a933a9af79803deaaaae03c29f719c08a8a8"   
+    }  
+}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "5633b6a2-90a9-4192-83e7-925c90b6a2fd",  "status": 200,  "result": {    "clientOrderId": "myOrder1",    "cumQty": "0",    "cumQuote": "0",    "executedQty": "0",    "orderId": 283194212,    "origQty": "11",    "origType": "TRAILING_STOP_MARKET",    "price": "0",    "reduceOnly": false,    "side": "BUY",    "positionSide": "SHORT",    "status": "CANCELED",    "stopPrice": "9300",    "closePosition": false,    
+    "symbol": "BTCUSDT",  
+    "timeInForce": "GTC",    "type": "TRAILING_STOP_MARKET",    "activatePrice": "9020",    "priceRate": "0.3",                  
+    "updateTime": 1571110484038,  
+    "workingType": "CONTRACT_PRICE",    "priceProtect": false,    "priceMatch": "NONE",                
+    "selfTradePreventionMode": "NONE",  
+    "goodTillDate": 0  },  
+  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    }  ]}
 ```
-{  "id": "5633b6a2-90a9-4192-83e7-925c90b6a2fd",  "status": 200,  "result": {    "clientOrderId": "myOrder1",    "cumQty": "0",    "cumQuote": "0",    "executedQty": "0",    "orderId": 283194212,    "origQty": "11",    "origType": "TRAILING_STOP_MARKET",    "price": "0",    "reduceOnly": false,    "side": "BUY",    "positionSide": "SHORT",    "status": "CANCELED",    "stopPrice": "9300",                    "closePosition": false,      "symbol": "BTCUSDT",    "timeInForce": "GTC",    "type": "TRAILING_STOP_MARKET",    "activatePrice": "9020",                "priceRate": "0.3",                    "updateTime": 1571110484038,    "workingType": "CONTRACT_PRICE",    "priceProtect": false,               "priceMatch": "NONE",                  "selfTradePreventionMode": "NONE",    "goodTillDate": 0                   },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    }  ]}
-```
 
-Query Order (USER\_DATA)
-========================
+# Query Order (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#api-description "Direct link to API Description")
 
 Check an order's status.
 
@@ -1235,48 +1269,44 @@ Check an order's status.
     *   order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
     *   order create time + 90 days < current time
 
-Method[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#method "Direct link to Method")
------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#method "Direct link to Method")
 
 `order.status`
 
-Request[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#request "Direct link to Request")
---------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#request "Direct link to Request")
 
-```
-{    "id": "0ce5d070-a5e5-4ff2-b57f-1556741a4204",    "method": "order.status",    "params": {        "apiKey": "HMOchcfii9ZRZnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGPHQj1lGdTjR",        "orderId": 328999071,        "symbol": "BTCUSDT",        "timestamp": 1703441060152,        "signature": "ba48184fc38a71d03d2b5435bd67c1206e3191e989fe99bda1bc643a880dfdbf"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "0ce5d070-a5e5-4ff2-b57f-1556741a4204",    "method": "order.status",    "params": {        "apiKey": "HMOchcfii9ZRZnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGPHQj1lGdTjR",        "orderId": 328999071,        "symbol": "BTCUSDT",        "timestamp": 1703441060152,        "signature": "ba48184fc38a71d03d2b5435bd67c1206e3191e989fe99bda1bc643a880dfdbf"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 Notes:
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 > *   `orderId` is self-increment for each specific `symbol`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order#response-example "Direct link to Response Example")
 
-```
-{ "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba", "status": 200, "result": {  "avgPrice": "0.00000",  "clientOrderId": "abc",  "cumQuote": "0",  "executedQty": "0",  "orderId": 1917641,  "origQty": "0.40",  "origType": "TRAILING_STOP_MARKET",  "price": "0",  "reduceOnly": false,  "side": "BUY",  "positionSide": "SHORT",  "status": "NEW",  "stopPrice": "9300",    // please ignore when order type is TRAILING_STOP_MARKET  "closePosition": false,   // if Close-All  "symbol": "BTCUSDT",  "time": 1579276756075,    // order time  "timeInForce": "GTC",  "type": "TRAILING_STOP_MARKET",  "activatePrice": "9020",   // activation price, only return with TRAILING_STOP_MARKET order  "priceRate": "0.3",     // callback rate, only return with TRAILING_STOP_MARKET order  "updateTime": 1579276756075,  // update time  "workingType": "CONTRACT_PRICE",  "priceProtect": false            // if conditional order trigger is protected }}
+```codeBlockLines_aHhF
+{  
+ "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba", "status": 200, "result": {  "avgPrice": "0.00000",  "clientOrderId": "abc",  "cumQuote": "0",  "executedQty": "0",  "orderId": 1917641,  "origQty": "0.40",  "origType": "TRAILING_STOP_MARKET",  "price": "0",  "reduceOnly": false,  "side": "BUY",  "positionSide": "SHORT",  "status": "NEW",  "stopPrice": "9300",    // please ignore when order type is TRAILING_STOP_MARKET  "closePosition": false,   // if Close-All  "symbol": "BTCUSDT",  "time": 1579276756075,    // order time  "timeInForce": "GTC",  "type": "TRAILING_STOP_MARKET",  "activatePrice": "9020",   // activation price, only return with TRAILING_STOP_MARKET order  "priceRate": "0.3",     // callback rate, only return with TRAILING_STOP_MARKET order  "updateTime": 1579276756075,  // update time  "workingType": "CONTRACT_PRICE",  "priceProtect": false            // if conditional order trigger is protected }}
 ```
 
-User Data Streams Connect
-=========================
+# User Data Streams Connect
 
 *   The base API endpoint is: **[https://fapi.binance.com](https://fapi.binance.com)**
     
@@ -1297,212 +1327,179 @@ User Data Streams Connect
     
 *   A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark
 
-Start User Data Stream (USER\_STREAM)
-=====================================
+# Start User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#api-description "Direct link to API Description")
 
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/listenKey`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
 ```
-{  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
-```
 
-Keepalive User Data Stream (USER\_STREAM)
-=========================================
+# Keepalive User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#api-description "Direct link to API Description")
 
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 60 minutes.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#http-request "Direct link to HTTP Request")
 
 PUT `/fapi/v1/listenKey`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "listenKey": "3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg" //the listenkey which got extended}
 ```
-{    "listenKey": "3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg" //the listenkey which got extended}
-```
 
-Close User Data Stream (USER\_STREAM)
-=====================================
+# Close User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#api-description "Direct link to API Description")
 
 Close out a user data stream.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#http-request "Direct link to HTTP Request")
 
 DELETE `/fapi/v1/listenKey`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#request-weight "Direct link to Request Weight")
 
 1
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream#response-example "Direct link to Response Example")
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
-Start User Data Stream (USER\_STREAM)
-=====================================
+# Start User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#api-description "Direct link to API Description")
 
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
 
-Method[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#method "Direct link to Method")
 
 `userDataStream.start`
 
-Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request "Direct link to Request")
 
-```
-{  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "method": "userDataStream.start",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
+```codeBlockLines_aHhF
+{  
+  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "method": "userDataStream.start",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "status": 200,  "result": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"  },   "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
-{  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "status": 200,  "result": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"  },   "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
-```
 
-Keepalive User Data Stream (USER\_STREAM)
-=========================================
+# Keepalive User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#api-description "Direct link to API Description")
 
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 60 minutes.
 
-Method[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#method "Direct link to Method")
-----------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#method "Direct link to Method")
 
 `userDataStream.ping`
 
-Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request "Direct link to Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request "Direct link to Request")
 
-```
-{  "id": "815d5fce-0880-4287-a567-80badf004c74",  "method": "userDataStream.ping",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "815d5fce-0880-4287-a567-80badf004c74",  "method": "userDataStream.ping",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"   }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "815d5fce-0880-4287-a567-80badf004c74",  "status": 200,  "result": {    "listenKey": "3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
-{  "id": "815d5fce-0880-4287-a567-80badf004c74",  "status": 200,  "result": {    "listenKey": "3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
-```
 
-Close User Data Stream (USER\_STREAM)
-=====================================
+# Close User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#api-description "Direct link to API Description")
 
 Close out a user data stream.
 
-Method[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#method "Direct link to Method")
 
 `userDataStream.stop`
 
-Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request "Direct link to Request")
 
-```
-{  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "method": "userDataStream.stop",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"  }}
+```codeBlockLines_aHhF
+{  
+  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "method": "userDataStream.stop",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"  }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "status": 200,  "result": {},   "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
-{  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "status": 200,  "result": {},   "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
-```
 
-Event: User Data Stream Expired
-===============================
+# Event: User Data Stream Expired
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-description "Direct link to Event Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-description "Direct link to Event Description")
 
 When the `listenKey` used for the user data stream turns expired, this event will be pushed.
 
@@ -1512,23 +1509,20 @@ When the `listenKey` used for the user data stream turns expired, this event wil
 > *   This event will be received only when a valid `listenKey` in connection got expired.
 > *   No more user data event will be updated after this event received until a new valid `listenKey` used.
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-name "Direct link to Event Name")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-name "Direct link to Event Name")
 
 `listenKeyExpired`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e": "listenKeyExpired",    // event type    "E": "1736996475556",       // event time    "listenKey":"WsCMN0a4KHUPTQuX6IUnqEZfB1inxmv1qR4kbf1LuEjur5VdbzqvyxqG9TSjVVxv"}
 ```
-{    "e": "listenKeyExpired",    // event type    "E": "1736996475556",       // event time    "listenKey":"WsCMN0a4KHUPTQuX6IUnqEZfB1inxmv1qR4kbf1LuEjur5VdbzqvyxqG9TSjVVxv"}
-```
 
-Event: Balance and Position Update
-==================================
+# Event: Balance and Position Update
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-description "Direct link to Event Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-description "Direct link to Event Description")
 
 Event type is `ACCOUNT_UPDATE`.
 
@@ -1563,45 +1557,42 @@ Event type is `ACCOUNT_UPDATE`.
 *   The field "bc" represents the balance change except for PnL and commission.
     
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-name "Direct link to Event Name")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-name "Direct link to Event Name")
 
 `ACCOUNT_UPDATE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Balance-and-Position-Update#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Balance-and-Position-Update#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e": "ACCOUNT_UPDATE",				// Event Type  "E": 1564745798939,            		// Event Time  "T": 1564745798938 ,           		// Transaction  "a":                          		// Update Data    {      "m":"ORDER",						// Event reason type      "B":[                     		// Balances        {          "a":"USDT",           		// Asset          "wb":"122624.12345678",    	// Wallet Balance          "cw":"100.12345678",			// Cross Wallet Balance          "bc":"50.12345678"			// Balance Change except PnL and Commission        },        {          "a":"BUSD",          "wb":"1.00000000",  
+          "cw":"0.00000000",          "bc":"-49.12345678"  
+        }      ],      "P":[        {          "s":"BTCUSDT",          	// Symbol          "pa":"0",               	// Position Amount          "ep":"0.00000",            // Entry Price          "bep":"0",                // breakeven price 		  "cr":"200",             	// (Pre-fee) Accumulated Realized  
+          "up":"0",						// Unrealized PnL          "mt":"isolated",				// Margin Type          "iw":"0.00000000",			// Isolated Wallet (if isolated position)          "ps":"BOTH"					// Position Side        }，        {        	"s":"BTCUSDT",        	"pa":"20",        	"ep":"6563.66500",        	"bep":"0",                // breakeven price        	"cr":"0",        	"up":"2850.21200",        	"mt":"isolated",        	"iw":"13200.70726908",        	"ps":"LONG"      	 },        {        	"s":"BTCUSDT",        	"pa":"-10",        	"ep":"6563.86000",        	"bep":"6563.6",          // breakeven price        	"cr":"-45.04000000",        	"up":"-1423.15600",        	"mt":"isolated",        	"iw":"6570.42511771",        	"ps":"SHORT"        }      ]    }}
 ```
-{  "e": "ACCOUNT_UPDATE",				// Event Type  "E": 1564745798939,            		// Event Time  "T": 1564745798938 ,           		// Transaction  "a":                          		// Update Data    {      "m":"ORDER",						// Event reason type      "B":[                     		// Balances        {          "a":"USDT",           		// Asset          "wb":"122624.12345678",    	// Wallet Balance          "cw":"100.12345678",			// Cross Wallet Balance          "bc":"50.12345678"			// Balance Change except PnL and Commission        },        {          "a":"BUSD",                     "wb":"1.00000000",          "cw":"0.00000000",                   "bc":"-49.12345678"        }      ],      "P":[        {          "s":"BTCUSDT",          	// Symbol          "pa":"0",               	// Position Amount          "ep":"0.00000",            // Entry Price          "bep":"0",                // breakeven price 		  "cr":"200",             	// (Pre-fee) Accumulated Realized          "up":"0",						// Unrealized PnL          "mt":"isolated",				// Margin Type          "iw":"0.00000000",			// Isolated Wallet (if isolated position)          "ps":"BOTH"					// Position Side        }，        {        	"s":"BTCUSDT",        	"pa":"20",        	"ep":"6563.66500",        	"bep":"0",                // breakeven price        	"cr":"0",        	"up":"2850.21200",        	"mt":"isolated",        	"iw":"13200.70726908",        	"ps":"LONG"      	 },        {        	"s":"BTCUSDT",        	"pa":"-10",        	"ep":"6563.86000",        	"bep":"6563.6",          // breakeven price        	"cr":"-45.04000000",        	"up":"-1423.15600",        	"mt":"isolated",        	"iw":"6570.42511771",        	"ps":"SHORT"        }      ]    }}
-```
 
-Event: Margin Call
-==================
+# Event: Margin Call
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Margin-Call#event-description "Direct link to Event Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Margin-Call#event-description "Direct link to Event Description")
 
 *   When the user's position risk ratio is too high, this stream will be pushed.
 *   This message is only used as risk guidance information and is not recommended for investment strategies.
 *   In the case of a highly volatile market, there may be the possibility that the user's position has been liquidated at the same time when this stream is pushed out.
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Margin-Call#event-name "Direct link to Event Name")
----------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Margin-Call#event-name "Direct link to Event Name")
 
 `MARGIN_CALL`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Margin-Call#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Margin-Call#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"MARGIN_CALL",    	// Event Type    "E":1587727187525,		// Event Time    "cw":"3.16812045",		// Cross Wallet Balance. Only pushed with crossed position margin call    "p":[					// Position(s) of Margin Call      {        "s":"ETHUSDT",		// Symbol        "ps":"LONG",		// Position Side        "pa":"1.327",		// Position Amount        "mt":"CROSSED",		// Margin Type        "iw":"0",			// Isolated Wallet (if isolated position)        "mp":"187.17127",	// Mark Price        "up":"-1.166074",	// Unrealized PnL        "mm":"1.614445"		// Maintenance Margin Required      }    ]}
 ```
-{    "e":"MARGIN_CALL",    	// Event Type    "E":1587727187525,		// Event Time    "cw":"3.16812045",		// Cross Wallet Balance. Only pushed with crossed position margin call    "p":[					// Position(s) of Margin Call      {        "s":"ETHUSDT",		// Symbol        "ps":"LONG",		// Position Side        "pa":"1.327",		// Position Amount        "mt":"CROSSED",		// Margin Type        "iw":"0",			// Isolated Wallet (if isolated position)        "mp":"187.17127",	// Mark Price        "up":"-1.166074",	// Unrealized PnL        "mm":"1.614445"		// Maintenance Margin Required      }    ]}  
-```
 
-Event: Order Update
-===================
+# Event: Order Update
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Order-Update#event-description "Direct link to Event Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Order-Update#event-description "Direct link to Event Description")
 
 When new order created, order status changed will push such event. event type is `ORDER_TRADE_UPDATE`.
 
@@ -1660,71 +1651,65 @@ When new order created, order status changed will push such event. event type is
     
     *   `c` shows as “adl\_autoclose”，`X` shows as “NEW”
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Order-Update#event-name "Direct link to Event Name")
-----------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Order-Update#event-name "Direct link to Event Name")
 
 `ORDER_TRADE_UPDATE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Order-Update#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Order-Update#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"ORDER_TRADE_UPDATE",		   // Event Type  "E":1568879465651,			       // Event Time  "T":1568879465650,			       // Transaction Time  "o":{    "s":"BTCUSDT",			         // Symbol    "c":"TEST",				           // Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "settlement_autoclose-": settlement order for delisting or delivery    "S":"SELL",					         // Side    "o":"TRAILING_STOP_MARKET",	 // Order Type    "f":"GTC",					         // Time in Force    "q":"0.001",				         // Original Quantity    "p":"0",					           // Original Price    "ap":"0",					           // Average Price    "sp":"7103.04",				       // Stop Price. Please ignore with TRAILING_STOP_MARKET order    "x":"NEW",					         // Execution Type    "X":"NEW",					         // Order Status    "i":8886774,				         // Order Id    "l":"0",					           // Order Last Filled Quantity    "z":"0",					           // Order Filled Accumulated Quantity    "L":"0",					           // Last Filled Price    "N":"USDT",            	     // Commission Asset, will not push if no commission    "n":"0",               	     // Commission, will not push if no commission    "T":1568879465650,			     // Order Trade Time    "t":0,			        	       // Trade Id    "b":"0",			    	         // Bids Notional    "a":"9.91",					         // Ask Notional    "m":false,					         // Is this trade the maker side?    "R":false,					         // Is this reduce only    "wt":"CONTRACT_PRICE", 		   // Stop Price Working Type    "ot":"TRAILING_STOP_MARKET", // Original Order Type    "ps":"LONG",					       // Position Side    "cp":false,						       // If Close-All, pushed with conditional order    "AP":"7476.89",				       // Activation Price, only puhed with TRAILING_STOP_MARKET order    "cr":"5.0",					         // Callback Rate, only puhed with TRAILING_STOP_MARKET order    "pP": false,                 // If price protection is turned on    "si": 0,                     // ignore    "ss": 0,                     // ignore    "rp":"0",	   					       // Realized Profit of the trade    "V":"EXPIRE_TAKER",          // STP mode    "pm":"OPPONENT",             // Price match mode    "gtd":0                      // TIF GTD order auto cancel time  }}
 ```
-{  "e":"ORDER_TRADE_UPDATE",		   // Event Type  "E":1568879465651,			       // Event Time  "T":1568879465650,			       // Transaction Time  "o":{								    "s":"BTCUSDT",			         // Symbol    "c":"TEST",				           // Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "settlement_autoclose-": settlement order for delisting or delivery    "S":"SELL",					         // Side    "o":"TRAILING_STOP_MARKET",	 // Order Type    "f":"GTC",					         // Time in Force    "q":"0.001",				         // Original Quantity    "p":"0",					           // Original Price    "ap":"0",					           // Average Price    "sp":"7103.04",				       // Stop Price. Please ignore with TRAILING_STOP_MARKET order    "x":"NEW",					         // Execution Type    "X":"NEW",					         // Order Status    "i":8886774,				         // Order Id    "l":"0",					           // Order Last Filled Quantity    "z":"0",					           // Order Filled Accumulated Quantity    "L":"0",					           // Last Filled Price    "N":"USDT",            	     // Commission Asset, will not push if no commission    "n":"0",               	     // Commission, will not push if no commission    "T":1568879465650,			     // Order Trade Time    "t":0,			        	       // Trade Id    "b":"0",			    	         // Bids Notional    "a":"9.91",					         // Ask Notional    "m":false,					         // Is this trade the maker side?    "R":false,					         // Is this reduce only    "wt":"CONTRACT_PRICE", 		   // Stop Price Working Type    "ot":"TRAILING_STOP_MARKET", // Original Order Type    "ps":"LONG",					       // Position Side    "cp":false,						       // If Close-All, pushed with conditional order    "AP":"7476.89",				       // Activation Price, only puhed with TRAILING_STOP_MARKET order    "cr":"5.0",					         // Callback Rate, only puhed with TRAILING_STOP_MARKET order    "pP": false,                 // If price protection is turned on    "si": 0,                     // ignore    "ss": 0,                     // ignore    "rp":"0",	   					       // Realized Profit of the trade    "V":"EXPIRE_TAKER",          // STP mode    "pm":"OPPONENT",             // Price match mode    "gtd":0                      // TIF GTD order auto cancel time  }}
-```
 
-Event: Trade Lite Update
-========================
+# Event: Trade Lite Update
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Trade-Lite#event-description "Direct link to Event Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Trade-Lite#event-description "Direct link to Event Description")
 
 Fast trade stream reduces data latency compared original `ORDER_TRADE_UPDATE` stream. However, it only pushes TRADE Execution Type, and fewer data fields.
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Trade-Lite#event-name "Direct link to Event Name")
---------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Trade-Lite#event-name "Direct link to Event Name")
 
 `TRADE_LITE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Trade-Lite#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Trade-Lite#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"TRADE_LITE",             // Event Type  "E":1721895408092,            // Event Time  "T":1721895408214,            // Transaction Time  "s":"BTCUSDT",                // Symbol  
+  "q":"0.001",                  // Original Quantity  "p":"0",                      // Original Price  "m":false,                    // Is this trade the maker side?  "c":"z8hcUoOsqEdKMeKPSABslD", // Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "settlement_autoclose-": settlement order for delisting or delivery  "S":"BUY",                   // Side  "L":"64089.20",              // Last Filled Price  "l":"0.040",                 // Order Last Filled Quantity  "t":109100866,               // Trade Id  "i":8886774,                // Order Id}
 ```
-{  "e":"TRADE_LITE",             // Event Type  "E":1721895408092,            // Event Time  "T":1721895408214,            // Transaction Time                            "s":"BTCUSDT",                // Symbol  "q":"0.001",                  // Original Quantity  "p":"0",                      // Original Price  "m":false,                    // Is this trade the maker side?  "c":"z8hcUoOsqEdKMeKPSABslD", // Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "settlement_autoclose-": settlement order for delisting or delivery  "S":"BUY",                   // Side  "L":"64089.20",              // Last Filled Price  "l":"0.040",                 // Order Last Filled Quantity  "t":109100866,               // Trade Id  "i":8886774,                // Order Id}
-```
 
-Event: Account Configuration Update previous Leverage Update
-============================================================
+# Event: Account Configuration Update previous Leverage Update
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Account-Configuration-Update-previous-Leverage-Update#event-description "Direct link to Event Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Account-Configuration-Update-previous-Leverage-Update#event-description "Direct link to Event Description")
 
 When the account configuration is changed, the event type will be pushed as `ACCOUNT_CONFIG_UPDATE` When the leverage of a trade pair changes, the payload will contain the object `ac` to represent the account configuration of the trade pair, where `s` represents the specific trade pair and `l` represents the leverage When the user Multi-Assets margin mode changes the payload will contain the object `ai` representing the user account configuration, where `j` represents the user Multi-Assets margin mode
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Account-Configuration-Update-previous-Leverage-Update#event-name "Direct link to Event Name")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Account-Configuration-Update-previous-Leverage-Update#event-name "Direct link to Event Name")
 
 `ACCOUNT_CONFIG_UPDATE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Account-Configuration-Update-previous-Leverage-Update#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Account-Configuration-Update-previous-Leverage-Update#response-example "Direct link to Response Example")
 
 > **Payload:**
 
-```
-{    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type    "E":1611646737479,		           // Event Time    "T":1611646737476,		           // Transaction Time    "ac":{								    "s":"BTCUSDT",					   // symbol    "l":25						       // leverage         }}   
+```codeBlockLines_aHhF
+{  
+    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type    "E":1611646737479,		           // Event Time    "T":1611646737476,		           // Transaction Time    "ac":{    "s":"BTCUSDT",					   // symbol    "l":25						       // leverage         }  
+}
 ```
 
 > **Or**
 
-```
-{    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type    "E":1611646737479,		           // Event Time    "T":1611646737476,		           // Transaction Time    "ai":{							   // User's Account Configuration    "j":true						   // Multi-Assets Mode    }}  
+```codeBlockLines_aHhF
+{  
+    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type    "E":1611646737479,		           // Event Time    "T":1611646737476,		           // Transaction Time    "ai":{							   // User's Account Configuration    "j":true						   // Multi-Assets Mode    }}
 ```
 
-Event: STRATEGY\_UPDATE
-=======================
+# Event: STRATEGY\_UPDATE
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-description "Direct link to Event Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-description "Direct link to Event Description")
 
 `STRATEGY_UPDATE` update when a strategy is created/cancelled/expired, ...etc.
 
@@ -1753,23 +1738,20 @@ Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams
 *   8014: Violated Futures Trading Quantitative Rules. Strategy stopped
 *   8015: User position empty or liquidated
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-name "Direct link to Event Name")
--------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-name "Direct link to Event Name")
 
 `STRATEGY_UPDATE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"e": "STRATEGY_UPDATE", // Event Type	"T": 1669261797627, // Transaction Time	"E": 1669261797628, // Event Time	"su": {			"si": 176054594, // Strategy ID			"st": "GRID", // Strategy Type			"ss": "NEW", // Strategy Status			"s": "BTCUSDT", // Symbol			"ut": 1669261797627, // Update Time			"c": 8007 // opCode		}}
 ```
-{	"e": "STRATEGY_UPDATE", // Event Type	"T": 1669261797627, // Transaction Time	"E": 1669261797628, // Event Time	"su": {			"si": 176054594, // Strategy ID			"st": "GRID", // Strategy Type			"ss": "NEW", // Strategy Status			"s": "BTCUSDT", // Symbol			"ut": 1669261797627, // Update Time			"c": 8007 // opCode		}}
-```
 
-Event: GRID\_UPDATE
-===================
+# Event: GRID\_UPDATE
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-GRID-UPDATE#event-description "Direct link to Event Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-GRID-UPDATE#event-description "Direct link to Event Description")
 
 `GRID_UPDATE` update when a sub order of a grid is filled or partially filled. **Strategy Status**
 
@@ -1778,211 +1760,221 @@ Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams
 *   CANCELLED
 *   EXPIRED
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-GRID-UPDATE#event-name "Direct link to Event Name")
----------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-GRID-UPDATE#event-name "Direct link to Event Name")
 
 `GRID_UPDATE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-GRID-UPDATE#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-GRID-UPDATE#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"e": "GRID_UPDATE", // Event Type	"T": 1669262908216, // Transaction Time	"E": 1669262908218, // Event Time	"gu": { 			"si": 176057039, // Strategy ID  
+			"st": "GRID", // Strategy Type			"ss": "WORKING", // Strategy Status			"s": "BTCUSDT", // Symbol			"r": "-0.00300716", // Realized PNL			"up": "16720", // Unmatched Average Price			"uq": "-0.001", // Unmatched Qty			"uf": "-0.00300716", // Unmatched Fee			"mp": "0.0", // Matched PNL			"ut": 1669262908197 // Update Time		   }}
 ```
-{	"e": "GRID_UPDATE", // Event Type	"T": 1669262908216, // Transaction Time	"E": 1669262908218, // Event Time	"gu": { 			"si": 176057039, // Strategy ID			"st": "GRID", // Strategy Type			"ss": "WORKING", // Strategy Status			"s": "BTCUSDT", // Symbol			"r": "-0.00300716", // Realized PNL			"up": "16720", // Unmatched Average Price			"uq": "-0.001", // Unmatched Qty			"uf": "-0.00300716", // Unmatched Fee			"mp": "0.0", // Matched PNL			"ut": 1669262908197 // Update Time		   }}
-```
 
-Event: Conditional\_Order\_Trigger\_Reject
-==========================================
+# Event: Conditional\_Order\_Trigger\_Reject
 
-Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Conditional-Order-Trigger-Reject#event-description "Direct link to Event Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Conditional-Order-Trigger-Reject#event-description "Direct link to Event Description")
 
 `CONDITIONAL_ORDER_TRIGGER_REJECT` update when a triggered TP/SL order got rejected.
 
-Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Conditional-Order-Trigger-Reject#event-name "Direct link to Event Name")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Conditional-Order-Trigger-Reject#event-name "Direct link to Event Name")
 
 `CONDITIONAL_ORDER_TRIGGER_REJECT`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Conditional-Order-Trigger-Reject#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/user-data-streams/Event-Conditional-Order-Trigger-Reject#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"CONDITIONAL_ORDER_TRIGGER_REJECT",      // Event Type    "E":1685517224945,      // Event Time    "T":1685517224955,      // me message send Time    "or":{      "s":"ETHUSDT",      // Symbol      "i":155618472834,      // orderId  
+      "r":"Due to the order could not be filled immediately, the FOK order has been rejected. The order will not be recorded in the order history",      // reject reason     }}
 ```
-{    "e":"CONDITIONAL_ORDER_TRIGGER_REJECT",      // Event Type    "E":1685517224945,      // Event Time    "T":1685517224955,      // me message send Time    "or":{      "s":"ETHUSDT",      // Symbol         "i":155618472834,      // orderId      "r":"Due to the order could not be filled immediately, the FOK order has been rejected. The order will not be recorded in the order history",      // reject reason     }}  
-```
 
-Futures Account Balance V2(USER\_DATA)
-======================================
+# Futures Account Balance V2(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api#api-description "Direct link to API Description")
 
 Query account balance info
 
-Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api#method "Direct link to Method")
--------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api#method "Direct link to Method")
 
 `v2/account.balance`
 
-Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api#request "Direct link to Request")
-----------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api#request "Direct link to Request")
 
-```
-{    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "v2/account.balance",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702561978458,        "signature": "208bb94a26f99aa122b1319490ca9cb2798fccc81d9b6449521a26268d53217a"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "v2/account.balance",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702561978458,        "signature": "208bb94a26f99aa122b1319490ca9cb2798fccc81d9b6449521a26268d53217a"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "status": 200,    "result": [      {        "accountAlias": "SgsR",              // unique account code        "asset": "USDT",  	                // asset name        "balance": "122607.35137903",        // wallet balance        "crossWalletBalance": "23.72469206", // crossed wallet balance        "crossUnPnl": "0.00000000"           // unrealized profit of crossed positions        "availableBalance": "23.72469206",   // available balance        "maxWithdrawAmount": "23.72469206",  // maximum amount for transfer out        "marginAvailable": true,             // whether the asset can be used as margin in Multi-Assets mode        "updateTime": 1617939110373      }    ],    "rateLimits": [      {        "rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400,        "count": 20      }    ]}
 ```
-{    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "status": 200,    "result": [      {        "accountAlias": "SgsR",              // unique account code        "asset": "USDT",  	                // asset name        "balance": "122607.35137903",        // wallet balance        "crossWalletBalance": "23.72469206", // crossed wallet balance        "crossUnPnl": "0.00000000"           // unrealized profit of crossed positions        "availableBalance": "23.72469206",   // available balance        "maxWithdrawAmount": "23.72469206",  // maximum amount for transfer out        "marginAvailable": true,             // whether the asset can be used as margin in Multi-Assets mode        "updateTime": 1617939110373      }    ],    "rateLimits": [      {        "rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400,        "count": 20      }    ]}
-```
 
-Futures Account Balance(USER\_DATA)
-===================================
+# Futures Account Balance(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#api-description "Direct link to API Description")
 
 Query account balance info
 
-Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#method "Direct link to Method")
--------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#method "Direct link to Method")
 
 `account.balance`
 
-Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#request "Direct link to Request")
-----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#request "Direct link to Request")
 
-```
-{    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "account.balance",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702561978458,        "signature": "208bb94a26f99aa122b1319490ca9cb2798fccc81d9b6449521a26268d53217a"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "account.balance",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702561978458,        "signature": "208bb94a26f99aa122b1319490ca9cb2798fccc81d9b6449521a26268d53217a"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "status": 200,    "result": [        {            "accountAlias": "SgsR",    // unique account code            "asset": "USDT",    // asset name            "balance": "122607.35137903", // wallet balance            "crossWalletBalance": "23.72469206", // crossed wallet balance            "crossUnPnl": "0.00000000"  // unrealized profit of crossed positions            "availableBalance": "23.72469206",       // available balance            "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out            "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode            "updateTime": 1617939110373        }    ],    "rateLimits": [      {        "rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400,        "count": 20      }    ]}
 ```
-{    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "status": 200,    "result": [        {            "accountAlias": "SgsR",    // unique account code            "asset": "USDT",    // asset name            "balance": "122607.35137903", // wallet balance            "crossWalletBalance": "23.72469206", // crossed wallet balance            "crossUnPnl": "0.00000000"  // unrealized profit of crossed positions            "availableBalance": "23.72469206",       // available balance            "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out            "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode            "updateTime": 1617939110373        }    ],    "rateLimits": [      {        "rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400,        "count": 20      }    ]}
-```
 
-Account Information V2(USER\_DATA)
-==================================
+# Account Information V2(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#api-description "Direct link to API Description")
 
 Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
 
-Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#method "Direct link to Method")
 
 `v2/account.status`
 
-Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#request "Direct link to Request")
 
-```
-{    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "v2/account.status",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702620814781,        "signature": "6bb98ef84170c70ba3d01f44261bfdf50fef374e551e590de22b5c3b729b1d8c"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "v2/account.status",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702620814781,        "signature": "6bb98ef84170c70ba3d01f44261bfdf50fef374e551e590de22b5c3b729b1d8c"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2#response-example "Direct link to Response Example")
 
 > Single Asset Mode
 
-```
-{  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {     	"totalInitialMargin": "0.00000000",            // total initial margin required with current mark price (useless with isolated positions), only for USDT asset  	"totalMaintMargin": "0.00000000",  	           // total maintenance margin required, only for USDT asset  	"totalWalletBalance": "103.12345678",           // total wallet balance, only for USDT asset  	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit, only for USDT asset  	"totalMarginBalance": "103.12345678",           // total margin balance, only for USDT asset  	"totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset  	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset  	"totalCrossWalletBalance": "103.12345678",      // crossed wallet balance, only for USDT asset  	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions, only for USDT asset  	"availableBalance": "103.12345678",             // available balance, only for USDT asset  	"maxWithdrawAmount": "103.12345678"             // maximum amount for transfer out, only for USDT asset  	"assets": [ // For assets that are quote assets, USDT/USDC/BTC  		{  			"asset": "USDT",			            // asset name  			"walletBalance": "23.72469206",         // wallet balance  			"unrealizedProfit": "0.00000000",       // unrealized profit  			"marginBalance": "23.72469206",         // margin balance  			"maintMargin": "0.00000000",	        // maintenance margin required  			"initialMargin": "0.00000000",          // total initial margin required with current mark price   			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price  			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price  			"crossWalletBalance": "23.72469206",    // crossed wallet balance  			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions  			"availableBalance": "23.72469206",      // available balance  			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out  			"updateTime": 1625474304765             // last update time   		},      		{  			"asset": "USDC",			            // asset name  			"walletBalance": "103.12345678",         // wallet balance  			"unrealizedProfit": "0.00000000",       // unrealized profit  			"marginBalance": "103.12345678",         // margin balance  			"maintMargin": "0.00000000",	        // maintenance margin required  			"initialMargin": "0.00000000",          // total initial margin required with current mark price   			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price  			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price  			"crossWalletBalance": "103.12345678",    // crossed wallet balance  			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions  			"availableBalance": "126.72469206",      // available balance  			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out  			"updateTime": 1625474304765             // last update time   		},          ],  	"positions": [  // positions of all symbols user had position/ open orders are returned  		            // only "BOTH" positions will be returned with One-way mode  		            // only "LONG" and "SHORT" positions will be returned with Hedge mode     	  {             "symbol": "BTCUSDT",                "positionSide": "BOTH",            // position side              "positionAmt": "1.000",               "unrealizedProfit": "0.00000000",  // unrealized profit                   "isolatedMargin": "0.00000000",	             "notional": "0",             "isolatedWallet": "0",             "initialMargin": "0",              // initial margin required with current mark price              "maintMargin": "0",                // maintenance margin required             "updateTime": 0    	  }   	]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {  	"totalInitialMargin": "0.00000000",            // total initial margin required with current mark price (useless with isolated positions), only for USDT asset  
+  	"totalMaintMargin": "0.00000000",  	           // total maintenance margin required, only for USDT asset  	"totalWalletBalance": "103.12345678",           // total wallet balance, only for USDT asset  	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit, only for USDT asset  	"totalMarginBalance": "103.12345678",           // total margin balance, only for USDT asset  	"totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset  	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset  	"totalCrossWalletBalance": "103.12345678",      // crossed wallet balance, only for USDT asset  	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions, only for USDT asset  	"availableBalance": "103.12345678",             // available balance, only for USDT asset  	"maxWithdrawAmount": "103.12345678"             // maximum amount for transfer out, only for USDT asset  	"assets": [ // For assets that are quote assets, USDT/USDC/BTC  		{  			"asset": "USDT",			            // asset name  			"walletBalance": "23.72469206",         // wallet balance  			"unrealizedProfit": "0.00000000",       // unrealized profit  			"marginBalance": "23.72469206",         // margin balance  			"maintMargin": "0.00000000",	        // maintenance margin required  			"initialMargin": "0.00000000",          // total initial margin required with current mark price  			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price  
+  			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price  			"crossWalletBalance": "23.72469206",    // crossed wallet balance  			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions  			"availableBalance": "23.72469206",      // available balance  			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out  			"updateTime": 1625474304765             // last update time},      		{  			"asset": "USDC",			            // asset name  			"walletBalance": "103.12345678",         // wallet balance  			"unrealizedProfit": "0.00000000",       // unrealized profit  			"marginBalance": "103.12345678",         // margin balance  			"maintMargin": "0.00000000",	        // maintenance margin required  			"initialMargin": "0.00000000",          // total initial margin required with current mark price  			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price  
+  			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price  			"crossWalletBalance": "103.12345678",    // crossed wallet balance  			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions  			"availableBalance": "126.72469206",      // available balance  			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out  			"updateTime": 1625474304765             // last update time},      ],  	"positions": [  // positions of all symbols user had position/ open orders are returned  		            // only "BOTH" positions will be returned with One-way mode  		            // only "LONG" and "SHORT" positions will be returned with Hedge mode     	  {             "symbol": "BTCUSDT",             "positionSide": "BOTH",            // position side   
+             "positionAmt": "1.000",    
+"unrealizedProfit": "0.00000000",  // unrealized profit                  "isolatedMargin": "0.00000000",	  
+             "notional": "0",             "isolatedWallet": "0",             "initialMargin": "0",              // initial margin required with current mark price             "maintMargin": "0",                // maintenance margin required  
+             "updateTime": 0    	  }  	]  
+  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
 ```
 
 > Multi-Asset Mode
 
-```
-{  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {     	"totalInitialMargin": "0.00000000",            // the sum of USD value of all cross positions/open order initial margin  	"totalMaintMargin": "0.00000000",  	           // the sum of USD value of all cross positions maintenance margin  	"totalWalletBalance": "126.72469206",          // total wallet balance in USD  	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit in USD  	"totalMarginBalance": "126.72469206",          // total margin balance in USD  	"totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin  	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD  	"totalCrossWalletBalance": "126.72469206",     // crossed wallet balance in USD  	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions in USD  	"availableBalance": "126.72469206",            // available balance in USD  	"maxWithdrawAmount": "126.72469206"            // maximum virtual amount for transfer out in USD  	"assets": [  		{  			"asset": "USDT",			         // asset name  			"walletBalance": "23.72469206",      // wallet balance  			"unrealizedProfit": "0.00000000",    // unrealized profit  			"marginBalance": "23.72469206",      // margin balance  			"maintMargin": "0.00000000",	     // maintenance margin required  			"initialMargin": "0.00000000",       // total initial margin required with current mark price   			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price  			"crossWalletBalance": "23.72469206",      // crossed wallet balance  			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions  			"availableBalance": "126.72469206",       // available balance  			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out  			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode  			"updateTime": 1625474304765 // last update time   		},  		{  			"asset": "BUSD",			// asset name  			"walletBalance": "103.12345678",      // wallet balance  			"unrealizedProfit": "0.00000000",    // unrealized profit  			"marginBalance": "103.12345678",      // margin balance  			"maintMargin": "0.00000000",	    // maintenance margin required  			"initialMargin": "0.00000000",    // total initial margin required with current mark price   			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price  			"crossWalletBalance": "103.12345678",      // crossed wallet balance  			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions  			"availableBalance": "126.72469206",       // available balance  			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out  			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode  			"updateTime": 1625474304765 // last update time  		}  	],   	"positions": [  // positions of all symbols user had position are returned                      // only "BOTH" positions will be returned with One-way mode  		            // only "LONG" and "SHORT" positions will be returned with Hedge mode     	  {             "symbol": "BTCUSDT",                "positionSide": "BOTH",            // position side              "positionAmt": "1.000",               "unrealizedProfit": "0.00000000",  // unrealized profit                   "isolatedMargin": "0.00000000",	             "notional": "0",             "isolatedWallet": "0",             "initialMargin": "0",              // initial margin required with current mark price              "maintMargin": "0",                // maintenance margin required             "updateTime": 0    	  }   	]   },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {  	"totalInitialMargin": "0.00000000",            // the sum of USD value of all cross positions/open order initial margin  
+  	"totalMaintMargin": "0.00000000",  	           // the sum of USD value of all cross positions maintenance margin  	"totalWalletBalance": "126.72469206",          // total wallet balance in USD  	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit in USD  	"totalMarginBalance": "126.72469206",          // total margin balance in USD  	"totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin  	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD  	"totalCrossWalletBalance": "126.72469206",     // crossed wallet balance in USD  	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions in USD  	"availableBalance": "126.72469206",            // available balance in USD  	"maxWithdrawAmount": "126.72469206"            // maximum virtual amount for transfer out in USD  	"assets": [  		{  			"asset": "USDT",			         // asset name  			"walletBalance": "23.72469206",      // wallet balance  			"unrealizedProfit": "0.00000000",    // unrealized profit  			"marginBalance": "23.72469206",      // margin balance  			"maintMargin": "0.00000000",	     // maintenance margin required  			"initialMargin": "0.00000000",       // total initial margin required with current mark price  			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+  			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price  			"crossWalletBalance": "23.72469206",      // crossed wallet balance  			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions  			"availableBalance": "126.72469206",       // available balance  			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out  			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode  			"updateTime": 1625474304765 // last update time  		},  
+  		{  			"asset": "BUSD",			// asset name  			"walletBalance": "103.12345678",      // wallet balance  			"unrealizedProfit": "0.00000000",    // unrealized profit  			"marginBalance": "103.12345678",      // margin balance  			"maintMargin": "0.00000000",	    // maintenance margin required  			"initialMargin": "0.00000000",    // total initial margin required with current mark price  			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+  			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price  			"crossWalletBalance": "103.12345678",      // crossed wallet balance  			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions  			"availableBalance": "126.72469206",       // available balance  			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out  			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode  			"updateTime": 1625474304765 // last update time  		}  	],   	"positions": [  // positions of all symbols user had position are returned                      // only "BOTH" positions will be returned with One-way mode  		            // only "LONG" and "SHORT" positions will be returned with Hedge mode     	  {             "symbol": "BTCUSDT",             "positionSide": "BOTH",            // position side   
+             "positionAmt": "1.000",    
+"unrealizedProfit": "0.00000000",  // unrealized profit                  "isolatedMargin": "0.00000000",	  
+             "notional": "0",             "isolatedWallet": "0",             "initialMargin": "0",              // initial margin required with current mark price             "maintMargin": "0",                // maintenance margin required  
+             "updateTime": 0    	  }  	]   
+  },  
+  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
 ```
 
-Account Information(USER\_DATA)
-===============================
+# Account Information(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#api-description "Direct link to API Description")
 
 Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
 
-Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#method "Direct link to Method")
----------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#method "Direct link to Method")
 
 `account.status`
 
-Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#request "Direct link to Request")
-------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#request "Direct link to Request")
 
-```
-{    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "account.status",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702620814781,        "signature": "6bb98ef84170c70ba3d01f44261bfdf50fef374e551e590de22b5c3b729b1d8c"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",    "method": "account.status",    "params": {        "apiKey": "xTaDyrmvA9XT2oBHHjy39zyPzKCvMdtH3b9q4xadkAg2dNSJXQGCxzui26L823W2",        "timestamp": 1702620814781,        "signature": "6bb98ef84170c70ba3d01f44261bfdf50fef374e551e590de22b5c3b729b1d8c"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information#response-example "Direct link to Response Example")
 
 > Single Asset Mode
 
-```
-{  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {    "feeTier": 0,       // account commission tier     "canTrade": true,   // if can trade    "canDeposit": true,     // if can transfer in asset    "canWithdraw": true,    // if can transfer out asset    "updateTime": 0,        // reserved property, please ignore     "multiAssetsMargin": false,    "tradeGroupId": -1,    "totalInitialMargin": "0.00000000",    // total initial margin required with current mark price (useless with isolated positions), only for USDT asset    "totalMaintMargin": "0.00000000",     // total maintenance margin required, only for USDT asset    "totalWalletBalance": "23.72469206",     // total wallet balance, only for USDT asset    "totalUnrealizedProfit": "0.00000000",   // total unrealized profit, only for USDT asset    "totalMarginBalance": "23.72469206",     // total margin balance, only for USDT asset    "totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset    "totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset    "totalCrossWalletBalance": "23.72469206",      // crossed wallet balance, only for USDT asset    "totalCrossUnPnl": "0.00000000",      // unrealized profit of crossed positions, only for USDT asset    "availableBalance": "23.72469206",       // available balance, only for USDT asset    "maxWithdrawAmount": "23.72469206"     // maximum amount for transfer out, only for USDT asset    "assets": [        {            "asset": "USDT",            // asset name            "walletBalance": "23.72469206",      // wallet balance            "unrealizedProfit": "0.00000000",    // unrealized profit            "marginBalance": "23.72469206",      // margin balance            "maintMargin": "0.00000000",        // maintenance margin required            "initialMargin": "0.00000000",    // total initial margin required with current mark price             "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price            "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price            "crossWalletBalance": "23.72469206",      // crossed wallet balance            "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions            "availableBalance": "23.72469206",       // available balance            "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out            "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode            "updateTime": 1625474304765 // last update time         },        {            "asset": "BUSD",            // asset name            "walletBalance": "103.12345678",      // wallet balance            "unrealizedProfit": "0.00000000",    // unrealized profit            "marginBalance": "103.12345678",      // margin balance            "maintMargin": "0.00000000",        // maintenance margin required            "initialMargin": "0.00000000",    // total initial margin required with current mark price             "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price            "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price            "crossWalletBalance": "103.12345678",      // crossed wallet balance            "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions            "availableBalance": "103.12345678",       // available balance            "maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out            "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode            "updateTime": 1625474304765 // last update time        }    ],    "positions": [  // positions of all symbols in the market are returned        // only "BOTH" positions will be returned with One-way mode        // only "LONG" and "SHORT" positions will be returned with Hedge mode        {            "symbol": "BTCUSDT",    // symbol name            "initialMargin": "0",   // initial margin required with current mark price             "maintMargin": "0",     // maintenance margin required            "unrealizedProfit": "0.00000000",  // unrealized profit            "positionInitialMargin": "0",      // initial margin required for positions with current mark price            "openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price            "leverage": "100",      // current initial leverage            "isolated": true,       // if the position is isolated            "entryPrice": "0.00000",    // average entry price            "maxNotional": "250000",    // maximum available notional with current leverage            "bidNotional": "0",  // bids notional, ignore            "askNotional": "0",  // ask notional, ignore            "positionSide": "BOTH",     // position side            "positionAmt": "0",         // position amount            "updateTime": 0           // last update time        }    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {    "feeTier": 0,       // account commission tier    "canTrade": true,   // if can trade  
+    "canDeposit": true,     // if can transfer in asset    "canWithdraw": true,    // if can transfer out asset    "updateTime": 0,        // reserved property, please ignore    "multiAssetsMargin": false,  
+    "tradeGroupId": -1,    "totalInitialMargin": "0.00000000",    // total initial margin required with current mark price (useless with isolated positions), only for USDT asset    "totalMaintMargin": "0.00000000",     // total maintenance margin required, only for USDT asset    "totalWalletBalance": "23.72469206",     // total wallet balance, only for USDT asset    "totalUnrealizedProfit": "0.00000000",   // total unrealized profit, only for USDT asset    "totalMarginBalance": "23.72469206",     // total margin balance, only for USDT asset    "totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset    "totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset    "totalCrossWalletBalance": "23.72469206",      // crossed wallet balance, only for USDT asset    "totalCrossUnPnl": "0.00000000",      // unrealized profit of crossed positions, only for USDT asset    "availableBalance": "23.72469206",       // available balance, only for USDT asset    "maxWithdrawAmount": "23.72469206"     // maximum amount for transfer out, only for USDT asset    "assets": [        {            "asset": "USDT",            // asset name            "walletBalance": "23.72469206",      // wallet balance            "unrealizedProfit": "0.00000000",    // unrealized profit            "marginBalance": "23.72469206",      // margin balance            "maintMargin": "0.00000000",        // maintenance margin required            "initialMargin": "0.00000000",    // total initial margin required with current mark price            "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+            "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price            "crossWalletBalance": "23.72469206",      // crossed wallet balance            "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions            "availableBalance": "23.72469206",       // available balance            "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out            "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode            "updateTime": 1625474304765 // last update time        },  
+        {            "asset": "BUSD",            // asset name            "walletBalance": "103.12345678",      // wallet balance            "unrealizedProfit": "0.00000000",    // unrealized profit            "marginBalance": "103.12345678",      // margin balance            "maintMargin": "0.00000000",        // maintenance margin required            "initialMargin": "0.00000000",    // total initial margin required with current mark price            "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+            "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price            "crossWalletBalance": "103.12345678",      // crossed wallet balance            "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions            "availableBalance": "103.12345678",       // available balance            "maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out            "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode            "updateTime": 1625474304765 // last update time        }    ],    "positions": [  // positions of all symbols in the market are returned        // only "BOTH" positions will be returned with One-way mode        // only "LONG" and "SHORT" positions will be returned with Hedge mode        {            "symbol": "BTCUSDT",    // symbol name            "initialMargin": "0",   // initial margin required with current mark price            "maintMargin": "0",     // maintenance margin required  
+            "unrealizedProfit": "0.00000000",  // unrealized profit            "positionInitialMargin": "0",      // initial margin required for positions with current mark price            "openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price            "leverage": "100",      // current initial leverage            "isolated": true,       // if the position is isolated            "entryPrice": "0.00000",    // average entry price            "maxNotional": "250000",    // maximum available notional with current leverage            "bidNotional": "0",  // bids notional, ignore            "askNotional": "0",  // ask notional, ignore            "positionSide": "BOTH",     // position side            "positionAmt": "0",         // position amount            "updateTime": 0           // last update time        }    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
 ```
 
 > Multi-Asset Mode
 
-```
-{  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {      "feeTier": 0,       // account commission tier       "canTrade": true,   // if can trade      "canDeposit": true,     // if can transfer in asset      "canWithdraw": true,    // if can transfer out asset      "updateTime": 0,        // reserved property, please ignore       "multiAssetsMargin": true,      "tradeGroupId": -1,      "totalInitialMargin": "0.00000000",    // the sum of USD value of all cross positions/open order initial margin      "totalMaintMargin": "0.00000000",     // the sum of USD value of all cross positions maintenance margin      "totalWalletBalance": "126.72469206",     // total wallet balance in USD      "totalUnrealizedProfit": "0.00000000",   // total unrealized profit in USD      "totalMarginBalance": "126.72469206",     // total margin balance in USD      "totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin      "totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD      "totalCrossWalletBalance": "126.72469206",      // crossed wallet balance in USD      "totalCrossUnPnl": "0.00000000",      // unrealized profit of crossed positions in USD      "availableBalance": "126.72469206",       // available balance in USD      "maxWithdrawAmount": "126.72469206"     // maximum virtual amount for transfer out in USD      "assets": [          {              "asset": "USDT",            // asset name              "walletBalance": "23.72469206",      // wallet balance              "unrealizedProfit": "0.00000000",    // unrealized profit              "marginBalance": "23.72469206",      // margin balance              "maintMargin": "0.00000000",        // maintenance margin required              "initialMargin": "0.00000000",    // total initial margin required with current mark price               "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price              "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price              "crossWalletBalance": "23.72469206",      // crossed wallet balance              "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions              "availableBalance": "126.72469206",       // available balance              "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out              "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode              "updateTime": 1625474304765 // last update time           },          {              "asset": "BUSD",            // asset name              "walletBalance": "103.12345678",      // wallet balance              "unrealizedProfit": "0.00000000",    // unrealized profit              "marginBalance": "103.12345678",      // margin balance              "maintMargin": "0.00000000",        // maintenance margin required              "initialMargin": "0.00000000",    // total initial margin required with current mark price               "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price              "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price              "crossWalletBalance": "103.12345678",      // crossed wallet balance              "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions              "availableBalance": "126.72469206",       // available balance              "maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out              "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode              "updateTime": 1625474304765 // last update time          }      ],      "positions": [  // positions of all symbols in the market are returned          // only "BOTH" positions will be returned with One-way mode          // only "LONG" and "SHORT" positions will be returned with Hedge mode          {              "symbol": "BTCUSDT",    // symbol name              "initialMargin": "0",   // initial margin required with current mark price               "maintMargin": "0",     // maintenance margin required              "unrealizedProfit": "0.00000000",  // unrealized profit              "positionInitialMargin": "0",      // initial margin required for positions with current mark price              "openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price              "leverage": "100",      // current initial leverage              "isolated": true,       // if the position is isolated              "entryPrice": "0.00000",    // average entry price              "breakEvenPrice": "0.0",    // average entry price              "maxNotional": "250000",    // maximum available notional with current leverage              "bidNotional": "0",  // bids notional, ignore              "askNotional": "0",  // ask notional, ignore              "positionSide": "BOTH",     // position side              "positionAmt": "0",         // position amount              "updateTime": 0           // last update time          }      ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "605a6d20-6588-4cb9-afa0-b0ab087507ba",  "status": 200,  "result": {      "feeTier": 0,       // account commission tier      "canTrade": true,   // if can trade  
+      "canDeposit": true,     // if can transfer in asset      "canWithdraw": true,    // if can transfer out asset      "updateTime": 0,        // reserved property, please ignore      "multiAssetsMargin": true,  
+      "tradeGroupId": -1,      "totalInitialMargin": "0.00000000",    // the sum of USD value of all cross positions/open order initial margin      "totalMaintMargin": "0.00000000",     // the sum of USD value of all cross positions maintenance margin      "totalWalletBalance": "126.72469206",     // total wallet balance in USD      "totalUnrealizedProfit": "0.00000000",   // total unrealized profit in USD      "totalMarginBalance": "126.72469206",     // total margin balance in USD      "totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin      "totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD      "totalCrossWalletBalance": "126.72469206",      // crossed wallet balance in USD      "totalCrossUnPnl": "0.00000000",      // unrealized profit of crossed positions in USD      "availableBalance": "126.72469206",       // available balance in USD      "maxWithdrawAmount": "126.72469206"     // maximum virtual amount for transfer out in USD      "assets": [          {              "asset": "USDT",            // asset name              "walletBalance": "23.72469206",      // wallet balance              "unrealizedProfit": "0.00000000",    // unrealized profit              "marginBalance": "23.72469206",      // margin balance              "maintMargin": "0.00000000",        // maintenance margin required              "initialMargin": "0.00000000",    // total initial margin required with current mark price              "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+              "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price              "crossWalletBalance": "23.72469206",      // crossed wallet balance              "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions              "availableBalance": "126.72469206",       // available balance              "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out              "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode              "updateTime": 1625474304765 // last update time          },  
+          {              "asset": "BUSD",            // asset name              "walletBalance": "103.12345678",      // wallet balance              "unrealizedProfit": "0.00000000",    // unrealized profit              "marginBalance": "103.12345678",      // margin balance              "maintMargin": "0.00000000",        // maintenance margin required              "initialMargin": "0.00000000",    // total initial margin required with current mark price              "positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+              "openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price              "crossWalletBalance": "103.12345678",      // crossed wallet balance              "crossUnPnl": "0.00000000"       // unrealized profit of crossed positions              "availableBalance": "126.72469206",       // available balance              "maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out              "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode              "updateTime": 1625474304765 // last update time          }      ],      "positions": [  // positions of all symbols in the market are returned          // only "BOTH" positions will be returned with One-way mode          // only "LONG" and "SHORT" positions will be returned with Hedge mode          {              "symbol": "BTCUSDT",    // symbol name              "initialMargin": "0",   // initial margin required with current mark price              "maintMargin": "0",     // maintenance margin required  
+              "unrealizedProfit": "0.00000000",  // unrealized profit              "positionInitialMargin": "0",      // initial margin required for positions with current mark price              "openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price              "leverage": "100",      // current initial leverage              "isolated": true,       // if the position is isolated              "entryPrice": "0.00000",    // average entry price              "breakEvenPrice": "0.0",    // average entry price              "maxNotional": "250000",    // maximum available notional with current leverage              "bidNotional": "0",  // bids notional, ignore              "askNotional": "0",  // ask notional, ignore              "positionSide": "BOTH",     // position side              "positionAmt": "0",         // position amount              "updateTime": 0           // last update time          }      ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 20    }  ]}
 ```
 

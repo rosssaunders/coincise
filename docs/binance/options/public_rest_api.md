@@ -1,10 +1,8 @@
 # Binance Options Public REST API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,11 +51,9 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-General Info
-============
+# General Info
 
-General API Information[​](/docs/derivatives/option/general-info#general-api-information "Direct link to General API Information")
-----------------------------------------------------------------------------------------------------------------------------------
+## General API Information[​](/docs/derivatives/option/general-info#general-api-information "Direct link to General API Information")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/articles/360002502072)
 *   The base endpoint is: \*\*[https://eapi.binance.com](https://eapi.binance.com)
@@ -87,8 +80,9 @@ General API Information[​](/docs/derivatives/option/general-info#general-api-i
 
 > **_The error payload is as follows:_**
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 *   Specific error codes and messages defined in [Error Codes](/docs/derivatives/option/general-info#error-codes).
@@ -100,8 +94,7 @@ General API Information[​](/docs/derivatives/option/general-info#general-api-i
 *   Parameters may be sent in any order.
 *   If a parameter sent in both the `query string` and `request body`, the `query string` parameter will be used.
 
-LIMITS[​](/docs/derivatives/option/general-info#limits "Direct link to LIMITS")
--------------------------------------------------------------------------------
+## LIMITS[​](/docs/derivatives/option/general-info#limits "Direct link to LIMITS")
 
 *   The `/eapi/v1/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 *   A `429` will be returned when either rate limit is violated.
@@ -125,8 +118,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 *   Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**` headers in the response.
 *   **The order rate limit is counted against each account**.
 
-Endpoint Security Type[​](/docs/derivatives/option/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
--------------------------------------------------------------------------------------------------------------------------------
+## Endpoint Security Type[​](/docs/derivatives/option/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
 
 *   Each endpoint has a security type that determines the how you will interact with it.
 *   API-keys are passed into the Rest API via the `X-MBX-APIKEY` header.
@@ -136,16 +128,15 @@ Endpoint Security Type[​](/docs/derivatives/option/general-info#endpoint-secur
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
-| MARKET\_DATA | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
+| MARKET\_DATA | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/option/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/option/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 *   `SIGNED` endpoints require an additional parameter, `signature`, to be sent in the `query string` or `request body`.
 *   Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
@@ -160,8 +151,10 @@ SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/option/ge
 
 > The logic is as follows:
 
-```
-if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  // process request} else {  // reject request}
+```codeBlockLines_aHhF
+if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  
+  // process request} else {  
+  // reject request}
 ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable, which can lead to requests taking varying amounts of time to reach the servers. With `recvWindow`, you can specify that the request must be processed within a certain number of milliseconds or be rejected by the server.
@@ -174,19 +167,18 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 
-| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 
-
+| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 |
+| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | BUY 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 9000 
-| recvWindow | 5000 
-| timestamp | 1591702613943 
+| symbol | BTCUSDT |
+| side | BUY |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 9000 |
+| recvWindow | 5000 |
+| timestamp | 1591702613943 |
 
 #### Example 1: As a query string[​](/docs/derivatives/option/general-info#example-1-as-a-query-string "Direct link to Example 1: As a query string")
 
@@ -194,14 +186,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order' -d 'symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order' -d 'symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
 ```
 
 *   **requestBody:**
@@ -221,14 +213,14 @@ symbol=BTC-210129-40000-C
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= 7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)   $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
+```codeBlockLines_aHhF
+(HMAC SHA256)   $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400&signature=7c12045972f6140e765e0f2b67d28099718df805732676494238f50be830a7d7'
 ```
 
 *   **queryString:**
@@ -248,14 +240,14 @@ symbol=BTC-210129-40000-C
 
 > **HMAC SHA256 signature:**
 
-```
-   $ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTCquantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTCquantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400" | openssl dgst -sha256 -hmac "YtP1BudNOWZE1ag5uzCkh4hIC7qSmQOu797r5EJBFGhxBYivjj8HIX0iiiPof5yG"    (stdin)= fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400&signature=fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: 22BjeOROKiXJ3NxbR3zjh3uoGcaflPu3VMyBXAg8Jj2J1xVSnY0eB4dzacdE9IWn" -X POST 'https://eapi.binance.com/eapi/v1/order?symbol=BTC-210129-40000-C&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=0.01&price=2000&recvWindow=5000&timestamp=1611825601400&signature=fa6045c54fb02912b766442be1f66fab619217e551a4fb4f8a1ee000df914d8e'
 ```
 
 *   **queryString:**
@@ -268,19 +260,16 @@ quantity=1&price=2000&recvWindow=5000&timestamp=1611825601400
 
 Note that the signature is different in example 3. There is no & between "GTC" and "quantity=1".
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/option/common-definition#terminology "Direct link to Terminology")
----------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/option/common-definition#terminology "Direct link to Terminology")
 
 *   `symbol` refers to the symbol name of a options contract symbol
 *   `underlying` refers to the underlying symbol of a options contract symbol
 *   `quoteAsset` refers to the asset that is the price of a symbol.
 *   `settleAsset` refers to the settlement asset when options are exercised
 
-ENUM definitions[​](/docs/derivatives/option/common-definition#enum-definitions "Direct link to ENUM definitions")
-------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/option/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Options contract type**
 
@@ -344,14 +333,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -363,20 +352,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/option/common-definition#symbol-filters "Direct link to Symbol filters")
-------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/option/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/option/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -395,8 +382,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -411,20 +398,19 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 *   `quantity` <= `maxQty`
 *   (`quantity`\-`minQty`) % `stepSize` == 0
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/option/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/option/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/option/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -471,8 +457,7 @@ Codes are universal,but messages can vary.
 
 *   Signature for this request is not valid.
 
-11xx - 2xxx Request issues[​](/docs/derivatives/option/error-code#11xx---2xxx-request-issues "Direct link to 11xx - 2xxx Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - 2xxx Request issues[​](/docs/derivatives/option/error-code#11xx---2xxx-request-issues "Direct link to 11xx - 2xxx Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/option/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -593,8 +578,7 @@ Codes are universal,but messages can vary.
 
 *   Option margin is insufficient.
 
-3xxx-5xxx Filters and other issues[​](/docs/derivatives/option/error-code#3xxx-5xxx-filters-and-other-issues "Direct link to 3xxx-5xxx Filters and other issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 3xxx-5xxx Filters and other issues[​](/docs/derivatives/option/error-code#3xxx-5xxx-filters-and-other-issues "Direct link to 3xxx-5xxx Filters and other issues")
 
 ### \-3029 TRANSFER\_FAILED[​](/docs/derivatives/option/error-code#-3029-transfer_failed "Direct link to -3029 TRANSFER_FAILED")
 
@@ -636,436 +620,377 @@ Codes are universal,but messages can vary.
 
 *   Amount must be positive.
 
-Check Server Time
-=================
+# Check Server Time
 
-API Description[​](/docs/derivatives/option/market-data#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data#api-description "Direct link to API Description")
 
 Test connectivity to the Rest API and get the current server time.
 
-HTTP Request[​](/docs/derivatives/option/market-data#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/time`
 
-Request Weight[​](/docs/derivatives/option/market-data#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/option/market-data#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data#request-parameters "Direct link to Request Parameters")
 
 NONE
 
-Response Example[​](/docs/derivatives/option/market-data#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "serverTime": 1499827319559}
 ```
-{  "serverTime": 1499827319559}
-```
 
-24hr Ticker Price Change Statistics
-===================================
+# 24hr Ticker Price Change Statistics
 
-API Description[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#api-description "Direct link to API Description")
 
 24 hour rolling window price change statistics.
 
-HTTP Request[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/ticker`
 
-Request Weight[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO | Option trading pair, e.g BTC-200730-9000-C 
+| symbol | STRING | NO | Option trading pair, e.g BTC-200730-9000-C |
 
-Response Example[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "symbol": "BTC-200730-9000-C",    "priceChange": "-16.2038",        //24-hour price change    "priceChangePercent": "-0.0162",  //24-hour percent price change    "lastPrice": "1000",              //Last trade price    "lastQty": "1000",                //Last trade amount    "open": "1016.2038",              //24-hour open price    "high": "1016.2038",              //24-hour high    "low": "0",                       //24-hour low    "volume": "5",                    //Trading volume(contracts)    "amount": "1",                    //Trade amount(in quote asset)    "bidPrice":"999.34",              //The best buy price    "askPrice":"1000.23",             //The best sell price    "openTime": 1592317127349,        //Time the first trade occurred within the last 24 hours    "closeTime": 1592380593516,       //Time the last trade occurred within the last 24 hours    "firstTradeId": 1,                //First trade ID  
+    "tradeCount": 5,                  //Number of trades    "strikePrice": "9000",            //Strike price    "exercisePrice": "3000.3356"      //return estimated settlement price one hour before exercise, return index price at other times  }]
 ```
-[  {    "symbol": "BTC-200730-9000-C",    "priceChange": "-16.2038",        //24-hour price change    "priceChangePercent": "-0.0162",  //24-hour percent price change    "lastPrice": "1000",              //Last trade price    "lastQty": "1000",                //Last trade amount    "open": "1016.2038",              //24-hour open price    "high": "1016.2038",              //24-hour high    "low": "0",                       //24-hour low    "volume": "5",                    //Trading volume(contracts)    "amount": "1",                    //Trade amount(in quote asset)    "bidPrice":"999.34",              //The best buy price    "askPrice":"1000.23",             //The best sell price    "openTime": 1592317127349,        //Time the first trade occurred within the last 24 hours    "closeTime": 1592380593516,       //Time the last trade occurred within the last 24 hours         "firstTradeId": 1,                //First trade ID    "tradeCount": 5,                  //Number of trades    "strikePrice": "9000",            //Strike price    "exercisePrice": "3000.3356"      //return estimated settlement price one hour before exercise, return index price at other times  }]
-```
 
-Exchange Information
-====================
+# Exchange Information
 
-API Description[​](/docs/derivatives/option/market-data/Exchange-Information#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Exchange-Information#api-description "Direct link to API Description")
 
 Current exchange trading rules and symbol information
 
-HTTP Request[​](/docs/derivatives/option/market-data/Exchange-Information#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Exchange-Information#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/exchangeInfo`
 
-Request Weight[​](/docs/derivatives/option/market-data/Exchange-Information#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Exchange-Information#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Exchange-Information#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Exchange-Information#request-parameters "Direct link to Request Parameters")
 
 NONE
 
-Response Example[​](/docs/derivatives/option/market-data/Exchange-Information#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Exchange-Information#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "timezone": "UTC",                    // Time zone used by the server  "serverTime": 1592387337630,          // Current system time  "optionContracts": [                  // Option contract underlying asset info    {      "baseAsset": "BTC",               // Base currency      "quoteAsset": "USDT",             // Quotation asset      "underlying": "BTCUSDT",          // Name of the underlying asset of the option contract      "settleAsset": "USDT"             // Settlement currency    }  ],  "optionAssets": [                     // Option asset info    {      "name": "USDT"                    // Asset name    }  ],  "optionSymbols": [                    // Option trading pair info    {        "expiryDate": 1660521600000,    // expiry time        "filters": [            {                "filterType": "PRICE_FILTER",                "minPrice": "0.02",                "maxPrice": "80000.01",                "tickSize": "0.01"            },            {                "filterType": "LOT_SIZE",                "minQty": "0.01",                "maxQty": "100",                "stepSize": "0.01"            }        ],        "symbol": "BTC-220815-50000-C",   // Trading pair name        "side": "CALL",                   // Direction: CALL long, PUT short        "strikePrice": "50000",           // Strike price        "underlying": "BTCUSDT",          // Underlying asset of the contract        "unit": 1,                        // Contract unit, the quantity of the underlying asset represented by a single contract.        "makerFeeRate": "0.0002",         // maker commission rate        "takerFeeRate": "0.0002",         // taker commission rate        "minQty": "0.01",                 // Minimum order quantity        "maxQty": "100",                  // Maximum order quantity        "initialMargin": "0.15",          // Initial Magin Ratio        "maintenanceMargin": "0.075",     // Maintenance Margin Ratio        "minInitialMargin": "0.1",        // Min Initial Margin Ratio        "minMaintenanceMargin": "0.05",   // Min Maintenance Margin Ratio        "priceScale": 2,                  // price precision        "quantityScale": 2,               // quantity precision        "quoteAsset": "USDT"              // Quotation asset    }  ],  "rateLimits": [    {        "rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400    },    {        "rateLimitType": "ORDERS",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 1200    },    {        "rateLimitType": "ORDERS",        "interval": "SECOND",        "intervalNum": 10,        "limit": 300    }  ]}
 ```
-{  "timezone": "UTC",                    // Time zone used by the server  "serverTime": 1592387337630,          // Current system time  "optionContracts": [                  // Option contract underlying asset info    {      "baseAsset": "BTC",               // Base currency      "quoteAsset": "USDT",             // Quotation asset      "underlying": "BTCUSDT",          // Name of the underlying asset of the option contract      "settleAsset": "USDT"             // Settlement currency    }  ],  "optionAssets": [                     // Option asset info    {      "name": "USDT"                    // Asset name    }  ],  "optionSymbols": [                    // Option trading pair info    {        "expiryDate": 1660521600000,    // expiry time        "filters": [            {                "filterType": "PRICE_FILTER",                "minPrice": "0.02",                "maxPrice": "80000.01",                "tickSize": "0.01"            },            {                "filterType": "LOT_SIZE",                "minQty": "0.01",                "maxQty": "100",                "stepSize": "0.01"            }        ],        "symbol": "BTC-220815-50000-C",   // Trading pair name        "side": "CALL",                   // Direction: CALL long, PUT short        "strikePrice": "50000",           // Strike price        "underlying": "BTCUSDT",          // Underlying asset of the contract        "unit": 1,                        // Contract unit, the quantity of the underlying asset represented by a single contract.        "makerFeeRate": "0.0002",         // maker commission rate        "takerFeeRate": "0.0002",         // taker commission rate        "minQty": "0.01",                 // Minimum order quantity        "maxQty": "100",                  // Maximum order quantity        "initialMargin": "0.15",          // Initial Magin Ratio        "maintenanceMargin": "0.075",     // Maintenance Margin Ratio        "minInitialMargin": "0.1",        // Min Initial Margin Ratio        "minMaintenanceMargin": "0.05",   // Min Maintenance Margin Ratio        "priceScale": 2,                  // price precision        "quantityScale": 2,               // quantity precision        "quoteAsset": "USDT"              // Quotation asset    }  ],  "rateLimits": [    {        "rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400    },    {        "rateLimitType": "ORDERS",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 1200    },    {        "rateLimitType": "ORDERS",        "interval": "SECOND",        "intervalNum": 10,        "limit": 300    }  ]}
-```
 
-Historical Exercise Records
-===========================
+# Historical Exercise Records
 
-API Description[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#api-description "Direct link to API Description")
 
 Get historical exercise records.
 
 *   REALISTIC\_VALUE\_STRICKEN -> Exercised
 *   EXTRINSIC\_VALUE\_EXPIRED -> Expired OTM
 
-HTTP Request[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/exerciseHistory`
 
-Request Weight[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#request-weight "Direct link to Request Weight")
 
 **3**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| underlying | STRING | NO | Underlying index like BTCUSDT 
-| startTime | LONG | NO | Start Time 
-| endTime | LONG | NO | End Time 
-| limit | INT | NO | Number of records Default:100 Max:100 
+| underlying | STRING | NO | Underlying index like BTCUSDT |
+| startTime | LONG | NO | Start Time |
+| endTime | LONG | NO | End Time |
+| limit | INT | NO | Number of records Default:100 Max:100 |
 
-Response Example[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Historical-Exercise-Records#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "symbol": "BTC-220121-60000-P",            // symbol    
+    "strikePrice": "60000",                    // strike price  
+    "realStrikePrice": "38844.69652571",       // real strike price    "expiryDate": 1642752000000,               // Exercise time    "strikeResult": "REALISTIC_VALUE_STRICKEN" // strike result  }]
 ```
-[  {     "symbol": "BTC-220121-60000-P",            // symbol      "strikePrice": "60000",                    // strike price    "realStrikePrice": "38844.69652571",       // real strike price    "expiryDate": 1642752000000,               // Exercise time    "strikeResult": "REALISTIC_VALUE_STRICKEN" // strike result  }]
-```
 
-Open Interest
-=============
+# Open Interest
 
-API Description[​](/docs/derivatives/option/market-data/Open-Interest#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Open-Interest#api-description "Direct link to API Description")
 
 Get open interest for specific underlying asset on specific expiration date.
 
-HTTP Request[​](/docs/derivatives/option/market-data/Open-Interest#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Open-Interest#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/openInterest`
 
-Request Weight[​](/docs/derivatives/option/market-data/Open-Interest#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Open-Interest#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Open-Interest#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Open-Interest#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| underlyingAsset | STRING | YES | underlying asset, e.g ETH/BTC 
-| expiration | STRING | YES | expiration date, e.g 221225 
+| underlyingAsset | STRING | YES | underlying asset, e.g ETH/BTC |
+| expiration | STRING | YES | expiration date, e.g 221225 |
 
-Response Example[​](/docs/derivatives/option/market-data/Open-Interest#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Open-Interest#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "symbol": "ETH-221119-1175-P",        "sumOpenInterest": "4.01",        "sumOpenInterestUsd": "4880.2985615624",        "timestamp": "1668754020000"    }]
 ```
-[    {        "symbol": "ETH-221119-1175-P",        "sumOpenInterest": "4.01",        "sumOpenInterestUsd": "4880.2985615624",        "timestamp": "1668754020000"    }]
-```
 
-Order Book
-==========
+# Order Book
 
-API Description[​](/docs/derivatives/option/market-data/Order-Book#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Order-Book#api-description "Direct link to API Description")
 
 Check orderbook depth on specific symbol
 
-HTTP Request[​](/docs/derivatives/option/market-data/Order-Book#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Order-Book#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/depth`
 
-Request Weight[​](/docs/derivatives/option/market-data/Order-Book#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Order-Book#request-weight "Direct link to Request Weight")
 
 | limit | weight |
 | --- | --- |
-| 5, 10, 20, 50 | 2 
-| 100 | 5 
-| 500 | 10 
-| 1000 | 20 
+| 5, 10, 20, 50 | 2 |
+| 100 | 5 |
+| 500 | 10 |
+| 1000 | 20 |
 
-Request Parameters[​](/docs/derivatives/option/market-data/Order-Book#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Order-Book#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C 
-| limit | INT | NO | Default:100 Max:1000.Optional value:\[10, 20, 50, 100, 500, 1000\] 
+| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C |
+| limit | INT | NO | Default:100 Max:1000.Optional value:\[10, 20, 50, 100, 500, 1000\] |
 
-Response Example[​](/docs/derivatives/option/market-data/Order-Book#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Order-Book#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "T": 1589436922972,   // transaction time  "u": 37461            // update id  "bids": [             // Buy order    [      "1000",            // Price      "0.9"              // Quantity    ]  ],  "asks": [              // Sell order    [      "1100",            // Price      "0.1"              // Quantity    ]  ]}
 ```
-{  "T": 1589436922972,   // transaction time  "u": 37461            // update id  "bids": [             // Buy order    [      "1000",            // Price      "0.9"              // Quantity    ]  ],  "asks": [              // Sell order    [      "1100",            // Price      "0.1"              // Quantity    ]  ]}  
-```
 
-Recent Trades List
-==================
+# Recent Trades List
 
-API Description[​](/docs/derivatives/option/market-data/Recent-Trades-List#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Recent-Trades-List#api-description "Direct link to API Description")
 
 Get recent market trades
 
-HTTP Request[​](/docs/derivatives/option/market-data/Recent-Trades-List#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Recent-Trades-List#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/trades`
 
-Request Weight[​](/docs/derivatives/option/market-data/Recent-Trades-List#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Recent-Trades-List#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Recent-Trades-List#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Recent-Trades-List#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C 
-| limit | INT | NO | Number of records Default:100 Max:500 
+| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C |
+| limit | INT | NO | Number of records Default:100 Max:500 |
 
-Response Example[​](/docs/derivatives/option/market-data/Recent-Trades-List#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Recent-Trades-List#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "id":"1",             // TradeId  
+    "symbol": "BTC-220722-19000-C",    "price": "1000",      // Completed trade price    "qty": "-0.1",        // Completed trade quantity    "quoteQty": "-100",   // Completed trade amount    "side": -1            // Completed trade direction（-1 Sell，1 Buy）    "time": 1592449455993,// Time  }  
+]
 ```
-[  {     "id":"1",             // TradeId    "symbol": "BTC-220722-19000-C",    "price": "1000",      // Completed trade price    "qty": "-0.1",        // Completed trade quantity    "quoteQty": "-100",   // Completed trade amount    "side": -1            // Completed trade direction（-1 Sell，1 Buy）    "time": 1592449455993,// Time   }]  
-```
 
-Recent Block Trades List
-========================
+# Recent Block Trades List
 
-API Description[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#api-description "Direct link to API Description")
 
 Get recent block trades
 
-HTTP Request[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/blockTrades`
 
-Request Weight[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO | Option trading pair, e.g. BTC-200730-9000-C 
-| limit | INT | NO | Number of records; Default: 100 and Max: 500 
+| symbol | STRING | NO | Option trading pair, e.g. BTC-200730-9000-C |
+| limit | INT | NO | Number of records; Default: 100 and Max: 500 |
 
-Response Example[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Recent-Block-Trade-List#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		"id": 1125899906901081078,		"tradeId": 389,		"symbol": "ETH-250725-1200-P",		"price": "342.40",		"qty": "-2167.20",		"quoteQty": "-4.90",		"side": -1,		"time": 1733950676483	},	{		"id": 1125899906901080972,		"tradeId": 161,		"symbol": "XRP-250904-0.086-P",		"price": "3.0",		"qty": "-6.0",		"quoteQty": "-2.02",		"side": -1,		"time": 1733950488444	}]
 ```
-[	{		"id": 1125899906901081078,		"tradeId": 389,		"symbol": "ETH-250725-1200-P",		"price": "342.40",		"qty": "-2167.20",		"quoteQty": "-4.90",		"side": -1,		"time": 1733950676483	},	{		"id": 1125899906901080972,		"tradeId": 161,		"symbol": "XRP-250904-0.086-P",		"price": "3.0",		"qty": "-6.0",		"quoteQty": "-2.02",		"side": -1,		"time": 1733950488444	}]
-```
 
-Symbol Price Ticker
-===================
+# Symbol Price Ticker
 
-API Description[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#api-description "Direct link to API Description")
 
 Get spot index price for option underlying.
 
-HTTP Request[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/index`
 
-Request Weight[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| underlying | STRING | YES | Spot pair（Option contract underlying asset, e.g BTCUSDT) 
+| underlying | STRING | YES | Spot pair（Option contract underlying asset, e.g BTCUSDT) |
 
-Response Example[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Symbol-Price-Ticker#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+   "time": 1656647305000,   "indexPrice": "9200" // Current spot index price}
 ```
-{   "time": 1656647305000,   "indexPrice": "9200" // Current spot index price}
-```
 
-Kline/Candlestick Data
-======================
+# Kline/Candlestick Data
 
-API Description[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#api-description "Direct link to API Description")
 
 Kline/candlestick bars for an option symbol. Klines are uniquely identified by their open time.
 
-HTTP Request[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/klines`
 
-Request Weight[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C 
-| interval | STRING | YES | Time interval 
-| startTime | LONG | NO | Start Time 1592317127349 
-| endTime | LONG | NO | End Time 
-| limit | INT | NO | Number of records Default:500 Max:1500 
+| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C |
+| interval | STRING | YES | Time interval |
+| startTime | LONG | NO | Start Time 1592317127349 |
+| endTime | LONG | NO | End Time |
+| limit | INT | NO | Number of records Default:500 Max:1500 |
 
 > *   If startTime and endTime are not sent, the most recent klines are returned.
 
-Response Example[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Kline-Candlestick-Data#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {      "open": "950",              // Opening price      "high": "1100",             // Highest price      "low": "900",               // Lowest price      "close": "1000",            // Closing price (latest price if the current candle has not closed)      "volume": "100"             // Trading volume(contracts)      "amount": "2",              // Trading amount(in quote asset)  
+      "interval": "5m",           // Candle type      "tradeCount": 10,           // Number of completed trades      "takerVolume": "100",       // Taker trading volume(contracts)    "takerAmount": "10000",     // Taker trade amount(in quote asset)      "openTime": 1499040000000,  // Opening time      "closeTime": 1499644799999, // Closing time  }]
 ```
-[  {      "open": "950",              // Opening price      "high": "1100",             // Highest price      "low": "900",               // Lowest price      "close": "1000",            // Closing price (latest price if the current candle has not closed)      "volume": "100"             // Trading volume(contracts)             "amount": "2",              // Trading amount(in quote asset)      "interval": "5m",           // Candle type      "tradeCount": 10,           // Number of completed trades      "takerVolume": "100",       // Taker trading volume(contracts)            "takerAmount": "10000",     // Taker trade amount(in quote asset)      "openTime": 1499040000000,  // Opening time      "closeTime": 1499644799999, // Closing time  }]
-```
 
-Test Connectivity
-=================
+# Test Connectivity
 
-API Description[​](/docs/derivatives/option/market-data/Test-Connectivity#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Test-Connectivity#api-description "Direct link to API Description")
 
 Test connectivity to the Rest API.
 
-HTTP Request[​](/docs/derivatives/option/market-data/Test-Connectivity#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Test-Connectivity#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/ping`
 
-Request Weight[​](/docs/derivatives/option/market-data/Test-Connectivity#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Test-Connectivity#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Test-Connectivity#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Test-Connectivity#request-parameters "Direct link to Request Parameters")
 
 NONE
 
-Response Example[​](/docs/derivatives/option/market-data/Test-Connectivity#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Test-Connectivity#response-example "Direct link to Response Example")
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
-Old Trades Lookup (MARKET\_DATA)
-================================
+# Old Trades Lookup (MARKET\_DATA)
 
-API Description[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#api-description "Direct link to API Description")
 
 Get older market historical trades.
 
-HTTP Request[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/historicalTrades`
 
-Request Weight[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#request-weight "Direct link to Request Weight")
 
 20
 
-Request Parameters[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C 
-| fromId | LONG | NO | The UniqueId ID from which to return. The latest deal record is returned by default 
-| limit | INT | NO | Number of records Default:100 Max:500 
+| symbol | STRING | YES | Option trading pair, e.g BTC-200730-9000-C |
+| fromId | LONG | NO | The UniqueId ID from which to return. The latest deal record is returned by default |
+| limit | INT | NO | Number of records Default:100 Max:500 |
 
-Response Example[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Old-Trades-Lookup#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "id":"1",             // UniqueId    "tradeId": "159244329455993",    // TradeId    "price": "1000",      // Completed trade price    "qty": "-0.1",        // Completed trade Quantity    "quoteQty": "-100",   // Completed trade amount    "side": -1            // Completed trade direction（-1 Sell，1 Buy）    "time": 1592449455993,// Time  }]
 ```
-[  {    "id":"1",             // UniqueId    "tradeId": "159244329455993",    // TradeId    "price": "1000",      // Completed trade price    "qty": "-0.1",        // Completed trade Quantity    "quoteQty": "-100",   // Completed trade amount    "side": -1            // Completed trade direction（-1 Sell，1 Buy）    "time": 1592449455993,// Time  }]
-```
 
-Option Mark Price
-=================
+# Option Mark Price
 
-API Description[​](/docs/derivatives/option/market-data/Option-Mark-Price#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/option/market-data/Option-Mark-Price#api-description "Direct link to API Description")
 
 Option mark price and greek info.
 
-HTTP Request[​](/docs/derivatives/option/market-data/Option-Mark-Price#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/option/market-data/Option-Mark-Price#http-request "Direct link to HTTP Request")
 
 GET `/eapi/v1/mark`
 
-Request Weight[​](/docs/derivatives/option/market-data/Option-Mark-Price#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/option/market-data/Option-Mark-Price#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/option/market-data/Option-Mark-Price#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/option/market-data/Option-Mark-Price#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO | Option trading pair, e.g BTC-200730-9000-C 
+| symbol | STRING | NO | Option trading pair, e.g BTC-200730-9000-C |
 
-Response Example[​](/docs/derivatives/option/market-data/Option-Mark-Price#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/option/market-data/Option-Mark-Price#response-example "Direct link to Response Example")
 
-```
-[  {    "symbol": "BTC-200730-9000-C",    "markPrice": "1343.2883",       // Mark price    "bidIV": "1.40000077",          // Implied volatility Buy    "askIV": "1.50000153",          // Implied volatility Sell    "markIV": "1.45000000"          // Implied volatility mark      "delta": "0.55937056",          // delta    "theta": "3739.82509871",       // theta    "gamma": "0.00010969",          // gamma    "vega": "978.58874732",         // vega    "highPriceLimit": "1618.241",   // Current highest buy price    "lowPriceLimit": "1068.3356"    // Current lowest sell price    "riskFreeInterest": "0.1"       // risk free rate  }]
+```codeBlockLines_aHhF
+[  
+  {    "symbol": "BTC-200730-9000-C",    "markPrice": "1343.2883",       // Mark price    "bidIV": "1.40000077",          // Implied volatility Buy    "askIV": "1.50000153",          // Implied volatility Sell    "markIV": "1.45000000"          // Implied volatility mark    "delta": "0.55937056",          // delta  
+    "theta": "3739.82509871",       // theta    "gamma": "0.00010969",          // gamma    "vega": "978.58874732",         // vega    "highPriceLimit": "1618.241",   // Current highest buy price    "lowPriceLimit": "1068.3356"    // Current lowest sell price    "riskFreeInterest": "0.1"       // risk free rate  }]
 ```
 

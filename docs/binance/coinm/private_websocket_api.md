@@ -1,10 +1,8 @@
 # Binance COINM Futures Private Websocket API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,8 +51,7 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-WebSocket API General Info
-==========================
+# WebSocket API General Info
 
 *   The base endpoint is: **`wss://ws-dapi.binance.com/ws-dapi/v1`**
     *   The base endpoint for testnet is: `wss://testnet.binancefuture.com/ws-dapi/v1`
@@ -74,25 +68,25 @@ WebSocket API General Info
 *   **`DECIMAL` parameters such as price are expected as JSON strings, not floats.**
 *   **User Data Stream requests - you will need to establish a separate WebSocket connection to listen to [user data streams](https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams)**
 
-WebSocket API Request format[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-request-format "Direct link to WebSocket API Request format")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Request format[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-request-format "Direct link to WebSocket API Request format")
 
 Requests must be sent as JSON in **text frames**, one request per frame.
 
 > Example of request:
 
-```
-{  "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",  "method": "order.place",  "params": {    "apiKey": "",    "price": "50000",    "quantity": 1,    "side": "BUY",    "symbol": "BTCUSD_PERP",    "timeInForce": "GTC",    "timestamp": 1728413737111,    "type": "LIMIT",    "signature": "996962a19802b5a09d7bc6ab1524227894533322a2f8a1f8934991689cabf8fe",  }}
+```codeBlockLines_aHhF
+{  
+  "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",  "method": "order.place",  "params": {    "apiKey": "",    "price": "50000",    "quantity": 1,    "side": "BUY",    "symbol": "BTCUSD_PERP",    "timeInForce": "GTC",    "timestamp": 1728413737111,    "type": "LIMIT",    "signature": "996962a19802b5a09d7bc6ab1524227894533322a2f8a1f8934991689cabf8fe",  }}
 ```
 
 Request fields:
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `id` | INT/STRING/null | YES | Arbitrary ID used to match responses to requests 
-| `method` | STRING | YES | Request method name 
-| `params` | OBJECT | NO | Request parameters. May be omitted if there are no parameters 
-|    |  |  |  
+| `id` | INT/STRING/null | YES | Arbitrary ID used to match responses to requests |
+| `method` | STRING | YES | Request method name |
+| `params` | OBJECT | NO | Request parameters. May be omitted if there are no parameters |
+|    |  |  |  |
 
 *   Request `id` is truly arbitrary. You can use UUIDs, sequential IDs, current timestamp, etc. The server does not interpret `id` in any way, simply echoing it back in the response.
 
@@ -101,35 +95,35 @@ You can freely reuse IDs within a session. However, be careful to not send more 
 *   Request method names may be prefixed with explicit version: e.g., "`v3/order.place`".
 *   The order of `params` is not significant.
 
-Response format[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#response-format "Direct link to Response format")
----------------------------------------------------------------------------------------------------------------------------------------
+## Response format[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#response-format "Direct link to Response format")
 
 Responses are returned as JSON in text frames, one response per frame.
 
 > Example of successful response:
 
-```
-{    "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",    "status": 200,    "result": {        "orderId": 333245211,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "status": "NEW",        "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",        "price": "50000",        "avgPrice": "0.00",        "origQty": "1",        "executedQty": "0",        "cumQty": "0",        "cumBase": "0",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "BUY",        "positionSide": "BOTH",        "stopPrice": "0",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "updateTime": 1728413795125    },    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        },        {            "rateLimitType": "ORDERS",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 1200,            "count": 1        }    ]}
+```codeBlockLines_aHhF
+{  
+    "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",    "status": 200,    "result": {        "orderId": 333245211,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "status": "NEW",        "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",        "price": "50000",        "avgPrice": "0.00",        "origQty": "1",        "executedQty": "0",        "cumQty": "0",        "cumBase": "0",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "BUY",        "positionSide": "BOTH",        "stopPrice": "0",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "updateTime": 1728413795125    },    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        },        {            "rateLimitType": "ORDERS",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 1200,            "count": 1        }    ]}
 ```
 
 > Example of failed response:
 
-```
-{  "id": "9ca10e58-7452-467e-9454-f669bb9c764e",  "status": 400,  "error": {    "code": -1102,    "msg": "Mandatory parameter 'quantity' was not sent, was empty/null, or malformed."  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 1    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "9ca10e58-7452-467e-9454-f669bb9c764e",  "status": 400,  "error": {    "code": -1102,    "msg": "Mandatory parameter 'quantity' was not sent, was empty/null, or malformed."  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 1    }  ]}
 ```
 
 Response fields:
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `id` | INT/STRING/null | YES | Same as in the original request 
-| `status` | INT | YES | Response status. See status codes 
-| `result` | OBJECT/ARRAY | YES | Response content. Present if request succeeded 
-| `error` | OBJECT | YES | Error description. Present if request failed 
-| `rateLimits` | ARRAY | NO | Rate limiting status. See Rate limits 
+| `id` | INT/STRING/null | YES | Same as in the original request |
+| `status` | INT | YES | Response status. See status codes |
+| `result` | OBJECT/ARRAY | YES | Response content. Present if request succeeded |
+| `error` | OBJECT | YES | Error description. Present if request failed |
+| `rateLimits` | ARRAY | NO | Rate limiting status. See Rate limits |
 
-WebSocket API Rate limits[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-rate-limits "Direct link to WebSocket API Rate limits")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Rate limits[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-rate-limits "Direct link to WebSocket API Rate limits")
 
 *   Rate limits are the same as on REST API and are shared with REST API.
 *   WebSocket handshake attempt costs 5 weight.
@@ -138,8 +132,7 @@ WebSocket API Rate limits[​](/docs/derivatives/coin-margined-futures/websocket
 *   `rateLimits` field visibility can be controlled with `returnRateLimits` boolean parameter in connection string or individual requests.
 *   E.g., use `wss://ws-dapi.binance.com/ws-dapi/v1?returnRateLimits=false` to hide `rateLimits` in responses by default. With that, you can pass extra `"returnRateLimits": true` parameter in requests to show rate limit in response when it is otherwise hidden by default.
 
-WebSocket API Authenticate after connection[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-authenticate-after-connection "Direct link to WebSocket API Authenticate after connection")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authenticate after connection[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-authenticate-after-connection "Direct link to WebSocket API Authenticate after connection")
 
 You can authenticate an already established connection using session authentication requests:
 
@@ -147,24 +140,23 @@ You can authenticate an already established connection using session authenticat
 *   `session.status` - check connection status and the current API key
 *   `session.logout` - forget the API key associated with the connection
 
-WebSocket API API key revocation[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-api-key-revocation "Direct link to WebSocket API API key revocation")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API API key revocation[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-api-key-revocation "Direct link to WebSocket API API key revocation")
 
 If during an active session the API key becomes invalid for any reason (e.g. IP address is not whitelisted, API key was deleted, API key doesn't have correct permissions, etc), after the next request the session will be revoked with the following error message:
 
-```
-{  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."   }}
+```codeBlockLines_aHhF
+{  
+  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."  }  
+}
 ```
 
-WebSocket API Authorize ad hoc requests[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-authorize-ad-hoc-requests "Direct link to WebSocket API Authorize ad hoc requests")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authorize ad hoc requests[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-authorize-ad-hoc-requests "Direct link to WebSocket API Authorize ad hoc requests")
 
 Only one API key can be authenticated with the WebSocket connection. The authenticated API key is used by default for requests that require an apiKey parameter. However, you can always specify the apiKey and signature explicitly for individual requests, overriding the authenticated API key and using a different one to authorize a specific request.
 
 For example, you might want to authenticate your USER\_DATA key to be used by default, but specify the TRADE key with an explicit signature when placing orders.
 
-WebSocket API Authentication request[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-authentication-request "Direct link to WebSocket API Authentication request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authentication request[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#websocket-api-authentication-request "Direct link to WebSocket API Authentication request")
 
 Authenticate WebSocket connection using the provided API key.
 
@@ -180,10 +172,10 @@ Note that only one API key can be authenticated. Calling `session.logon` multipl
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `apiKey` | STRING | YES |  
-| `recvWindow` | INT | NO |  
-| `signature` | STRING | YES |  
-| `timestamp` | INT | YES |  
+| `apiKey` | STRING | YES |  |
+| `recvWindow` | INT | NO |  |
+| `signature` | STRING | YES |  |
+| `timestamp` | INT | YES |  |
 
 **Note**:
 
@@ -193,14 +185,16 @@ Note that only one API key can be authenticated. Calling `session.logon` multipl
 
 > **Request**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logon",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature": "1cf54395b336b0a9727ef27d5d98987962bc47aca6e13fe978612d0adee066ed",    "timestamp": 1649729878532  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logon",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature": "1cf54395b336b0a9727ef27d5d98987962bc47aca6e13fe978612d0adee066ed",    "timestamp": 1649729878532  }}
 ```
 
 > **Response**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": true,    "serverTime": 1649729878630  },	"rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 2        }    ]}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": true,    "serverTime": 1649729878630  },	"rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 2        }    ]}
 ```
 
 ### Query session status[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#query-session-status "Direct link to Query session status")
@@ -215,14 +209,16 @@ Query the status of the WebSocket connection, inspecting which API key (if any) 
 
 > **Request**
 
-```
-{  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "method": "session.status"}
+```codeBlockLines_aHhF
+{  
+  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "method": "session.status"}
 ```
 
 > **Response**
 
-```
-{  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "status": 200,  "result": {    // if the connection is not authenticated, "apiKey" and "authorizedSince" will be shown as null    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": true,    "serverTime": 1649730611671  },	"rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 4        }    ]}
+```codeBlockLines_aHhF
+{  
+  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "status": 200,  "result": {    // if the connection is not authenticated, "apiKey" and "authorizedSince" will be shown as null    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": true,    "serverTime": 1649730611671  },	"rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 4        }    ]}
 ```
 
 ### Log out of the session[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#log-out-of-the-session "Direct link to Log out of the session")
@@ -237,46 +233,85 @@ Note that the WebSocket connection stays open after `session.logout` request. Yo
 
 **Parameters**: None
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 ### SIGNED request example (Ed25519)[​](/docs/derivatives/coin-margined-futures/websocket-api-general-info#signed-request-example-ed25519 "Direct link to SIGNED request example (Ed25519)")
 
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSD\_PERP 
-| side | SELL 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 0.2 
-| timestamp | 1668481559918 
+| symbol | BTCUSD\_PERP |
+| side | SELL |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 0.2 |
+| timestamp | 1668481559918 |
 
 > **Request**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logout"}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logout"}
 ```
 
 > **Response**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": null,    "authorizedSince": null,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  },	"rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        }    ]}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": null,    "authorizedSince": null,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  },	"rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        }    ]}
 ```
 
 A sample code in Python to show how to sign the payload with an Ed25519 key is available below.
 
-```
-#!/usr/bin/env python3import base64import timeimport jsonfrom cryptography.hazmat.primitives.serialization import load_pem_private_keyfrom websocket import create_connection# Set up authenticationAPI_KEY='put your own API Key here'PRIVATE_KEY_PATH='test-prv-key.pem'# Load the private key.# In this example the key is expected to be stored without encryption,# but we recommend using a strong password for improved security.with open(PRIVATE_KEY_PATH, 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)# Set up the request parametersparams = {    'apiKey':        API_KEY,    'symbol':       'BTCUSD_PERP',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}# Timestamp the requesttimestamp = int(time.time() * 1000) # UNIX timestamp in millisecondsparams['timestamp'] = timestamp# Sign the requestpayload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))params['signature'] = signature.decode('ASCII')# Send the requestrequest = {    'id': 'my_new_order',    'method': 'order.place',    'params': params}ws = create_connection("wss://ws-dapi.binance.com/ws-dapi/v1")ws.send(json.dumps(request))result =  ws.recv()ws.close()print(result)
+```codeBlockLines_aHhF
+#!/usr/bin/env python3  
+  
+import base64  
+import time  
+import json  
+from cryptography.hazmat.primitives.serialization import load_pem_private_key  
+from websocket import create_connection  
+  
+# Set up authentication  
+API_KEY='put your own API Key here'  
+PRIVATE_KEY_PATH='test-prv-key.pem'  
+  
+# Load the private key.  
+# In this example the key is expected to be stored without encryption,  
+# but we recommend using a strong password for improved security.  
+with open(PRIVATE_KEY_PATH, 'rb') as f:  
+    private_key = load_pem_private_key(data=f.read(),                                       password=None)  
+# Set up the request parameters  
+params = {  
+    'apiKey':        API_KEY,    'symbol':       'BTCUSD_PERP',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}  
+  
+# Timestamp the request  
+timestamp = int(time.time() * 1000) # UNIX timestamp in milliseconds  
+params['timestamp'] = timestamp  
+  
+# Sign the request  
+payload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])  
+  
+signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))  
+params['signature'] = signature.decode('ASCII')  
+  
+# Send the request  
+request = {  
+    'id': 'my_new_order',    'method': 'order.place',    'params': params}  
+  
+ws = create_connection("wss://ws-dapi.binance.com/ws-dapi/v1")  
+ws.send(json.dumps(request))  
+result =  ws.recv()  
+ws.close()  
+  
+print(result)
 ```
 
 A sample code in Python to show how to sign the payload with an Ed25519 key is available on the right side.
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/coin-margined-futures/common-definition#terminology "Direct link to Terminology")
-------------------------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/coin-margined-futures/common-definition#terminology "Direct link to Terminology")
 
 *   `symbol` refers to the symbol name of a contract symbol
 *   `pair` refers to the underlying symbol of a contracrt symbol
@@ -284,8 +319,7 @@ Terminology[​](/docs/derivatives/coin-margined-futures/common-definition#termi
 *   `quote asset` refers to the asset that is the `price` of a symbol.
 *   `margin asset` refers to the asset that is the `margin` of a symbol
 
-ENUM definitions[​](/docs/derivatives/coin-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
----------------------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/coin-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Symbol type:**
 
@@ -398,14 +432,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 6000  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 6000  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -417,20 +451,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/coin-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
----------------------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/coin-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/coin-margined-futures/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -449,8 +481,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -469,8 +501,8 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `MARKET_LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for `MARKET` orders on a symbol. There are 3 parts:
@@ -489,8 +521,8 @@ In order to pass the `market lot size`, the following must be true for `quantity
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
 ```
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
@@ -501,8 +533,8 @@ Note that both "algo" orders and normal orders are counted for this filter.
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.0500",    "multiplierDown": "0.9500",    "multiplierDecimal": 4  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.0500",    "multiplierDown": "0.9500",    "multiplierDecimal": 4  }
 ```
 
 The `PERCENT_PRICE` filter defines valid range for a price based on the mark price.
@@ -512,20 +544,19 @@ In order to pass the `percent price`, the following must be true for `price`:
 *   BUY: `price` <= `markPrice` \* `multiplierUp`
 *   SELL: `price` >= `markPrice` \* `multiplierDown`
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/coin-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/coin-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/coin-margined-futures/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -602,8 +633,7 @@ Codes are universal,but messages can vary.
 
 *   Start time is greater than end time.
 
-11xx - Request issues[​](/docs/derivatives/coin-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - Request issues[​](/docs/derivatives/coin-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/coin-margined-futures/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -719,8 +749,7 @@ Codes are universal,but messages can vary.
 
 *   Invalid newOrderRespType.
 
-20xx - Processing Issues[​](/docs/derivatives/coin-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## 20xx - Processing Issues[​](/docs/derivatives/coin-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
 
 ### \-2010 NEW\_ORDER\_REJECTED[​](/docs/derivatives/coin-margined-futures/error-code#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
 
@@ -790,8 +819,7 @@ Codes are universal,but messages can vary.
 
 *   Leverage is smaller than permitted: insufficient margin balance.
 
-40xx - Filters and other Issues[​](/docs/derivatives/coin-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 40xx - Filters and other Issues[​](/docs/derivatives/coin-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
 
 ### \-4000 INVALID\_ORDER\_STATUS[​](/docs/derivatives/coin-margined-futures/error-code#-4000-invalid_order_status "Direct link to -4000 INVALID_ORDER_STATUS")
 
@@ -1172,8 +1200,7 @@ Codes are universal,but messages can vary.
 
 *   Timestamp for this request is outside of the ME recvWindow.
 
-User Data Streams Connect
-=========================
+# User Data Streams Connect
 
 *   The base API endpoint is: **[https://dapi.binance.com](https://dapi.binance.com)**
     
@@ -1207,218 +1234,184 @@ User Data Streams Connect
     
 *   A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark
 
-Start User Data Stream (USER\_STREAM)
-=====================================
+# Start User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#api-description "Direct link to API Description")
 
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/listenKey`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
 ```
-{  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"}
-```
 
-Keepalive User Data Stream (USER\_STREAM)
-=========================================
+# Keepalive User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#api-description "Direct link to API Description")
 
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#http-request "Direct link to HTTP Request")
 
 PUT `/dapi/v1/listenKey`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream#response-example "Direct link to Response Example")
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
-Close User Data Stream(USER\_STREAM)
-====================================
+# Close User Data Stream(USER\_STREAM)
 
-API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#api-description "Direct link to API Description")
 
 Close out a user data stream.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#http-request "Direct link to HTTP Request")
 
 DELETE `/dapi/v1/listenKey`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#request-parameters "Direct link to Request Parameters")
 
 None
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream#response-example "Direct link to Response Example")
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
-Start User Data Stream (USER\_STREAM)
-=====================================
+# Start User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#api-description "Direct link to API Description")
 
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
 
-Method[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#method "Direct link to Method")
 
 `userDataStream.start`
 
-Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request "Direct link to Request")
 
-```
-{  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "method": "userDataStream.start",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
+```codeBlockLines_aHhF
+{  
+  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "method": "userDataStream.start",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"  }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `apiKey` | STRING | NO | Required if session is not authenticated via session.logon 
+| `apiKey` | STRING | NO | Required if session is not authenticated via session.logon |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "status": 200,  "result": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"  },   "rateLimits": [	{		"rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400,        "count": 8    }  ]}
 ```
-{  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",  "status": 200,  "result": {    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"  },   "rateLimits": [	{		"rateLimitType": "REQUEST_WEIGHT",        "interval": "MINUTE",        "intervalNum": 1,        "limit": 2400,        "count": 8    }  ]}
-```
 
-Keepalive User Data Stream (USER\_STREAM)
-=========================================
+# Keepalive User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#api-description "Direct link to API Description")
 
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 60 minutes.
 
-Method[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#method "Direct link to Method")
-----------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#method "Direct link to Method")
 
 `userDataStream.ping`
 
-Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request "Direct link to Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request "Direct link to Request")
 
-```
-{  "id": "815d5fce-0880-4287-a567-80badf004c74",  "method": "userDataStream.ping",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "815d5fce-0880-4287-a567-80badf004c74",  "method": "userDataStream.ping",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"   }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `apiKey` | STRING | NO | Required if session is not authenticated via `session.logon` 
+| `apiKey` | STRING | NO | Required if session is not authenticated via `session.logon` |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "815d5fce-0880-4287-a567-80badf004c74",  "status": 200,  "result": {    "listenKey": "3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
-{  "id": "815d5fce-0880-4287-a567-80badf004c74",  "status": 200,  "result": {    "listenKey": "3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
-```
 
-Close User Data Stream (USER\_STREAM)
-=====================================
+# Close User Data Stream (USER\_STREAM)
 
-API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#api-description "Direct link to API Description")
 
 Close out a user data stream.
 
-Method[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#method "Direct link to Method")
 
 `userDataStream.stop`
 
-Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request "Direct link to Request")
 
-```
-{  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "method": "userDataStream.stop",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"  }}
+```codeBlockLines_aHhF
+{  
+  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "method": "userDataStream.stop",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk9HlWFsOr9aLE2zvsw0MuIgwCIPy8atIco14y7Ju91duEh8A"  }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `apiKey` | STRING | NO | Required if session is not authenticated via `session.logon` 
+| `apiKey` | STRING | NO | Required if session is not authenticated via `session.logon` |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "status": 200,  "result": {},   "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
-{  "id": "819e1b1b-8c06-485b-a13e-131326c69599",  "status": 200,  "result": {},   "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
-```
 
-Event: User Data Stream Expired
-===============================
+# Event: User Data Stream Expired
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-description "Direct link to Event Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-description "Direct link to Event Description")
 
 When the `listenKey` used for the user data stream turns expired, this event will be pushed.
 
@@ -1428,45 +1421,39 @@ When the `listenKey` used for the user data stream turns expired, this event wil
 > *   This event will be received only when a valid `listenKey` in connection got expired.
 > *   No more user data event will be updated after this event received until a new valid `listenKey` used.
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-name "Direct link to Event Name")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#event-name "Direct link to Event Name")
 
 `listenKeyExpired`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-User-Data-Stream-Expired#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	'e': 'listenKeyExpired',      // event type	'E': 1576653824250				// event time	"listenKey":"WsCMN0a4KHUPTQuX6IUnqEZfB1inxmv1qR4kbf1LuEjur5VdbzqvyxqG9TSjVVxv"}
 ```
-{	'e': 'listenKeyExpired',      // event type	'E': 1576653824250				// event time	"listenKey":"WsCMN0a4KHUPTQuX6IUnqEZfB1inxmv1qR4kbf1LuEjur5VdbzqvyxqG9TSjVVxv"}
-```
 
-Event: Margin Call
-==================
+# Event: Margin Call
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call#event-description "Direct link to Event Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call#event-description "Direct link to Event Description")
 
 *   When the user's position risk ratio is too high, this stream will be pushed.
 *   This message is only used as risk guidance information and is not recommended for investment strategies.
 *   In the case of a highly volatile market, there may be the possibility that the user's position has been liquidated at the same time when this stream is pushed out.
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call#event-name "Direct link to Event Name")
----------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call#event-name "Direct link to Event Name")
 
 `MARGIN_CALL`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Margin-Call#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"MARGIN_CALL",    	  // Event Type    "E":1587727187525,		  // Event Time    "i": "SfsR",			  // Account Alias    "cw":"3.16812045",		  // Cross Wallet Balance. Only pushed with crossed position margin call    "p":[					  // Position(s) of Margin Call      {        "s":"BTCUSD_200925",  // Symbol        "ps":"LONG",		  // Position Side        "pa":"132",			  // Position Amount        "mt":"CROSSED",		  // Margin Type        "iw":"0",			  // Isolated Wallet (if isolated position)        "mp":"9187.17127000", // Mark Price        "up":"-1.166074",	  // Unrealized PnL        "mm":"1.614445"		  // Maintenance Margin Required      }    ]}
 ```
-{    "e":"MARGIN_CALL",    	  // Event Type    "E":1587727187525,		  // Event Time    "i": "SfsR",			  // Account Alias    "cw":"3.16812045",		  // Cross Wallet Balance. Only pushed with crossed position margin call    "p":[					  // Position(s) of Margin Call      {        "s":"BTCUSD_200925",  // Symbol        "ps":"LONG",		  // Position Side        "pa":"132",			  // Position Amount        "mt":"CROSSED",		  // Margin Type        "iw":"0",			  // Isolated Wallet (if isolated position)        "mp":"9187.17127000", // Mark Price        "up":"-1.166074",	  // Unrealized PnL        "mm":"1.614445"		  // Maintenance Margin Required      }    ]}  
-```
 
-Event: Balance and Position Update
-==================================
+# Event: Balance and Position Update
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-description "Direct link to Event Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-description "Direct link to Event Description")
 
 Event type is `ACCOUNT_UPDATE`.
 
@@ -1493,23 +1480,22 @@ Event type is `ACCOUNT_UPDATE`.
 *   The field "bc" represents the balance change except for PnL and commission.
     
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-name "Direct link to Event Name")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update#event-name "Direct link to Event Name")
 
 `ACCOUNT_UPDATE`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Balance-and-Position-Update#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e": "ACCOUNT_UPDATE",			// Event Type  "E": 1564745798939,            	// Event Time  "T": 1564745798938 ,           	// Transaction  "i": "SfsR",						// Account Alias  "a":                          	// Update Data    {      "m":"ORDER",					// Event reason type      "B":[                     	// Balances        {          "a":"BTC",           	    // Asset          "wb":"122624.12345678",   // Wallet Balance          "cw":"100.12345678",		// Cross Wallet Balance          "bc":"50.12345678"			// Balance Change except PnL and Commission        },        {          "a":"ETH",          "wb":"1.00000000",  
+          "cw":"0.00000000",          "bc":"-49.12345678"        }      ],      "P":[        {          "s":"BTCUSD_200925",      // Symbol          "pa":"0",               	// Position Amount          "ep":"0.0",               // Entry Price          "bep":"0.0",               // Break-Even Price          "cr":"200",             	// (Pre-fee) Accumulated Realized  
+          "up":"0",					// Unrealized PnL          "mt":"isolated",			// Margin Type          "iw":"0.00000000",		// Isolated Wallet (if isolated position)          "ps":"BOTH"				// Position Side        },        {        	"s":"BTCUSD_200925",        	"pa":"20",        	"ep":"6563.6",            "bep":"6563.7",        	"cr":"0",        	"up":"2850.21200000",        	"mt":"isolated",        	"iw":"13200.70726908",        	"ps":"LONG"      	 },        {        	"s":"BTCUSD_200925",        	"pa":"-10",        	"ep":"6563.8"            "bep":"6563.6",,        	"cr":"-45.04000000",        	"up":"-1423.15600000",        	"mt":"isolated",        	"iw":"6570.42511771",        	"ps":"SHORT"        }      ]    }}
 ```
-{  "e": "ACCOUNT_UPDATE",			// Event Type  "E": 1564745798939,            	// Event Time  "T": 1564745798938 ,           	// Transaction  "i": "SfsR",						// Account Alias  "a":                          	// Update Data    {      "m":"ORDER",					// Event reason type      "B":[                     	// Balances        {          "a":"BTC",           	    // Asset          "wb":"122624.12345678",   // Wallet Balance          "cw":"100.12345678",		// Cross Wallet Balance          "bc":"50.12345678"			// Balance Change except PnL and Commission        },        {          "a":"ETH",                     "wb":"1.00000000",          "cw":"0.00000000",          "bc":"-49.12345678"        }      ],      "P":[        {          "s":"BTCUSD_200925",      // Symbol          "pa":"0",               	// Position Amount          "ep":"0.0",               // Entry Price          "bep":"0.0",               // Break-Even Price           "cr":"200",             	// (Pre-fee) Accumulated Realized          "up":"0",					// Unrealized PnL          "mt":"isolated",			// Margin Type          "iw":"0.00000000",		// Isolated Wallet (if isolated position)          "ps":"BOTH"				// Position Side        },        {        	"s":"BTCUSD_200925",        	"pa":"20",        	"ep":"6563.6",            "bep":"6563.7",        	"cr":"0",        	"up":"2850.21200000",        	"mt":"isolated",        	"iw":"13200.70726908",        	"ps":"LONG"      	 },        {        	"s":"BTCUSD_200925",        	"pa":"-10",        	"ep":"6563.8"            "bep":"6563.6",,        	"cr":"-45.04000000",        	"up":"-1423.15600000",        	"mt":"isolated",        	"iw":"6570.42511771",        	"ps":"SHORT"        }      ]    }}
-```
 
-Event: Order Update
-===================
+# Event: Order Update
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Order-Update#event-description "Direct link to Event Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Order-Update#event-description "Direct link to Event Description")
 
 When new order created, modified, order status changed will push such event. event type is `ORDER_TRADE_UPDATE`.
 
@@ -1566,43 +1552,37 @@ When new order created, modified, order status changed will push such event. eve
     
     *   `c` shows as “adl\_autoclose”，`X` shows as “NEW”
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Order-Update#event-name "Direct link to Event Name")
-----------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Order-Update#event-name "Direct link to Event Name")
 
 `ORDER_TRADE_UPDATE`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Order-Update#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Order-Update#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"ORDER_TRADE_UPDATE",		// Event Type  "E":1591274595442,			// Event Time  "T":1591274595442,			// Transaction Time  "i":"SfsR",					// Account Alias  "o":{    "s":"BTCUSD_200925",		// Symbol    "c":"TEST",					// Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "delivery_autoclose-": settlement order for delisting or delivery    "S":"SELL",					// Side    "o":"TRAILING_STOP_MARKET",	// Order Type    "f":"GTC",					// Time in Force    "q":"2",				    // Original Quantity    "p":"0",					// Original Price    "ap":"0",					// Average Price    "sp":"9103.1",				// Stop Price. Please ignore with TRAILING_STOP_MARKET order    "x":"NEW",					// Execution Type    "X":"NEW",					// Order Status    "i":8888888,				// Order Id    "l":"0",					// Order Last Filled Quantity    "z":"0",					// Order Filled Accumulated Quantity    "L":"0",					// Last Filled Price    "ma": "BTC", 				// Margin Asset    "N":"BTC",            		// Commission Asset of the trade, will not push if no commission    "n":"0",               	    // Commission of the trade, will not push if no commission    "T":1591274595442,			// Order Trade Time    "t":0,			        	// Trade Id    "rp": "0",					// Realized Profit of the trade    "b":"0",			    	// Bid quantity of base asset    "a":"0",					// Ask quantity of base asset    "m":false,					// Is this trade the maker side?    "R":false,					// Is this reduce only    "wt":"CONTRACT_PRICE", 		// Stop Price Working Type    "ot":"TRAILING_STOP_MARKET",// Original Order Type    "ps":"LONG",				// Position Side    "cp":false,					// If Close-All, pushed with conditional order    "AP":"9476.8",				// Activation Price, only puhed with TRAILING_STOP_MARKET order    "cr":"5.0",					// Callback Rate, only puhed with TRAILING_STOP_MARKET order    "pP": false,				// If conditional order trigger is protected    "V":"EXPIRE_TAKER",       // STP mode    "pm":"OPPONENT"           // Price match mode  }}
 ```
-{  "e":"ORDER_TRADE_UPDATE",		// Event Type  "E":1591274595442,			// Event Time  "T":1591274595442,			// Transaction Time  "i":"SfsR",					// Account Alias  "o":{								    "s":"BTCUSD_200925",		// Symbol    "c":"TEST",					// Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "delivery_autoclose-": settlement order for delisting or delivery    "S":"SELL",					// Side    "o":"TRAILING_STOP_MARKET",	// Order Type    "f":"GTC",					// Time in Force    "q":"2",				    // Original Quantity    "p":"0",					// Original Price    "ap":"0",					// Average Price    "sp":"9103.1",				// Stop Price. Please ignore with TRAILING_STOP_MARKET order    "x":"NEW",					// Execution Type    "X":"NEW",					// Order Status    "i":8888888,				// Order Id    "l":"0",					// Order Last Filled Quantity    "z":"0",					// Order Filled Accumulated Quantity    "L":"0",					// Last Filled Price    "ma": "BTC", 				// Margin Asset    "N":"BTC",            		// Commission Asset of the trade, will not push if no commission    "n":"0",               	    // Commission of the trade, will not push if no commission    "T":1591274595442,			// Order Trade Time    "t":0,			        	// Trade Id    "rp": "0",					// Realized Profit of the trade    "b":"0",			    	// Bid quantity of base asset    "a":"0",					// Ask quantity of base asset    "m":false,					// Is this trade the maker side?    "R":false,					// Is this reduce only    "wt":"CONTRACT_PRICE", 		// Stop Price Working Type    "ot":"TRAILING_STOP_MARKET",// Original Order Type    "ps":"LONG",				// Position Side    "cp":false,					// If Close-All, pushed with conditional order    "AP":"9476.8",				// Activation Price, only puhed with TRAILING_STOP_MARKET order    "cr":"5.0",					// Callback Rate, only puhed with TRAILING_STOP_MARKET order    "pP": false,				// If conditional order trigger is protected    "V":"EXPIRE_TAKER",       // STP mode    "pm":"OPPONENT"           // Price match mode  }}
-```
 
-Event: Account Configuration Update (Leverage Update)
-=====================================================
+# Event: Account Configuration Update (Leverage Update)
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update#event-description "Direct link to Event Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update#event-description "Direct link to Event Description")
 
 When the account configuration is changed, the event type will be pushed as `ACCOUNT_CONFIG_UPDATE` When the leverage of a trade pair changes, the payload will contain the object `ac` to represent the account configuration of the trade pair, where `s` represents the specific trade pair and `l` represents the leverage
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update#event-name "Direct link to Event Name")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update#event-name "Direct link to Event Name")
 
 `ACCOUNT_CONFIG_UPDATE`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-Account-Configuration-Update#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type    "E":1611646737479,		           // Event Time    "T":1611646737476,		           // Transaction Time    "ac":{    "s":"BTCUSD_PERP",				   // symbol    "l":25						       // leverage    }}
 ```
-{    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type    "E":1611646737479,		           // Event Time    "T":1611646737476,		           // Transaction Time    "ac":{								    "s":"BTCUSD_PERP",				   // symbol    "l":25						       // leverage    }}
-```
 
-Event: STRATEGY\_UPDATE
-=======================
+# Event: STRATEGY\_UPDATE
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-description "Direct link to Event Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-description "Direct link to Event Description")
 
 `STRATEGY_UPDATE` update when a strategy is created/cancelled/expired, ...etc.
 
@@ -1631,23 +1611,20 @@ Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams
 *   8014: User can only place reduce only order
 *   8015: User position empty or liquidated
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-name "Direct link to Event Name")
--------------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#event-name "Direct link to Event Name")
 
 `STRATEGY_UPDATE`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-STRATEGY-UPDATE#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"e": "STRATEGY_UPDATE", // Event Type	"T": 1669261797627, // Transaction Time	"E": 1669261797628, // Event Time	"su": {			"si": 176054594, // Strategy ID			"st": "GRID", // Strategy Type			"ss": "NEW", // Strategy Status			"s": "BTCUSDT", // Symbol			"ut": 1669261797627, // Update Time			"c": 8007 // opCode		}}
 ```
-{	"e": "STRATEGY_UPDATE", // Event Type	"T": 1669261797627, // Transaction Time	"E": 1669261797628, // Event Time	"su": {			"si": 176054594, // Strategy ID			"st": "GRID", // Strategy Type			"ss": "NEW", // Strategy Status			"s": "BTCUSDT", // Symbol			"ut": 1669261797627, // Update Time			"c": 8007 // opCode		}}
-```
 
-Event: GRID\_UPDATE
-===================
+# Event: GRID\_UPDATE
 
-Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE#event-description "Direct link to Event Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE#event-description "Direct link to Event Description")
 
 `GRID_UPDATE` update when a sub order of a grid is filled or partially filled.
 
@@ -1658,78 +1635,73 @@ Event Description[​](/docs/derivatives/coin-margined-futures/user-data-streams
 *   CANCELLED
 *   EXPIRED
 
-Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE#event-name "Direct link to Event Name")
----------------------------------------------------------------------------------------------------------------------------------
+## Event Name[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE#event-name "Direct link to Event Name")
 
 `GRID_UPDATE`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/user-data-streams/Event-GRID-UPDATE#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"e": "GRID_UPDATE", // Event Type	"T": 1669262908216, // Transaction Time	"E": 1669262908218, // Event Time	"gu": { 			"si": 176057039, // Strategy ID  
+			"st": "GRID", // Strategy Type			"ss": "WORKING", // Strategy Status			"s": "BTCUSDT", // Symbol			"r": "-0.00300716", // Realized PNL			"up": "16720", // Unmatched Average Price			"uq": "-0.001", // Unmatched Qty			"uf": "-0.00300716", // Unmatched Fee			"mp": "0.0", // Matched PNL			"ut": 1669262908197 // Update Time	}}
 ```
-{	"e": "GRID_UPDATE", // Event Type	"T": 1669262908216, // Transaction Time	"E": 1669262908218, // Event Time	"gu": { 			"si": 176057039, // Strategy ID			"st": "GRID", // Strategy Type			"ss": "WORKING", // Strategy Status			"s": "BTCUSDT", // Symbol			"r": "-0.00300716", // Realized PNL			"up": "16720", // Unmatched Average Price			"uq": "-0.001", // Unmatched Qty			"uf": "-0.00300716", // Unmatched Fee			"mp": "0.0", // Matched PNL			"ut": 1669262908197 // Update Time	}}
-```
 
-New Order(TRADE)
-================
+# New Order(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#api-description "Direct link to API Description")
 
 Send in a new order.
 
-Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#method "Direct link to Method")
------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#method "Direct link to Method")
 
 `order.place`
 
-Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#request "Direct link to Request")
---------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#request "Direct link to Request")
 
-```
-{  "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",  "method": "order.place",  "params": {    "apiKey": "",    "price": "50000",    "quantity": 1,    "side": "BUY",    "symbol": "BTCUSD_PERP",    "timeInForce": "GTC",    "timestamp": 1728413737111,    "type": "LIMIT",    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"	}}
+```codeBlockLines_aHhF
+{  
+  "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",  "method": "order.place",  "params": {    "apiKey": "",    "price": "50000",    "quantity": 1,    "side": "BUY",    "symbol": "BTCUSD_PERP",    "timeInForce": "GTC",    "timestamp": 1728413737111,    "type": "LIMIT",    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"	}}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#request-weight "Direct link to Request Weight")
 
 **0**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES | BUY or SELL 
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. 
-| type | ENUM | YES | `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET` 
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | NO | Quantity measured by contract number, Cannot be sent with `closePosition`\=`true` 
-| reduceOnly | STRING | NO | `true` or `false`. default `false`. Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true` (Close-All) 
-| price | DECIMAL | NO |  
-| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` 
-| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. 
-| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different workingType) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% 
-| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
-| priceProtect | ENUM | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| newOrderRespType | ENUM | NO | `ACK`,`RESULT`, default `ACK` 
-| priceMatch | ENUM | NO | only available for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| selfTradePreventionMode | ENUM | NO | `NONE`: No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` 
-| recvWindow | INT | NO |  
-| timestamp | INT | YES |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES | BUY or SELL |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. |
+| type | ENUM | YES | `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET` |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | NO | Quantity measured by contract number, Cannot be sent with `closePosition`\=`true` |
+| reduceOnly | STRING | NO | `true` or `false`. default `false`. Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true` (Close-All) |
+| price | DECIMAL | NO |  |
+| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` |
+| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. |
+| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different workingType) |
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% |
+| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" |
+| priceProtect | ENUM | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| newOrderRespType | ENUM | NO | `ACK`,`RESULT`, default `ACK` |
+| priceMatch | ENUM | NO | only available for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| selfTradePreventionMode | ENUM | NO | `NONE`: No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` |
+| recvWindow | INT | NO |  |
+| timestamp | INT | YES |  |
 
 Additional mandatory parameters based on `type`:
 
 | Type | Additional mandatory parameters |
 | --- | --- |
-| `LIMIT` | `timeInForce`, `quantity`, `price` 
-| `MARKET` | `quantity` 
-| `STOP/TAKE_PROFIT` | `quantity`, `price`, `stopPrice` 
-| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` 
-| `TRAILING_STOP_MARKET` | `callbackRate` 
+| `LIMIT` | `timeInForce`, `quantity`, `price` |
+| `MARKET` | `quantity` |
+| `STOP/TAKE_PROFIT` | `quantity`, `price`, `stopPrice` |
+| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` |
+| `TRAILING_STOP_MARKET` | `callbackRate` |
 
 *   Order with type `STOP`, parameter `timeInForce` can be sent ( default `GTC`).
 *   Order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
@@ -1759,52 +1731,47 @@ Additional mandatory parameters based on `type`:
         *   Cannot be used with `reduceOnly` parameter
         *   In Hedge Mode, cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",  "status": 200,  "result": {      "orderId": 333245211,      "symbol": "BTCUSD_PERP",      "pair": "BTCUSD",      "status": "NEW",      "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",      "price": "50000",      "avgPrice": "0.00",      "origQty": "1",      "executedQty": "0",      "cumQty": "0",      "cumBase": "0",      "timeInForce": "GTC",      "type": "LIMIT",      "reduceOnly": false,      "closePosition": false,      "side": "BUY",      "positionSide": "BOTH",      "stopPrice": "0",      "workingType": "CONTRACT_PRICE",      "priceProtect": false,      "origType": "LIMIT",      "updateTime": 1728413795125  },  "rateLimits": [      {          "rateLimitType": "REQUEST_WEIGHT",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 2400,          "count": 6      },      {          "rateLimitType": "ORDERS",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 1200,          "count": 1      }  ]}
 ```
-{  "id": "60fa4366-f96e-42fe-a82b-f819952c6db4",  "status": 200,  "result": {      "orderId": 333245211,      "symbol": "BTCUSD_PERP",      "pair": "BTCUSD",      "status": "NEW",      "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",      "price": "50000",      "avgPrice": "0.00",      "origQty": "1",      "executedQty": "0",      "cumQty": "0",      "cumBase": "0",      "timeInForce": "GTC",      "type": "LIMIT",      "reduceOnly": false,      "closePosition": false,      "side": "BUY",      "positionSide": "BOTH",      "stopPrice": "0",      "workingType": "CONTRACT_PRICE",      "priceProtect": false,      "origType": "LIMIT",      "updateTime": 1728413795125  },  "rateLimits": [      {          "rateLimitType": "REQUEST_WEIGHT",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 2400,          "count": 6      },      {          "rateLimitType": "ORDERS",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 1200,          "count": 1      }  ]}
-```
 
-Modify Order (TRADE)
-====================
+# Modify Order (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#api-description "Direct link to API Description")
 
 Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
 
-Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#method "Direct link to Method")
 
 `order.modify`
 
-Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#request "Direct link to Request")
 
-```
-{  "id": "88601d02-bd0d-430d-8733-2708a569ebda",  "method": "order.modify",  "params": {    "apiKey": "",    "orderId": 333245211,    "price": "51000",    "quantity": 1,    "side": "BUY",    "symbol": "BTCUSD_PERP",    "timestamp": 1728415697189,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "88601d02-bd0d-430d-8733-2708a569ebda",  "method": "order.modify",  "params": {    "apiKey": "",    "orderId": 333245211,    "price": "51000",    "quantity": 1,    "side": "BUY",    "symbol": "BTCUSD_PERP",    "timestamp": 1728415697189,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#request-weight "Direct link to Request Weight")
 
 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M); 1 on IP rate limit(x-mbx-used-weight-1m)
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| symbol | STRING | YES |  
-| side | ENUM | YES | `SELL`, `BUY` 
-| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` 
-| price | DECIMAL | YES |  
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| symbol | STRING | YES |  |
+| side | ENUM | YES | `SELL`, `BUY` |
+| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` |
+| price | DECIMAL | YES |  |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
 > *   Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
@@ -1814,63 +1781,56 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-
 >     *   When the order is `GTX` and the new price will cause it to be executed immediately
 > *   One order can only be modfied for less than 10000 times
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "88601d02-bd0d-430d-8733-2708a569ebda",  "status": 200,  "result": {      "orderId": 333245211,      "symbol": "BTCUSD_PERP",      "pair": "BTCUSD",      "status": "NEW",      "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",      "price": "51000",      "avgPrice": "0.00",      "origQty": "1",      "executedQty": "0",      "cumQty": "0",      "cumBase": "0",      "timeInForce": "GTC",      "type": "LIMIT",      "reduceOnly": false,      "closePosition": false,      "side": "BUY",      "positionSide": "BOTH",      "stopPrice": "0",      "workingType": "CONTRACT_PRICE",      "priceProtect": false,      "origType": "LIMIT",      "updateTime": 1728415765493  },  "rateLimits": [      {          "rateLimitType": "REQUEST_WEIGHT",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 2400,          "count": 6      },      {          "rateLimitType": "ORDERS",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 1200,          "count": 1      }  ]}
 ```
-{  "id": "88601d02-bd0d-430d-8733-2708a569ebda",  "status": 200,  "result": {      "orderId": 333245211,      "symbol": "BTCUSD_PERP",      "pair": "BTCUSD",      "status": "NEW",      "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",      "price": "51000",      "avgPrice": "0.00",      "origQty": "1",      "executedQty": "0",      "cumQty": "0",      "cumBase": "0",      "timeInForce": "GTC",      "type": "LIMIT",      "reduceOnly": false,      "closePosition": false,      "side": "BUY",      "positionSide": "BOTH",      "stopPrice": "0",      "workingType": "CONTRACT_PRICE",      "priceProtect": false,      "origType": "LIMIT",      "updateTime": 1728415765493  },  "rateLimits": [      {          "rateLimitType": "REQUEST_WEIGHT",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 2400,          "count": 6      },      {          "rateLimitType": "ORDERS",          "interval": "MINUTE",          "intervalNum": 1,          "limit": 1200,          "count": 1      }  ]}
-```
 
-Cancel Order (TRADE)
-====================
+# Cancel Order (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#api-description "Direct link to API Description")
 
 Cancel an active order.
 
-Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#method "Direct link to Method")
 
 `order.cancel`
 
-Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#request "Direct link to Request")
 
-```
-{  "id": "a8627ea5-8b9f-452f-90ae-4136f2b442e2",  "method": "order.cancel",  "params": {    "apiKey": "",    "orderId": 333245211,    "symbol": "BTCUSD_PERP",    "timestamp": 1728416090517,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "a8627ea5-8b9f-452f-90ae-4136f2b442e2",  "method": "order.cancel",  "params": {    "apiKey": "",    "orderId": 333245211,    "symbol": "BTCUSD_PERP",    "timestamp": 1728416090517,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "id": "a8627ea5-8b9f-452f-90ae-4136f2b442e2",    "status": 200,    "result": {        "orderId": 333245211,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "status": "CANCELED",        "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",        "price": "51000",        "avgPrice": "0.00",        "origQty": "1",        "executedQty": "0",        "cumQty": "0",        "cumBase": "0",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "BUY",        "positionSide": "BOTH",        "stopPrice": "0",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "updateTime": 1728416138285    },    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        }    ]}
 ```
-{    "id": "a8627ea5-8b9f-452f-90ae-4136f2b442e2",    "status": 200,    "result": {        "orderId": 333245211,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "status": "CANCELED",        "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",        "price": "51000",        "avgPrice": "0.00",        "origQty": "1",        "executedQty": "0",        "cumQty": "0",        "cumBase": "0",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "BUY",        "positionSide": "BOTH",        "stopPrice": "0",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "updateTime": 1728416138285    },    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        }    ]}
-```
 
-Query Order (USER\_DATA)
-========================
+# Query Order (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#api-description "Direct link to API Description")
 
 Check an order's status.
 
@@ -1878,169 +1838,151 @@ Check an order's status.
     *   order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
     *   order create time + 90 days < current time
 
-Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#method "Direct link to Method")
------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#method "Direct link to Method")
 
 `order.status`
 
-Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#request "Direct link to Request")
---------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#request "Direct link to Request")
 
-```
-{    "id": "0ce5d070-a5e5-4ff2-b57f-1556741a4204",    "method": "order.status",    "params": {        "apiKey": "HMOchcfii9ZRZnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGPHQj1lGdTjR",        "orderId": 328999071,        "symbol": "BTCUSD_PERP",        "timestamp": 1703441060152,        "signature": "ba48184fc38a71d03d2b5435bd67c1206e3191e989fe99bda1bc643a880dfdbf"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "0ce5d070-a5e5-4ff2-b57f-1556741a4204",    "method": "order.status",    "params": {        "apiKey": "HMOchcfii9ZRZnhjp2XjGXhsOBd6msAhKz9joQaWwZ7arcJTlD2hGPHQj1lGdTjR",        "orderId": 328999071,        "symbol": "BTCUSD_PERP",        "timestamp": 1703441060152,        "signature": "ba48184fc38a71d03d2b5435bd67c1206e3191e989fe99bda1bc643a880dfdbf"    }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 Notes:
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 > *   `orderId` is self-increment for each specific `symbol`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "id": "0ce5d070-a5e5-4ff2-b57f-1556741a4204",    "status": 200,    "result": {        "orderId": 328999071,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "status": "NEW",        "clientOrderId": "ArY8Ng1rln0s9x3fclmAHy",        "price": "58000",        "avgPrice": "0.00",        "origQty": "1",        "executedQty": "0",        "cumBase": "0",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "BUY",        "positionSide": "LONG",        "stopPrice": "0",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "selfTradePreventionMode": "EXPIRE_TAKER",        "time": 1733740063619,        "updateTime": 1733740063619,        "priceMatch": "NONE"    },    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        }    ]}
 ```
-{    "id": "0ce5d070-a5e5-4ff2-b57f-1556741a4204",    "status": 200,    "result": {        "orderId": 328999071,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "status": "NEW",        "clientOrderId": "ArY8Ng1rln0s9x3fclmAHy",        "price": "58000",        "avgPrice": "0.00",        "origQty": "1",        "executedQty": "0",        "cumBase": "0",        "timeInForce": "GTC",        "type": "LIMIT",        "reduceOnly": false,        "closePosition": false,        "side": "BUY",        "positionSide": "LONG",        "stopPrice": "0",        "workingType": "CONTRACT_PRICE",        "priceProtect": false,        "origType": "LIMIT",        "selfTradePreventionMode": "EXPIRE_TAKER",        "time": 1733740063619,        "updateTime": 1733740063619,        "priceMatch": "NONE"    },    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 6        }    ]}
-```
 
-Position Information(USER\_DATA)
-================================
+# Position Information(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#api-description "Direct link to API Description")
 
 Get current position information.
 
-Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#method "Direct link to Method")
---------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#method "Direct link to Method")
 
 `account.position`
 
-Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#request "Direct link to Request")
------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#request "Direct link to Request")
 
-```
-{  "id": "233b8741-a96d-48e8-8ce1-160f43548aeb",  "method": "account.position",  "params": {    "apiKey": "",    "pair": "BTCUSD",    "timestamp": 1727825241779,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "233b8741-a96d-48e8-8ce1-160f43548aeb",  "method": "account.position",  "params": {    "apiKey": "",    "pair": "BTCUSD",    "timestamp": 1727825241779,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| marginAsset | STRING | NO |  
-| pair | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| marginAsset | STRING | NO |  |
+| pair | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Note**
 
 > *   Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "id": "233b8741-a96d-48e8-8ce1-160f43548aeb",    "status": 200,    "result": [        {            "symbol": "BTCUSD_PERP",            "positionAmt": "0",            "entryPrice": "0.00000000",            "markPrice": "62297.60417296",            "unRealizedProfit": "0.00000000",            "liquidationPrice": "0",            "leverage": "7",            "maxQty": "100",            "marginType": "cross",            "isolatedMargin": "0.00000000",            "isAutoAddMargin": "false",            "positionSide": "BOTH",            "notionalValue": "0",            "isolatedWallet": "0",            "updateTime": 1726731195634,            "breakEvenPrice": "0.00000000"        },      // ... ...    ],    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 10        }    ]}
 ```
-{    "id": "233b8741-a96d-48e8-8ce1-160f43548aeb",    "status": 200,    "result": [        {            "symbol": "BTCUSD_PERP",            "positionAmt": "0",            "entryPrice": "0.00000000",            "markPrice": "62297.60417296",            "unRealizedProfit": "0.00000000",            "liquidationPrice": "0",            "leverage": "7",            "maxQty": "100",            "marginType": "cross",            "isolatedMargin": "0.00000000",            "isAutoAddMargin": "false",            "positionSide": "BOTH",            "notionalValue": "0",            "isolatedWallet": "0",            "updateTime": 1726731195634,            "breakEvenPrice": "0.00000000"        },      // ... ...    ],    "rateLimits": [        {            "rateLimitType": "REQUEST_WEIGHT",            "interval": "MINUTE",            "intervalNum": 1,            "limit": 2400,            "count": 10        }    ]}
-```
 
-Futures Account Balance(USER\_DATA)
-===================================
+# Futures Account Balance(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/websocket-api#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/websocket-api#api-description "Direct link to API Description")
 
 Query account balance info
 
-Method[​](/docs/derivatives/coin-margined-futures/account/websocket-api#method "Direct link to Method")
--------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/account/websocket-api#method "Direct link to Method")
 
 `account.balance`
 
-Request[​](/docs/derivatives/coin-margined-futures/account/websocket-api#request "Direct link to Request")
-----------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/account/websocket-api#request "Direct link to Request")
 
-```
-{  "id": "9328e612-1560-4108-979e-283bf85b5acb",  "method": "account.balance",  "params": {    "apiKey": "",    "timestamp": 1727810404936,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "9328e612-1560-4108-979e-283bf85b5acb",  "method": "account.balance",  "params": {    "apiKey": "",    "timestamp": 1727810404936,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/websocket-api#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/websocket-api#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/websocket-api#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/websocket-api#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/websocket-api#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/websocket-api#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "9328e612-1560-4108-979e-283bf85b5acb",  "status": 200,  "result": [    {      "accountAlias": "fWAuTiuXoCuXmY",      "asset": "WLD",      "balance": "0.00000000",      "withdrawAvailable": "0.00000000",      "crossWalletBalance": "0.00000000",      "crossUnPnl": "0.00000000",      "availableBalance": "0.00000000",      "updateTime": 0    },    // ... ...  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 10    }  ]}
 ```
-{  "id": "9328e612-1560-4108-979e-283bf85b5acb",  "status": 200,  "result": [    {      "accountAlias": "fWAuTiuXoCuXmY",      "asset": "WLD",      "balance": "0.00000000",      "withdrawAvailable": "0.00000000",      "crossWalletBalance": "0.00000000",      "crossUnPnl": "0.00000000",      "availableBalance": "0.00000000",      "updateTime": 0    },    // ... ...  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 10    }  ]}
-```
 
-Account Information(USER\_DATA)
-===============================
+# Account Information(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#api-description "Direct link to API Description")
 
 Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
 
-Method[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#method "Direct link to Method")
----------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#method "Direct link to Method")
 
 `account.status`
 
-Request[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#request "Direct link to Request")
-------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#request "Direct link to Request")
 
-```
-{  "id": "baaec739-c5cf-4920-b448-c0b9c5431410",  "method": "account.status",  "params": {    "apiKey": "",    "timestamp": 1727785087742,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
+```codeBlockLines_aHhF
+{  
+  "id": "baaec739-c5cf-4920-b448-c0b9c5431410",  "method": "account.status",  "params": {    "apiKey": "",    "timestamp": 1727785087742,    "signature": "0f04368b2d22aafd0ggc8809ea34297eff602272917b5f01267db4efbc1c9422"   }}
 ```
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information#response-example "Direct link to Response Example")
 
-```
-{  "id": "baaec739-c5cf-4920-b448-c0b9c5431410",  "status": 200,  "result": {    "feeTier": 0,    "canTrade": true,    "canDeposit": true,    "canWithdraw": true,    "updateTime": 0,    "assets": [      {        "asset": "WLD",        "walletBalance": "0.00000000",        "unrealizedProfit": "0.00000000",        "marginBalance": "0.00000000",        "maintMargin": "0.00000000",        "initialMargin": "0.00000000",        "positionInitialMargin": "0.00000000",        "openOrderInitialMargin": "0.00000000",        "maxWithdrawAmount": "0.00000000",        "crossWalletBalance": "0.00000000",        "crossUnPnl": "0.00000000",        "availableBalance": "0.00000000",        "updateTime": 0      },      // ... ...    ],    "positions": [      {        "symbol": "ETHUSD_220930",        "initialMargin": "0",        "maintMargin": "0",        "unrealizedProfit": "0.00000000",        "positionInitialMargin": "0",        "openOrderInitialMargin": "0",        "leverage": "7",        "isolated": false,        "positionSide": "BOTH",        "entryPrice": "0.00000000",        "maxQty": "1000",        "notionalValue": "0",        "isolatedWallet": "0",        "updateTime": 0,        "positionAmt": "0",        "breakEvenPrice": "0.00000000"      },      // ... ...    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 10    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "baaec739-c5cf-4920-b448-c0b9c5431410",  "status": 200,  "result": {    "feeTier": 0,    "canTrade": true,    "canDeposit": true,    "canWithdraw": true,    "updateTime": 0,    "assets": [      {        "asset": "WLD",        "walletBalance": "0.00000000",        "unrealizedProfit": "0.00000000",        "marginBalance": "0.00000000",        "maintMargin": "0.00000000",        "initialMargin": "0.00000000",        "positionInitialMargin": "0.00000000",        "openOrderInitialMargin": "0.00000000",        "maxWithdrawAmount": "0.00000000",        "crossWalletBalance": "0.00000000",        "crossUnPnl": "0.00000000",        "availableBalance": "0.00000000",        "updateTime": 0      },      // ... ...    ],    "positions": [      {        "symbol": "ETHUSD_220930",        "initialMargin": "0",        "maintMargin": "0",        "unrealizedProfit": "0.00000000",        "positionInitialMargin": "0",        "openOrderInitialMargin": "0",        "leverage": "7",        "isolated": false,        "positionSide": "BOTH",        "entryPrice": "0.00000000",        "maxQty": "1000",        "notionalValue": "0",        "isolatedWallet": "0",        "updateTime": 0,        "positionAmt": "0",        "breakEvenPrice": "0.00000000"      },      // ... ...    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 10    }  ]}
 ```
 
