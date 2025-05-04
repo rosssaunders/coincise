@@ -1,10 +1,8 @@
 # Binance USDM Futures Private REST API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,18 +51,15 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-General Info
-============
+# General Info
 
-testnet[​](/docs/derivatives/usds-margined-futures/general-info#testnet "Direct link to testnet")
--------------------------------------------------------------------------------------------------
+## testnet[​](/docs/derivatives/usds-margined-futures/general-info#testnet "Direct link to testnet")
 
 *   Most of the endpoints can be used in the testnet platform.
 *   The REST baseurl for **testnet** is "[https://testnet.binancefuture.com](https://testnet.binancefuture.com)"
 *   The Websocket baseurl for **testnet** is "wss://fstream.binancefuture.com"
 
-SDK and Code Demonstration[​](/docs/derivatives/usds-margined-futures/general-info#sdk-and-code-demonstration "Direct link to SDK and Code Demonstration")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## SDK and Code Demonstration[​](/docs/derivatives/usds-margined-futures/general-info#sdk-and-code-demonstration "Direct link to SDK and Code Demonstration")
 
 **Disclaimer:**
 
@@ -88,8 +80,7 @@ please visit [https://github.com/binance/binance-futures-connector-java](https:/
 or use the command below:  
 `git clone https://github.com/binance/binance-futures-connector-java.git`
 
-General API Information[​](/docs/derivatives/usds-margined-futures/general-info#general-api-information "Direct link to General API Information")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## General API Information[​](/docs/derivatives/usds-margined-futures/general-info#general-api-information "Direct link to General API Information")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/articles/360002502072)
 *   The base endpoint is: **[https://fapi.binance.com](https://fapi.binance.com)**
@@ -119,8 +110,9 @@ General API Information[​](/docs/derivatives/usds-margined-futures/general-inf
 
 > **_The error payload is as follows:_**
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 *   Specific error codes and messages defined in [Error Codes](/docs/derivatives/usds-margined-futures/general-info#error-codes).
@@ -132,8 +124,7 @@ General API Information[​](/docs/derivatives/usds-margined-futures/general-inf
 *   Parameters may be sent in any order.
 *   If a parameter sent in both the `query string` and `request body`, the `query string` parameter will be used.
 
-LIMITS[​](/docs/derivatives/usds-margined-futures/general-info#limits "Direct link to LIMITS")
-----------------------------------------------------------------------------------------------
+## LIMITS[​](/docs/derivatives/usds-margined-futures/general-info#limits "Direct link to LIMITS")
 
 *   The `/fapi/v1/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 *   A `429` will be returned when either rate limit is violated.
@@ -157,8 +148,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 *   Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**` headers in the response.
 *   **The order rate limit is counted against each account**.
 
-Endpoint Security Type[​](/docs/derivatives/usds-margined-futures/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Endpoint Security Type[​](/docs/derivatives/usds-margined-futures/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
 
 *   Each endpoint has a security type that determines the how you will interact with it.
 *   API-keys are passed into the Rest API via the `X-MBX-APIKEY` header.
@@ -168,16 +158,15 @@ Endpoint Security Type[​](/docs/derivatives/usds-margined-futures/general-info
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
-| MARKET\_DATA | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
+| MARKET\_DATA | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 *   `SIGNED` endpoints require an additional parameter, `signature`, to be sent in the `query string` or `request body`.
 *   Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
@@ -192,8 +181,10 @@ SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-marg
 
 > The logic is as follows:
 
-```
-if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  // process request} else {  // reject request}
+```codeBlockLines_aHhF
+if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {  
+  // process request} else {  
+  // reject request}
 ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable, which can lead to requests taking varying amounts of time to reach the servers. With `recvWindow`, you can specify that the request must be processed within a certain number of milliseconds or be rejected by the server.
@@ -206,19 +197,18 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 
-| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 
-
+| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 |
+| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | BUY 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 9000 
-| recvWindow | 5000 
-| timestamp | 1591702613943 
+| symbol | BTCUSDT |
+| side | BUY |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 9000 |
+| recvWindow | 5000 |
+| timestamp | 1591702613943 |
 
 #### Example 1: As a query string[​](/docs/derivatives/usds-margined-futures/general-info#example-1-as-a-query-string "Direct link to Example 1: As a query string")
 
@@ -226,14 +216,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
 ```
 
 *   **queryString:**
@@ -254,14 +244,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi/binance.com/fapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 3c661234138461fcc7a7d8746c6558c9842d4e10870d2ecbedf7777cad694af9'
 ```
 
 *   **requestBody:**
@@ -282,14 +272,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://fapi.binance.com/fapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp=1591702613943&signature=f9d0ae5e813ef6ccf15c2b5a434047a0181cb5a342b903b367ca6d27a66e36f2'
 ```
 
 *   **queryString:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC
@@ -308,20 +298,19 @@ For this example, the private key will be referenced as `test-prv-key.pem`
 
 | Key | Value |
 | --- | --- |
-| apiKey | vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2 
-
+| apiKey | vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | SELL 
-| type | MARKET 
-| quantity | 1.23 
-| recvWindow | 9999999 
-| timestamp | 1671090801999 
+| symbol | BTCUSDT |
+| side | SELL |
+| type | MARKET |
+| quantity | 1.23 |
+| recvWindow | 9999999 |
+| timestamp | 1671090801999 |
 
 > **Signature payload (with the listed parameters):**
 
-```
+```codeBlockLines_aHhF
 timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23
 ```
 
@@ -335,31 +324,33 @@ Arrange the list of parameters into a string. Separate each parameter with a `&`
 
 > **Step 2.2**
 
-```
- $ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
+```codeBlockLines_aHhF
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
 ```
 
 2.2 - Sign payload using RSASSA-PKCS1-v1\_5 algorithm with SHA-256 hash function.
 
 > **Step 2.3**
 
-```
-$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+```codeBlockLines_aHhF
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64  
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 2.3 - Encode output as base64 string.
 
 > **Step 2.4**
 
-```
-$  echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64 | tr -d '\n'aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+```codeBlockLines_aHhF
+$  echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64 | tr -d '\n'  
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 2.4 - Delete any newlines in the signature.
 
 > **Step 2.5**
 
-```
+```codeBlockLines_aHhF
 aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
@@ -367,40 +358,52 @@ aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW
 
 > **Step 2.6**
 
-```
- curl -H "X-MBX-APIKEY: vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2" -X POST 'https://fapi.binance.com/fapi/v1/order?timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23&signature=aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D'
+```codeBlockLines_aHhF
+curl -H "X-MBX-APIKEY: vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2" -X POST 'https://fapi.binance.com/fapi/v1/order?timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23&signature=aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D'
 ```
 
 2.6 - curl command
 
 > **Bash script**
 
-```
-#!/usr/bin/env bash# Set up authentication:apiKey="vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2"   ### REPLACE THIS WITH YOUR API KEY# Set up the request:apiMethod="POST"apiCall="v1/order"apiParams="timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23"function rawurlencode {    local value="$1"    local len=${#value}    local encoded=""    local pos c o    for (( pos=0 ; pos<len ; pos++ ))    do        c=${value:$pos:1}        case "$c" in            [-_.~a-zA-Z0-9] ) o="${c}" ;;            * )   printf -v o '%%%02x' "'$c"        esac        encoded+="$o"    done    echo "$encoded"}ts=$(date +%s000)paramsWithTs="$apiParams&timestamp=$ts"rawSignature=$(echo -n "$paramsWithTs" \               | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem \  ### THIS IS YOUR PRIVATE KEY. DO NOT SHARE THIS FILE WITH ANYONE.               | openssl enc -base64 \               | tr -d '\n')signature=$(rawurlencode "$rawSignature")curl -H "X-MBX-APIKEY: $apiKey" -X $apiMethod \    "https://fapi.binance.com/fapi/$apiCall?$paramsWithTs&signature=$signature"
+```codeBlockLines_aHhF
+#!/usr/bin/env bash  
+  
+# Set up authentication:  
+apiKey="vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2"   ### REPLACE THIS WITH YOUR API KEY  
+  
+# Set up the request:  
+apiMethod="POST"  
+apiCall="v1/order"  
+apiParams="timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSDT&side=SELL&type=MARKET&quantity=1.23"  
+function rawurlencode {  
+    local value="$1"    local len=${#value}    local encoded=""    local pos c o    for (( pos=0 ; pos<len ; pos++ ))    do        c=${value:$pos:1}        case "$c" in            [-_.~a-zA-Z0-9] ) o="${c}" ;;            * )   printf -v o '%%%02x' "'$c"        esac        encoded+="$o"    done    echo "$encoded"}  
+ts=$(date +%s000)  
+paramsWithTs="$apiParams&timestamp=$ts"  
+rawSignature=$(echo -n "$paramsWithTs" \  
+               | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem \  ### THIS IS YOUR PRIVATE KEY. DO NOT SHARE THIS FILE WITH ANYONE.               | openssl enc -base64 \               | tr -d '\n')signature=$(rawurlencode "$rawSignature")  
+curl -H "X-MBX-APIKEY: $apiKey" -X $apiMethod \  
+    "https://fapi.binance.com/fapi/$apiCall?$paramsWithTs&signature=$signature"
 ```
 
 A sample Bash script containing similar steps is available in the right side.
 
 * * *
 
-Postman Collections[​](/docs/derivatives/usds-margined-futures/general-info#postman-collections "Direct link to Postman Collections")
--------------------------------------------------------------------------------------------------------------------------------------
+## Postman Collections[​](/docs/derivatives/usds-margined-futures/general-info#postman-collections "Direct link to Postman Collections")
 
 There is now a Postman collection containing the API endpoints for quick and easy use.
 
 For more information please refer to this page: [Binance API Postman](https://github.com/binance-exchange/binance-api-postman)
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/usds-margined-futures/common-definition#terminology "Direct link to Terminology")
-------------------------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/usds-margined-futures/common-definition#terminology "Direct link to Terminology")
 
 *   `base asset` refers to the asset that is the `quantity` of a symbol.
 *   `quote asset` refers to the asset that is the `price` of a symbol.
 
-ENUM definitions[​](/docs/derivatives/usds-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
----------------------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/usds-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Symbol type:**
 
@@ -517,14 +520,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -536,20 +539,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/usds-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
----------------------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/usds-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/usds-margined-futures/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -568,8 +569,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -588,8 +589,8 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `MARKET_LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for `MARKET` orders on a symbol. There are 3 parts:
@@ -608,8 +609,8 @@ In order to pass the `market lot size`, the following must be true for `quantity
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
 ```
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
@@ -620,8 +621,8 @@ Note that both "algo" orders and normal orders are counted for this filter.
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ALGO_ORDERS",    "limit": 100  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ALGO_ORDERS",    "limit": 100  }
 ```
 
 The `MAX_NUM_ALGO_ORDERS` filter defines the maximum number of all kinds of algo orders an account is allowed to have open on a symbol.
@@ -632,8 +633,8 @@ The algo orders include `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKE
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.1500",    "multiplierDown": "0.8500",    "multiplierDecimal": 4  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.1500",    "multiplierDown": "0.8500",    "multiplierDecimal": 4  }
 ```
 
 The `PERCENT_PRICE` filter defines valid range for a price based on the mark price.
@@ -647,30 +648,26 @@ In order to pass the `percent price`, the following must be true for `price`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MIN_NOTIONAL",    "notional": "5.0"  }
+```codeBlockLines_aHhF
+{    "filterType": "MIN_NOTIONAL",    "notional": "5.0"  }
 ```
 
 The `MIN_NOTIONAL` filter defines the minimum notional value allowed for an order on a symbol. An order's notional value is the `price` \* `quantity`. Since `MARKET` orders have no price, the mark price is used.
 
-Self Trade Prevention (STP) FAQ
-===============================
+# Self Trade Prevention (STP) FAQ
 
-What is Self Trade Prevention?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-is-self-trade-prevention "Direct link to What is Self Trade Prevention?")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## What is Self Trade Prevention?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-is-self-trade-prevention "Direct link to What is Self Trade Prevention?")
 
 Self Trade Prevention (or STP) prevents orders of users, or the user's `tradeGroupId` to match against their own.
 
-What defines a self-trade?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-defines-a-self-trade "Direct link to What defines a self-trade?")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## What defines a self-trade?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-defines-a-self-trade "Direct link to What defines a self-trade?")
 
 A self-trade can occur in either scenario:
 
 *   The order traded against the same account.
 *   The order traded against an account with the same `tradeGroupId`.
 
-What happens when STP is triggered?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-happens-when-stp-is-triggered "Direct link to What happens when STP is triggered?")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## What happens when STP is triggered?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-happens-when-stp-is-triggered "Direct link to What happens when STP is triggered?")
 
 There are three possible modes for what the system will do if an order could create a self-trade.
 
@@ -683,16 +680,14 @@ There are three possible modes for what the system will do if an order could cre
 The STP event will occur depending on the STP mode of the **taker order**.  
 Thus, the STP mode of an order that goes on the book is no longer relevant and will be ignored for all future order processing.
 
-Where do I set STP mode for an order?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#where-do-i-set-stp-mode-for-an-order "Direct link to Where do I set STP mode for an order?")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Where do I set STP mode for an order?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#where-do-i-set-stp-mode-for-an-order "Direct link to Where do I set STP mode for an order?")
 
 STP can only be set using field `selfTradePreventionMode` through API endpoints below:
 
 *   POST `/fapi/v1/order`
 *   POST `/fapi/v1/batchOrders`
 
-What is a Trade Group Id?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-is-a-trade-group-id "Direct link to What is a Trade Group Id?")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## What is a Trade Group Id?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-is-a-trade-group-id "Direct link to What is a Trade Group Id?")
 
 Different accounts with the same `tradeGroupId` are considered part of the same "trade group". Orders submitted by members of a trade group are eligible for STP according to the taker-order's STP mode.
 
@@ -702,163 +697,178 @@ If the value is `-1`, then the `tradeGroupId` has not been set for that account,
 
 We will release feature for user to group subaccounts to same `tradeGroupId` on website in future updates.
 
-How do I know which symbol uses STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#how-do-i-know-which-symbol-uses-stp "Direct link to How do I know which symbol uses STP?")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## How do I know which symbol uses STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#how-do-i-know-which-symbol-uses-stp "Direct link to How do I know which symbol uses STP?")
 
 Placing orders on all symbols in `GET fapi/v1/exchangeInfo` can set `selfTradePreventionMode`.
 
-What order types support STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-order-types-support-stp "Direct link to What order types support STP?")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## What order types support STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#what-order-types-support-stp "Direct link to What order types support STP?")
 
 `LIMIT`/`MARKET`/`STOP`/`TAKE_PROFIT`/`STOP_MARKET`/`TAKE_PROFIT_MARKET`/`TRAILING_STOP_MARKET` all supports STP when Time in force(timeInForce) set to `GTC`/ `IOC`/ `GTD`. STP won't take effect for Time in force(timeInForce) `FOK` or `GTX`
 
-Does Modify order support STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#does-modify-order-support-stp "Direct link to Does Modify order support STP?")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Does Modify order support STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#does-modify-order-support-stp "Direct link to Does Modify order support STP?")
 
 No. Modify order that has reset `selfTradePreventionMode` to `NONE`
 
-How do I know if an order expired due to STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#how-do-i-know-if-an-order-expired-due-to-stp "Direct link to How do I know if an order expired due to STP?")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## How do I know if an order expired due to STP?[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#how-do-i-know-if-an-order-expired-due-to-stp "Direct link to How do I know if an order expired due to STP?")
 
 The order will have the status `EXPIRED_IN_MATCH`.
 
 In user data stream event `ORDER_TRADE_UPDATE`, field `X` would be `EXPIRED_IN_MATCH` if order is expired due to STP
 
-```
-{  "e":"ORDER_TRADE_UPDATE",      // Event Type  "E":1568879465651,             // Event Time  "T":1568879465650,             // Transaction Time  "o":{                                 "s":"BTCUSDT",               // Symbol    "c":"TEST",                  // Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "settlement_autoclose-": settlement order for delisting or delivery    "S":"SELL",                  // Side    "o":"TRAILING_STOP_MARKET",  // Order Type    "f":"GTC",                   // Time in Force    "q":"0.001",                 // Original Quantity    "p":"0",                     // Original Price    "ap":"0",                    // Average Price    "sp":"7103.04",              // Stop Price. Please ignore with TRAILING_STOP_MARKET order    "x":"EXPIRED",               // Execution Type    "X":"EXPIRED_IN_MATCH",      // Order Status    "i":8886774,                 // Order Id    "l":"0",                     // Order Last Filled Quantity    "z":"0",                     // Order Filled Accumulated Quantity    "L":"0",                     // Last Filled Price    "N":"USDT",                  // Commission Asset, will not push if no commission    "n":"0",                     // Commission, will not push if no commission    "T":1568879465650,           // Order Trade Time    "t":0,                       // Trade Id    "b":"0",                     // Bids Notional    "a":"9.91",                  // Ask Notional    "m":false,                   // Is this trade the maker side?    "R":false,                   // Is this reduce only    "wt":"CONTRACT_PRICE",       // Stop Price Working Type    "ot":"TRAILING_STOP_MARKET", // Original Order Type    "ps":"LONG",                 // Position Side    "cp":false,                  // If Close-All, pushed with conditional order    "AP":"7476.89",              // Activation Price, only puhed with TRAILING_STOP_MARKET order    "cr":"5.0",                  // Callback Rate, only puhed with TRAILING_STOP_MARKET order    "pP": false,                 // ignore    "si": 0,                     // ignore    "ss": 0,                     // ignore    "rp":"0",                    // Realized Profit of the trade    "V": "EXPIRE_MAKER",         // selfTradePreventionMode    "pm":"QUEUE",                // price match type    "gtd":1768879465650          // good till date   }}
+```codeBlockLines_aHhF
+{  
+  "e":"ORDER_TRADE_UPDATE",      // Event Type  "E":1568879465651,             // Event Time  "T":1568879465650,             // Transaction Time  "o":{    "s":"BTCUSDT",               // Symbol  
+    "c":"TEST",                  // Client Order Id      // special client order id:      // starts with "autoclose-": liquidation order      // "adl_autoclose": ADL auto close order      // "settlement_autoclose-": settlement order for delisting or delivery    "S":"SELL",                  // Side    "o":"TRAILING_STOP_MARKET",  // Order Type    "f":"GTC",                   // Time in Force    "q":"0.001",                 // Original Quantity    "p":"0",                     // Original Price    "ap":"0",                    // Average Price    "sp":"7103.04",              // Stop Price. Please ignore with TRAILING_STOP_MARKET order    "x":"EXPIRED",               // Execution Type    "X":"EXPIRED_IN_MATCH",      // Order Status    "i":8886774,                 // Order Id    "l":"0",                     // Order Last Filled Quantity    "z":"0",                     // Order Filled Accumulated Quantity    "L":"0",                     // Last Filled Price    "N":"USDT",                  // Commission Asset, will not push if no commission    "n":"0",                     // Commission, will not push if no commission    "T":1568879465650,           // Order Trade Time    "t":0,                       // Trade Id    "b":"0",                     // Bids Notional    "a":"9.91",                  // Ask Notional    "m":false,                   // Is this trade the maker side?    "R":false,                   // Is this reduce only    "wt":"CONTRACT_PRICE",       // Stop Price Working Type    "ot":"TRAILING_STOP_MARKET", // Original Order Type    "ps":"LONG",                 // Position Side    "cp":false,                  // If Close-All, pushed with conditional order    "AP":"7476.89",              // Activation Price, only puhed with TRAILING_STOP_MARKET order    "cr":"5.0",                  // Callback Rate, only puhed with TRAILING_STOP_MARKET order    "pP": false,                 // ignore    "si": 0,                     // ignore    "ss": 0,                     // ignore    "rp":"0",                    // Realized Profit of the trade    "V": "EXPIRE_MAKER",         // selfTradePreventionMode    "pm":"QUEUE",                // price match type    "gtd":1768879465650          // good till date   }}
 ```
 
-STP Examples:[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#stp-examples "Direct link to STP Examples:")
------------------------------------------------------------------------------------------------------------------
+## STP Examples:[​](/docs/derivatives/usds-margined-futures/faq/stp-faq#stp-examples "Direct link to STP Examples:")
 
 For all these cases, assume that all orders for these examples are made on the same account.
 
 **Scenario A- A user sends an order with `EXPIRE_MAKER` that would match with their orders that are already on the book.**
 
-```
-Maker Order 1: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20002 selfTradePreventionMode=EXPIRE_MAKERMaker Order 2: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20001 selfTradePreventionMode=EXPIRE_MAKERTaker Order 1: symbol=BTCUSDT side=SELL type=LIMIT quantity=1 price=20000 selfTradePreventionMode=EXPIRE_MAKER
+```codeBlockLines_aHhF
+Maker Order 1: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20002 selfTradePreventionMode=EXPIRE_MAKER  
+Maker Order 2: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20001 selfTradePreventionMode=EXPIRE_MAKER  
+Taker Order 1: symbol=BTCUSDT side=SELL type=LIMIT quantity=1 price=20000 selfTradePreventionMode=EXPIRE_MAKER
 ```
 
 **Result**: The orders that were on the book will expire due to STP, and the taker order will go on the book.
 
 Maker Order 1
 
-```
-{    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "FILLED",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "20002",    "origQty": "1",    "executedQty": "1",    "cumQuote": "20002",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "FILLED",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "20002",    "origQty": "1",    "executedQty": "1",    "cumQuote": "20002",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Maker Order 2
 
-```
-{    "orderId": 292864711,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker2",    "price": "20001",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864711,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker2",    "price": "20001",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Output of the Taker Order
 
-```
-{    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "PARTIALLY_FILLED",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "20002",    "origQty": "2",    "executedQty": "1",    "cumQuote": "20002",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "PARTIALLY_FILLED",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "20002",    "origQty": "2",    "executedQty": "1",    "cumQuote": "20002",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 **Scenario B - A user sends an order with `EXPIRE_TAKER` that would match with their orders already on the book.**
 
-```
-Maker Order 1: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20002  selfTradePreventionMode=EXPIRE_MAKERMaker Order 2: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20001  selfTradePreventionMode=EXPIRE_MAKERTaker Order 1: symbol=BTCUSDT side=SELL type=LIMIT quantity=2 price=3      selfTradePreventionMode=EXPIRE_TAKER
+```codeBlockLines_aHhF
+Maker Order 1: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20002  selfTradePreventionMode=EXPIRE_MAKER  
+Maker Order 2: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20001  selfTradePreventionMode=EXPIRE_MAKER  
+Taker Order 1: symbol=BTCUSDT side=SELL type=LIMIT quantity=2 price=3      selfTradePreventionMode=EXPIRE_TAKER
 ```
 
 **Result**: The orders already on the book will remain, while the taker order will expire.
 
 Maker Order 1
 
-```
-{    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "FILLED",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "FILLED",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Maker Order 2
 
-```
-{    "orderId": 292864711,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker2",    "price": "20001",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864711,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker2",    "price": "20001",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Output of the Taker order
 
-```
-{    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_TAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_TAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 **Scenario C- A user has an order on the book, and then sends an order with `EXPIRE_BOTH` that would match with the existing order.**
 
-```
-Maker Order: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20002 selfTradePreventionMode=EXPIRE_MAKERTaker Order: symbol=BTCUSDT side=SELL type=LIMIT quantity=3 price=20000 selfTradePreventionMode=EXPIRE_BOTH
+```codeBlockLines_aHhF
+Maker Order: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=20002 selfTradePreventionMode=EXPIRE_MAKER  
+Taker Order: symbol=BTCUSDT side=SELL type=LIMIT quantity=3 price=20000 selfTradePreventionMode=EXPIRE_BOTH
 ```
 
 **Result:** Both orders will expire.
 
 Maker Order
 
-```
-{    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Taker Order
 
-```
-{    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_BOTH",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_BOTH",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 **Scenario D - A user has an order on the book with `EXPIRE_MAKER`, and then sends a new order with `EXPIRE_TAKER` which would match with the existing order.**
 
-```
-Maker Order: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=1 selfTradePreventionMode=EXPIRE_MAKERTaker Order: symbol=BTCUSDT side=SELL type=LIMIT quantity=1 price=1 selfTradePreventionMode=EXPIRE_TAKER
+```codeBlockLines_aHhF
+Maker Order: symbol=BTCUSDT side=BUY  type=LIMIT quantity=1 price=1 selfTradePreventionMode=EXPIRE_MAKER  
+Taker Order: symbol=BTCUSDT side=SELL type=LIMIT quantity=1 price=1 selfTradePreventionMode=EXPIRE_TAKER
 ```
 
 **Result**: The taker order's STP mode will be used, so the taker order will be expired.
 
 Maker Order
 
-```
-{    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "NEW",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "NEW",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Taker Order
 
-```
-{    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_TAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_TAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 **Scenario E - A user sends a market order with `EXPIRE_MAKER` which would match with an existing order.**
 
-```
-Maker Order: symbol=ABCDEF side=BUY  type=LIMIT  quantity=1 price=1  selfTradePreventionMode=EXPIRE_MAKERTaker Order: symbol=ABCDEF side=SELL type=MARKET quantity=3          selfTradePreventionMode=EXPIRE_MAKER
+```codeBlockLines_aHhF
+Maker Order: symbol=ABCDEF side=BUY  type=LIMIT  quantity=1 price=1  selfTradePreventionMode=EXPIRE_MAKER  
+Taker Order: symbol=ABCDEF side=SELL type=MARKET quantity=3          selfTradePreventionMode=EXPIRE_MAKER
 ```
 
 **Result**: The existing order expires with the status `EXPIRED_IN_MATCH`, due to STP. The new order also expires but with status `EXPIRED`, due to low liquidity on the order book.
 
 Maker Order
 
-```
-{    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864710,    "symbol": "BTCUSDT",    "status": "EXPIRED_IN_MATCH",    "clientOrderId": "testMaker1",    "price": "20002",    "avgPrice": "0.0000",    "origQty": "1",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
 Taker Order
 
-```
-{    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
+```codeBlockLines_aHhF
+{  
+    "orderId": 292864712,    "symbol": "BTCUSDT",    "status": "EXPIRED",    "clientOrderId": "testTaker1",    "price": "20000",    "avgPrice": "0.0000",    "origQty": "3",    "executedQty": "0",    "cumQuote": "0",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "SELL",    "positionSide": "BOTH",    "stopPrice": "0",    "workingType": "CONTRACT_PRICE",    "priceMatch": "NONE",    "selfTradePreventionMode": "EXPIRE_MAKER",    "goodTillDate": "null",    "priceProtect": false,    "origType": "LIMIT",    "time": 1692849639460,    "updateTime": 1692849639460}
 ```
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/usds-margined-futures/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -939,8 +949,7 @@ Codes are universal,but messages can vary.
 
 *   Not found, unauthenticated, or unauthorized.
 
-11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/usds-margined-futures/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -1064,8 +1073,7 @@ Codes are universal,but messages can vary.
 
 *   Invalid newOrderRespType.
 
-20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## 20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
 
 ### \-2010 NEW\_ORDER\_REJECTED[​](/docs/derivatives/usds-margined-futures/error-code#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
 
@@ -1143,8 +1151,7 @@ Codes are universal,but messages can vary.
 
 *   Leverage is smaller than permitted: insufficient margin balance.
 
-40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
 
 ### \-4000 INVALID\_ORDER\_STATUS[​](/docs/derivatives/usds-margined-futures/error-code#-4000-invalid_order_status "Direct link to -4000 INVALID_ORDER_STATUS")
 
@@ -1643,8 +1650,7 @@ Codes are universal,but messages can vary.
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to 10x in your region
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to %sx in your region
 
-50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
 
 ### \-5021 FOK\_ORDER\_REJECT[​](/docs/derivatives/usds-margined-futures/error-code#-5021-fok_order_reject "Direct link to -5021 FOK_ORDER_REJECT")
 
@@ -1698,60 +1704,55 @@ Codes are universal,but messages can vary.
 
 *   No depth matches this BBO order
 
-New Order(TRADE)
-================
+# New Order(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api#api-description "Direct link to API Description")
 
 Send in a new order.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/order`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api#request-weight "Direct link to Request Weight")
 
 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M); 0 on IP rate limit(x-mbx-used-weight-1m)
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. 
-| type | ENUM | YES |  
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | NO | Cannot be sent with `closePosition`\=`true`(Close-All) 
-| reduceOnly | STRING | NO | "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true` 
-| price | DECIMAL | NO |  
-| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` 
-| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. 
-| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% 
-| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
-| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" 
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` 
-| goodTillDate | LONG | NO | order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. |
+| type | ENUM | YES |  |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | NO | Cannot be sent with `closePosition`\=`true`(Close-All) |
+| reduceOnly | STRING | NO | "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true` |
+| price | DECIMAL | NO |  |
+| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` |
+| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. |
+| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) |
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% |
+| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" |
+| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` |
+| goodTillDate | LONG | NO | order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 Additional mandatory parameters based on `type`:
 
 | Type | Additional mandatory parameters |
 | --- | --- |
-| `LIMIT` | `timeInForce`, `quantity`, `price` 
-| `MARKET` | `quantity` 
-| `STOP/TAKE_PROFIT` | `quantity`, `price`, `stopPrice` 
-| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` 
-| `TRAILING_STOP_MARKET` | `callbackRate` 
+| `LIMIT` | `timeInForce`, `quantity`, `price` |
+| `MARKET` | `quantity` |
+| `STOP/TAKE_PROFIT` | `quantity`, `price`, `stopPrice` |
+| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` |
+| `TRAILING_STOP_MARKET` | `callbackRate` |
 
 > *   Order with type `STOP`, parameter `timeInForce` can be sent ( default `GTC`).
 >     
@@ -1793,39 +1794,34 @@ Additional mandatory parameters based on `type`:
 > *   In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
 >     
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"clientOrderId": "testOrder", 	"cumQty": "0", 	"cumQuote": "0", 	"executedQty": "0", 	"orderId": 22542179, 	"avgPrice": "0.00000", 	"origQty": "10", 	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",		// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"timeInForce": "GTD",  	"type": "TRAILING_STOP_MARKET",  	"origType": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",	// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",			// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1566818724722, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,      // if conditional order trigger is protected 	"priceMatch": "NONE",              //price match mode 	"selfTradePreventionMode": "NONE", //self trading preventation mode 	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order}
 ```
-{ 	"clientOrderId": "testOrder", 	"cumQty": "0", 	"cumQuote": "0", 	"executedQty": "0", 	"orderId": 22542179, 	"avgPrice": "0.00000", 	"origQty": "10", 	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",		// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"timeInForce": "GTD",  	"type": "TRAILING_STOP_MARKET",  	"origType": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",	// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",			// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1566818724722, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,      // if conditional order trigger is protected	 	"priceMatch": "NONE",              //price match mode 	"selfTradePreventionMode": "NONE", //self trading preventation mode 	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order}
-```
 
-Place Multiple Orders(TRADE)
-============================
+# Place Multiple Orders(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#api-description "Direct link to API Description")
 
 Place Multiple Orders
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/batchOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#request-weight "Direct link to Request Weight")
 
 5 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M); 5 on IP rate limit(x-mbx-used-weight-1m);
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| batchOrders | LIST<JSON> | YES | order list. Max 5 orders 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| batchOrders | LIST<JSON> | YES | order list. Max 5 orders |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Where `batchOrders` is the list of order parameters in JSON**
 
@@ -1834,68 +1830,64 @@ Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/P
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. 
-| type | ENUM | YES |  
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | YES |  
-| reduceOnly | STRING | NO | "true" or "false". default "false". 
-| price | DECIMAL | NO |  
-| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` 
-| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 4 where 1 for 1% 
-| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
-| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" 
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` 
-| goodTillDate | LONG | NO | order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. |
+| type | ENUM | YES |  |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | YES |  |
+| reduceOnly | STRING | NO | "true" or "false". default "false". |
+| price | DECIMAL | NO |  |
+| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` |
+| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) |
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 4 where 1 for 1% |
+| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" |
+| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` |
+| goodTillDate | LONG | NO | order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 |
 
 > *   Paremeter rules are same with `New Order`
 > *   Batch orders are processed concurrently, and the order of matching is not guaranteed.
 > *   The order of returned contents for batch orders is the same as the order of the order list.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{	 	"clientOrderId": "testOrder",	 	"cumQty": "0",	 	"cumQuote": "0",	 	"executedQty": "0",	 	"orderId": 22542179,	 	"avgPrice": "0.00000",	 	"origQty": "10",	 	"price": "0",	  	"reduceOnly": false,	  	"side": "BUY",	  	"positionSide": "SHORT",	  	"status": "NEW",	  	"stopPrice": "9300",		// please ignore when order type is TRAILING_STOP_MARKET	  	"symbol": "BTCUSDT",	  	"timeInForce": "GTC",	  	"type": "TRAILING_STOP_MARKET",	  	"origType": "TRAILING_STOP_MARKET",	  	"activatePrice": "9020",	// activation price, only return with TRAILING_STOP_MARKET order	  	"priceRate": "0.3",			// callback rate, only return with TRAILING_STOP_MARKET order	 	"updateTime": 1566818724722,	 	"workingType": "CONTRACT_PRICE",	 	"priceProtect": false,      // if conditional order trigger is protected			"priceMatch": "NONE",              //price match mode		"selfTradePreventionMode": "NONE", //self trading preventation mode		"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."  
+	}]
 ```
-[	{	 	"clientOrderId": "testOrder",	 	"cumQty": "0",	 	"cumQuote": "0",	 	"executedQty": "0",	 	"orderId": 22542179,	 	"avgPrice": "0.00000",	 	"origQty": "10",	 	"price": "0",	  	"reduceOnly": false,	  	"side": "BUY",	  	"positionSide": "SHORT",	  	"status": "NEW",	  	"stopPrice": "9300",		// please ignore when order type is TRAILING_STOP_MARKET	  	"symbol": "BTCUSDT",	  	"timeInForce": "GTC",	  	"type": "TRAILING_STOP_MARKET",	  	"origType": "TRAILING_STOP_MARKET",	  	"activatePrice": "9020",	// activation price, only return with TRAILING_STOP_MARKET order	  	"priceRate": "0.3",			// callback rate, only return with TRAILING_STOP_MARKET order	 	"updateTime": 1566818724722,	 	"workingType": "CONTRACT_PRICE",	 	"priceProtect": false,      // if conditional order trigger is protected			"priceMatch": "NONE",              //price match mode		"selfTradePreventionMode": "NONE", //self trading preventation mode		"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."	}]
-```
 
-Modify Order (TRADE)
-====================
+# Modify Order (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#api-description "Direct link to API Description")
 
 Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#http-request "Direct link to HTTP Request")
 
 PUT `/fapi/v1/order`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#request-weight "Direct link to Request Weight")
 
 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M); 1 on IP rate limit(x-mbx-used-weight-1m)
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| symbol | STRING | YES |  
-| side | ENUM | YES | `SELL`, `BUY` 
-| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` 
-| price | DECIMAL | YES |  
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| symbol | STRING | YES |  |
+| side | ENUM | YES | `SELL`, `BUY` |
+| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` |
+| price | DECIMAL | YES |  |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
 > *   Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
@@ -1906,225 +1898,200 @@ Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/M
 > *   One order can only be modfied for less than 10000 times
 > *   Modify order will set `selfTradePreventionMode` to `NONE`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"orderId": 20072994037, 	"symbol": "BTCUSDT", 	"pair": "BTCUSDT", 	"status": "NEW", 	"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW", 	"price": "30005", 	"avgPrice": "0.0", 	"origQty": "1", 	"executedQty": "0", 	"cumQty": "0", 	"cumBase": "0", 	"timeInForce": "GTC", 	"type": "LIMIT", 	"reduceOnly": false, 	"closePosition": false, 	"side": "BUY", 	"positionSide": "LONG", 	"stopPrice": "0", 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false, 	"origType": "LIMIT",    "priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0,                 //order pre-set auot cancel time for TIF GTD order 	"updateTime": 1629182711600}
 ```
-{ 	"orderId": 20072994037, 	"symbol": "BTCUSDT", 	"pair": "BTCUSDT", 	"status": "NEW", 	"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW", 	"price": "30005", 	"avgPrice": "0.0", 	"origQty": "1", 	"executedQty": "0", 	"cumQty": "0", 	"cumBase": "0", 	"timeInForce": "GTC", 	"type": "LIMIT", 	"reduceOnly": false, 	"closePosition": false, 	"side": "BUY", 	"positionSide": "LONG", 	"stopPrice": "0", 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false, 	"origType": "LIMIT",    "priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0,                 //order pre-set auot cancel time for TIF GTD order 	"updateTime": 1629182711600}
-```
 
-Modify Multiple Orders(TRADE)
-=============================
+# Modify Multiple Orders(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#api-description "Direct link to API Description")
 
 Modify Multiple Orders (TRADE)
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#http-request "Direct link to HTTP Request")
 
 PUT `/fapi/v1/batchOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-weight "Direct link to Request Weight")
 
 5 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M); 5 on IP rate limit(x-mbx-used-weight-1m);
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| batchOrders | list<JSON> | YES | order list. Max 5 orders 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| batchOrders | list<JSON> | YES | order list. Max 5 orders |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Where `batchOrders` is the list of order parameters in JSON**
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| symbol | STRING | YES |  
-| side | ENUM | YES | `SELL`, `BUY` 
-| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` 
-| price | DECIMAL | YES |  
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| symbol | STRING | YES |  |
+| side | ENUM | YES | `SELL`, `BUY` |
+| quantity | DECIMAL | YES | Order quantity, cannot be sent with `closePosition=true` |
+| price | DECIMAL | YES |  |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Parameter rules are same with `Modify Order`
 > *   Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
 > *   The order of returned contents for batch modify orders is the same as the order of the order list.
 > *   One order can only be modfied for less than 10000 times
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		"orderId": 20072994037,		"symbol": "BTCUSDT",		"pair": "BTCUSDT",		"status": "NEW",		"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",		"price": "30005",		"avgPrice": "0.0",		"origQty": "1",		"executedQty": "0",		"cumQty": "0",		"cumBase": "0",		"timeInForce": "GTC",		"type": "LIMIT",		"reduceOnly": false,		"closePosition": false,		"side": "BUY",		"positionSide": "LONG",		"stopPrice": "0",		"workingType": "CONTRACT_PRICE",		"priceProtect": false,		"origType": "LIMIT",        "priceMatch": "NONE",              //price match mode        "selfTradePreventionMode": "NONE", //self trading preventation mode        "goodTillDate": 0,                 //order pre-set auot cancel time for TIF GTD order		"updateTime": 1629182711600	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."  
+	}]
 ```
-[	{		"orderId": 20072994037,		"symbol": "BTCUSDT",		"pair": "BTCUSDT",		"status": "NEW",		"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",		"price": "30005",		"avgPrice": "0.0",		"origQty": "1",		"executedQty": "0",		"cumQty": "0",		"cumBase": "0",		"timeInForce": "GTC",		"type": "LIMIT",		"reduceOnly": false,		"closePosition": false,		"side": "BUY",		"positionSide": "LONG",		"stopPrice": "0",		"workingType": "CONTRACT_PRICE",		"priceProtect": false,		"origType": "LIMIT",        "priceMatch": "NONE",              //price match mode        "selfTradePreventionMode": "NONE", //self trading preventation mode        "goodTillDate": 0,                 //order pre-set auot cancel time for TIF GTD order		"updateTime": 1629182711600	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."	}]
-```
 
-Get Order Modify History (USER\_DATA)
-=====================================
+# Get Order Modify History (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#api-description "Direct link to API Description")
 
 Get order modification history
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/orderAmendment`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| startTime | LONG | NO | Timestamp in ms to get modification history from INCLUSIVE 
-| endTime | LONG | NO | Timestamp in ms to get modification history until INCLUSIVE 
-| limit | INT | NO | Default 50; max 100 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| startTime | LONG | NO | Timestamp in ms to get modification history from INCLUSIVE |
+| endTime | LONG | NO | Timestamp in ms to get modification history until INCLUSIVE |
+| limit | INT | NO | Default 50; max 100 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
 > *   Order modify history longer than 3 month is not avaliable
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "amendmentId": 5363,	// Order modification ID        "symbol": "BTCUSDT",        "pair": "BTCUSDT",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184560899,	// Order modification time        "amendment": {            "price": {                "before": "30004",                "after": "30003.2"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 3	// Order modification count, representing the number of times the order has been modified        }    },    {        "amendmentId": 5361,        "symbol": "BTCUSDT",        "pair": "BTCUSDT",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184533946,        "amendment": {            "price": {                "before": "30005",                "after": "30004"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 2        }    },    {        "amendmentId": 5325,        "symbol": "BTCUSDT",        "pair": "BTCUSDT",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629182711787,        "amendment": {            "price": {                "before": "30002",                "after": "30005"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 1        }    }]
 ```
-[    {        "amendmentId": 5363,	// Order modification ID        "symbol": "BTCUSDT",        "pair": "BTCUSDT",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184560899,	// Order modification time        "amendment": {            "price": {                "before": "30004",                "after": "30003.2"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 3	// Order modification count, representing the number of times the order has been modified        }    },    {        "amendmentId": 5361,        "symbol": "BTCUSDT",        "pair": "BTCUSDT",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184533946,        "amendment": {            "price": {                "before": "30005",                "after": "30004"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 2        }    },    {        "amendmentId": 5325,        "symbol": "BTCUSDT",        "pair": "BTCUSDT",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629182711787,        "amendment": {            "price": {                "before": "30002",                "after": "30005"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 1        }    }]
-```
 
-Cancel Order (TRADE)
-====================
+# Cancel Order (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#api-description "Direct link to API Description")
 
 Cancel an active order.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#http-request "Direct link to HTTP Request")
 
 DELETE `/fapi/v1/order`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"clientOrderId": "myOrder1", 	"cumQty": "0", 	"cumQuote": "0", 	"executedQty": "0", 	"orderId": 283194212, 	"origQty": "11", 	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "CANCELED",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1571110484038, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,            // if conditional order trigger is protected		"priceMatch": "NONE",              //price match mode	"selfTradePreventionMode": "NONE", //self trading preventation mode	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order}
 ```
-{ 	"clientOrderId": "myOrder1", 	"cumQty": "0", 	"cumQuote": "0", 	"executedQty": "0", 	"orderId": 283194212, 	"origQty": "11", 	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "CANCELED",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1571110484038, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,            // if conditional order trigger is protected		"priceMatch": "NONE",              //price match mode	"selfTradePreventionMode": "NONE", //self trading preventation mode	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order}
-```
 
-Cancel Multiple Orders (TRADE)
-==============================
+# Cancel Multiple Orders (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#api-description "Direct link to API Description")
 
 Cancel Multiple Orders
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#http-request "Direct link to HTTP Request")
 
 DELETE `/fapi/v1/batchOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 | orderIdList | LIST<LONG> | NO | max length 10  
-e.g. \[1234567,2345678\] 
+e.g. \[1234567,2345678\] |
 | origClientOrderIdList | LIST<STRING> | NO | max length 10  
-e.g. \["my\_id\_1","my\_id\_2"\], encode the double quotes. No space after comma. 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+e.g. \["my\_id\_1","my\_id\_2"\], encode the double quotes. No space after comma. |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderIdList` or `origClientOrderIdList` must be sent.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{	 	"clientOrderId": "myOrder1",	 	"cumQty": "0",	 	"cumQuote": "0",	 	"executedQty": "0",	 	"orderId": 283194212,	 	"origQty": "11",	 	"origType": "TRAILING_STOP_MARKET",  		"price": "0",  		"reduceOnly": false,  		"side": "BUY",  		"positionSide": "SHORT",  		"status": "CANCELED",  		"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  		"closePosition": false,   // if Close-All  		"symbol": "BTCUSDT",  		"timeInForce": "GTC",  		"type": "TRAILING_STOP_MARKET",  		"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  		"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order	 	"updateTime": 1571110484038,	 	"workingType": "CONTRACT_PRICE",	 	"priceProtect": false,            // if conditional order trigger is protected		 	"priceMatch": "NONE",              //price match mode	 	"selfTradePreventionMode": "NONE", //self trading preventation mode	 	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order	},	{		"code": -2011,		"msg": "Unknown order sent."	}]
 ```
-[	{	 	"clientOrderId": "myOrder1",	 	"cumQty": "0",	 	"cumQuote": "0",	 	"executedQty": "0",	 	"orderId": 283194212,	 	"origQty": "11",	 	"origType": "TRAILING_STOP_MARKET",  		"price": "0",  		"reduceOnly": false,  		"side": "BUY",  		"positionSide": "SHORT",  		"status": "CANCELED",  		"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  		"closePosition": false,   // if Close-All  		"symbol": "BTCUSDT",  		"timeInForce": "GTC",  		"type": "TRAILING_STOP_MARKET",  		"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  		"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order	 	"updateTime": 1571110484038,	 	"workingType": "CONTRACT_PRICE",	 	"priceProtect": false,            // if conditional order trigger is protected		 	"priceMatch": "NONE",              //price match mode	 	"selfTradePreventionMode": "NONE", //self trading preventation mode	 	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order	},	{		"code": -2011,		"msg": "Unknown order sent."	}]
-```
 
-Cancel All Open Orders (TRADE)
-==============================
+# Cancel All Open Orders (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#api-description "Direct link to API Description")
 
 Cancel All Open Orders
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
 
 DELETE `/fapi/v1/allOpenOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200, 	"msg": "The operation of cancel all open order is done."  
+}
 ```
-{	"code": 200, 	"msg": "The operation of cancel all open order is done."}
-```
 
-Auto-Cancel All Open Orders (TRADE)
-===================================
+# Auto-Cancel All Open Orders (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#api-description "Direct link to API Description")
 
 Cancel all open orders of the specified symbol at the end of the specified countdown. The endpoint should be called repeatedly as heartbeats so that the existing countdown time can be canceled and replaced by a new one.
 
@@ -2135,8 +2102,7 @@ Cancel all open orders of the specified symbol at the end of the specified count
 
 The system will check all countdowns **approximately every 10 milliseconds**, so please note that sufficient redundancy should be considered when using this function. We do not recommend setting the countdown time to be too precise or too small.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/countdownCancelAll`
 
@@ -2146,23 +2112,22 @@ POST `/fapi/v1/countdownCancelAll`
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| countdownTime | LONG | YES | countdown time, 1000 for 1 second. 0 to cancel the timer 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| countdownTime | LONG | YES | countdown time, 1000 for 1 second. 0 to cancel the timer |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"symbol": "BTCUSDT", 	"countdownTime": "100000"  
+}
 ```
-{	"symbol": "BTCUSDT", 	"countdownTime": "100000"}
-```
 
-Query Order (USER\_DATA)
-========================
+# Query Order (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#api-description "Direct link to API Description")
 
 Check an order's status.
 
@@ -2170,44 +2135,39 @@ Check an order's status.
     *   order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
     *   order create time + 90 days < current time
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/order`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 Notes:
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 > *   `orderId` is self-increment for each specific `symbol`
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected    "priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0                  //order pre-set auot cancel time for TIF GTD order	}
 ```
-{  	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected    "priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0                  //order pre-set auot cancel time for TIF GTD order	}
-```
 
-All Orders (USER\_DATA)
-=======================
+# All Orders (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#api-description "Direct link to API Description")
 
 Get all account orders; active, canceled, or filled.
 
@@ -2215,477 +2175,475 @@ Get all account orders; active, canceled, or filled.
     *   order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
     *   order create time + 90 days < current time
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/allOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 500; max 1000. 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 500; max 1000. |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Notes:**
 
 > *   If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
 > *   The query time period must be less then 7 days( default as the recent 7 days).
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {   	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",              //price match mode  	"selfTradePreventionMode": "NONE", //self trading preventation mode  	"goodTillDate": 0      //order pre-set auot cancel time for TIF GTD order  }]
 ```
-[  {   	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected	  	"priceMatch": "NONE",              //price match mode  	"selfTradePreventionMode": "NONE", //self trading preventation mode  	"goodTillDate": 0      //order pre-set auot cancel time for TIF GTD order  }]
-```
 
-Current All Open Orders (USER\_DATA)
-====================================
+# Current All Open Orders (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#api-description "Direct link to API Description")
 
 Get all open orders on a symbol.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/openOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#request-weight "Direct link to Request Weight")
 
 **1** for a single symbol; **40** when the symbol parameter is omitted
 
 **Careful** when accessing this with no symbol.
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   If the symbol is not sent, orders for all symbols will be returned in an array.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {  	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,            // if conditional order trigger is protected		"priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0      //order pre-set auot cancel time for TIF GTD order  }]
 ```
-[  {  	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,            // if conditional order trigger is protected		"priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0      //order pre-set auot cancel time for TIF GTD order  }]
-```
 
-Query Current Open Order (USER\_DATA)
-=====================================
+# Query Current Open Order (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#api-description "Direct link to API Description")
 
 Query open order
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/openOrder`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either`orderId` or `origClientOrderId` must be sent
 > *   If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  	"avgPrice": "0.00000",  	"clientOrderId": "abc",  	"cumQuote": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,            // if conditional order trigger is protected		"priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0      //order pre-set auot cancel time for TIF GTD order}
 ```
-{  	"avgPrice": "0.00000",				  	"clientOrderId": "abc",				  	"cumQuote": "0",						  	"executedQty": "0",					  	"orderId": 1917641,					  	"origQty": "0.40",						  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSDT",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order						  	"updateTime": 1579276756075,		  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,            // if conditional order trigger is protected		"priceMatch": "NONE",              //price match mode    "selfTradePreventionMode": "NONE", //self trading preventation mode    "goodTillDate": 0      //order pre-set auot cancel time for TIF GTD order}
-```
 
-User's Force Orders (USER\_DATA)
-================================
+# User's Force Orders (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#api-description "Direct link to API Description")
 
 Query user's Force Orders
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/forceOrders`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#request-weight "Direct link to Request Weight")
 
 **20** with symbol, **50** without symbol
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| autoCloseType | ENUM | NO | "LIQUIDATION" for liquidation orders, "ADL" for ADL orders. 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 50; max 100. 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| autoCloseType | ENUM | NO | "LIQUIDATION" for liquidation orders, "ADL" for ADL orders. |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 50; max 100. |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   If "autoCloseType" is not sent, orders with both of the types will be returned
 > *   If "startTime" is not sent, data within 7 days before "endTime" can be queried
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {  	"orderId": 6071832819,  	"symbol": "BTCUSDT",   
+  	"status": "FILLED",   
+  	"clientOrderId": "autoclose-1596107620040000020",   
+  	"price": "10871.09",   
+  	"avgPrice": "10913.21000",   
+  	"origQty": "0.001",   
+  	"executedQty": "0.001",   
+  	"cumQuote": "10.91321",   
+  	"timeInForce": "IOC",   
+  	"type": "LIMIT",   
+  	"reduceOnly": false,   
+  	"closePosition": false,   
+  	"side": "SELL",   
+  	"positionSide": "BOTH",   
+  	"stopPrice": "0",   
+  	"workingType": "CONTRACT_PRICE",   
+  	"origType": "LIMIT",   
+  	"time": 1596107620044,   
+  	"updateTime": 1596107620087  
+  }  {   	"orderId": 6072734303,   	"symbol": "BTCUSDT",   
+   	"status": "FILLED",   
+   	"clientOrderId": "adl_autoclose",   
+   	"price": "11023.14",   
+   	"avgPrice": "10979.82000",   
+   	"origQty": "0.001",   
+   	"executedQty": "0.001",   
+   	"cumQuote": "10.97982",   
+   	"timeInForce": "GTC",   
+   	"type": "LIMIT",   
+   	"reduceOnly": false,   
+   	"closePosition": false,   
+   	"side": "BUY",   
+   	"positionSide": "SHORT",   
+   	"stopPrice": "0",   
+   	"workingType": "CONTRACT_PRICE",   
+   	"origType": "LIMIT",   
+   	"time": 1596110725059,   
+   	"updateTime": 1596110725071  
+  }]
 ```
-[  {  	"orderId": 6071832819,   	"symbol": "BTCUSDT",   	"status": "FILLED",   	"clientOrderId": "autoclose-1596107620040000020",   	"price": "10871.09",   	"avgPrice": "10913.21000",   	"origQty": "0.001",   	"executedQty": "0.001",   	"cumQuote": "10.91321",   	"timeInForce": "IOC",   	"type": "LIMIT",   	"reduceOnly": false,   	"closePosition": false,   	"side": "SELL",   	"positionSide": "BOTH",   	"stopPrice": "0",   	"workingType": "CONTRACT_PRICE",   	"origType": "LIMIT",   	"time": 1596107620044,   	"updateTime": 1596107620087  }  {   	"orderId": 6072734303,    	"symbol": "BTCUSDT",    	"status": "FILLED",    	"clientOrderId": "adl_autoclose",    	"price": "11023.14",    	"avgPrice": "10979.82000",    	"origQty": "0.001",    	"executedQty": "0.001",    	"cumQuote": "10.97982",    	"timeInForce": "GTC",    	"type": "LIMIT",    	"reduceOnly": false,    	"closePosition": false,    	"side": "BUY",    	"positionSide": "SHORT",    	"stopPrice": "0",    	"workingType": "CONTRACT_PRICE",    	"origType": "LIMIT",    	"time": 1596110725059,    	"updateTime": 1596110725071  }]
-```
 
-Account Trade List (USER\_DATA)
-===============================
+# Account Trade List (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#api-description "Direct link to API Description")
 
 Get trades for a specific account and symbol.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/userTrades`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO | This can only be used in combination with `symbol` 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| fromId | LONG | NO | Trade id to fetch from. Default gets most recent trades. 
-| limit | INT | NO | Default 500; max 1000. 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO | This can only be used in combination with `symbol` |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| fromId | LONG | NO | Trade id to fetch from. Default gets most recent trades. |
+| limit | INT | NO | Default 500; max 1000. |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   If `startTime` and `endTime` are both not sent, then the last 7 days' data will be returned.
 > *   The time between `startTime` and `endTime` cannot be longer than 7 days.
 > *   The parameter `fromId` cannot be sent with `startTime` or `endTime`.
 > *   Only support querying trade in the past 6 months
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {  	"buyer": false,  	"commission": "-0.07819010",  	"commissionAsset": "USDT",  	"id": 698759,  	"maker": false,  	"orderId": 25851813,  	"price": "7819.01",  	"qty": "0.002",  	"quoteQty": "15.63802",  	"realizedPnl": "-0.91539999",  	"side": "SELL",  	"positionSide": "SHORT",  	"symbol": "BTCUSDT",  	"time": 1569514978020  }]
 ```
-[  {  	"buyer": false,  	"commission": "-0.07819010",  	"commissionAsset": "USDT",  	"id": 698759,  	"maker": false,  	"orderId": 25851813,  	"price": "7819.01",  	"qty": "0.002",  	"quoteQty": "15.63802",  	"realizedPnl": "-0.91539999",  	"side": "SELL",  	"positionSide": "SHORT",  	"symbol": "BTCUSDT",  	"time": 1569514978020  }]
-```
 
-Change Margin Type(TRADE)
-=========================
+# Change Margin Type(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#api-description "Direct link to API Description")
 
 Change symbol level margin type
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/marginType`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| marginType | ENUM | YES | ISOLATED, CROSSED 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| marginType | ENUM | YES | ISOLATED, CROSSED |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200,	"msg": "success"}
 ```
-{	"code": 200,	"msg": "success"}
-```
 
-Change Position Mode(TRADE)
-===========================
+# Change Position Mode(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#api-description "Direct link to API Description")
 
 Change user's position mode (Hedge Mode or One-way Mode ) on _**EVERY symbol**_
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/positionSide/dual`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| dualSidePosition | STRING | YES | "true": Hedge Mode; "false": One-way Mode 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| dualSidePosition | STRING | YES | "true": Hedge Mode; "false": One-way Mode |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200,	"msg": "success"}
 ```
-{	"code": 200,	"msg": "success"}
-```
 
-Change Initial Leverage(TRADE)
-==============================
+# Change Initial Leverage(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#api-description "Direct link to API Description")
 
 Change user's initial leverage of specific symbol market.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/leverage`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| leverage | INT | YES | target initial leverage: int from 1 to 125 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| leverage | INT | YES | target initial leverage: int from 1 to 125 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"leverage": 21, 	"maxNotionalValue": "1000000", 	"symbol": "BTCUSDT"}
 ```
-{ 	"leverage": 21, 	"maxNotionalValue": "1000000", 	"symbol": "BTCUSDT"}
-```
 
-Change Multi-Assets Mode (TRADE)
-================================
+# Change Multi-Assets Mode (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#api-description "Direct link to API Description")
 
 Change user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on _**Every symbol**_
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/multiAssetsMargin`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| multiAssetsMargin | STRING | YES | "true": Multi-Assets Mode; "false": Single-Asset Mode 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| multiAssetsMargin | STRING | YES | "true": Multi-Assets Mode; "false": Single-Asset Mode |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200,	"msg": "success"}
 ```
-{	"code": 200,	"msg": "success"}
-```
 
-Modify Isolated Position Margin(TRADE)
-======================================
+# Modify Isolated Position Margin(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#api-description "Direct link to API Description")
 
 Modify Isolated Position Margin
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/positionMargin`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. 
-| amount | DECIMAL | YES |  
-| type | INT | YES | 1: Add position margin，2: Reduce position margin 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. |
+| amount | DECIMAL | YES |  |
+| type | INT | YES | 1: Add position margin，2: Reduce position margin |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Only for isolated symbol
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"amount": 100.0,  	"code": 200,  	"msg": "Successfully modify position margin.",  	"type": 1}
 ```
-{	"amount": 100.0,  	"code": 200,  	"msg": "Successfully modify position margin.",  	"type": 1}
-```
 
-Position Information V2 (USER\_DATA)
-====================================
+# Position Information V2 (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#api-description "Direct link to API Description")
 
 Get current position information.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v2/positionRisk`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Note**
 
 > Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2#response-example "Direct link to Response Example")
 
 > For One-way position mode:
 
-```
-[  	{  		"entryPrice": "0.00000",        "breakEvenPrice": "0.0",    		"marginType": "isolated",   		"isAutoAddMargin": "false",  		"isolatedMargin": "0.00000000",	  		"leverage": "10",   		"liquidationPrice": "0",   		"markPrice": "6679.50671178",	  		"maxNotionalValue": "20000000",   		"positionAmt": "0.000",  		"notional": "0",,   		"isolatedWallet": "0",  		"symbol": "BTCUSDT",   		"unRealizedProfit": "0.00000000",   		"positionSide": "BOTH",  		"updateTime": 0  	}]
+```codeBlockLines_aHhF
+[  
+  	{  		"entryPrice": "0.00000",        "breakEvenPrice": "0.0",  		"marginType": "isolated",   
+  		"isAutoAddMargin": "false",  
+  		"isolatedMargin": "0.00000000",  		"leverage": "10",  		"liquidationPrice": "0",   
+  		"markPrice": "6679.50671178",	  
+  		"maxNotionalValue": "20000000",  		"positionAmt": "0.000",  
+  		"notional": "0",,  		"isolatedWallet": "0",  
+  		"symbol": "BTCUSDT",  		"unRealizedProfit": "0.00000000",   
+  		"positionSide": "BOTH",  
+  		"updateTime": 0  	}]
 ```
 
 > For Hedge position mode:
 
-```
-[    {        "symbol": "BTCUSDT",        "positionAmt": "0.001",        "entryPrice": "22185.2",        "breakEvenPrice": "0.0",          "markPrice": "21123.05052574",        "unRealizedProfit": "-1.06214947",        "liquidationPrice": "19731.45529116",        "leverage": "4",        "maxNotionalValue": "100000000",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "LONG",        "notional": "21.12305052",        "isolatedWallet": "0",        "updateTime": 1655217461579    },    {        "symbol": "BTCUSDT",        "positionAmt": "0.000",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",          "markPrice": "21123.05052574",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "4",        "maxNotionalValue": "100000000",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "SHORT",        "notional": "0",        "isolatedWallet": "0",        "updateTime": 0    }]
+```codeBlockLines_aHhF
+[  
+    {        "symbol": "BTCUSDT",        "positionAmt": "0.001",        "entryPrice": "22185.2",        "breakEvenPrice": "0.0",        "markPrice": "21123.05052574",  
+        "unRealizedProfit": "-1.06214947",        "liquidationPrice": "19731.45529116",        "leverage": "4",        "maxNotionalValue": "100000000",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "LONG",        "notional": "21.12305052",        "isolatedWallet": "0",        "updateTime": 1655217461579    },    {        "symbol": "BTCUSDT",        "positionAmt": "0.000",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",        "markPrice": "21123.05052574",  
+        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "4",        "maxNotionalValue": "100000000",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "SHORT",        "notional": "0",        "isolatedWallet": "0",        "updateTime": 0    }]
 ```
 
-Position Information V3 (USER\_DATA)
-====================================
+# Position Information V3 (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#api-description "Direct link to API Description")
 
 Get current position information(only symbol that has position or open orders will be returned).
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v3/positionRisk`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Note**
 
 > Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3#response-example "Direct link to Response Example")
 
 > For One-way position mode:
 
-```
-[  {        "symbol": "ADAUSDT",        "positionSide": "BOTH",               // position side         "positionAmt": "30",        "entryPrice": "0.385",        "breakEvenPrice": "0.385077",        "markPrice": "0.41047590",        "unRealizedProfit": "0.76427700",     // unrealized profit          "liquidationPrice": "0",        "isolatedMargin": "0",        "notional": "12.31427700",        "marginAsset": "USDT",        "isolatedWallet": "0",        "initialMargin": "0.61571385",        // initial margin required with current mark price         "maintMargin": "0.08004280",          // maintenance margin required        "positionInitialMargin": "0.61571385",// initial margin required for positions with current mark price        "openOrderInitialMargin": "0",        // initial margin required for open orders with current mark price         "adl": 2,        "bidNotional": "0",                   // bids notional, ignore        "askNotional": "0",                   // ask notional, ignore        "updateTime": 1720736417660  }]
+```codeBlockLines_aHhF
+[  
+  {        "symbol": "ADAUSDT",        "positionSide": "BOTH",               // position side        "positionAmt": "30",  
+        "entryPrice": "0.385",        "breakEvenPrice": "0.385077",        "markPrice": "0.41047590",        "unRealizedProfit": "0.76427700",     // unrealized profit        "liquidationPrice": "0",  
+        "isolatedMargin": "0",        "notional": "12.31427700",        "marginAsset": "USDT",        "isolatedWallet": "0",        "initialMargin": "0.61571385",        // initial margin required with current mark price        "maintMargin": "0.08004280",          // maintenance margin required  
+        "positionInitialMargin": "0.61571385",// initial margin required for positions with current mark price        "openOrderInitialMargin": "0",        // initial margin required for open orders with current mark price        "adl": 2,  
+        "bidNotional": "0",                   // bids notional, ignore        "askNotional": "0",                   // ask notional, ignore        "updateTime": 1720736417660  }]
 ```
 
 > For Hedge position mode:
 
-```
-[  {        "symbol": "ADAUSDT",        "positionSide": "LONG",               // position side         "positionAmt": "30",        "entryPrice": "0.385",        "breakEvenPrice": "0.385077",        "markPrice": "0.41047590",        "unRealizedProfit": "0.76427700",     // unrealized profit          "liquidationPrice": "0",        "isolatedMargin": "0",        "notional": "12.31427700",        "marginAsset": "USDT",        "isolatedWallet": "0",        "initialMargin": "0.61571385",        // initial margin required with current mark price         "maintMargin": "0.08004280",          // maintenance margin required        "positionInitialMargin": "0.61571385",// initial margin required for positions with current mark price        "openOrderInitialMargin": "0",        // initial margin required for open orders with current mark price         "adl": 2,        "bidNotional": "0",                   // bids notional, ignore        "askNotional": "0",                   // ask notional, ignore        "updateTime": 1720736417660  },  {        "symbol": "COMPUSDT",        "positionSide": "SHORT",        "positionAmt": "-1.000",        "entryPrice": "70.92841",        "breakEvenPrice": "70.900038636",        "markPrice": "49.72023376",        "unRealizedProfit": "21.20817624",        "liquidationPrice": "2260.56757210",        "isolatedMargin": "0",        "notional": "-49.72023376",        "marginAsset": "USDT",        "isolatedWallet": "0",        "initialMargin": "2.48601168",        "maintMargin": "0.49720233",        "positionInitialMargin": "2.48601168",        "openOrderInitialMargin": "0",        "adl": 2,        "bidNotional": "0",        "askNotional": "0",        "updateTime": 1708943511656  }]
+```codeBlockLines_aHhF
+[  
+  {        "symbol": "ADAUSDT",        "positionSide": "LONG",               // position side        "positionAmt": "30",  
+        "entryPrice": "0.385",        "breakEvenPrice": "0.385077",        "markPrice": "0.41047590",        "unRealizedProfit": "0.76427700",     // unrealized profit        "liquidationPrice": "0",  
+        "isolatedMargin": "0",        "notional": "12.31427700",        "marginAsset": "USDT",        "isolatedWallet": "0",        "initialMargin": "0.61571385",        // initial margin required with current mark price        "maintMargin": "0.08004280",          // maintenance margin required  
+        "positionInitialMargin": "0.61571385",// initial margin required for positions with current mark price        "openOrderInitialMargin": "0",        // initial margin required for open orders with current mark price        "adl": 2,  
+        "bidNotional": "0",                   // bids notional, ignore        "askNotional": "0",                   // ask notional, ignore        "updateTime": 1720736417660  },  {        "symbol": "COMPUSDT",        "positionSide": "SHORT",        "positionAmt": "-1.000",        "entryPrice": "70.92841",        "breakEvenPrice": "70.900038636",        "markPrice": "49.72023376",        "unRealizedProfit": "21.20817624",        "liquidationPrice": "2260.56757210",        "isolatedMargin": "0",        "notional": "-49.72023376",        "marginAsset": "USDT",        "isolatedWallet": "0",        "initialMargin": "2.48601168",        "maintMargin": "0.49720233",        "positionInitialMargin": "2.48601168",        "openOrderInitialMargin": "0",        "adl": 2,        "bidNotional": "0",        "askNotional": "0",        "updateTime": 1708943511656  }]
 ```
 
-Position ADL Quantile Estimation(USER\_DATA)
-============================================
+# Position ADL Quantile Estimation(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#api-description "Direct link to API Description")
 
 Position ADL Quantile Estimation
 
@@ -2696,122 +2654,116 @@ Position ADL Quantile Estimation
 >     *   "HEDGE" as a sign will be returned instead of "BOTH";
 >     *   A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/adlQuantile`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		"symbol": "ETHUSDT", "adlQuantile": 			{  
+				// if the positions of the symbol are crossed margined in Hedge Mode, "LONG" and "SHORT" will be returned a same quantile value, and "HEDGE" will be returned instead of "BOTH".				"LONG": 3,  "SHORT": 3, 				"HEDGE": 0   // only a sign, ignore the value  
+			}		}, 	{ 		"symbol": "BTCUSDT", 		"adlQuantile":   
+ 			{  
+ 				// for positions of the symbol are in One-way Mode or isolated margined in Hedge Mode 				"LONG": 1, 	// adl quantile for "LONG" position in hedge mode 				"SHORT": 2, 	// adl qauntile for "SHORT" position in hedge mode 				"BOTH": 0		// adl qunatile for position in one-way mode 			} 	} ]
 ```
-[	{		"symbol": "ETHUSDT", 		"adlQuantile": 			{				// if the positions of the symbol are crossed margined in Hedge Mode, "LONG" and "SHORT" will be returned a same quantile value, and "HEDGE" will be returned instead of "BOTH".				"LONG": 3,  				"SHORT": 3, 				"HEDGE": 0   // only a sign, ignore the value			}		}, 	{ 		"symbol": "BTCUSDT",  		"adlQuantile":  			{ 				// for positions of the symbol are in One-way Mode or isolated margined in Hedge Mode 				"LONG": 1, 	// adl quantile for "LONG" position in hedge mode 				"SHORT": 2, 	// adl qauntile for "SHORT" position in hedge mode 				"BOTH": 0		// adl qunatile for position in one-way mode 			} 	} ]
-```
 
-Get Position Margin Change History (TRADE)
-==========================================
+# Get Position Margin Change History (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#api-description "Direct link to API Description")
 
 Get Position Margin Change History
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/positionMargin/history`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| type | INT | NO | 1: Add position margin，2: Reduce position margin 
-| startTime | LONG | NO |  
-| endTime | LONG | NO | Default current time if not pass 
-| limit | INT | NO | Default: 500 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| type | INT | NO | 1: Add position margin，2: Reduce position margin |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO | Default current time if not pass |
+| limit | INT | NO | Default: 500 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Support querying future histories that are not older than 30 days
 > *   The time between `startTime` and `endTime`can't be more than 30 days
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{	  	"symbol": "BTCUSDT",	  	"type": 1,		"deltaType": "USER_ADJUST",		"amount": "23.36332311",	  	"asset": "USDT",	  	"time": 1578047897183,	  	"positionSide": "BOTH"	},	{		"symbol": "BTCUSDT",	  	"type": 1, 		"deltaType": "USER_ADJUST",  
+		"amount": "100",	  	"asset": "USDT",	  	"time": 1578047900425,	  	"positionSide": "LONG" 	}  
+]
 ```
-[	{	  	"symbol": "BTCUSDT",	  	"type": 1,		"deltaType": "USER_ADJUST",		"amount": "23.36332311",	  	"asset": "USDT",	  	"time": 1578047897183,	  	"positionSide": "BOTH"	},	{		"symbol": "BTCUSDT",	  	"type": 1, 		"deltaType": "USER_ADJUST",		"amount": "100",	  	"asset": "USDT",	  	"time": 1578047900425,	  	"positionSide": "LONG" 	}]
-```
 
-Test Order(TRADE)
-=================
+# Test Order(TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#api-description "Direct link to API Description")
 
 Testing order request, this order will not be submitted to matching engine
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/order/test`
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. 
-| type | ENUM | YES |  
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | NO | Cannot be sent with `closePosition`\=`true`(Close-All) 
-| reduceOnly | STRING | NO | "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true` 
-| price | DECIMAL | NO |  
-| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` 
-| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. 
-| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1% 
-| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
-| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" 
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| selfTradePreventionMode | ENUM | NO | `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` 
-| goodTillDate | LONG | NO | order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. |
+| type | ENUM | YES |  |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | NO | Cannot be sent with `closePosition`\=`true`(Close-All) |
+| reduceOnly | STRING | NO | "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true` |
+| price | DECIMAL | NO |  |
+| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` |
+| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| closePosition | STRING | NO | `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. |
+| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) |
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1% |
+| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" |
+| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| selfTradePreventionMode | ENUM | NO | `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE` |
+| goodTillDate | LONG | NO | order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 Additional mandatory parameters based on `type`:
 
 | Type | Additional mandatory parameters |
 | --- | --- |
-| `LIMIT` | `timeInForce`, `quantity`, `price` 
-| `MARKET` | `quantity` 
-| `STOP/TAKE_PROFIT` | `quantity`, `price`, `stopPrice` 
-| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` 
-| `TRAILING_STOP_MARKET` | `callbackRate` 
+| `LIMIT` | `timeInForce`, `quantity`, `price` |
+| `MARKET` | `quantity` |
+| `STOP/TAKE_PROFIT` | `quantity`, `price`, `stopPrice` |
+| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` |
+| `TRAILING_STOP_MARKET` | `callbackRate` |
 
 > *   Order with type `STOP`, parameter `timeInForce` can be sent ( default `GTC`).
 >     
@@ -2853,50 +2805,40 @@ Additional mandatory parameters based on `type`:
 > *   In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
 >     
 
-Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"clientOrderId": "testOrder", 	"cumQty": "0", 	"cumQuote": "0", 	"executedQty": "0", 	"orderId": 22542179, 	"avgPrice": "0.00000", 	"origQty": "10", 	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",		// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"timeInForce": "GTD",  	"type": "TRAILING_STOP_MARKET",  	"origType": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",	// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",			// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1566818724722, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,      // if conditional order trigger is protected 	"priceMatch": "NONE",              //price match mode 	"selfTradePreventionMode": "NONE", //self trading preventation mode 	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order}
 ```
-{ 	"clientOrderId": "testOrder", 	"cumQty": "0", 	"cumQuote": "0", 	"executedQty": "0", 	"orderId": 22542179, 	"avgPrice": "0.00000", 	"origQty": "10", 	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",		// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   // if Close-All  	"symbol": "BTCUSDT",  	"timeInForce": "GTD",  	"type": "TRAILING_STOP_MARKET",  	"origType": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",	// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",			// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1566818724722, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,      // if conditional order trigger is protected	 	"priceMatch": "NONE",              //price match mode 	"selfTradePreventionMode": "NONE", //self trading preventation mode 	"goodTillDate": 1693207680000      //order pre-set auot cancel time for TIF GTD order}
-```
 
-New Future Account Transfer
-===========================
+# User Universal Transfer (USER\_DATA)
 
-Please find details from [here](https://developers.binance.com/docs/wallet/asset/user-universal-transfer).
-
-User Universal Transfer (USER\_DATA)
-====================================
-
-API Description[​](/docs/wallet/asset/user-universal-transfer#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/wallet/asset/user-universal-transfer#api-description "Direct link to API Description")
 
 user universal transfer
 
-HTTP Request[​](/docs/wallet/asset/user-universal-transfer#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/wallet/asset/user-universal-transfer#http-request "Direct link to HTTP Request")
 
 POST `/sapi/v1/asset/transfer`
 
 You need to enable `Permits Universal Transfer` option for the API Key which requests this endpoint.
 
-Request Weight(UID)[​](/docs/wallet/asset/user-universal-transfer#request-weightuid "Direct link to Request Weight(UID)")
--------------------------------------------------------------------------------------------------------------------------
+## Request Weight(UID)[​](/docs/wallet/asset/user-universal-transfer#request-weightuid "Direct link to Request Weight(UID)")
 
 **900**
 
-Request Parameters[​](/docs/wallet/asset/user-universal-transfer#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/wallet/asset/user-universal-transfer#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| type | ENUM | YES |  
-| asset | STRING | YES |  
-| amount | DECIMAL | YES |  
-| fromSymbol | STRING | NO |  
-| toSymbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| type | ENUM | YES |  |
+| asset | STRING | YES |  |
+| amount | DECIMAL | YES |  |
+| fromSymbol | STRING | NO |  |
+| toSymbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 *   `fromSymbol` must be sent when type are ISOLATEDMARGIN\_MARGIN and ISOLATEDMARGIN\_ISOLATEDMARGIN
     
@@ -2936,988 +2878,901 @@ Request Parameters[​](/docs/wallet/asset/user-universal-transfer#request-param
     *   MAIN\_PORTFOLIO\_MARGIN Spot account transfer to Portfolio Margin account
     *   PORTFOLIO\_MARGIN\_MAIN Portfolio Margin account transfer to Spot account
 
-Response Example[​](/docs/wallet/asset/user-universal-transfer#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/wallet/asset/user-universal-transfer#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "tranId":13526853623}
 ```
-{    "tranId":13526853623}
-```
 
-Futures Account Balance V3 (USER\_DATA)
-=======================================
+# Futures Account Balance V3 (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#api-description "Direct link to API Description")
 
 Query account balance info
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v3/balance`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+ {   "accountAlias": "SgsR",              // unique account code   "asset": "USDT",  	                // asset name   "balance": "122607.35137903",        // wallet balance   "crossWalletBalance": "23.72469206", // crossed wallet balance   "crossUnPnl": "0.00000000"           // unrealized profit of crossed positions   "availableBalance": "23.72469206",   // available balance   "maxWithdrawAmount": "23.72469206",  // maximum amount for transfer out   "marginAvailable": true,             // whether the asset can be used as margin in Multi-Assets mode   "updateTime": 1617939110373 }]
 ```
-[ {   "accountAlias": "SgsR",              // unique account code   "asset": "USDT",  	                // asset name   "balance": "122607.35137903",        // wallet balance   "crossWalletBalance": "23.72469206", // crossed wallet balance   "crossUnPnl": "0.00000000"           // unrealized profit of crossed positions   "availableBalance": "23.72469206",   // available balance   "maxWithdrawAmount": "23.72469206",  // maximum amount for transfer out   "marginAvailable": true,             // whether the asset can be used as margin in Multi-Assets mode   "updateTime": 1617939110373 }]
-```
 
-Futures Account Balance V2 (USER\_DATA)
-=======================================
+# Futures Account Balance V2 (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#api-description "Direct link to API Description")
 
 Query account balance info
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v2/balance`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+ 	{ 		"accountAlias": "SgsR",    // unique account code 		"asset": "USDT",  	// asset name 		"balance": "122607.35137903", // wallet balance 		"crossWalletBalance": "23.72469206", // crossed wallet balance  		"crossUnPnl": "0.00000000"  // unrealized profit of crossed positions  		"availableBalance": "23.72469206",       // available balance  		"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out  		"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode  		"updateTime": 1617939110373	}]
 ```
-[ 	{ 		"accountAlias": "SgsR",    // unique account code 		"asset": "USDT",  	// asset name 		"balance": "122607.35137903", // wallet balance 		"crossWalletBalance": "23.72469206", // crossed wallet balance  		"crossUnPnl": "0.00000000"  // unrealized profit of crossed positions  		"availableBalance": "23.72469206",       // available balance  		"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out  		"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode  		"updateTime": 1617939110373	}]
-```
 
-Account Information V3(USER\_DATA)
-==================================
+# Account Information V3(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#api-description "Direct link to API Description")
 
 Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v3/account`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3#response-example "Direct link to Response Example")
 
 > single-asset mode
 
-```
-{   	"totalInitialMargin": "0.00000000",            // total initial margin required with current mark price (useless with isolated positions), only for USDT asset	"totalMaintMargin": "0.00000000",  	           // total maintenance margin required, only for USDT asset	"totalWalletBalance": "103.12345678",           // total wallet balance, only for USDT asset	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit, only for USDT asset	"totalMarginBalance": "103.12345678",           // total margin balance, only for USDT asset	"totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset	"totalCrossWalletBalance": "103.12345678",      // crossed wallet balance, only for USDT asset	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions, only for USDT asset	"availableBalance": "103.12345678",             // available balance, only for USDT asset	"maxWithdrawAmount": "103.12345678"             // maximum amount for transfer out, only for USDT asset	"assets": [ // For assets that are quote assets, USDT/USDC/BTC		{			"asset": "USDT",			            // asset name			"walletBalance": "23.72469206",         // wallet balance			"unrealizedProfit": "0.00000000",       // unrealized profit			"marginBalance": "23.72469206",         // margin balance			"maintMargin": "0.00000000",	        // maintenance margin required			"initialMargin": "0.00000000",          // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",    // crossed wallet balance			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions			"availableBalance": "23.72469206",      // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"updateTime": 1625474304765             // last update time 		},    		{			"asset": "USDC",			            // asset name			"walletBalance": "103.12345678",         // wallet balance			"unrealizedProfit": "0.00000000",       // unrealized profit			"marginBalance": "103.12345678",         // margin balance			"maintMargin": "0.00000000",	        // maintenance margin required			"initialMargin": "0.00000000",          // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",    // crossed wallet balance			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions			"availableBalance": "126.72469206",      // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"updateTime": 1625474304765             // last update time 		},        ],	"positions": [  // positions of all symbols user had position/ open orders are returned		            // only "BOTH" positions will be returned with One-way mode		            // only "LONG" and "SHORT" positions will be returned with Hedge mode   	  {           "symbol": "BTCUSDT",              "positionSide": "BOTH",            // position side            "positionAmt": "1.000",             "unrealizedProfit": "0.00000000",  // unrealized profit                 "isolatedMargin": "0.00000000",	           "notional": "0",           "isolatedWallet": "0",           "initialMargin": "0",              // initial margin required with current mark price            "maintMargin": "0",                // maintenance margin required           "updateTime": 0  	  } 	]}
+```codeBlockLines_aHhF
+{   	"totalInitialMargin": "0.00000000",            // total initial margin required with current mark price (useless with isolated positions), only for USDT asset  
+	"totalMaintMargin": "0.00000000",  	           // total maintenance margin required, only for USDT asset	"totalWalletBalance": "103.12345678",           // total wallet balance, only for USDT asset	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit, only for USDT asset	"totalMarginBalance": "103.12345678",           // total margin balance, only for USDT asset	"totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset	"totalCrossWalletBalance": "103.12345678",      // crossed wallet balance, only for USDT asset	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions, only for USDT asset	"availableBalance": "103.12345678",             // available balance, only for USDT asset	"maxWithdrawAmount": "103.12345678"             // maximum amount for transfer out, only for USDT asset	"assets": [ // For assets that are quote assets, USDT/USDC/BTC		{			"asset": "USDT",			            // asset name			"walletBalance": "23.72469206",         // wallet balance			"unrealizedProfit": "0.00000000",       // unrealized profit			"marginBalance": "23.72469206",         // margin balance			"maintMargin": "0.00000000",	        // maintenance margin required			"initialMargin": "0.00000000",          // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",    // crossed wallet balance			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions			"availableBalance": "23.72469206",      // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"updateTime": 1625474304765             // last update time },    		{			"asset": "USDC",			            // asset name			"walletBalance": "103.12345678",         // wallet balance			"unrealizedProfit": "0.00000000",       // unrealized profit			"marginBalance": "103.12345678",         // margin balance			"maintMargin": "0.00000000",	        // maintenance margin required			"initialMargin": "0.00000000",          // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",  // initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000", // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",    // crossed wallet balance			"crossUnPnl": "0.00000000"              // unrealized profit of crossed positions			"availableBalance": "126.72469206",      // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"updateTime": 1625474304765             // last update time },        ],	"positions": [  // positions of all symbols user had position/ open orders are returned		            // only "BOTH" positions will be returned with One-way mode		            // only "LONG" and "SHORT" positions will be returned with Hedge mode   	  {           "symbol": "BTCUSDT",           "positionSide": "BOTH",            // position side   
+           "positionAmt": "1.000",    
+"unrealizedProfit": "0.00000000",  // unrealized profit                "isolatedMargin": "0.00000000",	  
+           "notional": "0",           "isolatedWallet": "0",           "initialMargin": "0",              // initial margin required with current mark price           "maintMargin": "0",                // maintenance margin required  
+           "updateTime": 0  	  } 	]  
+}
 ```
 
 > OR multi-assets mode
 
-```
-{   	"totalInitialMargin": "0.00000000",            // the sum of USD value of all cross positions/open order initial margin	"totalMaintMargin": "0.00000000",  	           // the sum of USD value of all cross positions maintenance margin	"totalWalletBalance": "126.72469206",          // total wallet balance in USD	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit in USD	"totalMarginBalance": "126.72469206",          // total margin balance in USD	"totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD	"totalCrossWalletBalance": "126.72469206",     // crossed wallet balance in USD	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions in USD	"availableBalance": "126.72469206",            // available balance in USD	"maxWithdrawAmount": "126.72469206"            // maximum virtual amount for transfer out in USD	"assets": [		{			"asset": "USDT",			         // asset name			"walletBalance": "23.72469206",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "23.72469206",      // margin balance			"maintMargin": "0.00000000",	     // maintenance margin required			"initialMargin": "0.00000000",       // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time 		},		{			"asset": "BUSD",			// asset name			"walletBalance": "103.12345678",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "103.12345678",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time		}	], 	"positions": [  // positions of all symbols user had position are returned                    // only "BOTH" positions will be returned with One-way mode		            // only "LONG" and "SHORT" positions will be returned with Hedge mode   	  {           "symbol": "BTCUSDT",              "positionSide": "BOTH",            // position side            "positionAmt": "1.000",             "unrealizedProfit": "0.00000000",  // unrealized profit                 "isolatedMargin": "0.00000000",	           "notional": "0",           "isolatedWallet": "0",           "initialMargin": "0",              // initial margin required with current mark price            "maintMargin": "0",                // maintenance margin required           "updateTime": 0  	  } 	] }
+```codeBlockLines_aHhF
+{   	"totalInitialMargin": "0.00000000",            // the sum of USD value of all cross positions/open order initial margin  
+	"totalMaintMargin": "0.00000000",  	           // the sum of USD value of all cross positions maintenance margin	"totalWalletBalance": "126.72469206",          // total wallet balance in USD	"totalUnrealizedProfit": "0.00000000",         // total unrealized profit in USD	"totalMarginBalance": "126.72469206",          // total margin balance in USD	"totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD	"totalCrossWalletBalance": "126.72469206",     // crossed wallet balance in USD	"totalCrossUnPnl": "0.00000000",	           // unrealized profit of crossed positions in USD	"availableBalance": "126.72469206",            // available balance in USD	"maxWithdrawAmount": "126.72469206"            // maximum virtual amount for transfer out in USD	"assets": [		{			"asset": "USDT",			         // asset name			"walletBalance": "23.72469206",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "23.72469206",      // margin balance			"maintMargin": "0.00000000",	     // maintenance margin required			"initialMargin": "0.00000000",       // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time 		},  
+		{			"asset": "BUSD",			// asset name			"walletBalance": "103.12345678",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "103.12345678",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time		}	], 	"positions": [  // positions of all symbols user had position are returned                    // only "BOTH" positions will be returned with One-way mode		            // only "LONG" and "SHORT" positions will be returned with Hedge mode   	  {           "symbol": "BTCUSDT",           "positionSide": "BOTH",            // position side   
+           "positionAmt": "1.000",    
+"unrealizedProfit": "0.00000000",  // unrealized profit                "isolatedMargin": "0.00000000",	  
+           "notional": "0",           "isolatedWallet": "0",           "initialMargin": "0",              // initial margin required with current mark price           "maintMargin": "0",                // maintenance margin required  
+           "updateTime": 0  	  } ] }
 ```
 
-Account Information V2(USER\_DATA)
-==================================
+# Account Information V2(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#api-description "Direct link to API Description")
 
 Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v2/account`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2#response-example "Direct link to Response Example")
 
 > single-asset mode
 
-```
-{   	"feeTier": 0,  		// account commission tier 	"feeBurn": true,  	// "true": Fee Discount On; "false": Fee Discount Off	"canTrade": true,  	// if can trade	"canDeposit": true,  	// if can transfer in asset	"canWithdraw": true, 	// if can transfer out asset	"updateTime": 0,        // reserved property, please ignore 	"multiAssetsMargin": false,	"tradeGroupId": -1,	"totalInitialMargin": "0.00000000",    // total initial margin required with current mark price (useless with isolated positions), only for USDT asset	"totalMaintMargin": "0.00000000",  	  // total maintenance margin required, only for USDT asset	"totalWalletBalance": "23.72469206",     // total wallet balance, only for USDT asset	"totalUnrealizedProfit": "0.00000000",   // total unrealized profit, only for USDT asset	"totalMarginBalance": "23.72469206",     // total margin balance, only for USDT asset	"totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset	"totalCrossWalletBalance": "23.72469206",      // crossed wallet balance, only for USDT asset	"totalCrossUnPnl": "0.00000000",	  // unrealized profit of crossed positions, only for USDT asset	"availableBalance": "23.72469206",       // available balance, only for USDT asset	"maxWithdrawAmount": "23.72469206"     // maximum amount for transfer out, only for USDT asset	"assets": [		{			"asset": "USDT",			// asset name			"walletBalance": "23.72469206",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "23.72469206",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "23.72469206",       // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time 		},		{			"asset": "BUSD",			// asset name			"walletBalance": "103.12345678",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "103.12345678",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "103.12345678",       // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time		}	],	"positions": [  // positions of all symbols in the market are returned		// only "BOTH" positions will be returned with One-way mode		// only "LONG" and "SHORT" positions will be returned with Hedge mode		{			"symbol": "BTCUSDT",  	// symbol name			"initialMargin": "0",	// initial margin required with current mark price 			"maintMargin": "0",		// maintenance margin required			"unrealizedProfit": "0.00000000",  // unrealized profit			"positionInitialMargin": "0",      // initial margin required for positions with current mark price			"openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price			"leverage": "100",		// current initial leverage			"isolated": true,  		// if the position is isolated			"entryPrice": "0.00000",  	// average entry price			"maxNotional": "250000",  	// maximum available notional with current leverage			"bidNotional": "0",  // bids notional, ignore			"askNotional": "0",  // ask notional, ignore			"positionSide": "BOTH",  	// position side			"positionAmt": "0",			// position amount			"updateTime": 0           // last update time		}	]}
+```codeBlockLines_aHhF
+{   "feeTier": 0,  		// account commission tier 	"feeBurn": true,  	// "true": Fee Discount On; "false": Fee Discount Off	"canTrade": true,  	// if can trade  
+	"canDeposit": true,  	// if can transfer in asset	"canWithdraw": true, 	// if can transfer out asset	"updateTime": 0,        // reserved property, please ignore 	"multiAssetsMargin": false,  
+	"tradeGroupId": -1,	"totalInitialMargin": "0.00000000",    // total initial margin required with current mark price (useless with isolated positions), only for USDT asset	"totalMaintMargin": "0.00000000",  	  // total maintenance margin required, only for USDT asset	"totalWalletBalance": "23.72469206",     // total wallet balance, only for USDT asset	"totalUnrealizedProfit": "0.00000000",   // total unrealized profit, only for USDT asset	"totalMarginBalance": "23.72469206",     // total margin balance, only for USDT asset	"totalPositionInitialMargin": "0.00000000",    // initial margin required for positions with current mark price, only for USDT asset	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price, only for USDT asset	"totalCrossWalletBalance": "23.72469206",      // crossed wallet balance, only for USDT asset	"totalCrossUnPnl": "0.00000000",	  // unrealized profit of crossed positions, only for USDT asset	"availableBalance": "23.72469206",       // available balance, only for USDT asset	"maxWithdrawAmount": "23.72469206"     // maximum amount for transfer out, only for USDT asset	"assets": [		{			"asset": "USDT",			// asset name			"walletBalance": "23.72469206",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "23.72469206",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "23.72469206",       // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time 		},  
+		{			"asset": "BUSD",			// asset name			"walletBalance": "103.12345678",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "103.12345678",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "103.12345678",       // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time		}	],	"positions": [  // positions of all symbols in the market are returned		// only "BOTH" positions will be returned with One-way mode		// only "LONG" and "SHORT" positions will be returned with Hedge mode		{			"symbol": "BTCUSDT",  	// symbol name			"initialMargin": "0",	// initial margin required with current mark price 			"maintMargin": "0",		// maintenance margin required  
+			"unrealizedProfit": "0.00000000",  // unrealized profit			"positionInitialMargin": "0",      // initial margin required for positions with current mark price			"openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price			"leverage": "100",		// current initial leverage			"isolated": true,  		// if the position is isolated			"entryPrice": "0.00000",  	// average entry price			"maxNotional": "250000",  	// maximum available notional with current leverage			"bidNotional": "0",  // bids notional, ignore			"askNotional": "0",  // ask notional, ignore			"positionSide": "BOTH",  	// position side			"positionAmt": "0",			// position amount			"updateTime": 0           // last update time		}	]}
 ```
 
 > OR multi-assets mode
 
-```
-{   	"feeTier": 0,  		// account commission tier 	"feeBurn": true,  	// "true": Fee Discount On; "false": Fee Discount Off	"canTrade": true,  	// if can trade	"canTrade": true,  	// if can trade	"canDeposit": true,  	// if can transfer in asset	"canWithdraw": true, 	// if can transfer out asset	"updateTime": 0,        // reserved property, please ignore 	"multiAssetsMargin": true,	"tradeGroupId": -1,	"totalInitialMargin": "0.00000000",    // the sum of USD value of all cross positions/open order initial margin	"totalMaintMargin": "0.00000000",  	  // the sum of USD value of all cross positions maintenance margin	"totalWalletBalance": "126.72469206",     // total wallet balance in USD	"totalUnrealizedProfit": "0.00000000",   // total unrealized profit in USD	"totalMarginBalance": "126.72469206",     // total margin balance in USD	"totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD	"totalCrossWalletBalance": "126.72469206",      // crossed wallet balance in USD	"totalCrossUnPnl": "0.00000000",	  // unrealized profit of crossed positions in USD	"availableBalance": "126.72469206",       // available balance in USD	"maxWithdrawAmount": "126.72469206"     // maximum virtual amount for transfer out in USD	"assets": [		{			"asset": "USDT",			// asset name			"walletBalance": "23.72469206",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "23.72469206",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time 		},		{			"asset": "BUSD",			// asset name			"walletBalance": "103.12345678",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "103.12345678",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time		}	],	"positions": [  // positions of all symbols in the market are returned		// only "BOTH" positions will be returned with One-way mode		// only "LONG" and "SHORT" positions will be returned with Hedge mode		{			"symbol": "BTCUSDT",  	// symbol name			"initialMargin": "0",	// initial margin required with current mark price 			"maintMargin": "0",		// maintenance margin required			"unrealizedProfit": "0.00000000",  // unrealized profit			"positionInitialMargin": "0",      // initial margin required for positions with current mark price			"openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price			"leverage": "100",		// current initial leverage			"isolated": true,  		// if the position is isolated			"entryPrice": "0.00000",  	// average entry price			"maxNotional": "250000",  	// maximum available notional with current leverage			"bidNotional": "0",  // bids notional, ignore			"askNotional": "0",  // ask notional, ignore			"positionSide": "BOTH",  	// position side			"positionAmt": "0",			// position amount			"updateTime": 0           // last update time		}	]}
+```codeBlockLines_aHhF
+{   "feeTier": 0,  		// account commission tier 	"feeBurn": true,  	// "true": Fee Discount On; "false": Fee Discount Off	"canTrade": true,  	// if can trade  
+	"canTrade": true,  	// if can trade	"canDeposit": true,  	// if can transfer in asset	"canWithdraw": true, 	// if can transfer out asset	"updateTime": 0,        // reserved property, please ignore 	"multiAssetsMargin": true,  
+	"tradeGroupId": -1,	"totalInitialMargin": "0.00000000",    // the sum of USD value of all cross positions/open order initial margin	"totalMaintMargin": "0.00000000",  	  // the sum of USD value of all cross positions maintenance margin	"totalWalletBalance": "126.72469206",     // total wallet balance in USD	"totalUnrealizedProfit": "0.00000000",   // total unrealized profit in USD	"totalMarginBalance": "126.72469206",     // total margin balance in USD	"totalPositionInitialMargin": "0.00000000",    // the sum of USD value of all cross positions initial margin	"totalOpenOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price in USD	"totalCrossWalletBalance": "126.72469206",      // crossed wallet balance in USD	"totalCrossUnPnl": "0.00000000",	  // unrealized profit of crossed positions in USD	"availableBalance": "126.72469206",       // available balance in USD	"maxWithdrawAmount": "126.72469206"     // maximum virtual amount for transfer out in USD	"assets": [		{			"asset": "USDT",			// asset name			"walletBalance": "23.72469206",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "23.72469206",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "23.72469206",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time 		},  
+		{			"asset": "BUSD",			// asset name			"walletBalance": "103.12345678",      // wallet balance			"unrealizedProfit": "0.00000000",    // unrealized profit			"marginBalance": "103.12345678",      // margin balance			"maintMargin": "0.00000000",	    // maintenance margin required			"initialMargin": "0.00000000",    // total initial margin required with current mark price 			"positionInitialMargin": "0.00000000",    //initial margin required for positions with current mark price  
+			"openOrderInitialMargin": "0.00000000",   // initial margin required for open orders with current mark price			"crossWalletBalance": "103.12345678",      // crossed wallet balance			"crossUnPnl": "0.00000000"       // unrealized profit of crossed positions			"availableBalance": "126.72469206",       // available balance			"maxWithdrawAmount": "103.12345678",     // maximum amount for transfer out			"marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode			"updateTime": 1625474304765 // last update time		}	],	"positions": [  // positions of all symbols in the market are returned		// only "BOTH" positions will be returned with One-way mode		// only "LONG" and "SHORT" positions will be returned with Hedge mode		{			"symbol": "BTCUSDT",  	// symbol name			"initialMargin": "0",	// initial margin required with current mark price 			"maintMargin": "0",		// maintenance margin required  
+			"unrealizedProfit": "0.00000000",  // unrealized profit			"positionInitialMargin": "0",      // initial margin required for positions with current mark price			"openOrderInitialMargin": "0",     // initial margin required for open orders with current mark price			"leverage": "100",		// current initial leverage			"isolated": true,  		// if the position is isolated			"entryPrice": "0.00000",  	// average entry price			"maxNotional": "250000",  	// maximum available notional with current leverage			"bidNotional": "0",  // bids notional, ignore			"askNotional": "0",  // ask notional, ignore			"positionSide": "BOTH",  	// position side			"positionAmt": "0",			// position amount			"updateTime": 0           // last update time		}	]}
 ```
 
-Get Future Account Transaction History List(USER\_DATA)
-=======================================================
+# Get Future Account Transaction History List(USER\_DATA)
 
 Please find details from [here](https://developers.binance.com/docs/wallet/asset/query-user-universal-transfer).
 
-User Commission Rate (USER\_DATA)
-=================================
+# User Commission Rate (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#api-description "Direct link to API Description")
 
 Get User Commission Rate
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/commissionRate`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#request-weight "Direct link to Request Weight")
 
 **20**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"symbol": "BTCUSDT",  	"makerCommissionRate": "0.0002",  // 0.02%  	"takerCommissionRate": "0.0004"   // 0.04%}
 ```
-{	"symbol": "BTCUSDT",  	"makerCommissionRate": "0.0002",  // 0.02%  	"takerCommissionRate": "0.0004"   // 0.04%}
-```
 
-Futures Account Configuration(USER\_DATA)
-=========================================
+# Futures Account Configuration(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#api-description "Direct link to API Description")
 
 Query account configuration
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/accountConfig`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{     
+    "feeTier": 0,               // account commission tier   
+    "canTrade": true,           // if can trade  
+    "canDeposit": true,         // if can transfer in asset    "canWithdraw": true,        // if can transfer out asset    "dualSidePosition": true,    "updateTime": 0,            // reserved property, please ignore    "multiAssetsMargin": false,  
+    "tradeGroupId": -1}
 ```
-{       "feeTier": 0,               // account commission tier     "canTrade": true,           // if can trade    "canDeposit": true,         // if can transfer in asset    "canWithdraw": true,        // if can transfer out asset    "dualSidePosition": true,    "updateTime": 0,            // reserved property, please ignore     "multiAssetsMargin": false,    "tradeGroupId": -1}
-```
 
-Symbol Configuration(USER\_DATA)
-================================
+# Symbol Configuration(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#api-description "Direct link to API Description")
 
 Get current account symbol configuration.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/symbolConfig`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {  "symbol": "BTCUSDT",  "marginType": "CROSSED",  
+  "isAutoAddMargin": "false",  "leverage": 21,  "maxNotionalValue": "1000000",  }]
 ```
-[  {  "symbol": "BTCUSDT",   "marginType": "CROSSED",  "isAutoAddMargin": "false",  "leverage": 21,  "maxNotionalValue": "1000000",  }]
-```
 
-Query User Rate Limit (USER\_DATA)
-==================================
+# Query User Rate Limit (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#api-description "Direct link to API Description")
 
 Query User Rate Limit
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/rateLimit/order`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "rateLimitType": "ORDERS",    "interval": "SECOND",    "intervalNum": 10,    "limit": 10000,  },  {    "rateLimitType": "ORDERS",    "interval": "MINUTE",    "intervalNum": 1,    "limit": 20000,  }]
 ```
-[  {    "rateLimitType": "ORDERS",    "interval": "SECOND",    "intervalNum": 10,    "limit": 10000,  },  {    "rateLimitType": "ORDERS",    "interval": "MINUTE",    "intervalNum": 1,    "limit": 20000,  }]
-```
 
-Notional and Leverage Brackets (USER\_DATA)
-===========================================
+# Notional and Leverage Brackets (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#api-description "Direct link to API Description")
 
 Query user notional and leverage bracket on speicfic symbol
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/leverageBracket`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-[    {        "symbol": "ETHUSDT",	    "notionalCoef": 1.50,  //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted         "brackets": [            {                "bracket": 1,   // Notional bracket                "initialLeverage": 75,  // Max initial leverage for this bracket                "notionalCap": 10000,  // Cap notional of this bracket                "notionalFloor": 0,  // Notional threshold of this bracket                 "maintMarginRatio": 0.0065, // Maintenance ratio for this bracket                "cum":0 // Auxiliary number for quick calculation                            },        ]    }]
+```codeBlockLines_aHhF
+[  
+    {        "symbol": "ETHUSDT",	    "notionalCoef": 1.50,  //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted        "brackets": [  
+            {                "bracket": 1,   // Notional bracket                "initialLeverage": 75,  // Max initial leverage for this bracket                "notionalCap": 10000,  // Cap notional of this bracket                "notionalFloor": 0,  // Notional threshold of this bracket                "maintMarginRatio": 0.0065, // Maintenance ratio for this bracket  
+                "cum":0 // Auxiliary number for quick calculation                 
+            },  
+        ]    }]
 ```
 
 > **OR** (if symbol sent)
 
-```
-{    "symbol": "ETHUSDT",    "notionalCoef": 1.50,    "brackets": [        {            "bracket": 1,            "initialLeverage": 75,            "notionalCap": 10000,            "notionalFloor": 0,            "maintMarginRatio": 0.0065,            "cum":0        },    ]}
+```codeBlockLines_aHhF
+{  
+    "symbol": "ETHUSDT",    "notionalCoef": 1.50,    "brackets": [        {            "bracket": 1,            "initialLeverage": 75,            "notionalCap": 10000,            "notionalFloor": 0,            "maintMarginRatio": 0.0065,            "cum":0        },    ]}
 ```
 
-Get Current Multi-Assets Mode (USER\_DATA)
-==========================================
+# Get Current Multi-Assets Mode (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#api-description "Direct link to API Description")
 
 Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on _**Every symbol**_
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/multiAssetsMargin`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#request-weight "Direct link to Request Weight")
 
 **30**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"multiAssetsMargin": true // "true": Multi-Assets Mode; "false": Single-Asset Mode}
 ```
-{	"multiAssetsMargin": true // "true": Multi-Assets Mode; "false": Single-Asset Mode}
-```
 
-Get Current Position Mode(USER\_DATA)
-=====================================
+# Get Current Position Mode(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#api-description "Direct link to API Description")
 
 Get user's position mode (Hedge Mode or One-way Mode ) on _**EVERY symbol**_
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/positionSide/dual`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#request-weight "Direct link to Request Weight")
 
 30
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"dualSidePosition": true // "true": Hedge Mode; "false": One-way Mode}
 ```
-{	"dualSidePosition": true // "true": Hedge Mode; "false": One-way Mode}
-```
 
-Get Income History (USER\_DATA)
-===============================
+# Get Income History (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#api-description "Direct link to API Description")
 
 Query income history
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/income`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#request-weight "Direct link to Request Weight")
 
 **30**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| incomeType | STRING | NO | TRANSFER, WELCOME\_BONUS, REALIZED\_PNL, FUNDING\_FEE, COMMISSION, INSURANCE\_CLEAR, REFERRAL\_KICKBACK, COMMISSION\_REBATE, API\_REBATE, CONTEST\_REWARD, CROSS\_COLLATERAL\_TRANSFER, OPTIONS\_PREMIUM\_FEE, OPTIONS\_SETTLE\_PROFIT, INTERNAL\_TRANSFER, AUTO\_EXCHANGE, DELIVERED\_SETTELMENT, COIN\_SWAP\_DEPOSIT, COIN\_SWAP\_WITHDRAW, POSITION\_LIMIT\_INCREASE\_FEE, STRATEGY\_UMFUTURES\_TRANSFER，FEE\_RETURN，BFUSD\_REWARD 
-| startTime | LONG | NO | Timestamp in ms to get funding from INCLUSIVE. 
-| endTime | LONG | NO | Timestamp in ms to get funding until INCLUSIVE. 
-| page | INT | NO |  
-| limit | INT | NO | Default 100; max 1000 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| incomeType | STRING | NO | TRANSFER, WELCOME\_BONUS, REALIZED\_PNL, FUNDING\_FEE, COMMISSION, INSURANCE\_CLEAR, REFERRAL\_KICKBACK, COMMISSION\_REBATE, API\_REBATE, CONTEST\_REWARD, CROSS\_COLLATERAL\_TRANSFER, OPTIONS\_PREMIUM\_FEE, OPTIONS\_SETTLE\_PROFIT, INTERNAL\_TRANSFER, AUTO\_EXCHANGE, DELIVERED\_SETTELMENT, COIN\_SWAP\_DEPOSIT, COIN\_SWAP\_WITHDRAW, POSITION\_LIMIT\_INCREASE\_FEE, STRATEGY\_UMFUTURES\_TRANSFER，FEE\_RETURN，BFUSD\_REWARD |
+| startTime | LONG | NO | Timestamp in ms to get funding from INCLUSIVE. |
+| endTime | LONG | NO | Timestamp in ms to get funding until INCLUSIVE. |
+| page | INT | NO |  |
+| limit | INT | NO | Default 100; max 1000 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
 > *   If `incomeType` is not sent, all kinds of flow will be returned
 > *   "trandId" is unique in the same incomeType for a user
 > *   Income history only contains data for the last three months
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{    	"symbol": "",					// trade symbol, if existing    	"incomeType": "TRANSFER",	// income type    	"income": "-0.37500000",  // income amount    	"asset": "USDT",				// income asset    	"info":"TRANSFER",			// extra information    	"time": 1570608000000,    	"tranId":9689322392,		// transaction id    	"tradeId":""					// trade id, if existing	},	{   		"symbol": "BTCUSDT",    	"incomeType": "COMMISSION",    	"income": "-0.01000000",  
+    	"asset": "USDT",    	"info":"COMMISSION",    	"time": 1570636800000,    	"tranId":9689322392,    	"tradeId":"2059192"	}]
 ```
-[	{    	"symbol": "",					// trade symbol, if existing    	"incomeType": "TRANSFER",	// income type    	"income": "-0.37500000",  // income amount    	"asset": "USDT",				// income asset    	"info":"TRANSFER",			// extra information    	"time": 1570608000000,		    	"tranId":9689322392,		// transaction id    	"tradeId":""					// trade id, if existing	},	{   		"symbol": "BTCUSDT",    	"incomeType": "COMMISSION",     	"income": "-0.01000000",    	"asset": "USDT",    	"info":"COMMISSION",    	"time": 1570636800000,    	"tranId":9689322392,    	"tradeId":"2059192"	}]
-```
 
-Futures Trading Quantitative Rules Indicators (USER\_DATA)
-==========================================================
+# Futures Trading Quantitative Rules Indicators (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#api-description "Direct link to API Description")
 
 Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/apiTradingStatus`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#request-weight "Direct link to Request Weight")
 
 *   **1** for a single symbol
 *   **10** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{    "indicators": { // indicator: quantitative rules indicators, value: user's indicators value, triggerValue: trigger indicator value threshold of quantitative rules.         "BTCUSDT": [            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "UFR",  // Unfilled Ratio (UFR)                "value": 0.05,  // Current value                "triggerValue": 0.995  // Trigger value            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "IFER",  // IOC/FOK Expiration Ratio (IFER)                "value": 0.99,  // Current value                "triggerValue": 0.99  // Trigger value            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "GCR",  // GTC Cancellation Ratio (GCR)                "value": 0.99,  // Current value                "triggerValue": 0.99  // Trigger value            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "DR",  // Dust Ratio (DR)                "value": 0.99,  // Current value                "triggerValue": 0.99  // Trigger value            }        ],        "ETHUSDT": [            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "UFR",                "value": 0.05,                "triggerValue": 0.995            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "IFER",                "value": 0.99,                "triggerValue": 0.99            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "GCR",                "value": 0.99,                "triggerValue": 0.99            }            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "DR",                "value": 0.99,                "triggerValue": 0.99            }        ]    },    "updateTime": 1545741270000}
+```codeBlockLines_aHhF
+{  
+    "indicators": { // indicator: quantitative rules indicators, value: user's indicators value, triggerValue: trigger indicator value threshold of quantitative rules.        "BTCUSDT": [  
+            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "UFR",  // Unfilled Ratio (UFR)                "value": 0.05,  // Current value                "triggerValue": 0.995  // Trigger value            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "IFER",  // IOC/FOK Expiration Ratio (IFER)                "value": 0.99,  // Current value                "triggerValue": 0.99  // Trigger value            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "GCR",  // GTC Cancellation Ratio (GCR)                "value": 0.99,  // Current value                "triggerValue": 0.99  // Trigger value            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "DR",  // Dust Ratio (DR)                "value": 0.99,  // Current value                "triggerValue": 0.99  // Trigger value            }        ],        "ETHUSDT": [            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "UFR",                "value": 0.05,                "triggerValue": 0.995            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "IFER",                "value": 0.99,                "triggerValue": 0.99            },            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "GCR",                "value": 0.99,                "triggerValue": 0.99            }            {				"isLocked": true,			    "plannedRecoverTime": 1545741270000,                "indicator": "DR",                "value": 0.99,                "triggerValue": 0.99            }        ]    },    "updateTime": 1545741270000}
 ```
 
 > Or (account violation triggered)
 
-```
-{    "indicators":{        "ACCOUNT":[            {                "indicator":"TMV",  //  Too many violations under multiple symbols trigger account violation                "value":10,                "triggerValue":1,                "plannedRecoverTime":1644919865000,                "isLocked":true            }        ]    },    "updateTime":1644913304748}
+```codeBlockLines_aHhF
+{  
+    "indicators":{        "ACCOUNT":[            {                "indicator":"TMV",  //  Too many violations under multiple symbols trigger account violation                "value":10,                "triggerValue":1,                "plannedRecoverTime":1644919865000,                "isLocked":true            }        ]    },    "updateTime":1644913304748}
 ```
 
-Get Download Id For Futures Transaction History(USER\_DATA)
-===========================================================
+# Get Download Id For Futures Transaction History(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description "Direct link to API Description")
 
 Get download id for futures transaction history
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/income/asyn`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight "Direct link to Request Weight")
 
 **1000**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| startTime | LONG | YES | Timestamp in ms 
-| endTime | LONG | YES | Timestamp in ms 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| startTime | LONG | YES | Timestamp in ms |
+| endTime | LONG | YES | Timestamp in ms |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Request Limitation is 5 times per month, shared by front end download page and rest api
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
 ```
-{	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
-```
 
-Get Futures Transaction History Download Link by Id (USER\_DATA)
-================================================================
+# Get Futures Transaction History Download Link by Id (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#api-description "Direct link to API Description")
 
 Get futures transaction history download link by Id
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/income/asyn/id`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
 
 **10**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| downloadId | STRING | YES | get by download id api 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| downloadId | STRING | YES | get by download id api |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Download link expiration: 24h
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
 ```
 
 > **OR** (Response when server is processing)
 
-```
-{	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",  	"notified":false,  
+  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-Get Download Id For Futures Order History (USER\_DATA)
-======================================================
+# Get Download Id For Futures Order History (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#api-description "Direct link to API Description")
 
 Get Download Id For Futures Order History
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/order/asyn`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#request-weight "Direct link to Request Weight")
 
 **1000**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| startTime | LONG | YES | Timestamp in ms 
-| endTime | LONG | YES | Timestamp in ms 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| startTime | LONG | YES | Timestamp in ms |
+| endTime | LONG | YES | Timestamp in ms |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Request Limitation is 10 times per month, shared by front end download page and rest api
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
 ```
-{	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
-```
 
-Get Futures Order History Download Link by Id (USER\_DATA)
-==========================================================
+# Get Futures Order History Download Link by Id (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#api-description "Direct link to API Description")
 
 Get futures order history download link by Id
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/order/asyn/id`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
 
 **10**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| downloadId | STRING | YES | get by download id api 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| downloadId | STRING | YES | get by download id api |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Download link expiration: 24h
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
 ```
 
 > **OR** (Response when server is processing)
 
-```
-{	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",  	"notified":false,  
+  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-Get Download Id For Futures Trade History (USER\_DATA)
-======================================================
+# Get Download Id For Futures Trade History (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#api-description "Direct link to API Description")
 
 Get download id for futures trade history
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/trade/asyn`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-weight "Direct link to Request Weight")
 
 **1000**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| startTime | LONG | YES | Timestamp in ms 
-| endTime | LONG | YES | Timestamp in ms 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| startTime | LONG | YES | Timestamp in ms |
+| endTime | LONG | YES | Timestamp in ms |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Request Limitation is 5 times per month, shared by front end download page and rest api
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
 ```
-{	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
-```
 
-Get Futures Trade Download Link by Id(USER\_DATA)
-=================================================
+# Get Futures Trade Download Link by Id(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#api-description "Direct link to API Description")
 
 Get futures trade download link by Id
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/trade/asyn/id`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-weight "Direct link to Request Weight")
 
 **10**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| downloadId | STRING | YES | get by download id api 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| downloadId | STRING | YES | get by download id api |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Download link expiration: 24h
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
 ```
 
 > **OR** (Response when server is processing)
 
-```
-{	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",  	"notified":false,  
+  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-Toggle BNB Burn On Futures Trade (TRADE)
-========================================
+# Toggle BNB Burn On Futures Trade (TRADE)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#api-description "Direct link to API Description")
 
 Change user's BNB Fee Discount (Fee Discount On or Fee Discount Off ) on _**EVERY symbol**_
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/feeBurn`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| feeBurn | STRING | YES | "true": Fee Discount On; "false": Fee Discount Off 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| feeBurn | STRING | YES | "true": Fee Discount On; "false": Fee Discount Off |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200,	"msg": "success"}
 ```
-{	"code": 200,	"msg": "success"}
-```
 
-Get BNB Burn Status (USER\_DATA)
-================================
+# Get BNB Burn Status (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#api-description "Direct link to API Description")
 
 Get user's BNB Fee Discount (Fee Discount On or Fee Discount Off )
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/feeBurn`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#request-weight "Direct link to Request Weight")
 
 **30**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"feeBurn": true // "true": Fee Discount On; "false": Fee Discount Off}
 ```
-{	"feeBurn": true // "true": Fee Discount On; "false": Fee Discount Off}
-```
 
-List All Convert Pairs
-======================
+# List All Convert Pairs
 
-API Description[​](/docs/derivatives/usds-margined-futures/convert#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/convert#api-description "Direct link to API Description")
 
 Query for all convertible token pairs and the tokens’ respective upper/lower limits
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/convert#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/convert#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/convert/exchangeInfo`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/convert#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/convert#request-weight "Direct link to Request Weight")
 
 **20(IP)**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/convert#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/convert#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| fromAsset | STRING | EITHER OR BOTH | User spends coin 
-| toAsset | STRING | EITHER OR BOTH | User receives coin 
+| fromAsset | STRING | EITHER OR BOTH | User spends coin |
+| toAsset | STRING | EITHER OR BOTH | User receives coin |
 
 > *   User needs to supply either or both of the input parameter
 > *   If not defined for both fromAsset and toAsset, only partial token pairs will be returned
 > *   Asset BNFCR is only available to convert for MICA region users.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/convert#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/convert#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {    "fromAsset":"BTC",    "toAsset":"USDT",    "fromAssetMinAmount":"0.0004",    "fromAssetMaxAmount":"50",    "toAssetMinAmount":"20",    "toAssetMaxAmount":"2500000"  }]
 ```
-[  {    "fromAsset":"BTC",    "toAsset":"USDT",    "fromAssetMinAmount":"0.0004",    "fromAssetMaxAmount":"50",    "toAssetMinAmount":"20",    "toAssetMaxAmount":"2500000"  }]
-```
 
-Send Quote Request(USER\_DATA)
-==============================
+# Send Quote Request(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#api-description "Direct link to API Description")
 
 Request a quote for the requested token pairs
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/convert/getQuote`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#request-weight "Direct link to Request Weight")
 
 **50(IP)**
 
 **360/hour，500/day**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| fromAsset | STRING | YES |  
-| toAsset | STRING | YES |  
-| fromAmount | DECIMAL | EITHER | When specified, it is the amount you will be debited after the conversion 
-| toAmount | DECIMAL | EITHER | When specified, it is the amount you will be credited after the conversion 
-| validTime | ENUM | NO | 10s, default 10s 
-| recvWindow | LONG | NO | The value cannot be greater than 60000 
-| timestamp | LONG | YES |  
+| fromAsset | STRING | YES |  |
+| toAsset | STRING | YES |  |
+| fromAmount | DECIMAL | EITHER | When specified, it is the amount you will be debited after the conversion |
+| toAmount | DECIMAL | EITHER | When specified, it is the amount you will be credited after the conversion |
+| validTime | ENUM | NO | 10s, default 10s |
+| recvWindow | LONG | NO | The value cannot be greater than 60000 |
+| timestamp | LONG | YES |  |
 
 *   Either fromAmount or toAmount should be sent
 *   `quoteId` will be returned only if you have enough funds to convert
 
-Response Example[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/convert/Send-quote-request#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+   "quoteId":"12415572564",   "ratio":"38163.7",   "inverseRatio":"0.0000262",   "validTimestamp":1623319461670,   "toAmount":"3816.37",   "fromAmount":"0.1"}
 ```
-{   "quoteId":"12415572564",   "ratio":"38163.7",   "inverseRatio":"0.0000262",   "validTimestamp":1623319461670,   "toAmount":"3816.37",   "fromAmount":"0.1"}
-```
 
-Accept the offered quote (USER\_DATA)
-=====================================
+# Accept the offered quote (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#api-description "Direct link to API Description")
 
 Accept the offered quote by quote ID.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#http-request "Direct link to HTTP Request")
 
 POST `/fapi/v1/convert/acceptQuote`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#request-weight "Direct link to Request Weight")
 
 **200(IP)**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| quoteId | STRING | YES |  
-| recvWindow | LONG | NO | The value cannot be greater than 60000 
-| timestamp | LONG | YES |  
+| quoteId | STRING | YES |  |
+| recvWindow | LONG | NO | The value cannot be greater than 60000 |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/convert/Accept-Quote#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "orderId":"933256278426274426",  "createTime":1623381330472,  "orderStatus":"PROCESS" //PROCESS/ACCEPT_SUCCESS/SUCCESS/FAIL}
 ```
-{  "orderId":"933256278426274426",  "createTime":1623381330472,  "orderStatus":"PROCESS" //PROCESS/ACCEPT_SUCCESS/SUCCESS/FAIL}
-```
 
-Order status(USER\_DATA)
-========================
+# Order status(USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#api-description "Direct link to API Description")
 
 Query order status by order ID.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/convert/orderStatus`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#request-weight "Direct link to Request Weight")
 
 **50(IP)**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | STRING | NO | Either orderId or quoteId is required 
-| quoteId | STRING | NO | Either orderId or quoteId is required 
+| orderId | STRING | NO | Either orderId or quoteId is required |
+| quoteId | STRING | NO | Either orderId or quoteId is required |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/convert/Order-Status#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "orderId":933256278426274426,  "orderStatus":"SUCCESS",  "fromAsset":"BTC",  "fromAmount":"0.00054414",  "toAsset":"USDT",  "toAmount":"20",  "ratio":"36755",  "inverseRatio":"0.00002721",  "createTime":1623381330472}
 ```
-{  "orderId":933256278426274426,  "orderStatus":"SUCCESS",  "fromAsset":"BTC",  "fromAmount":"0.00054414",  "toAsset":"USDT",  "toAmount":"20",  "ratio":"36755",  "inverseRatio":"0.00002721",  "createTime":1623381330472}
-```
 
-Classic Portfolio Margin Account Information (USER\_DATA)
-=========================================================
+# Classic Portfolio Margin Account Information (USER\_DATA)
 
-API Description[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#api-description "Direct link to API Description")
 
 Get Classic Portfolio Margin current account information.
 
-HTTP Request[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#http-request "Direct link to HTTP Request")
 
 GET `/fapi/v1/pmAccountInfo`
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| asset | STRING | YES |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| asset | STRING | YES |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   maxWithdrawAmount is for asset transfer out to the spot wallet.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints#response-example "Direct link to Response Example")
 
-```
-{	"maxWithdrawAmountUSD": "1627523.32459208",   // Classic Portfolio margin maximum virtual amount for transfer out in USD	"asset": "BTC",            // asset name	"maxWithdrawAmount": "27.43689636",        // maximum amount for transfer out}
+```codeBlockLines_aHhF
+{  
+	"maxWithdrawAmountUSD": "1627523.32459208",   // Classic Portfolio margin maximum virtual amount for transfer out in USD	"asset": "BTC",            // asset name	"maxWithdrawAmount": "27.43689636",        // maximum amount for transfer out}
 ```
 

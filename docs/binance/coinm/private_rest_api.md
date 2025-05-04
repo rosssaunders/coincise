@@ -1,10 +1,8 @@
 # Binance COINM Futures Private REST API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,18 +51,15 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-General Info
-============
+# General Info
 
-testnet[​](/docs/derivatives/coin-margined-futures/general-info#testnet "Direct link to testnet")
--------------------------------------------------------------------------------------------------
+## testnet[​](/docs/derivatives/coin-margined-futures/general-info#testnet "Direct link to testnet")
 
 *   Most of the endpoints can be also used in the testnet platform.
 *   The REST baseurl for **testnet** is "[https://testnet.binancefuture.com](https://testnet.binancefuture.com)"
 *   The Websocket baseurl for **testnet** is "wss://dstream.binancefuture.com"
 
-General API Information[​](/docs/derivatives/coin-margined-futures/general-info#general-api-information "Direct link to General API Information")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## General API Information[​](/docs/derivatives/coin-margined-futures/general-info#general-api-information "Direct link to General API Information")
 
 *   The base endpoint is: **[https://dapi.binance.com](https://dapi.binance.com)**
 *   All endpoints return either a JSON object or array.
@@ -96,8 +88,9 @@ General API Information[​](/docs/derivatives/coin-margined-futures/general-inf
 
 > _**The error payload is as follows:**_
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 *   Specific error codes and messages defined in [Error Codes](/docs/derivatives/coin-margined-futures/general-info#error-codes).
@@ -109,8 +102,7 @@ General API Information[​](/docs/derivatives/coin-margined-futures/general-inf
 *   Parameters may be sent in any order.
 *   If a parameter sent in both the `query string` and `request body`, the `query string` parameter will be used.
 
-LIMITS[​](/docs/derivatives/coin-margined-futures/general-info#limits "Direct link to LIMITS")
-----------------------------------------------------------------------------------------------
+## LIMITS[​](/docs/derivatives/coin-margined-futures/general-info#limits "Direct link to LIMITS")
 
 *   The `/dapi/v1/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 *   A `429` will be returned when either rate limit is violated.
@@ -134,8 +126,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 *   Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**` headers in the response.
 *   **The order rate limit is counted against each account**.
 
-Endpoint Security Type[​](/docs/derivatives/coin-margined-futures/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Endpoint Security Type[​](/docs/derivatives/coin-margined-futures/general-info#endpoint-security-type "Direct link to Endpoint Security Type")
 
 *   Each endpoint has a security type that determines the how you will interact with it.
 *   API-keys are passed into the Rest API via the `X-MBX-APIKEY` header.
@@ -145,16 +136,15 @@ Endpoint Security Type[​](/docs/derivatives/coin-margined-futures/general-info
 
 | Security Type | Description |
 | --- | --- |
-| NONE | Endpoint can be accessed freely. 
-| TRADE | Endpoint requires sending a valid API-Key and signature. 
-| USER\_DATA | Endpoint requires sending a valid API-Key and signature. 
-| USER\_STREAM | Endpoint requires sending a valid API-Key. 
-| MARKET\_DATA | Endpoint requires sending a valid API-Key. 
+| NONE | Endpoint can be accessed freely. |
+| TRADE | Endpoint requires sending a valid API-Key and signature. |
+| USER\_DATA | Endpoint requires sending a valid API-Key and signature. |
+| USER\_STREAM | Endpoint requires sending a valid API-Key. |
+| MARKET\_DATA | Endpoint requires sending a valid API-Key. |
 
 *   `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/coin-margined-futures/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/coin-margined-futures/general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 *   `SIGNED` endpoints require an additional parameter, `signature`, to be sent in the `query string` or `request body`.
 *   Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
@@ -170,8 +160,9 @@ SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/coin-marg
 
 > The logic is as follows:
 
-```
-  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow){    // process request  }   else {    // reject request  }
+```codeBlockLines_aHhF
+if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow){    // process request  }  else {  
+    // reject request  }
 ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable, which can lead to requests taking varying amounts of time to reach the servers. With `recvWindow`, you can specify that the request must be processed within a certain number of milliseconds or be rejected by the server.
@@ -184,19 +175,18 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 | Key | Value |
 | --- | --- |
-| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 
-| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 
-
+| apiKey | dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83 |
+| secretKey | 2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSD\_200925 
-| side | BUY 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 9000 
-| recvWindow | 5000 
-| timestamp | 1591702613943 
+| symbol | BTCUSD\_200925 |
+| side | BUY |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 9000 |
+| recvWindow | 5000 |
+| timestamp | 1591702613943 |
 
 #### Example 1: As a query string[​](/docs/derivatives/coin-margined-futures/general-info#example-1-as-a-query-string "Direct link to Example 1: As a query string")
 
@@ -204,14 +194,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://dapi.binance.com/dapi/v1/order?symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://dapi.binance.com/dapi/v1/order?symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a'
 ```
 
 *   **queryString:**
@@ -232,14 +222,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://dapi.binance.com/dapi/v1/order' -d 'symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://dapi.binance.com/dapi/v1/order' -d 'symbol=BTCUSD_200925&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&signature= 21fd819734bf0e5c68740eed892909414d693635c5f7fffab1313925ae13556a'
 ```
 
 *   **requestBody:**
@@ -260,14 +250,14 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 > **HMAC SHA256 signature:**
 
-```
-    $ echo -n "symbol=BTCUSD_200925&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= f3129e7c72c7727037891ad8a86b76a7dc514ba125a536775c8ba403b2d1b222
+```codeBlockLines_aHhF
+$ echo -n "symbol=BTCUSD_200925&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943" | openssl dgst -sha256 -hmac "2b5eb11e18796d12d88f13dc27dbbd02c2cc51ff7059765ed9821957d82bb4d9"    (stdin)= f3129e7c72c7727037891ad8a86b76a7dc514ba125a536775c8ba403b2d1b222
 ```
 
 > **curl command:**
 
-```
-    (HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://dapi.binance.com/dapi/v1/order?symbol=BTCUSD_200925&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943&signature=f3129e7c72c7727037891ad8a86b76a7dc514ba125a536775c8ba403b2d1b222'
+```codeBlockLines_aHhF
+(HMAC SHA256)    $ curl -H "X-MBX-APIKEY: dbefbc809e3e83c283a984c3a1459732ea7db1360ca80c5c2c8867408d28cc83" -X POST 'https://dapi.binance.com/dapi/v1/order?symbol=BTCUSD_200925&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=9000&recvWindow=5000&timestamp= 1591702613943&signature=f3129e7c72c7727037891ad8a86b76a7dc514ba125a536775c8ba403b2d1b222'
 ```
 
 *   **queryString:** symbol=BTCUSD\_200925&side=BUY&type=LIMIT&timeInForce=GTC
@@ -286,20 +276,19 @@ For this example, the private key will be referenced as `test-prv-key.pem`
 
 | Key | Value |
 | --- | --- |
-| apiKey | vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2 
-
+| apiKey | vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2 |
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSD\_PERP 
-| side | SELL 
-| type | MARKET 
-| quantity | 100 
-| recvWindow | 9999999 
-| timestamp | 1671090801999 
+| symbol | BTCUSD\_PERP |
+| side | SELL |
+| type | MARKET |
+| quantity | 100 |
+| recvWindow | 9999999 |
+| timestamp | 1671090801999 |
 
 > **Signature payload (with the listed parameters):**
 
-```
+```codeBlockLines_aHhF
 timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100
 ```
 
@@ -313,31 +302,33 @@ Arrange the list of parameters into a string. Separate each parameter with a `&`
 
 > **Step 2.2**
 
-```
- $ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
+```codeBlockLines_aHhF
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem
 ```
 
 2.2 - Sign payload using RSASSA-PKCS1-v1\_5 algorithm with SHA-256 hash function.
 
 > **Step 2.3**
 
-```
-$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+```codeBlockLines_aHhF
+$ echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64  
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 2.3 - Encode output as base64 string.
 
 > **Step 2.4**
 
-```
-$  echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64 | tr -d '\n'aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
+```codeBlockLines_aHhF
+$  echo -n 'timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100' | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem | openssl enc -base64 | tr -d '\n'  
+aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
 2.4 - Delete any newlines in the signature.
 
 > **Step 2.5**
 
-```
+```codeBlockLines_aHhF
 aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D
 ```
 
@@ -345,25 +336,39 @@ aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW
 
 > **Step 2.6**
 
-```
- curl -H "X-MBX-APIKEY: vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2" -X POST 'https://dapi.binance.com/dapi/v1/order?timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100&signature=aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D'
+```codeBlockLines_aHhF
+curl -H "X-MBX-APIKEY: vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2" -X POST 'https://dapi.binance.com/dapi/v1/order?timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100&signature=aap36wD5loVXizxvvPI3wz9Cjqwmb3KVbxoym0XeWG1jZq8umqrnSk8H8dkLQeySjgVY91Ufs%2BBGCW%2B4sZjQEpgAfjM76riNxjlD3coGGEsPsT2lG39R%2F1q72zpDs8pYcQ4A692NgHO1zXcgScTGgdkjp%2Brp2bcddKjyz5XBrBM%3D'
 ```
 
 2.6 - curl command
 
 > **Bash script**
 
-```
-#!/usr/bin/env bash# Set up authentication:apiKey="vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2"   ### REPLACE THIS WITH YOUR API KEY# Set up the request:apiMethod="POST"apiCall="v1/order"apiParams="timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100"function rawurlencode {    local value="$1"    local len=${#value}    local encoded=""    local pos c o    for (( pos=0 ; pos<len ; pos++ ))    do        c=${value:$pos:1}        case "$c" in            [-_.~a-zA-Z0-9] ) o="${c}" ;;            * )   printf -v o '%%%02x' "'$c"        esac        encoded+="$o"    done    echo "$encoded"}ts=$(date +%s000)paramsWithTs="$apiParams&timestamp=$ts"rawSignature=$(echo -n "$paramsWithTs" \               | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem \  ### THIS IS YOUR PRIVATE KEY. DO NOT SHARE THIS FILE WITH ANYONE.               | openssl enc -base64 \               | tr -d '\n')signature=$(rawurlencode "$rawSignature")curl -H "X-MBX-APIKEY: $apiKey" -X $apiMethod \    "https://dapi.binance.com/dapi/$apiCall?$paramsWithTs&signature=$signature"
+```codeBlockLines_aHhF
+#!/usr/bin/env bash  
+  
+# Set up authentication:  
+apiKey="vE3BDAL1gP1UaexugRLtteaAHg3UO8Nza20uexEuW1Kh3tVwQfFHdAiyjjY428o2"   ### REPLACE THIS WITH YOUR API KEY  
+  
+# Set up the request:  
+apiMethod="POST"  
+apiCall="v1/order"  
+apiParams="timestamp=1671090801999&recvWindow=9999999&symbol=BTCUSD_PERP&side=SELL&type=MARKET&quantity=100"  
+function rawurlencode {  
+    local value="$1"    local len=${#value}    local encoded=""    local pos c o    for (( pos=0 ; pos<len ; pos++ ))    do        c=${value:$pos:1}        case "$c" in            [-_.~a-zA-Z0-9] ) o="${c}" ;;            * )   printf -v o '%%%02x' "'$c"        esac        encoded+="$o"    done    echo "$encoded"}  
+ts=$(date +%s000)  
+paramsWithTs="$apiParams&timestamp=$ts"  
+rawSignature=$(echo -n "$paramsWithTs" \  
+               | openssl dgst -keyform PEM -sha256 -sign ./test-prv-key.pem \  ### THIS IS YOUR PRIVATE KEY. DO NOT SHARE THIS FILE WITH ANYONE.               | openssl enc -base64 \               | tr -d '\n')signature=$(rawurlencode "$rawSignature")  
+curl -H "X-MBX-APIKEY: $apiKey" -X $apiMethod \  
+    "https://dapi.binance.com/dapi/$apiCall?$paramsWithTs&signature=$signature"
 ```
 
 A sample Bash script containing similar steps is available in the right side.
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/coin-margined-futures/common-definition#terminology "Direct link to Terminology")
-------------------------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/coin-margined-futures/common-definition#terminology "Direct link to Terminology")
 
 *   `symbol` refers to the symbol name of a contract symbol
 *   `pair` refers to the underlying symbol of a contracrt symbol
@@ -371,8 +376,7 @@ Terminology[​](/docs/derivatives/coin-margined-futures/common-definition#termi
 *   `quote asset` refers to the asset that is the `price` of a symbol.
 *   `margin asset` refers to the asset that is the `margin` of a symbol
 
-ENUM definitions[​](/docs/derivatives/coin-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
----------------------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/coin-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Symbol type:**
 
@@ -485,14 +489,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 6000  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 6000  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -504,20 +508,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/coin-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
----------------------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/coin-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/coin-margined-futures/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -536,8 +538,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -556,8 +558,8 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `MARKET_LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for `MARKET` orders on a symbol. There are 3 parts:
@@ -576,8 +578,8 @@ In order to pass the `market lot size`, the following must be true for `quantity
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
 ```
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
@@ -588,8 +590,8 @@ Note that both "algo" orders and normal orders are counted for this filter.
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.0500",    "multiplierDown": "0.9500",    "multiplierDecimal": 4  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.0500",    "multiplierDown": "0.9500",    "multiplierDecimal": 4  }
 ```
 
 The `PERCENT_PRICE` filter defines valid range for a price based on the mark price.
@@ -599,20 +601,19 @@ In order to pass the `percent price`, the following must be true for `price`:
 *   BUY: `price` <= `markPrice` \* `multiplierUp`
 *   SELL: `price` >= `markPrice` \* `multiplierDown`
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/coin-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/coin-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/coin-margined-futures/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -689,8 +690,7 @@ Codes are universal,but messages can vary.
 
 *   Start time is greater than end time.
 
-11xx - Request issues[​](/docs/derivatives/coin-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - Request issues[​](/docs/derivatives/coin-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/coin-margined-futures/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -806,8 +806,7 @@ Codes are universal,but messages can vary.
 
 *   Invalid newOrderRespType.
 
-20xx - Processing Issues[​](/docs/derivatives/coin-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## 20xx - Processing Issues[​](/docs/derivatives/coin-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
 
 ### \-2010 NEW\_ORDER\_REJECTED[​](/docs/derivatives/coin-margined-futures/error-code#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
 
@@ -877,8 +876,7 @@ Codes are universal,but messages can vary.
 
 *   Leverage is smaller than permitted: insufficient margin balance.
 
-40xx - Filters and other Issues[​](/docs/derivatives/coin-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 40xx - Filters and other Issues[​](/docs/derivatives/coin-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
 
 ### \-4000 INVALID\_ORDER\_STATUS[​](/docs/derivatives/coin-margined-futures/error-code#-4000-invalid_order_status "Direct link to -4000 INVALID_ORDER_STATUS")
 
@@ -1259,60 +1257,55 @@ Codes are universal,but messages can vary.
 
 *   Timestamp for this request is outside of the ME recvWindow.
 
-New Order (TRADE)
-=================
+# New Order (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api#api-description "Direct link to API Description")
 
 Send in a new order.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/order`
 
-Request Weight(IP)[​](/docs/derivatives/coin-margined-futures/trade/rest-api#request-weightip "Direct link to Request Weight(IP)")
-----------------------------------------------------------------------------------------------------------------------------------
+## Request Weight(IP)[​](/docs/derivatives/coin-margined-futures/trade/rest-api#request-weightip "Direct link to Request Weight(IP)")
 
 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M)  
 0 on IP rate limit(x-mbx-used-weight-1m)
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. 
-| type | ENUM | YES |  
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | NO | quantity measured by contract number, Cannot be sent with `closePosition`\=`true` 
-| reduceOnly | STRING | NO | "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true`(Close-All) 
-| price | DECIMAL | NO |  
-| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` 
-| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| closePosition | STRING | NO | `true`, `false`；Close-All,used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. 
-| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% 
-| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
-| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" 
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER` 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode. |
+| type | ENUM | YES |  |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | NO | quantity measured by contract number, Cannot be sent with `closePosition`\=`true` |
+| reduceOnly | STRING | NO | "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`\=`true`(Close-All) |
+| price | DECIMAL | NO |  |
+| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` |
+| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| closePosition | STRING | NO | `true`, `false`；Close-All,used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`. |
+| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) |
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1% |
+| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" |
+| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER` |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 Additional mandatory parameters based on `type`:
 
 | Type | Additional mandatory parameters |
 | --- | --- |
-| `LIMIT` | `timeInForce`, `quantity`, `price` 
-| `MARKET` | `quantity` 
-| `STOP/TAKE_PROFIT` | `price`, `stopPrice` 
-| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` 
-| `TRAILING_STOP_MARKET` | `callbackRate` 
+| `LIMIT` | `timeInForce`, `quantity`, `price` |
+| `MARKET` | `quantity` |
+| `STOP/TAKE_PROFIT` | `price`, `stopPrice` |
+| `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice` |
+| `TRAILING_STOP_MARKET` | `callbackRate` |
 
 > *   Order with type `STOP`, parameter `timeInForce` can be sent ( default `GTC`).
 >     
@@ -1352,18 +1345,17 @@ Additional mandatory parameters based on `type`:
 > *   `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC`.
 >     
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"clientOrderId": "testOrder", 	"cumQty": "0", 	"cumBase": "0", 	"executedQty": "0", 	"orderId": 22542179, 	"avgPrice": "0.0", 	"origQty": "10",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  
+  	"stopPrice": "9300",			   // please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,  		   // if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"origType": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1566818724722, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,              // if conditional order trigger is protected	"priceMatch": "NONE",               //price match mode 	"selfTradePreventionMode": "NONE",  //self trading preventation mode}
 ```
-{ 	"clientOrderId": "testOrder", 	"cumQty": "0", 	"cumBase": "0", 	"executedQty": "0", 	"orderId": 22542179, 	"avgPrice": "0.0", 	"origQty": "10",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",   	"status": "NEW",  	"stopPrice": "9300",			   // please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,  		   // if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"origType": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1566818724722, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,              // if conditional order trigger is protected	"priceMatch": "NONE",               //price match mode 	"selfTradePreventionMode": "NONE",  //self trading preventation mode}
-```
 
-Place Multiple Orders(TRADE)
-============================
+# Place Multiple Orders(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#api-description "Direct link to API Description")
 
 Place multiple orders
 
@@ -1371,24 +1363,21 @@ Place multiple orders
 *   Batch orders are processed concurrently, and the order of matching is not guaranteed.
 *   The order of returned contents for batch orders is the same as the order of the order list.
 
-HTTP请求[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#http请求 "Direct link to HTTP请求")
-----------------------------------------------------------------------------------------------------------------------
+## HTTP请求[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#http请求 "Direct link to HTTP请求")
 
 POST `/dapi/v1/batchOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| batchOrders | LIST<JSON> | YES | order list. Max 5 orders 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| batchOrders | LIST<JSON> | YES | order list. Max 5 orders |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Where `batchOrders` is the list of order parameters in JSON**
 
@@ -1397,63 +1386,59 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/P
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| side | ENUM | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. 
-| type | ENUM | YES |  
-| timeInForce | ENUM | NO |  
-| quantity | DECIMAL | YES |  
-| reduceOnly | STRING | NO | "true" or "false". default "false". 
-| price | DECIMAL | NO |  
-| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` 
-| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) 
-| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 4 where 1 for 1% 
-| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" 
-| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. 
-| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" 
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER` 
+| symbol | STRING | YES |  |
+| side | ENUM | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. |
+| type | ENUM | YES |  |
+| timeInForce | ENUM | NO |  |
+| quantity | DECIMAL | YES |  |
+| reduceOnly | STRING | NO | "true" or "false". default "false". |
+| price | DECIMAL | NO |  |
+| newClientOrderId | STRING | NO | A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$` |
+| stopPrice | DECIMAL | NO | Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| activationPrice | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`) |
+| callbackRate | DECIMAL | NO | Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 4 where 1 for 1% |
+| workingType | ENUM | NO | stopPrice triggered by: "MARK\_PRICE", "CONTRACT\_PRICE". Default "CONTRACT\_PRICE" |
+| priceProtect | STRING | NO | "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders. |
+| newOrderRespType | ENUM | NO | "ACK", "RESULT", default "ACK" |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| selfTradePreventionMode | ENUM | NO | `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER` |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{	 	"clientOrderId": "testOrder",	 	"cumQty": "0",	 	"cumBase": "0",	 	"executedQty": "0",	 	"orderId": 22542179,	 	"avgPrice": "0.0",	 	"origQty": "10",	 	"price": "0",	  	"reduceOnly": false,	  	"side": "BUY",	  	"positionSide": "SHORT",	  	"status": "NEW",	  	"stopPrice": "9300",		     // please ignore when order type is TRAILING_STOP_MARKET	  	"symbol": "BTCUSD_200925",	  	"pair": "BTCUSD",	  	"timeInForce": "GTC",	  	"type": "TRAILING_STOP_MARKET",	  	"origType": "TRAILING_STOP_MARKET",	  	"activatePrice": "9020",	     // activation price, only return with TRAILING_STOP_MARKET order	  	"priceRate": "0.3",			     // callback rate, only return with TRAILING_STOP_MARKET order	 	"updateTime": 1566818724722,	 	"workingType": "CONTRACT_PRICE",	 	"priceProtect": false,           // if conditional order trigger is protected	 	"priceMatch": "NONE",              //price match mode	 	"selfTradePreventionMode": "NONE"  //self trading preventation mode	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."  
+	}]
 ```
-[	{	 	"clientOrderId": "testOrder",	 	"cumQty": "0",	 	"cumBase": "0",	 	"executedQty": "0",	 	"orderId": 22542179,	 	"avgPrice": "0.0",	 	"origQty": "10",	 	"price": "0",	  	"reduceOnly": false,	  	"side": "BUY",	  	"positionSide": "SHORT",	  	"status": "NEW",	  	"stopPrice": "9300",		     // please ignore when order type is TRAILING_STOP_MARKET	  	"symbol": "BTCUSD_200925",	  	"pair": "BTCUSD",	  	"timeInForce": "GTC",	  	"type": "TRAILING_STOP_MARKET",	  	"origType": "TRAILING_STOP_MARKET",	  	"activatePrice": "9020",	     // activation price, only return with TRAILING_STOP_MARKET order	  	"priceRate": "0.3",			     // callback rate, only return with TRAILING_STOP_MARKET order	 	"updateTime": 1566818724722,	 	"workingType": "CONTRACT_PRICE",	 	"priceProtect": false,           // if conditional order trigger is protected	 	"priceMatch": "NONE",              //price match mode	 	"selfTradePreventionMode": "NONE"  //self trading preventation mode	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."	}]
-```
 
-Modify Order (TRADE)
-====================
+# Modify Order (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#api-description "Direct link to API Description")
 
 Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#http-request "Direct link to HTTP Request")
 
 PUT `/dapi/v1/order`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| symbol | STRING | YES |  
-| side | ENUM | YES | `SELL`, `BUY` 
-| quantity | DECIMAL | NO | Order quantity, cannot be sent with `closePosition=true` 
-| price | DECIMAL | NO |  
-| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| symbol | STRING | YES |  |
+| side | ENUM | YES | `SELL`, `BUY` |
+| quantity | DECIMAL | NO | Order quantity, cannot be sent with `closePosition=true` |
+| price | DECIMAL | NO |  |
+| priceMatch | ENUM | NO | only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price` |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
 > *   Either `quantity` or `price` must be sent.
@@ -1464,221 +1449,197 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/M
 > *   One order can only be modfied for less than 10000 times
 > *   Modify order will set `selfTradePreventionMode` to `NONE`
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"orderId": 20072994037, 	"symbol": "BTCUSD_PERP", 	"pair": "BTCUSD", 	"status": "NEW", 	"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW", 	"price": "30005", 	"avgPrice": "0.0", 	"origQty": "1", 	"executedQty": "0", 	"cumQty": "0", 	"cumBase": "0", 	"timeInForce": "GTC", 	"type": "LIMIT", 	"reduceOnly": false, 	"closePosition": false, 	"side": "BUY", 	"positionSide": "LONG", 	"stopPrice": "0", 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false, 	"origType": "LIMIT", 	"priceMatch": "NONE",               //price match mode 	"selfTradePreventionMode": "NONE",  //self trading preventation mode 	"updateTime": 1629182711600}
 ```
-{ 	"orderId": 20072994037, 	"symbol": "BTCUSD_PERP", 	"pair": "BTCUSD", 	"status": "NEW", 	"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW", 	"price": "30005", 	"avgPrice": "0.0", 	"origQty": "1", 	"executedQty": "0", 	"cumQty": "0", 	"cumBase": "0", 	"timeInForce": "GTC", 	"type": "LIMIT", 	"reduceOnly": false, 	"closePosition": false, 	"side": "BUY", 	"positionSide": "LONG", 	"stopPrice": "0", 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false, 	"origType": "LIMIT", 	"priceMatch": "NONE",               //price match mode 	"selfTradePreventionMode": "NONE",  //self trading preventation mode 	"updateTime": 1629182711600}
-```
 
-Modify Multiple Orders(TRADE)
-=============================
+# Modify Multiple Orders(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#api-description "Direct link to API Description")
 
 Modify Multiple Orders
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#http-request "Direct link to HTTP Request")
 
 PUT `/dapi/v1/batchOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| batchOrders | list<JSON> | YES | order list. Max 5 orders 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| batchOrders | list<JSON> | YES | order list. Max 5 orders |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Where `batchOrders` is the list of order parameters in JSON**
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| symbol | STRING | YES |  
-| side | ENUM | YES | `SELL`, `BUY` 
-| quantity | DECIMAL | NO | Order quantity, cannot be sent with `closePosition=true` 
-| price | DECIMAL | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| symbol | STRING | YES |  |
+| side | ENUM | YES | `SELL`, `BUY` |
+| quantity | DECIMAL | NO | Order quantity, cannot be sent with `closePosition=true` |
+| price | DECIMAL | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Parameter rules are same with `Modify Order`
 > *   Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
 > *   The order of returned contents for batch modify orders is the same as the order of the order list.
 > *   One order can only be modfied for less than 10000 times
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		"orderId": 20072994037,		"symbol": "BTCUSD_PERP",		"pair": "BTCUSD",		"status": "NEW",		"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",		"price": "30005",		"avgPrice": "0.0",		"origQty": "1",		"executedQty": "0",		"cumQty": "0",		"cumBase": "0",		"timeInForce": "GTC",		"type": "LIMIT",		"reduceOnly": false,		"closePosition": false,		"side": "BUY",		"positionSide": "LONG",		"stopPrice": "0",		"workingType": "CONTRACT_PRICE",		"priceProtect": false,		"origType": "LIMIT",		"priceMatch": "NONE",               //price match mode		"selfTradePreventionMode": "NONE",  //self trading preventation mode		"updateTime": 1629182711600	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."  
+	}]
 ```
-[	{		"orderId": 20072994037,		"symbol": "BTCUSD_PERP",		"pair": "BTCUSD",		"status": "NEW",		"clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",		"price": "30005",		"avgPrice": "0.0",		"origQty": "1",		"executedQty": "0",		"cumQty": "0",		"cumBase": "0",		"timeInForce": "GTC",		"type": "LIMIT",		"reduceOnly": false,		"closePosition": false,		"side": "BUY",		"positionSide": "LONG",		"stopPrice": "0",		"workingType": "CONTRACT_PRICE",		"priceProtect": false,		"origType": "LIMIT",		"priceMatch": "NONE",               //price match mode		"selfTradePreventionMode": "NONE",  //self trading preventation mode		"updateTime": 1629182711600	},	{		"code": -2022, 		"msg": "ReduceOnly Order is rejected."	}]
-```
 
-Get Order Modify History (USER\_DATA)
-=====================================
+# Get Order Modify History (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#api-description "Direct link to API Description")
 
 Get order modification history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/orderAmendment`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| startTime | LONG | NO | Timestamp in ms to get modification history from INCLUSIVE 
-| endTime | LONG | NO | Timestamp in ms to get modification history until INCLUSIVE 
-| limit | INT | NO | Default 50; max 100 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| startTime | LONG | NO | Timestamp in ms to get modification history from INCLUSIVE |
+| endTime | LONG | NO | Timestamp in ms to get modification history until INCLUSIVE |
+| limit | INT | NO | Default 50; max 100 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
 > *   Order modify history longer than 3 month is not avaliable
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "amendmentId": 5363,	// Order modification ID        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184560899,	// Order modification time        "amendment": {            "price": {                "before": "30004",                "after": "30003.2"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 3	// Order modification count, representing the number of times the order has been modified        }    },    {        "amendmentId": 5361,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184533946,        "amendment": {            "price": {                "before": "30005",                "after": "30004"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 2        }    },    {        "amendmentId": 5325,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629182711787,        "amendment": {            "price": {                "before": "30002",                "after": "30005"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 1        }    }]
 ```
-[    {        "amendmentId": 5363,	// Order modification ID        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184560899,	// Order modification time        "amendment": {            "price": {                "before": "30004",                "after": "30003.2"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 3	// Order modification count, representing the number of times the order has been modified        }    },    {        "amendmentId": 5361,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629184533946,        "amendment": {            "price": {                "before": "30005",                "after": "30004"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 2        }    },    {        "amendmentId": 5325,        "symbol": "BTCUSD_PERP",        "pair": "BTCUSD",        "orderId": 20072994037,        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",        "time": 1629182711787,        "amendment": {            "price": {                "before": "30002",                "after": "30005"            },            "origQty": {                "before": "1",                "after": "1"            },            "count": 1        }    }]
-```
 
-Cancel Order (TRADE)
-====================
+# Cancel Order (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#api-description "Direct link to API Description")
 
 Cancel an active order.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#http-request "Direct link to HTTP Request")
 
 DELETE `/dapi/v1/order`
 
 **Weight:** **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"avgPrice": "0.0", 	"clientOrderId": "myOrder1", 	"cumQty": "0", 	"cumBase": "0", 	"executedQty": "0", 	"orderId": 283194212, 	"origQty": "11", 	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "CANCELED",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1571110484038, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,              // if conditional order trigger is protected 	"priceMatch": "NONE",               //price match mode 	"selfTradePreventionMode": "NONE"   //self trading preventation mode}
 ```
-{ 	"avgPrice": "0.0", 	"clientOrderId": "myOrder1", 	"cumQty": "0", 	"cumBase": "0", 	"executedQty": "0", 	"orderId": 283194212, 	"origQty": "11", 	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT", 			  	"status": "CANCELED",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order 	"updateTime": 1571110484038, 	"workingType": "CONTRACT_PRICE", 	"priceProtect": false,              // if conditional order trigger is protected 	"priceMatch": "NONE",               //price match mode 	"selfTradePreventionMode": "NONE"   //self trading preventation mode}
-```
 
-Cancel Multiple Orders(TRADE)
-=============================
+# Cancel Multiple Orders(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#api-description "Direct link to API Description")
 
 Cancel Multiple Orders
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#http-request "Direct link to HTTP Request")
 
 DELETE `/dapi/v1/batchOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
+| symbol | STRING | YES |  |
 | orderIdList | LIST<LONG> | NO | max length 10  
-e.g. \[1234567,2345678\] 
+e.g. \[1234567,2345678\] |
 | origClientOrderIdList | LIST<STRING> | NO | max length 10  
-e.g. \["my\_id\_1","my\_id\_2"\], encode the double quotes. No space after comma. 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+e.g. \["my\_id\_1","my\_id\_2"\], encode the double quotes. No space after comma. |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderIdList` or `origClientOrderIdList` must be sent.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{	 	"avgPrice": "0.0",	 	"clientOrderId": "myOrder1",	 	"cumQty": "0",	 	"cumBase": "0",	 	"executedQty": "0",	 	"orderId": 283194212,	 	"origQty": "11",	 	"origType": "TRAILING_STOP_MARKET",  		"price": "0",  		"reduceOnly": false,  		"side": "BUY",  		"positionSide": "SHORT",  		"status": "CANCELED",  		"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  		"closePosition": false,   			// if Close-All  		"symbol": "BTCUSD_200925",  		"timeInForce": "GTC",  		"type": "TRAILING_STOP_MARKET",  		"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  		"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  		"workingType": "CONTRACT_PRICE", 		"priceProtect": false,              // if conditional order trigger is protected 		"priceMatch": "NONE",               //price match mode 		"selfTradePreventionMode": "NONE",  //self trading preventation mode	 	"updateTime": 1571110484038	},	{		"code": -2011,		"msg": "Unknown order sent."	}]
 ```
-[	{	 	"avgPrice": "0.0",	 	"clientOrderId": "myOrder1",	 	"cumQty": "0",	 	"cumBase": "0",	 	"executedQty": "0",	 	"orderId": 283194212,	 	"origQty": "11",	 	"origType": "TRAILING_STOP_MARKET",  		"price": "0",  		"reduceOnly": false,  		"side": "BUY",  		"positionSide": "SHORT",  		"status": "CANCELED",  		"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  		"closePosition": false,   			// if Close-All  		"symbol": "BTCUSD_200925",  		"timeInForce": "GTC",  		"type": "TRAILING_STOP_MARKET",  		"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  		"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  		"workingType": "CONTRACT_PRICE", 		"priceProtect": false,              // if conditional order trigger is protected 		"priceMatch": "NONE",               //price match mode 		"selfTradePreventionMode": "NONE",  //self trading preventation mode	 	"updateTime": 1571110484038	},	{		"code": -2011,		"msg": "Unknown order sent."	}]
-```
 
-Cancel All Open Orders(TRADE)
-=============================
+# Cancel All Open Orders(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#api-description "Direct link to API Description")
 
 Cancel All Open Orders
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
 
 DELETE `/dapi/v1/allOpenOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200, 	"msg": "The operation of cancel all open order is done."  
+}
 ```
-{	"code": 200, 	"msg": "The operation of cancel all open order is done."}
-```
 
-Auto-Cancel All Open Orders (TRADE)
-===================================
+# Auto-Cancel All Open Orders (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#api-description "Direct link to API Description")
 
 Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats so that the existing countdown time can be canceled and repalced by a new one. The system will check all countdowns **approximately every 10 milliseconds**, so please note that sufficient redundancy should be considered when using this function. We do not recommend setting the countdown time to be too precise or too small.
 
@@ -1688,38 +1649,34 @@ Cancel all open orders of the specified symbol at the end of the specified count
 > If this endpoint is not called within 120 seconds, all your orders of the specified symbol will be automatically canceled.  
 > If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/countdownCancelAll`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#request-weight "Direct link to Request Weight")
 
 **10**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| countdownTime | LONG | YES | countdown time, 1000 for 1 second. 0 to cancel the timer 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| countdownTime | LONG | YES | countdown time, 1000 for 1 second. 0 to cancel the timer |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#http-request-1 "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders#http-request-1 "Direct link to HTTP Request")
 
+```codeBlockLines_aHhF
+{  
+	"symbol": "BTCUSD_200925", 	"countdownTime": "100000"  
+}
 ```
-{	"symbol": "BTCUSD_200925", 	"countdownTime": "100000"}
-```
 
-Query Order (USER\_DATA)
-========================
+# Query Order (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#api-description "Direct link to API Description")
 
 Check an order's status.
 
@@ -1727,41 +1684,36 @@ Check an order's status.
     *   order status is CANCELED or EXPIRED AND order has NO filled trade AND created time + 3 days < current time
     *   order create time + 90 days < current time
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/order`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either `orderId` or `origClientOrderId` must be sent.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",               //price match mode  	"selfTradePreventionMode": "NONE"   //self trading preventation mode}
 ```
-{  	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",               //price match mode  	"selfTradePreventionMode": "NONE"   //self trading preventation mode}
-```
 
-All Orders (USER\_DATA)
-=======================
+# All Orders (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#api-description "Direct link to API Description")
 
 Get all account orders; active, canceled, or filled.
 
@@ -1769,29 +1721,26 @@ Get all account orders; active, canceled, or filled.
     *   order status is CANCELED or EXPIRED AND order has NO filled trade AND created time + 3 days < current time
     *   order create time + 90 days < current time
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/allOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#request-weight "Direct link to Request Weight")
 
 **20** with symbol, **40** with pair
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| pair | STRING | NO |  
-| orderId | LONG | NO |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default 50; max 100. 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| pair | STRING | NO |  |
+| orderId | LONG | NO |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default 50; max 100. |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 **Notes:**
 
@@ -1801,109 +1750,94 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/A
 > *   If orderId is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
 > *   The query time period must be less then 7 days( default as the recent 7 days).
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {   	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",               //price match mode  	"selfTradePreventionMode": "NONE",  //self trading preventation mode  }]
 ```
-[  {   	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",               //price match mode  	"selfTradePreventionMode": "NONE",  //self trading preventation mode  }]
-```
 
-Current All Open Orders (USER\_DATA)
-====================================
+# Current All Open Orders (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#api-description "Direct link to API Description")
 
 Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/openOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#request-weight "Direct link to Request Weight")
 
 **1** for a single symbol, **40** for mutltiple symbols
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| pair | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| pair | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  {  	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",               //price match mode  	"selfTradePreventionMode": "NONE"   //self trading preventation mode  }]
 ```
-[  {  	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,		// update time  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,              // if conditional order trigger is protected  	"priceMatch": "NONE",               //price match mode  	"selfTradePreventionMode": "NONE"   //self trading preventation mode  }]
-```
 
-Query Current Open Order(USER\_DATA)
-====================================
+# Query Current Open Order(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#api-description "Direct link to API Description")
 
 Query Current Open Order
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/openOrder`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| orderId | LONG | NO |  
-| origClientOrderId | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| orderId | LONG | NO |  |
+| origClientOrderId | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either`orderId` or `origClientOrderId` must be sent
 > *   If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  	"avgPrice": "0.0",  	"clientOrderId": "abc",  	"cumBase": "0",  	"executedQty": "0",  	"orderId": 1917641,  	"origQty": "0.40",  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD"  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order  	"updateTime": 1579276756075,  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false               // if conditional order trigger is protected  	"priceMatch": "NONE",               // price match mode  	"selfTradePreventionMode": "NONE"   // self trading preventation mode	}
 ```
-{  	"avgPrice": "0.0",				  	"clientOrderId": "abc",				  	"cumBase": "0",						  	"executedQty": "0",					  	"orderId": 1917641,					  	"origQty": "0.40",						  	"origType": "TRAILING_STOP_MARKET",  	"price": "0",  	"reduceOnly": false,  	"side": "BUY",  	"positionSide": "SHORT",  	"status": "NEW",  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET  	"closePosition": false,   			// if Close-All  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD"  	"time": 1579276756075,				// order time  	"timeInForce": "GTC",  	"type": "TRAILING_STOP_MARKET",  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order						  	"updateTime": 1579276756075,		  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false               // if conditional order trigger is protected	  	"priceMatch": "NONE",               // price match mode  	"selfTradePreventionMode": "NONE"   // self trading preventation mode	}
-```
 
-User's Force Orders(USER\_DATA)
-===============================
+# User's Force Orders(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#api-description "Direct link to API Description")
 
 User's Force Orders
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/forceOrders`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#request-weight "Direct link to Request Weight")
 
 **20** with symbol, **50** without symbol
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#request-parameters "Direct link to Request Parameters")
 
-```
+```codeBlockLines_aHhF
 Name      |  Type  | Mandatory |                         Description
 ```
 
@@ -1912,45 +1846,40 @@ Name      |  Type  | Mandatory |                         Description
 > *   If "autoCloseType" is not sent, orders with both of the types will be returned
 > *   If "startTime" is not sent, data within 200 days before "endTime" can be queried
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+  { 	"orderId": 165123080,  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"status": "FILLED",  	"clientOrderId": "autoclose-1596542005017000006",  	"price": "11326.9",  	"avgPrice": "11326.9",  	"origQty": "1",  	"executedQty": "1",  	"cumBase": "0.00882854",  	"timeInForce": "IOC",  	"type": "LIMIT",  	"reduceOnly": false,  	"closePosition": false,  	"side": "SELL",  	"positionSide": "BOTH",  	"stopPrice": "0",  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,  	"origType": "LIMIT",  	"time": 1596542005019,  	"updateTime": 1596542005050  },  {  	"orderId": 207251986,  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"status": "FILLED",  	"clientOrderId": "autoclose-1597307316020000006",  	"price": "11619.4",  	"avgPrice": "11661.2",  	"origQty": "1",  	"executedQty": "1",  	"cumBase": "0.00857544",  	"timeInForce": "IOC",  	"type": "LIMIT",  	"reduceOnly": false,  	"closePosition": false,  	"side": "SELL",  	"positionSide": "LONG",  	"stopPrice": "0",  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,  	"origType": "LIMIT",  	"time": 1597307316022,  	"updateTime": 1597307316035  }]
 ```
-[  { 	"orderId": 165123080,  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"status": "FILLED",  	"clientOrderId": "autoclose-1596542005017000006",  	"price": "11326.9",  	"avgPrice": "11326.9",  	"origQty": "1",  	"executedQty": "1",  	"cumBase": "0.00882854",  	"timeInForce": "IOC",  	"type": "LIMIT",  	"reduceOnly": false,  	"closePosition": false,  	"side": "SELL",  	"positionSide": "BOTH",  	"stopPrice": "0",  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,  	"origType": "LIMIT",  	"time": 1596542005019,  	"updateTime": 1596542005050  },  {  	"orderId": 207251986,  	"symbol": "BTCUSD_200925",  	"pair": "BTCUSD",  	"status": "FILLED",  	"clientOrderId": "autoclose-1597307316020000006",  	"price": "11619.4",  	"avgPrice": "11661.2",  	"origQty": "1",  	"executedQty": "1",  	"cumBase": "0.00857544",  	"timeInForce": "IOC",  	"type": "LIMIT",  	"reduceOnly": false,  	"closePosition": false,  	"side": "SELL",  	"positionSide": "LONG",  	"stopPrice": "0",  	"workingType": "CONTRACT_PRICE",  	"priceProtect": false,  	"origType": "LIMIT",  	"time": 1597307316022,  	"updateTime": 1597307316035  }]
-```
 
-Account Trade List (USER\_DATA)
-===============================
+# Account Trade List (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#api-description "Direct link to API Description")
 
 Get trades for a specific account and symbol.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/userTrades`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#request-weight "Direct link to Request Weight")
 
 **20** with symbol，**40** with pair
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| pair | STRING | NO |  
-| orderId | STRING | NO |  
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| fromId | LONG | NO | Trade id to fetch from. Default gets most recent trades. 
-| limit | INT | NO | Default 50; max 1000 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| pair | STRING | NO |  |
+| orderId | STRING | NO |  |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| fromId | LONG | NO | Trade id to fetch from. Default gets most recent trades. |
+| limit | INT | NO | Default 50; max 1000 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Either symbol or pair must be sent
 > *   Symbol and pair cannot be sent together
@@ -1961,40 +1890,35 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/A
 > *   If startTime and endTime are both not sent, then the last 7 days' data will be returned.
 > *   The time between startTime and endTime cannot be longer than 7 days.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		'symbol': 'BTCUSD_200626',	  	'id': 6,	  	'orderId': 28,	  	'pair': 'BTCUSD',	  	'side': 'SELL',	  	'price': '8800',	  	'qty': '1',	  	'realizedPnl': '0',	  	'marginAsset': 'BTC',	  	'baseQty': '0.01136364',	  	'commission': '0.00000454',	  	'commissionAsset': 'BTC',	  	'time': 1590743483586,	  	'positionSide': 'BOTH',	  	'buyer': false,	  	'maker': false	}]
 ```
-[	{		'symbol': 'BTCUSD_200626',	  	'id': 6,	  	'orderId': 28,	  	'pair': 'BTCUSD',	  	'side': 'SELL',	  	'price': '8800',	  	'qty': '1',	  	'realizedPnl': '0',	  	'marginAsset': 'BTC',	  	'baseQty': '0.01136364',	  	'commission': '0.00000454',	  	'commissionAsset': 'BTC',	  	'time': 1590743483586,	  	'positionSide': 'BOTH',	  	'buyer': false,	  	'maker': false	}]
-```
 
-Position Information(USER\_DATA)
-================================
+# Position Information(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#api-description "Direct link to API Description")
 
 Get current account information.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/positionRisk`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| marginAsset | STRING | NO |  
-| pair | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| marginAsset | STRING | NO |  |
+| pair | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
 > *   for One-way Mode user, the response will only show the "BOTH" positions
@@ -2004,124 +1928,107 @@ Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/P
 
 > Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "symbol": "BTCUSD_201225",        "positionAmt": "0",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",  // break-even price        "markPrice": "0.00000000",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "125",        "maxQty": "50",  // maximum quantity of base asset        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "BOTH",        "updateTime": 0    },    {        "symbol": "BTCUSD_201225",        "positionAmt": "1",        "entryPrice": "11707.70000003",        "breakEvenPrice": "11707.80000005",  // break-even price        "markPrice": "11788.66626667",        "unRealizedProfit": "0.00005866",        "liquidationPrice": "11667.63509587",        "leverage": "125",        "maxQty": "50",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "LONG",        "updateTime": 1627026881327     },    {        "symbol": "BTCUSD_201225",        "positionAmt": "0",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",  // break-even price        "markPrice": "0.00000000",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "125",        "maxQty": "50",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "SHORT",        "updateTime":1627026881327  }]
 ```
-[    {        "symbol": "BTCUSD_201225",        "positionAmt": "0",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",  // break-even price        "markPrice": "0.00000000",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "125",        "maxQty": "50",  // maximum quantity of base asset        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "BOTH",        "updateTime": 0    },    {        "symbol": "BTCUSD_201225",        "positionAmt": "1",        "entryPrice": "11707.70000003",        "breakEvenPrice": "11707.80000005",  // break-even price        "markPrice": "11788.66626667",        "unRealizedProfit": "0.00005866",        "liquidationPrice": "11667.63509587",        "leverage": "125",        "maxQty": "50",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "LONG",        "updateTime": 1627026881327     },    {        "symbol": "BTCUSD_201225",        "positionAmt": "0",        "entryPrice": "0.0",        "breakEvenPrice": "0.0",  // break-even price        "markPrice": "0.00000000",        "unRealizedProfit": "0.00000000",        "liquidationPrice": "0",        "leverage": "125",        "maxQty": "50",        "marginType": "cross",        "isolatedMargin": "0.00000000",        "isAutoAddMargin": "false",        "positionSide": "SHORT",        "updateTime":1627026881327  }] 
-```
 
-Change Position Mode(TRADE)
-===========================
+# Change Position Mode(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#api-description "Direct link to API Description")
 
 Change user's position mode (Hedge Mode or One-way Mode ) on _**EVERY symbol**_
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/positionSide/dual`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| dualSidePosition | STRING | YES | "true": Hedge Mode; "false": One-way Mode 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| dualSidePosition | STRING | YES | "true": Hedge Mode; "false": One-way Mode |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200,	"msg": "success"}
 ```
-{	"code": 200,	"msg": "success"}
-```
 
-Change Margin Type (TRADE)
-==========================
+# Change Margin Type (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#api-description "Direct link to API Description")
 
 Change user's margin type in the specific symbol market.For Hedge Mode, LONG and SHORT positions of one symbol use the same margin type.  
 With ISOLATED margin type, margins of the LONG and SHORT positions are isolated from each other.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#http-request "Direct link to HTTP Request")
--------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/marginType`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-weight "Direct link to Request Weight")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| marginType | ENUM | YES | ISOLATED, CROSSED 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| marginType | ENUM | YES | ISOLATED, CROSSED |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"code": 200,	"msg": "success"}
 ```
-{	"code": 200,	"msg": "success"}
-```
 
-Change Initial Leverage (TRADE)
-===============================
+# Change Initial Leverage (TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#api-description "Direct link to API Description")
 
 Change user's initial leverage in the specific symbol market.  
 For Hedge Mode, LONG and SHORT positions of one symbol use the same initial leverage and share a total notional value.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/leverage`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| leverage | INT | YES | target initial leverage: int from 1 to 125 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| leverage | INT | YES | target initial leverage: int from 1 to 125 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+ 	"leverage": 21, 	"maxQty": "1000",  // maximum quantity of base asset 	"symbol": "BTCUSD_200925"}
 ```
-{ 	"leverage": 21, 	"maxQty": "1000",  // maximum quantity of base asset 	"symbol": "BTCUSD_200925"}
-```
 
-Position ADL Quantile Estimation(USER\_DATA)
-============================================
+# Position ADL Quantile Estimation(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#api-description "Direct link to API Description")
 
 Query position ADL quantile estimation
 
@@ -2132,146 +2039,131 @@ Query position ADL quantile estimation
 >     *   "HEDGE" as a sign will be returned instead of "BOTH";
 >     *   A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/adlQuantile`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		"symbol": "BTCUSD_200925", "adlQuantile": 			{  
+				// if the positions of the symbol are crossed margined in Hedge Mode, "LONG" and "SHORT" will be returned a same quantile value, and "HEDGE" will be returned instead of "BOTH".				"LONG": 3,  "SHORT": 3, 				"HEDGE": 0   // only a sign, ignore the value  
+			}		}, 	{ 		"symbol": "BTCUSD_201225", 		"adlQuantile":   
+ 			{  
+ 				// for positions of the symbol are in One-way Mode or isolated margined in Hedge Mode 				"LONG": 1, 	    // adl quantile for "LONG" position in hedge mode 				"SHORT": 2, 	// adl qauntile for "SHORT" position in hedge mode 				"BOTH": 0		// adl qunatile for position in one-way mode 			} 	} ]
 ```
-[	{		"symbol": "BTCUSD_200925", 		"adlQuantile": 			{				// if the positions of the symbol are crossed margined in Hedge Mode, "LONG" and "SHORT" will be returned a same quantile value, and "HEDGE" will be returned instead of "BOTH".				"LONG": 3,  				"SHORT": 3, 				"HEDGE": 0   // only a sign, ignore the value			}		}, 	{ 		"symbol": "BTCUSD_201225",  		"adlQuantile":  			{ 				// for positions of the symbol are in One-way Mode or isolated margined in Hedge Mode 				"LONG": 1, 	    // adl quantile for "LONG" position in hedge mode 				"SHORT": 2, 	// adl qauntile for "SHORT" position in hedge mode 				"BOTH": 0		// adl qunatile for position in one-way mode 			} 	} ]
-```
 
-Modify Isolated Position Margin(TRADE)
-======================================
+# Modify Isolated Position Margin(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#api-description "Direct link to API Description")
 
 Modify Isolated Position Margin
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#http-request "Direct link to HTTP Request")
 
 POST `/dapi/v1/positionMargin`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. 
-| amount | DECIMAL | YES |  
-| type | INT | YES | 1: Add position margin,2: Reduce position margin 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| positionSide | ENUM | NO | Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode. |
+| amount | DECIMAL | YES |  |
+| type | INT | YES | 1: Add position margin,2: Reduce position margin |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Only for isolated symbol
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"amount": 100.0,  	"code": 200,  	"msg": "Successfully modify position margin.",  	"type": 1}
 ```
-{	"amount": 100.0,  	"code": 200,  	"msg": "Successfully modify position margin.",  	"type": 1}
-```
 
-Get Position Margin Change History(TRADE)
-=========================================
+# Get Position Margin Change History(TRADE)
 
-API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#api-description "Direct link to API Description")
 
 Get position margin change history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/positionMargin/history`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| type | INT | NO | 1: Add position margin,2: Reduce position margin 
-| startTime | LONG | NO |  
-| endTime | LONG | NO |  
-| limit | INT | NO | Default: 50 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| type | INT | NO | 1: Add position margin,2: Reduce position margin |
+| startTime | LONG | NO |  |
+| endTime | LONG | NO |  |
+| limit | INT | NO | Default: 50 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{		"amount": "23.36332311",	  	"asset": "BTC",	  	"symbol": "BTCUSD_200925",	  	"time": 1578047897183,	  	"type": 1,	  	"positionSide": "BOTH"	},	{		"amount": "100",	  	"asset": "BTC",	  	"symbol": "BTCUSD_200925",	  	"time": 1578047900425,	  	"type": 1,	  	"positionSide": "LONG"	}]
 ```
-[	{		"amount": "23.36332311",	  	"asset": "BTC",	  	"symbol": "BTCUSD_200925",	  	"time": 1578047897183,	  	"type": 1,	  	"positionSide": "BOTH"	},	{		"amount": "100",	  	"asset": "BTC",	  	"symbol": "BTCUSD_200925",	  	"time": 1578047900425,	  	"type": 1,	  	"positionSide": "LONG"	}]
-```
 
-New Future Account Transfer
-===========================
+# New Future Account Transfer
 
 Please find details from [here](https://developers.binance.com/docs/wallet/asset/user-universal-transfer).
 
-User Universal Transfer (USER\_DATA)
-====================================
+# User Universal Transfer (USER\_DATA)
 
-API Description[​](/docs/wallet/asset/user-universal-transfer#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/wallet/asset/user-universal-transfer#api-description "Direct link to API Description")
 
 user universal transfer
 
-HTTP Request[​](/docs/wallet/asset/user-universal-transfer#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/wallet/asset/user-universal-transfer#http-request "Direct link to HTTP Request")
 
 POST `/sapi/v1/asset/transfer`
 
 You need to enable `Permits Universal Transfer` option for the API Key which requests this endpoint.
 
-Request Weight(UID)[​](/docs/wallet/asset/user-universal-transfer#request-weightuid "Direct link to Request Weight(UID)")
--------------------------------------------------------------------------------------------------------------------------
+## Request Weight(UID)[​](/docs/wallet/asset/user-universal-transfer#request-weightuid "Direct link to Request Weight(UID)")
 
 **900**
 
-Request Parameters[​](/docs/wallet/asset/user-universal-transfer#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/wallet/asset/user-universal-transfer#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| type | ENUM | YES |  
-| asset | STRING | YES |  
-| amount | DECIMAL | YES |  
-| fromSymbol | STRING | NO |  
-| toSymbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| type | ENUM | YES |  |
+| asset | STRING | YES |  |
+| amount | DECIMAL | YES |  |
+| fromSymbol | STRING | NO |  |
+| toSymbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 *   `fromSymbol` must be sent when type are ISOLATEDMARGIN\_MARGIN and ISOLATEDMARGIN\_ISOLATEDMARGIN
     
@@ -2311,545 +2203,488 @@ Request Parameters[​](/docs/wallet/asset/user-universal-transfer#request-param
     *   MAIN\_PORTFOLIO\_MARGIN Spot account transfer to Portfolio Margin account
     *   PORTFOLIO\_MARGIN\_MAIN Portfolio Margin account transfer to Spot account
 
-Response Example[​](/docs/wallet/asset/user-universal-transfer#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/wallet/asset/user-universal-transfer#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "tranId":13526853623}
 ```
-{    "tranId":13526853623}
-```
 
-Futures Account Balance (USER\_DATA)
-====================================
+# Futures Account Balance (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#api-description "Direct link to API Description")
 
 Check futures account balance
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/balance`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+ 	{ 		"accountAlias": "SgsR",    // unique account code 		"asset": "BTC", 		"balance": "0.00250000", 		"withdrawAvailable": "0.00250000", 		"crossWalletBalance": "0.00241969",  		"crossUnPnl": "0.00000000",  		"availableBalance": "0.00241969", 		"updateTime": 1592468353979	}]
 ```
-[ 	{ 		"accountAlias": "SgsR",    // unique account code 		"asset": "BTC", 		"balance": "0.00250000", 		"withdrawAvailable": "0.00250000", 		"crossWalletBalance": "0.00241969",  		"crossUnPnl": "0.00000000",  		"availableBalance": "0.00241969", 		"updateTime": 1592468353979	}]
-```
 
-Get Future Account Transaction History List
-===========================================
+# Get Future Account Transaction History List
 
 Please find details from [here](https://developers.binance.com/docs/wallet/asset/query-user-universal-transfer).
 
-User Commission Rate (USER\_DATA)
-=================================
+# User Commission Rate (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#api-description "Direct link to API Description")
 
 Query user commission rate
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#http-request "Direct link to HTTP Request")
------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/commissionRate`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#request-weight "Direct link to Request Weight")
 
 **20**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | YES |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"symbol": "BTCUSD_PERP",  	"makerCommissionRate": "0.00015",  // 0.015%  	"takerCommissionRate": "0.00040"   // 0.040%}
 ```
-{	"symbol": "BTCUSD_PERP",  	"makerCommissionRate": "0.00015",  // 0.015%  	"takerCommissionRate": "0.00040"   // 0.040%}
-```
 
-Account Information (USER\_DATA)
-================================
+# Account Information (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#api-description "Direct link to API Description")
 
 Get current account information.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/account`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   for One-way Mode user, the "positions" will only show the "BOTH" positions
 > *   for Hedge Mode user, the "positions" will show "BOTH", "LONG", and "SHORT" positions.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"assets": [		{			"asset": "BTC",  // asset name   			"walletBalance": "0.00241969",  // total wallet balance  
+   			"unrealizedProfit": "0.00000000",  // unrealized profit or loss   			"marginBalance": "0.00241969",  // margin balance   			"maintMargin": "0.00000000",	// maintenance margin   			"initialMargin": "0.00000000",  // total intial margin required with the latest mark price   			"positionInitialMargin": "0.00000000",  // positions" margin required with the latest mark price   			"openOrderInitialMargin": "0.00000000",  // open orders" intial margin required with the latest mark price   			"maxWithdrawAmount": "0.00241969",  // available amount for transfer out   			"crossWalletBalance": "0.00241969",  // wallet balance for crossed margin   			"crossUnPnl": "0.00000000",  // total unrealized profit or loss of crossed positions   			"availableBalance": "0.00241969", // available margin balance			"updateTime": 1625474304765 //update time   		}	 ],	 "positions": [		 {		 	"symbol": "BTCUSD_201225",		 	"positionAmt":"0",	// position amount   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "BOTH", // BOTH means that it is the position of One-way Mode   			"entryPrice": "0.0",  
+   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",  // maximum quantity of base asset   			"updateTime": 0   		},  		{  			"symbol": "BTCUSD_201225",		 	"positionAmt":"0",   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "LONG",  // LONG or SHORT means that it is the position of Hedge Mode   			"entryPrice": "0.0",  
+   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",   			"updateTime": 0   		},  		{  			"symbol": "BTCUSD_201225",		 	"positionAmt":"0",   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "SHORT",  // LONG or SHORT means that it is the position of Hedge Mode   			"entryPrice": "0.0",  
+   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",			"notionalValue": "0",   			"updateTime":1627026881327   		}	 ],	 "canDeposit": true,	 "canTrade": true,	 "canWithdraw": true,	 "feeTier": 2,	 "updateTime": 0}
 ```
-{	"assets": [		{			"asset": "BTC",  // asset name    			"walletBalance": "0.00241969",  // total wallet balance   			"unrealizedProfit": "0.00000000",  // unrealized profit or loss   			"marginBalance": "0.00241969",  // margin balance   			"maintMargin": "0.00000000",	// maintenance margin   			"initialMargin": "0.00000000",  // total intial margin required with the latest mark price   			"positionInitialMargin": "0.00000000",  // positions" margin required with the latest mark price   			"openOrderInitialMargin": "0.00000000",  // open orders" intial margin required with the latest mark price   			"maxWithdrawAmount": "0.00241969",  // available amount for transfer out   			"crossWalletBalance": "0.00241969",  // wallet balance for crossed margin   			"crossUnPnl": "0.00000000",  // total unrealized profit or loss of crossed positions   			"availableBalance": "0.00241969", // available margin balance			"updateTime": 1625474304765 //update time   		}	 ],	 "positions": [		 {		 	"symbol": "BTCUSD_201225",		 	"positionAmt":"0",	// position amount   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "BOTH", // BOTH means that it is the position of One-way Mode     			"entryPrice": "0.0",   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",  // maximum quantity of base asset   			"updateTime": 0   		},  		{  			"symbol": "BTCUSD_201225",		 	"positionAmt":"0",   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "LONG",  // LONG or SHORT means that it is the position of Hedge Mode    			"entryPrice": "0.0",   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",   			"updateTime": 0   		},  		{  			"symbol": "BTCUSD_201225",		 	"positionAmt":"0",   			"initialMargin": "0",   			"maintMargin": "0",   			"unrealizedProfit": "0.00000000",   			"positionInitialMargin": "0",   			"openOrderInitialMargin": "0",   			"leverage": "125",   			"isolated": false,   			"positionSide": "SHORT",  // LONG or SHORT means that it is the position of Hedge Mode    			"entryPrice": "0.0",   			"breakEvenPrice": "0.0",  // break-even price   			"maxQty": "50",			"notionalValue": "0",   			"updateTime":1627026881327   		}	 ],	 "canDeposit": true,	 "canTrade": true,	 "canWithdraw": true,	 "feeTier": 2,	 "updateTime": 0}
-```
 
-Notional Bracket for Symbol(USER\_DATA)
-=======================================
+# Notional Bracket for Symbol(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#api-description "Direct link to API Description")
 
 Get the symbol's notional bracket list.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v2/leverageBracket`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "symbol": "BTCUSD_PERP",        "notionalCoef": 1.50,  //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted        "brackets": [  
+            {                "bracket": 1,   // bracket level                "initialLeverage": 125,  // the maximum leverage                "qtyCap": 50,  // upper edge of base asset quantity                "qtylFloor": 0,  // lower edge of base asset quantity                "maintMarginRatio": 0.004 // maintenance margin rate				"cum": 0.0 // Auxiliary number for quick calculation            },  
+        ]    }]
 ```
-[    {        "symbol": "BTCUSD_PERP",        "notionalCoef": 1.50,  //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted         "brackets": [            {                "bracket": 1,   // bracket level                "initialLeverage": 125,  // the maximum leverage                "qtyCap": 50,  // upper edge of base asset quantity                "qtylFloor": 0,  // lower edge of base asset quantity                "maintMarginRatio": 0.004 // maintenance margin rate				"cum": 0.0 // Auxiliary number for quick calculation             },        ]    }]
-```
 
-Notional Bracket for Pair(USER\_DATA)
-=====================================
+# Notional Bracket for Pair(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#api-description "Direct link to API Description")
 
 **Not recommended to continue using this v1 endpoint**
 
 Get the pair's default notional bracket list, may return ambiguous values when there have been multiple different `symbol` brackets under the `pair`, suggest using the following `GET /dapi/v2/leverageBracket` query instead to get the specific `symbol` notional bracket list.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/leverageBracket`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#request-weight "Direct link to Request Weight")
 
 **1**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| pair | STRING | NO |  
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| pair | STRING | NO |  |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+    {        "pair": "BTCUSD",        "brackets": [            {                "bracket": 1,   // bracket level                "initialLeverage": 125,  // the maximum leverage                "qtyCap": 50,  // upper edge of base asset quantity                "qtylFloor": 0,  // lower edge of base asset quantity                "maintMarginRatio": 0.004 // maintenance margin rate				"cum": 0.0  // Auxiliary number for quick calculation            },  
+        ]    }]
 ```
-[    {        "pair": "BTCUSD",        "brackets": [            {                "bracket": 1,   // bracket level                "initialLeverage": 125,  // the maximum leverage                "qtyCap": 50,  // upper edge of base asset quantity                "qtylFloor": 0,  // lower edge of base asset quantity                "maintMarginRatio": 0.004 // maintenance margin rate				"cum": 0.0  // Auxiliary number for quick calculation             },        ]    }]
-```
 
-Get Current Position Mode(USER\_DATA)
-=====================================
+# Get Current Position Mode(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#api-description "Direct link to API Description")
 
 Get user's position mode (Hedge Mode or One-way Mode ) on _**EVERY symbol**_
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/positionSide/dual`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#request-weight "Direct link to Request Weight")
 
 **30**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"dualSidePosition": true // "true": Hedge Mode; "false": One-way Mode}
 ```
-{	"dualSidePosition": true // "true": Hedge Mode; "false": One-way Mode}
-```
 
-Get Income History(USER\_DATA)
-==============================
+# Get Income History(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#api-description "Direct link to API Description")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#api-description "Direct link to API Description")
 
 Get income history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#http-request "Direct link to HTTP Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/income`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#request-weight "Direct link to Request Weight")
----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#request-weight "Direct link to Request Weight")
 
 **20**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#request-parameters "Direct link to Request Parameters")
----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
-| incomeType | STRING | NO | "TRANSFER","WELCOME\_BONUS", "FUNDING\_FEE", "REALIZED\_PNL", "COMMISSION", "INSURANCE\_CLEAR", and "DELIVERED\_SETTELMENT" 
-| startTime | LONG | NO | Timestamp in ms to get funding from INCLUSIVE. 
-| endTime | LONG | NO | Timestamp in ms to get funding until INCLUSIVE. 
-| page | INT | NO |  
-| limit | INT | NO | Default 100; max 1000 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| symbol | STRING | NO |  |
+| incomeType | STRING | NO | "TRANSFER","WELCOME\_BONUS", "FUNDING\_FEE", "REALIZED\_PNL", "COMMISSION", "INSURANCE\_CLEAR", and "DELIVERED\_SETTELMENT" |
+| startTime | LONG | NO | Timestamp in ms to get funding from INCLUSIVE. |
+| endTime | LONG | NO | Timestamp in ms to get funding until INCLUSIVE. |
+| page | INT | NO |  |
+| limit | INT | NO | Default 100; max 1000 |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   If `incomeType` is not sent, all kinds of flow will be returned
 > *   "trandId" is unique in the same "incomeType" for a user
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#response-example "Direct link to Response Example")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{    	"symbol": "",				// trade symbol, if existing    	"incomeType": "TRANSFER",	// income type    	"income": "-0.37500000",	// income amount    	"asset": "BTC",				// income asset    	"info":"WITHDRAW",			// extra information    	"time": 1570608000000,    	"tranId":"9689322392",		// transaction id    	"tradeId":""				// trade id, if existing	},	{   		"symbol": "BTCUSD_200925",    	"incomeType": "COMMISSION",    	"income": "-0.01000000",  
+    	"asset": "BTC",    	"info":"",    	"time": 1570636800000,    	"tranId":"9689322392",    	"tradeId":"2059192"	}]
 ```
-[	{    	"symbol": "",				// trade symbol, if existing    	"incomeType": "TRANSFER",	// income type    	"income": "-0.37500000",	// income amount    	"asset": "BTC",				// income asset    	"info":"WITHDRAW",			// extra information    	"time": 1570608000000,    	"tranId":"9689322392",		// transaction id    	"tradeId":""				// trade id, if existing	},	{   		"symbol": "BTCUSD_200925",    	"incomeType": "COMMISSION",     	"income": "-0.01000000",    	"asset": "BTC",    	"info":"",    	"time": 1570636800000,    	"tranId":"9689322392",    	"tradeId":"2059192"	}]
-```
 
-Get Download Id For Futures Transaction History(USER\_DATA)
-===========================================================
+# Get Download Id For Futures Transaction History(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description "Direct link to API Description")
 
 Get download id for futures transaction history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/income/asyn`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| startTime | LONG | YES | Timestamp in ms 
-| endTime | LONG | YES | Timestamp in ms 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| startTime | LONG | YES | Timestamp in ms |
+| endTime | LONG | YES | Timestamp in ms |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Request Limitation is 5 times per month, shared by front end download page and rest api
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
 ```
-{	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
-```
 
-Get Futures Transaction History Download Link by Id (USER\_DATA)
-================================================================
+# Get Futures Transaction History Download Link by Id (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#api-description "Direct link to API Description")
 
 Get futures transaction history download link by Id
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/income/asyn/id`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| downloadId | STRING | YES | get by download id api 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| downloadId | STRING | YES | get by download id api |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Download link expiration: 24h
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
 ```
 
 > **OR** (Response when server is processing)
 
-```
-{	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",  	"notified":false,  
+  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-Get Download Id For Futures Transaction History(USER\_DATA)
-===========================================================
+# Get Download Id For Futures Transaction History(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#api-description "Direct link to API Description")
 
 Get download id for futures transaction history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/income/asyn`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| startTime | LONG | YES | Timestamp in ms 
-| endTime | LONG | YES | Timestamp in ms 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| startTime | LONG | YES | Timestamp in ms |
+| endTime | LONG | YES | Timestamp in ms |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Request Limitation is 5 times per month, shared by front end download page and rest api
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
 ```
-{	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
-```
 
-Get Futures Order History Download Link by Id (USER\_DATA)
-==========================================================
+# Get Futures Order History Download Link by Id (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#api-description "Direct link to API Description")
 
 Get futures order history download link by Id
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/order/asyn/id`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-weight "Direct link to Request Weight")
 
 5
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| downloadId | STRING | YES | get by download id api 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| downloadId | STRING | YES | get by download id api |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Download link expiration: 24h
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
 ```
 
 > **OR** (Response when server is processing)
 
-```
-{	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",  	"notified":false,  
+  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-Get Download Id For Futures Trade History (USER\_DATA)
-======================================================
+# Get Download Id For Futures Trade History (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#api-description "Direct link to API Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#api-description "Direct link to API Description")
 
 Get download id for futures trade history
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#http-request "Direct link to HTTP Request")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/trade/asyn`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-weight "Direct link to Request Weight")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-parameters "Direct link to Request Parameters")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| startTime | LONG | YES | Timestamp in ms 
-| endTime | LONG | YES | Timestamp in ms 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| startTime | LONG | YES | Timestamp in ms |
+| endTime | LONG | YES | Timestamp in ms |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Request Limitation is 5 times per month, shared by front end download page and rest api
 > *   The time between `startTime` and `endTime` can not be longer than 1 year
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
 ```
-{	"avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days  	"downloadId":"546975389218332672",}
-```
 
-Get Futures Trade Download Link by Id(USER\_DATA)
-=================================================
+# Get Futures Trade Download Link by Id(USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#api-description "Direct link to API Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#api-description "Direct link to API Description")
 
 Get futures trade download link by Id
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#http-request "Direct link to HTTP Request")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/trade/asyn/id`
 
-Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-weight "Direct link to Request Weight")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-weight "Direct link to Request Weight")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| downloadId | STRING | YES | get by download id api 
-| recvWindow | LONG | NO |  
-| timestamp | LONG | YES |  
+| downloadId | STRING | YES | get by download id api |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |
 
 > *   Download link expiration: 24h
 
-Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id#response-example "Direct link to Response Example")
 
 > **Response:**
 
-```
-{	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"completed",     // Enum：completed，processing  	"url":"www.binance.com",  // The link is mapped to download id  	"notified":true,          // ignore  	"expirationTimestamp":1645009771000,  // The link would expire after this timestamp  	"isExpired":null,}
 ```
 
 > **OR** (Response when server is processing)
 
-```
-{	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",   	"notified":false,  	"expirationTimestamp":-1  	"isExpired":null,  	}
+```codeBlockLines_aHhF
+{  
+	"downloadId":"545923594199212032",  	"status":"processing",  	"url":"",  	"notified":false,  
+  	"expirationTimestamp":-1  	"isExpired":null,  	}
 ```
 
-Classic Portfolio Margin Account Information (USER\_DATA)
-=========================================================
+# Classic Portfolio Margin Account Information (USER\_DATA)
 
-API Description[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#api-description "Direct link to API Description")
 
 Get Classic Portfolio Margin current account information.
 
-HTTP Request[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#http-request "Direct link to HTTP Request")
-------------------------------------------------------------------------------------------------------------------------------
+## HTTP Request[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#http-request "Direct link to HTTP Request")
 
 GET `/dapi/v1/pmAccountInfo`
 
-Request Weight(IP)[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#request-weightip "Direct link to Request Weight(IP)")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight(IP)[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#request-weightip "Direct link to Request Weight(IP)")
 
 **5**
 
-Request Parameters[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| asset | STRING | YES |  
-| recvWindow | LONG | NO |  
+| asset | STRING | YES |  |
+| recvWindow | LONG | NO |  |
 
 > *   maxWithdrawAmount is for asset transfer out to the spot wallet.
 
-Response Example[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints#response-example "Direct link to Response Example")
 
-```
-{    "maxWithdrawAmountUSD": "25347.92083245",   // Classic Portfolio margin maximum virtual amount for transfer out in USD    "asset": "BTC",            // asset name    "maxWithdrawAmount": "1.33663654",        // maximum amount for transfer out}
+```codeBlockLines_aHhF
+{  
+    "maxWithdrawAmountUSD": "25347.92083245",   // Classic Portfolio margin maximum virtual amount for transfer out in USD    "asset": "BTC",            // asset name    "maxWithdrawAmount": "1.33663654",        // maximum amount for transfer out}
 ```
 

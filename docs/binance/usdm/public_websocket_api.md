@@ -1,10 +1,8 @@
 # Binance USDM Futures Public Websocket API Documentation
 
-Quick Start
-===========
+# Quick Start
 
-API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
---------------------------------------------------------------------------------------------
+## API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to API Key Setup")
 
 *   Some endpoints will require an API Key. Please refer to [this page](https://www.binance.com/en/support/faq/how-to-create-api-keys-on-binance-360002502072) regarding API key creation.
 *   Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
@@ -12,14 +10,12 @@ API Key Setup[​](/docs/derivatives/quick-start#api-key-setup "Direct link to A
 
 If the API keys were accidentally shared, please delete them immediately and create a new key.
 
-API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
------------------------------------------------------------------------------------------------------------------
+## API Key Restrictions[​](/docs/derivatives/quick-start#api-key-restrictions "Direct link to API Key Restrictions")
 
 *   After creating the API key, the default restrictions is `Enable Reading`.
 *   To **enable withdrawals via the API**, the API key restriction needs to be modified through the Binance UI.
 
-Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
---------------------------------------------------------------------------------------------------------
+## Enabling Accounts[​](/docs/derivatives/quick-start#enabling-accounts "Direct link to Enabling Accounts")
 
 ### Account[​](/docs/derivatives/quick-start#account "Direct link to Account")
 
@@ -41,8 +37,7 @@ Please refer to the [Futures Testnet page](https://testnet.binancefuture.com/en/
 
 To enable a `OPTION` account for Option Trading, please refer to the [Option Trading Guide](https://www.binance.com/en/support/faq/introduction-to-binance-options-374321c9317c473480243365298b8706)
 
-API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
---------------------------------------------------------------------------------------
+## API Library[​](/docs/derivatives/quick-start#api-library "Direct link to API Library")
 
 ### Python connector[​](/docs/derivatives/quick-start#python-connector "Direct link to Python connector")
 
@@ -56,8 +51,7 @@ This is a lightweight library that works as a connector to Binance public API, w
 
 [https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
 
-WebSocket API General Info
-==========================
+# WebSocket API General Info
 
 *   The base endpoint is: **`wss://ws-fapi.binance.com/ws-fapi/v1`**
     *   The base endpoint for testnet is: `wss://testnet.binancefuture.com/ws-fapi/v1`
@@ -74,25 +68,25 @@ WebSocket API General Info
 *   **`DECIMAL` parameters such as price are expected as JSON strings, not floats.**
 *   **User Data Stream requests - you will need to establish a separate WebSocket connection to listen to [user data streams](https://binance-docs.github.io/apidocs/futures/en/#user-data-streams)**
 
-WebSocket API Request format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-request-format "Direct link to WebSocket API Request format")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Request format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-request-format "Direct link to WebSocket API Request format")
 
 Requests must be sent as JSON in **text frames**, one request per frame.
 
 > Example of request:
 
-```
-{  "id": "9ca10e58-7452-467e-9454-f669bb9c764e",  "method": "order.place",  "params": {    "apiKey": "yeqKcXjtA9Eu4Tr3nJk61UJAGzXsEmFqqfVterxpMpR4peNfqE7Zl7oans8Qj089",    "price": "42088.0",    "quantity": "0.1",    "recvWindow": 5000,    "side": "BUY",    "signature": "996962a19802b5a09d7bc6ab1524227894533322a2f8a1f8934991689cabf8fe",    "symbol": "BTCUSDT",    "timeInForce": "GTC",    "timestamp": 1705311512994,    "type": "LIMIT"  }}
+```codeBlockLines_aHhF
+{  
+  "id": "9ca10e58-7452-467e-9454-f669bb9c764e",  "method": "order.place",  "params": {    "apiKey": "yeqKcXjtA9Eu4Tr3nJk61UJAGzXsEmFqqfVterxpMpR4peNfqE7Zl7oans8Qj089",    "price": "42088.0",    "quantity": "0.1",    "recvWindow": 5000,    "side": "BUY",    "signature": "996962a19802b5a09d7bc6ab1524227894533322a2f8a1f8934991689cabf8fe",    "symbol": "BTCUSDT",    "timeInForce": "GTC",    "timestamp": 1705311512994,    "type": "LIMIT"  }}
 ```
 
 Request fields:
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `id` | INT/STRING/null | YES | Arbitrary ID used to match responses to requests 
-| `method` | STRING | YES | Request method name 
-| `params` | OBJECT | NO | Request parameters. May be omitted if there are no parameters 
-|    |  |  |  
+| `id` | INT/STRING/null | YES | Arbitrary ID used to match responses to requests |
+| `method` | STRING | YES | Request method name |
+| `params` | OBJECT | NO | Request parameters. May be omitted if there are no parameters |
+|    |  |  |  |
 
 *   Request `id` is truly arbitrary. You can use UUIDs, sequential IDs, current timestamp, etc. The server does not interpret `id` in any way, simply echoing it back in the response.
 
@@ -101,35 +95,35 @@ You can freely reuse IDs within a session. However, be careful to not send more 
 *   Request method names may be prefixed with explicit version: e.g., "`v3/order.place`".
 *   The order of `params` is not significant.
 
-Response format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#response-format "Direct link to Response format")
----------------------------------------------------------------------------------------------------------------------------------------
+## Response format[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#response-format "Direct link to Response format")
 
 Responses are returned as JSON in text frames, one response per frame.
 
 > Example of successful response:
 
-```
-{  "id": "43a3843a-2321-4e45-8f79-351e5c354563",  "status": 200,  "result": {    "orderId": 336829446,    "symbol": "BTCUSDT",    "status": "NEW",    "clientOrderId": "FqEw6cn0vDhrkmfiwLYPeo",    "price": "42088.00",    "avgPrice": "0.00",    "origQty": "0.100",    "executedQty": "0.000",    "cumQty": "0.000",    "cumQuote": "0.00000",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0.00",    "workingType": "CONTRACT_PRICE",    "priceProtect": false,    "origType": "LIMIT",    "priceMatch": "NONE",    "selfTradePreventionMode": "NONE",    "goodTillDate": 0,    "updateTime": 1705385954229  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 0    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "43a3843a-2321-4e45-8f79-351e5c354563",  "status": 200,  "result": {    "orderId": 336829446,    "symbol": "BTCUSDT",    "status": "NEW",    "clientOrderId": "FqEw6cn0vDhrkmfiwLYPeo",    "price": "42088.00",    "avgPrice": "0.00",    "origQty": "0.100",    "executedQty": "0.000",    "cumQty": "0.000",    "cumQuote": "0.00000",    "timeInForce": "GTC",    "type": "LIMIT",    "reduceOnly": false,    "closePosition": false,    "side": "BUY",    "positionSide": "BOTH",    "stopPrice": "0.00",    "workingType": "CONTRACT_PRICE",    "priceProtect": false,    "origType": "LIMIT",    "priceMatch": "NONE",    "selfTradePreventionMode": "NONE",    "goodTillDate": 0,    "updateTime": 1705385954229  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 0    }  ]}
 ```
 
 > Example of failed response:
 
-```
-{  "id": "5761b939-27b1-4948-ab87-4a372a3f6b72",  "status": 400,  "error": {    "code": -1102,    "msg": "Mandatory parameter 'quantity' was not sent, was empty/null, or malformed."  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 1    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "5761b939-27b1-4948-ab87-4a372a3f6b72",  "status": 400,  "error": {    "code": -1102,    "msg": "Mandatory parameter 'quantity' was not sent, was empty/null, or malformed."  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 300,      "count": 1    },    {      "rateLimitType": "ORDERS",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 1200,      "count": 1    }  ]}
 ```
 
 Response fields:
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `id` | INT/STRING/null | YES | Same as in the original request 
-| `status` | INT | YES | Response status. See status codes 
-| `result` | OBJECT/ARRAY | YES | Response content. Present if request succeeded 
-| `error` | OBJECT | YES | Error description. Present if request failed 
-| `rateLimits` | ARRAY | NO | Rate limiting status. See Rate limits 
+| `id` | INT/STRING/null | YES | Same as in the original request |
+| `status` | INT | YES | Response status. See status codes |
+| `result` | OBJECT/ARRAY | YES | Response content. Present if request succeeded |
+| `error` | OBJECT | YES | Error description. Present if request failed |
+| `rateLimits` | ARRAY | NO | Rate limiting status. See Rate limits |
 
-WebSocket API Rate limits[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-rate-limits "Direct link to WebSocket API Rate limits")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Rate limits[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-rate-limits "Direct link to WebSocket API Rate limits")
 
 *   Rate limits are the same as on REST API and are shared with REST API.
 *   WebSocket handshake attempt costs 5 weight.
@@ -138,8 +132,7 @@ WebSocket API Rate limits[​](/docs/derivatives/usds-margined-futures/websocket
 *   `rateLimits` field visibility can be controlled with `returnRateLimits` boolean parameter in connection string or individual requests.
 *   E.g., use `wss://ws-fapi.binance.com/ws-fapi/v1?returnRateLimits=false` to hide `rateLimits` in responses by default. With that, you can pass extra `"returnRateLimits": true` parameter in requests to show rate limit in response when it is otherwise hidden by default.
 
-WebSocket API Authenticate after connection[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authenticate-after-connection "Direct link to WebSocket API Authenticate after connection")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authenticate after connection[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authenticate-after-connection "Direct link to WebSocket API Authenticate after connection")
 
 You can authenticate an already established connection using session authentication requests:
 
@@ -147,24 +140,23 @@ You can authenticate an already established connection using session authenticat
 *   `session.status` - check connection status and the current API key
 *   `session.logout` - forget the API key associated with the connection
 
-WebSocket API API key revocation[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-api-key-revocation "Direct link to WebSocket API API key revocation")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API API key revocation[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-api-key-revocation "Direct link to WebSocket API API key revocation")
 
 If during an active session the API key becomes invalid for any reason (e.g. IP address is not whitelisted, API key was deleted, API key doesn't have correct permissions, etc), after the next request the session will be revoked with the following error message:
 
-```
-{  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."   }}
+```codeBlockLines_aHhF
+{  
+  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."  }  
+}
 ```
 
-WebSocket API Authorize ad hoc requests[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authorize-ad-hoc-requests "Direct link to WebSocket API Authorize ad hoc requests")
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authorize ad hoc requests[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authorize-ad-hoc-requests "Direct link to WebSocket API Authorize ad hoc requests")
 
 Only one API key can be authenticated with the WebSocket connection. The authenticated API key is used by default for requests that require an apiKey parameter. However, you can always specify the apiKey and signature explicitly for individual requests, overriding the authenticated API key and using a different one to authorize a specific request.
 
 For example, you might want to authenticate your USER\_DATA key to be used by default, but specify the TRADE key with an explicit signature when placing orders.
 
-WebSocket API Authentication request[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authentication-request "Direct link to WebSocket API Authentication request")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## WebSocket API Authentication request[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#websocket-api-authentication-request "Direct link to WebSocket API Authentication request")
 
 **Note**:
 
@@ -174,14 +166,16 @@ WebSocket API Authentication request[​](/docs/derivatives/usds-margined-future
 
 > **Request**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logon",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature": "1cf54395b336b0a9727ef27d5d98987962bc47aca6e13fe978612d0adee066ed",    "timestamp": 1649729878532  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logon",  "params": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature": "1cf54395b336b0a9727ef27d5d98987962bc47aca6e13fe978612d0adee066ed",    "timestamp": 1649729878532  }}
 ```
 
 > **Response**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649729878630  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649729878630  }}
 ```
 
 Authenticate WebSocket connection using the provided API key.
@@ -198,23 +192,25 @@ Note that only one API key can be authenticated. Calling `session.logon` multipl
 
 | Name | Type | Mandatory |  Description |
 | --- | --- | --- | --- |
-| `apiKey` | STRING | YES |  
-| `recvWindow` | INT | NO |  
-| `signature` | STRING | YES |  
-| `timestamp` | INT | YES |  
+| `apiKey` | STRING | YES |  |
+| `recvWindow` | INT | NO |  |
+| `signature` | STRING | YES |  |
+| `timestamp` | INT | YES |  |
 
 ### Query session status[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#query-session-status "Direct link to Query session status")
 
 > **Request**
 
-```
-{  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "method": "session.status"}
+```codeBlockLines_aHhF
+{  
+  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "method": "session.status"}
 ```
 
 > **Response**
 
-```
-{  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "status": 200,  "result": {    // if the connection is not authenticated, "apiKey" and "authorizedSince" will be shown as null    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
+```codeBlockLines_aHhF
+{  
+  "id": "b50c16cd-62c9-4e29-89e4-37f10111f5bf",  "status": 200,  "result": {    // if the connection is not authenticated, "apiKey" and "authorizedSince" will be shown as null    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "authorizedSince": 1649729878532,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
 ```
 
 Query the status of the WebSocket connection, inspecting which API key (if any) is used to authorize requests.
@@ -229,14 +225,16 @@ Query the status of the WebSocket connection, inspecting which API key (if any) 
 
 > **Request**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logout"}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "method": "session.logout"}
 ```
 
 > **Response**
 
-```
-{  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": null,    "authorizedSince": null,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
+```codeBlockLines_aHhF
+{  
+  "id": "c174a2b1-3f51-4580-b200-8528bd237cb7",  "status": 200,  "result": {    "apiKey": null,    "authorizedSince": null,    "connectedSince": 1649729873021,    "returnRateLimits": false,    "serverTime": 1649730611671  }}
 ```
 
 Forget the API key previously authenticated. If the connection is not authenticated, this request does nothing.
@@ -249,38 +247,74 @@ Note that the WebSocket connection stays open after `session.logout` request. Yo
 
 **Parameters**: None
 
-SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## SIGNED (TRADE and USER\_DATA) Endpoint Security[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#signed-trade-and-user_data-endpoint-security "Direct link to SIGNED (TRADE and USER_DATA) Endpoint Security")
 
 ### SIGNED request example (Ed25519)[​](/docs/derivatives/usds-margined-futures/websocket-api-general-info#signed-request-example-ed25519 "Direct link to SIGNED request example (Ed25519)")
 
 | Parameter | Value |
 | --- | --- |
-| symbol | BTCUSDT 
-| side | SELL 
-| type | LIMIT 
-| timeInForce | GTC 
-| quantity | 1 
-| price | 0.2 
-| timestamp | 1668481559918 
+| symbol | BTCUSDT |
+| side | SELL |
+| type | LIMIT |
+| timeInForce | GTC |
+| quantity | 1 |
+| price | 0.2 |
+| timestamp | 1668481559918 |
 
-```
-#!/usr/bin/env python3import base64import timeimport jsonfrom cryptography.hazmat.primitives.serialization import load_pem_private_keyfrom websocket import create_connection# Set up authenticationAPI_KEY='put your own API Key here'PRIVATE_KEY_PATH='test-prv-key.pem'# Load the private key.# In this example the key is expected to be stored without encryption,# but we recommend using a strong password for improved security.with open(PRIVATE_KEY_PATH, 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)# Set up the request parametersparams = {    'apiKey':        API_KEY,    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}# Timestamp the requesttimestamp = int(time.time() * 1000) # UNIX timestamp in millisecondsparams['timestamp'] = timestamp# Sign the requestpayload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))params['signature'] = signature.decode('ASCII')# Send the requestrequest = {    'id': 'my_new_order',    'method': 'order.place',    'params': params}ws = create_connection("wss://ws-fapi.binance.com/ws-fapi/v1")ws.send(json.dumps(request))result =  ws.recv()ws.close()print(result)
+```codeBlockLines_aHhF
+#!/usr/bin/env python3  
+  
+import base64  
+import time  
+import json  
+from cryptography.hazmat.primitives.serialization import load_pem_private_key  
+from websocket import create_connection  
+  
+# Set up authentication  
+API_KEY='put your own API Key here'  
+PRIVATE_KEY_PATH='test-prv-key.pem'  
+  
+# Load the private key.  
+# In this example the key is expected to be stored without encryption,  
+# but we recommend using a strong password for improved security.  
+with open(PRIVATE_KEY_PATH, 'rb') as f:  
+    private_key = load_pem_private_key(data=f.read(),                                       password=None)  
+# Set up the request parameters  
+params = {  
+    'apiKey':        API_KEY,    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}  
+  
+# Timestamp the request  
+timestamp = int(time.time() * 1000) # UNIX timestamp in milliseconds  
+params['timestamp'] = timestamp  
+  
+# Sign the request  
+payload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])  
+  
+signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))  
+params['signature'] = signature.decode('ASCII')  
+  
+# Send the request  
+request = {  
+    'id': 'my_new_order',    'method': 'order.place',    'params': params}  
+  
+ws = create_connection("wss://ws-fapi.binance.com/ws-fapi/v1")  
+ws.send(json.dumps(request))  
+result =  ws.recv()  
+ws.close()  
+  
+print(result)
 ```
 
 A sample code in Python to show how to sign the payload with an Ed25519 key is available on the right side.
 
-Public Endpoints Info
-=====================
+# Public Endpoints Info
 
-Terminology[​](/docs/derivatives/usds-margined-futures/common-definition#terminology "Direct link to Terminology")
-------------------------------------------------------------------------------------------------------------------
+## Terminology[​](/docs/derivatives/usds-margined-futures/common-definition#terminology "Direct link to Terminology")
 
 *   `base asset` refers to the asset that is the `quantity` of a symbol.
 *   `quote asset` refers to the asset that is the `price` of a symbol.
 
-ENUM definitions[​](/docs/derivatives/usds-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
----------------------------------------------------------------------------------------------------------------------------------
+## ENUM definitions[​](/docs/derivatives/usds-margined-futures/common-definition#enum-definitions "Direct link to ENUM definitions")
 
 **Symbol type:**
 
@@ -397,14 +431,14 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 > REQUEST\_WEIGHT
 
-```
-  {  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "REQUEST_WEIGHT",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 2400  }
 ```
 
 > ORDERS
 
-```
-  {  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
+```codeBlockLines_aHhF
+{  	"rateLimitType": "ORDERS",  	"interval": "MINUTE",  	"intervalNum": 1,  	"limit": 1200   }
 ```
 
 *   REQUEST\_WEIGHT
@@ -416,20 +450,18 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 *   MINUTE
 
-Filters
-=======
+# Filters
 
 Filters define trading rules on a symbol or an exchange.
 
-Symbol filters[​](/docs/derivatives/usds-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
----------------------------------------------------------------------------------------------------------------------------
+## Symbol filters[​](/docs/derivatives/usds-margined-futures/common-definition#symbol-filters "Direct link to Symbol filters")
 
 ### PRICE\_FILTER[​](/docs/derivatives/usds-margined-futures/common-definition#price_filter "Direct link to PRICE_FILTER")
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
+```codeBlockLines_aHhF
+{    "filterType": "PRICE_FILTER",    "minPrice": "0.00000100",    "maxPrice": "100000.00000000",    "tickSize": "0.00000100"  }
 ```
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
@@ -448,8 +480,8 @@ Any of the above variables can be set to 0, which disables that rule in the `pri
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
@@ -468,8 +500,8 @@ In order to pass the `lot size`, the following must be true for `quantity`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
+```codeBlockLines_aHhF
+{    "filterType": "MARKET_LOT_SIZE",    "minQty": "0.00100000",    "maxQty": "100000.00000000",    "stepSize": "0.00100000"  }
 ```
 
 The `MARKET_LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for `MARKET` orders on a symbol. There are 3 parts:
@@ -488,8 +520,8 @@ In order to pass the `market lot size`, the following must be true for `quantity
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ORDERS",    "limit": 200  }
 ```
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
@@ -500,8 +532,8 @@ Note that both "algo" orders and normal orders are counted for this filter.
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MAX_NUM_ALGO_ORDERS",    "limit": 100  }
+```codeBlockLines_aHhF
+{    "filterType": "MAX_NUM_ALGO_ORDERS",    "limit": 100  }
 ```
 
 The `MAX_NUM_ALGO_ORDERS` filter defines the maximum number of all kinds of algo orders an account is allowed to have open on a symbol.
@@ -512,8 +544,8 @@ The algo orders include `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKE
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.1500",    "multiplierDown": "0.8500",    "multiplierDecimal": 4  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE",    "multiplierUp": "1.1500",    "multiplierDown": "0.8500",    "multiplierDecimal": 4  }
 ```
 
 The `PERCENT_PRICE` filter defines valid range for a price based on the mark price.
@@ -527,26 +559,25 @@ In order to pass the `percent price`, the following must be true for `price`:
 
 > **/exchangeInfo format:**
 
-```
-  {    "filterType": "MIN_NOTIONAL",    "notional": "5.0"  }
+```codeBlockLines_aHhF
+{    "filterType": "MIN_NOTIONAL",    "notional": "5.0"  }
 ```
 
 The `MIN_NOTIONAL` filter defines the minimum notional value allowed for an order on a symbol. An order's notional value is the `price` \* `quantity`. Since `MARKET` orders have no price, the mark price is used.
 
-Error Codes
-===========
+# Error Codes
 
 > Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{  
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 Errors consist of two parts: an error code and a message.  
 Codes are universal,but messages can vary.
 
-10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 10xx - General Server or Network issues[​](/docs/derivatives/usds-margined-futures/error-code#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
 
 ### \-1000 UNKNOWN[​](/docs/derivatives/usds-margined-futures/error-code#-1000-unknown "Direct link to -1000 UNKNOWN")
 
@@ -627,8 +658,7 @@ Codes are universal,but messages can vary.
 
 *   Not found, unauthenticated, or unauthorized.
 
-11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
------------------------------------------------------------------------------------------------------------------------------------------
+## 11xx - Request issues[​](/docs/derivatives/usds-margined-futures/error-code#11xx---request-issues "Direct link to 11xx - Request issues")
 
 ### \-1100 ILLEGAL\_CHARS[​](/docs/derivatives/usds-margined-futures/error-code#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
 
@@ -752,8 +782,7 @@ Codes are universal,but messages can vary.
 
 *   Invalid newOrderRespType.
 
-20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
---------------------------------------------------------------------------------------------------------------------------------------------------
+## 20xx - Processing Issues[​](/docs/derivatives/usds-margined-futures/error-code#20xx---processing-issues "Direct link to 20xx - Processing Issues")
 
 ### \-2010 NEW\_ORDER\_REJECTED[​](/docs/derivatives/usds-margined-futures/error-code#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
 
@@ -831,8 +860,7 @@ Codes are universal,but messages can vary.
 
 *   Leverage is smaller than permitted: insufficient margin balance.
 
-40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 40xx - Filters and other Issues[​](/docs/derivatives/usds-margined-futures/error-code#40xx---filters-and-other-issues "Direct link to 40xx - Filters and other Issues")
 
 ### \-4000 INVALID\_ORDER\_STATUS[​](/docs/derivatives/usds-margined-futures/error-code#-4000-invalid_order_status "Direct link to -4000 INVALID_ORDER_STATUS")
 
@@ -1331,8 +1359,7 @@ Codes are universal,but messages can vary.
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to 10x in your region
 *   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to %sx in your region
 
-50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 50xx - Order Execution Issues[​](/docs/derivatives/usds-margined-futures/error-code#50xx---order-execution-issues "Direct link to 50xx - Order Execution Issues")
 
 ### \-5021 FOK\_ORDER\_REJECT[​](/docs/derivatives/usds-margined-futures/error-code#-5021-fok_order_reject "Direct link to -5021 FOK_ORDER_REJECT")
 
@@ -1386,11 +1413,9 @@ Codes are universal,but messages can vary.
 
 *   No depth matches this BBO order
 
-Order Book
-==========
+# Order Book
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#api-description "Direct link to API Description")
---------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#api-description "Direct link to API Description")
 
 Get current order book. Note that this request returns limited market depth. If you need to continuously monitor order book updates, please consider using Websocket Market Streams:
 
@@ -1399,63 +1424,57 @@ Get current order book. Note that this request returns limited market depth. If 
 
 You can use `depth` request together with `<symbol>@depth` streams to maintain a local order book.
 
-Method[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#method "Direct link to Method")
------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#method "Direct link to Method")
 
 `depth`
 
-Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#request "Direct link to Request")
---------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#request "Direct link to Request")
 
-```
-{    "id": "51e2affb-0aba-4821-ba75-f2625006eb43",    "method": "depth",    "params": {      "symbol": "BTCUSDT"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "51e2affb-0aba-4821-ba75-f2625006eb43",    "method": "depth",    "params": {      "symbol": "BTCUSDT"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#request-weight "Direct link to Request Weight")
------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#request-weight "Direct link to Request Weight")
 
 Adjusted based on the limit:
 
 | Limit | Weight |
 | --- | --- |
-| 5, 10, 20, 50 | 2 
-| 100 | 5 
-| 500 | 10 
-| 1000 | 20 
+| 5, 10, 20, 50 | 2 |
+| 100 | 5 |
+| 500 | 10 |
+| 1000 | 20 |
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#request-parameters "Direct link to Request Parameters")
------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | YES |  
-| limit | INT | NO | Default 500; Valid limits:\[5, 10, 20, 50, 100, 500, 1000\] 
+| symbol | STRING | YES |  |
+| limit | INT | NO | Default 500; Valid limits:\[5, 10, 20, 50, 100, 500, 1000\] |
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",  "status": 200,  "result": {    "lastUpdateId": 1027024,    "E": 1589436922972,   // Message output time    "T": 1589436922959,   // Transaction time    "bids": [      [        "4.00000000",     // PRICE        "431.00000000"    // QTY      ]    ],    "asks": [      [        "4.00000200",        "12.00000000"      ]    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 5    }  ]}
 ```
-{  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",  "status": 200,  "result": {    "lastUpdateId": 1027024,    "E": 1589436922972,   // Message output time    "T": 1589436922959,   // Transaction time    "bids": [      [        "4.00000000",     // PRICE        "431.00000000"    // QTY      ]    ],    "asks": [      [        "4.00000200",        "12.00000000"      ]    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 5    }  ]}
-```
 
-Symbol Price Ticker
-===================
+# Symbol Price Ticker
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#api-description "Direct link to API Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#api-description "Direct link to API Description")
 
 Latest price for a symbol or symbols.
 
-Method[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#method "Direct link to Method")
--------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#method "Direct link to Method")
 
 `ticker.price`
 
-Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#request "Direct link to Request")
-----------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#request "Direct link to Request")
 
-```
-{   	"id": "9d32157c-a556-4d27-9866-66760a174b57",    "method": "ticker.price",    "params": {        "symbol": "BTCUSDT"    }}
+```codeBlockLines_aHhF
+{  
+   	"id": "9d32157c-a556-4d27-9866-66760a174b57",    "method": "ticker.price",    "params": {        "symbol": "BTCUSDT"    }}
 ```
 
 **Weight:**
@@ -1463,79 +1482,74 @@ Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/S
 **1** for a single symbol;  
 **2** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#request-parameters "Direct link to Request Parameters")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   If the symbol is not sent, prices for all symbols will be returned in an array.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker#response-example "Direct link to Response Example")
 
-```
-{  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": {	"symbol": "BTCUSDT",	"price": "6000.01",	"time": 1589437530011   // Transaction time  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": {	"symbol": "BTCUSDT",	"price": "6000.01",	"time": 1589437530011   // Transaction time  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
 
 > OR
 
-```
-{  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": [	{    	"symbol": "BTCUSDT",      	"price": "6000.01",      	"time": 1589437530011  	}  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": [	{    	"symbol": "BTCUSDT",      	"price": "6000.01",      	"time": 1589437530011  	}  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
 
-Symbol Order Book Ticker
-========================
+# Symbol Order Book Ticker
 
-API Description[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#api-description "Direct link to API Description")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## API Description[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#api-description "Direct link to API Description")
 
 Best price/qty on the order book for a symbol or symbols.
 
-Method[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#method "Direct link to Method")
-------------------------------------------------------------------------------------------------------------------------------------
+## Method[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#method "Direct link to Method")
 
 `ticker.book`
 
-Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#request "Direct link to Request")
----------------------------------------------------------------------------------------------------------------------------------------
+## Request[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#request "Direct link to Request")
 
-```
-{    "id": "9d32157c-a556-4d27-9866-66760a174b57",    "method": "ticker.book",    "params": {        "symbol": "BTCUSDT"    }}
+```codeBlockLines_aHhF
+{  
+    "id": "9d32157c-a556-4d27-9866-66760a174b57",    "method": "ticker.book",    "params": {        "symbol": "BTCUSDT"    }}
 ```
 
-Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#request-weight "Direct link to Request Weight")
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Weight[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#request-weight "Direct link to Request Weight")
 
 **2** for a single symbol;  
 **5** when the symbol parameter is omitted
 
-Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#request-parameters "Direct link to Request Parameters")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Request Parameters[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#request-parameters "Direct link to Request Parameters")
 
 | Name | Type | Mandatory | Description |
 | --- | --- | --- | --- |
-| symbol | STRING | NO |  
+| symbol | STRING | NO |  |
 
 > *   If the symbol is not sent, bookTickers for all symbols will be returned in an array.
 > *   The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
 
-Response Example[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker#response-example "Direct link to Response Example")
 
-```
-{  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": {    "lastUpdateId": 1027024,    "symbol": "BTCUSDT",    "bidPrice": "4.00000000",    "bidQty": "431.00000000",    "askPrice": "4.00000200",    "askQty": "9.00000000",    "time": 1589437530011   // Transaction time  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": {    "lastUpdateId": 1027024,    "symbol": "BTCUSDT",    "bidPrice": "4.00000000",    "bidQty": "431.00000000",    "askPrice": "4.00000200",    "askQty": "9.00000000",    "time": 1589437530011   // Transaction time  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
 
 > OR
 
-```
-{  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": [    {      "lastUpdateId": 1027024,      "symbol": "BTCUSDT",      "bidPrice": "4.00000000",      "bidQty": "431.00000000",      "askPrice": "4.00000200",      "askQty": "9.00000000",      "time": 1589437530011    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
+```codeBlockLines_aHhF
+{  
+  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": [    {      "lastUpdateId": 1027024,      "symbol": "BTCUSDT",      "bidPrice": "4.00000000",      "bidQty": "431.00000000",      "askPrice": "4.00000200",      "askQty": "9.00000000",      "time": 1589437530011    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 2400,      "count": 2    }  ]}
 ```
 
-Websocket Market Streams
-========================
+# Websocket Market Streams
 
 *   The connection method for Websocket is：
     
@@ -1562,19 +1576,18 @@ Websocket Market Streams
     
 *   Considering the possible data latency from RESTful endpoints during an extremely volatile market, it is highly recommended to get the order status, position, etc from the Websocket user data stream.
 
-Live Subscribing/Unsubscribing to streams
-=========================================
+# Live Subscribing/Unsubscribing to streams
 
 *   The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
 *   The `id` used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.
 
-Subscribe to a stream[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#subscribe-to-a-stream "Direct link to Subscribe to a stream")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Subscribe to a stream[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#subscribe-to-a-stream "Direct link to Subscribe to a stream")
 
 > **Response**
 
-```
-{  "result": null,  "id": 1}
+```codeBlockLines_aHhF
+{  
+  "result": null,  "id": 1}
 ```
 
 *   **Request**
@@ -1590,13 +1603,13 @@ Subscribe to a stream[​](/docs/derivatives/usds-margined-futures/websocket-mar
     }
     
 
-Unsubscribe to a stream[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#unsubscribe-to-a-stream "Direct link to Unsubscribe to a stream")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Unsubscribe to a stream[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#unsubscribe-to-a-stream "Direct link to Unsubscribe to a stream")
 
 > **Response**
 
-```
-{  "result": null,  "id": 312}
+```codeBlockLines_aHhF
+{  
+  "result": null,  "id": 312}
 ```
 
 *   **Request**
@@ -1611,13 +1624,13 @@ Unsubscribe to a stream[​](/docs/derivatives/usds-margined-futures/websocket-m
     }
     
 
-Listing Subscriptions[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#listing-subscriptions "Direct link to Listing Subscriptions")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Listing Subscriptions[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#listing-subscriptions "Direct link to Listing Subscriptions")
 
 > **Response**
 
-```
-{  "result": [    "btcusdt@aggTrade"  ],  "id": 3}
+```codeBlockLines_aHhF
+{  
+  "result": [    "btcusdt@aggTrade"  ],  "id": 3}
 ```
 
 *   **Request**
@@ -1628,15 +1641,15 @@ Listing Subscriptions[​](/docs/derivatives/usds-margined-futures/websocket-mar
     }
     
 
-Setting Properties[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#setting-properties "Direct link to Setting Properties")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Setting Properties[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#setting-properties "Direct link to Setting Properties")
 
 Currently, the only property can be set is to set whether `combined` stream payloads are enabled are not. The combined property is set to `false` when connecting using `/ws/` ("raw streams") and `true` when connecting using `/stream/`.
 
 > **Response**
 
-```
-{  "result": null,  "id": 5}
+```codeBlockLines_aHhF
+{  
+  "result": null,  "id": 5}
 ```
 
 *   **Request**
@@ -1652,13 +1665,13 @@ Currently, the only property can be set is to set whether `combined` stream payl
     }
     
 
-Retrieving Properties[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#retrieving-properties "Direct link to Retrieving Properties")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Retrieving Properties[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Live-Subscribing-Unsubscribing-to-streams#retrieving-properties "Direct link to Retrieving Properties")
 
 > **Response**
 
-```
-{  "result": true, // Indicates that combined is set to true.  "id": 2}
+```codeBlockLines_aHhF
+{  
+  "result": true, // Indicates that combined is set to true.  "id": 2}
 ```
 
 *   **Request**
@@ -1677,96 +1690,82 @@ Retrieving Properties[​](/docs/derivatives/usds-margined-futures/websocket-mar
 
 | Error Message | Description |
 | --- | --- |
-| {"code": 0, "msg": "Unknown property"} | Parameter used in the `SET_PROPERTY` or `GET_PROPERTY` was invalid 
-| {"code": 1, "msg": "Invalid value type: expected Boolean"} | Value should only be `true` or `false` 
-| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name provided was invalid 
-| {"code": 2, "msg": "Invalid request: request ID must be an unsigned integer"} | Parameter `id` had to be provided or the value provided in the `id` parameter is an unsupported type 
-| {"code": 2, "msg": "Invalid request: unknown variant %s, expected one of `SUBSCRIBE`, `UNSUBSCRIBE`, `LIST_SUBSCRIPTIONS`, `SET_PROPERTY`, `GET_PROPERTY` at line 1 column 28"} | Possible typo in the provided method or provided method was neither of the expected values 
-| {"code": 2, "msg": "Invalid request: too many parameters"} | Unnecessary parameters provided in the data 
-| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name was not provided 
-| {"code": 2, "msg": "Invalid request: missing field `method` at line 1 column 73"} | `method` was not provided in the data 
-| {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"} | JSON data sent has incorrect syntax.
+| {"code": 0, "msg": "Unknown property"} | Parameter used in the `SET_PROPERTY` or `GET_PROPERTY` was invalid |
+| {"code": 1, "msg": "Invalid value type: expected Boolean"} | Value should only be `true` or `false` |
+| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name provided was invalid |
+| {"code": 2, "msg": "Invalid request: request ID must be an unsigned integer"} | Parameter `id` had to be provided or the value provided in the `id` parameter is an unsupported type |
+| {"code": 2, "msg": "Invalid request: unknown variant %s, expected one of `SUBSCRIBE`, `UNSUBSCRIBE`, `LIST_SUBSCRIPTIONS`, `SET_PROPERTY`, `GET_PROPERTY` at line 1 column 28"} | Possible typo in the provided method or provided method was neither of the expected values |
+| {"code": 2, "msg": "Invalid request: too many parameters"} | Unnecessary parameters provided in the data |
+| {"code": 2, "msg": "Invalid request: property name must be a string"} | Property name was not provided |
+| {"code": 2, "msg": "Invalid request: missing field `method` at line 1 column 73"} | `method` was not provided in the data |
+| {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"} | JSON data sent has incorrect syntax. |
 
-Aggregate Trade Streams
-=======================
+# Aggregate Trade Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#stream-description "Direct link to Stream Description")
 
 The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@aggTrade`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#update-speed "Direct link to Update Speed")
 
 **100ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e": "aggTrade",  // Event type  "E": 123456789,   // Event time  "s": "BTCUSDT",    // Symbol  "a": 5933014,		// Aggregate trade ID  "p": "0.001",     // Price  "q": "100",       // Quantity  "f": 100,         // First trade ID  "l": 105,         // Last trade ID  "T": 123456785,   // Trade time  "m": true,        // Is the buyer the market maker?}
 ```
-{  "e": "aggTrade",  // Event type  "E": 123456789,   // Event time  "s": "BTCUSDT",    // Symbol  "a": 5933014,		// Aggregate trade ID  "p": "0.001",     // Price  "q": "100",       // Quantity  "f": 100,         // First trade ID  "l": 105,         // Last trade ID  "T": 123456785,   // Trade time  "m": true,        // Is the buyer the market maker?}
-```
 
-Mark Price Stream
-=================
+# Mark Price Stream
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#stream-description "Direct link to Stream Description")
 
 Mark price and funding rate for a single symbol pushed every 3 seconds or every second.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#stream-name "Direct link to Stream Name")
 
 `<symbol>@markPrice` or `<symbol>@markPrice@1s`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#update-speed "Direct link to Update Speed")
 
 **3000ms** or **1000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{    "e": "markPriceUpdate",  	// Event type    "E": 1562305380000,      	// Event time    "s": "BTCUSDT",          	// Symbol    "p": "11794.15000000",   	// Mark price    "i": "11784.62659091",		// Index price    "P": "11784.25641265",		// Estimated Settle Price, only useful in the last hour before the settlement starts    "r": "0.00038167",       	// Funding rate    "T": 1562306400000       	// Next funding time  }
 ```
-  {    "e": "markPriceUpdate",  	// Event type    "E": 1562305380000,      	// Event time    "s": "BTCUSDT",          	// Symbol    "p": "11794.15000000",   	// Mark price    "i": "11784.62659091",		// Index price    "P": "11784.25641265",		// Estimated Settle Price, only useful in the last hour before the settlement starts    "r": "0.00038167",       	// Funding rate    "T": 1562306400000       	// Next funding time  }
-```
 
-Mark Price Stream for All market
-================================
+# Mark Price Stream for All market
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#stream-description "Direct link to Stream Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#stream-description "Direct link to Stream Description")
 
 Mark price and funding rate for all symbols pushed every 3 seconds or every second.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#stream-name "Direct link to Stream Name")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#stream-name "Direct link to Stream Name")
 
 `!markPrice@arr` or `!markPrice@arr@1s`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#update-speed "Direct link to Update Speed")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#update-speed "Direct link to Update Speed")
 
 **3000ms** or **1000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[   
+  {  
+    "e": "markPriceUpdate",  	// Event type    "E": 1562305380000,      	// Event time    "s": "BTCUSDT",          	// Symbol    "p": "11185.87786614",   	// Mark price    "i": "11784.62659091"		// Index price    "P": "11784.25641265",		// Estimated Settle Price, only useful in the last hour before the settlement starts    "r": "0.00030000",       	// Funding rate    "T": 1562306400000       	// Next funding time  }]
 ```
-[   {    "e": "markPriceUpdate",  	// Event type    "E": 1562305380000,      	// Event time    "s": "BTCUSDT",          	// Symbol    "p": "11185.87786614",   	// Mark price    "i": "11784.62659091"		// Index price    "P": "11784.25641265",		// Estimated Settle Price, only useful in the last hour before the settlement starts    "r": "0.00030000",       	// Funding rate    "T": 1562306400000       	// Next funding time  }]
-```
 
-Kline/Candlestick Streams
-=========================
+# Kline/Candlestick Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#stream-description "Direct link to Stream Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#stream-description "Direct link to Stream Description")
 
 The Kline/Candlestick Stream push updates to the current klines/candlestick every 250 milliseconds (if existing).
 
@@ -1790,28 +1789,24 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 *   1w
 *   1M
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#stream-name "Direct link to Stream Name")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@kline_<interval>`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#update-speed "Direct link to Update Speed")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#update-speed "Direct link to Update Speed")
 
 **250ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e": "kline",     // Event type  "E": 1638747660000,   // Event time  "s": "BTCUSDT",    // Symbol  "k": {    "t": 1638747660000, // Kline start time    "T": 1638747719999, // Kline close time    "s": "BTCUSDT",  // Symbol    "i": "1m",      // Interval    "f": 100,       // First trade ID    "L": 200,       // Last trade ID    "o": "0.0010",  // Open price    "c": "0.0020",  // Close price    "h": "0.0025",  // High price    "l": "0.0015",  // Low price    "v": "1000",    // Base asset volume    "n": 100,       // Number of trades    "x": false,     // Is this kline closed?    "q": "1.0000",  // Quote asset volume    "V": "500",     // Taker buy base asset volume    "Q": "0.500",   // Taker buy quote asset volume    "B": "123456"   // Ignore  }}
 ```
-{  "e": "kline",     // Event type  "E": 1638747660000,   // Event time  "s": "BTCUSDT",    // Symbol  "k": {    "t": 1638747660000, // Kline start time    "T": 1638747719999, // Kline close time    "s": "BTCUSDT",  // Symbol    "i": "1m",      // Interval    "f": 100,       // First trade ID    "L": 200,       // Last trade ID    "o": "0.0010",  // Open price    "c": "0.0020",  // Close price    "h": "0.0025",  // High price    "l": "0.0015",  // Low price    "v": "1000",    // Base asset volume    "n": 100,       // Number of trades    "x": false,     // Is this kline closed?    "q": "1.0000",  // Quote asset volume    "V": "500",     // Taker buy base asset volume    "Q": "0.500",   // Taker buy quote asset volume    "B": "123456"   // Ignore  }}
-```
 
-Continuous Contract Kline/Candlestick Streams
-=============================================
+# Continuous Contract Kline/Candlestick Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#stream-description "Direct link to Stream Description")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#stream-description "Direct link to Stream Description")
 
 **Contract type:**
 
@@ -1839,275 +1834,236 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 *   1w
 *   1M
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#stream-name "Direct link to Stream Name")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#stream-name "Direct link to Stream Name")
 
 `<pair>_<contractType>@continuousKline_<interval>`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#update-speed "Direct link to Update Speed")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#update-speed "Direct link to Update Speed")
 
 **250ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#response-example "Direct link to Response Example")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"continuous_kline",	// Event type  "E":1607443058651,		// Event time  "ps":"BTCUSDT",			// Pair  "ct":"PERPETUAL"			// Contract type  "k":{    "t":1607443020000,		// Kline start time    "T":1607443079999,		// Kline close time    "i":"1m",				// Interval    "f":116467658886,		// First updateId    "L":116468012423,		// Last updateId    "o":"18787.00",			// Open price    "c":"18804.04",			// Close price    "h":"18804.04",			// High price    "l":"18786.54",			// Low price    "v":"197.664",			// volume    "n": 543,				// Number of trades    "x":false,				// Is this kline closed?    "q":"3715253.19494",	// Quote asset volume    "V":"184.769",			// Taker buy volume    "Q":"3472925.84746",	//Taker buy quote asset volume    "B":"0"					// Ignore  }}
 ```
-{  "e":"continuous_kline",	// Event type  "E":1607443058651,		// Event time  "ps":"BTCUSDT",			// Pair  "ct":"PERPETUAL"			// Contract type  "k":{    "t":1607443020000,		// Kline start time    "T":1607443079999,		// Kline close time    "i":"1m",				// Interval    "f":116467658886,		// First updateId    "L":116468012423,		// Last updateId    "o":"18787.00",			// Open price    "c":"18804.04",			// Close price    "h":"18804.04",			// High price    "l":"18786.54",			// Low price    "v":"197.664",			// volume    "n": 543,				// Number of trades    "x":false,				// Is this kline closed?    "q":"3715253.19494",	// Quote asset volume    "V":"184.769",			// Taker buy volume    "Q":"3472925.84746",	//Taker buy quote asset volume    "B":"0"					// Ignore  }}
-```
 
-Individual Symbol Mini Ticker Stream
-====================================
+# Individual Symbol Mini Ticker Stream
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#stream-description "Direct link to Stream Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#stream-description "Direct link to Stream Description")
 
 24hr rolling window mini-ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#stream-name "Direct link to Stream Name")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#stream-name "Direct link to Stream Name")
 
 `<symbol>@miniTicker`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#update-speed "Direct link to Update Speed")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#update-speed "Direct link to Update Speed")
 
 **2s**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{    "e": "24hrMiniTicker",  // Event type    "E": 123456789,         // Event time    "s": "BTCUSDT",         // Symbol    "c": "0.0025",          // Close price    "o": "0.0010",          // Open price    "h": "0.0025",          // High price    "l": "0.0010",          // Low price    "v": "10000",           // Total traded base asset volume    "q": "18"               // Total traded quote asset volume  }
 ```
-  {    "e": "24hrMiniTicker",  // Event type    "E": 123456789,         // Event time    "s": "BTCUSDT",         // Symbol    "c": "0.0025",          // Close price    "o": "0.0010",          // Open price    "h": "0.0025",          // High price    "l": "0.0010",          // Low price    "v": "10000",           // Total traded base asset volume    "q": "18"               // Total traded quote asset volume  }
-```
 
-All Market Tickers Streams
-==========================
+# All Market Tickers Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#stream-description "Direct link to Stream Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#stream-description "Direct link to Stream Description")
 
 24hr rolling window ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#stream-name "Direct link to Stream Name")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#stream-name "Direct link to Stream Name")
 
 `!ticker@arr`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#update-speed "Direct link to Update Speed")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[  
+	{	  "e": "24hrTicker",  // Event type	  "E": 123456789,     // Event time	  "s": "BTCUSDT",     // Symbol	  "p": "0.0015",      // Price change	  "P": "250.00",      // Price change percent	  "w": "0.0018",      // Weighted average price	  "c": "0.0025",      // Last price	  "Q": "10",          // Last quantity	  "o": "0.0010",      // Open price	  "h": "0.0025",      // High price	  "l": "0.0010",      // Low price	  "v": "10000",       // Total traded base asset volume	  "q": "18",          // Total traded quote asset volume	  "O": 0,             // Statistics open time	  "C": 86400000,      // Statistics close time	  "F": 0,             // First trade ID	  "L": 18150,         // Last trade Id	  "n": 18151          // Total number of trades	}]
 ```
-[	{	  "e": "24hrTicker",  // Event type	  "E": 123456789,     // Event time	  "s": "BTCUSDT",     // Symbol	  "p": "0.0015",      // Price change	  "P": "250.00",      // Price change percent	  "w": "0.0018",      // Weighted average price	  "c": "0.0025",      // Last price	  "Q": "10",          // Last quantity	  "o": "0.0010",      // Open price	  "h": "0.0025",      // High price	  "l": "0.0010",      // Low price	  "v": "10000",       // Total traded base asset volume	  "q": "18",          // Total traded quote asset volume	  "O": 0,             // Statistics open time	  "C": 86400000,      // Statistics close time	  "F": 0,             // First trade ID	  "L": 18150,         // Last trade Id	  "n": 18151          // Total number of trades	}]
-```
 
-Individual Symbol Ticker Streams
-================================
+# Individual Symbol Ticker Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#stream-description "Direct link to Stream Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#stream-description "Direct link to Stream Description")
 
 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#stream-name "Direct link to Stream Name")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@ticker`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#update-speed "Direct link to Update Speed")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#update-speed "Direct link to Update Speed")
 
 **2000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e": "24hrTicker",  // Event type  "E": 123456789,     // Event time  "s": "BTCUSDT",     // Symbol  "p": "0.0015",      // Price change  "P": "250.00",      // Price change percent  "w": "0.0018",      // Weighted average price  "c": "0.0025",      // Last price  "Q": "10",          // Last quantity  "o": "0.0010",      // Open price  "h": "0.0025",      // High price  "l": "0.0010",      // Low price  "v": "10000",       // Total traded base asset volume  "q": "18",          // Total traded quote asset volume  "O": 0,             // Statistics open time  "C": 86400000,      // Statistics close time  "F": 0,             // First trade ID  "L": 18150,         // Last trade Id  "n": 18151          // Total number of trades}
 ```
-{  "e": "24hrTicker",  // Event type  "E": 123456789,     // Event time  "s": "BTCUSDT",     // Symbol  "p": "0.0015",      // Price change  "P": "250.00",      // Price change percent  "w": "0.0018",      // Weighted average price  "c": "0.0025",      // Last price  "Q": "10",          // Last quantity  "o": "0.0010",      // Open price  "h": "0.0025",      // High price  "l": "0.0010",      // Low price  "v": "10000",       // Total traded base asset volume  "q": "18",          // Total traded quote asset volume  "O": 0,             // Statistics open time  "C": 86400000,      // Statistics close time  "F": 0,             // First trade ID  "L": 18150,         // Last trade Id  "n": 18151          // Total number of trades}
-```
 
-All Market Mini Tickers Stream
-==============================
+# All Market Mini Tickers Stream
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#stream-description "Direct link to Stream Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#stream-description "Direct link to Stream Description")
 
 24hr rolling window mini-ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#stream-name "Direct link to Stream Name")
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#stream-name "Direct link to Stream Name")
 
 `!miniTicker@arr`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#update-speed "Direct link to Update Speed")
------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+[    
+  {  
+    "e": "24hrMiniTicker",  // Event type    "E": 123456789,         // Event time    "s": "BTCUSDT",         // Symbol    "c": "0.0025",          // Close price    "o": "0.0010",          // Open price    "h": "0.0025",          // High price    "l": "0.0010",          // Low price    "v": "10000",           // Total traded base asset volume    "q": "18"               // Total traded quote asset volume  }]
 ```
-[    {    "e": "24hrMiniTicker",  // Event type    "E": 123456789,         // Event time    "s": "BTCUSDT",         // Symbol    "c": "0.0025",          // Close price    "o": "0.0010",          // Open price    "h": "0.0025",          // High price    "l": "0.0010",          // Low price    "v": "10000",           // Total traded base asset volume    "q": "18"               // Total traded quote asset volume  }]
-```
 
-Individual Symbol Book Ticker Streams
-=====================================
+# Individual Symbol Book Ticker Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#stream-description "Direct link to Stream Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#stream-description "Direct link to Stream Description")
 
 Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#stream-name "Direct link to Stream Name")
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@bookTicker`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#update-speed "Direct link to Update Speed")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#update-speed "Direct link to Update Speed")
 
 **Real-time**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"bookTicker",			// event type  "u":400900217,     		// order book updateId  "E": 1568014460893,  		// event time  "T": 1568014460891,  		// transaction time  "s":"BNBUSDT",     		// symbol  "b":"25.35190000", 		// best bid price  "B":"31.21000000", 		// best bid qty  "a":"25.36520000", 		// best ask price  "A":"40.66000000"  		// best ask qty}
 ```
-{  "e":"bookTicker",			// event type  "u":400900217,     		// order book updateId  "E": 1568014460893,  		// event time  "T": 1568014460891,  		// transaction time  "s":"BNBUSDT",     		// symbol  "b":"25.35190000", 		// best bid price  "B":"31.21000000", 		// best bid qty  "a":"25.36520000", 		// best ask price  "A":"40.66000000"  		// best ask qty}
-```
 
-All Book Tickers Stream
-=======================
+# All Book Tickers Stream
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#stream-description "Direct link to Stream Description")
 
 Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#stream-name "Direct link to Stream Name")
 
 `!bookTicker`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#update-speed "Direct link to Update Speed")
 
 **5s**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"bookTicker",			// event type  "u":400900217,     		// order book updateId  "E": 1568014460893,  	// event time  "T": 1568014460891,  	// transaction time  "s":"BNBUSDT",     		// symbol  "b":"25.35190000", 		// best bid price  "B":"31.21000000", 		// best bid qty  "a":"25.36520000", 		// best ask price  "A":"40.66000000"  		// best ask qty}
 ```
-{  "e":"bookTicker",			// event type  "u":400900217,     		// order book updateId  "E": 1568014460893,  	// event time  "T": 1568014460891,  	// transaction time  "s":"BNBUSDT",     		// symbol  "b":"25.35190000", 		// best bid price  "B":"31.21000000", 		// best bid qty  "a":"25.36520000", 		// best ask price  "A":"40.66000000"  		// best ask qty}
-```
 
-Liquidation Order Streams
-=========================
+# Liquidation Order Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#stream-description "Direct link to Stream Description")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#stream-description "Direct link to Stream Description")
 
 The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#stream-name "Direct link to Stream Name")
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#stream-name "Direct link to Stream Name")
 
    `<symbol>@forceOrder`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#update-speed "Direct link to Update Speed")
-------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#update-speed "Direct link to Update Speed")
 
 1000ms
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#response-example "Direct link to Response Example")
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  
+	"e":"forceOrder",                   // Event Type	"E":1568014460893,                  // Event Time	"o":{			"s":"BTCUSDT",                   // Symbol		"S":"SELL",                      // Side		"o":"LIMIT",                     // Order Type		"f":"IOC",                       // Time in Force		"q":"0.014",                     // Original Quantity		"p":"9910",                      // Price		"ap":"9910",                     // Average Price		"X":"FILLED",                    // Order Status		"l":"0.014",                     // Order Last Filled Quantity		"z":"0.014",                     // Order Filled Accumulated Quantity		"T":1568014460893,          	 // Order Trade Time		}  
+}
 ```
-{	"e":"forceOrder",                   // Event Type	"E":1568014460893,                  // Event Time	"o":{			"s":"BTCUSDT",                   // Symbol		"S":"SELL",                      // Side		"o":"LIMIT",                     // Order Type		"f":"IOC",                       // Time in Force		"q":"0.014",                     // Original Quantity		"p":"9910",                      // Price		"ap":"9910",                     // Average Price		"X":"FILLED",                    // Order Status		"l":"0.014",                     // Order Last Filled Quantity		"z":"0.014",                     // Order Filled Accumulated Quantity		"T":1568014460893,          	 // Order Trade Time		}}
-```
 
-All Market Liquidation Order Streams
-====================================
+# All Market Liquidation Order Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#stream-description "Direct link to Stream Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#stream-description "Direct link to Stream Description")
 
 The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#stream-name "Direct link to Stream Name")
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#stream-name "Direct link to Stream Name")
 
 `!forceOrder@arr`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#update-speed "Direct link to Update Speed")
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  
+	"e":"forceOrder",                   // Event Type	"E":1568014460893,                  // Event Time	"o":{			"s":"BTCUSDT",                   // Symbol		"S":"SELL",                      // Side		"o":"LIMIT",                     // Order Type		"f":"IOC",                       // Time in Force		"q":"0.014",                     // Original Quantity		"p":"9910",                      // Price		"ap":"9910",                     // Average Price		"X":"FILLED",                    // Order Status		"l":"0.014",                     // Order Last Filled Quantity		"z":"0.014",                     // Order Filled Accumulated Quantity		"T":1568014460893,          	 // Order Trade Time	}}
 ```
-{	"e":"forceOrder",                   // Event Type	"E":1568014460893,                  // Event Time	"o":{			"s":"BTCUSDT",                   // Symbol		"S":"SELL",                      // Side		"o":"LIMIT",                     // Order Type		"f":"IOC",                       // Time in Force		"q":"0.014",                     // Original Quantity		"p":"9910",                      // Price		"ap":"9910",                     // Average Price		"X":"FILLED",                    // Order Status		"l":"0.014",                     // Order Last Filled Quantity		"z":"0.014",                     // Order Filled Accumulated Quantity		"T":1568014460893,          	 // Order Trade Time	}}
-```
 
-Partial Book Depth Streams
-==========================
+# Partial Book Depth Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#stream-description "Direct link to Stream Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#stream-description "Direct link to Stream Description")
 
 Top **<levels>** bids and asks, Valid **<levels>** are 5, 10, or 20.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#stream-name "Direct link to Stream Name")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@depth<levels>` OR `<symbol>@depth<levels>@500ms` OR `<symbol>@depth<levels>@100ms`.
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#update-speed "Direct link to Update Speed")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#update-speed "Direct link to Update Speed")
 
 **250ms**, **500ms** or **100ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e": "depthUpdate", // Event type  "E": 1571889248277, // Event time  "T": 1571889248276, // Transaction time  "s": "BTCUSDT",  "U": 390497796,     // First update ID in event  "u": 390497878,     // Final update ID in event  "pu": 390497794,    // Final update Id in last stream(ie `u` in last stream)  "b": [              // Bids to be updated    [      "7403.89",      // Price Level to be updated      "0.002"         // Quantity    ],    [      "7403.90",      "3.906"    ],    [      "7404.00",      "1.428"    ],    [      "7404.85",      "5.239"    ],    [      "7405.43",      "2.562"    ]  ],  "a": [              // Asks to be updated    [      "7405.96",      // Price level to be      "3.340"         // Quantity    ],    [      "7406.63",      "4.525"    ],    [      "7407.08",      "2.475"    ],    [      "7407.15",      "4.800"    ],    [      "7407.20",      "0.175"    ]  ]}
 ```
-{  "e": "depthUpdate", // Event type  "E": 1571889248277, // Event time  "T": 1571889248276, // Transaction time  "s": "BTCUSDT",  "U": 390497796,     // First update ID in event  "u": 390497878,     // Final update ID in event  "pu": 390497794,    // Final update Id in last stream(ie `u` in last stream)  "b": [              // Bids to be updated    [      "7403.89",      // Price Level to be updated      "0.002"         // Quantity    ],    [      "7403.90",      "3.906"    ],    [      "7404.00",      "1.428"    ],    [      "7404.85",      "5.239"    ],    [      "7405.43",      "2.562"    ]  ],  "a": [              // Asks to be updated    [      "7405.96",      // Price level to be      "3.340"         // Quantity    ],    [      "7406.63",      "4.525"    ],    [      "7407.08",      "2.475"    ],    [      "7407.15",      "4.800"    ],    [      "7407.20",      "0.175"    ]  ]}
-```
 
-Diff. Book Depth Streams
-========================
+# Diff. Book Depth Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#stream-description "Direct link to Stream Description")
 
 Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@depth` OR `<symbol>@depth@500ms` OR `<symbol>@depth@100ms`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#update-speed "Direct link to Update Speed")
 
 **250ms**, **500ms**, **100ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams#response-example "Direct link to Response Example")
 
-```
-{  "e": "depthUpdate", // Event type  "E": 123456789,     // Event time  "T": 123456788,     // Transaction time   "s": "BTCUSDT",     // Symbol  "U": 157,           // First update ID in event  "u": 160,           // Final update ID in event  "pu": 149,          // Final update Id in last stream(ie `u` in last stream)  "b": [              // Bids to be updated    [      "0.0024",       // Price level to be updated      "10"            // Quantity    ]  ],  "a": [              // Asks to be updated    [      "0.0026",       // Price level to be updated      "100"          // Quantity    ]  ]}
+```codeBlockLines_aHhF
+{  
+  "e": "depthUpdate", // Event type  "E": 123456789,     // Event time  "T": 123456788,     // Transaction time  "s": "BTCUSDT",     // Symbol  
+  "U": 157,           // First update ID in event  "u": 160,           // Final update ID in event  "pu": 149,          // Final update Id in last stream(ie `u` in last stream)  "b": [              // Bids to be updated    [      "0.0024",       // Price level to be updated      "10"            // Quantity    ]  ],  "a": [              // Asks to be updated    [      "0.0026",       // Price level to be updated      "100"          // Quantity    ]  ]}
 ```
 
-How to manage a local order book correctly
-==========================================
+# How to manage a local order book correctly
 
 1.  Open a stream to **wss://fstream.binance.com/stream?streams=btcusdt@depth**.
 2.  Buffer the events you receive from the stream. For same price, latest received update covers the previous one.
@@ -2119,78 +2075,72 @@ How to manage a local order book correctly
 8.  If the quantity is 0, **remove** the price level.
 9.  Receiving an event that removes a price level that is not in your local order book can happen and is normal.
 
-Composite Index Symbol Information Streams
-==========================================
+# Composite Index Symbol Information Streams
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#stream-description "Direct link to Stream Description")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#stream-description "Direct link to Stream Description")
 
 Composite index information for index symbols pushed every second.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#stream-name "Direct link to Stream Name")
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#stream-name "Direct link to Stream Name")
 
 `<symbol>@compositeIndex`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#update-speed "Direct link to Update Speed")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#update-speed "Direct link to Update Speed")
 
 **1000ms**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#response-example "Direct link to Response Example")
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+  "e":"compositeIndex",		// Event type  "E":1602310596000,		// Event time  "s":"DEFIUSDT",			// Symbol  "p":"554.41604065",		// Price  "C":"baseAsset",  "c":[      				// Composition  	{  		"b":"BAL",			// Base asset  		"q":"USDT",         // Quote asset  		"w":"1.04884844",	// Weight in quantity  		"W":"0.01457800",   // Weight in percentage  		"i":"24.33521021"   // Index price  	},  	{  		"b":"BAND",  		"q":"USDT" ,  		"w":"3.53782729",  		"W":"0.03935200",  		"i":"7.26420084"    }  ]}
 ```
-{  "e":"compositeIndex",		// Event type  "E":1602310596000,		// Event time  "s":"DEFIUSDT",			// Symbol  "p":"554.41604065",		// Price  "C":"baseAsset",  "c":[      				// Composition  	{  		"b":"BAL",			// Base asset  		"q":"USDT",         // Quote asset  		"w":"1.04884844",	// Weight in quantity  		"W":"0.01457800",   // Weight in percentage  		"i":"24.33521021"   // Index price  	},  	{  		"b":"BAND",  		"q":"USDT" ,  		"w":"3.53782729",  		"W":"0.03935200",  		"i":"7.26420084"    }  ]}
-```
 
-Contract Info Stream
-====================
+# Contract Info Stream
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#stream-description "Direct link to Stream Description")
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#stream-description "Direct link to Stream Description")
 
 ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). `bks` field only shows up when bracket gets updated.
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#stream-name "Direct link to Stream Name")
-----------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#stream-name "Direct link to Stream Name")
 
 `!contractInfo`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#update-speed "Direct link to Update Speed")
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#update-speed "Direct link to Update Speed")
 
 **Real-time**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#response-example "Direct link to Response Example")
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream#response-example "Direct link to Response Example")
 
+```codeBlockLines_aHhF
+{  
+    "e":"contractInfo",          // Event Type    "E":1669356423908,           // Event Time    "s":"IOTAUSDT",              // Symbol    "ps":"IOTAUSDT",             // Pair    "ct":"PERPETUAL",            // Contract type    "dt":4133404800000,          // Delivery date time    "ot":1569398400000,          // onboard date time   
+    "cs":"TRADING",              // Contract status   
+    "bks":[  
+        {            "bs":1,              // Notional bracket            "bnf":0,             // Floor notional of this bracket            "bnc":5000,          // Cap notional of this bracket            "mmr":0.01,          // Maintenance ratio for this bracket            "cf":0,              // Auxiliary number for quick calculation            "mi":21,             // Min leverage for this bracket  
+            "ma":50              // Max leverage for this bracket        },        {            "bs":2,            "bnf":5000,            "bnc":25000,            "mmr":0.025,            "cf":75,            "mi":11,            "ma":20        }    ]}
 ```
-{    "e":"contractInfo",          // Event Type    "E":1669356423908,           // Event Time    "s":"IOTAUSDT",              // Symbol    "ps":"IOTAUSDT",             // Pair    "ct":"PERPETUAL",            // Contract type    "dt":4133404800000,          // Delivery date time     "ot":1569398400000,          // onboard date time     "cs":"TRADING",              // Contract status     "bks":[        {            "bs":1,              // Notional bracket            "bnf":0,             // Floor notional of this bracket            "bnc":5000,          // Cap notional of this bracket            "mmr":0.01,          // Maintenance ratio for this bracket            "cf":0,              // Auxiliary number for quick calculation             "mi":21,             // Min leverage for this bracket            "ma":50              // Max leverage for this bracket        },        {            "bs":2,            "bnf":5000,            "bnc":25000,            "mmr":0.025,            "cf":75,            "mi":11,            "ma":20        }    ]}
-```
 
-Multi-Assets Mode Asset Index
-=============================
+# Multi-Assets Mode Asset Index
 
-Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#stream-description "Direct link to Stream Description")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Description[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#stream-description "Direct link to Stream Description")
 
 Asset index for multi-assets mode user
 
-Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#stream-name "Direct link to Stream Name")
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## Stream Name[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#stream-name "Direct link to Stream Name")
 
 `!assetIndex@arr` OR `<assetSymbol>@assetIndex`
 
-Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#update-speed "Direct link to Update Speed")
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Update Speed[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#update-speed "Direct link to Update Speed")
 
 **1s**
 
-Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#response-example "Direct link to Response Example")
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Response Example[​](/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index#response-example "Direct link to Response Example")
 
-```
-[    {      "e":"assetIndexUpdate",      "E":1686749230000,      "s":"ADAUSD",           // asset index symbol      "i":"0.27462452",       // index price      "b":"0.10000000",       // bid buffer      "a":"0.10000000",       // ask buffer      "B":"0.24716207",       // bid rate      "A":"0.30208698",       // ask rate      "q":"0.05000000",       // auto exchange bid buffer      "g":"0.05000000",       // auto exchange ask buffer       "Q":"0.26089330",       // auto exchange bid rate      "G":"0.28835575"        // auto exchange ask rate    },    {      "e":"assetIndexUpdate",      "E":1686749230000,      "s":"USDTUSD",      "i":"0.99987691",        "b":"0.00010000",      "a":"0.00010000",      "B":"0.99977692",      "A":"0.99997689",      "q":"0.00010000",      "g":"0.00010000",      "Q":"0.99977692",      "G":"0.99997689"    }]
+```codeBlockLines_aHhF
+[  
+    {      "e":"assetIndexUpdate",      "E":1686749230000,      "s":"ADAUSD",           // asset index symbol      "i":"0.27462452",       // index price      "b":"0.10000000",       // bid buffer      "a":"0.10000000",       // ask buffer      "B":"0.24716207",       // bid rate      "A":"0.30208698",       // ask rate      "q":"0.05000000",       // auto exchange bid buffer      "g":"0.05000000",       // auto exchange ask buffer      "Q":"0.26089330",       // auto exchange bid rate  
+      "G":"0.28835575"        // auto exchange ask rate    },    {      "e":"assetIndexUpdate",      "E":1686749230000,      "s":"USDTUSD",      "i":"0.99987691",      "b":"0.00010000",  
+      "a":"0.00010000",      "B":"0.99977692",      "A":"0.99997689",      "q":"0.00010000",      "g":"0.00010000",      "Q":"0.99977692",      "G":"0.99997689"    }]
 ```
 
