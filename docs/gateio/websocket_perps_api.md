@@ -28,6 +28,8 @@ If you use old server urls(`wss://fx-ws.gateio.ws/v4/ws` or `wss://fx-ws-testnet
 
 ## [#](#changelog) Changelog
 
+Demo WebSocket application
+
 ```python
 # !/usr/bin/env python
 # coding: utf-8
@@ -37,198 +39,212 @@ import hmac
 import json
 import logging
 import time
+import threading
 
 from websocket import WebSocketApp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+event = threading.Event()
+
 class GateWebSocketApp(WebSocketApp):
 
-    def __init__(self, url, api_key, api_secret, **kwargs):
-        super(GateWebSocketApp, self).__init__(url, **kwargs)
-        self._api_key = api_key
-        self._api_secret = api_secret
+  def __init__(self, url, api_key, api_secret, **kwargs):
+    super(GateWebSocketApp, self).__init__(url, **kwargs)
+    self._api_key = api_key
+    self._api_secret = api_secret
 
-    def _send_ping(self, interval, event):
-        while not event.wait(interval):
-            self.last_ping_tm = time.time()
-            if self.sock:
-                try:
-                    self.sock.ping()
-                except Exception as ex:
-                    logger.warning("send_ping routine terminated: {}".format(ex))
-                    break
-                try:
-                    self._request("futures.ping", auth_required=False)
-                except Exception as e:
-                    raise e
+  def _send_ping(self):
+    while not event.wait(10):
+      self.last_ping_tm = time.time()
+      if self.sock:
+        try:
+          self.sock.ping()
+        except Exception as ex:
+          logger.warning("send_ping routine terminated: {}".format(ex))
+          break
+        try:
+          self._request("futures.ping", auth_required=False)
+        except Exception as e:
+          raise e
 
-    def _request(self, channel, event=None, payload=None, auth_required=True):
-        current_time = int(time.time())
-        data = {
-            "time": current_time,
-            "channel": channel,
-            "event": event,
-            "payload": payload,
-        }
-        if auth_required:
-            message = 'channel=%s&event=%s&time=%d' % (channel, event, current_time)
-            data['auth'] = {
-                "method": "api_key",
-                "KEY": self._api_key,
-                "SIGN": self.get_sign(message),
-            }
-        data = json.dumps(data)
-        logger.info('request: %s', data)
-        self.send(data)
+  def _request(self, channel, event=None, payload=None, auth_required=True):
+    current_time = int(time.time())
+    data = {
+      "time": current_time,
+      "channel": channel,
+      "event": event,
+      "payload": payload,
+    }
+    if auth_required:
+      message = 'channel=%s&event=%s&time=%d' % (channel, event, current_time)
+      data['auth'] = {
+        "method": "api_key",
+        "KEY": self._api_key,
+        "SIGN": self.get_sign(message),
+      }
+    data = json.dumps(data)
+    logger.info('request: %s', data)
+    self.send(data)
 
-    def get_sign(self, message):
-        h = hmac.new(self._api_secret.encode("utf8"), message.encode("utf8"), hashlib.sha512)
-        return h.hexdigest()
+  def get_sign(self, message):
+    h = hmac.new(self._api_secret.encode("utf8"), message.encode("utf8"), hashlib.sha512)
+    return h.hexdigest()
 
-    def subscribe(self, channel, payload=None, auth_required=True):
-        self._request(channel, "subscribe", payload, auth_required)
+  def subscribe(self, channel, payload=None, auth_required=True):
+    self._request(channel, "subscribe", payload, auth_required)
 
-    def unsubscribe(self, channel, payload=None, auth_required=True):
-        self._request(channel, "unsubscribe", payload, auth_required)
+  def unsubscribe(self, channel, payload=None, auth_required=True):
+    self._request(channel, "unsubscribe", payload, auth_required)
 
 def on_message(ws, message):
-    # type: (GateWebSocketApp, str) -> None
-    # handle message received
-    logger.info("message received from server: {}".format(message))
+  # type: (GateWebSocketApp, str) -> None
+  # handle message received
+  logger.info("message received from server: {}".format(message))
 
 def on_open(ws):
-    # type: (GateWebSocketApp) -> None
-    # subscribe to channels interested
-    logger.info('websocket connected')
-    ws.subscribe("futures.tickers", ['BTC_USDT'], False)
+  # type: (GateWebSocketApp) -> None
+  # subscribe to channels interested
+  logger.info('websocket connected')
+  ws.subscribe("futures.tickers", ['BTC_USDT'], False)
 
 if __name__ == "__main__":
-    logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
-    app = GateWebSocketApp("wss://fx-ws.gateio.ws/v4/ws/usdt",
-                           "YOUR_API_KEY",
-                           "YOUR_API_SECRET",
-                           on_open=on_open,
-                           on_message=on_message)
-    app.run_forever(ping_interval=5)
+  logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
+  app = GateWebSocketApp("wss://fx-ws.gateio.ws/v4/ws/usdt",
+                         "YOUR_API_KEY",
+                         "YOUR_API_SECRET",
+                         on_open=on_open,
+                         on_message=on_message)
+  app.run_forever(ping_interval=5)
 ```
+
+Demo WebSocket application
 
 ```go
 package main
 
 import (
-  "crypto/hmac"
-  "crypto/sha512"
-  "crypto/tls"
-  "encoding/hex"
-  "encoding/json"
-  "fmt"
-  "io"
-  "net/url"
-  "time"
+	"crypto/hmac"
+	"crypto/sha512"
+	"crypto/tls"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/url"
+	"time"
 
-  "github.com/gorilla/websocket"
+	"github.com/gorilla/websocket"
 )
 
 type Msg struct {
-  Time    int64    `json:"time"`
-  Channel string   `json:"channel"`
-  Event   string   `json:"event"`
-  Payload []string `json:"payload"`
-  Auth    *Auth    `json:"auth"`
+	Time    int64    `json:"time"`
+	Channel string   `json:"channel"`
+	Event   string   `json:"event"`
+	Payload []string `json:"payload"`
+	Auth    *Auth    `json:"auth"`
 }
 
 type Auth struct {
-  Method string `json:"method"`
-  KEY    string `json:"KEY"`
-  SIGN   string `json:"SIGN"`
+	Method string `json:"method"`
+	KEY    string `json:"KEY"`
+	SIGN   string `json:"SIGN"`
 }
 
 const (
-  Key    = "YOUR_API_KEY"
-  Secret = "YOUR_API_SECRETY"
+	Key    = "YOUR_API_KEY"
+	Secret = "YOUR_API_SECRETY"
 )
 
 func sign(channel, event string, t int64) string {
-  message := fmt.Sprintf("channel=%s&event=%s&time=%d", channel, event, t)
-  h2 := hmac.New(sha512.New, []byte(Secret))
-  io.WriteString(h2, message)
-  return hex.EncodeToString(h2.Sum(nil))
+	message := fmt.Sprintf("channel=%s&event=%s&time=%d", channel, event, t)
+	h2 := hmac.New(sha512.New, []byte(Secret))
+	io.WriteString(h2, message)
+	return hex.EncodeToString(h2.Sum(nil))
 }
 
 func (msg *Msg) sign() {
-  signStr := sign(msg.Channel, msg.Event, msg.Time)
-  msg.Auth = &Auth{
-    Method: "api_key",
-    KEY:    Key,
-    SIGN:   signStr,
-  }
+	signStr := sign(msg.Channel, msg.Event, msg.Time)
+	msg.Auth = &Auth{
+		Method: "api_key",
+		KEY:    Key,
+		SIGN:   signStr,
+	}
 }
 
 func (msg *Msg) send(c *websocket.Conn) error {
-  msgByte, err := json.Marshal(msg)
-  if err != nil {
-    return err
-  }
-  return c.WriteMessage(websocket.TextMessage, msgByte)
+	msgByte, err := json.Marshal(msg)
+	if err != nil {
+		return err
+	}
+	return c.WriteMessage(websocket.TextMessage, msgByte)
 }
 
 func NewMsg(channel, event string, t int64, payload []string) *Msg {
-  return &Msg{
-    Time:    t,
-    Channel: channel,
-    Event:   event,
-    Payload: payload,
-  }
+	return &Msg{
+		Time:    t,
+		Channel: channel,
+		Event:   event,
+		Payload: payload,
+	}
 }
 
 func main() {
-  u := url.URL{Scheme: "wss", Host: "fx-ws.gateio.ws", Path: "/v4/ws/usdt"}
-  websocket.DefaultDialer.TLSClientConfig = &tls.Config{RootCAs: nil, InsecureSkipVerify: true}
-  c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-  if err != nil {
-    panic(err)
-  }
-  c.SetPingHandler(nil)
+	u := url.URL{Scheme: "wss", Host: "fx-ws.gateio.ws", Path: "/v4/ws/usdt"}
+	websocket.DefaultDialer.TLSClientConfig = &tls.Config{RootCAs: nil, InsecureSkipVerify: true}
+	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+	if err != nil {
+		panic(err)
+	}
+	c.SetPingHandler(nil)
 
-  // read msg
-  go func() {
-    for {
-      _, message, err := c.ReadMessage()
-      if err != nil {
-        c.Close()
-        panic(err)
-      }
-      fmt.Printf("recv: %s\n", message)
-    }
-  }()
+	// read msg
+	go func() {
+		for {
+			_, message, err := c.ReadMessage()
+			if err != nil {
+				c.Close()
+				panic(err)
+			}
+			fmt.Printf("recv: %s\n", message)
+		}
+	}()
 
-  t := time.Now().Unix()
-  pingMsg := NewMsg("futures.ping", "", t, []string{})
-  err = pingMsg.send(c)
-  if err != nil {
-    panic(err)
-  }
+	t := time.Now().Unix()
+	pingMsg := NewMsg("futures.ping", "", t, []string{})
+	err = pingMsg.send(c)
+	if err != nil {
+		panic(err)
+	}
 
-  // subscribe order book
-  orderBookMsg := NewMsg("futures.order_book", "subscribe", t, []string{"BTC_USDT"})
-  err = orderBookMsg.send(c)
-  if err != nil {
-    panic(err)
-  }
+	// subscribe order book
+	orderBookMsg := NewMsg("futures.order_book", "subscribe", t, []string{"BTC_USDT"})
+	err = orderBookMsg.send(c)
+	if err != nil {
+		panic(err)
+	}
 
-  // subscribe positions
-  positionsMsg := NewMsg("futures.positions", "subscribe", t, []string{"USERID", "BTC_USDT"})
-  positionsMsg.sign()
-  err = positionsMsg.send(c)
-  if err != nil {
-    panic(err)
-  }
+	// subscribe positions
+	positionsMsg := NewMsg("futures.positions", "subscribe", t, []string{"USERID", "BTC_USDT"})
+	positionsMsg.sign()
+	err = positionsMsg.send(c)
+	if err != nil {
+		panic(err)
+	}
 
-  select {}
+	select {}
 }
 ```
+
+2025-04-25
+
+*   Futures Account Trade has added a new `futures.order_cancel_ids` channel.
+*   `futures.order_book` and `futures.order_book_update` have added a new depth level field `l`.
+
+2025-04-18
+
+*   Add additional code examples to the documentation.
 
 2025-03-24
 
@@ -427,14 +443,76 @@ WebSocket authentication uses the same signature calculation method with HTTP AP
 1.  Signature string concatenation method: `channel=<channel>&event=<event>&time=<time>`, where `<channel>`, `<event>`, `<time>` are corresponding request information
 2.  Authentication information are sent in request body in field `auth`.
 
+Code example
+
 ```python
 # example WebSocket signature calculation implementation in Python
-import hmac, hashlib, time
+import hmac, hashlib, json, time
 
-## api_key method generate secret
-secret = 'xxxx'
-message = 'channel=%s&event=%s&time=%s' % ('futures.orders', 'subscribe', int(time.time()))
-print(hmac.new(secret, message, hashlib.sha512).hexdigest())  ## Generating signature
+def gen_sign(channel, event, timestamp):
+    # GateAPIv4 key pair
+    api_key = 'YOUR_API_KEY'
+    api_secret = 'YOUR_API_SECRET'
+
+    s = 'channel=%s&event=%s&time=%d' % (channel, event, timestamp)
+    sign = hmac.new(api_secret.encode('utf-8'), s.encode('utf-8'), hashlib.sha512).hexdigest()
+    return {'method': 'api_key', 'KEY': api_key, 'SIGN': sign}
+
+request = {
+    'id': int(time.time() * 1e6),
+    'time': int(time.time()),
+    'channel': 'futures.orders',
+    'event': 'subscribe',
+    'payload': ["20011", "BTC_USD"]
+}
+request['auth'] = gen_sign(request['channel'], request['event'], request['time'])
+print(json.dumps(request))
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"crypto/hmac"
+	"crypto/sha512"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"time"
+)
+
+func genSign(channel, event string, timestamp int64) map[string]string {
+	apiKey := "YOUR_API_KEY"
+	apiSecret := "YOUR_API_SECRET"
+
+	s := fmt.Sprintf("channel=%s&event=%s&time=%d", channel, event, timestamp)
+	h := hmac.New(sha512.New, []byte(apiSecret))
+	h.Write([]byte(s))
+	sign := hex.EncodeToString(h.Sum(nil))
+
+	return map[string]string{
+		"method": "api_key",
+		"KEY":    apiKey,
+		"SIGN":   sign,
+	}
+}
+
+func main() {
+	timestamp := time.Now().Unix()
+	request := map[string]interface{}{
+		"id":      time.Now().UnixNano() / 1e3,
+		"time":    timestamp,
+		"channel": "futures.orders",
+		"event":   "subscribe",
+		"payload": []string{"20011", "BTC_USD"},
+	}
+	request["auth"] = genSign(request["channel"].(string), request["event"].(string), timestamp)
+
+	jsonBytes, _ := json.Marshal(request)
+	fmt.Println(string(jsonBytes))
+}
 ```
 
 You can log into the console to retrieve futures API key and secret.
@@ -459,12 +537,59 @@ You can log into the console to retrieve futures API key and secret.
 
 **if you want to actively detect the connection status, you can send application layer ping message and receive pong message.**
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 ws.send('{"time" : 123456, "channel" : "futures.ping"}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	ping := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.ping",
+	}
+
+	msg, err := json.Marshal(ping)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -492,13 +617,50 @@ The above command returns JSON structured like this:
 
 ## [#](#tickers-subscription) Tickers subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.tickers",
-    "event": "subscribe", "payload" : ["BTC_USD"]}')
+ws.send('{"time" : 123456, "channel" : "futures.tickers","event": "subscribe", "payload" : ["BTC_USD"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.tickers","event":"subscribe","payload":["BTC_USD"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -605,19 +767,68 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription) Cancel subscription
 
+Code example
+
 ```python
 import json
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.tickers",
-    "event": "unsubscribe",
-    "payload": ["BTC_USD"]
+  "time": 123456,
+  "channel": "futures.tickers",
+  "event": "unsubscribe",
+  "payload": ["BTC_USD"]
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    123456,
+		"channel": "futures.tickers",
+		"event":   "unsubscribe",
+		"payload": []string{"BTC_USD"},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -653,13 +864,50 @@ The above command returns JSON structured like this:
 
 ## [#](#trades-subscription) Trades subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.trades",
-        "event": "subscribe", "payload" : ["BTC_USD"]}')
+ws.send('{"time" : 123456, "channel" : "futures.trades","event": "subscribe", "payload" : ["BTC_USD"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.trades","event":"subscribe","payload":["BTC_USD"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -748,13 +996,51 @@ Positive size means taker is buyer，negative seller
 
 ## [#](#cancel-subscription-2) Cancel subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 ws.send(
-    '{"time" : 123456, "channel" : "futures.trades", "event": "subscribe", "payload" : ["BTC_USD"]}')
+  '{"time" : 123456, "channel" : "futures.trades", "event": "subscribe", "payload" : ["BTC_USD"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.trades","event":"subscribe","payload":["BTC_USD"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -818,13 +1104,50 @@ How to maintain local order book:
 
 ## [#](#legacy-order-book-subscription) Legacy order book subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.order_book",
-    "event": "subscribe", "payload" : ["BTC_USD", "20", "0"]}')
+ws.send('{"time" : 123456, "channel" : "futures.order_book","event": "subscribe", "payload" : ["BTC_USD", "20", "0"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.order_book","event":"subscribe","payload":["BTC_USD","20","0"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -892,7 +1215,8 @@ The above command returns JSON structured like this:
         "p": "97.1",
         "s": 2245
       }
-    ]
+    ],
+    "l": "20"
   }
 }
 ```
@@ -923,16 +1247,54 @@ The above command returns JSON structured like this:
   | »bids | Array | OrderBook bid List |
   | »»p | String | Bid price |
   | »»s | String | Bid size |
+  | »l | String | Depth level |
 
 ## [#](#legacy-order-book-unsubscription) Legacy order book unsubscription
+
+Code example
 
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.order_book",
-    "event": "unsubscribe", "payload" : ["BTC_USD", "20", "0"]}')
+ws.send('{"time" : 123456, "channel" : "futures.order_book","event": "unsubscribe", "payload" : ["BTC_USD", "20", "0"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.order_book","event":"unsubscribe","payload":["BTC_USD","20","0"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -964,13 +1326,50 @@ The above command returns JSON structured like this:
 
 ## [#](#best-ask-bid-subscription) Best ask/bid subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
-ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.book_ticker",
-        "event": "subscribe", "payload" : ["BTC_USD"]}')
+ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
+ws.send('{"time" : 123456, "channel" : "futures.book_ticker","event": "subscribe", "payload" : ["BTC_USDT"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.book_ticker","event":"subscribe","payload":["BTC_USDT"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1053,13 +1452,50 @@ If `a` is empty string, it means empty asks; if `b` is empty string, it means em
 
 ## [#](#best-ask-bid-unsubscription) Best ask/bid unsubscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
-ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.book_ticker",
-        "event": "unsubscribe", "payload" : ["BTC_USD"]}')
+ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
+ws.send('{"time" : 123456, "channel" : "futures.book_ticker","event": "unsubscribe", "payload" : ["BTC_USDT"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.book_ticker","event":"unsubscribe","payload":["BTC_USDT"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1091,13 +1527,50 @@ The above command returns JSON structured like this:
 
 ## [#](#order-book-update-subscription) Order book update subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
-ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.order_book_update",
-        "event": "subscribe", "payload" : ["BTC_USD", "100ms", "100"]}')
+ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
+ws.send('{"time" : 123456, "channel" : "futures.order_book_update","event": "subscribe", "payload" : ["BTC_USDT", "100ms", "100"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.order_book_update","event":"subscribe","payload":["BTC_USDT", "100ms", "100"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1166,7 +1639,8 @@ The above command returns JSON structured like this:
         "p": "54742",
         "s": 95
       }
-    ]
+    ],
+    "l": "100"
   }
 }
 ```
@@ -1198,16 +1672,55 @@ The above command returns JSON structured like this:
   | »a | Array | Changed asks |
   | »»p | String | Changed price |
   | »»s | Integer | Absolute size value after change. If 0, remove this price from order book |
+  | »l | String | Depth level |
 
 ## [#](#order-book-update-unsubscription) Order book update unsubscription
+
+Code example
 
 ```python
 from websocket import create_connection
 
-ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
+ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
 ws.send(
-    '{"time" : 123456, "channel" : "futures.order_book_update", "event": "unsubscribe", "payload" : ["BTC_USD", "100ms", "100"]}')
+  '{"time" : 123456, "channel" : "futures.order_book_update", "event": "unsubscribe", "payload" : ["BTC_USDT", "100ms"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.order_book_update","event":"unsubscribe","payload":["BTC_USDT", "100ms"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1245,13 +1758,50 @@ The above command returns JSON structured like this:
 
 **_If prefix `contract` with `mark_`, the contract's mark price candlesticks will be subscribed; if prefix with `index_`, index price candlesticks will be subscribed._**
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.candlesticks",
-        "event": "subscribe", "payload" : ["1m", "BTC_USD"]}')
+ws.send('{"time" : 123456, "channel" : "futures.candlesticks","event": "subscribe", "payload" : ["1m", "BTC_USD"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.candlesticks","event":"subscribe","payload":["1m", "BTC_USD"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1349,13 +1899,51 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-3) Cancel subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 ws.send(
-    '{"time" : 123456, "channel" : "futures.candlesticks", "event": "unsubscribe", "payload" : ["1m", "BTC_USD"]}')
+  '{"time" : 123456, "channel" : "futures.candlesticks", "event": "unsubscribe", "payload" : ["1m", "BTC_USD"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time":123456,"channel":"futures.candlesticks","event":"unsubscribe","payload":["1m", "BTC_USD"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1393,6 +1981,8 @@ The above command returns JSON structured like this:
 
 If you want to subscribe to liquidates order push in all contracts, use `!all` in the subscription request list
 
+Code example
+
 ```python
 import json
 from websocket import create_connection
@@ -1406,6 +1996,53 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"encoding/json"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    123456,
+		"channel": "futures.public_liquidates",
+		"event":   "subscribe",
+		"payload": []string{"BTC_USD", "ETH_USD"},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1484,6 +2121,8 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-4) Cancel subscription
 
+Code example
+
 ```python
 import json
 from websocket import create_connection
@@ -1497,6 +2136,53 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"encoding/json"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    123456,
+		"channel": "futures.public_liquidates",
+		"event":   "unsubscribe",
+		"payload": []string{"BTC_USD"},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
 ```
 
 The above command returns the JSON structure as follows：
@@ -1532,13 +2218,55 @@ The above command returns the JSON structure as follows：
 
 ## [#](#contract-stats-subscription) Contract Stats subscription
 
+Code example
+
 ```python
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
-ws.send('{"time" : 123456, "channel" : "futures.contract_stats",
-    "event": "subscribe", "payload" : ["BTC_USD","10s"]}')
+ws.send('{"time" : 123456, "channel" : "futures.contract_stats","event": "subscribe", "payload" : ["BTC_USD","1m"]}')
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	message := `{
+		"time": 123456,
+		"channel": "futures.contract_stats",
+		"event": "subscribe",
+		"payload": ["BTC_USD", "1m"]
+	}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(message))
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(msg))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1642,6 +2370,8 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-5) Cancel subscription
 
+Code example
+
 ```python
 import json
 from websocket import create_connection
@@ -1651,10 +2381,51 @@ req = {
     "time": 123456,
     "channel": "futures.contract_stats",
     "event": "unsubscribe",
-    "payload": ["BTC_USD","10s"]
+    "payload": ["BTC_USD","1m"]
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := `{
+		"time": 123456,
+		"channel": "futures.contract_stats",
+		"event": "unsubscribe",
+		"payload": ["BTC_USD", "1m"]
+	}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(req))
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(msg))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1704,24 +2475,78 @@ Authentication required.
 
 If you want to subscribe to order updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.orders",
-    "event": "subscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.orders",
+  "event": "subscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.orders",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1855,24 +2680,79 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-6) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.orders",
-    "event": "unsubscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.orders",
+  "event": "unsubscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.orders",
+		"event":   "unsubscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", // replace with your API key
+			"SIGN":   "xxxx", // replace with your generated signature
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -1914,24 +2794,79 @@ Authentication required.
 
 If you want to subscribe to user trade updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.usertrades",
-    "event": "subscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.usertrades",
+  "event": "subscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.usertrades",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2027,24 +2962,79 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-7) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.usertrades",
-    "event": "unsubscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.usertrades",
+  "event": "unsubscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.usertrades",
+		"event":   "unsubscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2086,24 +3076,79 @@ Authentication required.
 
 If you want to subscribe to liquidate updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.liquidates",
-    "event": "subscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.liquidates",
+  "event": "subscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.liquidates",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2205,24 +3250,79 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-8) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.liquidates",
-    "event": "unsubscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.liquidates",
+  "event": "unsubscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.liquidates",
+		"event":   "unsubscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2264,24 +3364,79 @@ Authentication required.
 
 If you want to subscribe to auto deleverage updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.auto_deleverages",
-    "event": "subscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.auto_deleverages",
+  "event": "subscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.auto_deleverages",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2371,24 +3526,79 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-9) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.auto_deleverages",
-    "event": "unsubscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.auto_deleverages",
+  "event": "unsubscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.auto_deleverages",
+		"event":   "unsubscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2430,24 +3640,79 @@ Authentication required.
 
 If you want to subscribe to position close updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
-    "channel": "futures.position_closes",
-    "event": "subscribe",
-    "payload": ["20011", "BTC_USD"],
-    "auth": {
-        "method": "api_key",
-        "KEY": "xxxx",
-        "SIGN": "xxxx"
-    }
+  "time": int(time.time()),
+  "channel": "futures.position_closes",
+  "event": "subscribe",
+  "payload": ["20011", "BTC_USD"],
+  "auth": {
+    "method": "api_key",
+    "KEY": "xxxx",
+    "SIGN": "xxxx"
+  }
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.position_closes",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2535,13 +3800,15 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-10) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.position_closes",
     "event": "unsubscribe",
     "payload": ["20011", "BTC_USD"],
@@ -2553,6 +3820,59 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.position_closes",
+		"event":   "unsubscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2592,13 +3912,15 @@ Authentication required.
 
 ## [#](#balances-subscription) Balances subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.balances",
     "event": "subscribe",
     "payload": ["20011"],
@@ -2610,6 +3932,59 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.balances",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2698,13 +4073,15 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-11) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.balances",
     "event": "unsubscribe",
     "payload": ["20011"],
@@ -2716,6 +4093,59 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.balances",
+		"event":   "unsubscribe",
+		"payload": []interface{}{"20011"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", 
+			"SIGN":   "xxxx", 
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2744,13 +4174,15 @@ Authentication required.
 
 If you want to subscribe to reduce risk limit updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.reduce_risk_limits",
     "event": "subscribe",
     "payload": ["20011", "BTC_USD"],
@@ -2762,6 +4194,59 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.reduce_risk_limits",
+		"event":   "subscribe",
+		"payload": []interface{}{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx", // replace with your API key
+			"SIGN":   "xxxx", // replace with your generated signature
+		},
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("json marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Fatal("write error:", err)
+	}
+
+	_, resp, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read error:", err)
+	}
+
+	fmt.Println(string(resp))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2853,13 +4338,15 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-12) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.reduce_risk_limits",
     "event": "unsubscribe",
     "payload": ["20011", "BTC_USD"],
@@ -2871,6 +4358,58 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("Dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.reduce_risk_limits",
+		"event":   "unsubscribe",
+		"payload": []string{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("JSON Marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal("Write error:", err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("Read error:", err)
+	}
+	fmt.Println(string(msg))
+}
 ```
 
 **Unsubscribe reduce risk limits update.**
@@ -2898,13 +4437,15 @@ Authentication required.
 
 If you want to subscribe to position updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.positions",
     "event": "subscribe",
     "payload": ["20011", "BTC_USD"],
@@ -2916,6 +4457,58 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("Dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.positions",
+		"event":   "subscribe",
+		"payload": []string{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("JSON Marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal("Write error:", err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("Read error:", err)
+	}
+	fmt.Println(string(msg))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -2948,7 +4541,7 @@ The above command returns JSON structured like this:
   
   | parameter | type | required | description |
   | --- | --- | --- | --- |
-  | user id | String | yes | User id |
+  | user id | String | yes | User id (This field is deprecated and is only used as a placeholder) |
   | contract | String | yes | Futures contract name |
 
 ## [#](#positions-notification) Positions notification
@@ -3007,6 +4600,7 @@ The above command returns JSON structured like this:
   | field | type | description |
   | --- | --- | --- |
   | contract | String | Futures contract name |
+  | cross_leverage_limit | Float | Cross margin leverage |
   | entry_price | Float | Entry price |
   | history_pnl | Float | History realized PNL |
   | history_point | Float | History realized POINT PNL |
@@ -3027,13 +4621,15 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-13) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.positions",
     "event": "unsubscribe",
     "payload": ["20011", "BTC_USD"],
@@ -3045,6 +4641,57 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.positions",
+		"event":   "unsubscribe",
+		"payload": []string{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(msg))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -3086,13 +4733,15 @@ Authentication required.
 
 If you want to subscribe to auto order updates in all contracts, use `!all` in contract list.
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.autoorders",
     "event": "subscribe",
     "payload": ["20011", "BTC_USD"],
@@ -3104,6 +4753,57 @@ req = {
 }
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.autoorders",
+		"event":   "subscribe",
+		"payload": []string{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(msg))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -3223,13 +4923,15 @@ The above command returns JSON structured like this:
 
 ## [#](#cancel-subscription-14) Cancel subscription
 
+Code example
+
 ```python
-import json
+import json, time
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
 req = {
-    "time": 123456,
+    "time": int(time.time()),
     "channel": "futures.autoorders",
     "event": "unsubscribe",
     "payload": ["20011", "BTC_USD"],
@@ -3240,6 +4942,57 @@ req = {
     }}
 ws.send(json.dumps(req))
 print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":     time.Now().Unix(),
+		"channel": "futures.autoorders",
+		"event":   "unsubscribe",
+		"payload": []string{"20011", "BTC_USD"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(msg))
+}
 ```
 
 The above command returns JSON structured like this:
@@ -3276,6 +5029,257 @@ The above command returns JSON structured like this:
 WebSocket API allows placing , canceling , amending , querying orders through a WebSocket connection.
 
 ### [#](#websocket-api-client-api-request) Websocket API Client Api Request
+
+Code example
+
+```python
+#!/usr/bin/python
+
+import time
+import json
+import hmac
+import hashlib
+import websocket
+import threading
+
+
+API_KEY = "xxxxx"
+SECRET = "xxxxx"
+WS_URL = "wss://fx-ws.gateio.ws/v4/ws/usdt"
+CHANNEL_LOGIN = "futures.login"
+CHANNEL_ORDER_PLACE = "futures.order_place"
+
+def get_ts():
+    return int(time.time())
+
+def get_ts_ms():
+    return int(time.time() * 1000)
+
+def get_signature(secret, channel, request_param_bytes, ts):
+    key = f"api\n{channel}\n{request_param_bytes.decode()}\n{ts}"
+    return hmac.new(secret.encode(), key.encode(), hashlib.sha512).hexdigest()
+
+def build_login_request():
+    ts = get_ts()
+    req_id = f"{get_ts_ms()}-1"
+    request_param = b""
+
+    sign = get_signature(SECRET, CHANNEL_LOGIN, request_param, ts)
+
+    payload = {
+        "api_key": API_KEY,
+        "signature": sign,
+        "timestamp": str(ts),
+        "req_id": req_id
+    }
+
+    return {
+        "time": ts,
+        "channel": CHANNEL_LOGIN,
+        "event": "api",
+        "payload": payload
+    }
+
+def build_order_request():
+    ts = get_ts()
+    req_id = f"{get_ts_ms()}-2"
+    order_param = {
+        "contract": "BTC_USDT",
+        "size": 6024,
+        "iceberg": 0,
+        "price": "3765",
+        "tif": "gtc",
+        "text": "t-my-custom-id",
+        "stp_act": "-"
+    }
+
+    payload = {
+        "req_id": req_id,
+        "req_param": order_param
+    }
+
+    return {
+        "time": ts,
+        "channel": CHANNEL_ORDER_PLACE,
+        "event": "api",
+        "payload": payload
+    }
+
+def on_message(ws, message):
+    print(f"recv: {message}")
+
+def on_error(ws, error):
+    print(f"error: {error}")
+
+def on_close(ws, close_status_code, close_msg):
+    print("connection closed")
+
+def on_open(ws):
+    print("WebSocket opened")
+
+    login_payload = build_login_request()
+    print("login payload:", login_payload)
+    ws.send(json.dumps(login_payload))
+
+    def delayed_order():
+        time.sleep(2)
+        order_payload = build_order_request()
+        print("order payload:", order_payload)
+        ws.send(json.dumps(order_payload))
+
+    threading.Thread(target=delayed_order).start()
+
+if __name__ == "__main__":
+    ws = websocket.WebSocketApp(
+        WS_URL,
+        on_message=on_message,
+        on_error=on_error,
+        on_close=on_close,
+        on_open=on_open
+    )
+    ws.run_forever()
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"crypto/hmac"
+	"crypto/sha512"
+	"crypto/tls"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"net/url"
+	"strconv"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func GetApiSignature(secret, channel string, requestParam []byte, ts int64) string {
+	hash := hmac.New(sha512.New, []byte(secret))
+	key := fmt.Sprintf("%s\n%s\n%s\n%d", "api", channel, string(requestParam), ts)
+	hash.Write([]byte(key))
+	return hex.EncodeToString(hash.Sum(nil))
+}
+
+func main() {
+
+	// 1. login
+	apiKey := "xxxxx"
+	secret := "xxxxx"
+	requestParam := ""
+	channel := "futures.login"
+	ts := time.Now().Unix()
+	requestId := fmt.Sprintf("%d-%d", time.Now().UnixMilli(), 1)
+
+	req := ApiRequest{
+		Time:    ts,
+		Channel: "futures.login",
+		Event:   "api",
+		Payload: ApiPayload{
+			ApiKey:       apiKey,
+			Signature:    GetApiSignature(secret, channel, []byte(requestParam), ts),
+			Timestamp:    strconv.FormatInt(ts, 10),
+			RequestId:    requestId,
+			RequestParam: []byte(requestParam),
+		},
+	}
+
+	fmt.Println(GetApiSignature(secret, channel, []byte(requestParam), ts))
+	marshal, _ := json.Marshal(req)
+	fmt.Println(string(marshal))
+
+	// connect the ws
+	u := url.URL{Scheme: "wss", Host: "fx-ws.gateio.ws", Path: "/v4/ws/usdt"}
+	websocket.DefaultDialer.TLSClientConfig = &tls.Config{RootCAs: nil, InsecureSkipVerify: true}
+	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+	if err != nil {
+		panic(err)
+	}
+	c.SetPingHandler(nil)
+
+	// read msg
+	go func() {
+		for {
+			_, message, err := c.ReadMessage()
+			if err != nil {
+				c.Close()
+				panic(err)
+			}
+			fmt.Printf("recv: %s\n", message)
+		}
+	}()
+
+	err = c.WriteMessage(websocket.TextMessage, marshal)
+	if err != nil {
+		panic(err)
+	}
+	time.Sleep(2 * time.Second)
+
+	//ws create an order
+	orderParam := OrderParam{
+		Contract: "BTC_USDT",
+		Size:     6024,
+		Iceberg:  0,
+		Price:    "3765",
+		Tif:      "gtc",
+		Text:     "t-my-custom-id",
+		StpAct:   false,
+	}
+	orderParamBytes, _ := json.Marshal(orderParam)
+
+	order_place := ApiRequest{
+		Time:    ts,
+		Channel: "futures.order_place",
+		Event:   "api",
+		Payload: ApiPayload{
+			RequestId:    requestId,
+			RequestParam: []byte(orderParamBytes),
+		},
+	}
+	orderReqByte, _ := json.Marshal(order_place)
+	err = c.WriteMessage(websocket.TextMessage, orderReqByte)
+
+	if err != nil {
+		panic(err)
+	}
+
+	select {}
+}
+
+type ApiRequest struct {
+	App     string     `json:"app,omitempty"`
+	Time    int64      `json:"time"`
+	Id      *int64     `json:"id,omitempty"`
+	Channel string     `json:"channel"`
+	Event   string     `json:"event"`
+	Payload ApiPayload `json:"payload"`
+}
+type ApiPayload struct {
+	ApiKey       string          `json:"api_key,omitempty"`
+	Signature    string          `json:"signature,omitempty"`
+	Timestamp    string          `json:"timestamp,omitempty"`
+	RequestId    string          `json:"req_id,omitempty"`
+	RequestParam json.RawMessage `json:"req_param,omitempty"`
+}
+
+type OrderParam struct {
+	Contract   string `json:"contract"`
+	Size       int64  `json:"size,omitempty"`
+	Iceberg    int64  `json:"iceberg,omitempty"`
+	Price      string `json:"price,omitempty"`
+	Close      bool   `json:"close,omitempty"`
+	ReduceOnly bool   `json:"reduce_only,omitempty"`
+	Tif        string `json:"tif,omitempty"`
+	Text       string `json:"text,omitempty"`
+	AutoSize   string `json:"auto_size,omitempty"`
+	StpAct     bool   `json:"stp_act,omitempty"`
+}
+```
 
 Client request example
 
@@ -3503,7 +5507,7 @@ Note: the GateAPIv4 key pair you used MUST have future Corresponding permissions
 
 Client Api Request
 
-Code samples
+Code example
 
 ```python
 import hmac
@@ -3587,68 +5591,101 @@ if __name__ == "__main__":
     main()
 ```
 
+Code example
+
 ```go
 package main
 
 import (
-   "crypto/hmac"
-   "crypto/sha512"
-   "encoding/hex"
-   "encoding/json"
-   "fmt"
-   "strconv"
-   "time"
+	"crypto/hmac"
+	"crypto/sha512"
+	"crypto/tls"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"github.com/gorilla/websocket"
+	"net/url"
+	"strconv"
+	"time"
 )
 
 func GetApiSignature(secret, channel string, requestParam []byte, ts int64) string {
-   hash := hmac.New(sha512.New, []byte(secret))
-   key := fmt.Sprintf("%s\n%s\n%s\n%d", "api", channel, string(requestParam), ts)
-   hash.Write([]byte(key))
-   return hex.EncodeToString(hash.Sum(nil))
+	hash := hmac.New(sha512.New, []byte(secret))
+	key := fmt.Sprintf("%s\n%s\n%s\n%d", "api", channel, string(requestParam), ts)
+	hash.Write([]byte(key))
+	return hex.EncodeToString(hash.Sum(nil))
 }
 
 // example WebSocket signature calculation implementation in go
 func main() {
-   apiKey := "YOUR_API_KEY"
-   secret := "YOUR_API_SECRET"
-   requestParam := ""
-   channel := "futures.login"
-   ts := time.Now().Unix()
-   requestId := fmt.Sprintf("%d-%d", time.Now().UnixMilli(), 1)
+	apiKey := "YOUR_API_KEY"
+	secret := "YOUR_API_SECRET"
+	requestParam := ""
+	channel := "futures.login"
+	ts := time.Now().Unix()
+	requestId := fmt.Sprintf("%d-%d", time.Now().UnixMilli(), 1)
 
-   req := ApiRequest{
-      Time:    ts,
-      Channel: "",
-      Event:   "api",
-      Payload: ApiPayload{
-         ApiKey:       apiKey,
-         Signature:    GetApiSignature(secret, channel, []byte(requestParam), ts),
-         Timestamp:    strconv.FormatInt(ts, 10),
-         RequestId:    requestId,
-         RequestParam: []byte(requestParam),
-      },
-   }
+	req := ApiRequest{
+		Time:    ts,
+		Channel: channel,
+		Event:   "api",
+		Payload: ApiPayload{
+			ApiKey:       apiKey,
+			Signature:    GetApiSignature(secret, channel, []byte(requestParam), ts),
+			Timestamp:    strconv.FormatInt(ts, 10),
+			RequestId:    requestId,
+			RequestParam: []byte(requestParam),
+		},
+	}
 
-   fmt.Println(GetApiSignature(secret, channel, []byte(requestParam), ts))
+	fmt.Println(GetApiSignature(secret, channel, []byte(requestParam), ts))
 
-   marshal, _ := json.Marshal(req)
-   fmt.Println(string(marshal))
+	marshal, _ := json.Marshal(req)
+	fmt.Println(string(marshal))
+
+	// connect the ws
+	u := url.URL{Scheme: "wss", Host: "fx-ws.gateio.ws", Path: "/v4/ws/usdt"}
+	websocket.DefaultDialer.TLSClientConfig = &tls.Config{RootCAs: nil, InsecureSkipVerify: true}
+	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+	if err != nil {
+		panic(err)
+	}
+	c.SetPingHandler(nil)
+
+	// read msg
+	go func() {
+		for {
+			_, message, err := c.ReadMessage()
+			if err != nil {
+				c.Close()
+				panic(err)
+			}
+			fmt.Printf("recv: %s\n", message)
+		}
+	}()
+
+	err = c.WriteMessage(websocket.TextMessage, marshal)
+	if err != nil {
+		panic(err)
+	}
+
+	select {}
 }
 
 type ApiRequest struct {
-   App     string     `json:"app,omitempty"`
-   Time    int64      `json:"time"`
-   Id      *int64     `json:"id,omitempty"`
-   Channel string     `json:"channel"`
-   Event   string     `json:"event"`
-   Payload ApiPayload `json:"payload"`
+	App     string     `json:"app,omitempty"`
+	Time    int64      `json:"time"`
+	Id      *int64     `json:"id,omitempty"`
+	Channel string     `json:"channel"`
+	Event   string     `json:"event"`
+	Payload ApiPayload `json:"payload"`
 }
 type ApiPayload struct {
-   ApiKey       string          `json:"api_key,omitempty"`
-   Signature    string          `json:"signature,omitempty"`
-   Timestamp    string          `json:"timestamp,omitempty"`
-   RequestId    string          `json:"req_id,omitempty"`
-   RequestParam json.RawMessage `json:"req_param,omitempty"`
+	ApiKey       string          `json:"api_key,omitempty"`
+	Signature    string          `json:"signature,omitempty"`
+	Timestamp    string          `json:"timestamp,omitempty"`
+	RequestId    string          `json:"req_id,omitempty"`
+	RequestParam json.RawMessage `json:"req_param,omitempty"`
 }
 ```
 
@@ -3749,7 +5786,7 @@ POST /futures/{settle}/orders
 
 ### [#](#order-place-request) Order Place Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -3758,21 +5795,103 @@ import json
 # pip install websocket_client
 from websocket import create_connection
 
+api_order = {
+      "contract": "BTC_USDT",
+      "size": 10,
+      "price": "31503.280000",
+      "tif": "gtc",
+      "text": "t-my-custom-id"
+    }
+
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
 ws.send(json.dumps(
-    "time": int(time.time()),
+    {"time": int(time.time()),
     "channel": "futures.order_place",
     "event": "api",
     "payload": {
-        "header":{
-            "x-gate-channel-id":"xxxx",
-        },
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_order)
-    }
+        "req_param": api_order 
+    }} 
 ))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+    "crypto/hmac"
+    "crypto/sha512"
+    "crypto/tls"
+    "encoding/hex"
+    "encoding/json"
+    "fmt"
+    "github.com/gorilla/websocket"
+    "net/url"
+    "strconv"
+    "time"
+)
+
+func main() {
+
+	// warn: you should login first before order
+
+	// connect the ws
+	u := url.URL{Scheme: "ws", Host: "xx.xx.xxx.xx:xxx", Path: "xxx"}
+	websocket.DefaultDialer.TLSClientConfig = &tls.Config{RootCAs: nil, InsecureSkipVerify: true}
+	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+	if err != nil {
+		panic(err)
+	}
+	c.SetPingHandler(nil)
+
+	// read msg
+	go func() {
+		for {
+			_, message, err := c.ReadMessage()
+			if err != nil {
+				c.Close()
+				panic(err)
+			}
+			fmt.Printf("recv: %s\n", message)
+		}
+	}()
+
+	err = c.WriteMessage(websocket.TextMessage, marshal)
+
+	//ws create an order
+	orderParam := orderParam{
+		Contract: "BTC_USDT",
+		size:     6024,
+		Iceberg:  0,
+		Price:    "3765",
+		Tif:      "gtc",
+		Text:     "t-my-custom-id",
+		Stp_act:  "-",
+	}
+	orderParamBytes, _ := json.Marshal(orderParam)
+	requestId := fmt.Sprintf("%d-%d", time.Now().UnixMilli(), 1)
+	order_place := ApiRequest{
+		Time:    time.Now().Unix(),
+		Channel: "futures.order_place",
+		Event:   "api",
+		Payload: ApiPayload{
+			RequestId:    requestId,
+			RequestParam: []byte(orderParamBytes),
+		},
+	}
+	orderReqByte, _ := json.Marshal(order_place)
+	err = c.WriteMessage(websocket.TextMessage, orderReqByte)
+
+	if err != nil {
+		panic(err)
+	}
+
+	select {}
+}
 ```
 
 Request example
@@ -3981,7 +6100,7 @@ POST /futures/{settle}/batch_orders
 
 ### [#](#order-batch-place-request) Order Batch Place Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -3990,8 +6109,18 @@ import json
 # pip install websocket_client
 from websocket import create_connection
 
+api_order=[
+      {
+        "contract": "BTC_USDT",
+        "size": 10,
+        "price": "31403.180000",
+        "tif": "gtc",
+        "text": "t-my-custom-id"
+      }
+    ]
+
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
-ws.send(json.dumps(
+ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "futures.order_batch_place",
     "event": "api",
@@ -4000,11 +6129,72 @@ ws.send(json.dumps(
             "x-gate-channel-id":"xxxx",
         },
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_order)
+        "req_param": api_order
     }
-))
+}))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	apiOrder := []map[string]interface{}{
+		{
+			"contract": "BTC_USDT",
+			"size":     10,
+			"price":    "31403.180000",
+			"tif":      "gtc",
+			"text":     "t-my-custom-id",
+		},
+	}
+
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	payload := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.order_batch_place",
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"header": map[string]interface{}{
+				"x-gate-channel-id": "xxxx",
+			},
+			"req_id":    "1ewq-3123w-5",
+			"req_param": apiOrder,
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
 ```
 
 Request example
@@ -4173,7 +6363,7 @@ DELETE /futures/{settle}/orders/{order_id}
 
 ### [#](#order-cancel-request) Order Cancel Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -4183,17 +6373,77 @@ import json
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
-ws.send(json.dumps(
+api_cancel_order = {
+      "order_id": "74046514"
+    }
+ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "futures.order_cancel",
     "event": "api",
     "payload": {
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_cancel_order)
+        "req_param": api_cancel_order
     }
-))
+}))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	apiCancelOrder := map[string]interface{}{
+		"order_id": "74046514",
+	}
+
+	payload := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.order_cancel",
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"req_id":    "1ewq-3123w-5",
+			"req_param": toJSONString(apiCancelOrder),
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
+
+func toJSONString(data interface{}) string {
+	bytes, _ := json.Marshal(data)
+	return string(bytes)
+}
 ```
 
 Order cancel request example
@@ -4297,6 +6547,185 @@ Result format:
 | »»label | String | Denotes error type in string format |
 | »»message | String | Detailed error message |
 
+## [#](#order-cancel-all-with-id-list) Order Cancel All With Id List
+
+You can cancel all open orders with this channel `futures.order_cancel_ids`.
+
+Multiple distinct order IDs can be specified. Each request can cancel a maximum of 20 records.
+
+**function as api below:**
+
+```json
+POST /futures/{settle}/batch_cancel_orders
+```
+
+### [#](#order-cancel-all-with-id-list-request) Order Cancel All With Id List Request
+
+Code example: Login is required before making requests
+
+```python
+#!/usr/bin/python
+
+import time
+import json
+# pip install websocket_client
+from websocket import create_connection
+
+ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
+cancelWithIdsParam = ["1694883366","123"]
+ws.send(json.dumps({
+    "time":int(time.time()),
+    "channel":"futures.order_cancel_ids",
+    "event":"api",
+    "payload":{
+        "req_id":"test_1",
+        "req_param": cancelWithIdsParam
+    }
+}))
+
+print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	timestamp := time.Now().Unix()
+	cancelWithIdsParam := []string{"1694883366", "123"}
+	channel := "futures.order_cancel_ids"
+
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	payload := map[string]interface{}{
+		"time":    timestamp,
+		"channel": channel,
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"req_id":    "test_1",
+			"req_param": cancelWithIdsParam,
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
+```
+
+Client request example
+
+```json
+{
+  "time": 1681986208,
+  "channel": "futures.order_cancel_ids",
+  "event": "api",
+  "payload": {
+    "req_id": "request-9",
+    "req_param": [
+      "1700664343",
+      "123"
+    ]
+  }
+}
+```
+
+Payload format:
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param | array | Yes | Order ID List |
+| req_header | object | No | apiv4 custom header |
+
+`req_header` Custom header data:
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| x-gate-exptime | string | false | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
+
+### [#](#order-cancel-all-with-id-list-notification) Order Cancel All With Id List Notification
+
+Order cancel notification example
+
+```json
+{
+  "request_id": "request-9",
+  "header": {
+    "response_time": "1681986208564",
+    "status": "200",
+    "channel": "futures.order_cancel_ids",
+    "event": "api",
+    "client_id": "::1-0x140001623c0",
+    "x_in_time": 1681985856667508,
+    "x_out_time": 1681985856667598,
+    "conn_id": "5e74253e9c793974",
+    "conn_trace_id": "1bde5aaa0acf2f5f48edfd4392e1fa68",
+    "trace_id": "e410abb5f74b4afc519e67920548838d"
+  },
+  "data": {
+    "result": [
+      {
+        "id": "1694883366",
+        "user_id": 111,
+        "succeeded": true
+      },
+      {
+        "id": "123",
+        "user_id": 111,
+        "message": "ORDER_NOT_FOUND"
+      }
+    ]
+  }
+}
+```
+
+Result format:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| request_id | String | Unique identifier of the message |
+| header | Map | response meta info |
+| »response_time | String | response send time in mill |
+| »channel | String | request channel |
+| »event | String | request event |
+| »client_id | String | Unique client id |
+| »x_in_time | Integer | time to receive the request (in microseconds) |
+| »x_out_time | Integer | time to return response (in microseconds) |
+| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
+| »conn_trace_id | String | TraceId to establish connection with client |
+| »trace_id | String | TraceId for executing order operation |
+| data | Object | Response data of the request |
+| »result | Object | response detail toapi (opens new window) |
+| »errs | Object | It is only available when the request fails |
+| »»label | String | denotes error type in string format |
+| »»message | String | detailed error message |
+
 ## [#](#cancel-all-open-orders-matched) Cancel all open orders matched
 
 `futures.order_cancel_cp`
@@ -4311,7 +6740,7 @@ DELETE /futures/{settle}/orders
 
 ### [#](#cancel-all-open-orders-matched-request) Cancel all open orders matched Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -4321,17 +6750,79 @@ import json
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
-ws.send(json.dumps(
+api_cancel_all_order = {
+      "contract": "BTC_USDT",
+      "side": "bid"
+    }
+ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "futures.order_cancel_cp",
     "event": "api",
     "payload": {
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_cancel_all_order)
+        "req_param": api_cancel_all_order
     }
-))
+}))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	apiCancelAllOrder := map[string]interface{}{
+		"contract": "BTC_USDT",
+		"side":     "bid",
+	}
+
+	payload := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.order_cancel_cp",
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"req_id":    "1ewq-3123w-5",
+			"req_param": toJSONString(apiCancelAllOrder),
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
+
+func toJSONString(data interface{}) string {
+	bytes, _ := json.Marshal(data)
+	return string(bytes)
+}
 ```
 
 Client request example
@@ -4452,7 +6943,7 @@ PUT /futures/{settle}/orders/{order_id}
 
 ### [#](#order-amend-request) Order Amend Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -4462,17 +6953,79 @@ import json
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
-ws.send(json.dumps(
+api_amend_order = {
+      "order_id": "74046543",
+      "price": "31303.180000"
+    }
+ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "futures.order_amend",
     "event": "api",
     "payload": {
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_amend_order)
+        "req_param": api_amend_order
     }
-))
+}))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	apiAmendOrder := map[string]interface{}{
+		"order_id": "74046543",
+		"price":    "31303.180000",
+	}
+
+	payload := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.order_amend",
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"req_id":    "1ewq-3123w-5",
+			"req_param": toJSONString(apiAmendOrder),
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
+
+func toJSONString(data interface{}) string {
+	bytes, _ := json.Marshal(data)
+	return string(bytes)
+}
 ```
 
 Client request example
@@ -4589,7 +7142,7 @@ GET /futures/{settle}/orders
 
 ### [#](#order-list-request) Order List Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -4599,17 +7152,80 @@ import json
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
-ws.send(json.dumps(
+api_list_order = {
+      "contract": "BTC_USDT",
+      "status": "open"
+    }
+ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "futures.order_list",
     "event": "api",
     "payload": {
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_list_order)
+        "req_param": api_list_order
     }
+}   
 ))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	apiListOrder := map[string]interface{}{
+		"contract": "BTC_USDT",
+		"status":   "open",
+	}
+
+	payload := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.order_list",
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"req_id":    "1ewq-3123w-5",
+			"req_param": toJSONString(apiListOrder),
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
+
+func toJSONString(data interface{}) string {
+	bytes, _ := json.Marshal(data)
+	return string(bytes)
+}
 ```
 
 Client request example
@@ -4715,7 +7331,7 @@ GET /futures/{settle}/orders/{order_id}
 
 ### [#](#order-status-request) Order Status Request
 
-Code samples
+Code example: Login is required before making requests
 
 ```python
 import time
@@ -4725,17 +7341,79 @@ import json
 from websocket import create_connection
 
 ws = create_connection("wss://fx-ws.gateio.ws/v4/ws/usdt")
-ws.send(json.dumps(
+
+api_status_order = {
+      "order_id": "74046543"
+    }
+
+ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "futures.order_status",
     "event": "api",
     "payload": {
         "req_id": "1ewq-3123w-5",
-        "req_param": json.dumps(api_status_order)
+        "req_param": api_status_order
     }
-))
+}))
 
 print(ws.recv())
+```
+
+Code example: Login is required before making requests
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws.gateio.ws/v4/ws/usdt"
+	ws, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer ws.Close()
+
+	apiStatusOrder := map[string]interface{}{
+		"order_id": "74046543",
+	}
+
+	payload := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.order_status",
+		"event":   "api",
+		"payload": map[string]interface{}{
+			"req_id":    "1ewq-3123w-5",
+			"req_param": toJSONString(apiStatusOrder),
+		},
+	}
+
+	msg, _ := json.Marshal(payload)
+	err = ws.WriteMessage(websocket.TextMessage, msg)
+	if err != nil {
+		log.Println("write:", err)
+		return
+	}
+
+	_, message, err := ws.ReadMessage()
+	if err != nil {
+		log.Println("read:", err)
+		return
+	}
+	fmt.Println(string(message))
+}
+
+func toJSONString(data interface{}) string {
+	bytes, _ := json.Marshal(data)
+	return string(bytes)
+}
 ```
 
 Client request example
@@ -4824,4 +7502,4 @@ Result format:
 | »»label | String | Denotes error type in string format |
 | »»message | String | Detailed error message |
 
-Last Updated: 3/28/2025, 2:56:38 AM
+Last Updated: 4/25/2025, 9:09:39 AM
