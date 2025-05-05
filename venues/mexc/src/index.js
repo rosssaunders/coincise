@@ -290,5 +290,11 @@ if (!apiType) {
   process.exit(1)
 }
 
-// Start the extraction process
-convertHtmlToMarkdown(apiType)
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  convertHtmlToMarkdown(apiType).catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
+}

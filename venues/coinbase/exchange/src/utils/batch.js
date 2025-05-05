@@ -2,6 +2,7 @@
 
 import fs from "fs"
 import path from "path"
+import process from "process"
 import { scrapeApiDocumentation } from "../scraper.js"
 import {
   readConfig,
@@ -35,10 +36,8 @@ export const processUrl = async (urlConfig, outputDir) => {
       const errorContent = `# Error Scraping ${url}\n\nFailed to scrape this URL at ${new Date().toISOString()}\n\nError message: ${error.message}`
       fs.writeFileSync(outputPath, errorContent, "utf8")
       console.log(`Created error placeholder file at ${outputPath}`)
-    } catch (writeError) {
-      console.error(
-        `Failed to create error placeholder file: ${writeError.message}`
-      )
+    } catch {
+      console.error(`Failed to create error placeholder file`)
     }
 
     // Re-throw the error to be handled by the caller
@@ -66,7 +65,7 @@ export const extractTitle = filePath => {
 
     // If no heading found, use the filename without extension
     return path.basename(filePath, ".md")
-  } catch (error) {
+  } catch {
     console.warn(`Warning: Could not extract title from ${filePath}`)
     return path.basename(filePath, ".md")
   }

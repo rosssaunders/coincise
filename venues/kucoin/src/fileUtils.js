@@ -3,6 +3,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
 
 const __filename = fileURLToPath(import.meta.url)

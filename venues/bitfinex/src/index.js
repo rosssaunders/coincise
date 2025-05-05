@@ -6,7 +6,6 @@ import { fileURLToPath } from "url"
 import { JSDOM } from "jsdom"
 import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
-import puppeteer from "puppeteer"
 import { launchBrowser, configurePage } from "./utils.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
 import process from "process"
@@ -322,8 +321,11 @@ const main = async () => {
   }
 }
 
-// Run the main function
-main().catch(error => {
-  console.error("Unhandled error:", error)
-  process.exit(1)
-})
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
+}

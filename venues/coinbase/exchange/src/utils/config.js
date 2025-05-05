@@ -1,7 +1,6 @@
 "use strict"
 
 import fs from "fs"
-import path from "path"
 
 /**
  * Read and parse a JSON config file

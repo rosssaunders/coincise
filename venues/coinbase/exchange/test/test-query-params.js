@@ -1,16 +1,9 @@
 /**
  * Test file to verify query parameters extraction
  */
-const fs = require("fs")
-const path = require("path")
-const {
-  scrapeApiDocumentation
-} = require("../../src/coinbase/exchange/scraper")
-const {
-  processAuthSection,
-  processRequestParams
-} = require("../../src/processors/formatters")
-const { generateMarkdownDocument } = require("../../src/processors/formatters")
+import fs from "fs"
+import path from "path"
+import { processRequestParams } from "../../src/processors/formatters"
 
 // Sample HTML content (replace with your sample if needed)
 const sampleHtml = `
@@ -33,11 +26,11 @@ console.log(pathParamsMarkdown)
 
 // Optionally save to a file for inspection
 fs.writeFileSync(
-  path.join(__dirname, "test-query-params-output.md"),
+  path.join(path.resolve(), "test-query-params-output.md"),
   queryParamsMarkdown || "No output generated"
 )
 fs.writeFileSync(
-  path.join(__dirname, "test-path-params-output.md"),
+  path.join(path.resolve(), "test-path-params-output.md"),
   pathParamsMarkdown || "No output generated"
 )
 console.log(

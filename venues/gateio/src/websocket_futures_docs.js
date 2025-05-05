@@ -9,6 +9,7 @@ import {
   addCodeBlockRule
 } from "./websocket_docs_utils.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import process from "process"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

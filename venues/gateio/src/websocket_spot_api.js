@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import TurndownService from "turndown"
 import { fileURLToPath } from "url"
+import process from "process"
 import { downloadHtml, processHtml } from "./websocket_docs_utils.js"
 import {
   addTableRule,

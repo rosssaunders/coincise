@@ -2,9 +2,10 @@
  * Main scraper for Coinbase Exchange API documentation
  */
 
-import puppeteer from "puppeteer"
+import { launchBrowser } from "../../shared/puppeteer.js"
 import fs from "fs"
 import path from "path"
+import process from "process"
 import { delay, ensureDirectoryExists } from "./utils/utils.js"
 import {
   extractArticleContent,
@@ -20,48 +21,6 @@ import {
 } from "./processors/formatters.js"
 import TurndownService from "turndown"
 import { formatMarkdown } from "../../shared/format-markdown.js"
-
-/**
- * Detect if running in a CI environment
- * @returns {boolean} - True if in CI environment
- */
-const isRunningInCI = () => {
-  return Boolean(
-    process.env.CI ||
-      process.env.GITHUB_ACTIONS ||
-      process.env.GITLAB_CI ||
-      process.env.JENKINS_URL
-  )
-}
-
-/**
- * Get browser launch options based on environment
- * @returns {Object} - Puppeteer launch options
- */
-const getBrowserLaunchOptions = () => {
-  // Default options
-  const options = {
-    headless: true,
-    defaultViewport: null,
-    args: ["--start-maximized"]
-  }
-
-  // Add CI-specific options
-  if (isRunningInCI()) {
-    options.args = [
-      ...options.args,
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-gpu"
-    ]
-    console.log(
-      "Detected CI environment, using special Puppeteer configuration"
-    )
-  }
-
-  return options
-}
 
 /**
  * Convert HTML content to Markdown
@@ -85,7 +44,7 @@ const convertHtmlToMarkdown = html => {
   // Add a custom table processing rule that handles complex nested tables
   turndownService.addRule("table", {
     filter: "table",
-    replacement: function (content, node, options) {
+    replacement: function (content, node) {
       // Extract table HTML
       const tableHtml = node.outerHTML
 
@@ -181,7 +140,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
 
   try {
     // Launch a headless browser with appropriate options
-    browser = await puppeteer.launch(getBrowserLaunchOptions())
+    browser = await launchBrowser()
 
     const page = await browser.newPage()
 
@@ -299,7 +258,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
             hidden: true,
             timeout: 5000
           })
-        } catch (error) {
+        } catch {
           // Try clicking outside the modal
           await page.mouse.click(10, 10)
           await delay(500)
@@ -314,7 +273,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
         try {
           await page.keyboard.press("Escape")
           await delay(1000)
-        } catch (e) {
+        } catch {
           // Ignore errors in error handling
         }
       }

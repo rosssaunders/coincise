@@ -8,6 +8,7 @@ import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
 import { launchBrowser, configurePage } from "./utils.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import process from "process"
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)

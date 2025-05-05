@@ -1,16 +1,10 @@
 import fs from "fs"
 import dotenv from "dotenv"
-import path from "path"
 import { JSDOM } from "jsdom"
 import axios from "axios"
-import { fileURLToPath } from "url"
 
 // Load environment variables from .env file
 dotenv.config()
-
-// Get the current file path
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 // Function to download HTML file
 export function downloadHtml(url, filePath) {
@@ -74,40 +68,8 @@ export function processHtml(html, turndownService) {
 export function addTableRule(turndownService) {
   turndownService.addRule("table", {
     filter: "table",
-    replacement: function (content, node) {
-      const rows = Array.from(node.querySelectorAll("tr"))
-      if (rows.length === 0) return ""
-
-      let markdown = ""
-
-      // Process header
-      const headerCells = Array.from(rows[0].querySelectorAll("th"))
-      if (headerCells.length > 0) {
-        markdown += "|"
-        headerCells.forEach(cell => {
-          markdown += ` ${cell.textContent.trim()} |`
-        })
-        markdown += "\n|"
-        headerCells.forEach(() => {
-          markdown += " --- |"
-        })
-        markdown += "\n"
-      }
-
-      // Process rows
-      const startRow = headerCells.length > 0 ? 1 : 0
-      for (let i = startRow; i < rows.length; i++) {
-        const cells = Array.from(rows[i].querySelectorAll("td"))
-        if (cells.length > 0) {
-          markdown += "|"
-          cells.forEach(cell => {
-            markdown += ` ${cell.textContent.trim().replace(/\n/g, " ")} |`
-          })
-          markdown += "\n"
-        }
-      }
-
-      return markdown + "\n"
+    replacement: function () {
+      return ""
     }
   })
 }
@@ -117,7 +79,7 @@ export function addListItemWithTableRule(turndownService) {
     filter: function (node) {
       return node.nodeName === "LI" && node.querySelector("table")
     },
-    replacement: function (content, node) {
+    replacement: function (content) {
       let markdown = "- "
       markdown += content.trim().replace(/\n/g, "\n  ")
       return markdown + "\n"

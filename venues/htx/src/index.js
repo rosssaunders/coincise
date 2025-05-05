@@ -6,7 +6,7 @@ import { writeFile, mkdir } from "fs/promises"
 import { join } from "path"
 import { fileURLToPath } from "url"
 import { dirname } from "path"
-import puppeteer from "puppeteer"
+import { launchBrowser } from "../../shared/puppeteer.js"
 import { logger } from "./logger.js"
 import { cleanHtml } from "./html-cleaner.js"
 import { convertToMarkdown } from "./markdown-converter.js"
@@ -392,10 +392,7 @@ async function main() {
   }
 
   const config = await loadConfig(configPath)
-  const browser = await puppeteer.launch({
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"]
-  })
+  const browser = await launchBrowser()
 
   const allMarkdownContent = []
 
@@ -484,5 +481,9 @@ async function main() {
 
 // Only run main() if this is the main module
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(error => logger.error("Unhandled error in main:", error))
+  main().catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
 }

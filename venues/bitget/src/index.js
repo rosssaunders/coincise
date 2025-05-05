@@ -5,6 +5,7 @@ import path from "path"
 import TurndownService from "turndown"
 import { gfm, tables } from "turndown-plugin-gfm"
 import { argv } from "process"
+import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
 
 // Add delay between requests
@@ -174,5 +175,11 @@ if (argv.length < 3) {
   process.exit(1)
 }
 
-// Run the converter with the provided config file
-convertToMarkdown(argv[2])
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  convertToMarkdown(argv[2]).catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
+}

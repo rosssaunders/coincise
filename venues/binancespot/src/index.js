@@ -64,10 +64,11 @@ async function processAll() {
   }
 }
 
-// Run if called directly
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  processAll().catch(err => {
-    console.error(err)
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  processAll().catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
     process.exit(1)
   })
 }

@@ -1,6 +1,6 @@
 "use strict"
 
-import puppeteer from "puppeteer"
+import { launchBrowser } from "../../shared/puppeteer.js"
 import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
 import { JSDOM } from "jsdom"
@@ -11,7 +11,7 @@ import {
   unlinkSync,
   readdirSync
 } from "fs"
-import { join, resolve } from "path"
+import { join } from "path"
 import process from "process"
 
 /**
@@ -126,7 +126,7 @@ async function processConfig(document, config) {
     }
   })
 
-  for (const [id, html] of allExtractedSections) {
+  for (const [, html] of allExtractedSections) {
     const markdown = turndownService.turndown(html)
     combinedMarkdown += markdown + "\n\n---\n\n"
   }
@@ -209,9 +209,7 @@ async function main() {
     console.log(`Fetching documentation from ${url}`)
 
     // Launch browser and get page content
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    })
+    const browser = await launchBrowser()
     const page = await browser.newPage()
     await page.goto(url, { waitUntil: "networkidle0" })
     const content = await page.content()
@@ -262,5 +260,11 @@ async function main() {
   }
 }
 
-// Run the main function
-main()
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
+}

@@ -1,6 +1,5 @@
 "use strict"
 
-import puppeteer from "puppeteer"
 import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
 import fs from "fs"
@@ -8,6 +7,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 import { launchBrowser, configurePage } from "../../../../shared/utils.js"
 import { formatMarkdown } from "../../../../shared/format-markdown.js"
+import process from "process"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 

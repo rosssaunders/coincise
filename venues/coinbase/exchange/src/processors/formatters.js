@@ -59,7 +59,6 @@ export const processRequestParams = paramsHtml => {
   const sectionTitle = document.querySelector("h3")?.textContent.trim()
   const isQueryParams = sectionTitle === "Query Params"
   const isPathParams = sectionTitle === "Path Params"
-  const isBodyParams = sectionTitle === "Body params"
 
   // Find all param items
   // Support both paramItem_Izrs (newer UI) and listItem_mkJa (older UI)

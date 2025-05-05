@@ -2,7 +2,6 @@
 
 import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
-import JSON5 from "json5"
 
 /**
  * Creates a basic turndown service with default configuration

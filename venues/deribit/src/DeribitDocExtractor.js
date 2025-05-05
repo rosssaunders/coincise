@@ -2,6 +2,7 @@
 
 import { promises as fs } from "fs"
 import path from "path"
+import process from "process"
 import BrowserUtils from "./browserUtils.js"
 import MarkdownUtils from "./markdownUtils.js"
 import ExtractionUtils from "./extractionUtils.js"

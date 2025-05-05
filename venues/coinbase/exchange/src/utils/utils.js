@@ -3,7 +3,6 @@
  */
 
 import fs from "fs"
-import path from "path"
 
 /**
  * Helper function to delay execution

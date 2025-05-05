@@ -5,6 +5,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 import child_process from "child_process"
 import { promisify } from "util"
+import process from "process"
 
 const exec = promisify(child_process.exec)
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -40,7 +41,7 @@ const processConfigFile = async configFile => {
     // Check if config file exists
     try {
       await fs.access(configPath)
-    } catch (error) {
+    } catch {
       printStatus(`Config file not found: ${configPath}`, true)
       return false
     }
