@@ -210,114 +210,137 @@ func main() {
 }
 ```
 
-Gate.io provides a simple and robust Websocket API to integrate spot trade status into your business or application.
+Gate.io provides a simple and robust Websocket API to integrate spot trade
+status into your business or application.
 
-We have language bindings in `Python` and `Golang`. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in `Python` and `Golang`. You can view code examples
+in the dark area to the right, and you can switch the programming language of
+the examples with the tabs in the top right.
 
 ### [#](#server-url) Server URL
 
 Base URLs:
 
-*   `wss://api.gateio.ws/ws/v4/`
+- `wss://api.gateio.ws/ws/v4/`
 
 ### [#](#sdk) SDK
 
 We provide WebSocket SDK to help developers with service integration.
 
-The SDK's source code are available in [gatews (opens new window)](https://github.com/gateio/gatews) GitHub repository.
+The SDK's source code are available in
+[gatews (opens new window)](https://github.com/gateio/gatews) GitHub repository.
 
 ### [#](#changelog) Changelog
 
 2025-04-18
 
-*   Add additional code examples to the documentation.
+- Add additional code examples to the documentation.
 
 2025-04-10
 
-*   Added description for the `filled_amount` field in both `spot.orders` and `spot.orders_v2` documents.
+- Added description for the `filled_amount` field in both `spot.orders` and
+  `spot.orders_v2` documents.
 
 2025-03-26
 
-*   Fix the documentation for the `auto_repay` and `auto_borrow` fields of `spot.order_place`.
+- Fix the documentation for the `auto_repay` and `auto_borrow` fields of
+  `spot.order_place`.
 
 2025-02-10
 
-*   Updated the Spot Account Trade module and added `x_in_time`, `x_out_time`, `conn_trace_id`, `trace_id` fields
-*   Updated the Spot Account Trade module and added the `spot.order_list` channel
-*   `spot.order_place` and `spot.order_amend` added `x_gate_ratelimit_requests_remain`, `x_gate_ratelimit_limit` and `x_gat_ratelimit_reset_timestamp` fields
+- Updated the Spot Account Trade module and added `x_in_time`, `x_out_time`,
+  `conn_trace_id`, `trace_id` fields
+- Updated the Spot Account Trade module and added the `spot.order_list` channel
+- `spot.order_place` and `spot.order_amend` added
+  `x_gate_ratelimit_requests_remain`, `x_gate_ratelimit_limit` and
+  `x_gat_ratelimit_reset_timestamp` fields
 
 2025-01-08
 
-*   The `spot.usertrades` channel now includes the `id_market` field, which is unique inside the trading market (token).
-*   The `spot.trades` channel now includes the `id_market` field, which is unique inside the trading market (token).
-*   A new `spot.trades_v2` channel has been added.
-*   A new `spot.usertrades_v2` channel has been added.
-*   A new `spot.orders_v2` channel has been added.
+- The `spot.usertrades` channel now includes the `id_market` field, which is
+  unique inside the trading market (token).
+- The `spot.trades` channel now includes the `id_market` field, which is unique
+  inside the trading market (token).
+- A new `spot.trades_v2` channel has been added.
+- A new `spot.usertrades_v2` channel has been added.
+- A new `spot.orders_v2` channel has been added.
 
 2024-11-28
 
-*   Remove `1000ms` update interval in `spot.order_book_update` server notification
+- Remove `1000ms` update interval in `spot.order_book_update` server
+  notification
 
 2024-01-17
 
-*   Add `w` window closed mark in candlestick update response
+- Add `w` window closed mark in candlestick update response
 
 2023-04-21
 
-*   Add `freeze`,`freeze_change`,`change_type` fields in `spot.cross_balances` server notification
+- Add `freeze`,`freeze_change`,`change_type` fields in `spot.cross_balances`
+  server notification
 
 2022-12-12
 
-*   Add `avg_deal_price` fields in `spot.orders` server notification
+- Add `avg_deal_price` fields in `spot.orders` server notification
 
 2022-12-07
 
-*   Add `freeze`,`freeze_change`,`change_type` fields in `spot.balances` server notification
+- Add `freeze`,`freeze_change`,`change_type` fields in `spot.balances` server
+  notification
 
 2022-11-22
 
-*   Add send millisecond timestamp `time_ms` in all channel response
+- Add send millisecond timestamp `time_ms` in all channel response
 
 2022-07-05
 
-*   Add `spot.cross_loan` channel to notify user cross margin borrowed and Interest updates
+- Add `spot.cross_loan` channel to notify user cross margin borrowed and
+  Interest updates
 
 2021-07-23
 
-*   Add `spot.cross_balances` channel to notify cross margin balance updates
-*   Add `text` field in `spot.usertrades` server notification
+- Add `spot.cross_balances` channel to notify cross margin balance updates
+- Add `text` field in `spot.usertrades` server notification
 
 2021-04-27
 
-*   Add milliseconds in `spot.orders`, `spot.balances`, `spot.margin_balances` and `spot.funding_balances` server notifications
+- Add milliseconds in `spot.orders`, `spot.balances`, `spot.margin_balances` and
+  `spot.funding_balances` server notifications
 
 2021-03-17
 
-*   Add documents explaining how to maintain local order book
-*   Add millisecond timestamp `t` in all order book channels' `result`
+- Add documents explaining how to maintain local order book
+- Add millisecond timestamp `t` in all order book channels' `result`
 
 2021-01-26
 
-*   Initial version
+- Initial version
 
 ## [#](#api-overview) API Overview
 
-WebSocket operations are divided into different channels. Channels are either public or private. While public channels can be subscribed to directly, private channels require authentication using Gate APIv4 key pairs(refer to [Authentication](#authentication) down below for details).
+WebSocket operations are divided into different channels. Channels are either
+public or private. While public channels can be subscribed to directly, private
+channels require authentication using Gate APIv4 key pairs(refer to
+[Authentication](#authentication) down below for details).
 
 All channels support the following events:
 
-*   **`subscribe`**
-    
-    Initiated from the client. Client uses this method to tell the server that it is interested in this channel and requires the server to notify the new data if channel related data are changed.
-    
-*   **`unsubscribe`**
-    
-    Initiated from the client. Client uses this method to tell the server that it is no longer interested in this channel and stop sending any further channel updates.
-    
-*   **`update`**
-    
-    Initiated from the sever. Server uses this method to send changed data to all clients subscribed to this channel. Client cannot use this operation event.
-    
+- **`subscribe`**
+
+  Initiated from the client. Client uses this method to tell the server that it
+  is interested in this channel and requires the server to notify the new data
+  if channel related data are changed.
+
+- **`unsubscribe`**
+
+  Initiated from the client. Client uses this method to tell the server that it
+  is no longer interested in this channel and stop sending any further channel
+  updates.
+
+- **`update`**
+
+  Initiated from the sever. Server uses this method to send changed data to all
+  clients subscribed to this channel. Client cannot use this operation event.
 
 ### [#](#client-request) Client Request
 
@@ -338,20 +361,28 @@ Client request example
 }
 ```
 
-`subscribe` or `unsubscribe` requests initiated from the client follow a common JSON format, which contains the following fields:
+`subscribe` or `unsubscribe` requests initiated from the client follow a common
+JSON format, which contains the following fields:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| time | Integer | Yes | Request time in seconds. Gap between request time and server time must not exceed 60 seconds |
-| id | Integer | No | Optional request id which will be sent back by the server to help you identify which request the server responds to |
-| channel | String | Yes | WebSocket channel to subscribe to. |
-| auth | Auth | No | Authentication credentials for private channels. SeeAuthentication section for details |
-| event | String | Yes | Channel operation event, i.e.subscribe, unsubscribe |
-| payload | Any | No | Optional request detail parameters |
+| Field   | Type    | Required | Description                                                                                                         |
+| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
+| time    | Integer | Yes      | Request time in seconds. Gap between request time and server time must not exceed 60 seconds                        |
+| id      | Integer | No       | Optional request id which will be sent back by the server to help you identify which request the server responds to |
+| channel | String  | Yes      | WebSocket channel to subscribe to.                                                                                  |
+| auth    | Auth    | No       | Authentication credentials for private channels. SeeAuthentication section for details                              |
+| event   | String  | Yes      | Channel operation event, i.e.subscribe, unsubscribe                                                                 |
+| payload | Any     | No       | Optional request detail parameters                                                                                  |
 
-Note that the type of `payload` is channel specific, but `subscribe` and `unsubscribe` payloads in one channel are in the same format. Take `spot.orders` for example, the payload format is a list of currency pairs interested. You can specify `["foo", "bar", "etc"]` as `subscribe` payload to receive order updates about them. Then specify `["etc"]` in `unsubscribe` payload later to exclude it from futures order updates.
+Note that the type of `payload` is channel specific, but `subscribe` and
+`unsubscribe` payloads in one channel are in the same format. Take `spot.orders`
+for example, the payload format is a list of currency pairs interested. You can
+specify `["foo", "bar", "etc"]` as `subscribe` payload to receive order updates
+about them. Then specify `["etc"]` in `unsubscribe` payload later to exclude it
+from futures order updates.
 
-Channel specific description below only gives the channel specific payload format for simplicity, but you need to send the full request to do channel subscription operations.
+Channel specific description below only gives the channel specific payload
+format for simplicity, but you need to send the full request to do channel
+subscription operations.
 
 ### [#](#server-response) Server Response
 
@@ -370,45 +401,55 @@ Server response example
 }
 ```
 
-Server response includes both response to client requests and server-initiated message updates. Similar with request, server responses follow almost the same JSON format with client requests:
+Server response includes both response to client requests and server-initiated
+message updates. Similar with request, server responses follow almost the same
+JSON format with client requests:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| time | Integer | Response time in seconds. |
-| time_ms | Integer | Response time in millisecond. |
-| id | Integer | Request ID extracted from the client request payload if client request has one |
-| channel | String | WebSocket channel name |
-| event | String | Server side channel event(i.e.,update) or event used in requests initiated from the client |
-| error | Error | Null if the server accepts the client request; otherwise, the detailed reason why request is rejected. |
-| result | Any | New data notification from the server, or response to client requests. Null iferror is not null. |
+| Field   | Type    | Description                                                                                            |
+| ------- | ------- | ------------------------------------------------------------------------------------------------------ |
+| time    | Integer | Response time in seconds.                                                                              |
+| time_ms | Integer | Response time in millisecond.                                                                          |
+| id      | Integer | Request ID extracted from the client request payload if client request has one                         |
+| channel | String  | WebSocket channel name                                                                                 |
+| event   | String  | Server side channel event(i.e.,update) or event used in requests initiated from the client             |
+| error   | Error   | Null if the server accepts the client request; otherwise, the detailed reason why request is rejected. |
+| result  | Any     | New data notification from the server, or response to client requests. Null iferror is not null.       |
 
-Note: type of `result` is channel specific if it's server-initiated data update notification, but response to client subscription request always set the `result` to `{"status": "success"}`. To verify if subscription request is successful or not, you only need to check if `error` field is null. Parsing `result` field is not necessary.
+Note: type of `result` is channel specific if it's server-initiated data update
+notification, but response to client subscription request always set the
+`result` to `{"status": "success"}`. To verify if subscription request is
+successful or not, you only need to check if `error` field is null. Parsing
+`result` field is not necessary.
 
-Channel specific description below will only give the server-initiated data update notification format for simplicity.
+Channel specific description below will only give the server-initiated data
+update notification format for simplicity.
 
 ### [#](#error) Error
 
 Error object has the following format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| code | Integer | Error code |
-| message | String | Detailed error reason |
+| Field   | Type    | Description           |
+| ------- | ------- | --------------------- |
+| code    | Integer | Error code            |
+| message | String  | Detailed error reason |
 
-In case of errors, you receive a message containing the proper error code and message within an error object. Possible errors includes:
+In case of errors, you receive a message containing the proper error code and
+message within an error object. Possible errors includes:
 
-| code | message |
-| --- | --- |
-| 1 | Invalid request body format |
-| 2 | Invalid argument provided |
-| 3 | Server side error happened |
-| 4 | Authentication fail |
+| code | message                     |
+| ---- | --------------------------- |
+| 1    | Invalid request body format |
+| 2    | Invalid argument provided   |
+| 3    | Server side error happened  |
+| 4    | Authentication fail         |
 
 ## [#](#authentication) Authentication
 
 WARNING
 
-Note: the GateAPIv4 key pair you used MUST have at least spot read permission enabled, and your outbound IP address must be in the key's IP whitelist if its whitelist is enabled.
+Note: the GateAPIv4 key pair you used MUST have at least spot read permission
+enabled, and your outbound IP address must be in the key's IP whitelist if its
+whitelist is enabled.
 
 ```python
 # example WebSocket signature calculation implementation in Python
@@ -478,26 +519,33 @@ func main() {
 }
 ```
 
-Client requests need to carry authentication information if channels are private, e.g. `spot.orders` channel to retrieve user orders update.
+Client requests need to carry authentication information if channels are
+private, e.g. `spot.orders` channel to retrieve user orders update.
 
-Authentication are sent by `auth` field in request body with the following format:
+Authentication are sent by `auth` field in request body with the following
+format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| method | String | Authentication method. Currently only one methodapi_key is accepted |
-| KEY | String | Gate APIv4 user key string |
-| SIGN | String | Authentication signature generated using GateAPIv4 secret and request information |
+| Field  | Type   | Description                                                                       |
+| ------ | ------ | --------------------------------------------------------------------------------- |
+| method | String | Authentication method. Currently only one methodapi_key is accepted               |
+| KEY    | String | Gate APIv4 user key string                                                        |
+| SIGN   | String | Authentication signature generated using GateAPIv4 secret and request information |
 
-WebSocket authentication uses the same signature calculation method with Gate APIv4 API, i.e., `HexEncode(HMAC_SHA512(secret, signature_string))`, but has the following differences:
+WebSocket authentication uses the same signature calculation method with Gate
+APIv4 API, i.e., `HexEncode(HMAC_SHA512(secret, signature_string))`, but has the
+following differences:
 
-1.  Signature string concatenation method: `channel=<channel>&event=<event>&time=<time>`, where `<channel>`, `<event>`, `<time>` are corresponding request information
+1.  Signature string concatenation method:
+    `channel=<channel>&event=<event>&time=<time>`, where `<channel>`, `<event>`,
+    `<time>` are corresponding request information
 2.  Authentication information are sent in request body in field `auth`.
 
 You can log into the console to retrieve Gate APIv4 key and secret.
 
 # [#](#system-api) System API
 
-System APIs used to retrieve service meta information. **NOT** used for subscription.
+System APIs used to retrieve service meta information. **NOT** used for
+subscription.
 
 ## [#](#application-ping-pong) Application ping pong
 
@@ -574,9 +622,16 @@ Response example
 
 Check if connection to server is still alive.
 
-This is an additional connection reachability check. The server uses the [protocol layer ping/pong (opens new window)](https://tools.ietf.org/html/rfc6455) message to check if client is still connected. It does NOT force this method to be used. If you use some well-known WebSocket client library, you generally don't need to care about this API.
+This is an additional connection reachability check. The server uses the
+[protocol layer ping/pong (opens new window)](https://tools.ietf.org/html/rfc6455)
+message to check if client is still connected. It does NOT force this method to
+be used. If you use some well-known WebSocket client library, you generally
+don't need to care about this API.
 
-However, from the client's view, this API can help the client to actively check if the connection to server is still reachable. Additionally, if the server receives the client's `spot.ping` request, it will also reset the client's timeout timer.
+However, from the client's view, this API can help the client to actively check
+if the connection to server is still reachable. Additionally, if the server
+receives the client's `spot.ping` request, it will also reset the client's
+timeout timer.
 
 TIP
 
@@ -588,7 +643,9 @@ This channel does not require authentication
 
 **update speed:** 1000ms
 
-The ticker is a high level overview of the state of the spot trading. It shows you the highest, lowest, last trade price. It also includes information such as daily volume and how much the price has changed over the last day.
+The ticker is a high level overview of the state of the spot trading. It shows
+you the highest, lowest, last trade price. It also includes information such as
+daily volume and how much the price has changed over the last day.
 
 ## [#](#client-subscription) Client Subscription
 
@@ -660,11 +717,12 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs |
+| Field   | Type          | Required | Description            |
+| ------- | ------------- | -------- | ---------------------- |
+| payload | Array[String] | Yes      | List of currency pairs |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
 ## [#](#server-notification) Server Notification
 
@@ -692,18 +750,18 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | Ticker object |
-| »currency_pair | String | Currency pair |
-| »last | String | Last price |
-| »lowest_ask | String | Recent best ask price |
-| »highest_bid | String | Recent best bid price |
-| »change_percentage | String | Change percentage |
-| »base_volume | String | Base volume |
-| »quote_volume | String | Quote volume |
-| »high_24h | String | Highest price in 24h |
-| »low_24h | String | Lowest price in 24h |
+| Field              | Type   | Description           |
+| ------------------ | ------ | --------------------- |
+| result             | Object | Ticker object         |
+| »currency_pair     | String | Currency pair         |
+| »last              | String | Last price            |
+| »lowest_ask        | String | Recent best ask price |
+| »highest_bid       | String | Recent best bid price |
+| »change_percentage | String | Change percentage     |
+| »base_volume       | String | Base volume           |
+| »quote_volume      | String | Quote volume          |
+| »high_24h          | String | Highest price in 24h  |
+| »low_24h           | String | Lowest price in 24h   |
 
 # [#](#public-trades-channel) Public Trades Channel
 
@@ -711,11 +769,13 @@ Result format:
 
 **update speed:** realtime
 
-This channel sends a trade message whenever a trade occurs. It includes details of the trade, such as price, amount, time and type.
+This channel sends a trade message whenever a trade occurs. It includes details
+of the trade, such as price, amount, time and type.
 
 Only the taker side in notified.
 
-Note this is a public channel. For private trade notifications, refer to section [User Trades](#spot-user-trades) below.
+Note this is a public channel. For private trade notifications, refer to section
+[User Trades](#spot-user-trades) below.
 
 ## [#](#client-subscription-2) Client Subscription
 
@@ -787,11 +847,12 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs |
+| Field   | Type          | Required | Description            |
+| ------- | ------------- | -------- | ---------------------- |
+| payload | Array[String] | Yes      | List of currency pairs |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
 TIP
 
@@ -809,7 +870,7 @@ Notification example
   "event": "update",
   "result": {
     "id": 309143071,
-    "id_market":2390902,
+    "id_market": 2390902,
     "create_time": 1606292218,
     "create_time_ms": "1606292218213.4578",
     "side": "sell",
@@ -822,30 +883,31 @@ Notification example
 }
 ```
 
-Note that public trade channel only notify the taker side in a trade. Private user trades channel below will notify all user related trades.
+Note that public trade channel only notify the taker side in a trade. Private
+user trades channel below will notify all user related trades.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | Public trade detail |
-| »id | Integer | All Market Trade ID |
-| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
-| »create_time | Integer | Trading unix timestamp in seconds |
-| »create_time_ms | String | Trading unix timestamp in milliseconds. Precision higher than ms will be appended as decimal points |
-| »side | String | Taker side |
-| »currency_pair | String | Currency pair |
-| »amount | String | Trade amount |
-| »price | String | Trade price |
-| »range | String | market Trade range (format: "start-end") |
-| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
+| Field           | Type    | Description                                                                                         |
+| --------------- | ------- | --------------------------------------------------------------------------------------------------- |
+| result          | Object  | Public trade detail                                                                                 |
+| »id             | Integer | All Market Trade ID                                                                                 |
+| »id_market      | Integer | One market Trade ID (Continuous Growth within a Single Market ID)                                   |
+| »create_time    | Integer | Trading unix timestamp in seconds                                                                   |
+| »create_time_ms | String  | Trading unix timestamp in milliseconds. Precision higher than ms will be appended as decimal points |
+| »side           | String  | Taker side                                                                                          |
+| »currency_pair  | String  | Currency pair                                                                                       |
+| »amount         | String  | Trade amount                                                                                        |
+| »price          | String  | Trade price                                                                                         |
+| »range          | String  | market Trade range (format: "start-end")                                                            |
+| »id_market      | Integer | One market Trade ID (Continuous Growth within a Single Market ID)                                   |
 
 #### [#](#enumerated-values) Enumerated Values
 
 | Property | Value |
-| --- | --- |
-| side | buy |
-| side | sell |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
 
 # [#](#public-trades-channel-v2-lite) Public Trades Channel V2(lite)
 
@@ -853,9 +915,11 @@ Result format:
 
 **update speed:** realtime
 
-This channel sends a trade message whenever a trade occurs. It includes details of the trade, such as price, amount, time and type.
+This channel sends a trade message whenever a trade occurs. It includes details
+of the trade, such as price, amount, time and type.
 
-Note this is a public channel. For private trade notifications, refer to section [User Trades](#spot-user-trades) below.
+Note this is a public channel. For private trade notifications, refer to section
+[User Trades](#spot-user-trades) below.
 
 ## [#](#client-subscription-3) Client Subscription
 
@@ -927,11 +991,12 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs |
+| Field   | Type          | Required | Description            |
+| ------- | ------------- | -------- | ---------------------- |
+| payload | Array[String] | Yes      | List of currency pairs |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
 TIP
 
@@ -949,7 +1014,7 @@ Notification example
   "event": "update",
   "result": {
     "id": 309143071,
-    "id_market":2390902,
+    "id_market": 2390902,
     "create_time": 1606292218,
     "create_time_ms": "1606292218213.4578",
     "side": "sell",
@@ -962,30 +1027,31 @@ Notification example
 }
 ```
 
-Note that public trade channel only notify the taker side in a trade. Private user trades channel below will notify all user related trades.
+Note that public trade channel only notify the taker side in a trade. Private
+user trades channel below will notify all user related trades.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | Public trade detail |
-| »id | Integer | All Market Trade ID |
-| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
-| »create_time | Integer | Trading unix timestamp in seconds |
-| »create_time_ms | String | Trading unix timestamp in milliseconds. Precision higher than ms will be appended as decimal points |
-| »side | String | Taker side |
-| »currency_pair | String | Currency pair |
-| »amount | String | Trade amount |
-| »price | String | Trade price |
-| »range | String | market Trade range (format: "start-end") |
-| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
+| Field           | Type    | Description                                                                                         |
+| --------------- | ------- | --------------------------------------------------------------------------------------------------- |
+| result          | Object  | Public trade detail                                                                                 |
+| »id             | Integer | All Market Trade ID                                                                                 |
+| »id_market      | Integer | One market Trade ID (Continuous Growth within a Single Market ID)                                   |
+| »create_time    | Integer | Trading unix timestamp in seconds                                                                   |
+| »create_time_ms | String  | Trading unix timestamp in milliseconds. Precision higher than ms will be appended as decimal points |
+| »side           | String  | Taker side                                                                                          |
+| »currency_pair  | String  | Currency pair                                                                                       |
+| »amount         | String  | Trade amount                                                                                        |
+| »price          | String  | Trade price                                                                                         |
+| »range          | String  | market Trade range (format: "start-end")                                                            |
+| »id_market      | Integer | One market Trade ID (Continuous Growth within a Single Market ID)                                   |
 
 #### [#](#enumerated-values-2) Enumerated Values
 
 | Property | Value |
-| --- | --- |
-| side | buy |
-| side | sell |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
 
 # [#](#candlesticks-channel) Candlesticks Channel
 
@@ -1065,28 +1131,29 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | Subscription parameters. From left to right,interval, cp |
-| »interval | String | Yes | Candlestick data point interval |
-| »cp | String | Yes | Currency pair |
+| Field     | Type          | Required | Description                                              |
+| --------- | ------------- | -------- | -------------------------------------------------------- |
+| payload   | Array[String] | Yes      | Subscription parameters. From left to right,interval, cp |
+| »interval | String        | Yes      | Candlestick data point interval                          |
+| »cp       | String        | Yes      | Currency pair                                            |
 
 #### [#](#enumerated-values-3) Enumerated Values
 
 | Property | Value |
-| --- | --- |
-| interval | 10s |
-| interval | 1m |
-| interval | 5m |
-| interval | 15m |
-| interval | 30m |
-| interval | 1h |
-| interval | 4h |
-| interval | 8h |
-| interval | 1d |
-| interval | 7d |
+| -------- | ----- |
+| interval | 10s   |
+| interval | 1m    |
+| interval | 5m    |
+| interval | 15m   |
+| interval | 30m   |
+| interval | 1h    |
+| interval | 4h    |
+| interval | 8h    |
+| interval | 1d    |
+| interval | 7d    |
 
-To subscribe to multiple currency pairs or with different intervals, just send multiple subscribe request with different parameters.
+To subscribe to multiple currency pairs or with different intervals, just send
+multiple subscribe request with different parameters.
 
 TIP
 
@@ -1118,48 +1185,65 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | One candlestick data point |
-| »t | String | Unix timestamp in seconds |
-| »v | String | Total volume |
-| »c | String | Close price |
-| »h | String | Highest price |
-| »l | String | Lowest price |
-| »o | String | Open price |
-| »n | String | Name of the subscription, in the format of<interval>_<cp> |
-| »a | String | Base currency trading amount |
-| »w | Boolean | true means window close. true may be missing, but does not affect data usage |
+| Field  | Type    | Description                                                                  |
+| ------ | ------- | ---------------------------------------------------------------------------- |
+| result | Object  | One candlestick data point                                                   |
+| »t     | String  | Unix timestamp in seconds                                                    |
+| »v     | String  | Total volume                                                                 |
+| »c     | String  | Close price                                                                  |
+| »h     | String  | Highest price                                                                |
+| »l     | String  | Lowest price                                                                 |
+| »o     | String  | Open price                                                                   |
+| »n     | String  | Name of the subscription, in the format of<interval>\_<cp>                   |
+| »a     | String  | Base currency trading amount                                                 |
+| »w     | Boolean | true means window close. true may be missing, but does not affect data usage |
 
 # [#](#order-book-channel) Order Book Channel
 
-Order book has three channels for subscription to satisfy different needs. They are:
+Order book has three channels for subscription to satisfy different needs. They
+are:
 
-*   `spot.book_ticker`
-    
-    Pushes any update about the price and amount of best bid or ask price in realtime for subscribed currency pairs.
-    
-*   `spot.order_book_update`
-    
-    Periodically notify order book changed levels which can be used to locally manage an order book.
-    
-*   `spot.order_book`
-    
-    Periodically notify top bids and asks snapshot with limited levels.
-    
+- `spot.book_ticker`
 
-Every currency pair's order book update has an internal update ID, which increments 1 on every order book update. The order book update ID corresponds to the `id` field in response of REST API `GET /api/v4/spot/order_book`.
+  Pushes any update about the price and amount of best bid or ask price in
+  realtime for subscribed currency pairs.
+
+- `spot.order_book_update`
+
+  Periodically notify order book changed levels which can be used to locally
+  manage an order book.
+
+- `spot.order_book`
+
+  Periodically notify top bids and asks snapshot with limited levels.
+
+Every currency pair's order book update has an internal update ID, which
+increments 1 on every order book update. The order book update ID corresponds to
+the `id` field in response of REST API `GET /api/v4/spot/order_book`.
 
 How to maintain local order book:
 
-1.  Subscribe `spot.order_book_update`, e.g. `["BTC_USDT", "100ms"]` pushes update in BTC\_USDT order book every 100ms
-2.  Cache WebSocket notifications. Every notification use `U` and `u` to tell the first and last update ID since last notification.
-3.  Retrieve base order book using REST API, and make sure the order book ID is recorded(referred as `baseID` below) e.g. `https://api.gateio.ws/api/v4/spot/order_book?currency_pair=BTC_USDT&limit=100&with_id=true` retrieves the full base order book of BTC\_USDT
-4.  Iterate the cached WebSocket notifications, and find the first one which the baseID falls into, i.e. `U <= baseId+1` and `u >= baseId+1`, then start consuming from it. Note that amount in notifications are all absolute values. Use them to replace original value in corresponding price. If amount equals to 0, delete the price from the order book.
-5.  Dump all notifications which satisfy `u < baseID+1`. If `baseID+1 < first notification U`, it means current base order book falls behind notifications. Start from step 3 to retrieve newer base order book.
-6.  If any subsequent notification which satisfy `U > baseID+1` is found, it means some updates are lost. Reconstruct local order book from step 3.
+1.  Subscribe `spot.order_book_update`, e.g. `["BTC_USDT", "100ms"]` pushes
+    update in BTC_USDT order book every 100ms
+2.  Cache WebSocket notifications. Every notification use `U` and `u` to tell
+    the first and last update ID since last notification.
+3.  Retrieve base order book using REST API, and make sure the order book ID is
+    recorded(referred as `baseID` below) e.g.
+    `https://api.gateio.ws/api/v4/spot/order_book?currency_pair=BTC_USDT&limit=100&with_id=true`
+    retrieves the full base order book of BTC_USDT
+4.  Iterate the cached WebSocket notifications, and find the first one which the
+    baseID falls into, i.e. `U <= baseId+1` and `u >= baseId+1`, then start
+    consuming from it. Note that amount in notifications are all absolute
+    values. Use them to replace original value in corresponding price. If amount
+    equals to 0, delete the price from the order book.
+5.  Dump all notifications which satisfy `u < baseID+1`. If
+    `baseID+1 < first notification U`, it means current base order book falls
+    behind notifications. Start from step 3 to retrieve newer base order book.
+6.  If any subsequent notification which satisfy `U > baseID+1` is found, it
+    means some updates are lost. Reconstruct local order book from step 3.
 
-You can find example application implementing the methods above in the [SDK GitHub repository (opens new window)](https://github.com/gateio/gatews)
+You can find example application implementing the methods above in the
+[SDK GitHub repository (opens new window)](https://github.com/gateio/gatews)
 
 ## [#](#best-bid-or-ask-price) Best bid or ask price
 
@@ -1237,11 +1321,12 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs |
+| Field   | Type          | Required | Description            |
+| ------- | ------------- | -------- | ---------------------- |
+| payload | Array[String] | Yes      | List of currency pairs |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
 TIP
 
@@ -1271,16 +1356,16 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | Order book ticker object |
-| »t | Integer | Order book update time in milliseconds |
-| »u | Integer | Order book update ID |
-| »s | String | Currency pair |
-| »b | String | best bid price |
-| »B | String | best bid amount |
-| »a | String | best ask price |
-| »A | String | best ask amount |
+| Field  | Type    | Description                            |
+| ------ | ------- | -------------------------------------- |
+| result | Object  | Order book ticker object               |
+| »t     | Integer | Order book update time in milliseconds |
+| »u     | Integer | Order book update ID                   |
+| »s     | String  | Currency pair                          |
+| »b     | String  | best bid price                         |
+| »B     | String  | best bid amount                        |
+| »a     | String  | best ask price                         |
+| »A     | String  | best ask amount                        |
 
 ## [#](#changed-order-book-levels) Changed order book levels
 
@@ -1356,16 +1441,16 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | Subscription parameters, from left to right,cp, interval |
-| »cp | String | Yes | Currency pair |
-| »interval | String | Yes | Notification update speed |
+| Field     | Type          | Required | Description                                              |
+| --------- | ------------- | -------- | -------------------------------------------------------- |
+| payload   | Array[String] | Yes      | Subscription parameters, from left to right,cp, interval |
+| »cp       | String        | Yes      | Currency pair                                            |
+| »interval | String        | Yes      | Notification update speed                                |
 
 #### [#](#enumerated-values-4) Enumerated Values
 
 | Property | Value |
-| --- | --- |
+| -------- | ----- |
 | interval | 100ms |
 
 TIP
@@ -1400,19 +1485,19 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | Changed order book levels |
-| »t | Integer | Order book update time in milliseconds |
-| »e | String | Ignore this field |
-| »E | Integer | Update unix timestamp in seconds. Deprecated in favour oft |
-| »s | String | Currency pair |
-| »U | Integer | First update order book id in this event since last update |
-| »u | Integer | Last update order book id in this event since last update |
-| »b | Array[OrderBookArray] | Changed bids since last update |
-| »»OrderBookArray | Array[String] | [Price, Amount] pair |
-| »a | Array[OrderBookArray] | Changed asks since last update |
-| »»OrderBookArray | Array[String] | [Price, Amount] pair |
+| Field            | Type                  | Description                                                |
+| ---------------- | --------------------- | ---------------------------------------------------------- |
+| result           | Object                | Changed order book levels                                  |
+| »t               | Integer               | Order book update time in milliseconds                     |
+| »e               | String                | Ignore this field                                          |
+| »E               | Integer               | Update unix timestamp in seconds. Deprecated in favour oft |
+| »s               | String                | Currency pair                                              |
+| »U               | Integer               | First update order book id in this event since last update |
+| »u               | Integer               | Last update order book id in this event since last update  |
+| »b               | Array[OrderBookArray] | Changed bids since last update                             |
+| »»OrderBookArray | Array[String]         | [Price, Amount] pair                                       |
+| »a               | Array[OrderBookArray] | Changed asks since last update                             |
+| »»OrderBookArray | Array[String]         | [Price, Amount] pair                                       |
 
 ## [#](#limited-level-full-order-book-snapshot) Limited-Level Full Order Book Snapshot
 
@@ -1490,23 +1575,23 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | Subscription parameters, from left to right,cp, level, interval |
-| »cp | String | Yes | Currency pair |
-| »level | String | Yes | Order book level |
-| »interval | String | Yes | Notification update speed |
+| Field     | Type          | Required | Description                                                     |
+| --------- | ------------- | -------- | --------------------------------------------------------------- |
+| payload   | Array[String] | Yes      | Subscription parameters, from left to right,cp, level, interval |
+| »cp       | String        | Yes      | Currency pair                                                   |
+| »level    | String        | Yes      | Order book level                                                |
+| »interval | String        | Yes      | Notification update speed                                       |
 
 #### [#](#enumerated-values-5) Enumerated Values
 
-| Property | Value |
-| --- | --- |
-| level | 5 |
-| level | 10 |
-| level | 20 |
-| level | 50 |
-| level | 100 |
-| interval | 100ms |
+| Property | Value  |
+| -------- | ------ |
+| level    | 5      |
+| level    | 10     |
+| level    | 20     |
+| level    | 50     |
+| level    | 100    |
+| interval | 100ms  |
 | interval | 1000ms |
 
 TIP
@@ -1547,16 +1632,16 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | Order book levels |
-| »t | Integer | Order book update time in milliseconds |
-| »lastUpdateId | Integer | Order book update ID of this snapshot |
-| »s | String | Currency Pair |
-| »bids | Array[OrderBookArray] | Top level bids in current snapshot, sort by price from high to low |
-| »»OrderBookArray | Array[String] | [Price, Amount] pair |
-| »asks | Array[OrderBookArray] | Top level asks in current snapshot, sort by price from low to high |
-| »»OrderBookArray | Array[String] | [Price, Amount] pair |
+| Field            | Type                  | Description                                                        |
+| ---------------- | --------------------- | ------------------------------------------------------------------ |
+| result           | Object                | Order book levels                                                  |
+| »t               | Integer               | Order book update time in milliseconds                             |
+| »lastUpdateId    | Integer               | Order book update ID of this snapshot                              |
+| »s               | String                | Currency Pair                                                      |
+| »bids            | Array[OrderBookArray] | Top level bids in current snapshot, sort by price from high to low |
+| »»OrderBookArray | Array[String]         | [Price, Amount] pair                                               |
+| »asks            | Array[OrderBookArray] | Top level asks in current snapshot, sort by price from low to high |
+| »»OrderBookArray | Array[String]         | [Price, Amount] pair                                               |
 
 # [#](#orders-channel) Orders Channel
 
@@ -1564,7 +1649,8 @@ Result format:
 
 **update speed:** realtime
 
-Notify changes of orders created in subscribed currency pairs. Including order creation, fill, close and cancellation
+Notify changes of orders created in subscribed currency pairs. Including order
+creation, fill, close and cancellation
 
 ## [#](#client-subscription-8) Client Subscription
 
@@ -1643,13 +1729,15 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs. |
+| Field   | Type          | Required | Description             |
+| ------- | ------------- | -------- | ----------------------- |
+| payload | Array[String] | Yes      | List of currency pairs. |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
-If you want to subscribe to all orders updates in all currency pairs, you can include `!all` in currency pair list.
+If you want to subscribe to all orders updates in all currency pairs, you can
+include `!all` in currency pair list.
 
 WARNING
 
@@ -1702,65 +1790,66 @@ Notification example
 }
 ```
 
-Updated order list. Note it is possible that multiple currency pairs' orders will be updated in one notification.
+Updated order list. Note it is possible that multiple currency pairs' orders
+will be updated in one notification.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[Object] | Updated order list |
-| »id | String | Order ID |
-| »user | Integer | User ID |
-| »text | String | User defined information |
-| »create_time | String | Order creation time |
-| »create_time_ms | String | Order creation time in milliseconds |
-| »update_time | String | Order last modification time |
-| »update_time_ms | String | Order last modification time in milliseconds |
-| »event | String | Order event- put: order creation- update: order fill update- finish: order closed or cancelled |
-| »currency_pair | String | Currency pair |
-| »type | String | Order type. limit - limit order |
-| »account | String | Account type. spot - spot account; margin - margin account |
-| »side | String | Order side |
-| »amount | String | Trade amount |
-| »price | String | Order price |
-| »time_in_force | String | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee |
-| »left | String | Amount left to fill |
-| »filled_total | String | Total filled in quote currency |
-| »filled_amount | String | Currency transaction volume |
-| »avg_deal_price | String | Average transaction price of orders |
-| »fee | String | Fee deducted |
-| »fee_currency | String | Fee currency unit |
-| »point_fee | String | Point used to deduct fee |
-| »gt_fee | String | GT used to deduct fee |
-| »gt_discount | Boolean | Whether GT fee discount is used |
-| »rebated_fee | String | Rebated fee |
-| »rebated_fee_currency | String | Rebated fee currency unit |
-| »auto_repay | Boolean | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:1. This field is only effective for cross margin orders. Margin account does not support setting auto repayment for orders.2. auto_borrow and auto_repay cannot be both set to true in one order. |
-| »auto_borrow | Boolean | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough. |
-| »stp_id | Integer | Orders between users in the same stp_id group are not allowed to be self-traded. Detail to ApiV4 |
-| »stp_act | String | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies |
-| »finish_as | String | How the order was finished.- open: processing- filled: filled totally- cancelled: manually cancelled- ioc: time in force is IOC, finish immediately- stp: cancelled because self trade prevention- poc: pending order policy is not met because tif is set to poc- fok: not fully filled immediately because tif is set to fok- trader_not_enough: insufficient counterparties lead to order cancellation- depth_not_enough: insufficient depth leads to order cancellation- small: order amount too small- liquidate_cancelled: cancelled by liquidate- -: unknown |
-| »amend_text | String | The custom data that the user remarked when amending the order |
+| Field                 | Type          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| result                | Array[Object] | Updated order list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| »id                   | String        | Order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| »user                 | Integer       | User ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| »text                 | String        | User defined information                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| »create_time          | String        | Order creation time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »create_time_ms       | String        | Order creation time in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »update_time          | String        | Order last modification time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »update_time_ms       | String        | Order last modification time in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »event                | String        | Order event- put: order creation- update: order fill update- finish: order closed or cancelled                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| »currency_pair        | String        | Currency pair                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| »type                 | String        | Order type. limit - limit order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »account              | String        | Account type. spot - spot account; margin - margin account                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| »side                 | String        | Order side                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| »amount               | String        | Trade amount                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »price                | String        | Order price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| »time_in_force        | String        | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee                                                                                                                                                                                                                                                                                                                                                                                                       |
+| »left                 | String        | Amount left to fill                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »filled_total         | String        | Total filled in quote currency                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| »filled_amount        | String        | Currency transaction volume                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| »avg_deal_price       | String        | Average transaction price of orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »fee                  | String        | Fee deducted                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »fee_currency         | String        | Fee currency unit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| »point_fee            | String        | Point used to deduct fee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| »gt_fee               | String        | GT used to deduct fee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| »gt_discount          | Boolean       | Whether GT fee discount is used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »rebated_fee          | String        | Rebated fee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| »rebated_fee_currency | String        | Rebated fee currency unit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| »auto_repay           | Boolean       | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:1. This field is only effective for cross margin orders. Margin account does not support setting auto repayment for orders.2. auto_borrow and auto_repay cannot be both set to true in one order.                                                                                                                                                                                                                                   |
+| »auto_borrow          | Boolean       | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »stp_id               | Integer       | Orders between users in the same stp_id group are not allowed to be self-traded. Detail to ApiV4                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| »stp_act              | String        | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »finish_as            | String        | How the order was finished.- open: processing- filled: filled totally- cancelled: manually cancelled- ioc: time in force is IOC, finish immediately- stp: cancelled because self trade prevention- poc: pending order policy is not met because tif is set to poc- fok: not fully filled immediately because tif is set to fok- trader_not_enough: insufficient counterparties lead to order cancellation- depth_not_enough: insufficient depth leads to order cancellation- small: order amount too small- liquidate_cancelled: cancelled by liquidate- -: unknown |
+| »amend_text           | String        | The custom data that the user remarked when amending the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 #### [#](#enumerated-values-6) Enumerated Values
 
-| Property | Value |
-| --- | --- |
-| type | limit |
-| type | market |
-| type | limit_repay |
-| type | market_repay |
-| type | limit_borrow |
-| type | market_borrow |
-| type | limit_borrow_repay |
-| account | spot |
-| account | margin |
-| account | portfolio |
-| side | buy |
-| side | sell |
-| time_in_force | gtc |
-| time_in_force | ioc |
-| time_in_force | poc |
+| Property      | Value              |
+| ------------- | ------------------ |
+| type          | limit              |
+| type          | market             |
+| type          | limit_repay        |
+| type          | market_repay       |
+| type          | limit_borrow       |
+| type          | market_borrow      |
+| type          | limit_borrow_repay |
+| account       | spot               |
+| account       | margin             |
+| account       | portfolio          |
+| side          | buy                |
+| side          | sell               |
+| time_in_force | gtc                |
+| time_in_force | ioc                |
+| time_in_force | poc                |
 
 # [#](#orders-channel-v2-lite) Orders Channel V2(lite)
 
@@ -1768,7 +1857,8 @@ Result format:
 
 **update speed:** realtime
 
-Notify changes of orders created in subscribed currency pairs. Including order creation, fill, close and cancellation
+Notify changes of orders created in subscribed currency pairs. Including order
+creation, fill, close and cancellation
 
 ## [#](#client-subscription-9) Client Subscription
 
@@ -1847,13 +1937,15 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs. |
+| Field   | Type          | Required | Description             |
+| ------- | ------------- | -------- | ----------------------- |
+| payload | Array[String] | Yes      | List of currency pairs. |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
-If you want to subscribe to all orders updates in all currency pairs, you can include `!all` in currency pair list.
+If you want to subscribe to all orders updates in all currency pairs, you can
+include `!all` in currency pair list.
 
 WARNING
 
@@ -1902,61 +1994,62 @@ Notification example
 }
 ```
 
-Updated order list. Note it is possible that multiple currency pairs' orders will be updated in one notification.
+Updated order list. Note it is possible that multiple currency pairs' orders
+will be updated in one notification.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[Object] | Updated order list |
-| »id | String | Order ID |
-| »user | Integer | User ID |
-| »text | String | User defined information |
-| »create_time | String | Order creation time |
-| »create_time_ms | String | Order creation time in milliseconds |
-| »update_time | String | Order last modification time |
-| »update_time_ms | String | Order last modification time in milliseconds |
-| »event | String | Order event- put: order creation- update: order fill update- finish: order closed or cancelled |
-| »currency_pair | String | Currency pair |
-| »type | String | Order type. limit - limit order |
-| »account | String | Account type. spot - spot account; margin - margin account |
-| »side | String | Order side |
-| »amount | String | Trade amount |
-| »price | String | Order price |
-| »time_in_force | String | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee |
-| »left | String | Amount left to fill |
-| »filled_total | String | Total filled in quote currency |
-| »filled_amount | String | Currency transaction volume |
-| »avg_deal_price | String | Average transaction price of orders |
-| »fee_currency | String | Fee currency unit |
-| »gt_discount | Boolean | Whether GT fee discount is used |
-| »rebated_fee_currency | String | Rebated fee currency unit |
-| »auto_repay | Boolean | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:1. This field is only effective for cross margin orders. Margin account does not support setting auto repayment for orders.2. auto_borrow and auto_repay cannot be both set to true in one order. |
-| »auto_borrow | Boolean | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough. |
-| »stp_id | Integer | Orders between users in the same stp_id group are not allowed to be self-traded. Detail to ApiV4 |
-| »stp_act | String | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies |
-| »finish_as | String | How the order was finished.- open: processing- filled: filled totally- cancelled: manually cancelled- ioc: time in force is IOC, finish immediately- stp: cancelled because self trade prevention- poc: pending order policy is not met because tif is set to poc- fok: not fully filled immediately because tif is set to fok- trader_not_enough: insufficient counterparties lead to order cancellation- depth_not_enough: insufficient depth leads to order cancellation- small: order amount too small- liquidate_cancelled: cancelled by liquidate- -: unknown |
-| »amend_text | String | The custom data that the user remarked when amending the order |
+| Field                 | Type          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| result                | Array[Object] | Updated order list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| »id                   | String        | Order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| »user                 | Integer       | User ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| »text                 | String        | User defined information                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| »create_time          | String        | Order creation time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »create_time_ms       | String        | Order creation time in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »update_time          | String        | Order last modification time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »update_time_ms       | String        | Order last modification time in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »event                | String        | Order event- put: order creation- update: order fill update- finish: order closed or cancelled                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| »currency_pair        | String        | Currency pair                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| »type                 | String        | Order type. limit - limit order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »account              | String        | Account type. spot - spot account; margin - margin account                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| »side                 | String        | Order side                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| »amount               | String        | Trade amount                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »price                | String        | Order price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| »time_in_force        | String        | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee                                                                                                                                                                                                                                                                                                                                                                                                       |
+| »left                 | String        | Amount left to fill                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »filled_total         | String        | Total filled in quote currency                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| »filled_amount        | String        | Currency transaction volume                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| »avg_deal_price       | String        | Average transaction price of orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »fee_currency         | String        | Fee currency unit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| »gt_discount          | Boolean       | Whether GT fee discount is used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »rebated_fee_currency | String        | Rebated fee currency unit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| »auto_repay           | Boolean       | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:1. This field is only effective for cross margin orders. Margin account does not support setting auto repayment for orders.2. auto_borrow and auto_repay cannot be both set to true in one order.                                                                                                                                                                                                                                   |
+| »auto_borrow          | Boolean       | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »stp_id               | Integer       | Orders between users in the same stp_id group are not allowed to be self-traded. Detail to ApiV4                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| »stp_act              | String        | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »finish_as            | String        | How the order was finished.- open: processing- filled: filled totally- cancelled: manually cancelled- ioc: time in force is IOC, finish immediately- stp: cancelled because self trade prevention- poc: pending order policy is not met because tif is set to poc- fok: not fully filled immediately because tif is set to fok- trader_not_enough: insufficient counterparties lead to order cancellation- depth_not_enough: insufficient depth leads to order cancellation- small: order amount too small- liquidate_cancelled: cancelled by liquidate- -: unknown |
+| »amend_text           | String        | The custom data that the user remarked when amending the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 #### [#](#enumerated-values-7) Enumerated Values
 
-| Property | Value |
-| --- | --- |
-| type | limit |
-| type | market |
-| type | limit_repay |
-| type | market_repay |
-| type | limit_borrow |
-| type | market_borrow |
-| type | limit_borrow_repay |
-| account | spot |
-| account | margin |
-| account | portfolio |
-| side | buy |
-| side | sell |
-| time_in_force | gtc |
-| time_in_force | ioc |
-| time_in_force | poc |
+| Property      | Value              |
+| ------------- | ------------------ |
+| type          | limit              |
+| type          | market             |
+| type          | limit_repay        |
+| type          | market_repay       |
+| type          | limit_borrow       |
+| type          | market_borrow      |
+| type          | limit_borrow_repay |
+| account       | spot               |
+| account       | margin             |
+| account       | portfolio          |
+| side          | buy                |
+| side          | sell               |
+| time_in_force | gtc                |
+| time_in_force | ioc                |
+| time_in_force | poc                |
 
 # [#](#user-trades-channel) User Trades Channel
 
@@ -1964,7 +2057,9 @@ Result format:
 
 **update speed:** realtime
 
-Notify user's personal trades in specified currency pairs. Unlike `spot.trades` channel, this is a private channel and notify all trades related to user whatever the trade role(maker/taker) is.
+Notify user's personal trades in specified currency pairs. Unlike `spot.trades`
+channel, this is a private channel and notify all trades related to user
+whatever the trade role(maker/taker) is.
 
 ## [#](#client-subscription-10) Client Subscription
 
@@ -2043,13 +2138,15 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs. |
+| Field   | Type          | Required | Description             |
+| ------- | ------------- | -------- | ----------------------- |
+| payload | Array[String] | Yes      | List of currency pairs. |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
-If you want to subscribe to all user trades updates in all currency pairs, you can include `!all` in currency pair list.
+If you want to subscribe to all user trades updates in all currency pairs, you
+can include `!all` in currency pair list.
 
 WARNING
 
@@ -2087,38 +2184,39 @@ Notification example
 }
 ```
 
-Updated user trades list. Note it is possible that multiple currency pairs' trades will be updated in one notification.
+Updated user trades list. Note it is possible that multiple currency pairs'
+trades will be updated in one notification.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[UserTrade] | Updated user trades list |
-| »id | Integer | All Market Trade ID |
-| »user_id | Integer | User ID |
-| »order_id | String | Related order ID |
-| »currency_pair | String | currency pair |
-| »create_time | Integer | Trading time in seconds |
-| »create_time_ms | String | Trading time in milliseconds. Precision higher than ms will be appended as decimal points |
-| »side | String | Order side |
-| »amount | String | Trade Amount |
-| »role | String | Trade Role (maker/taker) |
-| »price | String | Trade price |
-| »fee | String | Fee deducted |
-| »fee_currency | String | Fee currency unit |
-| »point_fee | String | Point used to deduct fee |
-| »gt_fee | String | GT used to deduct fee |
-| »text | String | User defined information |
-| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
+| Field           | Type             | Description                                                                               |
+| --------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| result          | Array[UserTrade] | Updated user trades list                                                                  |
+| »id             | Integer          | All Market Trade ID                                                                       |
+| »user_id        | Integer          | User ID                                                                                   |
+| »order_id       | String           | Related order ID                                                                          |
+| »currency_pair  | String           | currency pair                                                                             |
+| »create_time    | Integer          | Trading time in seconds                                                                   |
+| »create_time_ms | String           | Trading time in milliseconds. Precision higher than ms will be appended as decimal points |
+| »side           | String           | Order side                                                                                |
+| »amount         | String           | Trade Amount                                                                              |
+| »role           | String           | Trade Role (maker/taker)                                                                  |
+| »price          | String           | Trade price                                                                               |
+| »fee            | String           | Fee deducted                                                                              |
+| »fee_currency   | String           | Fee currency unit                                                                         |
+| »point_fee      | String           | Point used to deduct fee                                                                  |
+| »gt_fee         | String           | GT used to deduct fee                                                                     |
+| »text           | String           | User defined information                                                                  |
+| »id_market      | Integer          | One market Trade ID (Continuous Growth within a Single Market ID)                         |
 
 #### [#](#enumerated-values-8) Enumerated Values
 
 | Property | Value |
-| --- | --- |
-| side | buy |
-| side | sell |
-| role | maker |
-| role | taker |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
+| role     | maker |
+| role     | taker |
 
 # [#](#user-trades-channel-v2-lite) User Trades Channel V2 (lite)
 
@@ -2126,7 +2224,9 @@ Result format:
 
 **update speed:** realtime
 
-Notify user's personal trades in specified currency pairs. Unlike `spot.trades` channel, this is a private channel and notify all trades related to user whatever the trade role(maker/taker) is.
+Notify user's personal trades in specified currency pairs. Unlike `spot.trades`
+channel, this is a private channel and notify all trades related to user
+whatever the trade role(maker/taker) is.
 
 ## [#](#client-subscription-11) Client Subscription
 
@@ -2205,13 +2305,15 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs. |
+| Field   | Type          | Required | Description             |
+| ------- | ------------- | -------- | ----------------------- |
+| payload | Array[String] | Yes      | List of currency pairs. |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
-If you want to subscribe to all user trades updates in all currency pairs, you can include `!all` in currency pair list.
+If you want to subscribe to all user trades updates in all currency pairs, you
+can include `!all` in currency pair list.
 
 WARNING
 
@@ -2246,35 +2348,36 @@ Notification example
 }
 ```
 
-Updated user trades list. Note it is possible that multiple currency pairs' trades will be updated in one notification.
+Updated user trades list. Note it is possible that multiple currency pairs'
+trades will be updated in one notification.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[UserTrade] | Updated user trades list |
-| »id | Integer | All Market Trade ID |
-| »user_id | Integer | User ID |
-| »order_id | String | Related order ID |
-| »currency_pair | String | currency pair |
-| »create_time | Integer | Trading time in seconds |
-| »create_time_ms | String | Trading time in milliseconds. Precision higher than ms will be appended as decimal points |
-| »side | String | Order side |
-| »amount | String | Trade Amount |
-| »role | String | Trade Role (maker/taker) |
-| »price | String | Trade price |
-| »fee_currency | String | Fee currency unit |
-| »text | String | User defined information |
-| »id_market | Integer | One market Trade ID (Continuous Growth within a Single Market ID) |
+| Field           | Type             | Description                                                                               |
+| --------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| result          | Array[UserTrade] | Updated user trades list                                                                  |
+| »id             | Integer          | All Market Trade ID                                                                       |
+| »user_id        | Integer          | User ID                                                                                   |
+| »order_id       | String           | Related order ID                                                                          |
+| »currency_pair  | String           | currency pair                                                                             |
+| »create_time    | Integer          | Trading time in seconds                                                                   |
+| »create_time_ms | String           | Trading time in milliseconds. Precision higher than ms will be appended as decimal points |
+| »side           | String           | Order side                                                                                |
+| »amount         | String           | Trade Amount                                                                              |
+| »role           | String           | Trade Role (maker/taker)                                                                  |
+| »price          | String           | Trade price                                                                               |
+| »fee_currency   | String           | Fee currency unit                                                                         |
+| »text           | String           | User defined information                                                                  |
+| »id_market      | Integer          | One market Trade ID (Continuous Growth within a Single Market ID)                         |
 
 #### [#](#enumerated-values-9) Enumerated Values
 
 | Property | Value |
-| --- | --- |
-| side | buy |
-| side | sell |
-| role | maker |
-| role | taker |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
+| role     | maker |
+| role     | taker |
 
 # [#](#spot-balance-channel) Spot Balance Channel
 
@@ -2392,19 +2495,19 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[SpotBalance] | New balance update list |
-| »timestamp | String | Unix timestamp in seconds |
-| »timestamp_ms | String | Unix timestamp in milliseconds |
-| »user | String | User id |
-| »currency | String | Changed currency |
-| »change | String | Changed amount |
-| »total | String | Total spot balance |
-| »available | String | Balance available to use |
-| »freeze | String | Balance locked amount |
-| »freeze_change | String | Balance locked changed amount |
-| »change_type | String | Balance change type- withdraw- deposit- trade-fee-deduct- order-create: order creation- order-match: order fill update- order-update: cancel order or modify order- margin-transfer- future-transfer- cross-margin-transfer- other |
+| Field          | Type               | Description                                                                                                                                                                                                                        |
+| -------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| result         | Array[SpotBalance] | New balance update list                                                                                                                                                                                                            |
+| »timestamp     | String             | Unix timestamp in seconds                                                                                                                                                                                                          |
+| »timestamp_ms  | String             | Unix timestamp in milliseconds                                                                                                                                                                                                     |
+| »user          | String             | User id                                                                                                                                                                                                                            |
+| »currency      | String             | Changed currency                                                                                                                                                                                                                   |
+| »change        | String             | Changed amount                                                                                                                                                                                                                     |
+| »total         | String             | Total spot balance                                                                                                                                                                                                                 |
+| »available     | String             | Balance available to use                                                                                                                                                                                                           |
+| »freeze        | String             | Balance locked amount                                                                                                                                                                                                              |
+| »freeze_change | String             | Balance locked changed amount                                                                                                                                                                                                      |
+| »change_type   | String             | Balance change type- withdraw- deposit- trade-fee-deduct- order-create: order creation- order-match: order fill update- order-update: cancel order or modify order- margin-transfer- future-transfer- cross-margin-transfer- other |
 
 # [#](#margin-balance-channel) Margin Balance Channel
 
@@ -2412,7 +2515,8 @@ Result format:
 
 **update speed:** realtime
 
-Notify user margin balance updates. Any margin funding, borrowing will generate a new notification.
+Notify user margin balance updates. Any margin funding, borrowing will generate
+a new notification.
 
 ## [#](#client-subscription-13) Client Subscription
 
@@ -2522,19 +2626,19 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[MarginBalance] | New margin balance update list |
-| »timestamp | String | Unix timestamp in seconds |
-| »timestamp_ms | String | Unix timestamp in milliseconds |
-| »user | String | User id |
-| »currency_pair | String | Currency pair |
-| »currency | String | Changed currency |
-| »change | String | Changed amount |
-| »available | String | Amount available to use |
-| »freeze | String | Amount locked, e.g. used in funding book |
-| »borrowed | String | Amount borrowed |
-| »interest | String | Total unpaid interest generated from borrowing |
+| Field          | Type                 | Description                                    |
+| -------------- | -------------------- | ---------------------------------------------- |
+| result         | Array[MarginBalance] | New margin balance update list                 |
+| »timestamp     | String               | Unix timestamp in seconds                      |
+| »timestamp_ms  | String               | Unix timestamp in milliseconds                 |
+| »user          | String               | User id                                        |
+| »currency_pair | String               | Currency pair                                  |
+| »currency      | String               | Changed currency                               |
+| »change        | String               | Changed amount                                 |
+| »available     | String               | Amount available to use                        |
+| »freeze        | String               | Amount locked, e.g. used in funding book       |
+| »borrowed      | String               | Amount borrowed                                |
+| »interest      | String               | Total unpaid interest generated from borrowing |
 
 # [#](#funding-balance-channel) Funding Balance Channel
 
@@ -2542,7 +2646,8 @@ Result format:
 
 **update speed:** realtime
 
-Notify user funding balance updates. Including new lending loan being created, cancelled, or borrowed by someone else.
+Notify user funding balance updates. Including new lending loan being created,
+cancelled, or borrowed by someone else.
 
 ## [#](#client-subscription-14) Client Subscription
 
@@ -2649,16 +2754,16 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[FundingBalance] | New funding balance update list |
-| »timestamp | String | Unix timestamp in seconds |
-| »timestamp_ms | String | Unix timestamp in milliseconds |
-| »user | String | User id |
-| »currency | String | Changed currency |
-| »change | String | Changed amount |
-| »freeze | String | Amount locked, e.g. used in funding book |
-| »lent | String | Amount lent |
+| Field         | Type                  | Description                              |
+| ------------- | --------------------- | ---------------------------------------- |
+| result        | Array[FundingBalance] | New funding balance update list          |
+| »timestamp    | String                | Unix timestamp in seconds                |
+| »timestamp_ms | String                | Unix timestamp in milliseconds           |
+| »user         | String                | User id                                  |
+| »currency     | String                | Changed currency                         |
+| »change       | String                | Changed amount                           |
+| »freeze       | String                | Amount locked, e.g. used in funding book |
+| »lent         | String                | Amount lent                              |
 
 # [#](#cross-margin-balance-channel) Cross Margin Balance Channel
 
@@ -2668,7 +2773,8 @@ Result format:
 
 Notify user cross margin balance updates
 
-Note that open orders will not trigger balance update until being partially or fully filled.
+Note that open orders will not trigger balance update until being partially or
+fully filled.
 
 ## [#](#client-subscription-15) Client Subscription
 
@@ -2778,19 +2884,19 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Array[SpotBalance] | New balance update list |
-| »timestamp | String | Unix timestamp in seconds |
-| »timestamp_ms | String | Unix timestamp in milliseconds |
-| »user | String | User id |
-| »currency | String | Changed currency |
-| »change | String | Changed amount. |
-| »total | String | Total spot balance |
-| »available | String | Balance available to use |
-| »freeze | String | Balance locked amount |
-| »freeze_change | String | Balance locked changed amount |
-| »change_type | String | Balance change type- withdraw- deposit- trade-fee-deduct- order-create: order creation- order-match: order fill update- order-update: cancel order or modify order- margin-transfer- future-transfer- cross-margin-transfer- other |
+| Field          | Type               | Description                                                                                                                                                                                                                        |
+| -------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| result         | Array[SpotBalance] | New balance update list                                                                                                                                                                                                            |
+| »timestamp     | String             | Unix timestamp in seconds                                                                                                                                                                                                          |
+| »timestamp_ms  | String             | Unix timestamp in milliseconds                                                                                                                                                                                                     |
+| »user          | String             | User id                                                                                                                                                                                                                            |
+| »currency      | String             | Changed currency                                                                                                                                                                                                                   |
+| »change        | String             | Changed amount.                                                                                                                                                                                                                    |
+| »total         | String             | Total spot balance                                                                                                                                                                                                                 |
+| »available     | String             | Balance available to use                                                                                                                                                                                                           |
+| »freeze        | String             | Balance locked amount                                                                                                                                                                                                              |
+| »freeze_change | String             | Balance locked changed amount                                                                                                                                                                                                      |
+| »change_type   | String             | Balance change type- withdraw- deposit- trade-fee-deduct- order-create: order creation- order-match: order fill update- order-update: cancel order or modify order- margin-transfer- future-transfer- cross-margin-transfer- other |
 
 # [#](#cross-margin-loan-channel-deprecated) Cross Margin Loan Channel (deprecated)
 
@@ -2804,8 +2910,13 @@ Notify user cross margin borrowed and Interest updates
 
 Any cross margin borrowing, repayment will generate a new notification.
 
-1.  If a loan or repayment operation occurs, Both this channel and `spot.cross_balances` (balance change) will be notified, but `spot.cross_balances` notification only has the balance change(No loan information), This channel notification will contain balance、borrowed and Interest information
-2.  This channel is only notified when a loan or repayment occurs, if only the trade happens, This channel will not notify.
+1.  If a loan or repayment operation occurs, Both this channel and
+    `spot.cross_balances` (balance change) will be notified, but
+    `spot.cross_balances` notification only has the balance change(No loan
+    information), This channel notification will contain balance、borrowed and
+    Interest information
+2.  This channel is only notified when a loan or repayment occurs, if only the
+    trade happens, This channel will not notify.
 
 ## [#](#client-subscription-16) Client Subscription
 
@@ -2911,17 +3022,17 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object | New cross margin borrowed and Interest update message |
-| »timestamp | int64 | Unix timestamp in milliseconds |
-| »user | String | User id |
-| »currency | String | Changed currency |
-| »change | String | Changed amount. |
-| »total | String | Total spot balance |
-| »available | String | Balance available to use |
-| »borrowed | String | Amount borrowed |
-| »interest | String | Total unpaid interest generated from borrowing |
+| Field      | Type   | Description                                           |
+| ---------- | ------ | ----------------------------------------------------- |
+| result     | Object | New cross margin borrowed and Interest update message |
+| »timestamp | int64  | Unix timestamp in milliseconds                        |
+| »user      | String | User id                                               |
+| »currency  | String | Changed currency                                      |
+| »change    | String | Changed amount.                                       |
+| »total     | String | Total spot balance                                    |
+| »available | String | Balance available to use                              |
+| »borrowed  | String | Amount borrowed                                       |
+| »interest  | String | Total unpaid interest generated from borrowing        |
 
 # [#](#priceorders-channel) PriceOrders Channel
 
@@ -3008,13 +3119,15 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payload | Array[String] | Yes | List of currency pairs |
+| Field   | Type          | Required | Description            |
+| ------- | ------------- | -------- | ---------------------- |
+| payload | Array[String] | Yes      | List of currency pairs |
 
-You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier will not be overridden unless explicitly unsubscribed to.
+You can subscribe/unsubscribe multiple times. Currency pair subscribed earlier
+will not be overridden unless explicitly unsubscribed to.
 
-If you want to subscribe to all user trades updates in all currency pairs, you can include !all in currency pair list.
+If you want to subscribe to all user trades updates in all currency pairs, you
+can include !all in currency pair list.
 
 WARNING
 
@@ -3061,39 +3174,40 @@ Notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| result | Object |  |
-| »market | String | market name |
-| »uid | String | User id |
-| »id | String | id |
-| »currency_type | String | currency type |
-| »exchange_type | String | exchange type |
-| »reason | String | reason |
-| »err_msg | String | err_msg |
-| »fired_order_id | int | fired_order_id |
-| »instant_cancel | bool | instant cancel |
-| »trigger_price | String | trigger_price |
-| »trigger_rule | String | trigger_rule |
-| »trigger_expiration | int | trigger_expiration |
-| »price | String | price |
-| »amount | String | amount |
-| »source | String | source |
-| »order_type | String | order_type |
-| »side | String | side |
-| »engine_type | String | engine_type |
-| »is_stop_order | bool | is_stop_order |
+| Field               | Type   | Description        |
+| ------------------- | ------ | ------------------ |
+| result              | Object |                    |
+| »market             | String | market name        |
+| »uid                | String | User id            |
+| »id                 | String | id                 |
+| »currency_type      | String | currency type      |
+| »exchange_type      | String | exchange type      |
+| »reason             | String | reason             |
+| »err_msg            | String | err_msg            |
+| »fired_order_id     | int    | fired_order_id     |
+| »instant_cancel     | bool   | instant cancel     |
+| »trigger_price      | String | trigger_price      |
+| »trigger_rule       | String | trigger_rule       |
+| »trigger_expiration | int    | trigger_expiration |
+| »price              | String | price              |
+| »amount             | String | amount             |
+| »source             | String | source             |
+| »order_type         | String | order_type         |
+| »side               | String | side               |
+| »engine_type        | String | engine_type        |
+| »is_stop_order      | bool   | is_stop_order      |
 | »stop_trigger_price | String | stop_trigger_price |
-| »stop_trigger_rule | String | stop_trigger_rule |
-| »stop_price | String | stop_price |
-| »ctime | String | ctime |
-| »ftime | String | ftime |
+| »stop_trigger_rule  | String | stop_trigger_rule  |
+| »stop_price         | String | stop_price         |
+| »ctime              | String | ctime              |
+| »ftime              | String | ftime              |
 
 # [#](#spot-account-trade) Spot Account Trade
 
 ## [#](#websocket-api) Websocket API
 
-WebSocket API allows placing, canceling, amending, querying orders through a WebSocket connection.
+WebSocket API allows placing, canceling, amending, querying orders through a
+WebSocket connection.
 
 ### [#](#websocket-api-client-api-request) Websocket API Client Api Request
 
@@ -3356,19 +3470,25 @@ type OrderParam struct {
 }
 ```
 
-`api` requests initiated from the client follow a common JSON format, which contains the following fields:
+`api` requests initiated from the client follow a common JSON format, which
+contains the following fields:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| time | Integer | Yes | Request time in seconds. Gap between request time and server time must not exceed 60 seconds |
-| id | Integer | No | Optional request id which will be sent back by the server to help you identify which request the server responds to |
-| channel | String | Yes | WebSocket channel to subscribe to. |
-| event | String | Yes | Fixed as api |
-| payload | Object | Yes | Optional request detail parameters |
-| »req_id | String | Yes | Unique identifier of the message Provided by client. It will be returned in response message for identifyingthe corresponding request. |
-| »req_param | []Byte | Yes | Request api param |
+| Field      | Type    | Required | Description                                                                                                                            |
+| ---------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| time       | Integer | Yes      | Request time in seconds. Gap between request time and server time must not exceed 60 seconds                                           |
+| id         | Integer | No       | Optional request id which will be sent back by the server to help you identify which request the server responds to                    |
+| channel    | String  | Yes      | WebSocket channel to subscribe to.                                                                                                     |
+| event      | String  | Yes      | Fixed as api                                                                                                                           |
+| payload    | Object  | Yes      | Optional request detail parameters                                                                                                     |
+| »req_id    | String  | Yes      | Unique identifier of the message Provided by client. It will be returned in response message for identifyingthe corresponding request. |
+| »req_param | []Byte  | Yes      | Request api param                                                                                                                      |
 
-Note that the type of `payload.req_param` is channel specific, Take `spot.order_place` for example, `payload.req_param` same as apiv4 [/spot/orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-an-order) or [/spot/batch\_orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-a-batch-of-orders). You can place a limit order for GT\_USDT with example.
+Note that the type of `payload.req_param` is channel specific, Take
+`spot.order_place` for example, `payload.req_param` same as apiv4
+[/spot/orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-an-order)
+or
+[/spot/batch_orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-a-batch-of-orders).
+You can place a limit order for GT_USDT with example.
 
 ### [#](#websocket-api-server-response) Websocket API Server Response
 
@@ -3469,29 +3589,31 @@ Server api response example
 }
 ```
 
-Server response includes ack response to client requests and api result callback message updates. Server responses follow a common JSON format, which contains the following fields:
+Server response includes ack response to client requests and api result callback
+message updates. Server responses follow a common JSON format, which contains
+the following fields:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »x_gate_ratelimit_requests_remain | Integer | (For order placement/modification only) Remaining available requests in the current time window (hidden if 0) |
-| »x_gate_ratelimit_limit | Integer | (For order placement/modification only) Current rate limit cap (hidden if 0) |
-| »x_gat_ratelimit_reset_timestamp | Integer | (For order placement/modification only) If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Object | If this is ack response, result is the payload of the request, otherwise result is the response of the api |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field                             | Type    | Description                                                                                                                                                                                                                                                                                          |
+| --------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                                                                     |
+| header                            | Map     | response meta info                                                                                                                                                                                                                                                                                   |
+| »response_time                    | String  | response send time in mill                                                                                                                                                                                                                                                                           |
+| »channel                          | String  | request channel                                                                                                                                                                                                                                                                                      |
+| »event                            | String  | request event                                                                                                                                                                                                                                                                                        |
+| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                                                                     |
+| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                                                        |
+| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                                                            |
+| »x_gate_ratelimit_requests_remain | Integer | (For order placement/modification only) Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                        |
+| »x_gate_ratelimit_limit           | Integer | (For order placement/modification only) Current rate limit cap (hidden if 0)                                                                                                                                                                                                                         |
+| »x_gat_ratelimit_reset_timestamp  | Integer | (For order placement/modification only) If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
+| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                                                               |
+| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                                                          |
+| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                                                                |
+| data                              | Object  | Response data of the request                                                                                                                                                                                                                                                                         |
+| »result                           | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api                                                                                                                                                                                           |
+| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                                                          |
+| »»label                           | String  | denotes error type in string format                                                                                                                                                                                                                                                                  |
+| »»message                         | String  | detailed error message                                                                                                                                                                                                                                                                               |
 
 ### [#](#error-2) Error
 
@@ -3551,24 +3673,27 @@ Error Response Notification example（rate limit）
 
 Error object has the following format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| label | String | denotes error type in string format |
-| message | String | detailed error message |
+| Field   | Type   | Description                         |
+| ------- | ------ | ----------------------------------- |
+| label   | String | denotes error type in string format |
+| message | String | detailed error message              |
 
 Explanation of rate limit-related error codes:
 
-| Code | Description |
-| --- | --- |
-| 100 | Internal rate limiting exception error |
-| 211 | Spot trading rate limit |
-| 212 | Spot trading engine rate limit |
+| Code | Description                            |
+| ---- | -------------------------------------- |
+| 100  | Internal rate limiting exception error |
+| 211  | Spot trading rate limit                |
+| 212  | Spot trading engine rate limit         |
 
 ## [#](#login) Login
 
 WARNING
 
-Note: the GateAPIv4 key pair you used MUST have spot Corresponding permissions(eg: order-place channel must have spot write permissions), and your outbound IP address must be in the key's IP whitelist if its whitelist is enabled.
+Note: the GateAPIv4 key pair you used MUST have spot Corresponding
+permissions(eg: order-place channel must have spot write permissions), and your
+outbound IP address must be in the key's IP whitelist if its whitelist is
+enabled.
 
 ### [#](#login-request) Login Request
 
@@ -3757,17 +3882,23 @@ Request example
 }
 ```
 
-Payload format:| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| api_key | string | Yes | apiv4 key |
-| req_header | object | Yes | apiv4 custom header |
-| signature | string | Yes | apiv4 signature |
-| timestamp | string | Yes | unix timestamp in seconds |
+| Payload format: | Field  | Type | Required                                                                                                                                   | Description |
+| --------------- | ------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| req_id          | string | Yes  | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| api_key         | string | Yes  | apiv4 key                                                                                                                                  |
+| req_header      | object | Yes  | apiv4 custom header                                                                                                                        |
+| signature       | string | Yes  | apiv4 signature                                                                                                                            |
+| timestamp       | string | Yes  | unix timestamp in seconds                                                                                                                  |
 
-WebSocket api operation authentication uses the same signature calculation method with Gate APIv4 API, i.e., `HexEncode(HMAC_SHA512(secret, signature_string))`, but has the following differences:
+WebSocket api operation authentication uses the same signature calculation
+method with Gate APIv4 API, i.e.,
+`HexEncode(HMAC_SHA512(secret, signature_string))`, but has the following
+differences:
 
-1.  Signature string concatenation method: `"<event>\n<channel>\n<req_param>\n<timestamp>"`, where `<event>`, `<channel>`,`<req_param>`, `<timestamp>` are corresponding request information
+1.  Signature string concatenation method:
+    `"<event>\n<channel>\n<req_param>\n<timestamp>"`, where `<event>`,
+    `<channel>`,`<req_param>`, `<timestamp>` are corresponding request
+    information
 2.  `req_param` in `login` channel always empty string
 3.  Authentication information are sent in request body in field `payload`.
 
@@ -3801,26 +3932,26 @@ Login Response example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Object | If this is ack response, result is the payload of the request, otherwise result is the response of the api |
-| »»api_key | String | Login success apikey |
-| »»uid | String | Login user id |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field          | Type    | Description                                                                                                |
+| -------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| request_id     | String  | Unique identifier of the message                                                                           |
+| header         | Map     | response meta info                                                                                         |
+| »response_time | String  | response send time in mill                                                                                 |
+| »channel       | String  | request channel                                                                                            |
+| »event         | String  | request event                                                                                              |
+| »client_id     | String  | Unique client id                                                                                           |
+| »x_in_time     | Integer | time to receive the request (in microseconds)                                                              |
+| »x_out_time    | Integer | time to return response (in microseconds)                                                                  |
+| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection)                     |
+| »conn_trace_id | String  | TraceId to establish connection with client                                                                |
+| »trace_id      | String  | TraceId for executing order operation                                                                      |
+| data           | Object  | Response data of the request                                                                               |
+| »result        | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api |
+| »»api_key      | String  | Login success apikey                                                                                       |
+| »»uid          | String  | Login user id                                                                                              |
+| »errs          | Object  | It is only available when the request fails                                                                |
+| »»label        | String  | denotes error type in string format                                                                        |
+| »»message      | String  | detailed error message                                                                                     |
 
 ## [#](#order-place) Order Place
 
@@ -4010,89 +4141,98 @@ Request example
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | api order model's json byte data, could be an array with api order model; api order model detail toapi (opens new window) |
-| req_header | object | No | apiv4 custom header |
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id     | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param  | object | Yes      | api order model's json byte data, could be an array with api order model; api order model detail toapi (opens new window)                  |
+| req_header | object | No       | apiv4 custom header                                                                                                                        |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| text | string | false | User defined information. If not empty, must follow the rules below: |
-| currency_pair | string | true | Currency pair |
-| type | object | false | Order Type |
-| account | string | false | Account types， spot - spot account, margin - margin account, unified - unified account, cross_margin - cross margin account. Portfolio margin accounts can only be set to cross_margin |
-| side | string | true | Order side |
-| amount | string | true | When type is limit, it refers to base currency. For instance, BTC_USDT means BTC |
-| price | string | false | Price can't be empty when type = limit |
-| time_in_force | object | false | Time in force |
-| iceberg | string | false | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding all amount is not supported. |
-| auto_borrow | boolean | false | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough. |
-| auto_repay | boolean | false | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. |
-| stp_act | string | false | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies |
-| action_mode | string | false | Processing Mode |
+| Field         | Type    | Required | Description                                                                                                                                                                             |
+| ------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| text          | string  | false    | User defined information. If not empty, must follow the rules below:                                                                                                                    |
+| currency_pair | string  | true     | Currency pair                                                                                                                                                                           |
+| type          | object  | false    | Order Type                                                                                                                                                                              |
+| account       | string  | false    | Account types， spot - spot account, margin - margin account, unified - unified account, cross_margin - cross margin account. Portfolio margin accounts can only be set to cross_margin |
+| side          | string  | true     | Order side                                                                                                                                                                              |
+| amount        | string  | true     | When type is limit, it refers to base currency. For instance, BTC_USDT means BTC                                                                                                        |
+| price         | string  | false    | Price can't be empty when type = limit                                                                                                                                                  |
+| time_in_force | object  | false    | Time in force                                                                                                                                                                           |
+| iceberg       | string  | false    | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding all amount is not supported.                                                                               |
+| auto_borrow   | boolean | false    | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.                                                                         |
+| auto_repay    | boolean | false    | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled.                                                                   |
+| stp_act       | string  | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                                                         |
+| action_mode   | string  | false    | Processing Mode                                                                                                                                                                         |
 
 `req_header` Custom header data:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| x-gate-exptime | string | false | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
+| Field          | Type   | Required | Description                                                                                                                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 #### [#](#detail) Detail:
 
 **text**: User defined information. If not empty, must follow the rules below:
 
-*   prefixed with `t-`
-*   no longer than 28 bytes without `t-` prefix
-*   can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)
-*   not specified, default `apiv4-ws`
+- prefixed with `t-`
+- no longer than 28 bytes without `t-` prefix
+- can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)
+- not specified, default `apiv4-ws`
 
 **type**: Order Type
 
-*   limit: Limit Order
-*   market: Market Order
+- limit: Limit Order
+- market: Market Order
 
-**account**: Account types: spot - spot account, margin - margin account, cross\_margin - cross margin account, unified - unified account (old, only supports `cross_margin`)
+**account**: Account types: spot - spot account, margin - margin account,
+cross_margin - cross margin account, unified - unified account (old, only
+supports `cross_margin`)
 
-**amount**: When type is `limit`, it refers to base currency. For instance, `BTC_USDT` means `BTC` When `type` is `market`, it refers to different currency according to `side`
+**amount**: When type is `limit`, it refers to base currency. For instance,
+`BTC_USDT` means `BTC` When `type` is `market`, it refers to different currency
+according to `side`
 
-*   `side`: `buy` means quote currency, `BTC_USDT` means `USDT`
-*   `side`: `sell` means base currency，`BTC_USDT` means `BTC`
+- `side`: `buy` means quote currency, `BTC_USDT` means `USDT`
+- `side`: `sell` means base currency，`BTC_USDT` means `BTC`
 
-**time\_in\_force**: Time in force
+**time_in_force**: Time in force
 
-*   gtc: GoodTillCancelled
-*   ioc: mmediateOrCancelled, taker only
-*   poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee
-*   fok: FillOrKill, fill either completely or none Only `ioc` and `fok` are supported when `type` = `market`
+- gtc: GoodTillCancelled
+- ioc: mmediateOrCancelled, taker only
+- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
+  fee
+- fok: FillOrKill, fill either completely or none Only `ioc` and `fok` are
+  supported when `type` = `market`
 
-**auto\_repay**: Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:
+**auto_repay**: Enable or disable automatic repayment for automatic borrow loan
+generated by cross margin order. Default is disabled. Note that:
 
-*   This field is only effective for cross margin orders. Margin account does not support setting auto repayment for orders.
-*   `auto_borrow` and `auto_repay` can be both set to true in one order.
+- This field is only effective for cross margin orders. Margin account does not
+  support setting auto repayment for orders.
+- `auto_borrow` and `auto_repay` can be both set to true in one order.
 
-**stp\_act**: Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies
+**stp_act**: Self-Trading Prevention Action. Users can use this field to set
+self-trade prevetion strategies
 
-*   After users join the STP Group, he can pass stp\_act to limit the user's self-trade prevetion strategy. If stp\_act is not passed, the default is cn strategy。
-    
-*   When the user does not join the STP group, an error will be returned when passing the stp\_act parameter。
-    
-*   If the user did not use 'stp\_act' when placing the order, 'stp\_act' will return '-'
-    
-*   cn: Cancel newest, Cancel new orders and keep old ones
-    
-*   co: Cancel oldest, Cancel old orders and keep new ones
-    
-*   cb: Cancel both, Both old and new orders will be cancelled
-    
+- After users join the STP Group, he can pass stp_act to limit the user's
+  self-trade prevetion strategy. If stp_act is not passed, the default is cn
+  strategy。
+- When the user does not join the STP group, an error will be returned when
+  passing the stp_act parameter。
+- If the user did not use 'stp_act' when placing the order, 'stp_act' will
+  return '-'
+- cn: Cancel newest, Cancel new orders and keep old ones
+- co: Cancel oldest, Cancel old orders and keep new ones
+- cb: Cancel both, Both old and new orders will be cancelled
 
-**action\_mode**: Processing Mode: When placing an order, different fields are returned based on `action_mode`. This field is only valid during the request and is not included in the response result.
+**action_mode**: Processing Mode: When placing an order, different fields are
+returned based on `action_mode`. This field is only valid during the request and
+is not included in the response result.
 
-*   `ACK`: Asynchronous mode, only returns key order fields
-*   `RESULT`: No clearing information
-*   `FULL`: Full mode (default)
+- `ACK`: Asynchronous mode, only returns key order fields
+- `RESULT`: No clearing information
+- `FULL`: Full mode (default)
 
 ### [#](#ack-notification) Ack Notification
 
@@ -4194,7 +4334,7 @@ Order place notification example
 
 Response Notification example for an order
 
-> action\_mode: ACK
+> action_mode: ACK
 
 ```json
 {
@@ -4224,7 +4364,7 @@ Response Notification example for an order
 }
 ```
 
-> action\_mode: RESULT
+> action_mode: RESULT
 
 ```json
 {
@@ -4273,7 +4413,7 @@ Response Notification example for an order
 }
 ```
 
-> action\_mode: FULL
+> action_mode: FULL
 
 ```json
 {
@@ -4331,32 +4471,33 @@ Response Notification example for an order
 }
 ```
 
-Updated order list. Note it is possible that multiple currency pairs' orders will be updated in one notification.
+Updated order list. Note it is possible that multiple currency pairs' orders
+will be updated in one notification.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| ack | Bool | The return of the "ack" message represents the WebSocket confirmation message(Currently exists in the order-place api). If "ack" is false(this field will not be returned),it means that the message is a response message, and you can determine if the request was successful by checking "data.errs". |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0) |
-| »x_gate_ratelimit_limit | Integer | Current rate limit cap (hidden if 0) |
-| »x_gat_ratelimit_reset_timestamp | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| data | Object | Response data of the request |
-| »result | Object | If this is ack response, result is the payload of the request, otherwise result is the response of the api |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field                             | Type    | Description                                                                                                                                                                                                                                                                                              |
+| --------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                                                                         |
+| ack                               | Bool    | The return of the "ack" message represents the WebSocket confirmation message(Currently exists in the order-place api). If "ack" is false(this field will not be returned),it means that the message is a response message, and you can determine if the request was successful by checking "data.errs". |
+| header                            | Map     | response meta info                                                                                                                                                                                                                                                                                       |
+| »response_time                    | String  | response send time in mill                                                                                                                                                                                                                                                                               |
+| »channel                          | String  | request channel                                                                                                                                                                                                                                                                                          |
+| »event                            | String  | request event                                                                                                                                                                                                                                                                                            |
+| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                                                                         |
+| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                                                            |
+| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                                                                |
+| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                                                              |
+| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                                                                    |
+| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                                                                    |
+| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                                                                     |
+| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds)                                             |
+| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                                                                   |
+| data                              | Object  | Response data of the request                                                                                                                                                                                                                                                                             |
+| »result                           | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api                                                                                                                                                                                               |
+| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                                                              |
+| »»label                           | String  | denotes error type in string format                                                                                                                                                                                                                                                                      |
+| »»message                         | String  | detailed error message                                                                                                                                                                                                                                                                                   |
 
 ## [#](#order-cancel) Order Cancel
 
@@ -4480,25 +4621,25 @@ Order cancel request example
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | api cancel order, detail toapi (opens new window) |
-| req_header | object | No | apiv4 custom header |
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id     | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param  | object | Yes      | api cancel order, detail toapi (opens new window)                                                                                          |
+| req_header | object | No       | apiv4 custom header                                                                                                                        |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| order_id | string | true | Order ID returned, or user custom ID(i.e., text field). |
-| currency_pair | string | tur | Currency pair |
-| account | string | false | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
+| Field         | Type   | Required | Description                                                                                                                                                                                              |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id      | string | true     | Order ID returned, or user custom ID(i.e., text field).                                                                                                                                                  |
+| currency_pair | string | tur      | Currency pair                                                                                                                                                                                            |
+| account       | string | false    | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
 
 `req_header` Custom header data:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| x-gate-exptime | string | false | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
+| Field          | Type   | Required | Description                                                                                                                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-cancel-notification) Order Cancel Notification
 
@@ -4559,24 +4700,24 @@ Order cancel notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Object | single order cancel response, detail toapi (opens new window) |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field          | Type    | Description                                                                            |
+| -------------- | ------- | -------------------------------------------------------------------------------------- |
+| request_id     | String  | Unique identifier of the message                                                       |
+| header         | Map     | response meta info                                                                     |
+| »response_time | String  | response send time in mill                                                             |
+| »channel       | String  | request channel                                                                        |
+| »event         | String  | request event                                                                          |
+| »client_id     | String  | Unique client id                                                                       |
+| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
+| »x_out_time    | Integer | time to return response (in microseconds)                                              |
+| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
+| »conn_trace_id | String  | TraceId to establish connection with client                                            |
+| »trace_id      | String  | TraceId for executing order operation                                                  |
+| data           | Object  | Response data of the request                                                           |
+| »result        | Object  | single order cancel response, detail toapi (opens new window)                          |
+| »errs          | Object  | It is only available when the request fails                                            |
+| »»label        | String  | denotes error type in string format                                                    |
+| »»message      | String  | detailed error message                                                                 |
 
 ## [#](#order-cancel-all-with-id-list) Order Cancel All With Id List
 
@@ -4704,25 +4845,25 @@ Client request example
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | detail toapi (opens new window) |
-| req_header | object | No | apiv4 custom header |
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id     | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param  | object | Yes      | detail toapi (opens new window)                                                                                                            |
+| req_header | object | No       | apiv4 custom header                                                                                                                        |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency_pair | string | true | Currency pair |
-| id | string | true | Order ID or user-defined ID. If using a custom ID, it is only valid within 30 minutes after the order is created. |
-| account | string | false | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
+| Field         | Type   | Required | Description                                                                                                                                                                                              |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency_pair | string | true     | Currency pair                                                                                                                                                                                            |
+| id            | string | true     | Order ID or user-defined ID. If using a custom ID, it is only valid within 30 minutes after the order is created.                                                                                        |
+| account       | string | false    | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
 
 `req_header` Custom header data:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| x-gate-exptime | string | false | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
+| Field          | Type   | Required | Description                                                                                                                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-cancel-all-with-id-list-notification) Order Cancel All With Id List Notification
 
@@ -4757,24 +4898,24 @@ Order cancel notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Object | response detail toapi (opens new window) |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field          | Type    | Description                                                                            |
+| -------------- | ------- | -------------------------------------------------------------------------------------- |
+| request_id     | String  | Unique identifier of the message                                                       |
+| header         | Map     | response meta info                                                                     |
+| »response_time | String  | response send time in mill                                                             |
+| »channel       | String  | request channel                                                                        |
+| »event         | String  | request event                                                                          |
+| »client_id     | String  | Unique client id                                                                       |
+| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
+| »x_out_time    | Integer | time to return response (in microseconds)                                              |
+| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
+| »conn_trace_id | String  | TraceId to establish connection with client                                            |
+| »trace_id      | String  | TraceId for executing order operation                                                  |
+| data           | Object  | Response data of the request                                                           |
+| »result        | Object  | response detail toapi (opens new window)                                               |
+| »errs          | Object  | It is only available when the request fails                                            |
+| »»label        | String  | denotes error type in string format                                                    |
+| »»message      | String  | detailed error message                                                                 |
 
 ## [#](#order-cancel-all-with-specified-currency-pair) Order Cancel All With Specified Currency Pair
 
@@ -4896,25 +5037,25 @@ func main() {
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | detail toapi (opens new window) |
-| req_header | object | No | apiv4 custom header |
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id     | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param  | object | Yes      | detail toapi (opens new window)                                                                                                            |
+| req_header | object | No       | apiv4 custom header                                                                                                                        |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency_pair | string | true | Currency pair |
-| side | string | true | All bids or asks. Both included if not specified |
-| account | string | false | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
+| Field         | Type   | Required | Description                                                                                                                                                                                              |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency_pair | string | true     | Currency pair                                                                                                                                                                                            |
+| side          | string | true     | All bids or asks. Both included if not specified                                                                                                                                                         |
+| account       | string | false    | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
 
 `req_header` Custom header data:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| x-gate-exptime | string | false | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
+| Field          | Type   | Required | Description                                                                                                                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-cancel-all-with-specified-currency-pair-notification) Order Cancel All With Specified Currency Pair Notification
 
@@ -4977,24 +5118,24 @@ Order cancel notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Object | response detail toapi (opens new window) |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field          | Type    | Description                                                                            |
+| -------------- | ------- | -------------------------------------------------------------------------------------- |
+| request_id     | String  | Unique identifier of the message                                                       |
+| header         | Map     | response meta info                                                                     |
+| »response_time | String  | response send time in mill                                                             |
+| »channel       | String  | request channel                                                                        |
+| »event         | String  | request event                                                                          |
+| »client_id     | String  | Unique client id                                                                       |
+| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
+| »x_out_time    | Integer | time to return response (in microseconds)                                              |
+| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
+| »conn_trace_id | String  | TraceId to establish connection with client                                            |
+| »trace_id      | String  | TraceId for executing order operation                                                  |
+| data           | Object  | Response data of the request                                                           |
+| »result        | Object  | response detail toapi (opens new window)                                               |
+| »errs          | Object  | It is only available when the request fails                                            |
+| »»label        | String  | denotes error type in string format                                                    |
+| »»message      | String  | detailed error message                                                                 |
 
 ## [#](#order-amend) Order Amend
 
@@ -5120,28 +5261,28 @@ Client request example
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | api amend order, detail toapi (opens new window) |
-| req_header | object | No | apiv4 custom header |
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id     | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param  | object | Yes      | api amend order, detail toapi (opens new window)                                                                                           |
+| req_header | object | No       | apiv4 custom header                                                                                                                        |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| amount | string | false | New order amount. amount and `price must specify one of them |
-| price | string | false | New order price. amount and Price must specify one of them" |
-| amend_text | string | false | Custom info during amending order |
-| order_id | string | true | Order ID returned, or user custom ID(i.e., text field). |
-| currency_pair | string | true | Currency pair |
-| account | string | false | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
+| Field         | Type   | Required | Description                                                                                                                                                                                              |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| amount        | string | false    | New order amount. amount and `price must specify one of them                                                                                                                                             |
+| price         | string | false    | New order price. amount and Price must specify one of them"                                                                                                                                              |
+| amend_text    | string | false    | Custom info during amending order                                                                                                                                                                        |
+| order_id      | string | true     | Order ID returned, or user custom ID(i.e., text field).                                                                                                                                                  |
+| currency_pair | string | true     | Currency pair                                                                                                                                                                                            |
+| account       | string | false    | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
 
 `req_header` Custom header data:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| x-gate-exptime | string | false | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
+| Field          | Type   | Required | Description                                                                                                                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-amend-notification) Order Amend Notification
 
@@ -5205,27 +5346,27 @@ Order amend notification example
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0) |
-| »x_gate_ratelimit_limit | Integer | Current rate limit cap (hidden if 0) |
-| »x_gat_ratelimit_reset_timestamp | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| data | Object | Response data of the request |
-| »result | Object | response detail toapi (opens new window) |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field                             | Type    | Description                                                                                                                                                                                                                                                  |
+| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                             |
+| header                            | Map     | response meta info                                                                                                                                                                                                                                           |
+| »response_time                    | String  | response send time in mill                                                                                                                                                                                                                                   |
+| »channel                          | String  | request channel                                                                                                                                                                                                                                              |
+| »event                            | String  | request event                                                                                                                                                                                                                                                |
+| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                             |
+| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                |
+| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                    |
+| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                  |
+| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                        |
+| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                        |
+| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                         |
+| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
+| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                       |
+| data                              | Object  | Response data of the request                                                                                                                                                                                                                                 |
+| »result                           | Object  | response detail toapi (opens new window)                                                                                                                                                                                                                     |
+| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                  |
+| »»label                           | String  | denotes error type in string format                                                                                                                                                                                                                          |
+| »»message                         | String  | detailed error message                                                                                                                                                                                                                                       |
 
 ## [#](#order-status) Order Status
 
@@ -5349,18 +5490,18 @@ Client request example
 
 Payload format:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | detail toapi (opens new window) |
+| Field     | Type   | Required | Description                                                                                                                                |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id    | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param | object | Yes      | detail toapi (opens new window)                                                                                                            |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| order_id | string | true | Order ID returned, or user custom ID(i.e., text field). |
-| currency_pair | string | true | Currency pair |
-| account | string | false | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
+| Field         | Type   | Required | Description                                                                                                                                                                                              |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id      | string | true     | Order ID returned, or user custom ID(i.e., text field).                                                                                                                                                  |
+| currency_pair | string | true     | Currency pair                                                                                                                                                                                            |
+| account       | string | false    | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
 
 ### [#](#order-status-notification) Order Status Notification
 
@@ -5419,28 +5560,29 @@ Order status notification example
 }
 ```
 
-Updated order list. Note it is possible that multiple currency pairs' orders will be updated in one notification.
+Updated order list. Note it is possible that multiple currency pairs' orders
+will be updated in one notification.
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Object | response detail toapi (opens new window) |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field          | Type    | Description                                                                            |
+| -------------- | ------- | -------------------------------------------------------------------------------------- |
+| request_id     | String  | Unique identifier of the message                                                       |
+| header         | Map     | response meta info                                                                     |
+| »response_time | String  | response send time in mill                                                             |
+| »channel       | String  | request channel                                                                        |
+| »event         | String  | request event                                                                          |
+| »client_id     | String  | Unique client id                                                                       |
+| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
+| »x_out_time    | Integer | time to return response (in microseconds)                                              |
+| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
+| »conn_trace_id | String  | TraceId to establish connection with client                                            |
+| »trace_id      | String  | TraceId for executing order operation                                                  |
+| data           | Object  | Response data of the request                                                           |
+| »result        | Object  | response detail toapi (opens new window)                                               |
+| »errs          | Object  | It is only available when the request fails                                            |
+| »»label        | String  | denotes error type in string format                                                    |
+| »»message      | String  | detailed error message                                                                 |
 
 ## [#](#list-orders) List orders
 
@@ -5553,40 +5695,40 @@ Request example
 
 ```json
 {
-    "time": 1734400368,
-    "channel": "spot.order_list",
-    "event": "api",
-    "payload": {
-        "req_id": "1734081140-1",
-        "req_param": {
-            "currency_pair": "BTC_USDT",
-            "status": "finished",
-            "limit": 3,
-            "page": 1
-        }
+  "time": 1734400368,
+  "channel": "spot.order_list",
+  "event": "api",
+  "payload": {
+    "req_id": "1734081140-1",
+    "req_param": {
+      "currency_pair": "BTC_USDT",
+      "status": "finished",
+      "limit": 3,
+      "page": 1
     }
+  }
 }
 ```
 
 Payload:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| req_id | string | Yes | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes | detail toapi (opens new window) |
+| Field     | Type   | Required | Description                                                                                                                                |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| req_id    | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
+| req_param | object | Yes      | detail toapi (opens new window)                                                                                                            |
 
 `req_param` JSON byte data of the API order model:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency_pair | string | true | Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones. |
-| status | string | true | List orders based on status |
-| page | integer(int32) | false | Page number |
-| limit | integer | false | Maximum number of records to be returned. If status is open, maximum of limit is 100 |
-| account | string | false | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
-| from | integer(int64) | false | Start timestamp of the query |
-| to | integer(int64) | false | Time range ending, default to current time |
-| side | string | false | All bids or asks. Both included if not specified |
+| Field         | Type           | Required | Description                                                                                                                                                                                              |
+| ------------- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency_pair | string         | true     | Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.                                                                                           |
+| status        | string         | true     | List orders based on status                                                                                                                                                                              |
+| page          | integer(int32) | false    | Page number                                                                                                                                                                                              |
+| limit         | integer        | false    | Maximum number of records to be returned. If status is open, maximum of limit is 100                                                                                                                     |
+| account       | string         | false    | Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to cross_margin to operate against margin account. Portfolio margin account must set to cross_margin only |
+| from          | integer(int64) | false    | Start timestamp of the query                                                                                                                                                                             |
+| to            | integer(int64) | false    | Time range ending, default to current time                                                                                                                                                               |
+| side          | string         | false    | All bids or asks. Both included if not specified                                                                                                                                                         |
 
 #### [#](#detailed-descriptions) Detailed descriptions
 
@@ -5596,7 +5738,9 @@ Payload:
 
 `finished` - order has been filled or cancelled
 
-**account**: Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to `cross_margin` to operate against margin account. Portfolio margin account must set to `cross_margin` only
+**account**: Specify operation account. Default to spot ,portfolio and margin
+account if not specified. Set to `cross_margin` to operate against margin
+account. Portfolio margin account must set to `cross_margin` only
 
 ### [#](#responses) Responses
 
@@ -5604,141 +5748,141 @@ Responses example
 
 ```json
 {
-    "header": {
-        "response_time": "1734486677912",
-        "status": "200",
-        "channel": "spot.order_list",
-        "event": "api",
-        "client_id": "35.79.119.197-0xc00a13a1a0",
-        "x_in_time": 1734486677912508,
-        "x_out_time": 1734486677912598,
-        "conn_id": "5e74253e9c793974",
-        "conn_trace_id": "1bde5aaa0acf2f5f48edfd4392e1fa68",
-        "trace_id": "e410abb5f74b4afc519e67920548838d"
-    },
-    "data": {
-        "result": [
-            {
-                "id": "20874890569",
-                "text": "web",
-                "amend_text": "-",
-                "create_time": "1734081653",
-                "update_time": "1734081653",
-                "create_time_ms": 1734081653247,
-                "update_time_ms": 1734081653249,
-                "status": "closed",
-                "currency_pair": "BTC_USDT",
-                "type": "market",
-                "account": "spot",
-                "side": "buy",
-                "amount": "70.0",
-                "price": "0.0",
-                "time_in_force": "ioc",
-                "iceberg": "0.0",
-                "left": "0.143511",
-                "filled_amount": "0.00299",
-                "fill_price": "69.856489",
-                "filled_total": "69.856489",
-                "avg_deal_price": "23363.3742475",
-                "fee": "0.0000028704",
-                "fee_currency": "BTC",
-                "point_fee": "0.0",
-                "gt_fee": "0.0",
-                "gt_maker_fee": "0.0",
-                "gt_taker_fee": "0.0",
-                "rebated_fee": "0.0",
-                "rebated_fee_currency": "USDT",
-                "finish_as": "filled"
-            },
-            {
-                "id": "20884808760",
-                "text": "web",
-                "amend_text": "-",
-                "create_time": "1734081534",
-                "update_time": "1734081534",
-                "create_time_ms": 1734081534822,
-                "update_time_ms": 1734081534824,
-                "status": "closed",
-                "currency_pair": "BTC_USDT",
-                "type": "market",
-                "account": "spot",
-                "side": "buy",
-                "amount": "100.0",
-                "price": "0.0",
-                "time_in_force": "ioc",
-                "iceberg": "0.0",
-                "left": "0.088092",
-                "filled_amount": "0.00433",
-                "fill_price": "99.911908",
-                "filled_total": "99.911908",
-                "avg_deal_price": "23074.34364897",
-                "fee": "0.0000041568",
-                "fee_currency": "BTC",
-                "point_fee": "0.0",
-                "gt_fee": "0.0",
-                "gt_maker_fee": "0.0",
-                "gt_taker_fee": "0.0",
-                "rebated_fee": "0.0",
-                "rebated_fee_currency": "USDT",
-                "finish_as": "filled"
-            },
-            {
-                "id": "20870148234",
-                "text": "t-123456",
-                "amend_text": "-",
-                "create_time": "1733900250",
-                "update_time": "1733900250",
-                "create_time_ms": 1733900250750,
-                "update_time_ms": 1733900250755,
-                "status": "closed",
-                "currency_pair": "BTC_USDT",
-                "type": "market",
-                "account": "spot",
-                "side": "buy",
-                "amount": "10.0",
-                "price": "0.0",
-                "time_in_force": "ioc",
-                "iceberg": "0.0",
-                "left": "0.144492",
-                "filled_amount": "0.00013",
-                "fill_price": "9.855508",
-                "filled_total": "9.855508",
-                "avg_deal_price": "75811.6",
-                "fee": "0.0000001248",
-                "fee_currency": "BTC",
-                "point_fee": "0.0",
-                "gt_fee": "0.0",
-                "gt_maker_fee": "0.0",
-                "gt_taker_fee": "0.0",
-                "rebated_fee": "0.0",
-                "rebated_fee_currency": "USDT",
-                "finish_as": "filled"
-            }
-        ]
-    },
-    "request_id": "1734081140-1"
+  "header": {
+    "response_time": "1734486677912",
+    "status": "200",
+    "channel": "spot.order_list",
+    "event": "api",
+    "client_id": "35.79.119.197-0xc00a13a1a0",
+    "x_in_time": 1734486677912508,
+    "x_out_time": 1734486677912598,
+    "conn_id": "5e74253e9c793974",
+    "conn_trace_id": "1bde5aaa0acf2f5f48edfd4392e1fa68",
+    "trace_id": "e410abb5f74b4afc519e67920548838d"
+  },
+  "data": {
+    "result": [
+      {
+        "id": "20874890569",
+        "text": "web",
+        "amend_text": "-",
+        "create_time": "1734081653",
+        "update_time": "1734081653",
+        "create_time_ms": 1734081653247,
+        "update_time_ms": 1734081653249,
+        "status": "closed",
+        "currency_pair": "BTC_USDT",
+        "type": "market",
+        "account": "spot",
+        "side": "buy",
+        "amount": "70.0",
+        "price": "0.0",
+        "time_in_force": "ioc",
+        "iceberg": "0.0",
+        "left": "0.143511",
+        "filled_amount": "0.00299",
+        "fill_price": "69.856489",
+        "filled_total": "69.856489",
+        "avg_deal_price": "23363.3742475",
+        "fee": "0.0000028704",
+        "fee_currency": "BTC",
+        "point_fee": "0.0",
+        "gt_fee": "0.0",
+        "gt_maker_fee": "0.0",
+        "gt_taker_fee": "0.0",
+        "rebated_fee": "0.0",
+        "rebated_fee_currency": "USDT",
+        "finish_as": "filled"
+      },
+      {
+        "id": "20884808760",
+        "text": "web",
+        "amend_text": "-",
+        "create_time": "1734081534",
+        "update_time": "1734081534",
+        "create_time_ms": 1734081534822,
+        "update_time_ms": 1734081534824,
+        "status": "closed",
+        "currency_pair": "BTC_USDT",
+        "type": "market",
+        "account": "spot",
+        "side": "buy",
+        "amount": "100.0",
+        "price": "0.0",
+        "time_in_force": "ioc",
+        "iceberg": "0.0",
+        "left": "0.088092",
+        "filled_amount": "0.00433",
+        "fill_price": "99.911908",
+        "filled_total": "99.911908",
+        "avg_deal_price": "23074.34364897",
+        "fee": "0.0000041568",
+        "fee_currency": "BTC",
+        "point_fee": "0.0",
+        "gt_fee": "0.0",
+        "gt_maker_fee": "0.0",
+        "gt_taker_fee": "0.0",
+        "rebated_fee": "0.0",
+        "rebated_fee_currency": "USDT",
+        "finish_as": "filled"
+      },
+      {
+        "id": "20870148234",
+        "text": "t-123456",
+        "amend_text": "-",
+        "create_time": "1733900250",
+        "update_time": "1733900250",
+        "create_time_ms": 1733900250750,
+        "update_time_ms": 1733900250755,
+        "status": "closed",
+        "currency_pair": "BTC_USDT",
+        "type": "market",
+        "account": "spot",
+        "side": "buy",
+        "amount": "10.0",
+        "price": "0.0",
+        "time_in_force": "ioc",
+        "iceberg": "0.0",
+        "left": "0.144492",
+        "filled_amount": "0.00013",
+        "fill_price": "9.855508",
+        "filled_total": "9.855508",
+        "avg_deal_price": "75811.6",
+        "fee": "0.0000001248",
+        "fee_currency": "BTC",
+        "point_fee": "0.0",
+        "gt_fee": "0.0",
+        "gt_maker_fee": "0.0",
+        "gt_taker_fee": "0.0",
+        "rebated_fee": "0.0",
+        "rebated_fee_currency": "USDT",
+        "finish_as": "filled"
+      }
+    ]
+  },
+  "request_id": "1734081140-1"
 }
 ```
 
 Result format:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| request_id | String | Unique identifier of the message |
-| header | Map | response meta info |
-| »response_time | String | response send time in mill |
-| »channel | String | request channel |
-| »event | String | request event |
-| »client_id | String | Unique client id |
-| »x_in_time | Integer | time to receive the request (in microseconds) |
-| »x_out_time | Integer | time to return response (in microseconds) |
-| »conn_id | String | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String | TraceId to establish connection with client |
-| »trace_id | String | TraceId for executing order operation |
-| data | Object | Response data of the request |
-| »result | Array | response detail toapi (opens new window) |
-| »errs | Object | It is only available when the request fails |
-| »»label | String | denotes error type in string format |
-| »»message | String | detailed error message |
+| Field          | Type    | Description                                                                            |
+| -------------- | ------- | -------------------------------------------------------------------------------------- |
+| request_id     | String  | Unique identifier of the message                                                       |
+| header         | Map     | response meta info                                                                     |
+| »response_time | String  | response send time in mill                                                             |
+| »channel       | String  | request channel                                                                        |
+| »event         | String  | request event                                                                          |
+| »client_id     | String  | Unique client id                                                                       |
+| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
+| »x_out_time    | Integer | time to return response (in microseconds)                                              |
+| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
+| »conn_trace_id | String  | TraceId to establish connection with client                                            |
+| »trace_id      | String  | TraceId for executing order operation                                                  |
+| data           | Object  | Response data of the request                                                           |
+| »result        | Array   | response detail toapi (opens new window)                                               |
+| »errs          | Object  | It is only available when the request fails                                            |
+| »»label        | String  | denotes error type in string format                                                    |
+| »»message      | String  | detailed error message                                                                 |
 
 Last Updated: 4/18/2025, 8:25:26 AM

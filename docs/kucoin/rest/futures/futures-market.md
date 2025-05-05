@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="futures">futures v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 market
 
@@ -28,23 +28,21 @@ market
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/contracts/{symbol}',
-{
-  method: 'GET',
+fetch("/api/v1/contracts/{symbol}", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -61,13 +59,15 @@ print(r.json())
 
 `GET /api/v1/contracts/{symbol}`
 
-Get information of specified contracts that can be traded. This API will return a list of tradable contracts, including some key parameters of the contract such as the symbol name, tick size, mark price, etc.
+Get information of specified contracts that can be traded. This API will return
+a list of tradable contracts, including some key parameters of the contract such
+as the symbol name, tick size, mark price, etc.
 
 <h3 id="get-symbol-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|path|string|true|Path Parameter. Symbol of the contract|
+| Name   | In   | Type   | Required | Description                            |
+| ------ | ---- | ------ | -------- | -------------------------------------- |
+| symbol | path | string | true     | Path Parameter. Symbol of the contract |
 
 > Example responses
 
@@ -87,28 +87,17 @@ Get information of specified contracts that can be traded. This API will return 
         "symbol": {
           "type": "string",
           "description": "Symbol",
-          "example": [
-            "XBTUSDTM",
-            "XBTUSDCM",
-            "XBTUSDM"
-          ]
+          "example": ["XBTUSDTM", "XBTUSDCM", "XBTUSDM"]
         },
         "rootSymbol": {
           "type": "string",
           "description": "Contract group",
-          "example": [
-            "USDT",
-            "USDC",
-            "XBT"
-          ]
+          "example": ["USDT", "USDC", "XBT"]
         },
         "type": {
           "type": "string",
           "description": "Type of contract",
-          "enum": [
-            "FFWCSX",
-            "FFICSX"
-          ],
+          "enum": ["FFWCSX", "FFICSX"],
           "x-api-enum": [
             {
               "value": "FFWCSX",
@@ -228,9 +217,7 @@ Get information of specified contracts that can be traded. This API will return 
         "markMethod": {
           "type": "string",
           "description": "Marking method",
-          "enum": [
-            "FairPrice"
-          ],
+          "enum": ["FairPrice"],
           "x-api-enum": [
             {
               "value": "FairPrice",
@@ -242,9 +229,7 @@ Get information of specified contracts that can be traded. This API will return 
         "fairMethod": {
           "type": "string",
           "description": "Fair price marking method; the Futures contract is null",
-          "enum": [
-            "FundingRate"
-          ],
+          "enum": ["FundingRate"],
           "x-api-enum": [
             {
               "value": "FundingRate",
@@ -502,107 +487,104 @@ Get information of specified contracts that can be traded. This API will return 
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-symbol-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-symbol-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|200000 is for success, other is error|
-|» data|object|true|none|none|
-|»» symbol|string|true|none|Symbol|
-|»» rootSymbol|string|true|none|Contract group|
-|»» type|string|true|none|Type of contract|
-|»» firstOpenDate|integer(int64)|true|none|First Open Date (milliseconds)|
-|»» expireDate|integer(int64)|true|none|Expiration date (milliseconds) Null means it will never expire|
-|»» settleDate|integer(int64)|true|none|Settlement date (milliseconds) Null indicates that automatic settlement is not supported|
-|»» baseCurrency|string|true|none|Base currency|
-|»» quoteCurrency|string|true|none|Quote currency|
-|»» settleCurrency|string|true|none|Currency used to clear and settle the trades|
-|»» maxOrderQty|integer|true|none|Maximum order quantity|
-|»» maxPrice|number|true|none|Maximum order price|
-|»» lotSize|integer|true|none|Minimum lot size|
-|»» tickSize|number|true|none|Minimum price changes|
-|»» indexPriceTickSize|number|true|none|Index price of tick size|
-|»» multiplier|number|true|none|The basic unit of the contract API is lots. For the number of coins in each lot, please refer to the param multiplier. For example, for XBTUSDTM, multiplier=0.001, which corresponds to the value of each XBTUSDTM contract being 0.001 BTC. There is also a special case. All coin-swap contracts, such as each XBTUSDM contract, correspond to 1 USD.|
-|»» initialMargin|number|true|none|Initial margin requirement|
-|»» maintainMargin|number|true|none|Maintenance margin requirement|
-|»» maxRiskLimit|integer|true|none|Maximum risk limit (unit: XBT)|
-|»» minRiskLimit|integer|true|none|Minimum risk limit (unit: XBT)|
-|»» riskStep|integer|true|none|Risk limit increment value (unit: XBT)|
-|»» makerFeeRate|number|true|none|Maker fee rate|
-|»» takerFeeRate|number|true|none|Taker fee rate|
-|»» takerFixFee|number|true|none|Deprecated param|
-|»» makerFixFee|number|true|none|Deprecated param|
-|»» settlementFee|number|true|none|Settlement fee|
-|»» isDeleverage|boolean|true|none|Enabled ADL or not|
-|»» isQuanto|boolean|true|none|Deprecated param|
-|»» isInverse|boolean|true|none|Whether it is a reverse contract|
-|»» markMethod|string|true|none|Marking method|
-|»» fairMethod|string|true|none|Fair price marking method; the Futures contract is null|
-|»» fundingBaseSymbol|string|true|none|Ticker symbol of the base currency|
-|»» fundingQuoteSymbol|string|true|none|Ticker symbol of the quote currency|
-|»» fundingRateSymbol|string|true|none|Funding rate symbol|
-|»» indexSymbol|string|true|none|Index symbol|
-|»» settlementSymbol|string|true|none|Settlement symbol|
-|»» status|string|true|none|Contract status|
-|»» fundingFeeRate|number|true|none|Funding fee rate|
-|»» predictedFundingFeeRate|number|true|none|Predicted funding fee rate|
-|»» fundingRateGranularity|integer|true|none|Funding interval (milliseconds)|
-|»» openInterest|string|true|none|Open interest (unit: lots)|
-|»» turnoverOf24h|number|true|none|24-hour turnover|
-|»» volumeOf24h|number|true|none|24-hour volume|
-|»» markPrice|number|true|none|Mark price|
-|»» indexPrice|number|true|none|Index price|
-|»» lastTradePrice|number|true|none|Last trade price|
-|»» nextFundingRateTime|integer|true|none|Next funding rate time (milliseconds)|
-|»» maxLeverage|integer|true|none|Maximum leverage|
-|»» sourceExchanges|[string]|true|none|The contract index price source exchange|
-|»» premiumsSymbol1M|string|true|none|Premium index symbol (1 minute)|
-|»» premiumsSymbol8H|string|true|none|Premium index symbol (8 hours)|
-|»» fundingBaseSymbol1M|string|true|none|Base currency interest rate symbol (1 minute)|
-|»» fundingQuoteSymbol1M|string|true|none|Quote currency interest rate symbol (1 minute)|
-|»» lowPrice|number|true|none|24-hour lowest price|
-|»» highPrice|number|true|none|24-hour highest price|
-|»» priceChgPct|number|true|none|24-hour % price change|
-|»» priceChg|number|true|none|24-hour price change|
-|»» k|number|true|none|none|
-|»» m|number|true|none|none|
-|»» f|number|true|none|none|
-|»» mmrLimit|number|true|none|none|
-|»» mmrLevConstant|number|true|none|none|
-|»» supportCross|boolean|true|none|Whether support Cross Margin|
-|»» buyLimit|number|true|none|The current maximum buying price allowed|
-|»» sellLimit|number|true|none|The current minimum selling price allowed|
+| Name                       | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code                     | string         | true     | none         | 200000 is for success, other is error                                                                                                                                                                                                                                                                                                                    |
+| » data                     | object         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» symbol                  | string         | true     | none         | Symbol                                                                                                                                                                                                                                                                                                                                                   |
+| »» rootSymbol              | string         | true     | none         | Contract group                                                                                                                                                                                                                                                                                                                                           |
+| »» type                    | string         | true     | none         | Type of contract                                                                                                                                                                                                                                                                                                                                         |
+| »» firstOpenDate           | integer(int64) | true     | none         | First Open Date (milliseconds)                                                                                                                                                                                                                                                                                                                           |
+| »» expireDate              | integer(int64) | true     | none         | Expiration date (milliseconds) Null means it will never expire                                                                                                                                                                                                                                                                                           |
+| »» settleDate              | integer(int64) | true     | none         | Settlement date (milliseconds) Null indicates that automatic settlement is not supported                                                                                                                                                                                                                                                                 |
+| »» baseCurrency            | string         | true     | none         | Base currency                                                                                                                                                                                                                                                                                                                                            |
+| »» quoteCurrency           | string         | true     | none         | Quote currency                                                                                                                                                                                                                                                                                                                                           |
+| »» settleCurrency          | string         | true     | none         | Currency used to clear and settle the trades                                                                                                                                                                                                                                                                                                             |
+| »» maxOrderQty             | integer        | true     | none         | Maximum order quantity                                                                                                                                                                                                                                                                                                                                   |
+| »» maxPrice                | number         | true     | none         | Maximum order price                                                                                                                                                                                                                                                                                                                                      |
+| »» lotSize                 | integer        | true     | none         | Minimum lot size                                                                                                                                                                                                                                                                                                                                         |
+| »» tickSize                | number         | true     | none         | Minimum price changes                                                                                                                                                                                                                                                                                                                                    |
+| »» indexPriceTickSize      | number         | true     | none         | Index price of tick size                                                                                                                                                                                                                                                                                                                                 |
+| »» multiplier              | number         | true     | none         | The basic unit of the contract API is lots. For the number of coins in each lot, please refer to the param multiplier. For example, for XBTUSDTM, multiplier=0.001, which corresponds to the value of each XBTUSDTM contract being 0.001 BTC. There is also a special case. All coin-swap contracts, such as each XBTUSDM contract, correspond to 1 USD. |
+| »» initialMargin           | number         | true     | none         | Initial margin requirement                                                                                                                                                                                                                                                                                                                               |
+| »» maintainMargin          | number         | true     | none         | Maintenance margin requirement                                                                                                                                                                                                                                                                                                                           |
+| »» maxRiskLimit            | integer        | true     | none         | Maximum risk limit (unit: XBT)                                                                                                                                                                                                                                                                                                                           |
+| »» minRiskLimit            | integer        | true     | none         | Minimum risk limit (unit: XBT)                                                                                                                                                                                                                                                                                                                           |
+| »» riskStep                | integer        | true     | none         | Risk limit increment value (unit: XBT)                                                                                                                                                                                                                                                                                                                   |
+| »» makerFeeRate            | number         | true     | none         | Maker fee rate                                                                                                                                                                                                                                                                                                                                           |
+| »» takerFeeRate            | number         | true     | none         | Taker fee rate                                                                                                                                                                                                                                                                                                                                           |
+| »» takerFixFee             | number         | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
+| »» makerFixFee             | number         | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
+| »» settlementFee           | number         | true     | none         | Settlement fee                                                                                                                                                                                                                                                                                                                                           |
+| »» isDeleverage            | boolean        | true     | none         | Enabled ADL or not                                                                                                                                                                                                                                                                                                                                       |
+| »» isQuanto                | boolean        | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
+| »» isInverse               | boolean        | true     | none         | Whether it is a reverse contract                                                                                                                                                                                                                                                                                                                         |
+| »» markMethod              | string         | true     | none         | Marking method                                                                                                                                                                                                                                                                                                                                           |
+| »» fairMethod              | string         | true     | none         | Fair price marking method; the Futures contract is null                                                                                                                                                                                                                                                                                                  |
+| »» fundingBaseSymbol       | string         | true     | none         | Ticker symbol of the base currency                                                                                                                                                                                                                                                                                                                       |
+| »» fundingQuoteSymbol      | string         | true     | none         | Ticker symbol of the quote currency                                                                                                                                                                                                                                                                                                                      |
+| »» fundingRateSymbol       | string         | true     | none         | Funding rate symbol                                                                                                                                                                                                                                                                                                                                      |
+| »» indexSymbol             | string         | true     | none         | Index symbol                                                                                                                                                                                                                                                                                                                                             |
+| »» settlementSymbol        | string         | true     | none         | Settlement symbol                                                                                                                                                                                                                                                                                                                                        |
+| »» status                  | string         | true     | none         | Contract status                                                                                                                                                                                                                                                                                                                                          |
+| »» fundingFeeRate          | number         | true     | none         | Funding fee rate                                                                                                                                                                                                                                                                                                                                         |
+| »» predictedFundingFeeRate | number         | true     | none         | Predicted funding fee rate                                                                                                                                                                                                                                                                                                                               |
+| »» fundingRateGranularity  | integer        | true     | none         | Funding interval (milliseconds)                                                                                                                                                                                                                                                                                                                          |
+| »» openInterest            | string         | true     | none         | Open interest (unit: lots)                                                                                                                                                                                                                                                                                                                               |
+| »» turnoverOf24h           | number         | true     | none         | 24-hour turnover                                                                                                                                                                                                                                                                                                                                         |
+| »» volumeOf24h             | number         | true     | none         | 24-hour volume                                                                                                                                                                                                                                                                                                                                           |
+| »» markPrice               | number         | true     | none         | Mark price                                                                                                                                                                                                                                                                                                                                               |
+| »» indexPrice              | number         | true     | none         | Index price                                                                                                                                                                                                                                                                                                                                              |
+| »» lastTradePrice          | number         | true     | none         | Last trade price                                                                                                                                                                                                                                                                                                                                         |
+| »» nextFundingRateTime     | integer        | true     | none         | Next funding rate time (milliseconds)                                                                                                                                                                                                                                                                                                                    |
+| »» maxLeverage             | integer        | true     | none         | Maximum leverage                                                                                                                                                                                                                                                                                                                                         |
+| »» sourceExchanges         | [string]       | true     | none         | The contract index price source exchange                                                                                                                                                                                                                                                                                                                 |
+| »» premiumsSymbol1M        | string         | true     | none         | Premium index symbol (1 minute)                                                                                                                                                                                                                                                                                                                          |
+| »» premiumsSymbol8H        | string         | true     | none         | Premium index symbol (8 hours)                                                                                                                                                                                                                                                                                                                           |
+| »» fundingBaseSymbol1M     | string         | true     | none         | Base currency interest rate symbol (1 minute)                                                                                                                                                                                                                                                                                                            |
+| »» fundingQuoteSymbol1M    | string         | true     | none         | Quote currency interest rate symbol (1 minute)                                                                                                                                                                                                                                                                                                           |
+| »» lowPrice                | number         | true     | none         | 24-hour lowest price                                                                                                                                                                                                                                                                                                                                     |
+| »» highPrice               | number         | true     | none         | 24-hour highest price                                                                                                                                                                                                                                                                                                                                    |
+| »» priceChgPct             | number         | true     | none         | 24-hour % price change                                                                                                                                                                                                                                                                                                                                   |
+| »» priceChg                | number         | true     | none         | 24-hour price change                                                                                                                                                                                                                                                                                                                                     |
+| »» k                       | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» m                       | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» f                       | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» mmrLimit                | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» mmrLevConstant          | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» supportCross            | boolean        | true     | none         | Whether support Cross Margin                                                                                                                                                                                                                                                                                                                             |
+| »» buyLimit                | number         | true     | none         | The current maximum buying price allowed                                                                                                                                                                                                                                                                                                                 |
+| »» sellLimit               | number         | true     | none         | The current minimum selling price allowed                                                                                                                                                                                                                                                                                                                |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|type|FFWCSX|
-|type|FFICSX|
-|markMethod|FairPrice|
-|fairMethod|FundingRate|
-|status|Init|
-|status|Open|
-|status|BeingSettled|
-|status|Settled|
-|status|Paused|
-|status|Closed|
-|status|CancelOnly|
+| Property   | Value        |
+| ---------- | ------------ |
+| type       | FFWCSX       |
+| type       | FFICSX       |
+| markMethod | FairPrice    |
+| fairMethod | FundingRate  |
+| status     | Init         |
+| status     | Open         |
+| status     | BeingSettled |
+| status     | Settled      |
+| status     | Paused       |
+| status     | Closed       |
+| status     | CancelOnly   |
 
 <aside class="success">
 This operation does not require authentication
@@ -615,23 +597,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/contracts/active',
-{
-  method: 'GET',
+fetch("/api/v1/contracts/active", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -648,7 +628,9 @@ print(r.json())
 
 `GET /api/v1/contracts/active`
 
-Get detailed information of all contracts that can be traded. This API will return a list of tradable contracts, including some key parameters of the contract such as the symbol name, tick size, mark price, etc.
+Get detailed information of all contracts that can be traded. This API will
+return a list of tradable contracts, including some key parameters of the
+contract such as the symbol name, tick size, mark price, etc.
 
 > Example responses
 
@@ -670,28 +652,17 @@ Get detailed information of all contracts that can be traded. This API will retu
           "symbol": {
             "type": "string",
             "description": "Symbol",
-            "example": [
-              "XBTUSDTM",
-              "XBTUSDCM",
-              "XBTUSDM"
-            ]
+            "example": ["XBTUSDTM", "XBTUSDCM", "XBTUSDM"]
           },
           "rootSymbol": {
             "type": "string",
             "description": "Contract group",
-            "example": [
-              "USDT",
-              "USDC",
-              "XBT"
-            ]
+            "example": ["USDT", "USDC", "XBT"]
           },
           "type": {
             "type": "string",
             "description": "Type of contract",
-            "enum": [
-              "FFWCSX",
-              "FFICSX"
-            ],
+            "enum": ["FFWCSX", "FFICSX"],
             "x-api-enum": [
               {
                 "value": "FFWCSX",
@@ -811,9 +782,7 @@ Get detailed information of all contracts that can be traded. This API will retu
           "markMethod": {
             "type": "string",
             "description": "Marking method",
-            "enum": [
-              "FairPrice"
-            ],
+            "enum": ["FairPrice"],
             "x-api-enum": [
               {
                 "value": "FairPrice",
@@ -825,9 +794,7 @@ Get detailed information of all contracts that can be traded. This API will retu
           "fairMethod": {
             "type": "string",
             "description": "Fair price marking method; the Futures contract is null",
-            "enum": [
-              "FundingRate"
-            ],
+            "enum": ["FundingRate"],
             "x-api-enum": [
               {
                 "value": "FundingRate",
@@ -1085,107 +1052,104 @@ Get detailed information of all contracts that can be traded. This API will retu
       "description": "List of all contracts"
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-all-symbols-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-all-symbols-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|200000 is for success, other is error|
-|» data|[object]|true|none|List of all contracts|
-|»» symbol|string|true|none|Symbol|
-|»» rootSymbol|string|true|none|Contract group|
-|»» type|string|true|none|Type of contract|
-|»» firstOpenDate|integer(int64)|true|none|First Open Date (milliseconds)|
-|»» expireDate|integer(int64)|false|none|Expiration date (milliseconds) Null means it will never expire|
-|»» settleDate|integer(int64)|false|none|Settlement date (milliseconds) Null indicates that automatic settlement is not supported|
-|»» baseCurrency|string|true|none|Base currency|
-|»» quoteCurrency|string|true|none|Quote currency|
-|»» settleCurrency|string|true|none|Currency used to clear and settle the trades|
-|»» maxOrderQty|integer|true|none|Maximum order quantity|
-|»» maxPrice|number|true|none|Maximum order price|
-|»» lotSize|integer|true|none|Minimum lot size|
-|»» tickSize|number|true|none|Minimum price changes|
-|»» indexPriceTickSize|number|true|none|Index price of tick size|
-|»» multiplier|number|true|none|The basic unit of the contract API is lots. For the number of coins in each lot, please refer to the param multiplier. For example, for XBTUSDTM, multiplier=0.001, which corresponds to the value of each XBTUSDTM contract being 0.001 BTC. There is also a special case. All coin-swap contracts, such as each XBTUSDM contract, correspond to 1 USD.|
-|»» initialMargin|number|true|none|Initial margin requirement|
-|»» maintainMargin|number|true|none|Maintenance margin requirement|
-|»» maxRiskLimit|integer|true|none|Maximum risk limit (unit: XBT)|
-|»» minRiskLimit|integer|true|none|Minimum risk limit (unit: XBT)|
-|»» riskStep|integer|true|none|Risk limit increment value (unit: XBT)|
-|»» makerFeeRate|number|true|none|Maker fee rate|
-|»» takerFeeRate|number|true|none|Taker fee rate|
-|»» takerFixFee|number|true|none|Deprecated param|
-|»» makerFixFee|number|true|none|Deprecated param|
-|»» settlementFee|number|true|none|Settlement fee|
-|»» isDeleverage|boolean|true|none|Enabled ADL or not|
-|»» isQuanto|boolean|true|none|Deprecated param|
-|»» isInverse|boolean|true|none|Whether it is a reverse contract|
-|»» markMethod|string|true|none|Marking method|
-|»» fairMethod|string|true|none|Fair price marking method; the Futures contract is null|
-|»» fundingBaseSymbol|string|true|none|Ticker symbol of the base currency|
-|»» fundingQuoteSymbol|string|true|none|Ticker symbol of the quote currency|
-|»» fundingRateSymbol|string|true|none|Funding rate symbol|
-|»» indexSymbol|string|true|none|Index symbol|
-|»» settlementSymbol|string|true|none|Settlement symbol|
-|»» status|string|true|none|Contract status|
-|»» fundingFeeRate|number|true|none|Funding fee rate|
-|»» predictedFundingFeeRate|number|true|none|Predicted funding fee rate|
-|»» fundingRateGranularity|integer|true|none|Funding interval (milliseconds)|
-|»» openInterest|string|true|none|Open interest (unit: lots)|
-|»» turnoverOf24h|number|true|none|24-hour turnover|
-|»» volumeOf24h|number|true|none|24-hour volume|
-|»» markPrice|number|true|none|Mark price|
-|»» indexPrice|number|true|none|Index price|
-|»» lastTradePrice|number|true|none|Last trade price|
-|»» nextFundingRateTime|integer|true|none|Next funding rate time (milliseconds)|
-|»» maxLeverage|integer|true|none|Maximum leverage|
-|»» sourceExchanges|[string]|true|none|The contract index price source exchange|
-|»» premiumsSymbol1M|string|true|none|Premium index symbol (1 minute)|
-|»» premiumsSymbol8H|string|true|none|Premium index symbol (8 hours)|
-|»» fundingBaseSymbol1M|string|true|none|Base currency interest rate symbol (1 minute)|
-|»» fundingQuoteSymbol1M|string|true|none|Quote currency interest rate symbol (1 minute)|
-|»» lowPrice|number|true|none|24-hour lowest price|
-|»» highPrice|number|true|none|24-hour highest price|
-|»» priceChgPct|number|true|none|24-hour % price change|
-|»» priceChg|number|true|none|24-hour price change|
-|»» k|number|true|none|none|
-|»» m|number|true|none|none|
-|»» f|number|true|none|none|
-|»» mmrLimit|number|true|none|none|
-|»» mmrLevConstant|number|true|none|none|
-|»» supportCross|boolean|true|none|Whether support Cross Margin|
-|»» buyLimit|number|true|none|The current maximum buying price allowed|
-|»» sellLimit|number|true|none|The current minimum selling price allowed|
+| Name                       | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code                     | string         | true     | none         | 200000 is for success, other is error                                                                                                                                                                                                                                                                                                                    |
+| » data                     | [object]       | true     | none         | List of all contracts                                                                                                                                                                                                                                                                                                                                    |
+| »» symbol                  | string         | true     | none         | Symbol                                                                                                                                                                                                                                                                                                                                                   |
+| »» rootSymbol              | string         | true     | none         | Contract group                                                                                                                                                                                                                                                                                                                                           |
+| »» type                    | string         | true     | none         | Type of contract                                                                                                                                                                                                                                                                                                                                         |
+| »» firstOpenDate           | integer(int64) | true     | none         | First Open Date (milliseconds)                                                                                                                                                                                                                                                                                                                           |
+| »» expireDate              | integer(int64) | false    | none         | Expiration date (milliseconds) Null means it will never expire                                                                                                                                                                                                                                                                                           |
+| »» settleDate              | integer(int64) | false    | none         | Settlement date (milliseconds) Null indicates that automatic settlement is not supported                                                                                                                                                                                                                                                                 |
+| »» baseCurrency            | string         | true     | none         | Base currency                                                                                                                                                                                                                                                                                                                                            |
+| »» quoteCurrency           | string         | true     | none         | Quote currency                                                                                                                                                                                                                                                                                                                                           |
+| »» settleCurrency          | string         | true     | none         | Currency used to clear and settle the trades                                                                                                                                                                                                                                                                                                             |
+| »» maxOrderQty             | integer        | true     | none         | Maximum order quantity                                                                                                                                                                                                                                                                                                                                   |
+| »» maxPrice                | number         | true     | none         | Maximum order price                                                                                                                                                                                                                                                                                                                                      |
+| »» lotSize                 | integer        | true     | none         | Minimum lot size                                                                                                                                                                                                                                                                                                                                         |
+| »» tickSize                | number         | true     | none         | Minimum price changes                                                                                                                                                                                                                                                                                                                                    |
+| »» indexPriceTickSize      | number         | true     | none         | Index price of tick size                                                                                                                                                                                                                                                                                                                                 |
+| »» multiplier              | number         | true     | none         | The basic unit of the contract API is lots. For the number of coins in each lot, please refer to the param multiplier. For example, for XBTUSDTM, multiplier=0.001, which corresponds to the value of each XBTUSDTM contract being 0.001 BTC. There is also a special case. All coin-swap contracts, such as each XBTUSDM contract, correspond to 1 USD. |
+| »» initialMargin           | number         | true     | none         | Initial margin requirement                                                                                                                                                                                                                                                                                                                               |
+| »» maintainMargin          | number         | true     | none         | Maintenance margin requirement                                                                                                                                                                                                                                                                                                                           |
+| »» maxRiskLimit            | integer        | true     | none         | Maximum risk limit (unit: XBT)                                                                                                                                                                                                                                                                                                                           |
+| »» minRiskLimit            | integer        | true     | none         | Minimum risk limit (unit: XBT)                                                                                                                                                                                                                                                                                                                           |
+| »» riskStep                | integer        | true     | none         | Risk limit increment value (unit: XBT)                                                                                                                                                                                                                                                                                                                   |
+| »» makerFeeRate            | number         | true     | none         | Maker fee rate                                                                                                                                                                                                                                                                                                                                           |
+| »» takerFeeRate            | number         | true     | none         | Taker fee rate                                                                                                                                                                                                                                                                                                                                           |
+| »» takerFixFee             | number         | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
+| »» makerFixFee             | number         | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
+| »» settlementFee           | number         | true     | none         | Settlement fee                                                                                                                                                                                                                                                                                                                                           |
+| »» isDeleverage            | boolean        | true     | none         | Enabled ADL or not                                                                                                                                                                                                                                                                                                                                       |
+| »» isQuanto                | boolean        | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
+| »» isInverse               | boolean        | true     | none         | Whether it is a reverse contract                                                                                                                                                                                                                                                                                                                         |
+| »» markMethod              | string         | true     | none         | Marking method                                                                                                                                                                                                                                                                                                                                           |
+| »» fairMethod              | string         | true     | none         | Fair price marking method; the Futures contract is null                                                                                                                                                                                                                                                                                                  |
+| »» fundingBaseSymbol       | string         | true     | none         | Ticker symbol of the base currency                                                                                                                                                                                                                                                                                                                       |
+| »» fundingQuoteSymbol      | string         | true     | none         | Ticker symbol of the quote currency                                                                                                                                                                                                                                                                                                                      |
+| »» fundingRateSymbol       | string         | true     | none         | Funding rate symbol                                                                                                                                                                                                                                                                                                                                      |
+| »» indexSymbol             | string         | true     | none         | Index symbol                                                                                                                                                                                                                                                                                                                                             |
+| »» settlementSymbol        | string         | true     | none         | Settlement symbol                                                                                                                                                                                                                                                                                                                                        |
+| »» status                  | string         | true     | none         | Contract status                                                                                                                                                                                                                                                                                                                                          |
+| »» fundingFeeRate          | number         | true     | none         | Funding fee rate                                                                                                                                                                                                                                                                                                                                         |
+| »» predictedFundingFeeRate | number         | true     | none         | Predicted funding fee rate                                                                                                                                                                                                                                                                                                                               |
+| »» fundingRateGranularity  | integer        | true     | none         | Funding interval (milliseconds)                                                                                                                                                                                                                                                                                                                          |
+| »» openInterest            | string         | true     | none         | Open interest (unit: lots)                                                                                                                                                                                                                                                                                                                               |
+| »» turnoverOf24h           | number         | true     | none         | 24-hour turnover                                                                                                                                                                                                                                                                                                                                         |
+| »» volumeOf24h             | number         | true     | none         | 24-hour volume                                                                                                                                                                                                                                                                                                                                           |
+| »» markPrice               | number         | true     | none         | Mark price                                                                                                                                                                                                                                                                                                                                               |
+| »» indexPrice              | number         | true     | none         | Index price                                                                                                                                                                                                                                                                                                                                              |
+| »» lastTradePrice          | number         | true     | none         | Last trade price                                                                                                                                                                                                                                                                                                                                         |
+| »» nextFundingRateTime     | integer        | true     | none         | Next funding rate time (milliseconds)                                                                                                                                                                                                                                                                                                                    |
+| »» maxLeverage             | integer        | true     | none         | Maximum leverage                                                                                                                                                                                                                                                                                                                                         |
+| »» sourceExchanges         | [string]       | true     | none         | The contract index price source exchange                                                                                                                                                                                                                                                                                                                 |
+| »» premiumsSymbol1M        | string         | true     | none         | Premium index symbol (1 minute)                                                                                                                                                                                                                                                                                                                          |
+| »» premiumsSymbol8H        | string         | true     | none         | Premium index symbol (8 hours)                                                                                                                                                                                                                                                                                                                           |
+| »» fundingBaseSymbol1M     | string         | true     | none         | Base currency interest rate symbol (1 minute)                                                                                                                                                                                                                                                                                                            |
+| »» fundingQuoteSymbol1M    | string         | true     | none         | Quote currency interest rate symbol (1 minute)                                                                                                                                                                                                                                                                                                           |
+| »» lowPrice                | number         | true     | none         | 24-hour lowest price                                                                                                                                                                                                                                                                                                                                     |
+| »» highPrice               | number         | true     | none         | 24-hour highest price                                                                                                                                                                                                                                                                                                                                    |
+| »» priceChgPct             | number         | true     | none         | 24-hour % price change                                                                                                                                                                                                                                                                                                                                   |
+| »» priceChg                | number         | true     | none         | 24-hour price change                                                                                                                                                                                                                                                                                                                                     |
+| »» k                       | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» m                       | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» f                       | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» mmrLimit                | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» mmrLevConstant          | number         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                     |
+| »» supportCross            | boolean        | true     | none         | Whether support Cross Margin                                                                                                                                                                                                                                                                                                                             |
+| »» buyLimit                | number         | true     | none         | The current maximum buying price allowed                                                                                                                                                                                                                                                                                                                 |
+| »» sellLimit               | number         | true     | none         | The current minimum selling price allowed                                                                                                                                                                                                                                                                                                                |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|type|FFWCSX|
-|type|FFICSX|
-|markMethod|FairPrice|
-|fairMethod|FundingRate|
-|status|Init|
-|status|Open|
-|status|BeingSettled|
-|status|Settled|
-|status|Paused|
-|status|Closed|
-|status|CancelOnly|
+| Property   | Value        |
+| ---------- | ------------ |
+| type       | FFWCSX       |
+| type       | FFICSX       |
+| markMethod | FairPrice    |
+| fairMethod | FundingRate  |
+| status     | Init         |
+| status     | Open         |
+| status     | BeingSettled |
+| status     | Settled      |
+| status     | Paused       |
+| status     | Closed       |
+| status     | CancelOnly   |
 
 <aside class="success">
 This operation does not require authentication
@@ -1198,23 +1162,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/ticker?symbol=XBTUSDTM,XBTUSDM,ETHUSDTM',
-{
-  method: 'GET',
+fetch("/api/v1/ticker?symbol=XBTUSDTM,XBTUSDM,ETHUSDTM", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1237,17 +1199,19 @@ print(r.json())
 
 `GET /api/v1/ticker`
 
-This endpoint returns "last traded price/size", "best bid/ask price/size" etc. of a single symbol. These messages can also be obtained through Websocket.
+This endpoint returns "last traded price/size", "best bid/ask price/size" etc.
+of a single symbol. These messages can also be obtained through Websocket.
 
 <h3 id="get-ticker-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | query | string | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 #### Detailed descriptions
 
-**symbol**: Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) 
+**symbol**: Symbol of the contract. Please refer to
+[Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
 
 > Example responses
 
@@ -1276,10 +1240,7 @@ This endpoint returns "last traded price/size", "best bid/ask price/size" etc. o
         "side": {
           "type": "string",
           "description": "Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "x-api-enum": [
             {
               "value": "buy",
@@ -1342,45 +1303,42 @@ This endpoint returns "last traded price/size", "best bid/ask price/size" etc. o
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-ticker-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-ticker-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|200000 is for success, other is error|
-|» data|object|true|none|none|
-|»» sequence|integer(int64)|true|none|Sequence number, used to judge whether the messages pushed by Websocket are continuous.|
-|»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» side|string|true|none|Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.|
-|»» size|integer|true|none|Filled quantity|
-|»» tradeId|string|true|none|Transaction ID|
-|»» price|string|true|none|Filled price|
-|»» bestBidPrice|string|true|none|Best bid price|
-|»» bestBidSize|integer|true|none|Best bid size|
-|»» bestAskPrice|string|true|none|Best ask price|
-|»» bestAskSize|integer|true|none|Best ask size|
-|»» ts|integer(int64)|true|none|Filled time (nanoseconds)|
+| Name            | Type           | Required | Restrictions | Description                                                                                                                                   |
+| --------------- | -------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code          | string         | true     | none         | 200000 is for success, other is error                                                                                                         |
+| » data          | object         | true     | none         | none                                                                                                                                          |
+| »» sequence     | integer(int64) | true     | none         | Sequence number, used to judge whether the messages pushed by Websocket are continuous.                                                       |
+| »» symbol       | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                            |
+| »» side         | string         | true     | none         | Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book. |
+| »» size         | integer        | true     | none         | Filled quantity                                                                                                                               |
+| »» tradeId      | string         | true     | none         | Transaction ID                                                                                                                                |
+| »» price        | string         | true     | none         | Filled price                                                                                                                                  |
+| »» bestBidPrice | string         | true     | none         | Best bid price                                                                                                                                |
+| »» bestBidSize  | integer        | true     | none         | Best bid size                                                                                                                                 |
+| »» bestAskPrice | string         | true     | none         | Best ask price                                                                                                                                |
+| »» bestAskSize  | integer        | true     | none         | Best ask size                                                                                                                                 |
+| »» ts           | integer(int64) | true     | none         | Filled time (nanoseconds)                                                                                                                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|side|buy|
-|side|sell|
+| Property | Value |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
 
 <aside class="success">
 This operation does not require authentication
@@ -1393,23 +1351,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/allTickers',
-{
-  method: 'GET',
+fetch("/api/v1/allTickers", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1426,7 +1382,8 @@ print(r.json())
 
 `GET /api/v1/allTickers`
 
-This endpoint returns "last traded price/size", "best bid/ask price/size" etc. of a single symbol. These messages can also be obtained through Websocket.
+This endpoint returns "last traded price/size", "best bid/ask price/size" etc.
+of a single symbol. These messages can also be obtained through Websocket.
 
 > Example responses
 
@@ -1457,10 +1414,7 @@ This endpoint returns "last traded price/size", "best bid/ask price/size" etc. o
           "side": {
             "type": "string",
             "description": "Trade direction",
-            "enum": [
-              "buy",
-              "sell"
-            ],
+            "enum": ["buy", "sell"],
             "x-api-enum": [
               {
                 "value": "buy",
@@ -1524,45 +1478,42 @@ This endpoint returns "last traded price/size", "best bid/ask price/size" etc. o
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-all-tickers-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-all-tickers-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|200000 is for success, other is error|
-|» data|[object]|true|none|none|
-|»» sequence|integer(int64)|true|none|Sequence number, used to judge whether the messages pushed by Websocket are continuous.|
-|»» symbol|string|true|none|Symbol|
-|»» side|string|true|none|Trade direction|
-|»» size|integer|true|none|Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.|
-|»» tradeId|string|true|none|Transaction ID|
-|»» price|string|true|none|Filled price|
-|»» bestBidPrice|string|true|none|Best bid price|
-|»» bestBidSize|integer|true|none|Best bid size|
-|»» bestAskPrice|string|true|none|Best ask price|
-|»» bestAskSize|integer|true|none|Best ask size|
-|»» ts|integer(int64)|true|none|Filled time (nanoseconds)|
+| Name            | Type           | Required | Restrictions | Description                                                                                                                                   |
+| --------------- | -------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code          | string         | true     | none         | 200000 is for success, other is error                                                                                                         |
+| » data          | [object]       | true     | none         | none                                                                                                                                          |
+| »» sequence     | integer(int64) | true     | none         | Sequence number, used to judge whether the messages pushed by Websocket are continuous.                                                       |
+| »» symbol       | string         | true     | none         | Symbol                                                                                                                                        |
+| »» side         | string         | true     | none         | Trade direction                                                                                                                               |
+| »» size         | integer        | true     | none         | Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book. |
+| »» tradeId      | string         | true     | none         | Transaction ID                                                                                                                                |
+| »» price        | string         | true     | none         | Filled price                                                                                                                                  |
+| »» bestBidPrice | string         | true     | none         | Best bid price                                                                                                                                |
+| »» bestBidSize  | integer        | true     | none         | Best bid size                                                                                                                                 |
+| »» bestAskPrice | string         | true     | none         | Best ask price                                                                                                                                |
+| »» bestAskSize  | integer        | true     | none         | Best ask size                                                                                                                                 |
+| »» ts           | integer(int64) | true     | none         | Filled time (nanoseconds)                                                                                                                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|side|buy|
-|side|sell|
+| Property | Value |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
 
 <aside class="success">
 This operation does not require authentication
@@ -1575,23 +1526,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/level2/snapshot',
-{
-  method: 'GET',
+fetch("/api/v1/level2/snapshot", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1608,17 +1557,21 @@ print(r.json())
 
 `GET /api/v1/level2/snapshot`
 
-Query for Full orderbook depth data (aggregated by price). It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain an up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.
+Query for Full orderbook depth data (aggregated by price). It is generally used
+by professional traders because it uses more server resources and traffic, and
+we have strict access rate limit control. To maintain an up-to-date Order Book,
+please use Websocket incremental feed after retrieving the OrderBook.
 
 <h3 id="get-full-orderbook-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | query | string | false    | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 #### Detailed descriptions
 
-**symbol**: Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) 
+**symbol**: Symbol of the contract. Please refer to
+[Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
 
 > Example responses
 
@@ -1672,41 +1625,32 @@ Query for Full orderbook depth data (aggregated by price). It is generally used 
           "description": "Timestamp (nanoseconds)"
         }
       },
-      "required": [
-        "sequence",
-        "symbol",
-        "bids",
-        "asks",
-        "ts"
-      ]
+      "required": ["sequence", "symbol", "bids", "asks", "ts"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-full-orderbook-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-full-orderbook-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|200000 is for success, other is error|
-|» data|object|true|none|none|
-|»» sequence|integer(int64)|true|none|Sequence number|
-|»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» bids|[array]|true|none|bids, from high to low|
-|»» asks|[array]|true|none|asks, from low to high|
-|»» ts|integer(int64)|true|none|Timestamp (nanoseconds)|
+| Name        | Type           | Required | Restrictions | Description                                                                                                        |
+| ----------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code      | string         | true     | none         | 200000 is for success, other is error                                                                              |
+| » data      | object         | true     | none         | none                                                                                                               |
+| »» sequence | integer(int64) | true     | none         | Sequence number                                                                                                    |
+| »» symbol   | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» bids     | [array]        | true     | none         | bids, from high to low                                                                                             |
+| »» asks     | [array]        | true     | none         | asks, from low to high                                                                                             |
+| »» ts       | integer(int64) | true     | none         | Timestamp (nanoseconds)                                                                                            |
 
 <aside class="success">
 This operation does not require authentication
@@ -1719,23 +1663,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/level2/depth{size}?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/level2/depth{size}?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1756,14 +1698,16 @@ print(r.json())
 
 `GET /api/v1/level2/depth{size}`
 
-Query for part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.
+Query for part orderbook depth data. (aggregated by price). It is recommended
+that you request via this endpoint, as the system response will be faster and
+consume less traffic.
 
 <h3 id="get-part-orderbook-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|size|path|string|true|Get the depth layer, optional value: 20, 100|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| size   | path  | string | true     | Get the depth layer, optional value: 20, 100                                                                       |
+| symbol | query | string | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -1816,41 +1760,32 @@ Query for part orderbook depth data. (aggregated by price). It is recommended th
           "format": "int64"
         }
       },
-      "required": [
-        "sequence",
-        "symbol",
-        "bids",
-        "asks",
-        "ts"
-      ]
+      "required": ["sequence", "symbol", "bids", "asks", "ts"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-part-orderbook-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-part-orderbook-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» sequence|integer(int64)|true|none|Sequence number|
-|»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» bids|[array]|true|none|bids, from high to low|
-|»» asks|[array]|true|none|asks, from low to high|
-|»» ts|integer(int64)|true|none|Timestamp (nanoseconds)|
+| Name        | Type           | Required | Restrictions | Description                                                                                                        |
+| ----------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code      | string         | true     | none         | none                                                                                                               |
+| » data      | object         | true     | none         | none                                                                                                               |
+| »» sequence | integer(int64) | true     | none         | Sequence number                                                                                                    |
+| »» symbol   | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» bids     | [array]        | true     | none         | bids, from high to low                                                                                             |
+| »» asks     | [array]        | true     | none         | asks, from low to high                                                                                             |
+| »» ts       | integer(int64) | true     | none         | Timestamp (nanoseconds)                                                                                            |
 
 <aside class="success">
 This operation does not require authentication
@@ -1863,23 +1798,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/trade/history?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/trade/history?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1900,13 +1833,14 @@ print(r.json())
 
 `GET /api/v1/trade/history`
 
-Request the trade history of the specified symbol via this endpoint. The returned quantity is the last 100 transaction records.
+Request the trade history of the specified symbol via this endpoint. The
+returned quantity is the last 100 transaction records.
 
 <h3 id="get-trade-history-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | query | string | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -1961,10 +1895,7 @@ Request the trade history of the specified symbol via this endpoint. The returne
           "side": {
             "type": "string",
             "description": "Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.",
-            "enum": [
-              "buy",
-              "sell"
-            ],
+            "enum": ["buy", "sell"],
             "x-api-enum": [
               {
                 "value": "buy",
@@ -1993,43 +1924,40 @@ Request the trade history of the specified symbol via this endpoint. The returne
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-trade-history-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-trade-history-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» sequence|integer(int64)|true|none|Sequence number|
-|»» contractId|integer|true|none|Deprecated param|
-|»» tradeId|string|true|none|Transaction ID|
-|»» makerOrderId|string|true|none|Maker order ID|
-|»» takerOrderId|string|true|none|Taker order ID|
-|»» ts|integer(int64)|true|none|Filled timestamp (nanosecond)|
-|»» size|integer|true|none|Filled amount|
-|»» price|string|true|none|Filled price|
-|»» side|string|true|none|Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.|
+| Name            | Type           | Required | Restrictions | Description                                                                                                                                   |
+| --------------- | -------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code          | string         | true     | none         | none                                                                                                                                          |
+| » data          | [object]       | true     | none         | none                                                                                                                                          |
+| »» sequence     | integer(int64) | true     | none         | Sequence number                                                                                                                               |
+| »» contractId   | integer        | true     | none         | Deprecated param                                                                                                                              |
+| »» tradeId      | string         | true     | none         | Transaction ID                                                                                                                                |
+| »» makerOrderId | string         | true     | none         | Maker order ID                                                                                                                                |
+| »» takerOrderId | string         | true     | none         | Taker order ID                                                                                                                                |
+| »» ts           | integer(int64) | true     | none         | Filled timestamp (nanosecond)                                                                                                                 |
+| »» size         | integer        | true     | none         | Filled amount                                                                                                                                 |
+| »» price        | string         | true     | none         | Filled price                                                                                                                                  |
+| »» side         | string         | true     | none         | Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book. |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|side|buy|
-|side|sell|
+| Property | Value |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
 
 <aside class="success">
 This operation does not require authentication
@@ -2042,23 +1970,24 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/kline/query?symbol=XBTUSDTM,.KXBTUSDT,.XBTUSDTMPI,.XBTUSDTMPI8H&granularity=type,integer,enum,1%2C5%2C15%2C30%2C60%2C120%2C240%2C480%2C720%2C1440%2C10080,format,int64,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D',
-{
-  method: 'GET',
+fetch(
+  "/api/v1/kline/query?symbol=XBTUSDTM,.KXBTUSDT,.XBTUSDTMPI,.XBTUSDTMPI8H&granularity=type,integer,enum,1%2C5%2C15%2C30%2C60%2C120%2C240%2C480%2C720%2C1440%2C10080,format,int64,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D",
+  {
+    method: "GET",
 
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2155,32 +2084,34 @@ print(r.json())
 
 `GET /api/v1/kline/query`
 
-Get the symbol’s candlestick chart. Data are returned in grouped buckets based on requested type. For each query, the system will return at most 500 pieces of data. To obtain more data, please page the data by time.
+Get the symbol’s candlestick chart. Data are returned in grouped buckets based
+on requested type. For each query, the system will return at most 500 pieces of
+data. To obtain more data, please page the data by time.
 
 <h3 id="get-klines-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol, indexSymbol, premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220) |
-|granularity|query|integer(int64)|true|Type of candlestick patterns (minutes)|
-|from|query|integer(int64)|false|Start time (milliseconds)|
-|to|query|integer(int64)|false|End time (milliseconds)|
+| Name        | In    | Type           | Required | Description                                                                                                                                                         |
+| ----------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol      | query | string         | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol, indexSymbol, premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220) |
+| granularity | query | integer(int64) | true     | Type of candlestick patterns (minutes)                                                                                                                              |
+| from        | query | integer(int64) | false    | Start time (milliseconds)                                                                                                                                           |
+| to          | query | integer(int64) | false    | End time (milliseconds)                                                                                                                                             |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|granularity|1|
-|granularity|5|
-|granularity|15|
-|granularity|30|
-|granularity|60|
-|granularity|120|
-|granularity|240|
-|granularity|480|
-|granularity|720|
-|granularity|1440|
-|granularity|10080|
+| Parameter   | Value |
+| ----------- | ----- |
+| granularity | 1     |
+| granularity | 5     |
+| granularity | 15    |
+| granularity | 30    |
+| granularity | 60    |
+| granularity | 120   |
+| granularity | 240   |
+| granularity | 480   |
+| granularity | 720   |
+| granularity | 1440  |
+| granularity | 10080 |
 
 > Example responses
 
@@ -2204,27 +2135,24 @@ Get the symbol’s candlestick chart. Data are returned in grouped buckets based
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-klines-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-klines-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[array]|true|none|none|
+| Name   | Type    | Required | Restrictions | Description |
+| ------ | ------- | -------- | ------------ | ----------- |
+| » code | string  | true     | none         | none        |
+| » data | [array] | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -2237,23 +2165,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/mark-price/{symbol}/current',
-{
-  method: 'GET',
+fetch("/api/v1/mark-price/{symbol}/current", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2274,9 +2200,9 @@ Get the current mark price (Update snapshots once per second, real-time query).
 
 <h3 id="get-mark-price-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|path|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In   | Type   | Required | Description                                                                                                        |
+| ------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | path | string | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -2314,41 +2240,32 @@ Get the current mark price (Update snapshots once per second, real-time query).
           "description": "Index price"
         }
       },
-      "required": [
-        "symbol",
-        "granularity",
-        "timePoint",
-        "value",
-        "indexPrice"
-      ]
+      "required": ["symbol", "granularity", "timePoint", "value", "indexPrice"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-mark-price-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-mark-price-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» granularity|integer|true|none|Granularity (milliseconds)|
-|»» timePoint|integer(int64)|true|none|Time point (milliseconds)|
-|»» value|number|true|none|Mark price|
-|»» indexPrice|number|true|none|Index price|
+| Name           | Type           | Required | Restrictions | Description                                                                                                        |
+| -------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code         | string         | true     | none         | none                                                                                                               |
+| » data         | object         | true     | none         | none                                                                                                               |
+| »» symbol      | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» granularity | integer        | true     | none         | Granularity (milliseconds)                                                                                         |
+| »» timePoint   | integer(int64) | true     | none         | Time point (milliseconds)                                                                                          |
+| »» value       | number         | true     | none         | Mark price                                                                                                         |
+| »» indexPrice  | number         | true     | none         | Index price                                                                                                        |
 
 <aside class="success">
 This operation does not require authentication
@@ -2361,23 +2278,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/index/query?symbol=.KXBTUSDT,.BXBT',
-{
-  method: 'GET',
+fetch("/api/v1/index/query?symbol=.KXBTUSDT,.BXBT", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2399,19 +2314,20 @@ print(r.json())
 
 `GET /api/v1/index/query`
 
-Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache when querying).
+Get Spot Index Price (Update snapshots once per second, and there is a 5s cache
+when querying).
 
 <h3 id="get-spot-index-price-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: indexSymbol](https://www.kucoin.com/docs-new/api-3470220) |
-|startAt|query|integer(int64)|false|Start time (milliseconds)|
-|endAt|query|integer(int64)|false|End time (milliseconds)|
-|reverse|query|boolean|false|This parameter functions to judge whether the lookup is reversed. True means “yes”. False means “no”. This parameter is set as True by default.|
-|offset|query|integer(int64)|false|Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.|
-|forward|query|boolean|false|This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.|
-|maxCount|query|integer(int64)|false|Max. record count. The default record count is 10; the maximum length cannot exceed 100|
+| Name     | In    | Type           | Required | Description                                                                                                                                              |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol   | query | string         | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: indexSymbol](https://www.kucoin.com/docs-new/api-3470220)                                  |
+| startAt  | query | integer(int64) | false    | Start time (milliseconds)                                                                                                                                |
+| endAt    | query | integer(int64) | false    | End time (milliseconds)                                                                                                                                  |
+| reverse  | query | boolean        | false    | This parameter functions to judge whether the lookup is reversed. True means “yes”. False means “no”. This parameter is set as True by default.          |
+| offset   | query | integer(int64) | false    | Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.              |
+| forward  | query | boolean        | false    | This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default. |
+| maxCount | query | integer(int64) | false    | Max. record count. The default record count is 10; the maximum length cannot exceed 100                                                                  |
 
 > Example responses
 
@@ -2467,11 +2383,7 @@ Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache
                       "description": "Weight"
                     }
                   },
-                  "required": [
-                    "exchange",
-                    "price",
-                    "weight"
-                  ]
+                  "required": ["exchange", "price", "weight"]
                 },
                 "description": "Component List"
               }
@@ -2490,43 +2402,37 @@ Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache
           "description": "Whether there are more pages"
         }
       },
-      "required": [
-        "dataList",
-        "hasMore"
-      ]
+      "required": ["dataList", "hasMore"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-spot-index-price-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-spot-index-price-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» dataList|[object]|true|none|none|
-|»»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: indexSymbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»»» granularity|integer|true|none|Granularity (milliseconds)|
-|»»» timePoint|integer(int64)|true|none|Timestamp (milliseconds)|
-|»»» value|number|true|none|Index Value|
-|»»» decomposionList|[object]|true|none|Component List|
-|»»»» exchange|string|true|none|Exchange|
-|»»»» price|number|true|none|Price|
-|»»»» weight|number|true|none|Weight|
-|»» hasMore|boolean|true|none|Whether there are more pages|
+| Name                | Type           | Required | Restrictions | Description                                                                                                             |
+| ------------------- | -------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| » code              | string         | true     | none         | none                                                                                                                    |
+| » data              | object         | true     | none         | none                                                                                                                    |
+| »» dataList         | [object]       | true     | none         | none                                                                                                                    |
+| »»» symbol          | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: indexSymbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »»» granularity     | integer        | true     | none         | Granularity (milliseconds)                                                                                              |
+| »»» timePoint       | integer(int64) | true     | none         | Timestamp (milliseconds)                                                                                                |
+| »»» value           | number         | true     | none         | Index Value                                                                                                             |
+| »»» decomposionList | [object]       | true     | none         | Component List                                                                                                          |
+| »»»» exchange       | string         | true     | none         | Exchange                                                                                                                |
+| »»»» price          | number         | true     | none         | Price                                                                                                                   |
+| »»»» weight         | number         | true     | none         | Weight                                                                                                                  |
+| »» hasMore          | boolean        | true     | none         | Whether there are more pages                                                                                            |
 
 <aside class="success">
 This operation does not require authentication
@@ -2539,23 +2445,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/interest/query?symbol=.XBTINT8H,.USDTINT8H,.XBTINT,.USDTINT',
-{
-  method: 'GET',
+fetch("/api/v1/interest/query?symbol=.XBTINT8H,.USDTINT8H,.XBTINT,.USDTINT", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2583,15 +2487,15 @@ Get interest rate Index (real-time query).
 
 <h3 id="get-interest-rate-index-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: fundingBaseSymbol, fundingQuoteSymbol, fundingBaseSymbol1M, fundingQuoteSymbol1M](https://www.kucoin.com/docs-new/api-3470220) |
-|startAt|query|integer(int64)|false|Start time (milliseconds)|
-|endAt|query|integer(int64)|false|End time (milliseconds)|
-|reverse|query|boolean|false|This parameter functions to judge whether the lookup is reversed. True means “yes”. False means “no”. This parameter is set as True by default.|
-|offset|query|integer(int64)|false|Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.|
-|forward|query|boolean|false|This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.|
-|maxCount|query|integer(int64)|false|Max. record count. The default record count is 10; the maximum length cannot exceed 100|
+| Name     | In    | Type           | Required | Description                                                                                                                                                                                  |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol   | query | string         | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: fundingBaseSymbol, fundingQuoteSymbol, fundingBaseSymbol1M, fundingQuoteSymbol1M](https://www.kucoin.com/docs-new/api-3470220) |
+| startAt  | query | integer(int64) | false    | Start time (milliseconds)                                                                                                                                                                    |
+| endAt    | query | integer(int64) | false    | End time (milliseconds)                                                                                                                                                                      |
+| reverse  | query | boolean        | false    | This parameter functions to judge whether the lookup is reversed. True means “yes”. False means “no”. This parameter is set as True by default.                                              |
+| offset   | query | integer(int64) | false    | Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.                                                  |
+| forward  | query | boolean        | false    | This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.                                     |
+| maxCount | query | integer(int64) | false    | Max. record count. The default record count is 10; the maximum length cannot exceed 100                                                                                                      |
 
 > Example responses
 
@@ -2630,12 +2534,7 @@ Get interest rate Index (real-time query).
                 "description": "Interest rate value"
               }
             },
-            "required": [
-              "symbol",
-              "granularity",
-              "timePoint",
-              "value"
-            ]
+            "required": ["symbol", "granularity", "timePoint", "value"]
           }
         },
         "hasMore": {
@@ -2643,39 +2542,33 @@ Get interest rate Index (real-time query).
           "description": "Whether there are more pages"
         }
       },
-      "required": [
-        "dataList",
-        "hasMore"
-      ]
+      "required": ["dataList", "hasMore"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-interest-rate-index-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-interest-rate-index-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» dataList|[object]|true|none|none|
-|»»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: fundingBaseSymbol, fundingQuoteSymbol, fundingBaseSymbol1M, fundingQuoteSymbol1M](https://www.kucoin.com/docs-new/api-3470220)|
-|»»» granularity|integer|true|none|Granularity (milliseconds)|
-|»»» timePoint|integer(int64)|true|none|Timestamp (milliseconds)|
-|»»» value|number|true|none|Interest rate value|
-|»» hasMore|boolean|true|none|Whether there are more pages|
+| Name            | Type           | Required | Restrictions | Description                                                                                                                                                                                  |
+| --------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code          | string         | true     | none         | none                                                                                                                                                                                         |
+| » data          | object         | true     | none         | none                                                                                                                                                                                         |
+| »» dataList     | [object]       | true     | none         | none                                                                                                                                                                                         |
+| »»» symbol      | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: fundingBaseSymbol, fundingQuoteSymbol, fundingBaseSymbol1M, fundingQuoteSymbol1M](https://www.kucoin.com/docs-new/api-3470220) |
+| »»» granularity | integer        | true     | none         | Granularity (milliseconds)                                                                                                                                                                   |
+| »»» timePoint   | integer(int64) | true     | none         | Timestamp (milliseconds)                                                                                                                                                                     |
+| »»» value       | number         | true     | none         | Interest rate value                                                                                                                                                                          |
+| »» hasMore      | boolean        | true     | none         | Whether there are more pages                                                                                                                                                                 |
 
 <aside class="success">
 This operation does not require authentication
@@ -2688,23 +2581,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/premium/query?symbol=.XBTUSDTMPI,.XBTUSDTMPI8H',
-{
-  method: 'GET',
+fetch("/api/v1/premium/query?symbol=.XBTUSDTMPI,.XBTUSDTMPI8H", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2726,19 +2617,20 @@ print(r.json())
 
 `GET /api/v1/premium/query`
 
-Submit request to get premium index (Update snapshots once per second, real-time query).
+Submit request to get premium index (Update snapshots once per second, real-time
+query).
 
 <h3 id="get-premium-index-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220) |
-|startAt|query|integer(int64)|false|Start time (milliseconds)|
-|endAt|query|integer(int64)|false|End time (milliseconds)|
-|reverse|query|boolean|false|This parameter functions to judge whether the lookup is reversed. True means “yes”. False means “no”. This parameter is set as True by default.|
-|offset|query|integer(int64)|false|Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.|
-|forward|query|boolean|false|This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.|
-|maxCount|query|integer(int64)|false|Max. record count. The default record count is 10; the maximum length cannot exceed 100|
+| Name     | In    | Type           | Required | Description                                                                                                                                              |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol   | query | string         | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220)           |
+| startAt  | query | integer(int64) | false    | Start time (milliseconds)                                                                                                                                |
+| endAt    | query | integer(int64) | false    | End time (milliseconds)                                                                                                                                  |
+| reverse  | query | boolean        | false    | This parameter functions to judge whether the lookup is reversed. True means “yes”. False means “no”. This parameter is set as True by default.          |
+| offset   | query | integer(int64) | false    | Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.              |
+| forward  | query | boolean        | false    | This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default. |
+| maxCount | query | integer(int64) | false    | Max. record count. The default record count is 10; the maximum length cannot exceed 100                                                                  |
 
 > Example responses
 
@@ -2777,12 +2669,7 @@ Submit request to get premium index (Update snapshots once per second, real-time
                 "description": "Premium index"
               }
             },
-            "required": [
-              "symbol",
-              "granularity",
-              "timePoint",
-              "value"
-            ]
+            "required": ["symbol", "granularity", "timePoint", "value"]
           }
         },
         "hasMore": {
@@ -2790,39 +2677,33 @@ Submit request to get premium index (Update snapshots once per second, real-time
           "description": "Whether there are more pages"
         }
       },
-      "required": [
-        "dataList",
-        "hasMore"
-      ]
+      "required": ["dataList", "hasMore"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-premium-index-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-premium-index-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» dataList|[object]|true|none|none|
-|»»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220)|
-|»»» granularity|integer|true|none|Granularity (milliseconds)|
-|»»» timePoint|integer(int64)|true|none|Timestamp (milliseconds)|
-|»»» value|number|true|none|Premium index|
-|»» hasMore|boolean|true|none|Whether there are more pages|
+| Name            | Type           | Required | Restrictions | Description                                                                                                                                    |
+| --------------- | -------------- | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code          | string         | true     | none         | none                                                                                                                                           |
+| » data          | object         | true     | none         | none                                                                                                                                           |
+| »» dataList     | [object]       | true     | none         | none                                                                                                                                           |
+| »»» symbol      | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220) |
+| »»» granularity | integer        | true     | none         | Granularity (milliseconds)                                                                                                                     |
+| »»» timePoint   | integer(int64) | true     | none         | Timestamp (milliseconds)                                                                                                                       |
+| »»» value       | number         | true     | none         | Premium index                                                                                                                                  |
+| »» hasMore      | boolean        | true     | none         | Whether there are more pages                                                                                                                   |
 
 <aside class="success">
 This operation does not require authentication
@@ -2835,23 +2716,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/trade-statistics',
-{
-  method: 'GET',
+fetch("/api/v1/trade-statistics", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2889,33 +2768,28 @@ Get the statistics of the platform futures trading volume in the last 24 hours.
           "description": "24-hour platform Futures trading volume. Unit is USD"
         }
       },
-      "required": [
-        "turnoverOf24h"
-      ]
+      "required": ["turnoverOf24h"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-24hr-stats-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-24hr-stats-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» turnoverOf24h|number|true|none|24-hour platform Futures trading volume. Unit is USD|
+| Name             | Type   | Required | Restrictions | Description                                          |
+| ---------------- | ------ | -------- | ------------ | ---------------------------------------------------- |
+| » code           | string | true     | none         | none                                                 |
+| » data           | object | true     | none         | none                                                 |
+| »» turnoverOf24h | number | true     | none         | 24-hour platform Futures trading volume. Unit is USD |
 
 <aside class="success">
 This operation does not require authentication
@@ -2928,23 +2802,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/timestamp',
-{
-  method: 'GET',
+fetch("/api/v1/timestamp", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2980,27 +2852,24 @@ Get the API server time. This is the Unix timestamp.
       "description": "ServerTime (milliseconds)"
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-server-time-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-server-time-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|integer(int64)|true|none|ServerTime (milliseconds)|
+| Name   | Type           | Required | Restrictions | Description               |
+| ------ | -------------- | -------- | ------------ | ------------------------- |
+| » code | string         | true     | none         | none                      |
+| » data | integer(int64) | true     | none         | ServerTime (milliseconds) |
 
 <aside class="success">
 This operation does not require authentication
@@ -3013,23 +2882,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/status',
-{
-  method: 'GET',
+fetch("/api/v1/status", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3068,11 +2935,7 @@ Get the service status.
         "status": {
           "type": "string",
           "description": "Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order",
-          "enum": [
-            "open",
-            "close",
-            "cancelonly"
-          ],
+          "enum": ["open", "close", "cancelonly"],
           "x-api-enum": [
             {
               "value": "open",
@@ -3092,43 +2955,37 @@ Get the service status.
           ]
         }
       },
-      "required": [
-        "msg",
-        "status"
-      ]
+      "required": ["msg", "status"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-service-status-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-service-status-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» msg|string|true|none|none|
-|»» status|string|true|none|Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order|
+| Name      | Type   | Required | Restrictions | Description                                                                                                                             |
+| --------- | ------ | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| » code    | string | true     | none         | none                                                                                                                                    |
+| » data    | object | true     | none         | none                                                                                                                                    |
+| »» msg    | string | true     | none         | none                                                                                                                                    |
+| »» status | string | true     | none         | Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|status|open|
-|status|close|
-|status|cancelonly|
+| Property | Value      |
+| -------- | ---------- |
+| status   | open       |
+| status   | close      |
+| status   | cancelonly |
 
 <aside class="success">
 This operation does not require authentication
@@ -3141,23 +2998,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/bullet-public',
-{
-  method: 'POST',
+fetch("/api/v1/bullet-public", {
+  method: "POST",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3174,7 +3029,9 @@ print(r.json())
 
 `POST /api/v1/bullet-public`
 
-This interface can obtain the token required for Websocket to establish a Futures connection. If you need use public channels (e.g. all public market data), please make request as follows to obtain the server list and public token
+This interface can obtain the token required for Websocket to establish a
+Futures connection. If you need use public channels (e.g. all public market
+data), please make request as follows to obtain the server list and public token
 
 > Example responses
 
@@ -3210,9 +3067,7 @@ This interface can obtain the token required for Websocket to establish a Future
               "protocol": {
                 "type": "string",
                 "description": "Network Protocol",
-                "enum": [
-                  "websocket"
-                ],
+                "enum": ["websocket"],
                 "x-api-enum": [
                   {
                     "value": "websocket",
@@ -3240,46 +3095,40 @@ This interface can obtain the token required for Websocket to establish a Future
           }
         }
       },
-      "required": [
-        "token",
-        "instanceServers"
-      ]
+      "required": ["token", "instanceServers"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-public-token---futures-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-public-token---futures-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» token|string|true|none|The token required to establish a Websocket connection|
-|»» instanceServers|[object]|true|none|none|
-|»»» endpoint|string|true|none|Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change.|
-|»»» encrypt|boolean|true|none|Whether to encrypt. Currently only supports wss, not ws|
-|»»» protocol|string|true|none|Network Protocol|
-|»»» pingInterval|integer|true|none|Recommended ping interval (milliseconds)|
-|»»» pingTimeout|integer|true|none|Heartbeat timeout (milliseconds)|
+| Name               | Type     | Required | Restrictions | Description                                                                          |
+| ------------------ | -------- | -------- | ------------ | ------------------------------------------------------------------------------------ |
+| » code             | string   | true     | none         | none                                                                                 |
+| » data             | object   | true     | none         | none                                                                                 |
+| »» token           | string   | true     | none         | The token required to establish a Websocket connection                               |
+| »» instanceServers | [object] | true     | none         | none                                                                                 |
+| »»» endpoint       | string   | true     | none         | Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change. |
+| »»» encrypt        | boolean  | true     | none         | Whether to encrypt. Currently only supports wss, not ws                              |
+| »»» protocol       | string   | true     | none         | Network Protocol                                                                     |
+| »»» pingInterval   | integer  | true     | none         | Recommended ping interval (milliseconds)                                             |
+| »»» pingTimeout    | integer  | true     | none         | Heartbeat timeout (milliseconds)                                                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|protocol|websocket|
+| Property | Value     |
+| -------- | --------- |
+| protocol | websocket |
 
 <aside class="success">
 This operation does not require authentication
@@ -3292,23 +3141,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/bullet-private',
-{
-  method: 'POST',
+fetch("/api/v1/bullet-private", {
+  method: "POST",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3325,7 +3172,10 @@ print(r.json())
 
 `POST /api/v1/bullet-private`
 
-This interface can obtain the token required for Websocket to establish a Futures private connection. If you need use private channels (e.g. account balance notice), please make request as follows to obtain the server list and private token
+This interface can obtain the token required for Websocket to establish a
+Futures private connection. If you need use private channels (e.g. account
+balance notice), please make request as follows to obtain the server list and
+private token
 
 > Example responses
 
@@ -3361,9 +3211,7 @@ This interface can obtain the token required for Websocket to establish a Future
               "protocol": {
                 "type": "string",
                 "description": "Network Protocol",
-                "enum": [
-                  "websocket"
-                ],
+                "enum": ["websocket"],
                 "x-api-enum": [
                   {
                     "value": "websocket",
@@ -3391,50 +3239,43 @@ This interface can obtain the token required for Websocket to establish a Future
           }
         }
       },
-      "required": [
-        "token",
-        "instanceServers"
-      ]
+      "required": ["token", "instanceServers"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-private-token---futures-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-private-token---futures-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» token|string|true|none|The token required to establish a Websocket connection|
-|»» instanceServers|[object]|true|none|none|
-|»»» endpoint|string|true|none|Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change.|
-|»»» encrypt|boolean|true|none|Whether to encrypt. Currently only supports wss, not ws|
-|»»» protocol|string|true|none|Network Protocol|
-|»»» pingInterval|integer|true|none|Recommended ping interval (milliseconds)|
-|»»» pingTimeout|integer|true|none|Heartbeat timeout (milliseconds)|
+| Name               | Type     | Required | Restrictions | Description                                                                          |
+| ------------------ | -------- | -------- | ------------ | ------------------------------------------------------------------------------------ |
+| » code             | string   | true     | none         | none                                                                                 |
+| » data             | object   | true     | none         | none                                                                                 |
+| »» token           | string   | true     | none         | The token required to establish a Websocket connection                               |
+| »» instanceServers | [object] | true     | none         | none                                                                                 |
+| »»» endpoint       | string   | true     | none         | Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change. |
+| »»» encrypt        | boolean  | true     | none         | Whether to encrypt. Currently only supports wss, not ws                              |
+| »»» protocol       | string   | true     | none         | Network Protocol                                                                     |
+| »»» pingInterval   | integer  | true     | none         | Recommended ping interval (milliseconds)                                             |
+| »»» pingTimeout    | integer  | true     | none         | Heartbeat timeout (milliseconds)                                                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|protocol|websocket|
+| Property | Value     |
+| -------- | --------- |
+| protocol | websocket |
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
 # Schemas
-

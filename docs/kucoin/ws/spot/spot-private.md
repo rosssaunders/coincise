@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="spot">spot v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 spot_private
 
@@ -26,23 +26,21 @@ spot_private
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderV2/spotMarket/tradeOrdersV2',
-{
-  method: 'TRACE',
+fetch("/orderV2/spotMarket/tradeOrdersV2", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -59,7 +57,8 @@ print(r.json())
 
 `TRACE /orderV2/spotMarket/tradeOrdersV2`
 
-This topic will push all change events of your orders. Compared with v1, v2 adds an Order Status: "new", there is no difference in push speed
+This topic will push all change events of your orders. Compared with v1, v2 adds
+an Order Status: "new", there is no difference in push speed
 
 > Example responses
 
@@ -83,10 +82,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
     },
     "channelType": {
       "type": "string",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "description": "Channel type",
       "x-api-enum": [
         {
@@ -127,10 +123,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -163,10 +156,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -187,12 +177,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         },
         "status": {
           "type": "string",
-          "enum": [
-            "new",
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["new", "open", "match", "done"],
           "description": "Order Status",
           "x-api-enum": [
             {
@@ -220,11 +205,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         "symbol": {
           "type": "string",
           "description": "Symbol",
-          "example": [
-            "BTC-USDT",
-            "ETH-USDT",
-            "KCS-USDT"
-          ]
+          "example": ["BTC-USDT", "ETH-USDT", "KCS-USDT"]
         },
         "ts": {
           "type": "integer",
@@ -233,14 +214,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         },
         "type": {
           "type": "string",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled",
-            "received"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled", "received"],
           "description": "Order Type",
           "x-api-enum": [
             {
@@ -281,10 +255,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -301,10 +272,7 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -346,22 +314,15 @@ This topic will push all change events of your orders. Compared with v1, v2 adds
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
 ```
 
 <h3 id="get-order(v2)-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_private_orderV2](#schemaspot_spot_private_orderv2)|
+| Status | Meaning                                                 | Description | Schema                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_private_orderV2](#schemaspot_spot_private_orderv2) |
 
 <aside class="success">
 This operation does not require authentication
@@ -372,23 +333,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderV1/spotMarket/tradeOrders',
-{
-  method: 'TRACE',
+fetch("/orderV1/spotMarket/tradeOrders", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -429,10 +388,7 @@ This topic will push all change events of your orders.
     },
     "channelType": {
       "type": "string",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "description": "Channel type",
       "x-api-enum": [
         {
@@ -473,10 +429,7 @@ This topic will push all change events of your orders.
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -509,10 +462,7 @@ This topic will push all change events of your orders.
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -533,12 +483,7 @@ This topic will push all change events of your orders.
         },
         "status": {
           "type": "string",
-          "enum": [
-            "new",
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["new", "open", "match", "done"],
           "description": "Order Status",
           "x-api-enum": [
             {
@@ -566,11 +511,7 @@ This topic will push all change events of your orders.
         "symbol": {
           "type": "string",
           "description": "Symbol",
-          "example": [
-            "BTC-USDT",
-            "ETH-USDT",
-            "KCS-USDT"
-          ]
+          "example": ["BTC-USDT", "ETH-USDT", "KCS-USDT"]
         },
         "ts": {
           "type": "integer",
@@ -579,13 +520,7 @@ This topic will push all change events of your orders.
         },
         "type": {
           "type": "string",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled"],
           "description": "Order Type",
           "x-api-enum": [
             {
@@ -621,10 +556,7 @@ This topic will push all change events of your orders.
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -641,10 +573,7 @@ This topic will push all change events of your orders.
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -686,22 +615,15 @@ This topic will push all change events of your orders.
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
 ```
 
 <h3 id="get-order(v1)-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_private_orderV1](#schemaspot_spot_private_orderv1)|
+| Status | Meaning                                                 | Description | Schema                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_private_orderV1](#schemaspot_spot_private_orderv1) |
 
 <aside class="success">
 This operation does not require authentication
@@ -712,23 +634,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/account/account/balance',
-{
-  method: 'TRACE',
+fetch("/account/account/balance", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -745,7 +665,8 @@ print(r.json())
 
 `TRACE /account/account/balance`
 
-You will receive this message when an account balance changes. The message contains the details of the change.
+You will receive this message when an account balance changes. The message
+contains the details of the change.
 
 > Example responses
 
@@ -773,10 +694,7 @@ You will receive this message when an account balance changes. The message conta
     "channelType": {
       "type": "string",
       "description": "Channel type",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "x-api-enum": [
         {
           "value": "private",
@@ -808,11 +726,7 @@ You will receive this message when an account balance changes. The message conta
         "currency": {
           "type": "string",
           "description": "currency",
-          "example": [
-            "BTC",
-            "ETH",
-            "KCS"
-          ]
+          "example": ["BTC", "ETH", "KCS"]
         },
         "hold": {
           "type": "string",
@@ -832,10 +746,7 @@ You will receive this message when an account balance changes. The message conta
               "type": "string"
             }
           },
-          "required": [
-            "symbol",
-            "orderId"
-          ],
+          "required": ["symbol", "orderId"],
           "description": "Relation context"
         },
         "relationEvent": {
@@ -883,9 +794,9 @@ You will receive this message when an account balance changes. The message conta
 
 <h3 id="get-account-balance-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_private_account](#schemaspot_spot_private_account)|
+| Status | Meaning                                                 | Description | Schema                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_private_account](#schemaspot_spot_private_account) |
 
 <aside class="success">
 This operation does not require authentication
@@ -896,23 +807,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/stopOrder/spotMarket/advancedOrders',
-{
-  method: 'TRACE',
+fetch("/stopOrder/spotMarket/advancedOrders", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -953,10 +862,7 @@ This topic will push all change events of your stop orders.
     },
     "channelType": {
       "type": "string",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "description": "Channel type",
       "x-api-enum": [
         {
@@ -990,9 +896,7 @@ This topic will push all change events of your stop orders.
         "orderType": {
           "type": "string",
           "description": "User-specified order type",
-          "enum": [
-            "stop"
-          ],
+          "enum": ["stop"],
           "x-api-enum": [
             {
               "value": "stop",
@@ -1004,10 +908,7 @@ This topic will push all change events of your stop orders.
         "side": {
           "type": "string",
           "description": "buy or sell",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "x-api-enum": [
             {
               "value": "buy",
@@ -1028,10 +929,7 @@ This topic will push all change events of your stop orders.
         "stop": {
           "type": "string",
           "description": "Order type: loss: stop loss order, oco: oco order",
-          "enum": [
-            "loss",
-            "oco"
-          ],
+          "enum": ["loss", "oco"],
           "x-api-enum": [
             {
               "value": "loss",
@@ -1056,11 +954,7 @@ This topic will push all change events of your stop orders.
         "tradeType": {
           "type": "string",
           "description": "The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).",
-          "enum": [
-            "TRADE",
-            "MARGIN_TRADE",
-            "MARGIN_ISOLATED_TRADE"
-          ],
+          "enum": ["TRADE", "MARGIN_TRADE", "MARGIN_ISOLATED_TRADE"],
           "x-api-enum": [
             {
               "value": "TRADE",
@@ -1087,14 +981,7 @@ This topic will push all change events of your stop orders.
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "cancel",
-            "received"
-          ],
+          "enum": ["open", "match", "update", "filled", "cancel", "received"],
           "x-api-enum": [
             {
               "value": "open",
@@ -1145,22 +1032,15 @@ This topic will push all change events of your stop orders.
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
 ```
 
 <h3 id="get-stop-order-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_private_stopOrder](#schemaspot_spot_private_stoporder)|
+| Status | Meaning                                                 | Description | Schema                                                            |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_private_stopOrder](#schemaspot_spot_private_stoporder) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1193,10 +1073,7 @@ This operation does not require authentication
     },
     "channelType": {
       "type": "string",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "description": "Channel type",
       "x-api-enum": [
         {
@@ -1237,10 +1114,7 @@ This operation does not require authentication
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -1273,10 +1147,7 @@ This operation does not require authentication
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -1297,12 +1168,7 @@ This operation does not require authentication
         },
         "status": {
           "type": "string",
-          "enum": [
-            "new",
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["new", "open", "match", "done"],
           "description": "Order Status",
           "x-api-enum": [
             {
@@ -1330,11 +1196,7 @@ This operation does not require authentication
         "symbol": {
           "type": "string",
           "description": "Symbol",
-          "example": [
-            "BTC-USDT",
-            "ETH-USDT",
-            "KCS-USDT"
-          ]
+          "example": ["BTC-USDT", "ETH-USDT", "KCS-USDT"]
         },
         "ts": {
           "type": "integer",
@@ -1343,14 +1205,7 @@ This operation does not require authentication
         },
         "type": {
           "type": "string",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled",
-            "received"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled", "received"],
           "description": "Order Type",
           "x-api-enum": [
             {
@@ -1391,10 +1246,7 @@ This operation does not require authentication
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -1411,10 +1263,7 @@ This operation does not require authentication
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -1456,75 +1305,67 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|Channel type|
-|data|object|true|none|none|
-|» canceledSize|string|false|none|Cumulative number of cancellations|
-|» clientOid|string|true|none|Client Order ID: The ClientOid field is a unique ID created by the user|
-|» filledSize|string|false|none|Cumulative number filled|
-|» orderId|string|true|none|The unique order id generated by the trading system|
-|» orderTime|integer(int64)|true|none|Order time (milliseconds)|
-|» orderType|string|true|none|User-specified order type|
-|» originSize|string|true|none|User-specified order size|
-|» price|string|false|none|Price|
-|» remainFunds|string|false|none|Remain funds|
-|» remainSize|string|false|none|Remain size|
-|» side|string|true|none|buy or sell|
-|» size|string|false|none|User-specified order size|
-|» status|string|true|none|Order Status|
-|» symbol|string|true|none|Symbol|
-|» ts|integer(int64)|true|none|Push time (nanoseconds)|
-|» type|string|true|none|Order Type|
-|» oldSize|string|false|none|The size before order update|
-|» feeType|string|false|none|Actual Fee Type|
-|» liquidity|string|false|none|Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType**|
-|» matchPrice|string|false|none|Match Price (when the type is "match")|
-|» matchSize|string|false|none|Match Size (when the type is "match")|
-|» tradeId|string|false|none|Trade ID: Generated by Matching engine.|
+| Name           | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                    |
+| -------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic          | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| type           | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| subject        | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| userId         | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| channelType    | string         | true     | none         | Channel type                                                                                                                                                                                                                                                   |
+| data           | object         | true     | none         | none                                                                                                                                                                                                                                                           |
+| » canceledSize | string         | false    | none         | Cumulative number of cancellations                                                                                                                                                                                                                             |
+| » clientOid    | string         | true     | none         | Client Order ID: The ClientOid field is a unique ID created by the user                                                                                                                                                                                        |
+| » filledSize   | string         | false    | none         | Cumulative number filled                                                                                                                                                                                                                                       |
+| » orderId      | string         | true     | none         | The unique order id generated by the trading system                                                                                                                                                                                                            |
+| » orderTime    | integer(int64) | true     | none         | Order time (milliseconds)                                                                                                                                                                                                                                      |
+| » orderType    | string         | true     | none         | User-specified order type                                                                                                                                                                                                                                      |
+| » originSize   | string         | true     | none         | User-specified order size                                                                                                                                                                                                                                      |
+| » price        | string         | false    | none         | Price                                                                                                                                                                                                                                                          |
+| » remainFunds  | string         | false    | none         | Remain funds                                                                                                                                                                                                                                                   |
+| » remainSize   | string         | false    | none         | Remain size                                                                                                                                                                                                                                                    |
+| » side         | string         | true     | none         | buy or sell                                                                                                                                                                                                                                                    |
+| » size         | string         | false    | none         | User-specified order size                                                                                                                                                                                                                                      |
+| » status       | string         | true     | none         | Order Status                                                                                                                                                                                                                                                   |
+| » symbol       | string         | true     | none         | Symbol                                                                                                                                                                                                                                                         |
+| » ts           | integer(int64) | true     | none         | Push time (nanoseconds)                                                                                                                                                                                                                                        |
+| » type         | string         | true     | none         | Order Type                                                                                                                                                                                                                                                     |
+| » oldSize      | string         | false    | none         | The size before order update                                                                                                                                                                                                                                   |
+| » feeType      | string         | false    | none         | Actual Fee Type                                                                                                                                                                                                                                                |
+| » liquidity    | string         | false    | none         | Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** |
+| » matchPrice   | string         | false    | none         | Match Price (when the type is "match")                                                                                                                                                                                                                         |
+| » matchSize    | string         | false    | none         | Match Size (when the type is "match")                                                                                                                                                                                                                          |
+| » tradeId      | string         | false    | none         | Trade ID: Generated by Matching engine.                                                                                                                                                                                                                        |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|channelType|private|
-|channelType|public|
-|orderType|limit|
-|orderType|market|
-|side|buy|
-|side|sell|
-|status|new|
-|status|open|
-|status|match|
-|status|done|
-|type|open|
-|type|match|
-|type|update|
-|type|filled|
-|type|canceled|
-|type|received|
-|feeType|takerFee|
-|feeType|makerFee|
-|liquidity|taker|
-|liquidity|maker|
+| Property    | Value    |
+| ----------- | -------- |
+| channelType | private  |
+| channelType | public   |
+| orderType   | limit    |
+| orderType   | market   |
+| side        | buy      |
+| side        | sell     |
+| status      | new      |
+| status      | open     |
+| status      | match    |
+| status      | done     |
+| type        | open     |
+| type        | match    |
+| type        | update   |
+| type        | filled   |
+| type        | canceled |
+| type        | received |
+| feeType     | takerFee |
+| feeType     | makerFee |
+| liquidity   | taker    |
+| liquidity   | maker    |
 
 <h2 id="tocS_Spot_spot_private_orderV1">Spot_spot_private_orderV1</h2>
 <!-- backwards compatibility -->
@@ -1551,10 +1392,7 @@ This operation does not require authentication
     },
     "channelType": {
       "type": "string",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "description": "Channel type",
       "x-api-enum": [
         {
@@ -1595,10 +1433,7 @@ This operation does not require authentication
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -1631,10 +1466,7 @@ This operation does not require authentication
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -1655,12 +1487,7 @@ This operation does not require authentication
         },
         "status": {
           "type": "string",
-          "enum": [
-            "new",
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["new", "open", "match", "done"],
           "description": "Order Status",
           "x-api-enum": [
             {
@@ -1688,11 +1515,7 @@ This operation does not require authentication
         "symbol": {
           "type": "string",
           "description": "Symbol",
-          "example": [
-            "BTC-USDT",
-            "ETH-USDT",
-            "KCS-USDT"
-          ]
+          "example": ["BTC-USDT", "ETH-USDT", "KCS-USDT"]
         },
         "ts": {
           "type": "integer",
@@ -1701,13 +1524,7 @@ This operation does not require authentication
         },
         "type": {
           "type": "string",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled"],
           "description": "Order Type",
           "x-api-enum": [
             {
@@ -1743,10 +1560,7 @@ This operation does not require authentication
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -1763,10 +1577,7 @@ This operation does not require authentication
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -1808,74 +1619,66 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|Channel type|
-|data|object|true|none|none|
-|» canceledSize|string|false|none|Cumulative number of cancellations|
-|» clientOid|string|true|none|Client Order ID: The ClientOid field is a unique ID created by the user|
-|» filledSize|string|false|none|Cumulative number filled|
-|» orderId|string|true|none|The unique order id generated by the trading system|
-|» orderTime|integer(int64)|true|none|Order time (milliseconds)|
-|» orderType|string|true|none|User-specified order type|
-|» originSize|string|true|none|User-specified order size|
-|» price|string|false|none|Specify price for currency|
-|» remainFunds|string|false|none|Remain funds|
-|» remainSize|string|false|none|Remain size|
-|» side|string|true|none|buy or sell|
-|» size|string|false|none|User-specified order size|
-|» status|string|true|none|Order Status|
-|» symbol|string|true|none|Symbol|
-|» ts|integer(int64)|true|none|Push time (nanoseconds)|
-|» type|string|true|none|Order Type|
-|» oldSize|string|false|none|The size before order update|
-|» feeType|string|false|none|Actual Fee Type|
-|» liquidity|string|false|none|Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType**|
-|» matchPrice|string|false|none|Match Price (when the type is "match")|
-|» matchSize|string|false|none|Match Size (when the type is "match")|
-|» tradeId|string|false|none|Trade ID: Generated by Matching engine.|
+| Name           | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                    |
+| -------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic          | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| type           | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| subject        | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| userId         | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| channelType    | string         | true     | none         | Channel type                                                                                                                                                                                                                                                   |
+| data           | object         | true     | none         | none                                                                                                                                                                                                                                                           |
+| » canceledSize | string         | false    | none         | Cumulative number of cancellations                                                                                                                                                                                                                             |
+| » clientOid    | string         | true     | none         | Client Order ID: The ClientOid field is a unique ID created by the user                                                                                                                                                                                        |
+| » filledSize   | string         | false    | none         | Cumulative number filled                                                                                                                                                                                                                                       |
+| » orderId      | string         | true     | none         | The unique order id generated by the trading system                                                                                                                                                                                                            |
+| » orderTime    | integer(int64) | true     | none         | Order time (milliseconds)                                                                                                                                                                                                                                      |
+| » orderType    | string         | true     | none         | User-specified order type                                                                                                                                                                                                                                      |
+| » originSize   | string         | true     | none         | User-specified order size                                                                                                                                                                                                                                      |
+| » price        | string         | false    | none         | Specify price for currency                                                                                                                                                                                                                                     |
+| » remainFunds  | string         | false    | none         | Remain funds                                                                                                                                                                                                                                                   |
+| » remainSize   | string         | false    | none         | Remain size                                                                                                                                                                                                                                                    |
+| » side         | string         | true     | none         | buy or sell                                                                                                                                                                                                                                                    |
+| » size         | string         | false    | none         | User-specified order size                                                                                                                                                                                                                                      |
+| » status       | string         | true     | none         | Order Status                                                                                                                                                                                                                                                   |
+| » symbol       | string         | true     | none         | Symbol                                                                                                                                                                                                                                                         |
+| » ts           | integer(int64) | true     | none         | Push time (nanoseconds)                                                                                                                                                                                                                                        |
+| » type         | string         | true     | none         | Order Type                                                                                                                                                                                                                                                     |
+| » oldSize      | string         | false    | none         | The size before order update                                                                                                                                                                                                                                   |
+| » feeType      | string         | false    | none         | Actual Fee Type                                                                                                                                                                                                                                                |
+| » liquidity    | string         | false    | none         | Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** |
+| » matchPrice   | string         | false    | none         | Match Price (when the type is "match")                                                                                                                                                                                                                         |
+| » matchSize    | string         | false    | none         | Match Size (when the type is "match")                                                                                                                                                                                                                          |
+| » tradeId      | string         | false    | none         | Trade ID: Generated by Matching engine.                                                                                                                                                                                                                        |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|channelType|private|
-|channelType|public|
-|orderType|limit|
-|orderType|market|
-|side|buy|
-|side|sell|
-|status|new|
-|status|open|
-|status|match|
-|status|done|
-|type|open|
-|type|match|
-|type|update|
-|type|filled|
-|type|canceled|
-|feeType|takerFee|
-|feeType|makerFee|
-|liquidity|taker|
-|liquidity|maker|
+| Property    | Value    |
+| ----------- | -------- |
+| channelType | private  |
+| channelType | public   |
+| orderType   | limit    |
+| orderType   | market   |
+| side        | buy      |
+| side        | sell     |
+| status      | new      |
+| status      | open     |
+| status      | match    |
+| status      | done     |
+| type        | open     |
+| type        | match    |
+| type        | update   |
+| type        | filled   |
+| type        | canceled |
+| feeType     | takerFee |
+| feeType     | makerFee |
+| liquidity   | taker    |
+| liquidity   | maker    |
 
 <h2 id="tocS_Spot_spot_private_account">Spot_spot_private_account</h2>
 <!-- backwards compatibility -->
@@ -1906,10 +1709,7 @@ This operation does not require authentication
     "channelType": {
       "type": "string",
       "description": "Channel type",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "x-api-enum": [
         {
           "value": "private",
@@ -1941,11 +1741,7 @@ This operation does not require authentication
         "currency": {
           "type": "string",
           "description": "currency",
-          "example": [
-            "BTC",
-            "ETH",
-            "KCS"
-          ]
+          "example": ["BTC", "ETH", "KCS"]
         },
         "hold": {
           "type": "string",
@@ -1965,10 +1761,7 @@ This operation does not require authentication
               "type": "string"
             }
           },
-          "required": [
-            "symbol",
-            "orderId"
-          ],
+          "required": ["symbol", "orderId"],
           "description": "Relation context"
         },
         "relationEvent": {
@@ -2012,40 +1805,39 @@ This operation does not require authentication
     "data"
   ]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|id|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|Channel type|
-|data|object|true|none|none|
-|» accountId|string|true|none|Account ID|
-|» available|string|true|none|Funds available to withdraw or trade|
-|» availableChange|string|true|none|The change of available Funds|
-|» currency|string|true|none|currency|
-|» hold|string|true|none|Funds on hold (not available for use)|
-|» holdChange|string|true|none|The change of hold funds|
-|» relationContext|object|true|none|Relation context|
-|»» symbol|string|true|none|none|
-|»» orderId|string|true|none|none|
-|» relationEvent|string|true|none|Relation event|
-|» relationEventId|string|true|none|Relation event Id|
-|» time|string|true|none|none|
-|» total|string|true|none|Total balance = available + hold|
+| Name              | Type   | Required | Restrictions | Description                           |
+| ----------------- | ------ | -------- | ------------ | ------------------------------------- |
+| topic             | string | true     | none         | none                                  |
+| type              | string | true     | none         | none                                  |
+| subject           | string | true     | none         | none                                  |
+| id                | string | true     | none         | none                                  |
+| userId            | string | true     | none         | none                                  |
+| channelType       | string | true     | none         | Channel type                          |
+| data              | object | true     | none         | none                                  |
+| » accountId       | string | true     | none         | Account ID                            |
+| » available       | string | true     | none         | Funds available to withdraw or trade  |
+| » availableChange | string | true     | none         | The change of available Funds         |
+| » currency        | string | true     | none         | currency                              |
+| » hold            | string | true     | none         | Funds on hold (not available for use) |
+| » holdChange      | string | true     | none         | The change of hold funds              |
+| » relationContext | object | true     | none         | Relation context                      |
+| »» symbol         | string | true     | none         | none                                  |
+| »» orderId        | string | true     | none         | none                                  |
+| » relationEvent   | string | true     | none         | Relation event                        |
+| » relationEventId | string | true     | none         | Relation event Id                     |
+| » time            | string | true     | none         | none                                  |
+| » total           | string | true     | none         | Total balance = available + hold      |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|channelType|private|
-|channelType|public|
+| Property    | Value   |
+| ----------- | ------- |
+| channelType | private |
+| channelType | public  |
 
 <h2 id="tocS_Spot_spot_private_stopOrder">Spot_spot_private_stopOrder</h2>
 <!-- backwards compatibility -->
@@ -2072,10 +1864,7 @@ This operation does not require authentication
     },
     "channelType": {
       "type": "string",
-      "enum": [
-        "private",
-        "public"
-      ],
+      "enum": ["private", "public"],
       "description": "Channel type",
       "x-api-enum": [
         {
@@ -2109,9 +1898,7 @@ This operation does not require authentication
         "orderType": {
           "type": "string",
           "description": "User-specified order type",
-          "enum": [
-            "stop"
-          ],
+          "enum": ["stop"],
           "x-api-enum": [
             {
               "value": "stop",
@@ -2123,10 +1910,7 @@ This operation does not require authentication
         "side": {
           "type": "string",
           "description": "buy or sell",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "x-api-enum": [
             {
               "value": "buy",
@@ -2147,10 +1931,7 @@ This operation does not require authentication
         "stop": {
           "type": "string",
           "description": "Order type: loss: stop loss order, oco: oco order",
-          "enum": [
-            "loss",
-            "oco"
-          ],
+          "enum": ["loss", "oco"],
           "x-api-enum": [
             {
               "value": "loss",
@@ -2175,11 +1956,7 @@ This operation does not require authentication
         "tradeType": {
           "type": "string",
           "description": "The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).",
-          "enum": [
-            "TRADE",
-            "MARGIN_TRADE",
-            "MARGIN_ISOLATED_TRADE"
-          ],
+          "enum": ["TRADE", "MARGIN_TRADE", "MARGIN_ISOLATED_TRADE"],
           "x-api-enum": [
             {
               "value": "TRADE",
@@ -2206,14 +1983,7 @@ This operation does not require authentication
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "cancel",
-            "received"
-          ],
+          "enum": ["open", "match", "update", "filled", "cancel", "received"],
           "x-api-enum": [
             {
               "value": "open",
@@ -2264,59 +2034,50 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|Channel type|
-|data|object|true|none|none|
-|» createdAt|integer(int64)|true|none|Order created time (milliseconds)|
-|» orderId|string|true|none|The unique order id generated by the trading system|
-|» orderPrice|string|true|none|Price|
-|» orderType|string|true|none|User-specified order type|
-|» side|string|true|none|buy or sell|
-|» size|string|true|none|User-specified order size|
-|» stop|string|true|none|Order type: loss: stop loss order, oco: oco order|
-|» stopPrice|string|true|none|Stop Price|
-|» symbol|string|true|none|symbol|
-|» tradeType|string|true|none|The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).|
-|» ts|integer(int64)|true|none|Push time (nanoseconds)|
-|» type|string|true|none|Order Type|
+| Name         | Type           | Required | Restrictions | Description                                                                                              |
+| ------------ | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------- |
+| topic        | string         | true     | none         | none                                                                                                     |
+| type         | string         | true     | none         | none                                                                                                     |
+| subject      | string         | true     | none         | none                                                                                                     |
+| userId       | string         | true     | none         | none                                                                                                     |
+| channelType  | string         | true     | none         | Channel type                                                                                             |
+| data         | object         | true     | none         | none                                                                                                     |
+| » createdAt  | integer(int64) | true     | none         | Order created time (milliseconds)                                                                        |
+| » orderId    | string         | true     | none         | The unique order id generated by the trading system                                                      |
+| » orderPrice | string         | true     | none         | Price                                                                                                    |
+| » orderType  | string         | true     | none         | User-specified order type                                                                                |
+| » side       | string         | true     | none         | buy or sell                                                                                              |
+| » size       | string         | true     | none         | User-specified order size                                                                                |
+| » stop       | string         | true     | none         | Order type: loss: stop loss order, oco: oco order                                                        |
+| » stopPrice  | string         | true     | none         | Stop Price                                                                                               |
+| » symbol     | string         | true     | none         | symbol                                                                                                   |
+| » tradeType  | string         | true     | none         | The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin). |
+| » ts         | integer(int64) | true     | none         | Push time (nanoseconds)                                                                                  |
+| » type       | string         | true     | none         | Order Type                                                                                               |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|channelType|private|
-|channelType|public|
-|orderType|stop|
-|side|buy|
-|side|sell|
-|stop|loss|
-|stop|oco|
-|tradeType|TRADE|
-|tradeType|MARGIN_TRADE|
-|tradeType|MARGIN_ISOLATED_TRADE|
-|type|open|
-|type|match|
-|type|update|
-|type|filled|
-|type|cancel|
-|type|received|
-
+| Property    | Value                 |
+| ----------- | --------------------- |
+| channelType | private               |
+| channelType | public                |
+| orderType   | stop                  |
+| side        | buy                   |
+| side        | sell                  |
+| stop        | loss                  |
+| stop        | oco                   |
+| tradeType   | TRADE                 |
+| tradeType   | MARGIN_TRADE          |
+| tradeType   | MARGIN_ISOLATED_TRADE |
+| type        | open                  |
+| type        | match                 |
+| type        | update                |
+| type        | filled                |
+| type        | cancel                |
+| type        | received              |

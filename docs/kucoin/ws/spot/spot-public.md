@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="spot">spot v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 spot_public
 
@@ -26,23 +26,21 @@ spot_public
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/ticker/market/ticker:_symbol_,_symbol_',
-{
-  method: 'TRACE',
+fetch("/ticker/market/ticker:_symbol_,_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -127,21 +125,16 @@ Subscribe to this topic to get specified symbol pushes on BBO changes.
       ]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ],
+  "required": ["type", "topic", "subject", "data"],
   "x-apidog-refs": {}
 }
 ```
 
 <h3 id="get-ticker-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_ticker](#schemaspot_spot_public_ticker)|
+| Status | Meaning                                                 | Description | Schema                                                    |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_ticker](#schemaspot_spot_public_ticker) |
 
 <aside class="success">
 This operation does not require authentication
@@ -152,23 +145,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/allTickers/market/ticker:all',
-{
-  method: 'TRACE',
+fetch("/allTickers/market/ticker:all", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -246,20 +237,15 @@ Subscribe to this topic to get pushes on all market symbol BBO changes.
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="get-all-tickers-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_allTickers](#schemaspot_spot_public_alltickers)|
+| Status | Meaning                                                 | Description | Schema                                                            |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_allTickers](#schemaspot_spot_public_alltickers) |
 
 <aside class="success">
 This operation does not require authentication
@@ -270,23 +256,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel1/spotMarket/level1:_symbol_,_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel1/spotMarket/level1:_symbol_,_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -303,7 +287,8 @@ print(r.json())
 
 `TRACE /orderbookLevel1/spotMarket/level1:_symbol_,_symbol_`
 
-The system will return the 1 best ask/bid orders data; a topic supports up to 100 symbols. If there is no change in the market, data will not be pushed
+The system will return the 1 best ask/bid orders data; a topic supports up to
+100 symbols. If there is no change in the market, data will not be pushed
 
 > Example responses
 
@@ -343,27 +328,18 @@ The system will return the 1 best ask/bid orders data; a topic supports up to 10
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="orderbook---level1-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_orderbookLevel1](#schemaspot_spot_public_orderbooklevel1)|
+| Status | Meaning                                                 | Description | Schema                                                                      |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_orderbookLevel1](#schemaspot_spot_public_orderbooklevel1) |
 
 <aside class="success">
 This operation does not require authentication
@@ -374,23 +350,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel5/spotMarket/level2Depth5:_symbol_,_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel5/spotMarket/level2Depth5:_symbol_,_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -407,7 +381,8 @@ print(r.json())
 
 `TRACE /orderbookLevel5/spotMarket/level2Depth5:_symbol_,_symbol_`
 
-The system will return the 5 best ask/bid orders data; a topic supports up to 100 symbols. If there is no change in the market, data will not be pushed
+The system will return the 5 best ask/bid orders data; a topic supports up to
+100 symbols. If there is no change in the market, data will not be pushed
 
 > Example responses
 
@@ -453,27 +428,18 @@ The system will return the 5 best ask/bid orders data; a topic supports up to 10
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="orderbook---level5-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_orderbookLevel5](#schemaspot_spot_public_orderbooklevel5)|
+| Status | Meaning                                                 | Description | Schema                                                                      |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_orderbookLevel5](#schemaspot_spot_public_orderbooklevel5) |
 
 <aside class="success">
 This operation does not require authentication
@@ -484,23 +450,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel50/spotMarket/level2Depth50:_symbol_,_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel50/spotMarket/level2Depth50:_symbol_,_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -517,7 +481,8 @@ print(r.json())
 
 `TRACE /orderbookLevel50/spotMarket/level2Depth50:_symbol_,_symbol_`
 
-The system will return data for the 50 best ask/bid orders; a topic supports up to 100 symbols. If there is no change in the market, data will not be pushed
+The system will return data for the 50 best ask/bid orders; a topic supports up
+to 100 symbols. If there is no change in the market, data will not be pushed
 
 > Example responses
 
@@ -563,27 +528,18 @@ The system will return data for the 50 best ask/bid orders; a topic supports up 
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
 ```
 
 <h3 id="orderbook---level50-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_orderbookLevel50](#schemaspot_spot_public_orderbooklevel50)|
+| Status | Meaning                                                 | Description | Schema                                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_orderbookLevel50](#schemaspot_spot_public_orderbooklevel50) |
 
 <aside class="success">
 This operation does not require authentication
@@ -594,23 +550,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/callAuctionOrderbookLevel50/callauction/level2Depth50:_symbol_',
-{
-  method: 'TRACE',
+fetch("/callAuctionOrderbookLevel50/callauction/level2Depth50:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -627,7 +581,8 @@ print(r.json())
 
 `TRACE /callAuctionOrderbookLevel50/callauction/level2Depth50:_symbol_`
 
-The system will return the call auction 50 best ask/bid orders data; if there is no change in the market, data will not be pushed
+The system will return the call auction 50 best ask/bid orders data; if there is
+no change in the market, data will not be pushed
 
 > Example responses
 
@@ -673,27 +628,18 @@ The system will return the call auction 50 best ask/bid orders data; if there is
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
 ```
 
 <h3 id="callauctionorderbook---level50-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_callAuctionOrderbookLevel50](#schemaspot_spot_public_callauctionorderbooklevel50)|
+| Status | Meaning                                                 | Description | Schema                                                                                              |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_callAuctionOrderbookLevel50](#schemaspot_spot_public_callauctionorderbooklevel50) |
 
 <aside class="success">
 This operation does not require authentication
@@ -704,23 +650,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/callAuctionInfo/callauction/callauctionData:_symbol_',
-{
-  method: 'TRACE',
+fetch("/callAuctionInfo/callauction/callauctionData:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -805,20 +749,15 @@ Subscribe to this topic to get the specified symbol call auction info.
       ]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
 ```
 
 <h3 id="get-call-auction-info-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_callAuctionInfo](#schemaspot_spot_public_callauctioninfo)|
+| Status | Meaning                                                 | Description | Schema                                                                      |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_callAuctionInfo](#schemaspot_spot_public_callauctioninfo) |
 
 <aside class="success">
 This operation does not require authentication
@@ -829,23 +768,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookIncrement/market/level2:_symbol_,_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookIncrement/market/level2:_symbol_,_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -862,7 +799,9 @@ print(r.json())
 
 `TRACE /orderbookIncrement/market/level2:_symbol_,_symbol_`
 
-The system will return the increment change orderbook data (all depths); a topic supports up to 100 symbols. If there is no change in the market, data will not be pushed
+The system will return the increment change orderbook data (all depths); a topic
+supports up to 100 symbols. If there is no change in the market, data will not
+be pushed
 
 > Example responses
 
@@ -907,10 +846,7 @@ The system will return the increment change orderbook data (all depths); a topic
               }
             }
           },
-          "required": [
-            "asks",
-            "bids"
-          ]
+          "required": ["asks", "bids"]
         },
         "sequenceEnd": {
           "type": "integer",
@@ -929,29 +865,18 @@ The system will return the increment change orderbook data (all depths); a topic
           "format": "int64"
         }
       },
-      "required": [
-        "changes",
-        "sequenceEnd",
-        "sequenceStart",
-        "symbol",
-        "time"
-      ]
+      "required": ["changes", "sequenceEnd", "sequenceStart", "symbol", "time"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="orderbook---increment-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_orderbookIncrement](#schemaspot_spot_public_orderbookincrement)|
+| Status | Meaning                                                 | Description | Schema                                                                            |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_orderbookIncrement](#schemaspot_spot_public_orderbookincrement) |
 
 <aside class="success">
 This operation does not require authentication
@@ -962,23 +887,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/klines/market/candles:_symbol___type_',
-{
-  method: 'TRACE',
+fetch("/klines/market/candles:_symbol___type_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1034,27 +957,18 @@ Subscribe to this topic to get K-Line data.
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "candles",
-        "time"
-      ]
+      "required": ["symbol", "candles", "time"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="klines-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_klines](#schemaspot_spot_public_klines)|
+| Status | Meaning                                                 | Description | Schema                                                    |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_klines](#schemaspot_spot_public_klines) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1065,23 +979,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/trade/market/match:_symbol_,_symbol_',
-{
-  method: 'TRACE',
+fetch("/trade/market/match:_symbol_,_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1098,7 +1010,8 @@ print(r.json())
 
 `TRACE /trade/market/match:_symbol_,_symbol_`
 
-Subscribe to this topic to get Level 3 matching event data flows. A topic supports up to 100 symbols.
+Subscribe to this topic to get Level 3 matching event data flows. A topic
+supports up to 100 symbols.
 
 > Example responses
 
@@ -1165,20 +1078,15 @@ Subscribe to this topic to get Level 3 matching event data flows. A topic suppor
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="trade-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_trade](#schemaspot_spot_public_trade)|
+| Status | Meaning                                                 | Description | Schema                                                  |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_trade](#schemaspot_spot_public_trade) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1189,23 +1097,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/symbolSnapshot/market/snapshot:_symbol_',
-{
-  method: 'TRACE',
+fetch("/symbolSnapshot/market/snapshot:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1265,10 +1171,7 @@ Subscribe to get snapshot data for a single symbol.
             "board": {
               "type": "integer",
               "description": "Trading pair partition: 0. Primary partition 1.KuCoin Plus\", example = \"1\"",
-              "enum": [
-                0,
-                1
-              ],
+              "enum": [0, 1],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -1319,11 +1222,7 @@ Subscribe to get snapshot data for a single symbol.
             "mark": {
               "type": "integer",
               "description": "Trading Pair Mark: 0. Default 1.ST. 2.NEW\", example = \"1\"",
-              "enum": [
-                0,
-                1,
-                2
-              ],
+              "enum": [0, 1, 2],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -1536,26 +1435,18 @@ Subscribe to get snapshot data for a single symbol.
           ]
         }
       },
-      "required": [
-        "sequence",
-        "data"
-      ]
+      "required": ["sequence", "data"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="symbol-snapshot-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_symbolSnapshot](#schemaspot_spot_public_symbolsnapshot)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_symbolSnapshot](#schemaspot_spot_public_symbolsnapshot) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1566,23 +1457,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/marketSnapshot/market/snapshot:_market_',
-{
-  method: 'TRACE',
+fetch("/marketSnapshot/market/snapshot:_market_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1642,10 +1531,7 @@ Subscribe to this topic to get snapshot data for the entire market.
             "board": {
               "type": "integer",
               "description": "Trading pair partition: 0. Primary partition 1.KuCoin Plus\", example = \"1\"",
-              "enum": [
-                0,
-                1
-              ],
+              "enum": [0, 1],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -1658,9 +1544,7 @@ Subscribe to this topic to get snapshot data for the entire market.
                   "description": "KuCoin Plus"
                 }
               ],
-              "example": [
-                1
-              ]
+              "example": [1]
             },
             "buy": {
               "type": "number"
@@ -1699,11 +1583,7 @@ Subscribe to this topic to get snapshot data for the entire market.
             "mark": {
               "type": "integer",
               "description": "Trading Pair Mark: 0. Default 1.ST. 2.NEW\", example = \"1\"",
-              "enum": [
-                0,
-                1,
-                2
-              ],
+              "enum": [0, 1, 2],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -1721,9 +1601,7 @@ Subscribe to this topic to get snapshot data for the entire market.
                   "description": "NEW"
                 }
               ],
-              "example": [
-                1
-              ]
+              "example": [1]
             },
             "market": {
               "type": "string"
@@ -1918,26 +1796,18 @@ Subscribe to this topic to get snapshot data for the entire market.
           ]
         }
       },
-      "required": [
-        "sequence",
-        "data"
-      ]
+      "required": ["sequence", "data"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
 ```
 
 <h3 id="market-snapshot-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Spot_spot_public_marketSnapshot](#schemaspot_spot_public_marketsnapshot)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Spot_spot_public_marketSnapshot](#schemaspot_spot_public_marketsnapshot) |
 
 <aside class="success">
 This operation does not require authentication
@@ -2014,33 +1884,27 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ],
+  "required": ["type", "topic", "subject", "data"],
   "x-apidog-refs": {}
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|none|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» sequence|string|true|none|Sequence number|
-|» price|string|true|none|Last traded price|
-|» size|string|true|none|Last traded amount|
-|» bestAsk|string|true|none|Best ask price|
-|» bestAskSize|string|true|none|Best ask size|
-|» bestBid|string|true|none|Best bid price|
-|» bestBidSize|string|true|none|Best bid size|
-|» time|integer(int64)|true|none|The matching time of the latest transaction|
+| Name          | Type           | Required | Restrictions | Description                                 |
+| ------------- | -------------- | -------- | ------------ | ------------------------------------------- |
+| type          | string         | true     | none         | none                                        |
+| topic         | string         | true     | none         | none                                        |
+| subject       | string         | true     | none         | none                                        |
+| data          | object         | true     | none         | none                                        |
+| » sequence    | string         | true     | none         | Sequence number                             |
+| » price       | string         | true     | none         | Last traded price                           |
+| » size        | string         | true     | none         | Last traded amount                          |
+| » bestAsk     | string         | true     | none         | Best ask price                              |
+| » bestAskSize | string         | true     | none         | Best ask size                               |
+| » bestBid     | string         | true     | none         | Best bid price                              |
+| » bestBidSize | string         | true     | none         | Best bid size                               |
+| » time        | integer(int64) | true     | none         | The matching time of the latest transaction |
 
 <h2 id="tocS_Spot_spot_public_allTickers">Spot_spot_public_allTickers</h2>
 <!-- backwards compatibility -->
@@ -2104,32 +1968,26 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» bestAsk|string|true|none|none|
-|» bestAskSize|string|true|none|none|
-|» bestBid|string|true|none|none|
-|» bestBidSize|string|true|none|none|
-|» price|string|true|none|none|
-|» sequence|string|true|none|none|
-|» size|string|true|none|none|
-|» time|integer(int64)|true|none|The matching time of the latest transaction|
+| Name          | Type           | Required | Restrictions | Description                                 |
+| ------------- | -------------- | -------- | ------------ | ------------------------------------------- |
+| topic         | string         | true     | none         | none                                        |
+| type          | string         | true     | none         | none                                        |
+| subject       | string         | true     | none         | none                                        |
+| data          | object         | true     | none         | none                                        |
+| » bestAsk     | string         | true     | none         | none                                        |
+| » bestAskSize | string         | true     | none         | none                                        |
+| » bestBid     | string         | true     | none         | none                                        |
+| » bestBidSize | string         | true     | none         | none                                        |
+| » price       | string         | true     | none         | none                                        |
+| » sequence    | string         | true     | none         | none                                        |
+| » size        | string         | true     | none         | none                                        |
+| » time        | integer(int64) | true     | none         | The matching time of the latest transaction |
 
 <h2 id="tocS_Spot_spot_public_orderbookLevel1">Spot_spot_public_orderbookLevel1</h2>
 <!-- backwards compatibility -->
@@ -2172,34 +2030,24 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» asks|[string]|true|none|price, size|
-|» bids|[string]|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » asks      | [string]       | true     | none         | price, size |
+| » bids      | [string]       | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Spot_spot_public_orderbookLevel5">Spot_spot_public_orderbookLevel5</h2>
 <!-- backwards compatibility -->
@@ -2248,34 +2096,24 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» asks|[array]|true|none|price, size|
-|» bids|[array]|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » asks      | [array]        | true     | none         | price, size |
+| » bids      | [array]        | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Spot_spot_public_orderbookLevel50">Spot_spot_public_orderbookLevel50</h2>
 <!-- backwards compatibility -->
@@ -2324,34 +2162,24 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|none|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» asks|[array]|true|none|price, size|
-|» bids|[array]|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| type        | string         | true     | none         | none        |
+| topic       | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » asks      | [array]        | true     | none         | price, size |
+| » bids      | [array]        | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Spot_spot_public_callAuctionOrderbookLevel50">Spot_spot_public_callAuctionOrderbookLevel50</h2>
 <!-- backwards compatibility -->
@@ -2400,34 +2228,24 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "asks",
-        "bids",
-        "timestamp"
-      ]
+      "required": ["asks", "bids", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|none|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» asks|[array]|true|none|price, size|
-|» bids|[array]|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| type        | string         | true     | none         | none        |
+| topic       | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » asks      | [array]        | true     | none         | price, size |
+| » bids      | [array]        | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Spot_spot_public_callAuctionInfo">Spot_spot_public_callAuctionInfo</h2>
 <!-- backwards compatibility -->
@@ -2498,32 +2316,26 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|none|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol|
-|» estimatedPrice|string|true|none|Estimated price|
-|» estimatedSize|string|true|none|Estimated size|
-|» sellOrderRangeLowPrice|string|true|none|Sell ​​order minimum price|
-|» sellOrderRangeHighPrice|string|true|none|Sell ​​order maximum price|
-|» buyOrderRangeLowPrice|string|true|none|Buy ​​order minimum price|
-|» buyOrderRangeHighPrice|string|true|none|Buy ​​order maximum price|
-|» time|integer(int64)|true|none|Timestamp (ms)|
+| Name                      | Type           | Required | Restrictions | Description                |
+| ------------------------- | -------------- | -------- | ------------ | -------------------------- |
+| type                      | string         | true     | none         | none                       |
+| topic                     | string         | true     | none         | none                       |
+| subject                   | string         | true     | none         | none                       |
+| data                      | object         | true     | none         | none                       |
+| » symbol                  | string         | true     | none         | Symbol                     |
+| » estimatedPrice          | string         | true     | none         | Estimated price            |
+| » estimatedSize           | string         | true     | none         | Estimated size             |
+| » sellOrderRangeLowPrice  | string         | true     | none         | Sell ​​order minimum price |
+| » sellOrderRangeHighPrice | string         | true     | none         | Sell ​​order maximum price |
+| » buyOrderRangeLowPrice   | string         | true     | none         | Buy ​​order minimum price  |
+| » buyOrderRangeHighPrice  | string         | true     | none         | Buy ​​order maximum price  |
+| » time                    | integer(int64) | true     | none         | Timestamp (ms)             |
 
 <h2 id="tocS_Spot_spot_public_orderbookIncrement">Spot_spot_public_orderbookIncrement</h2>
 <!-- backwards compatibility -->
@@ -2571,10 +2383,7 @@ This operation does not require authentication
               }
             }
           },
-          "required": [
-            "asks",
-            "bids"
-          ]
+          "required": ["asks", "bids"]
         },
         "sequenceEnd": {
           "type": "integer",
@@ -2593,40 +2402,28 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "changes",
-        "sequenceEnd",
-        "sequenceStart",
-        "symbol",
-        "time"
-      ]
+      "required": ["changes", "sequenceEnd", "sequenceStart", "symbol", "time"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» changes|object|true|none|none|
-|»» asks|[array]|true|none|price,size,sequence|
-|»» bids|[array]|true|none|none|
-|» sequenceEnd|integer(int64)|true|none|none|
-|» sequenceStart|integer(int64)|true|none|none|
-|» symbol|string|true|none|none|
-|» time|integer(int64)|true|none|milliseconds|
+| Name            | Type           | Required | Restrictions | Description         |
+| --------------- | -------------- | -------- | ------------ | ------------------- |
+| topic           | string         | true     | none         | none                |
+| type            | string         | true     | none         | none                |
+| subject         | string         | true     | none         | none                |
+| data            | object         | true     | none         | none                |
+| » changes       | object         | true     | none         | none                |
+| »» asks         | [array]        | true     | none         | price,size,sequence |
+| »» bids         | [array]        | true     | none         | none                |
+| » sequenceEnd   | integer(int64) | true     | none         | none                |
+| » sequenceStart | integer(int64) | true     | none         | none                |
+| » symbol        | string         | true     | none         | none                |
+| » time          | integer(int64) | true     | none         | milliseconds        |
 
 <h2 id="tocS_Spot_spot_public_klines">Spot_spot_public_klines</h2>
 <!-- backwards compatibility -->
@@ -2668,34 +2465,24 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "candles",
-        "time"
-      ]
+      "required": ["symbol", "candles", "time"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|symbol|
-|» candles|[string]|true|none|Start time of the candle cycle,open price,close price, high price,low price,Transaction volume,Transaction amount|
-|» time|integer(int64)|true|none|now（us）|
+| Name      | Type           | Required | Restrictions | Description                                                                                                       |
+| --------- | -------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| topic     | string         | true     | none         | none                                                                                                              |
+| type      | string         | true     | none         | none                                                                                                              |
+| subject   | string         | true     | none         | none                                                                                                              |
+| data      | object         | true     | none         | none                                                                                                              |
+| » symbol  | string         | true     | none         | symbol                                                                                                            |
+| » candles | [string]       | true     | none         | Start time of the candle cycle,open price,close price, high price,low price,Transaction volume,Transaction amount |
+| » time    | integer(int64) | true     | none         | now（us）                                                                                                         |
 
 <h2 id="tocS_Spot_spot_public_trade">Spot_spot_public_trade</h2>
 <!-- backwards compatibility -->
@@ -2765,34 +2552,28 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» makerOrderId|string|true|none|none|
-|» price|string|true|none|none|
-|» sequence|string|true|none|none|
-|» side|string|true|none|none|
-|» size|string|true|none|none|
-|» symbol|string|true|none|none|
-|» takerOrderId|string|true|none|none|
-|» time|string|true|none|none|
-|» tradeId|string|true|none|none|
-|» type|string|true|none|none|
+| Name           | Type   | Required | Restrictions | Description |
+| -------------- | ------ | -------- | ------------ | ----------- |
+| topic          | string | true     | none         | none        |
+| type           | string | true     | none         | none        |
+| subject        | string | true     | none         | none        |
+| data           | object | true     | none         | none        |
+| » makerOrderId | string | true     | none         | none        |
+| » price        | string | true     | none         | none        |
+| » sequence     | string | true     | none         | none        |
+| » side         | string | true     | none         | none        |
+| » size         | string | true     | none         | none        |
+| » symbol       | string | true     | none         | none        |
+| » takerOrderId | string | true     | none         | none        |
+| » time         | string | true     | none         | none        |
+| » tradeId      | string | true     | none         | none        |
+| » type         | string | true     | none         | none        |
 
 <h2 id="tocS_Spot_spot_public_symbolSnapshot">Spot_spot_public_symbolSnapshot</h2>
 <!-- backwards compatibility -->
@@ -2838,10 +2619,7 @@ This operation does not require authentication
             "board": {
               "type": "integer",
               "description": "Trading pair partition: 0. Primary partition 1.KuCoin Plus\", example = \"1\"",
-              "enum": [
-                0,
-                1
-              ],
+              "enum": [0, 1],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -2892,11 +2670,7 @@ This operation does not require authentication
             "mark": {
               "type": "integer",
               "description": "Trading Pair Mark: 0. Default 1.ST. 2.NEW\", example = \"1\"",
-              "enum": [
-                0,
-                1,
-                2
-              ],
+              "enum": [0, 1, 2],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -3109,97 +2883,88 @@ This operation does not require authentication
           ]
         }
       },
-      "required": [
-        "sequence",
-        "data"
-      ]
+      "required": ["sequence", "data"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» sequence|string|true|none|none|
-|» data|object|true|none|none|
-|»» askSize|number|true|none|none|
-|»» averagePrice|number|true|none|none|
-|»» baseCurrency|string|true|none|none|
-|»» bidSize|number|true|none|none|
-|»» board|integer|true|none|Trading pair partition: 0. Primary partition 1.KuCoin Plus", example = "1"|
-|»» buy|number|true|none|none|
-|»» changePrice|number|true|none|none|
-|»» changeRate|number|true|none|none|
-|»» close|number|true|none|none|
-|»» datetime|integer(int64)|true|none|none|
-|»» high|number|true|none|none|
-|»» lastTradedPrice|number|true|none|none|
-|»» low|number|true|none|none|
-|»» makerCoefficient|number|true|none|none|
-|»» makerFeeRate|number|true|none|none|
-|»» marginTrade|boolean|true|none|none|
-|»» mark|integer|true|none|Trading Pair Mark: 0. Default 1.ST. 2.NEW", example = "1"|
-|»» market|string|true|none|none|
-|»» marketChange1h|object|true|none|none|
-|»»» changePrice|number|true|none|none|
-|»»» changeRate|number|true|none|none|
-|»»» high|number|true|none|none|
-|»»» low|number|true|none|none|
-|»»» open|number|true|none|none|
-|»»» vol|number|true|none|none|
-|»»» volValue|number|true|none|none|
-|»» marketChange24h|object|true|none|none|
-|»»» changePrice|number|true|none|none|
-|»»» changeRate|number|true|none|none|
-|»»» high|number|true|none|none|
-|»»» low|number|true|none|none|
-|»»» open|number|true|none|none|
-|»»» vol|number|true|none|none|
-|»»» volValue|number|true|none|none|
-|»» marketChange4h|object|true|none|none|
-|»»» changePrice|number|true|none|none|
-|»»» changeRate|number|true|none|none|
-|»»» high|number|true|none|none|
-|»»» low|number|true|none|none|
-|»»» open|number|true|none|none|
-|»»» vol|number|true|none|none|
-|»»» volValue|number|true|none|none|
-|»» markets|[string]|true|none|none|
-|»» open|number|true|none|none|
-|»» quoteCurrency|string|true|none|none|
-|»» sell|number|true|none|none|
-|»» siteTypes|[string]|true|none|none|
-|»» sort|integer|true|none|sorting number(Pointless)|
-|»» symbol|string|true|none|none|
-|»» symbolCode|string|true|none|none|
-|»» takerCoefficient|number|true|none|none|
-|»» takerFeeRate|number|true|none|none|
-|»» trading|boolean|true|none|none|
-|»» vol|number|true|none|none|
-|»» volValue|number|true|none|24-hour rolling transaction volume, refreshed every 2s|
+| Name                | Type           | Required | Restrictions | Description                                                                |
+| ------------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------- |
+| topic               | string         | true     | none         | none                                                                       |
+| type                | string         | true     | none         | none                                                                       |
+| subject             | string         | true     | none         | none                                                                       |
+| data                | object         | true     | none         | none                                                                       |
+| » sequence          | string         | true     | none         | none                                                                       |
+| » data              | object         | true     | none         | none                                                                       |
+| »» askSize          | number         | true     | none         | none                                                                       |
+| »» averagePrice     | number         | true     | none         | none                                                                       |
+| »» baseCurrency     | string         | true     | none         | none                                                                       |
+| »» bidSize          | number         | true     | none         | none                                                                       |
+| »» board            | integer        | true     | none         | Trading pair partition: 0. Primary partition 1.KuCoin Plus", example = "1" |
+| »» buy              | number         | true     | none         | none                                                                       |
+| »» changePrice      | number         | true     | none         | none                                                                       |
+| »» changeRate       | number         | true     | none         | none                                                                       |
+| »» close            | number         | true     | none         | none                                                                       |
+| »» datetime         | integer(int64) | true     | none         | none                                                                       |
+| »» high             | number         | true     | none         | none                                                                       |
+| »» lastTradedPrice  | number         | true     | none         | none                                                                       |
+| »» low              | number         | true     | none         | none                                                                       |
+| »» makerCoefficient | number         | true     | none         | none                                                                       |
+| »» makerFeeRate     | number         | true     | none         | none                                                                       |
+| »» marginTrade      | boolean        | true     | none         | none                                                                       |
+| »» mark             | integer        | true     | none         | Trading Pair Mark: 0. Default 1.ST. 2.NEW", example = "1"                  |
+| »» market           | string         | true     | none         | none                                                                       |
+| »» marketChange1h   | object         | true     | none         | none                                                                       |
+| »»» changePrice     | number         | true     | none         | none                                                                       |
+| »»» changeRate      | number         | true     | none         | none                                                                       |
+| »»» high            | number         | true     | none         | none                                                                       |
+| »»» low             | number         | true     | none         | none                                                                       |
+| »»» open            | number         | true     | none         | none                                                                       |
+| »»» vol             | number         | true     | none         | none                                                                       |
+| »»» volValue        | number         | true     | none         | none                                                                       |
+| »» marketChange24h  | object         | true     | none         | none                                                                       |
+| »»» changePrice     | number         | true     | none         | none                                                                       |
+| »»» changeRate      | number         | true     | none         | none                                                                       |
+| »»» high            | number         | true     | none         | none                                                                       |
+| »»» low             | number         | true     | none         | none                                                                       |
+| »»» open            | number         | true     | none         | none                                                                       |
+| »»» vol             | number         | true     | none         | none                                                                       |
+| »»» volValue        | number         | true     | none         | none                                                                       |
+| »» marketChange4h   | object         | true     | none         | none                                                                       |
+| »»» changePrice     | number         | true     | none         | none                                                                       |
+| »»» changeRate      | number         | true     | none         | none                                                                       |
+| »»» high            | number         | true     | none         | none                                                                       |
+| »»» low             | number         | true     | none         | none                                                                       |
+| »»» open            | number         | true     | none         | none                                                                       |
+| »»» vol             | number         | true     | none         | none                                                                       |
+| »»» volValue        | number         | true     | none         | none                                                                       |
+| »» markets          | [string]       | true     | none         | none                                                                       |
+| »» open             | number         | true     | none         | none                                                                       |
+| »» quoteCurrency    | string         | true     | none         | none                                                                       |
+| »» sell             | number         | true     | none         | none                                                                       |
+| »» siteTypes        | [string]       | true     | none         | none                                                                       |
+| »» sort             | integer        | true     | none         | sorting number(Pointless)                                                  |
+| »» symbol           | string         | true     | none         | none                                                                       |
+| »» symbolCode       | string         | true     | none         | none                                                                       |
+| »» takerCoefficient | number         | true     | none         | none                                                                       |
+| »» takerFeeRate     | number         | true     | none         | none                                                                       |
+| »» trading          | boolean        | true     | none         | none                                                                       |
+| »» vol              | number         | true     | none         | none                                                                       |
+| »» volValue         | number         | true     | none         | 24-hour rolling transaction volume, refreshed every 2s                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|board|0|
-|board|1|
-|mark|0|
-|mark|1|
-|mark|2|
+| Property | Value |
+| -------- | ----- |
+| board    | 0     |
+| board    | 1     |
+| mark     | 0     |
+| mark     | 1     |
+| mark     | 2     |
 
 <h2 id="tocS_Spot_spot_public_marketSnapshot">Spot_spot_public_marketSnapshot</h2>
 <!-- backwards compatibility -->
@@ -3245,10 +3010,7 @@ This operation does not require authentication
             "board": {
               "type": "integer",
               "description": "Trading pair partition: 0. Primary partition 1.KuCoin Plus\", example = \"1\"",
-              "enum": [
-                0,
-                1
-              ],
+              "enum": [0, 1],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -3261,9 +3023,7 @@ This operation does not require authentication
                   "description": "KuCoin Plus"
                 }
               ],
-              "example": [
-                1
-              ]
+              "example": [1]
             },
             "buy": {
               "type": "number"
@@ -3302,11 +3062,7 @@ This operation does not require authentication
             "mark": {
               "type": "integer",
               "description": "Trading Pair Mark: 0. Default 1.ST. 2.NEW\", example = \"1\"",
-              "enum": [
-                0,
-                1,
-                2
-              ],
+              "enum": [0, 1, 2],
               "x-api-enum": [
                 {
                   "value": 0,
@@ -3324,9 +3080,7 @@ This operation does not require authentication
                   "description": "NEW"
                 }
               ],
-              "example": [
-                1
-              ]
+              "example": [1]
             },
             "market": {
               "type": "string"
@@ -3521,95 +3275,85 @@ This operation does not require authentication
           ]
         }
       },
-      "required": [
-        "sequence",
-        "data"
-      ]
+      "required": ["sequence", "data"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» sequence|string|true|none|none|
-|» data|object|true|none|none|
-|»» askSize|number|true|none|none|
-|»» averagePrice|number|true|none|none|
-|»» baseCurrency|string|true|none|none|
-|»» bidSize|number|true|none|none|
-|»» board|integer|true|none|Trading pair partition: 0. Primary partition 1.KuCoin Plus", example = "1"|
-|»» buy|number|true|none|none|
-|»» changePrice|number|true|none|none|
-|»» changeRate|number|true|none|none|
-|»» close|number|true|none|none|
-|»» datetime|integer(int64)|true|none|none|
-|»» high|number|true|none|none|
-|»» lastTradedPrice|number|true|none|none|
-|»» low|number|true|none|none|
-|»» makerCoefficient|number|true|none|none|
-|»» makerFeeRate|number|true|none|none|
-|»» marginTrade|boolean|true|none|none|
-|»» mark|integer|true|none|Trading Pair Mark: 0. Default 1.ST. 2.NEW", example = "1"|
-|»» market|string|true|none|none|
-|»» marketChange1h|object|true|none|none|
-|»»» changePrice|number|true|none|none|
-|»»» changeRate|number|true|none|none|
-|»»» high|number|true|none|none|
-|»»» low|number|true|none|none|
-|»»» open|number|true|none|none|
-|»»» vol|number|true|none|none|
-|»»» volValue|number|true|none|none|
-|»» marketChange24h|object|true|none|none|
-|»»» changePrice|number|true|none|none|
-|»»» changeRate|number|true|none|none|
-|»»» high|number|true|none|none|
-|»»» low|number|true|none|none|
-|»»» open|number|true|none|none|
-|»»» vol|number|true|none|none|
-|»»» volValue|number|true|none|none|
-|»» marketChange4h|object|true|none|none|
-|»»» changePrice|number|true|none|none|
-|»»» changeRate|number|true|none|none|
-|»»» high|number|true|none|none|
-|»»» low|number|true|none|none|
-|»»» open|number|true|none|none|
-|»»» vol|number|true|none|none|
-|»»» volValue|number|true|none|none|
-|»» markets|[string]|true|none|none|
-|»» open|number|true|none|none|
-|»» quoteCurrency|string|true|none|none|
-|»» sell|number|true|none|none|
-|»» siteTypes|[string]|true|none|none|
-|»» sort|integer|true|none|sorting number|
-|»» symbol|string|true|none|none|
-|»» symbolCode|string|true|none|none|
-|»» takerCoefficient|number|true|none|none|
-|»» takerFeeRate|number|true|none|none|
-|»» trading|boolean|true|none|none|
-|»» vol|number|true|none|none|
-|»» volValue|number|true|none|none|
+| Name                | Type           | Required | Restrictions | Description                                                                |
+| ------------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------- |
+| topic               | string         | true     | none         | none                                                                       |
+| type                | string         | true     | none         | none                                                                       |
+| subject             | string         | true     | none         | none                                                                       |
+| data                | object         | true     | none         | none                                                                       |
+| » sequence          | string         | true     | none         | none                                                                       |
+| » data              | object         | true     | none         | none                                                                       |
+| »» askSize          | number         | true     | none         | none                                                                       |
+| »» averagePrice     | number         | true     | none         | none                                                                       |
+| »» baseCurrency     | string         | true     | none         | none                                                                       |
+| »» bidSize          | number         | true     | none         | none                                                                       |
+| »» board            | integer        | true     | none         | Trading pair partition: 0. Primary partition 1.KuCoin Plus", example = "1" |
+| »» buy              | number         | true     | none         | none                                                                       |
+| »» changePrice      | number         | true     | none         | none                                                                       |
+| »» changeRate       | number         | true     | none         | none                                                                       |
+| »» close            | number         | true     | none         | none                                                                       |
+| »» datetime         | integer(int64) | true     | none         | none                                                                       |
+| »» high             | number         | true     | none         | none                                                                       |
+| »» lastTradedPrice  | number         | true     | none         | none                                                                       |
+| »» low              | number         | true     | none         | none                                                                       |
+| »» makerCoefficient | number         | true     | none         | none                                                                       |
+| »» makerFeeRate     | number         | true     | none         | none                                                                       |
+| »» marginTrade      | boolean        | true     | none         | none                                                                       |
+| »» mark             | integer        | true     | none         | Trading Pair Mark: 0. Default 1.ST. 2.NEW", example = "1"                  |
+| »» market           | string         | true     | none         | none                                                                       |
+| »» marketChange1h   | object         | true     | none         | none                                                                       |
+| »»» changePrice     | number         | true     | none         | none                                                                       |
+| »»» changeRate      | number         | true     | none         | none                                                                       |
+| »»» high            | number         | true     | none         | none                                                                       |
+| »»» low             | number         | true     | none         | none                                                                       |
+| »»» open            | number         | true     | none         | none                                                                       |
+| »»» vol             | number         | true     | none         | none                                                                       |
+| »»» volValue        | number         | true     | none         | none                                                                       |
+| »» marketChange24h  | object         | true     | none         | none                                                                       |
+| »»» changePrice     | number         | true     | none         | none                                                                       |
+| »»» changeRate      | number         | true     | none         | none                                                                       |
+| »»» high            | number         | true     | none         | none                                                                       |
+| »»» low             | number         | true     | none         | none                                                                       |
+| »»» open            | number         | true     | none         | none                                                                       |
+| »»» vol             | number         | true     | none         | none                                                                       |
+| »»» volValue        | number         | true     | none         | none                                                                       |
+| »» marketChange4h   | object         | true     | none         | none                                                                       |
+| »»» changePrice     | number         | true     | none         | none                                                                       |
+| »»» changeRate      | number         | true     | none         | none                                                                       |
+| »»» high            | number         | true     | none         | none                                                                       |
+| »»» low             | number         | true     | none         | none                                                                       |
+| »»» open            | number         | true     | none         | none                                                                       |
+| »»» vol             | number         | true     | none         | none                                                                       |
+| »»» volValue        | number         | true     | none         | none                                                                       |
+| »» markets          | [string]       | true     | none         | none                                                                       |
+| »» open             | number         | true     | none         | none                                                                       |
+| »» quoteCurrency    | string         | true     | none         | none                                                                       |
+| »» sell             | number         | true     | none         | none                                                                       |
+| »» siteTypes        | [string]       | true     | none         | none                                                                       |
+| »» sort             | integer        | true     | none         | sorting number                                                             |
+| »» symbol           | string         | true     | none         | none                                                                       |
+| »» symbolCode       | string         | true     | none         | none                                                                       |
+| »» takerCoefficient | number         | true     | none         | none                                                                       |
+| »» takerFeeRate     | number         | true     | none         | none                                                                       |
+| »» trading          | boolean        | true     | none         | none                                                                       |
+| »» vol              | number         | true     | none         | none                                                                       |
+| »» volValue         | number         | true     | none         | none                                                                       |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|board|0|
-|board|1|
-|mark|0|
-|mark|1|
-|mark|2|
-
+| Property | Value |
+| -------- | ----- |
+| board    | 0     |
+| board    | 1     |
+| mark     | 0     |
+| mark     | 1     |
+| mark     | 2     |

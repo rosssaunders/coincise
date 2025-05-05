@@ -2,9 +2,11 @@
 
 ## Connection Limits
 
-A single websocket is limited to a maximum of 200 topics; exceeding this will return error code 100416.
+A single websocket is limited to a maximum of 200 topics; exceeding this will
+return error code 100416.
 
-A single IP is limited to a maximum of 60 websockets; exceeding this will return error code 100419.
+A single IP is limited to a maximum of 60 websockets; exceeding this will return
+error code 100419.
 
 ## Access
 
@@ -12,15 +14,18 @@ Market Websocket access URL: wss://open-api-ws.bingx.com/market
 
 ## Data Compression
 
-All response data from Websocket server are compressed into GZIP format. Clients have to decompress them for further use.
+All response data from Websocket server are compressed into GZIP format. Clients
+have to decompress them for further use.
 
 ## Heartbeats
 
-Once the Websocket Client and Websocket Server get connected, the server will send a heartbeat- ping message every 5 seconds (the frequency might change).
+Once the Websocket Client and Websocket Server get connected, the server will
+send a heartbeat- ping message every 5 seconds (the frequency might change).
 
 {"ping":"2177c68e4d0e45679965f482929b59c2","time":"2022-06-07T16:27:36.323+0800"}
 
-When the Websocket Client receives this heartbeat message, it should return pong message.
+When the Websocket Client receives this heartbeat message, it should return pong
+message.
 
 {"pong":"2177c68e4d0e45679965f482929b59c2","time":"2022-06-07T16:27:36.323+0800"}
 
@@ -40,19 +45,23 @@ Symbol must be fully capitalized
 
 ## Subscriptions
 
-After successfully establishing a connection with the Websocket server, the Websocket client sends the following request to subscribe to a specific topic:
+After successfully establishing a connection with the Websocket server, the
+Websocket client sends the following request to subscribe to a specific topic:
 
 { "id": "id1", "reqType": "sub", "dataType": "data to sub" }
 
--   ID is the unique ID passed in by the user, which will be returned when returned, used for distinguishing idempotence checks by the user
+- ID is the unique ID passed in by the user, which will be returned when
+  returned, used for distinguishing idempotence checks by the user
 
-After a successful subscription, the Websocket client will receive a confirmation message:
+After a successful subscription, the Websocket client will receive a
+confirmation message:
 
 { "id": "id1", "code": 0, "msg": "" }
 
-After that, once the subscribed data is updated, the Websocket client will receive the update message pushed by the server.
+After that, once the subscribed data is updated, the Websocket client will
+receive the update message pushed by the server.
 
--   Code Error Code Description
+- Code Error Code Description
 
 0:"SUCCESS"
 
@@ -64,35 +73,35 @@ After that, once the subscribed data is updated, the Websocket client will recei
 
 // No data found in server search
 
-100204:"SEARCH\_NO\_CONTENT"
+100204:"SEARCH_NO_CONTENT"
 
 // Duplicate Request
 
-100205:"REPEAT\_REQUEST"
+100205:"REPEAT_REQUEST"
 
 // Client request parameter error
 
-100400:"ILLEGAL\_ARGUMENT"
+100400:"ILLEGAL_ARGUMENT"
 
 // Client authentication failed
 
-100401:"AUTHENTICATION\_FAIL"
+100401:"AUTHENTICATION_FAIL"
 
 // Client permission verification failed
 
-100403:"AUTHORIZATION\_FAIL"
+100403:"AUTHORIZATION_FAIL"
 
 // Client request frequency limit
 
-100410:"FREQUENCY\_LIMIT"
+100410:"FREQUENCY_LIMIT"
 
 // Server error
 
-100500:"INTERNAL\_SERVER\_ERROR"
+100500:"INTERNAL_SERVER_ERROR"
 
 // Server Busy
 
-100503:"SERVER\_BUSY"
+100503:"SERVER_BUSY"
 
 ---
 
@@ -128,27 +137,27 @@ response
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| X-BX-APIKEY | string | no | API KEY |
+| Parameter Name | Type   | Required | Description |
+| -------------- | ------ | -------- | ----------- |
+| X-BX-APIKEY    | string | no       | API KEY     |
 
 ### Response Parameters
 
-| Parameter Name | Type | Description |
-| --- | --- | --- |
-| listenKey | string | listen Key |
+| Parameter Name | Type   | Description |
+| -------------- | ------ | ----------- |
+| listenKey      | string | listen Key  |
 
 ### Errors
 
-| Error Code | Description |
-| --- | --- |
-| 80014 | timestamp is invalid |
-| 100421 | Null timestamp or timestamp mismatch, try to run our sample code from the link https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query%20Assets |
-| 100419 | IP does not match IP whitelist , please go to https://bingx.com/en/account/api/ to verify the ip you have set |
-| 100410 | code:100410:The endpoint trigger frequency limit rule is currently in the disabled period and will be unblocked after 1727193814249 |
-| 100410 | rate limited |
-| 100413 | Incorrect apiKey |
-| 100410 | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155 |
+| Error Code | Description                                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 80014      | timestamp is invalid                                                                                                                                         |
+| 100421     | Null timestamp or timestamp mismatch, try to run our sample code from the link https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query%20Assets |
+| 100419     | IP does not match IP whitelist , please go to https://bingx.com/en/account/api/ to verify the ip you have set                                                |
+| 100410     | code:100410:The endpoint trigger frequency limit rule is currently in the disabled period and will be unblocked after 1727193814249                          |
+| 100410     | rate limited                                                                                                                                                 |
+| 100413     | Incorrect apiKey                                                                                                                                             |
+| 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 ## extend Listen Key Validity period
 
@@ -158,19 +167,30 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-The validity period is extended to 60 minutes after this call, and it is recommended to send a ping every 30 minutes.
+The validity period is extended to 60 minutes after this call, and it is
+recommended to send a ping every 30 minutes.
 
 CURL
 
 response
 
--   http status 200 success
+- http status 200 success
 
--   http status 204 not content
+- http status 204 not content
 
--   http status 404 not find key
+- http status 404 not find key
 
-[1\. Create Account](https://bingx.com) [2\. Pass KYC/KYB](https://bingx.com/en-us/account/api/) [3\. Create API KEY](https://bingx.com/en-us/account/api/) [4\. Configure API KEY permissions](https://bingx.com/en-us/account/api/) [5\. Understanding signature authentication](https://bingx-api.github.io/docs/#/en-us/swapV2/authentication.html#Signature%20Description) _6\. Run the following example code_ [7\. Understand common error codes](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Common%20Error%20Codes) [8\. Understand rate limitations](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Rate%20limit) [9\. Understanding request timestamps](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Timestamp) [10\. Understand fee schedule](https://bingx.com/en-us/support/costs/) [11\. Understand trading rules](https://bingx.com/en-us/tradeInfo/perpetual/trading-rules/BTC-USDT)
+[1\. Create Account](https://bingx.com)
+[2\. Pass KYC/KYB](https://bingx.com/en-us/account/api/)
+[3\. Create API KEY](https://bingx.com/en-us/account/api/)
+[4\. Configure API KEY permissions](https://bingx.com/en-us/account/api/)
+[5\. Understanding signature authentication](https://bingx-api.github.io/docs/#/en-us/swapV2/authentication.html#Signature%20Description)
+_6\. Run the following example code_
+[7\. Understand common error codes](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Common%20Error%20Codes)
+[8\. Understand rate limitations](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Rate%20limit)
+[9\. Understanding request timestamps](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Timestamp)
+[10\. Understand fee schedule](https://bingx.com/en-us/support/costs/)
+[11\. Understand trading rules](https://bingx.com/en-us/tradeInfo/perpetual/trading-rules/BTC-USDT)
 
 request parameters https://open-api.bingx.com
 
@@ -178,21 +198,21 @@ PUT /openApi/user/auth/userDataStream
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| listenKey | string | yes | listen Key |
+| Parameter Name | Type   | Required | Description |
+| -------------- | ------ | -------- | ----------- |
+| listenKey      | string | yes      | listen Key  |
 
 ### Errors
 
-| Error Code | Description |
-| --- | --- |
-| 80014 | timestamp is invalid |
-| 100421 | Null timestamp or timestamp mismatch, try to run our sample code from the link https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query%20Assets |
-| 100419 | IP does not match IP whitelist , please go to https://bingx.com/en/account/api/ to verify the ip you have set |
-| 100410 | code:100410:The endpoint trigger frequency limit rule is currently in the disabled period and will be unblocked after 1727193814249 |
-| 100410 | rate limited |
-| 100413 | Incorrect apiKey |
-| 100410 | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155 |
+| Error Code | Description                                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 80014      | timestamp is invalid                                                                                                                                         |
+| 100421     | Null timestamp or timestamp mismatch, try to run our sample code from the link https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query%20Assets |
+| 100419     | IP does not match IP whitelist , please go to https://bingx.com/en/account/api/ to verify the ip you have set                                                |
+| 100410     | code:100410:The endpoint trigger frequency limit rule is currently in the disabled period and will be unblocked after 1727193814249                          |
+| 100410     | rate limited                                                                                                                                                 |
+| 100413     | Incorrect apiKey                                                                                                                                             |
+| 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 ## delete Listen Key
 
@@ -208,13 +228,23 @@ CURL
 
 response
 
--   http status 200 success
+- http status 200 success
 
--   http status 204 not content
+- http status 204 not content
 
--   http status 404 not find key
+- http status 404 not find key
 
-[1\. Create Account](https://bingx.com) [2\. Pass KYC/KYB](https://bingx.com/en-us/account/api/) [3\. Create API KEY](https://bingx.com/en-us/account/api/) [4\. Configure API KEY permissions](https://bingx.com/en-us/account/api/) [5\. Understanding signature authentication](https://bingx-api.github.io/docs/#/en-us/swapV2/authentication.html#Signature%20Description) _6\. Run the following example code_ [7\. Understand common error codes](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Common%20Error%20Codes) [8\. Understand rate limitations](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Rate%20limit) [9\. Understanding request timestamps](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Timestamp) [10\. Understand fee schedule](https://bingx.com/en-us/support/costs/) [11\. Understand trading rules](https://bingx.com/en-us/tradeInfo/perpetual/trading-rules/BTC-USDT)
+[1\. Create Account](https://bingx.com)
+[2\. Pass KYC/KYB](https://bingx.com/en-us/account/api/)
+[3\. Create API KEY](https://bingx.com/en-us/account/api/)
+[4\. Configure API KEY permissions](https://bingx.com/en-us/account/api/)
+[5\. Understanding signature authentication](https://bingx-api.github.io/docs/#/en-us/swapV2/authentication.html#Signature%20Description)
+_6\. Run the following example code_
+[7\. Understand common error codes](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Common%20Error%20Codes)
+[8\. Understand rate limitations](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Rate%20limit)
+[9\. Understanding request timestamps](https://bingx-api.github.io/docs/#/en-us/swapV2/base-info.html#Timestamp)
+[10\. Understand fee schedule](https://bingx.com/en-us/support/costs/)
+[11\. Understand trading rules](https://bingx.com/en-us/tradeInfo/perpetual/trading-rules/BTC-USDT)
 
 request parameters https://open-api.bingx.com
 
@@ -222,27 +252,29 @@ DELETE /openApi/user/auth/userDataStream
 
 ### Request Parameters
 
-| Parameter Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| listenKey | string | yes | listen Key |
+| Parameter Name | Type   | Required | Description |
+| -------------- | ------ | -------- | ----------- |
+| listenKey      | string | yes      | listen Key  |
 
 ### Errors
 
-| Error Code | Description |
-| --- | --- |
-| 80014 | timestamp is invalid |
-| 100421 | Null timestamp or timestamp mismatch, try to run our sample code from the link https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query%20Assets |
-| 100419 | IP does not match IP whitelist , please go to https://bingx.com/en/account/api/ to verify the ip you have set |
-| 100410 | code:100410:The endpoint trigger frequency limit rule is currently in the disabled period and will be unblocked after 1727193814249 |
-| 100410 | rate limited |
-| 100413 | Incorrect apiKey |
-| 100410 | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155 |
+| Error Code | Description                                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 80014      | timestamp is invalid                                                                                                                                         |
+| 100421     | Null timestamp or timestamp mismatch, try to run our sample code from the link https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query%20Assets |
+| 100419     | IP does not match IP whitelist , please go to https://bingx.com/en/account/api/ to verify the ip you have set                                                |
+| 100410     | code:100410:The endpoint trigger frequency limit rule is currently in the disabled period and will be unblocked after 1727193814249                          |
+| 100410     | rate limited                                                                                                                                                 |
+| 100413     | Incorrect apiKey                                                                                                                                             |
+| 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 ---
 
 # Websocket Account Data
 
-Note that obtaining such information requires websocket authentication, use listenKey, and check the [Listen Key](https://bingx-api.github.io/docs/#/swapV2/listen-key.html)
+Note that obtaining such information requires websocket authentication, use
+listenKey, and check the
+[Listen Key](https://bingx-api.github.io/docs/#/swapV2/listen-key.html)
 
 The websocket api is wss://open-api-ws.bingx.com/market
 
@@ -258,49 +290,53 @@ dataType: spot.executionReport
 
 Subscription example
 
-{"id":"e745cd6d-d0f6-4a70-8d5a-043e4c741b40","reqType": "sub","dataType":"spot.executionReport"}
+{"id":"e745cd6d-d0f6-4a70-8d5a-043e4c741b40","reqType":
+"sub","dataType":"spot.executionReport"}
 
-The effective time of the listen key is 1 hour. In order to ensure that your subscription is not interrupted, please update the listen key regularly
+The effective time of the listen key is 1 hour. In order to ensure that your
+subscription is not interrupted, please update the listen key regularly
 
 Push data
 
 ### Data Parameters
 
-|  | Description |
-| --- | --- |
-| e | Event Type |
-| E | event time |
-| s | trading pair |
-| S | Order direction |
-| o | order type |
-| q | Order original quantity |
-| p | Original order price |
-| x | Event Type |
-| X | order status |
-| i | Order ID |
-| l | Last order transaction volume |
-| z | Accumulated transaction volume of orders |
-| L | Last transaction price of the order |
-| n | Number of handling fees |
-| N | Handling fee asset category |
-| T | transaction time |
-| t | Transaction ID |
-| O | Order creation time |
-| Z | Accumulated transaction amount of orders |
-| Y | Last transaction amount of the order |
-| Q | Original order amount |
+|     | Description                              |
+| --- | ---------------------------------------- |
+| e   | Event Type                               |
+| E   | event time                               |
+| s   | trading pair                             |
+| S   | Order direction                          |
+| o   | order type                               |
+| q   | Order original quantity                  |
+| p   | Original order price                     |
+| x   | Event Type                               |
+| X   | order status                             |
+| i   | Order ID                                 |
+| l   | Last order transaction volume            |
+| z   | Accumulated transaction volume of orders |
+| L   | Last transaction price of the order      |
+| n   | Number of handling fees                  |
+| N   | Handling fee asset category              |
+| T   | transaction time                         |
+| t   | Transaction ID                           |
+| O   | Order creation time                      |
+| Z   | Accumulated transaction amount of orders |
+| Y   | Last transaction amount of the order     |
+| Q   | Original order amount                    |
 
 ## Subscription account balance push
 
 Subscription Type
 
-dataType: ACCOUNT\_UPDATE
+dataType: ACCOUNT_UPDATE
 
 Subscription example
 
-{"id":"gdfg2311-d0f6-4a70-8d5a-043e4c741b40","reqType": "sub","dataType":"ACCOUNT\_UPDATE"}
+{"id":"gdfg2311-d0f6-4a70-8d5a-043e4c741b40","reqType":
+"sub","dataType":"ACCOUNT_UPDATE"}
 
-The field "m" represents the reason for the launch of the event, including the following possible types: -DEPOSIT
+The field "m" represents the reason for the launch of the event, including the
+following possible types: -DEPOSIT
 
 INIT
 
@@ -312,52 +348,53 @@ WITHDRAW
 
 ORDER
 
-FUNDING\_FEE
+FUNDING_FEE
 
-WITHDRAW\_REJECT
+WITHDRAW_REJECT
 
 ADJUSTMENT
 
-INSURANCE\_CLEAR
+INSURANCE_CLEAR
 
-ADMIN\_DEPOSIT
+ADMIN_DEPOSIT
 
-ADMIN\_WITHDRAW
+ADMIN_WITHDRAW
 
-MARGIN\_TRANSFER
+MARGIN_TRANSFER
 
-MARGIN\_TYPE\_CHANGE
+MARGIN_TYPE_CHANGE
 
-ASSET\_TRANSFER
+ASSET_TRANSFER
 
-OPTIONS\_PREMIUM\_FEE
+OPTIONS_PREMIUM_FEE
 
-OPTIONS\_SETTLE\_PROFIT
+OPTIONS_SETTLE_PROFIT
 
-AUTO\_EXCHANGE
+AUTO_EXCHANGE
 
--   For more about return error codes, please see the error code description on the homepage.
+- For more about return error codes, please see the error code description on
+  the homepage.
 
-The effective time of the listen key is 1 hour. In order to ensure that your subscription is not interrupted, please update the listen key regularly
+The effective time of the listen key is 1 hour. In order to ensure that your
+subscription is not interrupted, please update the listen key regularly
 
 Push data
 
 ### Data Parameters
 
-|  | Description |
-| --- | --- |
-| B | Array\[\] |
-| m | event launch reason |
+|     | Description         |
+| --- | ------------------- |
+| B   | Array\[\]           |
+| m   | event launch reason |
 
 ### Order Parameters
 
-|  | Description |
-| --- | --- |
-| a | Asset Name |
-| bc | The amount of change in the asset account in this transaction |
-| cw | The total assets in the account after the change in the asset account |
-| wb | The total assets in the account after the change in the asset account |
-| lk | Locked Asset |
+|     | Description                                                           |
+| --- | --------------------------------------------------------------------- |
+| a   | Asset Name                                                            |
+| bc  | The amount of change in the asset account in this transaction         |
+| cw  | The total assets in the account after the change in the asset account |
+| wb  | The total assets in the account after the change in the asset account |
+| lk  | Locked Asset                                                          |
 
 ---
-

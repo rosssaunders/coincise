@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="futures">futures v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 order
 
@@ -316,7 +316,11 @@ print(r.json())
 
 `POST /api/v1/orders`
 
-Place order in the futures trading system. You can place two major types of order: Limit and market. Orders can only be placed if your account has sufficient funds. Once an order is placed, your funds will be put on hold for the duration of the order. The amount of funds on hold depends on the order type and parameters specified.
+Place order in the futures trading system. You can place two major types of
+order: Limit and market. Orders can only be placed if your account has
+sufficient funds. Once an order is placed, your funds will be put on hold for
+the duration of the order. The amount of funds on hold depends on the order type
+and parameters specified.
 
 > Body parameter
 
@@ -327,17 +331,12 @@ Place order in the futures trading system. You can place two major types of orde
     "clientOid": {
       "type": "string",
       "description": "Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).",
-      "example": [
-        "5c52e11203aa677f33e493fb"
-      ]
+      "example": ["5c52e11203aa677f33e493fb"]
     },
     "side": {
       "type": "string",
       "description": "Specify if the order is to 'buy' or 'sell'.",
-      "enum": [
-        "buy",
-        "sell"
-      ],
+      "enum": ["buy", "sell"],
       "x-api-enum": [
         {
           "value": "buy",
@@ -350,31 +349,22 @@ Place order in the futures trading system. You can place two major types of orde
           "description": ""
         }
       ],
-      "example": [
-        "buy"
-      ]
+      "example": ["buy"]
     },
     "symbol": {
       "type": "string",
       "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) ",
-      "example": [
-        "XBTUSDTM"
-      ]
+      "example": ["XBTUSDTM"]
     },
     "leverage": {
       "type": "integer",
       "description": "Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.",
-      "example": [
-        3
-      ]
+      "example": [3]
     },
     "type": {
       "type": "string",
       "description": "Specify if the order is a 'limit' order or 'market' order",
-      "enum": [
-        "limit",
-        "market"
-      ],
+      "enum": ["limit", "market"],
       "default": "limit",
       "x-api-enum": [
         {
@@ -388,9 +378,7 @@ Place order in the futures trading system. You can place two major types of orde
           "description": ""
         }
       ],
-      "example": [
-        "limit"
-      ]
+      "example": ["limit"]
     },
     "remark": {
       "type": "string",
@@ -399,10 +387,7 @@ Place order in the futures trading system. You can place two major types of orde
     "stop": {
       "type": "string",
       "description": "Either 'down' or 'up'.  If stop is used, parameter stopPrice and stopPriceType also need to be provided.",
-      "enum": [
-        "down",
-        "up"
-      ],
+      "enum": ["down", "up"],
       "x-api-enum": [
         {
           "value": "down",
@@ -419,11 +404,7 @@ Place order in the futures trading system. You can place two major types of orde
     "stopPriceType": {
       "type": "string",
       "description": "Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.",
-      "enum": [
-        "TP",
-        "MP",
-        "IP"
-      ],
+      "enum": ["TP", "MP", "IP"],
       "x-api-enum": [
         {
           "value": "TP",
@@ -464,11 +445,7 @@ Place order in the futures trading system. You can place two major types of orde
     "stp": {
       "type": "string",
       "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.",
-      "enum": [
-        "CN",
-        "CO",
-        "CB"
-      ],
+      "enum": ["CN", "CO", "CB"],
       "x-api-enum": [
         {
           "value": "CN",
@@ -490,10 +467,7 @@ Place order in the futures trading system. You can place two major types of orde
     "marginMode": {
       "type": "string",
       "description": "Margin mode: ISOLATED, CROSS, default: ISOLATED",
-      "enum": [
-        "ISOLATED",
-        "CROSS"
-      ],
+      "enum": ["ISOLATED", "CROSS"],
       "default": "ISOLATED",
       "x-api-enum": [
         {
@@ -511,9 +485,7 @@ Place order in the futures trading system. You can place two major types of orde
     "price": {
       "type": "string",
       "description": "Required for type is 'limit' order, indicating the operating price",
-      "example": [
-        "0.1"
-      ]
+      "example": ["0.1"]
     },
     "size": {
       "type": "integer",
@@ -522,10 +494,7 @@ Place order in the futures trading system. You can place two major types of orde
     "timeInForce": {
       "type": "string",
       "description": "Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC",
-      "enum": [
-        "GTC",
-        "IOC"
-      ],
+      "enum": ["GTC", "IOC"],
       "default": "GTC",
       "x-api-enum": [
         {
@@ -568,64 +537,59 @@ Place order in the futures trading system. You can place two major types of orde
       "description": "**Choose one of size, qty, valueQty**. Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size (lot), which is not supported."
     }
   },
-  "required": [
-    "clientOid",
-    "symbol",
-    "side",
-    "leverage"
-  ]
+  "required": ["clientOid", "symbol", "side", "leverage"]
 }
 ```
 
 <h3 id="add-order-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» clientOid|body|string|true|Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).|
-|» side|body|string|true|Specify if the order is to 'buy' or 'sell'.|
-|» symbol|body|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|» leverage|body|integer|true|Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.|
-|» type|body|string|false|Specify if the order is a 'limit' order or 'market' order|
-|» remark|body|string|false|Remark for the order: Length cannot exceed 100 utf8 characters|
-|» stop|body|string|false|Either 'down' or 'up'.  If stop is used, parameter stopPrice and stopPriceType also need to be provided.|
-|» stopPriceType|body|string|false|Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.|
-|» stopPrice|body|string|false|Needs to be defined if stop is specified.|
-|» reduceOnly|body|boolean|false|A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.|
-|» closeOrder|body|boolean|false|A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.|
-|» forceHold|body|boolean|false|A mark to force-hold the funds for an order, even though it's an order to reduce the position size. This helps the order stay on the order book and not get canceled when the position size changes. Set to false by default. The system will force-freeze a certain amount of funds for this order, including orders whose direction is opposite to the current positions. This feature is to ensure that the order won’t be canceled by the matching engine in such a way that not enough funds are frozen for the order.|
-|» stp|body|string|false|[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.|
-|» marginMode|body|string|false|Margin mode: ISOLATED, CROSS, default: ISOLATED|
-|» price|body|string|false|Required for type is 'limit' order, indicating the operating price|
-|» size|body|integer|false|**Choose one of size, qty, valueQty**, Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.|
-|» timeInForce|body|string|false|Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC|
-|» postOnly|body|boolean|false|Optional for type is 'limit' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, choosing hidden or iceberg is not allowed. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.|
-|» hidden|body|boolean|false|Optional for type is 'limit' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.|
-|» iceberg|body|boolean|false|Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg is chosen, choosing postOnly is not allowed.|
-|» visibleSize|body|string|false|Optional for type is 'limit' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.|
-|» qty|body|string|false|**Choose one of size, qty, valueQty**. Order size (base currency) must be an integer multiple of the multiplier. The unit of the quantity of coin-swap is size (lot), which is not supported.|
-|» valueQty|body|string|false|**Choose one of size, qty, valueQty**. Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size (lot), which is not supported.|
+| Name            | In   | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body            | body | object  | false    | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| » clientOid     | body | string  | true     | Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(\_), and separator (-).                                                                                                                                                                                                                                                                                                                                                |
+| » side          | body | string  | true     | Specify if the order is to 'buy' or 'sell'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| » symbol        | body | string  | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                                                                                                                                                                                                                                                                          |
+| » leverage      | body | integer | true     | Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.                                                                                                                                                                                                                                                                                                                                                                                                  |
+| » type          | body | string  | false    | Specify if the order is a 'limit' order or 'market' order                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| » remark        | body | string  | false    | Remark for the order: Length cannot exceed 100 utf8 characters                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| » stop          | body | string  | false    | Either 'down' or 'up'. If stop is used, parameter stopPrice and stopPriceType also need to be provided.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » stopPriceType | body | string  | false    | Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| » stopPrice     | body | string  | false    | Needs to be defined if stop is specified.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| » reduceOnly    | body | boolean | false    | A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.                                                                                                                                                                                                                             |
+| » closeOrder    | body | boolean | false    | A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.                                                                                                                                                                                                                                                |
+| » forceHold     | body | boolean | false    | A mark to force-hold the funds for an order, even though it's an order to reduce the position size. This helps the order stay on the order book and not get canceled when the position size changes. Set to false by default. The system will force-freeze a certain amount of funds for this order, including orders whose direction is opposite to the current positions. This feature is to ensure that the order won’t be canceled by the matching engine in such a way that not enough funds are frozen for the order. |
+| » stp           | body | string  | false    | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.                                                                                                                                                                                                                                                                                                                                                                               |
+| » marginMode    | body | string  | false    | Margin mode: ISOLATED, CROSS, default: ISOLATED                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » price         | body | string  | false    | Required for type is 'limit' order, indicating the operating price                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| » size          | body | integer | false    | **Choose one of size, qty, valueQty**, Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.                                                                                                                                                                                                                                                                                                                                             |
+| » timeInForce   | body | string  | false    | Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC                                                                                                                                                                                                                                                                                                                                                                   |
+| » postOnly      | body | boolean | false    | Optional for type is 'limit' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, choosing hidden or iceberg is not allowed. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.                                                                                                                                                                |
+| » hidden        | body | boolean | false    | Optional for type is 'limit' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.                                                                                                                                                                                                                                                                                                                                                                                           |
+| » iceberg       | body | boolean | false    | Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg is chosen, choosing postOnly is not allowed.                                                                                                                                                                                                                                                                                                                                                             |
+| » visibleSize   | body | string  | false    | Optional for type is 'limit' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                   |
+| » qty           | body | string  | false    | **Choose one of size, qty, valueQty**. Order size (base currency) must be an integer multiple of the multiplier. The unit of the quantity of coin-swap is size (lot), which is not supported.                                                                                                                                                                                                                                                                                                                               |
+| » valueQty      | body | string  | false    | **Choose one of size, qty, valueQty**. Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size (lot), which is not supported.                                                                                                                                                                                                                                                                                                                                               |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|» side|buy|
-|» side|sell|
-|» type|limit|
-|» type|market|
-|» stop|down|
-|» stop|up|
-|» stopPriceType|TP|
-|» stopPriceType|MP|
-|» stopPriceType|IP|
-|» stp|CN|
-|» stp|CO|
-|» stp|CB|
-|» marginMode|ISOLATED|
-|» marginMode|CROSS|
-|» timeInForce|GTC|
-|» timeInForce|IOC|
+| Parameter       | Value    |
+| --------------- | -------- |
+| » side          | buy      |
+| » side          | sell     |
+| » type          | limit    |
+| » type          | market   |
+| » stop          | down     |
+| » stop          | up       |
+| » stopPriceType | TP       |
+| » stopPriceType | MP       |
+| » stopPriceType | IP       |
+| » stp           | CN       |
+| » stp           | CO       |
+| » stp           | CB       |
+| » marginMode    | ISOLATED |
+| » marginMode    | CROSS    |
+| » timeInForce   | GTC      |
+| » timeInForce   | IOC      |
 
 > Example responses
 
@@ -650,35 +614,29 @@ Place order in the futures trading system. You can place two major types of orde
           "description": "The user self-defined order ID."
         }
       },
-      "required": [
-        "orderId",
-        "clientOid"
-      ]
+      "required": ["orderId", "clientOid"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="add-order-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="add-order-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» orderId|string|true|none|The unique order ID generated by the trading system, which can be used later for further actions such as canceling the order.|
-|»» clientOid|string|true|none|The user self-defined order ID.|
+| Name         | Type   | Required | Restrictions | Description                                                                                                                   |
+| ------------ | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| » code       | string | true     | none         | none                                                                                                                          |
+| » data       | object | true     | none         | none                                                                                                                          |
+| »» orderId   | string | true     | none         | The unique order ID generated by the trading system, which can be used later for further actions such as canceling the order. |
+| »» clientOid | string | true     | none         | The user self-defined order ID.                                                                                               |
 
 <aside class="success">
 This operation does not require authentication
@@ -691,23 +649,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/orders',
-{
-  method: 'GET',
+fetch("/api/v1/orders", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -728,31 +684,31 @@ List your current orders.
 
 <h3 id="get-order-list-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|status|query|string|false|active or done, done as default. Only list orders for a specific status|
-|symbol|query|string|false|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
-|side|query|string|false|buy or sell|
-|type|query|string|false|Order Type|
-|startAt|query|integer(int64)|false|Start time (milisecond)|
-|endAt|query|integer(int64)|false|End time (milisecond)|
-|currentPage|query|integer|false|Current request page, The default currentPage is 1|
-|pageSize|query|integer|false|pageSize, The default pageSize is 50, The maximum cannot exceed 1000|
+| Name        | In    | Type           | Required | Description                                                                                                        |
+| ----------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| status      | query | string         | false    | active or done, done as default. Only list orders for a specific status                                            |
+| symbol      | query | string         | false    | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| side        | query | string         | false    | buy or sell                                                                                                        |
+| type        | query | string         | false    | Order Type                                                                                                         |
+| startAt     | query | integer(int64) | false    | Start time (milisecond)                                                                                            |
+| endAt       | query | integer(int64) | false    | End time (milisecond)                                                                                              |
+| currentPage | query | integer        | false    | Current request page, The default currentPage is 1                                                                 |
+| pageSize    | query | integer        | false    | pageSize, The default pageSize is 50, The maximum cannot exceed 1000                                               |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|status|active|
-|status|done|
-|side|buy|
-|side|sell|
-|type|limit|
-|type|market|
-|type|limit_stop|
-|type|market_stop|
-|type|oco_limit|
-|type|oco_stop|
+| Parameter | Value       |
+| --------- | ----------- |
+| status    | active      |
+| status    | done        |
+| side      | buy         |
+| side      | sell        |
+| type      | limit       |
+| type      | market      |
+| type      | limit_stop  |
+| type      | market_stop |
+| type      | oco_limit   |
+| type      | oco_stop    |
 
 > Example responses
 
@@ -987,79 +943,70 @@ List your current orders.
           }
         }
       },
-      "required": [
-        "currentPage",
-        "pageSize",
-        "totalNum",
-        "totalPage",
-        "items"
-      ]
+      "required": ["currentPage", "pageSize", "totalNum", "totalPage", "items"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-order-list-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-order-list-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» currentPage|integer|true|none|Current request page, The default currentPage is 1|
-|»» pageSize|integer|true|none|pageSize, The default pageSize is 50, The maximum cannot exceed 1000|
-|»» totalNum|integer|true|none|none|
-|»» totalPage|integer|true|none|none|
-|»» items|[object]|true|none|none|
-|»»» id|string|true|none|Order ID|
-|»»» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»»» type|string|true|none|Order type, market order or limit order|
-|»»» side|string|true|none|Transaction side|
-|»»» price|string|true|none|Order price|
-|»»» size|integer|true|none|Order quantity|
-|»»» value|string|true|none|Order value|
-|»»» dealValue|string|true|none|Executed size of funds|
-|»»» dealSize|integer|true|none|Executed quantity|
-|»»» stp|string|true|none|self trade prevention|
-|»»» stop|string|true|none|Stop order type (stop limit or stop market)|
-|»»» stopPriceType|string|true|none|Trigger price type of stop orders|
-|»»» stopTriggered|boolean|true|none|Mark to show whether the stop order is triggered|
-|»»» stopPrice|integer|true|none|Trigger price of stop orders|
-|»»» timeInForce|string|true|none|Time in force policy type|
-|»»» postOnly|boolean|true|none|Mark of post only|
-|»»» hidden|boolean|true|none|Mark of the hidden order|
-|»»» iceberg|boolean|true|none|Mark of the iceberg order|
-|»»» leverage|string|true|none|Leverage of the order|
-|»»» forceHold|boolean|true|none|A mark to forcely hold the funds for an order|
-|»»» closeOrder|boolean|true|none|A mark to close the position|
-|»»» visibleSize|integer|true|none|Visible size of the iceberg order|
-|»»» clientOid|string|true|none|Unique order id created by users to identify their orders|
-|»»» remark|string|true|none|Remark of the order|
-|»»» tags|string|true|none|tag order source|
-|»»» isActive|boolean|true|none|Mark of the active orders|
-|»»» cancelExist|boolean|true|none|Mark of the canceled orders|
-|»»» createdAt|integer(int64)|true|none|Time the order created|
-|»»» updatedAt|integer(int64)|true|none|last update time|
-|»»» endAt|integer(int64)|true|none|End time|
-|»»» orderTime|integer(int64)|true|none|Order create time in nanosecond|
-|»»» settleCurrency|string|true|none|settlement currency|
-|»»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»»» avgDealPrice|string|true|none|Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots * multiplier|
-|»»» status|string|true|none|order status: “open” or “done”|
-|»»» filledSize|integer|true|none|Value of the executed orders|
-|»»» filledValue|string|true|none|Executed order quantity|
-|»»» reduceOnly|boolean|true|none|A mark to reduce the position size only|
+| Name               | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                |
+| ------------------ | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code             | string         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| » data             | object         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» currentPage     | integer        | true     | none         | Current request page, The default currentPage is 1                                                                                                                                                                                                                         |
+| »» pageSize        | integer        | true     | none         | pageSize, The default pageSize is 50, The maximum cannot exceed 1000                                                                                                                                                                                                       |
+| »» totalNum        | integer        | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» totalPage       | integer        | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» items           | [object]       | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »»» id             | string         | true     | none         | Order ID                                                                                                                                                                                                                                                                   |
+| »»» symbol         | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                         |
+| »»» type           | string         | true     | none         | Order type, market order or limit order                                                                                                                                                                                                                                    |
+| »»» side           | string         | true     | none         | Transaction side                                                                                                                                                                                                                                                           |
+| »»» price          | string         | true     | none         | Order price                                                                                                                                                                                                                                                                |
+| »»» size           | integer        | true     | none         | Order quantity                                                                                                                                                                                                                                                             |
+| »»» value          | string         | true     | none         | Order value                                                                                                                                                                                                                                                                |
+| »»» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
+| »»» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
+| »»» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
+| »»» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »»» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
+| »»» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
+| »»» stopPrice      | integer        | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
+| »»» timeInForce    | string         | true     | none         | Time in force policy type                                                                                                                                                                                                                                                  |
+| »»» postOnly       | boolean        | true     | none         | Mark of post only                                                                                                                                                                                                                                                          |
+| »»» hidden         | boolean        | true     | none         | Mark of the hidden order                                                                                                                                                                                                                                                   |
+| »»» iceberg        | boolean        | true     | none         | Mark of the iceberg order                                                                                                                                                                                                                                                  |
+| »»» leverage       | string         | true     | none         | Leverage of the order                                                                                                                                                                                                                                                      |
+| »»» forceHold      | boolean        | true     | none         | A mark to forcely hold the funds for an order                                                                                                                                                                                                                              |
+| »»» closeOrder     | boolean        | true     | none         | A mark to close the position                                                                                                                                                                                                                                               |
+| »»» visibleSize    | integer        | true     | none         | Visible size of the iceberg order                                                                                                                                                                                                                                          |
+| »»» clientOid      | string         | true     | none         | Unique order id created by users to identify their orders                                                                                                                                                                                                                  |
+| »»» remark         | string         | true     | none         | Remark of the order                                                                                                                                                                                                                                                        |
+| »»» tags           | string         | true     | none         | tag order source                                                                                                                                                                                                                                                           |
+| »»» isActive       | boolean        | true     | none         | Mark of the active orders                                                                                                                                                                                                                                                  |
+| »»» cancelExist    | boolean        | true     | none         | Mark of the canceled orders                                                                                                                                                                                                                                                |
+| »»» createdAt      | integer(int64) | true     | none         | Time the order created                                                                                                                                                                                                                                                     |
+| »»» updatedAt      | integer(int64) | true     | none         | last update time                                                                                                                                                                                                                                                           |
+| »»» endAt          | integer(int64) | true     | none         | End time                                                                                                                                                                                                                                                                   |
+| »»» orderTime      | integer(int64) | true     | none         | Order create time in nanosecond                                                                                                                                                                                                                                            |
+| »»» settleCurrency | string         | true     | none         | settlement currency                                                                                                                                                                                                                                                        |
+| »»» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                                                                                                                                                                                    |
+| »»» avgDealPrice   | string         | true     | none         | Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots \* multiplier |
+| »»» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
+| »»» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
+| »»» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
+| »»» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
 
 <aside class="success">
 This operation does not require authentication
@@ -1072,23 +1019,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/orders',
-{
-  method: 'DELETE',
+fetch("/api/v1/orders", {
+  method: "DELETE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1105,13 +1050,14 @@ print(r.json())
 
 `DELETE /api/v1/orders`
 
-Cancel all open orders (excluding stop orders). The response is a list of orderIDs of the canceled orders.
+Cancel all open orders (excluding stop orders). The response is a list of
+orderIDs of the canceled orders.
 
 <h3 id="cancel-all-orders---v1-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|To cancel all limit orders for a specific contract only, unless otherwise specified, all limit orders will be deleted. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                                                                                                                       |
+| ------ | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | query | string | false    | To cancel all limit orders for a specific contract only, unless otherwise specified, all limit orders will be deleted. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -1135,33 +1081,28 @@ Cancel all open orders (excluding stop orders). The response is a list of orderI
           "description": "Unique ID of the canceled order"
         }
       },
-      "required": [
-        "cancelledOrderIds"
-      ]
+      "required": ["cancelledOrderIds"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="cancel-all-orders---v1-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="cancel-all-orders---v1-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» cancelledOrderIds|[string]|true|none|Unique ID of the canceled order|
+| Name                 | Type     | Required | Restrictions | Description                     |
+| -------------------- | -------- | -------- | ------------ | ------------------------------- |
+| » code               | string   | true     | none         | none                            |
+| » data               | object   | true     | none         | none                            |
+| »» cancelledOrderIds | [string] | true     | none         | Unique ID of the canceled order |
 
 <aside class="success">
 This operation does not require authentication
@@ -1474,17 +1415,12 @@ Place order to the futures trading system just for validation
     "clientOid": {
       "type": "string",
       "description": "Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)",
-      "example": [
-        "5c52e11203aa677f33e493fb"
-      ]
+      "example": ["5c52e11203aa677f33e493fb"]
     },
     "side": {
       "type": "string",
       "description": "specify if the order is to 'buy' or 'sell'",
-      "enum": [
-        "buy",
-        "sell"
-      ],
+      "enum": ["buy", "sell"],
       "x-api-enum": [
         {
           "value": "buy",
@@ -1497,31 +1433,22 @@ Place order to the futures trading system just for validation
           "description": ""
         }
       ],
-      "example": [
-        "buy"
-      ]
+      "example": ["buy"]
     },
     "symbol": {
       "type": "string",
       "description": "Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) ",
-      "example": [
-        "XBTUSDTM"
-      ]
+      "example": ["XBTUSDTM"]
     },
     "leverage": {
       "type": "integer",
       "description": "Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.",
-      "example": [
-        3
-      ]
+      "example": [3]
     },
     "type": {
       "type": "string",
       "description": "specify if the order is an 'limit' order or 'market' order",
-      "enum": [
-        "limit",
-        "market"
-      ],
+      "enum": ["limit", "market"],
       "default": "limit",
       "x-api-enum": [
         {
@@ -1535,9 +1462,7 @@ Place order to the futures trading system just for validation
           "description": ""
         }
       ],
-      "example": [
-        "limit"
-      ]
+      "example": ["limit"]
     },
     "remark": {
       "type": "string",
@@ -1546,10 +1471,7 @@ Place order to the futures trading system just for validation
     "stop": {
       "type": "string",
       "description": "Either 'down' or 'up'.  If stop is used,parameter stopPrice and stopPriceType also need to be provieded.",
-      "enum": [
-        "down",
-        "up"
-      ],
+      "enum": ["down", "up"],
       "x-api-enum": [
         {
           "value": "down",
@@ -1566,11 +1488,7 @@ Place order to the futures trading system just for validation
     "stopPriceType": {
       "type": "string",
       "description": "Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.",
-      "enum": [
-        "TP",
-        "MP",
-        "IP"
-      ],
+      "enum": ["TP", "MP", "IP"],
       "x-api-enum": [
         {
           "value": "TP",
@@ -1611,11 +1529,7 @@ Place order to the futures trading system just for validation
     "stp": {
       "type": "string",
       "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.",
-      "enum": [
-        "CN",
-        "CO",
-        "CB"
-      ],
+      "enum": ["CN", "CO", "CB"],
       "x-api-enum": [
         {
           "value": "CN",
@@ -1637,10 +1551,7 @@ Place order to the futures trading system just for validation
     "marginMode": {
       "type": "string",
       "description": "Margin mode: ISOLATED, CROSS, default: ISOLATED",
-      "enum": [
-        "ISOLATED",
-        "CROSS"
-      ],
+      "enum": ["ISOLATED", "CROSS"],
       "default": "ISOLATED",
       "x-api-enum": [
         {
@@ -1658,9 +1569,7 @@ Place order to the futures trading system just for validation
     "price": {
       "type": "string",
       "description": "Required for type is 'limit' order, indicating the operating price",
-      "example": [
-        "0.1"
-      ]
+      "example": ["0.1"]
     },
     "size": {
       "type": "integer",
@@ -1669,10 +1578,7 @@ Place order to the futures trading system just for validation
     "timeInForce": {
       "type": "string",
       "description": "Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC",
-      "enum": [
-        "GTC",
-        "IOC"
-      ],
+      "enum": ["GTC", "IOC"],
       "default": "GTC",
       "x-api-enum": [
         {
@@ -1715,65 +1621,59 @@ Place order to the futures trading system just for validation
       "description": "**Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported"
     }
   },
-  "required": [
-    "clientOid",
-    "symbol",
-    "type",
-    "side",
-    "leverage"
-  ]
+  "required": ["clientOid", "symbol", "type", "side", "leverage"]
 }
 ```
 
 <h3 id="add-order-test-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» clientOid|body|string|true|Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)|
-|» side|body|string|true|specify if the order is to 'buy' or 'sell'|
-|» symbol|body|string|true|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|» leverage|body|integer|true|Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.|
-|» type|body|string|true|specify if the order is an 'limit' order or 'market' order|
-|» remark|body|string|false|remark for the order, length cannot exceed 100 utf8 characters|
-|» stop|body|string|false|Either 'down' or 'up'.  If stop is used,parameter stopPrice and stopPriceType also need to be provieded.|
-|» stopPriceType|body|string|false|Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.|
-|» stopPrice|body|string|false|Need to be defined if stop is specified.|
-|» reduceOnly|body|boolean|false|A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.|
-|» closeOrder|body|boolean|false|A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.|
-|» forceHold|body|boolean|false|A mark to forcely hold the funds for an order, even though it's an order to reduce the position size. This helps the order stay on the order book and not get canceled when the position size changes. Set to false by default. The system will forcely freeze certain amount of funds for this order, including orders whose direction is opposite to the current positions. This feature is to ensure that the order won’t be canceled by the matching engine in such a circumstance that not enough funds are frozen for the order.|
-|» stp|body|string|false|[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.|
-|» marginMode|body|string|false|Margin mode: ISOLATED, CROSS, default: ISOLATED|
-|» price|body|string|false|Required for type is 'limit' order, indicating the operating price|
-|» size|body|integer|false|**Choose one of size, qty, valueQty**, Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.|
-|» timeInForce|body|string|false|Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC|
-|» postOnly|body|boolean|false|Optional for type is 'limit' order,  post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.|
-|» hidden|body|boolean|false|Optional for type is 'limit' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.|
-|» iceberg|body|boolean|false|Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.|
-|» visibleSize|body|string|false|Optional for type is 'limit' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.|
-|» qty|body|string|false|**Choose one of size, qty, valueQty**, Order size (Base currency) must be an integer multiple of the multiplier. The unit of the quantity of coin-swap is size(lot), which is not supported|
-|» valueQty|body|string|false|**Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported|
+| Name            | In   | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| --------------- | ---- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body            | body | object  | false    | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| » clientOid     | body | string  | true     | Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(\_), and separator(-)                                                                                                                                                                                                                                                                                                                                                            |
+| » side          | body | string  | true     | specify if the order is to 'buy' or 'sell'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » symbol        | body | string  | true     | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » leverage      | body | integer | true     | Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » type          | body | string  | true     | specify if the order is an 'limit' order or 'market' order                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » remark        | body | string  | false    | remark for the order, length cannot exceed 100 utf8 characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| » stop          | body | string  | false    | Either 'down' or 'up'. If stop is used,parameter stopPrice and stopPriceType also need to be provieded.                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| » stopPriceType | body | string  | false    | Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| » stopPrice     | body | string  | false    | Need to be defined if stop is specified.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| » reduceOnly    | body | boolean | false    | A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.                                                                                                                                                                                                                                        |
+| » closeOrder    | body | boolean | false    | A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.                                                                                                                                                                                                                                                           |
+| » forceHold     | body | boolean | false    | A mark to forcely hold the funds for an order, even though it's an order to reduce the position size. This helps the order stay on the order book and not get canceled when the position size changes. Set to false by default. The system will forcely freeze certain amount of funds for this order, including orders whose direction is opposite to the current positions. This feature is to ensure that the order won’t be canceled by the matching engine in such a circumstance that not enough funds are frozen for the order. |
+| » stp           | body | string  | false    | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.                                                                                                                                                                                                                                                                                                                                                                                      |
+| » marginMode    | body | string  | false    | Margin mode: ISOLATED, CROSS, default: ISOLATED                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| » price         | body | string  | false    | Required for type is 'limit' order, indicating the operating price                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » size          | body | integer | false    | **Choose one of size, qty, valueQty**, Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.                                                                                                                                                                                                                                                                                                                                                         |
+| » timeInForce   | body | string  | false    | Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC                                                                                                                                                                                                                                                                                                                                                                              |
+| » postOnly      | body | boolean | false    | Optional for type is 'limit' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.                                                                                                                                                                                 |
+| » hidden        | body | boolean | false    | Optional for type is 'limit' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| » iceberg       | body | boolean | false    | Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.                                                                                                                                                                                                                                                                                                                                                                                 |
+| » visibleSize   | body | string  | false    | Optional for type is 'limit' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                              |
+| » qty           | body | string  | false    | **Choose one of size, qty, valueQty**, Order size (Base currency) must be an integer multiple of the multiplier. The unit of the quantity of coin-swap is size(lot), which is not supported                                                                                                                                                                                                                                                                                                                                            |
+| » valueQty      | body | string  | false    | **Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported                                                                                                                                                                                                                                                                                                                                                            |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|» side|buy|
-|» side|sell|
-|» type|limit|
-|» type|market|
-|» stop|down|
-|» stop|up|
-|» stopPriceType|TP|
-|» stopPriceType|MP|
-|» stopPriceType|IP|
-|» stp|CN|
-|» stp|CO|
-|» stp|CB|
-|» marginMode|ISOLATED|
-|» marginMode|CROSS|
-|» timeInForce|GTC|
-|» timeInForce|IOC|
+| Parameter       | Value    |
+| --------------- | -------- |
+| » side          | buy      |
+| » side          | sell     |
+| » type          | limit    |
+| » type          | market   |
+| » stop          | down     |
+| » stop          | up       |
+| » stopPriceType | TP       |
+| » stopPriceType | MP       |
+| » stopPriceType | IP       |
+| » stp           | CN       |
+| » stp           | CO       |
+| » stp           | CB       |
+| » marginMode    | ISOLATED |
+| » marginMode    | CROSS    |
+| » timeInForce   | GTC      |
+| » timeInForce   | IOC      |
 
 > Example responses
 
@@ -1798,35 +1698,29 @@ Place order to the futures trading system just for validation
           "description": "The user self-defined order id."
         }
       },
-      "required": [
-        "orderId",
-        "clientOid"
-      ]
+      "required": ["orderId", "clientOid"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="add-order-test-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="add-order-test-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» orderId|string|true|none|The unique order id generated by the trading system,which can be used later for further actions such as canceling the order.|
-|»» clientOid|string|true|none|The user self-defined order id.|
+| Name         | Type   | Required | Restrictions | Description                                                                                                                  |
+| ------------ | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| » code       | string | true     | none         | none                                                                                                                         |
+| » data       | object | true     | none         | none                                                                                                                         |
+| »» orderId   | string | true     | none         | The unique order id generated by the trading system,which can be used later for further actions such as canceling the order. |
+| »» clientOid | string | true     | none         | The user self-defined order id.                                                                                              |
 
 <aside class="success">
 This operation does not require authentication
@@ -2130,7 +2024,13 @@ print(r.json())
 
 `POST /api/v1/orders/multi`
 
-Place multiple order to the futures trading system, you can place two major types of orders: limit and market. Orders can only be placed if your account has sufficient funds. Once an order is placed, your funds will be put on hold for the duration of the order. The amount of funds on hold depends on the order type and parameters specified. You can place up to 20 orders at one time, including limit orders, market orders, and stop orders  Please be noted that the system would hold the fees from the orders entered the orderbook in advance.
+Place multiple order to the futures trading system, you can place two major
+types of orders: limit and market. Orders can only be placed if your account has
+sufficient funds. Once an order is placed, your funds will be put on hold for
+the duration of the order. The amount of funds on hold depends on the order type
+and parameters specified. You can place up to 20 orders at one time, including
+limit orders, market orders, and stop orders Please be noted that the system
+would hold the fees from the orders entered the orderbook in advance.
 
 > Body parameter
 
@@ -2143,17 +2043,12 @@ Place multiple order to the futures trading system, you can place two major type
       "clientOid": {
         "type": "string",
         "description": "Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)",
-        "example": [
-          "5c52e11203aa677f33e493fb"
-        ]
+        "example": ["5c52e11203aa677f33e493fb"]
       },
       "side": {
         "type": "string",
         "description": "specify if the order is to 'buy' or 'sell'",
-        "enum": [
-          "buy",
-          "sell"
-        ],
+        "enum": ["buy", "sell"],
         "x-api-enum": [
           {
             "value": "buy",
@@ -2166,31 +2061,22 @@ Place multiple order to the futures trading system, you can place two major type
             "description": ""
           }
         ],
-        "example": [
-          "buy"
-        ]
+        "example": ["buy"]
       },
       "symbol": {
         "type": "string",
         "description": "Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070) ",
-        "example": [
-          "XBTUSDTM"
-        ]
+        "example": ["XBTUSDTM"]
       },
       "leverage": {
         "type": "integer",
         "description": "Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.",
-        "example": [
-          3
-        ]
+        "example": [3]
       },
       "type": {
         "type": "string",
         "description": "specify if the order is an 'limit' order or 'market' order",
-        "enum": [
-          "limit",
-          "market"
-        ],
+        "enum": ["limit", "market"],
         "default": "limit",
         "x-api-enum": [
           {
@@ -2204,9 +2090,7 @@ Place multiple order to the futures trading system, you can place two major type
             "description": ""
           }
         ],
-        "example": [
-          "limit"
-        ]
+        "example": ["limit"]
       },
       "remark": {
         "type": "string",
@@ -2215,10 +2099,7 @@ Place multiple order to the futures trading system, you can place two major type
       "stop": {
         "type": "string",
         "description": "Either 'down' or 'up'.  If stop is used,parameter stopPrice and stopPriceType also need to be provieded.",
-        "enum": [
-          "down",
-          "up"
-        ],
+        "enum": ["down", "up"],
         "x-api-enum": [
           {
             "value": "down",
@@ -2235,11 +2116,7 @@ Place multiple order to the futures trading system, you can place two major type
       "stopPriceType": {
         "type": "string",
         "description": "Either 'TP', 'IP' or 'MP', Need to be defined if stop is specified.",
-        "enum": [
-          "TP",
-          "MP",
-          "IP"
-        ],
+        "enum": ["TP", "MP", "IP"],
         "x-api-enum": [
           {
             "value": "TP",
@@ -2280,11 +2157,7 @@ Place multiple order to the futures trading system, you can place two major type
       "stp": {
         "type": "string",
         "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.",
-        "enum": [
-          "CN",
-          "CO",
-          "CB"
-        ],
+        "enum": ["CN", "CO", "CB"],
         "x-api-enum": [
           {
             "value": "CN",
@@ -2306,10 +2179,7 @@ Place multiple order to the futures trading system, you can place two major type
       "marginMode": {
         "type": "string",
         "description": "Margin mode: ISOLATED, CROSS, default: ISOLATED",
-        "enum": [
-          "ISOLATED",
-          "CROSS"
-        ],
+        "enum": ["ISOLATED", "CROSS"],
         "default": "ISOLATED",
         "x-api-enum": [
           {
@@ -2327,9 +2197,7 @@ Place multiple order to the futures trading system, you can place two major type
       "price": {
         "type": "string",
         "description": "Required for type is 'limit' order, indicating the operating price",
-        "example": [
-          "0.1"
-        ]
+        "example": ["0.1"]
       },
       "size": {
         "type": "integer",
@@ -2338,10 +2206,7 @@ Place multiple order to the futures trading system, you can place two major type
       "timeInForce": {
         "type": "string",
         "description": "Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC",
-        "enum": [
-          "GTC",
-          "IOC"
-        ],
+        "enum": ["GTC", "IOC"],
         "default": "GTC",
         "x-api-enum": [
           {
@@ -2384,21 +2249,16 @@ Place multiple order to the futures trading system, you can place two major type
         "description": "**Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported"
       }
     },
-    "required": [
-      "clientOid",
-      "symbol",
-      "side",
-      "leverage"
-    ]
+    "required": ["clientOid", "symbol", "side", "leverage"]
   }
 }
 ```
 
 <h3 id="batch-add-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|array[object]|false|none|
+| Name | In   | Type          | Required | Description |
+| ---- | ---- | ------------- | -------- | ----------- |
+| body | body | array[object] | false    | none        |
 
 > Example responses
 
@@ -2435,42 +2295,33 @@ Place multiple order to the futures trading system, you can place two major type
             "type": "string"
           }
         },
-        "required": [
-          "orderId",
-          "clientOid",
-          "symbol",
-          "code",
-          "msg"
-        ]
+        "required": ["orderId", "clientOid", "symbol", "code", "msg"]
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="batch-add-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="batch-add-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» orderId|string|true|none|The unique order id generated by the trading system,which can be used later for further actions such as canceling the order.|
-|»» clientOid|string|true|none|Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)|
-|»» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» code|string|true|none|none|
-|»» msg|string|true|none|none|
+| Name         | Type     | Required | Restrictions | Description                                                                                                                                                                 |
+| ------------ | -------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code       | string   | true     | none         | none                                                                                                                                                                        |
+| » data       | [object] | true     | none         | none                                                                                                                                                                        |
+| »» orderId   | string   | true     | none         | The unique order id generated by the trading system,which can be used later for further actions such as canceling the order.                                                |
+| »» clientOid | string   | true     | none         | Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(\_), and separator(-) |
+| »» symbol    | string   | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                          |
+| »» code      | string   | true     | none         | none                                                                                                                                                                        |
+| »» msg       | string   | true     | none         | none                                                                                                                                                                        |
 
 <aside class="success">
 This operation does not require authentication
@@ -2756,7 +2607,9 @@ print(r.json())
 
 `POST /api/v1/st-orders`
 
-Place take profit and stop loss order supports both take-profit and stop-loss functions, and other functions are exactly the same as the place order interface.
+Place take profit and stop loss order supports both take-profit and stop-loss
+functions, and other functions are exactly the same as the place order
+interface.
 
 > Body parameter
 
@@ -2767,17 +2620,12 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
     "clientOid": {
       "type": "string",
       "description": "Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)",
-      "example": [
-        "5c52e11203aa677f33e493fb"
-      ]
+      "example": ["5c52e11203aa677f33e493fb"]
     },
     "side": {
       "type": "string",
       "description": "specify if the order is to 'buy' or 'sell'",
-      "enum": [
-        "buy",
-        "sell"
-      ],
+      "enum": ["buy", "sell"],
       "x-api-enum": [
         {
           "value": "buy",
@@ -2790,31 +2638,22 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
           "description": ""
         }
       ],
-      "example": [
-        "buy"
-      ]
+      "example": ["buy"]
     },
     "symbol": {
       "type": "string",
       "description": "Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) ",
-      "example": [
-        "XBTUSDTM"
-      ]
+      "example": ["XBTUSDTM"]
     },
     "leverage": {
       "type": "integer",
       "description": "Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.",
-      "example": [
-        3
-      ]
+      "example": [3]
     },
     "type": {
       "type": "string",
       "description": "specify if the order is an 'limit' order or 'market' order",
-      "enum": [
-        "limit",
-        "market"
-      ],
+      "enum": ["limit", "market"],
       "default": "limit",
       "x-api-enum": [
         {
@@ -2828,9 +2667,7 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
           "description": "market order"
         }
       ],
-      "example": [
-        "limit"
-      ]
+      "example": ["limit"]
     },
     "remark": {
       "type": "string",
@@ -2839,11 +2676,7 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
     "stopPriceType": {
       "type": "string",
       "description": "Either 'TP', 'IP' or 'MP'",
-      "enum": [
-        "TP",
-        "MP",
-        "IP"
-      ],
+      "enum": ["TP", "MP", "IP"],
       "x-api-enum": [
         {
           "value": "TP",
@@ -2880,11 +2713,7 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
     "stp": {
       "type": "string",
       "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.",
-      "enum": [
-        "CN",
-        "CO",
-        "CB"
-      ],
+      "enum": ["CN", "CO", "CB"],
       "x-api-enum": [
         {
           "value": "CN",
@@ -2906,10 +2735,7 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
     "marginMode": {
       "type": "string",
       "description": "Margin mode: ISOLATED, CROSS, default: ISOLATED",
-      "enum": [
-        "ISOLATED",
-        "CROSS"
-      ],
+      "enum": ["ISOLATED", "CROSS"],
       "default": "ISOLATED",
       "x-api-enum": [
         {
@@ -2927,9 +2753,7 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
     "price": {
       "type": "string",
       "description": "Required for type is 'limit' order, indicating the operating price",
-      "example": [
-        "0.1"
-      ]
+      "example": ["0.1"]
     },
     "size": {
       "type": "integer",
@@ -2938,10 +2762,7 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
     "timeInForce": {
       "type": "string",
       "description": "Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC",
-      "enum": [
-        "GTC",
-        "IOC"
-      ],
+      "enum": ["GTC", "IOC"],
       "default": "GTC",
       "x-api-enum": [
         {
@@ -2992,63 +2813,57 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
       "description": "**Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported"
     }
   },
-  "required": [
-    "clientOid",
-    "symbol",
-    "type",
-    "side",
-    "leverage"
-  ]
+  "required": ["clientOid", "symbol", "type", "side", "leverage"]
 }
 ```
 
 <h3 id="add-take-profit-and-stop-loss-order-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» clientOid|body|string|true|Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)|
-|» side|body|string|true|specify if the order is to 'buy' or 'sell'|
-|» symbol|body|string|true|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|» leverage|body|integer|true|Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.|
-|» type|body|string|true|specify if the order is an 'limit' order or 'market' order|
-|» remark|body|string|false|remark for the order, length cannot exceed 100 utf8 characters|
-|» stopPriceType|body|string|false|Either 'TP', 'IP' or 'MP'|
-|» reduceOnly|body|boolean|false|A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.|
-|» closeOrder|body|boolean|false|A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.|
-|» forceHold|body|boolean|false|A mark to forcely hold the funds for an order, even though it's an order to reduce the position size. This helps the order stay on the order book and not get canceled when the position size changes. Set to false by default. The system will forcely freeze certain amount of funds for this order, including orders whose direction is opposite to the current positions. This feature is to ensure that the order won’t be canceled by the matching engine in such a circumstance that not enough funds are frozen for the order.|
-|» stp|body|string|false|[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.|
-|» marginMode|body|string|false|Margin mode: ISOLATED, CROSS, default: ISOLATED|
-|» price|body|string|false|Required for type is 'limit' order, indicating the operating price|
-|» size|body|integer|false|**Choose one of size, qty, valueQty**, Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.|
-|» timeInForce|body|string|false|Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC|
-|» postOnly|body|boolean|false|Optional for type is 'limit' order,  post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.|
-|» hidden|body|boolean|false|Optional for type is 'limit' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.|
-|» iceberg|body|boolean|false|Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.|
-|» visibleSize|body|string|false|Optional for type is 'limit' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.|
-|» triggerStopUpPrice|body|string|false|Take profit price|
-|» triggerStopDownPrice|body|string|false|Stop loss price|
-|» qty|body|string|false|**Choose one of size, qty, valueQty**, Order size (Base currency) must be an integer multiple of the multiplier. The unit of the quantity of coin-swap is size(lot), which is not supported|
-|» valueQty|body|string|false|**Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported|
+| Name                   | In   | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------------- | ---- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body                   | body | object  | false    | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| » clientOid            | body | string  | true     | Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(\_), and separator(-)                                                                                                                                                                                                                                                                                                                                                            |
+| » side                 | body | string  | true     | specify if the order is to 'buy' or 'sell'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » symbol               | body | string  | true     | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » leverage             | body | integer | true     | Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » type                 | body | string  | true     | specify if the order is an 'limit' order or 'market' order                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| » remark               | body | string  | false    | remark for the order, length cannot exceed 100 utf8 characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| » stopPriceType        | body | string  | false    | Either 'TP', 'IP' or 'MP'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| » reduceOnly           | body | boolean | false    | A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.                                                                                                                                                                                                                                        |
+| » closeOrder           | body | boolean | false    | A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.                                                                                                                                                                                                                                                           |
+| » forceHold            | body | boolean | false    | A mark to forcely hold the funds for an order, even though it's an order to reduce the position size. This helps the order stay on the order book and not get canceled when the position size changes. Set to false by default. The system will forcely freeze certain amount of funds for this order, including orders whose direction is opposite to the current positions. This feature is to ensure that the order won’t be canceled by the matching engine in such a circumstance that not enough funds are frozen for the order. |
+| » stp                  | body | string  | false    | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.                                                                                                                                                                                                                                                                                                                                                                                      |
+| » marginMode           | body | string  | false    | Margin mode: ISOLATED, CROSS, default: ISOLATED                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| » price                | body | string  | false    | Required for type is 'limit' order, indicating the operating price                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » size                 | body | integer | false    | **Choose one of size, qty, valueQty**, Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.                                                                                                                                                                                                                                                                                                                                                         |
+| » timeInForce          | body | string  | false    | Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC                                                                                                                                                                                                                                                                                                                                                                              |
+| » postOnly             | body | boolean | false    | Optional for type is 'limit' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.                                                                                                                                                                                 |
+| » hidden               | body | boolean | false    | Optional for type is 'limit' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| » iceberg              | body | boolean | false    | Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.                                                                                                                                                                                                                                                                                                                                                                                 |
+| » visibleSize          | body | string  | false    | Optional for type is 'limit' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                              |
+| » triggerStopUpPrice   | body | string  | false    | Take profit price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| » triggerStopDownPrice | body | string  | false    | Stop loss price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| » qty                  | body | string  | false    | **Choose one of size, qty, valueQty**, Order size (Base currency) must be an integer multiple of the multiplier. The unit of the quantity of coin-swap is size(lot), which is not supported                                                                                                                                                                                                                                                                                                                                            |
+| » valueQty             | body | string  | false    | **Choose one of size, qty, valueQty**, Order size (Value), USDS-Swap correspond to USDT or USDC. The unit of the quantity of coin-swap is size(lot), which is not supported                                                                                                                                                                                                                                                                                                                                                            |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|» side|buy|
-|» side|sell|
-|» type|limit|
-|» type|market|
-|» stopPriceType|TP|
-|» stopPriceType|MP|
-|» stopPriceType|IP|
-|» stp|CN|
-|» stp|CO|
-|» stp|CB|
-|» marginMode|ISOLATED|
-|» marginMode|CROSS|
-|» timeInForce|GTC|
-|» timeInForce|IOC|
+| Parameter       | Value    |
+| --------------- | -------- |
+| » side          | buy      |
+| » side          | sell     |
+| » type          | limit    |
+| » type          | market   |
+| » stopPriceType | TP       |
+| » stopPriceType | MP       |
+| » stopPriceType | IP       |
+| » stp           | CN       |
+| » stp           | CO       |
+| » stp           | CB       |
+| » marginMode    | ISOLATED |
+| » marginMode    | CROSS    |
+| » timeInForce   | GTC      |
+| » timeInForce   | IOC      |
 
 > Example responses
 
@@ -3073,35 +2888,29 @@ Place take profit and stop loss order supports both take-profit and stop-loss fu
           "description": "The user self-defined order id."
         }
       },
-      "required": [
-        "orderId",
-        "clientOid"
-      ]
+      "required": ["orderId", "clientOid"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="add-take-profit-and-stop-loss-order-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="add-take-profit-and-stop-loss-order-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» orderId|string|true|none|The unique order id generated by the trading system,which can be used later for further actions such as canceling the order.|
-|»» clientOid|string|true|none|The user self-defined order id.|
+| Name         | Type   | Required | Restrictions | Description                                                                                                                  |
+| ------------ | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| » code       | string | true     | none         | none                                                                                                                         |
+| » data       | object | true     | none         | none                                                                                                                         |
+| »» orderId   | string | true     | none         | The unique order id generated by the trading system,which can be used later for further actions such as canceling the order. |
+| »» clientOid | string | true     | none         | The user self-defined order id.                                                                                              |
 
 <aside class="success">
 This operation does not require authentication
@@ -3114,23 +2923,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/orders/{orderId}',
-{
-  method: 'DELETE',
+fetch("/api/v1/orders/{orderId}", {
+  method: "DELETE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3151,9 +2958,9 @@ Cancel order by system generated orderId.
 
 <h3 id="cancel-order-by-orderid-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|orderId|path|string|true|none|
+| Name    | In   | Type   | Required | Description |
+| ------- | ---- | ------ | -------- | ----------- |
+| orderId | path | string | true     | none        |
 
 > Example responses
 
@@ -3177,33 +2984,28 @@ Cancel order by system generated orderId.
           "description": "The orderId that is to be canceled"
         }
       },
-      "required": [
-        "cancelledOrderIds"
-      ]
+      "required": ["cancelledOrderIds"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="cancel-order-by-orderid-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="cancel-order-by-orderid-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» cancelledOrderIds|[string]|true|none|The orderId that is to be canceled|
+| Name                 | Type     | Required | Restrictions | Description                        |
+| -------------------- | -------- | -------- | ------------ | ---------------------------------- |
+| » code               | string   | true     | none         | none                               |
+| » data               | object   | true     | none         | none                               |
+| »» cancelledOrderIds | [string] | true     | none         | The orderId that is to be canceled |
 
 <aside class="success">
 This operation does not require authentication
@@ -3216,23 +3018,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/orders/client-order/{clientOid}?symbol=type,string',
-{
-  method: 'DELETE',
+fetch("/api/v1/orders/client-order/{clientOid}?symbol=type,string", {
+  method: "DELETE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3257,10 +3057,10 @@ Cancel order by client defined orderId.
 
 <h3 id="cancel-order-by-clientoid-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
-|clientOid|path|string|true|client order id|
+| Name      | In    | Type   | Required | Description                                                                                                        |
+| --------- | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol    | query | string | true     | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| clientOid | path  | string | true     | client order id                                                                                                    |
 
 > Example responses
 
@@ -3280,33 +3080,28 @@ Cancel order by client defined orderId.
           "type": "string"
         }
       },
-      "required": [
-        "clientOid"
-      ]
+      "required": ["clientOid"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="cancel-order-by-clientoid-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="cancel-order-by-clientoid-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» clientOid|string|true|none|none|
+| Name         | Type   | Required | Restrictions | Description |
+| ------------ | ------ | -------- | ------------ | ----------- |
+| » code       | string | true     | none         | none        |
+| » data       | object | true     | none         | none        |
+| »» clientOid | string | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -3417,30 +3212,24 @@ Cancel a bach of orders by client defined orderId or system generated orderId
             "type": "string"
           }
         },
-        "required": [
-          "symbol",
-          "clientOid"
-        ]
+        "required": ["symbol", "clientOid"]
       },
       "description": "the list of client orderId"
     }
   },
-  "required": [
-    "orderIdsList",
-    "clientOidsList"
-  ]
+  "required": ["orderIdsList", "clientOidsList"]
 }
 ```
 
 <h3 id="batch-cancel-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» orderIdsList|body|[string]|true|the list of orderId|
-|» clientOidsList|body|[object]|true|the list of client orderId|
-|»» symbol|body|string|true|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» clientOid|body|string|true|none|
+| Name             | In   | Type     | Required | Description                                                                                                        |
+| ---------------- | ---- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| body             | body | object   | false    | none                                                                                                               |
+| » orderIdsList   | body | [string] | true     | the list of orderId                                                                                                |
+| » clientOidsList | body | [object] | true     | the list of client orderId                                                                                         |
+| »» symbol        | body | string   | true     | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» clientOid     | body | string   | true     | none                                                                                                               |
 
 > Example responses
 
@@ -3471,40 +3260,32 @@ Cancel a bach of orders by client defined orderId or system generated orderId
             "type": "string"
           }
         },
-        "required": [
-          "orderId",
-          "clientOid",
-          "code",
-          "msg"
-        ]
+        "required": ["orderId", "clientOid", "code", "msg"]
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="batch-cancel-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="batch-cancel-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» orderId|string|true|none|none|
-|»» clientOid|string|true|none|none|
-|»» code|string|true|none|none|
-|»» msg|string|true|none|none|
+| Name         | Type     | Required | Restrictions | Description |
+| ------------ | -------- | -------- | ------------ | ----------- |
+| » code       | string   | true     | none         | none        |
+| » data       | [object] | true     | none         | none        |
+| »» orderId   | string   | true     | none         | none        |
+| »» clientOid | string   | true     | none         | none        |
+| »» code      | string   | true     | none         | none        |
+| »» msg       | string   | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -3517,23 +3298,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/orders?symbol=type,string',
-{
-  method: 'DELETE',
+fetch("/api/v3/orders?symbol=type,string", {
+  method: "DELETE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3554,13 +3333,14 @@ print(r.json())
 
 `DELETE /api/v3/orders`
 
-Cancel all open orders (excluding stop orders). The response is a list of orderIDs of the canceled orders.
+Cancel all open orders (excluding stop orders). The response is a list of
+orderIDs of the canceled orders.
 
 <h3 id="cancel-all-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Cancel all limit orders for a specific symbol only,  Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                                                    |
+| ------ | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | query | string | true     | Cancel all limit orders for a specific symbol only, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -3584,33 +3364,28 @@ Cancel all open orders (excluding stop orders). The response is a list of orderI
           "description": "Unique ID of the cancelled order"
         }
       },
-      "required": [
-        "cancelledOrderIds"
-      ]
+      "required": ["cancelledOrderIds"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="cancel-all-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="cancel-all-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» cancelledOrderIds|[string]|true|none|Unique ID of the cancelled order|
+| Name                 | Type     | Required | Restrictions | Description                      |
+| -------------------- | -------- | -------- | ------------ | -------------------------------- |
+| » code               | string   | true     | none         | none                             |
+| » data               | object   | true     | none         | none                             |
+| »» cancelledOrderIds | [string] | true     | none         | Unique ID of the cancelled order |
 
 <aside class="success">
 This operation does not require authentication
@@ -3623,23 +3398,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/stopOrders',
-{
-  method: 'DELETE',
+fetch("/api/v1/stopOrders", {
+  method: "DELETE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3656,13 +3429,15 @@ print(r.json())
 
 `DELETE /api/v1/stopOrders`
 
-Cancel all untriggered stop orders. The response is a list of orderIDs of the canceled stop orders. To cancel triggered stop orders, please use 'Cancel Multiple Futures Limit orders'.
+Cancel all untriggered stop orders. The response is a list of orderIDs of the
+canceled stop orders. To cancel triggered stop orders, please use 'Cancel
+Multiple Futures Limit orders'.
 
 <h3 id="cancel-all-stop-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|Cancel all limit orders for a specific contract only,  If not specified, all the limit orders will be deleted, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                                                                                                              |
+| ------ | ----- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | query | string | false    | Cancel all limit orders for a specific contract only, If not specified, all the limit orders will be deleted, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -3686,33 +3461,28 @@ Cancel all untriggered stop orders. The response is a list of orderIDs of the ca
           "description": "Unique ID of the cancelled order"
         }
       },
-      "required": [
-        "cancelledOrderIds"
-      ]
+      "required": ["cancelledOrderIds"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="cancel-all-stop-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="cancel-all-stop-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» cancelledOrderIds|[string]|true|none|Unique ID of the cancelled order|
+| Name                 | Type     | Required | Restrictions | Description                      |
+| -------------------- | -------- | -------- | ------------ | -------------------------------- |
+| » code               | string   | true     | none         | none                             |
+| » data               | object   | true     | none         | none                             |
+| »» cancelledOrderIds | [string] | true     | none         | Unique ID of the cancelled order |
 
 <aside class="success">
 This operation does not require authentication
@@ -3725,23 +3495,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/stopOrders',
-{
-  method: 'GET',
+fetch("/api/v1/stopOrders", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3758,28 +3526,29 @@ print(r.json())
 
 `GET /api/v1/stopOrders`
 
-Get the un-triggered stop orders list. Stop orders that have been triggered can be queried through the general order interface
+Get the un-triggered stop orders list. Stop orders that have been triggered can
+be queried through the general order interface
 
 <h3 id="get-stop-order-list-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
-|side|query|string|false|buy or sell|
-|type|query|string|false|limit, market|
-|startAt|query|integer(int64)|false|Start time (milisecond)|
-|endAt|query|integer(int64)|false|End time (milisecond)|
-|currentPage|query|integer|false|Current request page, The default currentPage is 1|
-|pageSize|query|integer|false|pageSize, The default pageSize is 50, The maximum cannot exceed 1000|
+| Name        | In    | Type           | Required | Description                                                                                                        |
+| ----------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol      | query | string         | false    | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| side        | query | string         | false    | buy or sell                                                                                                        |
+| type        | query | string         | false    | limit, market                                                                                                      |
+| startAt     | query | integer(int64) | false    | Start time (milisecond)                                                                                            |
+| endAt       | query | integer(int64) | false    | End time (milisecond)                                                                                              |
+| currentPage | query | integer        | false    | Current request page, The default currentPage is 1                                                                 |
+| pageSize    | query | integer        | false    | pageSize, The default pageSize is 50, The maximum cannot exceed 1000                                               |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|side|buy|
-|side|sell|
-|type|limit|
-|type|market|
+| Parameter | Value  |
+| --------- | ------ |
+| side      | buy    |
+| side      | sell   |
+| type      | limit  |
+| type      | market |
 
 > Example responses
 
@@ -4014,79 +3783,70 @@ Get the un-triggered stop orders list. Stop orders that have been triggered can 
           }
         }
       },
-      "required": [
-        "currentPage",
-        "pageSize",
-        "totalNum",
-        "totalPage",
-        "items"
-      ]
+      "required": ["currentPage", "pageSize", "totalNum", "totalPage", "items"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-stop-order-list-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-stop-order-list-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» currentPage|integer|true|none|Current request page, The default currentPage is 1|
-|»» pageSize|integer|true|none|pageSize, The default pageSize is 50, The maximum cannot exceed 1000|
-|»» totalNum|integer|true|none|none|
-|»» totalPage|integer|true|none|none|
-|»» items|[object]|true|none|none|
-|»»» id|string|true|none|Order ID|
-|»»» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»»» type|string|true|none|Order type, market order or limit order|
-|»»» side|string|true|none|Transaction side|
-|»»» price|string|true|none|Order price|
-|»»» size|integer|true|none|Order quantity|
-|»»» value|string|true|none|Order value|
-|»»» dealValue|string|true|none|Executed size of funds|
-|»»» dealSize|integer|true|none|Executed quantity|
-|»»» stp|string|true|none|self trade prevention|
-|»»» stop|string|true|none|Stop order type (stop limit or stop market)|
-|»»» stopPriceType|string|true|none|Trigger price type of stop orders|
-|»»» stopTriggered|boolean|true|none|Mark to show whether the stop order is triggered|
-|»»» stopPrice|string|true|none|Trigger price of stop orders|
-|»»» timeInForce|string|true|none|Time in force policy type|
-|»»» postOnly|boolean|true|none|Mark of post only|
-|»»» hidden|boolean|true|none|Mark of the hidden order|
-|»»» iceberg|boolean|true|none|Mark of the iceberg order|
-|»»» leverage|string|true|none|Leverage of the order|
-|»»» forceHold|boolean|true|none|A mark to forcely hold the funds for an order|
-|»»» closeOrder|boolean|true|none|A mark to close the position|
-|»»» visibleSize|integer|true|none|Visible size of the iceberg order|
-|»»» clientOid|string|true|none|Unique order id created by users to identify their orders|
-|»»» remark|string|true|none|Remark of the order|
-|»»» tags|string|true|none|tag order source|
-|»»» isActive|boolean|true|none|Mark of the active orders|
-|»»» cancelExist|boolean|true|none|Mark of the canceled orders|
-|»»» createdAt|integer(int64)|true|none|Time the order created|
-|»»» updatedAt|integer(int64)|true|none|last update time|
-|»»» endAt|integer(int64)|true|none|End time|
-|»»» orderTime|integer(int64)|true|none|Order create time in nanosecond|
-|»»» settleCurrency|string|true|none|settlement currency|
-|»»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»»» avgDealPrice|string|true|none|Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots * multiplier|
-|»»» filledSize|integer|true|none|Value of the executed orders|
-|»»» filledValue|string|true|none|Executed order quantity|
-|»»» status|string|true|none|order status: “open” or “done”|
-|»»» reduceOnly|boolean|true|none|A mark to reduce the position size only|
+| Name               | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                |
+| ------------------ | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code             | string         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| » data             | object         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» currentPage     | integer        | true     | none         | Current request page, The default currentPage is 1                                                                                                                                                                                                                         |
+| »» pageSize        | integer        | true     | none         | pageSize, The default pageSize is 50, The maximum cannot exceed 1000                                                                                                                                                                                                       |
+| »» totalNum        | integer        | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» totalPage       | integer        | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» items           | [object]       | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »»» id             | string         | true     | none         | Order ID                                                                                                                                                                                                                                                                   |
+| »»» symbol         | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                         |
+| »»» type           | string         | true     | none         | Order type, market order or limit order                                                                                                                                                                                                                                    |
+| »»» side           | string         | true     | none         | Transaction side                                                                                                                                                                                                                                                           |
+| »»» price          | string         | true     | none         | Order price                                                                                                                                                                                                                                                                |
+| »»» size           | integer        | true     | none         | Order quantity                                                                                                                                                                                                                                                             |
+| »»» value          | string         | true     | none         | Order value                                                                                                                                                                                                                                                                |
+| »»» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
+| »»» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
+| »»» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
+| »»» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »»» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
+| »»» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
+| »»» stopPrice      | string         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
+| »»» timeInForce    | string         | true     | none         | Time in force policy type                                                                                                                                                                                                                                                  |
+| »»» postOnly       | boolean        | true     | none         | Mark of post only                                                                                                                                                                                                                                                          |
+| »»» hidden         | boolean        | true     | none         | Mark of the hidden order                                                                                                                                                                                                                                                   |
+| »»» iceberg        | boolean        | true     | none         | Mark of the iceberg order                                                                                                                                                                                                                                                  |
+| »»» leverage       | string         | true     | none         | Leverage of the order                                                                                                                                                                                                                                                      |
+| »»» forceHold      | boolean        | true     | none         | A mark to forcely hold the funds for an order                                                                                                                                                                                                                              |
+| »»» closeOrder     | boolean        | true     | none         | A mark to close the position                                                                                                                                                                                                                                               |
+| »»» visibleSize    | integer        | true     | none         | Visible size of the iceberg order                                                                                                                                                                                                                                          |
+| »»» clientOid      | string         | true     | none         | Unique order id created by users to identify their orders                                                                                                                                                                                                                  |
+| »»» remark         | string         | true     | none         | Remark of the order                                                                                                                                                                                                                                                        |
+| »»» tags           | string         | true     | none         | tag order source                                                                                                                                                                                                                                                           |
+| »»» isActive       | boolean        | true     | none         | Mark of the active orders                                                                                                                                                                                                                                                  |
+| »»» cancelExist    | boolean        | true     | none         | Mark of the canceled orders                                                                                                                                                                                                                                                |
+| »»» createdAt      | integer(int64) | true     | none         | Time the order created                                                                                                                                                                                                                                                     |
+| »»» updatedAt      | integer(int64) | true     | none         | last update time                                                                                                                                                                                                                                                           |
+| »»» endAt          | integer(int64) | true     | none         | End time                                                                                                                                                                                                                                                                   |
+| »»» orderTime      | integer(int64) | true     | none         | Order create time in nanosecond                                                                                                                                                                                                                                            |
+| »»» settleCurrency | string         | true     | none         | settlement currency                                                                                                                                                                                                                                                        |
+| »»» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                                                                                                                                                                                    |
+| »»» avgDealPrice   | string         | true     | none         | Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots \* multiplier |
+| »»» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
+| »»» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
+| »»» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
+| »»» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
 
 <aside class="success">
 This operation does not require authentication
@@ -4099,23 +3859,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/orders/{order-id}',
-{
-  method: 'GET',
+fetch("/api/v1/orders/{order-id}", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -4136,9 +3894,9 @@ Get a single order by order id (including a stop order).
 
 <h3 id="get-order-by-orderid-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|order-id|path|string|true|none|
+| Name     | In   | Type   | Required | Description |
+| -------- | ---- | ------ | -------- | ----------- |
+| order-id | path | string | true     | none        |
 
 > Example responses
 
@@ -4165,10 +3923,7 @@ Get a single order by order id (including a stop order).
         "type": {
           "type": "string",
           "description": "Order type, market order or limit order",
-          "enum": [
-            "market",
-            "limit"
-          ],
+          "enum": ["market", "limit"],
           "x-api-enum": [
             {
               "value": "market",
@@ -4185,10 +3940,7 @@ Get a single order by order id (including a stop order).
         "side": {
           "type": "string",
           "description": "Transaction side",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "x-api-enum": [
             {
               "value": "buy",
@@ -4225,12 +3977,7 @@ Get a single order by order id (including a stop order).
         "stp": {
           "type": "string",
           "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.",
-          "enum": [
-            "",
-            "CN",
-            "CO",
-            "CB"
-          ],
+          "enum": ["", "CN", "CO", "CB"],
           "x-api-enum": [
             {
               "value": "",
@@ -4261,12 +4008,7 @@ Get a single order by order id (including a stop order).
         "stopPriceType": {
           "type": "string",
           "description": "Trigger price type of stop orders",
-          "enum": [
-            "",
-            "TP",
-            "MP",
-            "IP"
-          ],
+          "enum": ["", "TP", "MP", "IP"],
           "x-api-enum": [
             {
               "value": "",
@@ -4377,10 +4119,7 @@ Get a single order by order id (including a stop order).
         "marginMode": {
           "type": "string",
           "description": "Margin mode: ISOLATED (isolated), CROSS (cross margin).\n",
-          "enum": [
-            "CROSS",
-            "ISOLATED"
-          ],
+          "enum": ["CROSS", "ISOLATED"],
           "x-api-enum": [
             {
               "value": "CROSS",
@@ -4409,10 +4148,7 @@ Get a single order by order id (including a stop order).
         "status": {
           "type": "string",
           "description": "order status: “open” or “done”\n",
-          "enum": [
-            "open",
-            "done"
-          ],
+          "enum": ["open", "done"],
           "x-api-enum": [
             {
               "value": "open",
@@ -4472,86 +4208,83 @@ Get a single order by order id (including a stop order).
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-order-by-orderid-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-order-by-orderid-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» id|string|true|none|Order ID|
-|»» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» type|string|true|none|Order type, market order or limit order|
-|»» side|string|true|none|Transaction side|
-|»» price|string|true|none|Order price|
-|»» size|integer|true|none|Order quantity|
-|»» value|string|true|none|Order value|
-|»» dealValue|string|true|none|Executed size of funds|
-|»» dealSize|integer|true|none|Executed quantity|
-|»» stp|string|true|none|[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.|
-|»» stop|string|true|none|Stop order type (stop limit or stop market)|
-|»» stopPriceType|string|true|none|Trigger price type of stop orders|
-|»» stopTriggered|boolean|true|none|Mark to show whether the stop order is triggered|
-|»» stopPrice|number|true|none|Trigger price of stop orders|
-|»» timeInForce|string|true|none|Time in force policy type|
-|»» postOnly|boolean|true|none|Mark of post only|
-|»» hidden|boolean|true|none|Mark of the hidden order|
-|»» iceberg|boolean|true|none|Mark of the iceberg order|
-|»» leverage|string|true|none|Leverage of the order|
-|»» forceHold|boolean|true|none|A mark to forcely hold the funds for an order|
-|»» closeOrder|boolean|true|none|A mark to close the position|
-|»» visibleSize|integer|true|none|Visible size of the iceberg order|
-|»» clientOid|string|true|none|Unique order id created by users to identify their orders|
-|»» remark|string|true|none|Remark|
-|»» tags|string|true|none|tag order source|
-|»» isActive|boolean|true|none|Mark of the active orders|
-|»» cancelExist|boolean|true|none|Mark of the canceled orders|
-|»» createdAt|integer(int64)|true|none|Time the order created|
-|»» updatedAt|integer(int64)|true|none|last update time|
-|»» endAt|integer(int64)|false|none|Order Endtime|
-|»» orderTime|integer(int64)|true|none|Order create time in nanosecond|
-|»» settleCurrency|string|true|none|settlement currency|
-|»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»» avgDealPrice|string|true|none|Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots * multiplier|
-|»» filledSize|integer|true|none|Value of the executed orders|
-|»» filledValue|string|true|none|Executed order quantity|
-|»» status|string|true|none|order status: “open” or “done”|
-|»» reduceOnly|boolean|true|none|A mark to reduce the position size only|
+| Name              | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                |
+| ----------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code            | string         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| » data            | object         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» id             | string         | true     | none         | Order ID                                                                                                                                                                                                                                                                   |
+| »» symbol         | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                         |
+| »» type           | string         | true     | none         | Order type, market order or limit order                                                                                                                                                                                                                                    |
+| »» side           | string         | true     | none         | Transaction side                                                                                                                                                                                                                                                           |
+| »» price          | string         | true     | none         | Order price                                                                                                                                                                                                                                                                |
+| »» size           | integer        | true     | none         | Order quantity                                                                                                                                                                                                                                                             |
+| »» value          | string         | true     | none         | Order value                                                                                                                                                                                                                                                                |
+| »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
+| »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
+| »» stp            | string         | true     | none         | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.                                                                                                                          |
+| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
+| »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
+| »» stopPrice      | number         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
+| »» timeInForce    | string         | true     | none         | Time in force policy type                                                                                                                                                                                                                                                  |
+| »» postOnly       | boolean        | true     | none         | Mark of post only                                                                                                                                                                                                                                                          |
+| »» hidden         | boolean        | true     | none         | Mark of the hidden order                                                                                                                                                                                                                                                   |
+| »» iceberg        | boolean        | true     | none         | Mark of the iceberg order                                                                                                                                                                                                                                                  |
+| »» leverage       | string         | true     | none         | Leverage of the order                                                                                                                                                                                                                                                      |
+| »» forceHold      | boolean        | true     | none         | A mark to forcely hold the funds for an order                                                                                                                                                                                                                              |
+| »» closeOrder     | boolean        | true     | none         | A mark to close the position                                                                                                                                                                                                                                               |
+| »» visibleSize    | integer        | true     | none         | Visible size of the iceberg order                                                                                                                                                                                                                                          |
+| »» clientOid      | string         | true     | none         | Unique order id created by users to identify their orders                                                                                                                                                                                                                  |
+| »» remark         | string         | true     | none         | Remark                                                                                                                                                                                                                                                                     |
+| »» tags           | string         | true     | none         | tag order source                                                                                                                                                                                                                                                           |
+| »» isActive       | boolean        | true     | none         | Mark of the active orders                                                                                                                                                                                                                                                  |
+| »» cancelExist    | boolean        | true     | none         | Mark of the canceled orders                                                                                                                                                                                                                                                |
+| »» createdAt      | integer(int64) | true     | none         | Time the order created                                                                                                                                                                                                                                                     |
+| »» updatedAt      | integer(int64) | true     | none         | last update time                                                                                                                                                                                                                                                           |
+| »» endAt          | integer(int64) | false    | none         | Order Endtime                                                                                                                                                                                                                                                              |
+| »» orderTime      | integer(int64) | true     | none         | Order create time in nanosecond                                                                                                                                                                                                                                            |
+| »» settleCurrency | string         | true     | none         | settlement currency                                                                                                                                                                                                                                                        |
+| »» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                                                                                                                                                                                    |
+| »» avgDealPrice   | string         | true     | none         | Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots \* multiplier |
+| »» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
+| »» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
+| »» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
+| »» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|type|market|
-|type|limit|
-|side|buy|
-|side|sell|
-|stp||
-|stp|CN|
-|stp|CO|
-|stp|CB|
-|stopPriceType||
-|stopPriceType|TP|
-|stopPriceType|MP|
-|stopPriceType|IP|
-|marginMode|CROSS|
-|marginMode|ISOLATED|
-|status|open|
-|status|done|
+| Property      | Value    |
+| ------------- | -------- |
+| type          | market   |
+| type          | limit    |
+| side          | buy      |
+| side          | sell     |
+| stp           |          |
+| stp           | CN       |
+| stp           | CO       |
+| stp           | CB       |
+| stopPriceType |          |
+| stopPriceType | TP       |
+| stopPriceType | MP       |
+| stopPriceType | IP       |
+| marginMode    | CROSS    |
+| marginMode    | ISOLATED |
+| status        | open     |
+| status        | done     |
 
 <aside class="success">
 This operation does not require authentication
@@ -4564,23 +4297,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/orders/byClientOid?clientOid=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/orders/byClientOid?clientOid=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -4605,9 +4336,9 @@ Get a single order by client order ID (including a stop order).
 
 <h3 id="get-order-by-clientoid-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|clientOid|query|string|true|The user self-defined order ID.|
+| Name      | In    | Type   | Required | Description                     |
+| --------- | ----- | ------ | -------- | ------------------------------- |
+| clientOid | query | string | true     | The user self-defined order ID. |
 
 > Example responses
 
@@ -4634,10 +4365,7 @@ Get a single order by client order ID (including a stop order).
         "type": {
           "type": "string",
           "description": "Order type, market order or limit order",
-          "enum": [
-            "market",
-            "limit"
-          ],
+          "enum": ["market", "limit"],
           "x-api-enum": [
             {
               "value": "market",
@@ -4654,10 +4382,7 @@ Get a single order by client order ID (including a stop order).
         "side": {
           "type": "string",
           "description": "Transaction side",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "x-api-enum": [
             {
               "value": "buy",
@@ -4694,12 +4419,7 @@ Get a single order by client order ID (including a stop order).
         "stp": {
           "type": "string",
           "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.",
-          "enum": [
-            "",
-            "CN",
-            "CO",
-            "CB"
-          ],
+          "enum": ["", "CN", "CO", "CB"],
           "x-api-enum": [
             {
               "value": "",
@@ -4730,12 +4450,7 @@ Get a single order by client order ID (including a stop order).
         "stopPriceType": {
           "type": "string",
           "description": "Trigger price type of stop orders",
-          "enum": [
-            "",
-            "TP",
-            "MP",
-            "IP"
-          ],
+          "enum": ["", "TP", "MP", "IP"],
           "x-api-enum": [
             {
               "value": "",
@@ -4846,10 +4561,7 @@ Get a single order by client order ID (including a stop order).
         "marginMode": {
           "type": "string",
           "description": "Margin mode: ISOLATED (isolated), CROSS (cross margin).\n",
-          "enum": [
-            "CROSS",
-            "ISOLATED"
-          ],
+          "enum": ["CROSS", "ISOLATED"],
           "x-api-enum": [
             {
               "value": "CROSS",
@@ -4878,10 +4590,7 @@ Get a single order by client order ID (including a stop order).
         "status": {
           "type": "string",
           "description": "order status: “open” or “done”\n",
-          "enum": [
-            "open",
-            "done"
-          ],
+          "enum": ["open", "done"],
           "x-api-enum": [
             {
               "value": "open",
@@ -4942,86 +4651,83 @@ Get a single order by client order ID (including a stop order).
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-order-by-clientoid-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-order-by-clientoid-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» id|string|true|none|Order ID|
-|»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» type|string|true|none|Order type, market order or limit order|
-|»» side|string|true|none|Transaction side|
-|»» price|string|true|none|Order Price|
-|»» size|integer|true|none|Order quantity|
-|»» value|string|true|none|Order value|
-|»» dealValue|string|true|none|Executed size of funds|
-|»» dealSize|integer|true|none|Executed quantity|
-|»» stp|string|true|none|[Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.|
-|»» stop|string|true|none|Stop order type (stop limit or stop market)|
-|»» stopPriceType|string|true|none|Trigger price type of stop orders|
-|»» stopTriggered|boolean|true|none|Mark to show whether the stop order is triggered|
-|»» stopPrice|number|true|none|Trigger price of stop orders|
-|»» timeInForce|string|true|none|Time in force policy type|
-|»» postOnly|boolean|true|none|Mark of post only|
-|»» hidden|boolean|true|none|Mark of the hidden order|
-|»» iceberg|boolean|true|none|Mark of the iceberg order|
-|»» leverage|string|true|none|Leverage of the order|
-|»» forceHold|boolean|true|none|A mark to force-hold the funds for an order|
-|»» closeOrder|boolean|true|none|A mark to close the position|
-|»» visibleSize|integer|true|none|Visible size of the iceberg order|
-|»» clientOid|string|true|none|Unique order ID created by users to identify their orders|
-|»» remark|string|true|none|Remark|
-|»» tags|string|true|none|Tag order source|
-|»» isActive|boolean|true|none|Mark of the active orders|
-|»» cancelExist|boolean|true|none|Mark of the canceled orders|
-|»» createdAt|integer(int64)|true|none|Order creation time|
-|»» updatedAt|integer(int64)|true|none|Last update time|
-|»» endAt|integer(int64)|true|none|Order Endtime|
-|»» orderTime|integer(int64)|true|none|Order creation time in nanoseconds|
-|»» settleCurrency|string|true|none|Settlement currency|
-|»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»» avgDealPrice|string|true|none|Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity); reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots * multiplier|
-|»» filledSize|integer|true|none|Value of the executed orders|
-|»» filledValue|string|true|none|Executed order quantity|
-|»» status|string|true|none|order status: “open” or “done”|
-|»» reduceOnly|boolean|true|none|A mark to reduce the position size only|
+| Name              | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                |
+| ----------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code            | string         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| » data            | object         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» id             | string         | true     | none         | Order ID                                                                                                                                                                                                                                                                   |
+| »» symbol         | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                         |
+| »» type           | string         | true     | none         | Order type, market order or limit order                                                                                                                                                                                                                                    |
+| »» side           | string         | true     | none         | Transaction side                                                                                                                                                                                                                                                           |
+| »» price          | string         | true     | none         | Order Price                                                                                                                                                                                                                                                                |
+| »» size           | integer        | true     | none         | Order quantity                                                                                                                                                                                                                                                             |
+| »» value          | string         | true     | none         | Order value                                                                                                                                                                                                                                                                |
+| »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
+| »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
+| »» stp            | string         | true     | none         | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.                                                                                                                              |
+| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
+| »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
+| »» stopPrice      | number         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
+| »» timeInForce    | string         | true     | none         | Time in force policy type                                                                                                                                                                                                                                                  |
+| »» postOnly       | boolean        | true     | none         | Mark of post only                                                                                                                                                                                                                                                          |
+| »» hidden         | boolean        | true     | none         | Mark of the hidden order                                                                                                                                                                                                                                                   |
+| »» iceberg        | boolean        | true     | none         | Mark of the iceberg order                                                                                                                                                                                                                                                  |
+| »» leverage       | string         | true     | none         | Leverage of the order                                                                                                                                                                                                                                                      |
+| »» forceHold      | boolean        | true     | none         | A mark to force-hold the funds for an order                                                                                                                                                                                                                                |
+| »» closeOrder     | boolean        | true     | none         | A mark to close the position                                                                                                                                                                                                                                               |
+| »» visibleSize    | integer        | true     | none         | Visible size of the iceberg order                                                                                                                                                                                                                                          |
+| »» clientOid      | string         | true     | none         | Unique order ID created by users to identify their orders                                                                                                                                                                                                                  |
+| »» remark         | string         | true     | none         | Remark                                                                                                                                                                                                                                                                     |
+| »» tags           | string         | true     | none         | Tag order source                                                                                                                                                                                                                                                           |
+| »» isActive       | boolean        | true     | none         | Mark of the active orders                                                                                                                                                                                                                                                  |
+| »» cancelExist    | boolean        | true     | none         | Mark of the canceled orders                                                                                                                                                                                                                                                |
+| »» createdAt      | integer(int64) | true     | none         | Order creation time                                                                                                                                                                                                                                                        |
+| »» updatedAt      | integer(int64) | true     | none         | Last update time                                                                                                                                                                                                                                                           |
+| »» endAt          | integer(int64) | true     | none         | Order Endtime                                                                                                                                                                                                                                                              |
+| »» orderTime      | integer(int64) | true     | none         | Order creation time in nanoseconds                                                                                                                                                                                                                                         |
+| »» settleCurrency | string         | true     | none         | Settlement currency                                                                                                                                                                                                                                                        |
+| »» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                                                                                                                                                                                    |
+| »» avgDealPrice   | string         | true     | none         | Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity); reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots \* multiplier |
+| »» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
+| »» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
+| »» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
+| »» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|type|market|
-|type|limit|
-|side|buy|
-|side|sell|
-|stp||
-|stp|CN|
-|stp|CO|
-|stp|CB|
-|stopPriceType||
-|stopPriceType|TP|
-|stopPriceType|MP|
-|stopPriceType|IP|
-|marginMode|CROSS|
-|marginMode|ISOLATED|
-|status|open|
-|status|done|
+| Property      | Value    |
+| ------------- | -------- |
+| type          | market   |
+| type          | limit    |
+| side          | buy      |
+| side          | sell     |
+| stp           |          |
+| stp           | CN       |
+| stp           | CO       |
+| stp           | CB       |
+| stopPriceType |          |
+| stopPriceType | TP       |
+| stopPriceType | MP       |
+| stopPriceType | IP       |
+| marginMode    | CROSS    |
+| marginMode    | ISOLATED |
+| status        | open     |
+| status        | done     |
 
 <aside class="success">
 This operation does not require authentication
@@ -5034,23 +4740,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/recentDoneOrders',
-{
-  method: 'GET',
+fetch("/api/v1/recentDoneOrders", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -5067,13 +4771,14 @@ print(r.json())
 
 `GET /api/v1/recentDoneOrders`
 
-Get a list of recent 1000 closed orders in the last 24 hours.  If you need to get your recent traded order history with low latency, you may query this endpoint.
+Get a list of recent 1000 closed orders in the last 24 hours. If you need to get
+your recent traded order history with low latency, you may query this endpoint.
 
 <h3 id="get-recent-closed-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | query | string | false    | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -5291,65 +4996,62 @@ Get a list of recent 1000 closed orders in the last 24 hours.  If you need to ge
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-recent-closed-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-recent-closed-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» id|string|true|none|Order ID|
-|»» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» type|string|true|none|Order type, market order or limit order|
-|»» side|string|true|none|Transaction side|
-|»» price|string|true|none|Order price|
-|»» size|integer|true|none|Order quantity|
-|»» value|string|true|none|Order value|
-|»» dealValue|string|true|none|Executed size of funds|
-|»» dealSize|integer|true|none|Executed quantity|
-|»» stp|string|true|none|self trade prevention|
-|»» stop|string|true|none|Stop order type (stop limit or stop market)|
-|»» stopPriceType|string|true|none|Trigger price type of stop orders|
-|»» stopTriggered|boolean|true|none|Mark to show whether the stop order is triggered|
-|»» stopPrice|integer|true|none|Trigger price of stop orders|
-|»» timeInForce|string|true|none|Time in force policy type|
-|»» postOnly|boolean|true|none|Mark of post only|
-|»» hidden|boolean|true|none|Mark of the hidden order|
-|»» iceberg|boolean|true|none|Mark of the iceberg order|
-|»» leverage|string|true|none|Leverage of the order|
-|»» forceHold|boolean|true|none|A mark to forcely hold the funds for an order|
-|»» closeOrder|boolean|true|none|A mark to close the position|
-|»» visibleSize|integer|true|none|Visible size of the iceberg order|
-|»» clientOid|string|true|none|Unique order id created by users to identify their orders|
-|»» remark|string|true|none|Remark of the order|
-|»» tags|string|true|none|tag order source|
-|»» isActive|boolean|true|none|Mark of the active orders|
-|»» cancelExist|boolean|true|none|Mark of the canceled orders|
-|»» createdAt|integer(int64)|true|none|Time the order created|
-|»» updatedAt|integer(int64)|true|none|last update time|
-|»» endAt|integer(int64)|true|none|End time|
-|»» orderTime|integer(int64)|true|none|Order create time in nanosecond|
-|»» settleCurrency|string|true|none|settlement currency|
-|»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»» avgDealPrice|string|true|none|Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots * multiplier|
-|»» filledSize|integer|true|none|Value of the executed orders|
-|»» filledValue|string|true|none|Executed order quantity|
-|»» status|string|true|none|order status: “open” or “done”|
-|»» reduceOnly|boolean|true|none|A mark to reduce the position size only|
+| Name              | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                |
+| ----------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code            | string         | true     | none         | none                                                                                                                                                                                                                                                                       |
+| » data            | [object]       | true     | none         | none                                                                                                                                                                                                                                                                       |
+| »» id             | string         | true     | none         | Order ID                                                                                                                                                                                                                                                                   |
+| »» symbol         | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                                                                                                         |
+| »» type           | string         | true     | none         | Order type, market order or limit order                                                                                                                                                                                                                                    |
+| »» side           | string         | true     | none         | Transaction side                                                                                                                                                                                                                                                           |
+| »» price          | string         | true     | none         | Order price                                                                                                                                                                                                                                                                |
+| »» size           | integer        | true     | none         | Order quantity                                                                                                                                                                                                                                                             |
+| »» value          | string         | true     | none         | Order value                                                                                                                                                                                                                                                                |
+| »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
+| »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
+| »» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
+| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
+| »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
+| »» stopPrice      | integer        | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
+| »» timeInForce    | string         | true     | none         | Time in force policy type                                                                                                                                                                                                                                                  |
+| »» postOnly       | boolean        | true     | none         | Mark of post only                                                                                                                                                                                                                                                          |
+| »» hidden         | boolean        | true     | none         | Mark of the hidden order                                                                                                                                                                                                                                                   |
+| »» iceberg        | boolean        | true     | none         | Mark of the iceberg order                                                                                                                                                                                                                                                  |
+| »» leverage       | string         | true     | none         | Leverage of the order                                                                                                                                                                                                                                                      |
+| »» forceHold      | boolean        | true     | none         | A mark to forcely hold the funds for an order                                                                                                                                                                                                                              |
+| »» closeOrder     | boolean        | true     | none         | A mark to close the position                                                                                                                                                                                                                                               |
+| »» visibleSize    | integer        | true     | none         | Visible size of the iceberg order                                                                                                                                                                                                                                          |
+| »» clientOid      | string         | true     | none         | Unique order id created by users to identify their orders                                                                                                                                                                                                                  |
+| »» remark         | string         | true     | none         | Remark of the order                                                                                                                                                                                                                                                        |
+| »» tags           | string         | true     | none         | tag order source                                                                                                                                                                                                                                                           |
+| »» isActive       | boolean        | true     | none         | Mark of the active orders                                                                                                                                                                                                                                                  |
+| »» cancelExist    | boolean        | true     | none         | Mark of the canceled orders                                                                                                                                                                                                                                                |
+| »» createdAt      | integer(int64) | true     | none         | Time the order created                                                                                                                                                                                                                                                     |
+| »» updatedAt      | integer(int64) | true     | none         | last update time                                                                                                                                                                                                                                                           |
+| »» endAt          | integer(int64) | true     | none         | End time                                                                                                                                                                                                                                                                   |
+| »» orderTime      | integer(int64) | true     | none         | Order create time in nanosecond                                                                                                                                                                                                                                            |
+| »» settleCurrency | string         | true     | none         | settlement currency                                                                                                                                                                                                                                                        |
+| »» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                                                                                                                                                                                    |
+| »» avgDealPrice   | string         | true     | none         | Average transaction price, forward contract average transaction price = sum (transaction value) / sum (transaction quantity), reverse contract average transaction price = sum (transaction quantity) / sum (transaction value). Transaction quantity = lots \* multiplier |
+| »» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
+| »» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
+| »» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
+| »» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
 
 <aside class="success">
 This operation does not require authentication
@@ -5362,23 +5064,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/openOrderStatistics?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/openOrderStatistics?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -5399,13 +5099,14 @@ print(r.json())
 
 `GET /api/v1/openOrderStatistics`
 
-You can query this endpoint to get the total number and value of all your active orders.
+You can query this endpoint to get the total number and value of all your active
+orders.
 
 <h3 id="get-open-order-value-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | query | string | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -5451,32 +5152,29 @@ You can query this endpoint to get the total number and value of all your active
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-open-order-value-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-open-order-value-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» openOrderBuySize|integer|true|none|Total number of unexecuted buy orders|
-|»» openOrderSellSize|integer|true|none|Total number of unexecuted sell orders|
-|»» openOrderBuyCost|string|true|none|Value of all unexecuted buy orders|
-|»» openOrderSellCost|string|true|none|Value of all unexecuted sell orders|
-|»» settleCurrency|string|true|none|Settlement currency|
+| Name                 | Type    | Required | Restrictions | Description                            |
+| -------------------- | ------- | -------- | ------------ | -------------------------------------- |
+| » code               | string  | true     | none         | none                                   |
+| » data               | object  | true     | none         | none                                   |
+| »» openOrderBuySize  | integer | true     | none         | Total number of unexecuted buy orders  |
+| »» openOrderSellSize | integer | true     | none         | Total number of unexecuted sell orders |
+| »» openOrderBuyCost  | string  | true     | none         | Value of all unexecuted buy orders     |
+| »» openOrderSellCost | string  | true     | none         | Value of all unexecuted sell orders    |
+| »» settleCurrency    | string  | true     | none         | Settlement currency                    |
 
 <aside class="success">
 This operation does not require authentication
@@ -5489,23 +5187,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/recentFills',
-{
-  method: 'GET',
+fetch("/api/v1/recentFills", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -5522,13 +5218,14 @@ print(r.json())
 
 `GET /api/v1/recentFills`
 
-Get a list of recent 1000 fills in the last 24 hours. If you need to get your recently traded order history with low latency, you may query this endpoint.
+Get a list of recent 1000 fills in the last 24 hours. If you need to get your
+recently traded order history with low latency, you may query this endpoint.
 
 <h3 id="get-recent-trade-history-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| Name   | In    | Type   | Required | Description                                                                                                        |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| symbol | query | string | false    | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 
 > Example responses
 
@@ -5561,10 +5258,7 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
           "side": {
             "type": "string",
             "description": "Transaction side\n",
-            "enum": [
-              "buy",
-              "sell"
-            ],
+            "enum": ["buy", "sell"],
             "x-api-enum": [
               {
                 "value": "buy",
@@ -5581,10 +5275,7 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
           "liquidity": {
             "type": "string",
             "description": "Liquidity-taker or -maker\n",
-            "enum": [
-              "taker",
-              "maker"
-            ],
+            "enum": ["taker", "maker"],
             "x-api-enum": [
               {
                 "value": "taker",
@@ -5650,10 +5341,7 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
           "marginMode": {
             "type": "string",
             "description": "Margin mode: ISOLATED (isolated), CROSS (cross margin).\n",
-            "enum": [
-              "ISOLATED",
-              "CROSS"
-            ],
+            "enum": ["ISOLATED", "CROSS"],
             "x-api-enum": [
               {
                 "value": "ISOLATED",
@@ -5669,12 +5357,7 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
           },
           "displayType": {
             "type": "string",
-            "enum": [
-              "limit",
-              "market",
-              "limit_stop",
-              "market_stop"
-            ],
+            "enum": ["limit", "market", "limit_stop", "market_stop"],
             "description": "Order Type",
             "x-api-enum": [
               {
@@ -5710,10 +5393,7 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
           "orderType": {
             "type": "string",
             "description": "Order type\n",
-            "enum": [
-              "market",
-              "limit"
-            ],
+            "enum": ["market", "limit"],
             "x-api-enum": [
               {
                 "value": "market",
@@ -5730,13 +5410,7 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
           "tradeType": {
             "type": "string",
             "description": "Trade type (trade, liquid, cancel, adl or settlement)\n",
-            "enum": [
-              "trade",
-              "cancel",
-              "liquid",
-              "adl",
-              "settlement"
-            ],
+            "enum": ["trade", "cancel", "liquid", "adl", "settlement"],
             "x-api-enum": [
               {
                 "value": "trade",
@@ -5800,73 +5474,70 @@ Get a list of recent 1000 fills in the last 24 hours. If you need to get your re
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-recent-trade-history-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-recent-trade-history-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»» tradeId|string|true|none|Trade ID|
-|»» orderId|string|true|none|Order ID|
-|»» side|string|true|none|Transaction side|
-|»» liquidity|string|true|none|Liquidity-taker or -maker|
-|»» forceTaker|boolean|true|none|Whether to force processing as a taker|
-|»» price|string|true|none|Filled price|
-|»» size|integer|true|none|Filled amount|
-|»» value|string|true|none|Order value|
-|»» openFeePay|string|true|none|Opening transaction fee|
-|»» closeFeePay|string|true|none|Closing transaction fee|
-|»» stop|string|true|none|A mark to the stop order type|
-|»» feeRate|string|true|none|Fee Rate|
-|»» fixFee|string|true|none|Fixed fees (Deprecated field, no actual use of the value field)|
-|»» feeCurrency|string|true|none|Charging currency|
-|»» tradeTime|integer(int64)|true|none|Trade time in nanoseconds|
-|»» subTradeType|string|true|none|Deprecated field, no actual use of the value field|
-|»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»» displayType|string|true|none|Order Type|
-|»» fee|string|true|none|Transaction fee|
-|»» settleCurrency|string|true|none|Settle Currency|
-|»» orderType|string|true|none|Order type|
-|»» tradeType|string|true|none|Trade type (trade, liquid, cancel, adl or settlement)|
-|»» createdAt|integer(int64)|true|none|Order creation time|
+| Name              | Type           | Required | Restrictions | Description                                                                                                        |
+| ----------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code            | string         | true     | none         | none                                                                                                               |
+| » data            | [object]       | true     | none         | none                                                                                                               |
+| »» symbol         | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» tradeId        | string         | true     | none         | Trade ID                                                                                                           |
+| »» orderId        | string         | true     | none         | Order ID                                                                                                           |
+| »» side           | string         | true     | none         | Transaction side                                                                                                   |
+| »» liquidity      | string         | true     | none         | Liquidity-taker or -maker                                                                                          |
+| »» forceTaker     | boolean        | true     | none         | Whether to force processing as a taker                                                                             |
+| »» price          | string         | true     | none         | Filled price                                                                                                       |
+| »» size           | integer        | true     | none         | Filled amount                                                                                                      |
+| »» value          | string         | true     | none         | Order value                                                                                                        |
+| »» openFeePay     | string         | true     | none         | Opening transaction fee                                                                                            |
+| »» closeFeePay    | string         | true     | none         | Closing transaction fee                                                                                            |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                      |
+| »» feeRate        | string         | true     | none         | Fee Rate                                                                                                           |
+| »» fixFee         | string         | true     | none         | Fixed fees (Deprecated field, no actual use of the value field)                                                    |
+| »» feeCurrency    | string         | true     | none         | Charging currency                                                                                                  |
+| »» tradeTime      | integer(int64) | true     | none         | Trade time in nanoseconds                                                                                          |
+| »» subTradeType   | string         | true     | none         | Deprecated field, no actual use of the value field                                                                 |
+| »» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                            |
+| »» displayType    | string         | true     | none         | Order Type                                                                                                         |
+| »» fee            | string         | true     | none         | Transaction fee                                                                                                    |
+| »» settleCurrency | string         | true     | none         | Settle Currency                                                                                                    |
+| »» orderType      | string         | true     | none         | Order type                                                                                                         |
+| »» tradeType      | string         | true     | none         | Trade type (trade, liquid, cancel, adl or settlement)                                                              |
+| »» createdAt      | integer(int64) | true     | none         | Order creation time                                                                                                |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|side|buy|
-|side|sell|
-|liquidity|taker|
-|liquidity|maker|
-|marginMode|ISOLATED|
-|marginMode|CROSS|
-|displayType|limit|
-|displayType|market|
-|displayType|limit_stop|
-|displayType|market_stop|
-|orderType|market|
-|orderType|limit|
-|tradeType|trade|
-|tradeType|cancel|
-|tradeType|liquid|
-|tradeType|adl|
-|tradeType|settlement|
+| Property    | Value       |
+| ----------- | ----------- |
+| side        | buy         |
+| side        | sell        |
+| liquidity   | taker       |
+| liquidity   | maker       |
+| marginMode  | ISOLATED    |
+| marginMode  | CROSS       |
+| displayType | limit       |
+| displayType | market      |
+| displayType | limit_stop  |
+| displayType | market_stop |
+| orderType   | market      |
+| orderType   | limit       |
+| tradeType   | trade       |
+| tradeType   | cancel      |
+| tradeType   | liquid      |
+| tradeType   | adl         |
+| tradeType   | settlement  |
 
 <aside class="success">
 This operation does not require authentication
@@ -5879,23 +5550,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/fills',
-{
-  method: 'GET',
+fetch("/api/v1/fills", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -5912,32 +5581,34 @@ print(r.json())
 
 `GET /api/v1/fills`
 
-Get a list of recent fills. If you need to get your recent trade history with low latency, please query endpoint Get List of Orders Completed in 24h. The requested data is not real-time.
+Get a list of recent fills. If you need to get your recent trade history with
+low latency, please query endpoint Get List of Orders Completed in 24h. The
+requested data is not real-time.
 
 <h3 id="get-trade-history-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|orderId|query|string|false|List fills for a specific order only (if you specify orderId, other parameters can be ignored)|
-|symbol|query|string|false|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
-|side|query|string|false|Order side|
-|type|query|string|false|Order Type|
-|tradeTypes|query|string|false|Transaction type: trade, adl, liquid, settlement. Supports querying multiple types at the same time, separated by commas. Query all types when empty|
-|startAt|query|integer(int64)|false|Start time (milliseconds)|
-|endAt|query|integer(int64)|false|End time (milliseconds)|
-|currentPage|query|integer|false|Current request page. The default currentPage is 1|
-|pageSize|query|integer|false|pageSize, The default pageSize is 50; the maximum cannot exceed 1000|
+| Name        | In    | Type           | Required | Description                                                                                                                                          |
+| ----------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orderId     | query | string         | false    | List fills for a specific order only (if you specify orderId, other parameters can be ignored)                                                       |
+| symbol      | query | string         | false    | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                   |
+| side        | query | string         | false    | Order side                                                                                                                                           |
+| type        | query | string         | false    | Order Type                                                                                                                                           |
+| tradeTypes  | query | string         | false    | Transaction type: trade, adl, liquid, settlement. Supports querying multiple types at the same time, separated by commas. Query all types when empty |
+| startAt     | query | integer(int64) | false    | Start time (milliseconds)                                                                                                                            |
+| endAt       | query | integer(int64) | false    | End time (milliseconds)                                                                                                                              |
+| currentPage | query | integer        | false    | Current request page. The default currentPage is 1                                                                                                   |
+| pageSize    | query | integer        | false    | pageSize, The default pageSize is 50; the maximum cannot exceed 1000                                                                                 |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|side|buy|
-|side|sell|
-|type|limit|
-|type|market|
-|type|limit_stop|
-|type|market_stop|
+| Parameter | Value       |
+| --------- | ----------- |
+| side      | buy         |
+| side      | sell        |
+| type      | limit       |
+| type      | market      |
+| type      | limit_stop  |
+| type      | market_stop |
 
 > Example responses
 
@@ -5985,10 +5656,7 @@ Get a list of recent fills. If you need to get your recent trade history with lo
               "side": {
                 "type": "string",
                 "description": "Transaction side",
-                "enum": [
-                  "buy",
-                  "sell"
-                ],
+                "enum": ["buy", "sell"],
                 "x-api-enum": [
                   {
                     "value": "buy",
@@ -6005,10 +5673,7 @@ Get a list of recent fills. If you need to get your recent trade history with lo
               "liquidity": {
                 "type": "string",
                 "description": "Liquidity-taker or -maker",
-                "enum": [
-                  "taker",
-                  "maker"
-                ],
+                "enum": ["taker", "maker"],
                 "x-api-enum": [
                   {
                     "value": "taker",
@@ -6074,10 +5739,7 @@ Get a list of recent fills. If you need to get your recent trade history with lo
               "marginMode": {
                 "type": "string",
                 "description": "Margin mode: ISOLATED (isolated), CROSS (cross margin).",
-                "enum": [
-                  "ISOLATED",
-                  "CROSS"
-                ],
+                "enum": ["ISOLATED", "CROSS"],
                 "x-api-enum": [
                   {
                     "value": "ISOLATED",
@@ -6098,12 +5760,7 @@ Get a list of recent fills. If you need to get your recent trade history with lo
               "displayType": {
                 "type": "string",
                 "description": "Order type",
-                "enum": [
-                  "limit",
-                  "market",
-                  "limit_stop",
-                  "market_stop"
-                ],
+                "enum": ["limit", "market", "limit_stop", "market_stop"],
                 "x-api-enum": [
                   {
                     "value": "limit",
@@ -6134,10 +5791,7 @@ Get a list of recent fills. If you need to get your recent trade history with lo
               "orderType": {
                 "type": "string",
                 "description": "Order type",
-                "enum": [
-                  "market",
-                  "limit"
-                ],
+                "enum": ["market", "limit"],
                 "x-api-enum": [
                   {
                     "value": "market",
@@ -6154,12 +5808,7 @@ Get a list of recent fills. If you need to get your recent trade history with lo
               "tradeType": {
                 "type": "string",
                 "description": "Trade type (trade, liquid, adl or settlement)\n",
-                "enum": [
-                  "trade",
-                  "liquid",
-                  "adl",
-                  "settlement"
-                ],
+                "enum": ["trade", "liquid", "adl", "settlement"],
                 "x-api-enum": [
                   {
                     "value": "trade",
@@ -6228,92 +5877,82 @@ Get a list of recent fills. If you need to get your recent trade history with lo
           }
         }
       },
-      "required": [
-        "currentPage",
-        "pageSize",
-        "totalNum",
-        "totalPage",
-        "items"
-      ]
+      "required": ["currentPage", "pageSize", "totalNum", "totalPage", "items"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-trade-history-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-trade-history-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» currentPage|integer|true|none|none|
-|»» pageSize|integer|true|none|none|
-|»» totalNum|integer|true|none|none|
-|»» totalPage|integer|true|none|none|
-|»» items|[object]|true|none|none|
-|»»» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|»»» tradeId|string|true|none|Trade ID|
-|»»» orderId|string|true|none|Order ID|
-|»»» side|string|true|none|Transaction side|
-|»»» liquidity|string|true|none|Liquidity-taker or -maker|
-|»»» forceTaker|boolean|true|none|Whether to force processing as a taker|
-|»»» price|string|true|none|Filled price|
-|»»» size|integer|true|none|Filled amount|
-|»»» value|string|true|none|Order value|
-|»»» openFeePay|string|true|none|Opening transaction fee|
-|»»» closeFeePay|string|true|none|Closing transaction fee|
-|»»» stop|string|true|none|A mark to the stop order type|
-|»»» feeRate|string|true|none|Fee Rate|
-|»»» fixFee|string|true|none|Fixed fees (Deprecated field, no actual use of the value field)|
-|»»» feeCurrency|string|true|none|Charging currency|
-|»»» tradeTime|integer(int64)|true|none|Trade time in nanoseconds|
-|»»» subTradeType|string|true|none|Deprecated field, no actual use of the value field|
-|»»» marginMode|string|true|none|Margin mode: ISOLATED (isolated), CROSS (cross margin).|
-|»»» settleCurrency|string|true|none|Settle currency|
-|»»» displayType|string|true|none|Order type|
-|»»» fee|string|true|none|Trading fee|
-|»»» orderType|string|true|none|Order type|
-|»»» tradeType|string|true|none|Trade type (trade, liquid, adl or settlement)|
-|»»» createdAt|integer(int64)|true|none|Order creation time|
-|»»» openFeeTaxPay|string|true|none|Opening tax fee (Only KYC users in some regions have this parameter)|
-|»»» closeFeeTaxPay|string|true|none|Close tax fee (Only KYC users in some regions have this parameter)|
+| Name               | Type           | Required | Restrictions | Description                                                                                                        |
+| ------------------ | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code             | string         | true     | none         | none                                                                                                               |
+| » data             | object         | true     | none         | none                                                                                                               |
+| »» currentPage     | integer        | true     | none         | none                                                                                                               |
+| »» pageSize        | integer        | true     | none         | none                                                                                                               |
+| »» totalNum        | integer        | true     | none         | none                                                                                                               |
+| »» totalPage       | integer        | true     | none         | none                                                                                                               |
+| »» items           | [object]       | true     | none         | none                                                                                                               |
+| »»» symbol         | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »»» tradeId        | string         | true     | none         | Trade ID                                                                                                           |
+| »»» orderId        | string         | true     | none         | Order ID                                                                                                           |
+| »»» side           | string         | true     | none         | Transaction side                                                                                                   |
+| »»» liquidity      | string         | true     | none         | Liquidity-taker or -maker                                                                                          |
+| »»» forceTaker     | boolean        | true     | none         | Whether to force processing as a taker                                                                             |
+| »»» price          | string         | true     | none         | Filled price                                                                                                       |
+| »»» size           | integer        | true     | none         | Filled amount                                                                                                      |
+| »»» value          | string         | true     | none         | Order value                                                                                                        |
+| »»» openFeePay     | string         | true     | none         | Opening transaction fee                                                                                            |
+| »»» closeFeePay    | string         | true     | none         | Closing transaction fee                                                                                            |
+| »»» stop           | string         | true     | none         | A mark to the stop order type                                                                                      |
+| »»» feeRate        | string         | true     | none         | Fee Rate                                                                                                           |
+| »»» fixFee         | string         | true     | none         | Fixed fees (Deprecated field, no actual use of the value field)                                                    |
+| »»» feeCurrency    | string         | true     | none         | Charging currency                                                                                                  |
+| »»» tradeTime      | integer(int64) | true     | none         | Trade time in nanoseconds                                                                                          |
+| »»» subTradeType   | string         | true     | none         | Deprecated field, no actual use of the value field                                                                 |
+| »»» marginMode     | string         | true     | none         | Margin mode: ISOLATED (isolated), CROSS (cross margin).                                                            |
+| »»» settleCurrency | string         | true     | none         | Settle currency                                                                                                    |
+| »»» displayType    | string         | true     | none         | Order type                                                                                                         |
+| »»» fee            | string         | true     | none         | Trading fee                                                                                                        |
+| »»» orderType      | string         | true     | none         | Order type                                                                                                         |
+| »»» tradeType      | string         | true     | none         | Trade type (trade, liquid, adl or settlement)                                                                      |
+| »»» createdAt      | integer(int64) | true     | none         | Order creation time                                                                                                |
+| »»» openFeeTaxPay  | string         | true     | none         | Opening tax fee (Only KYC users in some regions have this parameter)                                               |
+| »»» closeFeeTaxPay | string         | true     | none         | Close tax fee (Only KYC users in some regions have this parameter)                                                 |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|side|buy|
-|side|sell|
-|liquidity|taker|
-|liquidity|maker|
-|marginMode|ISOLATED|
-|marginMode|CROSS|
-|displayType|limit|
-|displayType|market|
-|displayType|limit_stop|
-|displayType|market_stop|
-|orderType|market|
-|orderType|limit|
-|tradeType|trade|
-|tradeType|liquid|
-|tradeType|adl|
-|tradeType|settlement|
+| Property    | Value       |
+| ----------- | ----------- |
+| side        | buy         |
+| side        | sell        |
+| liquidity   | taker       |
+| liquidity   | maker       |
+| marginMode  | ISOLATED    |
+| marginMode  | CROSS       |
+| displayType | limit       |
+| displayType | market      |
+| displayType | limit_stop  |
+| displayType | market_stop |
+| orderType   | market      |
+| orderType   | limit       |
+| tradeType   | trade       |
+| tradeType   | liquid      |
+| tradeType   | adl         |
+| tradeType   | settlement  |
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
 # Schemas
-

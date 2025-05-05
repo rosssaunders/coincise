@@ -15,7 +15,7 @@
     "fairPrice": 8000,
     "timestamp": 1587442022003
   }
-} 
+}
 ```
 
 > or
@@ -28,11 +28,14 @@
 }
 ```
 
-*   https://contract.mexc.com
+- https://contract.mexc.com
 
-The corresponding API accepts a request of Type GET, POST, or DELETE. The content-type of POST request is: application/JSON.
+The corresponding API accepts a request of Type GET, POST, or DELETE. The
+content-type of POST request is: application/JSON.
 
-Parameters are sent in JSON format (parameter naming rules are camel named), and get requests are sent in requestParam (parameter naming rules are '\_' delimited)
+Parameters are sent in JSON format (parameter naming rules are camel named), and
+get requests are sent in requestParam (parameter naming rules are '\_'
+delimited)
 
 ## Authentication method
 
@@ -106,35 +109,60 @@ public static class SignVo {
 ```
 
 1.  Signature is not required for public endpoint.
-    
-2.  For private endpoint, ApiKey, Request-Time, Signature and Content-Type need to be passed into the header, must be specified as application / JSON, Recv-Window (optional) parameters, Signature is a signature string. The signature rules are as follows:
-    
+2.  For private endpoint, ApiKey, Request-Time, Signature and Content-Type need
+    to be passed into the header, must be specified as application / JSON,
+    Recv-Window (optional) parameters, Signature is a signature string. The
+    signature rules are as follows:
 
-1) When signing, you need to get the request parameter string first. It is "" if there is no parameter:
+1) When signing, you need to get the request parameter string first. It is "" if
+   there is no parameter:
 
-For GET/DELETE requests, the service parameters are spliced in dictionary order with & interval, and finally the signature target string is obtained (in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
+For GET/DELETE requests, the service parameters are spliced in dictionary order
+with & interval, and finally the signature target string is obtained (in the API
+of batch operation, if there are special symbols such as comma in the parameter
+value, these symbols need to be URL encoded when signing).
 
-For POST requests, the signature parameter is a JSON string (dictionary sorting is not required).
+For POST requests, the signature parameter is a JSON string (dictionary sorting
+is not required).
 
-2) After obtaining the parameter string, the signature target string is spliced. The rule is: accessKey + timestamp + obtained parameter string.
+2. After obtaining the parameter string, the signature target string is spliced.
+   The rule is: accessKey + timestamp + obtained parameter string.
 
-3) The HMAC SHA256 algorithm is used to sign the target string, and finally the signature is passed into the header as a parameter.
+3. The HMAC SHA256 algorithm is used to sign the target string, and finally the
+   signature is passed into the header as a parameter.
 
 Note：
 
-1) When the service parameter participating in the signature is null, it does not participate in the signature. For the path parameter, it does not participate in the signature; note that when get request stitches the parameter and pass it in the URL, if the parameter is null, it will be parsed into "" in the background parsing, fixed post request, when the parameter is null, do not pass the parameter, or set the value of the parameter to "" when signing, otherwise signature verification will fail.
+1. When the service parameter participating in the signature is null, it does
+   not participate in the signature. For the path parameter, it does not
+   participate in the signature; note that when get request stitches the
+   parameter and pass it in the URL, if the parameter is null, it will be parsed
+   into "" in the background parsing, fixed post request, when the parameter is
+   null, do not pass the parameter, or set the value of the parameter to "" when
+   signing, otherwise signature verification will fail.
 
-2) When requesting, put the value of Request-Time used in signing into the Request-Time parameter of the header, put the obtained signature string into the signature parameter of the header, put the Access Key of APIKEY into the ApiKey parameter of the header, and pass the other service parameters.
+2. When requesting, put the value of Request-Time used in signing into the
+   Request-Time parameter of the header, put the obtained signature string into
+   the signature parameter of the header, put the Access Key of APIKEY into the
+   ApiKey parameter of the header, and pass the other service parameters.
 
-3) The obtained signature string does not need to be base64 encoded.
+3. The obtained signature string does not need to be base64 encoded.
 
 ## Time security
 
-All APIs that require signature process need to fill in header parameter of Request-time, which is timestamp in milliseconds, when receives the request, the system verifies the time range from which the request was issued. The request is considered invalid if the received req\_time is less or more than 10 seconds (the default value) (the time window can be adjusted by sending an optional header parameter `recv-window` with a maximum value of 60, `recv_window` of 30 seconds or more is not recommended)
+All APIs that require signature process need to fill in header parameter of
+Request-time, which is timestamp in milliseconds, when receives the request, the
+system verifies the time range from which the request was issued. The request is
+considered invalid if the received req_time is less or more than 10 seconds (the
+default value) (the time window can be adjusted by sending an optional header
+parameter `recv-window` with a maximum value of 60, `recv_window` of 30 seconds
+or more is not recommended)
 
 ## Create API key
 
-Users can create API key in the personal center of MEXC, which is used for signature calculation and authentication, an API key is consist of two parts, secret key of Access keyAPI and secret key corresponding to Secret key.
+Users can create API key in the personal center of MEXC, which is used for
+signature calculation and authentication, an API key is consist of two parts,
+secret key of Access keyAPI and secret key corresponding to Secret key.
 
 ---
 
@@ -146,96 +174,102 @@ Every endpoint has the potential for abnormalities.
 
 The following is the error code information that the endpoint might return
 
-| code | description |
-| --- | --- |
-| 0 | Operate succeed |
-| 9999 | Public abnormal |
-| 500 | Internal error |
-| 501 | System busy |
-| 401 | Unauthorized |
-| 402 | Api\_key expired |
-| 406 | Accessed IP is not in the whitelist |
-| 506 | Unknown source of request |
-| 510 | Excessive frequency of requests |
-| 511 | Endpoint inaccessible |
-| 513 | Invalid request(for open api serves time more or less than 10s) |
-| 600 | Parameter error |
-| 601 | Data decoding error |
-| 602 | Verify failed |
-| 603 | Repeated requests |
-| 701 | Account read permission is required |
-| 702 | Account modify permission is required |
-| 703 | Trade information read permission is required |
-| 704 | Transaction information modify permission is required |
-| 1000 | Account does not exist |
-| 1001 | Contract does not exist |
-| 1002 | Contract not activated |
-| 1003 | Error in risk limit level |
-| 1004 | Amount error |
-| 2001 | Wrong order direction |
-| 2002 | Wrong opening type |
-| 2003 | Overpriced to pay |
-| 2004 | Low-price for selling |
-| 2005 | Balance insufficient |
-| 2006 | Leverage ratio error |
-| 2007 | Order price error |
-| 2008 | The quantity is insufficient |
-| 2009 | Positions do not exist or have been closed |
-| 2011 | Order quantity error |
-| 2013 | Cancel orders over maximum limit |
-| 2014 | The quantity of batch order exceeds the limit |
-| 2015 | Price or quantity accuracy error |
-| 2016 | Trigger volume over the maximum |
-| 2018 | Exceeding the maximum available margin |
-| 2019 | There is an active open position |
-| 2021 | The single leverage is not consistent with the existing position leverage |
-| 2022 | Wrong position type |
-| 2023 | There are positions over the maximum leverage |
-| 2024 | There are orders with leverage over the maximum |
-| 2025 | The holding positions is over the maximum allowable positions |
-| 2026 | Modification of leverage is not supported for cross |
-| 2027 | There is only one cross or isolated in the same direction |
-| 2028 | The maximum order quantity is exceeded |
-| 2029 | Error order type |
-| 2030 | External order ID is too long (Max. 32 bits ) |
-| 2031 | The allowable holding position exceed the current risk limit |
-| 2032 | Order price is less than long position force liquidate price |
-| 2033 | Order price is more than short position force liquidate price |
-| 2034 | The batch query quantity limit is exceeded |
-| 2035 | Unsupported market price tier |
-| 3001 | Trigger price type error |
-| 3002 | Trigger type error |
-| 3003 | Executive cycle error |
-| 3004 | Trigger price error |
-| 4001 | Unsupported currency |
-| 2036 | The orders more than the limit, please contact customer service |
-| 2037 | Frequent transactions, please try it later |
-| 2038 | The maximum allowable position quantity is exceeded, please contact customer service! |
-| 5001 | The take-price and the stop-loss price cannot be none at the same time |
-| 5002 | The Stop-Limit order does not exist or has closed |
-| 5003 | Take-profit and stop-loss price setting is wrong |
+| code | description                                                                                     |
+| ---- | ----------------------------------------------------------------------------------------------- |
+| 0    | Operate succeed                                                                                 |
+| 9999 | Public abnormal                                                                                 |
+| 500  | Internal error                                                                                  |
+| 501  | System busy                                                                                     |
+| 401  | Unauthorized                                                                                    |
+| 402  | Api_key expired                                                                                 |
+| 406  | Accessed IP is not in the whitelist                                                             |
+| 506  | Unknown source of request                                                                       |
+| 510  | Excessive frequency of requests                                                                 |
+| 511  | Endpoint inaccessible                                                                           |
+| 513  | Invalid request(for open api serves time more or less than 10s)                                 |
+| 600  | Parameter error                                                                                 |
+| 601  | Data decoding error                                                                             |
+| 602  | Verify failed                                                                                   |
+| 603  | Repeated requests                                                                               |
+| 701  | Account read permission is required                                                             |
+| 702  | Account modify permission is required                                                           |
+| 703  | Trade information read permission is required                                                   |
+| 704  | Transaction information modify permission is required                                           |
+| 1000 | Account does not exist                                                                          |
+| 1001 | Contract does not exist                                                                         |
+| 1002 | Contract not activated                                                                          |
+| 1003 | Error in risk limit level                                                                       |
+| 1004 | Amount error                                                                                    |
+| 2001 | Wrong order direction                                                                           |
+| 2002 | Wrong opening type                                                                              |
+| 2003 | Overpriced to pay                                                                               |
+| 2004 | Low-price for selling                                                                           |
+| 2005 | Balance insufficient                                                                            |
+| 2006 | Leverage ratio error                                                                            |
+| 2007 | Order price error                                                                               |
+| 2008 | The quantity is insufficient                                                                    |
+| 2009 | Positions do not exist or have been closed                                                      |
+| 2011 | Order quantity error                                                                            |
+| 2013 | Cancel orders over maximum limit                                                                |
+| 2014 | The quantity of batch order exceeds the limit                                                   |
+| 2015 | Price or quantity accuracy error                                                                |
+| 2016 | Trigger volume over the maximum                                                                 |
+| 2018 | Exceeding the maximum available margin                                                          |
+| 2019 | There is an active open position                                                                |
+| 2021 | The single leverage is not consistent with the existing position leverage                       |
+| 2022 | Wrong position type                                                                             |
+| 2023 | There are positions over the maximum leverage                                                   |
+| 2024 | There are orders with leverage over the maximum                                                 |
+| 2025 | The holding positions is over the maximum allowable positions                                   |
+| 2026 | Modification of leverage is not supported for cross                                             |
+| 2027 | There is only one cross or isolated in the same direction                                       |
+| 2028 | The maximum order quantity is exceeded                                                          |
+| 2029 | Error order type                                                                                |
+| 2030 | External order ID is too long (Max. 32 bits )                                                   |
+| 2031 | The allowable holding position exceed the current risk limit                                    |
+| 2032 | Order price is less than long position force liquidate price                                    |
+| 2033 | Order price is more than short position force liquidate price                                   |
+| 2034 | The batch query quantity limit is exceeded                                                      |
+| 2035 | Unsupported market price tier                                                                   |
+| 3001 | Trigger price type error                                                                        |
+| 3002 | Trigger type error                                                                              |
+| 3003 | Executive cycle error                                                                           |
+| 3004 | Trigger price error                                                                             |
+| 4001 | Unsupported currency                                                                            |
+| 2036 | The orders more than the limit, please contact customer service                                 |
+| 2037 | Frequent transactions, please try it later                                                      |
+| 2038 | The maximum allowable position quantity is exceeded, please contact customer service!           |
+| 5001 | The take-price and the stop-loss price cannot be none at the same time                          |
+| 5002 | The Stop-Limit order does not exist or has closed                                               |
+| 5003 | Take-profit and stop-loss price setting is wrong                                                |
 | 5004 | The take-profit and stop-loss order volume is more than the holding positions can be liquidated |
-| 6001 | Trading forbidden |
-| 6002 | Open forbidden |
-| 6003 | Time range error |
-| 6004 | The trading pair and status should be fill in |
-| 6005 | The trading pair is not available |
+| 6001 | Trading forbidden                                                                               |
+| 6002 | Open forbidden                                                                                  |
+| 6003 | Time range error                                                                                |
+| 6004 | The trading pair and status should be fill in                                                   |
+| 6005 | The trading pair is not available                                                               |
 
 ---
 
 ## WebSocket API
 
-WebSocket is a new Protocol in HTML5. It realizes full-duplex communication between client and server. A single handshake can establish the connection between the client and the server, and the server can actively send information to the client according to the rules. The advantages are as follows:
+WebSocket is a new Protocol in HTML5. It realizes full-duplex communication
+between client and server. A single handshake can establish the connection
+between the client and the server, and the server can actively send information
+to the client according to the rules. The advantages are as follows:
 
-1.  The request header information is relatively small about 2 bytes when the client and server transfer the data.
+1.  The request header information is relatively small about 2 bytes when the
+    client and server transfer the data.
 2.  Both the client and the server can actively send data to each other.
-3.  No need to create or destroy TCP requests many times, saving bandwidth and server resources.
+3.  No need to create or destroy TCP requests many times, saving bandwidth and
+    server resources.
 
-Developers are strongly advised to use the WebSocket API for market trends and buying/ selling depth information.
+Developers are strongly advised to use the WebSocket API for market trends and
+buying/ selling depth information.
 
 ## Native WS connection address
 
-*   wss://contract.mexc.com/edge
+- wss://contract.mexc.com/edge
 
 ## Detailed data interaction commands
 
@@ -256,9 +290,11 @@ Developers are strongly advised to use the WebSocket API for market trends and b
 }
 ```
 
-List of subscribe/unsubscribe data commands ( ws identification is not required except the list of personal related commands)
+List of subscribe/unsubscribe data commands ( ws identification is not required
+except the list of personal related commands)
 
-If no ping is received within 1 minute, the connection will be disconnected. It is recommended to send a ping for 10-20 seconds
+If no ping is received within 1 minute, the connection will be disconnected. It
+is recommended to send a ping for 10-20 seconds
 
 The ping message and server return are shown on the right
 
@@ -393,16 +429,19 @@ The ping message and server return are shown on the right
 }
 ```
 
-All private data will be pushed after login:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.
+All private data will be pushed after
+login:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.
 
-1.  If want to cancel the default push,add params when login: `"subscribe":false`.
-    
-2.  after login sucess,send "personal.filter" to filter the subscription，if want all data be pushed,send: `{"method":"personal.filter"}`or `{"method":"personal.filter","param":{"filters":[]}}`.
-    
-3.  available key for filter:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.
-    
+1.  If want to cancel the default push,add params when login:
+    `"subscribe":false`.
+2.  after login sucess,send "personal.filter" to filter the subscription，if
+    want all data be pushed,send: `{"method":"personal.filter"}`or
+    `{"method":"personal.filter","param":{"filters":[]}}`.
+3.  available key for
+    filter:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.
 
-only asset and adl.level not support for filter single currency or single future.
+only asset and adl.level not support for filter single currency or single
+future.
 
 The filter event sent later will overwrites the previous one.
 
@@ -416,7 +455,7 @@ The filter event sent later will overwrites the previous one.
 {
   "method": "sub.tickers",
   "param": {}
-} 
+}
 ```
 
 > If you want to return content (the same with following subscription):
@@ -426,7 +465,7 @@ The filter event sent later will overwrites the previous one.
   "method": "sub.tickers",
   "param": {},
   "gzip": false
-} 
+}
 ```
 
 > Unsubscribe
@@ -435,7 +474,7 @@ The filter event sent later will overwrites the previous one.
 {
   "method": "unsub.tickers",
   "param": {}
-} 
+}
 ```
 
 > Example
@@ -460,22 +499,24 @@ The filter event sent later will overwrites the previous one.
     }
   ],
   "ts": 1587442022003
-} 
+}
 ```
 
-Get the latest transaction price, buy-price, sell-price and 24 transaction volume of all the perpetual contracts on the platform without login. Send once a second after subscribing.
+Get the latest transaction price, buy-price, sell-price and 24 transaction
+volume of all the perpetual contracts on the platform without login. Send once a
+second after subscribing.
 
 subscribe , unsubscribe, example is shown on the right.
 
 **Response parameters:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| lastPrice | decimal | the last price |
-| volume24 | decimal | 24 hours trading volume, according to the statistics count |
-| riseFallRate | decimal | rise/fall rate |
-| fairPrice | decimal | fair price |
+| Parameter    | Data Type | Description                                                |
+| ------------ | --------- | ---------------------------------------------------------- |
+| symbol       | string    | the name of the contract                                   |
+| lastPrice    | decimal   | the last price                                             |
+| volume24     | decimal   | 24 hours trading volume, according to the statistics count |
+| riseFallRate | decimal   | rise/fall rate                                             |
+| fairPrice    | decimal   | fair price                                                 |
 
 ### Ticker
 
@@ -530,28 +571,30 @@ subscribe , unsubscribe, example is shown on the right.
 }
 ```
 
-Get the latest transaction price, buy price, sell price and 24 transaction volume of a contract, send the transaction data without users' login, and send once a second after subscription.
+Get the latest transaction price, buy price, sell price and 24 transaction
+volume of a contract, send the transaction data without users' login, and send
+once a second after subscription.
 
 subscribe , unsubscribe, example is shown on the right.
 
 **Response parameters:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| lastPrice | decimal | last price |
-| bid1 | decimal | bid/price |
-| ask1 | decimal | ask/price |
-| volume24 | decimal | 24 hours transaction volume, according to the statistical count |
-| holdVol | decimal | hold volume |
-| lower24Price | decimal | lowest price within 24 hours |
-| high24Price | decimal | highest price in 24 hours |
-| riseFallRate | decimal | rise fall rate |
-| riseFallValue | decimal | rise fall value |
-| indexPrice | decimal | index price |
-| fairPrice | decimal | fair price |
-| fundingRate | decimal | funding fee |
-| timestamp | long | system timestamp |
+| Parameter     | Data Type | Description                                                     |
+| ------------- | --------- | --------------------------------------------------------------- |
+| symbol        | string    | the name of the contract                                        |
+| lastPrice     | decimal   | last price                                                      |
+| bid1          | decimal   | bid/price                                                       |
+| ask1          | decimal   | ask/price                                                       |
+| volume24      | decimal   | 24 hours transaction volume, according to the statistical count |
+| holdVol       | decimal   | hold volume                                                     |
+| lower24Price  | decimal   | lowest price within 24 hours                                    |
+| high24Price   | decimal   | highest price in 24 hours                                       |
+| riseFallRate  | decimal   | rise fall rate                                                  |
+| riseFallValue | decimal   | rise fall value                                                 |
+| indexPrice    | decimal   | index price                                                     |
+| fairPrice     | decimal   | fair price                                                      |
+| fundingRate   | decimal   | funding fee                                                     |
+| timestamp     | long      | system timestamp                                                |
 
 ### Transaction
 
@@ -601,14 +644,14 @@ subscribe , unsubscribe, example is shown on the right.
 
 **Response parameters:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| p | decimal | transaction price |
-| v | decimal | volume |
-| T | int | transaction direction,1:purchase,2:sell |
-| O | int | open position, 1: open position,2:close position,3:position no change,volume is the additional position when O is 1 |
-| M | int | Is it auto-transact ? 1: Yes,2: No |
-| t | long | transaction time |
+| Parameter | Data Type | Description                                                                                                         |
+| --------- | --------- | ------------------------------------------------------------------------------------------------------------------- |
+| p         | decimal   | transaction price                                                                                                   |
+| v         | decimal   | volume                                                                                                              |
+| T         | int       | transaction direction,1:purchase,2:sell                                                                             |
+| O         | int       | open position, 1: open position,2:close position,3:position no change,volume is the additional position when O is 1 |
+| M         | int       | Is it auto-transact ? 1: Yes,2: No                                                                                  |
+| t         | long      | transaction time                                                                                                    |
 
 ### Depth
 
@@ -635,7 +678,8 @@ subscribe , unsubscribe, example is shown on the right.
 }
 ```
 
-> Full subscription(Limit could be 5, 10 or 20, default 20 without define., only subscribe to the full amount of one gear)
+> Full subscription(Limit could be 5, 10 or 20, default 20 without define., only
+> subscribe to the full amount of one gear)
 
 ```
 {
@@ -691,17 +735,20 @@ subscribe , unsubscribe, example is shown on the right.
 }
 ```
 
-subscribe , unsubscribe, example is shown on the right. Incremental depth subscription has merging enabled by default. If you do not want to enable it, please set `compress` to `false` when subscribing.
+subscribe , unsubscribe, example is shown on the right. Incremental depth
+subscription has merging enabled by default. If you do not want to enable it,
+please set `compress` to `false` when subscribing.
 
 **Response Parameter:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| asks | List | seller depth |
-| bids | List | buyer depth |
-| version | long | the version number |
+| Parameter | Data Type | Description        |
+| --------- | --------- | ------------------ |
+| asks      | List      | seller depth       |
+| bids      | List      | buyer depth        |
+| version   | long      | the version number |
 
-Tip: \[411.8, 10, 1\] 411.8 is price，10 is the order numbers of the contract ,1 is the order quantity
+Tip: \[411.8, 10, 1\] 411.8 is price，10 is the order numbers of the contract ,1
+is the order quantity
 
 ### K-line
 
@@ -753,21 +800,22 @@ Get the k-line data of the contract and keep updating.
 
 subscribe , unsubscribe, example is shown on the right.
 
-interval optional parameters: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1
+interval optional parameters:
+Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1
 
 **Response parameters:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| a | decimal | total transaction amount |
-| c | decimal | the closing price |
-| interval | string | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1 |
-| l | decimal | the lowest price |
-| o | decimal | the opening price |
-| q | decimal | total transaction volume |
-| h | decimal | the highest price |
-| t | long | trading time，unit：second（s）， the start time of the window（windowStart） |
+| Parameter | Data Type | Description                                                                   |
+| --------- | --------- | ----------------------------------------------------------------------------- |
+| symbol    | string    | the name of the contract                                                      |
+| a         | decimal   | total transaction amount                                                      |
+| c         | decimal   | the closing price                                                             |
+| interval  | string    | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1  |
+| l         | decimal   | the lowest price                                                              |
+| o         | decimal   | the opening price                                                             |
+| q         | decimal   | total transaction volume                                                      |
+| h         | decimal   | the highest price                                                             |
+| t         | long      | trading time，unit：second（s）， the start time of the window（windowStart） |
 
 ### Funding rate
 
@@ -813,11 +861,11 @@ subscribe , unsubscribe, example is shown on the right.
 
 **Response parameters:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| fundingRate | decimal | funding rate |
-| nextSettleTime | long | next liquidate time |
+| Parameter      | Data Type | Description              |
+| -------------- | --------- | ------------------------ |
+| symbol         | string    | the name of the contract |
+| fundingRate    | decimal   | funding rate             |
+| nextSettleTime | long      | next liquidate time      |
 
 ### Index price
 
@@ -863,10 +911,10 @@ subscribe , unsubscribe, example is shown on the right.
 
 **Response parameters:**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| price | decimal | price |
+| Parameter | Data Type | Description              |
+| --------- | --------- | ------------------------ |
+| symbol    | string    | the name of the contract |
+| price     | decimal   | price                    |
 
 ### Fair price
 
@@ -910,16 +958,17 @@ subscribe , unsubscribe, example is shown on the right.
 
 **Response parameters**
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| price | decimal | price |
+| Parameter | Data Type | Description              |
+| --------- | --------- | ------------------------ |
+| symbol    | string    | the name of the contract |
+| price     | decimal   | price                    |
 
 ## Private Channels
 
 **Signature:**
 
-The signature target string is: accessKey + timestamp,The HMAC SHA256 algorithm is used to sign the target string.
+The signature target string is: accessKey + timestamp,The HMAC SHA256 algorithm
+is used to sign the target string.
 
 **Signature String:**
 
@@ -949,7 +998,8 @@ The signature target string is: accessKey + timestamp,The HMAC SHA256 algorithm 
 
 **Response parameters:**
 
-Success: none, failure: return the corresponding error message, channel = rs.error
+Success: none, failure: return the corresponding error message, channel =
+rs.error
 
 Login successful (channel = rs.login)
 
@@ -993,31 +1043,31 @@ Login successful (channel = rs.login)
 
 `channel = push.personal.order`
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| orderId | long | orderid |
-| symbol | string | the name of the contract |
-| positionId | long | position id |
-| price | decimal | trigger price |
-| vol | decimal | trigger volume |
-| leverage | long | leverage |
-| side | int | order side 1open long,2close short,3open short 4 close long |
-| category | int | order category:1limit order, 2 system take-over delegate, 3 close delegate 4 ADL reduction |
-| orderType | int | true |
-| dealAvgPrice | decimal | transaction average price |
-| dealVol | decimal | transaction volume |
-| orderMargin | decimal | order margin |
-| usedMargin | decimal | used margin |
-| takerFee | decimal | taker fee |
-| makerFee | decimal | maker fee |
-| profit | decimal | close profit |
-| feeCurrency | string | fee currency |
-| openType | int | open type,1:isolated,2:cross |
-| state | int | order state,1 uninformed,2 uncompleted,3 completed,4 cancelled,5 invalid |
-| errorCode | int | error code, 0:normal, 1:param\_invalid, 2:insufficient\_balance, 3:position\_not\_exists, 4:position\_not\_enough, 5:position\_liq, 6:order\_liq, 7:risk\_level\_limit, 8:sys\_cancel, 9:position\_mode\_not\_match, 10:reduce\_only\_liq, 11:contract\_not\_enable, 12:delivery\_cancel, 13:position\_liq\_cancel, 14:adl\_cancel, 15:black\_user\_cancel, 16:settle\_funding\_cancel, 17:position\_im\_change\_cancel, 18:ioc\_cancel, 19:fok\_cancel, 20:post\_only\_cancel, 21:market\_cancel |
-| externalOid | string | external order id |
-| createTime | date | create time |
-| updateTime | date | update time |
+| Parameter    | Data Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orderId      | long      | orderid                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| symbol       | string    | the name of the contract                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| positionId   | long      | position id                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| price        | decimal   | trigger price                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| vol          | decimal   | trigger volume                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| leverage     | long      | leverage                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| side         | int       | order side 1open long,2close short,3open short 4 close long                                                                                                                                                                                                                                                                                                                                                                                                     |
+| category     | int       | order category:1limit order, 2 system take-over delegate, 3 close delegate 4 ADL reduction                                                                                                                                                                                                                                                                                                                                                                      |
+| orderType    | int       | true                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| dealAvgPrice | decimal   | transaction average price                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| dealVol      | decimal   | transaction volume                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| orderMargin  | decimal   | order margin                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| usedMargin   | decimal   | used margin                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| takerFee     | decimal   | taker fee                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| makerFee     | decimal   | maker fee                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| profit       | decimal   | close profit                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| feeCurrency  | string    | fee currency                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| openType     | int       | open type,1:isolated,2:cross                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| state        | int       | order state,1 uninformed,2 uncompleted,3 completed,4 cancelled,5 invalid                                                                                                                                                                                                                                                                                                                                                                                        |
+| errorCode    | int       | error code, 0:normal, 1:param_invalid, 2:insufficient_balance, 3:position_not_exists, 4:position_not_enough, 5:position_liq, 6:order_liq, 7:risk_level_limit, 8:sys_cancel, 9:position_mode_not_match, 10:reduce_only_liq, 11:contract_not_enable, 12:delivery_cancel, 13:position_liq_cancel, 14:adl_cancel, 15:black_user_cancel, 16:settle_funding_cancel, 17:position_im_change_cancel, 18:ioc_cancel, 19:fok_cancel, 20:post_only_cancel, 21:market_cancel |
+| externalOid  | string    | external order id                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| createTime   | date      | create time                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| updateTime   | date      | update time                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### Asset
 
@@ -1039,13 +1089,13 @@ Login successful (channel = rs.login)
 
 `channel = push.personal.asset`
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| currency | string | currency |
-| positionMargin | decimal | position margin |
-| frozenBalance | decimal | frozen balance |
-| availableBalance | decimal | available balance |
-| cashBalance | decimal | drawable balance |
+| Parameter        | Data Type | Description       |
+| ---------------- | --------- | ----------------- |
+| currency         | string    | currency          |
+| positionMargin   | decimal   | position margin   |
+| frozenBalance    | decimal   | frozen balance    |
+| availableBalance | decimal   | available balance |
+| cashBalance      | decimal   | drawable balance  |
 
 ### Position
 
@@ -1080,42 +1130,42 @@ Login successful (channel = rs.login)
 
 `channel = push.personal.position`
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| positionId | long | position id |
-| symbol | string | the name of the contract |
-| holdVol | decimal | hold volume |
-| positionType | int | position type， 1long 2short |
-| openType | int | open type， 1isolated 2cross |
-| state | int | position state,1holding2system holding 3closed |
-| frozenVol | decimal | frozen volume |
-| closeVol | decimal | close volume |
-| holdAvgPrice | decimal | hold average price |
-| closeAvgPrice | decimal | close average price |
-| openAvgPrice | decimal | open average price |
-| liquidatePrice | decimal | liquidate price |
-| oim | decimal | original initial margin |
-| adlLevel | int | the value of ADL is 1-5. If it is empty, wait for the refresh |
-| im | decimal | initial margin， add or subtract this item can be used to adjust the liquidate price |
-| holdFee | decimal | hold fee, positive means u get it, negative means lose it |
-| realised | decimal | realized profit and loss |
-| createTime | date | create time |
-| updateTime | date | update time |
+| Parameter      | Data Type | Description                                                                          |
+| -------------- | --------- | ------------------------------------------------------------------------------------ |
+| positionId     | long      | position id                                                                          |
+| symbol         | string    | the name of the contract                                                             |
+| holdVol        | decimal   | hold volume                                                                          |
+| positionType   | int       | position type， 1long 2short                                                         |
+| openType       | int       | open type， 1isolated 2cross                                                         |
+| state          | int       | position state,1holding2system holding 3closed                                       |
+| frozenVol      | decimal   | frozen volume                                                                        |
+| closeVol       | decimal   | close volume                                                                         |
+| holdAvgPrice   | decimal   | hold average price                                                                   |
+| closeAvgPrice  | decimal   | close average price                                                                  |
+| openAvgPrice   | decimal   | open average price                                                                   |
+| liquidatePrice | decimal   | liquidate price                                                                      |
+| oim            | decimal   | original initial margin                                                              |
+| adlLevel       | int       | the value of ADL is 1-5. If it is empty, wait for the refresh                        |
+| im             | decimal   | initial margin， add or subtract this item can be used to adjust the liquidate price |
+| holdFee        | decimal   | hold fee, positive means u get it, negative means lose it                            |
+| realised       | decimal   | realized profit and loss                                                             |
+| createTime     | date      | create time                                                                          |
+| updateTime     | date      | update time                                                                          |
 
 ### Risk limitation
 
 `channel = push.personal.risk.limit`
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| symbol | string | the name of the contract |
-| positionType | int | position type 1:long，2:short |
-| riskSource | int | Source of risk 0:other 1:Liquidation Service |
-| level | int | current risk level |
-| maxVol | decimal | maximum position volume |
-| maxLeverage | int | maximum leverage ratio |
-| mmr | decimal | maintenance margin rate |
-| imr | decimal | initial margin rate |
+| Parameter    | Data Type | Description                                  |
+| ------------ | --------- | -------------------------------------------- |
+| symbol       | string    | the name of the contract                     |
+| positionType | int       | position type 1:long，2:short                |
+| riskSource   | int       | Source of risk 0:other 1:Liquidation Service |
+| level        | int       | current risk level                           |
+| maxVol       | decimal   | maximum position volume                      |
+| maxLeverage  | int       | maximum leverage ratio                       |
+| mmr          | decimal   | maintenance margin rate                      |
+| imr          | decimal   | initial margin rate                          |
 
 ### Adl automatic reduction of position level
 
@@ -1134,10 +1184,10 @@ Login successful (channel = rs.login)
 
 `channel = push.personal.adl.level`
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| adlLevel | int | the current adl level ：1-5 |
-| positionId | long | position id |
+| Parameter  | Data Type | Description                 |
+| ---------- | --------- | --------------------------- |
+| adlLevel   | int       | the current adl level ：1-5 |
+| positionId | long      | position id                 |
 
 ### Position Mode
 
@@ -1153,9 +1203,9 @@ Login successful (channel = rs.login)
 
 `channel = push.personal.position.mode`
 
-| Parameter | Data Type | Description |
-| --- | --- | --- |
-| positionMode | int | position mode,1:hedge，2:one-way |
+| Parameter    | Data Type | Description                      |
+| ------------ | --------- | -------------------------------- |
+| positionMode | int       | position mode,1:hedge，2:one-way |
 
 ## How is depth information maintained
 
@@ -1189,14 +1239,26 @@ Login successful (channel = rs.login)
 
 **How is incremental depth information maintained:**
 
-1.  Though /api/v1/contract/depth/BTC\_USDT to get full amount of depth information, save the current version.
-2.  Subscribe to ws depth information, if the received data version more than the current version after update, the later received update cover the previous one at the same price.
-3.  Through /api/v1/contract/depth\_commits/BTC\_USDT/1000 get the latest 1000 depth snapshots.
-4.  Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information
-5.  Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS
-6.  The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.
-7.  The amount of hanging orders in each event represents the absolute value of the current hanging orders of the price, rather than the relative change.
-8.  If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.
+1.  Though /api/v1/contract/depth/BTC_USDT to get full amount of depth
+    information, save the current version.
+2.  Subscribe to ws depth information, if the received data version more than
+    the current version after update, the later received update cover the
+    previous one at the same price.
+3.  Through /api/v1/contract/depth_commits/BTC_USDT/1000 get the latest 1000
+    depth snapshots.
+4.  Discard version data from the snapshot obtained by Version (less than step 3
+    )for the same price in the current cached depth information
+5.  Update the contents of the deep snapshots to the local cache and keep
+    updating from the event received by the WS
+6.  The version of each new event should be exactly equal to version+1 of the
+    previous event, otherwise packet loss may occur. In case of packet loss or
+    discontinuous version of the event retrieved, please re-initialize from
+    Step 3.
+7.  The amount of hanging orders in each event represents the absolute value of
+    the current hanging orders of the price, rather than the relative change.
+8.  If the amount of a hanging order corresponding to a certain price is 0, it
+    means that the hanging order at that price has been cancelled, the price
+    should be removed.
 
 **Subscriptions，subscribe succeed response:**
 

@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="kucoin-futures-websocket-api">KuCoin Futures WebSocket API v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 futures_public
 
@@ -26,23 +26,21 @@ futures_public
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/tickerV2/contractMarket/tickerV2:_symbol_',
-{
-  method: 'TRACE',
+fetch("/tickerV2/contractMarket/tickerV2:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -59,7 +57,10 @@ print(r.json())
 
 `TRACE /tickerV2/contractMarket/tickerV2:_symbol_`
 
-Subscribe to this topic to get real-time pushes of BBO changes. After subscription, when there are changes in the order book (not necessarily ask1/bid1 changes), the system will push the real-time ticker symbol information to you.
+Subscribe to this topic to get real-time pushes of BBO changes. After
+subscription, when there are changes in the order book (not necessarily
+ask1/bid1 changes), the system will push the real-time ticker symbol information
+to you.
 
 > Example responses
 
@@ -119,21 +120,15 @@ Subscribe to this topic to get real-time pushes of BBO changes. After subscripti
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="get-ticker-v2-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_tickerv2](#schemafutures_futures_public_tickerv2)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_tickerv2](#schemafutures_futures_public_tickerv2) |
 
 <aside class="success">
 This operation does not require authentication
@@ -144,23 +139,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/tickerV1/contractMarket/ticker:_symbol_',
-{
-  method: 'TRACE',
+fetch("/tickerV1/contractMarket/ticker:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -177,7 +170,9 @@ print(r.json())
 
 `TRACE /tickerV1/contractMarket/ticker:_symbol_`
 
-Subscribe to this topic to get real-time pushes on BBO changes. It is not recommended to use this topic any more. For real-time ticker information, please subscribe /contractMarket/tickerV2:{symbol}.
+Subscribe to this topic to get real-time pushes on BBO changes. It is not
+recommended to use this topic any more. For real-time ticker information, please
+subscribe /contractMarket/tickerV2:{symbol}.
 
 > Example responses
 
@@ -253,21 +248,15 @@ Subscribe to this topic to get real-time pushes on BBO changes. It is not recomm
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="get-ticker(not-recommended)-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_tickerV1](#schemafutures_futures_public_tickerv1)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_tickerV1](#schemafutures_futures_public_tickerv1) |
 
 <aside class="success">
 This operation does not require authentication
@@ -278,23 +267,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel5/contractMarket/level2Depth5:_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel5/contractMarket/level2Depth5:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -311,7 +298,8 @@ print(r.json())
 
 `TRACE /orderbookLevel5/contractMarket/level2Depth5:_symbol_`
 
-The system will return the 5 best ask/bid orders data. If there is no change in the market, data will not be pushed
+The system will return the 5 best ask/bid orders data. If there is no change in
+the market, data will not be pushed
 
 > Example responses
 
@@ -371,30 +359,18 @@ The system will return the 5 best ask/bid orders data. If there is no change in 
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="orderbook---level5-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_orderbookLevel5](#schemafutures_futures_public_orderbooklevel5)|
+| Status | Meaning                                                 | Description | Schema                                                                                  |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_orderbookLevel5](#schemafutures_futures_public_orderbooklevel5) |
 
 <aside class="success">
 This operation does not require authentication
@@ -405,23 +381,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel50/contractMarket/level2Depth50:_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel50/contractMarket/level2Depth50:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -498,30 +472,18 @@ The depth50 market data.
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="orderbook---level50-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_orderbookLevel50](#schemafutures_futures_public_orderbooklevel50)|
+| Status | Meaning                                                 | Description | Schema                                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_orderbookLevel50](#schemafutures_futures_public_orderbooklevel50) |
 
 <aside class="success">
 This operation does not require authentication
@@ -532,23 +494,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookIncrement/contractMarket/level2:_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookIncrement/contractMarket/level2:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -565,7 +525,8 @@ print(r.json())
 
 `TRACE /orderbookIncrement/contractMarket/level2:_symbol_`
 
-The system will return the increment change orderbook data (all depth). If there is no change in the market, data will not be pushed.
+The system will return the increment change orderbook data (all depth). If there
+is no change in the market, data will not be pushed.
 
 > Example responses
 
@@ -603,28 +564,18 @@ The system will return the increment change orderbook data (all depth). If there
           "format": "int64"
         }
       },
-      "required": [
-        "sequence",
-        "change",
-        "timestamp"
-      ]
+      "required": ["sequence", "change", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="orderbook---increment-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_orderbookIncrement](#schemafutures_futures_public_orderbookincrement)|
+| Status | Meaning                                                 | Description | Schema                                                                                        |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_orderbookIncrement](#schemafutures_futures_public_orderbookincrement) |
 
 <aside class="success">
 This operation does not require authentication
@@ -635,23 +586,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/klines/contractMarket/limitCandle:_symbol___type_',
-{
-  method: 'TRACE',
+fetch("/klines/contractMarket/limitCandle:_symbol___type_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -704,30 +653,21 @@ Subscribe to this topic to get K-Line data.
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "candles",
-        "time"
-      ]
+      "required": ["symbol", "candles", "time"]
     },
     "subject": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "data",
-    "subject"
-  ]
+  "required": ["topic", "type", "data", "subject"]
 }
 ```
 
 <h3 id="klines-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_klines](#schemafutures_futures_public_klines)|
+| Status | Meaning                                                 | Description | Schema                                                                |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_klines](#schemafutures_futures_public_klines) |
 
 <aside class="success">
 This operation does not require authentication
@@ -738,23 +678,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/execution/contractMarket/execution:_symbol_',
-{
-  method: 'TRACE',
+fetch("/execution/contractMarket/execution:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -771,7 +709,8 @@ print(r.json())
 
 `TRACE /execution/contractMarket/execution:_symbol_`
 
-For each order executed, the system will send you the match messages in the format as following.
+For each order executed, the system will send you the match messages in the
+format as following.
 
 > Example responses
 
@@ -839,21 +778,15 @@ For each order executed, the system will send you the match messages in the form
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="match-execution-data.-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_matchExecution](#schemafutures_futures_public_matchexecution)|
+| Status | Meaning                                                 | Description | Schema                                                                                |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_matchExecution](#schemafutures_futures_public_matchexecution) |
 
 <aside class="success">
 This operation does not require authentication
@@ -864,23 +797,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/instrument/contract/instrument:_symbol_',
-{
-  method: 'TRACE',
+fetch("/instrument/contract/instrument:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -912,10 +843,7 @@ Subscribe this topic to get the mark Price, index Price or funding fee Rate
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "mark.index.price",
-        "funding.rate"
-      ],
+      "enum": ["mark.index.price", "funding.rate"],
       "x-api-enum": [
         {
           "value": "mark.index.price",
@@ -950,29 +878,21 @@ Subscribe this topic to get the mark Price, index Price or funding fee Rate
           "type": "number"
         }
       },
-      "required": [
-        "granularity",
-        "timestamp"
-      ]
+      "required": ["granularity", "timestamp"]
     },
     "type": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "subject",
-    "data",
-    "type"
-  ]
+  "required": ["topic", "subject", "data", "type"]
 }
 ```
 
 <h3 id="instrument-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_instrument](#schemafutures_futures_public_instrument)|
+| Status | Meaning                                                 | Description | Schema                                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_instrument](#schemafutures_futures_public_instrument) |
 
 <aside class="success">
 This operation does not require authentication
@@ -983,23 +903,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/announcement/contract/announcement:_symbol_',
-{
-  method: 'TRACE',
+fetch("/announcement/contract/announcement:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1056,28 +974,18 @@ Subscribe this topic to get Funding Fee Settlement.
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "fundingTime",
-        "fundingRate",
-        "timestamp"
-      ]
+      "required": ["symbol", "fundingTime", "fundingRate", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
 ```
 
 <h3 id="announcement-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_fundingFeeSettlement](#schemafutures_futures_public_fundingfeesettlement)|
+| Status | Meaning                                                 | Description | Schema                                                                                            |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_fundingFeeSettlement](#schemafutures_futures_public_fundingfeesettlement) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1088,23 +996,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/symbolSnapshot/contractMarket/snapshot:_symbol_',
-{
-  method: 'TRACE',
+fetch("/symbolSnapshot/contractMarket/snapshot:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1192,21 +1098,15 @@ Get symbol snapshot.
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "id",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "id", "data"]
 }
 ```
 
 <h3 id="symbol-snapshot-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_symbolSnapshot](#schemafutures_futures_public_symbolsnapshot)|
+| Status | Meaning                                                 | Description | Schema                                                                                |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_symbolSnapshot](#schemafutures_futures_public_symbolsnapshot) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1217,23 +1117,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/order/contractMarket/tradeOrders:_symbol_',
-{
-  method: 'TRACE',
+fetch("/order/contractMarket/tradeOrders:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1268,10 +1166,7 @@ Push order changes for the specified symbol
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "orderChange",
-        "symbolOrderChange"
-      ],
+      "enum": ["orderChange", "symbolOrderChange"],
       "x-api-enum": [
         {
           "value": "orderChange",
@@ -1300,10 +1195,7 @@ Push order changes for the specified symbol
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -1320,10 +1212,7 @@ Push order changes for the specified symbol
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -1348,10 +1237,7 @@ Push order changes for the specified symbol
         },
         "marginMode": {
           "type": "string",
-          "enum": [
-            "ISOLATED",
-            "CROSS"
-          ],
+          "enum": ["ISOLATED", "CROSS"],
           "description": "Margin Mode",
           "x-api-enum": [
             {
@@ -1369,13 +1255,7 @@ Push order changes for the specified symbol
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled"],
           "x-api-enum": [
             {
               "value": "open",
@@ -1428,11 +1308,7 @@ Push order changes for the specified symbol
         "status": {
           "type": "string",
           "description": "Order Status",
-          "enum": [
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["open", "match", "done"],
           "x-api-enum": [
             {
               "value": "open",
@@ -1458,10 +1334,7 @@ Push order changes for the specified symbol
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -1478,10 +1351,7 @@ Push order changes for the specified symbol
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -1519,10 +1389,7 @@ Push order changes for the specified symbol
         "tradeType": {
           "type": "string",
           "description": "normal order or liquid order",
-          "enum": [
-            "trade",
-            "liquid"
-          ],
+          "enum": ["trade", "liquid"],
           "x-api-enum": [
             {
               "value": "trade",
@@ -1555,22 +1422,15 @@ Push order changes for the specified symbol
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
 ```
 
 <h3 id="order-change-pushes.-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_orders](#schemafutures_futures_private_orders)|
+| Status | Meaning                                                 | Description | Schema                                                                  |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_orders](#schemafutures_futures_private_orders) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1581,23 +1441,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/allOrder/contractMarket/tradeOrders',
-{
-  method: 'TRACE',
+fetch("/allOrder/contractMarket/tradeOrders", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1632,10 +1490,7 @@ Push order changes for all symbol
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "orderChange",
-        "symbolOrderChange"
-      ],
+      "enum": ["orderChange", "symbolOrderChange"],
       "x-api-enum": [
         {
           "value": "orderChange",
@@ -1664,10 +1519,7 @@ Push order changes for all symbol
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -1684,10 +1536,7 @@ Push order changes for all symbol
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -1712,10 +1561,7 @@ Push order changes for all symbol
         },
         "marginMode": {
           "type": "string",
-          "enum": [
-            "ISOLATED",
-            "CROSS"
-          ],
+          "enum": ["ISOLATED", "CROSS"],
           "description": "Margin Mode",
           "x-api-enum": [
             {
@@ -1733,13 +1579,7 @@ Push order changes for all symbol
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled"],
           "x-api-enum": [
             {
               "value": "open",
@@ -1792,11 +1632,7 @@ Push order changes for all symbol
         "status": {
           "type": "string",
           "description": "Order Status",
-          "enum": [
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["open", "match", "done"],
           "x-api-enum": [
             {
               "value": "open",
@@ -1822,10 +1658,7 @@ Push order changes for all symbol
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -1842,10 +1675,7 @@ Push order changes for all symbol
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -1883,10 +1713,7 @@ Push order changes for all symbol
         "tradeType": {
           "type": "string",
           "description": "normal order or liquid order",
-          "enum": [
-            "trade",
-            "liquid"
-          ],
+          "enum": ["trade", "liquid"],
           "x-api-enum": [
             {
               "value": "trade",
@@ -1919,22 +1746,15 @@ Push order changes for all symbol
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
 ```
 
 <h3 id="all-order-change-pushes.-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_allOrders](#schemafutures_futures_private_allorders)|
+| Status | Meaning                                                 | Description | Schema                                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_allOrders](#schemafutures_futures_private_allorders) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1945,23 +1765,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/balance/contractAccount/wallet',
-{
-  method: 'TRACE',
+fetch("/balance/contractAccount/wallet", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2103,9 +1921,9 @@ Subscribe to this topic to get real-time balance change pushes
 
 <h3 id="the-balance-change-push-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_balance](#schemafutures_futures_private_balance)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_balance](#schemafutures_futures_private_balance) |
 
 <aside class="success">
 This operation does not require authentication
@@ -2116,23 +1934,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/position/contract/position:_symbol_',
-{
-  method: 'TRACE',
+fetch("/position/contract/position:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2175,11 +1991,7 @@ Subscribe this topic to get real-time pushes on symbols’ position change event
         "symbol": {
           "type": "string",
           "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070) ",
-          "example": [
-            "XBTUSDTM",
-            "XBTUSDM",
-            "ETHUSDTM"
-          ]
+          "example": ["XBTUSDTM", "XBTUSDM", "ETHUSDTM"]
         },
         "crossMode": {
           "type": "boolean",
@@ -2286,10 +2098,7 @@ Subscribe this topic to get real-time pushes on symbols’ position change event
         "marginMode": {
           "type": "string",
           "description": "Margin Mode: CROSS, ISOLATED\n",
-          "enum": [
-            "CROSS",
-            "ISOLATED"
-          ],
+          "enum": ["CROSS", "ISOLATED"],
           "x-api-enum": [
             {
               "value": "CROSS",
@@ -2306,9 +2115,7 @@ Subscribe this topic to get real-time pushes on symbols’ position change event
         "positionSide": {
           "type": "string",
           "description": "Position Side\n",
-          "enum": [
-            "BOTH"
-          ],
+          "enum": ["BOTH"],
           "x-api-enum": [
             {
               "value": "BOTH",
@@ -2431,22 +2238,15 @@ Subscribe this topic to get real-time pushes on symbols’ position change event
       "type": "string"
     }
   },
-  "required": [
-    "userId",
-    "topic",
-    "subject",
-    "data",
-    "type",
-    "channelType"
-  ]
+  "required": ["userId", "topic", "subject", "data", "type", "channelType"]
 }
 ```
 
 <h3 id="the-position-change-events-push-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_position](#schemafutures_futures_private_position)|
+| Status | Meaning                                                 | Description | Schema                                                                      |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_position](#schemafutures_futures_private_position) |
 
 <aside class="success">
 This operation does not require authentication
@@ -2457,23 +2257,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/allPosition/contract/positionAll',
-{
-  method: 'TRACE',
+fetch("/allPosition/contract/positionAll", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2490,7 +2288,8 @@ print(r.json())
 
 `TRACE /allPosition/contract/positionAll`
 
-Subscribe to this topic to get real-time pushes on all symbols’ position change events
+Subscribe to this topic to get real-time pushes on all symbols’ position change
+events
 
 > Example responses
 
@@ -2516,11 +2315,7 @@ Subscribe to this topic to get real-time pushes on all symbols’ position chang
         "symbol": {
           "type": "string",
           "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070) ",
-          "example": [
-            "XBTUSDTM",
-            "XBTUSDM",
-            "ETHUSDTM"
-          ]
+          "example": ["XBTUSDTM", "XBTUSDM", "ETHUSDTM"]
         },
         "crossMode": {
           "type": "boolean",
@@ -2627,10 +2422,7 @@ Subscribe to this topic to get real-time pushes on all symbols’ position chang
         "marginMode": {
           "type": "string",
           "description": "Margin Mode: CROSS, ISOLATED\n",
-          "enum": [
-            "CROSS",
-            "ISOLATED"
-          ],
+          "enum": ["CROSS", "ISOLATED"],
           "x-api-enum": [
             {
               "value": "CROSS",
@@ -2647,9 +2439,7 @@ Subscribe to this topic to get real-time pushes on all symbols’ position chang
         "positionSide": {
           "type": "string",
           "description": "Position Side\n",
-          "enum": [
-            "BOTH"
-          ],
+          "enum": ["BOTH"],
           "x-api-enum": [
             {
               "value": "BOTH",
@@ -2772,22 +2562,15 @@ Subscribe to this topic to get real-time pushes on all symbols’ position chang
       "type": "string"
     }
   },
-  "required": [
-    "userId",
-    "topic",
-    "subject",
-    "data",
-    "type",
-    "channelType"
-  ]
+  "required": ["userId", "topic", "subject", "data", "type", "channelType"]
 }
 ```
 
 <h3 id="all-symbol-position-change-events-push-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_allPosition](#schemafutures_futures_private_allposition)|
+| Status | Meaning                                                 | Description | Schema                                                                            |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_allPosition](#schemafutures_futures_private_allposition) |
 
 <aside class="success">
 This operation does not require authentication
@@ -2798,23 +2581,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/marginMode/contract/marginMode',
-{
-  method: 'TRACE',
+fetch("/marginMode/contract/marginMode", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2831,7 +2612,8 @@ print(r.json())
 
 `TRACE /marginMode/contract/marginMode`
 
-Subscribe to this topic to get real-time pushes on symbols’ margin mode change events
+Subscribe to this topic to get real-time pushes on symbols’ margin mode change
+events
 
 > Example responses
 
@@ -2855,9 +2637,7 @@ Subscribe to this topic to get real-time pushes on symbols’ margin mode change
           "description": "The SYMBOL is the key with value \n\"CROSS\" or \"ISOLATED\""
         }
       },
-      "required": [
-        "SYMBOL"
-      ]
+      "required": ["SYMBOL"]
     },
     "subject": {
       "type": "string"
@@ -2869,22 +2649,15 @@ Subscribe to this topic to get real-time pushes on symbols’ margin mode change
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "data",
-    "subject",
-    "userId",
-    "channelType"
-  ]
+  "required": ["topic", "type", "data", "subject", "userId", "channelType"]
 }
 ```
 
 <h3 id="the-margin-mode-change-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_marginMode](#schemafutures_futures_private_marginmode)|
+| Status | Meaning                                                 | Description | Schema                                                                          |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_marginMode](#schemafutures_futures_private_marginmode) |
 
 <aside class="success">
 This operation does not require authentication
@@ -2895,23 +2668,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/crossLeverage/contract/crossLeverage',
-{
-  method: 'TRACE',
+fetch("/crossLeverage/contract/crossLeverage", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2928,7 +2699,8 @@ print(r.json())
 
 `TRACE /crossLeverage/contract/crossLeverage`
 
-Subscribe to this topic to get real-time pushes on leverage changes of contracts that are in cross margin mode
+Subscribe to this topic to get real-time pushes on leverage changes of contracts
+that are in cross margin mode
 
 > Example responses
 
@@ -2963,28 +2735,19 @@ Subscribe to this topic to get real-time pushes on leverage changes of contracts
             "type": "string"
           }
         },
-        "required": [
-          "leverage"
-        ]
+        "required": ["leverage"]
       }
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
 ```
 
 <h3 id="the-leverage-change-push-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_crossLeverage](#schemafutures_futures_private_crossleverage)|
+| Status | Meaning                                                 | Description | Schema                                                                                |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_crossLeverage](#schemafutures_futures_private_crossleverage) |
 
 <aside class="success">
 This operation does not require authentication
@@ -2995,23 +2758,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/stopOrders/contractMarket/advancedOrders',
-{
-  method: 'TRACE',
+fetch("/stopOrders/contractMarket/advancedOrders", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -3053,10 +2814,7 @@ Subscribe to this topic to get real-time pushes on stop order changes.
         },
         "marginMode": {
           "type": "string",
-          "enum": [
-            "ISOLATED",
-            "CROSS"
-          ],
+          "enum": ["ISOLATED", "CROSS"],
           "description": "Margin Mode",
           "x-api-enum": [
             {
@@ -3082,9 +2840,7 @@ Subscribe to this topic to get real-time pushes on stop order changes.
         "orderType": {
           "type": "string",
           "description": "User-specified order type",
-          "enum": [
-            "stop"
-          ],
+          "enum": ["stop"],
           "x-api-enum": [
             {
               "value": "stop",
@@ -3095,10 +2851,7 @@ Subscribe to this topic to get real-time pushes on stop order changes.
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -3120,10 +2873,7 @@ Subscribe to this topic to get real-time pushes on stop order changes.
         "stop": {
           "type": "string",
           "description": "Either 'down' or 'up'",
-          "enum": [
-            "down",
-            "up"
-          ],
+          "enum": ["down", "up"],
           "x-api-enum": [
             {
               "value": "down",
@@ -3155,11 +2905,7 @@ Subscribe to this topic to get real-time pushes on stop order changes.
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "triggered",
-            "cancel"
-          ],
+          "enum": ["open", "triggered", "cancel"],
           "x-api-enum": [
             {
               "value": "open",
@@ -3222,9 +2968,9 @@ Subscribe to this topic to get real-time pushes on stop order changes.
 
 <h3 id="stop-order-change-pushes.-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_private_stopOrders](#schemafutures_futures_private_stoporders)|
+| Status | Meaning                                                 | Description | Schema                                                                          |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_private_stopOrders](#schemafutures_futures_private_stoporders) |
 
 <aside class="success">
 This operation does not require authentication
@@ -3293,33 +3039,26 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» bestBidSize|integer|true|none|none|
-|» bestBidPrice|string|true|none|none|
-|» bestAskPrice|string|true|none|none|
-|» bestAskSize|integer|true|none|none|
-|» ts|integer(int64)|true|none|none|
+| Name           | Type           | Required | Restrictions | Description |
+| -------------- | -------------- | -------- | ------------ | ----------- |
+| topic          | string         | true     | none         | none        |
+| type           | string         | true     | none         | none        |
+| subject        | string         | true     | none         | none        |
+| sn             | integer        | true     | none         | none        |
+| data           | object         | true     | none         | none        |
+| » symbol       | string         | true     | none         | none        |
+| » sequence     | integer(int64) | true     | none         | none        |
+| » bestBidSize  | integer        | true     | none         | none        |
+| » bestBidPrice | string         | true     | none         | none        |
+| » bestAskPrice | string         | true     | none         | none        |
+| » bestAskSize  | integer        | true     | none         | none        |
+| » ts           | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_tickerV1">Futures_futures_public_tickerV1</h2>
 <!-- backwards compatibility -->
@@ -3398,37 +3137,30 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» side|string|true|none|none|
-|» size|integer|true|none|none|
-|» price|string|true|none|none|
-|» bestBidSize|integer|true|none|none|
-|» bestBidPrice|string|true|none|none|
-|» bestAskPrice|string|true|none|none|
-|» tradeId|string|true|none|none|
-|» bestAskSize|integer|true|none|none|
-|» ts|integer(int64)|true|none|none|
+| Name           | Type           | Required | Restrictions | Description |
+| -------------- | -------------- | -------- | ------------ | ----------- |
+| topic          | string         | true     | none         | none        |
+| type           | string         | true     | none         | none        |
+| subject        | string         | true     | none         | none        |
+| sn             | integer        | true     | none         | none        |
+| data           | object         | true     | none         | none        |
+| » symbol       | string         | true     | none         | none        |
+| » sequence     | integer(int64) | true     | none         | none        |
+| » side         | string         | true     | none         | none        |
+| » size         | integer        | true     | none         | none        |
+| » price        | string         | true     | none         | none        |
+| » bestBidSize  | integer        | true     | none         | none        |
+| » bestBidPrice | string         | true     | none         | none        |
+| » bestAskPrice | string         | true     | none         | none        |
+| » tradeId      | string         | true     | none         | none        |
+| » bestAskSize  | integer        | true     | none         | none        |
+| » ts           | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_orderbookLevel5">Futures_futures_public_orderbookLevel5</h2>
 <!-- backwards compatibility -->
@@ -3491,40 +3223,27 @@ This operation does not require authentication
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» bids|[array]|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
-|» ts|integer(int64)|true|none|none|
-|» asks|[array]|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| sn          | integer        | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » bids      | [array]        | true     | none         | none        |
+| » sequence  | integer(int64) | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
+| » ts        | integer(int64) | true     | none         | none        |
+| » asks      | [array]        | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_orderbookLevel50">Futures_futures_public_orderbookLevel50</h2>
 <!-- backwards compatibility -->
@@ -3587,40 +3306,27 @@ This operation does not require authentication
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» bids|[array]|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
-|» ts|integer(int64)|true|none|none|
-|» asks|[array]|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| sn          | integer        | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » bids      | [array]        | true     | none         | none        |
+| » sequence  | integer(int64) | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
+| » ts        | integer(int64) | true     | none         | none        |
+| » asks      | [array]        | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_orderbookIncrement">Futures_futures_public_orderbookIncrement</h2>
 <!-- backwards compatibility -->
@@ -3661,36 +3367,25 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "sequence",
-        "change",
-        "timestamp"
-      ]
+      "required": ["sequence", "change", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer(int64)|true|none|none|
-|data|object|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» change|string|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| sn          | integer(int64) | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » sequence  | integer(int64) | true     | none         | none        |
+| » change    | string         | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_klines">Futures_futures_public_klines</h2>
 <!-- backwards compatibility -->
@@ -3729,37 +3424,27 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "candles",
-        "time"
-      ]
+      "required": ["symbol", "candles", "time"]
     },
     "subject": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "data",
-    "subject"
-  ]
+  "required": ["topic", "type", "data", "subject"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|» candles|[string]|true|none|Start time, open price, close price, high price, low price, Transaction volume(This value is incorrect, please do not use it, we will fix it in subsequent versions), Transaction amount|
-|» time|integer(int64)|true|none|timestamp(ms)|
-|subject|string|true|none|none|
+| Name      | Type           | Required | Restrictions | Description                                                                                                                                                                              |
+| --------- | -------------- | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic     | string         | true     | none         | none                                                                                                                                                                                     |
+| type      | string         | true     | none         | none                                                                                                                                                                                     |
+| data      | object         | true     | none         | none                                                                                                                                                                                     |
+| » symbol  | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                       |
+| » candles | [string]       | true     | none         | Start time, open price, close price, high price, low price, Transaction volume(This value is incorrect, please do not use it, we will fix it in subsequent versions), Transaction amount |
+| » time    | integer(int64) | true     | none         | timestamp(ms)                                                                                                                                                                            |
+| subject   | string         | true     | none         | none                                                                                                                                                                                     |
 
 <h2 id="tocS_Futures_futures_public_matchExecution">Futures_futures_public_matchExecution</h2>
 <!-- backwards compatibility -->
@@ -3830,35 +3515,28 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» side|string|true|none|none|
-|» size|integer|true|none|none|
-|» price|string|true|none|none|
-|» takerOrderId|string|true|none|none|
-|» makerOrderId|string|true|none|none|
-|» tradeId|string|true|none|none|
-|» ts|integer(int64)|true|none|none|
+| Name           | Type           | Required | Restrictions | Description |
+| -------------- | -------------- | -------- | ------------ | ----------- |
+| topic          | string         | true     | none         | none        |
+| type           | string         | true     | none         | none        |
+| subject        | string         | true     | none         | none        |
+| sn             | integer        | true     | none         | none        |
+| data           | object         | true     | none         | none        |
+| » symbol       | string         | true     | none         | none        |
+| » sequence     | integer(int64) | true     | none         | none        |
+| » side         | string         | true     | none         | none        |
+| » size         | integer        | true     | none         | none        |
+| » price        | string         | true     | none         | none        |
+| » takerOrderId | string         | true     | none         | none        |
+| » makerOrderId | string         | true     | none         | none        |
+| » tradeId      | string         | true     | none         | none        |
+| » ts           | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_instrument">Futures_futures_public_instrument</h2>
 <!-- backwards compatibility -->
@@ -3876,10 +3554,7 @@ This operation does not require authentication
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "mark.index.price",
-        "funding.rate"
-      ],
+      "enum": ["mark.index.price", "funding.rate"],
       "x-api-enum": [
         {
           "value": "mark.index.price",
@@ -3914,45 +3589,36 @@ This operation does not require authentication
           "type": "number"
         }
       },
-      "required": [
-        "granularity",
-        "timestamp"
-      ]
+      "required": ["granularity", "timestamp"]
     },
     "type": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "subject",
-    "data",
-    "type"
-  ]
+  "required": ["topic", "subject", "data", "type"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» granularity|integer|true|none|Granularity (predicted funding rate: 1-min granularity: 60000; Funding rate: 8-hours granularity: 28800000.)|
-|» fundingRate|number|false|none|none|
-|» timestamp|integer(int64)|true|none|none|
-|» markPrice|number|false|none|none|
-|» indexPrice|number|false|none|none|
-|type|string|true|none|none|
+| Name          | Type           | Required | Restrictions | Description                                                                                                  |
+| ------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| topic         | string         | true     | none         | none                                                                                                         |
+| subject       | string         | true     | none         | none                                                                                                         |
+| data          | object         | true     | none         | none                                                                                                         |
+| » granularity | integer        | true     | none         | Granularity (predicted funding rate: 1-min granularity: 60000; Funding rate: 8-hours granularity: 28800000.) |
+| » fundingRate | number         | false    | none         | none                                                                                                         |
+| » timestamp   | integer(int64) | true     | none         | none                                                                                                         |
+| » markPrice   | number         | false    | none         | none                                                                                                         |
+| » indexPrice  | number         | false    | none         | none                                                                                                         |
+| type          | string         | true     | none         | none                                                                                                         |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|subject|mark.index.price|
-|subject|funding.rate|
+| Property | Value            |
+| -------- | ---------------- |
+| subject  | mark.index.price |
+| subject  | funding.rate     |
 
 <h2 id="tocS_Futures_futures_public_fundingFeeSettlement">Futures_futures_public_fundingFeeSettlement</h2>
 <!-- backwards compatibility -->
@@ -3995,36 +3661,25 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "fundingTime",
-        "fundingRate",
-        "timestamp"
-      ]
+      "required": ["symbol", "fundingTime", "fundingRate", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|none|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol|
-|» fundingTime|integer(int64)|true|none|Funding time|
-|» fundingRate|number|true|none|Funding rate|
-|» timestamp|integer(int64)|true|none|none|
+| Name          | Type           | Required | Restrictions | Description  |
+| ------------- | -------------- | -------- | ------------ | ------------ |
+| type          | string         | true     | none         | none         |
+| topic         | string         | true     | none         | none         |
+| subject       | string         | true     | none         | none         |
+| data          | object         | true     | none         | none         |
+| » symbol      | string         | true     | none         | Symbol       |
+| » fundingTime | integer(int64) | true     | none         | Funding time |
+| » fundingRate | number         | true     | none         | Funding rate |
+| » timestamp   | integer(int64) | true     | none         | none         |
 
 <h2 id="tocS_Futures_futures_public_symbolSnapshot">Futures_futures_public_symbolSnapshot</h2>
 <!-- backwards compatibility -->
@@ -4098,36 +3753,29 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "id",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "id", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|id|string|true|none|none|
-|data|object|true|none|none|
-|» highPrice|number|true|none|none|
-|» lastPrice|number|true|none|none|
-|» lowPrice|number|true|none|none|
-|» price24HoursBefore|number|true|none|none|
-|» priceChg|number|true|none|none|
-|» priceChgPct|number|true|none|none|
-|» symbol|string|true|none|none|
-|» ts|integer(int64)|true|none|none|
-|» turnover|number|true|none|none|
-|» volume|number|true|none|none|
+| Name                 | Type           | Required | Restrictions | Description |
+| -------------------- | -------------- | -------- | ------------ | ----------- |
+| topic                | string         | true     | none         | none        |
+| type                 | string         | true     | none         | none        |
+| subject              | string         | true     | none         | none        |
+| id                   | string         | true     | none         | none        |
+| data                 | object         | true     | none         | none        |
+| » highPrice          | number         | true     | none         | none        |
+| » lastPrice          | number         | true     | none         | none        |
+| » lowPrice           | number         | true     | none         | none        |
+| » price24HoursBefore | number         | true     | none         | none        |
+| » priceChg           | number         | true     | none         | none        |
+| » priceChgPct        | number         | true     | none         | none        |
+| » symbol             | string         | true     | none         | none        |
+| » ts                 | integer(int64) | true     | none         | none        |
+| » turnover           | number         | true     | none         | none        |
+| » volume             | number         | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_private_orders">Futures_futures_private_orders</h2>
 <!-- backwards compatibility -->
@@ -4148,10 +3796,7 @@ This operation does not require authentication
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "orderChange",
-        "symbolOrderChange"
-      ],
+      "enum": ["orderChange", "symbolOrderChange"],
       "x-api-enum": [
         {
           "value": "orderChange",
@@ -4180,10 +3825,7 @@ This operation does not require authentication
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -4200,10 +3842,7 @@ This operation does not require authentication
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -4228,10 +3867,7 @@ This operation does not require authentication
         },
         "marginMode": {
           "type": "string",
-          "enum": [
-            "ISOLATED",
-            "CROSS"
-          ],
+          "enum": ["ISOLATED", "CROSS"],
           "description": "Margin Mode",
           "x-api-enum": [
             {
@@ -4249,13 +3885,7 @@ This operation does not require authentication
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled"],
           "x-api-enum": [
             {
               "value": "open",
@@ -4308,11 +3938,7 @@ This operation does not require authentication
         "status": {
           "type": "string",
           "description": "Order Status",
-          "enum": [
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["open", "match", "done"],
           "x-api-enum": [
             {
               "value": "open",
@@ -4338,10 +3964,7 @@ This operation does not require authentication
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -4358,10 +3981,7 @@ This operation does not require authentication
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -4399,10 +4019,7 @@ This operation does not require authentication
         "tradeType": {
           "type": "string",
           "description": "normal order or liquid order",
-          "enum": [
-            "trade",
-            "liquid"
-          ],
+          "enum": ["trade", "liquid"],
           "x-api-enum": [
             {
               "value": "trade",
@@ -4435,77 +4052,69 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)|
-|» orderType|string|false|none|User-specified order type|
-|» side|string|true|none|buy or sell|
-|» canceledSize|string|true|none|Cumulative number of cancellations|
-|» orderId|string|true|none|The unique order id generated by the trading system|
-|» marginMode|string|true|none|Margin Mode|
-|» type|string|true|none|Order Type|
-|» orderTime|integer(int64)|true|none|Order time (nanoseconds)|
-|» size|string|true|none|User-specified order size|
-|» filledSize|string|true|none|Cumulative number filled|
-|» price|string|true|none|Price|
-|» remainSize|string|true|none|Remain size|
-|» status|string|true|none|Order Status|
-|» ts|integer(int64)|true|none|Push time (nanoseconds)|
-|» liquidity|string|false|none|Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType**|
-|» feeType|string|false|none|Actual Fee Type|
-|» matchPrice|string|false|none|Match Price (when the type is "match")|
-|» matchSize|string|false|none|Match Size (when the type is "match")|
-|» tradeId|string|false|none|Trade ID: Generated by Matching engine.|
-|» oldSize|string|false|none|The size before order update|
-|» clientOid|string|false|none|Client Order ID: The ClientOid field is a unique ID created by the user|
-|» tradeType|string|true|none|normal order or liquid order|
+| Name           | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                    |
+| -------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic          | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| type           | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| subject        | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| userId         | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| channelType    | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| data           | object         | true     | none         | none                                                                                                                                                                                                                                                           |
+| » symbol       | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)                                                                                                                                           |
+| » orderType    | string         | false    | none         | User-specified order type                                                                                                                                                                                                                                      |
+| » side         | string         | true     | none         | buy or sell                                                                                                                                                                                                                                                    |
+| » canceledSize | string         | true     | none         | Cumulative number of cancellations                                                                                                                                                                                                                             |
+| » orderId      | string         | true     | none         | The unique order id generated by the trading system                                                                                                                                                                                                            |
+| » marginMode   | string         | true     | none         | Margin Mode                                                                                                                                                                                                                                                    |
+| » type         | string         | true     | none         | Order Type                                                                                                                                                                                                                                                     |
+| » orderTime    | integer(int64) | true     | none         | Order time (nanoseconds)                                                                                                                                                                                                                                       |
+| » size         | string         | true     | none         | User-specified order size                                                                                                                                                                                                                                      |
+| » filledSize   | string         | true     | none         | Cumulative number filled                                                                                                                                                                                                                                       |
+| » price        | string         | true     | none         | Price                                                                                                                                                                                                                                                          |
+| » remainSize   | string         | true     | none         | Remain size                                                                                                                                                                                                                                                    |
+| » status       | string         | true     | none         | Order Status                                                                                                                                                                                                                                                   |
+| » ts           | integer(int64) | true     | none         | Push time (nanoseconds)                                                                                                                                                                                                                                        |
+| » liquidity    | string         | false    | none         | Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** |
+| » feeType      | string         | false    | none         | Actual Fee Type                                                                                                                                                                                                                                                |
+| » matchPrice   | string         | false    | none         | Match Price (when the type is "match")                                                                                                                                                                                                                         |
+| » matchSize    | string         | false    | none         | Match Size (when the type is "match")                                                                                                                                                                                                                          |
+| » tradeId      | string         | false    | none         | Trade ID: Generated by Matching engine.                                                                                                                                                                                                                        |
+| » oldSize      | string         | false    | none         | The size before order update                                                                                                                                                                                                                                   |
+| » clientOid    | string         | false    | none         | Client Order ID: The ClientOid field is a unique ID created by the user                                                                                                                                                                                        |
+| » tradeType    | string         | true     | none         | normal order or liquid order                                                                                                                                                                                                                                   |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|subject|orderChange|
-|subject|symbolOrderChange|
-|orderType|limit|
-|orderType|market|
-|side|buy|
-|side|sell|
-|marginMode|ISOLATED|
-|marginMode|CROSS|
-|type|open|
-|type|match|
-|type|update|
-|type|filled|
-|type|canceled|
-|status|open|
-|status|match|
-|status|done|
-|liquidity|taker|
-|liquidity|maker|
-|feeType|takerFee|
-|feeType|makerFee|
-|tradeType|trade|
-|tradeType|liquid|
+| Property   | Value             |
+| ---------- | ----------------- |
+| subject    | orderChange       |
+| subject    | symbolOrderChange |
+| orderType  | limit             |
+| orderType  | market            |
+| side       | buy               |
+| side       | sell              |
+| marginMode | ISOLATED          |
+| marginMode | CROSS             |
+| type       | open              |
+| type       | match             |
+| type       | update            |
+| type       | filled            |
+| type       | canceled          |
+| status     | open              |
+| status     | match             |
+| status     | done              |
+| liquidity  | taker             |
+| liquidity  | maker             |
+| feeType    | takerFee          |
+| feeType    | makerFee          |
+| tradeType  | trade             |
+| tradeType  | liquid            |
 
 <h2 id="tocS_Futures_futures_private_allOrders">Futures_futures_private_allOrders</h2>
 <!-- backwards compatibility -->
@@ -4526,10 +4135,7 @@ This operation does not require authentication
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "orderChange",
-        "symbolOrderChange"
-      ],
+      "enum": ["orderChange", "symbolOrderChange"],
       "x-api-enum": [
         {
           "value": "orderChange",
@@ -4558,10 +4164,7 @@ This operation does not require authentication
         },
         "orderType": {
           "type": "string",
-          "enum": [
-            "limit",
-            "market"
-          ],
+          "enum": ["limit", "market"],
           "description": "User-specified order type",
           "x-api-enum": [
             {
@@ -4578,10 +4181,7 @@ This operation does not require authentication
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -4606,10 +4206,7 @@ This operation does not require authentication
         },
         "marginMode": {
           "type": "string",
-          "enum": [
-            "ISOLATED",
-            "CROSS"
-          ],
+          "enum": ["ISOLATED", "CROSS"],
           "description": "Margin Mode",
           "x-api-enum": [
             {
@@ -4627,13 +4224,7 @@ This operation does not require authentication
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "match",
-            "update",
-            "filled",
-            "canceled"
-          ],
+          "enum": ["open", "match", "update", "filled", "canceled"],
           "x-api-enum": [
             {
               "value": "open",
@@ -4686,11 +4277,7 @@ This operation does not require authentication
         "status": {
           "type": "string",
           "description": "Order Status",
-          "enum": [
-            "open",
-            "match",
-            "done"
-          ],
+          "enum": ["open", "match", "done"],
           "x-api-enum": [
             {
               "value": "open",
@@ -4716,10 +4303,7 @@ This operation does not require authentication
         },
         "liquidity": {
           "type": "string",
-          "enum": [
-            "taker",
-            "maker"
-          ],
+          "enum": ["taker", "maker"],
           "description": "Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** ",
           "x-api-enum": [
             {
@@ -4736,10 +4320,7 @@ This operation does not require authentication
         },
         "feeType": {
           "type": "string",
-          "enum": [
-            "takerFee",
-            "makerFee"
-          ],
+          "enum": ["takerFee", "makerFee"],
           "description": "Actual Fee Type",
           "x-api-enum": [
             {
@@ -4777,10 +4358,7 @@ This operation does not require authentication
         "tradeType": {
           "type": "string",
           "description": "normal order or liquid order",
-          "enum": [
-            "trade",
-            "liquid"
-          ],
+          "enum": ["trade", "liquid"],
           "x-api-enum": [
             {
               "value": "trade",
@@ -4813,77 +4391,69 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)|
-|» orderType|string|false|none|User-specified order type|
-|» side|string|true|none|buy or sell|
-|» canceledSize|string|true|none|Cumulative number of cancellations|
-|» orderId|string|true|none|The unique order id generated by the trading system|
-|» marginMode|string|true|none|Margin Mode|
-|» type|string|true|none|Order Type|
-|» orderTime|integer(int64)|true|none|Order time (nanoseconds)|
-|» size|string|true|none|User-specified order size|
-|» filledSize|string|true|none|Cumulative number filled|
-|» price|string|true|none|Price|
-|» remainSize|string|true|none|Remain size|
-|» status|string|true|none|Order Status|
-|» ts|integer(int64)|true|none|Push time (nanoseconds)|
-|» liquidity|string|false|none|Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType**|
-|» feeType|string|false|none|Actual Fee Type|
-|» matchPrice|string|false|none|Match Price (when the type is "match")|
-|» matchSize|string|false|none|Match Size (when the type is "match")|
-|» tradeId|string|false|none|Trade ID: Generated by Matching engine.|
-|» oldSize|string|false|none|The size before order update|
-|» clientOid|string|false|none|Client Order ID: The ClientOid field is a unique ID created by the user|
-|» tradeType|string|true|none|normal order or liquid order|
+| Name           | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                    |
+| -------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic          | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| type           | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| subject        | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| userId         | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| channelType    | string         | true     | none         | none                                                                                                                                                                                                                                                           |
+| data           | object         | true     | none         | none                                                                                                                                                                                                                                                           |
+| » symbol       | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)                                                                                                                                           |
+| » orderType    | string         | false    | none         | User-specified order type                                                                                                                                                                                                                                      |
+| » side         | string         | true     | none         | buy or sell                                                                                                                                                                                                                                                    |
+| » canceledSize | string         | true     | none         | Cumulative number of cancellations                                                                                                                                                                                                                             |
+| » orderId      | string         | true     | none         | The unique order id generated by the trading system                                                                                                                                                                                                            |
+| » marginMode   | string         | true     | none         | Margin Mode                                                                                                                                                                                                                                                    |
+| » type         | string         | true     | none         | Order Type                                                                                                                                                                                                                                                     |
+| » orderTime    | integer(int64) | true     | none         | Order time (nanoseconds)                                                                                                                                                                                                                                       |
+| » size         | string         | true     | none         | User-specified order size                                                                                                                                                                                                                                      |
+| » filledSize   | string         | true     | none         | Cumulative number filled                                                                                                                                                                                                                                       |
+| » price        | string         | true     | none         | Price                                                                                                                                                                                                                                                          |
+| » remainSize   | string         | true     | none         | Remain size                                                                                                                                                                                                                                                    |
+| » status       | string         | true     | none         | Order Status                                                                                                                                                                                                                                                   |
+| » ts           | integer(int64) | true     | none         | Push time (nanoseconds)                                                                                                                                                                                                                                        |
+| » liquidity    | string         | false    | none         | Actual transaction order type, If the counterparty order is an [Hidden/Iceberg Order](https://www.kucoin.com/docs-new/doc-338146), even if it is a maker order, this param will be displayed as taker. For actual trading fee, please refer to the **feeType** |
+| » feeType      | string         | false    | none         | Actual Fee Type                                                                                                                                                                                                                                                |
+| » matchPrice   | string         | false    | none         | Match Price (when the type is "match")                                                                                                                                                                                                                         |
+| » matchSize    | string         | false    | none         | Match Size (when the type is "match")                                                                                                                                                                                                                          |
+| » tradeId      | string         | false    | none         | Trade ID: Generated by Matching engine.                                                                                                                                                                                                                        |
+| » oldSize      | string         | false    | none         | The size before order update                                                                                                                                                                                                                                   |
+| » clientOid    | string         | false    | none         | Client Order ID: The ClientOid field is a unique ID created by the user                                                                                                                                                                                        |
+| » tradeType    | string         | true     | none         | normal order or liquid order                                                                                                                                                                                                                                   |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|subject|orderChange|
-|subject|symbolOrderChange|
-|orderType|limit|
-|orderType|market|
-|side|buy|
-|side|sell|
-|marginMode|ISOLATED|
-|marginMode|CROSS|
-|type|open|
-|type|match|
-|type|update|
-|type|filled|
-|type|canceled|
-|status|open|
-|status|match|
-|status|done|
-|liquidity|taker|
-|liquidity|maker|
-|feeType|takerFee|
-|feeType|makerFee|
-|tradeType|trade|
-|tradeType|liquid|
+| Property   | Value             |
+| ---------- | ----------------- |
+| subject    | orderChange       |
+| subject    | symbolOrderChange |
+| orderType  | limit             |
+| orderType  | market            |
+| side       | buy               |
+| side       | sell              |
+| marginMode | ISOLATED          |
+| marginMode | CROSS             |
+| type       | open              |
+| type       | match             |
+| type       | update            |
+| type       | filled            |
+| type       | canceled          |
+| status     | open              |
+| status     | match             |
+| status     | done              |
+| liquidity  | taker             |
+| liquidity  | maker             |
+| feeType    | takerFee          |
+| feeType    | makerFee          |
+| tradeType  | trade             |
+| tradeType  | liquid            |
 
 <h2 id="tocS_Futures_futures_private_balance">Futures_futures_private_balance</h2>
 <!-- backwards compatibility -->
@@ -5007,35 +4577,34 @@ This operation does not require authentication
     "data"
   ]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|id|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|none|
-|data|object|true|none|none|
-|» crossPosMargin|string|true|none|Margin of the cross margin position|
-|» isolatedOrderMargin|string|true|none|Margin of the isolated margin order|
-|» holdBalance|string|true|none|Frozen Balance|
-|» equity|string|true|none|Equity|
-|» version|string|true|none|Version. When holding a cross margin position, the available balance may change with fluctuations in the mark price, leading to discrepancies in the available balance for the same version number.|
-|» availableBalance|string|true|none|Available Balance|
-|» isolatedPosMargin|string|true|none|Margin of the isolated margin position, including isolated margin funding fees|
-|» walletBalance|string|true|none|Wallet Balance|
-|» isolatedFundingFeeMargin|string|true|none|Isolated margin funding fee|
-|» crossUnPnl|string|true|none|Unrealized PNL in cross margin mode|
-|» totalCrossMargin|string|true|none|Total margin under cross margin mode|
-|» currency|string|true|none|Currency Symbol|
-|» isolatedUnPnl|string|true|none|Unrealized PNL in isolated margin mode|
-|» crossOrderMargin|string|true|none|Margin of the cross margin order|
-|» timestamp|string|true|none|Last modified time|
+| Name                       | Type   | Required | Restrictions | Description                                                                                                                                                                                         |
+| -------------------------- | ------ | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic                      | string | true     | none         | none                                                                                                                                                                                                |
+| type                       | string | true     | none         | none                                                                                                                                                                                                |
+| subject                    | string | true     | none         | none                                                                                                                                                                                                |
+| id                         | string | true     | none         | none                                                                                                                                                                                                |
+| userId                     | string | true     | none         | none                                                                                                                                                                                                |
+| channelType                | string | true     | none         | none                                                                                                                                                                                                |
+| data                       | object | true     | none         | none                                                                                                                                                                                                |
+| » crossPosMargin           | string | true     | none         | Margin of the cross margin position                                                                                                                                                                 |
+| » isolatedOrderMargin      | string | true     | none         | Margin of the isolated margin order                                                                                                                                                                 |
+| » holdBalance              | string | true     | none         | Frozen Balance                                                                                                                                                                                      |
+| » equity                   | string | true     | none         | Equity                                                                                                                                                                                              |
+| » version                  | string | true     | none         | Version. When holding a cross margin position, the available balance may change with fluctuations in the mark price, leading to discrepancies in the available balance for the same version number. |
+| » availableBalance         | string | true     | none         | Available Balance                                                                                                                                                                                   |
+| » isolatedPosMargin        | string | true     | none         | Margin of the isolated margin position, including isolated margin funding fees                                                                                                                      |
+| » walletBalance            | string | true     | none         | Wallet Balance                                                                                                                                                                                      |
+| » isolatedFundingFeeMargin | string | true     | none         | Isolated margin funding fee                                                                                                                                                                         |
+| » crossUnPnl               | string | true     | none         | Unrealized PNL in cross margin mode                                                                                                                                                                 |
+| » totalCrossMargin         | string | true     | none         | Total margin under cross margin mode                                                                                                                                                                |
+| » currency                 | string | true     | none         | Currency Symbol                                                                                                                                                                                     |
+| » isolatedUnPnl            | string | true     | none         | Unrealized PNL in isolated margin mode                                                                                                                                                              |
+| » crossOrderMargin         | string | true     | none         | Margin of the cross margin order                                                                                                                                                                    |
+| » timestamp                | string | true     | none         | Last modified time                                                                                                                                                                                  |
 
 <h2 id="tocS_Futures_futures_private_position">Futures_futures_private_position</h2>
 <!-- backwards compatibility -->
@@ -5064,11 +4633,7 @@ This operation does not require authentication
         "symbol": {
           "type": "string",
           "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070) ",
-          "example": [
-            "XBTUSDTM",
-            "XBTUSDM",
-            "ETHUSDTM"
-          ]
+          "example": ["XBTUSDTM", "XBTUSDM", "ETHUSDTM"]
         },
         "crossMode": {
           "type": "boolean",
@@ -5175,10 +4740,7 @@ This operation does not require authentication
         "marginMode": {
           "type": "string",
           "description": "Margin Mode: CROSS, ISOLATED\n",
-          "enum": [
-            "CROSS",
-            "ISOLATED"
-          ],
+          "enum": ["CROSS", "ISOLATED"],
           "x-api-enum": [
             {
               "value": "CROSS",
@@ -5195,9 +4757,7 @@ This operation does not require authentication
         "positionSide": {
           "type": "string",
           "description": "Position Side\n",
-          "enum": [
-            "BOTH"
-          ],
+          "enum": ["BOTH"],
           "x-api-enum": [
             {
               "value": "BOTH",
@@ -5320,82 +4880,74 @@ This operation does not require authentication
       "type": "string"
     }
   },
-  "required": [
-    "userId",
-    "topic",
-    "subject",
-    "data",
-    "type",
-    "channelType"
-  ]
+  "required": ["userId", "topic", "subject", "data", "type", "channelType"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|userId|string|true|none|Deprecated, will delete later|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)|
-|» crossMode|boolean|true|none|Whether it is cross margin.|
-|» delevPercentage|number|true|none|ADL ranking percentile|
-|» openingTimestamp|integer(int64)|true|none|Open time|
-|» currentTimestamp|integer(int64)|true|none|Current timestamp|
-|» currentQty|integer|true|none|Current position quantity|
-|» currentCost|number|true|none|Current position value|
-|» currentComm|number|true|none|Current commission|
-|» unrealisedCost|number|true|none|Unrealized value|
-|» realisedGrossCost|number|true|none|Accumulated realized gross profit value|
-|» realisedCost|number|true|none|Current realized position value|
-|» isOpen|boolean|true|none|Opened position or not|
-|» markPrice|number|true|none|Mark price|
-|» markValue|number|true|none|Mark Value|
-|» posCost|number|true|none|Position value|
-|» posInit|number|true|none|Inital margin Cross = opening value/cross leverage; isolated = accumulation of initial margin for each transaction|
-|» posMargin|number|true|none|Bankruptcy cost Cross = mark value * imr; Isolated = position margin (accumulation of initial margin, additional margin, generated funding fees, etc.)|
-|» realisedGrossPnl|number|true|none|Accumulated realized gross profit value|
-|» realisedPnl|number|true|none|Realized profit and loss|
-|» unrealisedPnl|number|true|none|Unrealized profit and loss|
-|» unrealisedPnlPcnt|number|true|none|Profit-loss ratio of the position|
-|» unrealisedRoePcnt|number|true|none|Rate of return on investment|
-|» avgEntryPrice|number|true|none|Average entry price|
-|» liquidationPrice|number|true|none|Liquidation price: For Cross Margin, you can refer to the liquidationPrice, and the liquidation is based on the risk rate.|
-|» bankruptPrice|number|true|none|Bankruptcy price: For Cross Margin, you can refer to the bankruptPrice, and the liquidation is based on the risk rate.|
-|» settleCurrency|string|true|none|Currency used to clear and settle the trades|
-|» marginMode|string|true|none|Margin Mode: CROSS, ISOLATED|
-|» positionSide|string|true|none|Position Side|
-|» leverage|number|true|none|Leverage|
-|» autoDeposit|boolean|false|none|Auto deposit margin or not **Only applicable to Isolated Margin**|
-|» maintMarginReq|number|false|none|Maintenance margin requirement **Only applicable to Isolated Margin**|
-|» riskLimit|integer|false|none|Risk limit **Only applicable to Isolated Margin**|
-|» realLeverage|number|false|none|Leverage of the order **Only applicable to Isolated Margin**|
-|» posCross|number|false|none|Added margin **Only applicable to Isolated Margin**|
-|» posComm|number|false|none|Bankruptcy cost **Only applicable to Isolated Margin**|
-|» posLoss|number|false|none|Funding fees paid out **Only applicable to Isolated Margin**|
-|» posFunding|number|false|none|The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**|
-|» posMaint|number|false|none|Maintenance margin **Only applicable to Isolated Margin**|
-|» maintMargin|number|false|none|Position margin **Only applicable to Isolated Margin**|
-|» fundingTime|integer(int64)|false|none|Funding time|
-|» qty|integer|false|none|Position size|
-|» fundingRate|number|false|none|Funding rate|
-|» fundingFee|number|false|none|Funding fees|
-|» ts|integer(int64)|false|none|Funding Fee Settlement Time (nanoseconds)|
-|» success|boolean|false|none|Adjustment isolated margin risk limit level successful or not|
-|» msg|string|false|none|Adjustment isolated margin risk limit level failure reason|
-|type|string|true|none|none|
-|channelType|string|true|none|none|
+| Name                | Type           | Required | Restrictions | Description                                                                                                                                             |
+| ------------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| userId              | string         | true     | none         | Deprecated, will delete later                                                                                                                           |
+| topic               | string         | true     | none         | none                                                                                                                                                    |
+| subject             | string         | true     | none         | none                                                                                                                                                    |
+| data                | object         | true     | none         | none                                                                                                                                                    |
+| » symbol            | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)                                    |
+| » crossMode         | boolean        | true     | none         | Whether it is cross margin.                                                                                                                             |
+| » delevPercentage   | number         | true     | none         | ADL ranking percentile                                                                                                                                  |
+| » openingTimestamp  | integer(int64) | true     | none         | Open time                                                                                                                                               |
+| » currentTimestamp  | integer(int64) | true     | none         | Current timestamp                                                                                                                                       |
+| » currentQty        | integer        | true     | none         | Current position quantity                                                                                                                               |
+| » currentCost       | number         | true     | none         | Current position value                                                                                                                                  |
+| » currentComm       | number         | true     | none         | Current commission                                                                                                                                      |
+| » unrealisedCost    | number         | true     | none         | Unrealized value                                                                                                                                        |
+| » realisedGrossCost | number         | true     | none         | Accumulated realized gross profit value                                                                                                                 |
+| » realisedCost      | number         | true     | none         | Current realized position value                                                                                                                         |
+| » isOpen            | boolean        | true     | none         | Opened position or not                                                                                                                                  |
+| » markPrice         | number         | true     | none         | Mark price                                                                                                                                              |
+| » markValue         | number         | true     | none         | Mark Value                                                                                                                                              |
+| » posCost           | number         | true     | none         | Position value                                                                                                                                          |
+| » posInit           | number         | true     | none         | Inital margin Cross = opening value/cross leverage; isolated = accumulation of initial margin for each transaction                                      |
+| » posMargin         | number         | true     | none         | Bankruptcy cost Cross = mark value \* imr; Isolated = position margin (accumulation of initial margin, additional margin, generated funding fees, etc.) |
+| » realisedGrossPnl  | number         | true     | none         | Accumulated realized gross profit value                                                                                                                 |
+| » realisedPnl       | number         | true     | none         | Realized profit and loss                                                                                                                                |
+| » unrealisedPnl     | number         | true     | none         | Unrealized profit and loss                                                                                                                              |
+| » unrealisedPnlPcnt | number         | true     | none         | Profit-loss ratio of the position                                                                                                                       |
+| » unrealisedRoePcnt | number         | true     | none         | Rate of return on investment                                                                                                                            |
+| » avgEntryPrice     | number         | true     | none         | Average entry price                                                                                                                                     |
+| » liquidationPrice  | number         | true     | none         | Liquidation price: For Cross Margin, you can refer to the liquidationPrice, and the liquidation is based on the risk rate.                              |
+| » bankruptPrice     | number         | true     | none         | Bankruptcy price: For Cross Margin, you can refer to the bankruptPrice, and the liquidation is based on the risk rate.                                  |
+| » settleCurrency    | string         | true     | none         | Currency used to clear and settle the trades                                                                                                            |
+| » marginMode        | string         | true     | none         | Margin Mode: CROSS, ISOLATED                                                                                                                            |
+| » positionSide      | string         | true     | none         | Position Side                                                                                                                                           |
+| » leverage          | number         | true     | none         | Leverage                                                                                                                                                |
+| » autoDeposit       | boolean        | false    | none         | Auto deposit margin or not **Only applicable to Isolated Margin**                                                                                       |
+| » maintMarginReq    | number         | false    | none         | Maintenance margin requirement **Only applicable to Isolated Margin**                                                                                   |
+| » riskLimit         | integer        | false    | none         | Risk limit **Only applicable to Isolated Margin**                                                                                                       |
+| » realLeverage      | number         | false    | none         | Leverage of the order **Only applicable to Isolated Margin**                                                                                            |
+| » posCross          | number         | false    | none         | Added margin **Only applicable to Isolated Margin**                                                                                                     |
+| » posComm           | number         | false    | none         | Bankruptcy cost **Only applicable to Isolated Margin**                                                                                                  |
+| » posLoss           | number         | false    | none         | Funding fees paid out **Only applicable to Isolated Margin**                                                                                            |
+| » posFunding        | number         | false    | none         | The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**                                                     |
+| » posMaint          | number         | false    | none         | Maintenance margin **Only applicable to Isolated Margin**                                                                                               |
+| » maintMargin       | number         | false    | none         | Position margin **Only applicable to Isolated Margin**                                                                                                  |
+| » fundingTime       | integer(int64) | false    | none         | Funding time                                                                                                                                            |
+| » qty               | integer        | false    | none         | Position size                                                                                                                                           |
+| » fundingRate       | number         | false    | none         | Funding rate                                                                                                                                            |
+| » fundingFee        | number         | false    | none         | Funding fees                                                                                                                                            |
+| » ts                | integer(int64) | false    | none         | Funding Fee Settlement Time (nanoseconds)                                                                                                               |
+| » success           | boolean        | false    | none         | Adjustment isolated margin risk limit level successful or not                                                                                           |
+| » msg               | string         | false    | none         | Adjustment isolated margin risk limit level failure reason                                                                                              |
+| type                | string         | true     | none         | none                                                                                                                                                    |
+| channelType         | string         | true     | none         | none                                                                                                                                                    |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|marginMode|CROSS|
-|marginMode|ISOLATED|
-|positionSide|BOTH|
+| Property     | Value    |
+| ------------ | -------- |
+| marginMode   | CROSS    |
+| marginMode   | ISOLATED |
+| positionSide | BOTH     |
 
 <h2 id="tocS_Futures_futures_private_allPosition">Futures_futures_private_allPosition</h2>
 <!-- backwards compatibility -->
@@ -5424,11 +4976,7 @@ This operation does not require authentication
         "symbol": {
           "type": "string",
           "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070) ",
-          "example": [
-            "XBTUSDTM",
-            "XBTUSDM",
-            "ETHUSDTM"
-          ]
+          "example": ["XBTUSDTM", "XBTUSDM", "ETHUSDTM"]
         },
         "crossMode": {
           "type": "boolean",
@@ -5535,10 +5083,7 @@ This operation does not require authentication
         "marginMode": {
           "type": "string",
           "description": "Margin Mode: CROSS, ISOLATED\n",
-          "enum": [
-            "CROSS",
-            "ISOLATED"
-          ],
+          "enum": ["CROSS", "ISOLATED"],
           "x-api-enum": [
             {
               "value": "CROSS",
@@ -5555,9 +5100,7 @@ This operation does not require authentication
         "positionSide": {
           "type": "string",
           "description": "Position Side\n",
-          "enum": [
-            "BOTH"
-          ],
+          "enum": ["BOTH"],
           "x-api-enum": [
             {
               "value": "BOTH",
@@ -5680,82 +5223,74 @@ This operation does not require authentication
       "type": "string"
     }
   },
-  "required": [
-    "userId",
-    "topic",
-    "subject",
-    "data",
-    "type",
-    "channelType"
-  ]
+  "required": ["userId", "topic", "subject", "data", "type", "channelType"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|userId|string|true|none|Deprecated, will delete later|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)|
-|» crossMode|boolean|true|none|Whether it is cross margin.|
-|» delevPercentage|number|true|none|ADL ranking percentile|
-|» openingTimestamp|integer(int64)|true|none|Open time|
-|» currentTimestamp|integer(int64)|true|none|Current timestamp|
-|» currentQty|integer|true|none|Current position quantity|
-|» currentCost|number|true|none|Current position value|
-|» currentComm|number|true|none|Current commission|
-|» unrealisedCost|number|true|none|Unrealized value|
-|» realisedGrossCost|number|true|none|Accumulated realized gross profit value|
-|» realisedCost|number|true|none|Current realized position value|
-|» isOpen|boolean|true|none|Opened position or not|
-|» markPrice|number|true|none|Mark price|
-|» markValue|number|true|none|Mark Value|
-|» posCost|number|true|none|Position value|
-|» posInit|number|true|none|Inital margin Cross = opening value/cross leverage; isolated = accumulation of initial margin for each transaction|
-|» posMargin|number|true|none|Bankruptcy cost Cross = mark value * imr; Isolated = position margin (accumulation of initial margin, additional margin, generated funding fees, etc.)|
-|» realisedGrossPnl|number|true|none|Accumulated realized gross profit value|
-|» realisedPnl|number|true|none|Realized profit and loss|
-|» unrealisedPnl|number|true|none|Unrealized profit and loss|
-|» unrealisedPnlPcnt|number|true|none|Profit-loss ratio of the position|
-|» unrealisedRoePcnt|number|true|none|Rate of return on investment|
-|» avgEntryPrice|number|true|none|Average entry price|
-|» liquidationPrice|number|true|none|Liquidation price: For Cross Margin, you can refer to the liquidationPrice, and the liquidation is based on the risk rate.|
-|» bankruptPrice|number|true|none|Bankruptcy price: For Cross Margin, you can refer to the bankruptPrice, and the liquidation is based on the risk rate.|
-|» settleCurrency|string|true|none|Currency used to clear and settle the trades|
-|» marginMode|string|true|none|Margin Mode: CROSS, ISOLATED|
-|» positionSide|string|true|none|Position Side|
-|» leverage|number|true|none|Leverage|
-|» autoDeposit|boolean|false|none|Auto deposit margin or not **Only applicable to Isolated Margin**|
-|» maintMarginReq|number|false|none|Maintenance margin requirement **Only applicable to Isolated Margin**|
-|» riskLimit|integer|false|none|Risk limit **Only applicable to Isolated Margin**|
-|» realLeverage|number|false|none|Leverage of the order **Only applicable to Isolated Margin**|
-|» posCross|number|false|none|Added margin **Only applicable to Isolated Margin**|
-|» posComm|number|false|none|Bankruptcy cost **Only applicable to Isolated Margin**|
-|» posLoss|number|false|none|Funding fees paid out **Only applicable to Isolated Margin**|
-|» posFunding|number|false|none|The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**|
-|» posMaint|number|false|none|Maintenance margin **Only applicable to Isolated Margin**|
-|» maintMargin|number|false|none|Position margin **Only applicable to Isolated Margin**|
-|» fundingTime|integer(int64)|false|none|Funding time|
-|» qty|integer|false|none|Position size|
-|» fundingRate|number|false|none|Funding rate|
-|» fundingFee|number|false|none|Funding fees|
-|» ts|integer(int64)|false|none|Funding Fee Settlement Time (nanoseconds)|
-|» success|boolean|false|none|Adjustment isolated margin risk limit level successful or not|
-|» msg|string|false|none|Adjustment isolated margin risk limit level failure reason|
-|type|string|true|none|none|
-|channelType|string|true|none|none|
+| Name                | Type           | Required | Restrictions | Description                                                                                                                                             |
+| ------------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| userId              | string         | true     | none         | Deprecated, will delete later                                                                                                                           |
+| topic               | string         | true     | none         | none                                                                                                                                                    |
+| subject             | string         | true     | none         | none                                                                                                                                                    |
+| data                | object         | true     | none         | none                                                                                                                                                    |
+| » symbol            | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)                                    |
+| » crossMode         | boolean        | true     | none         | Whether it is cross margin.                                                                                                                             |
+| » delevPercentage   | number         | true     | none         | ADL ranking percentile                                                                                                                                  |
+| » openingTimestamp  | integer(int64) | true     | none         | Open time                                                                                                                                               |
+| » currentTimestamp  | integer(int64) | true     | none         | Current timestamp                                                                                                                                       |
+| » currentQty        | integer        | true     | none         | Current position quantity                                                                                                                               |
+| » currentCost       | number         | true     | none         | Current position value                                                                                                                                  |
+| » currentComm       | number         | true     | none         | Current commission                                                                                                                                      |
+| » unrealisedCost    | number         | true     | none         | Unrealized value                                                                                                                                        |
+| » realisedGrossCost | number         | true     | none         | Accumulated realized gross profit value                                                                                                                 |
+| » realisedCost      | number         | true     | none         | Current realized position value                                                                                                                         |
+| » isOpen            | boolean        | true     | none         | Opened position or not                                                                                                                                  |
+| » markPrice         | number         | true     | none         | Mark price                                                                                                                                              |
+| » markValue         | number         | true     | none         | Mark Value                                                                                                                                              |
+| » posCost           | number         | true     | none         | Position value                                                                                                                                          |
+| » posInit           | number         | true     | none         | Inital margin Cross = opening value/cross leverage; isolated = accumulation of initial margin for each transaction                                      |
+| » posMargin         | number         | true     | none         | Bankruptcy cost Cross = mark value \* imr; Isolated = position margin (accumulation of initial margin, additional margin, generated funding fees, etc.) |
+| » realisedGrossPnl  | number         | true     | none         | Accumulated realized gross profit value                                                                                                                 |
+| » realisedPnl       | number         | true     | none         | Realized profit and loss                                                                                                                                |
+| » unrealisedPnl     | number         | true     | none         | Unrealized profit and loss                                                                                                                              |
+| » unrealisedPnlPcnt | number         | true     | none         | Profit-loss ratio of the position                                                                                                                       |
+| » unrealisedRoePcnt | number         | true     | none         | Rate of return on investment                                                                                                                            |
+| » avgEntryPrice     | number         | true     | none         | Average entry price                                                                                                                                     |
+| » liquidationPrice  | number         | true     | none         | Liquidation price: For Cross Margin, you can refer to the liquidationPrice, and the liquidation is based on the risk rate.                              |
+| » bankruptPrice     | number         | true     | none         | Bankruptcy price: For Cross Margin, you can refer to the bankruptPrice, and the liquidation is based on the risk rate.                                  |
+| » settleCurrency    | string         | true     | none         | Currency used to clear and settle the trades                                                                                                            |
+| » marginMode        | string         | true     | none         | Margin Mode: CROSS, ISOLATED                                                                                                                            |
+| » positionSide      | string         | true     | none         | Position Side                                                                                                                                           |
+| » leverage          | number         | true     | none         | Leverage                                                                                                                                                |
+| » autoDeposit       | boolean        | false    | none         | Auto deposit margin or not **Only applicable to Isolated Margin**                                                                                       |
+| » maintMarginReq    | number         | false    | none         | Maintenance margin requirement **Only applicable to Isolated Margin**                                                                                   |
+| » riskLimit         | integer        | false    | none         | Risk limit **Only applicable to Isolated Margin**                                                                                                       |
+| » realLeverage      | number         | false    | none         | Leverage of the order **Only applicable to Isolated Margin**                                                                                            |
+| » posCross          | number         | false    | none         | Added margin **Only applicable to Isolated Margin**                                                                                                     |
+| » posComm           | number         | false    | none         | Bankruptcy cost **Only applicable to Isolated Margin**                                                                                                  |
+| » posLoss           | number         | false    | none         | Funding fees paid out **Only applicable to Isolated Margin**                                                                                            |
+| » posFunding        | number         | false    | none         | The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**                                                     |
+| » posMaint          | number         | false    | none         | Maintenance margin **Only applicable to Isolated Margin**                                                                                               |
+| » maintMargin       | number         | false    | none         | Position margin **Only applicable to Isolated Margin**                                                                                                  |
+| » fundingTime       | integer(int64) | false    | none         | Funding time                                                                                                                                            |
+| » qty               | integer        | false    | none         | Position size                                                                                                                                           |
+| » fundingRate       | number         | false    | none         | Funding rate                                                                                                                                            |
+| » fundingFee        | number         | false    | none         | Funding fees                                                                                                                                            |
+| » ts                | integer(int64) | false    | none         | Funding Fee Settlement Time (nanoseconds)                                                                                                               |
+| » success           | boolean        | false    | none         | Adjustment isolated margin risk limit level successful or not                                                                                           |
+| » msg               | string         | false    | none         | Adjustment isolated margin risk limit level failure reason                                                                                              |
+| type                | string         | true     | none         | none                                                                                                                                                    |
+| channelType         | string         | true     | none         | none                                                                                                                                                    |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|marginMode|CROSS|
-|marginMode|ISOLATED|
-|positionSide|BOTH|
+| Property     | Value    |
+| ------------ | -------- |
+| marginMode   | CROSS    |
+| marginMode   | ISOLATED |
+| positionSide | BOTH     |
 
 <h2 id="tocS_Futures_futures_private_marginMode">Futures_futures_private_marginMode</h2>
 <!-- backwards compatibility -->
@@ -5782,9 +5317,7 @@ This operation does not require authentication
           "description": "The SYMBOL is the key with value \n\"CROSS\" or \"ISOLATED\""
         }
       },
-      "required": [
-        "SYMBOL"
-      ]
+      "required": ["SYMBOL"]
     },
     "subject": {
       "type": "string"
@@ -5796,29 +5329,21 @@ This operation does not require authentication
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "data",
-    "subject",
-    "userId",
-    "channelType"
-  ]
+  "required": ["topic", "type", "data", "subject", "userId", "channelType"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|data|object|true|none|none|
-|» SYMBOL|string|true|none|The SYMBOL is the key with value <br>"CROSS" or "ISOLATED"|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|none|
+| Name        | Type   | Required | Restrictions | Description                                                |
+| ----------- | ------ | -------- | ------------ | ---------------------------------------------------------- |
+| topic       | string | true     | none         | none                                                       |
+| type        | string | true     | none         | none                                                       |
+| data        | object | true     | none         | none                                                       |
+| » SYMBOL    | string | true     | none         | The SYMBOL is the key with value <br>"CROSS" or "ISOLATED" |
+| subject     | string | true     | none         | none                                                       |
+| userId      | string | true     | none         | none                                                       |
+| channelType | string | true     | none         | none                                                       |
 
 <h2 id="tocS_Futures_futures_private_crossLeverage">Futures_futures_private_crossLeverage</h2>
 <!-- backwards compatibility -->
@@ -5856,36 +5381,26 @@ This operation does not require authentication
             "type": "string"
           }
         },
-        "required": [
-          "leverage"
-        ]
+        "required": ["leverage"]
       }
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "userId",
-    "channelType",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "userId", "channelType", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|none|
-|data|object|true|none|none|
-|» **additionalProperties**|object|false|none|none|
-|»» leverage|string|true|none|none|
+| Name                       | Type   | Required | Restrictions | Description |
+| -------------------------- | ------ | -------- | ------------ | ----------- |
+| topic                      | string | true     | none         | none        |
+| type                       | string | true     | none         | none        |
+| subject                    | string | true     | none         | none        |
+| userId                     | string | true     | none         | none        |
+| channelType                | string | true     | none         | none        |
+| data                       | object | true     | none         | none        |
+| » **additionalProperties** | object | false    | none         | none        |
+| »» leverage                | string | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_private_stopOrders">Futures_futures_private_stopOrders</h2>
 <!-- backwards compatibility -->
@@ -5913,10 +5428,7 @@ This operation does not require authentication
         },
         "marginMode": {
           "type": "string",
-          "enum": [
-            "ISOLATED",
-            "CROSS"
-          ],
+          "enum": ["ISOLATED", "CROSS"],
           "description": "Margin Mode",
           "x-api-enum": [
             {
@@ -5942,9 +5454,7 @@ This operation does not require authentication
         "orderType": {
           "type": "string",
           "description": "User-specified order type",
-          "enum": [
-            "stop"
-          ],
+          "enum": ["stop"],
           "x-api-enum": [
             {
               "value": "stop",
@@ -5955,10 +5465,7 @@ This operation does not require authentication
         },
         "side": {
           "type": "string",
-          "enum": [
-            "buy",
-            "sell"
-          ],
+          "enum": ["buy", "sell"],
           "description": "buy or sell",
           "x-api-enum": [
             {
@@ -5980,10 +5487,7 @@ This operation does not require authentication
         "stop": {
           "type": "string",
           "description": "Either 'down' or 'up'",
-          "enum": [
-            "down",
-            "up"
-          ],
+          "enum": ["down", "up"],
           "x-api-enum": [
             {
               "value": "down",
@@ -6015,11 +5519,7 @@ This operation does not require authentication
         "type": {
           "type": "string",
           "description": "Order Type",
-          "enum": [
-            "open",
-            "triggered",
-            "cancel"
-          ],
+          "enum": ["open", "triggered", "cancel"],
           "x-api-enum": [
             {
               "value": "open",
@@ -6078,46 +5578,44 @@ This operation does not require authentication
     "channelType"
   ]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|data|object|true|none|none|
-|» createdAt|integer(int64)|true|none|none|
-|» marginMode|string|true|none|Margin Mode|
-|» orderId|string|true|none|The unique order id generated by the trading system|
-|» orderPrice|string|true|none|Order Price|
-|» orderType|string|true|none|User-specified order type|
-|» side|string|true|none|buy or sell|
-|» size|integer|true|none|User-specified order size|
-|» stop|string|true|none|Either 'down' or 'up'|
-|» stopPrice|string|true|none|Stop Price|
-|» stopPriceType|string|true|none|none|
-|» symbol|string|true|none|Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070)|
-|» ts|integer(int64)|true|none|none|
-|» type|string|true|none|Order Type|
-|subject|string|true|none|none|
-|id|string|true|none|none|
-|userId|string|true|none|none|
-|channelType|string|true|none|none|
+| Name            | Type           | Required | Restrictions | Description                                                                                                          |
+| --------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| topic           | string         | true     | none         | none                                                                                                                 |
+| type            | string         | true     | none         | none                                                                                                                 |
+| data            | object         | true     | none         | none                                                                                                                 |
+| » createdAt     | integer(int64) | true     | none         | none                                                                                                                 |
+| » marginMode    | string         | true     | none         | Margin Mode                                                                                                          |
+| » orderId       | string         | true     | none         | The unique order id generated by the trading system                                                                  |
+| » orderPrice    | string         | true     | none         | Order Price                                                                                                          |
+| » orderType     | string         | true     | none         | User-specified order type                                                                                            |
+| » side          | string         | true     | none         | buy or sell                                                                                                          |
+| » size          | integer        | true     | none         | User-specified order size                                                                                            |
+| » stop          | string         | true     | none         | Either 'down' or 'up'                                                                                                |
+| » stopPrice     | string         | true     | none         | Stop Price                                                                                                           |
+| » stopPriceType | string         | true     | none         | none                                                                                                                 |
+| » symbol        | string         | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-221752070) |
+| » ts            | integer(int64) | true     | none         | none                                                                                                                 |
+| » type          | string         | true     | none         | Order Type                                                                                                           |
+| subject         | string         | true     | none         | none                                                                                                                 |
+| id              | string         | true     | none         | none                                                                                                                 |
+| userId          | string         | true     | none         | none                                                                                                                 |
+| channelType     | string         | true     | none         | none                                                                                                                 |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|marginMode|ISOLATED|
-|marginMode|CROSS|
-|orderType|stop|
-|side|buy|
-|side|sell|
-|stop|down|
-|stop|up|
-|type|open|
-|type|triggered|
-|type|cancel|
-
+| Property   | Value     |
+| ---------- | --------- |
+| marginMode | ISOLATED  |
+| marginMode | CROSS     |
+| orderType  | stop      |
+| side       | buy       |
+| side       | sell      |
+| stop       | down      |
+| stop       | up        |
+| type       | open      |
+| type       | triggered |
+| type       | cancel    |

@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="spot">spot v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 market
 
@@ -28,23 +28,21 @@ market
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/announcements',
-{
-  method: 'GET',
+fetch("/api/v3/announcements", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -61,54 +59,55 @@ print(r.json())
 
 `GET /api/v3/announcements`
 
-This interface can obtain the latest news announcements, and the default page search is for announcements within a month.
+This interface can obtain the latest news announcements, and the default page
+search is for announcements within a month.
 
 <h3 id="get-announcements-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|currentPage|query|integer(int64)|false|page number|
-|pageSize|query|integer(int64)|false|page Size|
-|annType|query|string|false|Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements|
-|lang|query|string|false|Language type, the default is en_US, the specific value parameters are as follows|
-|startTime|query|integer(int64)|false|Announcement online start time (milliseconds)|
-|endTime|query|integer(int64)|false|Announcement online end time (milliseconds)|
+| Name        | In    | Type           | Required | Description                                                                                                                                                                                                                                                                                                                                                          |
+| ----------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currentPage | query | integer(int64) | false    | page number                                                                                                                                                                                                                                                                                                                                                          |
+| pageSize    | query | integer(int64) | false    | page Size                                                                                                                                                                                                                                                                                                                                                            |
+| annType     | query | string         | false    | Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements |
+| lang        | query | string         | false    | Language type, the default is en_US, the specific value parameters are as follows                                                                                                                                                                                                                                                                                    |
+| startTime   | query | integer(int64) | false    | Announcement online start time (milliseconds)                                                                                                                                                                                                                                                                                                                        |
+| endTime     | query | integer(int64) | false    | Announcement online end time (milliseconds)                                                                                                                                                                                                                                                                                                                          |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|annType|latest-announcements |
-|annType|activities |
-|annType|product-updates |
-|annType|vip |
-|annType|maintenance-updates|
-|annType|delistings |
-|annType|others|
-|annType|api-campaigns |
-|annType|new-listings|
-|lang|zh_HK|
-|lang|ja_JP|
-|lang|ko_KR|
-|lang|en_US|
-|lang|pl_PL|
-|lang|es_ES|
-|lang|fr_FR|
-|lang|ar_AE|
-|lang|it_IT|
-|lang|id_ID|
-|lang|nl_NL|
-|lang|pt_PT|
-|lang|vi_VN|
-|lang|de_DE|
-|lang|tr_TR|
-|lang|ms_MY|
-|lang|ru_RU|
-|lang|th_TH|
-|lang|hi_IN|
-|lang|bn_BD|
-|lang|fil_PH|
-|lang|ur_PK|
+| Parameter | Value                |
+| --------- | -------------------- |
+| annType   | latest-announcements |
+| annType   | activities           |
+| annType   | product-updates      |
+| annType   | vip                  |
+| annType   | maintenance-updates  |
+| annType   | delistings           |
+| annType   | others               |
+| annType   | api-campaigns        |
+| annType   | new-listings         |
+| lang      | zh_HK                |
+| lang      | ja_JP                |
+| lang      | ko_KR                |
+| lang      | en_US                |
+| lang      | pl_PL                |
+| lang      | es_ES                |
+| lang      | fr_FR                |
+| lang      | ar_AE                |
+| lang      | it_IT                |
+| lang      | id_ID                |
+| lang      | nl_NL                |
+| lang      | pt_PT                |
+| lang      | vi_VN                |
+| lang      | de_DE                |
+| lang      | tr_TR                |
+| lang      | ms_MY                |
+| lang      | ru_RU                |
+| lang      | th_TH                |
+| lang      | hi_IN                |
+| lang      | bn_BD                |
+| lang      | fil_PH               |
+| lang      | ur_PK                |
 
 > Example responses
 
@@ -190,48 +189,39 @@ This interface can obtain the latest news announcements, and the default page se
           "description": "Total Page"
         }
       },
-      "required": [
-        "totalNum",
-        "items",
-        "currentPage",
-        "pageSize",
-        "totalPage"
-      ]
+      "required": ["totalNum", "items", "currentPage", "pageSize", "totalPage"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-announcements-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-announcements-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» totalNum|integer|true|none|Total Number|
-|»» items|[object]|true|none|none|
-|»»» annId|integer|true|none|Announcement ID|
-|»»» annTitle|string|true|none|Announcement title|
-|»»» annType|[string]|true|none|Announcement type|
-|»»» annDesc|string|true|none|Announcement description|
-|»»» cTime|integer(int64)|true|none|Announcement release time, Unix millisecond timestamp format|
-|»»» language|string|true|none|language type|
-|»»» annUrl|string|true|none|Announcement link|
-|»» currentPage|integer|true|none|Current page|
-|»» pageSize|integer|true|none|Page size|
-|»» totalPage|integer|true|none|Total Page|
+| Name           | Type           | Required | Restrictions | Description                                                  |
+| -------------- | -------------- | -------- | ------------ | ------------------------------------------------------------ |
+| » code         | string         | true     | none         | none                                                         |
+| » data         | object         | true     | none         | none                                                         |
+| »» totalNum    | integer        | true     | none         | Total Number                                                 |
+| »» items       | [object]       | true     | none         | none                                                         |
+| »»» annId      | integer        | true     | none         | Announcement ID                                              |
+| »»» annTitle   | string         | true     | none         | Announcement title                                           |
+| »»» annType    | [string]       | true     | none         | Announcement type                                            |
+| »»» annDesc    | string         | true     | none         | Announcement description                                     |
+| »»» cTime      | integer(int64) | true     | none         | Announcement release time, Unix millisecond timestamp format |
+| »»» language   | string         | true     | none         | language type                                                |
+| »»» annUrl     | string         | true     | none         | Announcement link                                            |
+| »» currentPage | integer        | true     | none         | Current page                                                 |
+| »» pageSize    | integer        | true     | none         | Page size                                                    |
+| »» totalPage   | integer        | true     | none         | Total Page                                                   |
 
 <aside class="success">
 This operation does not require authentication
@@ -244,23 +234,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/currencies/{currency}',
-{
-  method: 'GET',
+fetch("/api/v3/currencies/{currency}", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -281,10 +269,10 @@ Request the currency details of a specified currency via this endpoint.
 
 <h3 id="get-currency-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|currency|path|string|true|Path parameter, Currency|
-|chain|query|string|false|Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.|
+| Name     | In    | Type   | Required | Description                                                                                                                                                                              |
+| -------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency | path  | string | true     | Path parameter, Currency                                                                                                                                                                 |
+| chain    | query | string | false    | Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies. |
 
 > Example responses
 
@@ -432,51 +420,48 @@ Request the currency details of a specified currency via this endpoint.
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-currency-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-currency-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» currency|string|true|none|A unique currency code that will never change|
-|»» name|string|true|none|Currency name; will change after renaming|
-|»» fullName|string|true|none|Full currency name; will change after renaming|
-|»» precision|integer|true|none|Currency precision|
-|»» confirms|integer|true|none|Number of block confirmations|
-|»» contractAddress|string|true|none|Contract address|
-|»» isMarginEnabled|boolean|true|none|Margin support or not|
-|»» isDebitEnabled|boolean|true|none|Debit support or not|
-|»» chains|[object]|true|none|Chain list|
-|»»» chainName|string|true|none|Chain name of currency|
-|»»» withdrawalMinSize|string|true|none|Minimum withdrawal amount|
-|»»» depositMinSize|string|true|none|Minimum deposit amount|
-|»»» withdrawFeeRate|string|true|none|Withdraw fee rate|
-|»»» withdrawalMinFee|string|true|none|Minimum fees charged for withdrawal|
-|»»» isWithdrawEnabled|boolean|true|none|Withdrawal support or not|
-|»»» isDepositEnabled|boolean|true|none|Deposit support or not|
-|»»» confirms|integer|true|none|Number of block confirmations|
-|»»» preConfirms|integer|true|none|The number of blocks (confirmations) for advance on-chain verification|
-|»»» contractAddress|string|true|none|Contract address|
-|»»» withdrawPrecision|integer|true|none|Withdrawal precision bit, indicating the maximum supported length after the decimal point of the withdrawal amount|
-|»»» maxWithdraw|number|true|none|Maximum amount of single withdrawal|
-|»»» maxDeposit|string|true|none|Maximum amount of single deposit (only applicable to Lightning Network)|
-|»»» needTag|boolean|true|none|Need for memo/tag or not|
-|»»» chainId|string|true|none|Chain id of currency|
+| Name                  | Type     | Required | Restrictions | Description                                                                                                        |
+| --------------------- | -------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code                | string   | true     | none         | none                                                                                                               |
+| » data                | object   | true     | none         | none                                                                                                               |
+| »» currency           | string   | true     | none         | A unique currency code that will never change                                                                      |
+| »» name               | string   | true     | none         | Currency name; will change after renaming                                                                          |
+| »» fullName           | string   | true     | none         | Full currency name; will change after renaming                                                                     |
+| »» precision          | integer  | true     | none         | Currency precision                                                                                                 |
+| »» confirms           | integer  | true     | none         | Number of block confirmations                                                                                      |
+| »» contractAddress    | string   | true     | none         | Contract address                                                                                                   |
+| »» isMarginEnabled    | boolean  | true     | none         | Margin support or not                                                                                              |
+| »» isDebitEnabled     | boolean  | true     | none         | Debit support or not                                                                                               |
+| »» chains             | [object] | true     | none         | Chain list                                                                                                         |
+| »»» chainName         | string   | true     | none         | Chain name of currency                                                                                             |
+| »»» withdrawalMinSize | string   | true     | none         | Minimum withdrawal amount                                                                                          |
+| »»» depositMinSize    | string   | true     | none         | Minimum deposit amount                                                                                             |
+| »»» withdrawFeeRate   | string   | true     | none         | Withdraw fee rate                                                                                                  |
+| »»» withdrawalMinFee  | string   | true     | none         | Minimum fees charged for withdrawal                                                                                |
+| »»» isWithdrawEnabled | boolean  | true     | none         | Withdrawal support or not                                                                                          |
+| »»» isDepositEnabled  | boolean  | true     | none         | Deposit support or not                                                                                             |
+| »»» confirms          | integer  | true     | none         | Number of block confirmations                                                                                      |
+| »»» preConfirms       | integer  | true     | none         | The number of blocks (confirmations) for advance on-chain verification                                             |
+| »»» contractAddress   | string   | true     | none         | Contract address                                                                                                   |
+| »»» withdrawPrecision | integer  | true     | none         | Withdrawal precision bit, indicating the maximum supported length after the decimal point of the withdrawal amount |
+| »»» maxWithdraw       | number   | true     | none         | Maximum amount of single withdrawal                                                                                |
+| »»» maxDeposit        | string   | true     | none         | Maximum amount of single deposit (only applicable to Lightning Network)                                            |
+| »»» needTag           | boolean  | true     | none         | Need for memo/tag or not                                                                                           |
+| »»» chainId           | string   | true     | none         | Chain id of currency                                                                                               |
 
 <aside class="success">
 This operation does not require authentication
@@ -489,23 +474,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/currencies',
-{
-  method: 'GET',
+fetch("/api/v3/currencies", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -522,7 +505,8 @@ print(r.json())
 
 `GET /api/v3/currencies`
 
-Request a currency list via this endpoint. Not all currencies can currently be used for trading.
+Request a currency list via this endpoint. Not all currencies can currently be
+used for trading.
 
 > Example responses
 
@@ -684,83 +668,78 @@ Request a currency list via this endpoint. Not all currencies can currently be u
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-all-currencies-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-all-currencies-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» currency|string|true|none|A unique currency code that will never change|
-|»» name|string|true|none|Currency name; will change after renaming|
-|»» fullName|string|true|none|Full currency name; will change after renaming|
-|»» precision|integer|true|none|Currency precision|
-|»» confirms|integer|true|none|Number of block confirmations|
-|»» contractAddress|string|true|none|Contract address|
-|»» isMarginEnabled|boolean|true|none|Margin support or not|
-|»» isDebitEnabled|boolean|true|none|Debit support or not|
-|»» chains|[object]|true|none|Chain list|
-|»»» chainName|string|true|none|Chain name of currency|
-|»»» withdrawalMinSize|string|true|none|Minimum withdrawal amount|
-|»»» depositMinSize|string|true|none|Minimum deposit amount|
-|»»» withdrawFeeRate|string|true|none|Withdraw fee rate|
-|»»» withdrawalMinFee|string|true|none|Minimum fees charged for withdrawal|
-|»»» isWithdrawEnabled|boolean|true|none|Withdrawal support or not|
-|»»» isDepositEnabled|boolean|true|none|Deposit support or not|
-|»»» confirms|integer|true|none|Number of block confirmations|
-|»»» preConfirms|integer|true|none|The number of blocks (confirmations) for advance on-chain verification|
-|»»» contractAddress|string|true|none|Contract address|
-|»»» withdrawPrecision|integer|true|none|Withdrawal precision bit, indicating the maximum supported length after the decimal point of the withdrawal amount|
-|»»» maxWithdraw|string|true|none|Maximum amount of single withdrawal|
-|»»» maxDeposit|string|true|none|Maximum amount of single deposit (only applicable to Lightning Network)|
-|»»» needTag|boolean|true|none|Need for memo/tag or not|
-|»»» chainId|string|true|none|Chain id of currency|
-|»»» depositFeeRate|string|false|none|Deposit fee rate (some currencies have this param; the default is empty)|
-|»»» withdrawMaxFee|string|false|none|Withdraw max. fee (some currencies have this param; the default is empty)|
-|»»» depositTierFee|string|false|none|none|
+| Name                  | Type     | Required | Restrictions | Description                                                                                                        |
+| --------------------- | -------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code                | string   | true     | none         | none                                                                                                               |
+| » data                | [object] | true     | none         | none                                                                                                               |
+| »» currency           | string   | true     | none         | A unique currency code that will never change                                                                      |
+| »» name               | string   | true     | none         | Currency name; will change after renaming                                                                          |
+| »» fullName           | string   | true     | none         | Full currency name; will change after renaming                                                                     |
+| »» precision          | integer  | true     | none         | Currency precision                                                                                                 |
+| »» confirms           | integer  | true     | none         | Number of block confirmations                                                                                      |
+| »» contractAddress    | string   | true     | none         | Contract address                                                                                                   |
+| »» isMarginEnabled    | boolean  | true     | none         | Margin support or not                                                                                              |
+| »» isDebitEnabled     | boolean  | true     | none         | Debit support or not                                                                                               |
+| »» chains             | [object] | true     | none         | Chain list                                                                                                         |
+| »»» chainName         | string   | true     | none         | Chain name of currency                                                                                             |
+| »»» withdrawalMinSize | string   | true     | none         | Minimum withdrawal amount                                                                                          |
+| »»» depositMinSize    | string   | true     | none         | Minimum deposit amount                                                                                             |
+| »»» withdrawFeeRate   | string   | true     | none         | Withdraw fee rate                                                                                                  |
+| »»» withdrawalMinFee  | string   | true     | none         | Minimum fees charged for withdrawal                                                                                |
+| »»» isWithdrawEnabled | boolean  | true     | none         | Withdrawal support or not                                                                                          |
+| »»» isDepositEnabled  | boolean  | true     | none         | Deposit support or not                                                                                             |
+| »»» confirms          | integer  | true     | none         | Number of block confirmations                                                                                      |
+| »»» preConfirms       | integer  | true     | none         | The number of blocks (confirmations) for advance on-chain verification                                             |
+| »»» contractAddress   | string   | true     | none         | Contract address                                                                                                   |
+| »»» withdrawPrecision | integer  | true     | none         | Withdrawal precision bit, indicating the maximum supported length after the decimal point of the withdrawal amount |
+| »»» maxWithdraw       | string   | true     | none         | Maximum amount of single withdrawal                                                                                |
+| »»» maxDeposit        | string   | true     | none         | Maximum amount of single deposit (only applicable to Lightning Network)                                            |
+| »»» needTag           | boolean  | true     | none         | Need for memo/tag or not                                                                                           |
+| »»» chainId           | string   | true     | none         | Chain id of currency                                                                                               |
+| »»» depositFeeRate    | string   | false    | none         | Deposit fee rate (some currencies have this param; the default is empty)                                           |
+| »»» withdrawMaxFee    | string   | false    | none         | Withdraw max. fee (some currencies have this param; the default is empty)                                          |
+| »»» depositTierFee    | string   | false    | none         | none                                                                                                               |
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get Symbol 
+## Get Symbol
 
 <a id="opId004"></a>
 
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v2/symbols/{symbol}',
-{
-  method: 'GET',
+fetch("/api/v2/symbols/{symbol}", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -777,13 +756,14 @@ print(r.json())
 
 `GET /api/v2/symbols/{symbol}`
 
-Request via this endpoint to get detail currency pairs for trading. If you want to get the market information of the trading symbol, please use Get All Tickers.
+Request via this endpoint to get detail currency pairs for trading. If you want
+to get the market information of the trading symbol, please use Get All Tickers.
 
 <h3 id="get-symbol--parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|path|string|true|Path parameter, Symbol|
+| Name   | In   | Type   | Required | Description            |
+| ------ | ---- | ------ | -------- | ---------------------- |
+| symbol | path | string | true     | Path parameter, Symbol |
 
 > Example responses
 
@@ -802,18 +782,12 @@ Request via this endpoint to get detail currency pairs for trading. If you want 
         "symbol": {
           "type": "string",
           "description": "unique code of a symbol, it would not change after renaming",
-          "example": [
-            "BTC-USDT",
-            "BCHSV-USDT"
-          ]
+          "example": ["BTC-USDT", "BCHSV-USDT"]
         },
         "name": {
           "type": "string",
           "description": "Name of trading pairs, it would change after renaming",
-          "example": [
-            "BTC-USDT",
-            "BSV-USDT"
-          ]
+          "example": ["BTC-USDT", "BSV-USDT"]
         },
         "baseCurrency": {
           "type": "string",
@@ -830,11 +804,7 @@ Request via this endpoint to get detail currency pairs for trading. If you want 
         "market": {
           "type": "string",
           "description": "The trading market.",
-          "example": [
-            "USDS",
-            "BTC",
-            "ALTS"
-          ]
+          "example": ["USDS", "BTC", "ALTS"]
         },
         "baseMinSize": {
           "type": "string",
@@ -883,11 +853,7 @@ Request via this endpoint to get detail currency pairs for trading. If you want 
         "feeCategory": {
           "type": "integer",
           "description": "[Fee Type](https://www.kucoin.com/vip/privilege)",
-          "enum": [
-            1,
-            2,
-            3
-          ],
+          "enum": [1, 2, 3],
           "x-api-enum": [
             {
               "value": 1,
@@ -925,48 +891,36 @@ Request via this endpoint to get detail currency pairs for trading. If you want 
         "callauctionPriceFloor": {
           "type": "string",
           "description": "The lowest price declared in the call auction",
-          "example": [
-            "0.00001"
-          ]
+          "example": ["0.00001"]
         },
         "callauctionPriceCeiling": {
           "type": "string",
           "description": "The highest bid price in the call auction\n",
-          "example": [
-            "0.6"
-          ]
+          "example": ["0.6"]
         },
         "callauctionFirstStageStartTime": {
           "type": "integer",
           "description": "The first phase of the call auction starts at (Allow add orders, allow cancel orders)",
           "format": "int64",
-          "example": [
-            1740470400000
-          ]
+          "example": [1740470400000]
         },
         "callauctionSecondStageStartTime": {
           "type": "integer",
           "description": "The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)",
           "format": "int64",
-          "example": [
-            1740473400000
-          ]
+          "example": [1740473400000]
         },
         "callauctionThirdStageStartTime": {
           "type": "integer",
           "description": "The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)",
           "format": "int64",
-          "example": [
-            1740473700000
-          ]
+          "example": [1740473700000]
         },
         "tradingStartTime": {
           "type": "integer",
           "description": "Official opening time (end time of the third phase of call auction)",
           "format": "int64",
-          "example": [
-            1740474000000
-          ]
+          "example": [1740474000000]
         }
       },
       "required": [
@@ -1001,63 +955,60 @@ Request via this endpoint to get detail currency pairs for trading. If you want 
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-symbol--responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-symbol--responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» symbol|string|true|none|unique code of a symbol, it would not change after renaming|
-|»» name|string|true|none|Name of trading pairs, it would change after renaming|
-|»» baseCurrency|string|true|none|Base currency,e.g. BTC.|
-|»» quoteCurrency|string|true|none|Quote currency,e.g. USDT.|
-|»» feeCurrency|string|true|none|The currency of charged fees.|
-|»» market|string|true|none|The trading market.|
-|»» baseMinSize|string|true|none|The minimum order quantity requried to place an order.|
-|»» quoteMinSize|string|true|none|The minimum order funds required to place a market order.|
-|»» baseMaxSize|string|true|none|The maximum order size required to place an order.|
-|»» quoteMaxSize|string|true|none|The maximum order funds required to place a market order.|
-|»» baseIncrement|string|true|none|Quantity increment: The quantity for an order must be a positive integer multiple of this increment. Here, the size refers to the quantity of the base currency for the order. For example, for the ETH-USDT trading pair, if the baseIncrement is 0.0000001, the order quantity can be 1.0000001 but not 1.00000001.|
-|»» quoteIncrement|string|true|none|Quote increment: The funds for a market order must be a positive integer multiple of this increment. The funds refer to the quote currency amount. For example, for the ETH-USDT trading pair, if the quoteIncrement is 0.000001, the amount of USDT for the order can be 3000.000001 but not 3000.0000001.|
-|»» priceIncrement|string|true|none|Price increment: The price of an order must be a positive integer multiple of this increment. For example, for the ETH-USDT trading pair, if the priceIncrement is 0.01, the order price can be 3000.01 but not 3000.001.|
-|»» priceLimitRate|string|true|none|Threshold for price portection|
-|»» minFunds|string|true|none|The minimum trading amounts|
-|»» isMarginEnabled|boolean|true|none|Available for margin or not.|
-|»» enableTrading|boolean|true|none|Available for transaction or not.|
-|»» feeCategory|integer|true|none|[Fee Type](https://www.kucoin.com/vip/privilege)|
-|»» makerFeeCoefficient|string|true|none|The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
-|»» takerFeeCoefficient|string|true|none|The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
-|»» st|boolean|true|none|Whether it is a [Special Treatment](https://www.kucoin.com/legal/special-treatment) symbol|
-|»» callauctionIsEnabled|boolean|true|none|The  [call auction](https://www.kucoin.com/support/40999744334105) status returns true/false|
-|»» callauctionPriceFloor|string|true|none|The lowest price declared in the call auction|
-|»» callauctionPriceCeiling|string|true|none|The highest bid price in the call auction|
-|»» callauctionFirstStageStartTime|integer(int64)|true|none|The first phase of the call auction starts at (Allow add orders, allow cancel orders)|
-|»» callauctionSecondStageStartTime|integer(int64)|true|none|The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)|
-|»» callauctionThirdStageStartTime|integer(int64)|true|none|The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)|
-|»» tradingStartTime|integer(int64)|true|none|Official opening time (end time of the third phase of call auction)|
+| Name                               | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                                                           |
+| ---------------------------------- | -------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code                             | string         | true     | none         | none                                                                                                                                                                                                                                                                                                                  |
+| » data                             | object         | true     | none         | none                                                                                                                                                                                                                                                                                                                  |
+| »» symbol                          | string         | true     | none         | unique code of a symbol, it would not change after renaming                                                                                                                                                                                                                                                           |
+| »» name                            | string         | true     | none         | Name of trading pairs, it would change after renaming                                                                                                                                                                                                                                                                 |
+| »» baseCurrency                    | string         | true     | none         | Base currency,e.g. BTC.                                                                                                                                                                                                                                                                                               |
+| »» quoteCurrency                   | string         | true     | none         | Quote currency,e.g. USDT.                                                                                                                                                                                                                                                                                             |
+| »» feeCurrency                     | string         | true     | none         | The currency of charged fees.                                                                                                                                                                                                                                                                                         |
+| »» market                          | string         | true     | none         | The trading market.                                                                                                                                                                                                                                                                                                   |
+| »» baseMinSize                     | string         | true     | none         | The minimum order quantity requried to place an order.                                                                                                                                                                                                                                                                |
+| »» quoteMinSize                    | string         | true     | none         | The minimum order funds required to place a market order.                                                                                                                                                                                                                                                             |
+| »» baseMaxSize                     | string         | true     | none         | The maximum order size required to place an order.                                                                                                                                                                                                                                                                    |
+| »» quoteMaxSize                    | string         | true     | none         | The maximum order funds required to place a market order.                                                                                                                                                                                                                                                             |
+| »» baseIncrement                   | string         | true     | none         | Quantity increment: The quantity for an order must be a positive integer multiple of this increment. Here, the size refers to the quantity of the base currency for the order. For example, for the ETH-USDT trading pair, if the baseIncrement is 0.0000001, the order quantity can be 1.0000001 but not 1.00000001. |
+| »» quoteIncrement                  | string         | true     | none         | Quote increment: The funds for a market order must be a positive integer multiple of this increment. The funds refer to the quote currency amount. For example, for the ETH-USDT trading pair, if the quoteIncrement is 0.000001, the amount of USDT for the order can be 3000.000001 but not 3000.0000001.           |
+| »» priceIncrement                  | string         | true     | none         | Price increment: The price of an order must be a positive integer multiple of this increment. For example, for the ETH-USDT trading pair, if the priceIncrement is 0.01, the order price can be 3000.01 but not 3000.001.                                                                                             |
+| »» priceLimitRate                  | string         | true     | none         | Threshold for price portection                                                                                                                                                                                                                                                                                        |
+| »» minFunds                        | string         | true     | none         | The minimum trading amounts                                                                                                                                                                                                                                                                                           |
+| »» isMarginEnabled                 | boolean        | true     | none         | Available for margin or not.                                                                                                                                                                                                                                                                                          |
+| »» enableTrading                   | boolean        | true     | none         | Available for transaction or not.                                                                                                                                                                                                                                                                                     |
+| »» feeCategory                     | integer        | true     | none         | [Fee Type](https://www.kucoin.com/vip/privilege)                                                                                                                                                                                                                                                                      |
+| »» makerFeeCoefficient             | string         | true     | none         | The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee                                                                                                                                      |
+| »» takerFeeCoefficient             | string         | true     | none         | The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee                                                                                                                                      |
+| »» st                              | boolean        | true     | none         | Whether it is a [Special Treatment](https://www.kucoin.com/legal/special-treatment) symbol                                                                                                                                                                                                                            |
+| »» callauctionIsEnabled            | boolean        | true     | none         | The [call auction](https://www.kucoin.com/support/40999744334105) status returns true/false                                                                                                                                                                                                                           |
+| »» callauctionPriceFloor           | string         | true     | none         | The lowest price declared in the call auction                                                                                                                                                                                                                                                                         |
+| »» callauctionPriceCeiling         | string         | true     | none         | The highest bid price in the call auction                                                                                                                                                                                                                                                                             |
+| »» callauctionFirstStageStartTime  | integer(int64) | true     | none         | The first phase of the call auction starts at (Allow add orders, allow cancel orders)                                                                                                                                                                                                                                 |
+| »» callauctionSecondStageStartTime | integer(int64) | true     | none         | The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)                                                                                                                                                                                                                          |
+| »» callauctionThirdStageStartTime  | integer(int64) | true     | none         | The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)                                                                                                                                                                                                                     |
+| »» tradingStartTime                | integer(int64) | true     | none         | Official opening time (end time of the third phase of call auction)                                                                                                                                                                                                                                                   |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|feeCategory|1|
-|feeCategory|2|
-|feeCategory|3|
+| Property    | Value |
+| ----------- | ----- |
+| feeCategory | 1     |
+| feeCategory | 2     |
+| feeCategory | 3     |
 
 <aside class="success">
 This operation does not require authentication
@@ -1070,23 +1021,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v2/symbols',
-{
-  method: 'GET',
+fetch("/api/v2/symbols", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1103,13 +1052,15 @@ print(r.json())
 
 `GET /api/v2/symbols`
 
-Request a list of available currency pairs for trading via this endpoint. If you want to get the market information of the trading symbol, please use Get All Tickers.
+Request a list of available currency pairs for trading via this endpoint. If you
+want to get the market information of the trading symbol, please use Get All
+Tickers.
 
 <h3 id="get-all-symbols-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|market|query|string|false|[The trading market](https://www.kucoin.com/docs-new/api-222921786)|
+| Name   | In    | Type   | Required | Description                                                         |
+| ------ | ----- | ------ | -------- | ------------------------------------------------------------------- |
+| market | query | string | false    | [The trading market](https://www.kucoin.com/docs-new/api-222921786) |
 
 > Example responses
 
@@ -1130,18 +1081,12 @@ Request a list of available currency pairs for trading via this endpoint. If you
           "symbol": {
             "type": "string",
             "description": "Unique code of a symbol; it will not change after renaming",
-            "example": [
-              "BTC-USDT",
-              "BCHSV-USDT"
-            ]
+            "example": ["BTC-USDT", "BCHSV-USDT"]
           },
           "name": {
             "type": "string",
             "description": "Name of trading pairs, it will change after renaming",
-            "example": [
-              "BTC-USDT",
-              "BSV-USDT"
-            ]
+            "example": ["BTC-USDT", "BSV-USDT"]
           },
           "baseCurrency": {
             "type": "string",
@@ -1158,11 +1103,7 @@ Request a list of available currency pairs for trading via this endpoint. If you
           "market": {
             "type": "string",
             "description": "The trading market.",
-            "example": [
-              "USDS",
-              "BTC",
-              "ALTS"
-            ]
+            "example": ["USDS", "BTC", "ALTS"]
           },
           "baseMinSize": {
             "type": "string",
@@ -1211,11 +1152,7 @@ Request a list of available currency pairs for trading via this endpoint. If you
           "feeCategory": {
             "type": "integer",
             "description": "[Fee Type](https://www.kucoin.com/vip/privilege)",
-            "enum": [
-              1,
-              2,
-              3
-            ],
+            "enum": [1, 2, 3],
             "x-api-enum": [
               {
                 "value": 1,
@@ -1253,48 +1190,36 @@ Request a list of available currency pairs for trading via this endpoint. If you
           "callauctionPriceFloor": {
             "type": "string",
             "description": "The lowest price declared in the call auction",
-            "example": [
-              "0.00001"
-            ]
+            "example": ["0.00001"]
           },
           "callauctionPriceCeiling": {
             "type": "string",
             "description": "The highest bid price in the call auction\n",
-            "example": [
-              "0.6"
-            ]
+            "example": ["0.6"]
           },
           "callauctionFirstStageStartTime": {
             "type": "integer",
             "description": "The first phase of the call auction starts at (Allow add orders, allow cancel orders)",
             "format": "int64",
-            "example": [
-              1740470400000
-            ]
+            "example": [1740470400000]
           },
           "callauctionSecondStageStartTime": {
             "type": "integer",
             "description": "The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)",
             "format": "int64",
-            "example": [
-              1740473400000
-            ]
+            "example": [1740473400000]
           },
           "callauctionThirdStageStartTime": {
             "type": "integer",
             "description": "The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)",
             "format": "int64",
-            "example": [
-              1740473700000
-            ]
+            "example": [1740473700000]
           },
           "tradingStartTime": {
             "type": "integer",
             "description": "Official opening time (end time of the third phase of call auction)",
             "format": "int64",
-            "example": [
-              1740474000000
-            ]
+            "example": [1740474000000]
           }
         },
         "required": [
@@ -1330,63 +1255,60 @@ Request a list of available currency pairs for trading via this endpoint. If you
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-all-symbols-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-all-symbols-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» symbol|string|true|none|Unique code of a symbol; it will not change after renaming|
-|»» name|string|true|none|Name of trading pairs, it will change after renaming|
-|»» baseCurrency|string|true|none|Base currency, e.g. BTC.|
-|»» quoteCurrency|string|true|none|Quote currency, e.g. USDT.|
-|»» feeCurrency|string|true|none|The currency of charged fees.|
-|»» market|string|true|none|The trading market.|
-|»» baseMinSize|string|true|none|The minimum order quantity required to place an order.|
-|»» quoteMinSize|string|true|none|The minimum order funds required to place a market order.|
-|»» baseMaxSize|string|true|none|The maximum order size required to place an order.|
-|»» quoteMaxSize|string|true|none|The maximum order funds required to place a market order.|
-|»» baseIncrement|string|true|none|Quantity increment: The quantity for an order must be a positive integer multiple of this increment. Here, the size refers to the quantity of the base currency for the order. For example, for the ETH-USDT trading pair, if the baseIncrement is 0.0000001, the order quantity can be 1.0000001 but not 1.00000001.|
-|»» quoteIncrement|string|true|none|Quote increment: The funds for a market order must be a positive integer multiple of this increment. The funds refer to the quote currency amount. For example, for the ETH-USDT trading pair, if the quoteIncrement is 0.000001, the amount of USDT for the order can be 3000.000001 but not 3000.0000001.|
-|»» priceIncrement|string|true|none|Price increment: The price of an order must be a positive integer multiple of this increment. For example, for the ETH-USDT trading pair, if the priceIncrement is 0.01, the order price can be 3000.01 but not 3000.001.<br><br>Specifies the min. order price as well as the price increment.This also applies to quote currency.|
-|»» priceLimitRate|string|true|none|Threshold for price protection|
-|»» minFunds|string|true|none|The minimum trading amounts|
-|»» isMarginEnabled|boolean|true|none|Available for margin or not.|
-|»» enableTrading|boolean|true|none|Available for transaction or not.|
-|»» feeCategory|integer|true|none|[Fee Type](https://www.kucoin.com/vip/privilege)|
-|»» makerFeeCoefficient|string|true|none|The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
-|»» takerFeeCoefficient|string|true|none|The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
-|»» st|boolean|true|none|Whether it is a [Special Treatment](https://www.kucoin.com/legal/special-treatment) symbol|
-|»» callauctionIsEnabled|boolean|true|none|The [call auction](https://www.kucoin.com/support/40999744334105) status returns true/false|
-|»» callauctionPriceFloor|string|true|none|The lowest price declared in the call auction|
-|»» callauctionPriceCeiling|string|true|none|The highest bid price in the call auction|
-|»» callauctionFirstStageStartTime|integer(int64)|true|none|The first phase of the call auction starts at (Allow add orders, allow cancel orders)|
-|»» callauctionSecondStageStartTime|integer(int64)|true|none|The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)|
-|»» callauctionThirdStageStartTime|integer(int64)|true|none|The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)|
-|»» tradingStartTime|integer(int64)|true|none|Official opening time (end time of the third phase of call auction)|
+| Name                               | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                                                                         |
+| ---------------------------------- | -------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code                             | string         | true     | none         | none                                                                                                                                                                                                                                                                                                                                |
+| » data                             | [object]       | true     | none         | none                                                                                                                                                                                                                                                                                                                                |
+| »» symbol                          | string         | true     | none         | Unique code of a symbol; it will not change after renaming                                                                                                                                                                                                                                                                          |
+| »» name                            | string         | true     | none         | Name of trading pairs, it will change after renaming                                                                                                                                                                                                                                                                                |
+| »» baseCurrency                    | string         | true     | none         | Base currency, e.g. BTC.                                                                                                                                                                                                                                                                                                            |
+| »» quoteCurrency                   | string         | true     | none         | Quote currency, e.g. USDT.                                                                                                                                                                                                                                                                                                          |
+| »» feeCurrency                     | string         | true     | none         | The currency of charged fees.                                                                                                                                                                                                                                                                                                       |
+| »» market                          | string         | true     | none         | The trading market.                                                                                                                                                                                                                                                                                                                 |
+| »» baseMinSize                     | string         | true     | none         | The minimum order quantity required to place an order.                                                                                                                                                                                                                                                                              |
+| »» quoteMinSize                    | string         | true     | none         | The minimum order funds required to place a market order.                                                                                                                                                                                                                                                                           |
+| »» baseMaxSize                     | string         | true     | none         | The maximum order size required to place an order.                                                                                                                                                                                                                                                                                  |
+| »» quoteMaxSize                    | string         | true     | none         | The maximum order funds required to place a market order.                                                                                                                                                                                                                                                                           |
+| »» baseIncrement                   | string         | true     | none         | Quantity increment: The quantity for an order must be a positive integer multiple of this increment. Here, the size refers to the quantity of the base currency for the order. For example, for the ETH-USDT trading pair, if the baseIncrement is 0.0000001, the order quantity can be 1.0000001 but not 1.00000001.               |
+| »» quoteIncrement                  | string         | true     | none         | Quote increment: The funds for a market order must be a positive integer multiple of this increment. The funds refer to the quote currency amount. For example, for the ETH-USDT trading pair, if the quoteIncrement is 0.000001, the amount of USDT for the order can be 3000.000001 but not 3000.0000001.                         |
+| »» priceIncrement                  | string         | true     | none         | Price increment: The price of an order must be a positive integer multiple of this increment. For example, for the ETH-USDT trading pair, if the priceIncrement is 0.01, the order price can be 3000.01 but not 3000.001.<br><br>Specifies the min. order price as well as the price increment.This also applies to quote currency. |
+| »» priceLimitRate                  | string         | true     | none         | Threshold for price protection                                                                                                                                                                                                                                                                                                      |
+| »» minFunds                        | string         | true     | none         | The minimum trading amounts                                                                                                                                                                                                                                                                                                         |
+| »» isMarginEnabled                 | boolean        | true     | none         | Available for margin or not.                                                                                                                                                                                                                                                                                                        |
+| »» enableTrading                   | boolean        | true     | none         | Available for transaction or not.                                                                                                                                                                                                                                                                                                   |
+| »» feeCategory                     | integer        | true     | none         | [Fee Type](https://www.kucoin.com/vip/privilege)                                                                                                                                                                                                                                                                                    |
+| »» makerFeeCoefficient             | string         | true     | none         | The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee                                                                                                                                                    |
+| »» takerFeeCoefficient             | string         | true     | none         | The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee                                                                                                                                                    |
+| »» st                              | boolean        | true     | none         | Whether it is a [Special Treatment](https://www.kucoin.com/legal/special-treatment) symbol                                                                                                                                                                                                                                          |
+| »» callauctionIsEnabled            | boolean        | true     | none         | The [call auction](https://www.kucoin.com/support/40999744334105) status returns true/false                                                                                                                                                                                                                                         |
+| »» callauctionPriceFloor           | string         | true     | none         | The lowest price declared in the call auction                                                                                                                                                                                                                                                                                       |
+| »» callauctionPriceCeiling         | string         | true     | none         | The highest bid price in the call auction                                                                                                                                                                                                                                                                                           |
+| »» callauctionFirstStageStartTime  | integer(int64) | true     | none         | The first phase of the call auction starts at (Allow add orders, allow cancel orders)                                                                                                                                                                                                                                               |
+| »» callauctionSecondStageStartTime | integer(int64) | true     | none         | The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)                                                                                                                                                                                                                                        |
+| »» callauctionThirdStageStartTime  | integer(int64) | true     | none         | The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)                                                                                                                                                                                                                                   |
+| »» tradingStartTime                | integer(int64) | true     | none         | Official opening time (end time of the third phase of call auction)                                                                                                                                                                                                                                                                 |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|feeCategory|1|
-|feeCategory|2|
-|feeCategory|3|
+| Property    | Value |
+| ----------- | ----- |
+| feeCategory | 1     |
+| feeCategory | 2     |
+| feeCategory | 3     |
 
 <aside class="success">
 This operation does not require authentication
@@ -1399,23 +1321,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/orderbook/level1?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/market/orderbook/level1?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1436,13 +1356,15 @@ print(r.json())
 
 `GET /api/v1/market/orderbook/level1`
 
-Request via this endpoint to get Level 1 Market Data. The returned value includes the best bid price and size, the best ask price and size as well as the last traded price and the last traded size.
+Request via this endpoint to get Level 1 Market Data. The returned value
+includes the best bid price and size, the best ask price and size as well as the
+last traded price and the last traded size.
 
 <h3 id="get-ticker-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
+| Name   | In    | Type   | Required | Description |
+| ------ | ----- | ------ | -------- | ----------- |
+| symbol | query | string | true     | symbol      |
 
 > Example responses
 
@@ -1504,35 +1426,32 @@ Request via this endpoint to get Level 1 Market Data. The returned value include
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-ticker-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-ticker-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» time|integer(int64)|true|none|timestamp|
-|»» sequence|string|true|none|Sequence|
-|»» price|string|true|none|Last traded price|
-|»» size|string|true|none|Last traded size|
-|»» bestBid|string|true|none|Best bid price|
-|»» bestBidSize|string|true|none|Best bid size|
-|»» bestAsk|string|true|none|Best ask price|
-|»» bestAskSize|string|true|none|Best ask size|
+| Name           | Type           | Required | Restrictions | Description       |
+| -------------- | -------------- | -------- | ------------ | ----------------- |
+| » code         | string         | true     | none         | none              |
+| » data         | object         | true     | none         | none              |
+| »» time        | integer(int64) | true     | none         | timestamp         |
+| »» sequence    | string         | true     | none         | Sequence          |
+| »» price       | string         | true     | none         | Last traded price |
+| »» size        | string         | true     | none         | Last traded size  |
+| »» bestBid     | string         | true     | none         | Best bid price    |
+| »» bestBidSize | string         | true     | none         | Best bid size     |
+| »» bestAsk     | string         | true     | none         | Best ask price    |
+| »» bestAskSize | string         | true     | none         | Best ask size     |
 
 <aside class="success">
 This operation does not require authentication
@@ -1545,23 +1464,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/allTickers',
-{
-  method: 'GET',
+fetch("/api/v1/market/allTickers", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1578,7 +1495,10 @@ print(r.json())
 
 `GET /api/v1/market/allTickers`
 
-Request market tickers for all the trading pairs in the market (including 24h volume); takes a snapshot every 2 seconds.  On the rare occasion that we change the currency name, if you still want the changed symbol name, you can use the symbolName field instead of the symbol field via “Get all tickers” endpoint.
+Request market tickers for all the trading pairs in the market (including 24h
+volume); takes a snapshot every 2 seconds. On the rare occasion that we change
+the currency name, if you still want the changed symbol name, you can use the
+symbolName field instead of the symbol field via “Get all tickers” endpoint.
 
 > Example responses
 
@@ -1671,10 +1591,7 @@ Request market tickers for all the trading pairs in the market (including 24h vo
               "takerCoefficient": {
                 "type": "string",
                 "description": "The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee",
-                "enum": [
-                  "1",
-                  "0"
-                ],
+                "enum": ["1", "0"],
                 "x-api-enum": [
                   {
                     "value": "1",
@@ -1691,10 +1608,7 @@ Request market tickers for all the trading pairs in the market (including 24h vo
               "makerCoefficient": {
                 "type": "string",
                 "description": "The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee",
-                "enum": [
-                  "1",
-                  "0"
-                ],
+                "enum": ["1", "0"],
                 "x-api-enum": [
                   {
                     "value": "1",
@@ -1732,62 +1646,56 @@ Request market tickers for all the trading pairs in the market (including 24h vo
           }
         }
       },
-      "required": [
-        "time",
-        "ticker"
-      ]
+      "required": ["time", "ticker"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-all-tickers-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-all-tickers-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» time|integer(int64)|true|none|timestamp|
-|»» ticker|[object]|true|none|none|
-|»»» symbol|string|true|none|Symbol|
-|»»» symbolName|string|true|none|Name of trading pairs, it will change after renaming|
-|»»» buy|string|true|none|Best bid price|
-|»»» bestBidSize|string|true|none|Best bid size|
-|»»» sell|string|true|none|Best ask price|
-|»»» bestAskSize|string|true|none|Best ask size|
-|»»» changeRate|string|true|none|24h change rate|
-|»»» changePrice|string|true|none|24h change price|
-|»»» high|string|true|none|Highest price in 24h|
-|»»» low|string|true|none|Lowest price in 24h|
-|»»» vol|string|true|none|24h volume, executed based on base currency|
-|»»» volValue|string|true|none|24h traded amount|
-|»»» last|string|true|none|Last traded price|
-|»»» averagePrice|string|true|none|Average trading price in the last 24 hours|
-|»»» takerFeeRate|string|true|none|Basic Taker Fee|
-|»»» makerFeeRate|string|true|none|Basic Maker Fee|
-|»»» takerCoefficient|string|true|none|The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
-|»»» makerCoefficient|string|true|none|The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
+| Name                 | Type           | Required | Restrictions | Description                                                                                                                                                                      |
+| -------------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code               | string         | true     | none         | none                                                                                                                                                                             |
+| » data               | object         | true     | none         | none                                                                                                                                                                             |
+| »» time              | integer(int64) | true     | none         | timestamp                                                                                                                                                                        |
+| »» ticker            | [object]       | true     | none         | none                                                                                                                                                                             |
+| »»» symbol           | string         | true     | none         | Symbol                                                                                                                                                                           |
+| »»» symbolName       | string         | true     | none         | Name of trading pairs, it will change after renaming                                                                                                                             |
+| »»» buy              | string         | true     | none         | Best bid price                                                                                                                                                                   |
+| »»» bestBidSize      | string         | true     | none         | Best bid size                                                                                                                                                                    |
+| »»» sell             | string         | true     | none         | Best ask price                                                                                                                                                                   |
+| »»» bestAskSize      | string         | true     | none         | Best ask size                                                                                                                                                                    |
+| »»» changeRate       | string         | true     | none         | 24h change rate                                                                                                                                                                  |
+| »»» changePrice      | string         | true     | none         | 24h change price                                                                                                                                                                 |
+| »»» high             | string         | true     | none         | Highest price in 24h                                                                                                                                                             |
+| »»» low              | string         | true     | none         | Lowest price in 24h                                                                                                                                                              |
+| »»» vol              | string         | true     | none         | 24h volume, executed based on base currency                                                                                                                                      |
+| »»» volValue         | string         | true     | none         | 24h traded amount                                                                                                                                                                |
+| »»» last             | string         | true     | none         | Last traded price                                                                                                                                                                |
+| »»» averagePrice     | string         | true     | none         | Average trading price in the last 24 hours                                                                                                                                       |
+| »»» takerFeeRate     | string         | true     | none         | Basic Taker Fee                                                                                                                                                                  |
+| »»» makerFeeRate     | string         | true     | none         | Basic Maker Fee                                                                                                                                                                  |
+| »»» takerCoefficient | string         | true     | none         | The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee |
+| »»» makerCoefficient | string         | true     | none         | The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|takerCoefficient|1|
-|takerCoefficient|0|
-|makerCoefficient|1|
-|makerCoefficient|0|
+| Property         | Value |
+| ---------------- | ----- |
+| takerCoefficient | 1     |
+| takerCoefficient | 0     |
+| makerCoefficient | 1     |
+| makerCoefficient | 0     |
 
 <aside class="success">
 This operation does not require authentication
@@ -1800,23 +1708,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/histories?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/market/histories?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1837,13 +1743,14 @@ print(r.json())
 
 `GET /api/v1/market/histories`
 
-Request via this endpoint to get the trade history of the specified symbol, the returned quantity is the last 100 transaction records.
+Request via this endpoint to get the trade history of the specified symbol, the
+returned quantity is the last 100 transaction records.
 
 <h3 id="get-trade-history-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
+| Name   | In    | Type   | Required | Description |
+| ------ | ----- | ------ | -------- | ----------- |
+| symbol | query | string | true     | symbol      |
 
 > Example responses
 
@@ -1876,10 +1783,7 @@ Request via this endpoint to get the trade history of the specified symbol, the 
           "side": {
             "type": "string",
             "description": "Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.",
-            "enum": [
-              "buy",
-              "sell"
-            ],
+            "enum": ["buy", "sell"],
             "x-api-enum": [
               {
                 "value": "buy",
@@ -1899,49 +1803,40 @@ Request via this endpoint to get the trade history of the specified symbol, the 
             "description": "Filled timestamp(nanosecond)"
           }
         },
-        "required": [
-          "sequence",
-          "price",
-          "size",
-          "side",
-          "time"
-        ]
+        "required": ["sequence", "price", "size", "side", "time"]
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-trade-history-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-trade-history-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» sequence|string|true|none|Sequence number|
-|»» price|string|true|none|Filled price|
-|»» size|string|true|none|Filled amount|
-|»» side|string|true|none|Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.|
-|»» time|integer(int64)|true|none|Filled timestamp(nanosecond)|
+| Name        | Type           | Required | Restrictions | Description                                                                                                                                   |
+| ----------- | -------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code      | string         | true     | none         | none                                                                                                                                          |
+| » data      | [object]       | true     | none         | none                                                                                                                                          |
+| »» sequence | string         | true     | none         | Sequence number                                                                                                                               |
+| »» price    | string         | true     | none         | Filled price                                                                                                                                  |
+| »» size     | string         | true     | none         | Filled amount                                                                                                                                 |
+| »» side     | string         | true     | none         | Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book. |
+| »» time     | integer(int64) | true     | none         | Filled timestamp(nanosecond)                                                                                                                  |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|side|buy|
-|side|sell|
+| Property | Value |
+| -------- | ----- |
+| side     | buy   |
+| side     | sell  |
 
 <aside class="success">
 This operation does not require authentication
@@ -1954,23 +1849,24 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/candles?symbol=type,string&type=type,string,enum,1min%2C3min%2C5min%2C15min%2C30min%2C1hour%2C2hour%2C4hour%2C6hour%2C8hour%2C12hour%2C1day%2C1week%2C1month,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D',
-{
-  method: 'GET',
+fetch(
+  "/api/v1/market/candles?symbol=type,string&type=type,string,enum,1min%2C3min%2C5min%2C15min%2C30min%2C1hour%2C2hour%2C4hour%2C6hour%2C8hour%2C12hour%2C1day%2C1week%2C1month,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D%2C%5Bobject%20Object%5D",
+  {
+    method: "GET",
 
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2081,35 +1977,37 @@ print(r.json())
 
 `GET /api/v1/market/candles`
 
-Get the Kline of the symbol. Data are returned in grouped buckets based on requested type. For each query, the system would return at most 1500 pieces of data. To obtain more data, please page the data by time.
+Get the Kline of the symbol. Data are returned in grouped buckets based on
+requested type. For each query, the system would return at most 1500 pieces of
+data. To obtain more data, please page the data by time.
 
 <h3 id="get-klines-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true| symbol|
-|type|query|string|true|Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month|
-|startAt|query|integer(int64)|false|Start time (second), default is 0|
-|endAt|query|integer(int64)|false|End time (second), default is 0|
+| Name    | In    | Type           | Required | Description                                                                                                                  |
+| ------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| symbol  | query | string         | true     | symbol                                                                                                                       |
+| type    | query | string         | true     | Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month |
+| startAt | query | integer(int64) | false    | Start time (second), default is 0                                                                                            |
+| endAt   | query | integer(int64) | false    | End time (second), default is 0                                                                                              |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|type|1min|
-|type|3min|
-|type|5min|
-|type|15min|
-|type|30min|
-|type|1hour|
-|type|2hour|
-|type|4hour|
-|type|6hour|
-|type|8hour|
-|type|12hour|
-|type|1day|
-|type|1week|
-|type|1month|
+| Parameter | Value  |
+| --------- | ------ |
+| type      | 1min   |
+| type      | 3min   |
+| type      | 5min   |
+| type      | 15min  |
+| type      | 30min  |
+| type      | 1hour  |
+| type      | 2hour  |
+| type      | 4hour  |
+| type      | 6hour  |
+| type      | 8hour  |
+| type      | 12hour |
+| type      | 1day   |
+| type      | 1week  |
+| type      | 1month |
 
 > Example responses
 
@@ -2133,27 +2031,24 @@ Get the Kline of the symbol. Data are returned in grouped buckets based on reque
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-klines-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-klines-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[array]|true|none|none|
+| Name   | Type    | Required | Restrictions | Description |
+| ------ | ------- | -------- | ------------ | ----------- |
+| » code | string  | true     | none         | none        |
+| » data | [array] | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -2166,23 +2061,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/orderbook/level2_{size}?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/market/orderbook/level2_{size}?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2203,14 +2096,16 @@ print(r.json())
 
 `GET /api/v1/market/orderbook/level2_{size}`
 
-Query for part orderbook depth data. (aggregated by price)  You are recommended to request via this endpoint as the system reponse would be faster and cosume less traffic.
+Query for part orderbook depth data. (aggregated by price) You are recommended
+to request via this endpoint as the system reponse would be faster and cosume
+less traffic.
 
 <h3 id="get-part-orderbook-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
-|size|path|integer|true|Get the depth layer, optional value: 20, 100|
+| Name   | In    | Type    | Required | Description                                  |
+| ------ | ----- | ------- | -------- | -------------------------------------------- |
+| symbol | query | string  | true     | symbol                                       |
+| size   | path  | integer | true     | Get the depth layer, optional value: 20, 100 |
 
 > Example responses
 
@@ -2258,39 +2153,31 @@ Query for part orderbook depth data. (aggregated by price)  You are recommended 
           "description": "asks, from low to high"
         }
       },
-      "required": [
-        "sequence",
-        "bids",
-        "asks",
-        "time"
-      ]
+      "required": ["sequence", "bids", "asks", "time"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-part-orderbook-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-part-orderbook-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» time|integer(int64)|true|none|Timestamp(millisecond)|
-|»» sequence|string|true|none|Sequence number|
-|»» bids|[array]|true|none|bids, from high to low|
-|»» asks|[array]|true|none|asks, from low to high|
+| Name        | Type           | Required | Restrictions | Description            |
+| ----------- | -------------- | -------- | ------------ | ---------------------- |
+| » code      | string         | true     | none         | none                   |
+| » data      | object         | true     | none         | none                   |
+| »» time     | integer(int64) | true     | none         | Timestamp(millisecond) |
+| »» sequence | string         | true     | none         | Sequence number        |
+| »» bids     | [array]        | true     | none         | bids, from high to low |
+| »» asks     | [array]        | true     | none         | asks, from low to high |
 
 <aside class="success">
 This operation does not require authentication
@@ -2303,23 +2190,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/market/orderbook/level2?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v3/market/orderbook/level2?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2340,13 +2225,16 @@ print(r.json())
 
 `GET /api/v3/market/orderbook/level2`
 
-Query for Full orderbook depth data. (aggregated by price)  It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.
+Query for Full orderbook depth data. (aggregated by price) It is generally used
+by professional traders because it uses more server resources and traffic, and
+we have strict access rate limit control. To maintain up-to-date Order Book,
+please use Websocket incremental feed after retrieving the OrderBook.
 
 <h3 id="get-full-orderbook-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
+| Name   | In    | Type   | Required | Description |
+| ------ | ----- | ------ | -------- | ----------- |
+| symbol | query | string | true     | symbol      |
 
 > Example responses
 
@@ -2394,39 +2282,31 @@ Query for Full orderbook depth data. (aggregated by price)  It is generally used
           "description": "asks, from low to high"
         }
       },
-      "required": [
-        "time",
-        "sequence",
-        "bids",
-        "asks"
-      ]
+      "required": ["time", "sequence", "bids", "asks"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-full-orderbook-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-full-orderbook-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» time|integer(int64)|true|none|Timestamp(millisecond)|
-|»» sequence|string|true|none|Sequence number|
-|»» bids|[array]|true|none|bids, from high to low|
-|»» asks|[array]|true|none|asks, from low to high|
+| Name        | Type           | Required | Restrictions | Description            |
+| ----------- | -------------- | -------- | ------------ | ---------------------- |
+| » code      | string         | true     | none         | none                   |
+| » data      | object         | true     | none         | none                   |
+| »» time     | integer(int64) | true     | none         | Timestamp(millisecond) |
+| »» sequence | string         | true     | none         | Sequence number        |
+| »» bids     | [array]        | true     | none         | bids, from high to low |
+| »» asks     | [array]        | true     | none         | asks, from low to high |
 
 <aside class="success">
 This operation does not require authentication
@@ -2439,23 +2319,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/orderbook/callauction/level2_{size}?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/market/orderbook/callauction/level2_{size}?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2476,14 +2354,16 @@ print(r.json())
 
 `GET /api/v1/market/orderbook/callauction/level2_{size}`
 
-Query for call auction part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.
+Query for call auction part orderbook depth data. (aggregated by price). It is
+recommended that you request via this endpoint, as the system response will be
+faster and consume less traffic.
 
 <h3 id="get-call-auction-part-orderbook-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
-|size|path|integer|true|Get the depth layer, optional value: 20, 100|
+| Name   | In    | Type    | Required | Description                                  |
+| ------ | ----- | ------- | -------- | -------------------------------------------- |
+| symbol | query | string  | true     | symbol                                       |
+| size   | path  | integer | true     | Get the depth layer, optional value: 20, 100 |
 
 > Example responses
 
@@ -2531,39 +2411,31 @@ Query for call auction part orderbook depth data. (aggregated by price). It is r
           "description": "asks, from low to high"
         }
       },
-      "required": [
-        "sequence",
-        "bids",
-        "asks",
-        "time"
-      ]
+      "required": ["sequence", "bids", "asks", "time"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-call-auction-part-orderbook-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-call-auction-part-orderbook-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» time|integer(int64)|true|none|Timestamp (milliseconds)|
-|»» sequence|string|true|none|Sequence number|
-|»» bids|[array]|true|none|bids, from high to low|
-|»» asks|[array]|true|none|asks, from low to high|
+| Name        | Type           | Required | Restrictions | Description              |
+| ----------- | -------------- | -------- | ------------ | ------------------------ |
+| » code      | string         | true     | none         | none                     |
+| » data      | object         | true     | none         | none                     |
+| »» time     | integer(int64) | true     | none         | Timestamp (milliseconds) |
+| »» sequence | string         | true     | none         | Sequence number          |
+| »» bids     | [array]        | true     | none         | bids, from high to low   |
+| »» asks     | [array]        | true     | none         | asks, from low to high   |
 
 <aside class="success">
 This operation does not require authentication
@@ -2576,23 +2448,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/callauctionData?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/market/callauctionData?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2613,13 +2483,15 @@ print(r.json())
 
 `GET /api/v1/market/callauctionData`
 
-Get call auction data. This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.
+Get call auction data. This interface will return the following information for
+the specified symbol during the call auction phase: estimated transaction price,
+estimated transaction quantity, bid price range, and ask price range.
 
 <h3 id="get-call-auction-info-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
+| Name   | In    | Type   | Required | Description |
+| ------ | ----- | ------ | -------- | ----------- |
+| symbol | query | string | true     | symbol      |
 
 > Example responses
 
@@ -2638,9 +2510,7 @@ Get call auction data. This interface will return the following information for 
         "symbol": {
           "type": "string",
           "description": "Symbol",
-          "example": [
-            "BTC-USDT"
-          ]
+          "example": ["BTC-USDT"]
         },
         "estimatedPrice": {
           "type": "string",
@@ -2684,35 +2554,32 @@ Get call auction data. This interface will return the following information for 
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-call-auction-info-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-call-auction-info-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» symbol|string|true|none|Symbol|
-|»» estimatedPrice|string|true|none|Estimated price|
-|»» estimatedSize|string|true|none|Estimated size|
-|»» sellOrderRangeLowPrice|string|true|none|Sell ​​order minimum price|
-|»» sellOrderRangeHighPrice|string|true|none|Sell ​​order maximum price|
-|»» buyOrderRangeLowPrice|string|true|none|Buy order minimum price|
-|»» buyOrderRangeHighPrice|string|true|none|Buy ​​order maximum price|
-|»» time|integer(int64)|true|none|Timestamp (ms)|
+| Name                       | Type           | Required | Restrictions | Description                |
+| -------------------------- | -------------- | -------- | ------------ | -------------------------- |
+| » code                     | string         | true     | none         | none                       |
+| » data                     | object         | true     | none         | none                       |
+| »» symbol                  | string         | true     | none         | Symbol                     |
+| »» estimatedPrice          | string         | true     | none         | Estimated price            |
+| »» estimatedSize           | string         | true     | none         | Estimated size             |
+| »» sellOrderRangeLowPrice  | string         | true     | none         | Sell ​​order minimum price |
+| »» sellOrderRangeHighPrice | string         | true     | none         | Sell ​​order maximum price |
+| »» buyOrderRangeLowPrice   | string         | true     | none         | Buy order minimum price    |
+| »» buyOrderRangeHighPrice  | string         | true     | none         | Buy ​​order maximum price  |
+| »» time                    | integer(int64) | true     | none         | Timestamp (ms)             |
 
 <aside class="success">
 This operation does not require authentication
@@ -2725,23 +2592,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/prices',
-{
-  method: 'GET',
+fetch("/api/v1/prices", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -2758,14 +2623,15 @@ print(r.json())
 
 `GET /api/v1/prices`
 
-Request the fiat price of the currencies for the available trading pairs via this endpoint.
+Request the fiat price of the currencies for the available trading pairs via
+this endpoint.
 
 <h3 id="get-fiat-price-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|base|query|string|false|Ticker symbol of a base currency, e.g. USD, EUR. Default is USD|
-|currencies|query|string|false|Comma-separated cryptocurrencies to be converted into fiat, e.g.: BTC,ETH, etc. Default to return the fiat price of all currencies.|
+| Name       | In    | Type   | Required | Description                                                                                                                         |
+| ---------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| base       | query | string | false    | Ticker symbol of a base currency, e.g. USD, EUR. Default is USD                                                                     |
+| currencies | query | string | false    | Comma-separated cryptocurrencies to be converted into fiat, e.g.: BTC,ETH, etc. Default to return the fiat price of all currencies. |
 
 > Example responses
 
@@ -6370,923 +6236,920 @@ Request the fiat price of the currencies for the available trading pairs via thi
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-fiat-price-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-fiat-price-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» AGLD|string|true|none|none|
-|»» DFI|string|true|none|none|
-|»» PYTHUP|string|true|none|none|
-|»» ISLM|string|true|none|none|
-|»» NEAR|string|true|none|none|
-|»» AIOZ|string|true|none|none|
-|»» AUDIO|string|true|none|none|
-|»» BBL|string|true|none|none|
-|»» WLD|string|true|none|none|
-|»» HNT|string|true|none|none|
-|»» ETHFI|string|true|none|none|
-|»» DMAIL|string|true|none|none|
-|»» OPUP|string|true|none|none|
-|»» VET3S|string|true|none|none|
-|»» MANA3S|string|true|none|none|
-|»» TIDAL|string|true|none|none|
-|»» HALO|string|true|none|none|
-|»» OPUL|string|true|none|none|
-|»» MANA3L|string|true|none|none|
-|»» DGB|string|true|none|none|
-|»» AA|string|true|none|none|
-|»» BCH|string|true|none|none|
-|»» GMEE|string|true|none|none|
-|»» JST|string|true|none|none|
-|»» PBUX|string|true|none|none|
-|»» AR|string|true|none|none|
-|»» SEI|string|true|none|none|
-|»» PSTAKE|string|true|none|none|
-|»» LMWR|string|true|none|none|
-|»» UNFIDOWN|string|true|none|none|
-|»» BB|string|true|none|none|
-|»» JTO|string|true|none|none|
-|»» WEMIX|string|true|none|none|
-|»» G|string|true|none|none|
-|»» MARSH|string|true|none|none|
-|»» BN|string|true|none|none|
-|»» FLIP|string|true|none|none|
-|»» FLR|string|true|none|none|
-|»» BIGTIME|string|true|none|none|
-|»» FLY|string|true|none|none|
-|»» T|string|true|none|none|
-|»» W|string|true|none|none|
-|»» BDX|string|true|none|none|
-|»» BABYDOGE|string|true|none|none|
-|»» SFP|string|true|none|none|
-|»» DIA|string|true|none|none|
-|»» ISME|string|true|none|none|
-|»» LYM|string|true|none|none|
-|»» VET3L|string|true|none|none|
-|»» JUP|string|true|none|none|
-|»» LYX|string|true|none|none|
-|»» AIEPK|string|true|none|none|
-|»» SILLY|string|true|none|none|
-|»» SCPT|string|true|none|none|
-|»» WOO|string|true|none|none|
-|»» BLUR|string|true|none|none|
-|»» STRK|string|true|none|none|
-|»» BFC|string|true|none|none|
-|»» DC|string|true|none|none|
-|»» KARATE|string|true|none|none|
-|»» SUSHI3L|string|true|none|none|
-|»» NETVR|string|true|none|none|
-|»» WAVES|string|true|none|none|
-|»» LITH|string|true|none|none|
-|»» HAPI|string|true|none|none|
-|»» SUSHI3S|string|true|none|none|
-|»» CEEK|string|true|none|none|
-|»» FLOKI|string|true|none|none|
-|»» SHR|string|true|none|none|
-|»» SAND|string|true|none|none|
-|»» TURT|string|true|none|none|
-|»» UMA|string|true|none|none|
-|»» BEPRO|string|true|none|none|
-|»» SCRT|string|true|none|none|
-|»» TUSD|string|true|none|none|
-|»» COOKIE|string|true|none|none|
-|»» LRDS|string|true|none|none|
-|»» SIN|string|true|none|none|
-|»» OAS|string|true|none|none|
-|»» ROOT|string|true|none|none|
-|»» ADA3L|string|true|none|none|
-|»» TIAUP|string|true|none|none|
-|»» HTR|string|true|none|none|
-|»» UNB|string|true|none|none|
-|»» UNA|string|true|none|none|
-|»» HARD|string|true|none|none|
-|»» G3|string|true|none|none|
-|»» ADA3S|string|true|none|none|
-|»» MYRO|string|true|none|none|
-|»» HTX|string|true|none|none|
-|»» FT|string|true|none|none|
-|»» BTCDOWN|string|true|none|none|
-|»» UNI|string|true|none|none|
-|»» FX|string|true|none|none|
-|»» OBI|string|true|none|none|
-|»» UNO|string|true|none|none|
-|»» WRX|string|true|none|none|
-|»» TIADOWN|string|true|none|none|
-|»» ETHDOWN|string|true|none|none|
-|»» WELL|string|true|none|none|
-|»» SWFTC|string|true|none|none|
-|»» SKL|string|true|none|none|
-|»» UOS|string|true|none|none|
-|»» AIPAD|string|true|none|none|
-|»» BRETT|string|true|none|none|
-|»» SKY|string|true|none|none|
-|»» FRM|string|true|none|none|
-|»» VISION|string|true|none|none|
-|»» LENDS|string|true|none|none|
-|»» SLF|string|true|none|none|
-|»» BULL|string|true|none|none|
-|»» FLOW|string|true|none|none|
-|»» ODDZ|string|true|none|none|
-|»» SLN|string|true|none|none|
-|»» UPO|string|true|none|none|
-|»» SLP|string|true|none|none|
-|»» ID|string|true|none|none|
-|»» SLIM|string|true|none|none|
-|»» SPOT|string|true|none|none|
-|»» DOP|string|true|none|none|
-|»» ISSP|string|true|none|none|
-|»» UQC|string|true|none|none|
-|»» IO|string|true|none|none|
-|»» DOT|string|true|none|none|
-|»» 1INCH|string|true|none|none|
-|»» SMH|string|true|none|none|
-|»» MAK|string|true|none|none|
-|»» TOKO|string|true|none|none|
-|»» TURBO|string|true|none|none|
-|»» UNFI|string|true|none|none|
-|»» MAN|string|true|none|none|
-|»» EVER|string|true|none|none|
-|»» FTM|string|true|none|none|
-|»» SHRAP|string|true|none|none|
-|»» MAV|string|true|none|none|
-|»» MAX|string|true|none|none|
-|»» DPR|string|true|none|none|
-|»» FTT|string|true|none|none|
-|»» ARKM|string|true|none|none|
-|»» ATOM|string|true|none|none|
-|»» PENDLE|string|true|none|none|
-|»» QUICK|string|true|none|none|
-|»» BLZ|string|true|none|none|
-|»» BOBA|string|true|none|none|
-|»» MBL|string|true|none|none|
-|»» OFN|string|true|none|none|
-|»» UNIO|string|true|none|none|
-|»» SNS|string|true|none|none|
-|»» SNX|string|true|none|none|
-|»» NXRA|string|true|none|none|
-|»» TAIKO|string|true|none|none|
-|»» AVAX3L|string|true|none|none|
-|»» L3|string|true|none|none|
-|»» API3|string|true|none|none|
-|»» XRP3S|string|true|none|none|
-|»» QKC|string|true|none|none|
-|»» AVAX3S|string|true|none|none|
-|»» ROSE|string|true|none|none|
-|»» SATS|string|true|none|none|
-|»» BMX|string|true|none|none|
-|»» PORTAL|string|true|none|none|
-|»» TOMI|string|true|none|none|
-|»» XRP3L|string|true|none|none|
-|»» SOL|string|true|none|none|
-|»» SON|string|true|none|none|
-|»» BNC|string|true|none|none|
-|»» SOCIAL|string|true|none|none|
-|»» CGPT|string|true|none|none|
-|»» CELR|string|true|none|none|
-|»» BNB|string|true|none|none|
-|»» OGN|string|true|none|none|
-|»» CELO|string|true|none|none|
-|»» AUCTION|string|true|none|none|
-|»» MANTA|string|true|none|none|
-|»» LAYER|string|true|none|none|
-|»» AERO|string|true|none|none|
-|»» CETUS|string|true|none|none|
-|»» LL|string|true|none|none|
-|»» SPA|string|true|none|none|
-|»» PYTHDOWN|string|true|none|none|
-|»» NEIROCTO|string|true|none|none|
-|»» UTK|string|true|none|none|
-|»» GMRX|string|true|none|none|
-|»» BOB|string|true|none|none|
-|»» HOTCROSS|string|true|none|none|
-|»» AERGO|string|true|none|none|
-|»» MOCA|string|true|none|none|
-|»» SQD|string|true|none|none|
-|»» MV|string|true|none|none|
-|»» BNB3L|string|true|none|none|
-|»» BNB3S|string|true|none|none|
-|»» GALAX3L|string|true|none|none|
-|»» KAI|string|true|none|none|
-|»» SQR|string|true|none|none|
-|»» GALAX3S|string|true|none|none|
-|»» EGLD|string|true|none|none|
-|»» ZBCN|string|true|none|none|
-|»» KAS|string|true|none|none|
-|»» MEW|string|true|none|none|
-|»» PUNDIX|string|true|none|none|
-|»» LOOKS|string|true|none|none|
-|»» FXS|string|true|none|none|
-|»» BOSON|string|true|none|none|
-|»» BRISE|string|true|none|none|
-|»» AEVO|string|true|none|none|
-|»» FLUX|string|true|none|none|
-|»» PRCL|string|true|none|none|
-|»» UNFIUP|string|true|none|none|
-|»» SEIDOWN|string|true|none|none|
-|»» DOAI|string|true|none|none|
-|»» QNT|string|true|none|none|
-|»» REDO|string|true|none|none|
-|»» STRIKE|string|true|none|none|
-|»» ETHW|string|true|none|none|
-|»» OM|string|true|none|none|
-|»» OP|string|true|none|none|
-|»» WHALE|string|true|none|none|
-|»» 1CAT|string|true|none|none|
-|»» NEON|string|true|none|none|
-|»» GTAI|string|true|none|none|
-|»» SSV|string|true|none|none|
-|»» ETH2|string|true|none|none|
-|»» KCS|string|true|none|none|
-|»» ARPA|string|true|none|none|
-|»» ARTFI|string|true|none|none|
-|»» BRL|string|true|none|none|
-|»» ALEX|string|true|none|none|
-|»» STG|string|true|none|none|
-|»» SHIB|string|true|none|none|
-|»» IOTX|string|true|none|none|
-|»» OLE|string|true|none|none|
-|»» KDA|string|true|none|none|
-|»» CERE|string|true|none|none|
-|»» DOCK|string|true|none|none|
-|»» STX|string|true|none|none|
-|»» OLT|string|true|none|none|
-|»» QI|string|true|none|none|
-|»» SDAO|string|true|none|none|
-|»» BLAST|string|true|none|none|
-|»» LINK3S|string|true|none|none|
-|»» IOST|string|true|none|none|
-|»» SUI|string|true|none|none|
-|»» CAKE|string|true|none|none|
-|»» BSW|string|true|none|none|
-|»» OMG|string|true|none|none|
-|»» VOLT|string|true|none|none|
-|»» LINK3L|string|true|none|none|
-|»» GEEQ|string|true|none|none|
-|»» PYUSD|string|true|none|none|
-|»» SUN|string|true|none|none|
-|»» TOWER|string|true|none|none|
-|»» BTC|string|true|none|none|
-|»» IOTA|string|true|none|none|
-|»» REEF|string|true|none|none|
-|»» TRIAS|string|true|none|none|
-|»» KEY|string|true|none|none|
-|»» ETH3L|string|true|none|none|
-|»» BTT|string|true|none|none|
-|»» ONE|string|true|none|none|
-|»» RENDER|string|true|none|none|
-|»» ETH3S|string|true|none|none|
-|»» ANKR|string|true|none|none|
-|»» ALGO|string|true|none|none|
-|»» SYLO|string|true|none|none|
-|»» ZCX|string|true|none|none|
-|»» SD|string|true|none|none|
-|»» ONT|string|true|none|none|
-|»» MJT|string|true|none|none|
-|»» DYM|string|true|none|none|
-|»» DYP|string|true|none|none|
-|»» BAKEUP|string|true|none|none|
-|»» OOE|string|true|none|none|
-|»» ZELIX|string|true|none|none|
-|»» DOGE3L|string|true|none|none|
-|»» ARTY|string|true|none|none|
-|»» QORPO|string|true|none|none|
-|»» ICE|string|true|none|none|
-|»» NOTAI|string|true|none|none|
-|»» DOGE3S|string|true|none|none|
-|»» NAKA|string|true|none|none|
-|»» GALAX|string|true|none|none|
-|»» MKR|string|true|none|none|
-|»» DODO|string|true|none|none|
-|»» ICP|string|true|none|none|
-|»» ZEC|string|true|none|none|
-|»» ZEE|string|true|none|none|
-|»» ICX|string|true|none|none|
-|»» KMNO|string|true|none|none|
-|»» TT|string|true|none|none|
-|»» DOT3L|string|true|none|none|
-|»» XAI|string|true|none|none|
-|»» ZEN|string|true|none|none|
-|»» DOGE|string|true|none|none|
-|»» ALPHA|string|true|none|none|
-|»» DUSK|string|true|none|none|
-|»» DOT3S|string|true|none|none|
-|»» SXP|string|true|none|none|
-|»» HBAR|string|true|none|none|
-|»» SYNT|string|true|none|none|
-|»» ZEX|string|true|none|none|
-|»» BONDLY|string|true|none|none|
-|»» MLK|string|true|none|none|
-|»» KICKS|string|true|none|none|
-|»» PEPE|string|true|none|none|
-|»» OUSD|string|true|none|none|
-|»» LUNCDOWN|string|true|none|none|
-|»» DOGS|string|true|none|none|
-|»» REV3L|string|true|none|none|
-|»» CTSI|string|true|none|none|
-|»» C98|string|true|none|none|
-|»» OSMO|string|true|none|none|
-|»» NTRN|string|true|none|none|
-|»» CFX2S|string|true|none|none|
-|»» SYN|string|true|none|none|
-|»» VIDT|string|true|none|none|
-|»» SYS|string|true|none|none|
-|»» GAS|string|true|none|none|
-|»» BOME|string|true|none|none|
-|»» COMBO|string|true|none|none|
-|»» XCH|string|true|none|none|
-|»» VR|string|true|none|none|
-|»» CFX2L|string|true|none|none|
-|»» VSYS|string|true|none|none|
-|»» PANDORA|string|true|none|none|
-|»» THETA|string|true|none|none|
-|»» XCN|string|true|none|none|
-|»» NEXG|string|true|none|none|
-|»» MELOS|string|true|none|none|
-|»» XCV|string|true|none|none|
-|»» ORN|string|true|none|none|
-|»» WLKN|string|true|none|none|
-|»» AAVE|string|true|none|none|
-|»» MNT|string|true|none|none|
-|»» BONK|string|true|none|none|
-|»» PERP|string|true|none|none|
-|»» XDC|string|true|none|none|
-|»» MNW|string|true|none|none|
-|»» XDB|string|true|none|none|
-|»» BOND|string|true|none|none|
-|»» SUIA|string|true|none|none|
-|»» MOG|string|true|none|none|
-|»» SUTER|string|true|none|none|
-|»» TIME|string|true|none|none|
-|»» RACA|string|true|none|none|
-|»» BICO|string|true|none|none|
-|»» MON|string|true|none|none|
-|»» SWEAT|string|true|none|none|
-|»» MOXIE|string|true|none|none|
-|»» BABYBNB|string|true|none|none|
-|»» IGU|string|true|none|none|
-|»» HMSTR|string|true|none|none|
-|»» XEC|string|true|none|none|
-|»» MONI|string|true|none|none|
-|»» XR|string|true|none|none|
-|»» PEOPLE|string|true|none|none|
-|»» PUMLX|string|true|none|none|
-|»» ZIL|string|true|none|none|
-|»» WLDDOWN|string|true|none|none|
-|»» VAI|string|true|none|none|
-|»» XEN|string|true|none|none|
-|»» MPC|string|true|none|none|
-|»» XEM|string|true|none|none|
-|»» JASMY3S|string|true|none|none|
-|»» OTK|string|true|none|none|
-|»» TRAC|string|true|none|none|
-|»» DFYN|string|true|none|none|
-|»» BIDP|string|true|none|none|
-|»» JASMY3L|string|true|none|none|
-|»» INJDOWN|string|true|none|none|
-|»» KLV|string|true|none|none|
-|»» WAXL|string|true|none|none|
-|»» TRBDOWN|string|true|none|none|
-|»» BCH3L|string|true|none|none|
-|»» GMT3S|string|true|none|none|
-|»» KMD|string|true|none|none|
-|»» BCH3S|string|true|none|none|
-|»» ECOX|string|true|none|none|
-|»» AAVE3S|string|true|none|none|
-|»» GMT3L|string|true|none|none|
-|»» EPIK|string|true|none|none|
-|»» SUIP|string|true|none|none|
-|»» AAVE3L|string|true|none|none|
-|»» ZK|string|true|none|none|
-|»» ZKF|string|true|none|none|
-|»» OMNIA|string|true|none|none|
-|»» ZKJ|string|true|none|none|
-|»» ZKL|string|true|none|none|
-|»» GAFI|string|true|none|none|
-|»» CARV|string|true|none|none|
-|»» KNC|string|true|none|none|
-|»» CATS|string|true|none|none|
-|»» PROM|string|true|none|none|
-|»» ALEPH|string|true|none|none|
-|»» PONKE|string|true|none|none|
-|»» OVR|string|true|none|none|
-|»» CATI|string|true|none|none|
-|»» ORDER|string|true|none|none|
-|»» GFT|string|true|none|none|
-|»» BIFI|string|true|none|none|
-|»» GGC|string|true|none|none|
-|»» GGG|string|true|none|none|
-|»» DAPPX|string|true|none|none|
-|»» SUKU|string|true|none|none|
-|»» ULTI|string|true|none|none|
-|»» CREDI|string|true|none|none|
-|»» ERTHA|string|true|none|none|
-|»» FURY|string|true|none|none|
-|»» KARRAT|string|true|none|none|
-|»» MOBILE|string|true|none|none|
-|»» SIDUS|string|true|none|none|
-|»» NAVI|string|true|none|none|
-|»» TAO|string|true|none|none|
-|»» USDJ|string|true|none|none|
-|»» MTL|string|true|none|none|
-|»» VET|string|true|none|none|
-|»» FITFI|string|true|none|none|
-|»» USDT|string|true|none|none|
-|»» OXT|string|true|none|none|
-|»» CANDY|string|true|none|none|
-|»» USDP|string|true|none|none|
-|»» MTS|string|true|none|none|
-|»» TADA|string|true|none|none|
-|»» MTV|string|true|none|none|
-|»» NAVX|string|true|none|none|
-|»» ILV|string|true|none|none|
-|»» VINU|string|true|none|none|
-|»» GHX|string|true|none|none|
-|»» EDU|string|true|none|none|
-|»» HYVE|string|true|none|none|
-|»» BTC3L|string|true|none|none|
-|»» ANYONE|string|true|none|none|
-|»» BEAT|string|true|none|none|
-|»» KING|string|true|none|none|
-|»» CREAM|string|true|none|none|
-|»» CAS|string|true|none|none|
-|»» IMX|string|true|none|none|
-|»» CAT|string|true|none|none|
-|»» BTC3S|string|true|none|none|
-|»» USDE|string|true|none|none|
-|»» USDD|string|true|none|none|
-|»» CWAR|string|true|none|none|
-|»» USDC|string|true|none|none|
-|»» KRL|string|true|none|none|
-|»» INJ|string|true|none|none|
-|»» GAME|string|true|none|none|
-|»» TRIBL|string|true|none|none|
-|»» XLM|string|true|none|none|
-|»» TRBUP|string|true|none|none|
-|»» VRADOWN|string|true|none|none|
-|»» SUPER|string|true|none|none|
-|»» EIGEN|string|true|none|none|
-|»» IOI|string|true|none|none|
-|»» KSM|string|true|none|none|
-|»» CCD|string|true|none|none|
-|»» EGO|string|true|none|none|
-|»» EGP|string|true|none|none|
-|»» MXC|string|true|none|none|
-|»» TEL|string|true|none|none|
-|»» MOVR|string|true|none|none|
-|»» XMR|string|true|none|none|
-|»» MXM|string|true|none|none|
-|»» OORT|string|true|none|none|
-|»» GLM|string|true|none|none|
-|»» RAY|string|true|none|none|
-|»» XTAG|string|true|none|none|
-|»» GLQ|string|true|none|none|
-|»» CWEB|string|true|none|none|
-|»» REVU|string|true|none|none|
-|»» REVV|string|true|none|none|
-|»» ZRO|string|true|none|none|
-|»» XNL|string|true|none|none|
-|»» XNO|string|true|none|none|
-|»» SAROS|string|true|none|none|
-|»» KACE|string|true|none|none|
-|»» ZRX|string|true|none|none|
-|»» WLTH|string|true|none|none|
-|»» ATOM3L|string|true|none|none|
-|»» GMM|string|true|none|none|
-|»» BEER|string|true|none|none|
-|»» GMT|string|true|none|none|
-|»» HEART|string|true|none|none|
-|»» GMX|string|true|none|none|
-|»» ABBC|string|true|none|none|
-|»» OMNI|string|true|none|none|
-|»» ATOM3S|string|true|none|none|
-|»» IRL|string|true|none|none|
-|»» CFG|string|true|none|none|
-|»» WSDM|string|true|none|none|
-|»» GNS|string|true|none|none|
-|»» VANRY|string|true|none|none|
-|»» CFX|string|true|none|none|
-|»» GRAIL|string|true|none|none|
-|»» BEFI|string|true|none|none|
-|»» VELO|string|true|none|none|
-|»» XPR|string|true|none|none|
-|»» DOVI|string|true|none|none|
-|»» ACE|string|true|none|none|
-|»» ACH|string|true|none|none|
-|»» ISP|string|true|none|none|
-|»» XCAD|string|true|none|none|
-|»» MINA|string|true|none|none|
-|»» TIA|string|true|none|none|
-|»» DRIFT|string|true|none|none|
-|»» ACQ|string|true|none|none|
-|»» ACS|string|true|none|none|
-|»» MIND|string|true|none|none|
-|»» STORE|string|true|none|none|
-|»» REN|string|true|none|none|
-|»» ELA|string|true|none|none|
-|»» DREAMS|string|true|none|none|
-|»» ADA|string|true|none|none|
-|»» ELF|string|true|none|none|
-|»» REQ|string|true|none|none|
-|»» STORJ|string|true|none|none|
-|»» LADYS|string|true|none|none|
-|»» PAXG|string|true|none|none|
-|»» REZ|string|true|none|none|
-|»» XRD|string|true|none|none|
-|»» CHO|string|true|none|none|
-|»» CHR|string|true|none|none|
-|»» ADS|string|true|none|none|
-|»» CHZ|string|true|none|none|
-|»» ADX|string|true|none|none|
-|»» XRP|string|true|none|none|
-|»» JASMY|string|true|none|none|
-|»» KAGI|string|true|none|none|
-|»» FIDA|string|true|none|none|
-|»» PBR|string|true|none|none|
-|»» AEG|string|true|none|none|
-|»» H2O|string|true|none|none|
-|»» CHMB|string|true|none|none|
-|»» SAND3L|string|true|none|none|
-|»» PBX|string|true|none|none|
-|»» SOLVE|string|true|none|none|
-|»» DECHAT|string|true|none|none|
-|»» GARI|string|true|none|none|
-|»» SHIB2L|string|true|none|none|
-|»» SHIB2S|string|true|none|none|
-|»» ENA|string|true|none|none|
-|»» VEMP|string|true|none|none|
-|»» ENJ|string|true|none|none|
-|»» AFG|string|true|none|none|
-|»» RATS|string|true|none|none|
-|»» GRT|string|true|none|none|
-|»» FORWARD|string|true|none|none|
-|»» TFUEL|string|true|none|none|
-|»» ENS|string|true|none|none|
-|»» KASDOWN|string|true|none|none|
-|»» XTM|string|true|none|none|
-|»» DEGEN|string|true|none|none|
-|»» TLM|string|true|none|none|
-|»» DYDXDOWN|string|true|none|none|
-|»» CKB|string|true|none|none|
-|»» LUNC|string|true|none|none|
-|»» AURORA|string|true|none|none|
-|»» LUNA|string|true|none|none|
-|»» XTZ|string|true|none|none|
-|»» ELON|string|true|none|none|
-|»» DMTR|string|true|none|none|
-|»» EOS|string|true|none|none|
-|»» GST|string|true|none|none|
-|»» FORT|string|true|none|none|
-|»» FLAME|string|true|none|none|
-|»» PATEX|string|true|none|none|
-|»» DEEP|string|true|none|none|
-|»» ID3L|string|true|none|none|
-|»» GTC|string|true|none|none|
-|»» ID3S|string|true|none|none|
-|»» RIO|string|true|none|none|
-|»» CLH|string|true|none|none|
-|»» BURGER|string|true|none|none|
-|»» VRA|string|true|none|none|
-|»» SUNDOG|string|true|none|none|
-|»» GTT|string|true|none|none|
-|»» INJUP|string|true|none|none|
-|»» CPOOL|string|true|none|none|
-|»» EPX|string|true|none|none|
-|»» CLV|string|true|none|none|
-|»» FEAR|string|true|none|none|
-|»» MEME|string|true|none|none|
-|»» ROOBEE|string|true|none|none|
-|»» DEFI|string|true|none|none|
-|»» TOKEN|string|true|none|none|
-|»» GRAPE|string|true|none|none|
-|»» KASUP|string|true|none|none|
-|»» XWG|string|true|none|none|
-|»» SKEY|string|true|none|none|
-|»» SFUND|string|true|none|none|
-|»» EQX|string|true|none|none|
-|»» ORDIUP|string|true|none|none|
-|»» TON|string|true|none|none|
-|»» DEGO|string|true|none|none|
-|»» IZI|string|true|none|none|
-|»» ERG|string|true|none|none|
-|»» ERN|string|true|none|none|
-|»» VENOM|string|true|none|none|
-|»» VOXEL|string|true|none|none|
-|»» RLC|string|true|none|none|
-|»» PHA|string|true|none|none|
-|»» DYDXUP|string|true|none|none|
-|»» APE3S|string|true|none|none|
-|»» ORBS|string|true|none|none|
-|»» OPDOWN|string|true|none|none|
-|»» ESE|string|true|none|none|
-|»» APE3L|string|true|none|none|
-|»» HMND|string|true|none|none|
-|»» COQ|string|true|none|none|
-|»» AURY|string|true|none|none|
-|»» CULT|string|true|none|none|
-|»» AKT|string|true|none|none|
-|»» GLMR|string|true|none|none|
-|»» XYM|string|true|none|none|
-|»» ORAI|string|true|none|none|
-|»» XYO|string|true|none|none|
-|»» ETC|string|true|none|none|
-|»» LAI|string|true|none|none|
-|»» PIP|string|true|none|none|
-|»» ETH|string|true|none|none|
-|»» NEO|string|true|none|none|
-|»» RMV|string|true|none|none|
-|»» KLAY|string|true|none|none|
-|»» PIT|string|true|none|none|
-|»» TARA|string|true|none|none|
-|»» KALT|string|true|none|none|
-|»» PIX|string|true|none|none|
-|»» ETN|string|true|none|none|
-|»» CSIX|string|true|none|none|
-|»» TRADE|string|true|none|none|
-|»» MAVIA|string|true|none|none|
-|»» HIGH|string|true|none|none|
-|»» TRB|string|true|none|none|
-|»» ORDI|string|true|none|none|
-|»» TRVL|string|true|none|none|
-|»» AMB|string|true|none|none|
-|»» TRU|string|true|none|none|
-|»» LOGX|string|true|none|none|
-|»» FINC|string|true|none|none|
-|»» INFRA|string|true|none|none|
-|»» NATIX|string|true|none|none|
-|»» NFP|string|true|none|none|
-|»» TRY|string|true|none|none|
-|»» TRX|string|true|none|none|
-|»» LBP|string|true|none|none|
-|»» LBR|string|true|none|none|
-|»» EUL|string|true|none|none|
-|»» NFT|string|true|none|none|
-|»» SEIUP|string|true|none|none|
-|»» PUFFER|string|true|none|none|
-|»» EUR|string|true|none|none|
-|»» ORCA|string|true|none|none|
-|»» NEAR3L|string|true|none|none|
-|»» AMP|string|true|none|none|
-|»» XDEFI|string|true|none|none|
-|»» HIFI|string|true|none|none|
-|»» TRUF|string|true|none|none|
-|»» AITECH|string|true|none|none|
-|»» AMU|string|true|none|none|
-|»» USTC|string|true|none|none|
-|»» KNGL|string|true|none|none|
-|»» FOXY|string|true|none|none|
-|»» NGC|string|true|none|none|
-|»» TENET|string|true|none|none|
-|»» NEAR3S|string|true|none|none|
-|»» MAHA|string|true|none|none|
-|»» NGL|string|true|none|none|
-|»» TST|string|true|none|none|
-|»» HIPPO|string|true|none|none|
-|»» AXS3S|string|true|none|none|
-|»» CRO|string|true|none|none|
-|»» ZPAY|string|true|none|none|
-|»» MNDE|string|true|none|none|
-|»» CRV|string|true|none|none|
-|»» SWASH|string|true|none|none|
-|»» AXS3L|string|true|none|none|
-|»» VERSE|string|true|none|none|
-|»» RPK|string|true|none|none|
-|»» RPL|string|true|none|none|
-|»» AZERO|string|true|none|none|
-|»» SOUL|string|true|none|none|
-|»» VXV|string|true|none|none|
-|»» LDO|string|true|none|none|
-|»» MAGIC|string|true|none|none|
-|»» ALICE|string|true|none|none|
-|»» SEAM|string|true|none|none|
-|»» PLU|string|true|none|none|
-|»» AOG|string|true|none|none|
-|»» SMOLE|string|true|none|none|
-|»» EWT|string|true|none|none|
-|»» TSUGT|string|true|none|none|
-|»» PMG|string|true|none|none|
-|»» OPAI|string|true|none|none|
-|»» LOCUS|string|true|none|none|
-|»» CTA|string|true|none|none|
-|»» NIM|string|true|none|none|
-|»» CTC|string|true|none|none|
-|»» APE|string|true|none|none|
-|»» MERL|string|true|none|none|
-|»» JAM|string|true|none|none|
-|»» CTI|string|true|none|none|
-|»» APP|string|true|none|none|
-|»» APT|string|true|none|none|
-|»» WLDUP|string|true|none|none|
-|»» ZEND|string|true|none|none|
-|»» FIRE|string|true|none|none|
-|»» DENT|string|true|none|none|
-|»» PYTH|string|true|none|none|
-|»» LFT|string|true|none|none|
-|»» DPET|string|true|none|none|
-|»» ORDIDOWN|string|true|none|none|
-|»» KPOL|string|true|none|none|
-|»» ETHUP|string|true|none|none|
-|»» BAND|string|true|none|none|
-|»» POL|string|true|none|none|
-|»» ASTR|string|true|none|none|
-|»» NKN|string|true|none|none|
-|»» RSR|string|true|none|none|
-|»» DVPN|string|true|none|none|
-|»» TWT|string|true|none|none|
-|»» ARB|string|true|none|none|
-|»» CVC|string|true|none|none|
-|»» ARC|string|true|none|none|
-|»» XETA|string|true|none|none|
-|»» MTRG|string|true|none|none|
-|»» LOKA|string|true|none|none|
-|»» LPOOL|string|true|none|none|
-|»» TURBOS|string|true|none|none|
-|»» CVX|string|true|none|none|
-|»» ARX|string|true|none|none|
-|»» MPLX|string|true|none|none|
-|»» SUSHI|string|true|none|none|
-|»» NLK|string|true|none|none|
-|»» PEPE2|string|true|none|none|
-|»» WBTC|string|true|none|none|
-|»» SUI3L|string|true|none|none|
-|»» CWS|string|true|none|none|
-|»» SUI3S|string|true|none|none|
-|»» INSP|string|true|none|none|
-|»» MANA|string|true|none|none|
-|»» VRTX|string|true|none|none|
-|»» CSPR|string|true|none|none|
-|»» ATA|string|true|none|none|
-|»» OPEN|string|true|none|none|
-|»» HAI|string|true|none|none|
-|»» NMR|string|true|none|none|
-|»» ATH|string|true|none|none|
-|»» LIT|string|true|none|none|
-|»» TLOS|string|true|none|none|
-|»» TNSR|string|true|none|none|
-|»» CXT|string|true|none|none|
-|»» POLYX|string|true|none|none|
-|»» ZERO|string|true|none|none|
-|»» ROUTE|string|true|none|none|
-|»» LOOM|string|true|none|none|
-|»» PRE|string|true|none|none|
-|»» VRAUP|string|true|none|none|
-|»» HBB|string|true|none|none|
-|»» RVN|string|true|none|none|
-|»» PRQ|string|true|none|none|
-|»» ONDO|string|true|none|none|
-|»» PEPEDOWN|string|true|none|none|
-|»» WOOP|string|true|none|none|
-|»» LUNCUP|string|true|none|none|
-|»» KAVA|string|true|none|none|
-|»» LKI|string|true|none|none|
-|»» AVA|string|true|none|none|
-|»» NOM|string|true|none|none|
-|»» MAPO|string|true|none|none|
-|»» PEPEUP|string|true|none|none|
-|»» STRAX|string|true|none|none|
-|»» NOT|string|true|none|none|
-|»» ZERC|string|true|none|none|
-|»» BCUT|string|true|none|none|
-|»» MASA|string|true|none|none|
-|»» WAN|string|true|none|none|
-|»» WAT|string|true|none|none|
-|»» WAX|string|true|none|none|
-|»» MASK|string|true|none|none|
-|»» EOS3L|string|true|none|none|
-|»» IDEA|string|true|none|none|
-|»» EOS3S|string|true|none|none|
-|»» YFI|string|true|none|none|
-|»» MOODENG|string|true|none|none|
-|»» XCUR|string|true|none|none|
-|»» HYDRA|string|true|none|none|
-|»» POPCAT|string|true|none|none|
-|»» LQTY|string|true|none|none|
-|»» PIXEL|string|true|none|none|
-|»» LMR|string|true|none|none|
-|»» ZETA|string|true|none|none|
-|»» YGG|string|true|none|none|
-|»» AXS|string|true|none|none|
-|»» BCHSV|string|true|none|none|
-|»» NRN|string|true|none|none|
-|»» FTON|string|true|none|none|
-|»» COMP|string|true|none|none|
-|»» XPRT|string|true|none|none|
-|»» HFT|string|true|none|none|
-|»» UXLINK|string|true|none|none|
-|»» STAMP|string|true|none|none|
-|»» RUNE|string|true|none|none|
-|»» ZEUS|string|true|none|none|
-|»» LTC3L|string|true|none|none|
-|»» DAPP|string|true|none|none|
-|»» FORTH|string|true|none|none|
-|»» ALPINE|string|true|none|none|
-|»» SENSO|string|true|none|none|
-|»» LTC3S|string|true|none|none|
-|»» DEXE|string|true|none|none|
-|»» GOAL|string|true|none|none|
-|»» AVAX|string|true|none|none|
-|»» LISTA|string|true|none|none|
-|»» AMPL|string|true|none|none|
-|»» WORK|string|true|none|none|
-|»» BRWL|string|true|none|none|
-|»» BANANA|string|true|none|none|
-|»» PUSH|string|true|none|none|
-|»» WEN|string|true|none|none|
-|»» NEIRO|string|true|none|none|
-|»» BTCUP|string|true|none|none|
-|»» SOL3S|string|true|none|none|
-|»» BRAWL|string|true|none|none|
-|»» LAY3R|string|true|none|none|
-|»» LPT|string|true|none|none|
-|»» GODS|string|true|none|none|
-|»» SAND3S|string|true|none|none|
-|»» RDNT|string|true|none|none|
-|»» SOL3L|string|true|none|none|
-|»» NIBI|string|true|none|none|
-|»» NUM|string|true|none|none|
-|»» PYR|string|true|none|none|
-|»» DAG|string|true|none|none|
-|»» DAI|string|true|none|none|
-|»» HIP|string|true|none|none|
-|»» DAO|string|true|none|none|
-|»» AVAIL|string|true|none|none|
-|»» DAR|string|true|none|none|
-|»» FET|string|true|none|none|
-|»» FCON|string|true|none|none|
-|»» XAVA|string|true|none|none|
-|»» LRC|string|true|none|none|
-|»» UNI3S|string|true|none|none|
-|»» POKT|string|true|none|none|
-|»» DASH|string|true|none|none|
-|»» BAKEDOWN|string|true|none|none|
-|»» POLC|string|true|none|none|
-|»» CIRUS|string|true|none|none|
-|»» UNI3L|string|true|none|none|
-|»» NWC|string|true|none|none|
-|»» POLK|string|true|none|none|
-|»» LSD|string|true|none|none|
-|»» MARS4|string|true|none|none|
-|»» LSK|string|true|none|none|
-|»» BLOCK|string|true|none|none|
-|»» ANALOS|string|true|none|none|
-|»» SAFE|string|true|none|none|
-|»» DCK|string|true|none|none|
-|»» LSS|string|true|none|none|
-|»» DCR|string|true|none|none|
-|»» LIKE|string|true|none|none|
-|»» DATA|string|true|none|none|
-|»» WIF|string|true|none|none|
-|»» BLOK|string|true|none|none|
-|»» LTC|string|true|none|none|
-|»» METIS|string|true|none|none|
-|»» WIN|string|true|none|none|
-|»» HLG|string|true|none|none|
-|»» LTO|string|true|none|none|
-|»» DYDX|string|true|none|none|
-|»» ARB3S|string|true|none|none|
-|»» MUBI|string|true|none|none|
-|»» ARB3L|string|true|none|none|
-|»» RBTC1|string|true|none|none|
-|»» POND|string|true|none|none|
-|»» LINA|string|true|none|none|
-|»» MYRIA|string|true|none|none|
-|»» LINK|string|true|none|none|
-|»» QTUM|string|true|none|none|
-|»» TUNE|string|true|none|none|
-|»» UFO|string|true|none|none|
-|»» CYBER|string|true|none|none|
-|»» WILD|string|true|none|none|
-|»» POLS|string|true|none|none|
-|»» NYM|string|true|none|none|
-|»» FIL|string|true|none|none|
-|»» BAL|string|true|none|none|
-|»» SCA|string|true|none|none|
-|»» STND|string|true|none|none|
-|»» WMTX|string|true|none|none|
-|»» SCLP|string|true|none|none|
-|»» MANEKI|string|true|none|none|
-|»» BAT|string|true|none|none|
-|»» AKRO|string|true|none|none|
-|»» FTM3L|string|true|none|none|
-|»» BAX|string|true|none|none|
-|»» FTM3S|string|true|none|none|
-|»» COTI|string|true|none|none|
+| Name        | Type   | Required | Restrictions | Description |
+| ----------- | ------ | -------- | ------------ | ----------- |
+| » code      | string | true     | none         | none        |
+| » data      | object | true     | none         | none        |
+| »» AGLD     | string | true     | none         | none        |
+| »» DFI      | string | true     | none         | none        |
+| »» PYTHUP   | string | true     | none         | none        |
+| »» ISLM     | string | true     | none         | none        |
+| »» NEAR     | string | true     | none         | none        |
+| »» AIOZ     | string | true     | none         | none        |
+| »» AUDIO    | string | true     | none         | none        |
+| »» BBL      | string | true     | none         | none        |
+| »» WLD      | string | true     | none         | none        |
+| »» HNT      | string | true     | none         | none        |
+| »» ETHFI    | string | true     | none         | none        |
+| »» DMAIL    | string | true     | none         | none        |
+| »» OPUP     | string | true     | none         | none        |
+| »» VET3S    | string | true     | none         | none        |
+| »» MANA3S   | string | true     | none         | none        |
+| »» TIDAL    | string | true     | none         | none        |
+| »» HALO     | string | true     | none         | none        |
+| »» OPUL     | string | true     | none         | none        |
+| »» MANA3L   | string | true     | none         | none        |
+| »» DGB      | string | true     | none         | none        |
+| »» AA       | string | true     | none         | none        |
+| »» BCH      | string | true     | none         | none        |
+| »» GMEE     | string | true     | none         | none        |
+| »» JST      | string | true     | none         | none        |
+| »» PBUX     | string | true     | none         | none        |
+| »» AR       | string | true     | none         | none        |
+| »» SEI      | string | true     | none         | none        |
+| »» PSTAKE   | string | true     | none         | none        |
+| »» LMWR     | string | true     | none         | none        |
+| »» UNFIDOWN | string | true     | none         | none        |
+| »» BB       | string | true     | none         | none        |
+| »» JTO      | string | true     | none         | none        |
+| »» WEMIX    | string | true     | none         | none        |
+| »» G        | string | true     | none         | none        |
+| »» MARSH    | string | true     | none         | none        |
+| »» BN       | string | true     | none         | none        |
+| »» FLIP     | string | true     | none         | none        |
+| »» FLR      | string | true     | none         | none        |
+| »» BIGTIME  | string | true     | none         | none        |
+| »» FLY      | string | true     | none         | none        |
+| »» T        | string | true     | none         | none        |
+| »» W        | string | true     | none         | none        |
+| »» BDX      | string | true     | none         | none        |
+| »» BABYDOGE | string | true     | none         | none        |
+| »» SFP      | string | true     | none         | none        |
+| »» DIA      | string | true     | none         | none        |
+| »» ISME     | string | true     | none         | none        |
+| »» LYM      | string | true     | none         | none        |
+| »» VET3L    | string | true     | none         | none        |
+| »» JUP      | string | true     | none         | none        |
+| »» LYX      | string | true     | none         | none        |
+| »» AIEPK    | string | true     | none         | none        |
+| »» SILLY    | string | true     | none         | none        |
+| »» SCPT     | string | true     | none         | none        |
+| »» WOO      | string | true     | none         | none        |
+| »» BLUR     | string | true     | none         | none        |
+| »» STRK     | string | true     | none         | none        |
+| »» BFC      | string | true     | none         | none        |
+| »» DC       | string | true     | none         | none        |
+| »» KARATE   | string | true     | none         | none        |
+| »» SUSHI3L  | string | true     | none         | none        |
+| »» NETVR    | string | true     | none         | none        |
+| »» WAVES    | string | true     | none         | none        |
+| »» LITH     | string | true     | none         | none        |
+| »» HAPI     | string | true     | none         | none        |
+| »» SUSHI3S  | string | true     | none         | none        |
+| »» CEEK     | string | true     | none         | none        |
+| »» FLOKI    | string | true     | none         | none        |
+| »» SHR      | string | true     | none         | none        |
+| »» SAND     | string | true     | none         | none        |
+| »» TURT     | string | true     | none         | none        |
+| »» UMA      | string | true     | none         | none        |
+| »» BEPRO    | string | true     | none         | none        |
+| »» SCRT     | string | true     | none         | none        |
+| »» TUSD     | string | true     | none         | none        |
+| »» COOKIE   | string | true     | none         | none        |
+| »» LRDS     | string | true     | none         | none        |
+| »» SIN      | string | true     | none         | none        |
+| »» OAS      | string | true     | none         | none        |
+| »» ROOT     | string | true     | none         | none        |
+| »» ADA3L    | string | true     | none         | none        |
+| »» TIAUP    | string | true     | none         | none        |
+| »» HTR      | string | true     | none         | none        |
+| »» UNB      | string | true     | none         | none        |
+| »» UNA      | string | true     | none         | none        |
+| »» HARD     | string | true     | none         | none        |
+| »» G3       | string | true     | none         | none        |
+| »» ADA3S    | string | true     | none         | none        |
+| »» MYRO     | string | true     | none         | none        |
+| »» HTX      | string | true     | none         | none        |
+| »» FT       | string | true     | none         | none        |
+| »» BTCDOWN  | string | true     | none         | none        |
+| »» UNI      | string | true     | none         | none        |
+| »» FX       | string | true     | none         | none        |
+| »» OBI      | string | true     | none         | none        |
+| »» UNO      | string | true     | none         | none        |
+| »» WRX      | string | true     | none         | none        |
+| »» TIADOWN  | string | true     | none         | none        |
+| »» ETHDOWN  | string | true     | none         | none        |
+| »» WELL     | string | true     | none         | none        |
+| »» SWFTC    | string | true     | none         | none        |
+| »» SKL      | string | true     | none         | none        |
+| »» UOS      | string | true     | none         | none        |
+| »» AIPAD    | string | true     | none         | none        |
+| »» BRETT    | string | true     | none         | none        |
+| »» SKY      | string | true     | none         | none        |
+| »» FRM      | string | true     | none         | none        |
+| »» VISION   | string | true     | none         | none        |
+| »» LENDS    | string | true     | none         | none        |
+| »» SLF      | string | true     | none         | none        |
+| »» BULL     | string | true     | none         | none        |
+| »» FLOW     | string | true     | none         | none        |
+| »» ODDZ     | string | true     | none         | none        |
+| »» SLN      | string | true     | none         | none        |
+| »» UPO      | string | true     | none         | none        |
+| »» SLP      | string | true     | none         | none        |
+| »» ID       | string | true     | none         | none        |
+| »» SLIM     | string | true     | none         | none        |
+| »» SPOT     | string | true     | none         | none        |
+| »» DOP      | string | true     | none         | none        |
+| »» ISSP     | string | true     | none         | none        |
+| »» UQC      | string | true     | none         | none        |
+| »» IO       | string | true     | none         | none        |
+| »» DOT      | string | true     | none         | none        |
+| »» 1INCH    | string | true     | none         | none        |
+| »» SMH      | string | true     | none         | none        |
+| »» MAK      | string | true     | none         | none        |
+| »» TOKO     | string | true     | none         | none        |
+| »» TURBO    | string | true     | none         | none        |
+| »» UNFI     | string | true     | none         | none        |
+| »» MAN      | string | true     | none         | none        |
+| »» EVER     | string | true     | none         | none        |
+| »» FTM      | string | true     | none         | none        |
+| »» SHRAP    | string | true     | none         | none        |
+| »» MAV      | string | true     | none         | none        |
+| »» MAX      | string | true     | none         | none        |
+| »» DPR      | string | true     | none         | none        |
+| »» FTT      | string | true     | none         | none        |
+| »» ARKM     | string | true     | none         | none        |
+| »» ATOM     | string | true     | none         | none        |
+| »» PENDLE   | string | true     | none         | none        |
+| »» QUICK    | string | true     | none         | none        |
+| »» BLZ      | string | true     | none         | none        |
+| »» BOBA     | string | true     | none         | none        |
+| »» MBL      | string | true     | none         | none        |
+| »» OFN      | string | true     | none         | none        |
+| »» UNIO     | string | true     | none         | none        |
+| »» SNS      | string | true     | none         | none        |
+| »» SNX      | string | true     | none         | none        |
+| »» NXRA     | string | true     | none         | none        |
+| »» TAIKO    | string | true     | none         | none        |
+| »» AVAX3L   | string | true     | none         | none        |
+| »» L3       | string | true     | none         | none        |
+| »» API3     | string | true     | none         | none        |
+| »» XRP3S    | string | true     | none         | none        |
+| »» QKC      | string | true     | none         | none        |
+| »» AVAX3S   | string | true     | none         | none        |
+| »» ROSE     | string | true     | none         | none        |
+| »» SATS     | string | true     | none         | none        |
+| »» BMX      | string | true     | none         | none        |
+| »» PORTAL   | string | true     | none         | none        |
+| »» TOMI     | string | true     | none         | none        |
+| »» XRP3L    | string | true     | none         | none        |
+| »» SOL      | string | true     | none         | none        |
+| »» SON      | string | true     | none         | none        |
+| »» BNC      | string | true     | none         | none        |
+| »» SOCIAL   | string | true     | none         | none        |
+| »» CGPT     | string | true     | none         | none        |
+| »» CELR     | string | true     | none         | none        |
+| »» BNB      | string | true     | none         | none        |
+| »» OGN      | string | true     | none         | none        |
+| »» CELO     | string | true     | none         | none        |
+| »» AUCTION  | string | true     | none         | none        |
+| »» MANTA    | string | true     | none         | none        |
+| »» LAYER    | string | true     | none         | none        |
+| »» AERO     | string | true     | none         | none        |
+| »» CETUS    | string | true     | none         | none        |
+| »» LL       | string | true     | none         | none        |
+| »» SPA      | string | true     | none         | none        |
+| »» PYTHDOWN | string | true     | none         | none        |
+| »» NEIROCTO | string | true     | none         | none        |
+| »» UTK      | string | true     | none         | none        |
+| »» GMRX     | string | true     | none         | none        |
+| »» BOB      | string | true     | none         | none        |
+| »» HOTCROSS | string | true     | none         | none        |
+| »» AERGO    | string | true     | none         | none        |
+| »» MOCA     | string | true     | none         | none        |
+| »» SQD      | string | true     | none         | none        |
+| »» MV       | string | true     | none         | none        |
+| »» BNB3L    | string | true     | none         | none        |
+| »» BNB3S    | string | true     | none         | none        |
+| »» GALAX3L  | string | true     | none         | none        |
+| »» KAI      | string | true     | none         | none        |
+| »» SQR      | string | true     | none         | none        |
+| »» GALAX3S  | string | true     | none         | none        |
+| »» EGLD     | string | true     | none         | none        |
+| »» ZBCN     | string | true     | none         | none        |
+| »» KAS      | string | true     | none         | none        |
+| »» MEW      | string | true     | none         | none        |
+| »» PUNDIX   | string | true     | none         | none        |
+| »» LOOKS    | string | true     | none         | none        |
+| »» FXS      | string | true     | none         | none        |
+| »» BOSON    | string | true     | none         | none        |
+| »» BRISE    | string | true     | none         | none        |
+| »» AEVO     | string | true     | none         | none        |
+| »» FLUX     | string | true     | none         | none        |
+| »» PRCL     | string | true     | none         | none        |
+| »» UNFIUP   | string | true     | none         | none        |
+| »» SEIDOWN  | string | true     | none         | none        |
+| »» DOAI     | string | true     | none         | none        |
+| »» QNT      | string | true     | none         | none        |
+| »» REDO     | string | true     | none         | none        |
+| »» STRIKE   | string | true     | none         | none        |
+| »» ETHW     | string | true     | none         | none        |
+| »» OM       | string | true     | none         | none        |
+| »» OP       | string | true     | none         | none        |
+| »» WHALE    | string | true     | none         | none        |
+| »» 1CAT     | string | true     | none         | none        |
+| »» NEON     | string | true     | none         | none        |
+| »» GTAI     | string | true     | none         | none        |
+| »» SSV      | string | true     | none         | none        |
+| »» ETH2     | string | true     | none         | none        |
+| »» KCS      | string | true     | none         | none        |
+| »» ARPA     | string | true     | none         | none        |
+| »» ARTFI    | string | true     | none         | none        |
+| »» BRL      | string | true     | none         | none        |
+| »» ALEX     | string | true     | none         | none        |
+| »» STG      | string | true     | none         | none        |
+| »» SHIB     | string | true     | none         | none        |
+| »» IOTX     | string | true     | none         | none        |
+| »» OLE      | string | true     | none         | none        |
+| »» KDA      | string | true     | none         | none        |
+| »» CERE     | string | true     | none         | none        |
+| »» DOCK     | string | true     | none         | none        |
+| »» STX      | string | true     | none         | none        |
+| »» OLT      | string | true     | none         | none        |
+| »» QI       | string | true     | none         | none        |
+| »» SDAO     | string | true     | none         | none        |
+| »» BLAST    | string | true     | none         | none        |
+| »» LINK3S   | string | true     | none         | none        |
+| »» IOST     | string | true     | none         | none        |
+| »» SUI      | string | true     | none         | none        |
+| »» CAKE     | string | true     | none         | none        |
+| »» BSW      | string | true     | none         | none        |
+| »» OMG      | string | true     | none         | none        |
+| »» VOLT     | string | true     | none         | none        |
+| »» LINK3L   | string | true     | none         | none        |
+| »» GEEQ     | string | true     | none         | none        |
+| »» PYUSD    | string | true     | none         | none        |
+| »» SUN      | string | true     | none         | none        |
+| »» TOWER    | string | true     | none         | none        |
+| »» BTC      | string | true     | none         | none        |
+| »» IOTA     | string | true     | none         | none        |
+| »» REEF     | string | true     | none         | none        |
+| »» TRIAS    | string | true     | none         | none        |
+| »» KEY      | string | true     | none         | none        |
+| »» ETH3L    | string | true     | none         | none        |
+| »» BTT      | string | true     | none         | none        |
+| »» ONE      | string | true     | none         | none        |
+| »» RENDER   | string | true     | none         | none        |
+| »» ETH3S    | string | true     | none         | none        |
+| »» ANKR     | string | true     | none         | none        |
+| »» ALGO     | string | true     | none         | none        |
+| »» SYLO     | string | true     | none         | none        |
+| »» ZCX      | string | true     | none         | none        |
+| »» SD       | string | true     | none         | none        |
+| »» ONT      | string | true     | none         | none        |
+| »» MJT      | string | true     | none         | none        |
+| »» DYM      | string | true     | none         | none        |
+| »» DYP      | string | true     | none         | none        |
+| »» BAKEUP   | string | true     | none         | none        |
+| »» OOE      | string | true     | none         | none        |
+| »» ZELIX    | string | true     | none         | none        |
+| »» DOGE3L   | string | true     | none         | none        |
+| »» ARTY     | string | true     | none         | none        |
+| »» QORPO    | string | true     | none         | none        |
+| »» ICE      | string | true     | none         | none        |
+| »» NOTAI    | string | true     | none         | none        |
+| »» DOGE3S   | string | true     | none         | none        |
+| »» NAKA     | string | true     | none         | none        |
+| »» GALAX    | string | true     | none         | none        |
+| »» MKR      | string | true     | none         | none        |
+| »» DODO     | string | true     | none         | none        |
+| »» ICP      | string | true     | none         | none        |
+| »» ZEC      | string | true     | none         | none        |
+| »» ZEE      | string | true     | none         | none        |
+| »» ICX      | string | true     | none         | none        |
+| »» KMNO     | string | true     | none         | none        |
+| »» TT       | string | true     | none         | none        |
+| »» DOT3L    | string | true     | none         | none        |
+| »» XAI      | string | true     | none         | none        |
+| »» ZEN      | string | true     | none         | none        |
+| »» DOGE     | string | true     | none         | none        |
+| »» ALPHA    | string | true     | none         | none        |
+| »» DUSK     | string | true     | none         | none        |
+| »» DOT3S    | string | true     | none         | none        |
+| »» SXP      | string | true     | none         | none        |
+| »» HBAR     | string | true     | none         | none        |
+| »» SYNT     | string | true     | none         | none        |
+| »» ZEX      | string | true     | none         | none        |
+| »» BONDLY   | string | true     | none         | none        |
+| »» MLK      | string | true     | none         | none        |
+| »» KICKS    | string | true     | none         | none        |
+| »» PEPE     | string | true     | none         | none        |
+| »» OUSD     | string | true     | none         | none        |
+| »» LUNCDOWN | string | true     | none         | none        |
+| »» DOGS     | string | true     | none         | none        |
+| »» REV3L    | string | true     | none         | none        |
+| »» CTSI     | string | true     | none         | none        |
+| »» C98      | string | true     | none         | none        |
+| »» OSMO     | string | true     | none         | none        |
+| »» NTRN     | string | true     | none         | none        |
+| »» CFX2S    | string | true     | none         | none        |
+| »» SYN      | string | true     | none         | none        |
+| »» VIDT     | string | true     | none         | none        |
+| »» SYS      | string | true     | none         | none        |
+| »» GAS      | string | true     | none         | none        |
+| »» BOME     | string | true     | none         | none        |
+| »» COMBO    | string | true     | none         | none        |
+| »» XCH      | string | true     | none         | none        |
+| »» VR       | string | true     | none         | none        |
+| »» CFX2L    | string | true     | none         | none        |
+| »» VSYS     | string | true     | none         | none        |
+| »» PANDORA  | string | true     | none         | none        |
+| »» THETA    | string | true     | none         | none        |
+| »» XCN      | string | true     | none         | none        |
+| »» NEXG     | string | true     | none         | none        |
+| »» MELOS    | string | true     | none         | none        |
+| »» XCV      | string | true     | none         | none        |
+| »» ORN      | string | true     | none         | none        |
+| »» WLKN     | string | true     | none         | none        |
+| »» AAVE     | string | true     | none         | none        |
+| »» MNT      | string | true     | none         | none        |
+| »» BONK     | string | true     | none         | none        |
+| »» PERP     | string | true     | none         | none        |
+| »» XDC      | string | true     | none         | none        |
+| »» MNW      | string | true     | none         | none        |
+| »» XDB      | string | true     | none         | none        |
+| »» BOND     | string | true     | none         | none        |
+| »» SUIA     | string | true     | none         | none        |
+| »» MOG      | string | true     | none         | none        |
+| »» SUTER    | string | true     | none         | none        |
+| »» TIME     | string | true     | none         | none        |
+| »» RACA     | string | true     | none         | none        |
+| »» BICO     | string | true     | none         | none        |
+| »» MON      | string | true     | none         | none        |
+| »» SWEAT    | string | true     | none         | none        |
+| »» MOXIE    | string | true     | none         | none        |
+| »» BABYBNB  | string | true     | none         | none        |
+| »» IGU      | string | true     | none         | none        |
+| »» HMSTR    | string | true     | none         | none        |
+| »» XEC      | string | true     | none         | none        |
+| »» MONI     | string | true     | none         | none        |
+| »» XR       | string | true     | none         | none        |
+| »» PEOPLE   | string | true     | none         | none        |
+| »» PUMLX    | string | true     | none         | none        |
+| »» ZIL      | string | true     | none         | none        |
+| »» WLDDOWN  | string | true     | none         | none        |
+| »» VAI      | string | true     | none         | none        |
+| »» XEN      | string | true     | none         | none        |
+| »» MPC      | string | true     | none         | none        |
+| »» XEM      | string | true     | none         | none        |
+| »» JASMY3S  | string | true     | none         | none        |
+| »» OTK      | string | true     | none         | none        |
+| »» TRAC     | string | true     | none         | none        |
+| »» DFYN     | string | true     | none         | none        |
+| »» BIDP     | string | true     | none         | none        |
+| »» JASMY3L  | string | true     | none         | none        |
+| »» INJDOWN  | string | true     | none         | none        |
+| »» KLV      | string | true     | none         | none        |
+| »» WAXL     | string | true     | none         | none        |
+| »» TRBDOWN  | string | true     | none         | none        |
+| »» BCH3L    | string | true     | none         | none        |
+| »» GMT3S    | string | true     | none         | none        |
+| »» KMD      | string | true     | none         | none        |
+| »» BCH3S    | string | true     | none         | none        |
+| »» ECOX     | string | true     | none         | none        |
+| »» AAVE3S   | string | true     | none         | none        |
+| »» GMT3L    | string | true     | none         | none        |
+| »» EPIK     | string | true     | none         | none        |
+| »» SUIP     | string | true     | none         | none        |
+| »» AAVE3L   | string | true     | none         | none        |
+| »» ZK       | string | true     | none         | none        |
+| »» ZKF      | string | true     | none         | none        |
+| »» OMNIA    | string | true     | none         | none        |
+| »» ZKJ      | string | true     | none         | none        |
+| »» ZKL      | string | true     | none         | none        |
+| »» GAFI     | string | true     | none         | none        |
+| »» CARV     | string | true     | none         | none        |
+| »» KNC      | string | true     | none         | none        |
+| »» CATS     | string | true     | none         | none        |
+| »» PROM     | string | true     | none         | none        |
+| »» ALEPH    | string | true     | none         | none        |
+| »» PONKE    | string | true     | none         | none        |
+| »» OVR      | string | true     | none         | none        |
+| »» CATI     | string | true     | none         | none        |
+| »» ORDER    | string | true     | none         | none        |
+| »» GFT      | string | true     | none         | none        |
+| »» BIFI     | string | true     | none         | none        |
+| »» GGC      | string | true     | none         | none        |
+| »» GGG      | string | true     | none         | none        |
+| »» DAPPX    | string | true     | none         | none        |
+| »» SUKU     | string | true     | none         | none        |
+| »» ULTI     | string | true     | none         | none        |
+| »» CREDI    | string | true     | none         | none        |
+| »» ERTHA    | string | true     | none         | none        |
+| »» FURY     | string | true     | none         | none        |
+| »» KARRAT   | string | true     | none         | none        |
+| »» MOBILE   | string | true     | none         | none        |
+| »» SIDUS    | string | true     | none         | none        |
+| »» NAVI     | string | true     | none         | none        |
+| »» TAO      | string | true     | none         | none        |
+| »» USDJ     | string | true     | none         | none        |
+| »» MTL      | string | true     | none         | none        |
+| »» VET      | string | true     | none         | none        |
+| »» FITFI    | string | true     | none         | none        |
+| »» USDT     | string | true     | none         | none        |
+| »» OXT      | string | true     | none         | none        |
+| »» CANDY    | string | true     | none         | none        |
+| »» USDP     | string | true     | none         | none        |
+| »» MTS      | string | true     | none         | none        |
+| »» TADA     | string | true     | none         | none        |
+| »» MTV      | string | true     | none         | none        |
+| »» NAVX     | string | true     | none         | none        |
+| »» ILV      | string | true     | none         | none        |
+| »» VINU     | string | true     | none         | none        |
+| »» GHX      | string | true     | none         | none        |
+| »» EDU      | string | true     | none         | none        |
+| »» HYVE     | string | true     | none         | none        |
+| »» BTC3L    | string | true     | none         | none        |
+| »» ANYONE   | string | true     | none         | none        |
+| »» BEAT     | string | true     | none         | none        |
+| »» KING     | string | true     | none         | none        |
+| »» CREAM    | string | true     | none         | none        |
+| »» CAS      | string | true     | none         | none        |
+| »» IMX      | string | true     | none         | none        |
+| »» CAT      | string | true     | none         | none        |
+| »» BTC3S    | string | true     | none         | none        |
+| »» USDE     | string | true     | none         | none        |
+| »» USDD     | string | true     | none         | none        |
+| »» CWAR     | string | true     | none         | none        |
+| »» USDC     | string | true     | none         | none        |
+| »» KRL      | string | true     | none         | none        |
+| »» INJ      | string | true     | none         | none        |
+| »» GAME     | string | true     | none         | none        |
+| »» TRIBL    | string | true     | none         | none        |
+| »» XLM      | string | true     | none         | none        |
+| »» TRBUP    | string | true     | none         | none        |
+| »» VRADOWN  | string | true     | none         | none        |
+| »» SUPER    | string | true     | none         | none        |
+| »» EIGEN    | string | true     | none         | none        |
+| »» IOI      | string | true     | none         | none        |
+| »» KSM      | string | true     | none         | none        |
+| »» CCD      | string | true     | none         | none        |
+| »» EGO      | string | true     | none         | none        |
+| »» EGP      | string | true     | none         | none        |
+| »» MXC      | string | true     | none         | none        |
+| »» TEL      | string | true     | none         | none        |
+| »» MOVR     | string | true     | none         | none        |
+| »» XMR      | string | true     | none         | none        |
+| »» MXM      | string | true     | none         | none        |
+| »» OORT     | string | true     | none         | none        |
+| »» GLM      | string | true     | none         | none        |
+| »» RAY      | string | true     | none         | none        |
+| »» XTAG     | string | true     | none         | none        |
+| »» GLQ      | string | true     | none         | none        |
+| »» CWEB     | string | true     | none         | none        |
+| »» REVU     | string | true     | none         | none        |
+| »» REVV     | string | true     | none         | none        |
+| »» ZRO      | string | true     | none         | none        |
+| »» XNL      | string | true     | none         | none        |
+| »» XNO      | string | true     | none         | none        |
+| »» SAROS    | string | true     | none         | none        |
+| »» KACE     | string | true     | none         | none        |
+| »» ZRX      | string | true     | none         | none        |
+| »» WLTH     | string | true     | none         | none        |
+| »» ATOM3L   | string | true     | none         | none        |
+| »» GMM      | string | true     | none         | none        |
+| »» BEER     | string | true     | none         | none        |
+| »» GMT      | string | true     | none         | none        |
+| »» HEART    | string | true     | none         | none        |
+| »» GMX      | string | true     | none         | none        |
+| »» ABBC     | string | true     | none         | none        |
+| »» OMNI     | string | true     | none         | none        |
+| »» ATOM3S   | string | true     | none         | none        |
+| »» IRL      | string | true     | none         | none        |
+| »» CFG      | string | true     | none         | none        |
+| »» WSDM     | string | true     | none         | none        |
+| »» GNS      | string | true     | none         | none        |
+| »» VANRY    | string | true     | none         | none        |
+| »» CFX      | string | true     | none         | none        |
+| »» GRAIL    | string | true     | none         | none        |
+| »» BEFI     | string | true     | none         | none        |
+| »» VELO     | string | true     | none         | none        |
+| »» XPR      | string | true     | none         | none        |
+| »» DOVI     | string | true     | none         | none        |
+| »» ACE      | string | true     | none         | none        |
+| »» ACH      | string | true     | none         | none        |
+| »» ISP      | string | true     | none         | none        |
+| »» XCAD     | string | true     | none         | none        |
+| »» MINA     | string | true     | none         | none        |
+| »» TIA      | string | true     | none         | none        |
+| »» DRIFT    | string | true     | none         | none        |
+| »» ACQ      | string | true     | none         | none        |
+| »» ACS      | string | true     | none         | none        |
+| »» MIND     | string | true     | none         | none        |
+| »» STORE    | string | true     | none         | none        |
+| »» REN      | string | true     | none         | none        |
+| »» ELA      | string | true     | none         | none        |
+| »» DREAMS   | string | true     | none         | none        |
+| »» ADA      | string | true     | none         | none        |
+| »» ELF      | string | true     | none         | none        |
+| »» REQ      | string | true     | none         | none        |
+| »» STORJ    | string | true     | none         | none        |
+| »» LADYS    | string | true     | none         | none        |
+| »» PAXG     | string | true     | none         | none        |
+| »» REZ      | string | true     | none         | none        |
+| »» XRD      | string | true     | none         | none        |
+| »» CHO      | string | true     | none         | none        |
+| »» CHR      | string | true     | none         | none        |
+| »» ADS      | string | true     | none         | none        |
+| »» CHZ      | string | true     | none         | none        |
+| »» ADX      | string | true     | none         | none        |
+| »» XRP      | string | true     | none         | none        |
+| »» JASMY    | string | true     | none         | none        |
+| »» KAGI     | string | true     | none         | none        |
+| »» FIDA     | string | true     | none         | none        |
+| »» PBR      | string | true     | none         | none        |
+| »» AEG      | string | true     | none         | none        |
+| »» H2O      | string | true     | none         | none        |
+| »» CHMB     | string | true     | none         | none        |
+| »» SAND3L   | string | true     | none         | none        |
+| »» PBX      | string | true     | none         | none        |
+| »» SOLVE    | string | true     | none         | none        |
+| »» DECHAT   | string | true     | none         | none        |
+| »» GARI     | string | true     | none         | none        |
+| »» SHIB2L   | string | true     | none         | none        |
+| »» SHIB2S   | string | true     | none         | none        |
+| »» ENA      | string | true     | none         | none        |
+| »» VEMP     | string | true     | none         | none        |
+| »» ENJ      | string | true     | none         | none        |
+| »» AFG      | string | true     | none         | none        |
+| »» RATS     | string | true     | none         | none        |
+| »» GRT      | string | true     | none         | none        |
+| »» FORWARD  | string | true     | none         | none        |
+| »» TFUEL    | string | true     | none         | none        |
+| »» ENS      | string | true     | none         | none        |
+| »» KASDOWN  | string | true     | none         | none        |
+| »» XTM      | string | true     | none         | none        |
+| »» DEGEN    | string | true     | none         | none        |
+| »» TLM      | string | true     | none         | none        |
+| »» DYDXDOWN | string | true     | none         | none        |
+| »» CKB      | string | true     | none         | none        |
+| »» LUNC     | string | true     | none         | none        |
+| »» AURORA   | string | true     | none         | none        |
+| »» LUNA     | string | true     | none         | none        |
+| »» XTZ      | string | true     | none         | none        |
+| »» ELON     | string | true     | none         | none        |
+| »» DMTR     | string | true     | none         | none        |
+| »» EOS      | string | true     | none         | none        |
+| »» GST      | string | true     | none         | none        |
+| »» FORT     | string | true     | none         | none        |
+| »» FLAME    | string | true     | none         | none        |
+| »» PATEX    | string | true     | none         | none        |
+| »» DEEP     | string | true     | none         | none        |
+| »» ID3L     | string | true     | none         | none        |
+| »» GTC      | string | true     | none         | none        |
+| »» ID3S     | string | true     | none         | none        |
+| »» RIO      | string | true     | none         | none        |
+| »» CLH      | string | true     | none         | none        |
+| »» BURGER   | string | true     | none         | none        |
+| »» VRA      | string | true     | none         | none        |
+| »» SUNDOG   | string | true     | none         | none        |
+| »» GTT      | string | true     | none         | none        |
+| »» INJUP    | string | true     | none         | none        |
+| »» CPOOL    | string | true     | none         | none        |
+| »» EPX      | string | true     | none         | none        |
+| »» CLV      | string | true     | none         | none        |
+| »» FEAR     | string | true     | none         | none        |
+| »» MEME     | string | true     | none         | none        |
+| »» ROOBEE   | string | true     | none         | none        |
+| »» DEFI     | string | true     | none         | none        |
+| »» TOKEN    | string | true     | none         | none        |
+| »» GRAPE    | string | true     | none         | none        |
+| »» KASUP    | string | true     | none         | none        |
+| »» XWG      | string | true     | none         | none        |
+| »» SKEY     | string | true     | none         | none        |
+| »» SFUND    | string | true     | none         | none        |
+| »» EQX      | string | true     | none         | none        |
+| »» ORDIUP   | string | true     | none         | none        |
+| »» TON      | string | true     | none         | none        |
+| »» DEGO     | string | true     | none         | none        |
+| »» IZI      | string | true     | none         | none        |
+| »» ERG      | string | true     | none         | none        |
+| »» ERN      | string | true     | none         | none        |
+| »» VENOM    | string | true     | none         | none        |
+| »» VOXEL    | string | true     | none         | none        |
+| »» RLC      | string | true     | none         | none        |
+| »» PHA      | string | true     | none         | none        |
+| »» DYDXUP   | string | true     | none         | none        |
+| »» APE3S    | string | true     | none         | none        |
+| »» ORBS     | string | true     | none         | none        |
+| »» OPDOWN   | string | true     | none         | none        |
+| »» ESE      | string | true     | none         | none        |
+| »» APE3L    | string | true     | none         | none        |
+| »» HMND     | string | true     | none         | none        |
+| »» COQ      | string | true     | none         | none        |
+| »» AURY     | string | true     | none         | none        |
+| »» CULT     | string | true     | none         | none        |
+| »» AKT      | string | true     | none         | none        |
+| »» GLMR     | string | true     | none         | none        |
+| »» XYM      | string | true     | none         | none        |
+| »» ORAI     | string | true     | none         | none        |
+| »» XYO      | string | true     | none         | none        |
+| »» ETC      | string | true     | none         | none        |
+| »» LAI      | string | true     | none         | none        |
+| »» PIP      | string | true     | none         | none        |
+| »» ETH      | string | true     | none         | none        |
+| »» NEO      | string | true     | none         | none        |
+| »» RMV      | string | true     | none         | none        |
+| »» KLAY     | string | true     | none         | none        |
+| »» PIT      | string | true     | none         | none        |
+| »» TARA     | string | true     | none         | none        |
+| »» KALT     | string | true     | none         | none        |
+| »» PIX      | string | true     | none         | none        |
+| »» ETN      | string | true     | none         | none        |
+| »» CSIX     | string | true     | none         | none        |
+| »» TRADE    | string | true     | none         | none        |
+| »» MAVIA    | string | true     | none         | none        |
+| »» HIGH     | string | true     | none         | none        |
+| »» TRB      | string | true     | none         | none        |
+| »» ORDI     | string | true     | none         | none        |
+| »» TRVL     | string | true     | none         | none        |
+| »» AMB      | string | true     | none         | none        |
+| »» TRU      | string | true     | none         | none        |
+| »» LOGX     | string | true     | none         | none        |
+| »» FINC     | string | true     | none         | none        |
+| »» INFRA    | string | true     | none         | none        |
+| »» NATIX    | string | true     | none         | none        |
+| »» NFP      | string | true     | none         | none        |
+| »» TRY      | string | true     | none         | none        |
+| »» TRX      | string | true     | none         | none        |
+| »» LBP      | string | true     | none         | none        |
+| »» LBR      | string | true     | none         | none        |
+| »» EUL      | string | true     | none         | none        |
+| »» NFT      | string | true     | none         | none        |
+| »» SEIUP    | string | true     | none         | none        |
+| »» PUFFER   | string | true     | none         | none        |
+| »» EUR      | string | true     | none         | none        |
+| »» ORCA     | string | true     | none         | none        |
+| »» NEAR3L   | string | true     | none         | none        |
+| »» AMP      | string | true     | none         | none        |
+| »» XDEFI    | string | true     | none         | none        |
+| »» HIFI     | string | true     | none         | none        |
+| »» TRUF     | string | true     | none         | none        |
+| »» AITECH   | string | true     | none         | none        |
+| »» AMU      | string | true     | none         | none        |
+| »» USTC     | string | true     | none         | none        |
+| »» KNGL     | string | true     | none         | none        |
+| »» FOXY     | string | true     | none         | none        |
+| »» NGC      | string | true     | none         | none        |
+| »» TENET    | string | true     | none         | none        |
+| »» NEAR3S   | string | true     | none         | none        |
+| »» MAHA     | string | true     | none         | none        |
+| »» NGL      | string | true     | none         | none        |
+| »» TST      | string | true     | none         | none        |
+| »» HIPPO    | string | true     | none         | none        |
+| »» AXS3S    | string | true     | none         | none        |
+| »» CRO      | string | true     | none         | none        |
+| »» ZPAY     | string | true     | none         | none        |
+| »» MNDE     | string | true     | none         | none        |
+| »» CRV      | string | true     | none         | none        |
+| »» SWASH    | string | true     | none         | none        |
+| »» AXS3L    | string | true     | none         | none        |
+| »» VERSE    | string | true     | none         | none        |
+| »» RPK      | string | true     | none         | none        |
+| »» RPL      | string | true     | none         | none        |
+| »» AZERO    | string | true     | none         | none        |
+| »» SOUL     | string | true     | none         | none        |
+| »» VXV      | string | true     | none         | none        |
+| »» LDO      | string | true     | none         | none        |
+| »» MAGIC    | string | true     | none         | none        |
+| »» ALICE    | string | true     | none         | none        |
+| »» SEAM     | string | true     | none         | none        |
+| »» PLU      | string | true     | none         | none        |
+| »» AOG      | string | true     | none         | none        |
+| »» SMOLE    | string | true     | none         | none        |
+| »» EWT      | string | true     | none         | none        |
+| »» TSUGT    | string | true     | none         | none        |
+| »» PMG      | string | true     | none         | none        |
+| »» OPAI     | string | true     | none         | none        |
+| »» LOCUS    | string | true     | none         | none        |
+| »» CTA      | string | true     | none         | none        |
+| »» NIM      | string | true     | none         | none        |
+| »» CTC      | string | true     | none         | none        |
+| »» APE      | string | true     | none         | none        |
+| »» MERL     | string | true     | none         | none        |
+| »» JAM      | string | true     | none         | none        |
+| »» CTI      | string | true     | none         | none        |
+| »» APP      | string | true     | none         | none        |
+| »» APT      | string | true     | none         | none        |
+| »» WLDUP    | string | true     | none         | none        |
+| »» ZEND     | string | true     | none         | none        |
+| »» FIRE     | string | true     | none         | none        |
+| »» DENT     | string | true     | none         | none        |
+| »» PYTH     | string | true     | none         | none        |
+| »» LFT      | string | true     | none         | none        |
+| »» DPET     | string | true     | none         | none        |
+| »» ORDIDOWN | string | true     | none         | none        |
+| »» KPOL     | string | true     | none         | none        |
+| »» ETHUP    | string | true     | none         | none        |
+| »» BAND     | string | true     | none         | none        |
+| »» POL      | string | true     | none         | none        |
+| »» ASTR     | string | true     | none         | none        |
+| »» NKN      | string | true     | none         | none        |
+| »» RSR      | string | true     | none         | none        |
+| »» DVPN     | string | true     | none         | none        |
+| »» TWT      | string | true     | none         | none        |
+| »» ARB      | string | true     | none         | none        |
+| »» CVC      | string | true     | none         | none        |
+| »» ARC      | string | true     | none         | none        |
+| »» XETA     | string | true     | none         | none        |
+| »» MTRG     | string | true     | none         | none        |
+| »» LOKA     | string | true     | none         | none        |
+| »» LPOOL    | string | true     | none         | none        |
+| »» TURBOS   | string | true     | none         | none        |
+| »» CVX      | string | true     | none         | none        |
+| »» ARX      | string | true     | none         | none        |
+| »» MPLX     | string | true     | none         | none        |
+| »» SUSHI    | string | true     | none         | none        |
+| »» NLK      | string | true     | none         | none        |
+| »» PEPE2    | string | true     | none         | none        |
+| »» WBTC     | string | true     | none         | none        |
+| »» SUI3L    | string | true     | none         | none        |
+| »» CWS      | string | true     | none         | none        |
+| »» SUI3S    | string | true     | none         | none        |
+| »» INSP     | string | true     | none         | none        |
+| »» MANA     | string | true     | none         | none        |
+| »» VRTX     | string | true     | none         | none        |
+| »» CSPR     | string | true     | none         | none        |
+| »» ATA      | string | true     | none         | none        |
+| »» OPEN     | string | true     | none         | none        |
+| »» HAI      | string | true     | none         | none        |
+| »» NMR      | string | true     | none         | none        |
+| »» ATH      | string | true     | none         | none        |
+| »» LIT      | string | true     | none         | none        |
+| »» TLOS     | string | true     | none         | none        |
+| »» TNSR     | string | true     | none         | none        |
+| »» CXT      | string | true     | none         | none        |
+| »» POLYX    | string | true     | none         | none        |
+| »» ZERO     | string | true     | none         | none        |
+| »» ROUTE    | string | true     | none         | none        |
+| »» LOOM     | string | true     | none         | none        |
+| »» PRE      | string | true     | none         | none        |
+| »» VRAUP    | string | true     | none         | none        |
+| »» HBB      | string | true     | none         | none        |
+| »» RVN      | string | true     | none         | none        |
+| »» PRQ      | string | true     | none         | none        |
+| »» ONDO     | string | true     | none         | none        |
+| »» PEPEDOWN | string | true     | none         | none        |
+| »» WOOP     | string | true     | none         | none        |
+| »» LUNCUP   | string | true     | none         | none        |
+| »» KAVA     | string | true     | none         | none        |
+| »» LKI      | string | true     | none         | none        |
+| »» AVA      | string | true     | none         | none        |
+| »» NOM      | string | true     | none         | none        |
+| »» MAPO     | string | true     | none         | none        |
+| »» PEPEUP   | string | true     | none         | none        |
+| »» STRAX    | string | true     | none         | none        |
+| »» NOT      | string | true     | none         | none        |
+| »» ZERC     | string | true     | none         | none        |
+| »» BCUT     | string | true     | none         | none        |
+| »» MASA     | string | true     | none         | none        |
+| »» WAN      | string | true     | none         | none        |
+| »» WAT      | string | true     | none         | none        |
+| »» WAX      | string | true     | none         | none        |
+| »» MASK     | string | true     | none         | none        |
+| »» EOS3L    | string | true     | none         | none        |
+| »» IDEA     | string | true     | none         | none        |
+| »» EOS3S    | string | true     | none         | none        |
+| »» YFI      | string | true     | none         | none        |
+| »» MOODENG  | string | true     | none         | none        |
+| »» XCUR     | string | true     | none         | none        |
+| »» HYDRA    | string | true     | none         | none        |
+| »» POPCAT   | string | true     | none         | none        |
+| »» LQTY     | string | true     | none         | none        |
+| »» PIXEL    | string | true     | none         | none        |
+| »» LMR      | string | true     | none         | none        |
+| »» ZETA     | string | true     | none         | none        |
+| »» YGG      | string | true     | none         | none        |
+| »» AXS      | string | true     | none         | none        |
+| »» BCHSV    | string | true     | none         | none        |
+| »» NRN      | string | true     | none         | none        |
+| »» FTON     | string | true     | none         | none        |
+| »» COMP     | string | true     | none         | none        |
+| »» XPRT     | string | true     | none         | none        |
+| »» HFT      | string | true     | none         | none        |
+| »» UXLINK   | string | true     | none         | none        |
+| »» STAMP    | string | true     | none         | none        |
+| »» RUNE     | string | true     | none         | none        |
+| »» ZEUS     | string | true     | none         | none        |
+| »» LTC3L    | string | true     | none         | none        |
+| »» DAPP     | string | true     | none         | none        |
+| »» FORTH    | string | true     | none         | none        |
+| »» ALPINE   | string | true     | none         | none        |
+| »» SENSO    | string | true     | none         | none        |
+| »» LTC3S    | string | true     | none         | none        |
+| »» DEXE     | string | true     | none         | none        |
+| »» GOAL     | string | true     | none         | none        |
+| »» AVAX     | string | true     | none         | none        |
+| »» LISTA    | string | true     | none         | none        |
+| »» AMPL     | string | true     | none         | none        |
+| »» WORK     | string | true     | none         | none        |
+| »» BRWL     | string | true     | none         | none        |
+| »» BANANA   | string | true     | none         | none        |
+| »» PUSH     | string | true     | none         | none        |
+| »» WEN      | string | true     | none         | none        |
+| »» NEIRO    | string | true     | none         | none        |
+| »» BTCUP    | string | true     | none         | none        |
+| »» SOL3S    | string | true     | none         | none        |
+| »» BRAWL    | string | true     | none         | none        |
+| »» LAY3R    | string | true     | none         | none        |
+| »» LPT      | string | true     | none         | none        |
+| »» GODS     | string | true     | none         | none        |
+| »» SAND3S   | string | true     | none         | none        |
+| »» RDNT     | string | true     | none         | none        |
+| »» SOL3L    | string | true     | none         | none        |
+| »» NIBI     | string | true     | none         | none        |
+| »» NUM      | string | true     | none         | none        |
+| »» PYR      | string | true     | none         | none        |
+| »» DAG      | string | true     | none         | none        |
+| »» DAI      | string | true     | none         | none        |
+| »» HIP      | string | true     | none         | none        |
+| »» DAO      | string | true     | none         | none        |
+| »» AVAIL    | string | true     | none         | none        |
+| »» DAR      | string | true     | none         | none        |
+| »» FET      | string | true     | none         | none        |
+| »» FCON     | string | true     | none         | none        |
+| »» XAVA     | string | true     | none         | none        |
+| »» LRC      | string | true     | none         | none        |
+| »» UNI3S    | string | true     | none         | none        |
+| »» POKT     | string | true     | none         | none        |
+| »» DASH     | string | true     | none         | none        |
+| »» BAKEDOWN | string | true     | none         | none        |
+| »» POLC     | string | true     | none         | none        |
+| »» CIRUS    | string | true     | none         | none        |
+| »» UNI3L    | string | true     | none         | none        |
+| »» NWC      | string | true     | none         | none        |
+| »» POLK     | string | true     | none         | none        |
+| »» LSD      | string | true     | none         | none        |
+| »» MARS4    | string | true     | none         | none        |
+| »» LSK      | string | true     | none         | none        |
+| »» BLOCK    | string | true     | none         | none        |
+| »» ANALOS   | string | true     | none         | none        |
+| »» SAFE     | string | true     | none         | none        |
+| »» DCK      | string | true     | none         | none        |
+| »» LSS      | string | true     | none         | none        |
+| »» DCR      | string | true     | none         | none        |
+| »» LIKE     | string | true     | none         | none        |
+| »» DATA     | string | true     | none         | none        |
+| »» WIF      | string | true     | none         | none        |
+| »» BLOK     | string | true     | none         | none        |
+| »» LTC      | string | true     | none         | none        |
+| »» METIS    | string | true     | none         | none        |
+| »» WIN      | string | true     | none         | none        |
+| »» HLG      | string | true     | none         | none        |
+| »» LTO      | string | true     | none         | none        |
+| »» DYDX     | string | true     | none         | none        |
+| »» ARB3S    | string | true     | none         | none        |
+| »» MUBI     | string | true     | none         | none        |
+| »» ARB3L    | string | true     | none         | none        |
+| »» RBTC1    | string | true     | none         | none        |
+| »» POND     | string | true     | none         | none        |
+| »» LINA     | string | true     | none         | none        |
+| »» MYRIA    | string | true     | none         | none        |
+| »» LINK     | string | true     | none         | none        |
+| »» QTUM     | string | true     | none         | none        |
+| »» TUNE     | string | true     | none         | none        |
+| »» UFO      | string | true     | none         | none        |
+| »» CYBER    | string | true     | none         | none        |
+| »» WILD     | string | true     | none         | none        |
+| »» POLS     | string | true     | none         | none        |
+| »» NYM      | string | true     | none         | none        |
+| »» FIL      | string | true     | none         | none        |
+| »» BAL      | string | true     | none         | none        |
+| »» SCA      | string | true     | none         | none        |
+| »» STND     | string | true     | none         | none        |
+| »» WMTX     | string | true     | none         | none        |
+| »» SCLP     | string | true     | none         | none        |
+| »» MANEKI   | string | true     | none         | none        |
+| »» BAT      | string | true     | none         | none        |
+| »» AKRO     | string | true     | none         | none        |
+| »» FTM3L    | string | true     | none         | none        |
+| »» BAX      | string | true     | none         | none        |
+| »» FTM3S    | string | true     | none         | none        |
+| »» COTI     | string | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -7299,23 +7162,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/market/stats?symbol=type,string',
-{
-  method: 'GET',
+fetch("/api/v1/market/stats?symbol=type,string", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -7336,13 +7197,14 @@ print(r.json())
 
 `GET /api/v1/market/stats`
 
-Request via this endpoint to get the statistics of the specified ticker in the last 24 hours.
+Request via this endpoint to get the statistics of the specified ticker in the
+last 24 hours.
 
 <h3 id="get-24hr-stats-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|true|symbol|
+| Name   | In    | Type   | Required | Description |
+| ------ | ----- | ------ | -------- | ----------- |
+| symbol | query | string | true     | symbol      |
 
 > Example responses
 
@@ -7444,43 +7306,40 @@ Request via this endpoint to get the statistics of the specified ticker in the l
       ]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-24hr-stats-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-24hr-stats-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» time|integer(int64)|true|none|timestamp|
-|»» symbol|string|true|none|Symbol|
-|»» buy|string|true|none|Best bid price|
-|»» sell|string|true|none|Best ask price|
-|»» changeRate|string|true|none|24h change rate|
-|»» changePrice|string|true|none|24h change price|
-|»» high|string|true|none|Highest price in 24h|
-|»» low|string|true|none|Lowest price in 24h|
-|»» vol|string|true|none|24h volume, executed based on base currency|
-|»» volValue|string|true|none|24h traded amount|
-|»» last|string|true|none|Last traded price|
-|»» averagePrice|string|true|none|Average trading price in the last 24 hours|
-|»» takerFeeRate|string|true|none|Basic Taker Fee|
-|»» makerFeeRate|string|true|none|Basic Maker Fee|
-|»» takerCoefficient|string|true|none|The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
-|»» makerCoefficient|string|true|none|The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee|
+| Name                | Type           | Required | Restrictions | Description                                                                                                                                                                      |
+| ------------------- | -------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » code              | string         | true     | none         | none                                                                                                                                                                             |
+| » data              | object         | true     | none         | none                                                                                                                                                                             |
+| »» time             | integer(int64) | true     | none         | timestamp                                                                                                                                                                        |
+| »» symbol           | string         | true     | none         | Symbol                                                                                                                                                                           |
+| »» buy              | string         | true     | none         | Best bid price                                                                                                                                                                   |
+| »» sell             | string         | true     | none         | Best ask price                                                                                                                                                                   |
+| »» changeRate       | string         | true     | none         | 24h change rate                                                                                                                                                                  |
+| »» changePrice      | string         | true     | none         | 24h change price                                                                                                                                                                 |
+| »» high             | string         | true     | none         | Highest price in 24h                                                                                                                                                             |
+| »» low              | string         | true     | none         | Lowest price in 24h                                                                                                                                                              |
+| »» vol              | string         | true     | none         | 24h volume, executed based on base currency                                                                                                                                      |
+| »» volValue         | string         | true     | none         | 24h traded amount                                                                                                                                                                |
+| »» last             | string         | true     | none         | Last traded price                                                                                                                                                                |
+| »» averagePrice     | string         | true     | none         | Average trading price in the last 24 hours                                                                                                                                       |
+| »» takerFeeRate     | string         | true     | none         | Basic Taker Fee                                                                                                                                                                  |
+| »» makerFeeRate     | string         | true     | none         | Basic Maker Fee                                                                                                                                                                  |
+| »» takerCoefficient | string         | true     | none         | The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee |
+| »» makerCoefficient | string         | true     | none         | The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee |
 
 <aside class="success">
 This operation does not require authentication
@@ -7493,23 +7352,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/markets',
-{
-  method: 'GET',
+fetch("/api/v1/markets", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -7526,7 +7383,8 @@ print(r.json())
 
 `GET /api/v1/markets`
 
-Request via this endpoint the transaction currency for the entire trading market.
+Request via this endpoint the transaction currency for the entire trading
+market.
 
 > Example responses
 
@@ -7546,27 +7404,24 @@ Request via this endpoint the transaction currency for the entire trading market
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-market-list-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-market-list-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[string]|true|none|none|
+| Name   | Type     | Required | Restrictions | Description |
+| ------ | -------- | -------- | ------------ | ----------- |
+| » code | string   | true     | none         | none        |
+| » data | [string] | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -7579,23 +7434,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/my-ip',
-{
-  method: 'GET',
+fetch("/api/v1/my-ip", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -7629,27 +7482,24 @@ Get the server time.
       "type": "string"
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-client-ip-address-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-client-ip-address-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|string|true|none|none|
+| Name   | Type   | Required | Restrictions | Description |
+| ------ | ------ | -------- | ------------ | ----------- |
+| » code | string | true     | none         | none        |
+| » data | string | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -7662,23 +7512,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/timestamp',
-{
-  method: 'GET',
+fetch("/api/v1/timestamp", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -7714,27 +7562,24 @@ Get the server time.
       "description": "ServerTime (milliseconds)"
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-server-time-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-server-time-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|integer(int64)|true|none|ServerTime (milliseconds)|
+| Name   | Type           | Required | Restrictions | Description               |
+| ------ | -------------- | -------- | ------------ | ------------------------- |
+| » code | string         | true     | none         | none                      |
+| » data | integer(int64) | true     | none         | ServerTime (milliseconds) |
 
 <aside class="success">
 This operation does not require authentication
@@ -7747,23 +7592,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/status',
-{
-  method: 'GET',
+fetch("/api/v1/status", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -7799,11 +7642,7 @@ Get the service status.
         "status": {
           "type": "string",
           "description": "Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order",
-          "enum": [
-            "open",
-            "close",
-            "cancelonly"
-          ],
+          "enum": ["open", "close", "cancelonly"],
           "x-api-enum": [
             {
               "value": "open",
@@ -7827,43 +7666,37 @@ Get the service status.
           "description": "Remark for operation"
         }
       },
-      "required": [
-        "status",
-        "msg"
-      ]
+      "required": ["status", "msg"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-service-status-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-service-status-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» status|string|true|none|Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order|
-|»» msg|string|true|none|Remark for operation|
+| Name      | Type   | Required | Restrictions | Description                                                                                                                             |
+| --------- | ------ | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| » code    | string | true     | none         | none                                                                                                                                    |
+| » data    | object | true     | none         | none                                                                                                                                    |
+| »» status | string | true     | none         | Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order |
+| »» msg    | string | true     | none         | Remark for operation                                                                                                                    |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|status|open|
-|status|close|
-|status|cancelonly|
+| Property | Value      |
+| -------- | ---------- |
+| status   | open       |
+| status   | close      |
+| status   | cancelonly |
 
 <aside class="success">
 This operation does not require authentication
@@ -7876,23 +7709,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/bullet-public',
-{
-  method: 'POST',
+fetch("/api/v1/bullet-public", {
+  method: "POST",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -7909,7 +7740,9 @@ print(r.json())
 
 `POST /api/v1/bullet-public`
 
-This interface can obtain the token required for Websocket to establish a Spot/Margin connection. If you need use public channels (e.g. all public market data), please make request as follows to obtain the server list and public token
+This interface can obtain the token required for Websocket to establish a
+Spot/Margin connection. If you need use public channels (e.g. all public market
+data), please make request as follows to obtain the server list and public token
 
 > Example responses
 
@@ -7945,9 +7778,7 @@ This interface can obtain the token required for Websocket to establish a Spot/M
               "protocol": {
                 "type": "string",
                 "description": "Network Protocol",
-                "enum": [
-                  "websocket"
-                ],
+                "enum": ["websocket"],
                 "x-api-enum": [
                   {
                     "value": "websocket",
@@ -7975,46 +7806,40 @@ This interface can obtain the token required for Websocket to establish a Spot/M
           }
         }
       },
-      "required": [
-        "token",
-        "instanceServers"
-      ]
+      "required": ["token", "instanceServers"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-public-token---spot/margin-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-public-token---spot/margin-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» token|string|true|none|The token required to establish a Websocket connection|
-|»» instanceServers|[object]|true|none|none|
-|»»» endpoint|string|true|none|Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change.|
-|»»» encrypt|boolean|true|none|Whether to encrypt. Currently only supports wss, not ws|
-|»»» protocol|string|true|none|Network Protocol|
-|»»» pingInterval|integer|true|none|Recommended ping interval (milliseconds)|
-|»»» pingTimeout|integer|true|none|Heartbeat timeout (milliseconds)|
+| Name               | Type     | Required | Restrictions | Description                                                                          |
+| ------------------ | -------- | -------- | ------------ | ------------------------------------------------------------------------------------ |
+| » code             | string   | true     | none         | none                                                                                 |
+| » data             | object   | true     | none         | none                                                                                 |
+| »» token           | string   | true     | none         | The token required to establish a Websocket connection                               |
+| »» instanceServers | [object] | true     | none         | none                                                                                 |
+| »»» endpoint       | string   | true     | none         | Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change. |
+| »»» encrypt        | boolean  | true     | none         | Whether to encrypt. Currently only supports wss, not ws                              |
+| »»» protocol       | string   | true     | none         | Network Protocol                                                                     |
+| »»» pingInterval   | integer  | true     | none         | Recommended ping interval (milliseconds)                                             |
+| »»» pingTimeout    | integer  | true     | none         | Heartbeat timeout (milliseconds)                                                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|protocol|websocket|
+| Property | Value     |
+| -------- | --------- |
+| protocol | websocket |
 
 <aside class="success">
 This operation does not require authentication
@@ -8027,23 +7852,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v1/bullet-private',
-{
-  method: 'POST',
+fetch("/api/v1/bullet-private", {
+  method: "POST",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -8060,7 +7883,10 @@ print(r.json())
 
 `POST /api/v1/bullet-private`
 
-This interface can obtain the token required for Websocket to establish a Spot/Margin private connection. If you need use private channels (e.g. account balance notice), please make request as follows to obtain the server list and private token
+This interface can obtain the token required for Websocket to establish a
+Spot/Margin private connection. If you need use private channels (e.g. account
+balance notice), please make request as follows to obtain the server list and
+private token
 
 > Example responses
 
@@ -8096,9 +7922,7 @@ This interface can obtain the token required for Websocket to establish a Spot/M
               "protocol": {
                 "type": "string",
                 "description": "Network Protocol",
-                "enum": [
-                  "websocket"
-                ],
+                "enum": ["websocket"],
                 "x-api-enum": [
                   {
                     "value": "websocket",
@@ -8126,50 +7950,43 @@ This interface can obtain the token required for Websocket to establish a Spot/M
           }
         }
       },
-      "required": [
-        "token",
-        "instanceServers"
-      ]
+      "required": ["token", "instanceServers"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-private-token---spot/margin-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-private-token---spot/margin-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» token|string|true|none|The token required to establish a Websocket connection|
-|»» instanceServers|[object]|true|none|none|
-|»»» endpoint|string|true|none|Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change.|
-|»»» encrypt|boolean|true|none|Whether to encrypt. Currently only supports wss, not ws|
-|»»» protocol|string|true|none|Network Protocol|
-|»»» pingInterval|integer|true|none|Recommended ping interval (milliseconds)|
-|»»» pingTimeout|integer|true|none|Heartbeat timeout (milliseconds)|
+| Name               | Type     | Required | Restrictions | Description                                                                          |
+| ------------------ | -------- | -------- | ------------ | ------------------------------------------------------------------------------------ |
+| » code             | string   | true     | none         | none                                                                                 |
+| » data             | object   | true     | none         | none                                                                                 |
+| »» token           | string   | true     | none         | The token required to establish a Websocket connection                               |
+| »» instanceServers | [object] | true     | none         | none                                                                                 |
+| »»» endpoint       | string   | true     | none         | Websocket domain URL. It is recommended to use a dynamic URL, as the URL may change. |
+| »»» encrypt        | boolean  | true     | none         | Whether to encrypt. Currently only supports wss, not ws                              |
+| »»» protocol       | string   | true     | none         | Network Protocol                                                                     |
+| »»» pingInterval   | integer  | true     | none         | Recommended ping interval (milliseconds)                                             |
+| »»» pingTimeout    | integer  | true     | none         | Heartbeat timeout (milliseconds)                                                     |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|protocol|websocket|
+| Property | Value     |
+| -------- | --------- |
+| protocol | websocket |
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
 # Schemas
-

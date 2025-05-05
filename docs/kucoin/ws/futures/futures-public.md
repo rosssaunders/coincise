@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="futures">futures v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 futures_public
 
@@ -26,23 +26,21 @@ futures_public
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/tickerV2/contractMarket/tickerV2:_symbol_',
-{
-  method: 'TRACE',
+fetch("/tickerV2/contractMarket/tickerV2:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -59,7 +57,10 @@ print(r.json())
 
 `TRACE /tickerV2/contractMarket/tickerV2:_symbol_`
 
-Subscribe to this topic to get real-time pushes of BBO changes. After subscription, when there are changes in the order book (not necessarily ask1/bid1 changes), the system will push the real-time ticker symbol information to you.
+Subscribe to this topic to get real-time pushes of BBO changes. After
+subscription, when there are changes in the order book (not necessarily
+ask1/bid1 changes), the system will push the real-time ticker symbol information
+to you.
 
 > Example responses
 
@@ -119,21 +120,15 @@ Subscribe to this topic to get real-time pushes of BBO changes. After subscripti
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="get-ticker-v2-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_tickerv2](#schemafutures_futures_public_tickerv2)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_tickerv2](#schemafutures_futures_public_tickerv2) |
 
 <aside class="success">
 This operation does not require authentication
@@ -144,23 +139,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/tickerV1/contractMarket/ticker:_symbol_',
-{
-  method: 'TRACE',
+fetch("/tickerV1/contractMarket/ticker:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -177,7 +170,9 @@ print(r.json())
 
 `TRACE /tickerV1/contractMarket/ticker:_symbol_`
 
-Subscribe to this topic to get real-time pushes on BBO changes. It is not recommended to use this topic any more. For real-time ticker information, please subscribe /contractMarket/tickerV2:{symbol}.
+Subscribe to this topic to get real-time pushes on BBO changes. It is not
+recommended to use this topic any more. For real-time ticker information, please
+subscribe /contractMarket/tickerV2:{symbol}.
 
 > Example responses
 
@@ -253,21 +248,15 @@ Subscribe to this topic to get real-time pushes on BBO changes. It is not recomm
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="get-ticker(not-recommended)-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_tickerV1](#schemafutures_futures_public_tickerv1)|
+| Status | Meaning                                                 | Description | Schema                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_tickerV1](#schemafutures_futures_public_tickerv1) |
 
 <aside class="success">
 This operation does not require authentication
@@ -278,23 +267,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel5/contractMarket/level2Depth5:_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel5/contractMarket/level2Depth5:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -311,7 +298,8 @@ print(r.json())
 
 `TRACE /orderbookLevel5/contractMarket/level2Depth5:_symbol_`
 
-The system will return the 5 best ask/bid orders data. If there is no change in the market, data will not be pushed
+The system will return the 5 best ask/bid orders data. If there is no change in
+the market, data will not be pushed
 
 > Example responses
 
@@ -371,30 +359,18 @@ The system will return the 5 best ask/bid orders data. If there is no change in 
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="orderbook---level5-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_orderbookLevel5](#schemafutures_futures_public_orderbooklevel5)|
+| Status | Meaning                                                 | Description | Schema                                                                                  |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_orderbookLevel5](#schemafutures_futures_public_orderbooklevel5) |
 
 <aside class="success">
 This operation does not require authentication
@@ -405,23 +381,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookLevel50/contractMarket/level2Depth50:_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookLevel50/contractMarket/level2Depth50:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -498,30 +472,18 @@ The depth50 market data.
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="orderbook---level50-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_orderbookLevel50](#schemafutures_futures_public_orderbooklevel50)|
+| Status | Meaning                                                 | Description | Schema                                                                                    |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_orderbookLevel50](#schemafutures_futures_public_orderbooklevel50) |
 
 <aside class="success">
 This operation does not require authentication
@@ -532,23 +494,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/orderbookIncrement/contractMarket/level2:_symbol_',
-{
-  method: 'TRACE',
+fetch("/orderbookIncrement/contractMarket/level2:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -565,7 +525,8 @@ print(r.json())
 
 `TRACE /orderbookIncrement/contractMarket/level2:_symbol_`
 
-The system will return the increment change orderbook data (all depth). If there is no change in the market, data will not be pushed.
+The system will return the increment change orderbook data (all depth). If there
+is no change in the market, data will not be pushed.
 
 > Example responses
 
@@ -603,28 +564,18 @@ The system will return the increment change orderbook data (all depth). If there
           "format": "int64"
         }
       },
-      "required": [
-        "sequence",
-        "change",
-        "timestamp"
-      ]
+      "required": ["sequence", "change", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="orderbook---increment-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_orderbookIncrement](#schemafutures_futures_public_orderbookincrement)|
+| Status | Meaning                                                 | Description | Schema                                                                                        |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_orderbookIncrement](#schemafutures_futures_public_orderbookincrement) |
 
 <aside class="success">
 This operation does not require authentication
@@ -635,23 +586,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/klines/contractMarket/limitCandle:_symbol___type_',
-{
-  method: 'TRACE',
+fetch("/klines/contractMarket/limitCandle:_symbol___type_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -704,30 +653,21 @@ Subscribe to this topic to get K-Line data.
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "candles",
-        "time"
-      ]
+      "required": ["symbol", "candles", "time"]
     },
     "subject": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "data",
-    "subject"
-  ]
+  "required": ["topic", "type", "data", "subject"]
 }
 ```
 
 <h3 id="klines-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_klines](#schemafutures_futures_public_klines)|
+| Status | Meaning                                                 | Description | Schema                                                                |
+| ------ | ------------------------------------------------------- | ----------- | --------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_klines](#schemafutures_futures_public_klines) |
 
 <aside class="success">
 This operation does not require authentication
@@ -738,23 +678,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/execution/contractMarket/execution:_symbol_',
-{
-  method: 'TRACE',
+fetch("/execution/contractMarket/execution:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -771,7 +709,8 @@ print(r.json())
 
 `TRACE /execution/contractMarket/execution:_symbol_`
 
-For each order executed, the system will send you the match messages in the format as following.
+For each order executed, the system will send you the match messages in the
+format as following.
 
 > Example responses
 
@@ -839,21 +778,15 @@ For each order executed, the system will send you the match messages in the form
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
 ```
 
 <h3 id="match-execution-data.-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_matchExecution](#schemafutures_futures_public_matchexecution)|
+| Status | Meaning                                                 | Description | Schema                                                                                |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_matchExecution](#schemafutures_futures_public_matchexecution) |
 
 <aside class="success">
 This operation does not require authentication
@@ -864,23 +797,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/instrument/contract/instrument:_symbol_',
-{
-  method: 'TRACE',
+fetch("/instrument/contract/instrument:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -912,10 +843,7 @@ Subscribe this topic to get the mark Price, index Price or funding fee Rate
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "mark.index.price",
-        "funding.rate"
-      ],
+      "enum": ["mark.index.price", "funding.rate"],
       "x-api-enum": [
         {
           "value": "mark.index.price",
@@ -950,29 +878,21 @@ Subscribe this topic to get the mark Price, index Price or funding fee Rate
           "type": "number"
         }
       },
-      "required": [
-        "granularity",
-        "timestamp"
-      ]
+      "required": ["granularity", "timestamp"]
     },
     "type": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "subject",
-    "data",
-    "type"
-  ]
+  "required": ["topic", "subject", "data", "type"]
 }
 ```
 
 <h3 id="instrument-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_instrument](#schemafutures_futures_public_instrument)|
+| Status | Meaning                                                 | Description | Schema                                                                        |
+| ------ | ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_instrument](#schemafutures_futures_public_instrument) |
 
 <aside class="success">
 This operation does not require authentication
@@ -983,23 +903,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/announcement/contract/announcement:_symbol_',
-{
-  method: 'TRACE',
+fetch("/announcement/contract/announcement:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1056,28 +974,18 @@ Subscribe this topic to get Funding Fee Settlement.
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "fundingTime",
-        "fundingRate",
-        "timestamp"
-      ]
+      "required": ["symbol", "fundingTime", "fundingRate", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
 ```
 
 <h3 id="announcement-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_fundingFeeSettlement](#schemafutures_futures_public_fundingfeesettlement)|
+| Status | Meaning                                                 | Description | Schema                                                                                            |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_fundingFeeSettlement](#schemafutures_futures_public_fundingfeesettlement) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1088,23 +996,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/symbolSnapshot/contractMarket/snapshot:_symbol_',
-{
-  method: 'TRACE',
+fetch("/symbolSnapshot/contractMarket/snapshot:_symbol_", {
+  method: "TRACE",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1192,21 +1098,15 @@ Get symbol snapshot.
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "id",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "id", "data"]
 }
 ```
 
 <h3 id="symbol-snapshot-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|[Futures_futures_public_symbolSnapshot](#schemafutures_futures_public_symbolsnapshot)|
+| Status | Meaning                                                 | Description | Schema                                                                                |
+| ------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | [Futures_futures_public_symbolSnapshot](#schemafutures_futures_public_symbolsnapshot) |
 
 <aside class="success">
 This operation does not require authentication
@@ -1275,33 +1175,26 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» bestBidSize|integer|true|none|none|
-|» bestBidPrice|string|true|none|none|
-|» bestAskPrice|string|true|none|none|
-|» bestAskSize|integer|true|none|none|
-|» ts|integer(int64)|true|none|none|
+| Name           | Type           | Required | Restrictions | Description |
+| -------------- | -------------- | -------- | ------------ | ----------- |
+| topic          | string         | true     | none         | none        |
+| type           | string         | true     | none         | none        |
+| subject        | string         | true     | none         | none        |
+| sn             | integer        | true     | none         | none        |
+| data           | object         | true     | none         | none        |
+| » symbol       | string         | true     | none         | none        |
+| » sequence     | integer(int64) | true     | none         | none        |
+| » bestBidSize  | integer        | true     | none         | none        |
+| » bestBidPrice | string         | true     | none         | none        |
+| » bestAskPrice | string         | true     | none         | none        |
+| » bestAskSize  | integer        | true     | none         | none        |
+| » ts           | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_tickerV1">Futures_futures_public_tickerV1</h2>
 <!-- backwards compatibility -->
@@ -1380,37 +1273,30 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» side|string|true|none|none|
-|» size|integer|true|none|none|
-|» price|string|true|none|none|
-|» bestBidSize|integer|true|none|none|
-|» bestBidPrice|string|true|none|none|
-|» bestAskPrice|string|true|none|none|
-|» tradeId|string|true|none|none|
-|» bestAskSize|integer|true|none|none|
-|» ts|integer(int64)|true|none|none|
+| Name           | Type           | Required | Restrictions | Description |
+| -------------- | -------------- | -------- | ------------ | ----------- |
+| topic          | string         | true     | none         | none        |
+| type           | string         | true     | none         | none        |
+| subject        | string         | true     | none         | none        |
+| sn             | integer        | true     | none         | none        |
+| data           | object         | true     | none         | none        |
+| » symbol       | string         | true     | none         | none        |
+| » sequence     | integer(int64) | true     | none         | none        |
+| » side         | string         | true     | none         | none        |
+| » size         | integer        | true     | none         | none        |
+| » price        | string         | true     | none         | none        |
+| » bestBidSize  | integer        | true     | none         | none        |
+| » bestBidPrice | string         | true     | none         | none        |
+| » bestAskPrice | string         | true     | none         | none        |
+| » tradeId      | string         | true     | none         | none        |
+| » bestAskSize  | integer        | true     | none         | none        |
+| » ts           | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_orderbookLevel5">Futures_futures_public_orderbookLevel5</h2>
 <!-- backwards compatibility -->
@@ -1473,40 +1359,27 @@ This operation does not require authentication
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» bids|[array]|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
-|» ts|integer(int64)|true|none|none|
-|» asks|[array]|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| sn          | integer        | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » bids      | [array]        | true     | none         | none        |
+| » sequence  | integer(int64) | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
+| » ts        | integer(int64) | true     | none         | none        |
+| » asks      | [array]        | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_orderbookLevel50">Futures_futures_public_orderbookLevel50</h2>
 <!-- backwards compatibility -->
@@ -1569,40 +1442,27 @@ This operation does not require authentication
           }
         }
       },
-      "required": [
-        "bids",
-        "sequence",
-        "timestamp",
-        "ts",
-        "asks"
-      ]
+      "required": ["bids", "sequence", "timestamp", "ts", "asks"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» bids|[array]|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
-|» ts|integer(int64)|true|none|none|
-|» asks|[array]|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| sn          | integer        | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » bids      | [array]        | true     | none         | none        |
+| » sequence  | integer(int64) | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
+| » ts        | integer(int64) | true     | none         | none        |
+| » asks      | [array]        | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_orderbookIncrement">Futures_futures_public_orderbookIncrement</h2>
 <!-- backwards compatibility -->
@@ -1643,36 +1503,25 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "sequence",
-        "change",
-        "timestamp"
-      ]
+      "required": ["sequence", "change", "timestamp"]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer(int64)|true|none|none|
-|data|object|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» change|string|true|none|none|
-|» timestamp|integer(int64)|true|none|none|
+| Name        | Type           | Required | Restrictions | Description |
+| ----------- | -------------- | -------- | ------------ | ----------- |
+| topic       | string         | true     | none         | none        |
+| type        | string         | true     | none         | none        |
+| subject     | string         | true     | none         | none        |
+| sn          | integer(int64) | true     | none         | none        |
+| data        | object         | true     | none         | none        |
+| » sequence  | integer(int64) | true     | none         | none        |
+| » change    | string         | true     | none         | none        |
+| » timestamp | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_klines">Futures_futures_public_klines</h2>
 <!-- backwards compatibility -->
@@ -1711,37 +1560,27 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "candles",
-        "time"
-      ]
+      "required": ["symbol", "candles", "time"]
     },
     "subject": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "data",
-    "subject"
-  ]
+  "required": ["topic", "type", "data", "subject"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)|
-|» candles|[string]|true|none|Start time, open price, close price, high price, low price, Transaction volume(This value is incorrect, please do not use it, we will fix it in subsequent versions), Transaction amount|
-|» time|integer(int64)|true|none|timestamp(ms)|
-|subject|string|true|none|none|
+| Name      | Type           | Required | Restrictions | Description                                                                                                                                                                              |
+| --------- | -------------- | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| topic     | string         | true     | none         | none                                                                                                                                                                                     |
+| type      | string         | true     | none         | none                                                                                                                                                                                     |
+| data      | object         | true     | none         | none                                                                                                                                                                                     |
+| » symbol  | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                                                       |
+| » candles | [string]       | true     | none         | Start time, open price, close price, high price, low price, Transaction volume(This value is incorrect, please do not use it, we will fix it in subsequent versions), Transaction amount |
+| » time    | integer(int64) | true     | none         | timestamp(ms)                                                                                                                                                                            |
+| subject   | string         | true     | none         | none                                                                                                                                                                                     |
 
 <h2 id="tocS_Futures_futures_public_matchExecution">Futures_futures_public_matchExecution</h2>
 <!-- backwards compatibility -->
@@ -1812,35 +1651,28 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "sn",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "sn", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|sn|integer|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|none|
-|» sequence|integer(int64)|true|none|none|
-|» side|string|true|none|none|
-|» size|integer|true|none|none|
-|» price|string|true|none|none|
-|» takerOrderId|string|true|none|none|
-|» makerOrderId|string|true|none|none|
-|» tradeId|string|true|none|none|
-|» ts|integer(int64)|true|none|none|
+| Name           | Type           | Required | Restrictions | Description |
+| -------------- | -------------- | -------- | ------------ | ----------- |
+| topic          | string         | true     | none         | none        |
+| type           | string         | true     | none         | none        |
+| subject        | string         | true     | none         | none        |
+| sn             | integer        | true     | none         | none        |
+| data           | object         | true     | none         | none        |
+| » symbol       | string         | true     | none         | none        |
+| » sequence     | integer(int64) | true     | none         | none        |
+| » side         | string         | true     | none         | none        |
+| » size         | integer        | true     | none         | none        |
+| » price        | string         | true     | none         | none        |
+| » takerOrderId | string         | true     | none         | none        |
+| » makerOrderId | string         | true     | none         | none        |
+| » tradeId      | string         | true     | none         | none        |
+| » ts           | integer(int64) | true     | none         | none        |
 
 <h2 id="tocS_Futures_futures_public_instrument">Futures_futures_public_instrument</h2>
 <!-- backwards compatibility -->
@@ -1858,10 +1690,7 @@ This operation does not require authentication
     },
     "subject": {
       "type": "string",
-      "enum": [
-        "mark.index.price",
-        "funding.rate"
-      ],
+      "enum": ["mark.index.price", "funding.rate"],
       "x-api-enum": [
         {
           "value": "mark.index.price",
@@ -1896,45 +1725,36 @@ This operation does not require authentication
           "type": "number"
         }
       },
-      "required": [
-        "granularity",
-        "timestamp"
-      ]
+      "required": ["granularity", "timestamp"]
     },
     "type": {
       "type": "string"
     }
   },
-  "required": [
-    "topic",
-    "subject",
-    "data",
-    "type"
-  ]
+  "required": ["topic", "subject", "data", "type"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» granularity|integer|true|none|Granularity (predicted funding rate: 1-min granularity: 60000; Funding rate: 8-hours granularity: 28800000.)|
-|» fundingRate|number|false|none|none|
-|» timestamp|integer(int64)|true|none|none|
-|» markPrice|number|false|none|none|
-|» indexPrice|number|false|none|none|
-|type|string|true|none|none|
+| Name          | Type           | Required | Restrictions | Description                                                                                                  |
+| ------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| topic         | string         | true     | none         | none                                                                                                         |
+| subject       | string         | true     | none         | none                                                                                                         |
+| data          | object         | true     | none         | none                                                                                                         |
+| » granularity | integer        | true     | none         | Granularity (predicted funding rate: 1-min granularity: 60000; Funding rate: 8-hours granularity: 28800000.) |
+| » fundingRate | number         | false    | none         | none                                                                                                         |
+| » timestamp   | integer(int64) | true     | none         | none                                                                                                         |
+| » markPrice   | number         | false    | none         | none                                                                                                         |
+| » indexPrice  | number         | false    | none         | none                                                                                                         |
+| type          | string         | true     | none         | none                                                                                                         |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|subject|mark.index.price|
-|subject|funding.rate|
+| Property | Value            |
+| -------- | ---------------- |
+| subject  | mark.index.price |
+| subject  | funding.rate     |
 
 <h2 id="tocS_Futures_futures_public_fundingFeeSettlement">Futures_futures_public_fundingFeeSettlement</h2>
 <!-- backwards compatibility -->
@@ -1977,36 +1797,25 @@ This operation does not require authentication
           "format": "int64"
         }
       },
-      "required": [
-        "symbol",
-        "fundingTime",
-        "fundingRate",
-        "timestamp"
-      ]
+      "required": ["symbol", "fundingTime", "fundingRate", "timestamp"]
     }
   },
-  "required": [
-    "type",
-    "topic",
-    "subject",
-    "data"
-  ]
+  "required": ["type", "topic", "subject", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|type|string|true|none|none|
-|topic|string|true|none|none|
-|subject|string|true|none|none|
-|data|object|true|none|none|
-|» symbol|string|true|none|Symbol|
-|» fundingTime|integer(int64)|true|none|Funding time|
-|» fundingRate|number|true|none|Funding rate|
-|» timestamp|integer(int64)|true|none|none|
+| Name          | Type           | Required | Restrictions | Description  |
+| ------------- | -------------- | -------- | ------------ | ------------ |
+| type          | string         | true     | none         | none         |
+| topic         | string         | true     | none         | none         |
+| subject       | string         | true     | none         | none         |
+| data          | object         | true     | none         | none         |
+| » symbol      | string         | true     | none         | Symbol       |
+| » fundingTime | integer(int64) | true     | none         | Funding time |
+| » fundingRate | number         | true     | none         | Funding rate |
+| » timestamp   | integer(int64) | true     | none         | none         |
 
 <h2 id="tocS_Futures_futures_public_symbolSnapshot">Futures_futures_public_symbolSnapshot</h2>
 <!-- backwards compatibility -->
@@ -2080,34 +1889,26 @@ This operation does not require authentication
       ]
     }
   },
-  "required": [
-    "topic",
-    "type",
-    "subject",
-    "id",
-    "data"
-  ]
+  "required": ["topic", "type", "subject", "id", "data"]
 }
-
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|topic|string|true|none|none|
-|type|string|true|none|none|
-|subject|string|true|none|none|
-|id|string|true|none|none|
-|data|object|true|none|none|
-|» highPrice|number|true|none|none|
-|» lastPrice|number|true|none|none|
-|» lowPrice|number|true|none|none|
-|» price24HoursBefore|number|true|none|none|
-|» priceChg|number|true|none|none|
-|» priceChgPct|number|true|none|none|
-|» symbol|string|true|none|none|
-|» ts|integer(int64)|true|none|none|
-|» turnover|number|true|none|none|
-|» volume|number|true|none|none|
-
+| Name                 | Type           | Required | Restrictions | Description |
+| -------------------- | -------------- | -------- | ------------ | ----------- |
+| topic                | string         | true     | none         | none        |
+| type                 | string         | true     | none         | none        |
+| subject              | string         | true     | none         | none        |
+| id                   | string         | true     | none         | none        |
+| data                 | object         | true     | none         | none        |
+| » highPrice          | number         | true     | none         | none        |
+| » lastPrice          | number         | true     | none         | none        |
+| » lowPrice           | number         | true     | none         | none        |
+| » price24HoursBefore | number         | true     | none         | none        |
+| » priceChg           | number         | true     | none         | none        |
+| » priceChgPct        | number         | true     | none         | none        |
+| » symbol             | string         | true     | none         | none        |
+| » ts                 | integer(int64) | true     | none         | none        |
+| » turnover           | number         | true     | none         | none        |
+| » volume             | number         | true     | none         | none        |

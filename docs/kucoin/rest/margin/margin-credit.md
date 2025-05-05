@@ -8,14 +8,14 @@ includes: []
 search: true
 highlight_theme: darkula
 headingLevel: 2
-
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="margin">margin v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+> Scroll down for code samples, example requests and responses. Select a
+> language for code samples from the tabs above or the mobile navigation menu.
 
 credit
 
@@ -28,23 +28,21 @@ credit
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/project/list',
-{
-  method: 'GET',
+fetch("/api/v3/project/list", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -61,13 +59,14 @@ print(r.json())
 
 `GET /api/v3/project/list`
 
-This API endpoint is used to get the information about the currencies available for lending.
+This API endpoint is used to get the information about the currencies available
+for lending.
 
 <h3 id="get-loan-market-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|currency|query|string|false|currency|
+| Name     | In    | Type   | Required | Description |
+| -------- | ----- | ------ | -------- | ----------- |
+| currency | query | string | false    | currency    |
 
 > Example responses
 
@@ -134,38 +133,35 @@ This API endpoint is used to get the information about the currencies available 
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-loan-market-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-loan-market-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» currency|string|false|none|Currency|
-|»» purchaseEnable|boolean|false|none|Whether purchase is supported.|
-|»» redeemEnable|boolean|false|none|Whether redeem is supported.|
-|»» increment|string|false|none|Increment precision for purchase and redemption|
-|»» minPurchaseSize|string|false|none|Minimum purchase amount|
-|»» minInterestRate|string|false|none|Minimum lending rate|
-|»» maxInterestRate|string|false|none|Maximum lending rate|
-|»» interestIncrement|string|false|none|Increment precision for interest; default is 0.0001|
-|»» maxPurchaseSize|string|false|none|Maximum purchase amount|
-|»» marketInterestRate|string|false|none|Latest market lending rate|
-|»» autoPurchaseEnable|boolean|false|none|Whether to allow automatic purchase: True: on; false: off|
+| Name                  | Type     | Required | Restrictions | Description                                               |
+| --------------------- | -------- | -------- | ------------ | --------------------------------------------------------- |
+| » code                | string   | true     | none         | none                                                      |
+| » data                | [object] | true     | none         | none                                                      |
+| »» currency           | string   | false    | none         | Currency                                                  |
+| »» purchaseEnable     | boolean  | false    | none         | Whether purchase is supported.                            |
+| »» redeemEnable       | boolean  | false    | none         | Whether redeem is supported.                              |
+| »» increment          | string   | false    | none         | Increment precision for purchase and redemption           |
+| »» minPurchaseSize    | string   | false    | none         | Minimum purchase amount                                   |
+| »» minInterestRate    | string   | false    | none         | Minimum lending rate                                      |
+| »» maxInterestRate    | string   | false    | none         | Maximum lending rate                                      |
+| »» interestIncrement  | string   | false    | none         | Increment precision for interest; default is 0.0001       |
+| »» maxPurchaseSize    | string   | false    | none         | Maximum purchase amount                                   |
+| »» marketInterestRate | string   | false    | none         | Latest market lending rate                                |
+| »» autoPurchaseEnable | boolean  | false    | none         | Whether to allow automatic purchase: True: on; false: off |
 
 <aside class="success">
 This operation does not require authentication
@@ -178,23 +174,21 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/project/marketInterestRate?currency=BTC,ETH,KCS',
-{
-  method: 'GET',
+fetch("/api/v3/project/marketInterestRate?currency=BTC,ETH,KCS", {
+  method: "GET",
 
   headers: headers
 })
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -217,13 +211,14 @@ print(r.json())
 
 `GET /api/v3/project/marketInterestRate`
 
-This API endpoint is used to get the interest rates of the margin lending market over the past 7 days.
+This API endpoint is used to get the interest rates of the margin lending market
+over the past 7 days.
 
 <h3 id="get-loan-market-interest-rate-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|currency|query|string|true|currency|
+| Name     | In    | Type   | Required | Description |
+| -------- | ----- | ------ | -------- | ----------- |
+| currency | query | string | true     | currency    |
 
 > Example responses
 
@@ -250,36 +245,30 @@ This API endpoint is used to get the interest rates of the margin lending market
             "description": "Market lending rate"
           }
         },
-        "required": [
-          "time",
-          "marketInterestRate"
-        ]
+        "required": ["time", "marketInterestRate"]
       }
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-loan-market-interest-rate-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-loan-market-interest-rate-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|[object]|true|none|none|
-|»» time|string|true|none|Time: YYYYMMDDHH00|
-|»» marketInterestRate|string|true|none|Market lending rate|
+| Name                  | Type     | Required | Restrictions | Description         |
+| --------------------- | -------- | -------- | ------------ | ------------------- |
+| » code                | string   | true     | none         | none                |
+| » data                | [object] | true     | none         | none                |
+| »» time               | string   | true     | none         | Time: YYYYMMDDHH00  |
+| »» marketInterestRate | string   | true     | none         | Market lending rate |
 
 <aside class="success">
 This operation does not require authentication
@@ -364,11 +353,7 @@ Invest credit in the market and earn interest
     "currency": {
       "type": "string",
       "description": "Currency",
-      "example": [
-        "BTC",
-        "ETH",
-        "USDT"
-      ]
+      "example": ["BTC", "ETH", "USDT"]
     },
     "size": {
       "type": "string",
@@ -379,22 +364,18 @@ Invest credit in the market and earn interest
       "description": "Purchase interest rate"
     }
   },
-  "required": [
-    "currency",
-    "size",
-    "interestRate"
-  ]
+  "required": ["currency", "size", "interestRate"]
 }
 ```
 
 <h3 id="purchase-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» currency|body|string|true|Currency|
-|» size|body|string|true|Purchase amount|
-|» interestRate|body|string|true|Purchase interest rate|
+| Name           | In   | Type   | Required | Description            |
+| -------------- | ---- | ------ | -------- | ---------------------- |
+| body           | body | object | false    | none                   |
+| » currency     | body | string | true     | Currency               |
+| » size         | body | string | true     | Purchase amount        |
+| » interestRate | body | string | true     | Purchase interest rate |
 
 > Example responses
 
@@ -415,33 +396,28 @@ Invest credit in the market and earn interest
           "description": "Purchase order ID"
         }
       },
-      "required": [
-        "orderNo"
-      ]
+      "required": ["orderNo"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="purchase-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="purchase-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» orderNo|string|true|none|Purchase order ID|
+| Name       | Type   | Required | Restrictions | Description       |
+| ---------- | ------ | -------- | ------------ | ----------------- |
+| » code     | string | true     | none         | none              |
+| » data     | object | true     | none         | none              |
+| »» orderNo | string | true     | none         | Purchase order ID |
 
 <aside class="success">
 This operation does not require authentication
@@ -515,7 +491,9 @@ print(r.json())
 
 `POST /api/v3/lend/purchase/update`
 
-This API endpoint is used to update the interest rates of subscription orders, which will take effect at the beginning of the next hour. Please ensure that the funds are in the main (funding) account.
+This API endpoint is used to update the interest rates of subscription orders,
+which will take effect at the beginning of the next hour. Please ensure that the
+funds are in the main (funding) account.
 
 > Body parameter
 
@@ -526,11 +504,7 @@ This API endpoint is used to update the interest rates of subscription orders, w
     "currency": {
       "type": "string",
       "description": "Currency",
-      "example": [
-        "BTC",
-        "ETH",
-        "USDT"
-      ]
+      "example": ["BTC", "ETH", "USDT"]
     },
     "interestRate": {
       "type": "string",
@@ -541,22 +515,18 @@ This API endpoint is used to update the interest rates of subscription orders, w
       "description": "Purchase order ID"
     }
   },
-  "required": [
-    "currency",
-    "purchaseOrderNo",
-    "interestRate"
-  ]
+  "required": ["currency", "purchaseOrderNo", "interestRate"]
 }
 ```
 
 <h3 id="modify-purchase-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» currency|body|string|true|Currency|
-|» interestRate|body|string|true|Modified purchase interest rate|
-|» purchaseOrderNo|body|string|true|Purchase order ID|
+| Name              | In   | Type   | Required | Description                     |
+| ----------------- | ---- | ------ | -------- | ------------------------------- |
+| body              | body | object | false    | none                            |
+| » currency        | body | string | true     | Currency                        |
+| » interestRate    | body | string | true     | Modified purchase interest rate |
+| » purchaseOrderNo | body | string | true     | Purchase order ID               |
 
 > Example responses
 
@@ -573,27 +543,24 @@ This API endpoint is used to update the interest rates of subscription orders, w
       "type": "string"
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="modify-purchase-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="modify-purchase-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|string|true|none|none|
+| Name   | Type   | Required | Restrictions | Description |
+| ------ | ------ | -------- | ------------ | ----------- |
+| » code | string | true     | none         | none        |
+| » data | string | true     | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -606,23 +573,24 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/purchase/orders?status=type,string,enum,DONE%2CPENDING,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D',
-{
-  method: 'GET',
+fetch(
+  "/api/v3/purchase/orders?status=type,string,enum,DONE%2CPENDING,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D",
+  {
+    method: "GET",
 
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -663,20 +631,20 @@ This API endpoint provides a pagination query for the purchase orders.
 
 <h3 id="get-purchase-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|status|query|string|true|DONE-completed; PENDING-settling|
-|currency|query|string|false|Currency|
-|purchaseOrderNo|query|string|false|Purchase order ID|
-|currentPage|query|integer|false|Current page; default is 1|
-|pageSize|query|integer|false|Page size; 1<=pageSize<=50; default is 50|
+| Name            | In    | Type    | Required | Description                               |
+| --------------- | ----- | ------- | -------- | ----------------------------------------- |
+| status          | query | string  | true     | DONE-completed; PENDING-settling          |
+| currency        | query | string  | false    | Currency                                  |
+| purchaseOrderNo | query | string  | false    | Purchase order ID                         |
+| currentPage     | query | integer | false    | Current page; default is 1                |
+| pageSize        | query | integer | false    | Page size; 1<=pageSize<=50; default is 50 |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|status|DONE|
-|status|PENDING|
+| Parameter | Value   |
+| --------- | ------- |
+| status    | DONE    |
+| status    | PENDING |
 
 > Example responses
 
@@ -716,11 +684,7 @@ This API endpoint provides a pagination query for the purchase orders.
               "currency": {
                 "type": "string",
                 "description": "Currency",
-                "example": [
-                  "BTC",
-                  "ETH",
-                  "USDT"
-                ]
+                "example": ["BTC", "ETH", "USDT"]
               },
               "purchaseOrderNo": {
                 "type": "string",
@@ -750,10 +714,7 @@ This API endpoint provides a pagination query for the purchase orders.
               "status": {
                 "type": "string",
                 "description": "Status: DONE-completed; PENDING-settling",
-                "enum": [
-                  "DONE",
-                  "PENDING"
-                ],
+                "enum": ["DONE", "PENDING"],
                 "x-api-enum": [
                   {
                     "value": "DONE",
@@ -781,56 +742,47 @@ This API endpoint provides a pagination query for the purchase orders.
           }
         }
       },
-      "required": [
-        "currentPage",
-        "pageSize",
-        "totalNum",
-        "totalPage",
-        "items"
-      ]
+      "required": ["currentPage", "pageSize", "totalNum", "totalPage", "items"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-purchase-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-purchase-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» currentPage|integer|true|none|Current Page|
-|»» pageSize|integer|true|none|Page Size|
-|»» totalNum|integer|true|none|Total Number|
-|»» totalPage|integer|true|none|Total Pages|
-|»» items|[object]|true|none|none|
-|»»» currency|string|true|none|Currency|
-|»»» purchaseOrderNo|string|true|none|Purchase order ID|
-|»»» purchaseSize|string|true|none|Total purchase size|
-|»»» matchSize|string|true|none|Executed size|
-|»»» interestRate|string|true|none|Target annualized interest rate|
-|»»» incomeSize|string|true|none|Redeemed amount|
-|»»» applyTime|integer(int64)|true|none|Time of purchase|
-|»»» status|string|true|none|Status: DONE-completed; PENDING-settling|
+| Name                | Type           | Required | Restrictions | Description                              |
+| ------------------- | -------------- | -------- | ------------ | ---------------------------------------- |
+| » code              | string         | true     | none         | none                                     |
+| » data              | object         | true     | none         | none                                     |
+| »» currentPage      | integer        | true     | none         | Current Page                             |
+| »» pageSize         | integer        | true     | none         | Page Size                                |
+| »» totalNum         | integer        | true     | none         | Total Number                             |
+| »» totalPage        | integer        | true     | none         | Total Pages                              |
+| »» items            | [object]       | true     | none         | none                                     |
+| »»» currency        | string         | true     | none         | Currency                                 |
+| »»» purchaseOrderNo | string         | true     | none         | Purchase order ID                        |
+| »»» purchaseSize    | string         | true     | none         | Total purchase size                      |
+| »»» matchSize       | string         | true     | none         | Executed size                            |
+| »»» interestRate    | string         | true     | none         | Target annualized interest rate          |
+| »»» incomeSize      | string         | true     | none         | Redeemed amount                          |
+| »»» applyTime       | integer(int64) | true     | none         | Time of purchase                         |
+| »»» status          | string         | true     | none         | Status: DONE-completed; PENDING-settling |
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-|status|DONE|
-|status|PENDING|
+| Property | Value   |
+| -------- | ------- |
+| status   | DONE    |
+| status   | PENDING |
 
 <aside class="success">
 This operation does not require authentication
@@ -915,11 +867,7 @@ Redeem your loan order.
     "currency": {
       "type": "string",
       "description": "Currency",
-      "example": [
-        "BTC",
-        "ETH",
-        "USDT"
-      ]
+      "example": ["BTC", "ETH", "USDT"]
     },
     "size": {
       "type": "string",
@@ -930,22 +878,18 @@ Redeem your loan order.
       "description": "Purchase order ID"
     }
   },
-  "required": [
-    "currency",
-    "size",
-    "purchaseOrderNo"
-  ]
+  "required": ["currency", "size", "purchaseOrderNo"]
 }
 ```
 
 <h3 id="redeem-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|false|none|
-|» currency|body|string|true|Currency|
-|» size|body|string|true|Redemption amount|
-|» purchaseOrderNo|body|string|true|Purchase order ID|
+| Name              | In   | Type   | Required | Description       |
+| ----------------- | ---- | ------ | -------- | ----------------- |
+| body              | body | object | false    | none              |
+| » currency        | body | string | true     | Currency          |
+| » size            | body | string | true     | Redemption amount |
+| » purchaseOrderNo | body | string | true     | Purchase order ID |
 
 > Example responses
 
@@ -966,33 +910,28 @@ Redeem your loan order.
           "description": "Redeem order ID"
         }
       },
-      "required": [
-        "orderNo"
-      ]
+      "required": ["orderNo"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="redeem-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="redeem-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» orderNo|string|true|none|Redeem order ID|
+| Name       | Type   | Required | Restrictions | Description     |
+| ---------- | ------ | -------- | ------------ | --------------- |
+| » code     | string | true     | none         | none            |
+| » data     | object | true     | none         | none            |
+| »» orderNo | string | true     | none         | Redeem order ID |
 
 <aside class="success">
 This operation does not require authentication
@@ -1005,23 +944,24 @@ This operation does not require authentication
 > Code samples
 
 ```javascript
-
 const headers = {
-  'Accept':'application/json'
-};
+  Accept: "application/json"
+}
 
-fetch('/api/v3/redeem/orders?status=type,string,enum,DONE%2CPENDING,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D',
-{
-  method: 'GET',
+fetch(
+  "/api/v3/redeem/orders?status=type,string,enum,DONE%2CPENDING,x-api-enum,%5Bobject%20Object%5D%2C%5Bobject%20Object%5D",
+  {
+    method: "GET",
 
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
 ```
 
 ```python
@@ -1062,20 +1002,20 @@ This API endpoint provides pagination query for the redeem orders.
 
 <h3 id="get-redeem-orders-parameters">Parameters</h3>
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|status|query|string|true|DONE-completed; PENDING-settling|
-|currency|query|string|false|currency|
-|redeemOrderNo|query|string|false|Redeem order ID|
-|currentPage|query|integer|false|Current page; default is 1|
-|pageSize|query|integer|false|Page size; 1<=pageSize<=50; default is 50|
+| Name          | In    | Type    | Required | Description                               |
+| ------------- | ----- | ------- | -------- | ----------------------------------------- |
+| status        | query | string  | true     | DONE-completed; PENDING-settling          |
+| currency      | query | string  | false    | currency                                  |
+| redeemOrderNo | query | string  | false    | Redeem order ID                           |
+| currentPage   | query | integer | false    | Current page; default is 1                |
+| pageSize      | query | integer | false    | Page size; 1<=pageSize<=50; default is 50 |
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|status|DONE|
-|status|PENDING|
+| Parameter | Value   |
+| --------- | ------- |
+| status    | DONE    |
+| status    | PENDING |
 
 > Example responses
 
@@ -1115,11 +1055,7 @@ This API endpoint provides pagination query for the redeem orders.
               "currency": {
                 "type": "string",
                 "description": "Currency",
-                "example": [
-                  "BTC",
-                  "ETH",
-                  "USDT"
-                ]
+                "example": ["BTC", "ETH", "USDT"]
               },
               "purchaseOrderNo": {
                 "type": "string",
@@ -1158,52 +1094,42 @@ This API endpoint provides pagination query for the redeem orders.
           }
         }
       },
-      "required": [
-        "currentPage",
-        "pageSize",
-        "totalNum",
-        "totalPage",
-        "items"
-      ]
+      "required": ["currentPage", "pageSize", "totalNum", "totalPage", "items"]
     }
   },
-  "required": [
-    "code",
-    "data"
-  ]
+  "required": ["code", "data"]
 }
 ```
 
 <h3 id="get-redeem-orders-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
 <h3 id="get-redeem-orders-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|string|true|none|none|
-|» data|object|true|none|none|
-|»» currentPage|integer|true|none|Current Page|
-|»» pageSize|integer|true|none|Page Size|
-|»» totalNum|integer|true|none|Total Number|
-|»» totalPage|integer|true|none|Total Pages|
-|»» items|[object]|true|none|none|
-|»»» currency|string|true|none|Currency|
-|»»» purchaseOrderNo|string|true|none|Purchase order ID|
-|»»» redeemOrderNo|string|true|none|Redeem order ID|
-|»»» redeemSize|string|true|none|Redemption size|
-|»»» receiptSize|string|true|none|Redeemed size|
-|»»» applyTime|string|true|none|Time of redeem|
-|»»» status|string|true|none|Status: DONE-completed; PENDING-settling|
+| Name                | Type     | Required | Restrictions | Description                              |
+| ------------------- | -------- | -------- | ------------ | ---------------------------------------- |
+| » code              | string   | true     | none         | none                                     |
+| » data              | object   | true     | none         | none                                     |
+| »» currentPage      | integer  | true     | none         | Current Page                             |
+| »» pageSize         | integer  | true     | none         | Page Size                                |
+| »» totalNum         | integer  | true     | none         | Total Number                             |
+| »» totalPage        | integer  | true     | none         | Total Pages                              |
+| »» items            | [object] | true     | none         | none                                     |
+| »»» currency        | string   | true     | none         | Currency                                 |
+| »»» purchaseOrderNo | string   | true     | none         | Purchase order ID                        |
+| »»» redeemOrderNo   | string   | true     | none         | Redeem order ID                          |
+| »»» redeemSize      | string   | true     | none         | Redemption size                          |
+| »»» receiptSize     | string   | true     | none         | Redeemed size                            |
+| »»» applyTime       | string   | true     | none         | Time of redeem                           |
+| »»» status          | string   | true     | none         | Status: DONE-completed; PENDING-settling |
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
 # Schemas
-

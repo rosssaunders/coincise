@@ -1,181 +1,245 @@
-Introduction
-============
+# Introduction
 
-Welcome
--------
+## Welcome
 
 Welcome to the Crypto.com Exchange API v1 reference documentation.
 
-The Crypto.com Exchange API v1 provides developers with a REST, and websocket API.
+The Crypto.com Exchange API v1 provides developers with a REST, and websocket
+API.
 
-The majority of API calls are available across both mediums in the _same_ request and response formats, allowing smooth transition and a reduced learning curve between the two platforms.
+The majority of API calls are available across both mediums in the _same_
+request and response formats, allowing smooth transition and a reduced learning
+curve between the two platforms.
 
-Where applicable, all API calls come with detailed information on both the request and response parameters, all in a simple JSON format, as well as sample requests and code snippets in JavaScript, Python, C#, and Java which can be viewed on the right.
+Where applicable, all API calls come with detailed information on both the
+request and response parameters, all in a simple JSON format, as well as sample
+requests and code snippets in JavaScript, Python, C#, and Java which can be
+viewed on the right.
 
 _Notes on Exchange Upgrade and API Versions_
 
-*   Exchange v1 API is the latest version of API which can trade Spot / Derivatives / Margin.
-*   Derivatives v1 API has been upgraded into Exchange v1 API with additional capabilities for Spot Trading / Margin Trading / Wallet Management. As Exchange v1 API is a superset of [Derivatives v1 API](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html), existing customer can continue using the same for trading.
-*   For full details about the exchange upgrade, please refer to [this blog post with FAQ documents](https://crypto.com/product-news/introducing-the-gen-3-0-crypto-com-exchange).
+- Exchange v1 API is the latest version of API which can trade Spot /
+  Derivatives / Margin.
+- Derivatives v1 API has been upgraded into Exchange v1 API with additional
+  capabilities for Spot Trading / Margin Trading / Wallet Management. As
+  Exchange v1 API is a superset of
+  [Derivatives v1 API](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html),
+  existing customer can continue using the same for trading.
+- For full details about the exchange upgrade, please refer to
+  [this blog post with FAQ documents](https://crypto.com/product-news/introducing-the-gen-3-0-crypto-com-exchange).
 
-Breaking Change Schedule
-------------------------
+## Breaking Change Schedule
 
-*   On 2025-02-27 8:00 UTC,  
-    For `book.{instrument_name}.{depth}`, the full snapshot subscription (`book_subscription_type=SNAPSHOT`) `100ms` frequency is removed.  
-    Customers wishing to continue with the faster `100ms` frequency should switch to the delta subscription (`book_subscription_type=SNAPSHOT_AND_UPDATE`).  
-    This higher performing subscription benefits the user with reduced bandwidth/processing compared to the snapshot subscription.  
-    For a transition period, users subscribing to the removed `100ms` snapshot will receive the `500ms` subscription.  
-      
-    The `book.{instrument_name}` subscription (default depth) will be removed.  
-    Customers should use the explicit `book.{instrument_name}.{depth}` subscription and specify the required depth.
-    
-    For a transition period, users subscribing to the removed subscription will receive the default `50` depth subscription.  
-      
-    
-*   These changes will take place around 17 December 2023 8:00 UTC.
-*   Market Data wildcard ticker subscription will be removed. Users should use the instrument specific subscription.
+- On 2025-02-27 8:00 UTC,  
+  For `book.{instrument_name}.{depth}`, the full snapshot subscription
+  (`book_subscription_type=SNAPSHOT`) `100ms` frequency is removed.  
+  Customers wishing to continue with the faster `100ms` frequency should switch
+  to the delta subscription (`book_subscription_type=SNAPSHOT_AND_UPDATE`).  
+  This higher performing subscription benefits the user with reduced
+  bandwidth/processing compared to the snapshot subscription.  
+  For a transition period, users subscribing to the removed `100ms` snapshot
+  will receive the `500ms` subscription.
 
-Change Logs
------------
+  The `book.{instrument_name}` subscription (default depth) will be removed.  
+  Customers should use the explicit `book.{instrument_name}.{depth}`
+  subscription and specify the required depth.
 
-*   2025-03-14
-    
-    *   Removed deprecated attributes system\_label in `private/get-accounts`
-*   2025-03-06
-    
-    *   Removed deprecated `book.{instrument_name}` default book subscription
-    *   Removed deprecated 100ms internval from full snapshot `book.{instrument_name}.{depth}` book subscription
-*   2025-03-04
-    
-    *   Remove section: `Unified Wallet and System Label`
-*   2025-01-27
-    
-    *   `book.{instrument_name}.{depth}` - The following additional update frequencies are now supported:  
-        Full snapshot subscription (`book_subscription_type=SNAPSHOT`) `500ms`  
-        Delta subscription (`book_subscription_type=SNAPSHOT_AND_UPDATE`) `100ms`
-*   2024-12-11
-    
-    *   `private/create-order` fee\_instrument\_name was added
-*   2024-10-02
-    
-    *   `public/get-risk-parameters` was added
-*   2024-08-15
-    
-    *   `private/get-fee-rate` was added
-    *   `private/get-instrument-fee-rate`was added
-*   2024-07-12
-    
-    *   Staking API added:  
-        `private/staking/stake`  
-        `private/staking/unstake`  
-        `private/staking/get-staking-position`  
-        `private/staking/get-staking-instruments`  
-        `private/staking/get-open-stake`  
-        `private/staking/get-stake-history`  
-        `private/staking/get-reward-history`  
-        `private/staking/convert`  
-        `private/staking/get-open-convert`  
-        `private/staking/get-convert-history`  
-        `public/staking/get-conversion-rate`
-*   2024-06-27
-    
-    *   `private/create-order` self-trade prevent (STP) was added
-    *   `private/create-order-list (LIST)` self-trade prevent (STP) was added
-*   2024-02-12
-    
-    *   `public/get-trades`, `trade.{instrument_name}` subscription, clarification for the public trade side field
-    *   Side is the side of the taker order
-    *   `book.{instrument_name}.{depth}` clarifications for book delta sequence number handling and re-subscription
-*   2024-01-04
-    
-    *   Market data websocket subscription enhancements:
-    *   `book.{instrument_name}` - The `subscription` result value is now explicit  
-        e.g. previous `"subscription": "book.BTC_USD"` -> new `"subscription": "book.BTC_USD.50"`
-    *   `book.{instrument_name}.{depth}` - For delta updates, the fixed 500ms delta full book snapshot heartbeat is replaced with empty delta in the case of no book changes
-    *   `ticker` - Documented existing 'bs' and 'ks' fields (bid/ask size)
-    *   `settlement` - For wildcard subscription, the `subscription` result value is now explicit  
-        e.g. previous `"subscription": "settlement"` -> new `"subscription": "settlement.BTCUSD-231124"`
-    *   Applied consistent field ordering for all market data subscriptions (`book`, `ticker`, `trade`, `candlestick`, `index`, `mark`, `settlement`, `funding`, `estimatedfunding`).  
-        Result fields are always in the following order:  
-        `id, method, code, instrument_name, subscription, channel`
-    *   Market data REST `public/get-trades`
-    *   Added additional `tn` nanoseconds timestamp field to the trade response
-    *   Clarified timestamp pagination parameters
-*   2023-12-18
-    
-    *   Market Data wildcard ticker subscription removed. Users should use the instrument specific subscription.
-*   2023-12-11
-    
-    *   Introduced Market Data subscription limiting. Refer to [Market Data Websocket Subscription Limits](#market-data-websocket-subscription-limits) for more details
-*   2023-10-31
-    
-    *   `user.balance`,`private/user-balance` will be updated:  
-        1\. Existing field total\_margin\_balance will represent new margin balance calculation without haircut.  
-        2\. Existing field total\_initial\_margin previously is made up of position IM only. On effective date, this field will represent the total sum of total\_position\_im + total\_haircut  
-        3\. New field total\_position\_im will be introduced to represent initial margin requirement to support open positions and orders  
-        4\. New field total\_haircut will be introduced to represent the total haircut on eligible collateral token assets. Refer to [Smart Cross Margin Enhancement Guide](https://static2.crypto.com/exchange/assets/documents/Exchange%20Smart%20Cross%20Margin%20Enhancement%20Guide%202023.pdf) for details
-    *   `user.balance`, `user.account_risk`, `private/user-balance`, `private/get-subaccount-balances` will be updated:  
-        1\. New field collateral\_eligible will be introduced to indicate if token is eligible Collateral  
-        2\. collateral\_weight will be deprecated  
-        3\. New field haircut will be introduced to show haircut of eligible collateral token instead of collateral Weight. Refer to [Smart Cross Margin Enhancement Guide](https://static2.crypto.com/exchange/assets/documents/Exchange%20Smart%20Cross%20Margin%20Enhancement%20Guide%202023.pdf) for details
-*   2023-08-11
-    
-    *   `private/create-order-list (LIST)` for batch order creation added
-    *   `private/cancel-order-list (LIST)` for batch order cancel added
-*   2023-07-31  
-    
-    *   Market Data Websocket Subscriptions is effective:  
-        
-    *   `funding.{instrument_name}` - channel will return the fixed hourly rate that will settle at the end of the hour.  
-        
-    *   `estimatedfunding.{instrument_name}` - channel will return the estimated hourly rate that will begin in the next interval.  
-        
-    *   Added new “funding\_rate” and “estimated\_funding\_rate” valuation types for public/get-valuations
-*   2023-06-28
-    
-    *   `private/get-deposit-history` added
-    *   `private/get-withdrawal-history` added
-*   2022-11-30
-    
-    *   Support using `client_oid` to query in `private/get-order-detail` REST API
-*   2022-11-10
-    
-    *   `USD_Stable_Coin` (aka USD Bundle), will be renamed as `USD`. Customer can test the change in UAT from 2022-11-10 before the change is effective in PROD. Target date for PROD is TBD.
-    *   Customer can input both `USD` and `USD_Stable_Coin` to mean the same USD Bundle.
-    *   However, on response, `USD` will be used to mean USD Bundle, instead of `USD_Stable_Coin`.
-*   2022-10-31
-    
-    *   Added `private/create-order-list`, `private/create-subaccount-transfer` REST APIs
-    *   Added `user.account_risk` and `user.position_balance` WebSocket subscriptions
-    *   Added more `period` in `public/get-candlestick` `candlestick.{time_frame}.{instrument_name}` WebSocket subscription
-*   2022-09-21 - Added **Unified Wallet and System Label** section, to illustrate the transition from multiple wallets into unified wallet.
-    
-*   2022-09-21 - Added new sub-account management endpoints: `private/get-accounts`, `private/create-subaccount-transfer`
-    
-*   2022-09-21 - Added new exchange wallet management endpoints: `private/create-withdrawal`, `private/get-deposit-address`, `private/get-curency-networks`
-    
-*   2022-09-21 - First publish, based on Derivative Exchange API v1.
-    
+  For a transition period, users subscribing to the removed subscription will
+  receive the default `50` depth subscription.
 
-Common API Reference
-====================
+- These changes will take place around 17 December 2023 8:00 UTC.
+- Market Data wildcard ticker subscription will be removed. Users should use the
+  instrument specific subscription.
 
-Most of the APIs for REST and Websockets are shared, and follow the same request format and response, allowing users to easily switch between the two methods.
+## Change Logs
 
-The `Applies To` section under each API allows you to see which platform supports the API.
+- 2025-03-14
+
+  - Removed deprecated attributes system_label in `private/get-accounts`
+
+- 2025-03-06
+
+  - Removed deprecated `book.{instrument_name}` default book subscription
+  - Removed deprecated 100ms internval from full snapshot
+    `book.{instrument_name}.{depth}` book subscription
+
+- 2025-03-04
+
+  - Remove section: `Unified Wallet and System Label`
+
+- 2025-01-27
+
+  - `book.{instrument_name}.{depth}` - The following additional update
+    frequencies are now supported:  
+    Full snapshot subscription (`book_subscription_type=SNAPSHOT`) `500ms`  
+    Delta subscription (`book_subscription_type=SNAPSHOT_AND_UPDATE`) `100ms`
+
+- 2024-12-11
+
+  - `private/create-order` fee_instrument_name was added
+
+- 2024-10-02
+
+  - `public/get-risk-parameters` was added
+
+- 2024-08-15
+
+  - `private/get-fee-rate` was added
+  - `private/get-instrument-fee-rate`was added
+
+- 2024-07-12
+
+  - Staking API added:  
+    `private/staking/stake`  
+    `private/staking/unstake`  
+    `private/staking/get-staking-position`  
+    `private/staking/get-staking-instruments`  
+    `private/staking/get-open-stake`  
+    `private/staking/get-stake-history`  
+    `private/staking/get-reward-history`  
+    `private/staking/convert`  
+    `private/staking/get-open-convert`  
+    `private/staking/get-convert-history`  
+    `public/staking/get-conversion-rate`
+
+- 2024-06-27
+
+  - `private/create-order` self-trade prevent (STP) was added
+  - `private/create-order-list (LIST)` self-trade prevent (STP) was added
+
+- 2024-02-12
+
+  - `public/get-trades`, `trade.{instrument_name}` subscription, clarification
+    for the public trade side field
+  - Side is the side of the taker order
+  - `book.{instrument_name}.{depth}` clarifications for book delta sequence
+    number handling and re-subscription
+
+- 2024-01-04
+
+  - Market data websocket subscription enhancements:
+  - `book.{instrument_name}` - The `subscription` result value is now explicit  
+    e.g. previous `"subscription": "book.BTC_USD"` -> new
+    `"subscription": "book.BTC_USD.50"`
+  - `book.{instrument_name}.{depth}` - For delta updates, the fixed 500ms delta
+    full book snapshot heartbeat is replaced with empty delta in the case of no
+    book changes
+  - `ticker` - Documented existing 'bs' and 'ks' fields (bid/ask size)
+  - `settlement` - For wildcard subscription, the `subscription` result value is
+    now explicit  
+    e.g. previous `"subscription": "settlement"` -> new
+    `"subscription": "settlement.BTCUSD-231124"`
+  - Applied consistent field ordering for all market data subscriptions (`book`,
+    `ticker`, `trade`, `candlestick`, `index`, `mark`, `settlement`, `funding`,
+    `estimatedfunding`).  
+    Result fields are always in the following order:  
+    `id, method, code, instrument_name, subscription, channel`
+  - Market data REST `public/get-trades`
+  - Added additional `tn` nanoseconds timestamp field to the trade response
+  - Clarified timestamp pagination parameters
+
+- 2023-12-18
+
+  - Market Data wildcard ticker subscription removed. Users should use the
+    instrument specific subscription.
+
+- 2023-12-11
+
+  - Introduced Market Data subscription limiting. Refer to
+    [Market Data Websocket Subscription Limits](#market-data-websocket-subscription-limits)
+    for more details
+
+- 2023-10-31
+
+  - `user.balance`,`private/user-balance` will be updated:  
+    1\. Existing field total_margin_balance will represent new margin balance
+    calculation without haircut.  
+    2\. Existing field total_initial_margin previously is made up of position IM
+    only. On effective date, this field will represent the total sum of
+    total_position_im + total_haircut  
+    3\. New field total_position_im will be introduced to represent initial
+    margin requirement to support open positions and orders  
+    4\. New field total_haircut will be introduced to represent the total
+    haircut on eligible collateral token assets. Refer to
+    [Smart Cross Margin Enhancement Guide](https://static2.crypto.com/exchange/assets/documents/Exchange%20Smart%20Cross%20Margin%20Enhancement%20Guide%202023.pdf)
+    for details
+  - `user.balance`, `user.account_risk`, `private/user-balance`,
+    `private/get-subaccount-balances` will be updated:  
+    1\. New field collateral_eligible will be introduced to indicate if token is
+    eligible Collateral  
+    2\. collateral_weight will be deprecated  
+    3\. New field haircut will be introduced to show haircut of eligible
+    collateral token instead of collateral Weight. Refer to
+    [Smart Cross Margin Enhancement Guide](https://static2.crypto.com/exchange/assets/documents/Exchange%20Smart%20Cross%20Margin%20Enhancement%20Guide%202023.pdf)
+    for details
+
+- 2023-08-11
+
+  - `private/create-order-list (LIST)` for batch order creation added
+  - `private/cancel-order-list (LIST)` for batch order cancel added
+
+- 2023-07-31
+
+  - Market Data Websocket Subscriptions is effective:
+  - `funding.{instrument_name}` - channel will return the fixed hourly rate that
+    will settle at the end of the hour.
+  - `estimatedfunding.{instrument_name}` - channel will return the estimated
+    hourly rate that will begin in the next interval.
+  - Added new “funding_rate” and “estimated_funding_rate” valuation types for
+    public/get-valuations
+
+- 2023-06-28
+
+  - `private/get-deposit-history` added
+  - `private/get-withdrawal-history` added
+
+- 2022-11-30
+
+  - Support using `client_oid` to query in `private/get-order-detail` REST API
+
+- 2022-11-10
+
+  - `USD_Stable_Coin` (aka USD Bundle), will be renamed as `USD`. Customer can
+    test the change in UAT from 2022-11-10 before the change is effective in
+    PROD. Target date for PROD is TBD.
+  - Customer can input both `USD` and `USD_Stable_Coin` to mean the same USD
+    Bundle.
+  - However, on response, `USD` will be used to mean USD Bundle, instead of
+    `USD_Stable_Coin`.
+
+- 2022-10-31
+
+  - Added `private/create-order-list`, `private/create-subaccount-transfer` REST
+    APIs
+  - Added `user.account_risk` and `user.position_balance` WebSocket
+    subscriptions
+  - Added more `period` in `public/get-candlestick`
+    `candlestick.{time_frame}.{instrument_name}` WebSocket subscription
+
+- 2022-09-21 - Added **Unified Wallet and System Label** section, to illustrate
+  the transition from multiple wallets into unified wallet.
+- 2022-09-21 - Added new sub-account management endpoints:
+  `private/get-accounts`, `private/create-subaccount-transfer`
+- 2022-09-21 - Added new exchange wallet management endpoints:
+  `private/create-withdrawal`, `private/get-deposit-address`,
+  `private/get-curency-networks`
+- 2022-09-21 - First publish, based on Derivative Exchange API v1.
+
+# Common API Reference
+
+Most of the APIs for REST and Websockets are shared, and follow the same request
+format and response, allowing users to easily switch between the two methods.
+
+The `Applies To` section under each API allows you to see which platform
+supports the API.
 
 ### Naming Conventions
 
-*   All methods and URLs in dash-case
-    
-*   All parameters in snake\_case
-    
-*   Enums in full uppercase and snake\_case
-    
+- All methods and URLs in dash-case
+- All parameters in snake_case
+- Enums in full uppercase and snake_case
 
-Generating the API Key
-----------------------
+## Generating the API Key
 
 Before sending any requests, you'll need to generate a new API key.
 
@@ -183,17 +247,19 @@ This can be done in the Exchange website under `User Center` - `API`.
 
 After generating the key, there are two things you need to carefully note down:
 
-*   API Key
-*   Secret Key
+- API Key
+- Secret Key
 
-API Key and Secret are randomly generated by the system and can not be modified. Default settings will be set to "Can Read" only, and you have the option of adding or removing certain permissions for your API Key via Web UI.
+API Key and Secret are randomly generated by the system and can not be modified.
+Default settings will be set to "Can Read" only, and you have the option of
+adding or removing certain permissions for your API Key via Web UI.
 
-You can optionally specify a whitelist of IP addresses when generating the API Key.
+You can optionally specify a whitelist of IP addresses when generating the API
+Key.
 
 If specified, the API can only be used from the whitelisted IP addresses.
 
-REST API Root Endpoint
-----------------------
+## REST API Root Endpoint
 
 Note: REST API requests need to be sent as "Content Type: application/json"
 
@@ -209,10 +275,10 @@ Note: REST API requests need to be sent as "Content Type: application/json"
 
 `https://api.crypto.com/exchange/v1/{method}`
 
-Websocket Root Endpoints
-------------------------
+## Websocket Root Endpoints
 
-The Websocket is available across two servers -- the User API Websocket (for authenticated requests and subscriptions), and Market Data Websocket:
+The Websocket is available across two servers -- the User API Websocket (for
+authenticated requests and subscriptions), and Market Data Websocket:
 
 ### UAT Sandbox
 
@@ -234,27 +300,27 @@ The Websocket is available across two servers -- the User API Websocket (for aut
 
 `wss://stream.crypto.com/exchange/v1/market`
 
-Rate Limits
------------
+## Rate Limits
 
 ### REST API
 
 For authenticated calls, rate limits are per API method, per API key:
 
 | Method | Limit |
-| --- | --- |
+| ------ | ----- |
+
 | `private/create-order`  
 `private/cancel-order`  
-`private/cancel-all-orders` | 15 requests per 100ms each |
-| `private/get-order-detail` | 30 requests per 100ms |
-| `private/get-trades` | 1 requests per second |
-| `private/get-order-history` | 1 requests per second |
-| All others | 3 requests per 100ms each |
+`private/cancel-all-orders` | 15 requests per 100ms each | |
+`private/get-order-detail` | 30 requests per 100ms | | `private/get-trades` | 1
+requests per second | | `private/get-order-history` | 1 requests per second | |
+All others | 3 requests per 100ms each |
 
 For public market data calls, rate limits are per API method, per IP address:
 
 | Method | Limit |
-| --- | --- |
+| ------ | ----- |
+
 | `public/get-book`  
 `public/get-ticker`  
 `public/get-trades`  
@@ -264,74 +330,75 @@ For public market data calls, rate limits are per API method, per IP address:
 
 ### Staking
 
-| Method | Limit |
-| --- | --- |
-| `public/staking/*` | 50 requests per second |
+| Method              | Limit                  |
+| ------------------- | ---------------------- |
+| `public/staking/*`  | 50 requests per second |
 | `private/staking/*` | 50 requests per second |
 
 ### Websocket
 
-| Websocket | Limit |
-| --- | --- |
-| User API | 150 requests per second |
+| Websocket   | Limit                   |
+| ----------- | ----------------------- |
+| User API    | 150 requests per second |
 | Market Data | 100 requests per second |
 
-`private/get-trades` and `private/get-order-history` is rate limited at 1 request per second on REST
+`private/get-trades` and `private/get-order-history` is rate limited at 1
+request per second on REST
 
-**Important Note**  
-  
-We recommend adding a 1-second sleep after establishing the websocket connection, and before requests are sent.  
-  
-This will avoid occurrences of rate-limit (\`TOO\_MANY\_REQUESTS\`) errors, as the websocket rate limits are pro-rated based on the calendar-second that the websocket connection was opened.
+**Important Note**
 
-Open Order Limit
-----------------
+We recommend adding a 1-second sleep after establishing the websocket
+connection, and before requests are sent.
 
-| Condition | Limit |
-| --- | --- |
-| Maximum allowed open orders per trading pair per account/subaccount | 200 |
-| Overall maximum allowed open orders per account/subaccount across all trading pairs | 1000 |
+This will avoid occurrences of rate-limit (\`TOO_MANY_REQUESTS\`) errors, as the
+websocket rate limits are pro-rated based on the calendar-second that the
+websocket connection was opened.
 
-Request Format
---------------
+## Open Order Limit
+
+| Condition                                                                           | Limit |
+| ----------------------------------------------------------------------------------- | ----- |
+| Maximum allowed open orders per trading pair per account/subaccount                 | 200   |
+| Overall maximum allowed open orders per account/subaccount across all trading pairs | 1000  |
+
+## Request Format
 
 The following information applies to both REST API and websockets commands:
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | long | Y | Request Identifier  
-Range: 0 to 9,223,372,036,854,775,807  
-Response message will contain the same id |
-| method | string | Y | The method to be invoked |
-| params | object | N | Parameters for the methods |
-| api\_key | string | Depends | API key. See `Digital Signature` section |
-| sig | string | Depends | Digital signature. See `Digital Signature` section |
-| nonce | long | Y | Current timestamp (milliseconds since the Unix epoch) |
+| Name | Type | Required | Description        |
+| ---- | ---- | -------- | ------------------ |
+| id   | long | Y        | Request Identifier |
 
-Digital Signature
------------------
+Range: 0 to 9,223,372,036,854,775,807  
+Response message will contain the same id | | method | string | Y | The method
+to be invoked | | params | object | N | Parameters for the methods | | api_key |
+string | Depends | API key. See `Digital Signature` section | | sig | string |
+Depends | Digital signature. See `Digital Signature` section | | nonce | long |
+Y | Current timestamp (milliseconds since the Unix epoch) |
+
+## Digital Signature
 
     const crypto = require("crypto-js");
-    
+
     const signRequest = (request_body, api_key, secret) => {
       const { id, method, params, nonce } = request_body;
-    
+
       function isObject(obj) { return obj !== undefined && obj !== null && obj.constructor == Object; }
       function isArray(obj) { return obj !== undefined && obj !== null && obj.constructor == Array; }
       function arrayToString(obj) { return obj.reduce((a,b) => { return a + (isObject(b) ? objectToString(b) : (isArray(b) ? arrayToString(b) : b)); }, ""); }
       function objectToString(obj) { return (obj == null ? "" : Object.keys(obj).sort().reduce((a, b) => { return a + b + (isArray(obj[b]) ? arrayToString(obj[b]) : (isObject(obj[b]) ? objectToString(obj[b]) : obj[b])); }, "")); }
-    
+
       const paramsString = objectToString(params);
-    
+
       console.log(paramsString);
-    
+
       const sigPayload = method + id + api_key + paramsString + nonce;
       request_body.sig = crypto.HmacSHA256(sigPayload, secret).toString(crypto.enc.Hex);
     };
-    
+
     const apiKey = "token"; /* User API Key */
     const apiSecret = "secretKey"; /* User API Secret */
-    
+
     let request = {
       id: 11,
       method: "private/get-order-detail",
@@ -341,17 +408,17 @@ Digital Signature
       },
       nonce: 1587846358253,
     };
-    
+
     const requestBody = JSON.stringify(signRequest(request, apiKey, apiSecret)));
-    
+
 
     import hmac
     import hashlib
     import time
-    
+
     API_KEY = "API_KEY"
     SECRET_KEY = "SECRET_KEY"
-    
+
     req = {
         "id": 14,
         "method": "private/create-order-list",
@@ -378,17 +445,17 @@ Digital Signature
         },
         "nonce": int(time.time() * 1000)
     }
-    
+
     # First ensure the params are alphabetically sorted by key
     param_str = ""
-    
+
     MAX_LEVEL = 3
-    
-    
+
+
     def params_to_str(obj, level):
         if level >= MAX_LEVEL:
             return str(obj)
-    
+
         return_str = ""
         for key in sorted(obj):
             return_str += key
@@ -400,19 +467,19 @@ Digital Signature
             else:
                 return_str += str(obj[key])
         return return_str
-    
-    
+
+
     if "params" in req:
         param_str = params_to_str(req['params'], 0)
-    
+
     payload_str = req['method'] + str(req['id']) + req['api_key'] + param_str + str(req['nonce'])
-    
+
     req['sig'] = hmac.new(
         bytes(str(SECRET_KEY), 'utf-8'),
         msg=bytes(payload_str, 'utf-8'),
         digestmod=hashlib.sha256
     ).hexdigest()
-    
+
 
     using System;
     using System.Collections.Generic;
@@ -424,34 +491,34 @@ Digital Signature
     using System.Threading.Tasks;
     using System.Web;
     using System.Net.WebSockets;
-    
+
     private const string API_KEY = "YOUR_API_KEY";
     private const string API_SECRET = "YOUR_API_SECRET";
-    
+
     private static string GetSign (Dictionary Request)
     {
       Dictionary Params = Request.Params;
-    
+
       // Ensure the params are alphabetically sorted by key
       // When params contains List value, please refer to the other language's example code for the correct implementation of ParamString
       string ParamString = string.Join("", Params.Keys.OrderBy(key => key).Select(key => key + Params[key]));
-    
+
       string SigPayload = Request.method + Request.id + API_KEY + ParamString + Request.nonce;
-    
+
       var hash = new HMACSHA256(API_SECRET);
         var ComputedHash = hash.ComputeHash(SigPayload);
       return ToHex(ComputedHash, false);
     }
-    
+
 
     import com.fasterxml.jackson.annotation.JsonProperty;
     import lombok.AllArgsConstructor;
     import lombok.Builder;
     import lombok.Data;
     import lombok.NoArgsConstructor;
-    
+
     import java.util.Map;
-    
+
     @Data
     @Builder
     @NoArgsConstructor
@@ -461,15 +528,15 @@ Digital Signature
       private String method;
       private Map<String, Object> params;
       private String sig;
-    
+
       @JsonProperty("api_key")
       private String apiKey;
-    
+
       private Long nonce;
     }
-    
+
     //------------
-    
+
     import java.math.BigDecimal;
     import java.nio.charset.StandardCharsets;
     import java.security.InvalidKeyException;
@@ -480,12 +547,12 @@ Digital Signature
     import javax.crypto.Mac;
     import javax.crypto.spec.SecretKeySpec;
     import org.apache.commons.codec.binary.Hex;
-    
+
     public class SigningUtil {
-    
+
       private static final String HMAC_SHA256 = "HmacSHA256";
       private static final int MAX_LEVEL = 3;
-    
+
       public static boolean verifySignature(ApiRequestJson apiRequestJson, String secret) {
         try {
           return genSignature(apiRequestJson, secret).equalsIgnoreCase(apiRequestJson.getSig());
@@ -493,22 +560,22 @@ Digital Signature
           return false;
         }
       }
-    
+
       @SuppressWarnings("unchecked")
       public static String getParamString(final Object paramObject) {
         StringBuilder sb = new StringBuilder();
         appendParamString(sb, paramObject, 0);
         return sb.toString();
       }
-    
-    
+
+
       @SuppressWarnings("unchecked")
       private static void appendParamString(final StringBuilder paramsStringBuilder, final Object paramObject, final int level) {
         if (level >= MAX_LEVEL) {
           paramsStringBuilder.append(paramObject.toString());
           return;
         }
-    
+
         if (paramObject instanceof Map) {
           TreeMap<String, Object> params = new TreeMap<>((Map) paramObject);
           for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -537,39 +604,39 @@ Digital Signature
           paramsStringBuilder.append(paramObject.toString());
         }
       }
-    
+
       public static String genSignature(ApiRequestJson apiRequestJson, String secret)
           throws NoSuchAlgorithmException, InvalidKeyException {
         final byte[] byteKey = secret.getBytes(StandardCharsets.UTF_8);
         Mac mac = Mac.getInstance(HMAC_SHA256);
         SecretKeySpec keySpec = new SecretKeySpec(byteKey, HMAC_SHA256);
         mac.init(keySpec);
-    
+
         String paramsString = "";
-    
+
         if (apiRequestJson.getParams() != null) {
           paramsString += getParamString(apiRequestJson.getParams());
         }
-    
+
         String sigPayload =
             apiRequestJson.getMethod()
                 + apiRequestJson.getId()
                 + apiRequestJson.getApiKey()
                 + paramsString
                 + (apiRequestJson.getNonce() == null ? "" : apiRequestJson.getNonce());
-    
+
         byte[] macData = mac.doFinal(sigPayload.getBytes(StandardCharsets.UTF_8));
-    
+
         return Hex.encodeHexString(macData);
       }
-    
+
       public static ApiRequestJson sign(ApiRequestJson apiRequestJson, String secret)
           throws InvalidKeyException, NoSuchAlgorithmException {
         apiRequestJson.setSig(genSignature(apiRequestJson, secret));
-    
+
         return apiRequestJson;
       }
-    
+
       public static void main(String[] argv) throws InvalidKeyException, NoSuchAlgorithmException {
         ApiRequestJson apiRequestJson = ApiRequestJson.builder()
                 .id(11L)
@@ -577,176 +644,186 @@ Digital Signature
                 .method("public/auth")
                 .nonce(1589594102779L)
                 .build();
-    
+
         System.out.println(genSignature(apiRequestJson, "secretKey"));
-    
+
         System.out.println(sign(apiRequestJson, "secretKey"));
-    
+
       }
     }
-    
 
-For REST API, only the **private** methods require a Digital Signature (as "sig") and API key (as "api\_key") to be passed in. These private endpoints are only accessible by authenticated users.
+For REST API, only the **private** methods require a Digital Signature (as
+"sig") and API key (as "api_key") to be passed in. These private endpoints are
+only accessible by authenticated users.
 
-For Websocket (User API), the `public/auth` command has to be invoked ONCE per session, with the Digital Signature (as "sig") and API key (as "api\_key") as part of the request. Once authenticated, you will gain access to user-specific commands, and no longer need to use the pass in the Digital Signature and API key anymore for the duration of the session.
+For Websocket (User API), the `public/auth` command has to be invoked ONCE per
+session, with the Digital Signature (as "sig") and API key (as "api_key") as
+part of the request. Once authenticated, you will gain access to user-specific
+commands, and no longer need to use the pass in the Digital Signature and API
+key anymore for the duration of the session.
 
-The authentication is based on the pairing of the API Key, along with the HMAC-SHA256 hash of the request parameters using the API Secret as the cryptographic key.
+The authentication is based on the pairing of the API Key, along with the
+HMAC-SHA256 hash of the request parameters using the API Secret as the
+cryptographic key.
 
-You should NEVER explicitly include the API Secret Key in plain-text in your request
+You should NEVER explicitly include the API Secret Key in plain-text in your
+request
 
 The algorithm for generating the HMAC-SHA256 signature is as follows:
 
-*   If "params" exist in the request, sort the request parameter keys in **ascending** order.
-    
-*   Combine all the ordered parameter keys as `key` + `value` (no spaces, no delimiters). Let's call this the `parameter string`
-    
-*   Next, do the following: `method` + `id` + `api_key` + `parameter string` + `nonce`
-    
-*   Use HMAC-SHA256 to hash the above using the API Secret as the cryptographic key
-    
-*   Encode the output as a hex string -- this is your Digital Signature  
-      
-    
+- If "params" exist in the request, sort the request parameter keys in
+  **ascending** order.
+- Combine all the ordered parameter keys as `key` + `value` (no spaces, no
+  delimiters). Let's call this the `parameter string`
+- Next, do the following: `method` + `id` + `api_key` + `parameter string` +
+  `nonce`
+- Use HMAC-SHA256 to hash the above using the API Secret as the cryptographic
+  key
+- Encode the output as a hex string -- this is your Digital Signature
 
-Since all parameters for calculating the HMAC-SHA256 hash are present in the request **except** the API Secret, the server-side will independently calculate the Digital Signature as well, and if done correctly, the computed hashes will match.  
-Besides, for JavaScript client calling \`private/get-order-detail\` API, it is highly recommended to use STRING format of \`order\_id\` in the JSON request payload, in order to guarantee the correctness of Digital Signature.
+Since all parameters for calculating the HMAC-SHA256 hash are present in the
+request **except** the API Secret, the server-side will independently calculate
+the Digital Signature as well, and if done correctly, the computed hashes will
+match.  
+Besides, for JavaScript client calling \`private/get-order-detail\` API, it is
+highly recommended to use STRING format of \`order_id\` in the JSON request
+payload, in order to guarantee the correctness of Digital Signature.
 
-Request Format
---------------
+## Request Format
 
-**Important Note**  
-  
-All **numbers** **must** be strings, and must be wrapped in double quotes. e.g. "12.34", instead of 12.34.
+**Important Note**
 
-Response Format
----------------
+All **numbers** **must** be strings, and must be wrapped in double quotes. e.g.
+"12.34", instead of 12.34.
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Original request identifier |
-| method | string | Method invoked |
-| result | object | Result object |
-| code | int | 0 for success, see below for full list |
-| message | string | (optional) For server or error messages |
+## Response Format
+
+| Name     | Type   | Description                                              |
+| -------- | ------ | -------------------------------------------------------- |
+| id       | long   | Original request identifier                              |
+| method   | string | Method invoked                                           |
+| result   | object | Result object                                            |
+| code     | int    | 0 for success, see below for full list                   |
+| message  | string | (optional) For server or error messages                  |
 | original | string | (optional) Original request as a string, for error cases |
 
-Response and Reason Codes
--------------------------
+## Response and Reason Codes
 
-These codes are shared by both the response, and the `reason` field for rejected orders.
+These codes are shared by both the response, and the `reason` field for rejected
+orders.
 
-| Code | HTTP Status | Message Code | Description |
-| --- | --- | --- | --- |
-| 0 | 200 | \-- | Success |
-| 201 | 500 | NO\_POSITION | No position |
-| 202 | 400 | ACCOUNT\_IS\_SUSPENDED | Account is suspended |
-| 203 | 500 | ACCOUNTS\_DO\_NOT\_MATCH | Accounts do not match |
-| 204 | 400 | DUPLICATE\_CLORDID | Duplicate client order id |
-| 205 | 500 | DUPLICATE\_ORDERID | Duplicate order id |
-| 206 | 500 | INSTRUMENT\_EXPIRED | Instrument has expired |
-| 207 | 400 | NO\_MARK\_PRICE | No mark price |
-| 208 | 400 | INSTRUMENT\_NOT\_TRADABLE | Instrument is not tradable |
-| 209 | 400 | INVALID\_INSTRUMENT | Instrument is invalid |
-| 210 | 500 | INVALID\_ACCOUNT | Account is invalid |
-| 211 | 500 | INVALID\_CURRENCY | Currency is invalid |
-| 212 | 500 | INVALID\_ORDERID | Invalid order id |
-| 213 | 400 | INVALID\_ORDERQTY | Invalid order quantity |
-| 214 | 500 | INVALID\_SETTLE\_CURRENCY | Invalid settlement currency |
-| 215 | 500 | INVALID\_FEE\_CURRENCY | Invalid fee currency |
-| 216 | 500 | INVALID\_POSITION\_QTY | Invalid position quantity |
-| 217 | 500 | INVALID\_OPEN\_QTY | Invalid open quantity |
-| 218 | 400 | INVALID\_ORDTYPE | Invalid `order_type` |
-| 219 | 500 | INVALID\_EXECINST | Invalid `exec_inst` |
-| 220 | 400 | INVALID\_SIDE | Invalid `side` |
-| 221 | 400 | INVALID\_TIF | Invalid `time_in_force` |
-| 222 | 400 | STALE\_MARK\_PRICE | Stale mark price |
-| 223 | 400 | NO\_CLORDID | No client order id |
-| 224 | 400 | REJ\_BY\_MATCHING\_ENGINE | Rejected by matching engine |
-| 225 | 400 | EXCEED\_MAXIMUM\_ENTRY\_LEVERAGE | Exceeds maximum entry leverage |
-| 226 | 400 | INVALID\_LEVERAGE | Invalid leverage |
-| 227 | 400 | INVALID\_SLIPPAGE | Invalid slippage |
-| 228 | 400 | INVALID\_FLOOR\_PRICE | Invalid floor price |
-| 229 | 400 | INVALID\_REF\_PRICE | Invalid ref price |
-| 230 | 400 | INVALID\_TRIGGER\_TYPE | Invalid ref price type |
-| 301 | 500 | ACCOUNT\_IS\_IN\_MARGIN\_CALL | Account is in margin call |
-| 302 | 500 | EXCEEDS\_ACCOUNT\_RISK\_LIMIT | Exceeds account risk limit |
-| 303 | 500 | EXCEEDS\_POSITION\_RISK\_LIMIT | Exceeds position risk limit |
-| 304 | 500 | ORDER\_WILL\_LEAD\_TO\_IMMEDIATE\_LIQUIDATION | Order will lead to immediate liquidation |
-| 305 | 500 | ORDER\_WILL\_TRIGGER\_MARGIN\_CALL | Order will trigger margin call |
-| 306 | 500 | INSUFFICIENT\_AVAILABLE\_BALANCE | Insufficient available balance |
-| 307 | 500 | INVALID\_ORDSTATUS | Invalid order status |
-| 308 | 400 | INVALID\_PRICE | Invalid price |
-| 309 | 500 | MARKET\_IS\_NOT\_OPEN | Market is not open |
-| 310 | 500 | ORDER\_PRICE\_BEYOND\_LIQUIDATION\_PRICE | Order price beyond liquidation price |
-| 311 | 500 | POSITION\_IS\_IN\_LIQUIDATION | Position is in liquidation |
-| 312 | 500 | ORDER\_PRICE\_GREATER\_THAN\_LIMITUPPRICE | Order price is greater than the limit up price |
-| 313 | 500 | ORDER\_PRICE\_LESS\_THAN\_LIMITDOWNPRICE | Order price is less than the limit down price |
-| 314 | 400 | EXCEEDS\_MAX\_ORDER\_SIZE | Exceeds max order size |
-| 315 | 400 | FAR\_AWAY\_LIMIT\_PRICE | Far away limit price |
-| 316 | 500 | NO\_ACTIVE\_ORDER | No active order |
-| 317 | 500 | POSITION\_NO\_EXIST | Position does not exist |
-| 318 | 400 | EXCEEDS\_MAX\_ALLOWED\_ORDERS | Exceeds max allowed orders |
-| 319 | 400 | EXCEEDS\_MAX\_POSITION\_SIZE | Exceeds max position size |
-| 320 | 500 | EXCEEDS\_INITIAL\_MARGIN | Exceeds initial margin |
-| 321 | 500 | EXCEEDS\_MAX\_AVAILABLE\_BALANCE | Exceeds maximum availble balance |
-| 401 | 400 | ACCOUNT\_DOES\_NOT\_EXIST | Account does not exist |
-| 406 | 500 | ACCOUNT\_IS\_NOT\_ACTIVE | Account is not active |
-| 407 | 500 | MARGIN\_UNIT\_DOES\_NOT\_EXIST | Margin unit does not exist |
-| 408 | 400 | MARGIN\_UNIT\_IS\_SUSPENDED | Margin unit is suspended |
-| 409 | 500 | INVALID\_USER | Invalid user |
-| 410 | 500 | USER\_IS\_NOT\_ACTIVE | User is not active |
-| 411 | 500 | USER\_NO\_DERIV\_ACCESS | User does not have derivative access |
-| 412 | 500 | ACCOUNT\_NO\_DERIV\_ACCESS | Account does not have derivative access |
-| 415 | 500 | BELOW\_MIN\_ORDER\_SIZE | Below Min. Order Size |
-| 501 | 500 | EXCEED\_MAXIMUM\_EFFECTIVE\_LEVERAGE | Exceeds maximum effective leverage |
-| 604 | 500 | INVALID\_COLLATERAL\_PRICE | Invalid collateral price |
-| 605 | 500 | INVALID\_MARGIN\_CALC | Invalid margin calculation |
-| 606 | 500 | EXCEED\_ALLOWED\_SLIPPAGE | Exceed allowed slippage |
-| 30024 | 400 | MAX\_AMOUNT\_VIOLATED | If `create-withdrawal` call quantity > `max_withdrawal_balance` in `user-balance` api |
-| 40001 | 400 | BAD\_REQUEST | Bad request |
-| 40002 | 400 | METHOD\_NOT\_FOUND | Method not found |
-| 40003 | 400 | INVALID\_REQUEST | Invalid request |
-| 40004 | 400 | MISSING\_OR\_INVALID\_ARGUMENT | Required argument is blank or missing |
-| 40005 | 400 | INVALID\_DATE | Invalid date |
-| 40006 | 400 | DUPLICATE\_REQUEST | Duplicate request received |
-| 40101 | 401 | UNAUTHORIZED | Not authenticated, or key/signature incorrect |
-| 40102 | 400 | INVALID\_NONCE | Nonce value differs by more than 60 seconds |
-| 40103 | 401 | IP\_ILLEGAL | IP address not whitelisted |
-| 40104 | 401 | USER\_TIER\_INVALID | Disallowed based on user tier |
-| 40107 | 400 | EXCEED\_MAX\_SUBSCRIPTIONS | Session subscription limit has been exceeded |
-| 40401 | 200 | NOT\_FOUND | Not found |
-| 40801 | 408 | REQUEST\_TIMEOUT | Request has timed out |
-| 42901 | 429 | TOO\_MANY\_REQUESTS | Requests have exceeded rate limits |
-| 43003 | 500 | FILL\_OR\_KILL | FOK order has not been filled and cancelled |
-| 43004 | 500 | IMMEDIATE\_OR\_CANCEL | IOC order has not been filled and cancelled |
-| 43005 | 500 | POST\_ONLY\_REJ | Rejected POST\_ONLY create-order request (normally happened when `exec_inst` contains `POST_ONLY` but `time_in_force` is NOT `GOOD_TILL_CANCEL`) |
-| 43012 | 200 | SELF\_TRADE\_PREVENTION | Canceled due to Self Trade Prevention |
-| 50001 | 400 | DW\_CREDIT\_LINE\_NOT\_MAINTAINED | If `create-withdrawal` call breaching credit line check |
-| 50001 | 400 | ERR\_INTERNAL | Internal error |
+| Code  | HTTP Status | Message Code                             | Description                                                                                                                                     |
+| ----- | ----------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0     | 200         | \--                                      | Success                                                                                                                                         |
+| 201   | 500         | NO_POSITION                              | No position                                                                                                                                     |
+| 202   | 400         | ACCOUNT_IS_SUSPENDED                     | Account is suspended                                                                                                                            |
+| 203   | 500         | ACCOUNTS_DO_NOT_MATCH                    | Accounts do not match                                                                                                                           |
+| 204   | 400         | DUPLICATE_CLORDID                        | Duplicate client order id                                                                                                                       |
+| 205   | 500         | DUPLICATE_ORDERID                        | Duplicate order id                                                                                                                              |
+| 206   | 500         | INSTRUMENT_EXPIRED                       | Instrument has expired                                                                                                                          |
+| 207   | 400         | NO_MARK_PRICE                            | No mark price                                                                                                                                   |
+| 208   | 400         | INSTRUMENT_NOT_TRADABLE                  | Instrument is not tradable                                                                                                                      |
+| 209   | 400         | INVALID_INSTRUMENT                       | Instrument is invalid                                                                                                                           |
+| 210   | 500         | INVALID_ACCOUNT                          | Account is invalid                                                                                                                              |
+| 211   | 500         | INVALID_CURRENCY                         | Currency is invalid                                                                                                                             |
+| 212   | 500         | INVALID_ORDERID                          | Invalid order id                                                                                                                                |
+| 213   | 400         | INVALID_ORDERQTY                         | Invalid order quantity                                                                                                                          |
+| 214   | 500         | INVALID_SETTLE_CURRENCY                  | Invalid settlement currency                                                                                                                     |
+| 215   | 500         | INVALID_FEE_CURRENCY                     | Invalid fee currency                                                                                                                            |
+| 216   | 500         | INVALID_POSITION_QTY                     | Invalid position quantity                                                                                                                       |
+| 217   | 500         | INVALID_OPEN_QTY                         | Invalid open quantity                                                                                                                           |
+| 218   | 400         | INVALID_ORDTYPE                          | Invalid `order_type`                                                                                                                            |
+| 219   | 500         | INVALID_EXECINST                         | Invalid `exec_inst`                                                                                                                             |
+| 220   | 400         | INVALID_SIDE                             | Invalid `side`                                                                                                                                  |
+| 221   | 400         | INVALID_TIF                              | Invalid `time_in_force`                                                                                                                         |
+| 222   | 400         | STALE_MARK_PRICE                         | Stale mark price                                                                                                                                |
+| 223   | 400         | NO_CLORDID                               | No client order id                                                                                                                              |
+| 224   | 400         | REJ_BY_MATCHING_ENGINE                   | Rejected by matching engine                                                                                                                     |
+| 225   | 400         | EXCEED_MAXIMUM_ENTRY_LEVERAGE            | Exceeds maximum entry leverage                                                                                                                  |
+| 226   | 400         | INVALID_LEVERAGE                         | Invalid leverage                                                                                                                                |
+| 227   | 400         | INVALID_SLIPPAGE                         | Invalid slippage                                                                                                                                |
+| 228   | 400         | INVALID_FLOOR_PRICE                      | Invalid floor price                                                                                                                             |
+| 229   | 400         | INVALID_REF_PRICE                        | Invalid ref price                                                                                                                               |
+| 230   | 400         | INVALID_TRIGGER_TYPE                     | Invalid ref price type                                                                                                                          |
+| 301   | 500         | ACCOUNT_IS_IN_MARGIN_CALL                | Account is in margin call                                                                                                                       |
+| 302   | 500         | EXCEEDS_ACCOUNT_RISK_LIMIT               | Exceeds account risk limit                                                                                                                      |
+| 303   | 500         | EXCEEDS_POSITION_RISK_LIMIT              | Exceeds position risk limit                                                                                                                     |
+| 304   | 500         | ORDER_WILL_LEAD_TO_IMMEDIATE_LIQUIDATION | Order will lead to immediate liquidation                                                                                                        |
+| 305   | 500         | ORDER_WILL_TRIGGER_MARGIN_CALL           | Order will trigger margin call                                                                                                                  |
+| 306   | 500         | INSUFFICIENT_AVAILABLE_BALANCE           | Insufficient available balance                                                                                                                  |
+| 307   | 500         | INVALID_ORDSTATUS                        | Invalid order status                                                                                                                            |
+| 308   | 400         | INVALID_PRICE                            | Invalid price                                                                                                                                   |
+| 309   | 500         | MARKET_IS_NOT_OPEN                       | Market is not open                                                                                                                              |
+| 310   | 500         | ORDER_PRICE_BEYOND_LIQUIDATION_PRICE     | Order price beyond liquidation price                                                                                                            |
+| 311   | 500         | POSITION_IS_IN_LIQUIDATION               | Position is in liquidation                                                                                                                      |
+| 312   | 500         | ORDER_PRICE_GREATER_THAN_LIMITUPPRICE    | Order price is greater than the limit up price                                                                                                  |
+| 313   | 500         | ORDER_PRICE_LESS_THAN_LIMITDOWNPRICE     | Order price is less than the limit down price                                                                                                   |
+| 314   | 400         | EXCEEDS_MAX_ORDER_SIZE                   | Exceeds max order size                                                                                                                          |
+| 315   | 400         | FAR_AWAY_LIMIT_PRICE                     | Far away limit price                                                                                                                            |
+| 316   | 500         | NO_ACTIVE_ORDER                          | No active order                                                                                                                                 |
+| 317   | 500         | POSITION_NO_EXIST                        | Position does not exist                                                                                                                         |
+| 318   | 400         | EXCEEDS_MAX_ALLOWED_ORDERS               | Exceeds max allowed orders                                                                                                                      |
+| 319   | 400         | EXCEEDS_MAX_POSITION_SIZE                | Exceeds max position size                                                                                                                       |
+| 320   | 500         | EXCEEDS_INITIAL_MARGIN                   | Exceeds initial margin                                                                                                                          |
+| 321   | 500         | EXCEEDS_MAX_AVAILABLE_BALANCE            | Exceeds maximum availble balance                                                                                                                |
+| 401   | 400         | ACCOUNT_DOES_NOT_EXIST                   | Account does not exist                                                                                                                          |
+| 406   | 500         | ACCOUNT_IS_NOT_ACTIVE                    | Account is not active                                                                                                                           |
+| 407   | 500         | MARGIN_UNIT_DOES_NOT_EXIST               | Margin unit does not exist                                                                                                                      |
+| 408   | 400         | MARGIN_UNIT_IS_SUSPENDED                 | Margin unit is suspended                                                                                                                        |
+| 409   | 500         | INVALID_USER                             | Invalid user                                                                                                                                    |
+| 410   | 500         | USER_IS_NOT_ACTIVE                       | User is not active                                                                                                                              |
+| 411   | 500         | USER_NO_DERIV_ACCESS                     | User does not have derivative access                                                                                                            |
+| 412   | 500         | ACCOUNT_NO_DERIV_ACCESS                  | Account does not have derivative access                                                                                                         |
+| 415   | 500         | BELOW_MIN_ORDER_SIZE                     | Below Min. Order Size                                                                                                                           |
+| 501   | 500         | EXCEED_MAXIMUM_EFFECTIVE_LEVERAGE        | Exceeds maximum effective leverage                                                                                                              |
+| 604   | 500         | INVALID_COLLATERAL_PRICE                 | Invalid collateral price                                                                                                                        |
+| 605   | 500         | INVALID_MARGIN_CALC                      | Invalid margin calculation                                                                                                                      |
+| 606   | 500         | EXCEED_ALLOWED_SLIPPAGE                  | Exceed allowed slippage                                                                                                                         |
+| 30024 | 400         | MAX_AMOUNT_VIOLATED                      | If `create-withdrawal` call quantity > `max_withdrawal_balance` in `user-balance` api                                                           |
+| 40001 | 400         | BAD_REQUEST                              | Bad request                                                                                                                                     |
+| 40002 | 400         | METHOD_NOT_FOUND                         | Method not found                                                                                                                                |
+| 40003 | 400         | INVALID_REQUEST                          | Invalid request                                                                                                                                 |
+| 40004 | 400         | MISSING_OR_INVALID_ARGUMENT              | Required argument is blank or missing                                                                                                           |
+| 40005 | 400         | INVALID_DATE                             | Invalid date                                                                                                                                    |
+| 40006 | 400         | DUPLICATE_REQUEST                        | Duplicate request received                                                                                                                      |
+| 40101 | 401         | UNAUTHORIZED                             | Not authenticated, or key/signature incorrect                                                                                                   |
+| 40102 | 400         | INVALID_NONCE                            | Nonce value differs by more than 60 seconds                                                                                                     |
+| 40103 | 401         | IP_ILLEGAL                               | IP address not whitelisted                                                                                                                      |
+| 40104 | 401         | USER_TIER_INVALID                        | Disallowed based on user tier                                                                                                                   |
+| 40107 | 400         | EXCEED_MAX_SUBSCRIPTIONS                 | Session subscription limit has been exceeded                                                                                                    |
+| 40401 | 200         | NOT_FOUND                                | Not found                                                                                                                                       |
+| 40801 | 408         | REQUEST_TIMEOUT                          | Request has timed out                                                                                                                           |
+| 42901 | 429         | TOO_MANY_REQUESTS                        | Requests have exceeded rate limits                                                                                                              |
+| 43003 | 500         | FILL_OR_KILL                             | FOK order has not been filled and cancelled                                                                                                     |
+| 43004 | 500         | IMMEDIATE_OR_CANCEL                      | IOC order has not been filled and cancelled                                                                                                     |
+| 43005 | 500         | POST_ONLY_REJ                            | Rejected POST_ONLY create-order request (normally happened when `exec_inst` contains `POST_ONLY` but `time_in_force` is NOT `GOOD_TILL_CANCEL`) |
+| 43012 | 200         | SELF_TRADE_PREVENTION                    | Canceled due to Self Trade Prevention                                                                                                           |
+| 50001 | 400         | DW_CREDIT_LINE_NOT_MAINTAINED            | If `create-withdrawal` call breaching credit line check                                                                                         |
+| 50001 | 400         | ERR_INTERNAL                             | Internal error                                                                                                                                  |
 
-Websocket Termination Codes
----------------------------
+## Websocket Termination Codes
 
-| Code | Description |
-| --- | --- |
+| Code | Description                                                                       |
+| ---- | --------------------------------------------------------------------------------- |
 | 1000 | Normal disconnection by server, usually when the heartbeat isn't handled properly |
-| 1006 | Abnormal disconnection |
-| 1013 | Server restarting -- try again later |
+| 1006 | Abnormal disconnection                                                            |
+| 1013 | Server restarting -- try again later                                              |
 
-Error Response Format
----------------------
+## Error Response Format
 
-Due to the asynchronous nature of websocket requests, a robust and consistent error response is crucial in order to match the response with the request.
+Due to the asynchronous nature of websocket requests, a robust and consistent
+error response is crucial in order to match the response with the request.
 
-To ensure API consistency for websocket error responses, if the `id` and `method` is omitted in the original request, `id` will have a value of `-1` and `method` will have a value of `ERROR`.
+To ensure API consistency for websocket error responses, if the `id` and
+`method` is omitted in the original request, `id` will have a value of `-1` and
+`method` will have a value of `ERROR`.
 
-The original request will be returned as an escaped string in the `original` field.
+The original request will be returned as an escaped string in the `original`
+field.
 
-Account Balance and Position API
-================================
+# Account Balance and Position API
 
-private/user-balance
---------------------
+## private/user-balance
 
 > Request Sample
 
@@ -756,7 +833,6 @@ private/user-balance
       "params": {},
       "nonce": 1611022832613
     }
-    
 
 > Response Sample
 
@@ -829,13 +905,13 @@ private/user-balance
         ]
       }
     }
-    
 
 Returns the user's wallet balance.
 
 ### Request Params
 
-**Note**: You still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: You still need to pass in an empty `params` block like `params: {}`
+for API request consistency
 
 ### Applies To
 
@@ -849,42 +925,41 @@ POST
 
 An array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Instrument name of the balance e.g. `USD` |
-| total\_available\_balance | string | Balance that user can open new order (Margin Balance - Initial Margin) |
-| total\_margin\_balance | string | Positive cash balance on eligible collateral tokens + Negative balance on all tokens + Unrealised PnL - Fee reserves |
-| total\_initial\_margin | string | Total margin requirement to support positions and all open orders IM and haircut from risk asset holdings  
-Total sum of total\_position\_im + total\_haircut |
-| total\_position\_im | string | initial margin requirement to support open positions and orders |
-| total\_haircut | string | the total haircut on eligible collateral token assets |
-| total\_maintenance\_margin | string | Total maintenance margin requirement for all positions |
-| total\_position\_cost | string | Position value in USD |
-| total\_cash\_balance | string | Wallet Balance (Deposits - Withdrawals + Realized PnL - Fees) |
-| total\_collateral\_value | string | Collateral Value |
-| total\_session\_unrealized\_pnl | string | Current unrealized profit and loss from all open positions (calculated with Mark Price and Avg Price) |
-| total\_session\_realized\_pnl | string | Current realized profit and loss from all open positions (calculated with Mark Price and Avg Price) |
-| is\_liquidating | boolean | Describes whether the account is under liquidation |
-| total\_effective\_leverage | string | The actual leverage used (all open positions combined), i.e. position size / margin balance |
-| position\_limit | string | Maximum position size allowed (for all open positions combined) |
-| used\_position\_limit | string | Combined position size of all open positions + order exposure on all instruments |
-| position\_balances | array | Collateral balances as shown below |
+| Name                                           | Type    | Description                                                                                                          |
+| ---------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| instrument_name                                | string  | Instrument name of the balance e.g. `USD`                                                                            |
+| total_available_balance                        | string  | Balance that user can open new order (Margin Balance - Initial Margin)                                               |
+| total_margin_balance                           | string  | Positive cash balance on eligible collateral tokens + Negative balance on all tokens + Unrealised PnL - Fee reserves |
+| total_initial_margin                           | string  | Total margin requirement to support positions and all open orders IM and haircut from risk asset holdings            |
+| Total sum of total_position_im + total_haircut |
+| total_position_im                              | string  | initial margin requirement to support open positions and orders                                                      |
+| total_haircut                                  | string  | the total haircut on eligible collateral token assets                                                                |
+| total_maintenance_margin                       | string  | Total maintenance margin requirement for all positions                                                               |
+| total_position_cost                            | string  | Position value in USD                                                                                                |
+| total_cash_balance                             | string  | Wallet Balance (Deposits - Withdrawals + Realized PnL - Fees)                                                        |
+| total_collateral_value                         | string  | Collateral Value                                                                                                     |
+| total_session_unrealized_pnl                   | string  | Current unrealized profit and loss from all open positions (calculated with Mark Price and Avg Price)                |
+| total_session_realized_pnl                     | string  | Current realized profit and loss from all open positions (calculated with Mark Price and Avg Price)                  |
+| is_liquidating                                 | boolean | Describes whether the account is under liquidation                                                                   |
+| total_effective_leverage                       | string  | The actual leverage used (all open positions combined), i.e. position size / margin balance                          |
+| position_limit                                 | string  | Maximum position size allowed (for all open positions combined)                                                      |
+| used_position_limit                            | string  | Combined position size of all open positions + order exposure on all instruments                                     |
+| position_balances                              | array   | Collateral balances as shown below                                                                                   |
 
 `position_balances` is an array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Instrument name of the collateral e.g. `USD`, `CRO`, `USDT`, or `DAI` |
-| quantity | string | Quantity of the collateral |
-| market\_value | string | Market value of the collateral |
-| collateral\_eligible | boolean | true or false |
-| haircut | string | Show haircut for eligible collateral token |
-| collateral\_amount | string | Collateral amount derived by market\_value minus haircut |
-| max\_withdrawal\_balance | string | Max withdrawal balance of the collateral |
-| reserved\_qty | string | Fund/balance in use, not available for new orders or additional trading activities. |
+| Name                   | Type    | Description                                                                         |
+| ---------------------- | ------- | ----------------------------------------------------------------------------------- |
+| instrument_name        | string  | Instrument name of the collateral e.g. `USD`, `CRO`, `USDT`, or `DAI`               |
+| quantity               | string  | Quantity of the collateral                                                          |
+| market_value           | string  | Market value of the collateral                                                      |
+| collateral_eligible    | boolean | true or false                                                                       |
+| haircut                | string  | Show haircut for eligible collateral token                                          |
+| collateral_amount      | string  | Collateral amount derived by market_value minus haircut                             |
+| max_withdrawal_balance | string  | Max withdrawal balance of the collateral                                            |
+| reserved_qty           | string  | Fund/balance in use, not available for new orders or additional trading activities. |
 
-private/user-balance-history
-----------------------------
+## private/user-balance-history
 
 > Request Sample
 
@@ -893,7 +968,6 @@ private/user-balance-history
       "method": "private/user-balance-history",
       "params": {}
     }
-    
 
 > Response Sample
 
@@ -911,19 +985,20 @@ private/user-balance-history
         ]
       }
     }
-    
 
-Returns the user's balance history. This call may temporarily have discrepancies with that shown on the GUI.
+Returns the user's balance history. This call may temporarily have discrepancies
+with that shown on the GUI.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| timeframe | string | N | `H1` means every hour, `D1` means every day. Omit for 'D1' |
-| end\_time | number | N | Can be millisecond or nanosecond. Exclusive. If not provided, will be current time. |
-| limit | int | N | If timeframe is `D1`, max `limit` will be 30 (days). If timeframe is `H1`, max `limit` will be 120 (hours). |
+| Name      | Type   | Required | Description                                                                                                 |
+| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------- |
+| timeframe | string | N        | `H1` means every hour, `D1` means every day. Omit for 'D1'                                                  |
+| end_time  | number | N        | Can be millisecond or nanosecond. Exclusive. If not provided, will be current time.                         |
+| limit     | int    | N        | If timeframe is `D1`, max `limit` will be 30 (days). If timeframe is `H1`, max `limit` will be 120 (hours). |
 
-**Note**: If you omit all parameters, you still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: If you omit all parameters, you still need to pass in an empty
+`params` block like `params: {}` for API request consistency
 
 ### Applies To
 
@@ -937,14 +1012,13 @@ POST
 
 An array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | instrument name of the balance e.g. USD |
-| t | number | timestamp |
-| c | string | total cash balance |
+| Name            | Type   | Description                             |
+| --------------- | ------ | --------------------------------------- |
+| instrument_name | string | instrument name of the balance e.g. USD |
+| t               | number | timestamp                               |
+| c               | string | total cash balance                      |
 
-private/get-accounts
---------------------
+## private/get-accounts
 
 > Request Sample
 
@@ -954,7 +1028,6 @@ private/get-accounts
       "params": {"page_size": 30,"page": 2},
       "nonce": 1587846358253
     }
-    
 
 > Response Sample
 
@@ -1008,7 +1081,6 @@ private/get-accounts
         ]
       }
     }
-    
 
 Get Account and its Sub Accounts
 
@@ -1016,9 +1088,10 @@ Get Account and its Sub Accounts
 
 By default, the `page_size` is `20` and `page` is `0` respectively.
 
-It can be overided in the JSON request: i.e. "page\_size": 30, "page": 2
+It can be overided in the JSON request: i.e. "page_size": 30, "page": 2
 
-Note: if using default setting, please ensure you keep `params: {}` for API request consistency.
+Note: if using default setting, please ensure you keep `params: {}` for API
+request consistency.
 
 ### Applies To
 
@@ -1030,32 +1103,32 @@ POST
 
 ### Response Attributes
 
-an object of `master_account`, with an array of `sub_account_list`, both consisting of:
+an object of `master_account`, with an array of `sub_account_list`, both
+consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| uuid | string | Sub account uuid |
-| master\_account\_uuid | string | Master account uuid |
-| margin\_account\_uuid | string | (optional) Margin account uuid |
-| label | string | Sub account label |
-| enabled | boolean | true or false |
-| tradable | boolean | true or false |
-| name | string | Name of sub account |
-| email | string | Email of sub account |
-| mobile\_number | string | Mobile number of sub account |
-| country\_code | string | Country Code of sub account |
-| address | string | Address of sub account |
-| margin\_access | string | DEFAULT or DISABLED |
-| derivatives\_access | string | DEFAULT or DISABLED |
-| create\_time | number | Creation timestamp (milliseconds since the Unix epoch) |
-| update\_time | number | Last update timestamp (milliseconds since the Unix epoch) |
-| two\_fa\_enabled | boolean | true or false |
-| kyc\_level | string | Kyc Level |
-| suspended | boolean | true or false |
-| terminated | boolean | true or false |
+| Name                | Type    | Description                                               |
+| ------------------- | ------- | --------------------------------------------------------- |
+| uuid                | string  | Sub account uuid                                          |
+| master_account_uuid | string  | Master account uuid                                       |
+| margin_account_uuid | string  | (optional) Margin account uuid                            |
+| label               | string  | Sub account label                                         |
+| enabled             | boolean | true or false                                             |
+| tradable            | boolean | true or false                                             |
+| name                | string  | Name of sub account                                       |
+| email               | string  | Email of sub account                                      |
+| mobile_number       | string  | Mobile number of sub account                              |
+| country_code        | string  | Country Code of sub account                               |
+| address             | string  | Address of sub account                                    |
+| margin_access       | string  | DEFAULT or DISABLED                                       |
+| derivatives_access  | string  | DEFAULT or DISABLED                                       |
+| create_time         | number  | Creation timestamp (milliseconds since the Unix epoch)    |
+| update_time         | number  | Last update timestamp (milliseconds since the Unix epoch) |
+| two_fa_enabled      | boolean | true or false                                             |
+| kyc_level           | string  | Kyc Level                                                 |
+| suspended           | boolean | true or false                                             |
+| terminated          | boolean | true or false                                             |
 
-private/create-subaccount-transfer
-----------------------------------
+## private/create-subaccount-transfer
 
 > Request Sample
 
@@ -1070,7 +1143,6 @@ private/create-subaccount-transfer
       },
       "nonce": 1587846358253
     }
-    
 
 > Response sample
 
@@ -1079,18 +1151,17 @@ private/create-subaccount-transfer
       "method":"private/create-subaccount-transfer",
       "code":0
     }
-    
 
 Transfer between subaccounts (and master account).
 
 ### Request params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| from | string | Y | Account UUID to be debited |
-| to | string | Y | Account UUID to be credit |
-| currency | string | Y | Currency symbol |
-| amount | string | Y | Amount to transfer - must a be positive number |
+| Name     | Type   | Required | Description                                    |
+| -------- | ------ | -------- | ---------------------------------------------- |
+| from     | string | Y        | Account UUID to be debited                     |
+| to       | string | Y        | Account UUID to be credit                      |
+| currency | string | Y        | Currency symbol                                |
+| amount   | string | Y        | Amount to transfer - must a be positive number |
 
 ### Applies To
 
@@ -1098,12 +1169,11 @@ REST
 
 ### Response attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| code | number | 0 for successful transfer (NO\_ERROR) else the error code |
+| Name | Type   | Description                                              |
+| ---- | ------ | -------------------------------------------------------- |
+| code | number | 0 for successful transfer (NO_ERROR) else the error code |
 
-private/get-subaccount-balances
--------------------------------
+## private/get-subaccount-balances
 
 > Request Sample
 
@@ -1113,7 +1183,6 @@ private/get-subaccount-balances
       "params": {},
       "nonce": 1
     }
-    
 
 > Response Sample
 
@@ -1220,13 +1289,13 @@ private/get-subaccount-balances
         ]
       }
     }
-    
 
 Returns the user's wallet balances of all sub-accounts.
 
 ### Request Params
 
-**Note**: You still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: You still need to pass in an empty `params` block like `params: {}`
+for API request consistency
 
 ### Applies To
 
@@ -1240,39 +1309,38 @@ POST
 
 An array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account | string | Sub account ID |
-| instrument\_name | string | Instrument name of the balance e.g. `USD` |
-| total\_available\_balance | string | Balance that user can open new order (Margin Balance - Initial Margin) |
-| total\_margin\_balance | string | Positive cash balance on eligible collateral tokens + Negative balance on all tokens + Unrealised PnL - Fee reserves |
-| total\_initial\_margin | string | Total margin requirement to support positions and all open orders IM and haircut from risk asset holdings |
-| total\_maintenance\_margin | string | Total maintenance margin requirement for all positions |
-| total\_position\_cost | string | Position value in USD |
-| total\_cash\_balance | string | Wallet Balance (Deposits - Withdrawals + Realized PnL - Fees) |
-| total\_collateral\_value | string | Collateral Value |
-| total\_session\_unrealized\_pnl | string | Current unrealized profit and loss from all open positions (calculated with Mark Price and Avg Price) |
-| total\_session\_realized\_pnl | string | Current realized profit and loss from all open positions (calculated with Mark Price and Avg Price) |
-| is\_liquidating | boolean | Describes whether the account is under liquidation |
-| total\_effective\_leverage | string | The actual leverage used (all open positions combined), i.e. position size / margin balance |
-| position\_limit | string | Maximum position size allowed (for all open positions combined) |
-| used\_position\_limit | string | Combined position size of all open positions + order exposure on all instruments |
-| position\_balances | array | Collateral balances as shown below |
+| Name                         | Type    | Description                                                                                                          |
+| ---------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| account                      | string  | Sub account ID                                                                                                       |
+| instrument_name              | string  | Instrument name of the balance e.g. `USD`                                                                            |
+| total_available_balance      | string  | Balance that user can open new order (Margin Balance - Initial Margin)                                               |
+| total_margin_balance         | string  | Positive cash balance on eligible collateral tokens + Negative balance on all tokens + Unrealised PnL - Fee reserves |
+| total_initial_margin         | string  | Total margin requirement to support positions and all open orders IM and haircut from risk asset holdings            |
+| total_maintenance_margin     | string  | Total maintenance margin requirement for all positions                                                               |
+| total_position_cost          | string  | Position value in USD                                                                                                |
+| total_cash_balance           | string  | Wallet Balance (Deposits - Withdrawals + Realized PnL - Fees)                                                        |
+| total_collateral_value       | string  | Collateral Value                                                                                                     |
+| total_session_unrealized_pnl | string  | Current unrealized profit and loss from all open positions (calculated with Mark Price and Avg Price)                |
+| total_session_realized_pnl   | string  | Current realized profit and loss from all open positions (calculated with Mark Price and Avg Price)                  |
+| is_liquidating               | boolean | Describes whether the account is under liquidation                                                                   |
+| total_effective_leverage     | string  | The actual leverage used (all open positions combined), i.e. position size / margin balance                          |
+| position_limit               | string  | Maximum position size allowed (for all open positions combined)                                                      |
+| used_position_limit          | string  | Combined position size of all open positions + order exposure on all instruments                                     |
+| position_balances            | array   | Collateral balances as shown below                                                                                   |
 
 `position_balances` is an array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Instrument name of the collateral e.g. `USD`, `CRO`, `USDT`, or `DAI` |
-| quantity | string | Quantity of the collateral |
-| market\_value | string | Market value of the collateral |
-| collateral\_eligible | boolean | true or false |
-| haircut | string | Show haircut for eligible collateral token |
-| collateral\_amount | string | Collateral amount derived by market\_value minus haircut |
-| max\_withdrawal\_balance | string | Max withdrawal balance of the collateral |
+| Name                   | Type    | Description                                                           |
+| ---------------------- | ------- | --------------------------------------------------------------------- |
+| instrument_name        | string  | Instrument name of the collateral e.g. `USD`, `CRO`, `USDT`, or `DAI` |
+| quantity               | string  | Quantity of the collateral                                            |
+| market_value           | string  | Market value of the collateral                                        |
+| collateral_eligible    | boolean | true or false                                                         |
+| haircut                | string  | Show haircut for eligible collateral token                            |
+| collateral_amount      | string  | Collateral amount derived by market_value minus haircut               |
+| max_withdrawal_balance | string  | Max withdrawal balance of the collateral                              |
 
-private/get-positions
----------------------
+## private/get-positions
 
 > Request Sample
 
@@ -1282,7 +1350,6 @@ private/get-positions
       "params": {},
       "nonce": 1611022832613
     }
-    
 
 > Response Sample
 
@@ -1304,17 +1371,17 @@ private/get-positions
         }]
       }
     }
-    
 
 Returns the user's position.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD-PERP |
+| Name            | Type   | Required | Description      |
+| --------------- | ------ | -------- | ---------------- |
+| instrument_name | string | N        | e.g. BTCUSD-PERP |
 
-**Note**: If you omit all parameters, you still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: If you omit all parameters, you still need to pass in an empty
+`params` block like `params: {}` for API request consistency
 
 ### Applies To
 
@@ -1328,27 +1395,25 @@ POST
 
 An array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| type | string | e.g. Perpetual Swap |
-| quantity | string | Position quantity |
-| cost | string | Position cost or value in USD |
-| open\_position\_pnl | string | Profit and loss for the open position |
-| open\_pos\_cost | string | Open position cost |
-| session\_pnl | string | Profit and loss in the current trading session |
-| update\_timestamp\_ms | number | Updated time (Unix timestamp) |
+| Name                | Type   | Description                                    |
+| ------------------- | ------ | ---------------------------------------------- |
+| instrument_name     | string | e.g. BTCUSD-PERP                               |
+| type                | string | e.g. Perpetual Swap                            |
+| quantity            | string | Position quantity                              |
+| cost                | string | Position cost or value in USD                  |
+| open_position_pnl   | string | Profit and loss for the open position          |
+| open_pos_cost       | string | Open position cost                             |
+| session_pnl         | string | Profit and loss in the current trading session |
+| update_timestamp_ms | number | Updated time (Unix timestamp)                  |
 
-Trading API
-===========
+# Trading API
 
-Introduction
-------------
+## Introduction
 
-History will be stored for recent 6 months record only. For records over 6 months, please contact our support team.
+History will be stored for recent 6 months record only. For records over 6
+months, please contact our support team.
 
-private/create-order
---------------------
+## private/create-order
 
 > Request Sample
 
@@ -1367,7 +1432,6 @@ private/create-order
         "time_in_force": "FILL_OR_KILL"
       }
     }
-    
 
 > Response Sample
 
@@ -1380,66 +1444,71 @@ private/create-order
         "order_id": "18342311"
       }
     }
-    
 
 Creates a new BUY or SELL Order on the Exchange.
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check when the order is successfully created.
+The `user.order` subscription can be used to check when the order is
+successfully created.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTCUSD-PERP |
-| side | string | Y | `BUY`, `SELL` |
-| type | string | Y | `LIMIT`, `MARKET`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
-| price | string | Y | Price |
-| quantity | string | Y | Order Quantity |
-| notional | [number](#request-format-2) | Depends | For MARKET (BUY), STOP\_LOSS (BUY), TAKE\_PROFIT (BUY) orders only:  
-Amount to spend |
-| client\_oid | string | N | Client Order ID (Maximum 36 characters) |
-| exec\_inst | array of string | N | `POST_ONLY` |
-| time\_in\_force | string | N | `GOOD_TILL_CANCEL`, `IMMEDIATE_OR_CANCEL`, `FILL_OR_KILL`  
-When `exec_inst` contains `POST_ONLY`, `time_in_force` can only be `GOOD_TILL_CANCEL` |
-| ref\_price | string | N\* | Trigger price required for `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` order type |
-| ref\_price\_type | string | N | which price to use for ref\_price: `MARK_PRICE` (default), `INDEX_PRICE`, `LAST_PRICE` |
-| spot\_margin | string | N | `SPOT`: non-margin order, `MARGIN`: margin order |
-| stp\_scope | string | N | Optional Field  
-  
+| Name                                                                                  | Type                        | Required | Description                                                                                         |
+| ------------------------------------------------------------------------------------- | --------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| instrument_name                                                                       | string                      | Y        | e.g. BTCUSD-PERP                                                                                    |
+| side                                                                                  | string                      | Y        | `BUY`, `SELL`                                                                                       |
+| type                                                                                  | string                      | Y        | `LIMIT`, `MARKET`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`                    |
+| price                                                                                 | string                      | Y        | Price                                                                                               |
+| quantity                                                                              | string                      | Y        | Order Quantity                                                                                      |
+| notional                                                                              | [number](#request-format-2) | Depends  | For MARKET (BUY), STOP_LOSS (BUY), TAKE_PROFIT (BUY) orders only:                                   |
+| Amount to spend                                                                       |
+| client_oid                                                                            | string                      | N        | Client Order ID (Maximum 36 characters)                                                             |
+| exec_inst                                                                             | array of string             | N        | `POST_ONLY`                                                                                         |
+| time_in_force                                                                         | string                      | N        | `GOOD_TILL_CANCEL`, `IMMEDIATE_OR_CANCEL`, `FILL_OR_KILL`                                           |
+| When `exec_inst` contains `POST_ONLY`, `time_in_force` can only be `GOOD_TILL_CANCEL` |
+| ref_price                                                                             | string                      | N\*      | Trigger price required for `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` order type |
+| ref_price_type                                                                        | string                      | N        | which price to use for ref_price: `MARK_PRICE` (default), `INDEX_PRICE`, `LAST_PRICE`               |
+| spot_margin                                                                           | string                      | N        | `SPOT`: non-margin order, `MARGIN`: margin order                                                    |
+| stp_scope                                                                             | string                      | N        | Optional Field                                                                                      |
+
 Possible Values  
 \- M: Matches Master or Sub a/c  
-\- S: Matches Sub a/c only  
-  
-Note: orderbook-specific settings takes higher precedence. |
-| stp\_inst | string | N\* | Mandatory if stp\_scope is set.  
-  
+\- S: Matches Sub a/c only
+
+Note: orderbook-specific settings takes higher precedence. | | stp_inst | string
+| N\* | Mandatory if stp_scope is set.
+
 Possible Values  
 \- M: Cancel Maker  
 \- T: Cancel Taker  
-\- B: Cancel Both Maker and Taker |
-| stp\_id | string of number | N\* | Optional Field  
-  
-Possible Value: 0 to 32767  
-  
+\- B: Cancel Both Maker and Taker | | stp_id | string of number | N\* | Optional
+Field
+
+Possible Value: 0 to 32767
+
 Default Value  
-\- If stp\_scope & stp\_inst are not specified, REJECT  
-\- If stp\_scope is specified, default value = 0.  
-  
-Note: orderbook-specific settings takes higher precedence. |
-| fee\_instrument\_name | string | N | Specify the preferred fee token.  
+\- If stp_scope & stp_inst are not specified, REJECT  
+\- If stp_scope is specified, default value = 0.
+
+Note: orderbook-specific settings takes higher precedence. | |
+fee_instrument_name | string | N | Specify the preferred fee token.  
 Valid Values:  
 \[SPOT\] Buy - Base/Quote token/USD/USDT/EUR  
 \[SPOT\] Sell - Quote token/USD/USDT/EUR  
-\[DERIV\] Buy/Sell - USD/USDT/EUR  
-  
+\[DERIV\] Buy/Sell - USD/USDT/EUR
+
 Example:  
-If a client would like to BUY CRO/BTC, the default fee token is CRO, valid tokens are CRO/BTC/USD/USDT/EUR.  
-If a client would like to SELL CRO/BTC, the default fee token is BTC, valid tokens are BTC/USD/USDT/EUR.  
-If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD, valid tokens are USD/USDT/EUR.  
-  
-If a client has an insufficient balance in their preferred fee token, the system will switch to the default fee token. |
+If a client would like to BUY CRO/BTC, the default fee token is CRO, valid
+tokens are CRO/BTC/USD/USDT/EUR.  
+If a client would like to SELL CRO/BTC, the default fee token is BTC, valid
+tokens are BTC/USD/USDT/EUR.  
+If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD,
+valid tokens are USD/USDT/EUR.
+
+If a client has an insufficient balance in their preferred fee token, the system
+will switch to the default fee token. |
 
 ### Applies To
 
@@ -1451,13 +1520,12 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| order\_id | string of number | Newly created order ID |
-| client\_oid | string | If a Client Order ID was provided in the request, otherwise, will be the `nonce` in the request. As nonce can be the same among orders, it is recommened to specify `client_oid`. |
+| Name       | Type             | Description                                                                                                                                                                       |
+| ---------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id   | string of number | Newly created order ID                                                                                                                                                            |
+| client_oid | string           | If a Client Order ID was provided in the request, otherwise, will be the `nonce` in the request. As nonce can be the same among orders, it is recommened to specify `client_oid`. |
 
-private/cancel-order
---------------------
+## private/cancel-order
 
 > Request Sample
 
@@ -1469,7 +1537,6 @@ private/cancel-order
         "order_id": "18342311"
       }
     }
-    
 
 > Response Sample
 
@@ -1483,23 +1550,24 @@ private/cancel-order
         "order_id": "18342311"
       }
     }
-    
-    
 
 Cancels an existing order on the Exchange (asynchronous).
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check when the order is successfully canceled.
+The `user.order` subscription can be used to check when the order is
+successfully canceled.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| order\_id | number or string of number | Depends | Optional Order ID  
+| Name     | Type                       | Required | Description       |
+| -------- | -------------------------- | -------- | ----------------- |
+| order_id | number or string of number | Depends  | Optional Order ID |
+
 Either `order_id` or `client_oid` must be present  
-`string` format is highly recommended. |
-| client\_oid | string | Depends | Optional Client Order ID  
+`string` format is highly recommended. | | client_oid | string | Depends |
+Optional Client Order ID  
 Either `order_id` or `client_oid` must be present |
 
 ### Applies To
@@ -1512,13 +1580,12 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| order\_id | string of number | Order ID |
-| client\_oid | string | Client Order ID |
+| Name       | Type             | Description     |
+| ---------- | ---------------- | --------------- |
+| order_id   | string of number | Order ID        |
+| client_oid | string           | Client Order ID |
 
-private/cancel-all-orders
--------------------------
+## private/cancel-all-orders
 
 > Request Sample
 
@@ -1530,7 +1597,6 @@ private/cancel-all-orders
         "instrument_name": "BTCUSD-PERP"
       }
     }
-    
 
 > Response Sample
 
@@ -1539,20 +1605,21 @@ private/cancel-all-orders
       "method": "private/cancel-all-orders",
       "code": 0
     }
-    
 
 Cancels all orders for a particular instrument/pair (asynchronous).
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check when the order is successfully canceled.
+The `user.order` subscription can be used to check when the order is
+successfully canceled.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD-PERP. If not provided, the orders of ALL instruments will be canceled |
-| type | string | N | e.g. `LIMIT`, `TRIGGER`, `ALL` |
+| Name            | Type   | Required | Description                                                                       |
+| --------------- | ------ | -------- | --------------------------------------------------------------------------------- |
+| instrument_name | string | N        | e.g. BTCUSD-PERP. If not provided, the orders of ALL instruments will be canceled |
+| type            | string | N        | e.g. `LIMIT`, `TRIGGER`, `ALL`                                                    |
 
 ### Applies To
 
@@ -1564,10 +1631,10 @@ POST
 
 ### Response Attributes
 
-No result block is returned. The code (0 = success) is the primary indicator that the request is queued.
+No result block is returned. The code (0 = success) is the primary indicator
+that the request is queued.
 
-private/close-position
-----------------------
+## private/close-position
 
 > Request Sample
 
@@ -1581,7 +1648,7 @@ private/close-position
         "price": "30000.0"
       }
     }
-    
+
     {
       "id": 1,
       "nonce" : 1610905028000,
@@ -1591,7 +1658,6 @@ private/close-position
         "type": "MARKET"
       }
     }
-    
 
 > Response Sample
 
@@ -1604,21 +1670,22 @@ private/close-position
         "order_id": "15744"
       }
     }
-    
 
 Cancels position for a particular instrument/pair (asynchronous).
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check when the order is successfully canceled.
+The `user.order` subscription can be used to check when the order is
+successfully canceled.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTCUSD-PERP |
-| type | string | Y | `LIMIT` or `MARKET` |
-| price | string | Depends | For `LIMIT` orders only |
+| Name            | Type   | Required | Description             |
+| --------------- | ------ | -------- | ----------------------- |
+| instrument_name | string | Y        | e.g. BTCUSD-PERP        |
+| type            | string | Y        | `LIMIT` or `MARKET`     |
+| price           | string | Depends  | For `LIMIT` orders only |
 
 ### Applies To
 
@@ -1632,13 +1699,12 @@ POST
 
 The code (0 = success) is the primary indicator that the request is queued.
 
-| Name | Type | Description |
-| --- | --- | --- |
-| order\_id | string of number | Order ID |
-| client\_oid | string | Client Order ID |
+| Name       | Type             | Description     |
+| ---------- | ---------------- | --------------- |
+| order_id   | string of number | Order ID        |
+| client_oid | string           | Client Order ID |
 
-private/get-open-orders
------------------------
+## private/get-open-orders
 
 > Request Sample
 
@@ -1649,7 +1715,6 @@ private/get-open-orders
         "instrument_name": "BTCUSD-PERP"
       }
     }
-    
 
 > Response Sample
 
@@ -1686,15 +1751,14 @@ private/get-open-orders
         }]
       }
     }
-    
 
 Gets all **open** orders for a particular instrument.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD-PERP. Omit for 'all' |
+| Name            | Type   | Required | Description                      |
+| --------------- | ------ | -------- | -------------------------------- |
+| instrument_name | string | N        | e.g. BTCUSD-PERP. Omit for 'all' |
 
 ### Applies To
 
@@ -1708,45 +1772,37 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| order\_id | string of number | Order ID |
-| client\_oid | string | Client Order ID |
-| order\_type | string | `MARKET`, `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
-| time\_in\_force | string |   
+| Name          | Type             | Description                                                                      |
+| ------------- | ---------------- | -------------------------------------------------------------------------------- |
+| account_id    | string           | Account ID                                                                       |
+| order_id      | string of number | Order ID                                                                         |
+| client_oid    | string           | Client Order ID                                                                  |
+| order_type    | string           | `MARKET`, `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force | string           |
+
 \- `GOOD_TILL_CANCEL`  
 \- `IMMEDIATE_OR_CANCEL`  
-\- `FILL_OR_KILL` |
-| side | string | `BUY` or `SELL` |
-| exec\_inst | array |   
+\- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
-\- `LIQUIDATION` |
-| quantity | string | Quantity specified in the order |
-| limit\_price | string | Limit price specified in the order |
-| order\_value | string | Order value |
-| maker\_fee\_rate | string | User's maker fee rate |
-| taker\_fee\_rate | string | User's taker fee rate |
-| avg\_price | string | Average price |
-| cumulative\_quantity | string | Cumulative executed quantity |
-| cumulative\_value | string | Cumulative executed value |
-| cumulative\_fee | string | Cumulative executed fee |
-| status | string | Order status:  
+\- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
+limit_price | string | Limit price specified in the order | | order_value |
+string | Order value | | maker_fee_rate | string | User's maker fee rate | |
+taker_fee_rate | string | User's taker fee rate | | avg_price | string | Average
+price | | cumulative_quantity | string | Cumulative executed quantity | |
+cumulative_value | string | Cumulative executed value | | cumulative_fee |
+string | Cumulative executed fee | | status | string | Order status:  
 \- `NEW`  
 \- `PENDING`  
-\- `ACTIVE` |
-| update\_user\_id | string | Updated user |
-| order\_date | string | Order creation date |
-| create\_time | number | Order creation timestamp |
-| create\_time\_ns | string | Order creation timestamp (nanosecond) |
-| update\_time | number | Order update timestamp |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| fee\_instrument\_name | string | Currency used for the fees |
+\- `ACTIVE` | | update_user_id | string | Updated user | | order_date | string |
+Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g.
+BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees |
 
-Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and `cumulative_quantity` > 0.
+Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and
+`cumulative_quantity` > 0.
 
-private/get-order-detail
-------------------------
+## private/get-order-detail
 
 > Request Sample
 
@@ -1757,7 +1813,6 @@ private/get-order-detail
         "order_id": "19848525"
       }
     }
-    
 
 > Response Sample
 
@@ -1793,14 +1848,13 @@ private/get-order-detail
         "update_time": 1613575617173
       }
     }
-    
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| order\_id | number or string of number | N | Order ID. `string` format is highly recommended, especially for JavaScript client. If not provided, `client_oid` must be specified. |
-| client\_oid | string | N | Client Order ID. If not provided, `order_id` must be specified. |
+| Name       | Type                       | Required | Description                                                                                                                         |
+| ---------- | -------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| order_id   | number or string of number | N        | Order ID. `string` format is highly recommended, especially for JavaScript client. If not provided, `client_oid` must be specified. |
+| client_oid | string                     | N        | Client Order ID. If not provided, `order_id` must be specified.                                                                     |
 
 Note: Either `order_id` or `client_oid` must be specified.
 
@@ -1816,44 +1870,35 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| order\_id | string of number | Order ID |
-| client\_oid | string | Client Order ID |
-| order\_type | string | `MARKET`, `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
-| time\_in\_force | string |   
+| Name          | Type             | Description                                                                      |
+| ------------- | ---------------- | -------------------------------------------------------------------------------- |
+| account_id    | string           | Account ID                                                                       |
+| order_id      | string of number | Order ID                                                                         |
+| client_oid    | string           | Client Order ID                                                                  |
+| order_type    | string           | `MARKET`, `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force | string           |
+
 \- `GOOD_TILL_CANCEL`  
 \- `IMMEDIATE_OR_CANCEL`  
-\- `FILL_OR_KILL` |
-| side | string | `BUY` or `SELL` |
-| exec\_inst | array |   
+\- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
-\- `LIQUIDATION` |
-| quantity | string | Quantity specified in the order |
-| limit\_price | string | Limit price specified in the order |
-| order\_value | string | Order value |
-| maker\_fee\_rate | string | User's maker fee rate |
-| taker\_fee\_rate | string | User's taker fee rate |
-| avg\_price | string | Average price |
-| cumulative\_quantity | string | Cumulative executed quantity |
-| cumulative\_value | string | Cumulative executed value |
-| cumulative\_fee | string | Cumulative executed fee |
-| status | string | Order status:  
+\- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
+limit_price | string | Limit price specified in the order | | order_value |
+string | Order value | | maker_fee_rate | string | User's maker fee rate | |
+taker_fee_rate | string | User's taker fee rate | | avg_price | string | Average
+price | | cumulative_quantity | string | Cumulative executed quantity | |
+cumulative_value | string | Cumulative executed value | | cumulative_fee |
+string | Cumulative executed fee | | status | string | Order status:  
 \- `REJECTED`  
 \- `CANCELED`  
 \- `FILLED`  
-\- `EXPIRED` |
-| update\_user\_id | string | Updated user |
-| order\_date | string | Order creation date |
-| create\_time | number | Order creation timestamp |
-| create\_time\_ns | string | Order creation timestamp (nanosecond) |
-| update\_time | number | Order update timestamp |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| fee\_instrument\_name | string | Currency used for the fees |
+\- `EXPIRED` | | update_user_id | string | Updated user | | order_date | string
+| Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g.
+BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees |
 
-private/change-account-leverage
--------------------------------
+## private/change-account-leverage
 
 > Request Sample
 
@@ -1865,7 +1910,6 @@ private/change-account-leverage
         "leverage": 10
       }
     }
-    
 
 > Response Sample
 
@@ -1874,16 +1918,17 @@ private/change-account-leverage
       "method": "private/change-account-leverage",
       "code": 0
     }
-    
 
-Changes the maximum leverage used by the account. Please note, each instrument has its own maximum leverage. Whichever leverage (account or instrument) is lower will be used.
+Changes the maximum leverage used by the account. Please note, each instrument
+has its own maximum leverage. Whichever leverage (account or instrument) is
+lower will be used.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| account\_id | string | Y | account ID to change the leverage. Must be currently the logged user's account |
-| leverage | number | Y | maximum leverage to be used for the account. Valid values are between 1-100 (inclusive) |
+| Name       | Type   | Required | Description                                                                             |
+| ---------- | ------ | -------- | --------------------------------------------------------------------------------------- |
+| account_id | string | Y        | account ID to change the leverage. Must be currently the logged user's account          |
+| leverage   | number | Y        | maximum leverage to be used for the account. Valid values are between 1-100 (inclusive) |
 
 ### Applies To
 
@@ -1895,13 +1940,12 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| code | number | error code or 0 if no error |
+| Name    | Type   | Description                                                  |
+| ------- | ------ | ------------------------------------------------------------ |
+| code    | number | error code or 0 if no error                                  |
 | message | string | text description of the error code if non-zero code returned |
 
-private/change-account-settings
--------------------------------
+## private/change-account-settings
 
 > Request Sample
 
@@ -1916,7 +1960,6 @@ private/change-account-settings
       },
       "nonce": 1721989111722
     }
-    
 
 > Response Sample
 
@@ -1925,34 +1968,36 @@ private/change-account-settings
       "method": "private/change-account-settings",
       "code": 0
     }
-    
 
 Change the account STP settings.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| stp\_scope | string | N | Optional Field  
+| Name      | Type   | Required | Description    |
+| --------- | ------ | -------- | -------------- |
+| stp_scope | string | N        | Optional Field |
+
 Possible Values  
 M: Matches Master or Sub a/c  
-S: Matches Sub a/c only |
-| stp\_inst | number | N | Mandatory if stp\_scope is set.  
+S: Matches Sub a/c only | | stp_inst | number | N | Mandatory if stp_scope is
+set.  
 Possible Values  
 M: Cancel Maker  
 T: Cancel Taker  
-B: Cancel Both Maker and Taker |
-| stp\_id | string of number | N | Optional Field:  
+B: Cancel Both Maker and Taker | | stp_id | string of number | N | Optional
+Field:  
 Possible Value: 0 to 32767  
 Default Value  
-If stp\_scope & stp\_inst are not specified, REJECT  
-If stp\_scope is specified, default value = 0. |
-| leverage | number | N | Maximum leverage user intends to set for the account. Valid values are between 1-50 (inclusive). When account effective leverage exceeds this, further risk increasing orders will be rejected |
+If stp_scope & stp_inst are not specified, REJECT  
+If stp_scope is specified, default value = 0. | | leverage | number | N |
+Maximum leverage user intends to set for the account. Valid values are between
+1-50 (inclusive). When account effective leverage exceeds this, further risk
+increasing orders will be rejected |
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
+| Name | Type   | Description              |
+| ---- | ------ | ------------------------ |
 | code | number | 0 for successful changes |
 
 ### Applies To
@@ -1963,8 +2008,7 @@ REST
 
 POST
 
-private/get-account-settings
-----------------------------
+## private/get-account-settings
 
 > Request Sample
 
@@ -1975,7 +2019,6 @@ private/get-account-settings
       "params": {},
       "nonce": 1721989202781
     }
-    
 
 > Response Sample
 
@@ -1992,7 +2035,6 @@ private/get-account-settings
         }
       ]
     }
-    
 
 Get the STP account settings.
 
@@ -2002,27 +2044,27 @@ N/A
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| code | number | 0 for successful changes |
+| Name               | Type   | Description                                                                                                                             |
+| ------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| code               | number | 0 for successful changes                                                                                                                |
 | result -> leverage | number | The max leverage user set on the account. When account effective leverage exceeds this, further risk increasing orders will be rejected |
-| result -> stp\_id | number | Optional Field  
-  
-Possible Value: 0 to 32767  
-  
+| result -> stp_id   | number | Optional Field                                                                                                                          |
+
+Possible Value: 0 to 32767
+
 Default Value  
-\- If stp\_scope & stp\_inst are not specified, REJECT  
-\- If stp\_scope is specified, default value = 0.  
-  
-Note: orderbook-specific settings takes higher precedence. |
-| result -> stp\_scope | string | Optional Field  
-  
+\- If stp_scope & stp_inst are not specified, REJECT  
+\- If stp_scope is specified, default value = 0.
+
+Note: orderbook-specific settings takes higher precedence. | | result ->
+stp_scope | string | Optional Field
+
 Possible Values  
 \- M: Matches Master or Sub a/c  
-\- S: Matches Sub a/c only  
-  
-Note: orderbook-specific settings takes higher precedence. |
-| result -> stp\_inst | string | Possible Values  
+\- S: Matches Sub a/c only
+
+Note: orderbook-specific settings takes higher precedence. | | result ->
+stp_inst | string | Possible Values  
 \- M: Cancel Maker  
 \- T: Cancel Taker  
 \- B: Cancel Both Maker and Taker |
@@ -2035,8 +2077,7 @@ REST
 
 POST
 
-private/get-fee-rate
---------------------
+## private/get-fee-rate
 
 > Request Sample
 
@@ -2046,7 +2087,6 @@ private/get-fee-rate
       "params": {},
       "nonce": 1721989202781
     }
-    
 
 > Response Sample
 
@@ -2063,7 +2103,6 @@ private/get-fee-rate
         "effective_deriv_taker_rate_bps": "3"
       }
     }
-    
 
 Get fee rates for user’s account.
 
@@ -2073,14 +2112,14 @@ N/A
 
 ### Response Attributes
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| spot\_tier | string | Y | 30day spot trading volume tier |
-| deriv\_tier | string | Y | 30day deriv trading volume tier |
-| effective\_spot\_maker\_rate\_bps | string | Y | 30day spot maker rate in bps |
-| effective\_spot\_taker\_rate\_bps | string | Y | 30day spot taker rate in bps |
-| effective\_deriv\_maker\_rate\_bps | string | Y | 30day deriv maker rate in bps |
-| effective\_deriv\_taker\_rate\_bps | string | Y | 30day deriv taker rate in bps |
+| Name                           | Type   | Required | Description                     |
+| ------------------------------ | ------ | -------- | ------------------------------- |
+| spot_tier                      | string | Y        | 30day spot trading volume tier  |
+| deriv_tier                     | string | Y        | 30day deriv trading volume tier |
+| effective_spot_maker_rate_bps  | string | Y        | 30day spot maker rate in bps    |
+| effective_spot_taker_rate_bps  | string | Y        | 30day spot taker rate in bps    |
+| effective_deriv_maker_rate_bps | string | Y        | 30day deriv maker rate in bps   |
+| effective_deriv_taker_rate_bps | string | Y        | 30day deriv taker rate in bps   |
 
 ### Applies To
 
@@ -2090,8 +2129,7 @@ REST
 
 POST
 
-private/get-instrument-fee-rate
--------------------------------
+## private/get-instrument-fee-rate
 
 > Request Sample
 
@@ -2103,7 +2141,6 @@ private/get-instrument-fee-rate
         "instrument_name": "BTC_USD"
       }
     }
-    
 
 > Response Sample
 
@@ -2117,23 +2154,22 @@ private/get-instrument-fee-rate
         "effective_taker_rate_bps": "6.9"
       }
     }
-    
 
 Get the instrument fee rate.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTC\_USD, BTCUSD-PERP |
+| Name            | Type   | Required | Description               |
+| --------------- | ------ | -------- | ------------------------- |
+| instrument_name | string | Y        | e.g. BTC_USD, BTCUSD-PERP |
 
 ### Response Attributes
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTC\_USD |
-| effective\_maker\_rate\_bps | string | Y | maker rate in bps |
-| effective\_taker\_rate\_bps | string | Y | taker rate in bps |
+| Name                     | Type   | Required | Description       |
+| ------------------------ | ------ | -------- | ----------------- |
+| instrument_name          | string | Y        | e.g. BTC_USD      |
+| effective_maker_rate_bps | string | Y        | maker rate in bps |
+| effective_taker_rate_bps | string | Y        | taker rate in bps |
 
 ### Applies To
 
@@ -2143,18 +2179,22 @@ REST
 
 POST
 
-Advanced Order Management API
-=============================
+# Advanced Order Management API
 
-private/create-order (Conditional Order)
-----------------------------------------
+## private/create-order (Conditional Order)
 
-[Conditional Orders](https://help.crypto.com/en/articles/4453247-stop-loss-order-and-take-profit-order) automatically place a mark or limit order when the mark price reaches a trigger price specified by the user. If the mark price reaches or exceeds the trigger price, the Stop-Loss/Take-Profit order will be converted to a live order and placed in the order book. If the mark price does not reach the trigger price, the Stop-Loss/Take-Profit order will remain active until it is canceled or triggered.
+[Conditional Orders](https://help.crypto.com/en/articles/4453247-stop-loss-order-and-take-profit-order)
+automatically place a mark or limit order when the mark price reaches a trigger
+price specified by the user. If the mark price reaches or exceeds the trigger
+price, the Stop-Loss/Take-Profit order will be converted to a live order and
+placed in the order book. If the mark price does not reach the trigger price,
+the Stop-Loss/Take-Profit order will remain active until it is canceled or
+triggered.
 
-See [private/create-order](#private-create-order) and the `type` parameter for more information.
+See [private/create-order](#private-create-order) and the `type` parameter for
+more information.
 
-private/create-order-list (LIST)
---------------------------------
+## private/create-order-list (LIST)
 
 > Request Sample
 
@@ -2189,9 +2229,9 @@ private/create-order-list (LIST)
       },
       "nonce": 1637891379231
     }
-    
+
     > Response Sample
-    
+
     ```json
     // Create List of Orders - All ok
     {
@@ -2215,7 +2255,7 @@ private/create-order-list (LIST)
         ]
       }
     }
-    
+
     // Create List of Orders - Some rejected
     {
       "id": 12,
@@ -2238,116 +2278,121 @@ private/create-order-list (LIST)
         ]
       }
     }
-    
 
 Create a list of orders on the Exchange.
 
 `contingency_type` must be `LIST`, for list of orders creation.
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check if the orders are successfully created.
+The `user.order` subscription can be used to check if the orders are
+successfully created.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| contingency\_type | string | Y | LIST |
-| order\_list | array of orders | Y | `LIST`: 1-10 orders |
+| Name             | Type            | Required | Description         |
+| ---------------- | --------------- | -------- | ------------------- |
+| contingency_type | string          | Y        | LIST                |
+| order_list       | array of orders | Y        | `LIST`: 1-10 orders |
 
 Content of each order in `order_list`
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g., ETH\_CRO, BTC\_USDT |
-| side | string | Y | BUY, SELL |
-| type | string | Y | LIMIT, MARKET, STOP\_LOSS, STOP\_LIMIT, TAKE\_PROFIT, TAKE\_PROFIT\_LIMIT |
-| price | number | Depends | For LIMIT and STOP\_LIMIT orders only:  
-Unit price |
-| quantity | number | Depends | For LIMIT Orders, MARKET, STOP\_LOSS, TAKE\_PROFIT orders only:  
-Order Quantity to be Sold |
-| notional | [number](#request-format-2) | Depends | For MARKET (BUY), STOP\_LOSS (BUY), TAKE\_PROFIT (BUY) orders only:  
-Amount to spend |
-| client\_oid | string | N | Optional Client order ID (Maximum 36 characters) |
-| time\_in\_force | string | N | (Limit Orders Only)  
+| Name                      | Type                        | Required | Description                                                          |
+| ------------------------- | --------------------------- | -------- | -------------------------------------------------------------------- |
+| instrument_name           | string                      | Y        | e.g., ETH_CRO, BTC_USDT                                              |
+| side                      | string                      | Y        | BUY, SELL                                                            |
+| type                      | string                      | Y        | LIMIT, MARKET, STOP_LOSS, STOP_LIMIT, TAKE_PROFIT, TAKE_PROFIT_LIMIT |
+| price                     | number                      | Depends  | For LIMIT and STOP_LIMIT orders only:                                |
+| Unit price                |
+| quantity                  | number                      | Depends  | For LIMIT Orders, MARKET, STOP_LOSS, TAKE_PROFIT orders only:        |
+| Order Quantity to be Sold |
+| notional                  | [number](#request-format-2) | Depends  | For MARKET (BUY), STOP_LOSS (BUY), TAKE_PROFIT (BUY) orders only:    |
+| Amount to spend           |
+| client_oid                | string                      | N        | Optional Client order ID (Maximum 36 characters)                     |
+| time_in_force             | string                      | N        | (Limit Orders Only)                                                  |
+
 Options are:  
 \- `GOOD_TILL_CANCEL` (Default if unspecified)  
 \- `FILL_OR_KILL`  
-\- `IMMEDIATE_OR_CANCEL` |
-| exec\_inst | array | N | (Limit Orders Only)  
+\- `IMMEDIATE_OR_CANCEL` | | exec_inst | array | N | (Limit Orders Only)  
 Options are:  
 \- `POST_ONLY`  
-\- Or leave empty |
-| trigger\_price | number | N | Used with STOP\_LOSS, STOP\_LIMIT, TAKE\_PROFIT, and TAKE\_PROFIT\_LIMIT orders.  
-Dictates when order will be triggered |
-| stp\_scope | string | N | Optional Field  
-  
+\- Or leave empty | | trigger_price | number | N | Used with STOP_LOSS,
+STOP_LIMIT, TAKE_PROFIT, and TAKE_PROFIT_LIMIT orders.  
+Dictates when order will be triggered | | stp_scope | string | N | Optional
+Field
+
 Possible Values  
 \- M: Matches Master or Sub a/c  
-\- S: Matches Sub a/c only  
-  
-Note: orderbook-specific settings takes higher precedence. |
-| stp\_inst | string | N\* | Mandatory if stp\_scope is set.  
-  
+\- S: Matches Sub a/c only
+
+Note: orderbook-specific settings takes higher precedence. | | stp_inst | string
+| N\* | Mandatory if stp_scope is set.
+
 Possible Values  
 \- M: Cancel Maker  
 \- T: Cancel Taker  
-\- B: Cancel Both Maker and Taker |
-| stp\_id | string of number | N\* | Optional Field  
-  
-Possible Value: 0 to 32767  
-  
+\- B: Cancel Both Maker and Taker | | stp_id | string of number | N\* | Optional
+Field
+
+Possible Value: 0 to 32767
+
 Default Value  
-\- If stp\_scope & stp\_inst are not specified, REJECT  
-\- If stp\_scope is specified, default value = 0.  
-  
-Note: orderbook-specific settings takes higher precedence. |
-| fee\_instrument\_name | string | N | Specify the preferred fee token.  
+\- If stp_scope & stp_inst are not specified, REJECT  
+\- If stp_scope is specified, default value = 0.
+
+Note: orderbook-specific settings takes higher precedence. | |
+fee_instrument_name | string | N | Specify the preferred fee token.  
 Valid Values:  
 \[SPOT\] Buy - Base/Quote CCY/USD/USDT  
 \[SPOT\] Sell - Quote CCY/USD/USDT  
-\[DERIV\] Buy/Sell - USD/USDT  
-  
-Example:  
-If a client would like to BUY CRO/BTC, the default fee token is CRO, valid currencies are CRO/BTC/USD/USDT.  
-If a client would like to SELL CRO/BTC, the default fee token is BTC, valid currencies are BTC/USD/USDT.  
-If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD, valid currencies are USD/USDT.  
-  
-If a client has an insufficient balance in their preferred fee token, the system will switch to the default fee token. |
+\[DERIV\] Buy/Sell - USD/USDT
 
-  
+Example:  
+If a client would like to BUY CRO/BTC, the default fee token is CRO, valid
+currencies are CRO/BTC/USD/USDT.  
+If a client would like to SELL CRO/BTC, the default fee token is BTC, valid
+currencies are BTC/USD/USDT.  
+If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD,
+valid currencies are USD/USDT.
+
+If a client has an insufficient balance in their preferred fee token, the system
+will switch to the default fee token. |
+
 **Here are the mandatory parameters based on order `type`:**
 
-| Type | Side | Additional Mandatory Parameters |
-| --- | --- | --- |
-| LIMIT | Both | quantity, price |
-| MARKET | BUY | notional or quantity, mutually exclusive |
-| MARKET | SELL | quantity |
-| STOP\_LIMIT | Both | price, quantity, trigger\_price |
-| TAKE\_PROFIT\_LIMIT | Both | price, quantity, trigger\_price |
-| STOP\_LOSS | BUY | notional, trigger\_price |
-| STOP\_LOSS | SELL | quantity, trigger\_price |
-| TAKE\_PROFIT | BUY | notional, trigger\_price |
-| TAKE\_PROFIT | SELL | quantity, trigger\_price |
+| Type              | Side | Additional Mandatory Parameters          |
+| ----------------- | ---- | ---------------------------------------- |
+| LIMIT             | Both | quantity, price                          |
+| MARKET            | BUY  | notional or quantity, mutually exclusive |
+| MARKET            | SELL | quantity                                 |
+| STOP_LIMIT        | Both | price, quantity, trigger_price           |
+| TAKE_PROFIT_LIMIT | Both | price, quantity, trigger_price           |
+| STOP_LOSS         | BUY  | notional, trigger_price                  |
+| STOP_LOSS         | SELL | quantity, trigger_price                  |
+| TAKE_PROFIT       | BUY  | notional, trigger_price                  |
+| TAKE_PROFIT       | SELL | quantity, trigger_price                  |
 
-  
 **Contingency Type:**
 
-| Type | Description |
-| --- | --- |
+| Type | Description             |
+| ---- | ----------------------- |
 | LIST | Create a list of orders |
 
-  
 **Helpful information:**
 
-*   `STOP_LIMIT` and `TAKE_PROFIT_LIMIT` will execute a LIMIT order when the trigger\_price is reached.
-*   `STOP_LOSS` and `TAKE_PROFIT` will execute a MARKET order when the trigger\_price is reached.
+- `STOP_LIMIT` and `TAKE_PROFIT_LIMIT` will execute a LIMIT order when the
+  trigger_price is reached.
+- `STOP_LOSS` and `TAKE_PROFIT` will execute a MARKET order when the
+  trigger_price is reached.
 
-  
 **To create trigger orders against market price:**
 
-*   `trigger_price` below market price: SELL `STOP_LOSS` and `STOP_LIMIT`, BUY `TAKE_PROFIT` and `TAKE_PROFIT_LIMIT`
-*   `trigger_price` above market price: BUY `STOP_LOSS` and `STOP_LIMIT`, SELL `TAKE_PROFIT` and `TAKE_PROFIT_LIMIT`
+- `trigger_price` below market price: SELL `STOP_LOSS` and `STOP_LIMIT`, BUY
+  `TAKE_PROFIT` and `TAKE_PROFIT_LIMIT`
+- `trigger_price` above market price: BUY `STOP_LOSS` and `STOP_LIMIT`, SELL
+  `TAKE_PROFIT` and `TAKE_PROFIT_LIMIT`
 
 ### Applies To
 
@@ -2359,22 +2404,21 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| result\_list | array of results | List of order creation result |
+| Name        | Type             | Description                   |
+| ----------- | ---------------- | ----------------------------- |
+| result_list | array of results | List of order creation result |
 
 Content of each order in `result_list`
 
-| Name | Type | Description |
-| --- | --- | --- |
-| index | number | The index of corresponding order request (Start from 0) |
-| code | number | 0 if success |
-| message | string | (Optional) For server or error messages |
-| order\_id | number | Newly created order ID |
-| client\_oid | string | (Optional) if a Client order ID was provided in the request. (Maximum 36 characters) |
+| Name       | Type   | Description                                                                          |
+| ---------- | ------ | ------------------------------------------------------------------------------------ |
+| index      | number | The index of corresponding order request (Start from 0)                              |
+| code       | number | 0 if success                                                                         |
+| message    | string | (Optional) For server or error messages                                              |
+| order_id   | number | Newly created order ID                                                               |
+| client_oid | string | (Optional) if a Client order ID was provided in the request. (Maximum 36 characters) |
 
-private/cancel-order-list (LIST)
---------------------------------
+## private/cancel-order-list (LIST)
 
 > Request Sample
 
@@ -2397,7 +2441,6 @@ private/cancel-order-list (LIST)
       },
       "nonce": 1587846358253
     }
-    
 
 > Response Sample
 
@@ -2419,7 +2462,7 @@ private/cancel-order-list (LIST)
         ]
       }
     }
-    
+
     // Cancel List of Orders - Error encountered
     {
       "id": 13,
@@ -2439,28 +2482,29 @@ private/cancel-order-list (LIST)
         ]
       }
     }
-    
 
 Cancel a list of orders on the Exchange.
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check when each of the orders is successfully cancelled.
+The `user.order` subscription can be used to check when each of the orders is
+successfully cancelled.
 
 ### Request Params (List of Orders)
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| order\_list | array of orders | Y | For non contingency orders, A list of orders to be cancelled |
-| instrument\_name | string | N | Instrument name of contingency order, e.g., ETH\_CRO, BTC\_USDT |
-| contingency\_type | string | Y | Must be value "LIST" |
+| Name             | Type            | Required | Description                                                   |
+| ---------------- | --------------- | -------- | ------------------------------------------------------------- |
+| order_list       | array of orders | Y        | For non contingency orders, A list of orders to be cancelled  |
+| instrument_name  | string          | N        | Instrument name of contingency order, e.g., ETH_CRO, BTC_USDT |
+| contingency_type | string          | Y        | Must be value "LIST"                                          |
 
 Content of each order in `order_list`
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | instrument\_name, e.g., ETH\_CRO, BTC\_USDT |
-| order\_id | string | Y | Order ID |
+| Name            | Type   | Required | Description                              |
+| --------------- | ------ | -------- | ---------------------------------------- |
+| instrument_name | string | Y        | instrument_name, e.g., ETH_CRO, BTC_USDT |
+| order_id        | string | Y        | Order ID                                 |
 
 ### Applies To
 
@@ -2474,20 +2518,19 @@ POST
 
 A `result_list` will be received:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| result\_list | array of results | List of order cancellation result |
+| Name        | Type             | Description                       |
+| ----------- | ---------------- | --------------------------------- |
+| result_list | array of results | List of order cancellation result |
 
 Content of each order in `result_list`
 
-| Name | Type | Description |
-| --- | --- | --- |
-| index | number | The index of corresponding order request (Start from 0) |
-| code | number | 0 if success |
-| message | string | (Optional) For server or error messages |
+| Name    | Type   | Description                                             |
+| ------- | ------ | ------------------------------------------------------- |
+| index   | number | The index of corresponding order request (Start from 0) |
+| code    | number | 0 if success                                            |
+| message | string | (Optional) For server or error messages                 |
 
-private/create-order-list (OCO)
--------------------------------
+## private/create-order-list (OCO)
 
 > Request Example
 
@@ -2515,7 +2558,6 @@ private/create-order-list (OCO)
         ]
       }
     }
-    
 
 > Response Example
 
@@ -2527,23 +2569,31 @@ private/create-order-list (OCO)
         "list_id" : 6498090546073120100
       }
     }
-    
 
 Creates a One-Cancel-the-Other (OCO) order on the Exchange.
 
-[OCO Order](https://help.crypto.com/en/articles/5807203-one-cancels-the-other-oco-orders) allows users to place two orders at the same time. Users are able to place a limit order with a stop order, and only one of them will be executed. When either one of the above orders is executed, the other is automatically canceled. This allows users to take a profit while minimizing potential loss. The OCO order type is available for Spot trading pairs and Futures and Perpetual contracts only.
+[OCO Order](https://help.crypto.com/en/articles/5807203-one-cancels-the-other-oco-orders)
+allows users to place two orders at the same time. Users are able to place a
+limit order with a stop order, and only one of them will be executed. When
+either one of the above orders is executed, the other is automatically canceled.
+This allows users to take a profit while minimizing potential loss. The OCO
+order type is available for Spot trading pairs and Futures and Perpetual
+contracts only.
 
-This call is asynchronous, so the response is simply a confirmation of the request. The `user.order` subscription can be used to check if the orders are successfully created.
+This call is asynchronous, so the response is simply a confirmation of the
+request. The `user.order` subscription can be used to check if the orders are
+successfully created.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| contingency\_type | string | Y | `OCO`  
- |
-| order\_list | array of orders | Y | Exactly 2 orders |
+| Name             | Type            | Required | Description      |
+| ---------------- | --------------- | -------- | ---------------- |
+| contingency_type | string          | Y        | `OCO`            |
+|  |
+| order_list       | array of orders | Y        | Exactly 2 orders |
 
-For the content of each order in `order_list`, please refer to [`private/create-order`](#private-create-order) for details.
+For the content of each order in `order_list`, please refer to
+[`private/create-order`](#private-create-order) for details.
 
 ### Applies To
 
@@ -2555,12 +2605,11 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| list\_id | number | List ID |
+| Name    | Type   | Description |
+| ------- | ------ | ----------- |
+| list_id | number | List ID     |
 
-private/cancel-order-list (OCO)
--------------------------------
+## private/cancel-order-list (OCO)
 
 > Request Example
 
@@ -2574,7 +2623,6 @@ private/cancel-order-list (OCO)
         "contingency_type":"OCO"
       }
     }
-    
 
 > Response Example
 
@@ -2583,21 +2631,22 @@ private/cancel-order-list (OCO)
       "method" : "private/cancel-order-list",
       "code" : 0
     }
-    
 
 Cancel a contingency order on the Exchange.
 
-This call is asynchronous, so the response is simply a confirmation of the request.
+This call is asynchronous, so the response is simply a confirmation of the
+request.
 
-The `user.order` subscription can be used to check when each of the orders is successfully cancelled.
+The `user.order` subscription can be used to check when each of the orders is
+successfully cancelled.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| contingency\_type | string | Y | `OCO` |
-| list\_id | string | Y | List ID |
-| instrument\_name | string | Y | Instrument Name |
+| Name             | Type   | Required | Description     |
+| ---------------- | ------ | -------- | --------------- |
+| contingency_type | string | Y        | `OCO`           |
+| list_id          | string | Y        | List ID         |
+| instrument_name  | string | Y        | Instrument Name |
 
 ### Applies To
 
@@ -2609,10 +2658,10 @@ POST
 
 ### Response Attributes
 
-No result block is returned. The code (0 = success) is the primary indicator that the request is queued.
+No result block is returned. The code (0 = success) is the primary indicator
+that the request is queued.
 
-private/get-order-list (OCO)
-----------------------------
+## private/get-order-list (OCO)
 
 > Request Example
 
@@ -2626,7 +2675,6 @@ private/get-order-list (OCO)
         "contingency_type":"OCO"
       }
     }
-    
 
 > Response Example
 
@@ -2694,17 +2742,16 @@ private/get-order-list (OCO)
         ]
       }
     }
-    
 
 Gets the details of an outstanding (not executed) contingency order on Exchange.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| contingency\_type | string | Y | `OCO` |
-| list\_id | string | Y | ID of the contingency order |
-| instrument\_name | string | Y | instrument\_name of the contingency order, e.g. ETH\_CRO, BTC\_USDT. |
+| Name             | Type   | Required | Description                                                       |
+| ---------------- | ------ | -------- | ----------------------------------------------------------------- |
+| contingency_type | string | Y        | `OCO`                                                             |
+| list_id          | string | Y        | ID of the contingency order                                       |
+| instrument_name  | string | Y        | instrument_name of the contingency order, e.g. ETH_CRO, BTC_USDT. |
 
 ### Applies To
 
@@ -2716,18 +2763,17 @@ POST
 
 ### Response Attributes
 
-List of order in the field `data`. For content of `data`, please refer to [`private/get-open-orders`](#private-get-open-orders) for details
+List of order in the field `data`. For content of `data`, please refer to
+[`private/get-open-orders`](#private-get-open-orders) for details
 
-Order, Trade, Transaction History API
-=====================================
+# Order, Trade, Transaction History API
 
-Introduction
-------------
+## Introduction
 
-History will be stored for recent 6 months record only. For records over 6 months, please contact our support team.
+History will be stored for recent 6 months record only. For records over 6
+months, please contact our support team.
 
-private/get-order-history
--------------------------
+## private/get-order-history
 
 > Request Sample
 
@@ -2741,7 +2787,6 @@ private/get-order-history
         "limit": 20
       }
     }
-    
 
 > Response Sample
 
@@ -2805,29 +2850,31 @@ private/get-order-history
           }]
       }
     }
-    
-    
 
 Gets the order history for a particular instrument.
 
-Users should use `user.order` to keep track of real-time order updates, and `private/get-order-history` should primarily be used for recovery; typically when the websocket is disconnected.
+Users should use `user.order` to keep track of real-time order updates, and
+`private/get-order-history` should primarily be used for recovery; typically
+when the websocket is disconnected.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD-PERP. Omit for 'all' |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`).  
+| Name            | Type             | Required | Description                                   |
+| --------------- | ---------------- | -------- | --------------------------------------------- |
+| instrument_name | string           | N        | e.g. BTCUSD-PERP. Omit for 'all'              |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`). |
+
 Default: `end_time - 1 day`.  
-Nanosecond is recommended for accurate pagination |
-| end\_time | number or string | N | End time in Unix time format (`exclusive`)  
+Nanosecond is recommended for accurate pagination | | end_time | number or
+string | N | End time in Unix time format (`exclusive`)  
 Default: current system timestamp.  
-Nanosecond is recommended for accurate pagination |
-| limit | int | N | The maximum number of trades to be retrieved before the `end_time`.  
+Nanosecond is recommended for accurate pagination | | limit | int | N | The
+maximum number of trades to be retrieved before the `end_time`.  
 Default: 100.  
 Max: 100. |
 
-**Note**: If you omit all parameters, you still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: If you omit all parameters, you still need to pass in an empty
+`params` block like `params: {}` for API request consistency
 
 ### Applies To
 
@@ -2841,46 +2888,38 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| order\_id | string of number | Order ID |
-| client\_oid | string | Client Order ID |
-| order\_type | string | `MARKET`, `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
-| time\_in\_force | string |   
+| Name          | Type             | Description                                                                      |
+| ------------- | ---------------- | -------------------------------------------------------------------------------- |
+| account_id    | string           | Account ID                                                                       |
+| order_id      | string of number | Order ID                                                                         |
+| client_oid    | string           | Client Order ID                                                                  |
+| order_type    | string           | `MARKET`, `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force | string           |
+
 \- `GOOD_TILL_CANCEL`  
 \- `IMMEDIATE_OR_CANCEL`  
-\- `FILL_OR_KILL` |
-| side | string | `BUY` or `SELL` |
-| exec\_inst | array |   
+\- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
-\- `LIQUIDATION` |
-| quantity | string | Quantity specified in the order |
-| limit\_price | string | Limit price specified in the order |
-| order\_value | string | Order value |
-| maker\_fee\_rate | string | User's maker fee rate |
-| taker\_fee\_rate | string | User's taker fee rate |
-| avg\_price | string | Average price |
-| cumulative\_quantity | string | Cumulative executed quantity |
-| cumulative\_value | string | Cumulative executed value |
-| cumulative\_fee | string | Cumulative executed fee |
-| status | string | Order status:  
+\- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
+limit_price | string | Limit price specified in the order | | order_value |
+string | Order value | | maker_fee_rate | string | User's maker fee rate | |
+taker_fee_rate | string | User's taker fee rate | | avg_price | string | Average
+price | | cumulative_quantity | string | Cumulative executed quantity | |
+cumulative_value | string | Cumulative executed value | | cumulative_fee |
+string | Cumulative executed fee | | status | string | Order status:  
 \- `REJECTED`  
 \- `CANCELED`  
 \- `FILLED`  
-\- `EXPIRED` |
-| update\_user\_id | string | Updated user |
-| order\_date | string | Order creation date |
-| create\_time | number | Order creation timestamp |
-| create\_time\_ns | string | Order creation timestamp (nanosecond) |
-| update\_time | number | Order update timestamp |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| fee\_instrument\_name | string | Currency used for the fees |
+\- `EXPIRED` | | update_user_id | string | Updated user | | order_date | string
+| Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g.
+BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees |
 
-Note: Please note `PENDING`,`ACTIVE` can only be found in `private/get-open-orders` REST endpoint or `user.order` WebSocket subscription.
+Note: Please note `PENDING`,`ACTIVE` can only be found in
+`private/get-open-orders` REST endpoint or `user.order` WebSocket subscription.
 
-private/get-trades
-------------------
+## private/get-trades
 
 > Request Sample
 
@@ -2894,7 +2933,6 @@ private/get-trades
         "limit": 20
       }
     }
-    
 
 > Response Sample
 
@@ -2926,28 +2964,31 @@ private/get-trades
         }]
       }
     }
-    
 
 Gets all executed trades for a particular instrument.
 
-Users should use `user.trade` to keep track of real-time trades, and `private/get-trades` should primarily be used for recovery; typically when the websocket is disconnected.
+Users should use `user.trade` to keep track of real-time trades, and
+`private/get-trades` should primarily be used for recovery; typically when the
+websocket is disconnected.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD-PERP. Omit for 'all' |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`).  
+| Name            | Type             | Required | Description                                   |
+| --------------- | ---------------- | -------- | --------------------------------------------- |
+| instrument_name | string           | N        | e.g. BTCUSD-PERP. Omit for 'all'              |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`). |
+
 Default: `end_time - 1 day`.  
-Nanosecond is recommended for accurate pagination |
-| end\_time | number or string | N | End time in Unix time format (`exclusive`)  
+Nanosecond is recommended for accurate pagination | | end_time | number or
+string | N | End time in Unix time format (`exclusive`)  
 Default: current system timestamp.  
-Nanosecond is recommended for accurate pagination |
-| limit | int | N | The maximum number of trades to be retrievd before the `end_time`.  
+Nanosecond is recommended for accurate pagination | | limit | int | N | The
+maximum number of trades to be retrievd before the `end_time`.  
 Default: 100.  
 Max: 100. |
 
-**Note**: If you omit all parameters, you still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: If you omit all parameters, you still need to pass in an empty
+`params` block like `params: {}` for API request consistency
 
 ### Applies To
 
@@ -2961,36 +3002,37 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| event\_date | string | Event date |
-| journal\_type | string | Journal type would be `TRADING` |
-| traded\_quantity | string | Trade quantity |
-| traded\_price | string | Trade price |
-| fees | string | Trade fees, the negative sign means a deduction on balance |
-| order\_id | string of number | Order ID |
-| trade\_id | string of number | Trade ID |
-| trade\_match\_id | string of number | Trade match ID |
-| client\_oid | string | Client Order ID |
-| taker\_side | string | `MAKER` or `TAKER` or empty |
-| side | string | `BUY` or `SELL` |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| fee\_instrument\_name | string | e.g. USD |
-| create\_time | number | Create timestamp in milliseconds |
-| create\_time\_ns | string | Create timestamp in nanoseconds |
-| transact\_time\_ns | string | Trade transaction time in nanseconds |
-| match\_count | string of number | (Optional)  
+| Name                | Type             | Description                                                |
+| ------------------- | ---------------- | ---------------------------------------------------------- |
+| account_id          | string           | Account ID                                                 |
+| event_date          | string           | Event date                                                 |
+| journal_type        | string           | Journal type would be `TRADING`                            |
+| traded_quantity     | string           | Trade quantity                                             |
+| traded_price        | string           | Trade price                                                |
+| fees                | string           | Trade fees, the negative sign means a deduction on balance |
+| order_id            | string of number | Order ID                                                   |
+| trade_id            | string of number | Trade ID                                                   |
+| trade_match_id      | string of number | Trade match ID                                             |
+| client_oid          | string           | Client Order ID                                            |
+| taker_side          | string           | `MAKER` or `TAKER` or empty                                |
+| side                | string           | `BUY` or `SELL`                                            |
+| instrument_name     | string           | e.g. BTCUSD-PERP                                           |
+| fee_instrument_name | string           | e.g. USD                                                   |
+| create_time         | number           | Create timestamp in milliseconds                           |
+| create_time_ns      | string           | Create timestamp in nanoseconds                            |
+| transact_time_ns    | string           | Trade transaction time in nanseconds                       |
+| match_count         | string of number | (Optional)                                                 |
+
 Number of orders matched for this trade execution  
 If it is Maker's Order, value is always 1  
-If it is Taker's Order, it is the number of orders matched for this trade execution |
-| match\_index | string of number | (Optional)  
+If it is Taker's Order, it is the number of orders matched for this trade
+execution | | match_index | string of number | (Optional)  
 Only appears if it is Maker's order.  
 It represents which order entry of corresponding price level was matched  
-This value is 0 base. If the matched order is on the top of the queue, it is shown 0. |
+This value is 0 base. If the matched order is on the top of the queue, it is
+shown 0. |
 
-private/get-transactions
-------------------------
+## private/get-transactions
 
 > Request Sample
 
@@ -3004,7 +3046,6 @@ private/get-transactions
         "limit": 20
       }
     }
-    
 
 > Response Sample
 
@@ -3050,23 +3091,23 @@ private/get-transactions
         ]
       }
     }
-    
 
 Fetches recent transactions
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. instrument\_name, e.g. BTCUSD-PERP, Omit for 'all' |
-| journal\_type | string | N | Refer to the `journal_type` in `Response Attributes` |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`).  
+| Name            | Type             | Required | Description                                            |
+| --------------- | ---------------- | -------- | ------------------------------------------------------ |
+| instrument_name | string           | N        | e.g. instrument_name, e.g. BTCUSD-PERP, Omit for 'all' |
+| journal_type    | string           | N        | Refer to the `journal_type` in `Response Attributes`   |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`).          |
+
 Default: `end_time - 1 day`.  
-Nanosecond is recommended for accurate pagination |
-| end\_time | number or string | N | End time in Unix time format (`exclusive`)  
+Nanosecond is recommended for accurate pagination | | end_time | number or
+string | N | End time in Unix time format (`exclusive`)  
 Default: current system timestamp.  
-Nanosecond is recommended for accurate pagination |
-| limit | int | N | The maximum number of trades to be retrievd before the `end_time`.  
+Nanosecond is recommended for accurate pagination | | limit | int | N | The
+maximum number of trades to be retrievd before the `end_time`.  
 Default: 100.  
 Max: 100. |
 
@@ -3080,30 +3121,28 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| event\_date | string | Event date |
-| journal\_type | string | Journal type would be `TRADING`, `TRADE_FEE`, `ONCHAIN_WITHDRAW`, `ONCHAIN_DEPOSIT`, `ROLLBACK_DEPOSIT`, `ROLLBACK_WITHDRAW`, `FUNDING`, `REALIZED_PNL`, `INSURANCE_FUND`, `SOCIALIZED_LOSS`, `LIQUIDATION_FEE`, `SESSION_RESET`, `ADJUSTMENT`, `SESSION_SETTLE`, `UNCOVERED_LOSS`, `ADMIN_ADJUSTMENT`, `DELIST`, `SETTLEMENT_FEE`, `AUTO_CONVERSION`, `MANUAL_CONVERSION`,`SUBACCOUNT_TX`,`FIAT_WITHDRAWAL_CANCEL`,`MARGIN_TRADE_INTEREST` |
-| journal\_id | string of number | Journal ID |
-| transaction\_qty | string | Transaction quantity |
-| transaction\_cost | string | Transaction cost |
-| realized\_pnl | string | Realized PNL |
-| order\_id | string of number | Order ID |
-| trade\_id | string of number | Trade ID |
-| trade\_match\_id | string of number | Trade match ID applicable to trades only. Non-trade related transactions will have zero or null value. |
-| client\_oid | string | Client Order ID (can be empty) |
-| taker\_side | string | `MAKER` or `TAKER` or empty |
-| side | string | `BUY` or `SELL` |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| event\_timestamp\_ms | number | Event timestamp in milliseconds |
-| event\_timestamp\_ns | string | Event timestamp in nanoseconds |
+| Name               | Type             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| account_id         | string           | Account ID                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| event_date         | string           | Event date                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| journal_type       | string           | Journal type would be `TRADING`, `TRADE_FEE`, `ONCHAIN_WITHDRAW`, `ONCHAIN_DEPOSIT`, `ROLLBACK_DEPOSIT`, `ROLLBACK_WITHDRAW`, `FUNDING`, `REALIZED_PNL`, `INSURANCE_FUND`, `SOCIALIZED_LOSS`, `LIQUIDATION_FEE`, `SESSION_RESET`, `ADJUSTMENT`, `SESSION_SETTLE`, `UNCOVERED_LOSS`, `ADMIN_ADJUSTMENT`, `DELIST`, `SETTLEMENT_FEE`, `AUTO_CONVERSION`, `MANUAL_CONVERSION`,`SUBACCOUNT_TX`,`FIAT_WITHDRAWAL_CANCEL`,`MARGIN_TRADE_INTEREST` |
+| journal_id         | string of number | Journal ID                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| transaction_qty    | string           | Transaction quantity                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| transaction_cost   | string           | Transaction cost                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| realized_pnl       | string           | Realized PNL                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| order_id           | string of number | Order ID                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| trade_id           | string of number | Trade ID                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| trade_match_id     | string of number | Trade match ID applicable to trades only. Non-trade related transactions will have zero or null value.                                                                                                                                                                                                                                                                                                                                      |
+| client_oid         | string           | Client Order ID (can be empty)                                                                                                                                                                                                                                                                                                                                                                                                              |
+| taker_side         | string           | `MAKER` or `TAKER` or empty                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| side               | string           | `BUY` or `SELL`                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| instrument_name    | string           | e.g. BTCUSD-PERP                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| event_timestamp_ms | number           | Event timestamp in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                             |
+| event_timestamp_ns | string           | Event timestamp in nanoseconds                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-Wallet API
-==========
+# Wallet API
 
-private/create-withdrawal
--------------------------
+## private/create-withdrawal
 
 > Request Sample
 
@@ -3120,7 +3159,6 @@ private/create-withdrawal
       },
       "nonce": "1607063412000"
     }
-    
 
 > Response Sample
 
@@ -3139,25 +3177,28 @@ private/create-withdrawal
         "network_id": null
       }
     }
-    
 
-Creates a withdrawal request. Withdrawal setting must be enabled for your API Key. If you do not see the option when viewing your API Key, this feature is not yet available for you.
+Creates a withdrawal request. Withdrawal setting must be enabled for your API
+Key. If you do not see the option when viewing your API Key, this feature is not
+yet available for you.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| client\_wid | string | N | Optional Client withdrawal ID |
-| currency | string | Y | E.g. BTC, CRO |
-| amount | decimal | Y |  |
-| address | string | Y |  |
-| address\_tag | string | N | Secondary address identifier for coins like XRP, XLM etc. Also known as memo or tags. |
-| network\_id | string | N | Select the desired network, require the address to be whitelisted first. See default\_network and network in get-currency-networks for the value. |
+| Name        | Type    | Required | Description                                                                                                                                      |
+| ----------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| client_wid  | string  | N        | Optional Client withdrawal ID                                                                                                                    |
+| currency    | string  | Y        | E.g. BTC, CRO                                                                                                                                    |
+| amount      | decimal | Y        |                                                                                                                                                  |
+| address     | string  | Y        |                                                                                                                                                  |
+| address_tag | string  | N        | Secondary address identifier for coins like XRP, XLM etc. Also known as memo or tags.                                                            |
+| network_id  | string  | N        | Select the desired network, require the address to be whitelisted first. See default_network and network in get-currency-networks for the value. |
 
 ### Helpful Information
 
-*   Withdrawal addresses must first be whitelisted in your account’s Withdrawal Whitelist page.
-*   Withdrawal fees and minimum withdrawal amount can be found on the Fees & Limits page on the Exchange website.
+- Withdrawal addresses must first be whitelisted in your account’s Withdrawal
+  Whitelist page.
+- Withdrawal fees and minimum withdrawal amount can be found on the Fees &
+  Limits page on the Exchange website.
 
 ### Applies To
 
@@ -3169,18 +3210,17 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Newly created withdrawal ID |
-| client\_wid | string | (Optional) if a Client withdrawal ID was provided in the request |
-| currency | string | E.g. BTC, CRO |
-| amount | decimal |  |
-| fee | decimal |  |
-| address | string | Address with Address Tag (if any) |
-| create\_time | long |  |
+| Name        | Type    | Description                                                      |
+| ----------- | ------- | ---------------------------------------------------------------- |
+| id          | long    | Newly created withdrawal ID                                      |
+| client_wid  | string  | (Optional) if a Client withdrawal ID was provided in the request |
+| currency    | string  | E.g. BTC, CRO                                                    |
+| amount      | decimal |                                                                  |
+| fee         | decimal |                                                                  |
+| address     | string  | Address with Address Tag (if any)                                |
+| create_time | long    |                                                                  |
 
-private/get-currency-networks
------------------------------
+## private/get-currency-networks
 
 > Request Sample
 
@@ -3192,7 +3232,6 @@ private/get-currency-networks
       "sig": "9b4e5428970d88270ac18aa680d33bf6a42390db2060e7f3b81f579a99cea9d5",
       "nonce": :1640830660110
     }
-    
 
 > Response Sample
 
@@ -3248,19 +3287,19 @@ private/get-currency-networks
         }
       }
     }
-    
 
 Get the symbol network mapping.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| no param required | N/A |  |  |
+| Name              | Type | Required | Description |
+| ----------------- | ---- | -------- | ----------- |
+| no param required | N/A  |          |             |
 
 **Note**:  
-i. You still need to pass in an empty `params` block like `params: {}` for API request consistency  
-ii. It works for master account only, not for sub-accounts.  
+i. You still need to pass in an empty `params` block like `params: {}` for API
+request consistency  
+ii. It works for master account only, not for sub-accounts.
 
 ### Applies To
 
@@ -3274,25 +3313,24 @@ POST
 
 An Map of `currency`, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| full\_name | string | e.g. SHIBA INU |
-| default\_network | string | If network is not provided in create-withdrawal, it will search for default\_network, if there is more than 1 network available. |
-| network\_list | string | A list of networks |
+| Name            | Type   | Description                                                                                                                     |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| full_name       | string | e.g. SHIBA INU                                                                                                                  |
+| default_network | string | If network is not provided in create-withdrawal, it will search for default_network, if there is more than 1 network available. |
+| network_list    | string | A list of networks                                                                                                              |
 
-network\_list:
+network_list:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| network\_id | string | the network id, can be used in create-withdrawal |
-| withdraw\_enabled | boolean |  |
-| deposit\_enabled | boolean |  |
-| withdrawal\_fee | decimal |  |
-| min\_withdrawal\_amount | decimal |  |
-| confirmation\_required | int | confirmation blocks count |
+| Name                  | Type    | Description                                      |
+| --------------------- | ------- | ------------------------------------------------ |
+| network_id            | string  | the network id, can be used in create-withdrawal |
+| withdraw_enabled      | boolean |                                                  |
+| deposit_enabled       | boolean |                                                  |
+| withdrawal_fee        | decimal |                                                  |
+| min_withdrawal_amount | decimal |                                                  |
+| confirmation_required | int     | confirmation blocks count                        |
 
-private/get-deposit-address
----------------------------
+## private/get-deposit-address
 
 > Request Sample
 
@@ -3304,7 +3342,6 @@ private/get-deposit-address
       },
       "nonce": 1587846358253
     }
-    
 
 > Response Sample
 
@@ -3333,15 +3370,16 @@ private/get-deposit-address
         ]
       }
     }
-    
 
-Fetches deposit address. Withdrawal setting must be enabled for your API Key. If you do not see the option when viewing your API Keys, this feature is not yet available for you.
+Fetches deposit address. Withdrawal setting must be enabled for your API Key. If
+you do not see the option when viewing your API Keys, this feature is not yet
+available for you.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency | string | Y | E.g. BTC, CRO |
+| Name     | Type   | Required | Description   |
+| -------- | ------ | -------- | ------------- |
+| currency | string | Y        | E.g. BTC, CRO |
 
 ### Applies To
 
@@ -3355,23 +3393,21 @@ POST
 
 An array of `deposit_address_list`, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Newly created deposit ID |
-| currency | string | E.g. BTC, CRO |
-| network | string | E.g. ETH, CRO  
-  
+| Name     | Type   | Description              |
+| -------- | ------ | ------------------------ |
+| id       | long   | Newly created deposit ID |
+| currency | string | E.g. BTC, CRO            |
+| network  | string | E.g. ETH, CRO            |
+
 When currency = CRO, network = CRO, it is a main net address.  
-When currency = CRO, network = ETH, it is an ERC20 address. |
-| address | string | Address with Address Tag (if any) |
-| create\_time | long |  |
-| status | string | "0"  
-  
+When currency = CRO, network = ETH, it is an ERC20 address. | | address | string
+| Address with Address Tag (if any) | | create_time | long | | | status | string
+| "0"
+
 0 - Inactive  
 1 - Active |
 
-private/get-deposit-history
----------------------------
+## private/get-deposit-history
 
 > Request Sample
 
@@ -3388,7 +3424,6 @@ private/get-deposit-history
       },
       "nonce": 1587846358253
     }
-    
 
 > Response Sample
 
@@ -3411,23 +3446,24 @@ private/get-deposit-history
         ]
       }
     }
-    
 
-Fetches deposit history. Withdrawal setting must be enabled for your API Key. If you do not see the option when viewing your API Keys, this feature is not yet available for you.  
-  
-Note: It works for master account only, not for sub-accounts.  
+Fetches deposit history. Withdrawal setting must be enabled for your API Key. If
+you do not see the option when viewing your API Keys, this feature is not yet
+available for you.
+
+Note: It works for master account only, not for sub-accounts.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency | string | N | E.g. BTC, CRO |
-| start\_ts | long | N | Default is 90 days from current timestamp |
-| end\_ts | long | N | Default is current timestamp |
-| page\_size | int | N | Page size (Default: 20, Max: 200) |
-| page | int | N | Page number (0-based) |
-| status | string | N | "0"  
-  
+| Name      | Type   | Required | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| currency  | string | N        | E.g. BTC, CRO                             |
+| start_ts  | long   | N        | Default is 90 days from current timestamp |
+| end_ts    | long   | N        | Default is current timestamp              |
+| page_size | int    | N        | Page size (Default: 20, Max: 200)         |
+| page      | int    | N        | Page number (0-based)                     |
+| status    | string | N        | "0"                                       |
+
 0 - Not Arrived  
 1 - Arrived  
 2 - Failed  
@@ -3445,23 +3481,22 @@ POST
 
 An array of `deposit_list`, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Newly created deposit ID |
-| currency | string | E.g. BTC, CRO |
-| amount | decimal |  |
-| fee | decimal |  |
-| address | string | Address with Address Tag (if any) |
-| create\_time | long |  |
-| status | string | "0"  
-  
+| Name        | Type    | Description                       |
+| ----------- | ------- | --------------------------------- |
+| id          | long    | Newly created deposit ID          |
+| currency    | string  | E.g. BTC, CRO                     |
+| amount      | decimal |                                   |
+| fee         | decimal |                                   |
+| address     | string  | Address with Address Tag (if any) |
+| create_time | long    |                                   |
+| status      | string  | "0"                               |
+
 0 - Not Arrived  
 1 - Arrived  
 2 - Failed  
 3 - Pending |
 
-private/get-withdrawal-history
-------------------------------
+## private/get-withdrawal-history
 
 > Request Sample
 
@@ -3478,7 +3513,6 @@ private/get-withdrawal-history
       },
       "nonce": 1587846358253
     }
-    
 
 > Response Sample
 
@@ -3504,23 +3538,24 @@ private/get-withdrawal-history
         ]
       }
     }
-    
 
-Fetches withdrawal history. Withdrawal setting must be enabled for your API Key. If you do not see the option when viewing your API Keys, this feature is not yet available for you.  
-  
-Note: It works for master account only, not for sub-accounts.  
+Fetches withdrawal history. Withdrawal setting must be enabled for your API Key.
+If you do not see the option when viewing your API Keys, this feature is not yet
+available for you.
+
+Note: It works for master account only, not for sub-accounts.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency | string | N | E.g. BTC, CRO |
-| start\_ts | long | N | Default is 90 days from current timestamp |
-| end\_ts | long | N | Default is current timestamp |
-| page\_size | int | N | Page size (Default: 20, Max: 200) |
-| page | int | N | Page number (0-based) |
-| status | string | N | "0"  
-  
+| Name      | Type   | Required | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| currency  | string | N        | E.g. BTC, CRO                             |
+| start_ts  | long   | N        | Default is 90 days from current timestamp |
+| end_ts    | long   | N        | Default is current timestamp              |
+| page_size | int    | N        | Page size (Default: 20, Max: 200)         |
+| page      | int    | N        | Page number (0-based)                     |
+| status    | string | N        | "0"                                       |
+
 0 - Pending  
 1 - Processing  
 2 - Rejected  
@@ -3541,32 +3576,30 @@ POST
 
 An array of `withdrawal_list`, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Newly created withdrawal ID |
-| client\_wid | string | (Optional) if a Client withdrawal ID was provided in the request |
-| currency | string | E.g. BTC, CRO |
-| amount | decimal |  |
-| fee | decimal |  |
-| address | string | Address with Address Tag (if any) |
-| create\_time | long |  |
-| status | string | "0"  
-  
+| Name        | Type    | Description                                                      |
+| ----------- | ------- | ---------------------------------------------------------------- |
+| id          | long    | Newly created withdrawal ID                                      |
+| client_wid  | string  | (Optional) if a Client withdrawal ID was provided in the request |
+| currency    | string  | E.g. BTC, CRO                                                    |
+| amount      | decimal |                                                                  |
+| fee         | decimal |                                                                  |
+| address     | string  | Address with Address Tag (if any)                                |
+| create_time | long    |                                                                  |
+| status      | string  | "0"                                                              |
+
 0 - Pending  
 1 - Processing  
 2 - Rejected  
 3 - Payment In-progress  
 4 - Payment Failed  
 5 - Completed  
-6 - Cancelled |
-| txid | string | Transaction hash |
-| network\_id | string | Network for the transaction - please see get-currency-networks. Only available when Exchange support multiple network on the currency |
+6 - Cancelled | | txid | string | Transaction hash | | network_id | string |
+Network for the transaction - please see get-currency-networks. Only available
+when Exchange support multiple network on the currency |
 
-Staking API
-===========
+# Staking API
 
-private/staking/stake
----------------------
+## private/staking/stake
 
 > Request Sample
 
@@ -3578,7 +3611,6 @@ private/staking/stake
         "quantity": "1"
       }
     }
-    
 
 > Response Sample
 
@@ -3597,16 +3629,15 @@ private/staking/stake
         "reason": "NO_ERROR"
       }
     }
-    
 
 Create a request to earn token rewards by staking on-chain in the Exchange.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | Staking instrument name, e.g. SOL.staked, refer to `instrument_name` from `private/staking/get-staking-instruments` response |
-| quantity | string | Y | Stake quantity |
+| Name            | Type   | Required | Description                                                                                                                  |
+| --------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| instrument_name | string | Y        | Staking instrument name, e.g. SOL.staked, refer to `instrument_name` from `private/staking/get-staking-instruments` response |
+| quantity        | string | Y        | Stake quantity                                                                                                               |
 
 ### Applies To
 
@@ -3618,24 +3649,23 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| staking\_id | string | Request id |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| status | string | Request status:  
+| Name            | Type   | Description                              |
+| --------------- | ------ | ---------------------------------------- |
+| staking_id      | string | Request id                               |
+| instrument_name | string | Staking instrument name, e.g. SOL.staked |
+| status          | string | Request status:                          |
+
 \- `NEW`  
 \- `PENDING`  
 \- `STAKED`  
 \- `COMPLETED`  
-\- `REJECTED` |
-| quantity | string | Stake quantity |
-| underlying\_inst\_name | string | Underlying instrument name of staking, e.g. SOL |
-| pre\_stake\_charge\_rate\_in\_bps | string | Pre stake charge rate in basis point |
-| pre\_stake\_charge | string | Pre stake charge value |
-| reason | string | Reason for the status, e.g. "NO\_ERROR" |
+\- `REJECTED` | | quantity | string | Stake quantity | | underlying_inst_name |
+string | Underlying instrument name of staking, e.g. SOL | |
+pre_stake_charge_rate_in_bps | string | Pre stake charge rate in basis point | |
+pre_stake_charge | string | Pre stake charge value | | reason | string | Reason
+for the status, e.g. "NO_ERROR" |
 
-private/staking/unstake
------------------------
+## private/staking/unstake
 
 > Request Sample
 
@@ -3647,7 +3677,6 @@ private/staking/unstake
         "quantity": "1"
       }
     }
-    
 
 > Response Sample
 
@@ -3664,21 +3693,26 @@ private/staking/unstake
         "reason": "NO_ERROR"
       }
     }
-    
 
 Create a request to unlock staked token.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | Staking instrument name, e.g. SOL.staked, refer to `instrument_name` from `private/staking/get-staking-instruments` response |
-| quantity | string | Y | Unstake quantity  
-  
-For yield-bearing instruments (learn more from [FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), this field requires the quantity you wish to unstake in terms of the original staked token.  
-  
+| Name            | Type   | Required | Description                                                                                                                  |
+| --------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| instrument_name | string | Y        | Staking instrument name, e.g. SOL.staked, refer to `instrument_name` from `private/staking/get-staking-instruments` response |
+| quantity        | string | Y        | Unstake quantity                                                                                                             |
+
+For yield-bearing instruments (learn more from
+[FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)),
+this field requires the quantity you wish to unstake in terms of the original
+staked token.
+
 Example:  
-If you hold a TSTON.staked position, specify the quantity of TSTON.staked token you wish to unstake. You can retrieve the conversion rates (of TSTON to TON) from private/staking/get-swap-rate endpoint to estimate the quantity of TON you will receive after the request is successfully completed. |
+If you hold a TSTON.staked position, specify the quantity of TSTON.staked token
+you wish to unstake. You can retrieve the conversion rates (of TSTON to TON)
+from private/staking/get-swap-rate endpoint to estimate the quantity of TON you
+will receive after the request is successfully completed. |
 
 ### Applies To
 
@@ -3690,28 +3724,32 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| staking\_id | string | Request id |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| status | string | Request status:  
+| Name            | Type   | Description                              |
+| --------------- | ------ | ---------------------------------------- |
+| staking_id      | string | Request id                               |
+| instrument_name | string | Staking instrument name, e.g. SOL.staked |
+| status          | string | Request status:                          |
+
 \- `NEW`  
 \- `PENDING`  
 \- `PENDING_WITHDRAWAL`  
 \- `PENDING_UNSTAKING`  
 \- `COMPLETED`  
-\- `REJECTED` |
-| quantity | string | Unstake quantity  
-  
-For yield-bearing instruments (learn more from [FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), this field displays the quantity you wish to unstake in terms of the original token you staked.  
-  
-Example:  
-If you hold a TSTON.staked position, specify the quantity of TSTON.staked tokens you wish to unstake. This field will show you the quantity of TON you will receive after the request is successfully completed. |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| reason | string | Reason for the status, e.g. "NO\_ERROR" |
+\- `REJECTED` | | quantity | string | Unstake quantity
 
-private/staking/get-staking-position
-------------------------------------
+For yield-bearing instruments (learn more from
+[FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)),
+this field displays the quantity you wish to unstake in terms of the original
+token you staked.
+
+Example:  
+If you hold a TSTON.staked position, specify the quantity of TSTON.staked tokens
+you wish to unstake. This field will show you the quantity of TON you will
+receive after the request is successfully completed. | | underlying_inst_name |
+string | Underlying instrument name, e.g. SOL | | reason | string | Reason for
+the status, e.g. "NO_ERROR" |
+
+## private/staking/get-staking-position
 
 > Request Sample
 
@@ -3722,7 +3760,6 @@ private/staking/get-staking-position
         "instrument_name": "SOL.staked"
       }
     }
-    
 
 > Response Sample
 
@@ -3743,15 +3780,14 @@ private/staking/get-staking-position
         ]
       }
     }
-    
 
 Get the total staking position for a user/token
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | Staking instrument name, e.g. SOL.staked |
+| Name            | Type   | Required | Description                              |
+| --------------- | ------ | -------- | ---------------------------------------- |
+| instrument_name | string | N        | Staking instrument name, e.g. SOL.staked |
 
 ### Applies To
 
@@ -3765,22 +3801,26 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| staked\_quantity | string | Total staked quantity  
-  
-For yield-bearing instruments (learn more from [FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), the staked\_quantity, pending\_unstaked\_quantity, reward\_eligible\_quantity fields display the quantity of yield-bearing tokens held.  
-  
-Example:  
-If you hold a TSTON.staked position, this will show the actual quantity of TSTON held on-chain on your behalf via the Crypto.com Exchange. |
-| pending\_staked\_quantity | string | Total pending staked quantity |
-| pending\_unstaked\_quantity | string | Total pending unstaked quantity |
-| reward\_eligible\_quantity | string | Total reward eligible quantity, quantity can be unstaked/convert |
+| Name                 | Type   | Description                              |
+| -------------------- | ------ | ---------------------------------------- |
+| instrument_name      | string | Staking instrument name, e.g. SOL.staked |
+| underlying_inst_name | string | Underlying instrument name, e.g. SOL     |
+| staked_quantity      | string | Total staked quantity                    |
 
-private/staking/get-staking-instruments
----------------------------------------
+For yield-bearing instruments (learn more from
+[FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), the
+staked_quantity, pending_unstaked_quantity, reward_eligible_quantity fields
+display the quantity of yield-bearing tokens held.
+
+Example:  
+If you hold a TSTON.staked position, this will show the actual quantity of TSTON
+held on-chain on your behalf via the Crypto.com Exchange. | |
+pending_staked_quantity | string | Total pending staked quantity | |
+pending_unstaked_quantity | string | Total pending unstaked quantity | |
+reward_eligible_quantity | string | Total reward eligible quantity, quantity can
+be unstaked/convert |
+
+## private/staking/get-staking-instruments
 
 > Request Sample
 
@@ -3789,7 +3829,6 @@ private/staking/get-staking-instruments
       "method": "private/staking/get-staking-instruments",
       "params": {}
     }
-    
 
 > Response Sample
 
@@ -3840,15 +3879,14 @@ private/staking/get-staking-instruments
         ]
       }
     }
-    
 
 Get staking instruments information
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| no param required | N/A |  |  |
+| Name              | Type | Required | Description |
+| ----------------- | ---- | -------- | ----------- |
+| no param required | N/A  |          |             |
 
 ### Applies To
 
@@ -3862,32 +3900,31 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| reward\_inst\_name | string | Reward instrument name, e.g. SOL.staked |
-| out\_of\_stock | boolean | Disabled stake - true or false |
-| block\_unstake | boolean | Disabled unstake - true or false |
-| est\_rewards | string | Estimated rewards |
-| apr\_y | string | Estimated rewards unit - APR or APY |
-| min\_stake\_amt | string | Minimum stake amount |
-| reward\_frequency | string | Estimated reward frequency (day) |
-| lock\_up\_period | string | Estimated lock up period (day) |
-| is\_compound\_reward | boolean | Is reward compounded - true or false |
-| pre\_stake\_charge\_enable | boolean | Is pre stake charge applied - true or false |
-| pre\_stake\_charge\_rate\_in\_bps | string | Pre stake charge rate in basis point |
-| is\_restaked | boolean | Is restaked instrument - true or false |
-| additional\_rewards | array | See below |
+| Name                         | Type    | Description                                 |
+| ---------------------------- | ------- | ------------------------------------------- |
+| instrument_name              | string  | Staking instrument name, e.g. SOL.staked    |
+| underlying_inst_name         | string  | Underlying instrument name, e.g. SOL        |
+| reward_inst_name             | string  | Reward instrument name, e.g. SOL.staked     |
+| out_of_stock                 | boolean | Disabled stake - true or false              |
+| block_unstake                | boolean | Disabled unstake - true or false            |
+| est_rewards                  | string  | Estimated rewards                           |
+| apr_y                        | string  | Estimated rewards unit - APR or APY         |
+| min_stake_amt                | string  | Minimum stake amount                        |
+| reward_frequency             | string  | Estimated reward frequency (day)            |
+| lock_up_period               | string  | Estimated lock up period (day)              |
+| is_compound_reward           | boolean | Is reward compounded - true or false        |
+| pre_stake_charge_enable      | boolean | Is pre stake charge applied - true or false |
+| pre_stake_charge_rate_in_bps | string  | Pre stake charge rate in basis point        |
+| is_restaked                  | boolean | Is restaked instrument - true or false      |
+| additional_rewards           | array   | See below                                   |
 
 `additional_rewards` consists of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| reward\_inst\_name | string | Additional reward instrument name |
+| Name             | Type   | Description                       |
+| ---------------- | ------ | --------------------------------- |
+| reward_inst_name | string | Additional reward instrument name |
 
-private/staking/get-open-stake
-------------------------------
+## private/staking/get-open-stake
 
 > Request Sample
 
@@ -3901,7 +3938,6 @@ private/staking/get-open-stake
         "limit": "10"
       }
     }
-    
 
 > Response Sample
 
@@ -3936,21 +3972,21 @@ private/staking/get-open-stake
         ]
       }
     }
-    
 
 Get stake/unstake requests that status is not in final state.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | Staking instrument name, e.g. SOL.staked |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
+| Name            | Type             | Required | Description                                  |
+| --------------- | ---------------- | -------- | -------------------------------------------- |
+| instrument_name | string           | N        | Staking instrument name, e.g. SOL.staked     |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`) |
+
 Default: `end_time - 30 days`  
-Min: `end_time - 180 days` |
-| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
-Default: current system timestamp |
-| limit | number or string | N | The maximum number of requests returned  
+Min: `end_time - 180 days` | | end_time | number or string | N | End time in
+Unix time format (`inclusive`)  
+Default: current system timestamp | | limit | number or string | N | The maximum
+number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -3966,30 +4002,32 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| cycle\_id | string | Cycle id |
-| staking\_id | string | Request id |
-| status | string | Request status:  
+| Name                 | Type   | Description                              |
+| -------------------- | ------ | ---------------------------------------- |
+| instrument_name      | string | Staking instrument name, e.g. SOL.staked |
+| underlying_inst_name | string | Underlying instrument name, e.g. SOL     |
+| cycle_id             | string | Cycle id                                 |
+| staking_id           | string | Request id                               |
+| status               | string | Request status:                          |
+
 \- `NEW`  
 \- `PENDING`  
 \- `PENDING_WITHDRAWAL`  
 \- `PENDING_UNSTAKING`  
-\- `STAKED` |
-| account | string | Account id |
-| quantity | string | Stake/unstake quantity  
-  
-For yield-bearing instruments (learn more from [FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), this field displays the quantity in terms of the original staked token.  
-  
-Example:  
-When unstaking a TSTON.staked position, this field will specify the quantity which is pending an unstaking action, denominated in TON. |
-| side | string | Stake or Unstake |
-| create\_timestamp\_ms | string | Request creation timestamp in milliseconds in Unix time format |
+\- `STAKED` | | account | string | Account id | | quantity | string |
+Stake/unstake quantity
 
-private/staking/get-stake-history
----------------------------------
+For yield-bearing instruments (learn more from
+[FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)),
+this field displays the quantity in terms of the original staked token.
+
+Example:  
+When unstaking a TSTON.staked position, this field will specify the quantity
+which is pending an unstaking action, denominated in TON. | | side | string |
+Stake or Unstake | | create_timestamp_ms | string | Request creation timestamp
+in milliseconds in Unix time format |
+
+## private/staking/get-stake-history
 
 > Request Sample
 
@@ -4003,7 +4041,6 @@ private/staking/get-stake-history
         "limit": "10"
       }
     }
-    
 
 > Response Sample
 
@@ -4038,21 +4075,21 @@ private/staking/get-stake-history
         ]
       }
     }
-    
 
 Get stake/unstake request history
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | Staking instrument name, e.g. SOL.staked |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
+| Name            | Type             | Required | Description                                  |
+| --------------- | ---------------- | -------- | -------------------------------------------- |
+| instrument_name | string           | N        | Staking instrument name, e.g. SOL.staked     |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`) |
+
 Default: `end_time - 30 days`  
-Min: `end_time - 180 days` |
-| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
-Default: current system timestamp |
-| limit | number or string | N | The maximum number of requests returned  
+Min: `end_time - 180 days` | | end_time | number or string | N | End time in
+Unix time format (`inclusive`)  
+Default: current system timestamp | | limit | number or string | N | The maximum
+number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -4068,27 +4105,29 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| cycle\_id | string | Cycle id |
-| staking\_id | string | Request id |
-| status | string | Request status:  
-\- `COMPLETED`  
-\- `REJECTED` |
-| account | string | Account id |
-| quantity | string | Stake/unstake quantity  
-  
-For yield-bearing instruments (learn more from [FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), this field displays the quantity in terms of the original staked token.  
-  
-Example:  
-After unstaking a TSTON.staked position, this field shows how much TON was received as a result of the completed request. |
-| side | string | Stake or Unstake |
-| create\_timestamp\_ms | string | Request creation timestamp in milliseconds in Unix time format |
+| Name                 | Type   | Description                              |
+| -------------------- | ------ | ---------------------------------------- |
+| instrument_name      | string | Staking instrument name, e.g. SOL.staked |
+| underlying_inst_name | string | Underlying instrument name, e.g. SOL     |
+| cycle_id             | string | Cycle id                                 |
+| staking_id           | string | Request id                               |
+| status               | string | Request status:                          |
 
-private/staking/get-reward-history
-----------------------------------
+\- `COMPLETED`  
+\- `REJECTED` | | account | string | Account id | | quantity | string |
+Stake/unstake quantity
+
+For yield-bearing instruments (learn more from
+[FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)),
+this field displays the quantity in terms of the original staked token.
+
+Example:  
+After unstaking a TSTON.staked position, this field shows how much TON was
+received as a result of the completed request. | | side | string | Stake or
+Unstake | | create_timestamp_ms | string | Request creation timestamp in
+milliseconds in Unix time format |
+
+## private/staking/get-reward-history
 
 > Request Sample
 
@@ -4102,7 +4141,6 @@ private/staking/get-reward-history
         "limit": "10"
       }
     }
-    
 
 > Response Sample
 
@@ -4123,21 +4161,21 @@ private/staking/get-reward-history
         ]
       }
     }
-    
 
 Get stake/unstake request history
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | Staking instrument name, e.g. SOL.staked |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
+| Name            | Type             | Required | Description                                  |
+| --------------- | ---------------- | -------- | -------------------------------------------- |
+| instrument_name | string           | N        | Staking instrument name, e.g. SOL.staked     |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`) |
+
 Default: `end_time - 30 days`  
-Min: `end_time - 180 days` |
-| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
-Default: current system timestamp |
-| limit | number or string | N | The maximum number of requests returned  
+Min: `end_time - 180 days` | | end_time | number or string | N | End time in
+Unix time format (`inclusive`)  
+Default: current system timestamp | | limit | number or string | N | The maximum
+number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -4153,17 +4191,16 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| staking\_inst\_name | string | Staking instrument name, e.g. SOL.staked |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| reward\_inst\_name | string | Reward instrument name, e.g. SOL.staked |
-| reward\_quantity | string | Reward quantity |
-| staked\_balance | string | Staked balance |
-| event\_timestamp\_ms | string | Event timestamp in milliseconds in Unix time format |
+| Name                 | Type   | Description                                         |
+| -------------------- | ------ | --------------------------------------------------- |
+| staking_inst_name    | string | Staking instrument name, e.g. SOL.staked            |
+| underlying_inst_name | string | Underlying instrument name, e.g. SOL                |
+| reward_inst_name     | string | Reward instrument name, e.g. SOL.staked             |
+| reward_quantity      | string | Reward quantity                                     |
+| staked_balance       | string | Staked balance                                      |
+| event_timestamp_ms   | string | Event timestamp in milliseconds in Unix time format |
 
-private/staking/convert
------------------------
+## private/staking/convert
 
 > Request Sample
 
@@ -4178,7 +4215,6 @@ private/staking/convert
         "slippage_tolerance_bps": "3"
       }
     }
-    
 
 > Response Sample
 
@@ -4196,23 +4232,23 @@ private/staking/convert
         "reason": "NO_ERROR"
       }
     }
-    
 
 Create a request to convert between staked token with liquid staking token.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| from\_instrument\_name | string | Y | Instrument name to convert from:  
+| Name                 | Type   | Required | Description                      |
+| -------------------- | ------ | -------- | -------------------------------- |
+| from_instrument_name | string | Y        | Instrument name to convert from: |
+
 \- ETH.staked  
-\- CDCETH |
-| to\_instrument\_name | string | Y | Instrument name to convert to:  
+\- CDCETH | | to_instrument_name | string | Y | Instrument name to convert to:  
 \- CDCETH if `from_instrument_name` is ETH.staked  
-\- ETH.staked if `from_instrument_name` is CDCETH |
-| expected\_rate | string | Y | Expected conversion rate, received from `public/staking/get-conversion-rate` |
-| from\_quantity | string | Y | Quantity to be converted in from\_instrument\_name |
-| slippage\_tolerance\_bps | string | Y | Maximum slippage allowed in basis point |
+\- ETH.staked if `from_instrument_name` is CDCETH | | expected_rate | string | Y
+| Expected conversion rate, received from `public/staking/get-conversion-rate` |
+| from_quantity | string | Y | Quantity to be converted in from_instrument_name
+| | slippage_tolerance_bps | string | Y | Maximum slippage allowed in basis
+point |
 
 ### Applies To
 
@@ -4224,18 +4260,17 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| from\_instrument\_name | string | Instrument name to convert from , e.g. ETH.staked |
-| to\_instrument\_name | string | Instrument name to convert to, e.g. CDCETH |
-| expected\_rate | string | Expected conversion rate |
-| from\_quantity | string | Quantity to be converted in from\_instrument\_name |
-| slippage\_tolerance\_bps | string | Maximum slippage allowed in basis point |
-| convert\_id | string | Convert request id |
-| reason | string | Reason for the status, e.g. "NO\_ERROR" |
+| Name                   | Type   | Description                                       |
+| ---------------------- | ------ | ------------------------------------------------- |
+| from_instrument_name   | string | Instrument name to convert from , e.g. ETH.staked |
+| to_instrument_name     | string | Instrument name to convert to, e.g. CDCETH        |
+| expected_rate          | string | Expected conversion rate                          |
+| from_quantity          | string | Quantity to be converted in from_instrument_name  |
+| slippage_tolerance_bps | string | Maximum slippage allowed in basis point           |
+| convert_id             | string | Convert request id                                |
+| reason                 | string | Reason for the status, e.g. "NO_ERROR"            |
 
-private/staking/get-open-convert
---------------------------------
+## private/staking/get-open-convert
 
 > Request Sample with limit and time range provided
 
@@ -4248,7 +4283,6 @@ private/staking/get-open-convert
         "limit": "10"
       }
     }
-    
 
 > Response Sample
 
@@ -4273,20 +4307,20 @@ private/staking/get-open-convert
         ]
       }
     }
-    
 
 Get convert request that status is not in final state.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
+| Name       | Type             | Required | Description                                  |
+| ---------- | ---------------- | -------- | -------------------------------------------- |
+| start_time | number or string | N        | Start time in Unix time format (`inclusive`) |
+
 Default: `end_time - 30 day`  
-Min: `end_time - 180 days` |
-| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
-Default: current system timestamp |
-| limit | number or string | N | The maximum number of requests returned  
+Min: `end_time - 180 days` | | end_time | number or string | N | End time in
+Unix time format (`inclusive`)  
+Default: current system timestamp | | limit | number or string | N | The maximum
+number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -4302,24 +4336,22 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| from\_instrument\_name | string | Instrument name to convert from:  
-\- ETH.staked  
-\- CDCETH |
-| to\_instrument\_name | string | Instrument name to convert to, e.g. CDCETH |
-| expected\_rate | string | Expected conversion rate |
-| from\_quantity | string | Quantity to be converted in from\_instrument\_name |
-| slippage\_tolerance\_bps | string | Maximum slippage allowed in basis point |
-| actual\_rate | string | Actual conversion rate |
-| to\_quantity | string | Quantity converted to to\_instrument\_name |
-| convert\_id | string | Convert request id |
-| status | string | Request status:  
-\- `NEW` |
-| create\_timestamp\_ms | string | Request creation timestamp in milliseconds in Unix time format |
+| Name                 | Type   | Description                      |
+| -------------------- | ------ | -------------------------------- |
+| from_instrument_name | string | Instrument name to convert from: |
 
-private/staking/get-convert-history
------------------------------------
+\- ETH.staked  
+\- CDCETH | | to_instrument_name | string | Instrument name to convert to, e.g.
+CDCETH | | expected_rate | string | Expected conversion rate | | from_quantity |
+string | Quantity to be converted in from_instrument_name | |
+slippage_tolerance_bps | string | Maximum slippage allowed in basis point | |
+actual_rate | string | Actual conversion rate | | to_quantity | string |
+Quantity converted to to_instrument_name | | convert_id | string | Convert
+request id | | status | string | Request status:  
+\- `NEW` | | create_timestamp_ms | string | Request creation timestamp in
+milliseconds in Unix time format |
+
+## private/staking/get-convert-history
 
 > Request Sample with limit and time range provided
 
@@ -4332,7 +4364,6 @@ private/staking/get-convert-history
         "limit": "10"
       }
     }
-    
 
 > Response Sample
 
@@ -4357,20 +4388,20 @@ private/staking/get-convert-history
         ]
       }
     }
-    
 
 Get convert request history
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
+| Name       | Type             | Required | Description                                  |
+| ---------- | ---------------- | -------- | -------------------------------------------- |
+| start_time | number or string | N        | Start time in Unix time format (`inclusive`) |
+
 Default: `end_time - 30 day`  
-Min: `end_time - 180 days` |
-| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
-Default: current system timestamp |
-| limit | number or string | N | The maximum number of requests returned  
+Min: `end_time - 180 days` | | end_time | number or string | N | End time in
+Unix time format (`inclusive`)  
+Default: current system timestamp | | limit | number or string | N | The maximum
+number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -4386,27 +4417,24 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| from\_instrument\_name | string | Instrument name to convert from:  
-\- ETH.staked  
-\- CDCETH |
-| to\_instrument\_name | string | Instrument name to convert to:  
-\- CDCETH  
-\- ETH.staked |
-| expected\_rate | string | Expected conversion rate |
-| from\_quantity | string | Quantity to be converted in from\_instrument\_name |
-| slippage\_tolerance\_bps | string | Maximum slippage allowed in basis point |
-| actual\_rate | string | Actual conversion rate |
-| to\_quantity | string | Quantity converted to to\_instrument\_name |
-| convert\_id | string | Convert request id |
-| status | string | Request status:  
-\- `COMPLETED`  
-\- Reason of `REJECTED` |
-| create\_timestamp\_ms | string | Request creation timestamp in milliseconds in Unix time format |
+| Name                 | Type   | Description                      |
+| -------------------- | ------ | -------------------------------- |
+| from_instrument_name | string | Instrument name to convert from: |
 
-public/staking/get-conversion-rate
-----------------------------------
+\- ETH.staked  
+\- CDCETH | | to_instrument_name | string | Instrument name to convert to:  
+\- CDCETH  
+\- ETH.staked | | expected_rate | string | Expected conversion rate | |
+from_quantity | string | Quantity to be converted in from_instrument_name | |
+slippage_tolerance_bps | string | Maximum slippage allowed in basis point | |
+actual_rate | string | Actual conversion rate | | to_quantity | string |
+Quantity converted to to_instrument_name | | convert_id | string | Convert
+request id | | status | string | Request status:  
+\- `COMPLETED`  
+\- Reason of `REJECTED` | | create_timestamp_ms | string | Request creation
+timestamp in milliseconds in Unix time format |
+
+## public/staking/get-conversion-rate
 
 > Request Sample
 
@@ -4417,7 +4445,6 @@ public/staking/get-conversion-rate
         "instrument_name": "CDCETH"
       }
     }
-    
 
 > Response Sample
 
@@ -4430,16 +4457,15 @@ public/staking/get-conversion-rate
         "conversion_rate": "1.0203"
       }
     }
-    
 
 Get conversion rate between staked token and liquid staking token
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | liquid staking token instrument name:  
-\- CDCETH |
+| Name            | Type   | Required | Description                           |
+| --------------- | ------ | -------- | ------------------------------------- |
+| instrument_name | string | Y        | liquid staking token instrument name: |
+| \- CDCETH       |
 
 ### Applies To
 
@@ -4451,7 +4477,7 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | CDCETH |
-| conversion\_rate | string | conversion rate between staked token (ETH.staked) and liquid staking token (CDCETH) |
+| Name            | Type   | Description                                                                         |
+| --------------- | ------ | ----------------------------------------------------------------------------------- |
+| instrument_name | string | CDCETH                                                                              |
+| conversion_rate | string | conversion rate between staked token (ETH.staked) and liquid staking token (CDCETH) |
