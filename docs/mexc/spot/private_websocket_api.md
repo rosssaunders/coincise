@@ -6,70 +6,66 @@
 
 ### Order side
 
-- BUY
-- SELL
+*   BUY
+*   SELL
 
 ### Order type
 
-- LIMIT (Limit order)
-- MARKET (Market order)
-- LIMIT_MAKER (Limit maker order)
-- IMMEDIATE_OR_CANCEL (Immediate or cancel order)
-- FILL_OR_KILL (Fill or kill order)
+*   LIMIT (Limit order)  
+    
+*   MARKET (Market order)
+*   LIMIT\_MAKER (Limit maker order)
+*   IMMEDIATE\_OR\_CANCEL (Immediate or cancel order)
+*   FILL\_OR\_KILL (Fill or kill order)
 
 ### Order Status
 
-- NEW Uncompleted
-- FILLED Filled
-- PARTIALLY_FILLED Partially filled
-- CANCELED Canceled
-- PARTIALLY_CANCELED Partially canceled
+*   NEW Uncompleted
+*   FILLED Filled
+*   PARTIALLY\_FILLED Partially filled
+*   CANCELED Canceled
+*   PARTIALLY\_CANCELED Partially canceled
 
 ### Kline Interval
 
-- 1m 1 minute
-- 5m 5 minute
-- 15m 15 minute
-- 30m 30 minute
-- 60m 60 minute
-- 4h 4 hour
-- 1d 1 day
-- 1W 1 week
-- 1M 1 month
+*   1m 1 minute
+*   5m 5 minute
+*   15m 15 minute
+*   30m 30 minute
+*   60m 60 minute
+*   4h 4 hour
+*   1d 1 day
+*   1W 1 week
+*   1M 1 month
 
 ### changed type
 
-- WITHDRAW withdraw
-- WITHDRAW_FEE withdraw fee
-- DEPOSIT deposit
-- DEPOSIT_FEE deposit fee
-- ENTRUST deal
-- ENTRUST_PLACE place order
-- ENTRUST_CANCEL cancel order
-- TRADE_FEE trade fee
-- ENTRUST_UNFROZEN return frozen order funds
-- SUGAR airdrop
-- ETF_INDEX ETF place order
+*   WITHDRAW withdraw
+*   WITHDRAW\_FEE withdraw fee
+*   DEPOSIT deposit
+*   DEPOSIT\_FEE deposit fee
+*   ENTRUST deal
+*   ENTRUST\_PLACE place order
+*   ENTRUST\_CANCEL cancel order
+*   TRADE\_FEE trade fee
+*   ENTRUST\_UNFROZEN return frozen order funds
+*   SUGAR airdrop
+*   ETF\_INDEX ETF place order
 
 ---
 
 ## Websocket User Data Streams
 
-- The base API endpoint is: **https://api.mexc.com**
-- A User Data Stream `listenKey` is valid for 60 minutes after creation.
-- Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
-- Doing a `DELETE` on a `listenKey` will close the stream and invalidate the
-  `listenKey`.
-- websocket baseurl: **ws://wbs-api.mexc.com/ws**
-- User Data Streams are accessed at **/ws?listenKey=listenKey**  
-  For example:
-  **ws://wbs-api.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
-- A single connection is only valid for 24 hours; expect to be disconnected at
-  the 24 hour mark.
-- Each UID can apply for a maximum of 60 listen keys (excluding invalid listen
-  keys).
-- Each listen key maximum support 5 websocket connection (which means each uid
-  can applies for a maximum of 60 listen keys and 300 ws links).
+*   The base API endpoint is: **https://api.mexc.com**
+*   A User Data Stream `listenKey` is valid for 60 minutes after creation.
+*   Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
+*   Doing a `DELETE` on a `listenKey` will close the stream and invalidate the `listenKey`.
+*   websocket baseurl: **ws://wbs-api.mexc.com/ws**
+*   User Data Streams are accessed at **/ws?listenKey=listenKey**  
+    For example: **ws://wbs-api.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
+*   A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.
+*   Each UID can apply for a maximum of 60 listen keys (excluding invalid listen keys).
+*   Each listen key maximum support 5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).
 
 ## Listen Key
 
@@ -83,20 +79,19 @@
 }
 ```
 
-**Required Permissions:** Account Read / SPOT_ACCOUNT_R
+**Required Permissions:** Account Read / SPOT\_ACCOUNT\_R
 
 **HTTP Request**
 
-- **POST** `/api/v3/userDataStream`
+*   **POST** `/api/v3/userDataStream`
 
-Starts a new data stream. The stream will close 60 minutes after creation unless
-a keepalive is sent.
+Starts a new data stream. The stream will close 60 minutes after creation unless a keepalive is sent.
 
 **Parameters:**
 
 NONE
 
----
+* * *
 
 ### Get Valid Listen Keys
 
@@ -112,11 +107,11 @@ NONE
 }
 ```
 
-**Required Permissions:** Account Read / SPOT_ACCOUNT_R
+**Required Permissions:** Account Read / SPOT\_ACCOUNT\_R
 
 **HTTP Request**
 
-- **GET** `/api/v3/userDataStream`
+*   **GET** `/api/v3/userDataStream`
 
 Retrieves all currently valid listen keys.
 
@@ -124,7 +119,7 @@ Retrieves all currently valid listen keys.
 
 NONE
 
----
+* * *
 
 ### Extend Listen Key Validity
 
@@ -138,18 +133,17 @@ NONE
 
 **HTTP Request**
 
-- **PUT** `/api/v3/userDataStream`
+*   **PUT** `/api/v3/userDataStream`
 
-Extends the validity to 60 minutes from the time of this call. It is recommended
-to send a request every 30 minutes.
+Extends the validity to 60 minutes from the time of this call. It is recommended to send a request every 30 minutes.
 
 **Request Parameters:**
 
 | Parameter | Data Type | Required | Description |
-| --------- | --------- | -------- | ----------- |
-| listenKey | string    | Yes      |             |
+| --- | --- | --- | --- |
+| listenKey | string | Yes |  |
 
----
+* * *
 
 ### Close Listen Key
 
@@ -163,22 +157,21 @@ to send a request every 30 minutes.
 
 **HTTP Request**
 
-- **DELETE** `/api/v3/userDataStream`
+*   **DELETE** `/api/v3/userDataStream`
 
 Closes the user data stream.
 
 **Request Parameters:**
 
 | Parameter | Data Type | Required | Description |
-| --------- | --------- | -------- | ----------- |
-| listenKey | string    | Yes      |             |
+| --- | --- | --- | --- |
+| listenKey | string | Yes |  |
 
----
+* * *
 
 ## Spot Account Update
 
-After a successful subscription, whenever the account balance or available
-balance changes, the server will push updates of the account assets.
+After a successful subscription, whenever the account balance or available balance changes, the server will push updates of the account assets.
 
 > **Request:**
 
@@ -215,18 +208,18 @@ balance changes, the server will push updates of the account assets.
 
 **Response Parameters:**
 
-| Parameter           | Data Type | Description                 |
-| ------------------- | --------- | --------------------------- |
-| privateAccount      | json      | Account information         |
-| vcoinName           | string    | Asset name                  |
-| balanceAmount       | string    | Available balance           |
-| balanceAmountChange | string    | Change in available balance |
-| frozenAmount        | string    | Frozen balance              |
-| frozenAmountChange  | string    | Change in frozen balance    |
-| type                | string    | Change type (see details)   |
-| time                | long      | Settlement time             |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| privateAccount | json | Account information |
+| vcoinName | string | Asset name |
+| balanceAmount | string | Available balance |
+| balanceAmountChange | string | Change in available balance |
+| frozenAmount | string | Frozen balance |
+| frozenAmountChange | string | Change in frozen balance |
+| type | string | Change type (see details) |
+| time | long | Settlement time |
 
----
+* * *
 
 ## Spot Account Deals
 
@@ -266,23 +259,23 @@ balance changes, the server will push updates of the account assets.
 
 **Response Parameters:**
 
-| Parameter     | Data Type | Description                  |
-| ------------- | --------- | ---------------------------- |
-| symbol        | string    | Trading pair                 |
-| sendTime      | long      | Event time                   |
-| privateDeals  | json      | Account trade information    |
-| price         | string    | Trade price                  |
-| quantity      | string    | Trade quantity               |
-| amount        | string    | Trade amount                 |
-| tradeType     | int       | Trade type (1: Buy, 2: Sell) |
-| tradeId       | string    | Trade ID                     |
-| orderId       | string    | Order ID                     |
-| clientOrderId | string    | User-defined order ID        |
-| feeAmount     | string    | Fee amount                   |
-| feeCurrency   | string    | Fee currency                 |
-| time          | long      | Trade time                   |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| symbol | string | Trading pair |
+| sendTime | long | Event time |
+| privateDeals | json | Account trade information |
+| price | string | Trade price |
+| quantity | string | Trade quantity |
+| amount | string | Trade amount |
+| tradeType | int | Trade type (1: Buy, 2: Sell) |
+| tradeId | string | Trade ID |
+| orderId | string | Order ID |
+| clientOrderId | string | User-defined order ID |
+| feeAmount | string | Fee amount |
+| feeCurrency | string | Fee currency |
+| time | long | Trade time |
 
----
+* * *
 
 ## Spot Account Orders
 
@@ -327,21 +320,21 @@ balance changes, the server will push updates of the account assets.
 
 **Response Parameters:**
 
-| Parameter          | Data Type  | Description                                                                                                                          |
-| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| symbol             | string     | Trading pair                                                                                                                         |
-| sendTime           | long       | Event time                                                                                                                           |
-| privateOrders      | json       | Account order information                                                                                                            |
-| id                 | string     | Order ID                                                                                                                             |
-| price              | bigDecimal | Order price                                                                                                                          |
-| quantity           | bigDecimal | Order quantity                                                                                                                       |
-| amount             | bigDecimal | Total order amount                                                                                                                   |
-| avgPrice           | bigDecimal | Average trade price                                                                                                                  |
-| orderType          | int        | Order type: LIMIT_ORDER (1), POST_ONLY (2), IMMEDIATE_OR_CANCEL (3), FILL_OR_KILL (4), MARKET_ORDER (5); Stop loss/take profit (100) |
-| tradeType          | int        | Trade type (1: Buy, 2: Sell)                                                                                                         |
-| remainAmount       | bigDecimal | Remaining amount                                                                                                                     |
-| remainQuantity     | bigDecimal | Remaining quantity                                                                                                                   |
-| cumulativeQuantity | bigDecimal | Cumulative trade quantity                                                                                                            |
-| cumulativeAmount   | bigDecimal | Cumulative trade amount                                                                                                              |
-| status             | int        | Order status: 1: Not traded, 2: Fully traded, 3: Partially traded, 4: Canceled, 5: Partially canceled                                |
-| createTime         | long       | Order creation time                                                                                                                  |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| symbol | string | Trading pair |
+| sendTime | long | Event time |
+| privateOrders | json | Account order information |
+| id | string | Order ID |
+| price | bigDecimal | Order price |
+| quantity | bigDecimal | Order quantity |
+| amount | bigDecimal | Total order amount |
+| avgPrice | bigDecimal | Average trade price |
+| orderType | int | Order type: LIMIT\_ORDER (1), POST\_ONLY (2), IMMEDIATE\_OR\_CANCEL (3), FILL\_OR\_KILL (4), MARKET\_ORDER (5); Stop loss/take profit (100) |
+| tradeType | int | Trade type (1: Buy, 2: Sell) |
+| remainAmount | bigDecimal | Remaining amount |
+| remainQuantity | bigDecimal | Remaining quantity |
+| cumulativeQuantity | bigDecimal | Cumulative trade quantity |
+| cumulativeAmount | bigDecimal | Cumulative trade amount |
+| status | int | Order status: 1: Not traded, 2: Fully traded, 3: Partially traded, 4: Canceled, 5: Partially canceled |
+| createTime | long | Order creation time |
