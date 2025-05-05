@@ -41,7 +41,7 @@ export const launchBrowser = async () => {
  * @param {string} options.customLogPrefix - Custom prefix for logs from page.evaluate (defaults to '[PuppeteerScript]')
  * @returns {Promise<void>}
  */
-const configurePage = async (page, options = {}) => {
+export const configurePage = async (page, options = {}) => {
   const { logWebsiteMessages = false, customLogPrefix = "[PuppeteerScript]" } =
     options
 
