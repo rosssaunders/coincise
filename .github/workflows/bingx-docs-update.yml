@@ -1,13 +1,13 @@
-name: Weekly BingX Documentation Update
+name: BingX Docs Update
 
 on:
   schedule:
     # Run every Sunday at 00:00 UTC
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch: # Allow manual triggering
   push:
     paths:
-      - 'venues/bingx/**'
+      - "venues/bingx/**"
 
 jobs:
   update-docs:
@@ -28,8 +28,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
           cache-dependency-path: venues/bingx/package-lock.json
 
       - name: Install dependencies
@@ -51,10 +51,10 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: 'docs: update BingX API documentation'
-          title: 'Weekly BingX API Documentation Update'
-          body: 'Automated weekly update of BingX API documentation'
-          branch: 'bingx-docs-update' # Updated branch name
-          base: 'main'
+          commit-message: "docs: update BingX API documentation"
+          title: "Weekly BingX API Documentation Update"
+          body: "Automated weekly update of BingX API documentation"
+          branch: "bingx-docs-update" # Updated branch name
+          base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}

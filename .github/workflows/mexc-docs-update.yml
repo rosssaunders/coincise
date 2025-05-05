@@ -1,13 +1,13 @@
-name: Weekly MEXC Documentation Update
+name: MEXC Docs Update
 
 on:
   schedule:
     # Run every Sunday at 00:00 UTC
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch: # Allow manual triggering
   push:
     paths:
-      - 'venues/mexc/**'
+      - "venues/mexc/**"
 
 jobs:
   update-docs:
@@ -28,8 +28,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
           cache-dependency-path: venues/mexc/package-lock.json
 
       - name: Install dependencies
@@ -51,10 +51,10 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: 'docs: update MEXC API documentation'
-          title: 'Weekly MEXC API Documentation Update'
-          body: 'Automated weekly update of MEXC API documentation'
-          branch: 'mexc-docs-update'
-          base: 'main'
+          commit-message: "docs: update MEXC API documentation"
+          title: "Weekly MEXC API Documentation Update"
+          body: "Automated weekly update of MEXC API documentation"
+          branch: "mexc-docs-update"
+          base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
