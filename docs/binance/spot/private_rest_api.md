@@ -28,8 +28,9 @@ for `price`/`stopPrice` of the enabled rules:
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "PRICE_FILTER",  "minPrice": "0.00000100",  "maxPrice": "100000.00000000",  "tickSize": "0.00000100"}
+```codeBlockLines_aHhF
+{
+  "filterType": "PRICE_FILTER",  "minPrice": "0.00000100",  "maxPrice": "100000.00000000",  "tickSize": "0.00000100"}
 ```
 
 ### PERCENT_PRICE[​](/docs/binance-spot-api-docs/filters#percent_price "Direct link to PERCENT_PRICE")
@@ -45,8 +46,9 @@ In order to pass the `percent price`, the following must be true for `price`:
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "PERCENT_PRICE",  "multiplierUp": "1.3000",  "multiplierDown": "0.7000",  "avgPriceMins": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "PERCENT_PRICE",  "multiplierUp": "1.3000",  "multiplierDown": "0.7000",  "avgPriceMins": 5}
 ```
 
 ### PERCENT_PRICE_BY_SIDE[​](/docs/binance-spot-api-docs/filters#percent_price_by_side "Direct link to PERCENT_PRICE_BY_SIDE")
@@ -70,8 +72,8 @@ Sell orders will succeed on this filter if:
 
 **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE_BY_SIDE",    "bidMultiplierUp": "1.2",    "bidMultiplierDown": "0.2",    "askMultiplierUp": "5",    "askMultiplierDown": "0.8",    "avgPriceMins": 1  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE_BY_SIDE",    "bidMultiplierUp": "1.2",    "bidMultiplierDown": "0.2",    "askMultiplierUp": "5",    "askMultiplierDown": "0.8",    "avgPriceMins": 1  }
 ```
 
 ### LOT_SIZE[​](/docs/binance-spot-api-docs/filters#lot_size "Direct link to LOT_SIZE")
@@ -93,8 +95,9 @@ In order to pass the `lot size`, the following must be true for
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
+```codeBlockLines_aHhF
+{
+  "filterType": "LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
 ```
 
 ### MIN_NOTIONAL[​](/docs/binance-spot-api-docs/filters#min_notional "Direct link to MIN_NOTIONAL")
@@ -108,8 +111,9 @@ of minutes the average price is calculated over. 0 means the last price is used.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MIN_NOTIONAL",  "minNotional": "0.00100000",  "applyToMarket": true,  "avgPriceMins": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "MIN_NOTIONAL",  "minNotional": "0.00100000",  "applyToMarket": true,  "avgPriceMins": 5}
 ```
 
 ### NOTIONAL[​](/docs/binance-spot-api-docs/filters#notional "Direct link to NOTIONAL")
@@ -134,8 +138,9 @@ If the `avgPriceMins` is 0, then the last price will be used.
 
 **/exchangeInfo format:**
 
-```
-{   "filterType": "NOTIONAL",   "minNotional": "10.00000000",   "applyMinToMarket": false,   "maxNotional": "10000.00000000",   "applyMaxToMarket": false,   "avgPriceMins": 5}
+```codeBlockLines_aHhF
+{
+   "filterType": "NOTIONAL",   "minNotional": "10.00000000",   "applyMinToMarket": false,   "maxNotional": "10000.00000000",   "applyMaxToMarket": false,   "avgPriceMins": 5}
 ```
 
 ### ICEBERG_PARTS[​](/docs/binance-spot-api-docs/filters#iceberg_parts "Direct link to ICEBERG_PARTS")
@@ -145,8 +150,9 @@ The number of `ICEBERG_PARTS` is defined as `CEIL(qty / icebergQty)`.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "ICEBERG_PARTS",  "limit": 10}
+```codeBlockLines_aHhF
+{
+  "filterType": "ICEBERG_PARTS",  "limit": 10}
 ```
 
 ### MARKET_LOT_SIZE[​](/docs/binance-spot-api-docs/filters#market_lot_size "Direct link to MARKET_LOT_SIZE")
@@ -168,8 +174,9 @@ In order to pass the `market lot size`, the following must be true for
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MARKET_LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
+```codeBlockLines_aHhF
+{
+  "filterType": "MARKET_LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
 ```
 
 ### MAX_NUM_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_orders "Direct link to MAX_NUM_ORDERS")
@@ -180,8 +187,9 @@ are counted for this filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ORDERS",  "maxNumOrders": 25}
+```codeBlockLines_aHhF
+{
+  "filterType": "MAX_NUM_ORDERS",  "maxNumOrders": 25}
 ```
 
 ### MAX_NUM_ALGO_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_algo_orders "Direct link to MAX_NUM_ALGO_ORDERS")
@@ -192,8 +200,9 @@ account is allowed to have open on a symbol. "Algo" orders are `STOP_LOSS`,
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 5}
 ```
 
 ### MAX_NUM_ICEBERG_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_iceberg_orders "Direct link to MAX_NUM_ICEBERG_ORDERS")
@@ -204,8 +213,9 @@ order where the `icebergQty` is > 0.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 5}
 ```
 
 ### MAX_POSITION[​](/docs/binance-spot-api-docs/filters#max_position "Direct link to MAX_POSITION")
@@ -226,8 +236,9 @@ the `MAX_POSITION` filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType":"MAX_POSITION",  "maxPosition":"10.00000000"}
+```codeBlockLines_aHhF
+{
+  "filterType":"MAX_POSITION",  "maxPosition":"10.00000000"}
 ```
 
 ### TRAILING_DELTA[​](/docs/binance-spot-api-docs/filters#trailing_delta "Direct link to TRAILING_DELTA")
@@ -252,8 +263,8 @@ For `STOP_LOSS SELL`, `STOP_LOSS_LIMIT SELL`, `TAKE_PROFIT BUY`, and
 
 **/exchangeInfo format:**
 
-```
-    {          "filterType": "TRAILING_DELTA",          "minTrailingAboveDelta": 10,          "maxTrailingAboveDelta": 2000,          "minTrailingBelowDelta": 10,          "maxTrailingBelowDelta": 2000   }
+```codeBlockLines_aHhF
+{          "filterType": "TRAILING_DELTA",          "minTrailingAboveDelta": 10,          "maxTrailingAboveDelta": 2000,          "minTrailingBelowDelta": 10,          "maxTrailingBelowDelta": 2000   }
 ```
 
 ## Exchange Filters[​](/docs/binance-spot-api-docs/filters#exchange-filters "Direct link to Exchange Filters")
@@ -266,8 +277,9 @@ and normal orders are counted for this filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ORDERS",  "maxNumOrders": 1000}
+```codeBlockLines_aHhF
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDERS",  "maxNumOrders": 1000}
 ```
 
 ### EXCHANGE_MAX_NUM_ALGO_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_algo_orders "Direct link to EXCHANGE_MAX_NUM_ALGO_ORDERS")
@@ -278,8 +290,9 @@ orders an account is allowed to have open on the exchange. "Algo" orders are
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 200}
+```codeBlockLines_aHhF
+{
+  "filterType": "EXCHANGE_MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 200}
 ```
 
 ### EXCHANGE_MAX_NUM_ICEBERG_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_iceberg_orders "Direct link to EXCHANGE_MAX_NUM_ICEBERG_ORDERS")
@@ -289,8 +302,9 @@ iceberg orders an account is allowed to have open on the exchange.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 10000}
+```codeBlockLines_aHhF
+{
+  "filterType": "EXCHANGE_MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 10000}
 ```
 
 # ENUM Definitions
@@ -418,20 +432,20 @@ This sets how long an order will be active before expiration.
 
 - REQUEST_WEIGHT
 
-```
-    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000    }
+```codeBlockLines_aHhF
+{      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000    }
 ```
 
 - ORDERS
 
-```
-    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 1,      "limit": 10    }
+```codeBlockLines_aHhF
+{      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 1,      "limit": 10    }
 ```
 
 - RAW_REQUESTS
 
-```
-    {      "rateLimitType": "RAW_REQUESTS",      "interval": "MINUTE",      "intervalNum": 5,      "limit": 61000    }
+```codeBlockLines_aHhF
+{      "rateLimitType": "RAW_REQUESTS",      "interval": "MINUTE",      "intervalNum": 5,      "limit": 61000    }
 ```
 
 ## Rate limit intervals (interval)[​](/docs/binance-spot-api-docs/enums#rate-limit-intervals-interval "Direct link to Rate limit intervals (interval)")
@@ -458,8 +472,9 @@ to learn more.
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 ## 10xx - General Server or Network issues[​](/docs/binance-spot-api-docs/errors#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
@@ -1038,8 +1053,9 @@ request sent would not have changed the status quo.
 
 Sample Payload below:
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 - Specific error codes and messages are defined in
@@ -1167,8 +1183,10 @@ the value it's looking for it will check the next one.
   not sent, **it defaults to 5000**.
 - The logic is as follows:
 
-  ```
-  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow) {  // process request} else {  // reject request}
+  ```codeBlockLines_aHhF
+  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow) {
+    // process request} else {
+    // reject request}
   ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable,
@@ -1186,21 +1204,20 @@ beyond 60,000!**
 Here is a step-by-step example of how to send a valid signed payload from the
 Linux command line using `echo`, `openssl`, and `curl`.
 
-| Key         | Value                                                            |
-| ----------- | ---------------------------------------------------------------- |
-| `apiKey`    | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
-| `secretKey` | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j |
-
-| Parameter     | Value         |
-| ------------- | ------------- |
-| `symbol`      | LTCBTC        |
-| `side`        | BUY           |
-| `type`        | LIMIT         |
-| `timeInForce` | GTC           |
-| `quantity`    | 1             |
-| `price`       | 0.1           |
-| `recvWindow`  | 5000          |
-| `timestamp`   | 1499827319559 |
+| Key           | Value                                                            |
+| ------------- | ---------------------------------------------------------------- |
+| `apiKey`      | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
+| `secretKey`   | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j |
+| Parameter     | Value                                                            |
+| ---           | ---                                                              |
+| `symbol`      | LTCBTC                                                           |
+| `side`        | BUY                                                              |
+| `type`        | LIMIT                                                            |
+| `timeInForce` | GTC                                                              |
+| `quantity`    | 1                                                                |
+| `price`       | 0.1                                                              |
+| `recvWindow`  | 5000                                                             |
+| `timestamp`   | 1499827319559                                                    |
 
 **Example 1: As a request body**
 
@@ -1208,14 +1225,16 @@ Linux command line using `echo`, `openssl`, and `curl`.
   symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
 - **HMAC SHA256 signature:**
 
-  ```
-  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"(stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
+  ```codeBlockLines_aHhF
+  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+  (stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
   ```
 
 - **curl command:**
 
-  ```
-  (HMAC SHA256)[linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order' -d 'symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
+  ```codeBlockLines_aHhF
+  (HMAC SHA256)
+  [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order' -d 'symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
   ```
 
 **Example 2: As a query string**
@@ -1224,14 +1243,16 @@ Linux command line using `echo`, `openssl`, and `curl`.
   symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
 - **HMAC SHA256 signature:**
 
-  ```
-  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"(stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
+  ```codeBlockLines_aHhF
+  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+  (stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
   ```
 
 - **curl command:**
 
-  ```
-  (HMAC SHA256)[linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
+  ```codeBlockLines_aHhF
+  (HMAC SHA256)
+  [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
   ```
 
 **Example 3: Mixed query string and request body**
@@ -1240,14 +1261,16 @@ Linux command line using `echo`, `openssl`, and `curl`.
 - **requestBody:** quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
 - **HMAC SHA256 signature:**
 
-  ```
-  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"(stdin)= 0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77
+  ```codeBlockLines_aHhF
+  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+  (stdin)= 0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77
   ```
 
 - **curl command:**
 
-  ```
-  (HMAC SHA256)[linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77'
+  ```codeBlockLines_aHhF
+  (HMAC SHA256)
+  [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77'
   ```
 
 Note that the signature is different in example 3. There is no & between "GTC"
@@ -1265,20 +1288,19 @@ a corresponding API key will be provided for you.
 
 For this example, the private key will be referenced as `./test-prv-key.pem`
 
-| Key      | Value                                                            |
-| -------- | ---------------------------------------------------------------- |
-| `apiKey` | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
-
-| Parameter     | Value         |
-| ------------- | ------------- |
-| `symbol`      | BTCUSDT       |
-| `side`        | SELL          |
-| `type`        | LIMIT         |
-| `timeInForce` | GTC           |
-| `quantity`    | 1             |
-| `price`       | 0.2           |
-| `timestamp`   | 1668481559918 |
-| `recvWindow`  | 5000          |
+| Key           | Value                                                            |
+| ------------- | ---------------------------------------------------------------- |
+| `apiKey`      | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
+| Parameter     | Value                                                            |
+| ---           | ---                                                              |
+| `symbol`      | BTCUSDT                                                          |
+| `side`        | SELL                                                             |
+| `type`        | LIMIT                                                            |
+| `timeInForce` | GTC                                                              |
+| `quantity`    | 1                                                                |
+| `price`       | 0.2                                                              |
+| `timestamp`   | 1668481559918                                                    |
+| `recvWindow`  | 5000                                                             |
 
 **Step 1: Construct the payload**
 
@@ -1287,7 +1309,7 @@ Arrange the list of parameters into a string. Separate each parameter with a
 
 For the parameters above, the signature payload would look like this:
 
-```
+```codeBlockLines_aHhF
 symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000
 ```
 
@@ -1296,33 +1318,46 @@ symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timesta
 1.  Encode signature payload as ASCII data.
 2.  Sign payload using RSASSA-PKCS1-v1_5 algorithm with SHA-256 hash function.
 
-```
+```codeBlockLines_aHhF
 $ echo -n 'symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000' | openssl dgst -sha256 -sign ./test-prv-key.pem
 ```
 
 3.  Encode output as base64 string.
 
-```
-$  echo -n 'symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000' | openssl dgst -sha256 -sign ./test-prv-key.pem | openssl enc -base64 -AHZ8HOjiJ1s/igS9JA+n7+7Ti/ihtkRF5BIWcPIEluJP6tlbFM/Bf44LfZka/iemtahZAZzcO9TnI5uaXh3++lrqtNonCwp6/245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH+XxaCmR0WcvlKjNQnp12/eKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang/1WOq+Jaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT/fNnMRxFc7u+j3qI//5yuGuu14KR0MuQKKCSpViieD+fIti46sxPTsjSemoUKp0oXA==
+```codeBlockLines_aHhF
+$  echo -n 'symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000' | openssl dgst -sha256 -sign ./test-prv-key.pem | openssl enc -base64 -A
+HZ8HOjiJ1s/igS9JA+n7+7Ti/ihtkRF5BIWcPIEluJP6tlbFM/Bf44LfZka/iemtahZAZzcO9TnI5uaXh3++lrqtNonCwp6/245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH+XxaCmR0WcvlKjNQnp12/eKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang/1WOq+Jaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT/fNnMRxFc7u+j3qI//5yuGuu14KR0MuQKKCSpViieD+fIti46sxPTsjSemoUKp0oXA==
 ```
 
 4.  Since the signature may contain `/` and `=`, this could cause issues with
     sending the request. So the signature has to be URL encoded.
 
-```
+```codeBlockLines_aHhF
 HZ8HOjiJ1s%2FigS9JA%2Bn7%2B7Ti%2FihtkRF5BIWcPIEluJP6tlbFM%2FBf44LfZka%2FiemtahZAZzcO9TnI5uaXh3%2B%2BlrqtNonCwp6%2F245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH%2BXxaCmR0WcvlKjNQnp12%2FeKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang%2F1WOq%2BJaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT%2FfNnMRxFc7u%2Bj3qI%2F%2F5yuGuu14KR0MuQKKCSpViieD%2BfIti46sxPTsjSemoUKp0oXA%3D%3D
 ```
 
 5.  The curl command:
 
-```
+```codeBlockLines_aHhF
 curl -H "X-MBX-APIKEY: CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ" -X POST 'https://api.binance.com/api/v3/order?symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000&signature=HZ8HOjiJ1s%2FigS9JA%2Bn7%2B7Ti%2FihtkRF5BIWcPIEluJP6tlbFM%2FBf44LfZka%2FiemtahZAZzcO9TnI5uaXh3%2B%2BlrqtNonCwp6%2F245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH%2BXxaCmR0WcvlKjNQnp12%2FeKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang%2F1WOq%2BJaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT%2FfNnMRxFc7u%2Bj3qI%2F%2F5yuGuu14KR0MuQKKCSpViieD%2BfIti46sxPTsjSemoUKp0oXA%3D%3D'
 ```
 
 A sample Bash script below does the similar steps said above.
 
-```
-API_KEY="put your own API Key here"PRIVATE_KEY_PATH="test-prv-key.pem"# Set up the request:API_METHOD="POST"API_CALL="api/v3/order"API_PARAMS="symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2"# Sign the request:timestamp=$(date +%s000)api_params_with_timestamp="$API_PARAMS&timestamp=$timestamp"signature=$(echo -n "$api_params_with_timestamp" \            | openssl dgst -sha256 -sign "$PRIVATE_KEY_PATH" \            | openssl enc -base64 -A)# Send the request:curl -H "X-MBX-APIKEY: $API_KEY" -X "$API_METHOD" \    "https://api.binance.com/$API_CALL?$api_params_with_timestamp" \    --data-urlencode "signature=$signature"
+```codeBlockLines_aHhF
+API_KEY="put your own API Key here"
+PRIVATE_KEY_PATH="test-prv-key.pem"
+# Set up the request:
+API_METHOD="POST"
+API_CALL="api/v3/order"
+API_PARAMS="symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2"
+# Sign the request:
+timestamp=$(date +%s000)
+api_params_with_timestamp="$API_PARAMS&timestamp=$timestamp"
+signature=$(echo -n "$api_params_with_timestamp" \
+            | openssl dgst -sha256 -sign "$PRIVATE_KEY_PATH" \            | openssl enc -base64 -A)# Send the request:
+curl -H "X-MBX-APIKEY: $API_KEY" -X "$API_METHOD" \
+    "https://api.binance.com/$API_CALL?$api_params_with_timestamp" \    --data-urlencode "signature=$signature"
 ```
 
 #### Ed25519 Keys[​](/docs/binance-spot-api-docs/rest-api/endpoint-security-type#ed25519-keys "Direct link to Ed25519 Keys")
@@ -1343,15 +1378,49 @@ the best performance and security out of all supported key types.**
 This is a sample code in Python to show how to sign the payload with an Ed25519
 key.
 
-```
-#!/usr/bin/env python3import base64import requestsimport timefrom cryptography.hazmat.primitives.serialization import load_pem_private_key# Set up authenticationAPI_KEY='put your own API Key here'PRIVATE_KEY_PATH='test-prv-key.pem'# Load the private key.# In this example the key is expected to be stored without encryption,# but we recommend using a strong password for improved security.with open(PRIVATE_KEY_PATH, 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)# Set up the request parametersparams = {    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20',}# Timestamp the requesttimestamp = int(time.time() * 1000) # UNIX timestamp in millisecondsparams['timestamp'] = timestamp# Sign the requestpayload = '&'.join([f'{param}={value}' for param, value in params.items()])signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))params['signature'] = signature# Send the requestheaders = {    'X-MBX-APIKEY': API_KEY,}response = requests.post(    'https://api.binance.com/api/v3/order',    headers=headers,    data=params,)print(response.json())
+```codeBlockLines_aHhF
+#!/usr/bin/env python3
+
+import base64
+import requests
+import time
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
+
+# Set up authentication
+API_KEY='put your own API Key here'
+PRIVATE_KEY_PATH='test-prv-key.pem'
+
+# Load the private key.
+# In this example the key is expected to be stored without encryption,
+# but we recommend using a strong password for improved security.
+with open(PRIVATE_KEY_PATH, 'rb') as f:
+    private_key = load_pem_private_key(data=f.read(),                                       password=None)
+# Set up the request parameters
+params = {
+    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20',}
+
+# Timestamp the request
+timestamp = int(time.time() * 1000) # UNIX timestamp in milliseconds
+params['timestamp'] = timestamp
+
+# Sign the request
+payload = '&'.join([f'{param}={value}' for param, value in params.items()])
+signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))
+params['signature'] = signature
+
+# Send the request
+headers = {
+    'X-MBX-APIKEY': API_KEY,}
+response = requests.post(
+    'https://api.binance.com/api/v3/order',    headers=headers,    data=params,)
+print(response.json())
 ```
 
 # General endpoints
 
 ### Test connectivity[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity "Direct link to Test connectivity")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ping
 ```
 
@@ -1365,13 +1434,13 @@ Test connectivity to the Rest API.
 
 **Response:**
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
 ### Check server time[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time "Direct link to Check server time")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/time
 ```
 
@@ -1385,13 +1454,14 @@ Test connectivity to the Rest API and get the current server time.
 
 **Response:**
 
-```
-{  "serverTime": 1499827319559}
+```codeBlockLines_aHhF
+{
+  "serverTime": 1499827319559}
 ```
 
 ### Exchange information[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information "Direct link to Exchange information")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/exchangeInfo
 ```
 
@@ -1455,15 +1525,16 @@ Cannot be used in combination with `symbols` or `symbol`. |
 
 **Response:**
 
-```
-{  "timezone": "UTC",  "serverTime": 1565246363776,  "rateLimits": [    {      // These are defined in the `ENUM definitions` section under `Rate Limiters (rateLimitType)`.      // All limits are optional    }  ],  "exchangeFilters": [    // These are the defined filters in the `Filters` section.    // All filters are optional.  ],  "symbols": [    {      "symbol": "ETHBTC",      "status": "TRADING",      "baseAsset": "ETH",      "baseAssetPrecision": 8,      "quoteAsset": "BTC",      "quotePrecision": 8, // will be removed in future api versions (v4+)      "quoteAssetPrecision": 8,      "baseCommissionPrecision": 8,      "quoteCommissionPrecision": 8,      "orderTypes": [        "LIMIT",        "LIMIT_MAKER",        "MARKET",        "STOP_LOSS",        "STOP_LOSS_LIMIT",        "TAKE_PROFIT",        "TAKE_PROFIT_LIMIT"      ],      "icebergAllowed": true,      "ocoAllowed": true,      "otoAllowed": true,      "quoteOrderQtyMarketAllowed": true,      "allowTrailingStop": false,      "cancelReplaceAllowed":false,      "allowAmend":false,      "isSpotTradingAllowed": true,      "isMarginTradingAllowed": true,      "filters": [        // These are defined in the Filters section.        // All filters are optional      ],      "permissions": [],      "permissionSets": [        [          "SPOT",          "MARGIN"        ]      ],      "defaultSelfTradePreventionMode": "NONE",      "allowedSelfTradePreventionModes": [        "NONE"      ]    }  ],  // Optional field. Present only when SOR is available.  // https://github.com/binance/binance-spot-api-docs/blob/master/faqs/sor_faq.md  "sors": [    {      "baseAsset": "BTC",      "symbols": [        "BTCUSDT",        "BTCUSDC"      ]    }  ]}
+```codeBlockLines_aHhF
+{
+  "timezone": "UTC",  "serverTime": 1565246363776,  "rateLimits": [    {      // These are defined in the `ENUM definitions` section under `Rate Limiters (rateLimitType)`.      // All limits are optional    }  ],  "exchangeFilters": [    // These are the defined filters in the `Filters` section.    // All filters are optional.  ],  "symbols": [    {      "symbol": "ETHBTC",      "status": "TRADING",      "baseAsset": "ETH",      "baseAssetPrecision": 8,      "quoteAsset": "BTC",      "quotePrecision": 8, // will be removed in future api versions (v4+)      "quoteAssetPrecision": 8,      "baseCommissionPrecision": 8,      "quoteCommissionPrecision": 8,      "orderTypes": [        "LIMIT",        "LIMIT_MAKER",        "MARKET",        "STOP_LOSS",        "STOP_LOSS_LIMIT",        "TAKE_PROFIT",        "TAKE_PROFIT_LIMIT"      ],      "icebergAllowed": true,      "ocoAllowed": true,      "otoAllowed": true,      "quoteOrderQtyMarketAllowed": true,      "allowTrailingStop": false,      "cancelReplaceAllowed":false,      "allowAmend":false,      "isSpotTradingAllowed": true,      "isMarginTradingAllowed": true,      "filters": [        // These are defined in the Filters section.        // All filters are optional      ],      "permissions": [],      "permissionSets": [        [          "SPOT",          "MARGIN"        ]      ],      "defaultSelfTradePreventionMode": "NONE",      "allowedSelfTradePreventionModes": [        "NONE"      ]    }  ],  // Optional field. Present only when SOR is available.  // https://github.com/binance/binance-spot-api-docs/blob/master/faqs/sor_faq.md  "sors": [    {      "baseAsset": "BTC",      "symbols": [        "BTCUSDT",        "BTCUSDC"      ]    }  ]}
 ```
 
 # Trading endpoints
 
 ### New order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-trade "Direct link to New order (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/order
 ```
 
@@ -1546,20 +1617,23 @@ Other info:
 
 **Response - ACK:**
 
-```
-{  "symbol": "BTCUSDT",  "orderId": 28,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",  "transactTime": 1507725176595}
+```codeBlockLines_aHhF
+{
+  "symbol": "BTCUSDT",  "orderId": 28,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",  "transactTime": 1507725176595}
 ```
 
 **Response - RESULT:**
 
-```
-{  "symbol": "BTCUSDT",  "orderId": 28,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",  "transactTime": 1507725176595,  "price": "0.00000000",  "origQty": "10.00000000",  "executedQty": "10.00000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "10.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "MARKET",  "side": "SELL",  "workingTime": 1507725176595,  "selfTradePreventionMode": "NONE"}
+```codeBlockLines_aHhF
+{
+  "symbol": "BTCUSDT",  "orderId": 28,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",  "transactTime": 1507725176595,  "price": "0.00000000",  "origQty": "10.00000000",  "executedQty": "10.00000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "10.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "MARKET",  "side": "SELL",  "workingTime": 1507725176595,  "selfTradePreventionMode": "NONE"}
 ```
 
 **Response - FULL:**
 
-```
-{  "symbol": "BTCUSDT",  "orderId": 28,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",  "transactTime": 1507725176595,  "price": "0.00000000",  "origQty": "10.00000000",  "executedQty": "10.00000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "10.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "MARKET",  "side": "SELL",  "workingTime": 1507725176595,  "selfTradePreventionMode": "NONE",  "fills": [    {      "price": "4000.00000000",      "qty": "1.00000000",      "commission": "4.00000000",      "commissionAsset": "USDT",      "tradeId": 56    },    {      "price": "3999.00000000",      "qty": "5.00000000",      "commission": "19.99500000",      "commissionAsset": "USDT",      "tradeId": 57    },    {      "price": "3998.00000000",      "qty": "2.00000000",      "commission": "7.99600000",      "commissionAsset": "USDT",      "tradeId": 58    },    {      "price": "3997.00000000",      "qty": "1.00000000",      "commission": "3.99700000",      "commissionAsset": "USDT",      "tradeId": 59    },    {      "price": "3995.00000000",      "qty": "1.00000000",      "commission": "3.99500000",      "commissionAsset": "USDT",      "tradeId": 60    }  ]}
+```codeBlockLines_aHhF
+{
+  "symbol": "BTCUSDT",  "orderId": 28,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",  "transactTime": 1507725176595,  "price": "0.00000000",  "origQty": "10.00000000",  "executedQty": "10.00000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "10.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "MARKET",  "side": "SELL",  "workingTime": 1507725176595,  "selfTradePreventionMode": "NONE",  "fills": [    {      "price": "4000.00000000",      "qty": "1.00000000",      "commission": "4.00000000",      "commissionAsset": "USDT",      "tradeId": 56    },    {      "price": "3999.00000000",      "qty": "5.00000000",      "commission": "19.99500000",      "commissionAsset": "USDT",      "tradeId": 57    },    {      "price": "3998.00000000",      "qty": "2.00000000",      "commission": "7.99600000",      "commissionAsset": "USDT",      "tradeId": 58    },    {      "price": "3997.00000000",      "qty": "1.00000000",      "commission": "3.99700000",      "commissionAsset": "USDT",      "tradeId": 59    },    {      "price": "3995.00000000",      "qty": "1.00000000",      "commission": "3.99500000",      "commissionAsset": "USDT",      "tradeId": 60    }  ]}
 ```
 
 **Conditional fields in Order Responses**
@@ -1586,7 +1660,7 @@ The fields are listed below:
 
 ### Test new order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade "Direct link to Test new order (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/order/test
 ```
 
@@ -1616,19 +1690,20 @@ the following optional parameters are also accepted:
 
 Without `computeCommissionRates`
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
 With `computeCommissionRates`
 
-```
-{  "standardCommissionForOrder": {  //Standard commission rates on trades from the order.    "maker": "0.00000112",    "taker": "0.00000114"  },  "taxCommissionForOrder": {       //Tax commission rates for trades from the order.    "maker": "0.00000112",    "taker": "0.00000114"  },  "discount": {                    //Discount on standard commissions when paying in BNB.    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.  }}
+```codeBlockLines_aHhF
+{
+  "standardCommissionForOrder": {  //Standard commission rates on trades from the order.    "maker": "0.00000112",    "taker": "0.00000114"  },  "taxCommissionForOrder": {       //Tax commission rates for trades from the order.    "maker": "0.00000112",    "taker": "0.00000114"  },  "discount": {                    //Discount on standard commissions when paying in BNB.    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.  }}
 ```
 
 ### Query order (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data "Direct link to Query order (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/order
 ```
 
@@ -1660,8 +1735,9 @@ Check an order's status.
 
 **Response:**
 
-```
-{  "symbol": "LTCBTC",  "orderId": 1,  "orderListId": -1,                 // This field will always have a value of -1 if not an order list.  "clientOrderId": "myOrder1",  "price": "0.1",  "origQty": "1.0",  "executedQty": "0.0",  "cummulativeQuoteQty": "0.0",  "status": "NEW",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "stopPrice": "0.0",  "icebergQty": "0.0",  "time": 1499827319559,  "updateTime": 1499827319559,  "isWorking": true,  "workingTime":1499827319559,  "origQuoteOrderQty": "0.000000",  "selfTradePreventionMode": "NONE"}
+```codeBlockLines_aHhF
+{
+  "symbol": "LTCBTC",  "orderId": 1,  "orderListId": -1,                 // This field will always have a value of -1 if not an order list.  "clientOrderId": "myOrder1",  "price": "0.1",  "origQty": "1.0",  "executedQty": "0.0",  "cummulativeQuoteQty": "0.0",  "status": "NEW",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "stopPrice": "0.0",  "icebergQty": "0.0",  "time": 1499827319559,  "updateTime": 1499827319559,  "isWorking": true,  "workingTime":1499827319559,  "origQuoteOrderQty": "0.000000",  "selfTradePreventionMode": "NONE"}
 ```
 
 **Note:** The payload above does not show all fields that can appear. Please
@@ -1670,7 +1746,7 @@ refer to
 
 ### Cancel order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade "Direct link to Cancel order (TRADE)")
 
-```
+```codeBlockLines_aHhF
 DELETE /api/v3/order
 ```
 
@@ -1705,8 +1781,9 @@ Notes:
 
 **Response:**
 
-```
-{  "symbol": "LTCBTC",  "origClientOrderId": "myOrder1",  "orderId": 4,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "cancelMyOrder1",  "transactTime": 1684804350068,  "price": "2.00000000",  "origQty": "1.00000000",  "executedQty": "0.00000000",  "cummulativeQuoteQty": "0.00000000",  "status": "CANCELED",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "selfTradePreventionMode": "NONE"}
+```codeBlockLines_aHhF
+{
+  "symbol": "LTCBTC",  "origClientOrderId": "myOrder1",  "orderId": 4,  "orderListId": -1, // Unless it's part of an order list, value will be -1  "clientOrderId": "cancelMyOrder1",  "transactTime": 1684804350068,  "price": "2.00000000",  "origQty": "1.00000000",  "executedQty": "0.00000000",  "cummulativeQuoteQty": "0.00000000",  "status": "CANCELED",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "selfTradePreventionMode": "NONE"}
 ```
 
 **Notes:**
@@ -1723,20 +1800,22 @@ Notes:
 - If the `cancelRestrictions` value is not any of the supported values, the
   error will be:
 
-```
-{    "code": -1145,    "msg": "Invalid cancelRestrictions"}
+```codeBlockLines_aHhF
+{
+    "code": -1145,    "msg": "Invalid cancelRestrictions"}
 ```
 
 - If the order did not pass the conditions for `cancelRestrictions`, the error
   will be:
 
-```
-{    "code": -2011,    "msg": "Order was not canceled due to cancel restrictions."}
+```codeBlockLines_aHhF
+{
+    "code": -2011,    "msg": "Order was not canceled due to cancel restrictions."}
 ```
 
 ### Cancel All Open Orders on a Symbol (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade "Direct link to Cancel All Open Orders on a Symbol (TRADE)")
 
-```
+```codeBlockLines_aHhF
 DELETE /api/v3/openOrders
 ```
 
@@ -1757,13 +1836,14 @@ order list.
 
 **Response:**
 
-```
-[  {    "symbol": "BTCUSDT",    "origClientOrderId": "E6APeyTJvkMvLMYMqu1KQ4",    "orderId": 11,    "orderListId": -1,    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",    "transactTime": 1684804350068,    "price": "0.089853",    "origQty": "0.178622",    "executedQty": "0.000000",    "cummulativeQuoteQty": "0.000000",    "status": "CANCELED",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "selfTradePreventionMode": "NONE"  },  {    "symbol": "BTCUSDT",    "origClientOrderId": "A3EF2HCwxgZPFMrfwbgrhv",    "orderId": 13,    "orderListId": -1,    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",    "transactTime": 1684804350069,    "price": "0.090430",    "origQty": "0.178622",    "executedQty": "0.000000",    "cummulativeQuoteQty": "0.000000",    "status": "CANCELED",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "selfTradePreventionMode": "NONE"  },  {    "orderListId": 1929,    "contingencyType": "OCO",    "listStatusType": "ALL_DONE",    "listOrderStatus": "ALL_DONE",    "listClientOrderId": "2inzWQdDvZLHbbAmAozX2N",    "transactionTime": 1585230948299,    "symbol": "BTCUSDT",    "orders": [      {        "symbol": "BTCUSDT",        "orderId": 20,        "clientOrderId": "CwOOIPHSmYywx6jZX77TdL"      },      {        "symbol": "BTCUSDT",        "orderId": 21,        "clientOrderId": "461cPg51vQjV3zIMOXNz39"      }    ],    "orderReports": [      {        "symbol": "BTCUSDT",        "origClientOrderId": "CwOOIPHSmYywx6jZX77TdL",        "orderId": 20,        "orderListId": 1929,        "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",        "transactTime": 1688005070874,        "price": "0.668611",        "origQty": "0.690354",        "executedQty": "0.000000",        "cummulativeQuoteQty": "0.000000",        "status": "CANCELED",        "timeInForce": "GTC",        "type": "STOP_LOSS_LIMIT",        "side": "BUY",        "stopPrice": "0.378131",        "icebergQty": "0.017083",        "selfTradePreventionMode": "NONE"      },      {        "symbol": "BTCUSDT",        "origClientOrderId": "461cPg51vQjV3zIMOXNz39",        "orderId": 21,        "orderListId": 1929,        "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",        "transactTime": 1688005070874,        "price": "0.008791",        "origQty": "0.690354",        "executedQty": "0.000000",        "cummulativeQuoteQty": "0.000000",        "status": "CANCELED",        "timeInForce": "GTC",        "type": "LIMIT_MAKER",        "side": "BUY",        "icebergQty": "0.639962",        "selfTradePreventionMode": "NONE"      }    ]  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BTCUSDT",    "origClientOrderId": "E6APeyTJvkMvLMYMqu1KQ4",    "orderId": 11,    "orderListId": -1,    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",    "transactTime": 1684804350068,    "price": "0.089853",    "origQty": "0.178622",    "executedQty": "0.000000",    "cummulativeQuoteQty": "0.000000",    "status": "CANCELED",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "selfTradePreventionMode": "NONE"  },  {    "symbol": "BTCUSDT",    "origClientOrderId": "A3EF2HCwxgZPFMrfwbgrhv",    "orderId": 13,    "orderListId": -1,    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",    "transactTime": 1684804350069,    "price": "0.090430",    "origQty": "0.178622",    "executedQty": "0.000000",    "cummulativeQuoteQty": "0.000000",    "status": "CANCELED",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "selfTradePreventionMode": "NONE"  },  {    "orderListId": 1929,    "contingencyType": "OCO",    "listStatusType": "ALL_DONE",    "listOrderStatus": "ALL_DONE",    "listClientOrderId": "2inzWQdDvZLHbbAmAozX2N",    "transactionTime": 1585230948299,    "symbol": "BTCUSDT",    "orders": [      {        "symbol": "BTCUSDT",        "orderId": 20,        "clientOrderId": "CwOOIPHSmYywx6jZX77TdL"      },      {        "symbol": "BTCUSDT",        "orderId": 21,        "clientOrderId": "461cPg51vQjV3zIMOXNz39"      }    ],    "orderReports": [      {        "symbol": "BTCUSDT",        "origClientOrderId": "CwOOIPHSmYywx6jZX77TdL",        "orderId": 20,        "orderListId": 1929,        "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",        "transactTime": 1688005070874,        "price": "0.668611",        "origQty": "0.690354",        "executedQty": "0.000000",        "cummulativeQuoteQty": "0.000000",        "status": "CANCELED",        "timeInForce": "GTC",        "type": "STOP_LOSS_LIMIT",        "side": "BUY",        "stopPrice": "0.378131",        "icebergQty": "0.017083",        "selfTradePreventionMode": "NONE"      },      {        "symbol": "BTCUSDT",        "origClientOrderId": "461cPg51vQjV3zIMOXNz39",        "orderId": 21,        "orderListId": 1929,        "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",        "transactTime": 1688005070874,        "price": "0.008791",        "origQty": "0.690354",        "executedQty": "0.000000",        "cummulativeQuoteQty": "0.000000",        "status": "CANCELED",        "timeInForce": "GTC",        "type": "LIMIT_MAKER",        "side": "BUY",        "icebergQty": "0.639962",        "selfTradePreventionMode": "NONE"      }    ]  }]
 ```
 
 ### Cancel an Existing Order and Send a New Order (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-an-existing-order-and-send-a-new-order-trade "Direct link to Cancel an Existing Order and Send a New Order (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/order/cancelReplace
 ```
 
@@ -1873,51 +1953,59 @@ succeeded, partially succeeded, or failed.
 
 **Response SUCCESS unfilled order count is not exceeded:**
 
-```
-// Both the cancel order placement and new order placement succeeded.{  "cancelResult": "SUCCESS",  "newOrderResult": "SUCCESS",  "cancelResponse": {    "symbol": "BTCUSDT",    "origClientOrderId": "DnLo3vTAQcjha43lAZhZ0y",    "orderId": 9,    "orderListId": -1,    "clientOrderId": "osxN3JXAtJvKvCqGeMWMVR",    "transactTime": 1684804350068,    "price": "0.01000000",    "origQty": "0.000100",    "executedQty": "0.00000000",    "origQuoteOrderQty": "0.000000",    "cummulativeQuoteQty": "0.00000000",    "status": "CANCELED",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "SELL",    "selfTradePreventionMode": "NONE"  },  "newOrderResponse": {    "symbol": "BTCUSDT",    "orderId": 10,    "orderListId": -1,    "clientOrderId": "wOceeeOzNORyLiQfw7jd8S",    "transactTime": 1652928801803,    "price": "0.02000000",    "origQty": "0.040000",    "executedQty": "0.00000000",    "cummulativeQuoteQty": "0.00000000",    "origQuoteOrderQty": "0.000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "workingTime": 1669277163808,    "fills": [],    "selfTradePreventionMode": "NONE"  }}
+```codeBlockLines_aHhF
+// Both the cancel order placement and new order placement succeeded.
+{
+  "cancelResult": "SUCCESS",  "newOrderResult": "SUCCESS",  "cancelResponse": {    "symbol": "BTCUSDT",    "origClientOrderId": "DnLo3vTAQcjha43lAZhZ0y",    "orderId": 9,    "orderListId": -1,    "clientOrderId": "osxN3JXAtJvKvCqGeMWMVR",    "transactTime": 1684804350068,    "price": "0.01000000",    "origQty": "0.000100",    "executedQty": "0.00000000",    "origQuoteOrderQty": "0.000000",    "cummulativeQuoteQty": "0.00000000",    "status": "CANCELED",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "SELL",    "selfTradePreventionMode": "NONE"  },  "newOrderResponse": {    "symbol": "BTCUSDT",    "orderId": 10,    "orderListId": -1,    "clientOrderId": "wOceeeOzNORyLiQfw7jd8S",    "transactTime": 1652928801803,    "price": "0.02000000",    "origQty": "0.040000",    "executedQty": "0.00000000",    "cummulativeQuoteQty": "0.00000000",    "origQuoteOrderQty": "0.000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "workingTime": 1669277163808,    "fills": [],    "selfTradePreventionMode": "NONE"  }}
 ```
 
 **Response when Cancel Order Fails with STOP_ON FAILURE and account has not
 exceeded unfilled order count:**
 
-```
-{  "code": -2022,  "msg": "Order cancel-replace failed.",  "data": {    "cancelResult": "FAILURE",    "newOrderResult": "NOT_ATTEMPTED",    "cancelResponse": {      "code": -2011,      "msg": "Unknown order sent."    },    "newOrderResponse": null  }}
+```codeBlockLines_aHhF
+{
+  "code": -2022,  "msg": "Order cancel-replace failed.",  "data": {    "cancelResult": "FAILURE",    "newOrderResult": "NOT_ATTEMPTED",    "cancelResponse": {      "code": -2011,      "msg": "Unknown order sent."    },    "newOrderResponse": null  }}
 ```
 
 **Response when Cancel Order Succeeds but New Order Placement Fails and account
 has not exceeded the unfilled order count:**
 
-```
-{  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "SUCCESS",    "newOrderResult": "FAILURE",    "cancelResponse": {      "symbol": "BTCUSDT",      "origClientOrderId": "86M8erehfExV8z2RC8Zo8k",      "orderId": 3,      "orderListId": -1,      "clientOrderId": "G1kLo6aDv2KGNTFcjfTSFq",      "price": "0.006123",      "origQty": "10000.000000",      "executedQty": "0.000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.000000",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT_MAKER",      "side": "SELL",      "selfTradePreventionMode": "NONE"    },    "newOrderResponse": {      "code": -2010,      "msg": "Order would immediately match and take."    }  }}
+```codeBlockLines_aHhF
+{
+  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "SUCCESS",    "newOrderResult": "FAILURE",    "cancelResponse": {      "symbol": "BTCUSDT",      "origClientOrderId": "86M8erehfExV8z2RC8Zo8k",      "orderId": 3,      "orderListId": -1,      "clientOrderId": "G1kLo6aDv2KGNTFcjfTSFq",      "price": "0.006123",      "origQty": "10000.000000",      "executedQty": "0.000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.000000",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT_MAKER",      "side": "SELL",      "selfTradePreventionMode": "NONE"    },    "newOrderResponse": {      "code": -2010,      "msg": "Order would immediately match and take."    }  }}
 ```
 
 **Response when Cancel Order fails with ALLOW_FAILURE and account has not
 exceeded the unfilled order count:**
 
-```
-{  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "FAILURE",    "newOrderResult": "SUCCESS",    "cancelResponse": {      "code": -2011,      "msg": "Unknown order sent."    },    "newOrderResponse": {      "symbol": "BTCUSDT",      "orderId": 11,      "orderListId": -1,      "clientOrderId": "pfojJMg6IMNDKuJqDxvoxN",      "transactTime": 1648540168818    }  }}
+```codeBlockLines_aHhF
+{
+  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "FAILURE",    "newOrderResult": "SUCCESS",    "cancelResponse": {      "code": -2011,      "msg": "Unknown order sent."    },    "newOrderResponse": {      "symbol": "BTCUSDT",      "orderId": 11,      "orderListId": -1,      "clientOrderId": "pfojJMg6IMNDKuJqDxvoxN",      "transactTime": 1648540168818    }  }}
 ```
 
 **Response when both Cancel Order and New Order Placement fail using
 `cancelReplaceMode=ALLOW_FAILURE` and account has not exceeded the unfilled
 order count:**
 
-```
-{  "code": -2022,  "msg": "Order cancel-replace failed.",  "data": {    "cancelResult": "FAILURE",    "newOrderResult": "FAILURE",    "cancelResponse": {      "code": -2011,      "msg": "Unknown order sent."    },    "newOrderResponse": {      "code": -2010,      "msg": "Order would immediately match and take."    }  }}
+```codeBlockLines_aHhF
+{
+  "code": -2022,  "msg": "Order cancel-replace failed.",  "data": {    "cancelResult": "FAILURE",    "newOrderResult": "FAILURE",    "cancelResponse": {      "code": -2011,      "msg": "Unknown order sent."    },    "newOrderResponse": {      "code": -2010,      "msg": "Order would immediately match and take."    }  }}
 ```
 
 **Response when using `orderRateLimitExceededMode=DO_NOTHING` and account's
 unfilled order count has been exceeded:**
 
-```
-{  "code": -1015,  "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."}
+```codeBlockLines_aHhF
+{
+  "code": -1015,  "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."}
 ```
 
 **Response when using `orderRateLimitExceededMode=CANCEL_ONLY` and account's
 unfilled order count has been exceeded:**
 
-```
-{  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "SUCCESS",    "newOrderResult": "FAILURE",    "cancelResponse": {      "symbol": "LTCBNB",      "origClientOrderId": "GKt5zzfOxRDSQLveDYCTkc",      "orderId": 64,      "orderListId": -1,      "clientOrderId": "loehOJF3FjoreUBDmv739R",      "transactTime": 1715779007228,      "price": "1.00",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT",      "side": "SELL",      "selfTradePreventionMode": "NONE"    },    "newOrderResponse": {      "code": -1015,      "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."    }  }}
+```codeBlockLines_aHhF
+{
+  "code": -2021,  "msg": "Order cancel-replace partially failed.",  "data": {    "cancelResult": "SUCCESS",    "newOrderResult": "FAILURE",    "cancelResponse": {      "symbol": "LTCBNB",      "origClientOrderId": "GKt5zzfOxRDSQLveDYCTkc",      "orderId": 64,      "orderListId": -1,      "clientOrderId": "loehOJF3FjoreUBDmv739R",      "transactTime": 1715779007228,      "price": "1.00",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT",      "side": "SELL",      "selfTradePreventionMode": "NONE"    },    "newOrderResponse": {      "code": -1015,      "msg": "Too many new orders; current limit is 1 orders per 10 SECOND."    }  }}
 ```
 
 **Notes:**
@@ -1930,7 +2018,7 @@ unfilled order count has been exceeded:**
 
 ### Order Amend Keep Priority (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-amend-keep-priority-trade "Direct link to Order Amend Keep Priority (TRADE)")
 
-```
+```codeBlockLines_aHhF
 PUT /api/v3/order/amend/keepPriority
 ```
 
@@ -1966,14 +2054,16 @@ cannot be greater than `60000`. | | timestamp | LONG | YES | |
 
 **Response:** Response for a single order:
 
-```
-{  "transactTime": 1741926410255,  "executionId": 75,  "amendedOrder":  {    "symbol": "BTCUSDT",    "orderId": 33,    "orderListId": -1,    "origClientOrderId": "5xrgbMyg6z36NzBn2pbT8H",    "clientOrderId": "PFaq6hIHxqFENGfdtn4J6Q",    "price": "6.00000000",    "qty": "5.00000000",    "executedQty": "0.00000000",    "preventedQty": "0.00000000",    "quoteOrderQty": "0.00000000",    "cumulativeQuoteQty": "0.00000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "SELL",    "workingTime": 1741926410242,    "selfTradePreventionMode": "NONE"  }}
+```codeBlockLines_aHhF
+{
+  "transactTime": 1741926410255,  "executionId": 75,  "amendedOrder":  {    "symbol": "BTCUSDT",    "orderId": 33,    "orderListId": -1,    "origClientOrderId": "5xrgbMyg6z36NzBn2pbT8H",    "clientOrderId": "PFaq6hIHxqFENGfdtn4J6Q",    "price": "6.00000000",    "qty": "5.00000000",    "executedQty": "0.00000000",    "preventedQty": "0.00000000",    "quoteOrderQty": "0.00000000",    "cumulativeQuoteQty": "0.00000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "SELL",    "workingTime": 1741926410242,    "selfTradePreventionMode": "NONE"  }}
 ```
 
 Response for an order that is part of an Order list:
 
-```
-{  "transactTime": 1741669661670,  "executionId": 22,  "amendedOrder":  {    "symbol": "BTCUSDT",    "orderId": 9,    "orderListId": 1,    "origClientOrderId": "W0fJ9fiLKHOJutovPK3oJp",    "clientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",    "price": "0.00000000",    "qty": "4.00000000",    "executedQty": "0.00000000",    "preventedQty": "0.00000000",    "quoteOrderQty": "0.00000000",    "cumulativeQuoteQty": "0.00000000",    "status": "PENDING_NEW",    "timeInForce": "GTC",    "type": "MARKET",    "side": "BUY",    "selfTradePreventionMode": "NONE"  },  "listStatus":  {    "orderListId": 1,    "contingencyType": "OTO",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "AT7FTxZXylVSwRoZs52mt3",    "symbol": "BTCUSDT",    "orders":    [      {        "symbol": "BTCUSDT",        "orderId": 8,        "clientOrderId": "GkwwHZUUbFtZOoH1YsZk9Q"      },      {        "symbol": "BTCUSDT",        "orderId": 9,        "clientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi"      }    ]  }}
+```codeBlockLines_aHhF
+{
+  "transactTime": 1741669661670,  "executionId": 22,  "amendedOrder":  {    "symbol": "BTCUSDT",    "orderId": 9,    "orderListId": 1,    "origClientOrderId": "W0fJ9fiLKHOJutovPK3oJp",    "clientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",    "price": "0.00000000",    "qty": "4.00000000",    "executedQty": "0.00000000",    "preventedQty": "0.00000000",    "quoteOrderQty": "0.00000000",    "cumulativeQuoteQty": "0.00000000",    "status": "PENDING_NEW",    "timeInForce": "GTC",    "type": "MARKET",    "side": "BUY",    "selfTradePreventionMode": "NONE"  },  "listStatus":  {    "orderListId": 1,    "contingencyType": "OTO",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "AT7FTxZXylVSwRoZs52mt3",    "symbol": "BTCUSDT",    "orders":    [      {        "symbol": "BTCUSDT",        "orderId": 8,        "clientOrderId": "GkwwHZUUbFtZOoH1YsZk9Q"      },      {        "symbol": "BTCUSDT",        "orderId": 9,        "clientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi"      }    ]  }}
 ```
 
 **Note:** The payloads above do not show all fields that can appear. Please
@@ -1982,7 +2072,7 @@ refer to
 
 ### Current open orders (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data "Direct link to Current open orders (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/openOrders
 ```
 
@@ -2005,8 +2095,9 @@ Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 **Response:**
 
-```
-[  {    "symbol": "LTCBTC",    "orderId": 1,    "orderListId": -1, // Unless it's part of an order list, value will be -1    "clientOrderId": "myOrder1",    "price": "0.1",    "origQty": "1.0",    "executedQty": "0.0",    "cummulativeQuoteQty": "0.0",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "stopPrice": "0.0",    "icebergQty": "0.0",    "time": 1499827319559,    "updateTime": 1499827319559,    "isWorking": true,    "origQuoteOrderQty": "0.000000",    "workingTime": 1499827319559,    "selfTradePreventionMode": "NONE"  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "LTCBTC",    "orderId": 1,    "orderListId": -1, // Unless it's part of an order list, value will be -1    "clientOrderId": "myOrder1",    "price": "0.1",    "origQty": "1.0",    "executedQty": "0.0",    "cummulativeQuoteQty": "0.0",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "stopPrice": "0.0",    "icebergQty": "0.0",    "time": 1499827319559,    "updateTime": 1499827319559,    "isWorking": true,    "origQuoteOrderQty": "0.000000",    "workingTime": 1499827319559,    "selfTradePreventionMode": "NONE"  }]
 ```
 
 **Note:** The payload above does not show all fields that can appear. Please
@@ -2015,7 +2106,7 @@ refer to
 
 ### All orders (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#all-orders-user_data "Direct link to All orders (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/allOrders
 ```
 
@@ -2048,8 +2139,9 @@ Get all account orders; active, canceled, or filled.
 
 **Response:**
 
-```
-[  {    "symbol": "LTCBTC",    "orderId": 1,    "orderListId": -1, //Unless it's part of an order list, value will be -1    "clientOrderId": "myOrder1",    "price": "0.1",    "origQty": "1.0",    "executedQty": "0.0",    "cummulativeQuoteQty": "0.0",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "stopPrice": "0.0",    "icebergQty": "0.0",    "time": 1499827319559,    "updateTime": 1499827319559,    "isWorking": true,    "origQuoteOrderQty": "0.000000",    "workingTime": 1499827319559,    "selfTradePreventionMode": "NONE"  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "LTCBTC",    "orderId": 1,    "orderListId": -1, //Unless it's part of an order list, value will be -1    "clientOrderId": "myOrder1",    "price": "0.1",    "origQty": "1.0",    "executedQty": "0.0",    "cummulativeQuoteQty": "0.0",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "stopPrice": "0.0",    "icebergQty": "0.0",    "time": 1499827319559,    "updateTime": 1499827319559,    "isWorking": true,    "origQuoteOrderQty": "0.000000",    "workingTime": 1499827319559,    "selfTradePreventionMode": "NONE"  }]
 ```
 
 **Note:** The payload above does not show all fields that can appear. Please
@@ -2060,7 +2152,7 @@ refer to
 
 #### New OCO - Deprecated (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-oco---deprecated-trade "Direct link to New OCO - Deprecated (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/order/oco
 ```
 
@@ -2109,13 +2201,14 @@ Send in a new OCO.
 
 **Response:**
 
-```
-{  "orderListId": 0,  "contingencyType": "OCO",  "listStatusType": "EXEC_STARTED",  "listOrderStatus": "EXECUTING",  "listClientOrderId": "JYVpp3F0f5CAG15DhtrqLp",  "transactionTime": 1563417480525,  "symbol": "LTCBTC",  "orders": [    {      "symbol": "LTCBTC",      "orderId": 2,      "clientOrderId": "Kk7sqHb9J6mJWTMDVW7Vos"    },    {      "symbol": "LTCBTC",      "orderId": 3,      "clientOrderId": "xTXKaGYd4bluPVp78IVRvl"    }  ],  "orderReports": [    {      "symbol": "LTCBTC",      "orderId": 2,      "orderListId": 0,      "clientOrderId": "Kk7sqHb9J6mJWTMDVW7Vos",      "transactTime": 1563417480525,      "price": "0.000000",      "origQty": "0.624363",      "executedQty": "0.000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.000000",      "status": "NEW",      "timeInForce": "GTC",      "type": "STOP_LOSS",      "side": "BUY",      "stopPrice": "0.960664",      "workingTime": -1,      "selfTradePreventionMode": "NONE"    },    {      "symbol": "LTCBTC",      "orderId": 3,      "orderListId": 0,      "clientOrderId": "xTXKaGYd4bluPVp78IVRvl",      "transactTime": 1563417480525,      "price": "0.036435",      "origQty": "0.624363",      "executedQty": "0.000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.000000",      "status": "NEW",      "timeInForce": "GTC",      "type": "LIMIT_MAKER",      "side": "BUY",      "workingTime": 1563417480525,      "selfTradePreventionMode": "NONE"    }  ]}
+```codeBlockLines_aHhF
+{
+  "orderListId": 0,  "contingencyType": "OCO",  "listStatusType": "EXEC_STARTED",  "listOrderStatus": "EXECUTING",  "listClientOrderId": "JYVpp3F0f5CAG15DhtrqLp",  "transactionTime": 1563417480525,  "symbol": "LTCBTC",  "orders": [    {      "symbol": "LTCBTC",      "orderId": 2,      "clientOrderId": "Kk7sqHb9J6mJWTMDVW7Vos"    },    {      "symbol": "LTCBTC",      "orderId": 3,      "clientOrderId": "xTXKaGYd4bluPVp78IVRvl"    }  ],  "orderReports": [    {      "symbol": "LTCBTC",      "orderId": 2,      "orderListId": 0,      "clientOrderId": "Kk7sqHb9J6mJWTMDVW7Vos",      "transactTime": 1563417480525,      "price": "0.000000",      "origQty": "0.624363",      "executedQty": "0.000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.000000",      "status": "NEW",      "timeInForce": "GTC",      "type": "STOP_LOSS",      "side": "BUY",      "stopPrice": "0.960664",      "workingTime": -1,      "selfTradePreventionMode": "NONE"    },    {      "symbol": "LTCBTC",      "orderId": 3,      "orderListId": 0,      "clientOrderId": "xTXKaGYd4bluPVp78IVRvl",      "transactTime": 1563417480525,      "price": "0.036435",      "origQty": "0.624363",      "executedQty": "0.000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.000000",      "status": "NEW",      "timeInForce": "GTC",      "type": "LIMIT_MAKER",      "side": "BUY",      "workingTime": 1563417480525,      "selfTradePreventionMode": "NONE"    }  ]}
 ```
 
 #### New Order list - OCO (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oco-trade "Direct link to New Order list - OCO (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/orderList/oco
 ```
 
@@ -2203,13 +2296,14 @@ parameter. The following example is for the `RESULT` response type. See
 [`POST /api/v3/order`](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-trade)
 for more examples.
 
-```
-{    "orderListId": 1,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "lH1YDkuQKWiXVXHPSKYEIp",    "transactionTime": 1710485608839,    "symbol": "LTCBTC",    "orders": [        {            "symbol": "LTCBTC",            "orderId": 10,            "clientOrderId": "44nZvqpemY7sVYgPYbvPih"        },        {            "symbol": "LTCBTC",            "orderId": 11,            "clientOrderId": "NuMp0nVYnciDiFmVqfpBqK"        }    ],    "orderReports": [        {            "symbol": "LTCBTC",            "orderId": 10,            "orderListId": 1,            "clientOrderId": "44nZvqpemY7sVYgPYbvPih",            "transactTime": 1710485608839,            "price": "1.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "STOP_LOSS_LIMIT",            "side": "SELL",            "stopPrice": "1.00000000",            "workingTime": -1,            "icebergQty": "1.00000000",            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 11,            "orderListId": 1,            "clientOrderId": "NuMp0nVYnciDiFmVqfpBqK",            "transactTime": 1710485608839,            "price": "3.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "LIMIT_MAKER",            "side": "SELL",            "workingTime": 1710485608839,            "selfTradePreventionMode": "NONE"        }    ]}
+```codeBlockLines_aHhF
+{
+    "orderListId": 1,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "lH1YDkuQKWiXVXHPSKYEIp",    "transactionTime": 1710485608839,    "symbol": "LTCBTC",    "orders": [        {            "symbol": "LTCBTC",            "orderId": 10,            "clientOrderId": "44nZvqpemY7sVYgPYbvPih"        },        {            "symbol": "LTCBTC",            "orderId": 11,            "clientOrderId": "NuMp0nVYnciDiFmVqfpBqK"        }    ],    "orderReports": [        {            "symbol": "LTCBTC",            "orderId": 10,            "orderListId": 1,            "clientOrderId": "44nZvqpemY7sVYgPYbvPih",            "transactTime": 1710485608839,            "price": "1.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "STOP_LOSS_LIMIT",            "side": "SELL",            "stopPrice": "1.00000000",            "workingTime": -1,            "icebergQty": "1.00000000",            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 11,            "orderListId": 1,            "clientOrderId": "NuMp0nVYnciDiFmVqfpBqK",            "transactTime": 1710485608839,            "price": "3.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "LIMIT_MAKER",            "side": "SELL",            "workingTime": 1710485608839,            "selfTradePreventionMode": "NONE"        }    ]}
 ```
 
 #### New Order list - OTO (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oto-trade "Direct link to New Order list - OTO (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/orderList/oto
 ```
 
@@ -2303,8 +2397,9 @@ Matching Engine
 
 **Response:**
 
-```
-{    "orderListId": 0,    "contingencyType": "OTO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "yl2ERtcar1o25zcWtqVBTC",    "transactionTime": 1712289389158,    "symbol": "ABCDEF",    "orders": [        {            "symbol": "LTCBTC",            "orderId": 4,            "clientOrderId": "Bq17mn9fP6vyCn75Jw1xya"        },        {            "symbol": "LTCBTC",            "orderId": 5,            "clientOrderId": "arLFo0zGJVDE69cvGBaU0d"        }    ],    "orderReports": [        {            "symbol": "LTCBTC",            "orderId": 4,            "orderListId": 0,            "clientOrderId": "Bq17mn9fP6vyCn75Jw1xya",            "transactTime": 1712289389158,            "price": "1.00000000",            "origQty": "1.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "LIMIT",            "side": "SELL",            "workingTime": 1712289389158,            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 5,            "orderListId": 0,            "clientOrderId": "arLFo0zGJVDE69cvGBaU0d",            "transactTime": 1712289389158,            "price": "0.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "PENDING_NEW",            "timeInForce": "GTC",            "type": "MARKET",            "side": "BUY",            "workingTime": -1,            "selfTradePreventionMode": "NONE"        }    ]}
+```codeBlockLines_aHhF
+{
+    "orderListId": 0,    "contingencyType": "OTO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "yl2ERtcar1o25zcWtqVBTC",    "transactionTime": 1712289389158,    "symbol": "ABCDEF",    "orders": [        {            "symbol": "LTCBTC",            "orderId": 4,            "clientOrderId": "Bq17mn9fP6vyCn75Jw1xya"        },        {            "symbol": "LTCBTC",            "orderId": 5,            "clientOrderId": "arLFo0zGJVDE69cvGBaU0d"        }    ],    "orderReports": [        {            "symbol": "LTCBTC",            "orderId": 4,            "orderListId": 0,            "clientOrderId": "Bq17mn9fP6vyCn75Jw1xya",            "transactTime": 1712289389158,            "price": "1.00000000",            "origQty": "1.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "LIMIT",            "side": "SELL",            "workingTime": 1712289389158,            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 5,            "orderListId": 0,            "clientOrderId": "arLFo0zGJVDE69cvGBaU0d",            "transactTime": 1712289389158,            "price": "0.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "PENDING_NEW",            "timeInForce": "GTC",            "type": "MARKET",            "side": "BUY",            "workingTime": -1,            "selfTradePreventionMode": "NONE"        }    ]}
 ```
 
 **Note:** The payload above does not show all fields that can appear. Please
@@ -2313,7 +2408,7 @@ refer to
 
 #### New Order list - OTOCO (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---otoco-trade "Direct link to New Order list - OTOCO (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/orderList/otoco
 ```
 
@@ -2430,8 +2525,9 @@ Matching Engine
 
 **Response:**
 
-```
-{    "orderListId": 1,    "contingencyType": "OTO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "RumwQpBaDctlUu5jyG5rs0",    "transactionTime": 1712291372842,    "symbol": "ABCDEF",    "orders": [        {            "symbol": "LTCBTC",            "orderId": 6,            "clientOrderId": "fM9Y4m23IFJVCQmIrlUmMK"        },        {            "symbol": "LTCBTC",            "orderId": 7,            "clientOrderId": "6pcQbFIzTXGZQ1e2MkGDq4"        },        {            "symbol": "LTCBTC",            "orderId": 8,            "clientOrderId": "r4JMv9cwAYYUwwBZfbussx"        }    ],    "orderReports": [        {            "symbol": "LTCBTC",            "orderId": 6,            "orderListId": 1,            "clientOrderId": "fM9Y4m23IFJVCQmIrlUmMK",            "transactTime": 1712291372842,            "price": "1.00000000",            "origQty": "1.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "LIMIT",            "side": "SELL",            "workingTime": 1712291372842,            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 7,            "orderListId": 1,            "clientOrderId": "6pcQbFIzTXGZQ1e2MkGDq4",            "transactTime": 1712291372842,            "price": "1.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "PENDING_NEW",            "timeInForce": "IOC",            "type": "STOP_LOSS_LIMIT",            "side": "BUY",            "stopPrice": "6.00000000",            "workingTime": -1,            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 8,            "orderListId": 1,            "clientOrderId": "r4JMv9cwAYYUwwBZfbussx",            "transactTime": 1712291372842,            "price": "3.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "PENDING_NEW",            "timeInForce": "GTC",            "type": "LIMIT_MAKER",            "side": "BUY",            "workingTime": -1,            "selfTradePreventionMode": "NONE"        }    ]}
+```codeBlockLines_aHhF
+{
+    "orderListId": 1,    "contingencyType": "OTO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "RumwQpBaDctlUu5jyG5rs0",    "transactionTime": 1712291372842,    "symbol": "ABCDEF",    "orders": [        {            "symbol": "LTCBTC",            "orderId": 6,            "clientOrderId": "fM9Y4m23IFJVCQmIrlUmMK"        },        {            "symbol": "LTCBTC",            "orderId": 7,            "clientOrderId": "6pcQbFIzTXGZQ1e2MkGDq4"        },        {            "symbol": "LTCBTC",            "orderId": 8,            "clientOrderId": "r4JMv9cwAYYUwwBZfbussx"        }    ],    "orderReports": [        {            "symbol": "LTCBTC",            "orderId": 6,            "orderListId": 1,            "clientOrderId": "fM9Y4m23IFJVCQmIrlUmMK",            "transactTime": 1712291372842,            "price": "1.00000000",            "origQty": "1.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "NEW",            "timeInForce": "GTC",            "type": "LIMIT",            "side": "SELL",            "workingTime": 1712291372842,            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 7,            "orderListId": 1,            "clientOrderId": "6pcQbFIzTXGZQ1e2MkGDq4",            "transactTime": 1712291372842,            "price": "1.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "PENDING_NEW",            "timeInForce": "IOC",            "type": "STOP_LOSS_LIMIT",            "side": "BUY",            "stopPrice": "6.00000000",            "workingTime": -1,            "selfTradePreventionMode": "NONE"        },        {            "symbol": "LTCBTC",            "orderId": 8,            "orderListId": 1,            "clientOrderId": "r4JMv9cwAYYUwwBZfbussx",            "transactTime": 1712291372842,            "price": "3.00000000",            "origQty": "5.00000000",            "executedQty": "0.00000000",            "origQuoteOrderQty": "0.000000",            "cummulativeQuoteQty": "0.00000000",            "status": "PENDING_NEW",            "timeInForce": "GTC",            "type": "LIMIT_MAKER",            "side": "BUY",            "workingTime": -1,            "selfTradePreventionMode": "NONE"        }    ]}
 ```
 
 **Note:** The payload above does not show all fields that can appear. Please
@@ -2440,7 +2536,7 @@ refer to
 
 #### Cancel Order list (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-list-trade "Direct link to Cancel Order list (TRADE)")
 
-```
+```codeBlockLines_aHhF
 DELETE /api/v3/orderList
 ```
 
@@ -2472,13 +2568,14 @@ Cancel an entire Order list
 
 **Response:**
 
-```
-{  "orderListId": 0,  "contingencyType": "OCO",  "listStatusType": "ALL_DONE",  "listOrderStatus": "ALL_DONE",  "listClientOrderId": "C3wyj4WVEktd7u9aVBRXcN",  "transactionTime": 1574040868128,  "symbol": "LTCBTC",  "orders": [    {      "symbol": "LTCBTC",      "orderId": 2,      "clientOrderId": "pO9ufTiFGg3nw2fOdgeOXa"    },    {      "symbol": "LTCBTC",      "orderId": 3,      "clientOrderId": "TXOvglzXuaubXAaENpaRCB"    }  ],  "orderReports": [    {      "symbol": "LTCBTC",      "origClientOrderId": "pO9ufTiFGg3nw2fOdgeOXa",      "orderId": 2,      "orderListId": 0,      "clientOrderId": "unfWT8ig8i0uj6lPuYLez6",      "transactTime": 1688005070874,      "price": "1.00000000",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00000000",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "STOP_LOSS_LIMIT",      "side": "SELL",      "stopPrice": "1.00000000",      "selfTradePreventionMode": "NONE"    },    {      "symbol": "LTCBTC",      "origClientOrderId": "TXOvglzXuaubXAaENpaRCB",      "orderId": 3,      "orderListId": 0,      "clientOrderId": "unfWT8ig8i0uj6lPuYLez6",      "transactTime": 1688005070874,      "price": "3.00000000",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00000000",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT_MAKER",      "side": "SELL",      "selfTradePreventionMode": "NONE"    }  ]}
+```codeBlockLines_aHhF
+{
+  "orderListId": 0,  "contingencyType": "OCO",  "listStatusType": "ALL_DONE",  "listOrderStatus": "ALL_DONE",  "listClientOrderId": "C3wyj4WVEktd7u9aVBRXcN",  "transactionTime": 1574040868128,  "symbol": "LTCBTC",  "orders": [    {      "symbol": "LTCBTC",      "orderId": 2,      "clientOrderId": "pO9ufTiFGg3nw2fOdgeOXa"    },    {      "symbol": "LTCBTC",      "orderId": 3,      "clientOrderId": "TXOvglzXuaubXAaENpaRCB"    }  ],  "orderReports": [    {      "symbol": "LTCBTC",      "origClientOrderId": "pO9ufTiFGg3nw2fOdgeOXa",      "orderId": 2,      "orderListId": 0,      "clientOrderId": "unfWT8ig8i0uj6lPuYLez6",      "transactTime": 1688005070874,      "price": "1.00000000",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00000000",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "STOP_LOSS_LIMIT",      "side": "SELL",      "stopPrice": "1.00000000",      "selfTradePreventionMode": "NONE"    },    {      "symbol": "LTCBTC",      "origClientOrderId": "TXOvglzXuaubXAaENpaRCB",      "orderId": 3,      "orderListId": 0,      "clientOrderId": "unfWT8ig8i0uj6lPuYLez6",      "transactTime": 1688005070874,      "price": "3.00000000",      "origQty": "10.00000000",      "executedQty": "0.00000000",      "origQuoteOrderQty": "0.000000",      "cummulativeQuoteQty": "0.00000000",      "status": "CANCELED",      "timeInForce": "GTC",      "type": "LIMIT_MAKER",      "side": "SELL",      "selfTradePreventionMode": "NONE"    }  ]}
 ```
 
 #### Query Order list (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-list-user_data "Direct link to Query Order list (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/orderList
 ```
 
@@ -2499,13 +2596,14 @@ Retrieves a specific order list based on provided optional parameters.
 
 **Response:**
 
-```
-{  "orderListId": 27,  "contingencyType": "OCO",  "listStatusType": "EXEC_STARTED",  "listOrderStatus": "EXECUTING",  "listClientOrderId": "h2USkA5YQpaXHPIrkd96xE",  "transactionTime": 1565245656253,  "symbol": "LTCBTC",  "orders": [    {      "symbol": "LTCBTC",      "orderId": 4,      "clientOrderId": "qD1gy3kc3Gx0rihm9Y3xwS"    },    {      "symbol": "LTCBTC",      "orderId": 5,      "clientOrderId": "ARzZ9I00CPM8i3NhmU9Ega"    }  ]}
+```codeBlockLines_aHhF
+{
+  "orderListId": 27,  "contingencyType": "OCO",  "listStatusType": "EXEC_STARTED",  "listOrderStatus": "EXECUTING",  "listClientOrderId": "h2USkA5YQpaXHPIrkd96xE",  "transactionTime": 1565245656253,  "symbol": "LTCBTC",  "orders": [    {      "symbol": "LTCBTC",      "orderId": 4,      "clientOrderId": "qD1gy3kc3Gx0rihm9Y3xwS"    },    {      "symbol": "LTCBTC",      "orderId": 5,      "clientOrderId": "ARzZ9I00CPM8i3NhmU9Ega"    }  ]}
 ```
 
 #### Query all Order lists (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-all-order-lists-user_data "Direct link to Query all Order lists (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/allOrderList
 ```
 
@@ -2531,13 +2629,14 @@ hours.
 
 **Response:**
 
-```
-[  {    "orderListId": 29,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "amEEAXryFzFwYF1FeRpUoZ",    "transactionTime": 1565245913483,    "symbol": "LTCBTC",    "orders": [      {        "symbol": "LTCBTC",        "orderId": 4,        "clientOrderId": "oD7aesZqjEGlZrbtRpy5zB"      },      {        "symbol": "LTCBTC",        "orderId": 5,        "clientOrderId": "Jr1h6xirOxgeJOUuYQS7V3"      }    ]  },  {    "orderListId": 28,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "hG7hFNxJV6cZy3Ze4AUT4d",    "transactionTime": 1565245913407,    "symbol": "LTCBTC",    "orders": [      {        "symbol": "LTCBTC",        "orderId": 2,        "clientOrderId": "j6lFOfbmFMRjTYA7rRJ0LP"      },      {        "symbol": "LTCBTC",        "orderId": 3,        "clientOrderId": "z0KCjOdditiLS5ekAFtK81"      }    ]  }]
+```codeBlockLines_aHhF
+[
+  {    "orderListId": 29,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "amEEAXryFzFwYF1FeRpUoZ",    "transactionTime": 1565245913483,    "symbol": "LTCBTC",    "orders": [      {        "symbol": "LTCBTC",        "orderId": 4,        "clientOrderId": "oD7aesZqjEGlZrbtRpy5zB"      },      {        "symbol": "LTCBTC",        "orderId": 5,        "clientOrderId": "Jr1h6xirOxgeJOUuYQS7V3"      }    ]  },  {    "orderListId": 28,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "hG7hFNxJV6cZy3Ze4AUT4d",    "transactionTime": 1565245913407,    "symbol": "LTCBTC",    "orders": [      {        "symbol": "LTCBTC",        "orderId": 2,        "clientOrderId": "j6lFOfbmFMRjTYA7rRJ0LP"      },      {        "symbol": "LTCBTC",        "orderId": 3,        "clientOrderId": "z0KCjOdditiLS5ekAFtK81"      }    ]  }]
 ```
 
 #### Query Open Order lists (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-open-order-lists-user_data "Direct link to Query Open Order lists (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/openOrderList
 ```
 
@@ -2554,15 +2653,16 @@ GET /api/v3/openOrderList
 
 **Response:**
 
-```
-[  {    "orderListId": 31,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "wuB13fmulKj3YjdqWEcsnp",    "transactionTime": 1565246080644,    "symbol": "LTCBTC",    "orders": [      {        "symbol": "LTCBTC",        "orderId": 4,        "clientOrderId": "r3EH2N76dHfLoSZWIUw1bT"      },      {        "symbol": "LTCBTC",        "orderId": 5,        "clientOrderId": "Cv1SnyPD3qhqpbjpYEHbd2"      }    ]  }]
+```codeBlockLines_aHhF
+[
+  {    "orderListId": 31,    "contingencyType": "OCO",    "listStatusType": "EXEC_STARTED",    "listOrderStatus": "EXECUTING",    "listClientOrderId": "wuB13fmulKj3YjdqWEcsnp",    "transactionTime": 1565246080644,    "symbol": "LTCBTC",    "orders": [      {        "symbol": "LTCBTC",        "orderId": 4,        "clientOrderId": "r3EH2N76dHfLoSZWIUw1bT"      },      {        "symbol": "LTCBTC",        "orderId": 5,        "clientOrderId": "Cv1SnyPD3qhqpbjpYEHbd2"      }    ]  }]
 ```
 
 ### SOR[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#sor "Direct link to SOR")
 
 #### New order using SOR (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-using-sor-trade "Direct link to New order using SOR (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/sor/order
 ```
 
@@ -2604,13 +2704,14 @@ Read [SOR FAQ](/docs/binance-spot-api-docs/faqs/sor_faq) to learn more.
 
 **Response:**
 
-```
-{  "symbol": "BTCUSDT",  "orderId": 2,  "orderListId": -1,  "clientOrderId": "sBI1KM6nNtOfj5tccZSKly",  "transactTime": 1689149087774,  "price": "31000.00000000",  "origQty": "0.50000000",  "executedQty": "0.50000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "14000.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "workingTime": 1689149087774,  "fills": [    {      "matchType": "ONE_PARTY_TRADE_REPORT",      "price": "28000.00000000",      "qty": "0.50000000",      "commission": "0.00000000",      "commissionAsset": "BTC",      "tradeId": -1,      "allocId": 0    }  ],  "workingFloor": "SOR",  "selfTradePreventionMode": "NONE",  "usedSor": true}
+```codeBlockLines_aHhF
+{
+  "symbol": "BTCUSDT",  "orderId": 2,  "orderListId": -1,  "clientOrderId": "sBI1KM6nNtOfj5tccZSKly",  "transactTime": 1689149087774,  "price": "31000.00000000",  "origQty": "0.50000000",  "executedQty": "0.50000000",  "origQuoteOrderQty": "0.000000",  "cummulativeQuoteQty": "14000.00000000",  "status": "FILLED",  "timeInForce": "GTC",  "type": "LIMIT",  "side": "BUY",  "workingTime": 1689149087774,  "fills": [    {      "matchType": "ONE_PARTY_TRADE_REPORT",      "price": "28000.00000000",      "qty": "0.50000000",      "commission": "0.00000000",      "commissionAsset": "BTC",      "tradeId": -1,      "allocId": 0    }  ],  "workingFloor": "SOR",  "selfTradePreventionMode": "NONE",  "usedSor": true}
 ```
 
 #### Test new order using SOR (TRADE)[​](/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-using-sor-trade "Direct link to Test new order using SOR (TRADE)")
 
-```
+```codeBlockLines_aHhF
 POST /api/v3/sor/order/test
 ```
 
@@ -2641,21 +2742,22 @@ the following optional parameters are also accepted:
 
 Without `computeCommissionRates`
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
 With `computeCommissionRates`
 
-```
-{  "standardCommissionForOrder": {  //Standard commission rates on trades from the order.    "maker": "0.00000112",    "taker": "0.00000114"  },  "taxCommissionForOrder": {       //Tax commission rates for trades from the order    "maker": "0.00000112",    "taker": "0.00000114"  },  "discount": {                    //Discount on standard commissions when paying in BNB.    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.  }}
+```codeBlockLines_aHhF
+{
+  "standardCommissionForOrder": {  //Standard commission rates on trades from the order.    "maker": "0.00000112",    "taker": "0.00000114"  },  "taxCommissionForOrder": {       //Tax commission rates for trades from the order    "maker": "0.00000112",    "taker": "0.00000114"  },  "discount": {                    //Discount on standard commissions when paying in BNB.    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.  }}
 ```
 
 # Account Endpoints
 
 ### Account information (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#account-information-user_data "Direct link to Account information (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/account
 ```
 
@@ -2676,13 +2778,14 @@ Get current account information.
 
 **Response:**
 
-```
-{  "makerCommission": 15,  "takerCommission": 15,  "buyerCommission": 0,  "sellerCommission": 0,  "commissionRates": {    "maker": "0.00150000",    "taker": "0.00150000",    "buyer": "0.00000000",    "seller": "0.00000000"  },  "canTrade": true,  "canWithdraw": true,  "canDeposit": true,  "brokered": false,  "requireSelfTradePrevention": false,  "preventSor": false,  "updateTime": 123456789,  "accountType": "SPOT",  "balances": [    {      "asset": "BTC",      "free": "4723846.89208129",      "locked": "0.00000000"    },    {      "asset": "LTC",      "free": "4763368.68006011",      "locked": "0.00000000"    }  ],  "permissions": [    "SPOT"  ],  "uid": 354937868}
+```codeBlockLines_aHhF
+{
+  "makerCommission": 15,  "takerCommission": 15,  "buyerCommission": 0,  "sellerCommission": 0,  "commissionRates": {    "maker": "0.00150000",    "taker": "0.00150000",    "buyer": "0.00000000",    "seller": "0.00000000"  },  "canTrade": true,  "canWithdraw": true,  "canDeposit": true,  "brokered": false,  "requireSelfTradePrevention": false,  "preventSor": false,  "updateTime": 123456789,  "accountType": "SPOT",  "balances": [    {      "asset": "BTC",      "free": "4723846.89208129",      "locked": "0.00000000"    },    {      "asset": "LTC",      "free": "4763368.68006011",      "locked": "0.00000000"    }  ],  "permissions": [    "SPOT"  ],  "uid": 354937868}
 ```
 
 ### Account trade list (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data "Direct link to Account trade list (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/myTrades
 ```
 
@@ -2726,13 +2829,14 @@ Get trades for a specific account and symbol.
 
 **Response:**
 
-```
-[  {    "symbol": "BNBBTC",    "id": 28457,    "orderId": 100234,    "orderListId": -1,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.000012",    "commission": "10.10000000",    "commissionAsset": "BNB",    "time": 1499865549590,    "isBuyer": true,    "isMaker": false,    "isBestMatch": true  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BNBBTC",    "id": 28457,    "orderId": 100234,    "orderListId": -1,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.000012",    "commission": "10.10000000",    "commissionAsset": "BNB",    "time": 1499865549590,    "isBuyer": true,    "isMaker": false,    "isBestMatch": true  }]
 ```
 
 ### Query Unfilled Order Count (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-unfilled-order-count-user_data "Direct link to Query Unfilled Order Count (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/rateLimit/order
 ```
 
@@ -2751,13 +2855,14 @@ Displays the user's unfilled order count for all intervals.
 
 **Response:**
 
-```
-[  {    "rateLimitType": "ORDERS",    "interval": "SECOND",    "intervalNum": 10,    "limit": 50,    "count": 0  },  {    "rateLimitType": "ORDERS",    "interval": "DAY",    "intervalNum": 1,    "limit": 160000,    "count": 0  }]
+```codeBlockLines_aHhF
+[
+  {    "rateLimitType": "ORDERS",    "interval": "SECOND",    "intervalNum": 10,    "limit": 50,    "count": 0  },  {    "rateLimitType": "ORDERS",    "interval": "DAY",    "intervalNum": 1,    "limit": 160000,    "count": 0  }]
 ```
 
 ### Query Prevented Matches (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-prevented-matches-user_data "Direct link to Query Prevented Matches (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/myPreventedMatches
 ```
 
@@ -2796,13 +2901,14 @@ Database
 
 **Response:**
 
-```
-[  {    "symbol": "BTCUSDT",    "preventedMatchId": 1,    "takerOrderId": 5,    "makerSymbol": "BTCUSDT",    "makerOrderId": 3,    "tradeGroupId": 1,    "selfTradePreventionMode": "EXPIRE_MAKER",    "price": "1.100000",    "makerPreventedQuantity": "1.300000",    "transactTime": 1669101687094  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BTCUSDT",    "preventedMatchId": 1,    "takerOrderId": 5,    "makerSymbol": "BTCUSDT",    "makerOrderId": 3,    "tradeGroupId": 1,    "selfTradePreventionMode": "EXPIRE_MAKER",    "price": "1.100000",    "makerPreventedQuantity": "1.300000",    "transactTime": 1669101687094  }]
 ```
 
 ### Query Allocations (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-allocations-user_data "Direct link to Query Allocations (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/myAllocations
 ```
 
@@ -2842,13 +2948,14 @@ hours.
 
 **Response:**
 
-```
-[  {    "symbol": "BTCUSDT",    "allocationId": 0,    "allocationType": "SOR",    "orderId": 1,    "orderListId": -1,    "price": "1.00000000",    "qty": "5.00000000",    "quoteQty": "5.00000000",    "commission": "0.00000000",    "commissionAsset": "BTC",    "time": 1687506878118,    "isBuyer": true,    "isMaker": false,    "isAllocator": false  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BTCUSDT",    "allocationId": 0,    "allocationType": "SOR",    "orderId": 1,    "orderListId": -1,    "price": "1.00000000",    "qty": "5.00000000",    "quoteQty": "5.00000000",    "commission": "0.00000000",    "commissionAsset": "BTC",    "time": 1687506878118,    "isBuyer": true,    "isMaker": false,    "isAllocator": false  }]
 ```
 
 ### Query Commission Rates (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-commission-rates-user_data "Direct link to Query Commission Rates (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/account/commission
 ```
 
@@ -2866,13 +2973,14 @@ Get current account commission rates.
 
 **Response:**
 
-```
-{  "symbol": "BTCUSDT",  "standardCommission": {         //Commission rates on trades from the order.    "maker": "0.00000010",    "taker": "0.00000020",    "buyer": "0.00000030",    "seller": "0.00000040"  },  "taxCommission": {              //Tax commission rates for trades from the order.    "maker": "0.00000112",    "taker": "0.00000114",    "buyer": "0.00000118",    "seller": "0.00000116"  },  "discount": {                   //Discount commission when paying in BNB    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.75000000"      //Standard commission is reduced by this rate when paying commission in BNB.  }}
+```codeBlockLines_aHhF
+{
+  "symbol": "BTCUSDT",  "standardCommission": {         //Commission rates on trades from the order.    "maker": "0.00000010",    "taker": "0.00000020",    "buyer": "0.00000030",    "seller": "0.00000040"  },  "taxCommission": {              //Tax commission rates for trades from the order.    "maker": "0.00000112",    "taker": "0.00000114",    "buyer": "0.00000118",    "seller": "0.00000116"  },  "discount": {                   //Discount commission when paying in BNB    "enabledForAccount": true,    "enabledForSymbol": true,    "discountAsset": "BNB",    "discount": "0.75000000"      //Standard commission is reduced by this rate when paying commission in BNB.  }}
 ```
 
 ### Query Order Amendments (USER_DATA)[​](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data "Direct link to Query Order Amendments (USER_DATA)")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/order/amendments
 ```
 
@@ -2897,6 +3005,7 @@ Database
 
 **Response:**
 
-```
-[  {      "symbol": "BTCUSDT",      "orderId": 9,      "executionId": 22,      "origClientOrderId": "W0fJ9fiLKHOJutovPK3oJp",      "newClientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",      "origQty": "5.00000000",      "newQty": "4.00000000",      "time": 1741669661670  },  {      "symbol": "BTCUDST",      "orderId": 9,      "executionId": 25,      "origClientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",      "newClientOrderId": "5uS0r35ohuQyDlCzZuYXq2",      "origQty": "4.00000000",      "newQty": "3.00000000",      "time": 1741672924895  }]
+```codeBlockLines_aHhF
+[
+  {      "symbol": "BTCUSDT",      "orderId": 9,      "executionId": 22,      "origClientOrderId": "W0fJ9fiLKHOJutovPK3oJp",      "newClientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",      "origQty": "5.00000000",      "newQty": "4.00000000",      "time": 1741669661670  },  {      "symbol": "BTCUDST",      "orderId": 9,      "executionId": 25,      "origClientOrderId": "UQ1Np3bmQ71jJzsSDW9Vpi",      "newClientOrderId": "5uS0r35ohuQyDlCzZuYXq2",      "origQty": "4.00000000",      "newQty": "3.00000000",      "time": 1741672924895  }]
 ```

@@ -28,8 +28,9 @@ for `price`/`stopPrice` of the enabled rules:
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "PRICE_FILTER",  "minPrice": "0.00000100",  "maxPrice": "100000.00000000",  "tickSize": "0.00000100"}
+```codeBlockLines_aHhF
+{
+  "filterType": "PRICE_FILTER",  "minPrice": "0.00000100",  "maxPrice": "100000.00000000",  "tickSize": "0.00000100"}
 ```
 
 ### PERCENT_PRICE[​](/docs/binance-spot-api-docs/filters#percent_price "Direct link to PERCENT_PRICE")
@@ -45,8 +46,9 @@ In order to pass the `percent price`, the following must be true for `price`:
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "PERCENT_PRICE",  "multiplierUp": "1.3000",  "multiplierDown": "0.7000",  "avgPriceMins": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "PERCENT_PRICE",  "multiplierUp": "1.3000",  "multiplierDown": "0.7000",  "avgPriceMins": 5}
 ```
 
 ### PERCENT_PRICE_BY_SIDE[​](/docs/binance-spot-api-docs/filters#percent_price_by_side "Direct link to PERCENT_PRICE_BY_SIDE")
@@ -70,8 +72,8 @@ Sell orders will succeed on this filter if:
 
 **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE_BY_SIDE",    "bidMultiplierUp": "1.2",    "bidMultiplierDown": "0.2",    "askMultiplierUp": "5",    "askMultiplierDown": "0.8",    "avgPriceMins": 1  }
+```codeBlockLines_aHhF
+{    "filterType": "PERCENT_PRICE_BY_SIDE",    "bidMultiplierUp": "1.2",    "bidMultiplierDown": "0.2",    "askMultiplierUp": "5",    "askMultiplierDown": "0.8",    "avgPriceMins": 1  }
 ```
 
 ### LOT_SIZE[​](/docs/binance-spot-api-docs/filters#lot_size "Direct link to LOT_SIZE")
@@ -93,8 +95,9 @@ In order to pass the `lot size`, the following must be true for
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
+```codeBlockLines_aHhF
+{
+  "filterType": "LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
 ```
 
 ### MIN_NOTIONAL[​](/docs/binance-spot-api-docs/filters#min_notional "Direct link to MIN_NOTIONAL")
@@ -108,8 +111,9 @@ of minutes the average price is calculated over. 0 means the last price is used.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MIN_NOTIONAL",  "minNotional": "0.00100000",  "applyToMarket": true,  "avgPriceMins": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "MIN_NOTIONAL",  "minNotional": "0.00100000",  "applyToMarket": true,  "avgPriceMins": 5}
 ```
 
 ### NOTIONAL[​](/docs/binance-spot-api-docs/filters#notional "Direct link to NOTIONAL")
@@ -134,8 +138,9 @@ If the `avgPriceMins` is 0, then the last price will be used.
 
 **/exchangeInfo format:**
 
-```
-{   "filterType": "NOTIONAL",   "minNotional": "10.00000000",   "applyMinToMarket": false,   "maxNotional": "10000.00000000",   "applyMaxToMarket": false,   "avgPriceMins": 5}
+```codeBlockLines_aHhF
+{
+   "filterType": "NOTIONAL",   "minNotional": "10.00000000",   "applyMinToMarket": false,   "maxNotional": "10000.00000000",   "applyMaxToMarket": false,   "avgPriceMins": 5}
 ```
 
 ### ICEBERG_PARTS[​](/docs/binance-spot-api-docs/filters#iceberg_parts "Direct link to ICEBERG_PARTS")
@@ -145,8 +150,9 @@ The number of `ICEBERG_PARTS` is defined as `CEIL(qty / icebergQty)`.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "ICEBERG_PARTS",  "limit": 10}
+```codeBlockLines_aHhF
+{
+  "filterType": "ICEBERG_PARTS",  "limit": 10}
 ```
 
 ### MARKET_LOT_SIZE[​](/docs/binance-spot-api-docs/filters#market_lot_size "Direct link to MARKET_LOT_SIZE")
@@ -168,8 +174,9 @@ In order to pass the `market lot size`, the following must be true for
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MARKET_LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
+```codeBlockLines_aHhF
+{
+  "filterType": "MARKET_LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
 ```
 
 ### MAX_NUM_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_orders "Direct link to MAX_NUM_ORDERS")
@@ -180,8 +187,9 @@ are counted for this filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ORDERS",  "maxNumOrders": 25}
+```codeBlockLines_aHhF
+{
+  "filterType": "MAX_NUM_ORDERS",  "maxNumOrders": 25}
 ```
 
 ### MAX_NUM_ALGO_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_algo_orders "Direct link to MAX_NUM_ALGO_ORDERS")
@@ -192,8 +200,9 @@ account is allowed to have open on a symbol. "Algo" orders are `STOP_LOSS`,
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 5}
 ```
 
 ### MAX_NUM_ICEBERG_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_iceberg_orders "Direct link to MAX_NUM_ICEBERG_ORDERS")
@@ -204,8 +213,9 @@ order where the `icebergQty` is > 0.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 5}
+```codeBlockLines_aHhF
+{
+  "filterType": "MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 5}
 ```
 
 ### MAX_POSITION[​](/docs/binance-spot-api-docs/filters#max_position "Direct link to MAX_POSITION")
@@ -226,8 +236,9 @@ the `MAX_POSITION` filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType":"MAX_POSITION",  "maxPosition":"10.00000000"}
+```codeBlockLines_aHhF
+{
+  "filterType":"MAX_POSITION",  "maxPosition":"10.00000000"}
 ```
 
 ### TRAILING_DELTA[​](/docs/binance-spot-api-docs/filters#trailing_delta "Direct link to TRAILING_DELTA")
@@ -252,8 +263,8 @@ For `STOP_LOSS SELL`, `STOP_LOSS_LIMIT SELL`, `TAKE_PROFIT BUY`, and
 
 **/exchangeInfo format:**
 
-```
-    {          "filterType": "TRAILING_DELTA",          "minTrailingAboveDelta": 10,          "maxTrailingAboveDelta": 2000,          "minTrailingBelowDelta": 10,          "maxTrailingBelowDelta": 2000   }
+```codeBlockLines_aHhF
+{          "filterType": "TRAILING_DELTA",          "minTrailingAboveDelta": 10,          "maxTrailingAboveDelta": 2000,          "minTrailingBelowDelta": 10,          "maxTrailingBelowDelta": 2000   }
 ```
 
 ## Exchange Filters[​](/docs/binance-spot-api-docs/filters#exchange-filters "Direct link to Exchange Filters")
@@ -266,8 +277,9 @@ and normal orders are counted for this filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ORDERS",  "maxNumOrders": 1000}
+```codeBlockLines_aHhF
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDERS",  "maxNumOrders": 1000}
 ```
 
 ### EXCHANGE_MAX_NUM_ALGO_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_algo_orders "Direct link to EXCHANGE_MAX_NUM_ALGO_ORDERS")
@@ -278,8 +290,9 @@ orders an account is allowed to have open on the exchange. "Algo" orders are
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 200}
+```codeBlockLines_aHhF
+{
+  "filterType": "EXCHANGE_MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 200}
 ```
 
 ### EXCHANGE_MAX_NUM_ICEBERG_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_iceberg_orders "Direct link to EXCHANGE_MAX_NUM_ICEBERG_ORDERS")
@@ -289,8 +302,9 @@ iceberg orders an account is allowed to have open on the exchange.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 10000}
+```codeBlockLines_aHhF
+{
+  "filterType": "EXCHANGE_MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 10000}
 ```
 
 # ENUM Definitions
@@ -418,20 +432,20 @@ This sets how long an order will be active before expiration.
 
 - REQUEST_WEIGHT
 
-```
-    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000    }
+```codeBlockLines_aHhF
+{      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000    }
 ```
 
 - ORDERS
 
-```
-    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 1,      "limit": 10    }
+```codeBlockLines_aHhF
+{      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 1,      "limit": 10    }
 ```
 
 - RAW_REQUESTS
 
-```
-    {      "rateLimitType": "RAW_REQUESTS",      "interval": "MINUTE",      "intervalNum": 5,      "limit": 61000    }
+```codeBlockLines_aHhF
+{      "rateLimitType": "RAW_REQUESTS",      "interval": "MINUTE",      "intervalNum": 5,      "limit": 61000    }
 ```
 
 ## Rate limit intervals (interval)[​](/docs/binance-spot-api-docs/enums#rate-limit-intervals-interval "Direct link to Rate limit intervals (interval)")
@@ -458,8 +472,9 @@ to learn more.
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
 
-```
-{  "code":-1121,  "msg":"Invalid symbol."}
+```codeBlockLines_aHhF
+{
+  "code":-1121,  "msg":"Invalid symbol."}
 ```
 
 ## 10xx - General Server or Network issues[​](/docs/binance-spot-api-docs/errors#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
@@ -1038,8 +1053,9 @@ request sent would not have changed the status quo.
 
 Sample Payload below:
 
-```
-{  "code": -1121,  "msg": "Invalid symbol."}
+```codeBlockLines_aHhF
+{
+  "code": -1121,  "msg": "Invalid symbol."}
 ```
 
 - Specific error codes and messages are defined in
@@ -1167,8 +1183,10 @@ the value it's looking for it will check the next one.
   not sent, **it defaults to 5000**.
 - The logic is as follows:
 
-  ```
-  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow) {  // process request} else {  // reject request}
+  ```codeBlockLines_aHhF
+  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow) {
+    // process request} else {
+    // reject request}
   ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable,
@@ -1186,21 +1204,20 @@ beyond 60,000!**
 Here is a step-by-step example of how to send a valid signed payload from the
 Linux command line using `echo`, `openssl`, and `curl`.
 
-| Key         | Value                                                            |
-| ----------- | ---------------------------------------------------------------- |
-| `apiKey`    | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
-| `secretKey` | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j |
-
-| Parameter     | Value         |
-| ------------- | ------------- |
-| `symbol`      | LTCBTC        |
-| `side`        | BUY           |
-| `type`        | LIMIT         |
-| `timeInForce` | GTC           |
-| `quantity`    | 1             |
-| `price`       | 0.1           |
-| `recvWindow`  | 5000          |
-| `timestamp`   | 1499827319559 |
+| Key           | Value                                                            |
+| ------------- | ---------------------------------------------------------------- |
+| `apiKey`      | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
+| `secretKey`   | NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j |
+| Parameter     | Value                                                            |
+| ---           | ---                                                              |
+| `symbol`      | LTCBTC                                                           |
+| `side`        | BUY                                                              |
+| `type`        | LIMIT                                                            |
+| `timeInForce` | GTC                                                              |
+| `quantity`    | 1                                                                |
+| `price`       | 0.1                                                              |
+| `recvWindow`  | 5000                                                             |
+| `timestamp`   | 1499827319559                                                    |
 
 **Example 1: As a request body**
 
@@ -1208,14 +1225,16 @@ Linux command line using `echo`, `openssl`, and `curl`.
   symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
 - **HMAC SHA256 signature:**
 
-  ```
-  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"(stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
+  ```codeBlockLines_aHhF
+  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+  (stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
   ```
 
 - **curl command:**
 
-  ```
-  (HMAC SHA256)[linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order' -d 'symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
+  ```codeBlockLines_aHhF
+  (HMAC SHA256)
+  [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order' -d 'symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
   ```
 
 **Example 2: As a query string**
@@ -1224,14 +1243,16 @@ Linux command line using `echo`, `openssl`, and `curl`.
   symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
 - **HMAC SHA256 signature:**
 
-  ```
-  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"(stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
+  ```codeBlockLines_aHhF
+  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+  (stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
   ```
 
 - **curl command:**
 
-  ```
-  (HMAC SHA256)[linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
+  ```codeBlockLines_aHhF
+  (HMAC SHA256)
+  [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
   ```
 
 **Example 3: Mixed query string and request body**
@@ -1240,14 +1261,16 @@ Linux command line using `echo`, `openssl`, and `curl`.
 - **requestBody:** quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
 - **HMAC SHA256 signature:**
 
-  ```
-  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"(stdin)= 0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77
+  ```codeBlockLines_aHhF
+  [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+  (stdin)= 0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77
   ```
 
 - **curl command:**
 
-  ```
-  (HMAC SHA256)[linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77'
+  ```codeBlockLines_aHhF
+  (HMAC SHA256)
+  [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://api.binance.com/api/v3/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77'
   ```
 
 Note that the signature is different in example 3. There is no & between "GTC"
@@ -1265,20 +1288,19 @@ a corresponding API key will be provided for you.
 
 For this example, the private key will be referenced as `./test-prv-key.pem`
 
-| Key      | Value                                                            |
-| -------- | ---------------------------------------------------------------- |
-| `apiKey` | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
-
-| Parameter     | Value         |
-| ------------- | ------------- |
-| `symbol`      | BTCUSDT       |
-| `side`        | SELL          |
-| `type`        | LIMIT         |
-| `timeInForce` | GTC           |
-| `quantity`    | 1             |
-| `price`       | 0.2           |
-| `timestamp`   | 1668481559918 |
-| `recvWindow`  | 5000          |
+| Key           | Value                                                            |
+| ------------- | ---------------------------------------------------------------- |
+| `apiKey`      | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
+| Parameter     | Value                                                            |
+| ---           | ---                                                              |
+| `symbol`      | BTCUSDT                                                          |
+| `side`        | SELL                                                             |
+| `type`        | LIMIT                                                            |
+| `timeInForce` | GTC                                                              |
+| `quantity`    | 1                                                                |
+| `price`       | 0.2                                                              |
+| `timestamp`   | 1668481559918                                                    |
+| `recvWindow`  | 5000                                                             |
 
 **Step 1: Construct the payload**
 
@@ -1287,7 +1309,7 @@ Arrange the list of parameters into a string. Separate each parameter with a
 
 For the parameters above, the signature payload would look like this:
 
-```
+```codeBlockLines_aHhF
 symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000
 ```
 
@@ -1296,33 +1318,46 @@ symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timesta
 1.  Encode signature payload as ASCII data.
 2.  Sign payload using RSASSA-PKCS1-v1_5 algorithm with SHA-256 hash function.
 
-```
+```codeBlockLines_aHhF
 $ echo -n 'symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000' | openssl dgst -sha256 -sign ./test-prv-key.pem
 ```
 
 3.  Encode output as base64 string.
 
-```
-$  echo -n 'symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000' | openssl dgst -sha256 -sign ./test-prv-key.pem | openssl enc -base64 -AHZ8HOjiJ1s/igS9JA+n7+7Ti/ihtkRF5BIWcPIEluJP6tlbFM/Bf44LfZka/iemtahZAZzcO9TnI5uaXh3++lrqtNonCwp6/245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH+XxaCmR0WcvlKjNQnp12/eKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang/1WOq+Jaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT/fNnMRxFc7u+j3qI//5yuGuu14KR0MuQKKCSpViieD+fIti46sxPTsjSemoUKp0oXA==
+```codeBlockLines_aHhF
+$  echo -n 'symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000' | openssl dgst -sha256 -sign ./test-prv-key.pem | openssl enc -base64 -A
+HZ8HOjiJ1s/igS9JA+n7+7Ti/ihtkRF5BIWcPIEluJP6tlbFM/Bf44LfZka/iemtahZAZzcO9TnI5uaXh3++lrqtNonCwp6/245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH+XxaCmR0WcvlKjNQnp12/eKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang/1WOq+Jaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT/fNnMRxFc7u+j3qI//5yuGuu14KR0MuQKKCSpViieD+fIti46sxPTsjSemoUKp0oXA==
 ```
 
 4.  Since the signature may contain `/` and `=`, this could cause issues with
     sending the request. So the signature has to be URL encoded.
 
-```
+```codeBlockLines_aHhF
 HZ8HOjiJ1s%2FigS9JA%2Bn7%2B7Ti%2FihtkRF5BIWcPIEluJP6tlbFM%2FBf44LfZka%2FiemtahZAZzcO9TnI5uaXh3%2B%2BlrqtNonCwp6%2F245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH%2BXxaCmR0WcvlKjNQnp12%2FeKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang%2F1WOq%2BJaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT%2FfNnMRxFc7u%2Bj3qI%2F%2F5yuGuu14KR0MuQKKCSpViieD%2BfIti46sxPTsjSemoUKp0oXA%3D%3D
 ```
 
 5.  The curl command:
 
-```
+```codeBlockLines_aHhF
 curl -H "X-MBX-APIKEY: CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ" -X POST 'https://api.binance.com/api/v3/order?symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2&timestamp=1668481559918&recvWindow=5000&signature=HZ8HOjiJ1s%2FigS9JA%2Bn7%2B7Ti%2FihtkRF5BIWcPIEluJP6tlbFM%2FBf44LfZka%2FiemtahZAZzcO9TnI5uaXh3%2B%2BlrqtNonCwp6%2F245UFWkiW1elpgtVAmJPbogcAv6rSlokztAfWk296ZJXzRDYAtzGH0gq7CgSJKfH%2BXxaCmR0WcvlKjNQnp12%2FeKXJYO4tDap8UCBLuyxDnR7oJKLHQHJLP0r0EAVOOSIbrFang%2F1WOq%2BJaq4Efc4XpnTgnwlBbWTmhWDR1pvS9iVEzcSYLHT%2FfNnMRxFc7u%2Bj3qI%2F%2F5yuGuu14KR0MuQKKCSpViieD%2BfIti46sxPTsjSemoUKp0oXA%3D%3D'
 ```
 
 A sample Bash script below does the similar steps said above.
 
-```
-API_KEY="put your own API Key here"PRIVATE_KEY_PATH="test-prv-key.pem"# Set up the request:API_METHOD="POST"API_CALL="api/v3/order"API_PARAMS="symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2"# Sign the request:timestamp=$(date +%s000)api_params_with_timestamp="$API_PARAMS&timestamp=$timestamp"signature=$(echo -n "$api_params_with_timestamp" \            | openssl dgst -sha256 -sign "$PRIVATE_KEY_PATH" \            | openssl enc -base64 -A)# Send the request:curl -H "X-MBX-APIKEY: $API_KEY" -X "$API_METHOD" \    "https://api.binance.com/$API_CALL?$api_params_with_timestamp" \    --data-urlencode "signature=$signature"
+```codeBlockLines_aHhF
+API_KEY="put your own API Key here"
+PRIVATE_KEY_PATH="test-prv-key.pem"
+# Set up the request:
+API_METHOD="POST"
+API_CALL="api/v3/order"
+API_PARAMS="symbol=BTCUSDT&side=SELL&type=LIMIT&timeInForce=GTC&quantity=1&price=0.2"
+# Sign the request:
+timestamp=$(date +%s000)
+api_params_with_timestamp="$API_PARAMS&timestamp=$timestamp"
+signature=$(echo -n "$api_params_with_timestamp" \
+            | openssl dgst -sha256 -sign "$PRIVATE_KEY_PATH" \            | openssl enc -base64 -A)# Send the request:
+curl -H "X-MBX-APIKEY: $API_KEY" -X "$API_METHOD" \
+    "https://api.binance.com/$API_CALL?$api_params_with_timestamp" \    --data-urlencode "signature=$signature"
 ```
 
 #### Ed25519 Keys[​](/docs/binance-spot-api-docs/rest-api/endpoint-security-type#ed25519-keys "Direct link to Ed25519 Keys")
@@ -1343,15 +1378,49 @@ the best performance and security out of all supported key types.**
 This is a sample code in Python to show how to sign the payload with an Ed25519
 key.
 
-```
-#!/usr/bin/env python3import base64import requestsimport timefrom cryptography.hazmat.primitives.serialization import load_pem_private_key# Set up authenticationAPI_KEY='put your own API Key here'PRIVATE_KEY_PATH='test-prv-key.pem'# Load the private key.# In this example the key is expected to be stored without encryption,# but we recommend using a strong password for improved security.with open(PRIVATE_KEY_PATH, 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)# Set up the request parametersparams = {    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20',}# Timestamp the requesttimestamp = int(time.time() * 1000) # UNIX timestamp in millisecondsparams['timestamp'] = timestamp# Sign the requestpayload = '&'.join([f'{param}={value}' for param, value in params.items()])signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))params['signature'] = signature# Send the requestheaders = {    'X-MBX-APIKEY': API_KEY,}response = requests.post(    'https://api.binance.com/api/v3/order',    headers=headers,    data=params,)print(response.json())
+```codeBlockLines_aHhF
+#!/usr/bin/env python3
+
+import base64
+import requests
+import time
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
+
+# Set up authentication
+API_KEY='put your own API Key here'
+PRIVATE_KEY_PATH='test-prv-key.pem'
+
+# Load the private key.
+# In this example the key is expected to be stored without encryption,
+# but we recommend using a strong password for improved security.
+with open(PRIVATE_KEY_PATH, 'rb') as f:
+    private_key = load_pem_private_key(data=f.read(),                                       password=None)
+# Set up the request parameters
+params = {
+    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20',}
+
+# Timestamp the request
+timestamp = int(time.time() * 1000) # UNIX timestamp in milliseconds
+params['timestamp'] = timestamp
+
+# Sign the request
+payload = '&'.join([f'{param}={value}' for param, value in params.items()])
+signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))
+params['signature'] = signature
+
+# Send the request
+headers = {
+    'X-MBX-APIKEY': API_KEY,}
+response = requests.post(
+    'https://api.binance.com/api/v3/order',    headers=headers,    data=params,)
+print(response.json())
 ```
 
 # General endpoints
 
 ### Test connectivity[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity "Direct link to Test connectivity")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ping
 ```
 
@@ -1365,13 +1434,13 @@ Test connectivity to the Rest API.
 
 **Response:**
 
-```
+```codeBlockLines_aHhF
 {}
 ```
 
 ### Check server time[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time "Direct link to Check server time")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/time
 ```
 
@@ -1385,13 +1454,14 @@ Test connectivity to the Rest API and get the current server time.
 
 **Response:**
 
-```
-{  "serverTime": 1499827319559}
+```codeBlockLines_aHhF
+{
+  "serverTime": 1499827319559}
 ```
 
 ### Exchange information[​](/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information "Direct link to Exchange information")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/exchangeInfo
 ```
 
@@ -1455,15 +1525,16 @@ Cannot be used in combination with `symbols` or `symbol`. |
 
 **Response:**
 
-```
-{  "timezone": "UTC",  "serverTime": 1565246363776,  "rateLimits": [    {      // These are defined in the `ENUM definitions` section under `Rate Limiters (rateLimitType)`.      // All limits are optional    }  ],  "exchangeFilters": [    // These are the defined filters in the `Filters` section.    // All filters are optional.  ],  "symbols": [    {      "symbol": "ETHBTC",      "status": "TRADING",      "baseAsset": "ETH",      "baseAssetPrecision": 8,      "quoteAsset": "BTC",      "quotePrecision": 8, // will be removed in future api versions (v4+)      "quoteAssetPrecision": 8,      "baseCommissionPrecision": 8,      "quoteCommissionPrecision": 8,      "orderTypes": [        "LIMIT",        "LIMIT_MAKER",        "MARKET",        "STOP_LOSS",        "STOP_LOSS_LIMIT",        "TAKE_PROFIT",        "TAKE_PROFIT_LIMIT"      ],      "icebergAllowed": true,      "ocoAllowed": true,      "otoAllowed": true,      "quoteOrderQtyMarketAllowed": true,      "allowTrailingStop": false,      "cancelReplaceAllowed":false,      "allowAmend":false,      "isSpotTradingAllowed": true,      "isMarginTradingAllowed": true,      "filters": [        // These are defined in the Filters section.        // All filters are optional      ],      "permissions": [],      "permissionSets": [        [          "SPOT",          "MARGIN"        ]      ],      "defaultSelfTradePreventionMode": "NONE",      "allowedSelfTradePreventionModes": [        "NONE"      ]    }  ],  // Optional field. Present only when SOR is available.  // https://github.com/binance/binance-spot-api-docs/blob/master/faqs/sor_faq.md  "sors": [    {      "baseAsset": "BTC",      "symbols": [        "BTCUSDT",        "BTCUSDC"      ]    }  ]}
+```codeBlockLines_aHhF
+{
+  "timezone": "UTC",  "serverTime": 1565246363776,  "rateLimits": [    {      // These are defined in the `ENUM definitions` section under `Rate Limiters (rateLimitType)`.      // All limits are optional    }  ],  "exchangeFilters": [    // These are the defined filters in the `Filters` section.    // All filters are optional.  ],  "symbols": [    {      "symbol": "ETHBTC",      "status": "TRADING",      "baseAsset": "ETH",      "baseAssetPrecision": 8,      "quoteAsset": "BTC",      "quotePrecision": 8, // will be removed in future api versions (v4+)      "quoteAssetPrecision": 8,      "baseCommissionPrecision": 8,      "quoteCommissionPrecision": 8,      "orderTypes": [        "LIMIT",        "LIMIT_MAKER",        "MARKET",        "STOP_LOSS",        "STOP_LOSS_LIMIT",        "TAKE_PROFIT",        "TAKE_PROFIT_LIMIT"      ],      "icebergAllowed": true,      "ocoAllowed": true,      "otoAllowed": true,      "quoteOrderQtyMarketAllowed": true,      "allowTrailingStop": false,      "cancelReplaceAllowed":false,      "allowAmend":false,      "isSpotTradingAllowed": true,      "isMarginTradingAllowed": true,      "filters": [        // These are defined in the Filters section.        // All filters are optional      ],      "permissions": [],      "permissionSets": [        [          "SPOT",          "MARGIN"        ]      ],      "defaultSelfTradePreventionMode": "NONE",      "allowedSelfTradePreventionModes": [        "NONE"      ]    }  ],  // Optional field. Present only when SOR is available.  // https://github.com/binance/binance-spot-api-docs/blob/master/faqs/sor_faq.md  "sors": [    {      "baseAsset": "BTC",      "symbols": [        "BTCUSDT",        "BTCUSDC"      ]    }  ]}
 ```
 
 # Market Data endpoints
 
 ### Order book[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book "Direct link to Order book")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/depth
 ```
 
@@ -1488,13 +1559,14 @@ GET /api/v3/depth
 
 **Response:**
 
-```
-{  "lastUpdateId": 1027024,  "bids": [    [      "4.00000000",     // PRICE      "431.00000000"    // QTY    ]  ],  "asks": [    [      "4.00000200",      "12.00000000"    ]  ]}
+```codeBlockLines_aHhF
+{
+  "lastUpdateId": 1027024,  "bids": [    [      "4.00000000",     // PRICE      "431.00000000"    // QTY    ]  ],  "asks": [    [      "4.00000200",      "12.00000000"    ]  ]}
 ```
 
 ### Recent trades list[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list "Direct link to Recent trades list")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/trades
 ```
 
@@ -1513,13 +1585,14 @@ Get recent trades.
 
 **Response:**
 
-```
-[  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.000012",    "time": 1499865549590,    "isBuyerMaker": true,    "isBestMatch": true  }]
+```codeBlockLines_aHhF
+[
+  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.000012",    "time": 1499865549590,    "isBuyerMaker": true,    "isBestMatch": true  }]
 ```
 
 ### Old trade lookup[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup "Direct link to Old trade lookup")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/historicalTrades
 ```
 
@@ -1539,13 +1612,14 @@ Get older trades.
 
 **Response:**
 
-```
-[  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.000012",    "time": 1499865549590,    "isBuyerMaker": true,    "isBestMatch": true  }]
+```codeBlockLines_aHhF
+[
+  {    "id": 28457,    "price": "4.00000100",    "qty": "12.00000000",    "quoteQty": "48.000012",    "time": 1499865549590,    "isBuyerMaker": true,    "isBestMatch": true  }]
 ```
 
 ### Compressed/Aggregate trades list[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list "Direct link to Compressed/Aggregate trades list")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/aggTrades
 ```
 
@@ -1571,13 +1645,14 @@ taker order, with the same price will have the quantity aggregated.
 
 **Response:**
 
-```
-[  {    "a": 26129,         // Aggregate tradeId    "p": "0.01633102",  // Price    "q": "4.70443515",  // Quantity    "f": 27781,         // First tradeId    "l": 27781,         // Last tradeId    "T": 1498793709153, // Timestamp    "m": true,          // Was the buyer the maker?    "M": true           // Was the trade the best price match?  }]
+```codeBlockLines_aHhF
+[
+  {    "a": 26129,         // Aggregate tradeId    "p": "0.01633102",  // Price    "q": "4.70443515",  // Quantity    "f": 27781,         // First tradeId    "l": 27781,         // Last tradeId    "T": 1498793709153, // Timestamp    "m": true,          // Was the buyer the maker?    "M": true           // Was the trade the best price match?  }]
 ```
 
 ### Kline/Candlestick data[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data "Direct link to Kline/Candlestick data")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/klines
 ```
 
@@ -1625,13 +1700,14 @@ Supported kline intervals (case-sensitive):
 
 **Response:**
 
-```
-[  [    1499040000000,      // Kline open time    "0.01634790",       // Open price    "0.80000000",       // High price    "0.01575800",       // Low price    "0.01577100",       // Close price    "148976.11427815",  // Volume    1499644799999,      // Kline Close time    "2434.19055334",    // Quote asset volume    308,                // Number of trades    "1756.87402397",    // Taker buy base asset volume    "28.46694368",      // Taker buy quote asset volume    "0"                 // Unused field, ignore.  ]]
+```codeBlockLines_aHhF
+[
+  [    1499040000000,      // Kline open time    "0.01634790",       // Open price    "0.80000000",       // High price    "0.01575800",       // Low price    "0.01577100",       // Close price    "148976.11427815",  // Volume    1499644799999,      // Kline Close time    "2434.19055334",    // Quote asset volume    308,                // Number of trades    "1756.87402397",    // Taker buy base asset volume    "28.46694368",      // Taker buy quote asset volume    "0"                 // Unused field, ignore.  ]]
 ```
 
 ### UIKlines[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines "Direct link to UIKlines")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/uiKlines
 ```
 
@@ -1668,13 +1744,14 @@ charts.
 
 **Response:**
 
-```
-[  [    1499040000000,      // Kline open time    "0.01634790",       // Open price    "0.80000000",       // High price    "0.01575800",       // Low price    "0.01577100",       // Close price    "148976.11427815",  // Volume    1499644799999,      // Kline close time    "2434.19055334",    // Quote asset volume    308,                // Number of trades    "1756.87402397",    // Taker buy base asset volume    "28.46694368",      // Taker buy quote asset volume    "0"                 // Unused field. Ignore.  ]]
+```codeBlockLines_aHhF
+[
+  [    1499040000000,      // Kline open time    "0.01634790",       // Open price    "0.80000000",       // High price    "0.01575800",       // Low price    "0.01577100",       // Close price    "148976.11427815",  // Volume    1499644799999,      // Kline close time    "2434.19055334",    // Quote asset volume    308,                // Number of trades    "1756.87402397",    // Taker buy base asset volume    "28.46694368",      // Taker buy quote asset volume    "0"                 // Unused field. Ignore.  ]]
 ```
 
 ### Current average price[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price "Direct link to Current average price")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/avgPrice
 ```
 
@@ -1692,13 +1769,14 @@ Current average price for a symbol.
 
 **Response:**
 
-```
-{  "mins": 5,                    // Average price interval (in minutes)  "price": "9.35751834",        // Average price  "closeTime": 1694061154503    // Last trade time}
+```codeBlockLines_aHhF
+{
+  "mins": 5,                    // Average price interval (in minutes)  "price": "9.35751834",        // Average price  "closeTime": 1694061154503    // Last trade time}
 ```
 
 ### 24hr ticker price change statistics[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics "Direct link to 24hr ticker price change statistics")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ticker/24hr
 ```
 
@@ -1735,31 +1813,35 @@ If none provided, the default is FULL |
 
 **Response - FULL:**
 
-```
-{  "symbol": "BNBBTC",  "priceChange": "-94.99999800",  "priceChangePercent": "-95.960",  "weightedAvgPrice": "0.29628482",  "prevClosePrice": "0.10002000",  "lastPrice": "4.00000200",  "lastQty": "200.00000000",  "bidPrice": "4.00000000",  "bidQty": "100.00000000",  "askPrice": "4.00000200",  "askQty": "100.00000000",  "openPrice": "99.00000000",  "highPrice": "100.00000000",  "lowPrice": "0.10000000",  "volume": "8913.30000000",  "quoteVolume": "15.30000000",  "openTime": 1499783499040,  "closeTime": 1499869899040,  "firstId": 28385,   // First tradeId  "lastId": 28460,    // Last tradeId  "count": 76         // Trade count}
+```codeBlockLines_aHhF
+{
+  "symbol": "BNBBTC",  "priceChange": "-94.99999800",  "priceChangePercent": "-95.960",  "weightedAvgPrice": "0.29628482",  "prevClosePrice": "0.10002000",  "lastPrice": "4.00000200",  "lastQty": "200.00000000",  "bidPrice": "4.00000000",  "bidQty": "100.00000000",  "askPrice": "4.00000200",  "askQty": "100.00000000",  "openPrice": "99.00000000",  "highPrice": "100.00000000",  "lowPrice": "0.10000000",  "volume": "8913.30000000",  "quoteVolume": "15.30000000",  "openTime": 1499783499040,  "closeTime": 1499869899040,  "firstId": 28385,   // First tradeId  "lastId": 28460,    // Last tradeId  "count": 76         // Trade count}
 ```
 
 OR
 
-```
-[  {    "symbol": "BNBBTC",    "priceChange": "-94.99999800",    "priceChangePercent": "-95.960",    "weightedAvgPrice": "0.29628482",    "prevClosePrice": "0.10002000",    "lastPrice": "4.00000200",    "lastQty": "200.00000000",    "bidPrice": "4.00000000",    "bidQty": "100.00000000",    "askPrice": "4.00000200",    "askQty": "100.00000000",    "openPrice": "99.00000000",    "highPrice": "100.00000000",    "lowPrice": "0.10000000",    "volume": "8913.30000000",    "quoteVolume": "15.30000000",    "openTime": 1499783499040,    "closeTime": 1499869899040,    "firstId": 28385,   // First tradeId    "lastId": 28460,    // Last tradeId    "count": 76         // Trade count  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BNBBTC",    "priceChange": "-94.99999800",    "priceChangePercent": "-95.960",    "weightedAvgPrice": "0.29628482",    "prevClosePrice": "0.10002000",    "lastPrice": "4.00000200",    "lastQty": "200.00000000",    "bidPrice": "4.00000000",    "bidQty": "100.00000000",    "askPrice": "4.00000200",    "askQty": "100.00000000",    "openPrice": "99.00000000",    "highPrice": "100.00000000",    "lowPrice": "0.10000000",    "volume": "8913.30000000",    "quoteVolume": "15.30000000",    "openTime": 1499783499040,    "closeTime": 1499869899040,    "firstId": 28385,   // First tradeId    "lastId": 28460,    // Last tradeId    "count": 76         // Trade count  }]
 ```
 
 **Response - MINI:**
 
-```
-{  "symbol":      "BNBBTC",          // Symbol Name  "openPrice":   "99.00000000",     // Opening price of the Interval  "highPrice":   "100.00000000",    // Highest price in the interval  "lowPrice":    "0.10000000",      // Lowest  price in the interval  "lastPrice":   "4.00000200",      // Closing price of the interval  "volume":      "8913.30000000",   // Total trade volume (in base asset)  "quoteVolume": "15.30000000",     // Total trade volume (in quote asset)  "openTime":    1499783499040,     // Start of the ticker interval  "closeTime":   1499869899040,     // End of the ticker interval  "firstId":     28385,             // First tradeId considered  "lastId":      28460,             // Last tradeId considered  "count":       76                 // Total trade count}
+```codeBlockLines_aHhF
+{
+  "symbol":      "BNBBTC",          // Symbol Name  "openPrice":   "99.00000000",     // Opening price of the Interval  "highPrice":   "100.00000000",    // Highest price in the interval  "lowPrice":    "0.10000000",      // Lowest  price in the interval  "lastPrice":   "4.00000200",      // Closing price of the interval  "volume":      "8913.30000000",   // Total trade volume (in base asset)  "quoteVolume": "15.30000000",     // Total trade volume (in quote asset)  "openTime":    1499783499040,     // Start of the ticker interval  "closeTime":   1499869899040,     // End of the ticker interval  "firstId":     28385,             // First tradeId considered  "lastId":      28460,             // Last tradeId considered  "count":       76                 // Total trade count}
 ```
 
 OR
 
-```
-[  {    "symbol": "BNBBTC",    "openPrice": "99.00000000",    "highPrice": "100.00000000",    "lowPrice": "0.10000000",    "lastPrice": "4.00000200",    "volume": "8913.30000000",    "quoteVolume": "15.30000000",    "openTime": 1499783499040,    "closeTime": 1499869899040,    "firstId": 28385,    "lastId": 28460,    "count": 76  },  {    "symbol": "LTCBTC",    "openPrice": "0.07000000",    "highPrice": "0.07000000",    "lowPrice": "0.07000000",    "lastPrice": "0.07000000",    "volume": "11.00000000",    "quoteVolume": "0.77000000",    "openTime": 1656908192899,    "closeTime": 1656994592899,    "firstId": 0,    "lastId": 10,    "count": 11  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BNBBTC",    "openPrice": "99.00000000",    "highPrice": "100.00000000",    "lowPrice": "0.10000000",    "lastPrice": "4.00000200",    "volume": "8913.30000000",    "quoteVolume": "15.30000000",    "openTime": 1499783499040,    "closeTime": 1499869899040,    "firstId": 28385,    "lastId": 28460,    "count": 76  },  {    "symbol": "LTCBTC",    "openPrice": "0.07000000",    "highPrice": "0.07000000",    "lowPrice": "0.07000000",    "lastPrice": "0.07000000",    "volume": "11.00000000",    "quoteVolume": "0.77000000",    "openTime": 1656908192899,    "closeTime": 1656994592899,    "firstId": 0,    "lastId": 10,    "count": 11  }]
 ```
 
 ### Trading Day Ticker[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker "Direct link to Trading Day Ticker")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ticker/tradingDay
 ```
 
@@ -1774,19 +1856,12 @@ request is more than 50.
 
 **Parameters:**
 
-| Name   | Type   | Mandatory | Description                               |
-| ------ | ------ | --------- | ----------------------------------------- |
-| symbol | STRING | YES       | Either symbol or symbols must be provided |
-
-Examples of accepted format for the symbols parameter:  
-\["BTCUSDT","BNBUSDT"\]  
-or  
-%5B%22BTCUSDT%22,%22BNBUSDT%22%5D
-
-The maximum number of symbols allowed in a request is 100. | | symbols | |
-timeZone | STRING | NO | Default: 0 (UTC) | | type | ENUM | NO | Supported
-values: FULL or MINI.  
-If none provided, the default is FULL |
+| | | symbol | STRING | YES | Either symbol or symbols must be providedExamples
+of accepted format for the symbols
+parameter:["BTCUSDT","BNBUSDT"]or%5B%22BTCUSDT%22,%22BNBUSDT%22%5DThe maximum
+number of symbols allowed in a request is 100. symbols timeZone | STRING | NO |
+Default: 0 (UTC) type | ENUM | NO | Supported values: FULL or MINI.If none
+provided, the default is FULL |
 
 **Notes:**
 
@@ -1800,33 +1875,37 @@ If none provided, the default is FULL |
 
 With `symbol`:
 
-```
-{  "symbol":             "BTCUSDT",  "priceChange":        "-83.13000000",         // Absolute price change  "priceChangePercent": "-0.317",               // Relative price change in percent  "weightedAvgPrice":   "26234.58803036",       // quoteVolume / volume  "openPrice":          "26304.80000000",  "highPrice":          "26397.46000000",  "lowPrice":           "26088.34000000",  "lastPrice":          "26221.67000000",  "volume":             "18495.35066000",       // Volume in base asset  "quoteVolume":        "485217905.04210480",   // Volume in quote asset  "openTime":           1695686400000,  "closeTime":          1695772799999,  "firstId":            3220151555,             // Trade ID of the first trade in the interval  "lastId":             3220849281,             // Trade ID of the last trade in the interval  "count":              697727                  // Number of trades in the interval}
+```codeBlockLines_aHhF
+{
+  "symbol":             "BTCUSDT",  "priceChange":        "-83.13000000",         // Absolute price change  "priceChangePercent": "-0.317",               // Relative price change in percent  "weightedAvgPrice":   "26234.58803036",       // quoteVolume / volume  "openPrice":          "26304.80000000",  "highPrice":          "26397.46000000",  "lowPrice":           "26088.34000000",  "lastPrice":          "26221.67000000",  "volume":             "18495.35066000",       // Volume in base asset  "quoteVolume":        "485217905.04210480",   // Volume in quote asset  "openTime":           1695686400000,  "closeTime":          1695772799999,  "firstId":            3220151555,             // Trade ID of the first trade in the interval  "lastId":             3220849281,             // Trade ID of the last trade in the interval  "count":              697727                  // Number of trades in the interval}
 ```
 
 With `symbols`:
 
-```
-[  {    "symbol": "BTCUSDT",    "priceChange": "-83.13000000",    "priceChangePercent": "-0.317",    "weightedAvgPrice": "26234.58803036",    "openPrice": "26304.80000000",    "highPrice": "26397.46000000",    "lowPrice": "26088.34000000",    "lastPrice": "26221.67000000",    "volume": "18495.35066000",    "quoteVolume": "485217905.04210480",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 3220151555,    "lastId": 3220849281,    "count": 697727  },  {    "symbol": "BNBUSDT",    "priceChange": "2.60000000",    "priceChangePercent": "1.238",    "weightedAvgPrice": "211.92276958",    "openPrice": "210.00000000",    "highPrice": "213.70000000",    "lowPrice": "209.70000000",    "lastPrice": "212.60000000",    "volume": "280709.58900000",    "quoteVolume": "59488753.54750000",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 672397461,    "lastId": 672496158,    "count": 98698  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BTCUSDT",    "priceChange": "-83.13000000",    "priceChangePercent": "-0.317",    "weightedAvgPrice": "26234.58803036",    "openPrice": "26304.80000000",    "highPrice": "26397.46000000",    "lowPrice": "26088.34000000",    "lastPrice": "26221.67000000",    "volume": "18495.35066000",    "quoteVolume": "485217905.04210480",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 3220151555,    "lastId": 3220849281,    "count": 697727  },  {    "symbol": "BNBUSDT",    "priceChange": "2.60000000",    "priceChangePercent": "1.238",    "weightedAvgPrice": "211.92276958",    "openPrice": "210.00000000",    "highPrice": "213.70000000",    "lowPrice": "209.70000000",    "lastPrice": "212.60000000",    "volume": "280709.58900000",    "quoteVolume": "59488753.54750000",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 672397461,    "lastId": 672496158,    "count": 98698  }]
 ```
 
 **Response - MINI:**
 
 With `symbol`:
 
-```
-{  "symbol":         "BTCUSDT",  "openPrice":      "26304.80000000",  "highPrice":      "26397.46000000",  "lowPrice":       "26088.34000000",  "lastPrice":      "26221.67000000",  "volume":         "18495.35066000",       // Volume in base asset  "quoteVolume":    "485217905.04210480",   // Volume in quote asset  "openTime":       1695686400000,  "closeTime":      1695772799999,  "firstId":        3220151555,             // Trade ID of the first trade in the interval  "lastId":         3220849281,             // Trade ID of the last trade in the interval  "count":          697727                  // Number of trades in the interval}
+```codeBlockLines_aHhF
+{
+  "symbol":         "BTCUSDT",  "openPrice":      "26304.80000000",  "highPrice":      "26397.46000000",  "lowPrice":       "26088.34000000",  "lastPrice":      "26221.67000000",  "volume":         "18495.35066000",       // Volume in base asset  "quoteVolume":    "485217905.04210480",   // Volume in quote asset  "openTime":       1695686400000,  "closeTime":      1695772799999,  "firstId":        3220151555,             // Trade ID of the first trade in the interval  "lastId":         3220849281,             // Trade ID of the last trade in the interval  "count":          697727                  // Number of trades in the interval}
 ```
 
 With `symbols`:
 
-```
-[  {    "symbol": "BTCUSDT",    "openPrice": "26304.80000000",    "highPrice": "26397.46000000",    "lowPrice": "26088.34000000",    "lastPrice": "26221.67000000",    "volume": "18495.35066000",    "quoteVolume": "485217905.04210480",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 3220151555,    "lastId": 3220849281,    "count": 697727  },  {    "symbol": "BNBUSDT",    "openPrice": "210.00000000",    "highPrice": "213.70000000",    "lowPrice": "209.70000000",    "lastPrice": "212.60000000",    "volume": "280709.58900000",    "quoteVolume": "59488753.54750000",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 672397461,    "lastId": 672496158,    "count": 98698  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BTCUSDT",    "openPrice": "26304.80000000",    "highPrice": "26397.46000000",    "lowPrice": "26088.34000000",    "lastPrice": "26221.67000000",    "volume": "18495.35066000",    "quoteVolume": "485217905.04210480",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 3220151555,    "lastId": 3220849281,    "count": 697727  },  {    "symbol": "BNBUSDT",    "openPrice": "210.00000000",    "highPrice": "213.70000000",    "lowPrice": "209.70000000",    "lastPrice": "212.60000000",    "volume": "280709.58900000",    "quoteVolume": "59488753.54750000",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 672397461,    "lastId": 672496158,    "count": 98698  }]
 ```
 
 ### Symbol price ticker[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker "Direct link to Symbol price ticker")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ticker/price
 ```
 
@@ -1857,19 +1936,21 @@ or
 
 **Response:**
 
-```
-{  "symbol": "LTCBTC",  "price": "4.00000200"}
+```codeBlockLines_aHhF
+{
+  "symbol": "LTCBTC",  "price": "4.00000200"}
 ```
 
 OR
 
-```
-[  {    "symbol": "LTCBTC",    "price": "4.00000200"  },  {    "symbol": "ETHBTC",    "price": "0.07946600"  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "LTCBTC",    "price": "4.00000200"  },  {    "symbol": "ETHBTC",    "price": "0.07946600"  }]
 ```
 
 ### Symbol order book ticker[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker "Direct link to Symbol order book ticker")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ticker/bookTicker
 ```
 
@@ -1900,19 +1981,21 @@ or
 
 **Response:**
 
-```
-{  "symbol": "LTCBTC",  "bidPrice": "4.00000000",  "bidQty": "431.00000000",  "askPrice": "4.00000200",  "askQty": "9.00000000"}
+```codeBlockLines_aHhF
+{
+  "symbol": "LTCBTC",  "bidPrice": "4.00000000",  "bidQty": "431.00000000",  "askPrice": "4.00000200",  "askQty": "9.00000000"}
 ```
 
 OR
 
-```
-[  {    "symbol": "LTCBTC",    "bidPrice": "4.00000000",    "bidQty": "431.00000000",    "askPrice": "4.00000200",    "askQty": "9.00000000"  },  {    "symbol": "ETHBTC",    "bidPrice": "0.07946700",    "bidQty": "9.00000000",    "askPrice": "100000.00000000",    "askQty": "1000.00000000"  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "LTCBTC",    "bidPrice": "4.00000000",    "bidQty": "431.00000000",    "askPrice": "4.00000200",    "askQty": "9.00000000"  },  {    "symbol": "ETHBTC",    "bidPrice": "0.07946700",    "bidQty": "9.00000000",    "askPrice": "100000.00000000",    "askQty": "1000.00000000"  }]
 ```
 
 ### Rolling window price change statistics[​](/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics "Direct link to Rolling window price change statistics")
 
-```
+```codeBlockLines_aHhF
 GET /api/v3/ticker
 ```
 
@@ -1939,25 +2022,14 @@ request is more than 50.
 
 **Parameters:**
 
-| Name   | Type   | Mandatory | Description                               |
-| ------ | ------ | --------- | ----------------------------------------- |
-| symbol | STRING | YES       | Either symbol or symbols must be provided |
-
-Examples of accepted format for the symbols parameter:  
-\["BTCUSDT","BNBUSDT"\]  
-or  
-%5B%22BTCUSDT%22,%22BNBUSDT%22%5D
-
-The maximum number of symbols allowed in a request is 100. | | symbols | |
-windowSize | ENUM | NO | Defaults to 1d if no parameter provided  
-Supported windowSize values:  
-1m,2m....59m for minutes  
-1h, 2h....23h - for hours  
-1d...7d - for days
-
-Units cannot be combined (e.g. 1d2h is not allowed) | | type | ENUM | NO |
-Supported values: FULL or MINI.  
-If none provided, the default is FULL |
+| | | symbol | STRING | YES | Either symbol or symbols must be providedExamples
+of accepted format for the symbols
+parameter:["BTCUSDT","BNBUSDT"]or%5B%22BTCUSDT%22,%22BNBUSDT%22%5DThe maximum
+number of symbols allowed in a request is 100. symbols windowSize | ENUM | NO |
+Defaults to 1d if no parameter providedSupported windowSize values:1m,2m....59m
+for minutes1h, 2h....23h - for hours1d...7d - for daysUnits cannot be combined
+(e.g. 1d2h is not allowed) type | ENUM | NO | Supported values: FULL or MINI.If
+none provided, the default is FULL |
 
 **Data Source:** Database
 
@@ -1965,30 +2037,34 @@ If none provided, the default is FULL |
 
 When using `symbol`:
 
-```
-{  "symbol":             "BNBBTC",  "priceChange":        "-8.00000000",  // Absolute price change  "priceChangePercent": "-88.889",      // Relative price change in percent  "weightedAvgPrice":   "2.60427807",   // QuoteVolume / Volume  "openPrice":          "9.00000000",  "highPrice":          "9.00000000",  "lowPrice":           "1.00000000",  "lastPrice":          "1.00000000",  "volume":             "187.00000000",  "quoteVolume":        "487.00000000", // Sum of (price * volume) for all trades  "openTime":           1641859200000,  // Open time for ticker window  "closeTime":          1642031999999,  // Close time for ticker window  "firstId":            0,              // Trade IDs  "lastId":             60,  "count":              61              // Number of trades in the interval}
+```codeBlockLines_aHhF
+{
+  "symbol":             "BNBBTC",  "priceChange":        "-8.00000000",  // Absolute price change  "priceChangePercent": "-88.889",      // Relative price change in percent  "weightedAvgPrice":   "2.60427807",   // QuoteVolume / Volume  "openPrice":          "9.00000000",  "highPrice":          "9.00000000",  "lowPrice":           "1.00000000",  "lastPrice":          "1.00000000",  "volume":             "187.00000000",  "quoteVolume":        "487.00000000", // Sum of (price * volume) for all trades  "openTime":           1641859200000,  // Open time for ticker window  "closeTime":          1642031999999,  // Close time for ticker window  "firstId":            0,              // Trade IDs  "lastId":             60,  "count":              61              // Number of trades in the interval}
 ```
 
 or
 
 When using `symbols`:
 
-```
-[  {    "symbol": "BTCUSDT",    "priceChange": "-154.13000000",        // Absolute price change    "priceChangePercent": "-0.740",        // Relative price change in percent    "weightedAvgPrice": "20677.46305250",  // QuoteVolume / Volume    "openPrice": "20825.27000000",    "highPrice": "20972.46000000",    "lowPrice": "20327.92000000",    "lastPrice": "20671.14000000",    "volume": "72.65112300",    "quoteVolume": "1502240.91155513",     // Sum of (price * volume) for all trades    "openTime": 1655432400000,             // Open time for ticker window    "closeTime": 1655446835460,            // Close time for ticker window    "firstId": 11147809,                   // Trade IDs    "lastId": 11149775,    "count": 1967                          // Number of trades in the interval  },  {    "symbol": "BNBBTC",    "priceChange": "0.00008530",    "priceChangePercent": "0.823",    "weightedAvgPrice": "0.01043129",    "openPrice": "0.01036170",    "highPrice": "0.01049850",    "lowPrice": "0.01033870",    "lastPrice": "0.01044700",    "volume": "166.67000000",    "quoteVolume": "1.73858301",    "openTime": 1655432400000,    "closeTime": 1655446835460,    "firstId": 2351674,    "lastId": 2352034,    "count": 361  }]
+```codeBlockLines_aHhF
+[
+  {    "symbol": "BTCUSDT",    "priceChange": "-154.13000000",        // Absolute price change    "priceChangePercent": "-0.740",        // Relative price change in percent    "weightedAvgPrice": "20677.46305250",  // QuoteVolume / Volume    "openPrice": "20825.27000000",    "highPrice": "20972.46000000",    "lowPrice": "20327.92000000",    "lastPrice": "20671.14000000",    "volume": "72.65112300",    "quoteVolume": "1502240.91155513",     // Sum of (price * volume) for all trades    "openTime": 1655432400000,             // Open time for ticker window    "closeTime": 1655446835460,            // Close time for ticker window    "firstId": 11147809,                   // Trade IDs    "lastId": 11149775,    "count": 1967                          // Number of trades in the interval  },  {    "symbol": "BNBBTC",    "priceChange": "0.00008530",    "priceChangePercent": "0.823",    "weightedAvgPrice": "0.01043129",    "openPrice": "0.01036170",    "highPrice": "0.01049850",    "lowPrice": "0.01033870",    "lastPrice": "0.01044700",    "volume": "166.67000000",    "quoteVolume": "1.73858301",    "openTime": 1655432400000,    "closeTime": 1655446835460,    "firstId": 2351674,    "lastId": 2352034,    "count": 361  }]
 ```
 
 **Response - MINI:**
 
 When using `symbol`:
 
-```
-{    "symbol": "LTCBTC",    "openPrice": "0.10000000",    "highPrice": "2.00000000",    "lowPrice": "0.10000000",    "lastPrice": "2.00000000",    "volume": "39.00000000",    "quoteVolume": "13.40000000",  // Sum of (price * volume) for all trades    "openTime": 1656986580000,     // Open time for ticker window    "closeTime": 1657001016795,    // Close time for ticker window    "firstId": 0,                  // Trade IDs    "lastId": 34,    "count": 35                    // Number of trades in the interval}
+```codeBlockLines_aHhF
+{
+    "symbol": "LTCBTC",    "openPrice": "0.10000000",    "highPrice": "2.00000000",    "lowPrice": "0.10000000",    "lastPrice": "2.00000000",    "volume": "39.00000000",    "quoteVolume": "13.40000000",  // Sum of (price * volume) for all trades    "openTime": 1656986580000,     // Open time for ticker window    "closeTime": 1657001016795,    // Close time for ticker window    "firstId": 0,                  // Trade IDs    "lastId": 34,    "count": 35                    // Number of trades in the interval}
 ```
 
 OR
 
 When using `symbols`:
 
-```
-[    {        "symbol": "BNBBTC",        "openPrice": "0.10000000",        "highPrice": "2.00000000",        "lowPrice": "0.10000000",        "lastPrice": "2.00000000",        "volume": "39.00000000",        "quoteVolume": "13.40000000", // Sum of (price * volume) for all trades        "openTime": 1656986880000,    // Open time for ticker window        "closeTime": 1657001297799,   // Close time for ticker window        "firstId": 0,                 // Trade IDs        "lastId": 34,        "count": 35                   // Number of trades in the interval    },    {        "symbol": "LTCBTC",        "openPrice": "0.07000000",        "highPrice": "0.07000000",        "lowPrice": "0.07000000",        "lastPrice": "0.07000000",        "volume": "33.00000000",        "quoteVolume": "2.31000000",        "openTime": 1656986880000,        "closeTime": 1657001297799,        "firstId": 0,        "lastId": 32,        "count": 33    }]
+```codeBlockLines_aHhF
+[
+    {        "symbol": "BNBBTC",        "openPrice": "0.10000000",        "highPrice": "2.00000000",        "lowPrice": "0.10000000",        "lastPrice": "2.00000000",        "volume": "39.00000000",        "quoteVolume": "13.40000000", // Sum of (price * volume) for all trades        "openTime": 1656986880000,    // Open time for ticker window        "closeTime": 1657001297799,   // Close time for ticker window        "firstId": 0,                 // Trade IDs        "lastId": 34,        "count": 35                   // Number of trades in the interval    },    {        "symbol": "LTCBTC",        "openPrice": "0.07000000",        "highPrice": "0.07000000",        "lowPrice": "0.07000000",        "lastPrice": "0.07000000",        "volume": "33.00000000",        "quoteVolume": "2.31000000",        "openTime": 1656986880000,        "closeTime": 1657001297799,        "firstId": 0,        "lastId": 32,        "count": 33    }]
 ```

@@ -157,8 +157,19 @@ The resulting text string is the value of the `RawData (96)` field.
 
 Here is a sample Python code implementing the signature algorithm:
 
-```
-import base64from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKeyfrom cryptography.hazmat.primitives.serialization import load_pem_private_keydef logon_raw_data(private_key: Ed25519PrivateKey,                   sender_comp_id: str,                   target_comp_id: str,                   msg_seq_num: str,                   sending_time: str):    """    Computes the value of RawData (96) field in Logon<A> message.    """    payload = chr(1).join([        'A',        sender_comp_id,        target_comp_id,        msg_seq_num,        sending_time,    ])    signature = private_key.sign(payload.encode('ASCII'))    return base64.b64encode(signature).decode('ASCII')with open('private_key.pem', 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)raw_data = logon_raw_data(private_key,                          sender_comp_id='5JQmUOsm',                          target_comp_id='SPOT',                          msg_seq_num='1',                          sending_time='20240612-08:52:21.613')
+```codeBlockLines_aHhF
+import base64
+
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
+
+def logon_raw_data(private_key: Ed25519PrivateKey,
+                   sender_comp_id: str,                   target_comp_id: str,                   msg_seq_num: str,                   sending_time: str):    """    Computes the value of RawData (96) field in Logon<A> message.    """    payload = chr(1).join([        'A',        sender_comp_id,        target_comp_id,        msg_seq_num,        sending_time,    ])    signature = private_key.sign(payload.encode('ASCII'))    return base64.b64encode(signature).decode('ASCII')
+
+with open('private_key.pem', 'rb') as f:
+    private_key = load_pem_private_key(data=f.read(),                                       password=None)
+raw_data = logon_raw_data(private_key,
+                          sender_comp_id='5JQmUOsm',                          target_comp_id='SPOT',                          msg_seq_num='1',                          sending_time='20240612-08:52:21.613')
 ```
 
 The values presented below can be used to validate the correctness of the
@@ -179,19 +190,21 @@ The Ed25519 private key used in the example computation is shown below:
 > secure and may compromise your cryptographic implementation. Always generate
 > your own unique and secure keys for actual use.
 
-```
------BEGIN PRIVATE KEY-----MC4CAQAwBQYDK2VwBCIEIIJEYWtGBrhACmb9Dvy+qa8WEf0lQOl1s4CLIAB9m89u-----END PRIVATE KEY-----
+```codeBlockLines_aHhF
+-----BEGIN PRIVATE KEY-----
+MC4CAQAwBQYDK2VwBCIEIIJEYWtGBrhACmb9Dvy+qa8WEf0lQOl1s4CLIAB9m89u
+-----END PRIVATE KEY-----
 ```
 
 Computed signature:
 
-```
+```codeBlockLines_aHhF
 4MHXelVVcpkdwuLbl6n73HQUXUf1dse2PCgT1DYqW9w8AVZ1RACFGM+5UdlGPrQHrgtS3CvsRURC1oj73j8gCA==
 ```
 
 Resulting Logon `<A>` message:
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=247|35=A|34=1|49=EXAMPLE|52=20240627-11:17:25.223|56=SPOT|95=88|96=4MHXelVVcpkdwuLbl6n73HQUXUf1dse2PCgT1DYqW9w8AVZ1RACFGM+5UdlGPrQHrgtS3CvsRURC1oj73j8gCA==|98=0|108=30|141=Y|553=sBRXrJx2DsOraMXOaUovEhgVRcjOvCtQwnWj8VxkOh1xqboS02SPGfKi2h8spZJb|25035=2|10=227|
 ```
 
@@ -306,7 +319,7 @@ Client order ID fields must conform to the regex `^[a-zA-Z0-9-_]{1,36}$`:
 > \[!NOTE\] In example messages, the `|` character is used to represent SOH
 > character:
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=113|35=A|34=1|49=SPOT|52=20240612-08:52:21.636837|56=5JQmUOsm|98=0|108=30|25037=4392a152-3481-4499-921a-6d42c50702e2|10=051|
 ```
 
@@ -542,7 +555,7 @@ sessions. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=248|35=A|34=1|49=5JQmUOsm|52=20240612-08:52:21.613|56=SPOT|95=88|96=KhJLbZqADWknfTAcp0ZjyNz36Kxa4ffvpNf9nTIc+K5l35h+vA1vzDRvLAEQckyl6VDOwJ53NOBnmmRYxQvQBQ==|98=0|108=30|141=Y|553=W5rcOD30c0gT4jHK8oX5d5NbzWoa0k4SFVoTHIFNJVZ3NuRpYb6ZyJznj8THyx5d|25035=1|10=000|
 ```
 
@@ -556,7 +569,7 @@ sessions. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=113|35=A|34=1|49=SPOT|52=20240612-08:52:21.636837|56=5JQmUOsm|98=0|108=30|25037=4392a152-3481-4499-921a-6d42c50702e2|10=051|
 ```
 
@@ -573,13 +586,13 @@ to Logout.
 
 Logout Request
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=55|35=5|34=3|49=GhQHzrLR|52=20240611-09:44:25.543|56=SPOT|10=249|
 ```
 
 Logout Response
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=84|35=5|34=4|49=SPOT|52=20240611-09:44:25.544001|56=GhQHzrLR|58=Logout acknowledgment.|10=212|
 ```
 
@@ -594,13 +607,13 @@ close the old one.
 
 The countdown message sent will be:
 
-```
+```codeBlockLines_aHhF
 You'll be disconnected in %d seconds. Please reconnect.
 ```
 
 When there are 10 seconds remaining, the following message will be sent:
 
-```
+```codeBlockLines_aHhF
 Your connection is about to be closed. Please reconnect.
 ```
 
@@ -613,7 +626,7 @@ above message, the server will log it out and close the session.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=0000113|35=B|49=SPOT|56=OE|34=4|52=20240924-21:07:35.773537|148=Your connection is about to be closed. Please reconnect.|10=165|
 ```
 
@@ -713,7 +726,7 @@ orders. | | 25032 | SOR | BOOLEAN | N | Whether to activate SOR for this order.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=114|35=D|34=2|49=qNXO12fH|52=20240611-09:01:46.228|56=SPOT|11=1718096506197867067|38=5|40=2|44=10|54=1|55=LTCBNB|59=4|10=016|
 ```
 
@@ -934,7 +947,7 @@ orders. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=330|35=8|34=2|49=SPOT|52=20240611-09:01:46.228950|56=qNXO12fH|11=1718096506197867067|14=0.00000000|17=144|32=0.00000000|37=76|38=5.00000000|39=0|40=2|44=10.00000000|54=1|55=LTCBNB|59=4|60=20240611-09:01:46.228000|150=0|151=5.00000000|636=Y|1057=Y|25001=1|25017=0.00000000|25018=20240611-09:01:46.228000|25023=20240611-09:01:46.228000|10=095|
 ```
 
@@ -978,7 +991,7 @@ canceled.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=93|35=F|34=2|49=ieBwvCKy|52=20240613-01:11:13.784|56=SPOT|11=1718241073695674483|37=2|55=LTCBNB|10=210|
 ```
 
@@ -1018,7 +1031,7 @@ Human-readable error message. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=137|35=9|34=2|49=SPOT|52=20240613-01:12:41.320869|56=OlZb8ht8|11=1718241161272843932|37=2|55=LTCBNB|58=Unknown order sent.|434=1|25016=-1013|10=087|
 ```
 
@@ -1135,7 +1148,7 @@ orders. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=160|35=XCN|34=2|49=JS8iiXK6|52=20240613-02:31:53.753|56=SPOT|11=1718245913721036458|37=8|38=5|40=2|44=4|54=1|55=LTCBNB|59=1|111=1|25033=1|25034=1718245913721036819|10=229|
 ```
 
@@ -1169,7 +1182,7 @@ Sent by the client to cancel all open orders on a symbol.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=95|35=q|34=2|49=dpYPesqv|52=20240613-01:24:36.948|56=SPOT|11=1718241876901971671|55=BTCUSDT|530=1|10=243|
 ```
 
@@ -1207,7 +1220,7 @@ Human-readable error message. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=109|35=r|34=2|49=SPOT|52=20240613-01:24:36.949763|56=dpYPesqv|11=1718241876901971671|55=LTCBNB|530=1|531=1|533=5|10=083|
 ```
 
@@ -1324,7 +1337,7 @@ Possible values:
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=236|35=E|34=2|49=Eg13pOvN|52=20240607-02:19:07.836|56=SPOT|73=2|11=w1717726747805308656|55=LTCBNB|54=2|38=1|40=2|44=0.25|59=1|11=p1717726747805308656|55=LTCBNB|54=2|38=1|40=1|25010=1|25011=3|25012=0|25013=1|1385=2|25014=1717726747805308656|10=171|
 ```
 
@@ -1550,7 +1563,7 @@ ListTriggerAction | CHAR | N | Possible values:
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=293|35=N|34=2|49=SPOT|52=20240607-02:19:07.837191|56=Eg13pOvN|55=BTCUSDT|60=20240607-02:19:07.836000|66=25|73=2|55=BTCUSDT|37=52|11=w1717726747805308656|55=BTCUSDT|37=53|11=p1717726747805308656|25010=1|25011=3|25012=0|25013=1|429=4|431=3|1385=2|25014=1717726747805308656|25015=1717726747805308656|10=162|
 ```
 
@@ -1587,7 +1600,7 @@ to learn more.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=103|35=XAK|34=2|49=EXAMPLE|52=20250319-12:35:21.087|56=SPOT|11=O2EIAS01742387721086|37=0|38=0.9|55=BTCUSDT|10=254|
 ```
 
@@ -1621,7 +1634,7 @@ Sent by the server when the OrderAmendKeepPriorityRequest `<XAK>` has failed.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=0000176|35=XAR|49=SPOT|56=OE|34=2|52=20250319-14:27:32.751074|11=1WRGW5J1742394452749|37=0|55=BTCUSDT|38=1.000000|25016=-2038|58=The requested action would change no state; rejecting.|10=235|
 ```
 
@@ -1637,7 +1650,7 @@ Sent by the client to query current limits.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=82|35=XLQ|34=2|49=7buKHZxZ|52=20240614-05:35:35.357|56=SPOT|6136=1718343335357229749|10=170|
 ```
 
@@ -1670,7 +1683,7 @@ limit. | | \=>25007 | LimitResetInterval | INT | N | How often the limit resets.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=225|35=XLR|34=2|49=SPOT|52=20240614-05:42:42.724057|56=uGnG0ef8|6136=1718343762723730315|25003=3|25004=2|25005=1|25006=1000|25007=10|25008=s|25004=1|25005=0|25006=200|25007=10|25008=s|25004=1|25005=0|25006=200000|25007=1|25008=d|10=241|
 ```
 
@@ -1696,7 +1709,7 @@ responded to with a [Reject`<3>`](/docs/binance-spot-api-docs/fix-api#reject).
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=92|35=x|49=BMDWATCH|56=SPOT|34=2|52=20250114-08:46:56.096691|320=BTCUSDT_INFO|559=0|55=BTCUSDT|10=164|
 ```
 
@@ -1725,7 +1738,7 @@ Sent by the server in a response to the
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=218|35=y|49=SPOT|56=BMDWATCH|34=2|52=20250114-08:46:56.100147|320=BTCUSDT_INFO|146=1|55=BTCUSDT|15=USDT|562=0.00001000|1140=9000.00000000|25039=0.00001000|25040=0.00000001|25041=76.79001236|25042=0.00000001|969=0.01000000|10=093|
 ```
 
@@ -1820,8 +1833,19 @@ Possible values:
 
 **Sample message:**
 
-```
-# Subscriptions# BOOK TICKER Stream8=FIX.4.4|9=132|35=V|49=TRADER1|56=SPOT|34=4|52=20241122-06:17:14.183428|262=BOOK_TICKER_STREAM|263=1|264=1|266=Y|146=1|55=BTCUSDT|267=2|269=0|269=1|10=010|# DEPTH Stream8=FIX.4.4|9=127|35=V|49=TRADER1|56=SPOT|34=7|52=20241122-06:17:14.443822|262=DEPTH_STREAM|263=1|264=10|266=Y|146=1|55=BTCUSDT|267=2|269=0|269=1|10=111|# TRADE Stream8=FIX.4.4|9=120|35=V|49=TRADER1|56=SPOT|34=3|52=20241122-06:34:14.775606|262=TRADE_STREAM|263=1|264=1|266=Y|146=1|55=BTCUSDT|267=1|269=2|10=040|# Unsubscription from TRADE Stream8=FIX.4.4|9=79|35=V|49=TRADER1|56=SPOT|34=7|52=20241122-06:41:56.966969|262=TRADE_STREAM|263=2|264=1|10=113|
+```codeBlockLines_aHhF
+# Subscriptions
+# BOOK TICKER Stream
+8=FIX.4.4|9=132|35=V|49=TRADER1|56=SPOT|34=4|52=20241122-06:17:14.183428|262=BOOK_TICKER_STREAM|263=1|264=1|266=Y|146=1|55=BTCUSDT|267=2|269=0|269=1|10=010|
+
+# DEPTH Stream
+8=FIX.4.4|9=127|35=V|49=TRADER1|56=SPOT|34=7|52=20241122-06:17:14.443822|262=DEPTH_STREAM|263=1|264=10|266=Y|146=1|55=BTCUSDT|267=2|269=0|269=1|10=111|
+
+# TRADE Stream
+8=FIX.4.4|9=120|35=V|49=TRADER1|56=SPOT|34=3|52=20241122-06:34:14.775606|262=TRADE_STREAM|263=1|264=1|266=Y|146=1|55=BTCUSDT|267=1|269=2|10=040|
+
+# Unsubscription from TRADE Stream
+8=FIX.4.4|9=79|35=V|49=TRADER1|56=SPOT|34=7|52=20241122-06:41:56.966969|262=TRADE_STREAM|263=2|264=1|10=113|
 ```
 
 ### MarketDataRequestReject`<Y>`[​](/docs/binance-spot-api-docs/fix-api#marketdatarequestrejecty "Direct link to marketdatarequestrejecty")
@@ -1841,7 +1865,7 @@ Human-readable error message. |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=0000218|35=Y|49=SPOT|56=EXAMPLE|34=5|52=20241019-05:39:36.688964|262=BOOK_TICKER_2|281=2|25016=-1191|58=Similar subscription is already active on this connection. Symbol='BNBBUSD', active subscription id: 'BOOK_TICKER_1'.|10=137|
 ```
 
@@ -1871,7 +1895,7 @@ subscriptions.
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=0000107|35=W|49=SPOT|56=EXAMPLE|34=34|52=20241019-05:41:52.867164|262=BOOK_TICKER_1_2|55=BNBBUSD|25044=0|268=0|10=151|
 ```
 
@@ -1920,7 +1944,7 @@ specified |
 
 **Sample message:**
 
-```
+```codeBlockLines_aHhF
 8=FIX.4.4|9=0000313|35=X|49=SPOT|56=EXAMPLE|34=16|52=20241019-05:40:11.466313|262=TRADE_3|893=N|268=3|279=0|269=2|270=10.00000|271=0.01000|55=BNBBUSD|1003=0|60=20241019-05:40:11.464000|279=0|269=2|270=10.00000|271=0.01000|1003=1|60=20241019-05:40:11.464000|279=0|269=2|270=10.00000|271=0.01000|1003=2|60=20241019-05:40:11.464000|10=125|
 ```
 
@@ -1931,12 +1955,15 @@ specified |
 
 [Trade Stream](/docs/binance-spot-api-docs/fix-api#tradestream)
 
-```
-8=FIX.4.4|9=237|35=X|34=114|49=SPOT|52=20250116-19:36:44.544549|56=EXAMPLE|262=id|268=2|279=0|270=240.00|271=3.00000000|269=2|55=BNBBUSD|60=20250116-19:36:44.196569|1003=67|279=0|270=238.00|271=2.00000000|269=2|60=20250116-19:36:44.196569|1003=68|893=N|10=180|8=FIX.4.4|9=163|35=X|34=115|49=SPOT|52=20250116-19:36:44.544659|56=EXAMPLE|262=id|268=1|279=0|270=233.00|271=1.00000000|269=2|55=BNBBUSD|60=20250116-19:36:44.196569|1003=69|893=Y|10=243|
+```codeBlockLines_aHhF
+8=FIX.4.4|9=237|35=X|34=114|49=SPOT|52=20250116-19:36:44.544549|56=EXAMPLE|262=id|268=2|279=0|270=240.00|271=3.00000000|269=2|55=BNBBUSD|60=20250116-19:36:44.196569|1003=67|279=0|270=238.00|271=2.00000000|269=2|60=20250116-19:36:44.196569|1003=68|893=N|10=180|
+8=FIX.4.4|9=163|35=X|34=115|49=SPOT|52=20250116-19:36:44.544659|56=EXAMPLE|262=id|268=1|279=0|270=233.00|271=1.00000000|269=2|55=BNBBUSD|60=20250116-19:36:44.196569|1003=69|893=Y|10=243|
 ```
 
 [Diff. Depth Stream](/docs/binance-spot-api-docs/fix-api#diffdepthstream)
 
-```
-8=FIX.4.4|9=156|35=X|34=12|49=SPOT|52=20250116-19:45:31.774162|56=EXAMPLE|262=id|268=2|279=2|270=362.00|269=0|55=BNBBUSD|25043=1143|25044=1145|279=2|270=313.00|269=0|893=N|10=047|8=FIX.4.4|9=171|35=X|34=13|49=SPOT|52=20250116-19:45:31.774263|56=EXAMPLE|262=id|268=2|279=2|270=284.00|269=0|55=BNBBUSD|25043=1143|25044=1145|279=1|270=264.00|271=3.00000000|269=0|893=N|10=239|8=FIX.4.4|9=149|35=X|34=14|49=SPOT|52=20250116-19:45:31.774281|56=EXAMPLE|262=id|268=1|279=1|270=395.00|271=19.00000000|269=1|55=BNBBUSD|25043=1143|25044=1145|893=Y|10=024|
+```codeBlockLines_aHhF
+8=FIX.4.4|9=156|35=X|34=12|49=SPOT|52=20250116-19:45:31.774162|56=EXAMPLE|262=id|268=2|279=2|270=362.00|269=0|55=BNBBUSD|25043=1143|25044=1145|279=2|270=313.00|269=0|893=N|10=047|
+8=FIX.4.4|9=171|35=X|34=13|49=SPOT|52=20250116-19:45:31.774263|56=EXAMPLE|262=id|268=2|279=2|270=284.00|269=0|55=BNBBUSD|25043=1143|25044=1145|279=1|270=264.00|271=3.00000000|269=0|893=N|10=239|
+8=FIX.4.4|9=149|35=X|34=14|49=SPOT|52=20250116-19:45:31.774281|56=EXAMPLE|262=id|268=1|279=1|270=395.00|271=19.00000000|269=1|55=BNBBUSD|25043=1143|25044=1145|893=Y|10=024|
 ```
