@@ -36,11 +36,48 @@ Optional dependencies must be justified in the project's README.md.
 - Use ES6 modules (`import`/`export`)
 - Enable strict mode in all files
 - Use async/await for asynchronous operations
-- Follow ES6 class syntax for object-oriented code
+- Follow functional programming paradigms and avoid object-oriented code
+- DO NOT use ES6 classes unless absolutely necessary
 - Use arrow functions where appropriate
+- Use pure functions with no side effects whenever possible
+- Use function composition over inheritance
 - Use template literals for string interpolation
 - Use destructuring and spread operators
 - Use const/let instead of var
+
+## Script Entry Point
+
+- All scripts must use the following pattern for handling entry points:
+
+```javascript
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => {
+    console.error('Unhandled error in main:', error)
+    console.error('Stack trace:', error.stack)
+    process.exit(1)
+  })
+}
+```
+
+- All scripts must exit with a non-zero exit code when errors occur to ensure CI/CD pipelines can detect failures
+- Error messages should be descriptive and include context about what failed
+
+## Logging Standards
+
+- Use the built-in `console` methods for logging throughout the codebase
+- Prefer `console.error` for error reporting with descriptive messages
+- Always log both the error object and its stack trace when catching errors:
+  ```javascript
+  console.error('Error description:', error)
+  console.error('Stack trace:', error.stack)
+  ```
+- Include relevant context in error messages (e.g., URL, file path, operation name)
+- Use `console.warn` for important but non-fatal issues
+- Use `console.info` or `console.log` for standard operational messages
+- Avoid third-party logging libraries unless there is a specific justified need
+- If using a custom logger utility, it should be simple and wrap console methods
+- Ensure all log messages are clear, concise, and meaningful for debugging
 
 ## Code Style
 

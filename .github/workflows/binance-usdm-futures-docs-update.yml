@@ -3,11 +3,11 @@ name: Weekly Binance Futures Documentation Update
 on:
   schedule:
     # Run every Sunday at 00:00 UTC
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch: # Allow manual triggering
   push:
     paths:
-      - 'venues/binancefutures/**'
+      - "venues/binancefutures/**"
 
 jobs:
   update-docs:
@@ -28,8 +28,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
           cache-dependency-path: venues/binancefutures/package-lock.json
 
       - name: Install shared dependencies
@@ -54,32 +54,6 @@ jobs:
       - name: Process USDM Private WebSocket
         run: npm run process:usdm:private:ws
 
-      # COINM Processing
-      - name: Process COINM Public REST
-        run: npm run process:coinm:public:rest
-
-      - name: Process COINM Private REST
-        run: npm run process:coinm:private:rest
-
-      - name: Process COINM Public WebSocket
-        run: npm run process:coinm:public:ws
-
-      - name: Process COINM Private WebSocket
-        run: npm run process:coinm:private:ws
-
-      # Options Processing
-      - name: Process Options Public REST
-        run: npm run process:options:public:rest
-
-      - name: Process Options Private REST
-        run: npm run process:options:private:rest
-
-      - name: Process Options Public WebSocket
-        run: npm run process:options:public:ws
-
-      - name: Process Options Private WebSocket
-        run: npm run process:options:private:ws
-
       - name: Check for changes
         id: git-check
         run: |
@@ -93,9 +67,9 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: 'docs: update Binance Futures API documentation'
-          title: 'Weekly Binance API Documentation Update'
-          branch: 'binance-futures-docs-update'
-          base: 'main'
+          commit-message: "docs: update Binance Futures API documentation"
+          title: "Weekly Binance USDM API Documentation Update"
+          branch: "binance-usdm-docs-update"
+          base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}

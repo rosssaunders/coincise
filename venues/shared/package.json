@@ -5,8 +5,10 @@
   "type": "module",
   "main": "utils.js",
   "dependencies": {
+    "prettier": "^3.2.4",
     "puppeteer": "24.7.2",
     "turndown": "^7.1.2",
-    "turndown-plugin-gfm": "^1.0.2"
+    "turndown-plugin-gfm": "^1.0.2",
+    "json5": "^2.2.3"
   }
 }

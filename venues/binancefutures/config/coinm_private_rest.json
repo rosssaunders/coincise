@@ -44,6 +44,15 @@
     "derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id",
     "derivatives/coin-margined-futures/portfolio-margin-endpoints"
   ],
+  "endpoint_test": [
+    "derivatives/quick-start",
+    "derivatives/coin-margined-futures/general-info",
+    "derivatives/coin-margined-futures/common-definition",
+    "derivatives/coin-margined-futures/error-code",
+    "derivatives/coin-margined-futures/trade/rest-api",
+    "derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders",
+    "derivatives/coin-margined-futures/trade/rest-api/Modify-Order"
+  ],
   "output_file": "binance/coinm/private_rest_api.md",
   "title": "Binance COINM Futures Private REST API Documentation"
 }
