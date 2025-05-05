@@ -8,6 +8,8 @@ import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
 import puppeteer from "puppeteer"
 import { launchBrowser, configurePage } from "./utils.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
+import process from "process"
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)
@@ -305,6 +307,15 @@ const main = async () => {
     const outputPath = path.join(__dirname, "../output.md")
     fs.writeFileSync(outputPath, markdown)
     console.log(`Documentation written to ${outputPath}`)
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(outputPath)
+      console.log(`Formatted: ${outputPath}`)
+    } catch (err) {
+      console.error(`Error formatting markdown:`, err)
+      process.exit(1)
+    }
   } catch (error) {
     console.error("Error in main function:", error)
     process.exit(1)

@@ -1,4 +1,4 @@
-name: Binance Spot Docs Update
+name: Binance Futures Change Log Update
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # Allow manual triggering
   push:
     paths:
-      - "venues/binancespot/**"
+      - "venues/binancefutures/**"
 
 jobs:
   update-docs:
@@ -17,7 +17,7 @@ jobs:
       pull-requests: write
     defaults:
       run:
-        working-directory: venues/binancespot
+        working-directory: venues/binancefutures
 
     steps:
       - name: Checkout repository
@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
-          cache-dependency-path: venues/binancespot/package-lock.json
+          cache-dependency-path: venues/binancefutures/package-lock.json
 
       - name: Install shared dependencies
         run: |
@@ -41,26 +41,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Binance Spot scraper (change_log)
-        run: npm run extract:change_log
-
-      - name: Run Binance Spot scraper (public_rest)
-        run: npm run extract:public_rest
-
-      - name: Run Binance Spot scraper (private_rest)
-        run: npm run extract:private_rest
-
-      - name: Run Binance Spot scraper (public_websocket)
-        run: npm run extract:public_websocket
-
-      - name: Run Binance Spot scraper (private_websocket)
-        run: npm run extract:private_websocket
-
-      - name: Run Binance Spot scraper (fix)
-        run: npm run extract:fix
-
-      - name: Run Binance Spot scraper (sbe)
-        run: npm run extract:sbe
+      # USDM Processing
+      - name: Process API Change Log
+        run: npm run process:change_log
 
       - name: Check for changes
         id: git-check
@@ -75,10 +58,9 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: "docs: update Binance API documentation"
-          title: "Weekly Binance Spot API Documentation Update"
-          body: "Automated weekly update of Binance API documentation"
-          branch: "binance-docs-update"
+          commit-message: "docs: update Binance Futures API documentation"
+          title: "Weekly Binance USDM API Documentation Update"
+          branch: "binance-usdm-docs-update"
           base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}

@@ -4,6 +4,7 @@ import TurndownService from "turndown"
 import { fileURLToPath } from "url"
 import { downloadHtml, processHtml } from "./websocket_docs_utils.js"
 import { addTableRule, addCodeBlockRule } from "./websocket_docs_utils.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 // Get the current file path
 const __filename = fileURLToPath(import.meta.url)
@@ -52,13 +53,25 @@ async function main() {
 
   // Read the HTML file
   console.log("Reading HTML file...")
-  fs.readFile(htmlFilePath, "utf8", (err, html) => {
+  fs.readFile(htmlFilePath, "utf8", async (err, html) => {
     if (err) {
       console.error("Error reading file:", err)
       return
     }
 
-    processHtml(html)
+    const markdown = processHtml(html, turndownService)
+    fs.writeFileSync(outputFilePath, markdown)
+    console.log(`Markdown file created at: ${outputFilePath}`)
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(outputFilePath)
+      console.log(`Formatted: ${outputFilePath}`)
+    } catch (err) {
+      console.error("Error formatting markdown:", err)
+      console.error("Stack trace:", err.stack)
+      process.exit(1)
+    }
 
     // Delete the HTML file after processing
     deleteHtmlFile(htmlFilePath)

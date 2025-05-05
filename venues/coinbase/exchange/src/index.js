@@ -5,6 +5,7 @@
 "use strict"
 
 import fs from "fs"
+import process from "process"
 import { scrapeApiDocumentation } from "./scraper.js"
 import {
   processAuthSection,

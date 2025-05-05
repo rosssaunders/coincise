@@ -4,6 +4,8 @@ import path from "path"
 import puppeteer from "puppeteer"
 import TurndownService from "turndown"
 import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
+import { formatMarkdown } from "../../shared/format-markdown.js"
+import process from "process"
 
 const turndown = new TurndownService()
 turndown.use([gfm, tables, strikethrough])
@@ -100,6 +102,16 @@ async function main() {
     console.log(
       `Generated markdown for config: ${configPath}, saved to: ${filepath}`
     )
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(filepath)
+      console.log(`Formatted: ${filepath}`)
+    } catch (err) {
+      console.error("Error formatting markdown:", err)
+      console.error("Stack trace:", err.stack)
+      process.exit(1)
+    }
   }
 }
 

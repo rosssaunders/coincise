@@ -7,6 +7,7 @@ import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
 import { launchBrowser, configurePage } from "../../../../shared/utils.js"
+import { formatMarkdown } from "../../../../shared/format-markdown.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -104,6 +105,15 @@ export class BaseProcessor {
       const outputPath = path.join(__dirname, "../../../../docs/", output_file)
       fs.mkdirSync(path.dirname(outputPath), { recursive: true })
       fs.writeFileSync(outputPath, markdownContent)
+
+      // Format the markdown file
+      try {
+        await formatMarkdown(outputPath)
+        console.log(`Formatted: ${outputPath}`)
+      } catch (err) {
+        console.error(`Error formatting markdown:`, err)
+        process.exit(1)
+      }
 
       console.log(
         `\n✨ ${this.processorType} API documentation successfully generated! ✨\n📄 Output file: ${output_file}\n`

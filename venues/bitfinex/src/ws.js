@@ -7,6 +7,7 @@ import { JSDOM } from "jsdom"
 import TurndownService from "turndown"
 import { gfm } from "turndown-plugin-gfm"
 import { launchBrowser, configurePage } from "./utils.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)
@@ -236,7 +237,17 @@ const main = async () => {
     }
 
     // Write the markdown file
-    fs.writeFileSync(path.join(__dirname, config.output), markdown)
+    const outputPath = path.join(__dirname, config.output)
+    fs.writeFileSync(outputPath, markdown)
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(outputPath)
+      console.log(`Formatted: ${outputPath}`)
+    } catch (err) {
+      console.error(`Error formatting markdown:`, err)
+      process.exit(1)
+    }
 
     console.log(
       `Successfully extracted WebSocket documentation to ${config.output}`

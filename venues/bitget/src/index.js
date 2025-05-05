@@ -5,6 +5,7 @@ import path from "path"
 import TurndownService from "turndown"
 import { gfm, tables } from "turndown-plugin-gfm"
 import { argv } from "process"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 // Add delay between requests
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -146,6 +147,15 @@ async function convertToMarkdown(configPath) {
     console.log(
       `\nMarkdown file has been created successfully at ${outputPath}!`
     )
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(outputPath)
+      console.log(`Formatted: ${outputPath}`)
+    } catch (err) {
+      console.error(`Error formatting markdown:`, err)
+      process.exit(1)
+    }
   } catch (error) {
     console.error("Error converting to markdown:", error)
     process.exit(1)

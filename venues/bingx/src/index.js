@@ -4,6 +4,7 @@ import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
 import fs from "fs"
 import { getConfig } from "./config/bingx.js"
 import process from "process"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 async function loadBrowser() {
   // Only return the browser instance, not an object
@@ -550,6 +551,15 @@ async function main() {
     // Save the combined markdown to a single file
     const outputPath = `${docsDir}/${outputFileName}`
     fs.writeFileSync(outputPath, combinedMarkdown)
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(outputPath)
+      console.log(`Formatted: ${outputPath}`)
+    } catch (err) {
+      console.error(`Error formatting markdown:`, err)
+      process.exit(1)
+    }
 
     // Print a visually appealing success message
     console.log(

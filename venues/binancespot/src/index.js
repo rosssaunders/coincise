@@ -4,11 +4,13 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import process from "process"
 import {
   fetchContent,
   configureTurndown,
   politeDelay
 } from "../../shared/utils.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -51,6 +53,15 @@ async function processAll() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true })
   fs.writeFileSync(outPath, content)
   console.log(`Wrote: ${outPath}`)
+
+  // Format the output file
+  try {
+    await formatMarkdown(outPath)
+    console.log(`Formatted: ${outPath}`)
+  } catch (err) {
+    console.error(`Error formatting markdown:`, err)
+    process.exit(1)
+  }
 }
 
 // Run if called directly

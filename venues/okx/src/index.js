@@ -12,6 +12,7 @@ import {
   readdirSync
 } from "fs"
 import { join, resolve } from "path"
+import process from "process"
 
 /**
  * Extracts sections from the document based on the section configuration

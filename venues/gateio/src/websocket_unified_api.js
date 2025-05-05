@@ -8,6 +8,7 @@ import {
   addListItemWithTableRule,
   addCodeBlockRule
 } from "./websocket_docs_utils.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -42,6 +43,17 @@ async function run() {
       const markdown = processHtml(html, turndownService)
       fs.writeFileSync(outputFilePath, markdown)
       console.log(`Markdown file created at: ${outputFilePath}`)
+
+      // Format the markdown file
+      try {
+        await formatMarkdown(outputFilePath)
+        console.log(`Formatted: ${outputFilePath}`)
+      } catch (err) {
+        console.error("Error formatting markdown:", err)
+        console.error("Stack trace:", err.stack)
+        process.exit(1)
+      }
+
       fs.unlink(htmlFilePath, err => {
         if (err) {
           console.error("Error deleting HTML file:", err)

@@ -3,6 +3,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -56,4 +57,16 @@ export const writeToFile = async (filePath, content) => {
 
   await fs.promises.writeFile(filePath, content, "utf8")
   console.log(`File written successfully: ${filePath}`)
+
+  // Format the markdown file if it is a markdown file
+  if (filePath.endsWith(".md") || filePath.endsWith(".markdown")) {
+    try {
+      await formatMarkdown(filePath)
+      console.log(`Formatted: ${filePath}`)
+    } catch (err) {
+      console.error("Error formatting markdown:", err)
+      console.error("Stack trace:", err.stack)
+      process.exit(1)
+    }
+  }
 }

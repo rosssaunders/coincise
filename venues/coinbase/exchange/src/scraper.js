@@ -19,6 +19,7 @@ import {
   generateMarkdownDocument
 } from "./processors/formatters.js"
 import TurndownService from "turndown"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 /**
  * Detect if running in a CI environment
@@ -336,6 +337,16 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     // Write the markdown file
     fs.writeFileSync(outputPath, markdownContent, "utf8")
     console.log(`Markdown documentation saved to: ${outputPath}`)
+
+    // Format the markdown file
+    try {
+      await formatMarkdown(outputPath)
+      console.log(`Formatted: ${outputPath}`)
+    } catch (err) {
+      console.error("Error formatting markdown:", err)
+      console.error("Stack trace:", err.stack)
+      process.exit(1)
+    }
 
     return outputPath
   } catch (error) {

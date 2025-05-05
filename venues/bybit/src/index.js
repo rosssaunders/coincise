@@ -5,6 +5,7 @@ import { generatePublicRestDocs } from "./processors/publicRestProcessor.js"
 import { generatePrivateRestDocs } from "./processors/privateRestProcessor.js"
 import { generatePublicWebsocketDocs } from "./processors/publicWebsocketProcessor.js"
 import { generatePrivateWebsocketDocs } from "./processors/privateWebsocketProcessor.js"
+import process from "process"
 
 async function main() {
   try {

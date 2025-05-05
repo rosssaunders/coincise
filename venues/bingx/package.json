@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "jsdom": "^26.1.0",
-    "puppeteer": "24.7.2",
+    "puppeteer": "^24.8.0",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2",
     "prettier": "3.5.3"
