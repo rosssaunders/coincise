@@ -422,28 +422,10 @@ messages, they are:
 Each request follows a common format, which contains `time`, `channel`, `event`
 and `payload`.
 
-| parameter | type    | required | description                                                                                                         |
-| --------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| id        | Integer | No       | Optional request id which will be sent back by the server to help you identify which request the server responds to |
-| time      | Integer | Yes      | Request time                                                                                                        |
-| channel   | String  | Yes      | Request subscribe/unsubscribe channel                                                                               |
-| auth      | String  | No       | Request auth info, see Authentication section for details                                                           |
-| event     | String  | Yes      | Request event (subscribe/unsubscribe/update/all/api)                                                                |
-| payload   | Array   | Yes      | Request detail parameters                                                                                           |
-
 ### [#](#response) Response
 
 Similar with request, response follows a common format composed of `time`,
 `channel`, `event` , `error` and `result`.
-
-| field   | type    | required | description                                                                                      |
-| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------ |
-| time    | Integer | Yes      | Response time                                                                                    |
-| time_ms | Integer | Yes      | Response time of millisecond                                                                     |
-| channel | String  | Yes      | Response channel                                                                                 |
-| event   | String  | Yes      | Response channel event (update/all)                                                              |
-| error   | Object  | Yes      | Response error                                                                                   |
-| result  | Any     | Yes      | New data notification from the server, or response to client requests. Null iferror is not null. |
 
 Note: type of `result` is channel specific if it's server-initiated data update
 notification, but response to client subscription request always set the
@@ -458,13 +440,6 @@ update notification format for simplicity.
 
 In case of error, you receive a message containing the proper error code and
 message within an error object.
-
-| Code | Message                 |
-| ---- | ----------------------- |
-| 1    | invalid argument struct |
-| 2    | invalid argument        |
-| 3    | service error           |
-| 4    | authentication fail     |
 
 ## [#](#authentication) Authentication
 
@@ -552,12 +527,6 @@ func main() {
 ```
 
 You can log into the console to retrieve futures API key and secret.
-
-| field  | type   | description           |
-| ------ | ------ | --------------------- |
-| method | String | Allowed value:api_key |
-| KEY    | String | User key string       |
-| SIGN   | String | User sign string      |
 
 # [#](#system-api) System API
 
@@ -731,10 +700,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type  | required | description   |
-  | --------- | ----- | -------- | ------------- |
-  | payload   | Array | Yes      | Contract list |
-
 ## [#](#tickers-notification) Tickers notification
 
 ```json
@@ -780,30 +745,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field                   | type   | description                                                                                                            |
-  | ----------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
-  | contract                | String | Futures contract name                                                                                                  |
-  | last                    | String | Last price                                                                                                             |
-  | change_percentage       | String | Change percentage                                                                                                      |
-  | funding_rate            | String | Funding rate                                                                                                           |
-  | funding_rate_indicative | String | Indicative Funding rate in next period. (deprecated. use funding_rate)                                                 |
-  | mark_price              | String | Recent mark price                                                                                                      |
-  | index_price             | String | Index price                                                                                                            |
-  | total_size              | String | Total size                                                                                                             |
-  | volume_24h              | String | Volume 24h                                                                                                             |
-  | quanto_base_rate        | String | Exchange rate of base currency and settlement currency in Quanto contract. Does not exists in contracts of other types |
-  | volume_24h_btc          | String | Trade volumes in recent 24h in BTC(deprecated, usevolume_24h_base, volume_24h_quote, volume_24h_settle instead)        |
-  | volume_24h_usd          | String | Trade volumes in recent 24h in USD(deprecated, usevolume_24h_base, volume_24h_quote, volume_24h_settle instead)        |
-  | volume_24h_quote        | String | Trade volume in recent 24h, in quote currency                                                                          |
-  | volume_24h_settle       | String | Trade volume in recent 24h, in settle currency                                                                         |
-  | volume_24h_base         | String | Trade volume in recent 24h, in base currency                                                                           |
-  | low_24h                 | String | Lowest trading price in recent 24h                                                                                     |
-  | high_24h                | String | Highest trading price in recent 24h                                                                                    |
 
 ## [#](#cancel-subscription) Cancel subscription
 
@@ -978,10 +919,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type  | required | description   |
-  | --------- | ----- | -------- | ------------- |
-  | payload   | Array | Yes      | Contract list |
-
 ## [#](#trades-notification) Trades notification
 
 Positive size means taker is buyer，negative seller
@@ -1019,20 +956,6 @@ Positive size means taker is buyer，negative seller
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field          | type   | description                                                                                                                                                                                                                                                                                                                    |
-  | -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  | contract       | String | Futures contract name                                                                                                                                                                                                                                                                                                          |
-  | size           | int    | Trades size                                                                                                                                                                                                                                                                                                                    |
-  | id             | int    | Trades id                                                                                                                                                                                                                                                                                                                      |
-  | create_time    | int    | Trades msg create time                                                                                                                                                                                                                                                                                                         |
-  | create_time_ms | int    | Trades msg create time in milliseconds                                                                                                                                                                                                                                                                                         |
-  | price          | string | Trades price                                                                                                                                                                                                                                                                                                                   |
-  | is_internal    | bool   | Whether internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the transaction price may deviate, and it will not be recorded in the K-line. If it is not an internal trade, this field will not be returned. |
 
 ## [#](#cancel-subscription-2) Cancel subscription
 
@@ -1234,12 +1157,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                |
-  | --------- | ------ | -------- | ------------------------------------------ |
-  | contract  | String | Yes      | Contract name                              |
-  | limit     | String | Yes      | Limit, legal limits: 100, 50, 20, 10, 5, 1 |
-  | interval  | String | Yes      | Legal intervals: "0"                       |
-
 ## [#](#legacy-order-book-notification) Legacy order book notification
 
 ```json
@@ -1290,20 +1207,6 @@ The above command returns JSON structured like this:
   `all`
 
 * params
-
-  | field     | type    | description                                     |
-  | --------- | ------- | ----------------------------------------------- |
-  | result    | object  | Order book info                                 |
-  | »t        | Integer | Order book generation timestamp in milliseconds |
-  | »contract | String  | Contract name                                   |
-  | »id       | Integer | OrderBook id                                    |
-  | »asks     | Array   | OrderBook ask list                              |
-  | »»p       | String  | Ask price                                       |
-  | »»s       | String  | Ask size                                        |
-  | »bids     | Array   | OrderBook bid List                              |
-  | »»p       | String  | Bid price                                       |
-  | »»s       | String  | Bid size                                        |
-  | »l        | String  | Depth level                                     |
 
 ## [#](#legacy-order-book-unsubscription) Legacy order book unsubscription
 
@@ -1494,17 +1397,6 @@ empty bids.
 
 * params
 
-  | field  | type    | description                                     |
-  | ------ | ------- | ----------------------------------------------- |
-  | result | object  | Best bid and ask                                |
-  | »t     | Integer | Book ticker generated timestamp in milliseconds |
-  | »u     | String  | Order book update ID                            |
-  | »s     | String  | Contract name                                   |
-  | »b     | String  | Best bid price. If no bids, it's empty string   |
-  | »B     | Integer | Best bid size. If no bids, it will be 0         |
-  | »a     | String  | Best ask price. If no asks, it's empty string   |
-  | »A     | Integer | Best ask size. If no asks, it will be 0         |
-
 ## [#](#best-ask-bid-unsubscription) Best ask/bid unsubscription
 
 Code example
@@ -1655,12 +1547,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                                                                                            |
-  | --------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-  | contract  | String | Yes      | Contract name                                                                                                          |
-  | frequency | String | Yes      | Update frequency, 20ms or 100ms                                                                                        |
-  | level     | String | No       | Optional level interested. Only updates within are notified. Allowed values: "100", "50", "20"; 20ms only Allowed "20" |
-
 ## [#](#order-book-update-notification) Order book update notification
 
 ```json
@@ -1712,21 +1598,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type    | description                                                               |
-  | ------ | ------- | ------------------------------------------------------------------------- |
-  | result | Object  | Changed asks and bids since last update                                   |
-  | »t     | Integer | Order book generation timestamp in milliseconds                           |
-  | »s     | String  | Contract name                                                             |
-  | »U     | Integer | First order book update ID since last update                              |
-  | »u     | Integer | Last order book update ID since last update                               |
-  | »b     | Array   | Changed bids                                                              |
-  | »»p    | String  | Changed price                                                             |
-  | »»s    | Integer | Absolute size value after change. If 0, remove this price from order book |
-  | »a     | Array   | Changed asks                                                              |
-  | »»p    | String  | Changed price                                                             |
-  | »»s    | Integer | Absolute size value after change. If 0, remove this price from order book |
-  | »l     | String  | Depth level                                                               |
 
 ## [#](#order-book-update-unsubscription) Order book update unsubscription
 
@@ -1885,11 +1756,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | field    | type   | description                                                              |
-  | -------- | ------ | ------------------------------------------------------------------------ |
-  | interval | String | Interval : "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
-  | contract | String | Futures contract name                                                    |
-
 ## [#](#candlesticks-notification) Candlesticks notification
 
 ```json
@@ -1936,21 +1802,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field | type    | description           |
-  | ----- | ------- | --------------------- |
-  | t     | Integer | Time                  |
-  | o     | String  | Open                  |
-  | c     | String  | Close                 |
-  | h     | String  | Highest               |
-  | l     | String  | Lowest                |
-  | v     | Integer | Volume                |
-  | n     | String  | Futures contract name |
-  | a     | String  | Amount                |
 
 ## [#](#cancel-subscription-3) Cancel subscription
 
@@ -2127,10 +1978,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | name     | type   | required | describe      |
-  | -------- | ------ | -------- | ------------- |
-  | contract | String | yes      | contract list |
-
 ## [#](#public-liquidate-order-notification) public liquidate order notification
 
 ```json
@@ -2163,17 +2010,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | name   | type  | describe         |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | parameter | type    | description              |
-  | --------- | ------- | ------------------------ |
-  | price     | Float   | order price              |
-  | size      | Integer | liquidate order quantity |
-  | time_ms   | Integer | time_in_milliseconds     |
-  | contract  | String  | contract                 |
 
 ## [#](#cancel-subscription-4) Cancel subscription
 
@@ -2352,11 +2188,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                                                    |
-  | --------- | ------ | -------- | ------------------------------------------------------------------------------ |
-  | contract  | String | Yes      | Futures contract name                                                          |
-  | interval  | String | Yes      | Interval : "1s", "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
-
 ## [#](#contract-stats-notification) Contract Stats notification
 
 ```json
@@ -2400,28 +2231,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field             | type    | description                              |
-  | ----------------- | ------- | ---------------------------------------- |
-  | time              | Integer | Stat timestamp                           |
-  | contract          | String  | Contract Name                            |
-  | mark_price        | Float   | Current mark price                       |
-  | lsr_taker         | Float   | Long/short account number ratio          |
-  | lsr_account       | Float   | Long/short taker size ratio              |
-  | long_liq_size     | Integer | Long liquidation size                    |
-  | long_liq_amount   | Float   | Long liquidation amount(base currency)   |
-  | long_liq_usd      | Float   | Long liquidation volume(quote currency)  |
-  | short_liq_size    | Integer | Short liquidation size                   |
-  | short_liq_amount  | Float   | Short liquidation amount(base currency)  |
-  | short_liq_usd     | Float   | Short liquidation volume(quote currency) |
-  | open_interest     | Integer | Open interest size                       |
-  | open_interest_usd | Float   | Open interest volume(quote currency)     |
-  | top_lsr_account   | Float   | Top trader long/short account ratio      |
-  | top_lsr_size      | Float   | Top trader long/short position ratio     |
 
 ## [#](#cancel-subscription-5) Cancel subscription
 
@@ -2510,11 +2319,6 @@ The above command returns JSON structured like this:
   `unsubscribe`
 
 * params
-
-  | parameter | type   | required | description                                                                    |
-  | --------- | ------ | -------- | ------------------------------------------------------------------------------ |
-  | contract  | String | Yes      | Futures contract name                                                          |
-  | interval  | String | Yes      | Interval : "1s", "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
 
 **Note: `contract` is `unsub_all`, which means cancel all**
 
@@ -2633,11 +2437,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#orders-notification) Orders notification
 
 ```json
@@ -2695,44 +2494,6 @@ The above command returns JSON structured like this:
 * params
 
   `For the meaning of parameters, please refer to http interface.`
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field             | type    | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-  | ----------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | create_time       | Integer | Creation time of order(deprecated)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-  | create_time_ms    | Integer | Creation timestamp in milliseconds of order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-  | fill_price        | Float   | Fill price of the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-  | finish_as         | String  | How the order was finished.- filled: all filled- cancelled: manually cancelled- liquidated: cancelled because of liquidation- ioc: time in force is IOC, finish immediately- auto_deleveraged: finished by ADL- reduce_only: cancelled because of increasing position while reduce-only set- position_closed: cancelled because of position close- stp: cancelled because self trade prevention                                                                                                                                                                                                                                               |
-  | iceberg           | Integer | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-  | id                | Integer | Futures order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-  | is_close          | Bool    | Is the order to close position                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-  | is_liq            | Bool    | Is the order for liquidation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-  | left              | Integer | Size left to be traded                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-  | mkfr              | Float   | Maker fee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-  | is_reduce_only    | Bool    | Is the order reduce-only                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-  | status            | String  | Order status- open: waiting to be traded- finished: finished                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-  | tkfr              | Float   | Taker fee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-  | price             | Float   | Order price. 0 for market order with tif set as ioc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-  | refu              | Integer | Reference user ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-  | refr              | Float   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-  | size              | Integer | Order size. Specify positive number to make a bid, and negative number to ask                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-  | text              | String  | User defined information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-  | tif               | String  | Time in force- gtc: GoodTillCancelled- ioc: ImmediateOrCancelled, taker only- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee- fok: FillOrKill, fill either completely or noneOnly ioc and fok are supported when type=market                                                                                                                                                                                                                                                                                                                                                                                 |
-  | finish_time       | Integer | Order finished unix timestamp in seconds. For unfinished orders, this field returns a value of 0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-  | finish_time_ms    | Integer | Order finished unix timestamp in milliseconds. For unfinished orders, this field returns a value of 0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-  | user              | String  | User ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-  | contract          | String  | Futures contract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-  | stp_id            | String  | Orders between users in the same stp_id group are not allowed to be self-traded1. If the stp_id of two orders being matched is non-zero and equal, they will not be executed. Instead, the corresponding strategy will be executed based on the stp_act of the taker.2. stp_id returns 0 by default for orders that have not been set for STP group                                                                                                                                                                                                                                                                                           |
-  | stp_act           | String  | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies1. After users join the STP Group, he can pass stp_act to limit the user's self-trade prevetion strategy. If stp_act is not passed, the default is cn strategy。2. When the user does not join the STP group, an error will be returned when passing the stp_act parameter。3. If the user did not use 'stp_act' when placing the order, 'stp_act' will return '-'- cn: Cancel newest, Cancel new orders and keep old ones- co: Cancel oldest, Cancel old orders and keep new ones- cb: Cancel both, Both old and new orders will be cancelled |
-  | amend_text        | String  | The custom data that the user remarked when amending the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-  | update_id         | Integer | Update ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-  | update_time       | Integer | Update Time (Milliseconds Timestamp)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-  | biz_info          | String  | Users can annotate this modification with information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-  | stop_profit_price | String  | Stop Profit Price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-  | stop_loss_price   | String  | Stop Loss Price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ## [#](#cancel-subscription-6) Cancel subscription
 
@@ -2953,11 +2714,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#user-trades-notification) User trades notification
 
 ```json
@@ -2997,24 +2753,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field          | type    | description                 |
-  | -------------- | ------- | --------------------------- |
-  | contract       | String  | Futures contract name       |
-  | create_time    | Integer | Create time                 |
-  | create_time_ms | Integer | Create time in milliseconds |
-  | id             | String  | Trades id                   |
-  | order_id       | String  | Order Id                    |
-  | price          | String  | Price                       |
-  | size           | Integer | Trades size                 |
-  | role           | String  | User role (maker/taker)     |
-  | text           | String  | User defined information    |
-  | fee            | Float   | Fee deducted                |
-  | point_fee      | Float   | Points used to deduct fee   |
 
 ## [#](#cancel-subscription-7) Cancel subscription
 
@@ -3235,11 +2973,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#liquidates-notification) Liquidates notification
 
 ```json
@@ -3282,27 +3015,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field       | type    | description             |
-  | ----------- | ------- | ----------------------- |
-  | entry_price | Float   | Average entry price     |
-  | fill_price  | Float   | Average execution price |
-  | leverage    | Float   | Leverage                |
-  | liq_price   | Float   | Liquidates price        |
-  | margin      | Float   | Margin                  |
-  | mark_price  | Float   | Mark price              |
-  | order_id    | Integer | Order id                |
-  | order_price | Float   | Commission price        |
-  | left        | Integer | Order unfilled quantity |
-  | size        | Integer | Position original size  |
-  | time        | Integer | Time                    |
-  | time_ms     | Integer | Time in milliseconds    |
-  | user        | String  | User id                 |
-  | contract    | String  | Futures contract name   |
 
 ## [#](#cancel-subscription-8) Cancel subscription
 
@@ -3523,11 +3235,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#auto-deleverages-notification) Auto_deleverages notification
 
 ```json
@@ -3564,21 +3271,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field         | type    | description           |
-  | ------------- | ------- | --------------------- |
-  | entry_price   | Float   | Entry price           |
-  | fill_price    | Float   | Execution price       |
-  | position_size | Integer | Position size         |
-  | trade_size    | Integer | Trade size            |
-  | time          | Integer | Time                  |
-  | time_ms       | Integer | Time in milliseconds  |
-  | user          | String  | User id               |
-  | contract      | String  | Futures contract name |
 
 ## [#](#cancel-subscription-9) Cancel subscription
 
@@ -3799,11 +3491,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#position-closes-notification) Position_closes notification
 
 ```json
@@ -3839,20 +3526,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field    | type    | description           |
-  | -------- | ------- | --------------------- |
-  | contract | String  | Futures contract name |
-  | pnl      | Number  | Profit & loss         |
-  | side     | String  | Side (long or short)  |
-  | text     | String  | Messages              |
-  | time     | Integer | Time                  |
-  | time_ms  | Integer | Time in milliseconds  |
-  | user     | String  | User id               |
 
 ## [#](#cancel-subscription-10) Cancel subscription
 
@@ -4070,10 +3743,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description |
-  | --------- | ------ | -------- | ----------- |
-  | user id   | String | yes      | User id     |
-
 ## [#](#balances-notification) balances notification
 
 ```json
@@ -4110,21 +3779,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field    | type    | description           |
-  | -------- | ------- | --------------------- |
-  | balance  | Number  | Balance after changed |
-  | change   | Number  | Change                |
-  | text     | String  | Messages              |
-  | time     | Integer | Time                  |
-  | time_ms  | Integer | Time in milliseconds  |
-  | type     | String  | Type                  |
-  | user     | String  | User id               |
-  | currency | String  | Transfer unit         |
 
 ## [#](#cancel-subscription-11) Cancel subscription
 
@@ -4333,11 +3987,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#reduce-risk-limits-notification) Reduce_risk_limits notification
 
 ```json
@@ -4375,22 +4024,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field            | type    | description          |
-  | ---------------- | ------- | -------------------- |
-  | cancel_orders    | Integer | Cancel orders        |
-  | contract         | String  | Contract name        |
-  | leverage_max     | Integer | Leverage max         |
-  | liq_price        | Float   | Liquidates price     |
-  | maintenance_rate | Float   | Maintenance rate     |
-  | risk_limit       | Integer | Risk limit           |
-  | time             | Integer | Time                 |
-  | time_ms          | Integer | Time in milliseconds |
-  | user             | String  | User id              |
 
 ## [#](#cancel-subscription-12) Cancel subscription
 
@@ -4595,11 +4228,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                                          |
-  | --------- | ------ | -------- | -------------------------------------------------------------------- |
-  | user id   | String | yes      | User id (This field is deprecated and is only used as a placeholder) |
-  | contract  | String | yes      | Futures contract name                                                |
-
 ## [#](#positions-notification) Positions notification
 
 ```json
@@ -4648,32 +4276,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field                | type    | description                                                                    |
-  | -------------------- | ------- | ------------------------------------------------------------------------------ |
-  | contract             | String  | Futures contract name                                                          |
-  | cross_leverage_limit | Float   | Cross margin leverage                                                          |
-  | entry_price          | Float   | Entry price                                                                    |
-  | history_pnl          | Float   | History realized PNL                                                           |
-  | history_point        | Float   | History realized POINT PNL                                                     |
-  | last_close_pnl       | Float   | PNL of last position close                                                     |
-  | leverage             | Integer | Position leverage. 0 means cross margin; positive number means isolated margin |
-  | leverage_max         | Integer | Maximum leverage under current risk limit                                      |
-  | liq_price            | Float   | Liquidation price                                                              |
-  | maintenance_rate     | Float   | Maintenance rate under current risk limit                                      |
-  | margin               | Float   | Position margin                                                                |
-  | realised_pnl         | Float   | Realized PNL                                                                   |
-  | realised_point       | Float   | Realized POINT PNL                                                             |
-  | risk_limit           | Integer | Position risk limit                                                            |
-  | size                 | Integer | Contract size                                                                  |
-  | time                 | Integer | Update unix timestamp                                                          |
-  | time_ms              | Integer | Update unix timestamp in milliseconds                                          |
-  | user                 | String  | User id                                                                        |
-  | update_id            | Integer | Message sequence number                                                        |
 
 ## [#](#cancel-subscription-13) Cancel subscription
 
@@ -4890,11 +4492,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description           |
-  | --------- | ------ | -------- | --------------------- |
-  | user id   | String | yes      | User id               |
-  | contract  | String | yes      | Futures contract name |
-
 ## [#](#auto-orders-notification) Auto orders notification
 
 ```json
@@ -4956,26 +4553,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field         | type    | description                                            |
-  | ------------- | ------- | ------------------------------------------------------ |
-  | user          | Number  | User id                                                |
-  | trigger       | Object  |                                                        |
-  | initial       | Object  |                                                        |
-  | id            | Number  | Auto order id                                          |
-  | trade_id      | Number  | Trade id                                               |
-  | status        | String  | Order status                                           |
-  | reason        | String  | Change reason                                          |
-  | create_time   | Number  | Create time                                            |
-  | name          | String  | Name                                                   |
-  | is_stop_order | boolean | Is stop                                                |
-  | stop_trigger  | Object  |                                                        |
-  | order_type    | String  | Take-profit/stop-loss types, detail to http api        |
-  | me_order_id   | Number  | Corresponding order ID of order take-profit/stop-loss. |
 
 ## [#](#cancel-subscription-14) Cancel subscription
 
@@ -5360,19 +4937,6 @@ Client request example
 `api` requests initiated from the client follow a common JSON format, which
 contains the following fields:
 
-| Field      | Type    | Required | Description                                                                                                                                                            |
-| ---------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| time       | Integer | Yes      | Request time in seconds. Gap between request time and server time must not exceed 60 seconds                                                                           |
-| id         | Integer | No       | Optional request id which will be sent back by the server to help you identify whichrequest the server responds to                                                     |
-| channel    | String  | Yes      | WebSocket channel to subscribe to.                                                                                                                                     |
-| event      | String  | Yes      | Fixed as api                                                                                                                                                           |
-| payload    | Object  | Yes      | Optional request detail parameters                                                                                                                                     |
-| »req_id    | String  | Yes      | Unique identifier of the message Provided by client.It will be returned in response message foridentifying the corresponding request.                                  |
-| »timestamp | String  | Yes      | Signature time in seconds                                                                                                                                              |
-| »api_key   | String  | Yes      | Gate APIv4 user key string                                                                                                                                             |
-| »signature | String  | Yes      | Authentication signature generated using GateAPIv4 secret and request information,See[Websocket API Authentication](#Websocket API Authentication) section for details |
-| »req_param | []Byte  | Yes      | Request api param                                                                                                                                                      |
-
 Note that the type of `payload.req_param` is channel specific, Take
 `futures.order_place` for example, `payload.req_param` same as apiv4
 [/futures/{settle}/orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-a-futures-order).
@@ -5465,28 +5029,6 @@ Server response includes ack response to client requests and api result callback
 message updates. Server responses follow a common JSON format, which contains
 the following fields:
 
-| Field                             | Type    | Description                                                                                                                                                                                                                                                                                                 |
-| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                                                                            |
-| header                            | Map     | Response meta info                                                                                                                                                                                                                                                                                          |
-| »response_time                    | String  | Response send time in mill                                                                                                                                                                                                                                                                                  |
-| »channel                          | String  | Request channel                                                                                                                                                                                                                                                                                             |
-| »event                            | String  | Request event                                                                                                                                                                                                                                                                                               |
-| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                                                                            |
-| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                                                               |
-| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                                                                   |
-| »x_gate_ratelimit_requests_remain | Integer | (For order placement/modification/cancel only) Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                        |
-| »x_gate_ratelimit_limit           | Integer | (For order placement/modification/cancel only) Current rate limit cap (hidden if 0)                                                                                                                                                                                                                         |
-| »x_gat_ratelimit_reset_timestamp  | Integer | (For order placement/modification/cancel only) If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                                                                      |
-| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                                                                 |
-| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                                                                       |
-| data                              | Object  | Response data of the request                                                                                                                                                                                                                                                                                |
-| »result                           | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api                                                                                                                                                                                                  |
-| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                                                                 |
-| »»label                           | String  | Denotes error type in string format                                                                                                                                                                                                                                                                         |
-| »»message                         | String  | Detailed error message                                                                                                                                                                                                                                                                                      |
-
 ### [#](#error-2) Error
 
 Error Response Notification example
@@ -5546,18 +5088,7 @@ Error Response Notification example（rate limit）
 
 Error object has the following format:
 
-| Field   | Type   | Description                         |
-| ------- | ------ | ----------------------------------- |
-| label   | String | Denotes error type in string format |
-| message | String | Detailed error message              |
-
 Explanation of rate limit-related error codes:
-
-| Code | Description                            |
-| ---- | -------------------------------------- |
-| 100  | Internal rate limiting exception error |
-| 311  | Contract rate limit                    |
-| 312  | Contract engine rate limit             |
 
 ## [#](#login) Login
 
@@ -5772,14 +5303,6 @@ Request example
 
 Payload format:
 
-| Field     | Type   | Required | Description                                                                                                                                |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id    | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| api_key   | string | Yes      | Apiv4 key                                                                                                                                  |
-| headers   | object | Yes      | Apiv4 custom header                                                                                                                        |
-| signature | string | Yes      | Apiv4 signature                                                                                                                            |
-| timestamp | string | Yes      | Unix timestamp in seconds                                                                                                                  |
-
 WebSocket api operation authentication uses the same signature calculation
 method with Gate APIv4 API, i.e.,
 `HexEncode(HMAC_SHA512(secret, signature_string))`, but has the following
@@ -5821,27 +5344,6 @@ Login Response example
 ```
 
 Result format:
-
-| Field          | Type    | Description                                                                                                |
-| -------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| request_id     | String  | Unique identifier of the message                                                                           |
-| header         | Map     | Response meta info                                                                                         |
-| »response_time | String  | Response send time in mill                                                                                 |
-| »channel       | String  | Request channel                                                                                            |
-| »event         | String  | Request event                                                                                              |
-| »client_id     | String  | Unique client id                                                                                           |
-| »x_in_time     | Integer | time to receive the request (in microseconds)                                                              |
-| »x_out_time    | Integer | time to return response (in microseconds)                                                                  |
-| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection)                     |
-| »conn_trace_id | String  | TraceId to establish connection with client                                                                |
-| »trace_id      | String  | TraceId for executing order operation                                                                      |
-| data           | Object  | Response data of the request                                                                               |
-| »result        | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api |
-| »»api_key      | String  | Login success apikey                                                                                       |
-| »»uid          | String  | Login user id                                                                                              |
-| »errs          | Object  | It is only available when the request fails                                                                |
-| »»label        | String  | Denotes error type in string format                                                                        |
-| »»message      | String  | Detailed error message                                                                                     |
 
 ## [#](#order-place) Order Place
 
@@ -5987,32 +5489,9 @@ Request example
 
 Payload format:
 
-| Field      | Type   | Required | Description                                                                                                                                |
-| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id     | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param  | object | Yes      | Api order model's json byte data, use api order model; api order model detail to api (opens new window)                                    |
-| req_header | object | No       | Apiv4 custom header                                                                                                                        |
-
 `req_param` JSON byte data of the API order model:
 
-| Field       | Type   | Required | Description                                                                                                                                                    |
-| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| contract    | string | true     | contract                                                                                                                                                       |
-| size        | int64  | true     | Order size. Specify a positive number for bidding, a negative number for inquiry                                                                               |
-| iceberg     | int64  | true     | Iceberg order display size. 0 means non-iceberg. Note that you will incur fees for the hidden size                                                             |
-| price       | string | false    | Order price. 0 means market order, with tif set to ioc                                                                                                         |
-| close       | bool   | false    | Set to true for closing the position, with size set to 0                                                                                                       |
-| reduce_only | bool   | false    | Set to true to only reduce the order                                                                                                                           |
-| tif         | string | false    | Validity time                                                                                                                                                  |
-| text        | string | false    | User-defined information. If not empty, it must follow these rules：                                                                                           |
-| auto_size   | string | false    | Set the side to close a dual-mode position. close_long closes the long side, while close_short closes the short side. Note that size also needs to be set to 0 |
-| stp_act     | string | false    | Self-trade prevention actions. Users can set self-trade prevention strategies through this field                                                               |
-
 `req_header` Custom header data:
-
-| Field          | Type   | Required | Description                                                                                                                                                         |
-| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 #### [#](#detail) Detail
 
@@ -6139,29 +5618,6 @@ Response Notification example
 Return of order information for placing an order
 
 Result format:
-
-| Field                             | Type    | Description                                                                                                                                                                                                                                                                                             |
-| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                                                                        |
-| ack                               | Bool    | The return of the "ack" message represents the WebSocket confirmation message(Currently exists in the order-place api).If "ack" is false(this field will not be returned), it means that the message is a response message, and you can determine if the request was successfulby checking "data.errs". |
-| header                            | Map     | Response meta info                                                                                                                                                                                                                                                                                      |
-| »response_time                    | String  | Response send time in mill                                                                                                                                                                                                                                                                              |
-| »channel                          | String  | Request channel                                                                                                                                                                                                                                                                                         |
-| »event                            | String  | Request event                                                                                                                                                                                                                                                                                           |
-| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                                                                        |
-| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                                                           |
-| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                                                               |
-| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                                                             |
-| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                                                                   |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                                                                   |
-| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                                                                    |
-| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds)                                            |
-| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                                                                  |
-| data                              | Object  | Response data of the request                                                                                                                                                                                                                                                                            |
-| »result                           | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api                                                                                                                                                                                              |
-| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                                                             |
-| »»label                           | String  | Denotes error type in string format                                                                                                                                                                                                                                                                     |
-| »»message                         | String  | Detailed error message                                                                                                                                                                                                                                                                                  |
 
 ## [#](#order-batch-place) Order Batch Place
 
@@ -6298,21 +5754,11 @@ Request example
 
 Payload format:
 
-| Field      | Type   | Required | Description                                                                                                                                |
-| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id     | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param  | object | Yes      | Api order model's json byte data, an array with api order model; api order model detail to api (opens new window)                          |
-| req_header | object | No       | Apiv4 custom header                                                                                                                        |
-
 `req_param` The JSON byte data for the API order model can refer to a single
 order placement, or an array of multiple single orders. For details, refer to
 the order placement documentation.
 
 `req_header` Custom header data:
-
-| Field          | Type   | Required | Description                                                                                                                                                         |
-| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-batch-place-ack-notification) Order Batch Place Ack Notification
 
@@ -6404,29 +5850,6 @@ Response Notification example
 Return of order information for batch placing order
 
 Result format:
-
-| Field                             | Type    | Description                                                                                                                                                                                                                                                                                             |
-| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                                                                        |
-| ack                               | Bool    | The return of the "ack" message represents the WebSocket confirmation message(Currently exists in the order-place api).If "ack" is false(this field will not be returned), it means that the message is a response message, and you can determine if the request was successfulby checking "data.errs". |
-| header                            | Map     | Response meta info                                                                                                                                                                                                                                                                                      |
-| »response_time                    | String  | Response send time in mill                                                                                                                                                                                                                                                                              |
-| »channel                          | String  | Request channel                                                                                                                                                                                                                                                                                         |
-| »event                            | String  | Request event                                                                                                                                                                                                                                                                                           |
-| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                                                                        |
-| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                                                           |
-| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                                                               |
-| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                                                             |
-| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                                                                   |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                                                                   |
-| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                                                                    |
-| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds)                                            |
-| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                                                                  |
-| data                              | Object  | Response data of the request                                                                                                                                                                                                                                                                            |
-| »result                           | Object  | If this is ack response, result is the payload of the request, otherwise result is the response of the api                                                                                                                                                                                              |
-| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                                                             |
-| »»label                           | String  | Denotes error type in string format                                                                                                                                                                                                                                                                     |
-| »»message                         | String  | Detailed error message                                                                                                                                                                                                                                                                                  |
 
 ## [#](#order-cancel) Order Cancel
 
@@ -6543,17 +5966,7 @@ Order cancel request example
 
 Payload format:
 
-| Field      | Type   | Required | Description                                                                                                                                |
-| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id     | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param  | object | Yes      | Api cancel order, detail to api (opens new window)                                                                                         |
-| req_header | object | No       | apiv4 custom header                                                                                                                        |
-
 `req_header` Custom header data:
-
-| Field          | Type   | Required | Description                                                                                                                                                         |
-| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-status-notification) Order Status Notification
 
@@ -6603,28 +6016,6 @@ Order status notification example
 ```
 
 Result format:
-
-| Field                             | Type    | Description                                                                                                                                                                                                                                                  |
-| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                             |
-| header                            | Map     | Response meta info                                                                                                                                                                                                                                           |
-| »response_time                    | String  | Response send time in mill                                                                                                                                                                                                                                   |
-| »channel                          | String  | Request channel                                                                                                                                                                                                                                              |
-| »event                            | String  | Request event                                                                                                                                                                                                                                                |
-| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                             |
-| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                |
-| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                    |
-| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                  |
-| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                        |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                        |
-| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                         |
-| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                       |
-| data                              | Object  | Response data of the request                                                                                                                                                                                                                                 |
-| »result                           | Object  | Single order cancel response, detail to api (opens new window)                                                                                                                                                                                               |
-| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                  |
-| »»label                           | String  | Denotes error type in string format                                                                                                                                                                                                                          |
-| »»message                         | String  | Detailed error message                                                                                                                                                                                                                                       |
 
 ## [#](#order-cancel-all-with-id-list) Order Cancel All With Id List
 
@@ -6734,17 +6125,7 @@ Client request example
 
 Payload format:
 
-| Field      | Type   | Required | Description                                                                                                                                |
-| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id     | string | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param  | array  | Yes      | Order ID List                                                                                                                              |
-| req_header | object | No       | apiv4 custom header                                                                                                                        |
-
 `req_header` Custom header data:
-
-| Field          | Type   | Required | Description                                                                                                                                                         |
-| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-cancel-all-with-id-list-notification) Order Cancel All With Id List Notification
 
@@ -6783,25 +6164,6 @@ Order cancel notification example
 ```
 
 Result format:
-
-| Field          | Type    | Description                                                                            |
-| -------------- | ------- | -------------------------------------------------------------------------------------- |
-| request_id     | String  | Unique identifier of the message                                                       |
-| header         | Map     | response meta info                                                                     |
-| »response_time | String  | response send time in mill                                                             |
-| »channel       | String  | request channel                                                                        |
-| »event         | String  | request event                                                                          |
-| »client_id     | String  | Unique client id                                                                       |
-| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
-| »x_out_time    | Integer | time to return response (in microseconds)                                              |
-| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String  | TraceId to establish connection with client                                            |
-| »trace_id      | String  | TraceId for executing order operation                                                  |
-| data           | Object  | Response data of the request                                                           |
-| »result        | Object  | response detail toapi (opens new window)                                               |
-| »errs          | Object  | It is only available when the request fails                                            |
-| »»label        | String  | denotes error type in string format                                                    |
-| »»message      | String  | detailed error message                                                                 |
 
 ## [#](#cancel-all-open-orders-matched) Cancel all open orders matched
 
@@ -6921,17 +6283,7 @@ Client request example
 
 Payload format:
 
-| Field      | Type   | Required | Description                                                                                                                                |
-| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id     | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param  | object | Yes      | Detail to.api (opens new window)                                                                                                           |
-| req_header | object | No       | apiv4 custom header                                                                                                                        |
-
 `req_header` Custom header data:
-
-| Field          | Type   | Required | Description                                                                                                                                                         |
-| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#cancel-all-open-orders-matched-notification) Cancel all open orders matched Notification
 
@@ -6983,28 +6335,6 @@ Order cancel notification example
 ```
 
 Result format:
-
-| Field                             | Type    | Description                                                                                                                                                                                                                                                  |
-| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                             |
-| header                            | Map     | Response meta info                                                                                                                                                                                                                                           |
-| »response_time                    | String  | Response send time in mill                                                                                                                                                                                                                                   |
-| »channel                          | String  | Request channel                                                                                                                                                                                                                                              |
-| »event                            | String  | Request event                                                                                                                                                                                                                                                |
-| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                             |
-| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                |
-| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                    |
-| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                  |
-| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                        |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                        |
-| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                         |
-| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                       |
-| data                              | Object  | Response data of the request                                                                                                                                                                                                                                 |
-| »result                           | Object  | Response detail to api (opens new window)                                                                                                                                                                                                                    |
-| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                  |
-| »»label                           | String  | Denotes error type in string format                                                                                                                                                                                                                          |
-| »»message                         | String  | Detailed error message                                                                                                                                                                                                                                       |
 
 ## [#](#order-amend) Order Amend
 
@@ -7124,17 +6454,7 @@ Client request example
 
 Payload format:
 
-| Field      | Type   | Required | Description                                                                                                                                |
-| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id     | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param  | object | Yes      | Api amend order, detail to api (opens new window)                                                                                          |
-| req_header | object | No       | apiv4 custom header                                                                                                                        |
-
 `req_header` Custom header data:
-
-| Field          | Type   | Required | Description                                                                                                                                                         |
-| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | string | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
 ### [#](#order-amend-notification) Order Amend Notification
 
@@ -7182,28 +6502,6 @@ Order amend notification example
 ```
 
 Result format:
-
-| Field                             | Type    | Description                                                                                                                                                                                                                                                  |
-| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| request_id                        | String  | Unique identifier of the message                                                                                                                                                                                                                             |
-| header                            | Map     | Response meta info                                                                                                                                                                                                                                           |
-| »response_time                    | String  | Response send time in mill                                                                                                                                                                                                                                   |
-| »channel                          | String  | Request channel                                                                                                                                                                                                                                              |
-| »event                            | String  | Request event                                                                                                                                                                                                                                                |
-| »client_id                        | String  | Unique client id                                                                                                                                                                                                                                             |
-| »x_in_time                        | Integer | time to receive the request (in microseconds)                                                                                                                                                                                                                |
-| »x_out_time                       | Integer | time to return response (in microseconds)                                                                                                                                                                                                                    |
-| »conn_trace_id                    | String  | TraceId to establish connection with client                                                                                                                                                                                                                  |
-| »trace_id                         | String  | TraceId for executing order operation                                                                                                                                                                                                                        |
-| »x_gate_ratelimit_requests_remain | Integer | Remaining available requests in the current time window (hidden if 0)                                                                                                                                                                                        |
-| »x_gate_ratelimit_limit           | Integer | Current rate limit cap (hidden if 0)                                                                                                                                                                                                                         |
-| »x_gat_ratelimit_reset_timestamp  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
-| »conn_id                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                       |
-| data                              | Object  | Response data of the request                                                                                                                                                                                                                                 |
-| »result                           | Object  | Response detail to api (opens new window)                                                                                                                                                                                                                    |
-| »errs                             | Object  | It is only available when the request fails                                                                                                                                                                                                                  |
-| »»label                           | String  | Denotes error type in string format                                                                                                                                                                                                                          |
-| »»message                         | String  | Detailed error message                                                                                                                                                                                                                                       |
 
 ## [#](#order-list) Order List
 
@@ -7324,11 +6622,6 @@ Client request example
 
 Payload format:
 
-| Field     | Type   | Required | Description                                                                                                                                |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id    | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes      | Api list order, detail to api (opens new window)                                                                                           |
-
 ### [#](#order-list-notification) Order List Notification
 
 Order list notification example
@@ -7374,25 +6667,6 @@ Order list notification example
 ```
 
 Result format:
-
-| Field          | Type    | Description                                                                            |
-| -------------- | ------- | -------------------------------------------------------------------------------------- |
-| request_id     | String  | Unique identifier of the message                                                       |
-| header         | Map     | Response meta info                                                                     |
-| »response_time | String  | Response send time in mill                                                             |
-| »channel       | String  | Request channel                                                                        |
-| »event         | String  | Request event                                                                          |
-| »client_id     | String  | Unique client id                                                                       |
-| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
-| »x_out_time    | Integer | time to return response (in microseconds)                                              |
-| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String  | TraceId to establish connection with client                                            |
-| »trace_id      | String  | TraceId for executing order operation                                                  |
-| data           | Object  | Signature time in seconds                                                              |
-| »result        | Object  | Response detail to api (opens new window)                                              |
-| »errs          | Object  | It is only available when the request fails                                            |
-| »»label        | String  | Denotes error type in string format                                                    |
-| »»message      | String  | Detailed error message                                                                 |
 
 ## [#](#order-status) Order Status
 
@@ -7511,11 +6785,6 @@ Client request example
 
 Payload format:
 
-| Field     | Type   | Required | Description                                                                                                                                |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| req_id    | string | Yes      | Request id which will be sent back by the server to help you identify which request the server responds to,it's different from outside'sid |
-| req_param | object | Yes      | Detail to api (opens new window)                                                                                                           |
-
 ### [#](#order-cancel-notification) Order Cancel Notification
 
 Order cancel notification example
@@ -7559,24 +6828,5 @@ Order cancel notification example
 ```
 
 Result format:
-
-| Field          | Type    | Description                                                                            |
-| -------------- | ------- | -------------------------------------------------------------------------------------- |
-| request_id     | String  | Unique identifier of the message                                                       |
-| header         | Map     | Response meta info                                                                     |
-| »response_time | String  | Response send time in mill                                                             |
-| »channel       | String  | Request channel                                                                        |
-| »event         | String  | Request event                                                                          |
-| »client_id     | String  | Unique client id                                                                       |
-| »x_in_time     | Integer | time to receive the request (in microseconds)                                          |
-| »x_out_time    | Integer | time to return response (in microseconds)                                              |
-| »conn_id       | String  | Connection ID established with the client (remains consistent for the same connection) |
-| »conn_trace_id | String  | TraceId to establish connection with client                                            |
-| »trace_id      | String  | TraceId for executing order operation                                                  |
-| data           | Object  | Signature time in seconds                                                              |
-| »result        | Object  | Response detail to api (opens new window)                                              |
-| »errs          | Object  | It is only available when the request fails                                            |
-| »»label        | String  | Denotes error type in string format                                                    |
-| »»message      | String  | Detailed error message                                                                 |
 
 Last Updated: 4/25/2025, 9:09:39 AM

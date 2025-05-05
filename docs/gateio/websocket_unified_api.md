@@ -236,39 +236,15 @@ Each general api supports some different event messages, they are:
 Each request follows a common format, which contains `time`, `channel`, `event`
 and `payload`.
 
-| parameter | type    | required | description                                                                                                         |
-| --------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| id        | Integer | No       | Optional request id which will be sent back by the server to help you identify which request the server responds to |
-| time      | Integer | Yes      | Request time                                                                                                        |
-| channel   | String  | Yes      | Request subscribe/unsubscribe channel                                                                               |
-| auth      | String  | No       | Request auth info, see Authentication section for details                                                           |
-| event     | String  | Yes      | Request event (subscribe/unsubscribe/update/all/api)                                                                |
-| payload   | Array   | Yes      | Request detail parameters                                                                                           |
-
 ### [#](#response) Response
 
 Similar with request, response follows a common format composed of `time`,
 `channel`, `event` , `error` and `result`.
 
-| field   | type    | required | description                         |
-| ------- | ------- | -------- | ----------------------------------- |
-| time    | Integer | Yes      | Response time                       |
-| time_ms | Integer | Yes      | Response time of millisecond        |
-| channel | String  | Yes      | Response channel                    |
-| event   | String  | Yes      | Response channel event (update/all) |
-| error   | Object  | Yes      | Response error                      |
-| result  | Array   | Yes      | Response detail parameters          |
-
 ### [#](#error) Error
 
 In case of error, you receive a message containing the proper error code and
 message within an error object.
-
-| Code | Message                 |
-| ---- | ----------------------- |
-| 1    | invalid argument struct |
-| 2    | invalid argument        |
-| 3    | service error           |
 
 ## [#](#authentication) Authentication
 
@@ -294,12 +270,6 @@ print(hmac.new(secret, message, hashlib.sha512).hexdigest())  ## Generating sign
 ```
 
 You can log into the console to retrieve futures API key and secret.
-
-| field  | type   | description           |
-| ------ | ------ | --------------------- |
-| method | String | Allowed value:api_key |
-| KEY    | String | User key string       |
-| SIGN   | String | User sign string      |
 
 # [#](#system-api) System API
 
@@ -406,10 +376,6 @@ The above command returns JSON structured like this:
 
   this channel do not need params
 
-  | parameter | type | required | description |
-  | --------- | ---- | -------- | ----------- |
-  |           |      |          |             |
-
 ## [#](#assets-notification) assets notification
 
 ```json
@@ -446,22 +412,6 @@ The above command returns JSON structured like this:
 * params
 
   `For the meaning of parameters, please refer to http interface.`
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field | type    | field full name (non-push field) | description                   |
-  | ----- | ------- | -------------------------------- | ----------------------------- |
-  | u     | integer | user_id                          | user id                       |
-  | t     | integer | refresh_time                     | data refresh time             |
-  | r     | string  | total_initial_margin_rate        | total initial margin rate     |
-  | R     | string  | total_maintenance_margin_rate    | total maintenance margin rate |
-  | b     | string  | total_margin_balance             | total margin balance          |
-  | e     | string  | unified_margin_total_equity      | portfolio margin total equity |
-  | l     | string  | unified_margin_total_liab        | portfolio margin total liab   |
-  | T     | string  | unified_margin_total             | portfolio margin total        |
-  | a     | string  | total_available_margin           | total available margin        |
 
 ## [#](#cancel-subscription) Cancel subscription
 
@@ -568,10 +518,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter  | type         | required | description      |
-  | ---------- | ------------ | -------- | ---------------- |
-  | currencies | array string | yes      | asset currencies |
-
 ## [#](#asset-detail-notification) asset detail notification
 
 ```json
@@ -609,21 +555,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field | type    | field full name (non-push field) | description       |
-  | ----- | ------- | -------------------------------- | ----------------- |
-  | u     | integer | user_id                          | user id           |
-  | t     | integer | refresh_time                     | data refresh time |
-  | dts   | map     | details                          | assets detail map |
-  | >a    | string  | available                        | availabe amount   |
-  | >f    | string  | freeze                           | locked amount     |
-  | >e    | string  | equity                           | equity            |
-  | >tl   | string  | total_liab                       | total liabilities |
-  | >b    | string  | balance                          | balance           |
 
 ## [#](#cancel-subscription-2) Cancel subscription
 

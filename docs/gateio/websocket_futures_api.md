@@ -277,26 +277,10 @@ messages, they are:
 Each request follows a common format, which contains `time`, `channel`, `event`
 and `payload`.
 
-| parameter | type    | required | description                                               |
-| --------- | ------- | -------- | --------------------------------------------------------- |
-| time      | Integer | Yes      | request time                                              |
-| channel   | String  | Yes      | request subscribe/unsubscribe channel                     |
-| auth      | String  | no       | request auth info, see Authentication section for details |
-| event     | String  | Yes      | request event (subscribe/unsubscribe/update/all)          |
-| payload   | Array   | Yes      | request detail parameters                                 |
-
 ### [#](#response) Response
 
 Similar with request, response follows a common format composed of `time`,
 `channel`, `event` , `error` and `result`.
-
-| field   | type    | required | description                                                                                      |
-| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------ |
-| time    | Integer | Yes      | response time                                                                                    |
-| channel | String  | Yes      | response channel                                                                                 |
-| event   | String  | Yes      | response channel event (update/all)                                                              |
-| error   | Object  | Yes      | response channel event (update/all)                                                              |
-| result  | Any     | Yes      | New data notification from the server, or response to client requests. Null iferror is not null. |
 
 Note: type of `result` is channel specific if it's server-initiated data update
 notification, but response to client subscription request always set the
@@ -311,13 +295,6 @@ update notification format for simplicity.
 
 In case of error, you receive a message containing the proper error code and
 message within an error object.
-
-| Code | Message                 |
-| ---- | ----------------------- |
-| 1    | invalid argument struct |
-| 2    | invalid argument        |
-| 3    | service error           |
-| 4    | authentication fail     |
 
 ## [#](#authentication) Authentication
 
@@ -343,12 +320,6 @@ print(hmac.new(secret, message, hashlib.sha512).hexdigest())  ## Generating sign
 ```
 
 You can log into the console to retrieve delivery API key and secret.
-
-| field  | type   | description            |
-| ------ | ------ | ---------------------- |
-| method | String | allowed value: api_key |
-| KEY    | String | user key string        |
-| SIGN   | String | user sign string       |
 
 # [#](#system-api) System API
 
@@ -438,10 +409,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type  | required | description   |
-  | --------- | ----- | -------- | ------------- |
-  | payload   | Array | Yes      | contract list |
-
 ## [#](#tickers-notification) Tickers notification
 
 ```json
@@ -485,28 +452,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field                   | type   | description             |
-  | ----------------------- | ------ | ----------------------- |
-  | contract                | String | delivery contract name  |
-  | last                    | String | last price              |
-  | change_percentage       | String | change percentage       |
-  | funding_rate            | String | funding rate            |
-  | funding_rate_indicative | String | funding rate indicative |
-  | mark_price              | String | mark price              |
-  | index_price             | String | index price             |
-  | total_size              | String | total size              |
-  | volume_24h              | String | volume 24h              |
-  | quanto_base_rate        | String | quanto base rate        |
-  | volume_24h_btc          | String | watch http api          |
-  | volume_24h_usd          | String | watch http api          |
-  | volume_24h_quote        | String | watch http api          |
-  | volume_24h_settle       | String | watch http api          |
-  | volume_24h_base         | String | watch http api          |
 
 ## [#](#cancel-subscription) Cancel subscription
 
@@ -595,10 +540,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type  | required | description   |
-  | --------- | ----- | -------- | ------------- |
-  | payload   | Array | Yes      | contract list |
-
 ## [#](#trades-notification) Trades notification
 
 Positive size means taker is buyer，negative seller
@@ -634,19 +575,6 @@ Positive size means taker is buyer，negative seller
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field          | type   | description                            |
-  | -------------- | ------ | -------------------------------------- |
-  | contract       | String | delivery contract name                 |
-  | size           | int    | trades size                            |
-  | id             | int    | trades id                              |
-  | create_time    | int    | trades msg create time                 |
-  | create_time_ms | int    | trades msg create time in milliseconds |
-  | price          | string | trades price                           |
 
 ## [#](#cancel-subscription-2) Cancel subscription
 
@@ -774,12 +702,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                |
-  | --------- | ------ | -------- | ------------------------------------------ |
-  | contract  | String | Yes      | contract name                              |
-  | limit     | String | Yes      | limit, legal limits: 100, 50, 20, 10, 5, 1 |
-  | interval  | String | Yes      | legal intervals: "0"                       |
-
 ## [#](#legacy-order-book-notification) Legacy order book notification
 
 ```json
@@ -848,17 +770,6 @@ Or
   `update/all`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field    | type    | description                                                                                                                        |
-  | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-  | contract | String  | delivery contract name                                                                                                             |
-  | s        | Integer | this number is the final value, the calculated value. Positive Numbers represent long(bids), Negative number represent short(asks) |
-  | p        | String  | this order book price                                                                                                              |
-  | id       | Integer | this price order book id                                                                                                           |
 
 ## [#](#legacy-order-book-unsubscription) Legacy order book unsubscription
 
@@ -978,17 +889,6 @@ empty bids.
 
 * params
 
-  | field  | type    | description                                     |
-  | ------ | ------- | ----------------------------------------------- |
-  | result | object  | Best bid and ask                                |
-  | » t    | Integer | Book ticker generated timestamp in milliseconds |
-  | » u    | String  | Order book update ID                            |
-  | » s    | String  | Contract name                                   |
-  | » b    | String  | Best bid price. If no bids, it's empty string   |
-  | » B    | Integer | Best bid size. If no bids, it will be 0         |
-  | » a    | String  | Best ask price. If no asks, it's empty string   |
-  | » A    | Integer | Best ask size. If no asks, it will be 0         |
-
 ## [#](#best-ask-bid-unsubscription) Best ask/bid unsubscription
 
 ```python
@@ -1067,12 +967,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                                                                                 |
-  | --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------- |
-  | contract  | String | Yes      | Contract name                                                                                               |
-  | frequency | String | Yes      | Update frequency, 100ms or 1000ms                                                                           |
-  | level     | String | No       | Optional level interested. Only updates within are notified. Allowed values: "100", "50", "20", "10" or "5" |
-
 ## [#](#order-book-update-notification) Order book update notification
 
 ```json
@@ -1124,20 +1018,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type    | description                                                               |
-  | ------ | ------- | ------------------------------------------------------------------------- |
-  | result | object  | Changed asks and bids since last update                                   |
-  | » t    | Integer | Order book generation timestamp in milliseconds                           |
-  | » s    | String  | Contract name                                                             |
-  | » U    | Integer | First order book update ID since last update                              |
-  | » u    | Integer | Last order book update ID since last update                               |
-  | » b    | String  | Changed bids                                                              |
-  | »» p   | String  | Changed price                                                             |
-  | »» s   | String  | Absolute size value after change. If 0, remove this price from order book |
-  | » a    | String  | Changed asks                                                              |
-  | »» p   | String  | Changed price                                                             |
-  | »» s   | String  | Absolute size value after change. If 0, remove this price from order book |
 
 ## [#](#order-book-update-unsubscription) Order book update unsubscription
 
@@ -1221,11 +1101,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | field    | type   | description                                                              |
-  | -------- | ------ | ------------------------------------------------------------------------ |
-  | interval | String | interval : "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
-  | contract | String | delivery contract name                                                   |
-
 ## [#](#candlesticks-notification) Candlesticks notification
 
 ```json
@@ -1270,20 +1145,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field | type    | description            |
-  | ----- | ------- | ---------------------- |
-  | t     | Integer | time                   |
-  | o     | String  | open                   |
-  | c     | String  | close                  |
-  | h     | String  | highest                |
-  | l     | String  | lowest                 |
-  | v     | Integer | volume                 |
-  | n     | String  | delivery contract name |
 
 ## [#](#cancel-subscription-3) Cancel subscription
 
@@ -1380,11 +1241,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#orders-notification) Orders notification
 
 ```json
@@ -1436,35 +1292,6 @@ The above command returns JSON structured like this:
 * params
 
   `For the meaning of parameters, please refer to http interface.`
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field          | type    | description                                 |
-  | -------------- | ------- | ------------------------------------------- |
-  | create_time    | Integer |                                             |
-  | create_time_ms | Integer | create unix timestamp in milliseconds       |
-  | fill_price     | Float   |                                             |
-  | finish_as      | String  |                                             |
-  | iceberg        | Integer |                                             |
-  | id             | Integer |                                             |
-  | is_close       | Integer |                                             |
-  | is_liq         | Integer |                                             |
-  | left           | Integer |                                             |
-  | mkfr           | Integer |                                             |
-  | is_reduce_only | Bool    |                                             |
-  | status         | String  |                                             |
-  | tkfr           | Integer |                                             |
-  | price          | Integer |                                             |
-  | refu           | Integer |                                             |
-  | size           | Integer |                                             |
-  | text           | String  |                                             |
-  | tif            | String  |                                             |
-  | finish_time    | Integer | order update unix timestamp in milliseconds |
-  | finish_time_ms | Integer | order update unix timestamp in milliseconds |
-  | user           | String  |                                             |
-  | contract       | String  |                                             |
 
 ## [#](#cancel-subscription-4) Cancel subscription
 
@@ -1572,11 +1399,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#user-trades-notification) User trades notification
 
 ```json
@@ -1613,21 +1435,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field          | type    | description                 |
-  | -------------- | ------- | --------------------------- |
-  | contract       | String  | delivery contract name      |
-  | create_time    | Integer | create time                 |
-  | create_time_ms | Integer | create time in milliseconds |
-  | id             | String  | trades id                   |
-  | order_id       | String  | Order Id                    |
-  | price          | String  | price                       |
-  | size           | Integer | trades size                 |
-  | role           | String  | user role (maker/taker)     |
 
 ## [#](#cancel-subscription-5) Cancel subscription
 
@@ -1735,11 +1542,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#liquidates-notification) Liquidates notification
 
 ```json
@@ -1781,27 +1583,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field       | type    | description             |
-  | ----------- | ------- | ----------------------- |
-  | entry_price | Float   | average entry price     |
-  | fill_price  | Float   | average execution price |
-  | leverage    | Float   | leverage                |
-  | liq_price   | Float   | liquidates price        |
-  | margin      | Float   | margin                  |
-  | mark_price  | Float   | mark price              |
-  | order_id    | Integer | order id                |
-  | order_price | Float   | commission price        |
-  | left        | Integer | order unfilled quantity |
-  | size        | Integer | position original size  |
-  | time        | Integer | time                    |
-  | time_ms     | Integer | time in milliseconds    |
-  | user        | String  | user id                 |
-  | contract    | String  | delivery contract name  |
 
 ## [#](#cancel-subscription-6) Cancel subscription
 
@@ -1909,11 +1690,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#auto-deleverages-notification) Auto_deleverages notification
 
 ```json
@@ -1949,21 +1725,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field         | type    | description            |
-  | ------------- | ------- | ---------------------- |
-  | entry_price   | Float   | entry price            |
-  | fill_price    | Float   | execution price        |
-  | position_size | Integer | position size          |
-  | trade_size    | Integer | trade size             |
-  | time          | Integer | time                   |
-  | time_ms       | Integer | time in milliseconds   |
-  | user          | String  | user id                |
-  | contract      | String  | delivery contract name |
 
 ## [#](#cancel-subscription-7) Cancel subscription
 
@@ -2071,11 +1832,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#position-closes-notification) Position_closes notification
 
 ```json
@@ -2110,20 +1866,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field    | type    | description            |
-  | -------- | ------- | ---------------------- |
-  | contract | String  | delivery contract name |
-  | pnl      | Number  | profit & loss          |
-  | side     | String  | side (long or short)   |
-  | text     | String  | messages               |
-  | time     | Integer | time                   |
-  | time_ms  | Integer | time in milliseconds   |
-  | user     | String  | user id                |
 
 ## [#](#cancel-subscription-8) Cancel subscription
 
@@ -2231,10 +1973,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description |
-  | --------- | ------ | -------- | ----------- |
-  | user id   | String | no       | user id     |
-
 ## [#](#balances-notification) balances notification
 
 ```json
@@ -2269,20 +2007,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field   | type    | description           |
-  | ------- | ------- | --------------------- |
-  | balance | Number  | balance after changed |
-  | change  | Number  | change                |
-  | text    | String  | messages              |
-  | time    | Integer | time                  |
-  | time_ms | Integer | time in milliseconds  |
-  | type    | String  | type                  |
-  | user    | String  | user id               |
 
 ## [#](#cancel-subscription-9) Cancel subscription
 
@@ -2378,11 +2102,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#reduce-risk-limits-notification) Reduce_risk_limits notification
 
 ```json
@@ -2420,22 +2139,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field            | type   | description          |
-  | ---------------- | ------ | -------------------- |
-  | cancel_orders    | Number | cancel orders        |
-  | contract         | String | contract name        |
-  | leverage_max     | Number | leverage max         |
-  | liq_price        | Number | liquidates price     |
-  | maintenance_rate | Number | maintenance rate     |
-  | risk_limit       | Number | risk limit           |
-  | time             | Number | time                 |
-  | time_ms          | Number | time in milliseconds |
-  | user             | String | user id              |
 
 ## [#](#cancel-subscription-10) Cancel subscription
 
@@ -2529,11 +2232,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#positions-notification) Positions notification
 
 ```json
@@ -2579,30 +2277,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field            | type    | description                                                                    |
-  | ---------------- | ------- | ------------------------------------------------------------------------------ |
-  | contract         | String  | delivery contract name                                                         |
-  | entry_price      | Float   | Entry price                                                                    |
-  | history_pnl      | Float   | History realized PNL                                                           |
-  | history_point    | Float   | History realized POINT PNL                                                     |
-  | last_close_pnl   | Float   | PNL of last position close                                                     |
-  | leverage         | Integer | Position leverage. 0 means cross margin; positive number means isolated margin |
-  | leverage_max     | Integer | Maximum leverage under current risk limit                                      |
-  | liq_price        | Float   | Liquidation price                                                              |
-  | maintenance_rate | Float   | Maintenance rate under current risk limit                                      |
-  | margin           | Float   | Position margin                                                                |
-  | realised_pnl     | Float   | Realized PNL                                                                   |
-  | realised_point   | Float   | Realized POINT PNL                                                             |
-  | risk_limit       | Integer | Position risk limit                                                            |
-  | size             | Number  | contract size                                                                  |
-  | time             | Number  | update unix timestamp                                                          |
-  | time_ms          | Number  | update unix timestamp in milliseconds                                          |
-  | user             | String  | user id                                                                        |
 
 ## [#](#cancel-subscription-11) Cancel subscription
 
@@ -2710,11 +2384,6 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter | type   | required | description                                               |
-  | --------- | ------ | -------- | --------------------------------------------------------- |
-  | user id   | String | no       | user id                                                   |
-  | contract  | String | yes      | delivery contract name. !all——Subscribe to all contracts. |
-
 ## [#](#auto-orders-notification) Auto orders notification
 
 ```json
@@ -2773,24 +2442,6 @@ The above command returns JSON structured like this:
   `update`
 
 * params
-
-  | field  | type  | description      |
-  | ------ | ----- | ---------------- |
-  | result | Array | Array of objects |
-
-  | field         | type    | description    |
-  | ------------- | ------- | -------------- |
-  | user          | Number  | user id        |
-  | trigger       | Object  | watch http api |
-  | initial       | Object  | watch http api |
-  | id            | Number  | auto order id  |
-  | trade_id      | Number  | trade id       |
-  | status        | String  | order status   |
-  | reason        | String  | change reason  |
-  | create_time   | Number  | create time    |
-  | name          | String  | name           |
-  | is_stop_order | boolean | is stop        |
-  | stop_trigger  | Object  | watch http api |
 
 ## [#](#cancel-subscription-12) Cancel subscription
 
