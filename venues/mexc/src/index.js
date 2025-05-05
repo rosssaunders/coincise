@@ -1,29 +1,30 @@
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import turndownService from './utils/turndownService.js'
-import { launchBrowserAndLoadPage } from './utils/puppeteerUtils.js'
-import { warn, info, error, success } from './utils/logger.js'
+import fs from "fs"
+import path from "path"
+import process from "process"
+import { fileURLToPath } from "url"
+import turndownService from "./turndownService.js"
+import { launchBrowserAndLoadPage } from "./puppeteerUtils.js"
+import { warn, info, error, success } from "./logger.js"
 
 // --- Configuration ---
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const API_CONFIGS = {
   spot: {
-    inputHtmlFile: 'https://mexcdevelop.github.io/apidocs/spot_v3_en',
-    outputDir: '../../docs/mexc/spot',
-    configDir: '../config/spot',
+    inputHtmlFile: "https://mexcdevelop.github.io/apidocs/spot_v3_en",
+    outputDir: "../../docs/mexc/spot",
+    configDir: "../config/spot"
   },
   contract: {
-    inputHtmlFile: 'https://mexcdevelop.github.io/apidocs/contract_v1_en',
-    outputDir: '../../docs/mexc/contract',
-    configDir: '../config/contract',
+    inputHtmlFile: "https://mexcdevelop.github.io/apidocs/contract_v1_en",
+    outputDir: "../../docs/mexc/contract",
+    configDir: "../config/contract"
   },
   broker: {
-    inputHtmlFile: 'https://mexcdevelop.github.io/apidocs/broker_en',
-    outputDir: '../../docs/mexc/broker',
-    configDir: '../config/broker',
-  },
+    inputHtmlFile: "https://mexcdevelop.github.io/apidocs/broker_en",
+    outputDir: "../../docs/mexc/broker",
+    configDir: "../config/broker"
+  }
 }
 
 /**
@@ -37,21 +38,21 @@ const API_CONFIGS = {
  *     - html: The complete HTML content of the section
  */
 async function extractSectionsFromPage(page) {
-  info('Extracting content sections...')
+  info("Extracting content sections...")
   return await page.evaluate(() => {
-    const contentNode = document.querySelector('.content')
+    const contentNode = document.querySelector(".content")
     if (!contentNode) {
-      warn('Could not find .content element in the page', [
-        'The page structure has changed',
-        'The HTML file is not loaded correctly',
-        'The content is in a different container element',
+      warn("Could not find .content element in the page", [
+        "The page structure has changed",
+        "The HTML file is not loaded correctly",
+        "The content is in a different container element"
       ])
       return {}
     }
 
     const sections = {}
     let currentSection = null
-    let currentSectionHtml = ''
+    let currentSectionHtml = ""
 
     const children = Array.from(contentNode.childNodes)
 
@@ -59,26 +60,29 @@ async function extractSectionsFromPage(page) {
       const node = children[i]
       const nodeName = node.nodeName.toUpperCase()
 
-      if (nodeName === 'H1') {
+      if (nodeName === "H1") {
         // Finish previous section if any
         if (currentSection) {
           sections[currentSection.title] = {
             title: currentSection.title,
-            html: currentSectionHtml,
+            html: currentSectionHtml
           }
         }
-        currentSectionHtml = ''
+        currentSectionHtml = ""
 
         // Start new section
-        const sectionTitle = node.textContent?.trim() || ''
+        const sectionTitle = node.textContent?.trim() || ""
         currentSection = {
-          title: sectionTitle,
+          title: sectionTitle
         }
       } else if (currentSection) {
         // Append content to the current section
         if (node.nodeType === Node.ELEMENT_NODE) {
-          currentSectionHtml += node.outerHTML || ''
-        } else if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+          currentSectionHtml += node.outerHTML || ""
+        } else if (
+          node.nodeType === Node.TEXT_NODE &&
+          node.textContent?.trim()
+        ) {
           currentSectionHtml += `<p>${node.textContent.trim()}</p>`
         }
       }
@@ -88,7 +92,7 @@ async function extractSectionsFromPage(page) {
     if (currentSection) {
       sections[currentSection.title] = {
         title: currentSection.title,
-        html: currentSectionHtml,
+        html: currentSectionHtml
       }
     }
 
@@ -114,11 +118,14 @@ function filterSectionsByConfig(sections, configObj) {
       sectionTitle.toLowerCase().includes(includeSection.toLowerCase())
     )
     if (!found) {
-      warn(`Could not find section matching "${includeSection}" in the extracted content`, [
-        'The section name has changed in the source',
-        'The section is no longer available',
-        'There is a typo in the config file',
-      ])
+      warn(
+        `Could not find section matching "${includeSection}" in the extracted content`,
+        [
+          "The section name has changed in the source",
+          "The section is no longer available",
+          "There is a typo in the config file"
+        ]
+      )
     }
   })
 
@@ -144,7 +151,7 @@ function filterSectionsByConfig(sections, configObj) {
  */
 function formatEndpointsMarkdown(sections, configTitle) {
   let markdown = `# ${configTitle}\n\n`
-  const separator = '\n\n---\n\n'
+  const separator = "\n\n---\n\n"
 
   // Iterate over sections object
   for (const [sectionTitle, section] of Object.entries(sections)) {
@@ -167,7 +174,7 @@ function formatEndpointsMarkdown(sections, configTitle) {
  * Processes sections based on configs and generates markdown
  */
 function processAndGenerateMarkdown(sectionsData, configObj) {
-  info('Processing sections based on configurations...')
+  info("Processing sections based on configurations...")
 
   // Filter sections based on this config
   const filteredSections = filterSectionsByConfig(sectionsData, configObj)
@@ -183,7 +190,7 @@ function processAndGenerateMarkdown(sectionsData, configObj) {
 async function convertHtmlToMarkdown(apiType) {
   if (!API_CONFIGS[apiType]) {
     error(`Invalid API type: ${apiType}`, [
-      `Valid API types are: ${Object.keys(API_CONFIGS).join(', ')}`,
+      `Valid API types are: ${Object.keys(API_CONFIGS).join(", ")}`
     ])
     process.exit(1)
   }
@@ -195,12 +202,16 @@ async function convertHtmlToMarkdown(apiType) {
     info(`Processing ${apiType} API documentation...`)
 
     // 1. Launch browser and load page
-    const { browser: launchedBrowser, page } = await launchBrowserAndLoadPage(config.inputHtmlFile)
+    const { browser: launchedBrowser, page } = await launchBrowserAndLoadPage(
+      config.inputHtmlFile
+    )
     browser = launchedBrowser
 
     // 2. Extract content sections
     const sectionsData = await extractSectionsFromPage(page)
-    info(`Extracted ${Object.keys(sectionsData).length} top-level sections for ${apiType} API.`)
+    info(
+      `Extracted ${Object.keys(sectionsData).length} top-level sections for ${apiType} API.`
+    )
 
     // Create output directory if it doesn't exist
     if (!fs.existsSync(config.outputDir)) {
@@ -215,12 +226,12 @@ async function convertHtmlToMarkdown(apiType) {
     // Read all JSON config files from the config directory
     const configFiles = fs
       .readdirSync(path.join(__dirname, config.configDir))
-      .filter(file => file.endsWith('.json'))
+      .filter(file => file.endsWith(".json"))
 
     if (configFiles.length === 0) {
       warn(`No config files found in ${config.configDir}`, [
-        'Please add JSON config files to the config directory',
-        'Each config file should contain the necessary configuration for a specific API section',
+        "Please add JSON config files to the config directory",
+        "Each config file should contain the necessary configuration for a specific API section"
       ])
       return
     }
@@ -228,15 +239,21 @@ async function convertHtmlToMarkdown(apiType) {
     for (const configFile of configFiles) {
       info(`Processing ${configFile} for ${apiType} API...`)
       const configObj = JSON.parse(
-        fs.readFileSync(path.join(__dirname, config.configDir, configFile), 'utf8')
+        fs.readFileSync(
+          path.join(__dirname, config.configDir, configFile),
+          "utf8"
+        )
       )
 
-      const markdownContent = processAndGenerateMarkdown(sectionsData, configObj)
+      const markdownContent = processAndGenerateMarkdown(
+        sectionsData,
+        configObj
+      )
 
       const outputFile = path.format({
         ...path.parse(configFile),
         base: undefined,
-        ext: '.md',
+        ext: ".md"
       })
       const fullOutputPath = path.join(config.outputDir, outputFile)
       const absoluteOutputPath = path.resolve(process.cwd(), fullOutputPath)
@@ -248,11 +265,15 @@ async function convertHtmlToMarkdown(apiType) {
 
     success(`Markdown files successfully generated for ${apiType} API`)
   } catch (err) {
-    error('An error occurred during processing', [err.message, 'Stack trace:', err.stack])
+    error("An error occurred during processing", [
+      err.message,
+      "Stack trace:",
+      err.stack
+    ])
     process.exit(1)
   } finally {
     if (browser) {
-      info('Closing Puppeteer...')
+      info("Closing Puppeteer...")
       await browser.close()
     }
   }
@@ -262,9 +283,9 @@ async function convertHtmlToMarkdown(apiType) {
 const apiType = process.argv[2]
 
 if (!apiType) {
-  error('No API type specified', [
-    'Usage: node index.js <api-type>',
-    `Valid API types are: ${Object.keys(API_CONFIGS).join(', ')}`,
+  error("No API type specified", [
+    "Usage: node index.js <api-type>",
+    `Valid API types are: ${Object.keys(API_CONFIGS).join(", ")}`
   ])
   process.exit(1)
 }
