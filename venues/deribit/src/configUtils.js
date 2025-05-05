@@ -1,6 +1,6 @@
-'use strict'
+"use strict"
 
-import { promises as fs } from 'fs'
+import { promises as fs } from "fs"
 
 /**
  * Utility class for configuration handling
@@ -14,14 +14,14 @@ class ConfigUtils {
    */
   static async loadConfig(configPath) {
     try {
-      const configData = await fs.readFile(configPath, 'utf8')
+      const configData = await fs.readFile(configPath, "utf8")
       const config = JSON.parse(configData)
 
       this.validateConfig(config)
 
       return config
     } catch (error) {
-      if (error.code === 'ENOENT') {
+      if (error.code === "ENOENT") {
         throw new Error(`Configuration file not found: ${configPath}`)
       }
       throw error
@@ -35,7 +35,11 @@ class ConfigUtils {
    */
   static validateConfig(config) {
     // Validate sections property
-    if (!config.sections || !Array.isArray(config.sections) || config.sections.length === 0) {
+    if (
+      !config.sections ||
+      !Array.isArray(config.sections) ||
+      config.sections.length === 0
+    ) {
       throw new Error(
         'Configuration must contain a "sections" array with at least one section name'
       )
@@ -47,13 +51,15 @@ class ConfigUtils {
     }
 
     // Validate title property (optional)
-    if (config.title && typeof config.title !== 'string') {
+    if (config.title && typeof config.title !== "string") {
       throw new Error('Configuration "title" must be a string when provided')
     }
 
     // Validate supportArticles if present
     if (config.supportArticles && !Array.isArray(config.supportArticles)) {
-      throw new Error('Configuration "supportArticles" must be an array when provided')
+      throw new Error(
+        'Configuration "supportArticles" must be an array when provided'
+      )
     }
   }
 }

@@ -1,11 +1,11 @@
-'use strict'
+"use strict"
 
-import { promises as fs } from 'fs'
-import path from 'path'
-import BrowserUtils from './utils/browserUtils.js'
-import MarkdownUtils from './utils/markdownUtils.js'
-import ExtractionUtils from './utils/extractionUtils.js'
-import ConfigUtils from './utils/configUtils.js'
+import { promises as fs } from "fs"
+import path from "path"
+import BrowserUtils from "./browserUtils.js"
+import MarkdownUtils from "./markdownUtils.js"
+import ExtractionUtils from "./extractionUtils.js"
+import ConfigUtils from "./configUtils.js"
 
 /**
  * Main application class for extracting Deribit API documentation
@@ -29,7 +29,9 @@ class DeribitDocExtractor {
     try {
       // Load and validate configuration
       this.config = await ConfigUtils.loadConfig(this.configPath)
-      console.log(`Loaded configuration with ${this.config.sections.length} sections to extract`)
+      console.log(
+        `Loaded configuration with ${this.config.sections.length} sections to extract`
+      )
 
       // Initialize Turndown service for Markdown conversion
       this.turndownService = MarkdownUtils.initTurndownService()
@@ -60,19 +62,26 @@ class DeribitDocExtractor {
 
     try {
       // Load the Deribit API documentation
-      await page.goto('https://docs.deribit.com', {
-        waitUntil: 'networkidle0',
-        timeout: 60000,
+      await page.goto("https://docs.deribit.com", {
+        waitUntil: "networkidle0",
+        timeout: 60000
       })
 
       // Extract the selected sections
-      const content = await ExtractionUtils.extractSelectedSections(page, this.config.sections)
+      const content = await ExtractionUtils.extractSelectedSections(
+        page,
+        this.config.sections
+      )
 
-      console.log(`Found and extracted ${content.matchedSections.length} sections:`)
+      console.log(
+        `Found and extracted ${content.matchedSections.length} sections:`
+      )
       content.matchedSections.forEach(section => console.log(`  - ${section}`))
 
       if (content.matchedSections.length === 0) {
-        console.warn('No matching sections found. Check your section names in the config file.')
+        console.warn(
+          "No matching sections found. Check your section names in the config file."
+        )
       }
 
       // Convert to markdown
@@ -86,20 +95,28 @@ class DeribitDocExtractor {
    * Extract content from support articles
    */
   async extractSupportArticles() {
-    if (!this.config.supportArticles || this.config.supportArticles.length === 0) {
-      console.log('No support articles specified in configuration. Skipping.')
-      return ''
+    if (
+      !this.config.supportArticles ||
+      this.config.supportArticles.length === 0
+    ) {
+      console.log("No support articles specified in configuration. Skipping.")
+      return ""
     }
 
-    console.log(`Processing ${this.config.supportArticles.length} support articles...`)
-    let supportContent = '## Support Articles\n\n'
+    console.log(
+      `Processing ${this.config.supportArticles.length} support articles...`
+    )
+    let supportContent = "## Support Articles\n\n"
 
     for (const url of this.config.supportArticles) {
       console.log(`Processing support article: ${url}`)
       const page = await BrowserUtils.createPage(this.browser)
 
       try {
-        const articleContent = await ExtractionUtils.extractSupportArticle(page, url)
+        const articleContent = await ExtractionUtils.extractSupportArticle(
+          page,
+          url
+        )
 
         if (articleContent) {
           const articleMarkdown = this.turndownService.turndown(articleContent)
@@ -124,21 +141,21 @@ class DeribitDocExtractor {
    */
   async run() {
     try {
-      console.log('Starting documentation extraction process...')
+      console.log("Starting documentation extraction process...")
 
       // Extract the main API documentation
-      console.log('Extracting selected API documentation sections...')
+      console.log("Extracting selected API documentation sections...")
       const mainContent = await this.extractApiDocumentation()
-      console.log('API documentation extraction complete')
+      console.log("API documentation extraction complete")
 
       // Extract support articles if specified
-      console.log('Extracting support articles...')
+      console.log("Extracting support articles...")
       const supportContent = await this.extractSupportArticles()
-      console.log('Support articles extraction complete')
+      console.log("Support articles extraction complete")
 
       // Combine the content
-      console.log('Creating documentation file...')
-      let combinedMarkdown = `# ${this.config.title || 'Deribit API Documentation'}\n\n`
+      console.log("Creating documentation file...")
+      let combinedMarkdown = `# ${this.config.title || "Deribit API Documentation"}\n\n`
 
       // Add the main API documentation
       combinedMarkdown += `${mainContent}\n\n`
@@ -156,9 +173,9 @@ class DeribitDocExtractor {
       await fs.writeFile(this.config.output, combinedMarkdown)
       console.log(`Documentation written to: ${this.config.output}`)
 
-      console.log('Documentation extraction complete!')
+      console.log("Documentation extraction complete!")
     } catch (error) {
-      console.error('Error in extraction process:', error)
+      console.error("Error in extraction process:", error)
       throw error
     }
   }

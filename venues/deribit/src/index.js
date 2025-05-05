@@ -1,6 +1,7 @@
-'use strict'
+"use strict"
 
-import DeribitDocExtractor from './DeribitDocExtractor.js'
+import process from "process"
+import DeribitDocExtractor from "./DeribitDocExtractor.js"
 
 /**
  * Main execution function
@@ -10,8 +11,8 @@ const main = async () => {
   const configPath = process.argv[2]
 
   if (!configPath) {
-    console.error('Error: No configuration file specified')
-    console.log('Usage: node index.js <path-to-config-file>')
+    console.error("Error: No configuration file specified")
+    console.log("Usage: node index.js <path-to-config-file>")
     process.exit(1)
   }
 
@@ -26,7 +27,7 @@ const main = async () => {
 
     process.exit(0)
   } catch (error) {
-    console.error('Unhandled error:', error)
+    console.error("Unhandled error:", error)
     process.exit(1)
   } finally {
     // Clean up resources
@@ -36,6 +37,6 @@ const main = async () => {
 
 // Start the application
 main().catch(error => {
-  console.error('Unhandled error:', error)
+  console.error("Unhandled error:", error)
   process.exit(1)
 })

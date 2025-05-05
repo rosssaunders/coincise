@@ -1,7 +1,7 @@
-'use strict'
+"use strict"
 
-import TurndownService from 'turndown'
-import turndownPluginGfm from 'turndown-plugin-gfm'
+import TurndownService from "turndown"
+import turndownPluginGfm from "turndown-plugin-gfm"
 
 /**
  * Utility class for Markdown conversion
@@ -14,20 +14,20 @@ class MarkdownUtils {
   static initTurndownService() {
     // Initialize Turndown with GFM
     const turndownService = new TurndownService({
-      codeBlockStyle: 'fenced',
-      fence: '```',
+      codeBlockStyle: "fenced",
+      fence: "```"
     })
 
     // Add GFM plugins (tables, strikethrough, etc)
     turndownService.use(turndownPluginGfm.gfm)
 
     // Add custom rule to preserve line breaks in table cells
-    turndownService.addRule('tableCellWithBr', {
-      filter: 'td',
+    turndownService.addRule("tableCellWithBr", {
+      filter: "td",
       replacement: (content, node) => {
-        const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, '<br>')
+        const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, "<br>")
         return `| ${cellContent} `
-      },
+      }
     })
 
     return turndownService
