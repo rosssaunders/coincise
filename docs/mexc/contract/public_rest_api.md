@@ -15,7 +15,7 @@
     "fairPrice": 8000,
     "timestamp": 1587442022003
   }
-}
+} 
 ```
 
 > or
@@ -28,14 +28,11 @@
 }
 ```
 
-- https://contract.mexc.com
+*   https://contract.mexc.com
 
-The corresponding API accepts a request of Type GET, POST, or DELETE. The
-content-type of POST request is: application/JSON.
+The corresponding API accepts a request of Type GET, POST, or DELETE. The content-type of POST request is: application/JSON.
 
-Parameters are sent in JSON format (parameter naming rules are camel named), and
-get requests are sent in requestParam (parameter naming rules are '\_'
-delimited)
+Parameters are sent in JSON format (parameter naming rules are camel named), and get requests are sent in requestParam (parameter naming rules are '\_' delimited)
 
 ## Authentication method
 
@@ -109,60 +106,35 @@ public static class SignVo {
 ```
 
 1.  Signature is not required for public endpoint.
-2.  For private endpoint, ApiKey, Request-Time, Signature and Content-Type need
-    to be passed into the header, must be specified as application / JSON,
-    Recv-Window (optional) parameters, Signature is a signature string. The
-    signature rules are as follows:
+    
+2.  For private endpoint, ApiKey, Request-Time, Signature and Content-Type need to be passed into the header, must be specified as application / JSON, Recv-Window (optional) parameters, Signature is a signature string. The signature rules are as follows:
+    
 
-1) When signing, you need to get the request parameter string first. It is "" if
-   there is no parameter:
+1) When signing, you need to get the request parameter string first. It is "" if there is no parameter:
 
-For GET/DELETE requests, the service parameters are spliced in dictionary order
-with & interval, and finally the signature target string is obtained (in the API
-of batch operation, if there are special symbols such as comma in the parameter
-value, these symbols need to be URL encoded when signing).
+For GET/DELETE requests, the service parameters are spliced in dictionary order with & interval, and finally the signature target string is obtained (in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
 
-For POST requests, the signature parameter is a JSON string (dictionary sorting
-is not required).
+For POST requests, the signature parameter is a JSON string (dictionary sorting is not required).
 
-2. After obtaining the parameter string, the signature target string is spliced.
-   The rule is: accessKey + timestamp + obtained parameter string.
+2) After obtaining the parameter string, the signature target string is spliced. The rule is: accessKey + timestamp + obtained parameter string.
 
-3. The HMAC SHA256 algorithm is used to sign the target string, and finally the
-   signature is passed into the header as a parameter.
+3) The HMAC SHA256 algorithm is used to sign the target string, and finally the signature is passed into the header as a parameter.
 
 Note：
 
-1. When the service parameter participating in the signature is null, it does
-   not participate in the signature. For the path parameter, it does not
-   participate in the signature; note that when get request stitches the
-   parameter and pass it in the URL, if the parameter is null, it will be parsed
-   into "" in the background parsing, fixed post request, when the parameter is
-   null, do not pass the parameter, or set the value of the parameter to "" when
-   signing, otherwise signature verification will fail.
+1) When the service parameter participating in the signature is null, it does not participate in the signature. For the path parameter, it does not participate in the signature; note that when get request stitches the parameter and pass it in the URL, if the parameter is null, it will be parsed into "" in the background parsing, fixed post request, when the parameter is null, do not pass the parameter, or set the value of the parameter to "" when signing, otherwise signature verification will fail.
 
-2. When requesting, put the value of Request-Time used in signing into the
-   Request-Time parameter of the header, put the obtained signature string into
-   the signature parameter of the header, put the Access Key of APIKEY into the
-   ApiKey parameter of the header, and pass the other service parameters.
+2) When requesting, put the value of Request-Time used in signing into the Request-Time parameter of the header, put the obtained signature string into the signature parameter of the header, put the Access Key of APIKEY into the ApiKey parameter of the header, and pass the other service parameters.
 
-3. The obtained signature string does not need to be base64 encoded.
+3) The obtained signature string does not need to be base64 encoded.
 
 ## Time security
 
-All APIs that require signature process need to fill in header parameter of
-Request-time, which is timestamp in milliseconds, when receives the request, the
-system verifies the time range from which the request was issued. The request is
-considered invalid if the received req_time is less or more than 10 seconds (the
-default value) (the time window can be adjusted by sending an optional header
-parameter `recv-window` with a maximum value of 60, `recv_window` of 30 seconds
-or more is not recommended)
+All APIs that require signature process need to fill in header parameter of Request-time, which is timestamp in milliseconds, when receives the request, the system verifies the time range from which the request was issued. The request is considered invalid if the received req\_time is less or more than 10 seconds (the default value) (the time window can be adjusted by sending an optional header parameter `recv-window` with a maximum value of 60, `recv_window` of 30 seconds or more is not recommended)
 
 ## Create API key
 
-Users can create API key in the personal center of MEXC, which is used for
-signature calculation and authentication, an API key is consist of two parts,
-secret key of Access keyAPI and secret key corresponding to Secret key.
+Users can create API key in the personal center of MEXC, which is used for signature calculation and authentication, an API key is consist of two parts, secret key of Access keyAPI and secret key corresponding to Secret key.
 
 ---
 
@@ -174,87 +146,86 @@ Every endpoint has the potential for abnormalities.
 
 The following is the error code information that the endpoint might return
 
-| code | description                                                                                     |
-| ---- | ----------------------------------------------------------------------------------------------- |
-| 0    | Operate succeed                                                                                 |
-| 9999 | Public abnormal                                                                                 |
-| 500  | Internal error                                                                                  |
-| 501  | System busy                                                                                     |
-| 401  | Unauthorized                                                                                    |
-| 402  | Api_key expired                                                                                 |
-| 406  | Accessed IP is not in the whitelist                                                             |
-| 506  | Unknown source of request                                                                       |
-| 510  | Excessive frequency of requests                                                                 |
-| 511  | Endpoint inaccessible                                                                           |
-| 513  | Invalid request(for open api serves time more or less than 10s)                                 |
-| 600  | Parameter error                                                                                 |
-| 601  | Data decoding error                                                                             |
-| 602  | Verify failed                                                                                   |
-| 603  | Repeated requests                                                                               |
-| 701  | Account read permission is required                                                             |
-| 702  | Account modify permission is required                                                           |
-| 703  | Trade information read permission is required                                                   |
-| 704  | Transaction information modify permission is required                                           |
-| 1000 | Account does not exist                                                                          |
-| 1001 | Contract does not exist                                                                         |
-| 1002 | Contract not activated                                                                          |
-| 1003 | Error in risk limit level                                                                       |
-| 1004 | Amount error                                                                                    |
-| 2001 | Wrong order direction                                                                           |
-| 2002 | Wrong opening type                                                                              |
-| 2003 | Overpriced to pay                                                                               |
-| 2004 | Low-price for selling                                                                           |
-| 2005 | Balance insufficient                                                                            |
-| 2006 | Leverage ratio error                                                                            |
-| 2007 | Order price error                                                                               |
-| 2008 | The quantity is insufficient                                                                    |
-| 2009 | Positions do not exist or have been closed                                                      |
-| 2011 | Order quantity error                                                                            |
-| 2013 | Cancel orders over maximum limit                                                                |
-| 2014 | The quantity of batch order exceeds the limit                                                   |
-| 2015 | Price or quantity accuracy error                                                                |
-| 2016 | Trigger volume over the maximum                                                                 |
-| 2018 | Exceeding the maximum available margin                                                          |
-| 2019 | There is an active open position                                                                |
-| 2021 | The single leverage is not consistent with the existing position leverage                       |
-| 2022 | Wrong position type                                                                             |
-| 2023 | There are positions over the maximum leverage                                                   |
-| 2024 | There are orders with leverage over the maximum                                                 |
-| 2025 | The holding positions is over the maximum allowable positions                                   |
-| 2026 | Modification of leverage is not supported for cross                                             |
-| 2027 | There is only one cross or isolated in the same direction                                       |
-| 2028 | The maximum order quantity is exceeded                                                          |
-| 2029 | Error order type                                                                                |
-| 2030 | External order ID is too long (Max. 32 bits )                                                   |
-| 2031 | The allowable holding position exceed the current risk limit                                    |
-| 2032 | Order price is less than long position force liquidate price                                    |
-| 2033 | Order price is more than short position force liquidate price                                   |
-| 2034 | The batch query quantity limit is exceeded                                                      |
-| 2035 | Unsupported market price tier                                                                   |
-| 3001 | Trigger price type error                                                                        |
-| 3002 | Trigger type error                                                                              |
-| 3003 | Executive cycle error                                                                           |
-| 3004 | Trigger price error                                                                             |
-| 4001 | Unsupported currency                                                                            |
-| 2036 | The orders more than the limit, please contact customer service                                 |
-| 2037 | Frequent transactions, please try it later                                                      |
-| 2038 | The maximum allowable position quantity is exceeded, please contact customer service!           |
-| 5001 | The take-price and the stop-loss price cannot be none at the same time                          |
-| 5002 | The Stop-Limit order does not exist or has closed                                               |
-| 5003 | Take-profit and stop-loss price setting is wrong                                                |
+| code | description |
+| --- | --- |
+| 0 | Operate succeed |
+| 9999 | Public abnormal |
+| 500 | Internal error |
+| 501 | System busy |
+| 401 | Unauthorized |
+| 402 | Api\_key expired |
+| 406 | Accessed IP is not in the whitelist |
+| 506 | Unknown source of request |
+| 510 | Excessive frequency of requests |
+| 511 | Endpoint inaccessible |
+| 513 | Invalid request(for open api serves time more or less than 10s) |
+| 600 | Parameter error |
+| 601 | Data decoding error |
+| 602 | Verify failed |
+| 603 | Repeated requests |
+| 701 | Account read permission is required |
+| 702 | Account modify permission is required |
+| 703 | Trade information read permission is required |
+| 704 | Transaction information modify permission is required |
+| 1000 | Account does not exist |
+| 1001 | Contract does not exist |
+| 1002 | Contract not activated |
+| 1003 | Error in risk limit level |
+| 1004 | Amount error |
+| 2001 | Wrong order direction |
+| 2002 | Wrong opening type |
+| 2003 | Overpriced to pay |
+| 2004 | Low-price for selling |
+| 2005 | Balance insufficient |
+| 2006 | Leverage ratio error |
+| 2007 | Order price error |
+| 2008 | The quantity is insufficient |
+| 2009 | Positions do not exist or have been closed |
+| 2011 | Order quantity error |
+| 2013 | Cancel orders over maximum limit |
+| 2014 | The quantity of batch order exceeds the limit |
+| 2015 | Price or quantity accuracy error |
+| 2016 | Trigger volume over the maximum |
+| 2018 | Exceeding the maximum available margin |
+| 2019 | There is an active open position |
+| 2021 | The single leverage is not consistent with the existing position leverage |
+| 2022 | Wrong position type |
+| 2023 | There are positions over the maximum leverage |
+| 2024 | There are orders with leverage over the maximum |
+| 2025 | The holding positions is over the maximum allowable positions |
+| 2026 | Modification of leverage is not supported for cross |
+| 2027 | There is only one cross or isolated in the same direction |
+| 2028 | The maximum order quantity is exceeded |
+| 2029 | Error order type |
+| 2030 | External order ID is too long (Max. 32 bits ) |
+| 2031 | The allowable holding position exceed the current risk limit |
+| 2032 | Order price is less than long position force liquidate price |
+| 2033 | Order price is more than short position force liquidate price |
+| 2034 | The batch query quantity limit is exceeded |
+| 2035 | Unsupported market price tier |
+| 3001 | Trigger price type error |
+| 3002 | Trigger type error |
+| 3003 | Executive cycle error |
+| 3004 | Trigger price error |
+| 4001 | Unsupported currency |
+| 2036 | The orders more than the limit, please contact customer service |
+| 2037 | Frequent transactions, please try it later |
+| 2038 | The maximum allowable position quantity is exceeded, please contact customer service! |
+| 5001 | The take-price and the stop-loss price cannot be none at the same time |
+| 5002 | The Stop-Limit order does not exist or has closed |
+| 5003 | Take-profit and stop-loss price setting is wrong |
 | 5004 | The take-profit and stop-loss order volume is more than the holding positions can be liquidated |
-| 6001 | Trading forbidden                                                                               |
-| 6002 | Open forbidden                                                                                  |
-| 6003 | Time range error                                                                                |
-| 6004 | The trading pair and status should be fill in                                                   |
-| 6005 | The trading pair is not available                                                               |
+| 6001 | Trading forbidden |
+| 6002 | Open forbidden |
+| 6003 | Time range error |
+| 6004 | The trading pair and status should be fill in |
+| 6005 | The trading pair is not available |
 
 ---
 
 ## Market endpoints
 
-The API endpoint under the \[Market endpoints\] module doesn't require
-authentication.
+The API endpoint under the \[Market endpoints\] module doesn't require authentication.
 
 ## Get the server time
 
@@ -269,11 +240,11 @@ curl "https://contract.mexc.com/api/v1/contract/ping"
 ```
 {
   "success": true,
-  "data":1587442022003
+  "data":1587442022003 
 }
 ```
 
-- **GET** `api/v1/contract/ping`
+*   **GET** `api/v1/contract/ping`
 
 rate limit: 20 times / 2 seconds
 
@@ -358,54 +329,54 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
 }
 ```
 
-- **GET** `api/v1/contract/detail`
+*   **GET** `api/v1/contract/detail`
 
 Rate limit: 1 times / 5 seconds
 
 **Request parameters:**
 
-| Parameter | Date Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | false     | the name of the contract |
+| Parameter | Date Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | false | the name of the contract |
 
 **Response parameters:**
 
-| Parameter                 | Date Type | Description                                                          |
-| ------------------------- | --------- | -------------------------------------------------------------------- |
-| symbol                    | string    | the name of the contract                                             |
-| displayName               | string    | display name                                                         |
-| displayNameEn             | string    | english display name                                                 |
-| positionOpenType          | int       | position open type,1：isolated，2：cross，3：both                    |
-| baseCoin                  | string    | base currency such as BTC                                            |
-| quoteCoin                 | string    | quote currency such as USDT                                          |
-| settleCoin                | string    | liquidation currency such as USDT                                    |
-| contractSize              | decimal   | contract value                                                       |
-| minLeverage               | int       | minimum leverage                                                     |
-| maxLeverage               | int       | maximum leverage                                                     |
-| priceScale                | int       | price scale                                                          |
-| volScale                  | int       | quantity scale                                                       |
-| amountScale               | int       | amount scale                                                         |
-| priceUnit                 | int       | price unit                                                           |
-| volUnit                   | int       | volume unit                                                          |
-| minVol                    | decimal   | minimum volume                                                       |
-| maxVol                    | decimal   | maximum volume                                                       |
-| bidLimitPriceRate         | decimal   | bid limit price rate                                                 |
-| askLimitPriceRate         | decimal   | ask limit price rate                                                 |
-| takerFeeRate              | decimal   | taker rate                                                           |
-| makerFeeRate              | decimal   | maker rate                                                           |
-| maintenanceMarginRate     | decimal   | maintenance margin rate                                              |
-| initialMarginRate         | decimal   | initial margin rate                                                  |
-| riskBaseVol               | decimal   | initial volume                                                       |
-| riskIncrVol               | decimal   | risk increasing volume                                               |
-| riskIncrMmr               | decimal   | maintain increasing margin rate                                      |
-| riskIncrImr               | decimal   | initial increasing margin rate                                       |
-| riskLevelLimit            | int       | risk level limit                                                     |
-| priceCoefficientVariation | decimal   | fair price coefficient variation                                     |
-| indexOrigin               | List      | index origin                                                         |
-| state                     | int       | status, 0:enabled,1:delivery, 2:completed, 3: offline, 4: pause      |
-| apiAllowed                | bool      | whether support api                                                  |
-| conceptPlate              | List      | The zone, corresponding to the entryKey field of the section list    |
-| riskLimitType             | List      | Risk limit type, BY_VOLUME: by the volume, BY_VALUE: by the position |
+| Parameter | Date Type | Description |
+| --- | --- | --- |
+| symbol | string | the name of the contract |
+| displayName | string | display name |
+| displayNameEn | string | english display name |
+| positionOpenType | int | position open type,1：isolated，2：cross，3：both |
+| baseCoin | string | base currency such as BTC |
+| quoteCoin | string | quote currency such as USDT |
+| settleCoin | string | liquidation currency such as USDT |
+| contractSize | decimal | contract value |
+| minLeverage | int | minimum leverage |
+| maxLeverage | int | maximum leverage |
+| priceScale | int | price scale |
+| volScale | int | quantity scale |
+| amountScale | int | amount scale |
+| priceUnit | int | price unit |
+| volUnit | int | volume unit |
+| minVol | decimal | minimum volume |
+| maxVol | decimal | maximum volume |
+| bidLimitPriceRate | decimal | bid limit price rate |
+| askLimitPriceRate | decimal | ask limit price rate |
+| takerFeeRate | decimal | taker rate |
+| makerFeeRate | decimal | maker rate |
+| maintenanceMarginRate | decimal | maintenance margin rate |
+| initialMarginRate | decimal | initial margin rate |
+| riskBaseVol | decimal | initial volume |
+| riskIncrVol | decimal | risk increasing volume |
+| riskIncrMmr | decimal | maintain increasing margin rate |
+| riskIncrImr | decimal | initial increasing margin rate |
+| riskLevelLimit | int | risk level limit |
+| priceCoefficientVariation | decimal | fair price coefficient variation |
+| indexOrigin | List | index origin |
+| state | int | status, 0:enabled,1:delivery, 2:completed, 3: offline, 4: pause |
+| apiAllowed | bool | whether support api |
+| conceptPlate | List | The zone, corresponding to the entryKey field of the section list |
+| riskLimitType | List | Risk limit type, BY\_VOLUME: by the volume, BY\_VALUE: by the position |
 
 ## Get the transferable currencies
 
@@ -429,7 +400,7 @@ curl "https://contract.mexc.com/api/v1/contract/support_currencies"
 }
 ```
 
-- **GET** `api/v1/contract/support_currencies`
+*   **GET** `api/v1/contract/support_currencies`
 
 Rate limit: 20 times /2 seconds
 
@@ -439,8 +410,7 @@ None
 
 **Response parameters:**
 
-The returned "data" field contains a list of string with each string represents
-a suppported currency.
+The returned "data" field contains a list of string with each string represents a suppported currency.
 
 ## Get the contract‘s depth information
 
@@ -482,28 +452,27 @@ curl "https://contract.mexc.com/api/v1/contract/depth/BTC_USDT"
 }
 ```
 
-- **GET** `api/v1/contract/depth/{symbol}`
+*   **GET** `api/v1/contract/depth/{symbol}`
 
 Rate limit: 20 times /2 seconds
 
 **Request parameters:**
 
-| Parameter | Date Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | true      | the name of the contract |
-| limit     | int       | false     | tier                     |
+| Parameter | Date Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| limit | int | false | tier |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description        |
-| --------- | --------- | ------------------ |
-| asks      | List      | the seller depth   |
-| bids      | List      | the buyer depth    |
-| version   | long      | the version number |
-| timestamp | long      | system timestamp   |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| asks | List | the seller depth |
+| bids | List | the buyer depth |
+| version | long | the version number |
+| timestamp | long | system timestamp |
 
-note: \[411.8, 10, 1\] 411.8 is the price，10 is the volume of contracts for
-this price,1 is the order quantity
+note: \[411.8, 10, 1\] 411.8 is the price，10 is the volume of contracts for this price,1 is the order quantity
 
 ## Get a snapshot of the latest N depth information of the contract
 
@@ -535,24 +504,24 @@ curl "https://contract.mexc.com/api/v1/contract/depth_commits/BTC_USDT/20"
 }
 ```
 
-- **GET** `api/v1/contract/depth_commits/{symbol}/{limit}`
+*   **GET** `api/v1/contract/depth_commits/{symbol}/{limit}`
 
 Rate limit: 20 times /2 seconds
 
 **Request parameter:**
 
-| Parameter | Data Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | true      | the name of the contract |
-| limit     | int       | true      | count                    |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| limit | int | true | count |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description        |
-| --------- | --------- | ------------------ |
-| asks      | List      | the seller depth   |
-| bids      | List      | the buyer depth    |
-| version   | long      | the version number |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| asks | List | the seller depth |
+| bids | List | the buyer depth |
+| version | long | the version number |
 
 ## Get contract index price
 
@@ -576,23 +545,23 @@ curl "https://contract.mexc.com/api/v1/contract/index_price/BTC_USDT"
 }
 ```
 
-- **GET** `api/v1/contract/index_price/{symbol}`
+*   **GET** `api/v1/contract/index_price/{symbol}`
 
 Rate limit: 20 times /2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | true      | the name of the contract |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
 
 **Response parameters:**
 
-| Parameter  | Data Type | Description      |
-| ---------- | --------- | ---------------- |
-| symbol     | string    | trading pair     |
-| indexPrice | decimal   | index price      |
-| timestamp  | long      | system timestamp |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| symbol | string | trading pair |
+| indexPrice | decimal | index price |
+| timestamp | long | system timestamp |
 
 ## Get contract fair price
 
@@ -616,23 +585,23 @@ curl "https://contract.mexc.com/api/v1/contract/fair_price/BTC_USDT"
 }
 ```
 
-- **GET** `api/v1/contract/fair_price/{symbol}`
+*   **GET** `api/v1/contract/fair_price/{symbol}`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | true      | the name of the contract |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description              |
-| --------- | --------- | ------------------------ |
-| symbol    | string    | the name of the contract |
-| fairPrice | decimal   | fair price               |
-| timestamp | long      | system timestamp         |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| symbol | string | the name of the contract |
+| fairPrice | decimal | fair price |
+| timestamp | long | system timestamp |
 
 ## Get contract funding rate
 
@@ -660,27 +629,27 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 }
 ```
 
-- **GET** `api/v1/contract/funding_rate/{symbol}`
+*   **GET** `api/v1/contract/funding_rate/{symbol}`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | true      | the name of the contract |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
 
 **Response parameters:**
 
-| Parameter      | Data Type | Description              |
-| -------------- | --------- | ------------------------ |
-| symbol         | string    | the name of the contract |
-| fundingRate    | decimal   | funding rate             |
-| maxFundingRate | decimal   | max funding rate         |
-| minFundingRate | decimal   | min funding rate         |
-| collectCycle   | int       | charge cycle             |
-| nextSettleTime | long      | next charge time         |
-| timestamp      | long      | system timestamp         |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| symbol | string | the name of the contract |
+| fundingRate | decimal | funding rate |
+| maxFundingRate | decimal | max funding rate |
+| minFundingRate | decimal | min funding rate |
+| collectCycle | int | charge cycle |
+| nextSettleTime | long | next charge time |
+| timestamp | long | system timestamp |
 
 ## K-line data
 
@@ -722,43 +691,35 @@ curl "https://contract.mexc.com/api/v1/contract/kline/BTC_USDT?interval=Min15&st
 }
 ```
 
-- **GET** `api/v1/contract/kline/{symbol}`
+*   **GET** `api/v1/contract/kline/{symbol}`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description                                                                                |
-| --------- | --------- | --------- | ------------------------------------------------------------------------------------------ |
-| symbol    | string    | true      | the name of the contract                                                                   |
-| interval  | string    | false     | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1,default: Min1 |
-| start     | long      | false     | start timestamp,seconds                                                                    |
-| end       | long      | false     | end timestamp,seconds                                                                      |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| interval | string | false | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1,default: Min1 |
+| start | long | false | start timestamp,seconds |
+| end | long | false | end timestamp,seconds |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description       |
-| --------- | --------- | ----------------- |
-| open      | double    | the opening price |
-| close     | double    | the closing price |
-| high      | double    | the highest price |
-| low       | double    | the lowest price  |
-| vol       | double    | volume            |
-| time      | long      | time window       |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| open | double | the opening price |
+| close | double | the closing price |
+| high | double | the highest price |
+| low | double | the lowest price |
+| vol | double | volume |
+| time | long | time window |
 
 Attention:
 
-1、The maximum data in a single request is 2000 pieces. If your choice of
-start/end time and granularity of time results in more than the maximum volume
-of data in a single request, your request will only return 2000 pieces. If you
-want to get sufficiently fine-grained data over a larger time range, you need to
-make several times requests.
+1、The maximum data in a single request is 2000 pieces. If your choice of start/end time and granularity of time results in more than the maximum volume of data in a single request, your request will only return 2000 pieces. If you want to get sufficiently fine-grained data over a larger time range, you need to make several times requests.
 
-2、If only the start time is provided, then query the data from the start time
-to the current system time. If only the end time is provided, the 2000 pieces of
-data closest to the end time are returned. If neither start time nor end time is
-provided, the 2000 pieces of data closest to the current time in the system are
-queried.
+2、If only the start time is provided, then query the data from the start time to the current system time. If only the end time is provided, the 2000 pieces of data closest to the end time are returned. If neither start time nor end time is provided, the 2000 pieces of data closest to the current time in the system are queried.
 
 ## Get K-line data of the index price
 
@@ -800,43 +761,35 @@ curl "https://contract.mexc.com/api/v1/contract/kline/index_price/BTC_USDT?inter
 }
 ```
 
-- **GET** `api/v1/contract/kline/index_price/{symbol}`
+*   **GET** `api/v1/contract/kline/index_price/{symbol}`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description                                                                                |
-| --------- | --------- | --------- | ------------------------------------------------------------------------------------------ |
-| symbol    | string    | true      | the name of the contract                                                                   |
-| interval  | string    | false     | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1,default: Min1 |
-| start     | long      | false     | start timestamp,seconds                                                                    |
-| end       | long      | false     | end timestamp,seconds                                                                      |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| interval | string | false | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1,default: Min1 |
+| start | long | false | start timestamp,seconds |
+| end | long | false | end timestamp,seconds |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description       |
-| --------- | --------- | ----------------- |
-| open      | double    | the opening price |
-| close     | double    | the closing price |
-| high      | double    | the highest price |
-| low       | double    | the lowest price  |
-| vol       | double    | volume            |
-| time      | long      | time window       |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| open | double | the opening price |
+| close | double | the closing price |
+| high | double | the highest price |
+| low | double | the lowest price |
+| vol | double | volume |
+| time | long | time window |
 
 Attention:
 
-1、The maximum data in a single request is 2000 pieces. If your choice of
-start/end time and granularity of time results in more than the maximum volume
-of data in a single request, your request will only return 2000 pieces. If you
-want to get sufficiently fine-grained data over a larger time range, you need to
-make several times requests.
+1、The maximum data in a single request is 2000 pieces. If your choice of start/end time and granularity of time results in more than the maximum volume of data in a single request, your request will only return 2000 pieces. If you want to get sufficiently fine-grained data over a larger time range, you need to make several times requests.
 
-2、If only the start time is provided, then query the data from the start time
-to the current system time. If only the end time is provided, the 2000 pieces of
-data closest to the end time are returned. If neither start time nor end time is
-provided, the 2000 pieces of data closest to the current time in the system are
-queried.
+2、If only the start time is provided, then query the data from the start time to the current system time. If only the end time is provided, the 2000 pieces of data closest to the end time are returned. If neither start time nor end time is provided, the 2000 pieces of data closest to the current time in the system are queried.
 
 ## Get K-line data of the fair price
 
@@ -878,43 +831,35 @@ curl "https://contract.mexc.com/api/v1/contract/kline/fair_price/BTC_USDT?interv
 }
 ```
 
-- **GET** `api/v1/contract/kline/fair_price/{symbol}`
+*   **GET** `api/v1/contract/kline/fair_price/{symbol}`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description                                                                                |
-| --------- | --------- | --------- | ------------------------------------------------------------------------------------------ |
-| symbol    | string    | true      | the name of the contract                                                                   |
-| interval  | string    | false     | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1,default: Min1 |
-| start     | long      | false     | start timestamp,seconds                                                                    |
-| end       | long      | false     | end timestamp,seconds                                                                      |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| interval | string | false | interval: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1,default: Min1 |
+| start | long | false | start timestamp,seconds |
+| end | long | false | end timestamp,seconds |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description       |
-| --------- | --------- | ----------------- |
-| open      | double    | the opening price |
-| close     | double    | the closing price |
-| high      | double    | the highest price |
-| low       | double    | the lowest price  |
-| vol       | double    | volume            |
-| time      | long      | time window       |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| open | double | the opening price |
+| close | double | the closing price |
+| high | double | the highest price |
+| low | double | the lowest price |
+| vol | double | volume |
+| time | long | time window |
 
 Attention:
 
-1、The maximum data in a single request is 2000 pieces. If your choice of
-start/end time and granularity of time results in more than the maximum volume
-of data in a single request, your request will only return 2000 pieces. If you
-want to get sufficiently fine-grained data over a larger time range, you need to
-make several times requests.
+1、The maximum data in a single request is 2000 pieces. If your choice of start/end time and granularity of time results in more than the maximum volume of data in a single request, your request will only return 2000 pieces. If you want to get sufficiently fine-grained data over a larger time range, you need to make several times requests.
 
-2、If only the start time is provided, then query the data from the start time
-to the current system time. If only the end time is provided, the 2000 pieces of
-data closest to the end time are returned. If neither start time nor end time is
-provided, the 2000 pieces of data closest to the current time in the system are
-queried.
+2、If only the start time is provided, then query the data from the start time to the current system time. If only the end time is provided, the 2000 pieces of data closest to the end time are returned. If neither start time nor end time is provided, the 2000 pieces of data closest to the current time in the system are queried.
 
 ## Get contract transaction data
 
@@ -951,27 +896,27 @@ curl "https://contract.mexc.com/api/v1/contract/deals/BTC_USDT"
 }
 ```
 
-- **GET** `api/v1/contract/deals/{symbol}`
+*   **GET** `api/v1/contract/deals/{symbol}`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description                                                            |
-| --------- | --------- | --------- | ---------------------------------------------------------------------- |
-| symbol    | string    | true      | the name of the contract                                               |
-| limit     | int       | false     | consequence set quantity ，maximum is 100, default 100 without setting |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| limit | int | false | consequence set quantity ，maximum is 100, default 100 without setting |
 
 **Response parameters:**
 
-| Parameter | Data Type | Description                                                          |
-| --------- | --------- | -------------------------------------------------------------------- |
-| p         | decimal   | transaction price                                                    |
-| v         | decimal   | quantity                                                             |
-| T         | int       | deal type,1:purchase,2:sell                                          |
-| O         | int       | open position, 1: Yes,2: No, when O is 1, vol is additional position |
-| M         | int       | self-transact,1:yes,2:no                                             |
-| t         | long      | transaction time                                                     |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| p | decimal | transaction price |
+| v | decimal | quantity |
+| T | int | deal type,1:purchase,2:sell |
+| O | int | open position, 1: Yes,2: No, when O is 1, vol is additional position |
+| M | int | self-transact,1:yes,2:no |
+| t | long | transaction time |
 
 ## Get contract trend data
 
@@ -1009,35 +954,35 @@ curl "https://contract.mexc.com/api/v1/contract/ticker"
 }
 ```
 
-- **GET** `api/v1/contract/ticker`
+*   **GET** `api/v1/contract/ticker`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description              |
-| --------- | --------- | --------- | ------------------------ |
-| symbol    | string    | false     | the name of the contract |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | false | the name of the contract |
 
 **Response parameters:**
 
-| Parameter     | Data Type | Description                                                           |
-| ------------- | --------- | --------------------------------------------------------------------- |
-| symbol        | string    | the name of the contract                                              |
-| lastPrice     | decimal   | the latest price                                                      |
-| bid1          | decimal   | purchase price                                                        |
-| ask1          | decimal   | sell price                                                            |
-| volume24      | decimal   | 24 hours trading volume, according to the volume of statistical count |
-| amount24      | decimal   | 24 hours transaction volume                                           |
-| holdVol       | decimal   | total holdings                                                        |
-| lower24Price  | decimal   | lowest price within 24 hours                                          |
-| high24Price   | decimal   | highest price within 24 hours                                         |
-| riseFallRate  | decimal   | rise/fall rate                                                        |
-| riseFallValue | decimal   | rise/fall value                                                       |
-| indexPrice    | decimal   | index price                                                           |
-| fairPrice     | decimal   | fair price                                                            |
-| fundingRate   | decimal   | funding rate                                                          |
-| timestamp     | long      | transaction timestamp                                                 |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| symbol | string | the name of the contract |
+| lastPrice | decimal | the latest price |
+| bid1 | decimal | purchase price |
+| ask1 | decimal | sell price |
+| volume24 | decimal | 24 hours trading volume, according to the volume of statistical count |
+| amount24 | decimal | 24 hours transaction volume |
+| holdVol | decimal | total holdings |
+| lower24Price | decimal | lowest price within 24 hours |
+| high24Price | decimal | highest price within 24 hours |
+| riseFallRate | decimal | rise/fall rate |
+| riseFallValue | decimal | rise/fall value |
+| indexPrice | decimal | index price |
+| fairPrice | decimal | fair price |
+| fundingRate | decimal | funding rate |
+| timestamp | long | transaction timestamp |
 
 ## Get all contract risk fund balance
 
@@ -1070,7 +1015,7 @@ curl "https://contract.mexc.com/api/v1/contract/risk_reverse"
 }
 ```
 
-- **GET** `api/v1/contract/risk_reverse`
+*   **GET** `api/v1/contract/risk_reverse`
 
 Rate limit:20 times/2 seconds
 
@@ -1080,12 +1025,12 @@ None
 
 **Response parameters:**
 
-| parameter name | type    | description             |
-| -------------- | ------- | ----------------------- |
-| symbol         | string  | the name of the cntract |
-| currency       | string  | currency                |
-| available      | decimal | available balance       |
-| timestamp      | long    | system timestamp        |
+| parameter name | type | description |
+| --- | --- | --- |
+| symbol | string | the name of the cntract |
+| currency | string | currency |
+| available | decimal | available balance |
+| timestamp | long | system timestamp |
 
 ## Get contract risk fund balance history
 
@@ -1124,31 +1069,31 @@ curl "https://contract.mexc.com/api/v1/contract/risk_reverse/history?symbol=BTC_
 }
 ```
 
-- **GET** `api/v1/contract/risk_reverse/history`
+*   **GET** `api/v1/contract/risk_reverse/history`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description                            |
-| --------- | --------- | --------- | -------------------------------------- |
-| symbol    | string    | true      | the name of the contract               |
-| page_num  | int       | true      | current page number, default is 1      |
-| page_size | int       | true      | the page size, default 20, maximum 100 |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| page\_num | int | true | current page number, default is 1 |
+| page\_size | int | true | the page size, default 20, maximum 100 |
 
 **Response parameters:**
 
-| Parameter    | Data Type | Description              |
-| ------------ | --------- | ------------------------ |
-| pageSize     | int       | page size                |
-| totalCount   | int       | total count              |
-| totalPage    | int       | total pages              |
-| currentPage  | int       | current page             |
-| resultList   | list      | data consequence set     |
-| symbol       | string    | the name of the contract |
-| currency     | string    | liquidation currency     |
-| available    | decimal   | balance                  |
-| snapshotTime | long      | snapshot time            |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| pageSize | int | page size |
+| totalCount | int | total count |
+| totalPage | int | total pages |
+| currentPage | int | current page |
+| resultList | list | data consequence set |
+| symbol | string | the name of the contract |
+| currency | string | liquidation currency |
+| available | decimal | balance |
+| snapshotTime | long | snapshot time |
 
 ## Get contract funding rate history
 
@@ -1185,27 +1130,27 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
 }
 ```
 
-- **GET** `api/v1/contract/funding_rate/history`
+*   **GET** `api/v1/contract/funding_rate/history`
 
 Rate limit:20 times/2 seconds
 
 **Request parameters:**
 
-| Parameter | Data Type | Mandatory | Description                             |
-| --------- | --------- | --------- | --------------------------------------- |
-| symbol    | string    | true      | the name of the contract                |
-| page_num  | int       | true      | current page number, default is 1       |
-| page_size | int       | true      | the page size, default 20, maximum 1000 |
+| Parameter | Data Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | true | the name of the contract |
+| page\_num | int | true | current page number, default is 1 |
+| page\_size | int | true | the page size, default 20, maximum 1000 |
 
 **Response parameters:**
 
-| Parameter   | Data Type | Description              |
-| ----------- | --------- | ------------------------ |
-| pageSize    | int       | page size                |
-| totalCount  | int       | the total count          |
-| totalPage   | int       | the total pages          |
-| currentPage | int       | the current page         |
-| resultList  | list      | data consequence set     |
-| symbol      | string    | the name of the contract |
-| fundingRate | decimal   | funding rate             |
-| settleTime  | long      | liquidation time         |
+| Parameter | Data Type | Description |
+| --- | --- | --- |
+| pageSize | int | page size |
+| totalCount | int | the total count |
+| totalPage | int | the total pages |
+| currentPage | int | the current page |
+| resultList | list | data consequence set |
+| symbol | string | the name of the contract |
+| fundingRate | decimal | funding rate |
+| settleTime | long | liquidation time |
