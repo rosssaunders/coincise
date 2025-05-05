@@ -1,8 +1,8 @@
-'use strict'
+"use strict"
 
-import fetch from 'node-fetch'
-import path from 'path'
-import { config } from '../config/config.js'
+import fetch from "node-fetch"
+import path from "path"
+import { config } from "./config.js"
 
 /**
  * Downloads OpenAPI specification files from KuCoin's GitHub repository
@@ -12,7 +12,7 @@ import { config } from '../config/config.js'
 export const downloadOpenApiSpecs = async apiSpecUrls => {
   const downloadedSpecs = {
     rest: {},
-    ws: {},
+    ws: {}
   }
 
   // Download REST API specs
@@ -27,15 +27,21 @@ export const downloadOpenApiSpecs = async apiSpecUrls => {
         const response = await fetch(fullUrl)
 
         if (!response.ok) {
-          throw new Error(`Failed to download from ${fullUrl}: ${response.statusText}`)
+          throw new Error(
+            `Failed to download from ${fullUrl}: ${response.statusText}`
+          )
         }
 
         const specData = await response.json()
-        const fileName = path.basename(specUrl, '.json').split('-').slice(1).join('-')
+        const fileName = path
+          .basename(specUrl, ".json")
+          .split("-")
+          .slice(1)
+          .join("-")
 
         downloadedSpecs.rest[category].push({
           fileName,
-          specData,
+          specData
         })
       } catch (error) {
         console.error(`Error downloading ${fullUrl}:`, error.message)
@@ -56,15 +62,21 @@ export const downloadOpenApiSpecs = async apiSpecUrls => {
         const response = await fetch(fullUrl)
 
         if (!response.ok) {
-          throw new Error(`Failed to download from ${fullUrl}: ${response.statusText}`)
+          throw new Error(
+            `Failed to download from ${fullUrl}: ${response.statusText}`
+          )
         }
 
         const specData = await response.json()
-        const fileName = path.basename(specUrl, '.json').split('-').slice(1).join('-')
+        const fileName = path
+          .basename(specUrl, ".json")
+          .split("-")
+          .slice(1)
+          .join("-")
 
         downloadedSpecs.ws[category].push({
           fileName,
-          specData,
+          specData
         })
       } catch (error) {
         console.error(`Error downloading ${fullUrl}:`, error.message)

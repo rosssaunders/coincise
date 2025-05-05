@@ -1,9 +1,9 @@
-'use strict'
+"use strict"
 
-import path from 'path'
-import { fileURLToPath } from 'url'
-import widdershins from 'widdershins'
-import { writeToFile } from '../utils/fileUtils.js'
+import path from "path"
+import { fileURLToPath } from "url"
+import widdershins from "widdershins"
+import { writeToFile } from "./fileUtils.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -33,7 +33,7 @@ const mergeOpenApiSpecs = specs => {
     if (spec.paths) {
       mergedSpec.paths = {
         ...(mergedSpec.paths || {}),
-        ...spec.paths,
+        ...spec.paths
       }
     }
 
@@ -45,27 +45,27 @@ const mergeOpenApiSpecs = specs => {
       if (spec.components.schemas) {
         mergedSpec.components.schemas = {
           ...(mergedSpec.components.schemas || {}),
-          ...spec.components.schemas,
+          ...spec.components.schemas
         }
       }
 
       // Merge other component types
       const componentTypes = [
-        'responses',
-        'parameters',
-        'examples',
-        'requestBodies',
-        'headers',
-        'securitySchemes',
-        'links',
-        'callbacks',
+        "responses",
+        "parameters",
+        "examples",
+        "requestBodies",
+        "headers",
+        "securitySchemes",
+        "links",
+        "callbacks"
       ]
 
       for (const type of componentTypes) {
         if (spec.components[type]) {
           mergedSpec.components[type] = {
             ...(mergedSpec.components[type] || {}),
-            ...spec.components[type],
+            ...spec.components[type]
           }
         }
       }
@@ -81,19 +81,19 @@ const mergeOpenApiSpecs = specs => {
  * @param {string} outputDir - Base output directory for generated Markdown files
  */
 export const convertSpecsToMarkdown = async (downloadedSpecs, outputDir) => {
-  const fullOutputPath = path.resolve(__dirname, '..', outputDir)
+  const fullOutputPath = path.resolve(__dirname, "..", outputDir)
 
   // Configure widdershins options
   const options = {
     codeSamples: true,
     httpsnippet: false,
-    language_tabs: [{ javascript: 'JavaScript' }, { python: 'Python' }],
+    language_tabs: [{ javascript: "JavaScript" }, { python: "Python" }],
     search: true,
-    theme: 'darkula',
+    theme: "darkula",
     summary: true,
     tocSummary: true,
     headings: 2,
-    omitHeader: false, // Include headers in the output
+    omitHeader: false // Include headers in the output
   }
 
   // Process REST API specs
@@ -104,11 +104,19 @@ export const convertSpecsToMarkdown = async (downloadedSpecs, outputDir) => {
     for (const spec of specs) {
       try {
         const markdownOutput = await widdershins.convert(spec.specData, options)
-        const outputFilePath = path.join(fullOutputPath, 'rest', category, `${spec.fileName}.md`)
+        const outputFilePath = path.join(
+          fullOutputPath,
+          "rest",
+          category,
+          `${spec.fileName}.md`
+        )
 
         await writeToFile(outputFilePath, markdownOutput)
       } catch (error) {
-        console.error(`Error converting individual REST API spec ${spec.fileName}:`, error)
+        console.error(
+          `Error converting individual REST API spec ${spec.fileName}:`,
+          error
+        )
       }
     }
 
@@ -122,12 +130,19 @@ export const convertSpecsToMarkdown = async (downloadedSpecs, outputDir) => {
         mergedSpec.info.title = `KuCoin ${category.charAt(0).toUpperCase() + category.slice(1)} REST API`
 
         const markdownOutput = await widdershins.convert(mergedSpec, options)
-        const outputFilePath = path.join(fullOutputPath, 'rest', `${category}_api.md`)
+        const outputFilePath = path.join(
+          fullOutputPath,
+          "rest",
+          `${category}_api.md`
+        )
 
         await writeToFile(outputFilePath, markdownOutput)
       }
     } catch (error) {
-      console.error(`Error converting merged REST API spec for ${category}:`, error)
+      console.error(
+        `Error converting merged REST API spec for ${category}:`,
+        error
+      )
     }
   }
 
@@ -139,11 +154,19 @@ export const convertSpecsToMarkdown = async (downloadedSpecs, outputDir) => {
     for (const spec of specs) {
       try {
         const markdownOutput = await widdershins.convert(spec.specData, options)
-        const outputFilePath = path.join(fullOutputPath, 'ws', category, `${spec.fileName}.md`)
+        const outputFilePath = path.join(
+          fullOutputPath,
+          "ws",
+          category,
+          `${spec.fileName}.md`
+        )
 
         await writeToFile(outputFilePath, markdownOutput)
       } catch (error) {
-        console.error(`Error converting individual WebSocket API spec ${spec.fileName}:`, error)
+        console.error(
+          `Error converting individual WebSocket API spec ${spec.fileName}:`,
+          error
+        )
       }
     }
 
@@ -157,12 +180,19 @@ export const convertSpecsToMarkdown = async (downloadedSpecs, outputDir) => {
         mergedSpec.info.title = `KuCoin ${category.charAt(0).toUpperCase() + category.slice(1)} WebSocket API`
 
         const markdownOutput = await widdershins.convert(mergedSpec, options)
-        const outputFilePath = path.join(fullOutputPath, 'ws', `${category}_api.md`)
+        const outputFilePath = path.join(
+          fullOutputPath,
+          "ws",
+          `${category}_api.md`
+        )
 
         await writeToFile(outputFilePath, markdownOutput)
       }
     } catch (error) {
-      console.error(`Error converting merged WebSocket API spec for ${category}:`, error)
+      console.error(
+        `Error converting merged WebSocket API spec for ${category}:`,
+        error
+      )
     }
   }
 }

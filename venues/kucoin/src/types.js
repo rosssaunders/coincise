@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * @typedef {Object} OpenApiSpec
@@ -17,5 +17,5 @@
 // Export types for documentation purposes
 export const types = {
   OpenApiSpec: {},
-  DownloadedSpecs: {},
+  DownloadedSpecs: {}
 }
