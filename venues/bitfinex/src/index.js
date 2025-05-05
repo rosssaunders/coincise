@@ -1,25 +1,25 @@
-'use strict'
+"use strict"
 
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { JSDOM } from 'jsdom'
-import TurndownService from 'turndown'
-import { gfm } from 'turndown-plugin-gfm'
-import puppeteer from 'puppeteer'
-import { launchBrowser, configurePage } from './utils.js'
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import { JSDOM } from "jsdom"
+import TurndownService from "turndown"
+import { gfm } from "turndown-plugin-gfm"
+import puppeteer from "puppeteer"
+import { launchBrowser, configurePage } from "./utils.js"
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Get config file name from command line arguments
-const configFileName = process.argv[2] || 'extraction.json'
+const configFileName = process.argv[2] || "extraction.json"
 console.log(`Using config file: ${configFileName}`)
 
 // Load configuration
 const config = JSON.parse(
-  fs.readFileSync(path.join(__dirname, `../config/${configFileName}`), 'utf8')
+  fs.readFileSync(path.join(__dirname, `../config/${configFileName}`), "utf8")
 )
 
 /**
@@ -36,10 +36,10 @@ const fetchMainDocContent = async url => {
     const page = await browser.newPage()
     await configurePage(page)
 
-    await page.goto(url, { waitUntil: 'networkidle2' })
+    await page.goto(url, { waitUntil: "networkidle2" })
 
     // Wait for the content to load
-    await page.waitForSelector('body', { timeout: 5000 })
+    await page.waitForSelector("body", { timeout: 5000 })
 
     // Extract the page content
     const content = await page.evaluate(() => {
@@ -62,46 +62,47 @@ const fetchMainDocContent = async url => {
 const configureTurndown = () => {
   // Set up Turndown for HTML to Markdown conversion
   const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
+    headingStyle: "atx",
+    codeBlockStyle: "fenced"
   })
 
   // Add GitHub Flavored Markdown plugin
   turndownService.use(gfm)
 
   // Configure turndown for code blocks
-  turndownService.addRule('codeBlocks', {
-    filter: ['pre'],
+  turndownService.addRule("codeBlocks", {
+    filter: ["pre"],
     replacement: function (content, node) {
-      const language = node.querySelector('code')?.className.replace('language-', '') || ''
+      const language =
+        node.querySelector("code")?.className.replace("language-", "") || ""
       return `\n\`\`\`${language}\n${content.trim()}\n\`\`\`\n`
-    },
+    }
   })
 
   // Add custom rule for tables without headers
-  turndownService.addRule('tablesWithoutHeaders', {
-    filter: ['table'],
+  turndownService.addRule("tablesWithoutHeaders", {
+    filter: ["table"],
     replacement: function (content, node) {
-      const rows = Array.from(node.querySelectorAll('tr'))
-      if (rows.length === 0) return ''
+      const rows = Array.from(node.querySelectorAll("tr"))
+      if (rows.length === 0) return ""
 
       // If there's no thead, create a markdown table with empty headers
-      if (!node.querySelector('thead')) {
+      if (!node.querySelector("thead")) {
         const firstRow = rows[0]
-        const cells = Array.from(firstRow.querySelectorAll('td'))
-        const headerRow = cells.map(() => '---').join(' | ')
+        const cells = Array.from(firstRow.querySelectorAll("td"))
+        const headerRow = cells.map(() => "---").join(" | ")
         const contentRows = rows
           .map(row => {
-            const cells = Array.from(row.querySelectorAll('td'))
-            return cells.map(cell => cell.textContent.trim()).join(' | ')
+            const cells = Array.from(row.querySelectorAll("td"))
+            return cells.map(cell => cell.textContent.trim()).join(" | ")
           })
-          .join('\n')
+          .join("\n")
 
         return `\n| ${headerRow} |\n| ${contentRows} |\n`
       }
 
       return content
-    },
+    }
   })
 
   return turndownService
@@ -117,7 +118,7 @@ const extractEndpointsBySection = htmlContent => {
   const sections = {}
 
   // Find all section headers (strong tags) that are direct children of paragraphs
-  const sectionHeaders = Array.from(document.querySelectorAll('p > strong'))
+  const sectionHeaders = Array.from(document.querySelectorAll("p > strong"))
 
   sectionHeaders.forEach(header => {
     const sectionName = header.textContent.trim()
@@ -125,16 +126,16 @@ const extractEndpointsBySection = htmlContent => {
 
     // Find the unordered list that follows this section header
     let listElement = header.parentElement.nextElementSibling
-    while (listElement && listElement.tagName !== 'UL') {
+    while (listElement && listElement.tagName !== "UL") {
       listElement = listElement.nextElementSibling
     }
 
     if (!listElement) return
 
     // Extract links from this section
-    const links = Array.from(listElement.querySelectorAll('a')).map(a => ({
+    const links = Array.from(listElement.querySelectorAll("a")).map(a => ({
       title: a.textContent.trim(),
-      url: a.getAttribute('href'),
+      url: a.getAttribute("href")
     }))
 
     if (links.length > 0) {
@@ -152,7 +153,7 @@ const extractEndpointsBySection = htmlContent => {
  * @returns {Promise<string>} HTML content of the page
  */
 const fetchEndpointContent = async (url, baseUrl) => {
-  const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
+  const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`
   let browser = null
   let page = null
 
@@ -163,14 +164,14 @@ const fetchEndpointContent = async (url, baseUrl) => {
     await configurePage(page)
 
     await page.goto(fullUrl, {
-      waitUntil: 'networkidle2',
-      timeout: 30000,
+      waitUntil: "networkidle2",
+      timeout: 30000
     })
 
     // Wait for the main content to load
     await page
-      .waitForSelector('.content-body', {
-        timeout: 60000, // Increased timeout to 60 seconds
+      .waitForSelector(".content-body", {
+        timeout: 60000 // Increased timeout to 60 seconds
       })
       .catch(() => {
         console.warn(`Warning: Content not found on ${fullUrl}`)
@@ -178,7 +179,7 @@ const fetchEndpointContent = async (url, baseUrl) => {
 
     // Extract the main content
     const content = await page.evaluate(() => {
-      const contentEl = document.querySelector('.content-body')
+      const contentEl = document.querySelector(".content-body")
       return contentEl ? contentEl.innerHTML : null
     })
 
@@ -218,7 +219,7 @@ const processEndpoint = async (endpoint, baseUrl, turndownService) => {
 
     return {
       ...endpoint,
-      markdown,
+      markdown
     }
   } catch (error) {
     console.error(`Failed to process endpoint ${endpoint.title}:`, error)
@@ -232,19 +233,19 @@ const processEndpoint = async (endpoint, baseUrl, turndownService) => {
 const main = async () => {
   try {
     // Determine the URL to fetch from
-    const docUrl = config.docUrl || 'https://docs.bitfinex.com/docs/rest-auth'
+    const docUrl = config.docUrl || "https://docs.bitfinex.com/docs/rest-auth"
 
     // Fetch HTML content from the URL instead of reading local file
     const htmlContent = await fetchMainDocContent(docUrl)
     if (!htmlContent) {
-      console.error('Failed to fetch main documentation content')
+      console.error("Failed to fetch main documentation content")
       process.exit(1)
     }
 
     // Extract endpoints by section
     const sections = extractEndpointsBySection(htmlContent)
     if (Object.keys(sections).length === 0) {
-      console.error('No sections found in the documentation')
+      console.error("No sections found in the documentation")
       process.exit(1)
     }
 
@@ -253,8 +254,11 @@ const main = async () => {
 
     // Generate markdown for URL and Authentication sections
     const { document } = new JSDOM(htmlContent).window
-    const urlSection = document.querySelector('#url')?.parentElement.nextElementSibling
-    const authSection = document.querySelector('#authentication')?.parentElement.nextElementSibling
+    const urlSection =
+      document.querySelector("#url")?.parentElement.nextElementSibling
+    const authSection =
+      document.querySelector("#authentication")?.parentElement
+        .nextElementSibling
 
     let markdown = `# ${config.title}\n\n`
 
@@ -274,14 +278,20 @@ const main = async () => {
 
     // Process each section and its endpoints
     for (const [sectionName, endpoints] of Object.entries(sections)) {
-      console.log(`Processing section: ${sectionName} (${endpoints.length} endpoints)`)
+      console.log(
+        `Processing section: ${sectionName} (${endpoints.length} endpoints)`
+      )
 
       markdown += `## ${sectionName}\n\n`
 
       // Process each endpoint in the section
       for (const endpoint of endpoints) {
         try {
-          const processedEndpoint = await processEndpoint(endpoint, config.baseUrl, turndownService)
+          const processedEndpoint = await processEndpoint(
+            endpoint,
+            config.baseUrl,
+            turndownService
+          )
           markdown += `### ${processedEndpoint.title}\n\n${processedEndpoint.markdown}\n\n`
         } catch (error) {
           console.error(`Failed to process endpoint ${endpoint.title}:`, error)
@@ -292,17 +302,17 @@ const main = async () => {
     }
 
     // Write the markdown to a file
-    const outputPath = path.join(__dirname, '../output.md')
+    const outputPath = path.join(__dirname, "../output.md")
     fs.writeFileSync(outputPath, markdown)
     console.log(`Documentation written to ${outputPath}`)
   } catch (error) {
-    console.error('Error in main function:', error)
+    console.error("Error in main function:", error)
     process.exit(1)
   }
 }
 
 // Run the main function
 main().catch(error => {
-  console.error('Unhandled error:', error)
+  console.error("Unhandled error:", error)
   process.exit(1)
 })

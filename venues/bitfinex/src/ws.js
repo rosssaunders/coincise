@@ -1,24 +1,24 @@
-'use strict'
+"use strict"
 
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { JSDOM } from 'jsdom'
-import TurndownService from 'turndown'
-import { gfm } from 'turndown-plugin-gfm'
-import { launchBrowser, configurePage } from './utils.js'
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import { JSDOM } from "jsdom"
+import TurndownService from "turndown"
+import { gfm } from "turndown-plugin-gfm"
+import { launchBrowser, configurePage } from "./utils.js"
 
 // Set up directory paths
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Get config file name from command line arguments
-const configFileName = process.argv[2] || 'ws_private.json'
+const configFileName = process.argv[2] || "ws_private.json"
 console.log(`Using config file: ${configFileName}`)
 
 // Load configuration
 const config = JSON.parse(
-  fs.readFileSync(path.join(__dirname, `../config/${configFileName}`), 'utf8')
+  fs.readFileSync(path.join(__dirname, `../config/${configFileName}`), "utf8")
 )
 
 /**
@@ -38,13 +38,13 @@ const fetchContent = async url => {
     await configurePage(page)
 
     await page.goto(url, {
-      waitUntil: 'networkidle2',
-      timeout: 30000,
+      waitUntil: "networkidle2",
+      timeout: 30000
     })
 
     // Wait for the content to load
-    await page.waitForSelector('body', {
-      timeout: 60000, // Increased timeout to 60 seconds
+    await page.waitForSelector("body", {
+      timeout: 60000 // Increased timeout to 60 seconds
     })
 
     // Extract the page content
@@ -66,7 +66,7 @@ const fetchContent = async url => {
         await page.close()
       }
     } catch (error) {
-      console.error('Error closing page:', error)
+      console.error("Error closing page:", error)
     }
 
     try {
@@ -74,7 +74,7 @@ const fetchContent = async url => {
         await browser.close()
       }
     } catch (error) {
-      console.error('Error closing browser:', error)
+      console.error("Error closing browser:", error)
     }
   }
 }
@@ -86,20 +86,21 @@ const fetchContent = async url => {
 const configureTurndown = () => {
   // Set up Turndown for HTML to Markdown conversion
   const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
+    headingStyle: "atx",
+    codeBlockStyle: "fenced"
   })
 
   // Add GitHub Flavored Markdown plugin
   turndownService.use(gfm)
 
   // Configure turndown for code blocks
-  turndownService.addRule('codeBlocks', {
-    filter: ['pre'],
+  turndownService.addRule("codeBlocks", {
+    filter: ["pre"],
     replacement: function (content, node) {
-      const language = node.querySelector('code')?.className.replace('language-', '') || ''
+      const language =
+        node.querySelector("code")?.className.replace("language-", "") || ""
       return `\n\`\`\`${language}\n${content.trim()}\n\`\`\`\n`
-    },
+    }
   })
 
   return turndownService
@@ -115,7 +116,7 @@ const extractLinks = htmlContent => {
   const links = []
 
   // Find all section headers
-  const sections = Array.from(document.querySelectorAll('h1, h2, h3'))
+  const sections = Array.from(document.querySelectorAll("h1, h2, h3"))
 
   for (const section of sections) {
     // Find the specific section we're looking for
@@ -123,13 +124,15 @@ const extractLinks = htmlContent => {
       let element = section.nextElementSibling
 
       // Look for lists after the section header
-      while (element && !element.matches('h1, h2, h3')) {
-        if (element.tagName === 'UL') {
+      while (element && !element.matches("h1, h2, h3")) {
+        if (element.tagName === "UL") {
           // Extract links from this list
-          const listLinks = Array.from(element.querySelectorAll('a')).map(a => ({
-            title: a.textContent.trim(),
-            url: a.getAttribute('href'),
-          }))
+          const listLinks = Array.from(element.querySelectorAll("a")).map(
+            a => ({
+              title: a.textContent.trim(),
+              url: a.getAttribute("href")
+            })
+          )
 
           links.push(...listLinks)
         }
@@ -149,14 +152,14 @@ const extractLinks = htmlContent => {
  * @returns {Promise<string>} Markdown content
  */
 const processUrl = async (url, baseUrl, turndownService) => {
-  const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
+  const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`
 
   try {
     const content = await fetchContent(fullUrl)
 
     // Extract main content
     const { document } = new JSDOM(content).window
-    const mainContent = document.querySelector('.content-body') || document.body
+    const mainContent = document.querySelector(".content-body") || document.body
 
     if (!mainContent) {
       throw new Error(`No main content found on ${fullUrl}`)
@@ -193,7 +196,8 @@ const main = async () => {
 
       // Extract the main content
       const { document } = new JSDOM(content).window
-      const mainContent = document.querySelector('.content-body') || document.body
+      const mainContent =
+        document.querySelector(".content-body") || document.body
 
       // Convert to markdown and add to the output
       const pageMarkdown = turndownService.turndown(mainContent.innerHTML)
@@ -203,7 +207,7 @@ const main = async () => {
       if (url === config.mainDocsUrl) {
         const links = extractLinks(content)
         if (links.length === 0) {
-          console.error('No links found in the main documentation page')
+          console.error("No links found in the main documentation page")
           process.exit(1)
         }
 
@@ -211,7 +215,11 @@ const main = async () => {
         for (const link of links) {
           console.log(`Processing endpoint: ${link.title}`)
 
-          const endpointMarkdown = await processUrl(link.url, config.baseUrl, turndownService)
+          const endpointMarkdown = await processUrl(
+            link.url,
+            config.baseUrl,
+            turndownService
+          )
           if (!endpointMarkdown) {
             console.error(`Failed to process endpoint: ${link.title}`)
             process.exit(1)
@@ -230,15 +238,17 @@ const main = async () => {
     // Write the markdown file
     fs.writeFileSync(path.join(__dirname, config.output), markdown)
 
-    console.log(`Successfully extracted WebSocket documentation to ${config.output}`)
+    console.log(
+      `Successfully extracted WebSocket documentation to ${config.output}`
+    )
   } catch (error) {
-    console.error('Error extracting WebSocket documentation:', error)
+    console.error("Error extracting WebSocket documentation:", error)
     process.exit(1)
   }
 }
 
 // Execute the main function
 main().catch(error => {
-  console.error('Fatal error:', error)
+  console.error("Fatal error:", error)
   process.exit(1)
 })

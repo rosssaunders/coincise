@@ -5,7 +5,10 @@
     "filename": "private_websocket_api.md",
     "title": "HTX Private WebSocket API Documentation"
   },
-  "numericIds": [524, 528, 540, 541, 575, 576, 578, 579, 580, 581, 582, 583, 691, 692, 693, 5420],
+  "numericIds": [
+    524, 528, 540, 541, 575, 576, 578, 579, 580, 581, 582, 583, 691, 692, 693,
+    5420
+  ],
   "otherUrls": [
     "8cb89359-77b5-11ed-9966-190263a1987",
     "8cb89359-77b5-11ed-9966-1902650839d",

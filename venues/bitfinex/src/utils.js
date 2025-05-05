@@ -1,5 +1,5 @@
-'use strict'
+"use strict"
 
-import { launchBrowser, configurePage } from '../../shared/utils.js'
+import { launchBrowser, configurePage } from "../../shared/utils.js"
 
 export { launchBrowser, configurePage }

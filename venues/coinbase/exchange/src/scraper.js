@@ -2,23 +2,23 @@
  * Main scraper for Coinbase Exchange API documentation
  */
 
-import puppeteer from 'puppeteer'
-import fs from 'fs'
-import path from 'path'
-import { delay, ensureDirectoryExists } from './utils/utils.js'
+import puppeteer from "puppeteer"
+import fs from "fs"
+import path from "path"
+import { delay, ensureDirectoryExists } from "./utils/utils.js"
 import {
   extractArticleContent,
   extractAuthSection,
   extractRequestParams,
   extractModalContent,
-  extractPathAndQueryParams,
-} from './processors/extractors.js'
+  extractPathAndQueryParams
+} from "./processors/extractors.js"
 import {
   processAuthSection,
   processRequestParams,
-  generateMarkdownDocument,
-} from './processors/formatters.js'
-import TurndownService from 'turndown'
+  generateMarkdownDocument
+} from "./processors/formatters.js"
+import TurndownService from "turndown"
 
 /**
  * Detect if running in a CI environment
@@ -26,7 +26,10 @@ import TurndownService from 'turndown'
  */
 const isRunningInCI = () => {
   return Boolean(
-    process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITLAB_CI || process.env.JENKINS_URL
+    process.env.CI ||
+      process.env.GITHUB_ACTIONS ||
+      process.env.GITLAB_CI ||
+      process.env.JENKINS_URL
   )
 }
 
@@ -39,19 +42,21 @@ const getBrowserLaunchOptions = () => {
   const options = {
     headless: true,
     defaultViewport: null,
-    args: ['--start-maximized'],
+    args: ["--start-maximized"]
   }
 
   // Add CI-specific options
   if (isRunningInCI()) {
     options.args = [
       ...options.args,
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu"
     ]
-    console.log('Detected CI environment, using special Puppeteer configuration')
+    console.log(
+      "Detected CI environment, using special Puppeteer configuration"
+    )
   }
 
   return options
@@ -64,21 +69,21 @@ const getBrowserLaunchOptions = () => {
  */
 const convertHtmlToMarkdown = html => {
   const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
+    headingStyle: "atx",
+    codeBlockStyle: "fenced"
   })
 
   // Add custom rule for code tags
-  turndownService.addRule('code', {
-    filter: 'code',
+  turndownService.addRule("code", {
+    filter: "code",
     replacement: function (content) {
-      return '`' + content + '`'
-    },
+      return "`" + content + "`"
+    }
   })
 
   // Add a custom table processing rule that handles complex nested tables
-  turndownService.addRule('table', {
-    filter: 'table',
+  turndownService.addRule("table", {
+    filter: "table",
     replacement: function (content, node, options) {
       // Extract table HTML
       const tableHtml = node.outerHTML
@@ -87,7 +92,7 @@ const convertHtmlToMarkdown = html => {
       // which can be tricky across Node.js and browser environments
 
       // First, try to detect table headers
-      let tableMarkdown = ''
+      let tableMarkdown = ""
       let headers = []
 
       // Look for th elements to build header row
@@ -96,16 +101,16 @@ const convertHtmlToMarkdown = html => {
       while ((thMatch = thRegex.exec(tableHtml)) !== null) {
         // Clean up the content (remove nested divs, etc.)
         let headerContent = thMatch[1]
-          .replace(/<div[^>]*>([\s\S]*?)<\/div>/g, '$1')
-          .replace(/<[^>]+>/g, '')
+          .replace(/<div[^>]*>([\s\S]*?)<\/div>/g, "$1")
+          .replace(/<[^>]+>/g, "")
           .trim()
         headers.push(headerContent)
       }
 
       // If we found headers, create the header row
       if (headers.length > 0) {
-        tableMarkdown += '| ' + headers.join(' | ') + ' |\n'
-        tableMarkdown += '| ' + headers.map(() => '---').join(' | ') + ' |\n'
+        tableMarkdown += "| " + headers.join(" | ") + " |\n"
+        tableMarkdown += "| " + headers.map(() => "---").join(" | ") + " |\n"
       }
 
       // Now extract the table rows using tr and td elements
@@ -114,7 +119,7 @@ const convertHtmlToMarkdown = html => {
 
       while ((trMatch = trRegex.exec(tableHtml)) !== null) {
         // Skip header rows (already processed)
-        if (trMatch[1].includes('<th')) continue
+        if (trMatch[1].includes("<th")) continue
 
         // Process td elements in this row
         const tdRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi
@@ -126,15 +131,18 @@ const convertHtmlToMarkdown = html => {
           let cellContent = tdMatch[1]
 
           // Handle code tags
-          cellContent = cellContent.replace(/<code>(.*?)<\/code>/g, '`$1`')
+          cellContent = cellContent.replace(/<code>(.*?)<\/code>/g, "`$1`")
 
           // Handle links
-          cellContent = cellContent.replace(/<a\s+href="([^"]+)"[^>]*>(.*?)<\/a>/g, '[$2]($1)')
+          cellContent = cellContent.replace(
+            /<a\s+href="([^"]+)"[^>]*>(.*?)<\/a>/g,
+            "[$2]($1)"
+          )
 
           // Clean up remaining HTML and trim
           cellContent = cellContent
-            .replace(/<div[^>]*>([\s\S]*?)<\/div>/g, '$1')
-            .replace(/<[^>]+>/g, '')
+            .replace(/<div[^>]*>([\s\S]*?)<\/div>/g, "$1")
+            .replace(/<[^>]+>/g, "")
             .trim()
 
           cells.push(cellContent)
@@ -142,20 +150,20 @@ const convertHtmlToMarkdown = html => {
 
         // Only add non-empty rows
         if (cells.length > 0) {
-          tableMarkdown += '| ' + cells.join(' | ') + ' |\n'
+          tableMarkdown += "| " + cells.join(" | ") + " |\n"
         }
       }
 
-      return '\n\n' + tableMarkdown + '\n'
-    },
+      return "\n\n" + tableMarkdown + "\n"
+    }
   })
 
   // Remove default table rules to avoid conflicts
   if (turndownService.rules.tableCell) {
-    turndownService.remove('tableCell')
+    turndownService.remove("tableCell")
   }
   if (turndownService.rules.tableRow) {
-    turndownService.remove('tableRow')
+    turndownService.remove("tableRow")
   }
 
   return turndownService.turndown(html)
@@ -179,22 +187,22 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     // Navigate to the Coinbase Exchange API documentation page
     console.log(`Navigating to ${url}...`)
     await page.goto(url, {
-      waitUntil: 'networkidle0',
-      timeout: 60000,
+      waitUntil: "networkidle0",
+      timeout: 60000
     })
 
     // Wait for article element
-    await page.waitForSelector('article', { timeout: 60000 })
-    console.log('Page loaded successfully')
+    await page.waitForSelector("article", { timeout: 60000 })
+    console.log("Page loaded successfully")
 
     // Extract content from the <article> tag
-    console.log('Extracting article content...')
+    console.log("Extracting article content...")
     const articleHtml = await extractArticleContent(page, { html: true })
     const articleContent = convertHtmlToMarkdown(articleHtml)
-    console.log('Article content converted to markdown')
+    console.log("Article content converted to markdown")
 
     // Extract authentication section if it exists
-    console.log('Extracting authentication section...')
+    console.log("Extracting authentication section...")
     const authSectionHtml = await extractAuthSection(page)
     let authMarkdown = null
 
@@ -203,12 +211,12 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       try {
         authMarkdown = processAuthSection(authSectionHtml)
       } catch (error) {
-        console.error('Error processing authentication section:', error)
+        console.error("Error processing authentication section:", error)
       }
     }
 
     // Extract path and query parameters sections if they exist
-    console.log('Extracting path and query parameters...')
+    console.log("Extracting path and query parameters...")
     const paramsResults = await extractPathAndQueryParams(page)
     let pathParamsMarkdown = null
     let queryParamsMarkdown = null
@@ -218,7 +226,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       try {
         pathParamsMarkdown = processRequestParams(paramsResults.pathParams)
       } catch (error) {
-        console.error('Error processing path parameters section:', error)
+        console.error("Error processing path parameters section:", error)
       }
     }
 
@@ -227,12 +235,12 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       try {
         queryParamsMarkdown = processRequestParams(paramsResults.queryParams)
       } catch (error) {
-        console.error('Error processing query parameters section:', error)
+        console.error("Error processing query parameters section:", error)
       }
     }
 
     // Extract request parameters section if it exists
-    console.log('Extracting request parameters...')
+    console.log("Extracting request parameters...")
     const requestParamsHtml = await extractRequestParams(page)
     let requestParamsMarkdown = null
 
@@ -241,31 +249,33 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       try {
         requestParamsMarkdown = processRequestParams(requestParamsHtml)
       } catch (error) {
-        console.error('Error processing request parameters section:', error)
+        console.error("Error processing request parameters section:", error)
       }
     }
 
     // Save all modal content
-    console.log('Extracting response details...')
+    console.log("Extracting response details...")
     const modalResults = []
 
     // Select all the buttons related to HTTP codes
-    const buttons = await page.$$('.apiResponseSchemaPickerOption_OMBh')
+    const buttons = await page.$$(".apiResponseSchemaPickerOption_OMBh")
     console.log(`Found ${buttons.length} response schema buttons`)
 
     for (const [index, button] of buttons.entries()) {
       try {
         // Get button text for identification
         const buttonText = await page.evaluate(el => el.textContent, button)
-        console.log(`Processing response schema ${index + 1}/${buttons.length}: ${buttonText}`)
+        console.log(
+          `Processing response schema ${index + 1}/${buttons.length}: ${buttonText}`
+        )
 
         // Click the button to open the modal
         await button.click()
 
         // Wait for the modal content to appear
-        await page.waitForSelector('.cds-modal', {
+        await page.waitForSelector(".cds-modal", {
           visible: true,
-          timeout: 30000,
+          timeout: 30000
         })
 
         // Wait a bit for animation to complete
@@ -276,17 +286,17 @@ const scrapeApiDocumentation = async (url, outputPath) => {
 
         modalResults.push({
           buttonText,
-          modalContent,
+          modalContent
         })
 
         // Close the modal by pressing the Escape key
-        await page.keyboard.press('Escape')
+        await page.keyboard.press("Escape")
 
         // Wait for the modal to close
         try {
-          await page.waitForSelector('.cds-modal', {
+          await page.waitForSelector(".cds-modal", {
             hidden: true,
-            timeout: 5000,
+            timeout: 5000
           })
         } catch (error) {
           // Try clicking outside the modal
@@ -301,7 +311,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
 
         // Try to close modal if there was an error
         try {
-          await page.keyboard.press('Escape')
+          await page.keyboard.press("Escape")
           await delay(1000)
         } catch (e) {
           // Ignore errors in error handling
@@ -310,7 +320,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     }
 
     // Generate markdown and save to file
-    console.log('Generating markdown document...')
+    console.log("Generating markdown document...")
     const markdownContent = generateMarkdownDocument(
       articleContent,
       modalResults,
@@ -324,7 +334,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     ensureDirectoryExists(path.dirname(outputPath))
 
     // Write the markdown file
-    fs.writeFileSync(outputPath, markdownContent, 'utf8')
+    fs.writeFileSync(outputPath, markdownContent, "utf8")
     console.log(`Markdown documentation saved to: ${outputPath}`)
 
     return outputPath
@@ -336,7 +346,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     // Close the browser if it was opened
     if (browser) {
       await browser.close()
-      console.log('Browser closed')
+      console.log("Browser closed")
     }
   }
 }

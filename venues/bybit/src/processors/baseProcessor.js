@@ -1,33 +1,33 @@
-'use strict'
+"use strict"
 
-import puppeteer from 'puppeteer'
-import TurndownService from 'turndown'
-import { gfm } from 'turndown-plugin-gfm'
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { launchBrowser, configurePage } from '../../../../shared/utils.js'
+import puppeteer from "puppeteer"
+import TurndownService from "turndown"
+import { gfm } from "turndown-plugin-gfm"
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import { launchBrowser, configurePage } from "../../../../shared/utils.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export class BaseProcessor {
   constructor(configPath, processorType) {
-    this.configPath = path.join(__dirname, '../../config', configPath)
+    this.configPath = path.join(__dirname, "../../config", configPath)
     this.processorType = processorType
     this.browser = null
     this.page = null
     this.turndownService = new TurndownService({
-      codeBlockStyle: 'fenced',
-      fence: '```',
+      codeBlockStyle: "fenced",
+      fence: "```"
     })
     this.turndownService.use(gfm)
     // Add custom rule to preserve line breaks in table cells
-    this.turndownService.addRule('tableCellWithBr', {
-      filter: 'td',
+    this.turndownService.addRule("tableCellWithBr", {
+      filter: "td",
       replacement: (content, node) => {
-        const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, '<br>')
+        const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, "<br>")
         return `| ${cellContent} `
-      },
+      }
     })
   }
 
@@ -44,26 +44,28 @@ export class BaseProcessor {
   }
 
   async extractContent(url) {
-    await this.page.goto(url, { waitUntil: 'networkidle0' })
+    await this.page.goto(url, { waitUntil: "networkidle0" })
 
     return await this.page.evaluate(() => {
       const selectors = [
-        '.theme-doc-markdown',
-        '.markdown-body',
-        '.theme-default-content',
-        'article',
-        'main',
+        ".theme-doc-markdown",
+        ".markdown-body",
+        ".theme-default-content",
+        "article",
+        "main"
       ]
 
       for (const selector of selectors) {
         const element = document.querySelector(selector)
         if (element) {
-          const unwantedElements = element.querySelectorAll('nav, .sidebar, .toc, .header-anchor')
+          const unwantedElements = element.querySelectorAll(
+            "nav, .sidebar, .toc, .header-anchor"
+          )
           unwantedElements.forEach(el => el.remove())
           return element.innerHTML
         }
       }
-      return ''
+      return ""
     })
   }
 
@@ -86,7 +88,7 @@ export class BaseProcessor {
     try {
       await this.initialize()
 
-      const config = JSON.parse(fs.readFileSync(this.configPath, 'utf8'))
+      const config = JSON.parse(fs.readFileSync(this.configPath, "utf8"))
       const { endpoints, output_file, title } = config
 
       let markdownContent = `# ${title}\n\n`
@@ -99,7 +101,7 @@ export class BaseProcessor {
         }
       }
 
-      const outputPath = path.join(__dirname, '../../../../docs/', output_file)
+      const outputPath = path.join(__dirname, "../../../../docs/", output_file)
       fs.mkdirSync(path.dirname(outputPath), { recursive: true })
       fs.writeFileSync(outputPath, markdownContent)
 
@@ -107,7 +109,10 @@ export class BaseProcessor {
         `\n✨ ${this.processorType} API documentation successfully generated! ✨\n📄 Output file: ${output_file}\n`
       )
     } catch (error) {
-      console.error(`Error generating ${this.processorType} API documentation:`, error)
+      console.error(
+        `Error generating ${this.processorType} API documentation:`,
+        error
+      )
       throw error
     } finally {
       await this.cleanup()

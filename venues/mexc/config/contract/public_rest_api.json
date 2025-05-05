@@ -1,8 +1,4 @@
 {
   "title": "Public REST API Endpoints",
-  "includeSections": [
-    "Integration guide",
-    "Error code",
-    "Market endpoints"
-  ]
-} 
+  "includeSections": ["Integration guide", "Error code", "Market endpoints"]
+}

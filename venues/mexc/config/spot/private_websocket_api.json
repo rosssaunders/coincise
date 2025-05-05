@@ -1,7 +1,4 @@
 {
   "title": "Private WebSocket API Streams",
-  "includeSections": [
-    "Public API Definitions",
-    "WebSocket User Data Streams"
-  ]
-} 
+  "includeSections": ["Public API Definitions", "WebSocket User Data Streams"]
+}

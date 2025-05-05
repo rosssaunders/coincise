@@ -2,8 +2,8 @@
  * Utils for the Coinbase Exchange API scraper
  */
 
-import fs from 'fs'
-import path from 'path'
+import fs from "fs"
+import path from "path"
 
 /**
  * Helper function to delay execution

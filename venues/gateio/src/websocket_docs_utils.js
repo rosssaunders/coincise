@@ -1,9 +1,9 @@
-import fs from 'fs'
-import dotenv from 'dotenv'
-import path from 'path'
-import { JSDOM } from 'jsdom'
-import axios from 'axios'
-import { fileURLToPath } from 'url'
+import fs from "fs"
+import dotenv from "dotenv"
+import path from "path"
+import { JSDOM } from "jsdom"
+import axios from "axios"
+import { fileURLToPath } from "url"
 
 // Load environment variables from .env file
 dotenv.config()
@@ -20,20 +20,22 @@ export function downloadHtml(url, filePath) {
     axios
       .get(url, {
         headers: {
-          'User-Agent': 'Mozilla/5.0',
-          Accept: 'text/html',
+          "User-Agent": "Mozilla/5.0",
+          Accept: "text/html"
         },
-        responseType: 'stream',
+        responseType: "stream"
       })
       .then(response => {
         if (response.status !== 200) {
-          reject(new Error(`Failed to download: HTTP status code ${response.status}`))
+          reject(
+            new Error(`Failed to download: HTTP status code ${response.status}`)
+          )
           return
         }
         response.data.pipe(file)
-        file.on('finish', () => {
+        file.on("finish", () => {
           file.close()
-          console.log('Download completed successfully.')
+          console.log("Download completed successfully.")
           resolve()
         })
       })
@@ -41,7 +43,7 @@ export function downloadHtml(url, filePath) {
         fs.unlink(filePath, () => {})
         reject(err)
       })
-    file.on('error', err => {
+    file.on("error", err => {
       fs.unlink(filePath, () => {})
       reject(err)
     })
@@ -51,90 +53,92 @@ export function downloadHtml(url, filePath) {
 // Function to process HTML and convert to markdown
 export function processHtml(html, turndownService) {
   if (!turndownService) {
-    console.error('TurndownService is not initialized.')
-    return ''
+    console.error("TurndownService is not initialized.")
+    return ""
   }
   const dom = new JSDOM(html)
   const document = dom.window.document
-  const contentContainer = document.querySelector('div.col-md-9.col-lg-10.content__container')
+  const contentContainer = document.querySelector(
+    "div.col-md-9.col-lg-10.content__container"
+  )
   if (!contentContainer) {
-    console.error('Could not find main content container')
-    return ''
+    console.error("Could not find main content container")
+    return ""
   }
   const content = contentContainer.innerHTML
-  console.log('Content extracted successfully.')
+  console.log("Content extracted successfully.")
   return turndownService.turndown(content)
 }
 
 // Helper functions for adding custom Turndown rules
 export function addTableRule(turndownService) {
-  turndownService.addRule('table', {
-    filter: 'table',
+  turndownService.addRule("table", {
+    filter: "table",
     replacement: function (content, node) {
-      const rows = Array.from(node.querySelectorAll('tr'))
-      if (rows.length === 0) return ''
+      const rows = Array.from(node.querySelectorAll("tr"))
+      if (rows.length === 0) return ""
 
-      let markdown = ''
+      let markdown = ""
 
       // Process header
-      const headerCells = Array.from(rows[0].querySelectorAll('th'))
+      const headerCells = Array.from(rows[0].querySelectorAll("th"))
       if (headerCells.length > 0) {
-        markdown += '|'
+        markdown += "|"
         headerCells.forEach(cell => {
           markdown += ` ${cell.textContent.trim()} |`
         })
-        markdown += '\n|'
+        markdown += "\n|"
         headerCells.forEach(() => {
-          markdown += ' --- |'
+          markdown += " --- |"
         })
-        markdown += '\n'
+        markdown += "\n"
       }
 
       // Process rows
       const startRow = headerCells.length > 0 ? 1 : 0
       for (let i = startRow; i < rows.length; i++) {
-        const cells = Array.from(rows[i].querySelectorAll('td'))
+        const cells = Array.from(rows[i].querySelectorAll("td"))
         if (cells.length > 0) {
-          markdown += '|'
+          markdown += "|"
           cells.forEach(cell => {
-            markdown += ` ${cell.textContent.trim().replace(/\n/g, ' ')} |`
+            markdown += ` ${cell.textContent.trim().replace(/\n/g, " ")} |`
           })
-          markdown += '\n'
+          markdown += "\n"
         }
       }
 
-      return markdown + '\n'
-    },
+      return markdown + "\n"
+    }
   })
 }
 
 export function addListItemWithTableRule(turndownService) {
-  turndownService.addRule('listItemWithTable', {
+  turndownService.addRule("listItemWithTable", {
     filter: function (node) {
-      return node.nodeName === 'LI' && node.querySelector('table')
+      return node.nodeName === "LI" && node.querySelector("table")
     },
     replacement: function (content, node) {
-      let markdown = '- '
-      markdown += content.trim().replace(/\n/g, '\n  ')
-      return markdown + '\n'
-    },
+      let markdown = "- "
+      markdown += content.trim().replace(/\n/g, "\n  ")
+      return markdown + "\n"
+    }
   })
 }
 
 export function addCodeBlockRule(turndownService) {
-  turndownService.addRule('codeBlock', {
-    filter: 'pre',
+  turndownService.addRule("codeBlock", {
+    filter: "pre",
     replacement: function (content, node) {
-      let language = ''
+      let language = ""
       if (node.className) {
-        const classes = node.className.split(' ')
-        const langClass = classes.find(cls => cls.startsWith('language-'))
+        const classes = node.className.split(" ")
+        const langClass = classes.find(cls => cls.startsWith("language-"))
         if (langClass) {
-          language = langClass.replace('language-', '').trim()
+          language = langClass.replace("language-", "").trim()
         }
       }
       const trimmedContent = content.trim()
       return `\n\`\`\`${language}\n${trimmedContent}\n\`\`\`\n`
-    },
+    }
   })
 }

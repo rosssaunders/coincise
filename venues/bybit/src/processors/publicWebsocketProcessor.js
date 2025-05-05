@@ -1,10 +1,10 @@
-'use strict'
+"use strict"
 
-import { BaseProcessor } from './baseProcessor.js'
+import { BaseProcessor } from "./baseProcessor.js"
 
 export class PublicWebsocketProcessor extends BaseProcessor {
   constructor() {
-    super('public_websocket.json', 'Public WebSocket')
+    super("public_websocket.json", "Public WebSocket")
   }
 }
 

@@ -1,23 +1,27 @@
 // Simplified Binance Spot extraction script
-'use strict'
+"use strict"
 
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { fetchContent, configureTurndown, politeDelay } from '../../shared/utils.js'
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import {
+  fetchContent,
+  configureTurndown,
+  politeDelay
+} from "../../shared/utils.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const CONFIG_PATH = process.argv[2]
   ? path.resolve(process.argv[2])
-  : path.resolve(__dirname, '../config/spot.json')
+  : path.resolve(__dirname, "../config/spot.json")
 
-const DOCS_ROOT = path.resolve(__dirname, '../../../docs')
-const BASE_URL = 'https://developers.binance.com/docs'
+const DOCS_ROOT = path.resolve(__dirname, "../../../docs")
+const BASE_URL = "https://developers.binance.com/docs"
 
 // Load config
-const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'))
+const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"))
 
 // Setup Turndown
 const turndownService = configureTurndown()
@@ -31,11 +35,11 @@ async function processAll() {
     console.log(`Fetching: ${url}`)
     try {
       const html = await fetchContent(url, {
-        selector: '.theme-doc-markdown.markdown',
-        timeout: 30000,
+        selector: ".theme-doc-markdown.markdown",
+        timeout: 30000
       })
       const md = turndownService.turndown(html)
-      if (md) content += md + '\n\n'
+      if (md) content += md + "\n\n"
       await politeDelay(1000) // polite delay
     } catch (err) {
       console.error(err.message)

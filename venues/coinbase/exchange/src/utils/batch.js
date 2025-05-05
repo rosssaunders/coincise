@@ -1,9 +1,13 @@
-'use strict'
+"use strict"
 
-import fs from 'fs'
-import path from 'path'
-import { scrapeApiDocumentation } from '../scraper.js'
-import { readConfig, ensureOutputDirectory, generateFilename } from './config.js'
+import fs from "fs"
+import path from "path"
+import { scrapeApiDocumentation } from "../scraper.js"
+import {
+  readConfig,
+  ensureOutputDirectory,
+  generateFilename
+} from "./config.js"
 
 /**
  * Process a single URL from the config
@@ -29,10 +33,12 @@ export const processUrl = async (urlConfig, outputDir) => {
     // Create a minimal error file to indicate failure
     try {
       const errorContent = `# Error Scraping ${url}\n\nFailed to scrape this URL at ${new Date().toISOString()}\n\nError message: ${error.message}`
-      fs.writeFileSync(outputPath, errorContent, 'utf8')
+      fs.writeFileSync(outputPath, errorContent, "utf8")
       console.log(`Created error placeholder file at ${outputPath}`)
     } catch (writeError) {
-      console.error(`Failed to create error placeholder file: ${writeError.message}`)
+      console.error(
+        `Failed to create error placeholder file: ${writeError.message}`
+      )
     }
 
     // Re-throw the error to be handled by the caller
@@ -48,21 +54,21 @@ export const processUrl = async (urlConfig, outputDir) => {
  */
 export const extractTitle = filePath => {
   try {
-    const content = fs.readFileSync(filePath, 'utf8')
-    const lines = content.split('\n')
+    const content = fs.readFileSync(filePath, "utf8")
+    const lines = content.split("\n")
 
     // Find the first heading
     for (const line of lines) {
-      if (line.startsWith('#')) {
-        return line.replace(/^#+\s*/, '').trim()
+      if (line.startsWith("#")) {
+        return line.replace(/^#+\s*/, "").trim()
       }
     }
 
     // If no heading found, use the filename without extension
-    return path.basename(filePath, '.md')
+    return path.basename(filePath, ".md")
   } catch (error) {
     console.warn(`Warning: Could not extract title from ${filePath}`)
-    return path.basename(filePath, '.md')
+    return path.basename(filePath, ".md")
   }
 }
 
@@ -75,8 +81,8 @@ export const extractTitle = filePath => {
 export const generateAnchor = title => {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
 }
 
 /**
@@ -87,7 +93,7 @@ export const generateAnchor = title => {
  * @returns {string} Markdown table of contents
  */
 export const createTableOfContents = (urlConfigs, outputDir) => {
-  let toc = '## Table of Contents\n\n'
+  let toc = "## Table of Contents\n\n"
 
   for (const urlConfig of urlConfigs) {
     const filename = generateFilename(urlConfig.url, urlConfig.filename)
@@ -115,16 +121,20 @@ export const createTableOfContents = (urlConfigs, outputDir) => {
  * @param {string} combinedFilename - Name of the combined output file
  * @returns {string} Path to the combined file
  */
-export const combineMarkdownFiles = (urlConfigs, outputDir, combinedFilename) => {
+export const combineMarkdownFiles = (
+  urlConfigs,
+  outputDir,
+  combinedFilename
+) => {
   const combinedFilePath = path.join(outputDir, combinedFilename)
 
   // Create a new file with a header
-  let combinedContent = '# Coinbase Exchange API Documentation\n\n'
+  let combinedContent = "# Coinbase Exchange API Documentation\n\n"
   combinedContent += `Generated on ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}\n\n`
 
   // Add table of contents
   combinedContent += createTableOfContents(urlConfigs, outputDir)
-  combinedContent += '\n---\n\n'
+  combinedContent += "\n---\n\n"
 
   // Add content from each file
   for (const urlConfig of urlConfigs) {
@@ -132,35 +142,37 @@ export const combineMarkdownFiles = (urlConfigs, outputDir, combinedFilename) =>
     const filePath = path.join(outputDir, filename)
 
     if (!fs.existsSync(filePath)) {
-      console.warn(`Warning: File ${filePath} does not exist, skipping in combined file`)
+      console.warn(
+        `Warning: File ${filePath} does not exist, skipping in combined file`
+      )
       continue
     }
 
     console.log(`Adding ${filename} to combined file...`)
 
     const title = extractTitle(filePath)
-    const content = fs.readFileSync(filePath, 'utf8')
+    const content = fs.readFileSync(filePath, "utf8")
 
     // Add a section divider and title
     combinedContent += `# ${title}\n\n`
 
     // Append the file content, skipping the first heading (already used as section title)
-    const contentLines = content.split('\n')
+    const contentLines = content.split("\n")
     let skipFirstHeading = true
 
     for (const line of contentLines) {
-      if (skipFirstHeading && line.startsWith('#')) {
+      if (skipFirstHeading && line.startsWith("#")) {
         skipFirstHeading = false
         continue
       }
 
       if (skipFirstHeading === false) {
-        combinedContent += line + '\n'
+        combinedContent += line + "\n"
       }
     }
 
     // Add a separator between files
-    combinedContent += '\n---\n\n'
+    combinedContent += "\n---\n\n"
   }
 
   // Write the combined content to file
@@ -176,7 +188,11 @@ export const combineMarkdownFiles = (urlConfigs, outputDir, combinedFilename) =>
  * @param {string} outputDir - Directory containing the output files
  * @param {string} combinedFilename - Name of the combined file to keep
  */
-export const cleanupIndividualFiles = (urlConfigs, outputDir, combinedFilename) => {
+export const cleanupIndividualFiles = (
+  urlConfigs,
+  outputDir,
+  combinedFilename
+) => {
   const combinedFilePath = path.join(outputDir, combinedFilename)
 
   for (const urlConfig of urlConfigs) {
@@ -206,7 +222,7 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
     const config = readConfig(configPath)
 
     // Get the output directory from config or override
-    const outputDir = outputDirOverride || config.output_directory || 'output'
+    const outputDir = outputDirOverride || config.output_directory || "output"
 
     // Create output directory if it doesn't exist
     ensureOutputDirectory(outputDir)
@@ -214,7 +230,7 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
     const urlConfigs = config.urls
 
     if (!urlConfigs || !Array.isArray(urlConfigs) || urlConfigs.length === 0) {
-      throw new Error('No URLs found in config file')
+      throw new Error("No URLs found in config file")
     }
 
     console.log(`Found ${urlConfigs.length} URLs to process in ${configPath}`)
@@ -226,7 +242,9 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
     for (let i = 0; i < urlConfigs.length; i++) {
       const urlConfig = urlConfigs[i]
 
-      console.log(`\n[${i + 1}/${urlConfigs.length}] Processing: ${urlConfig.url}`)
+      console.log(
+        `\n[${i + 1}/${urlConfigs.length}] Processing: ${urlConfig.url}`
+      )
 
       try {
         await processUrl(urlConfig, outputDir)
@@ -244,7 +262,7 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
     console.log(`- Failed to process: ${failedUrls.length} URLs`)
 
     if (failedUrls.length > 0) {
-      console.log('\nFailed URLs:')
+      console.log("\nFailed URLs:")
       failedUrls.forEach(url => console.log(`- ${url}`))
     }
 
@@ -253,23 +271,30 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
       console.log(`\nAll URLs processed. Results saved to ${outputDir}/`)
 
       // Get combined filename from config or use default
-      const combinedFilename = config.combined_filename || 'combined_api_documentation.md'
+      const combinedFilename =
+        config.combined_filename || "combined_api_documentation.md"
 
       console.log(`Combining all markdown files into ${combinedFilename}...`)
 
       // Combine markdown files
-      const combinedFilePath = combineMarkdownFiles(urlConfigs, outputDir, combinedFilename)
+      const combinedFilePath = combineMarkdownFiles(
+        urlConfigs,
+        outputDir,
+        combinedFilename
+      )
 
-      console.log(`✅ Combined API documentation created at ${combinedFilePath}`)
+      console.log(
+        `✅ Combined API documentation created at ${combinedFilePath}`
+      )
 
       // Clean up individual files if needed
       if (config.delete_individual_files !== false) {
-        console.log('Deleting individual markdown files...')
+        console.log("Deleting individual markdown files...")
         cleanupIndividualFiles(urlConfigs, outputDir, combinedFilename)
-        console.log('✅ Cleanup completed. Only combined file remains.')
+        console.log("✅ Cleanup completed. Only combined file remains.")
       }
     } else {
-      throw new Error('All URLs failed to process, cannot create combined file')
+      throw new Error("All URLs failed to process, cannot create combined file")
     }
   } catch (error) {
     console.error(`Error in batch processing: ${error.message}`)
@@ -278,7 +303,9 @@ export const processBatch = async (configPath, outputDirOverride = null) => {
   } finally {
     // Exit with non-zero code if there were failures in GitHub Actions
     if (hasFailures && (process.env.CI || process.env.GITHUB_ACTIONS)) {
-      console.error('\n❌ Some URLs failed to process. GitHub Actions should mark this as failed.')
+      console.error(
+        "\n❌ Some URLs failed to process. GitHub Actions should mark this as failed."
+      )
       // Setting a timeout to ensure logs are flushed before exit
       setTimeout(() => {
         process.exit(1)

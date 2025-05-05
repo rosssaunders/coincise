@@ -1,9 +1,9 @@
 // scrape-docs.js
-import fs from 'fs'
-import path from 'path'
-import puppeteer from 'puppeteer'
-import TurndownService from 'turndown'
-import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
+import fs from "fs"
+import path from "path"
+import puppeteer from "puppeteer"
+import TurndownService from "turndown"
+import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
 
 const turndown = new TurndownService()
 turndown.use([gfm, tables, strikethrough])
@@ -11,14 +11,14 @@ turndown.use([gfm, tables, strikethrough])
 async function extractSectionsAsHtmlMap(url) {
   // launch headless browser
   const browser = await puppeteer.launch({
-    headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
   })
   const page = await browser.newPage()
-  await page.goto(url, { waitUntil: 'networkidle0' })
+  await page.goto(url, { waitUntil: "networkidle0" })
 
   // select all H1 elements
-  const h1Elements = await page.$$('h1')
+  const h1Elements = await page.$$("h1")
   const sectionMap = new Map()
 
   for (const h1Handle of h1Elements) {
@@ -29,7 +29,7 @@ async function extractSectionsAsHtmlMap(url) {
     const html = await h1Handle.evaluate(el => {
       let content = el.outerHTML
       let sibling = el.nextElementSibling
-      while (sibling && sibling.tagName !== 'H1') {
+      while (sibling && sibling.tagName !== "H1") {
         content += sibling.outerHTML
         sibling = sibling.nextElementSibling
       }
@@ -45,9 +45,9 @@ async function extractSectionsAsHtmlMap(url) {
 }
 
 async function main() {
-  const configDir = path.resolve(process.cwd(), 'config')
+  const configDir = path.resolve(process.cwd(), "config")
   // Changed output directory to docs/cryptocom in the repo root
-  const outputDir = path.resolve(process.cwd(), '../../docs/cryptocom')
+  const outputDir = path.resolve(process.cwd(), "../../docs/cryptocom")
 
   // Ensure output directory exists
   if (!fs.existsSync(outputDir)) {
@@ -55,24 +55,26 @@ async function main() {
   }
 
   // Read all JSON config files in the config directory
-  const configFiles = fs.readdirSync(configDir).filter(file => file.endsWith('.json'))
+  const configFiles = fs
+    .readdirSync(configDir)
+    .filter(file => file.endsWith(".json"))
 
   for (const configFile of configFiles) {
     const configPath = path.join(configDir, configFile)
-    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+    const config = JSON.parse(fs.readFileSync(configPath, "utf-8"))
 
     // Use baseUrl from config instead of hardcoded URL
     const url =
       config.baseUrl ||
-      'https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#introduction' // Fallback URL if not in config
+      "https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#introduction" // Fallback URL if not in config
     const sectionMap = await extractSectionsAsHtmlMap(url)
 
     // markdown file
-    let allHtmlContent = ''
+    let allHtmlContent = ""
 
     // Log available sections for debugging
-    console.log('Available sections:', Array.from(sectionMap.keys()))
-    console.log('Config sections:', config.sections)
+    console.log("Available sections:", Array.from(sectionMap.keys()))
+    console.log("Config sections:", config.sections)
 
     for (const sectionName of config.sections) {
       if (sectionMap.has(sectionName)) {
@@ -95,7 +97,9 @@ async function main() {
 
     const filepath = path.join(outputDir, filename)
     fs.writeFileSync(filepath, markdown)
-    console.log(`Generated markdown for config: ${configPath}, saved to: ${filepath}`)
+    console.log(
+      `Generated markdown for config: ${configPath}, saved to: ${filepath}`
+    )
   }
 }
 

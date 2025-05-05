@@ -1,22 +1,22 @@
-'use strict'
+"use strict"
 
-import { promises as fs } from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import child_process from 'child_process'
-import { promisify } from 'util'
+import { promises as fs } from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import child_process from "child_process"
+import { promisify } from "util"
 
 const exec = promisify(child_process.exec)
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 // ANSI color codes for terminal output
-const GREEN = '\x1b[32m'
-const RED = '\x1b[31m'
-const RESET = '\x1b[0m'
+const GREEN = "\x1b[32m"
+const RED = "\x1b[31m"
+const RESET = "\x1b[0m"
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const rootDir = path.join(__dirname, '..', '..')
+const rootDir = path.join(__dirname, "..", "..")
 
 /**
  * Prints a status message to the console with color
@@ -48,7 +48,7 @@ const processConfigFile = async configFile => {
     printStatus(`Processing ${configFile}...`)
 
     // Run the conversion script
-    const indexPath = path.join(rootDir, 'src', 'index.js')
+    const indexPath = path.join(rootDir, "src", "index.js")
     const { stdout, stderr } = await exec(`node ${indexPath} ${configPath}`)
 
     if (stdout) console.log(stdout)
@@ -66,7 +66,11 @@ const processConfigFile = async configFile => {
  * Main function to process all config files
  */
 const main = async () => {
-  const configFiles = ['config/common.json', 'config/spot.json', 'config/future.json']
+  const configFiles = [
+    "config/common.json",
+    "config/spot.json",
+    "config/future.json"
+  ]
 
   let success = true
 
@@ -82,9 +86,9 @@ const main = async () => {
   }
 
   if (success) {
-    printStatus('All conversions completed successfully!')
+    printStatus("All conversions completed successfully!")
   } else {
-    printStatus('Conversion process failed.', true)
+    printStatus("Conversion process failed.", true)
     process.exit(1)
   }
 }

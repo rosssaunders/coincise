@@ -1,8 +1,4 @@
 {
   "title": "Private WebSocket API Streams",
-  "includeSections": [
-    "Integration guide",
-    "Error code",
-    "WebSocket API"
-  ]
-} 
+  "includeSections": ["Integration guide", "Error code", "WebSocket API"]
+}

@@ -5,7 +5,7 @@
  */
 
 // Import from the new structure
-import { scrapeApiDocumentation } from './scraper.js'
+import { scrapeApiDocumentation } from "./scraper.js"
 // const { scrapeApiDocumentation } = require('./scraper');
 
 // For backward compatibility

@@ -53,7 +53,10 @@
     {
       "h1_match": "order-book-trading",
       "h2_match": "order-book-trading-trade",
-      "h3_matches": ["order-book-trading-trade-post", "order-book-trading-trade-get"],
+      "h3_matches": [
+        "order-book-trading-trade-post",
+        "order-book-trading-trade-get"
+      ],
       "include_h2_html": false
     },
     {

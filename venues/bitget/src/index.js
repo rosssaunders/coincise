@@ -1,29 +1,29 @@
-import { promises as fs } from 'fs'
-import puppeteer from 'puppeteer'
-import * as cheerio from 'cheerio'
-import path from 'path'
-import TurndownService from 'turndown'
-import { gfm, tables } from 'turndown-plugin-gfm'
-import { argv } from 'process'
+import { promises as fs } from "fs"
+import puppeteer from "puppeteer"
+import * as cheerio from "cheerio"
+import path from "path"
+import TurndownService from "turndown"
+import { gfm, tables } from "turndown-plugin-gfm"
+import { argv } from "process"
 
 // Add delay between requests
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 // Initialize Turndown service with GFM plugin
 const turndownService = new TurndownService({
-  headingStyle: 'atx',
-  codeBlockStyle: 'fenced',
+  headingStyle: "atx",
+  codeBlockStyle: "fenced"
 })
 turndownService.use(gfm)
 turndownService.use(tables)
 
 // Add a custom rule to handle <td> elements and preserve <br> tags
-turndownService.addRule('tableCellWithBr', {
-  filter: 'td',
+turndownService.addRule("tableCellWithBr", {
+  filter: "td",
   replacement: function (content, node) {
-    const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, '<br>')
+    const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, "<br>")
     return `| ${cellContent} `
-  },
+  }
 })
 
 // Retry function with exponential backoff
@@ -40,7 +40,9 @@ async function retryWithBackoff(fn, maxRetries = 3, initialDelay = 5000) {
       }
 
       const delayTime = initialDelay * Math.pow(2, attempt - 1)
-      console.log(`Attempt ${attempt} failed. Retrying in ${delayTime / 1000} seconds...`)
+      console.log(
+        `Attempt ${attempt} failed. Retrying in ${delayTime / 1000} seconds...`
+      )
       await delay(delayTime)
     }
   }
@@ -51,8 +53,8 @@ async function retryWithBackoff(fn, maxRetries = 3, initialDelay = 5000) {
 async function processPage(page, fullUrl) {
   // Navigate to the page and wait for content to load
   await page.goto(fullUrl, {
-    waitUntil: 'networkidle0',
-    timeout: 30000,
+    waitUntil: "networkidle0",
+    timeout: 30000
   })
 
   // Get the page content
@@ -60,7 +62,7 @@ async function processPage(page, fullUrl) {
   const $ = cheerio.load(content)
 
   // Extract the markdown content div
-  const markdownDiv = $('.theme-doc-markdown.markdown').first()
+  const markdownDiv = $(".theme-doc-markdown.markdown").first()
 
   if (markdownDiv.length === 0) {
     console.log(`No markdown content found for ${fullUrl}`)
@@ -78,9 +80,9 @@ async function convertToMarkdown(configPath) {
   let browser
   try {
     // Read the config file
-    const config = JSON.parse(await fs.readFile(configPath, 'utf8'))
+    const config = JSON.parse(await fs.readFile(configPath, "utf8"))
 
-    const outputDir = '../../docs/bitget'
+    const outputDir = "../../docs/bitget"
 
     // Create output directory if it doesn't exist
     await fs.mkdir(outputDir, { recursive: true })
@@ -90,13 +92,13 @@ async function convertToMarkdown(configPath) {
 
     // Launch browser once for all requests
     browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--start-maximized', '--no-sandbox', '--disable-setuid-sandbox'],
+      headless: "new",
+      args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"]
     })
 
     // Process each link
     for (const relativePath of config.urls) {
-      if (!relativePath || typeof relativePath !== 'string') {
+      if (!relativePath || typeof relativePath !== "string") {
         continue
       }
 
@@ -114,7 +116,7 @@ async function convertToMarkdown(configPath) {
 
         // Set viewport and user agent
         await page.setUserAgent(
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
         )
 
         // Process the page with retry logic
@@ -126,7 +128,7 @@ async function convertToMarkdown(configPath) {
 
         if (sectionContent) {
           // Add a newline before each section to ensure proper separation
-          markdownContent += '\n\n' + sectionContent
+          markdownContent += "\n\n" + sectionContent
         }
 
         // Close the page after processing
@@ -141,9 +143,11 @@ async function convertToMarkdown(configPath) {
     // Save the markdown content
     const outputPath = path.join(outputDir, config.output_file)
     await fs.writeFile(outputPath, markdownContent)
-    console.log(`\nMarkdown file has been created successfully at ${outputPath}!`)
+    console.log(
+      `\nMarkdown file has been created successfully at ${outputPath}!`
+    )
   } catch (error) {
-    console.error('Error converting to markdown:', error)
+    console.error("Error converting to markdown:", error)
     process.exit(1)
   } finally {
     // Close the browser
@@ -155,8 +159,8 @@ async function convertToMarkdown(configPath) {
 
 // Check if config file path is provided
 if (argv.length < 3) {
-  console.error('Please provide the path to the links config file')
-  console.error('Usage: node index.js <path_to_links_file>')
+  console.error("Please provide the path to the links config file")
+  console.error("Usage: node index.js <path_to_links_file>")
   process.exit(1)
 }
 

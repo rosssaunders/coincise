@@ -1,7 +1,7 @@
-'use strict'
+"use strict"
 
-import fs from 'fs'
-import path from 'path'
+import fs from "fs"
+import path from "path"
 
 /**
  * Read and parse a JSON config file
@@ -11,7 +11,7 @@ import path from 'path'
  */
 export const readConfig = configPath => {
   try {
-    const configContent = fs.readFileSync(configPath, 'utf8')
+    const configContent = fs.readFileSync(configPath, "utf8")
     return JSON.parse(configContent)
   } catch (error) {
     throw new Error(`Failed to read config file: ${error.message}`)
@@ -44,13 +44,13 @@ export const generateFilename = (url, filename) => {
   if (!filename) {
     // Extract the last part of the URL and sanitize it
     filename = url
-      .split('/')
+      .split("/")
       .pop()
-      .replace(/[^a-zA-Z0-9]/g, '-')
+      .replace(/[^a-zA-Z0-9]/g, "-")
   }
 
   // Add .md extension if not present
-  if (!filename.endsWith('.md')) {
+  if (!filename.endsWith(".md")) {
     filename = `${filename}.md`
   }
 
@@ -64,14 +64,17 @@ export const generateFilename = (url, filename) => {
  * @returns {Object} Object containing configPath and outputDir
  */
 export const parseConfigOptions = args => {
-  let configPath = 'config.json'
+  let configPath = "config.json"
   let outputDir = null
 
   for (let i = 0; i < args.length; i++) {
-    if ((args[i] === '-c' || args[i] === '--config') && i + 1 < args.length) {
+    if ((args[i] === "-c" || args[i] === "--config") && i + 1 < args.length) {
       configPath = args[i + 1]
       i++ // Skip the next argument
-    } else if ((args[i] === '-o' || args[i] === '--output') && i + 1 < args.length) {
+    } else if (
+      (args[i] === "-o" || args[i] === "--output") &&
+      i + 1 < args.length
+    ) {
       outputDir = args[i + 1]
       i++ // Skip the next argument
     }

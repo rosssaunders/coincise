@@ -1,11 +1,11 @@
-'use strict'
+"use strict"
 
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const LOG_DIR = path.join(__dirname, '../../logs')
+const LOG_DIR = path.join(__dirname, "../../logs")
 
 export async function setupLogger() {
   try {
@@ -16,8 +16,11 @@ export async function setupLogger() {
 
     // Create a write stream for logging
     const logStream = fs.createWriteStream(
-      path.join(LOG_DIR, `bybit-docs-${new Date().toISOString().split('T')[0]}.log`),
-      { flags: 'a' }
+      path.join(
+        LOG_DIR,
+        `bybit-docs-${new Date().toISOString().split("T")[0]}.log`
+      ),
+      { flags: "a" }
     )
 
     // Override console.log to write to both console and file
@@ -25,8 +28,8 @@ export async function setupLogger() {
     console.log = (...args) => {
       const timestamp = new Date().toISOString()
       const message = args
-        .map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg))
-        .join(' ')
+        .map(arg => (typeof arg === "object" ? JSON.stringify(arg) : arg))
+        .join(" ")
 
       logStream.write(`[${timestamp}] ${message}\n`)
       originalConsoleLog.apply(console, args)
@@ -34,7 +37,7 @@ export async function setupLogger() {
 
     return true
   } catch (error) {
-    console.error('Failed to setup logger:', error)
+    console.error("Failed to setup logger:", error)
     throw error
   }
 }

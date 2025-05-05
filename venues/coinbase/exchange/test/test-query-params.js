@@ -1,11 +1,16 @@
 /**
  * Test file to verify query parameters extraction
  */
-const fs = require('fs')
-const path = require('path')
-const { scrapeApiDocumentation } = require('../../src/coinbase/exchange/scraper')
-const { processAuthSection, processRequestParams } = require('../../src/processors/formatters')
-const { generateMarkdownDocument } = require('../../src/processors/formatters')
+const fs = require("fs")
+const path = require("path")
+const {
+  scrapeApiDocumentation
+} = require("../../src/coinbase/exchange/scraper")
+const {
+  processAuthSection,
+  processRequestParams
+} = require("../../src/processors/formatters")
+const { generateMarkdownDocument } = require("../../src/processors/formatters")
 
 // Sample HTML content (replace with your sample if needed)
 const sampleHtml = `
@@ -18,21 +23,23 @@ const samplePathParamsHtml = `
 `
 
 // Process the HTML
-console.log('Processing Query Parameters:')
+console.log("Processing Query Parameters:")
 const queryParamsMarkdown = processRequestParams(sampleHtml)
 console.log(queryParamsMarkdown)
 
-console.log('\nProcessing Path Parameters:')
+console.log("\nProcessing Path Parameters:")
 const pathParamsMarkdown = processRequestParams(samplePathParamsHtml)
 console.log(pathParamsMarkdown)
 
 // Optionally save to a file for inspection
 fs.writeFileSync(
-  path.join(__dirname, 'test-query-params-output.md'),
-  queryParamsMarkdown || 'No output generated'
+  path.join(__dirname, "test-query-params-output.md"),
+  queryParamsMarkdown || "No output generated"
 )
 fs.writeFileSync(
-  path.join(__dirname, 'test-path-params-output.md'),
-  pathParamsMarkdown || 'No output generated'
+  path.join(__dirname, "test-path-params-output.md"),
+  pathParamsMarkdown || "No output generated"
 )
-console.log('Output saved to test-query-params-output.md and test-path-params-output.md')
+console.log(
+  "Output saved to test-query-params-output.md and test-path-params-output.md"
+)
