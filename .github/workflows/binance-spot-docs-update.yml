@@ -34,9 +34,9 @@ jobs:
 
       - name: Install shared dependencies
         run: |
-          cd ../shared
+          pushd ../shared
           npm install
-          cd ../binancespot
+          popd
 
       - name: Install dependencies
         run: npm ci

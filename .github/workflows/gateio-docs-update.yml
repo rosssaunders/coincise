@@ -32,6 +32,12 @@ jobs:
           cache: "npm"
           cache-dependency-path: venues/gateio/package-lock.json
 
+      - name: Install shared dependencies
+        run: |
+          pushd ../shared
+          npm install
+          popd
+
       - name: Install dependencies
         run: npm ci
 
