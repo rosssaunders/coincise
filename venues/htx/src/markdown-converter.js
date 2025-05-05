@@ -1,7 +1,7 @@
-'use strict'
+"use strict"
 
-import TurndownService from 'turndown'
-import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
+import TurndownService from "turndown"
+import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
 
 /**
  * Converts HTML content to Markdown format with custom table cell formatting
@@ -10,20 +10,20 @@ import { gfm, tables, strikethrough } from 'turndown-plugin-gfm'
  */
 function convertToMarkdown(html) {
   const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
-    fence: '```',
-    bulletListMarker: '-',
-    emDelimiter: '_',
-    strongDelimiter: '**',
-    br: '\n',
-    preformattedCode: true,
+    headingStyle: "atx",
+    codeBlockStyle: "fenced",
+    fence: "```",
+    bulletListMarker: "-",
+    emDelimiter: "_",
+    strongDelimiter: "**",
+    br: "\n",
+    preformattedCode: true
   })
   turndownService.use([gfm, tables, strikethrough])
 
   const originalEscape = turndownService.escape
   turndownService.escape = function (string) {
-    return originalEscape(string).replace(/\$/g, '\\$')
+    return originalEscape(string).replace(/\$/g, "\\$")
   }
 
   return turndownService.turndown(html)
