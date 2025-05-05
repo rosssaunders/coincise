@@ -1,33 +1,5 @@
 # Bitget Futures API Documentation
 
-# Futures Trading API
-
-This section introduces the API documentation for Futures trading.
-
-For more details, please refer to the menu on the left.
-
-Please note that there are 3 product types under Futures trading for RestAPI and
-Websocket
-
-| Product Type | Desc                                                |
-| ------------ | --------------------------------------------------- |
-| USDT-FUTURES | USDT-M Futures, Futures settled in USDT             |
-| USDC-FUTURES | USDC-M Futures, Futures settled in USDC             |
-| COIN-FUTURES | Coin-M Futures, Futures settled in cryptocurrencies |
-
-Specially, these are the product type value for
-[demo trading](/api-doc/common/demotrading/restapi) in RestAPI and Websocket
-
-| Product Type  | Desc                                                |
-| ------------- | --------------------------------------------------- |
-| SUSDT-FUTURES | USDT-M Futures Demo(Try out USDT-M futures trading) |
-| SUSDC-FUTURES | USDC-M Futures Demo(Try out USDC-M futures)         |
-| SCOIN-FUTURES | Coin-M Futures Demo(Try out Coin-M futures trading) |
-
-Every account has certain demo coins, you could check your demo coin balance by
-calling the [Account List](/api-doc/contract/account/Get-Account-List) API with
-above demo trading product type
-
 # VIP Fee Rate
 
 Rate limit:10 req/sec/IP
