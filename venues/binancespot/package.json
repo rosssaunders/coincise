@@ -12,7 +12,7 @@
     "extract:private_websocket": "node src/index.js ./config/private_websocket.json",
     "extract:fix": "node src/index.js ./config/fix.json",
     "extract:sbe": "node src/index.js ./config/sbe.json",
-    "extract:change_log": "node src/index.js ./config/changelog.json"
+    "extract:change_log": "node src/index.js ./config/change_log.json"
   },
   "author": "",
   "license": "ISC",
