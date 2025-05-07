@@ -1,549 +1,193 @@
 # Binance Spot Public Websocket API Documentation
 
-# Error codes for Binance
+## Error codes for Binance
 
 **Last Updated: 2025-04-08**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
 
+```json
+{
+  "code": -1121,
+  "msg": "Invalid symbol."
+}
 ```
-{  "code":-1121,  "msg":"Invalid symbol."}
-```
 
-## 10xx - General Server or Network issues[​](/docs/binance-spot-api-docs/errors#10xx---general-server-or-network-issues "Direct link to 10xx - General Server or Network issues")
-
-### \-1000 UNKNOWN[​](/docs/binance-spot-api-docs/errors#-1000-unknown "Direct link to -1000 UNKNOWN")
-
-- An unknown error occurred while processing the request.
-
-### \-1001 DISCONNECTED[​](/docs/binance-spot-api-docs/errors#-1001-disconnected "Direct link to -1001 DISCONNECTED")
-
-- Internal error; unable to process your request. Please try again.
-
-### \-1002 UNAUTHORIZED[​](/docs/binance-spot-api-docs/errors#-1002-unauthorized "Direct link to -1002 UNAUTHORIZED")
-
-- You are not authorized to execute this request.
-
-### \-1003 TOO_MANY_REQUESTS[​](/docs/binance-spot-api-docs/errors#-1003-too_many_requests "Direct link to -1003 TOO_MANY_REQUESTS")
-
-- Too many requests queued.
-- Too much request weight used; current limit is %s request weight per %s.
-  Please use WebSocket Streams for live updates to avoid polling the API.
-- Way too much request weight used; IP banned until %s. Please use WebSocket
-  Streams for live updates to avoid bans.
-
-### \-1006 UNEXPECTED_RESP[​](/docs/binance-spot-api-docs/errors#-1006-unexpected_resp "Direct link to -1006 UNEXPECTED_RESP")
-
-- An unexpected response was received from the message bus. Execution status
-  unknown.
-
-### \-1007 TIMEOUT[​](/docs/binance-spot-api-docs/errors#-1007-timeout "Direct link to -1007 TIMEOUT")
-
-- Timeout waiting for response from backend server. Send status unknown;
-  execution status unknown.
-
-### \-1008 SERVER_BUSY[​](/docs/binance-spot-api-docs/errors#-1008-server_busy "Direct link to -1008 SERVER_BUSY")
-
-- Server is currently overloaded with other requests. Please try again in a few
-  minutes.
-
-### \-1013 INVALID_MESSAGE[​](/docs/binance-spot-api-docs/errors#-1013-invalid_message "Direct link to -1013 INVALID_MESSAGE")
-
-- The request is rejected by the API. (i.e. The request didn't reach the
-  Matching Engine.)
-- Potential error messages can be found in
-  [Filter Failures](/docs/binance-spot-api-docs/errors#filter-failures) or
-  [Failures during order placement](/docs/binance-spot-api-docs/errors#other-errors).
-
-### \-1014 UNKNOWN_ORDER_COMPOSITION[​](/docs/binance-spot-api-docs/errors#-1014-unknown_order_composition "Direct link to -1014 UNKNOWN_ORDER_COMPOSITION")
-
-- Unsupported order combination.
-
-### \-1015 TOO_MANY_ORDERS[​](/docs/binance-spot-api-docs/errors#-1015-too_many_orders "Direct link to -1015 TOO_MANY_ORDERS")
-
-- Too many new orders.
-- Too many new orders; current limit is %s orders per %s.
-
-### \-1016 SERVICE_SHUTTING_DOWN[​](/docs/binance-spot-api-docs/errors#-1016-service_shutting_down "Direct link to -1016 SERVICE_SHUTTING_DOWN")
-
-- This service is no longer available.
-
-### \-1020 UNSUPPORTED_OPERATION[​](/docs/binance-spot-api-docs/errors#-1020-unsupported_operation "Direct link to -1020 UNSUPPORTED_OPERATION")
-
-- This operation is not supported.
-
-### \-1021 INVALID_TIMESTAMP[​](/docs/binance-spot-api-docs/errors#-1021-invalid_timestamp "Direct link to -1021 INVALID_TIMESTAMP")
-
-- Timestamp for this request is outside of the recvWindow.
-- Timestamp for this request was 1000ms ahead of the server's time.
-
-### \-1022 INVALID_SIGNATURE[​](/docs/binance-spot-api-docs/errors#-1022-invalid_signature "Direct link to -1022 INVALID_SIGNATURE")
-
-- Signature for this request is not valid.
-
-### \-1033 COMP_ID_IN_USE[​](/docs/binance-spot-api-docs/errors#-1033-comp_id_in_use "Direct link to -1033 COMP_ID_IN_USE")
-
-- `SenderCompId(49)` is currently in use. Concurrent use of the same
-  SenderCompId within one account is not allowed.
-
-### \-1034 TOO_MANY_CONNECTIONS[​](/docs/binance-spot-api-docs/errors#-1034-too_many_connections "Direct link to -1034 TOO_MANY_CONNECTIONS")
-
-- Too many concurrent connections; current limit is '%s'.
-- Too many connection attempts for account; current limit is %s per '%s'.
-- Too many connection attempts from IP; current limit is %s per '%s'.
-
-### \-1035 LOGGED_OUT[​](/docs/binance-spot-api-docs/errors#-1035-logged_out "Direct link to -1035 LOGGED_OUT")
-
-- Please send [Logout`<5>`](/docs/binance-spot-api-docs/fix-api#logout) message
-  to close the session.
-
-## 11xx - Request issues[​](/docs/binance-spot-api-docs/errors#11xx---request-issues "Direct link to 11xx - Request issues")
-
-### \-1100 ILLEGAL_CHARS[​](/docs/binance-spot-api-docs/errors#-1100-illegal_chars "Direct link to -1100 ILLEGAL_CHARS")
-
-- Illegal characters found in a parameter.
-- Illegal characters found in parameter '%s'; legal range is '%s'.
-
-### \-1101 TOO_MANY_PARAMETERS[​](/docs/binance-spot-api-docs/errors#-1101-too_many_parameters "Direct link to -1101 TOO_MANY_PARAMETERS")
-
-- Too many parameters sent for this endpoint.
-- Too many parameters; expected '%s' and received '%s'.
-- Duplicate values for a parameter detected.
-
-### \-1102 MANDATORY_PARAM_EMPTY_OR_MALFORMED[​](/docs/binance-spot-api-docs/errors#-1102-mandatory_param_empty_or_malformed "Direct link to -1102 MANDATORY_PARAM_EMPTY_OR_MALFORMED")
-
-- A mandatory parameter was not sent, was empty/null, or malformed.
-- Mandatory parameter '%s' was not sent, was empty/null, or malformed.
-- Param '%s' or '%s' must be sent, but both were empty/null!
-- Required tag '%s' missing.
-- Field value was empty or malformed.
-- '%s' contains unexpected value. Cannot be greater than %s.
-
-### \-1103 UNKNOWN_PARAM[​](/docs/binance-spot-api-docs/errors#-1103-unknown_param "Direct link to -1103 UNKNOWN_PARAM")
-
-- An unknown parameter was sent.
-- Undefined Tag.
-
-### \-1104 UNREAD_PARAMETERS[​](/docs/binance-spot-api-docs/errors#-1104-unread_parameters "Direct link to -1104 UNREAD_PARAMETERS")
-
-- Not all sent parameters were read.
-- Not all sent parameters were read; read '%s' parameter(s) but was sent '%s'.
-
-### \-1105 PARAM_EMPTY[​](/docs/binance-spot-api-docs/errors#-1105-param_empty "Direct link to -1105 PARAM_EMPTY")
-
-- A parameter was empty.
-- Parameter '%s' was empty.
-
-### \-1106 PARAM_NOT_REQUIRED[​](/docs/binance-spot-api-docs/errors#-1106-param_not_required "Direct link to -1106 PARAM_NOT_REQUIRED")
-
-- A parameter was sent when not required.
-- Parameter '%s' sent when not required.
-- A tag '%s' was sent when not required.
-
-### \-1108 PARAM_OVERFLOW[​](/docs/binance-spot-api-docs/errors#-1108-param_overflow "Direct link to -1108 PARAM_OVERFLOW")
-
-- Parameter '%s' overflowed.
-
-### \-1111 BAD_PRECISION[​](/docs/binance-spot-api-docs/errors#-1111-bad_precision "Direct link to -1111 BAD_PRECISION")
-
-- Parameter '%s' has too much precision.
-
-### \-1112 NO_DEPTH[​](/docs/binance-spot-api-docs/errors#-1112-no_depth "Direct link to -1112 NO_DEPTH")
-
-- No orders on book for symbol.
-
-### \-1114 TIF_NOT_REQUIRED[​](/docs/binance-spot-api-docs/errors#-1114-tif_not_required "Direct link to -1114 TIF_NOT_REQUIRED")
-
-- TimeInForce parameter sent when not required.
-
-### \-1115 INVALID_TIF[​](/docs/binance-spot-api-docs/errors#-1115-invalid_tif "Direct link to -1115 INVALID_TIF")
-
-- Invalid timeInForce.
-
-### \-1116 INVALID_ORDER_TYPE[​](/docs/binance-spot-api-docs/errors#-1116-invalid_order_type "Direct link to -1116 INVALID_ORDER_TYPE")
-
-- Invalid orderType.
-
-### \-1117 INVALID_SIDE[​](/docs/binance-spot-api-docs/errors#-1117-invalid_side "Direct link to -1117 INVALID_SIDE")
-
-- Invalid side.
-
-### \-1118 EMPTY_NEW_CL_ORD_ID[​](/docs/binance-spot-api-docs/errors#-1118-empty_new_cl_ord_id "Direct link to -1118 EMPTY_NEW_CL_ORD_ID")
-
-- New client order ID was empty.
-
-### \-1119 EMPTY_ORG_CL_ORD_ID[​](/docs/binance-spot-api-docs/errors#-1119-empty_org_cl_ord_id "Direct link to -1119 EMPTY_ORG_CL_ORD_ID")
-
-- Original client order ID was empty.
-
-### \-1120 BAD_INTERVAL[​](/docs/binance-spot-api-docs/errors#-1120-bad_interval "Direct link to -1120 BAD_INTERVAL")
-
-- Invalid interval.
-
-### \-1121 BAD_SYMBOL[​](/docs/binance-spot-api-docs/errors#-1121-bad_symbol "Direct link to -1121 BAD_SYMBOL")
-
-- Invalid symbol.
-
-### \-1122 INVALID_SYMBOLSTATUS[​](/docs/binance-spot-api-docs/errors#-1122-invalid_symbolstatus "Direct link to -1122 INVALID_SYMBOLSTATUS")
-
-- Invalid symbolStatus.
-
-### \-1125 INVALID_LISTEN_KEY[​](/docs/binance-spot-api-docs/errors#-1125-invalid_listen_key "Direct link to -1125 INVALID_LISTEN_KEY")
-
-- This listenKey does not exist.
-
-### \-1127 MORE_THAN_XX_HOURS[​](/docs/binance-spot-api-docs/errors#-1127-more_than_xx_hours "Direct link to -1127 MORE_THAN_XX_HOURS")
-
-- Lookup interval is too big.
-- More than %s hours between startTime and endTime.
-
-### \-1128 OPTIONAL_PARAMS_BAD_COMBO[​](/docs/binance-spot-api-docs/errors#-1128-optional_params_bad_combo "Direct link to -1128 OPTIONAL_PARAMS_BAD_COMBO")
-
-- Combination of optional parameters invalid.
-- Combination of optional fields invalid. Recommendation: '%s' and '%s' must
-  both be sent.
-- Fields \[%s\] must be sent together or omitted entirely.
-- Invalid `MDEntryType (269)` combination. BID and OFFER must be requested
-  together.
-
-### \-1130 INVALID_PARAMETER[​](/docs/binance-spot-api-docs/errors#-1130-invalid_parameter "Direct link to -1130 INVALID_PARAMETER")
-
-- Invalid data sent for a parameter.
-- Data sent for parameter '%s' is not valid.
-
-### \-1134 BAD_STRATEGY_TYPE[​](/docs/binance-spot-api-docs/errors#-1134-bad_strategy_type "Direct link to -1134 BAD_STRATEGY_TYPE")
-
-- `strategyType` was less than 1000000.
-- `TargetStrategy (847)` was less than 1000000.
-
-### \-1135 INVALID_JSON[​](/docs/binance-spot-api-docs/errors#-1135-invalid_json "Direct link to -1135 INVALID_JSON")
-
-- Invalid JSON Request
-- JSON sent for parameter '%s' is not valid
-
-### \-1139 INVALID_TICKER_TYPE[​](/docs/binance-spot-api-docs/errors#-1139-invalid_ticker_type "Direct link to -1139 INVALID_TICKER_TYPE")
-
-- Invalid ticker type.
-
-### \-1145 INVALID_CANCEL_RESTRICTIONS[​](/docs/binance-spot-api-docs/errors#-1145-invalid_cancel_restrictions "Direct link to -1145 INVALID_CANCEL_RESTRICTIONS")
-
-- `cancelRestrictions` has to be either `ONLY_NEW` or `ONLY_PARTIALLY_FILLED`.
-
-### \-1151 DUPLICATE_SYMBOLS[​](/docs/binance-spot-api-docs/errors#-1151-duplicate_symbols "Direct link to -1151 DUPLICATE_SYMBOLS")
-
-- Symbol is present multiple times in the list.
-
-### \-1152 INVALID_SBE_HEADER[​](/docs/binance-spot-api-docs/errors#-1152-invalid_sbe_header "Direct link to -1152 INVALID_SBE_HEADER")
-
-- Invalid `X-MBX-SBE` header; expected `<SCHEMA_ID>:<VERSION>`.
-
-### \-1153 UNSUPPORTED_SCHEMA_ID[​](/docs/binance-spot-api-docs/errors#-1153-unsupported_schema_id "Direct link to -1153 UNSUPPORTED_SCHEMA_ID")
-
-- Unsupported SBE schema ID or version specified in the `X-MBX-SBE` header.
-
-### \-1155 SBE_DISABLED[​](/docs/binance-spot-api-docs/errors#-1155-sbe_disabled "Direct link to -1155 SBE_DISABLED")
-
-- SBE is not enabled.
-
-### \-1158 OCO_ORDER_TYPE_REJECTED[​](/docs/binance-spot-api-docs/errors#-1158-oco_order_type_rejected "Direct link to -1158 OCO_ORDER_TYPE_REJECTED")
-
-- Order type not supported in OCO.
-- If the order type provided in the `aboveType` and/or `belowType` is not
-  supported.
-
-### \-1160 OCO_ICEBERGQTY_TIMEINFORCE[​](/docs/binance-spot-api-docs/errors#-1160-oco_icebergqty_timeinforce "Direct link to -1160 OCO_ICEBERGQTY_TIMEINFORCE")
-
-- Parameter '%s' is not supported if `aboveTimeInForce`/`belowTimeInForce` is
-  not GTC.
-- If the order type for the above or below leg is `STOP_LOSS_LIMIT`, and
-  `icebergQty` is provided for that leg, the `timeInForce` has to be `GTC` else
-  it will throw an error.
-- `TimeInForce (59)` must be `GTC (1)` when `MaxFloor (111)` is used.
-
-### \-1161 DEPRECATED_SCHEMA[​](/docs/binance-spot-api-docs/errors#-1161-deprecated_schema "Direct link to -1161 DEPRECATED_SCHEMA")
-
-- Unable to encode the response in SBE schema 'x'. Please use schema 'y' or
-  higher.
-
-### \-1165 BUY_OCO_LIMIT_MUST_BE_BELOW[​](/docs/binance-spot-api-docs/errors#-1165-buy_oco_limit_must_be_below "Direct link to -1165 BUY_OCO_LIMIT_MUST_BE_BELOW")
-
-- A limit order in a buy OCO must be below.
-
-### \-1166 SELL_OCO_LIMIT_MUST_BE_ABOVE[​](/docs/binance-spot-api-docs/errors#-1166-sell_oco_limit_must_be_above "Direct link to -1166 SELL_OCO_LIMIT_MUST_BE_ABOVE")
-
-- A limit order in a sell OCO must be above.
-
-### \-1168 BOTH_OCO_ORDERS_CANNOT_BE_LIMIT[​](/docs/binance-spot-api-docs/errors#-1168-both_oco_orders_cannot_be_limit "Direct link to -1168 BOTH_OCO_ORDERS_CANNOT_BE_LIMIT")
-
-- At least one OCO order must be contingent.
-
-### \-1169 INVALID_TAG_NUMBER[​](/docs/binance-spot-api-docs/errors#-1169-invalid_tag_number "Direct link to -1169 INVALID_TAG_NUMBER")
-
-- Invalid tag number.
-
-### \-1170 TAG_NOT_DEFINED_IN_MESSAGE[​](/docs/binance-spot-api-docs/errors#-1170-tag_not_defined_in_message "Direct link to -1170 TAG_NOT_DEFINED_IN_MESSAGE")
-
-- Tag '%s' not defined for this message type.
-
-### \-1171 TAG_APPEARS_MORE_THAN_ONCE[​](/docs/binance-spot-api-docs/errors#-1171-tag_appears_more_than_once "Direct link to -1171 TAG_APPEARS_MORE_THAN_ONCE")
-
-- Tag '%s' appears more than once.
-
-### \-1172 TAG_OUT_OF_ORDER[​](/docs/binance-spot-api-docs/errors#-1172-tag_out_of_order "Direct link to -1172 TAG_OUT_OF_ORDER")
-
-- Tag '%s' specified out of required order.
-
-### \-1173 GROUP_FIELDS_OUT_OF_ORDER[​](/docs/binance-spot-api-docs/errors#-1173-group_fields_out_of_order "Direct link to -1173 GROUP_FIELDS_OUT_OF_ORDER")
-
-- Repeating group '%s' fields out of order.
-
-### \-1174 INVALID_COMPONENT[​](/docs/binance-spot-api-docs/errors#-1174-invalid_component "Direct link to -1174 INVALID_COMPONENT")
-
-- Component '%s' is incorrectly populated on '%s' order. Recommendation: '%s'
-
-### \-1175 RESET_SEQ_NUM_SUPPORT[​](/docs/binance-spot-api-docs/errors#-1175-reset_seq_num_support "Direct link to -1175 RESET_SEQ_NUM_SUPPORT")
-
-- Continuation of sequence numbers to new session is currently unsupported.
-  Sequence numbers must be reset for each new session.
-
-### \-1176 ALREADY_LOGGED_IN[​](/docs/binance-spot-api-docs/errors#-1176-already_logged_in "Direct link to -1176 ALREADY_LOGGED_IN")
-
-- [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) should only be
-  sent once.
-
-### \-1177 GARBLED_MESSAGE[​](/docs/binance-spot-api-docs/errors#-1177-garbled_message "Direct link to -1177 GARBLED_MESSAGE")
-
-- `CheckSum(10)` contains an incorrect value.
-- `BeginString (8)` is not the first tag in a message.
-- `MsgType (35)` is not the third tag in a message.
-- `BodyLength (9)` does not contain the correct byte count.
-- Only printable ASCII characters and SOH (Start of Header) are allowed.
-
-### \-1178 BAD_SENDER_COMPID[​](/docs/binance-spot-api-docs/errors#-1178-bad_sender_compid "Direct link to -1178 BAD_SENDER_COMPID")
-
-- `SenderCompId(49)` contains an incorrect value. The SenderCompID value should
-  not change throughout the lifetime of a session.
-
-### \-1179 BAD_SEQ_NUM[​](/docs/binance-spot-api-docs/errors#-1179-bad_seq_num "Direct link to -1179 BAD_SEQ_NUM")
-
-- `MsgSeqNum(34)` contains an unexpected value. Expected: '%d'.
-
-### \-1180 EXPECTED_LOGON[​](/docs/binance-spot-api-docs/errors#-1180-expected_logon "Direct link to -1180 EXPECTED_LOGON")
-
-- [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) must be the first
-  message in the session.
-
-### \-1181 TOO_MANY_MESSAGES[​](/docs/binance-spot-api-docs/errors#-1181-too_many_messages "Direct link to -1181 TOO_MANY_MESSAGES")
-
-- Too many messages; current limit is '%d' messages per '%s'.
-
-### \-1182 PARAMS_BAD_COMBO[​](/docs/binance-spot-api-docs/errors#-1182-params_bad_combo "Direct link to -1182 PARAMS_BAD_COMBO")
-
-- Conflicting fields: \[%s\]
-
-### \-1183 NOT_ALLOWED_IN_DROP_COPY_SESSIONS[​](/docs/binance-spot-api-docs/errors#-1183-not_allowed_in_drop_copy_sessions "Direct link to -1183 NOT_ALLOWED_IN_DROP_COPY_SESSIONS")
-
-- Requested operation is not allowed in DropCopy sessions.
-
-### \-1184 DROP_COPY_SESSION_NOT_ALLOWED[​](/docs/binance-spot-api-docs/errors#-1184-drop_copy_session_not_allowed "Direct link to -1184 DROP_COPY_SESSION_NOT_ALLOWED")
-
-- DropCopy sessions are not supported on this server. Please reconnect to a drop
-  copy server.
-
-### \-1185 DROP_COPY_SESSION_REQUIRED[​](/docs/binance-spot-api-docs/errors#-1185-drop_copy_session_required "Direct link to -1185 DROP_COPY_SESSION_REQUIRED")
-
-- Only DropCopy sessions are supported on this server. Either reconnect to order
-  entry server or send `DropCopyFlag (9406)` field.
-
-### \-1186 NOT_ALLOWED_IN_ORDER_ENTRY_SESSIONS[​](/docs/binance-spot-api-docs/errors#-1186-not_allowed_in_order_entry_sessions "Direct link to -1186 NOT_ALLOWED_IN_ORDER_ENTRY_SESSIONS")
-
-- Requested operation is not allowed in order entry sessions.
-
-### \-1187 NOT_ALLOWED_IN_MARKET_DATA_SESSIONS[​](/docs/binance-spot-api-docs/errors#-1187-not_allowed_in_market_data_sessions "Direct link to -1187 NOT_ALLOWED_IN_MARKET_DATA_SESSIONS")
-
-- Requested operation is not allowed in market data sessions.
-
-### \-1188 INCORRECT_NUM_IN_GROUP_COUNT[​](/docs/binance-spot-api-docs/errors#-1188-incorrect_num_in_group_count "Direct link to -1188 INCORRECT_NUM_IN_GROUP_COUNT")
-
-- Incorrect NumInGroup count for repeating group '%s'.
-
-### \-1189 DUPLICATE_ENTRIES_IN_A_GROUP[​](/docs/binance-spot-api-docs/errors#-1189-duplicate_entries_in_a_group "Direct link to -1189 DUPLICATE_ENTRIES_IN_A_GROUP")
-
-- Group '%s' contains duplicate entries.
-
-### \-1190 INVALID_REQUEST_ID[​](/docs/binance-spot-api-docs/errors#-1190-invalid_request_id "Direct link to -1190 INVALID_REQUEST_ID")
-
-- `MDReqID (262)` contains a subscription request id that is already in use on
-  this connection.
-- `MDReqID (262)` contains an unsubscription request id that does not match any
-  active subscription.
-
-### \-1191 TOO_MANY_SUBSCRIPTIONS[​](/docs/binance-spot-api-docs/errors#-1191-too_many_subscriptions "Direct link to -1191 TOO_MANY_SUBSCRIPTIONS")
-
-- Too many subscriptions. Connection may create up to '%s' subscriptions at a
-  time.
-- Similar subscription is already active on this connection. Symbol='%s', active
-  subscription id: '%s'.
-
-### \-1194 INVALID_TIME_UNIT[​](/docs/binance-spot-api-docs/errors#-1194-invalid_time_unit "Direct link to -1194 INVALID_TIME_UNIT")
-
-- Invalid value for time unit; expected either MICROSECOND or MILLISECOND.
-
-### \-1196 BUY_OCO_STOP_LOSS_MUST_BE_ABOVE[​](/docs/binance-spot-api-docs/errors#-1196-buy_oco_stop_loss_must_be_above "Direct link to -1196 BUY_OCO_STOP_LOSS_MUST_BE_ABOVE")
-
-- A stop loss order in a buy OCO must be above.
-
-### \-1197 SELL_OCO_STOP_LOSS_MUST_BE_BELOW[​](/docs/binance-spot-api-docs/errors#-1197-sell_oco_stop_loss_must_be_below "Direct link to -1197 SELL_OCO_STOP_LOSS_MUST_BE_BELOW")
-
-- A stop loss order in a sell OCO must be below.
-
-### \-1198 BUY_OCO_TAKE_PROFIT_MUST_BE_BELOW[​](/docs/binance-spot-api-docs/errors#-1198-buy_oco_take_profit_must_be_below "Direct link to -1198 BUY_OCO_TAKE_PROFIT_MUST_BE_BELOW")
-
-- A take profit order in a buy OCO must be below.
-
-### \-1199 SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE[​](/docs/binance-spot-api-docs/errors#-1199-sell_oco_take_profit_must_be_above "Direct link to -1199 SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE")
-
-- A take profit order in a sell OCO must be above.
-
-### \-2010 NEW_ORDER_REJECTED[​](/docs/binance-spot-api-docs/errors#-2010-new_order_rejected "Direct link to -2010 NEW_ORDER_REJECTED")
-
-- NEW_ORDER_REJECTED
-
-### \-2011 CANCEL_REJECTED[​](/docs/binance-spot-api-docs/errors#-2011-cancel_rejected "Direct link to -2011 CANCEL_REJECTED")
-
-- CANCEL_REJECTED
-
-### \-2013 NO_SUCH_ORDER[​](/docs/binance-spot-api-docs/errors#-2013-no_such_order "Direct link to -2013 NO_SUCH_ORDER")
-
-- Order does not exist.
-
-### \-2014 BAD_API_KEY_FMT[​](/docs/binance-spot-api-docs/errors#-2014-bad_api_key_fmt "Direct link to -2014 BAD_API_KEY_FMT")
-
-- API-key format invalid.
-
-### \-2015 REJECTED_MBX_KEY[​](/docs/binance-spot-api-docs/errors#-2015-rejected_mbx_key "Direct link to -2015 REJECTED_MBX_KEY")
-
-- Invalid API-key, IP, or permissions for action.
-
-### \-2016 NO_TRADING_WINDOW[​](/docs/binance-spot-api-docs/errors#-2016-no_trading_window "Direct link to -2016 NO_TRADING_WINDOW")
-
-- No trading window could be found for the symbol. Try ticker/24hrs instead.
-
-### \-2026 ORDER_ARCHIVED[​](/docs/binance-spot-api-docs/errors#-2026-order_archived "Direct link to -2026 ORDER_ARCHIVED")
-
-- Order was canceled or expired with no executed qty over 90 days ago and has
-  been archived.
-
-### \-2039 CLIENT_ORDER_ID_INVALID[​](/docs/binance-spot-api-docs/errors#-2039-client_order_id_invalid "Direct link to -2039 CLIENT_ORDER_ID_INVALID")
-
-- Client order ID is not correct for this order ID.
-
-## Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, -2011 CANCEL_REJECTED, and -2038 ORDER_AMEND_REJECTED[​](/docs/binance-spot-api-docs/errors#messages-for--1010-error_msg_received--2010-new_order_rejected--2011-cancel_rejected-and--2038-order_amend_rejected "Direct link to Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, -2011 CANCEL_REJECTED, and -2038 ORDER_AMEND_REJECTED")
+| Code   | Name                                     | Description                                                                                                                                                                                                                                                                                                                                   |
+| ------ | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-1000 | \-UNKNOWN​                               | \-An unknown error occurred while processing the request.                                                                                                                                                                                                                                                                                     |
+| \-1001 | \-DISCONNECTED​                          | \-Internal error; unable to process your request. Please try again.                                                                                                                                                                                                                                                                           |
+| \-1002 | \-UNAUTHORIZED​                          | \-You are not authorized to execute this request.                                                                                                                                                                                                                                                                                             |
+| \-1003 | \-TOO_MANY_REQUESTS​                     | \-- Too many requests queued. - Too much request weight used; current limit is %s request weight per %s. Please use WebSocket Streams for live updates to avoid polling the API. - Way too much request weight used; IP banned until %s. Please use WebSocket Streams for live updates to avoid bans.                                         |
+| \-1006 | \-UNEXPECTED_RESP​                       | \-An unexpected response was received from the message bus. Execution status unknown.                                                                                                                                                                                                                                                         |
+| \-1007 | \-TIMEOUT​                               | \-Timeout waiting for response from backend server. Send status unknown; execution status unknown.                                                                                                                                                                                                                                            |
+| \-1008 | \-SERVER_BUSY​                           | \-Server is currently overloaded with other requests. Please try again in a few minutes.                                                                                                                                                                                                                                                      |
+| \-1013 | \-INVALID_MESSAGE​                       | \-- The request is rejected by the API. (i.e. The request didn't reach the Matching Engine.) - Potential error messages can be found in [Filter Failures](/docs/binance-spot-api-docs/errors#filter-failures) or [Failures during order placement](/docs/binance-spot-api-docs/errors#other-errors).                                          |
+| \-1014 | \-UNKNOWN_ORDER_COMPOSITION​             | \-Unsupported order combination.                                                                                                                                                                                                                                                                                                              |
+| \-1015 | \-TOO_MANY_ORDERS​                       | \-- Too many new orders. - Too many new orders; current limit is %s orders per %s.                                                                                                                                                                                                                                                            |
+| \-1016 | \-SERVICE_SHUTTING_DOWN​                 | \-This service is no longer available.                                                                                                                                                                                                                                                                                                        |
+| \-1020 | \-UNSUPPORTED_OPERATION​                 | \-This operation is not supported.                                                                                                                                                                                                                                                                                                            |
+| \-1021 | \-INVALID_TIMESTAMP​                     | \-- Timestamp for this request is outside of the recvWindow. - Timestamp for this request was 1000ms ahead of the server's time.                                                                                                                                                                                                              |
+| \-1022 | \-INVALID_SIGNATURE​                     | \-Signature for this request is not valid.                                                                                                                                                                                                                                                                                                    |
+| \-1033 | \-COMP_ID_IN_USE​                        | \-`SenderCompId(49)` is currently in use. Concurrent use of the same SenderCompId within one account is not allowed.                                                                                                                                                                                                                          |
+| \-1034 | \-TOO_MANY_CONNECTIONS​                  | \-- Too many concurrent connections; current limit is '%s'. - Too many connection attempts for account; current limit is %s per '%s'. - Too many connection attempts from IP; current limit is %s per '%s'.                                                                                                                                   |
+| \-1035 | \-LOGGED_OUT​                            | \-Please send [Logout`<5>`](/docs/binance-spot-api-docs/fix-api#logout) message to close the session.                                                                                                                                                                                                                                         |
+| \-1100 | \-ILLEGAL_CHARS​                         | \-- Illegal characters found in a parameter. - Illegal characters found in parameter '%s'; legal range is '%s'.                                                                                                                                                                                                                               |
+| \-1101 | \-TOO_MANY_PARAMETERS​                   | \-- Too many parameters sent for this endpoint. - Too many parameters; expected '%s' and received '%s'. - Duplicate values for a parameter detected.                                                                                                                                                                                          |
+| \-1102 | \-MANDATORY_PARAM_EMPTY_OR_MALFORMED​    | \-- A mandatory parameter was not sent, was empty/null, or malformed. - Mandatory parameter '%s' was not sent, was empty/null, or malformed. - Param '%s' or '%s' must be sent, but both were empty/null! - Required tag '%s' missing. - Field value was empty or malformed. - '%s' contains unexpected value. Cannot be greater than %s.     |
+| \-1103 | \-UNKNOWN_PARAM​                         | \-- An unknown parameter was sent. - Undefined Tag.                                                                                                                                                                                                                                                                                           |
+| \-1104 | \-UNREAD_PARAMETERS​                     | \-- Not all sent parameters were read. - Not all sent parameters were read; read '%s' parameter(s) but was sent '%s'.                                                                                                                                                                                                                         |
+| \-1105 | \-PARAM_EMPTY​                           | \-- A parameter was empty. - Parameter '%s' was empty.                                                                                                                                                                                                                                                                                        |
+| \-1106 | \-PARAM_NOT_REQUIRED​                    | \-- A parameter was sent when not required. - Parameter '%s' sent when not required. - A tag '%s' was sent when not required.                                                                                                                                                                                                                 |
+| \-1108 | \-PARAM_OVERFLOW​                        | \-Parameter '%s' overflowed.                                                                                                                                                                                                                                                                                                                  |
+| \-1111 | \-BAD_PRECISION​                         | \-Parameter '%s' has too much precision.                                                                                                                                                                                                                                                                                                      |
+| \-1112 | \-NO_DEPTH​                              | \-No orders on book for symbol.                                                                                                                                                                                                                                                                                                               |
+| \-1114 | \-TIF_NOT_REQUIRED​                      | \-TimeInForce parameter sent when not required.                                                                                                                                                                                                                                                                                               |
+| \-1115 | \-INVALID_TIF​                           | \-Invalid timeInForce.                                                                                                                                                                                                                                                                                                                        |
+| \-1116 | \-INVALID_ORDER_TYPE​                    | \-Invalid orderType.                                                                                                                                                                                                                                                                                                                          |
+| \-1117 | \-INVALID_SIDE​                          | \-Invalid side.                                                                                                                                                                                                                                                                                                                               |
+| \-1118 | \-EMPTY_NEW_CL_ORD_ID​                   | \-New client order ID was empty.                                                                                                                                                                                                                                                                                                              |
+| \-1119 | \-EMPTY_ORG_CL_ORD_ID​                   | \-Original client order ID was empty.                                                                                                                                                                                                                                                                                                         |
+| \-1120 | \-BAD_INTERVAL​                          | \-Invalid interval.                                                                                                                                                                                                                                                                                                                           |
+| \-1121 | \-BAD_SYMBOL​                            | \-Invalid symbol.                                                                                                                                                                                                                                                                                                                             |
+| \-1122 | \-INVALID_SYMBOLSTATUS​                  | \-Invalid symbolStatus.                                                                                                                                                                                                                                                                                                                       |
+| \-1125 | \-INVALID_LISTEN_KEY​                    | \-This listenKey does not exist.                                                                                                                                                                                                                                                                                                              |
+| \-1127 | \-MORE_THAN_XX_HOURS​                    | \-- Lookup interval is too big. - More than %s hours between startTime and endTime.                                                                                                                                                                                                                                                           |
+| \-1128 | \-OPTIONAL_PARAMS_BAD_COMBO​             | \-- Combination of optional parameters invalid. - Combination of optional fields invalid. Recommendation: '%s' and '%s' must both be sent. - Fields \[%s\] must be sent together or omitted entirely. - Invalid `MDEntryType (269)` combination. BID and OFFER must be requested together.                                                    |
+| \-1130 | \-INVALID_PARAMETER​                     | \-- Invalid data sent for a parameter. - Data sent for parameter '%s' is not valid.                                                                                                                                                                                                                                                           |
+| \-1134 | \-BAD_STRATEGY_TYPE​                     | \-- `strategyType` was less than 1000000. - `TargetStrategy (847)` was less than 1000000.                                                                                                                                                                                                                                                     |
+| \-1135 | \-INVALID_JSON​                          | \-- Invalid JSON Request - JSON sent for parameter '%s' is not valid                                                                                                                                                                                                                                                                          |
+| \-1139 | \-INVALID_TICKER_TYPE​                   | \-Invalid ticker type.                                                                                                                                                                                                                                                                                                                        |
+| \-1145 | \-INVALID_CANCEL_RESTRICTIONS​           | \-`cancelRestrictions` has to be either `ONLY_NEW` or `ONLY_PARTIALLY_FILLED`.                                                                                                                                                                                                                                                                |
+| \-1151 | \-DUPLICATE_SYMBOLS​                     | \-Symbol is present multiple times in the list.                                                                                                                                                                                                                                                                                               |
+| \-1152 | \-INVALID_SBE_HEADER​                    | \-Invalid `X-MBX-SBE` header; expected `<SCHEMA_ID>:<VERSION>`.                                                                                                                                                                                                                                                                               |
+| \-1153 | \-UNSUPPORTED_SCHEMA_ID​                 | \-Unsupported SBE schema ID or version specified in the `X-MBX-SBE` header.                                                                                                                                                                                                                                                                   |
+| \-1155 | \-SBE_DISABLED​                          | \-SBE is not enabled.                                                                                                                                                                                                                                                                                                                         |
+| \-1158 | \-OCO_ORDER_TYPE_REJECTED​               | \-- Order type not supported in OCO. - If the order type provided in the `aboveType` and/or `belowType` is not supported.                                                                                                                                                                                                                     |
+| \-1160 | \-OCO_ICEBERGQTY_TIMEINFORCE​            | \-- Parameter '%s' is not supported if `aboveTimeInForce`/`belowTimeInForce` is not GTC. - If the order type for the above or below leg is `STOP_LOSS_LIMIT`, and `icebergQty` is provided for that leg, the `timeInForce` has to be `GTC` else it will throw an error. - `TimeInForce (59)` must be `GTC (1)` when `MaxFloor (111)` is used. |
+| \-1161 | \-DEPRECATED_SCHEMA​                     | \-Unable to encode the response in SBE schema 'x'. Please use schema 'y' or higher.                                                                                                                                                                                                                                                           |
+| \-1165 | \-BUY_OCO_LIMIT_MUST_BE_BELOW​           | \-A limit order in a buy OCO must be below.                                                                                                                                                                                                                                                                                                   |
+| \-1166 | \-SELL_OCO_LIMIT_MUST_BE_ABOVE​          | \-A limit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                                  |
+| \-1168 | \-BOTH_OCO_ORDERS_CANNOT_BE_LIMIT​       | \-At least one OCO order must be contingent.                                                                                                                                                                                                                                                                                                  |
+| \-1169 | \-INVALID_TAG_NUMBER​                    | \-Invalid tag number.                                                                                                                                                                                                                                                                                                                         |
+| \-1170 | \-TAG_NOT_DEFINED_IN_MESSAGE​            | \-Tag '%s' not defined for this message type.                                                                                                                                                                                                                                                                                                 |
+| \-1171 | \-TAG_APPEARS_MORE_THAN_ONCE​            | \-Tag '%s' appears more than once.                                                                                                                                                                                                                                                                                                            |
+| \-1172 | \-TAG_OUT_OF_ORDER​                      | \-Tag '%s' specified out of required order.                                                                                                                                                                                                                                                                                                   |
+| \-1173 | \-GROUP_FIELDS_OUT_OF_ORDER​             | \-Repeating group '%s' fields out of order.                                                                                                                                                                                                                                                                                                   |
+| \-1174 | \-INVALID_COMPONENT​                     | \-Component '%s' is incorrectly populated on '%s' order. Recommendation: '%s'                                                                                                                                                                                                                                                                 |
+| \-1175 | \-RESET_SEQ_NUM_SUPPORT​                 | \-Continuation of sequence numbers to new session is currently unsupported. Sequence numbers must be reset for each new session.                                                                                                                                                                                                              |
+| \-1176 | \-ALREADY_LOGGED_IN​                     | \-[Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) should only be sent once.                                                                                                                                                                                                                                                      |
+| \-1177 | \-GARBLED_MESSAGE​                       | \-- `CheckSum(10)` contains an incorrect value. - `BeginString (8)` is not the first tag in a message. - `MsgType (35)` is not the third tag in a message. - `BodyLength (9)` does not contain the correct byte count. - Only printable ASCII characters and SOH (Start of Header) are allowed.                                               |
+| \-1178 | \-BAD_SENDER_COMPID​                     | \-`SenderCompId(49)` contains an incorrect value. The SenderCompID value should not change throughout the lifetime of a session.                                                                                                                                                                                                              |
+| \-1179 | \-BAD_SEQ_NUM​                           | \-`MsgSeqNum(34)` contains an unexpected value. Expected: '%d'.                                                                                                                                                                                                                                                                               |
+| \-1180 | \-EXPECTED_LOGON​                        | \-[Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) must be the first message in the session.                                                                                                                                                                                                                                      |
+| \-1181 | \-TOO_MANY_MESSAGES​                     | \-Too many messages; current limit is '%d' messages per '%s'.                                                                                                                                                                                                                                                                                 |
+| \-1182 | \-PARAMS_BAD_COMBO​                      | \-Conflicting fields: \[%s\]                                                                                                                                                                                                                                                                                                                  |
+| \-1183 | \-NOT_ALLOWED_IN_DROP_COPY_SESSIONS​     | \-Requested operation is not allowed in DropCopy sessions.                                                                                                                                                                                                                                                                                    |
+| \-1184 | \-DROP_COPY_SESSION_NOT_ALLOWED​         | \-DropCopy sessions are not supported on this server. Please reconnect to a drop copy server.                                                                                                                                                                                                                                                 |
+| \-1185 | \-DROP_COPY_SESSION_REQUIRED​            | \-Only DropCopy sessions are supported on this server. Either reconnect to order entry server or send `DropCopyFlag (9406)` field.                                                                                                                                                                                                            |
+| \-1186 | \-NOT_ALLOWED_IN_ORDER_ENTRY_SESSIONS​   | \-Requested operation is not allowed in order entry sessions.                                                                                                                                                                                                                                                                                 |
+| \-1187 | \-NOT_ALLOWED_IN_MARKET_DATA_SESSIONS​   | \-Requested operation is not allowed in market data sessions.                                                                                                                                                                                                                                                                                 |
+| \-1188 | \-INCORRECT_NUM_IN_GROUP_COUNT​          | \-Incorrect NumInGroup count for repeating group '%s'.                                                                                                                                                                                                                                                                                        |
+| \-1189 | \-DUPLICATE_ENTRIES_IN_A_GROUP​          | \-Group '%s' contains duplicate entries.                                                                                                                                                                                                                                                                                                      |
+| \-1190 | \-INVALID_REQUEST_ID​                    | \-- `MDReqID (262)` contains a subscription request id that is already in use on this connection. - `MDReqID (262)` contains an unsubscription request id that does not match any active subscription.                                                                                                                                        |
+| \-1191 | \-TOO_MANY_SUBSCRIPTIONS​                | \-- Too many subscriptions. Connection may create up to '%s' subscriptions at a time. - Similar subscription is already active on this connection. Symbol='%s', active subscription id: '%s'.                                                                                                                                                 |
+| \-1194 | \-INVALID_TIME_UNIT​                     | \-Invalid value for time unit; expected either MICROSECOND or MILLISECOND.                                                                                                                                                                                                                                                                    |
+| \-1196 | \-BUY_OCO_STOP_LOSS_MUST_BE_ABOVE​       | \-A stop loss order in a buy OCO must be above.                                                                                                                                                                                                                                                                                               |
+| \-1197 | \-SELL_OCO_STOP_LOSS_MUST_BE_BELOW​      | \-A stop loss order in a sell OCO must be below.                                                                                                                                                                                                                                                                                              |
+| \-1198 | \-BUY_OCO_TAKE_PROFIT_MUST_BE_BELOW​     | \-A take profit order in a buy OCO must be below.                                                                                                                                                                                                                                                                                             |
+| \-1199 | \-SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE​    | \-A take profit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                            |
+| \-2010 | \-NEW_ORDER_REJECTED​                    | \-NEW_ORDER_REJECTED                                                                                                                                                                                                                                                                                                                          |
+| \-2011 | \-CANCEL_REJECTED​                       | \-CANCEL_REJECTED                                                                                                                                                                                                                                                                                                                             |
+| \-2013 | \-NO_SUCH_ORDER​                         | \-Order does not exist.                                                                                                                                                                                                                                                                                                                       |
+| \-2014 | \-BAD_API_KEY_FMT​                       | \-API-key format invalid.                                                                                                                                                                                                                                                                                                                     |
+| \-2015 | \-REJECTED_MBX_KEY​                      | \-Invalid API-key, IP, or permissions for action.                                                                                                                                                                                                                                                                                             |
+| \-2016 | \-NO_TRADING_WINDOW​                     | \-No trading window could be found for the symbol. Try ticker/24hrs instead.                                                                                                                                                                                                                                                                  |
+| \-2026 | \-ORDER_ARCHIVED​                        | \-Order was canceled or expired with no executed qty over 90 days ago and has been archived.                                                                                                                                                                                                                                                  |
+| \-2039 | \-CLIENT_ORDER_ID_INVALID​               | \-Client order ID is not correct for this order ID.                                                                                                                                                                                                                                                                                           |
+| \-2021 | \-Order cancel-replace partially failed​ | \-This code is sent when either the cancellation of the order failed or the new order placement failed but not both.                                                                                                                                                                                                                          |
+| \-2022 | \-Order cancel-replace failed.​          | \-This code is sent when both the cancellation of the order failed and the new order placement failed.                                                                                                                                                                                                                                        |
+
+### 10xx - General Server or Network issues
+
+### 11xx - Request issues
+
+### Messages for -1010 ERROR_MSG_RECEIVED, -2010 NEW_ORDER_REJECTED, -2011 CANCEL_REJECTED, and -2038 ORDER_AMEND_REJECTED
 
 This code is sent when an error has been returned by the matching engine. The
 following messages which will indicate the specific error:
 
-| Error message                                                   | Description                                                                                 |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| "Unknown order sent."                                           | The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found.               |
-| "Duplicate order sent."                                         | The `clOrdId` is already in use.                                                            |
-| "Market is closed."                                             | The symbol is not trading.                                                                  |
-| "Account has insufficient balance for requested action."        | Not enough funds to complete the action.                                                    |
-| "Market orders are not supported for this symbol."              | `MARKET` is not enabled on the symbol.                                                      |
-| "Iceberg orders are not supported for this symbol."             | `icebergQty` is not enabled on the symbol.                                                  |
-| "Stop loss orders are not supported for this symbol."           | `STOP_LOSS` is not enabled on the symbol.                                                   |
-| "Stop loss limit orders are not supported for this symbol."     | `STOP_LOSS_LIMIT` is not enabled on the symbol.                                             |
-| "Take profit orders are not supported for this symbol."         | `TAKE_PROFIT` is not enabled on the symbol.                                                 |
-| "Take profit limit orders are not supported for this symbol."   | `TAKE_PROFIT_LIMIT` is not enabled on the symbol.                                           |
-| "Order amend is not supported for this symbol."                 | Order amend keep priority is not enabled on the symbol.                                     |
-| "Price \* QTY is zero or less."                                 | `price` \* `quantity` is too low.                                                           |
-| "IcebergQty exceeds QTY."                                       | `icebergQty` must be less than the order quantity.                                          |
-| "This action is disabled on this account."                      | Contact customer support; some actions have been disabled on the account.                   |
-| "This account may not place or cancel orders."                  | Contact customer support; the account has trading ability disabled.                         |
-| "Unsupported order combination"                                 | The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed. |
-| "Order would trigger immediately."                              | The order's stop price is not valid when compared to the last traded price.                 |
-| "Cancel order is invalid. Check origClOrdId and orderId."       | No `origClOrdId` or `orderId` was sent in.                                                  |
-| "Order would immediately match and take."                       | `LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order.  |
-| "The relationship of the prices for the orders is not correct." | The prices set in the `OCO` is breaking the Price restrictions.                             |
+| Error message                                                                    | Description                                                                                                                                                                                                       |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-"Unknown order sent."                                                          | \-The order (by either `orderId`, `clOrdId`, `origClOrdId`) could not be found.                                                                                                                                   |
+| \-"Duplicate order sent."                                                        | \-The `clOrdId` is already in use.                                                                                                                                                                                |
+| \-"Market is closed."                                                            | \-The symbol is not trading.                                                                                                                                                                                      |
+| \-"Account has insufficient balance for requested action."                       | \-Not enough funds to complete the action.                                                                                                                                                                        |
+| \-"Market orders are not supported for this symbol."                             | \-`MARKET` is not enabled on the symbol.                                                                                                                                                                          |
+| \-"Iceberg orders are not supported for this symbol."                            | \-`icebergQty` is not enabled on the symbol.                                                                                                                                                                      |
+| \-"Stop loss orders are not supported for this symbol."                          | \-`STOP_LOSS` is not enabled on the symbol.                                                                                                                                                                       |
+| \-"Stop loss limit orders are not supported for this symbol."                    | \-`STOP_LOSS_LIMIT` is not enabled on the symbol.                                                                                                                                                                 |
+| \-"Take profit orders are not supported for this symbol."                        | \-`TAKE_PROFIT` is not enabled on the symbol.                                                                                                                                                                     |
+| \-"Take profit limit orders are not supported for this symbol."                  | \-`TAKE_PROFIT_LIMIT` is not enabled on the symbol.                                                                                                                                                               |
+| \-"Order amend is not supported for this symbol."                                | \-Order amend keep priority is not enabled on the symbol.                                                                                                                                                         |
+| \-"Price \* QTY is zero or less."                                                | \-`price` \* `quantity` is too low.                                                                                                                                                                               |
+| \-"IcebergQty exceeds QTY."                                                      | \-`icebergQty` must be less than the order quantity.                                                                                                                                                              |
+| \-"This action is disabled on this account."                                     | \-Contact customer support; some actions have been disabled on the account.                                                                                                                                       |
+| \-"This account may not place or cancel orders."                                 | \-Contact customer support; the account has trading ability disabled.                                                                                                                                             |
+| \-"Unsupported order combination"                                                | \-The `orderType`, `timeInForce`, `stopPrice`, and/or `icebergQty` combination isn't allowed.                                                                                                                     |
+| \-"Order would trigger immediately."                                             | \-The order's stop price is not valid when compared to the last traded price.                                                                                                                                     |
+| \-"Cancel order is invalid. Check origClOrdId and orderId."                      | \-No `origClOrdId` or `orderId` was sent in.                                                                                                                                                                      |
+| \-"Order would immediately match and take."                                      | \-`LIMIT_MAKER` order type would immediately match and trade, and not be a pure maker order.                                                                                                                      |
+| \-"The relationship of the prices for the orders is not correct."                | \-The prices set in the `OCO` is breaking the Price restrictions. For reference: `BUY` : `LIMIT_MAKER` `price` < Last Traded Price < `stopPrice` `SELL` : `LIMIT_MAKER` `price` > Last Traded Price > `stopPrice` |
+| \-"OCO orders are not supported for this symbol"                                 | \-`OCO` is not enabled on the symbol.                                                                                                                                                                             |
+| \-"Quote order qty market orders are not support for this symbol."               | \-`MARKET` orders using the parameter `quoteOrderQty` are not enabled on the symbol.                                                                                                                              |
+| \-"Trailing stop orders are not supported for this symbol."                      | \-Orders using `trailingDelta` are not enabled on the symbol.                                                                                                                                                     |
+| \-"Order cancel-replace is not supported for this symbol."                       | \-`POST /api/v3/order/cancelReplace` (REST API) or `order.cancelReplace` (WebSocket API) is not enabled on the symbol.                                                                                            |
+| \-"This symbol is not permitted for this account."                               | \-Account and symbol do not have the same permissions. (e.g. `SPOT`, `MARGIN`, etc)                                                                                                                               |
+| \-"This symbol is restricted for this account."                                  | \-Account is unable to trade on that symbol. (e.g. An `ISOLATED_MARGIN` account cannot place `SPOT` orders.)                                                                                                      |
+| \-"Order was not canceled due to cancel restrictions."                           | \-Either `cancelRestrictions` was set to `ONLY_NEW` but the order status was not `NEW` or `cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was not `PARTIALLY_FILLED`.                |
+| \-"Rest API trading is not enabled." / "WebSocket API trading is not enabled."   | \-Order is being placed or a server that is not configured to allow access to `TRADE` endpoints.                                                                                                                  |
+| \-"FIX API trading is not enabled.                                               | \-Order is placed on a FIX server that is not TRADE enabled.                                                                                                                                                      |
+| \-"Order book liquidity is less than `LOT_SIZE` filter minimum quantity."        | \-Quote quantity market orders cannot be placed when the order book liquidity is less than minimum quantity configured for the `LOT_SIZE` filter.                                                                 |
+| \-"Order book liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity." | \-Quote quantity market orders cannot be placed when the order book liquidity is less than the minimum quantity for `MARKET_LOT_SIZE` filter.                                                                     |
+| \-"Order book liquidity is less than symbol minimum quantity."                   | \-Quote quantity market orders cannot be placed when there are no orders on the book.                                                                                                                             |
+| \-"Order amend (quantity increase) is not supported."                            | \-`newQty` must be less than the order quantity.                                                                                                                                                                  |
+| \-"The requested action would change no state; rejecting".                       | \-The request sent would not have changed the status quo.(e.g. `newQty` cannot equal the order quantity.)                                                                                                         |
 
-For reference:  
-`BUY` : `LIMIT_MAKER` `price` < Last Traded Price < `stopPrice`  
-`SELL` : `LIMIT_MAKER` `price` > Last Traded Price > `stopPrice` | | "OCO orders
-are not supported for this symbol" | `OCO` is not enabled on the symbol. | |
-"Quote order qty market orders are not support for this symbol." | `MARKET`
-orders using the parameter `quoteOrderQty` are not enabled on the symbol. | |
-"Trailing stop orders are not supported for this symbol." | Orders using
-`trailingDelta` are not enabled on the symbol. | | "Order cancel-replace is not
-supported for this symbol." | `POST /api/v3/order/cancelReplace` (REST API) or
-`order.cancelReplace` (WebSocket API) is not enabled on the symbol. | | "This
-symbol is not permitted for this account." | Account and symbol do not have the
-same permissions. (e.g. `SPOT`, `MARGIN`, etc) | | "This symbol is restricted
-for this account." | Account is unable to trade on that symbol. (e.g. An
-`ISOLATED_MARGIN` account cannot place `SPOT` orders.) | | "Order was not
-canceled due to cancel restrictions." | Either `cancelRestrictions` was set to
-`ONLY_NEW` but the order status was not `NEW`  
-or  
-`cancelRestrictions` was set to `ONLY_PARTIALLY_FILLED` but the order status was
-not `PARTIALLY_FILLED`. | | "Rest API trading is not enabled." / "WebSocket API
-trading is not enabled." | Order is being placed or a server that is not
-configured to allow access to `TRADE` endpoints. | | "FIX API trading is not
-enabled. | Order is placed on a FIX server that is not TRADE enabled. | | "Order
-book liquidity is less than `LOT_SIZE` filter minimum quantity." | Quote
-quantity market orders cannot be placed when the order book liquidity is less
-than minimum quantity configured for the `LOT_SIZE` filter. | | "Order book
-liquidity is less than `MARKET_LOT_SIZE` filter minimum quantity." | Quote
-quantity market orders cannot be placed when the order book liquidity is less
-than the minimum quantity for `MARKET_LOT_SIZE` filter. | | "Order book
-liquidity is less than symbol minimum quantity." | Quote quantity market orders
-cannot be placed when there are no orders on the book. | | "Order amend
-(quantity increase) is not supported." | `newQty` must be less than the order
-quantity. | | "The requested action would change no state; rejecting". | The
-request sent would not have changed the status quo.
+### Errors regarding placing orders via cancelReplace
 
-(e.g. `newQty` cannot equal the order quantity.) |
+### Filter failures
 
-## Errors regarding placing orders via cancelReplace[​](/docs/binance-spot-api-docs/errors#errors-regarding-placing-orders-via-cancelreplace "Direct link to Errors regarding placing orders via cancelReplace")
+| Error message                                       | Description                                                                                                                                                                         |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-"Filter failure: PRICE_FILTER"                    | \-`price` is too high, too low, and/or not following the tick size rule for the symbol.                                                                                             |
+| \-"Filter failure: PERCENT_PRICE"                   | \-`price` is X% too high or X% too low from the average weighted price over the last Y minutes.                                                                                     |
+| \-"Filter failure: LOT_SIZE"                        | \-`quantity` is too high, too low, and/or not following the step size rule for the symbol.                                                                                          |
+| \-"Filter failure: MIN_NOTIONAL"                    | \-`price` \* `quantity` is too low to be a valid order for the symbol.                                                                                                              |
+| \-"Filter failure: NOTIONAL"                        | \-`price` \* `quantity` is not within range of the `minNotional` and `maxNotional`                                                                                                  |
+| \-"Filter failure: ICEBERG_PARTS"                   | \-`ICEBERG` order would break into too many parts; icebergQty is too small.                                                                                                         |
+| \-"Filter failure: MARKET_LOT_SIZE"                 | \-`MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol.                                                                         |
+| \-"Filter failure: MAX_POSITION"                    | \-The account's position has reached the maximum defined limit. This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders. |
+| \-"Filter failure: MAX_NUM_ORDERS"                  | \-Account has too many open orders on the symbol.                                                                                                                                   |
+| \-"Filter failure: MAX_NUM_ALGO_ORDERS"             | \-Account has too many open stop loss and/or take profit orders on the symbol.                                                                                                      |
+| \-"Filter failure: MAX_NUM_ICEBERG_ORDERS"          | \-Account has too many open iceberg orders on the symbol.                                                                                                                           |
+| \-"Filter failure: TRAILING_DELTA"                  | \-`trailingDelta` is not within the defined range of the filter for that order type.                                                                                                |
+| \-"Filter failure: EXCHANGE_MAX_NUM_ORDERS"         | \-Account has too many open orders on the exchange.                                                                                                                                 |
+| \-"Filter failure: EXCHANGE_MAX_NUM_ALGO_ORDERS"    | \-Account has too many open stop loss and/or take profit orders on the exchange.                                                                                                    |
+| \-"Filter failure: EXCHANGE_MAX_NUM_ICEBERG_ORDERS" | \-Account has too many open iceberg orders on the exchange.                                                                                                                         |
 
-### \-2021 Order cancel-replace partially failed[​](/docs/binance-spot-api-docs/errors#-2021-order-cancel-replace-partially-failed "Direct link to -2021 Order cancel-replace partially failed")
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/errors](https://developers.binance.com/docs/binance-spot-api-docs/errors)
 
-- This code is sent when either the cancellation of the order failed or the new
-  order placement failed but not both.
-
-### \-2022 Order cancel-replace failed.[​](/docs/binance-spot-api-docs/errors#-2022-order-cancel-replace-failed "Direct link to -2022 Order cancel-replace failed.")
-
-- This code is sent when both the cancellation of the order failed and the new
-  order placement failed.
-
-## Filter failures[​](/docs/binance-spot-api-docs/errors#filter-failures "Direct link to Filter failures")
-
-| Error message                                                                                                       | Description                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| "Filter failure: PRICE_FILTER"                                                                                      | `price` is too high, too low, and/or not following the tick size rule for the symbol.                     |
-| "Filter failure: PERCENT_PRICE"                                                                                     | `price` is X% too high or X% too low from the average weighted price over the last Y minutes.             |
-| "Filter failure: LOT_SIZE"                                                                                          | `quantity` is too high, too low, and/or not following the step size rule for the symbol.                  |
-| "Filter failure: MIN_NOTIONAL"                                                                                      | `price` \* `quantity` is too low to be a valid order for the symbol.                                      |
-| "Filter failure: NOTIONAL"                                                                                          | `price` \* `quantity` is not within range of the `minNotional` and `maxNotional`                          |
-| "Filter failure: ICEBERG_PARTS"                                                                                     | `ICEBERG` order would break into too many parts; icebergQty is too small.                                 |
-| "Filter failure: MARKET_LOT_SIZE"                                                                                   | `MARKET` order's `quantity` is too high, too low, and/or not following the step size rule for the symbol. |
-| "Filter failure: MAX_POSITION"                                                                                      | The account's position has reached the maximum defined limit.                                             |
-| This is composed of the sum of the balance of the base asset, and the sum of the quantity of all open `BUY` orders. |
-| "Filter failure: MAX_NUM_ORDERS"                                                                                    | Account has too many open orders on the symbol.                                                           |
-| "Filter failure: MAX_NUM_ALGO_ORDERS"                                                                               | Account has too many open stop loss and/or take profit orders on the symbol.                              |
-| "Filter failure: MAX_NUM_ICEBERG_ORDERS"                                                                            | Account has too many open iceberg orders on the symbol.                                                   |
-| "Filter failure: TRAILING_DELTA"                                                                                    | `trailingDelta` is not within the defined range of the filter for that order type.                        |
-| "Filter failure: EXCHANGE_MAX_NUM_ORDERS"                                                                           | Account has too many open orders on the exchange.                                                         |
-| "Filter failure: EXCHANGE_MAX_NUM_ALGO_ORDERS"                                                                      | Account has too many open stop loss and/or take profit orders on the exchange.                            |
-| "Filter failure: EXCHANGE_MAX_NUM_ICEBERG_ORDERS"                                                                   | Account has too many open iceberg orders on the exchange.                                                 |
-
-# Filters
+## Filters
 
 Filters define trading rules on a symbol or an exchange. Filters come in two
 forms: `symbol filters` and `exchange filters`.
 
-## Symbol filters[​](/docs/binance-spot-api-docs/filters#symbol-filters "Direct link to Symbol filters")
+### Symbol filters
 
-### PRICE_FILTER[​](/docs/binance-spot-api-docs/filters#price_filter "Direct link to PRICE_FILTER")
+#### PRICE_FILTER
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
 
@@ -564,11 +208,16 @@ for `price`/`stopPrice` of the enabled rules:
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "PRICE_FILTER",  "minPrice": "0.00000100",  "maxPrice": "100000.00000000",  "tickSize": "0.00000100"}
+```json
+{
+  "filterType": "PRICE_FILTER",
+  "minPrice": "0.00000100",
+  "maxPrice": "100000.00000000",
+  "tickSize": "0.00000100"
+}
 ```
 
-### PERCENT_PRICE[​](/docs/binance-spot-api-docs/filters#percent_price "Direct link to PERCENT_PRICE")
+#### PERCENT_PRICE
 
 The `PERCENT_PRICE` filter defines the valid range for the price based on the
 average of the previous trades. `avgPriceMins` is the number of minutes the
@@ -581,11 +230,16 @@ In order to pass the `percent price`, the following must be true for `price`:
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "PERCENT_PRICE",  "multiplierUp": "1.3000",  "multiplierDown": "0.7000",  "avgPriceMins": 5}
+```json
+{
+  "filterType": "PERCENT_PRICE",
+  "multiplierUp": "1.3000",
+  "multiplierDown": "0.7000",
+  "avgPriceMins": 5
+}
 ```
 
-### PERCENT_PRICE_BY_SIDE[​](/docs/binance-spot-api-docs/filters#percent_price_by_side "Direct link to PERCENT_PRICE_BY_SIDE")
+#### PERCENT_PRICE_BY_SIDE
 
 The `PERCENT_PRICE_BY_SIDE` filter defines the valid range for the price based
 on the average of the previous trades.  
@@ -606,11 +260,18 @@ Sell orders will succeed on this filter if:
 
 **/exchangeInfo format:**
 
-```
-  {    "filterType": "PERCENT_PRICE_BY_SIDE",    "bidMultiplierUp": "1.2",    "bidMultiplierDown": "0.2",    "askMultiplierUp": "5",    "askMultiplierDown": "0.8",    "avgPriceMins": 1  }
+```json
+{
+  "filterType": "PERCENT_PRICE_BY_SIDE",
+  "bidMultiplierUp": "1.2",
+  "bidMultiplierDown": "0.2",
+  "askMultiplierUp": "5",
+  "askMultiplierDown": "0.8",
+  "avgPriceMins": 1
+}
 ```
 
-### LOT_SIZE[​](/docs/binance-spot-api-docs/filters#lot_size "Direct link to LOT_SIZE")
+#### LOT_SIZE
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules
 for a symbol. There are 3 parts:
@@ -629,11 +290,16 @@ In order to pass the `lot size`, the following must be true for
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
+```json
+{
+  "filterType": "LOT_SIZE",
+  "minQty": "0.00100000",
+  "maxQty": "100000.00000000",
+  "stepSize": "0.00100000"
+}
 ```
 
-### MIN_NOTIONAL[​](/docs/binance-spot-api-docs/filters#min_notional "Direct link to MIN_NOTIONAL")
+#### MIN_NOTIONAL
 
 The `MIN_NOTIONAL` filter defines the minimum notional value allowed for an
 order on a symbol. An order's notional value is the `price` \* `quantity`.
@@ -644,11 +310,16 @@ of minutes the average price is calculated over. 0 means the last price is used.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MIN_NOTIONAL",  "minNotional": "0.00100000",  "applyToMarket": true,  "avgPriceMins": 5}
+```json
+{
+  "filterType": "MIN_NOTIONAL",
+  "minNotional": "0.00100000",
+  "applyToMarket": true,
+  "avgPriceMins": 5
+}
 ```
 
-### NOTIONAL[​](/docs/binance-spot-api-docs/filters#notional "Direct link to NOTIONAL")
+#### NOTIONAL
 
 The `NOTIONAL` filter defines the acceptable notional range allowed for an order
 on a symbol.
@@ -670,22 +341,32 @@ If the `avgPriceMins` is 0, then the last price will be used.
 
 **/exchangeInfo format:**
 
-```
-{   "filterType": "NOTIONAL",   "minNotional": "10.00000000",   "applyMinToMarket": false,   "maxNotional": "10000.00000000",   "applyMaxToMarket": false,   "avgPriceMins": 5}
+```json
+{
+  "filterType": "NOTIONAL",
+  "minNotional": "10.00000000",
+  "applyMinToMarket": false,
+  "maxNotional": "10000.00000000",
+  "applyMaxToMarket": false,
+  "avgPriceMins": 5
+}
 ```
 
-### ICEBERG_PARTS[​](/docs/binance-spot-api-docs/filters#iceberg_parts "Direct link to ICEBERG_PARTS")
+#### ICEBERG_PARTS
 
 The `ICEBERG_PARTS` filter defines the maximum parts an iceberg order can have.
 The number of `ICEBERG_PARTS` is defined as `CEIL(qty / icebergQty)`.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "ICEBERG_PARTS",  "limit": 10}
+```json
+{
+  "filterType": "ICEBERG_PARTS",
+  "limit": 10
+}
 ```
 
-### MARKET_LOT_SIZE[​](/docs/binance-spot-api-docs/filters#market_lot_size "Direct link to MARKET_LOT_SIZE")
+#### MARKET_LOT_SIZE
 
 The `MARKET_LOT_SIZE` filter defines the `quantity` (aka "lots" in auction
 terms) rules for `MARKET` orders on a symbol. There are 3 parts:
@@ -704,11 +385,16 @@ In order to pass the `market lot size`, the following must be true for
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MARKET_LOT_SIZE",  "minQty": "0.00100000",  "maxQty": "100000.00000000",  "stepSize": "0.00100000"}
+```json
+{
+  "filterType": "MARKET_LOT_SIZE",
+  "minQty": "0.00100000",
+  "maxQty": "100000.00000000",
+  "stepSize": "0.00100000"
+}
 ```
 
-### MAX_NUM_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_orders "Direct link to MAX_NUM_ORDERS")
+#### MAX_NUM_ORDERS
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is
 allowed to have open on a symbol. Note that both "algo" orders and normal orders
@@ -716,11 +402,14 @@ are counted for this filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ORDERS",  "maxNumOrders": 25}
+```json
+{
+  "filterType": "MAX_NUM_ORDERS",
+  "maxNumOrders": 25
+}
 ```
 
-### MAX_NUM_ALGO_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_algo_orders "Direct link to MAX_NUM_ALGO_ORDERS")
+#### MAX_NUM_ALGO_ORDERS
 
 The `MAX_NUM_ALGO_ORDERS` filter defines the maximum number of "algo" orders an
 account is allowed to have open on a symbol. "Algo" orders are `STOP_LOSS`,
@@ -728,11 +417,14 @@ account is allowed to have open on a symbol. "Algo" orders are `STOP_LOSS`,
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 5}
+```json
+{
+  "filterType": "MAX_NUM_ALGO_ORDERS",
+  "maxNumAlgoOrders": 5
+}
 ```
 
-### MAX_NUM_ICEBERG_ORDERS[​](/docs/binance-spot-api-docs/filters#max_num_iceberg_orders "Direct link to MAX_NUM_ICEBERG_ORDERS")
+#### MAX_NUM_ICEBERG_ORDERS
 
 The `MAX_NUM_ICEBERG_ORDERS` filter defines the maximum number of `ICEBERG`
 orders an account is allowed to have open on a symbol. An `ICEBERG` order is any
@@ -740,11 +432,14 @@ order where the `icebergQty` is > 0.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 5}
+```json
+{
+  "filterType": "MAX_NUM_ICEBERG_ORDERS",
+  "maxNumIcebergOrders": 5
+}
 ```
 
-### MAX_POSITION[​](/docs/binance-spot-api-docs/filters#max_position "Direct link to MAX_POSITION")
+#### MAX_POSITION
 
 The `MAX_POSITION` filter defines the allowed maximum position an account can
 have on the base asset of a symbol. An account's position defined as the sum of
@@ -762,11 +457,14 @@ the `MAX_POSITION` filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType":"MAX_POSITION",  "maxPosition":"10.00000000"}
+```json
+{
+  "filterType": "MAX_POSITION",
+  "maxPosition": "10.00000000"
+}
 ```
 
-### TRAILING_DELTA[​](/docs/binance-spot-api-docs/filters#trailing_delta "Direct link to TRAILING_DELTA")
+#### TRAILING_DELTA
 
 The `TRAILING_DELTA` filter defines the minimum and maximum value for the
 parameter `trailingDelta`.
@@ -788,13 +486,19 @@ For `STOP_LOSS SELL`, `STOP_LOSS_LIMIT SELL`, `TAKE_PROFIT BUY`, and
 
 **/exchangeInfo format:**
 
-```
-    {          "filterType": "TRAILING_DELTA",          "minTrailingAboveDelta": 10,          "maxTrailingAboveDelta": 2000,          "minTrailingBelowDelta": 10,          "maxTrailingBelowDelta": 2000   }
+```json
+{
+  "filterType": "TRAILING_DELTA",
+  "minTrailingAboveDelta": 10,
+  "maxTrailingAboveDelta": 2000,
+  "minTrailingBelowDelta": 10,
+  "maxTrailingBelowDelta": 2000
+}
 ```
 
-## Exchange Filters[​](/docs/binance-spot-api-docs/filters#exchange-filters "Direct link to Exchange Filters")
+### Exchange Filters
 
-### EXCHANGE_MAX_NUM_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_orders "Direct link to EXCHANGE_MAX_NUM_ORDERS")
+#### EXCHANGE_MAX_NUM_ORDERS
 
 The `EXCHANGE_MAX_NUM_ORDERS` filter defines the maximum number of orders an
 account is allowed to have open on the exchange. Note that both "algo" orders
@@ -802,11 +506,14 @@ and normal orders are counted for this filter.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ORDERS",  "maxNumOrders": 1000}
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDERS",
+  "maxNumOrders": 1000
+}
 ```
 
-### EXCHANGE_MAX_NUM_ALGO_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_algo_orders "Direct link to EXCHANGE_MAX_NUM_ALGO_ORDERS")
+#### EXCHANGE_MAX_NUM_ALGO_ORDERS
 
 The `EXCHANGE_MAX_NUM_ALGO_ORDERS` filter defines the maximum number of "algo"
 orders an account is allowed to have open on the exchange. "Algo" orders are
@@ -814,33 +521,42 @@ orders an account is allowed to have open on the exchange. "Algo" orders are
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ALGO_ORDERS",  "maxNumAlgoOrders": 200}
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ALGO_ORDERS",
+  "maxNumAlgoOrders": 200
+}
 ```
 
-### EXCHANGE_MAX_NUM_ICEBERG_ORDERS[​](/docs/binance-spot-api-docs/filters#exchange_max_num_iceberg_orders "Direct link to EXCHANGE_MAX_NUM_ICEBERG_ORDERS")
+#### EXCHANGE_MAX_NUM_ICEBERG_ORDERS
 
 The `EXCHANGE_MAX_NUM_ICEBERG_ORDERS` filter defines the maximum number of
 iceberg orders an account is allowed to have open on the exchange.
 
 **/exchangeInfo format:**
 
-```
-{  "filterType": "EXCHANGE_MAX_NUM_ICEBERG_ORDERS",  "maxNumIcebergOrders": 10000}
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ICEBERG_ORDERS",
+  "maxNumIcebergOrders": 10000
+}
 ```
 
-# ENUM Definitions
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
+
+## ENUM Definitions
 
 This will apply for both REST API and WebSocket API.
 
-## Symbol status (status)[​](/docs/binance-spot-api-docs/enums#symbol-status-status "Direct link to Symbol status (status)")
+### Symbol status (status)
 
 - `TRADING`
 - `END_OF_DAY`
 - `HALT`
 - `BREAK`
 
-## Account and Symbol Permissions (permissions)[​](/docs/binance-spot-api-docs/enums#account-and-symbol-permissions-permissions "Direct link to Account and Symbol Permissions (permissions)")
+### Account and Symbol Permissions (permissions)
 
 - `SPOT`
 - `MARGIN`
@@ -870,48 +586,47 @@ This will apply for both REST API and WebSocket API.
 - `TRD_GRP_024`
 - `TRD_GRP_025`
 
-## Order status (status)[​](/docs/binance-spot-api-docs/enums#order-status-status "Direct link to Order status (status)")
+### Order status (status)
 
-| Status                                                                                            | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `NEW`                                                                                             | The order has been accepted by the engine.                                                                                                                                     |
-| `PENDING_NEW`                                                                                     | The order is in a pending phase until the working order of an order list has been fully filled.                                                                                |
-| `PARTIALLY_FILLED`                                                                                | A part of the order has been filled.                                                                                                                                           |
-| `FILLED`                                                                                          | The order has been completed.                                                                                                                                                  |
-| `CANCELED`                                                                                        | The order has been canceled by the user.                                                                                                                                       |
-| `PENDING_CANCEL`                                                                                  | Currently unused                                                                                                                                                               |
-| `REJECTED`                                                                                        | The order was not accepted by the engine and not processed.                                                                                                                    |
-| `EXPIRED`                                                                                         | The order was canceled according to the order type's rules (e.g. LIMIT FOK orders with no fill, LIMIT IOC or MARKET orders that partially fill)                                |
-| or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance) |
-| `EXPIRED_IN_MATCH`                                                                                | The order was expired by the exchange due to STP. (e.g. an order with `EXPIRE_TAKER` will match with existing orders on the book with the same account or same `tradeGroupId`) |
+| Status               | Description                                                                                                                                                                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`NEW`              | \-The order has been accepted by the engine.                                                                                                                                                                                                        |
+| \-`PENDING_NEW`      | \-The order is in a pending phase until the working order of an order list has been fully filled.                                                                                                                                                   |
+| \-`PARTIALLY_FILLED` | \-A part of the order has been filled.                                                                                                                                                                                                              |
+| \-`FILLED`           | \-The order has been completed.                                                                                                                                                                                                                     |
+| \-`CANCELED`         | \-The order has been canceled by the user.                                                                                                                                                                                                          |
+| \-`PENDING_CANCEL`   | \-Currently unused                                                                                                                                                                                                                                  |
+| \-`REJECTED`         | \-The order was not accepted by the engine and not processed.                                                                                                                                                                                       |
+| \-`EXPIRED`          | \-The order was canceled according to the order type's rules (e.g. LIMIT FOK orders with no fill, LIMIT IOC or MARKET orders that partially fill) or by the exchange, (e.g. orders canceled during liquidation, orders canceled during maintenance) |
+| \-`EXPIRED_IN_MATCH` | \-The order was expired by the exchange due to STP. (e.g. an order with `EXPIRE_TAKER` will match with existing orders on the book with the same account or same `tradeGroupId`)                                                                    |
 
-## Order List Status (listStatusType)[​](/docs/binance-spot-api-docs/enums#order-list-status-liststatustype "Direct link to Order List Status (listStatusType)")
+### Order List Status (listStatusType)
 
-| Status         | Description                                                                                                    |
-| -------------- | -------------------------------------------------------------------------------------------------------------- |
-| `RESPONSE`     | This is used when the ListStatus is responding to a failed action. (E.g. order list placement or cancellation) |
-| `EXEC_STARTED` | The order list has been placed or there is an update to the order list status.                                 |
-| `UPDATED`      | The clientOrderId of an order in the order list has been changed.                                              |
-| `ALL_DONE`     | The order list has finished executing and thus is no longer active.                                            |
+| Status           | Description                                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
+| \-`RESPONSE`     | \-This is used when the ListStatus is responding to a failed action. (E.g. order list placement or cancellation) |
+| \-`EXEC_STARTED` | \-The order list has been placed or there is an update to the order list status.                                 |
+| \-`UPDATED`      | \-The clientOrderId of an order in the order list has been changed.                                              |
+| \-`ALL_DONE`     | \-The order list has finished executing and thus is no longer active.                                            |
 
-## Order List Order Status (listOrderStatus)[​](/docs/binance-spot-api-docs/enums#order-list-order-status-listorderstatus "Direct link to Order List Order Status (listOrderStatus)")
+### Order List Order Status (listOrderStatus)
 
-| Status      | Description                                                                                       |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| `EXECUTING` | Either an order list has been placed or there is an update to the status of the list.             |
-| `ALL_DONE`  | An order list has completed execution and thus no longer active.                                  |
-| `REJECT`    | The List Status is responding to a failed action either during order placement or order canceled. |
+| Status        | Description                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| \-`EXECUTING` | \-Either an order list has been placed or there is an update to the status of the list.             |
+| \-`ALL_DONE`  | \-An order list has completed execution and thus no longer active.                                  |
+| \-`REJECT`    | \-The List Status is responding to a failed action either during order placement or order canceled. |
 
-## ContingencyType[​](/docs/binance-spot-api-docs/enums#contingencytype "Direct link to ContingencyType")
+### ContingencyType
 
 - `OCO`
 - `OTO`
 
-## AllocationType[​](/docs/binance-spot-api-docs/enums#allocationtype "Direct link to AllocationType")
+### AllocationType
 
 - `SOR`
 
-## Order types (orderTypes, type)[​](/docs/binance-spot-api-docs/enums#order-types-ordertypes-type "Direct link to Order types (orderTypes, type)")
+### Order types (orderTypes, type)
 
 - `LIMIT`
 - `MARKET`
@@ -921,62 +636,74 @@ This will apply for both REST API and WebSocket API.
 - `TAKE_PROFIT_LIMIT`
 - `LIMIT_MAKER`
 
-## Order Response Type (newOrderRespType)[​](/docs/binance-spot-api-docs/enums#order-response-type-neworderresptype "Direct link to Order Response Type (newOrderRespType)")
+### Order Response Type (newOrderRespType)
 
 - `ACK`
 - `RESULT`
 - `FULL`
 
-## Working Floor[​](/docs/binance-spot-api-docs/enums#working-floor "Direct link to Working Floor")
+### Working Floor
 
 - `EXCHANGE`
 - `SOR`
 
-## Order side (side)[​](/docs/binance-spot-api-docs/enums#order-side-side "Direct link to Order side (side)")
+### Order side (side)
 
 - `BUY`
 - `SELL`
 
-## Time in force (timeInForce)[​](/docs/binance-spot-api-docs/enums#time-in-force-timeinforce "Direct link to Time in force (timeInForce)")
+### Time in force (timeInForce)
 
 This sets how long an order will be active before expiration.
 
-| Status                                                                          | Description         |
-| ------------------------------------------------------------------------------- | ------------------- |
-| `GTC`                                                                           | Good Til Canceled   |
-| An order will be on the book unless the order is canceled.                      |
-| `IOC`                                                                           | Immediate Or Cancel |
-| An order will try to fill the order as much as it can before the order expires. |
-| `FOK`                                                                           | Fill or Kill        |
-| An order will expire if the full order cannot be filled upon execution.         |
+| Status  | Description                                                                                           |
+| ------- | ----------------------------------------------------------------------------------------------------- |
+| \-`GTC` | \-Good Til Canceled An order will be on the book unless the order is canceled.                        |
+| \-`IOC` | \-Immediate Or Cancel An order will try to fill the order as much as it can before the order expires. |
+| \-`FOK` | \-Fill or Kill An order will expire if the full order cannot be filled upon execution.                |
 
-## Rate limiters (rateLimitType)[​](/docs/binance-spot-api-docs/enums#rate-limiters-ratelimittype "Direct link to Rate limiters (rateLimitType)")
+### Rate limiters (rateLimitType)
 
 - REQUEST_WEIGHT
 
-```
-    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000    }
+```json
+{
+  "rateLimitType": "REQUEST_WEIGHT",
+  "interval": "MINUTE",
+  "intervalNum": 1,
+  "limit": 6000
+}
 ```
 
 - ORDERS
 
-```
-    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 1,      "limit": 10    }
+```json
+{
+  "rateLimitType": "ORDERS",
+  "interval": "SECOND",
+  "intervalNum": 1,
+  "limit": 10
+}
 ```
 
 - RAW_REQUESTS
 
-```
-    {      "rateLimitType": "RAW_REQUESTS",      "interval": "MINUTE",      "intervalNum": 5,      "limit": 61000    }
+```json
+{
+  "rateLimitType": "RAW_REQUESTS",
+  "interval": "MINUTE",
+  "intervalNum": 5,
+  "limit": 61000
+}
 ```
 
-## Rate limit intervals (interval)[​](/docs/binance-spot-api-docs/enums#rate-limit-intervals-interval "Direct link to Rate limit intervals (interval)")
+### Rate limit intervals (interval)
 
 - SECOND
 - MINUTE
 - DAY
 
-## STP Modes[​](/docs/binance-spot-api-docs/enums#stp-modes "Direct link to STP Modes")
+### STP Modes
 
 Read [Self Trade Prevention (STP) FAQ](/docs/binance-spot-api-docs/faqs/stp_faq)
 to learn more.
@@ -987,9 +714,12 @@ to learn more.
 - `EXPIRE_BOTH`
 - `DECREMENT`
 
-# WebSocket Streams for Binance (2025-01-28)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/enums](https://developers.binance.com/docs/binance-spot-api-docs/enums)
 
-## General WSS information[​](/docs/binance-spot-api-docs/web-socket-streams#general-wss-information "Direct link to General WSS information")
+## WebSocket Streams for Binance (2025-01-28)
+
+### General WSS information
 
 - The base endpoint is: **wss://stream.binance.com:9443** or
   **wss://stream.binance.com:443**.
@@ -1017,7 +747,7 @@ to learn more.
   `timeUnit=MICROSECOND or timeUnit=microsecond` in the URL.
   - For example: `/stream?streams=btcusdt@trade&timeUnit=MICROSECOND`
 
-## WebSocket Limits[​](/docs/binance-spot-api-docs/web-socket-streams#websocket-limits "Direct link to WebSocket Limits")
+### WebSocket Limits
 
 - WebSocket connections have a limit of 5 incoming messages per second. A
   message is considered:
@@ -1029,7 +759,7 @@ to learn more.
 - A single connection can listen to a maximum of 1024 streams.
 - There is a limit of **300 connections per attempt every 5 minutes per IP**.
 
-## Live Subscribing/Unsubscribing to streams[​](/docs/binance-spot-api-docs/web-socket-streams#live-subscribingunsubscribing-to-streams "Direct link to Live Subscribing/Unsubscribing to streams")
+### Live Subscribing/Unsubscribing to streams
 
 - The following data can be sent through the WebSocket instance in order to
   subscribe/unsubscribe from streams. Examples can be seen below.
@@ -1041,49 +771,69 @@ to learn more.
 - In the response, if the `result` received is `null` this means the request
   sent was a success for non-query requests (e.g. Subscribing/Unsubscribing).
 
-### Subscribe to a stream[​](/docs/binance-spot-api-docs/web-socket-streams#subscribe-to-a-stream "Direct link to Subscribe to a stream")
+#### Subscribe to a stream
 
 - Request
 
-  ```
-  {  "method": "SUBSCRIBE",  "params": [    "btcusdt@aggTrade",    "btcusdt@depth"  ],  "id": 1}
+  ```json
+  {
+    "method": "SUBSCRIBE",
+    "params": ["btcusdt@aggTrade", "btcusdt@depth"],
+    "id": 1
+  }
   ```
 
 - Response
 
-  ```
-  {  "result": null,  "id": 1}
+  ```json
+  {
+    "result": null,
+    "id": 1
+  }
   ```
 
-### Unsubscribe to a stream[​](/docs/binance-spot-api-docs/web-socket-streams#unsubscribe-to-a-stream "Direct link to Unsubscribe to a stream")
+#### Unsubscribe to a stream
 
 - Request
 
-  ```
-  {  "method": "UNSUBSCRIBE",  "params": [    "btcusdt@depth"  ],  "id": 312}
+  ```json
+  {
+    "method": "UNSUBSCRIBE",
+    "params": ["btcusdt@depth"],
+    "id": 312
+  }
   ```
 
 - Response
 
-  ```
-  {  "result": null,  "id": 312}
+  ```json
+  {
+    "result": null,
+    "id": 312
+  }
   ```
 
-### Listing Subscriptions[​](/docs/binance-spot-api-docs/web-socket-streams#listing-subscriptions "Direct link to Listing Subscriptions")
+#### Listing Subscriptions
 
 - Request
 
-  ```
-  {  "method": "LIST_SUBSCRIPTIONS",  "id": 3}
+  ```json
+  {
+    "method": "LIST_SUBSCRIPTIONS",
+    "id": 3
+  }
   ```
 
 - Response
 
-  ```
-  {  "result": [    "btcusdt@aggTrade"  ],  "id": 3}
+  ```json
+  {
+    "result": ["btcusdt@aggTrade"],
+    "id": 3
+  }
   ```
 
-### Setting Properties[​](/docs/binance-spot-api-docs/web-socket-streams#setting-properties "Direct link to Setting Properties")
+#### Setting Properties
 
 Currently, the only property that can be set is whether `combined` stream
 payloads are enabled or not. The combined property is set to `false` when
@@ -1092,47 +842,61 @@ connecting using `/ws/` ("raw streams") and `true` when connecting using
 
 - Request
 
-  ```
-  {  "method": "SET_PROPERTY",  "params": [    "combined",    true  ],  "id": 5}
+  ```json
+  {
+    "method": "SET_PROPERTY",
+    "params": ["combined", true],
+    "id": 5
+  }
   ```
 
 - Response
 
-  ```
-  {  "result": null,  "id": 5}
+  ```json
+  {
+    "result": null,
+    "id": 5
+  }
   ```
 
-### Retrieving Properties[​](/docs/binance-spot-api-docs/web-socket-streams#retrieving-properties "Direct link to Retrieving Properties")
+#### Retrieving Properties
 
 - Request
 
-  ```
-  {  "method": "GET_PROPERTY",  "params": [    "combined"  ],  "id": 2}
+  ```json
+  {
+    "method": "GET_PROPERTY",
+    "params": ["combined"],
+    "id": 2
+  }
   ```
 
 - Response
 
+  ```json
+  {
+    "result": true, // Indicates that combined is set to true.
+    "id": 2
+  }
   ```
-  {  "result": true, // Indicates that combined is set to true.  "id": 2}
-  ```
 
-### Error Messages[​](/docs/binance-spot-api-docs/web-socket-streams#error-messages "Direct link to Error Messages")
+#### Error Messages
 
-| Error Message                                                                                                                                                                   | Description                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| {"code": 0, "msg": "Unknown property","id": %s}                                                                                                                                 | Parameter used in the `SET_PROPERTY` or `GET_PROPERTY` was invalid                                   |
-| {"code": 1, "msg": "Invalid value type: expected Boolean"}                                                                                                                      | Value should only be `true` or `false`                                                               |
-| {"code": 2, "msg": "Invalid request: property name must be a string"}                                                                                                           | Property name provided was invalid                                                                   |
-| {"code": 2, "msg": "Invalid request: request ID must be an unsigned integer"}                                                                                                   | Parameter `id` had to be provided or the value provided in the `id` parameter is an unsupported type |
-| {"code": 2, "msg": "Invalid request: unknown variant %s, expected one of `SUBSCRIBE`, `UNSUBSCRIBE`, `LIST_SUBSCRIPTIONS`, `SET_PROPERTY`, `GET_PROPERTY` at line 1 column 28"} | Possible typo in the provided method or provided method was neither of the expected values           |
-| {"code": 2, "msg": "Invalid request: too many parameters"}                                                                                                                      | Unnecessary parameters provided in the data                                                          |
-| {"code": 2, "msg": "Invalid request: property name must be a string"}                                                                                                           | Property name was not provided                                                                       |
-| {"code": 2, "msg": "Invalid request: missing field `method` at line 1 column 73"}                                                                                               | `method` was not provided in the data                                                                |
-| {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"}                                                                                                            | JSON data sent has incorrect syntax.                                                                 |
+| Error Message                                                                                                                                                                     | Description                                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| \-{"code": 0, "msg": "Unknown property","id": %s}                                                                                                                                 | \-Parameter used in the `SET_PROPERTY` or `GET_PROPERTY` was invalid                                   |
+| \-{"code": 1, "msg": "Invalid value type: expected Boolean"}                                                                                                                      | \-Value should only be `true` or `false`                                                               |
+| \-{"code": 2, "msg": "Invalid request: property name must be a string"}                                                                                                           | \-Property name provided was invalid                                                                   |
+| \-{"code": 2, "msg": "Invalid request: request ID must be an unsigned integer"}                                                                                                   | \-Parameter `id` had to be provided or the value provided in the `id` parameter is an unsupported type |
+| \-{"code": 2, "msg": "Invalid request: unknown variant %s, expected one of `SUBSCRIBE`, `UNSUBSCRIBE`, `LIST_SUBSCRIPTIONS`, `SET_PROPERTY`, `GET_PROPERTY` at line 1 column 28"} | \-Possible typo in the provided method or provided method was neither of the expected values           |
+| \-{"code": 2, "msg": "Invalid request: too many parameters"}                                                                                                                      | \-Unnecessary parameters provided in the data                                                          |
+| \-{"code": 2, "msg": "Invalid request: property name must be a string"}                                                                                                           | \-Property name was not provided                                                                       |
+| \-{"code": 2, "msg": "Invalid request: missing field `method` at line 1 column 73"}                                                                                               | \-`method` was not provided in the data                                                                |
+| \-{"code":3,"msg":"Invalid JSON: expected value at line %s column %s"}                                                                                                            | \-JSON data sent has incorrect syntax.                                                                 |
 
-# Detailed Stream information
+## Detailed Stream information
 
-## Aggregate Trade Streams[​](/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams "Direct link to Aggregate Trade Streams")
+### Aggregate Trade Streams
 
 The Aggregate Trade Streams push trade information that is aggregated for a
 single taker order.
@@ -1143,11 +907,23 @@ single taker order.
 
 **Payload:**
 
-```
-{  "e": "aggTrade",    // Event type  "E": 1672515782136, // Event time  "s": "BNBBTC",      // Symbol  "a": 12345,         // Aggregate trade ID  "p": "0.001",       // Price  "q": "100",         // Quantity  "f": 100,           // First trade ID  "l": 105,           // Last trade ID  "T": 1672515782136, // Trade time  "m": true,          // Is the buyer the market maker?  "M": true           // Ignore}
+```json
+{
+  "e": "aggTrade", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "a": 12345, // Aggregate trade ID
+  "p": "0.001", // Price
+  "q": "100", // Quantity
+  "f": 100, // First trade ID
+  "l": 105, // Last trade ID
+  "T": 1672515782136, // Trade time
+  "m": true, // Is the buyer the market maker?
+  "M": true // Ignore
+}
 ```
 
-## Trade Streams[​](/docs/binance-spot-api-docs/web-socket-streams#trade-streams "Direct link to Trade Streams")
+### Trade Streams
 
 The Trade Streams push raw trade information; each trade has a unique buyer and
 seller.
@@ -1158,11 +934,21 @@ seller.
 
 **Payload:**
 
-```
-{  "e": "trade",       // Event type  "E": 1672515782136, // Event time  "s": "BNBBTC",      // Symbol  "t": 12345,         // Trade ID  "p": "0.001",       // Price  "q": "100",         // Quantity  "T": 1672515782136, // Trade time  "m": true,          // Is the buyer the market maker?  "M": true           // Ignore}
+```json
+{
+  "e": "trade", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "t": 12345, // Trade ID
+  "p": "0.001", // Price
+  "q": "100", // Quantity
+  "T": 1672515782136, // Trade time
+  "m": true, // Is the buyer the market maker?
+  "M": true // Ignore
+}
 ```
 
-## Kline/Candlestick Streams for UTC[​](/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-for-utc "Direct link to Kline/Candlestick Streams for UTC")
+### Kline/Candlestick Streams for UTC
 
 The Kline/Candlestick Stream push updates to the current klines/candlestick
 every second in `UTC+0` timezone
@@ -1194,11 +980,34 @@ s-> seconds; m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 **Payload:**
 
-```
-{  "e": "kline",         // Event type  "E": 1672515782136,   // Event time  "s": "BNBBTC",        // Symbol  "k": {    "t": 1672515780000, // Kline start time    "T": 1672515839999, // Kline close time    "s": "BNBBTC",      // Symbol    "i": "1m",          // Interval    "f": 100,           // First trade ID    "L": 200,           // Last trade ID    "o": "0.0010",      // Open price    "c": "0.0020",      // Close price    "h": "0.0025",      // High price    "l": "0.0015",      // Low price    "v": "1000",        // Base asset volume    "n": 100,           // Number of trades    "x": false,         // Is this kline closed?    "q": "1.0000",      // Quote asset volume    "V": "500",         // Taker buy base asset volume    "Q": "0.500",       // Taker buy quote asset volume    "B": "123456"       // Ignore  }}
+```json
+{
+  "e": "kline", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "k": {
+    "t": 1672515780000, // Kline start time
+    "T": 1672515839999, // Kline close time
+    "s": "BNBBTC", // Symbol
+    "i": "1m", // Interval
+    "f": 100, // First trade ID
+    "L": 200, // Last trade ID
+    "o": "0.0010", // Open price
+    "c": "0.0020", // Close price
+    "h": "0.0025", // High price
+    "l": "0.0015", // Low price
+    "v": "1000", // Base asset volume
+    "n": 100, // Number of trades
+    "x": false, // Is this kline closed?
+    "q": "1.0000", // Quote asset volume
+    "V": "500", // Taker buy base asset volume
+    "Q": "0.500", // Taker buy quote asset volume
+    "B": "123456" // Ignore
+  }
+}
 ```
 
-## Kline/Candlestick Streams with timezone offset[​](/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-with-timezone-offset "Direct link to Kline/Candlestick Streams with timezone offset")
+### Kline/Candlestick Streams with timezone offset
 
 The Kline/Candlestick Stream push updates to the current klines/candlestick
 every second in `UTC+8` timezone
@@ -1222,11 +1031,34 @@ Supported intervals: See
 
 **Payload:**
 
-```
-{  "e": "kline",         // Event type  "E": 1672515782136,   // Event time  "s": "BNBBTC",        // Symbol  "k": {    "t": 1672515780000, // Kline start time    "T": 1672515839999, // Kline close time    "s": "BNBBTC",      // Symbol    "i": "1m",          // Interval    "f": 100,           // First trade ID    "L": 200,           // Last trade ID    "o": "0.0010",      // Open price    "c": "0.0020",      // Close price    "h": "0.0025",      // High price    "l": "0.0015",      // Low price    "v": "1000",        // Base asset volume    "n": 100,           // Number of trades    "x": false,         // Is this kline closed?    "q": "1.0000",      // Quote asset volume    "V": "500",         // Taker buy base asset volume    "Q": "0.500",       // Taker buy quote asset volume    "B": "123456"       // Ignore  }}
+```json
+{
+  "e": "kline", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "k": {
+    "t": 1672515780000, // Kline start time
+    "T": 1672515839999, // Kline close time
+    "s": "BNBBTC", // Symbol
+    "i": "1m", // Interval
+    "f": 100, // First trade ID
+    "L": 200, // Last trade ID
+    "o": "0.0010", // Open price
+    "c": "0.0020", // Close price
+    "h": "0.0025", // High price
+    "l": "0.0015", // Low price
+    "v": "1000", // Base asset volume
+    "n": 100, // Number of trades
+    "x": false, // Is this kline closed?
+    "q": "1.0000", // Quote asset volume
+    "V": "500", // Taker buy base asset volume
+    "Q": "0.500", // Taker buy quote asset volume
+    "B": "123456" // Ignore
+  }
+}
 ```
 
-## Individual Symbol Mini Ticker Stream[​](/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-mini-ticker-stream "Direct link to Individual Symbol Mini Ticker Stream")
+### Individual Symbol Mini Ticker Stream
 
 24hr rolling window mini-ticker statistics. These are NOT the statistics of the
 UTC day, but a 24hr rolling window for the previous 24hrs.
@@ -1237,11 +1069,21 @@ UTC day, but a 24hr rolling window for the previous 24hrs.
 
 **Payload:**
 
-```
-  {    "e": "24hrMiniTicker",  // Event type    "E": 1672515782136,     // Event time    "s": "BNBBTC",          // Symbol    "c": "0.0025",          // Close price    "o": "0.0010",          // Open price    "h": "0.0025",          // High price    "l": "0.0010",          // Low price    "v": "10000",           // Total traded base asset volume    "q": "18"               // Total traded quote asset volume  }
+```json
+{
+  "e": "24hrMiniTicker", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "c": "0.0025", // Close price
+  "o": "0.0010", // Open price
+  "h": "0.0025", // High price
+  "l": "0.0010", // Low price
+  "v": "10000", // Total traded base asset volume
+  "q": "18" // Total traded quote asset volume
+}
 ```
 
-## All Market Mini Tickers Stream[​](/docs/binance-spot-api-docs/web-socket-streams#all-market-mini-tickers-stream "Direct link to All Market Mini Tickers Stream")
+### All Market Mini Tickers Stream
 
 24hr rolling window mini-ticker statistics for all symbols that changed in an
 array. These are NOT the statistics of the UTC day, but a 24hr rolling window
@@ -1254,11 +1096,15 @@ in the array.
 
 **Payload:**
 
-```
-[  {    // Same as <symbol>@miniTicker payload  }]
+```json
+[
+  {
+    // Same as <symbol>@miniTicker payload
+  }
+]
 ```
 
-## Individual Symbol Ticker Streams[​](/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-ticker-streams "Direct link to Individual Symbol Ticker Streams")
+### Individual Symbol Ticker Streams
 
 24hr rolling window ticker statistics for a single symbol. These are NOT the
 statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
@@ -1269,11 +1115,35 @@ statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
 
 **Payload:**
 
-```
-{  "e": "24hrTicker",  // Event type  "E": 1672515782136, // Event time  "s": "BNBBTC",      // Symbol  "p": "0.0015",      // Price change  "P": "250.00",      // Price change percent  "w": "0.0018",      // Weighted average price  "x": "0.0009",      // First trade(F)-1 price (first trade before the 24hr rolling window)  "c": "0.0025",      // Last price  "Q": "10",          // Last quantity  "b": "0.0024",      // Best bid price  "B": "10",          // Best bid quantity  "a": "0.0026",      // Best ask price  "A": "100",         // Best ask quantity  "o": "0.0010",      // Open price  "h": "0.0025",      // High price  "l": "0.0010",      // Low price  "v": "10000",       // Total traded base asset volume  "q": "18",          // Total traded quote asset volume  "O": 0,             // Statistics open time  "C": 86400000,      // Statistics close time  "F": 0,             // First trade ID  "L": 18150,         // Last trade Id  "n": 18151          // Total number of trades}
+```json
+{
+  "e": "24hrTicker", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "p": "0.0015", // Price change
+  "P": "250.00", // Price change percent
+  "w": "0.0018", // Weighted average price
+  "x": "0.0009", // First trade(F)-1 price (first trade before the 24hr rolling window)
+  "c": "0.0025", // Last price
+  "Q": "10", // Last quantity
+  "b": "0.0024", // Best bid price
+  "B": "10", // Best bid quantity
+  "a": "0.0026", // Best ask price
+  "A": "100", // Best ask quantity
+  "o": "0.0010", // Open price
+  "h": "0.0025", // High price
+  "l": "0.0010", // Low price
+  "v": "10000", // Total traded base asset volume
+  "q": "18", // Total traded quote asset volume
+  "O": 0, // Statistics open time
+  "C": 86400000, // Statistics close time
+  "F": 0, // First trade ID
+  "L": 18150, // Last trade Id
+  "n": 18151 // Total number of trades
+}
 ```
 
-## All Market Tickers Stream[​](/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream "Direct link to All Market Tickers Stream")
+### All Market Tickers Stream
 
 24hr rolling window ticker statistics for all symbols that changed in an array.
 These are NOT the statistics of the UTC day, but a 24hr rolling window for the
@@ -1286,11 +1156,15 @@ array.
 
 **Payload:**
 
-```
-[  {    // Same as <symbol>@ticker payload  }]
+```json
+[
+  {
+    // Same as <symbol>@ticker payload
+  }
+]
 ```
 
-## Individual Symbol Rolling Window Statistics Streams[​](/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-rolling-window-statistics-streams "Direct link to Individual Symbol Rolling Window Statistics Streams")
+### Individual Symbol Rolling Window Statistics Streams
 
 Rolling window ticker statistics for a single symbol, computed over multiple
 windows.
@@ -1308,11 +1182,29 @@ wider than <window_size>.
 
 **Payload:**
 
-```
-{  "e": "1hTicker",    // Event type  "E": 1672515782136, // Event time  "s": "BNBBTC",      // Symbol  "p": "0.0015",      // Price change  "P": "250.00",      // Price change percent  "o": "0.0010",      // Open price  "h": "0.0025",      // High price  "l": "0.0010",      // Low price  "c": "0.0025",      // Last price  "w": "0.0018",      // Weighted average price  "v": "10000",       // Total traded base asset volume  "q": "18",          // Total traded quote asset volume  "O": 0,             // Statistics open time  "C": 1675216573749, // Statistics close time  "F": 0,             // First trade ID  "L": 18150,         // Last trade Id  "n": 18151          // Total number of trades}
+```json
+{
+  "e": "1hTicker", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "p": "0.0015", // Price change
+  "P": "250.00", // Price change percent
+  "o": "0.0010", // Open price
+  "h": "0.0025", // High price
+  "l": "0.0010", // Low price
+  "c": "0.0025", // Last price
+  "w": "0.0018", // Weighted average price
+  "v": "10000", // Total traded base asset volume
+  "q": "18", // Total traded quote asset volume
+  "O": 0, // Statistics open time
+  "C": 1675216573749, // Statistics close time
+  "F": 0, // First trade ID
+  "L": 18150, // Last trade Id
+  "n": 18151 // Total number of trades
+}
 ```
 
-## All Market Rolling Window Statistics Streams[​](/docs/binance-spot-api-docs/web-socket-streams#all-market-rolling-window-statistics-streams "Direct link to All Market Rolling Window Statistics Streams")
+### All Market Rolling Window Statistics Streams
 
 Rolling window ticker statistics for all market symbols, computed over multiple
 windows. Note that only tickers that have changed will be present in the array.
@@ -1325,11 +1217,16 @@ windows. Note that only tickers that have changed will be present in the array.
 
 **Payload:**
 
-```
-[  {    // Same as <symbol>@ticker_<window_size> payload,    // one for each symbol updated within the interval.  }]
+```json
+[
+  {
+    // Same as <symbol>@ticker_<window_size> payload,
+    // one for each symbol updated within the interval.
+  }
+]
 ```
 
-## Individual Symbol Book Ticker Streams[​](/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-book-ticker-streams "Direct link to Individual Symbol Book Ticker Streams")
+### Individual Symbol Book Ticker Streams
 
 Pushes any update to the best bid or ask's price or quantity in real-time for a
 specified symbol. Multiple `<symbol>@bookTicker` streams can be subscribed to
@@ -1341,11 +1238,18 @@ over one connection.
 
 **Payload:**
 
-```
-{  "u":400900217,     // order book updateId  "s":"BNBUSDT",     // symbol  "b":"25.35190000", // best bid price  "B":"31.21000000", // best bid qty  "a":"25.36520000", // best ask price  "A":"40.66000000"  // best ask qty}
+```json
+{
+  "u": 400900217, // order book updateId
+  "s": "BNBUSDT", // symbol
+  "b": "25.35190000", // best bid price
+  "B": "31.21000000", // best bid qty
+  "a": "25.36520000", // best ask price
+  "A": "40.66000000" // best ask qty
+}
 ```
 
-## Average Price[​](/docs/binance-spot-api-docs/web-socket-streams#average-price "Direct link to Average Price")
+### Average Price
 
 Average price streams push changes in the average price over a fixed time
 interval.
@@ -1356,11 +1260,18 @@ interval.
 
 **Payload:**
 
-```
-{  "e": "avgPrice",          // Event type  "E": 1693907033000,       // Event time  "s": "BTCUSDT",           // Symbol  "i": "5m",                // Average price interval  "w": "25776.86000000",    // Average price  "T": 1693907032213        // Last trade time}
+```json
+{
+  "e": "avgPrice", // Event type
+  "E": 1693907033000, // Event time
+  "s": "BTCUSDT", // Symbol
+  "i": "5m", // Average price interval
+  "w": "25776.86000000", // Average price
+  "T": 1693907032213 // Last trade time
+}
 ```
 
-## Partial Book Depth Streams[​](/docs/binance-spot-api-docs/web-socket-streams#partial-book-depth-streams "Direct link to Partial Book Depth Streams")
+### Partial Book Depth Streams
 
 Top **<levels>** bids and asks, pushed every second. Valid **<levels>** are 5,
 10, or 20.
@@ -1371,11 +1282,27 @@ Top **<levels>** bids and asks, pushed every second. Valid **<levels>** are 5,
 
 **Payload:**
 
-```
-{  "lastUpdateId": 160,  // Last update ID  "bids": [             // Bids to be updated    [      "0.0024",         // Price level to be updated      "10"              // Quantity    ]  ],  "asks": [             // Asks to be updated    [      "0.0026",         // Price level to be updated      "100"             // Quantity    ]  ]}
+```json
+{
+  "lastUpdateId": 160, // Last update ID
+  "bids": [
+    // Bids to be updated
+    [
+      "0.0024", // Price level to be updated
+      "10" // Quantity
+    ]
+  ],
+  "asks": [
+    // Asks to be updated
+    [
+      "0.0026", // Price level to be updated
+      "100" // Quantity
+    ]
+  ]
+}
 ```
 
-## Diff. Depth Stream[​](/docs/binance-spot-api-docs/web-socket-streams#diff-depth-stream "Direct link to Diff. Depth Stream")
+### Diff. Depth Stream
 
 Order book price and quantity depth updates used to locally manage an order
 book.
@@ -1386,11 +1313,31 @@ book.
 
 **Payload:**
 
-```
-{  "e": "depthUpdate", // Event type  "E": 1672515782136, // Event time  "s": "BNBBTC",      // Symbol  "U": 157,           // First update ID in event  "u": 160,           // Final update ID in event  "b": [              // Bids to be updated    [      "0.0024",       // Price level to be updated      "10"            // Quantity    ]  ],  "a": [              // Asks to be updated    [      "0.0026",       // Price level to be updated      "100"           // Quantity    ]  ]}
+```json
+{
+  "e": "depthUpdate", // Event type
+  "E": 1672515782136, // Event time
+  "s": "BNBBTC", // Symbol
+  "U": 157, // First update ID in event
+  "u": 160, // Final update ID in event
+  "b": [
+    // Bids to be updated
+    [
+      "0.0024", // Price level to be updated
+      "10" // Quantity
+    ]
+  ],
+  "a": [
+    // Asks to be updated
+    [
+      "0.0026", // Price level to be updated
+      "100" // Quantity
+    ]
+  ]
+}
 ```
 
-## How to manage a local order book correctly[​](/docs/binance-spot-api-docs/web-socket-streams#how-to-manage-a-local-order-book-correctly "Direct link to How to manage a local order book correctly")
+### How to manage a local order book correctly
 
 1.  Open a WebSocket connection to
     `wss://stream.binance.com:9443/ws/bnbbtc@depth`.
@@ -1431,7 +1378,10 @@ To apply an event to your local order book, follow this update procedure:
 > However, for most use cases, seeing 5000 levels on each side is enough to
 > understand the market and trade effectively.
 
-# General API Information
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
+
+## General API Information
 
 - The base endpoint is: **`wss://ws-api.binance.com:443/ws-api/v3`**.
   - If you experience issues with the standard 443 port, alternative port 9443
@@ -1460,23 +1410,40 @@ To apply an event to your local order book, follow this update procedure:
   [SPOT Glossary](/docs/binance-spot-api-docs/faqs/spot_glossary) for more
   information.
 
-# Request format
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-api-information](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-api-information)
+
+## Request format
 
 Requests must be sent as JSON in **text frames**, one request per frame.
 
 Example of request:
 
-```
-{  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",  "method": "order.place",  "params": {    "symbol": "BTCUSDT",    "side": "BUY",    "type": "LIMIT",    "price": "0.1",    "quantity": "10",    "timeInForce": "GTC",    "timestamp": 1655716096498,    "apiKey": "T59MTDLWlpRW16JVeZ2Nju5A5C98WkMm8CSzWC4oqynUlTm1zXOxyauT8LmwXEv9",    "signature": "5942ad337e6779f2f4c62cd1c26dba71c91514400a24990a3e7f5edec9323f90"  }}
+```json
+{
+  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",
+  "method": "order.place",
+  "params": {
+    "symbol": "BTCUSDT",
+    "side": "BUY",
+    "type": "LIMIT",
+    "price": "0.1",
+    "quantity": "10",
+    "timeInForce": "GTC",
+    "timestamp": 1655716096498,
+    "apiKey": "T59MTDLWlpRW16JVeZ2Nju5A5C98WkMm8CSzWC4oqynUlTm1zXOxyauT8LmwXEv9",
+    "signature": "5942ad337e6779f2f4c62cd1c26dba71c91514400a24990a3e7f5edec9323f90"
+  }
+}
 ```
 
 Request fields:
 
-| Name     | Type                  | Mandatory | Description                                                   |
-| -------- | --------------------- | --------- | ------------------------------------------------------------- |
-| `id`     | INT / STRING / `null` | YES       | Arbitrary ID used to match responses to requests              |
-| `method` | STRING                | YES       | Request method name                                           |
-| `params` | OBJECT                | NO        | Request parameters. May be omitted if there are no parameters |
+| Name       | Type                    | Mandatory | Description                                                     |
+| ---------- | ----------------------- | --------- | --------------------------------------------------------------- |
+| \-`id`     | \-INT / STRING / `null` | \-YES     | \-Arbitrary ID used to match responses to requests              |
+| \-`method` | \-STRING                | \-YES     | \-Request method name                                           |
+| \-`params` | \-OBJECT                | \-NO      | \-Request parameters. May be omitted if there are no parameters |
 
 - Request `id` is truly arbitrary. You can use UUIDs, sequential IDs, current
   timestamp, etc. The server does not interpret `id` in any way, simply echoing
@@ -1490,33 +1457,110 @@ Request fields:
   `"v3/order.place"`.
 - The order of `params` is not significant.
 
-# Response format
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/request-format](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/request-format)
+
+## Response format
 
 Responses are returned as JSON in **text frames**, one response per frame.
 
 Example of successful response:
 
-```
-{  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",  "status": 200,  "result": {    "symbol": "BTCUSDT",    "orderId": 12510053279,    "orderListId": -1,    "clientOrderId": "a097fe6304b20a7e4fc436",    "transactTime": 1655716096505,    "price": "0.10000000",    "origQty": "10.00000000",    "executedQty": "0.00000000",    "origQuoteOrderQty": "0.000000",    "cummulativeQuoteQty": "0.00000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "workingTime": 1655716096505,    "selfTradePreventionMode": "NONE"  },  "rateLimits": [    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 50,      "count": 12    },    {      "rateLimitType": "ORDERS",      "interval": "DAY",      "intervalNum": 1,      "limit": 160000,      "count": 4043    },    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 321    }  ]}
+```json
+{
+  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",
+  "status": 200,
+  "result": {
+    "symbol": "BTCUSDT",
+    "orderId": 12510053279,
+    "orderListId": -1,
+    "clientOrderId": "a097fe6304b20a7e4fc436",
+    "transactTime": 1655716096505,
+    "price": "0.10000000",
+    "origQty": "10.00000000",
+    "executedQty": "0.00000000",
+    "origQuoteOrderQty": "0.000000",
+    "cummulativeQuoteQty": "0.00000000",
+    "status": "NEW",
+    "timeInForce": "GTC",
+    "type": "LIMIT",
+    "side": "BUY",
+    "workingTime": 1655716096505,
+    "selfTradePreventionMode": "NONE"
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 12
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 4043
+    },
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 321
+    }
+  ]
+}
 ```
 
 Example of failed response:
 
-```
-{  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",  "status": 400,  "error": {    "code": -2010,    "msg": "Account has insufficient balance for requested action."  },  "rateLimits": [    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 50,      "count": 13    },    {      "rateLimitType": "ORDERS",      "interval": "DAY",      "intervalNum": 1,      "limit": 160000,      "count": 4044    },    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 322    }  ]}
+```json
+{
+  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",
+  "status": 400,
+  "error": {
+    "code": -2010,
+    "msg": "Account has insufficient balance for requested action."
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 13
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 4044
+    },
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 322
+    }
+  ]
+}
 ```
 
 Response fields:
 
-| Name         | Type                  | Mandatory                                    | Description                                                                                                    |
-| ------------ | --------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `id`         | INT / STRING / `null` | YES                                          | Same as in the original request                                                                                |
-| `status`     | INT                   | YES                                          | Response status. See [Status codes](/docs/binance-spot-api-docs/websocket-api/response-format#status-codes)    |
-| `result`     | OBJECT / ARRAY        | YES                                          | Response content. Present if request succeeded                                                                 |
-| `error`      | OBJECT                | Error description. Present if request failed |
-| `rateLimits` | ARRAY                 | NO                                           | Rate limiting status. See [Rate limits](/docs/binance-spot-api-docs/websocket-api/response-format#rate-limits) |
+| Name           | Type                    | Mandatory                                      | Description                                                                                                      |
+| -------------- | ----------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| \-`id`         | \-INT / STRING / `null` | \-YES                                          | \-Same as in the original request                                                                                |
+| \-`status`     | \-INT                   | \-YES                                          | \-Response status. See [Status codes](/docs/binance-spot-api-docs/websocket-api/response-format#status-codes)    |
+| \-`result`     | \-OBJECT / ARRAY        | \-YES                                          | \-Response content. Present if request succeeded                                                                 |
+| \-`error`      | \-OBJECT                | \-Error description. Present if request failed |
+| \-`rateLimits` | \-ARRAY                 | \-NO                                           | \-Rate limiting status. See [Rate limits](/docs/binance-spot-api-docs/websocket-api/response-format#rate-limits) |
 
-### Status codes[​](/docs/binance-spot-api-docs/websocket-api/response-format#status-codes "Direct link to Status codes")
+#### Status codes
 
 Status codes in the `status` field are the same as in HTTP.
 
@@ -1540,7 +1584,10 @@ Here are some common status codes that you might encounter:
 See [Error codes for Binance](/docs/binance-spot-api-docs/errors) for a list of
 error codes and messages.
 
-# Event format
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/response-format](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/response-format)
+
+## Event format
 
 User Data Stream events for non-SBE sessions are sent as JSON in **text
 frames**, one event per frame.
@@ -1553,25 +1600,46 @@ for details on how to subscribe to User Data Stream in WebSocket API.
 
 Example of an event:
 
-```
-{  "event": {    "e": "outboundAccountPosition",    "E": 1728972148778,    "u": 1728972148778,    "B": [      {        "a": "ABC",        "f": "11818.00000000",        "l": "182.00000000"      },      {        "a": "DEF",        "f": "10580.00000000",        "l": "70.00000000"      }    ]  }}
+```json
+{
+  "event": {
+    "e": "outboundAccountPosition",
+    "E": 1728972148778,
+    "u": 1728972148778,
+    "B": [
+      {
+        "a": "ABC",
+        "f": "11818.00000000",
+        "l": "182.00000000"
+      },
+      {
+        "a": "DEF",
+        "f": "10580.00000000",
+        "l": "70.00000000"
+      }
+    ]
+  }
+}
 ```
 
 Event fields:
 
-| Name    | Type   | Mandatory | Description                                                                          |
-| ------- | ------ | --------- | ------------------------------------------------------------------------------------ |
-| `event` | OBJECT | YES       | Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream) |
+| Name      | Type     | Mandatory | Description                                                                            |
+| --------- | -------- | --------- | -------------------------------------------------------------------------------------- |
+| \-`event` | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream) |
 
-# Rate limits
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format)
 
-### Connection limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#connection-limits "Direct link to Connection limits")
+## Rate limits
+
+#### Connection limits
 
 There is a limit of **300 connections per attempt every 5 minutes**.
 
 The connection is per **IP address**.
 
-### General information on rate limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#general-information-on-rate-limits "Direct link to General information on rate limits")
+#### General information on rate limits
 
 - Current API rate limits can be queried using the
   [`exchangeInfo`](/docs/binance-spot-api-docs/websocket-api/rate-limits#exchange-information)
@@ -1582,24 +1650,39 @@ The connection is per **IP address**.
 - Requests fail with status `429` when unfilled order count or request rate
   limits are violated.
 
-#### How to interpret rate limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#how-to-interpret-rate-limits "Direct link to How to interpret rate limits")
+##### How to interpret rate limits
 
 A response with rate limit status may look like this:
 
-```
-{  "id": "7069b743-f477-4ae3-81db-db9b8df085d2",  "status": 200,  "result": {    "serverTime": 1656400526260  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 70    }  ]}
+```json
+{
+  "id": "7069b743-f477-4ae3-81db-db9b8df085d2",
+  "status": 200,
+  "result": {
+    "serverTime": 1656400526260
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 70
+    }
+  ]
+}
 ```
 
 The `rateLimits` array describes all currently active rate limits affected by
 the request.
 
-| Name            | Type | Mandatory | Description                                            |
-| --------------- | ---- | --------- | ------------------------------------------------------ |
-| `rateLimitType` | ENUM | YES       | Rate limit type: `REQUEST_WEIGHT`, `ORDERS`            |
-| `interval`      | ENUM | YES       | Rate limit interval: `SECOND`, `MINUTE`, `HOUR`, `DAY` |
-| `intervalNum`   | INT  | YES       | Rate limit interval multiplier                         |
-| `limit`         | INT  | YES       | Request limit per interval                             |
-| `count`         | INT  | YES       | Current usage per interval                             |
+| Name              | Type   | Mandatory | Description                                              |
+| ----------------- | ------ | --------- | -------------------------------------------------------- |
+| \-`rateLimitType` | \-ENUM | \-YES     | \-Rate limit type: `REQUEST_WEIGHT`, `ORDERS`            |
+| \-`interval`      | \-ENUM | \-YES     | \-Rate limit interval: `SECOND`, `MINUTE`, `HOUR`, `DAY` |
+| \-`intervalNum`   | \-INT  | \-YES     | \-Rate limit interval multiplier                         |
+| \-`limit`         | \-INT  | \-YES     | \-Request limit per interval                             |
+| \-`count`         | \-INT  | \-YES     | \-Current usage per interval                             |
 
 Rate limits are accounted by intervals.
 
@@ -1617,7 +1700,7 @@ shorter interval to expire and reset. If you exhaust a longer interval, you will
 have to wait for that interval to reset, even if shorter rate limit count is
 zero.
 
-#### How to show/hide rate limit information[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#how-to-showhide-rate-limit-information "Direct link to How to show/hide rate limit information")
+##### How to show/hide rate limit information
 
 `rateLimits` field is included with every response by default.
 
@@ -1632,22 +1715,35 @@ omitted from responses to reduce their size.
 
   Default request and response:
 
-  ```
-  {"id":1,"method":"time"}
+  ```json
+  { "id": 1, "method": "time" }
   ```
 
-  ```
-  {"id":1,"status":200,"result":{"serverTime":1656400526260},"rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000,"count":70}]}
+  ```json
+  {
+    "id": 1,
+    "status": 200,
+    "result": { "serverTime": 1656400526260 },
+    "rateLimits": [
+      {
+        "rateLimitType": "REQUEST_WEIGHT",
+        "interval": "MINUTE",
+        "intervalNum": 1,
+        "limit": 6000,
+        "count": 70
+      }
+    ]
+  }
   ```
 
   Request and response without rate limit status:
 
-  ```
-  {"id":2,"method":"time","params":{"returnRateLimits":false}}
+  ```json
+  { "id": 2, "method": "time", "params": { "returnRateLimits": false } }
   ```
 
-  ```
-  {"id":2,"status":200,"result":{"serverTime":1656400527891}}
+  ```json
+  { "id": 2, "status": 200, "result": { "serverTime": 1656400527891 } }
   ```
 
 - Optional `returnRateLimits` boolean parameter in connection URL.
@@ -1655,7 +1751,7 @@ omitted from responses to reduce their size.
   If you wish to omit `rateLimits` from all responses by default, use
   `returnRateLimits` parameter in the query string instead:
 
-  ```
+  ```null
   wss://ws-api.binance.com:443/ws-api/v3?returnRateLimits=false
   ```
 
@@ -1668,7 +1764,7 @@ omitted from responses to reduce their size.
 **Note:** Your requests are still rate limited if you hide the `rateLimits`
 field in responses.
 
-### IP limits[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#ip-limits "Direct link to IP limits")
+#### IP limits
 
 - Every request has a certain **weight**, added to your limit as you perform
   requests.
@@ -1695,18 +1791,51 @@ field in responses.
 Successful response indicating that in 1 minute you have used 70 weight out of
 your 6000 limit:
 
-```
-{  "id": "7069b743-f477-4ae3-81db-db9b8df085d2",  "status": 200,  "result": [],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 70    }  ]}
+```json
+{
+  "id": "7069b743-f477-4ae3-81db-db9b8df085d2",
+  "status": 200,
+  "result": [],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 70
+    }
+  ]
+}
 ```
 
 Failed response indicating that you are banned and the ban will last until epoch
 `1659146400000`:
 
-```
-{  "id": "fc93a61a-a192-4cf4-bb2a-a8f0f0c51e06",  "status": 418,  "error": {    "code": -1003,    "msg": "Way too much request weight used; IP banned until 1659146400000. Please use WebSocket Streams for live updates to avoid bans.",    "data": {      "serverTime": 1659142907531,      "retryAfter": 1659146400000    }  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2411    }  ]}
+```json
+{
+  "id": "fc93a61a-a192-4cf4-bb2a-a8f0f0c51e06",
+  "status": 418,
+  "error": {
+    "code": -1003,
+    "msg": "Way too much request weight used; IP banned until 1659146400000. Please use WebSocket Streams for live updates to avoid bans.",
+    "data": {
+      "serverTime": 1659142907531,
+      "retryAfter": 1659146400000
+    }
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2411
+    }
+  ]
+}
 ```
 
-### Unfilled Order Count[​](/docs/binance-spot-api-docs/websocket-api/rate-limits#unfilled-order-count "Direct link to Unfilled Order Count")
+#### Unfilled Order Count
 
 - Successfully placed orders update the `ORDERS` rate limit type.
 - Rejected or unsuccessful orders might or might not update the `ORDERS` rate
@@ -1727,23 +1856,70 @@ Failed response indicating that you are banned and the ban will last until epoch
 Successful response indicating that you have placed 12 orders in 10 seconds, and
 4043 orders in the past 24 hours:
 
-```
-{  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",  "status": 200,  "result": {    "symbol": "BTCUSDT",    "orderId": 12510053279,    "orderListId": -1,    "clientOrderId": "a097fe6304b20a7e4fc436",    "transactTime": 1655716096505,    "price": "0.10000000",    "origQty": "10.00000000",    "executedQty": "0.00000000",    "origQuoteOrderQty": "0.000000",    "cummulativeQuoteQty": "0.00000000",    "status": "NEW",    "timeInForce": "GTC",    "type": "LIMIT",    "side": "BUY",    "workingTime": 1655716096505,    "selfTradePreventionMode": "NONE"  },  "rateLimits": [    {      "rateLimitType": "ORDERS",      "interval": "SECOND",      "intervalNum": 10,      "limit": 50,      "count": 12    },    {      "rateLimitType": "ORDERS",      "interval": "DAY",      "intervalNum": 1,      "limit": 160000,      "count": 4043    },    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 321    }  ]}
+```json
+{
+  "id": "e2a85d9f-07a5-4f94-8d5f-789dc3deb097",
+  "status": 200,
+  "result": {
+    "symbol": "BTCUSDT",
+    "orderId": 12510053279,
+    "orderListId": -1,
+    "clientOrderId": "a097fe6304b20a7e4fc436",
+    "transactTime": 1655716096505,
+    "price": "0.10000000",
+    "origQty": "10.00000000",
+    "executedQty": "0.00000000",
+    "origQuoteOrderQty": "0.000000",
+    "cummulativeQuoteQty": "0.00000000",
+    "status": "NEW",
+    "timeInForce": "GTC",
+    "type": "LIMIT",
+    "side": "BUY",
+    "workingTime": 1655716096505,
+    "selfTradePreventionMode": "NONE"
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 12
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 4043
+    },
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 321
+    }
+  ]
+}
 ```
 
-# Request security
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/rate-limits](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/rate-limits)
+
+## Request security
 
 - Every method has a security type which determines how to call it.
   - Security type is stated next to the method name. For example,
     [Place new order (TRADE)](/docs/binance-spot-api-docs/websocket-api/request-security#place-new-order-trade).
   - If no security type is stated, the security type is NONE.
 
-| Security type | API key  | Signature | Description                                                                |
-| ------------- | -------- | --------- | -------------------------------------------------------------------------- |
-| `NONE`        |          |           | Public market data                                                         |
-| `TRADE`       | required | required  | Trading on the exchange, placing and canceling orders                      |
-| `USER_DATA`   | required | required  | Private account information, such as order status and your trading history |
-| `USER_STREAM` | required |           | Managing User Data Stream subscriptions                                    |
+| Security type   | API key    | Signature  | Description                                                                  |
+| --------------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| \-`NONE`        |            |            | \-Public market data                                                         |
+| \-`TRADE`       | \-required | \-required | \-Trading on the exchange, placing and canceling orders                      |
+| \-`USER_DATA`   | \-required | \-required | \-Private account information, such as order status and your trading history |
+| \-`USER_STREAM` | \-required |            | \-Managing User Data Stream subscriptions                                    |
 
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
@@ -1761,7 +1937,7 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
     Management first.
 - `TRADE` and `USER_DATA` requests are also known as `SIGNED` requests.
 
-### SIGNED (TRADE and USER_DATA) request security[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-trade-and-user_data-request-security "Direct link to SIGNED (TRADE and USER_DATA) request security")
+#### SIGNED (TRADE and USER_DATA) request security
 
 - `SIGNED` requests require an additional parameter: `signature`, authorizing
   the request.
@@ -1772,7 +1948,7 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
   [SIGNED request example (Ed25519)](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-ed25519)
   on how to compute signature, depending on which API key type you are using.
 
-### Timing security[​](/docs/binance-spot-api-docs/websocket-api/request-security#timing-security "Direct link to Timing security")
+#### Timing security
 
 - `SIGNED` requests also require a `timestamp` parameter which should be the
   current millisecond timestamp.
@@ -1784,8 +1960,12 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
 
 - Request processing logic is as follows:
 
-  ```
-  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow) {  // process request} else {  // reject request}
+  ```javascript
+  if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {
+    // process request
+  } else {
+    // reject request
+  }
   ```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable,
@@ -1795,16 +1975,16 @@ certain number of milliseconds or be rejected by the server.
 
 **It is recommended to use a small `recvWindow` of 5000 or less!**
 
-### SIGNED request example (HMAC)[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-hmac "Direct link to SIGNED request example (HMAC)")
+#### SIGNED request example (HMAC)
 
 Here is a step-by-step guide on how to sign requests using HMAC secret key.
 
 Example API key and secret key:
 
-| Key       | Value                                                              |
-| --------- | ------------------------------------------------------------------ |
-| apiKey    | `vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A` |
-| secretKey | `NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j` |
+| Key         | Value                                                                |
+| ----------- | -------------------------------------------------------------------- |
+| \-apiKey    | \-`vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A` |
+| \-secretKey | \-`NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j` |
 
 **WARNING: DO NOT SHARE YOUR API KEY AND SECRET KEY WITH ANYONE.**
 
@@ -1812,8 +1992,24 @@ The example keys are provided here only for illustrative purposes.
 
 Example of request:
 
-```
-{  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",  "method": "order.place",  "params": {    "symbol":           "BTCUSDT",    "side":             "SELL",    "type":             "LIMIT",    "timeInForce":      "GTC",    "quantity":         "0.01000000",    "price":            "52000.00",    "newOrderRespType": "ACK",    "recvWindow":       100,    "timestamp":        1645423376532,    "apiKey":           "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature":        "------ FILL ME ------"  }}
+```json
+{
+  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",
+  "method": "order.place",
+  "params": {
+    "symbol": "BTCUSDT",
+    "side": "SELL",
+    "type": "LIMIT",
+    "timeInForce": "GTC",
+    "quantity": "0.01000000",
+    "price": "52000.00",
+    "newOrderRespType": "ACK",
+    "recvWindow": 100,
+    "timestamp": 1645423376532,
+    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "signature": "------ FILL ME ------"
+  }
+}
 ```
 
 As you can see, the `signature` parameter is currently missing.
@@ -1823,24 +2019,24 @@ As you can see, the `signature` parameter is currently missing.
 Take all request `params` except for the `signature`, sort them by name in
 alphabetical order:
 
-| Parameter        | Value                                                            |
-| ---------------- | ---------------------------------------------------------------- |
-| apiKey           | vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
-| newOrderRespType | ACK                                                              |
-| price            | 52000.00                                                         |
-| quantity         | 0.01000000                                                       |
-| recvWindow       | 100                                                              |
-| side             | SELL                                                             |
-| symbol           | BTCUSDT                                                          |
-| timeInForce      | GTC                                                              |
-| timestamp        | 1645423376532                                                    |
-| type             | LIMIT                                                            |
+| Parameter          | Value                                                              |
+| ------------------ | ------------------------------------------------------------------ |
+| \-apiKey           | \-vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A |
+| \-newOrderRespType | \-ACK                                                              |
+| \-price            | \-52000.00                                                         |
+| \-quantity         | \-0.01000000                                                       |
+| \-recvWindow       | \-100                                                              |
+| \-side             | \-SELL                                                             |
+| \-symbol           | \-BTCUSDT                                                          |
+| \-timeInForce      | \-GTC                                                              |
+| \-timestamp        | \-1645423376532                                                    |
+| \-type             | \-LIMIT                                                            |
 
 Format parameters as `parameter=value` pairs separated by `&`.
 
 Resulting signature payload:
 
-```
+```null
 apiKey=vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A&newOrderRespType=ACK&price=52000.00&quantity=0.01000000&recvWindow=100&side=SELL&symbol=BTCUSDT&timeInForce=GTC&timestamp=1645423376532&type=LIMIT
 ```
 
@@ -1855,8 +2051,11 @@ resulting signature value is case-insensitive.
 
 You can cross-check your signature algorithm implementation with OpenSSL:
 
-```
-$ echo -n 'apiKey=vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A&newOrderRespType=ACK&price=52000.00&quantity=0.01000000&recvWindow=100&side=SELL&symbol=BTCUSDT&timeInForce=GTC&timestamp=1645423376532&type=LIMIT' \  | openssl dgst -hex -sha256 -hmac 'NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j'cc15477742bd704c29492d96c7ead9414dfd8e0ec4a00f947bb5bb454ddbd08a
+```shell
+$ echo -n 'apiKey=vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A&newOrderRespType=ACK&price=52000.00&quantity=0.01000000&recvWindow=100&side=SELL&symbol=BTCUSDT&timeInForce=GTC&timestamp=1645423376532&type=LIMIT' \
+  | openssl dgst -hex -sha256 -hmac 'NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j'
+
+cc15477742bd704c29492d96c7ead9414dfd8e0ec4a00f947bb5bb454ddbd08a
 ```
 
 **Step 3. Add `signature` to request `params`**
@@ -1864,17 +2063,33 @@ $ echo -n 'apiKey=vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh
 Finally, complete the request by adding the `signature` parameter with the
 signature string.
 
-```
-{  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",  "method": "order.place",  "params": {    "symbol":           "BTCUSDT",    "side":             "SELL",    "type":             "LIMIT",    "timeInForce":      "GTC",    "quantity":         "0.01000000",    "price":            "52000.00",    "newOrderRespType": "ACK",    "recvWindow":       100,    "timestamp":        1645423376532,    "apiKey":           "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",    "signature":        "cc15477742bd704c29492d96c7ead9414dfd8e0ec4a00f947bb5bb454ddbd08a"  }}
+```json
+{
+  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",
+  "method": "order.place",
+  "params": {
+    "symbol": "BTCUSDT",
+    "side": "SELL",
+    "type": "LIMIT",
+    "timeInForce": "GTC",
+    "quantity": "0.01000000",
+    "price": "52000.00",
+    "newOrderRespType": "ACK",
+    "recvWindow": 100,
+    "timestamp": 1645423376532,
+    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "signature": "cc15477742bd704c29492d96c7ead9414dfd8e0ec4a00f947bb5bb454ddbd08a"
+  }
+}
 ```
 
-### SIGNED request example (RSA)[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-rsa "Direct link to SIGNED request example (RSA)")
+#### SIGNED request example (RSA)
 
 Here is a step-by-step guide on how to sign requests using your RSA private key.
 
-| Key    | Value                                                              |
-| ------ | ------------------------------------------------------------------ |
-| apiKey | `CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ` |
+| Key      | Value                                                                |
+| -------- | -------------------------------------------------------------------- |
+| \-apiKey | \-`CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ` |
 
 In this example, we assume the private key is stored in the `test-prv-key.pem`
 file.
@@ -1885,8 +2100,24 @@ The example keys are provided here only for illustrative purposes.
 
 Example of request:
 
-```
-{  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",  "method": "order.place",  "params": {    "symbol":           "BTCUSDT",    "side":             "SELL",    "type":             "LIMIT",    "timeInForce":      "GTC",    "quantity":         "0.01000000",    "price":            "52000.00",    "newOrderRespType": "ACK",    "recvWindow":       100,    "timestamp":        1645423376532,    "apiKey":           "CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ",    "signature":        "------ FILL ME ------"  }}
+```json
+{
+  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",
+  "method": "order.place",
+  "params": {
+    "symbol": "BTCUSDT",
+    "side": "SELL",
+    "type": "LIMIT",
+    "timeInForce": "GTC",
+    "quantity": "0.01000000",
+    "price": "52000.00",
+    "newOrderRespType": "ACK",
+    "recvWindow": 100,
+    "timestamp": 1645423376532,
+    "apiKey": "CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ",
+    "signature": "------ FILL ME ------"
+  }
+}
 ```
 
 **Step 1. Construct the signature payload**
@@ -1894,24 +2125,24 @@ Example of request:
 Take all request `params` except for the `signature`, sort them by name in
 alphabetical order:
 
-| Parameter        | Value                                                            |
-| ---------------- | ---------------------------------------------------------------- |
-| apiKey           | CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
-| newOrderRespType | ACK                                                              |
-| price            | 52000.00                                                         |
-| quantity         | 0.01000000                                                       |
-| recvWindow       | 100                                                              |
-| side             | SELL                                                             |
-| symbol           | BTCUSDT                                                          |
-| timeInForce      | GTC                                                              |
-| timestamp        | 1645423376532                                                    |
-| type             | LIMIT                                                            |
+| Parameter          | Value                                                              |
+| ------------------ | ------------------------------------------------------------------ |
+| \-apiKey           | \-CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ |
+| \-newOrderRespType | \-ACK                                                              |
+| \-price            | \-52000.00                                                         |
+| \-quantity         | \-0.01000000                                                       |
+| \-recvWindow       | \-100                                                              |
+| \-side             | \-SELL                                                             |
+| \-symbol           | \-BTCUSDT                                                          |
+| \-timeInForce      | \-GTC                                                              |
+| \-timestamp        | \-1645423376532                                                    |
+| \-type             | \-LIMIT                                                            |
 
 Format parameters as `parameter=value` pairs separated by `&`.
 
 Resulting signature payload:
 
-```
+```null
 apiKey=CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ&newOrderRespType=ACK&price=52000.00&quantity=0.01000000&recvWindow=100&side=SELL&symbol=BTCUSDT&timeInForce=GTC&timestamp=1645423376532&type=LIMIT
 ```
 
@@ -1926,8 +2157,12 @@ Note that `apiKey`, the payload, and the resulting `signature` are
 
 You can cross-check your signature algorithm implementation with OpenSSL:
 
-```
-$ echo -n 'apiKey=CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ&newOrderRespType=ACK&price=52000.00&quantity=0.01000000&recvWindow=100&side=SELL&symbol=BTCUSDT&timeInForce=GTC&timestamp=1645423376532&type=LIMIT' \  | openssl dgst -sha256 -sign test-prv-key.pem \  | openssl enc -base64 -AOJJaf8C/3VGrU4ATTR4GiUDqL2FboSE1Qw7UnnoYNfXTXHubIl1iaePGuGyfct4NPu5oVEZCH4Q6ZStfB1w4ssgu0uiB/Bg+fBrRFfVgVaLKBdYHMvT+ljUJzqVaeoThG9oXlduiw8PbS9U8DYAbDvWN3jqZLo4Z2YJbyovyDAvDTr/oC0+vssLqP7NmlNb3fF3Bj7StmOwJvQJTbRAtzxK5PP7OQe+0mbW+D7RqVkUiSswR8qJFWTeSe4nXXNIdZdueYhF/Xf25L+KitJS5IHdIHcKfEw3MQzHFb2ZsGWkjDQwxkwr7Noi0Zaa+gFtxCuatGFm9dFIyx217pmSHtA==
+```shell
+$ echo -n 'apiKey=CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ&newOrderRespType=ACK&price=52000.00&quantity=0.01000000&recvWindow=100&side=SELL&symbol=BTCUSDT&timeInForce=GTC&timestamp=1645423376532&type=LIMIT' \
+  | openssl dgst -sha256 -sign test-prv-key.pem \
+  | openssl enc -base64 -A
+
+OJJaf8C/3VGrU4ATTR4GiUDqL2FboSE1Qw7UnnoYNfXTXHubIl1iaePGuGyfct4NPu5oVEZCH4Q6ZStfB1w4ssgu0uiB/Bg+fBrRFfVgVaLKBdYHMvT+ljUJzqVaeoThG9oXlduiw8PbS9U8DYAbDvWN3jqZLo4Z2YJbyovyDAvDTr/oC0+vssLqP7NmlNb3fF3Bj7StmOwJvQJTbRAtzxK5PP7OQe+0mbW+D7RqVkUiSswR8qJFWTeSe4nXXNIdZdueYhF/Xf25L+KitJS5IHdIHcKfEw3MQzHFb2ZsGWkjDQwxkwr7Noi0Zaa+gFtxCuatGFm9dFIyx217pmSHtA==
 ```
 
 **Step 3. Add `signature` to request `params`**
@@ -1935,33 +2170,104 @@ $ echo -n 'apiKey=CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TR
 Finally, complete the request by adding the `signature` parameter with the
 signature string.
 
-```
-{  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",  "method": "order.place",  "params": {    "symbol":           "BTCUSDT",    "side":             "SELL",    "type":             "LIMIT",    "timeInForce":      "GTC",    "quantity":         "0.01000000",    "price":            "52000.00",    "newOrderRespType": "ACK",    "recvWindow":       100,    "timestamp":        1645423376532,    "apiKey":           "CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ",    "signature":        "OJJaf8C/3VGrU4ATTR4GiUDqL2FboSE1Qw7UnnoYNfXTXHubIl1iaePGuGyfct4NPu5oVEZCH4Q6ZStfB1w4ssgu0uiB/Bg+fBrRFfVgVaLKBdYHMvT+ljUJzqVaeoThG9oXlduiw8PbS9U8DYAbDvWN3jqZLo4Z2YJbyovyDAvDTr/oC0+vssLqP7NmlNb3fF3Bj7StmOwJvQJTbRAtzxK5PP7OQe+0mbW+D7RqVkUiSswR8qJFWTeSe4nXXNIdZdueYhF/Xf25L+KitJS5IHdIHcKfEw3MQzHFb2ZsGWkjDQwxkwr7Noi0Zaa+gFtxCuatGFm9dFIyx217pmSHtA=="  }}
+```json
+{
+  "id": "4885f793-e5ad-4c3b-8f6c-55d891472b71",
+  "method": "order.place",
+  "params": {
+    "symbol": "BTCUSDT",
+    "side": "SELL",
+    "type": "LIMIT",
+    "timeInForce": "GTC",
+    "quantity": "0.01000000",
+    "price": "52000.00",
+    "newOrderRespType": "ACK",
+    "recvWindow": 100,
+    "timestamp": 1645423376532,
+    "apiKey": "CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ",
+    "signature": "OJJaf8C/3VGrU4ATTR4GiUDqL2FboSE1Qw7UnnoYNfXTXHubIl1iaePGuGyfct4NPu5oVEZCH4Q6ZStfB1w4ssgu0uiB/Bg+fBrRFfVgVaLKBdYHMvT+ljUJzqVaeoThG9oXlduiw8PbS9U8DYAbDvWN3jqZLo4Z2YJbyovyDAvDTr/oC0+vssLqP7NmlNb3fF3Bj7StmOwJvQJTbRAtzxK5PP7OQe+0mbW+D7RqVkUiSswR8qJFWTeSe4nXXNIdZdueYhF/Xf25L+KitJS5IHdIHcKfEw3MQzHFb2ZsGWkjDQwxkwr7Noi0Zaa+gFtxCuatGFm9dFIyx217pmSHtA=="
+  }
+}
 ```
 
-### SIGNED Request Example (Ed25519)[​](/docs/binance-spot-api-docs/websocket-api/request-security#signed-request-example-ed25519 "Direct link to SIGNED Request Example (Ed25519)")
+#### SIGNED Request Example (Ed25519)
 
 **Note: It is highly recommended to use Ed25519 API keys as it should provide
 the best performance and security out of all supported key types.**
 
-| Parameter     | Value         |
-| ------------- | ------------- |
-| `symbol`      | BTCUSDT       |
-| `side`        | SELL          |
-| `type`        | LIMIT         |
-| `timeInForce` | GTC           |
-| `quantity`    | 1             |
-| `price`       | 0.2           |
-| `timestamp`   | 1668481559918 |
+| Parameter       | Value           |
+| --------------- | --------------- |
+| \-`symbol`      | \-BTCUSDT       |
+| \-`side`        | \-SELL          |
+| \-`type`        | \-LIMIT         |
+| \-`timeInForce` | \-GTC           |
+| \-`quantity`    | \-1             |
+| \-`price`       | \-0.2           |
+| \-`timestamp`   | \-1668481559918 |
 
 This is a sample code in Python to show how to sign the payload with an Ed25519
 key.
 
-```
-#!/usr/bin/env python3import base64import timeimport jsonfrom cryptography.hazmat.primitives.serialization import load_pem_private_keyfrom websocket import create_connection# Set up authenticationAPI_KEY='put your own API Key here'PRIVATE_KEY_PATH='test-prv-key.pem'# Load the private key.# In this example the key is expected to be stored without encryption,# but we recommend using a strong password for improved security.with open(PRIVATE_KEY_PATH, 'rb') as f:    private_key = load_pem_private_key(data=f.read(),                                       password=None)# Set up the request parametersparams = {    'apiKey':        API_KEY,    'symbol':       'BTCUSDT',    'side':         'SELL',    'type':         'LIMIT',    'timeInForce':  'GTC',    'quantity':     '1.0000000',    'price':        '0.20'}# Timestamp the requesttimestamp = int(time.time() * 1000) # UNIX timestamp in millisecondsparams['timestamp'] = timestamp# Sign the requestpayload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))params['signature'] = signature.decode('ASCII')# Send the requestrequest = {    'id': 'my_new_order',    'method': 'order.place',    'params': params}ws = create_connection("wss://ws-api.binance.com:443/ws-api/v3")ws.send(json.dumps(request))result =  ws.recv()ws.close()print(result)
+```python
+#!/usr/bin/env python3
+
+import base64
+import time
+import json
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
+from websocket import create_connection
+
+# Set up authentication
+API_KEY='put your own API Key here'
+PRIVATE_KEY_PATH='test-prv-key.pem'
+
+# Load the private key.
+# In this example the key is expected to be stored without encryption,
+# but we recommend using a strong password for improved security.
+with open(PRIVATE_KEY_PATH, 'rb') as f:
+    private_key = load_pem_private_key(data=f.read(),
+                                       password=None)
+
+# Set up the request parameters
+params = {
+    'apiKey':        API_KEY,
+    'symbol':       'BTCUSDT',
+    'side':         'SELL',
+    'type':         'LIMIT',
+    'timeInForce':  'GTC',
+    'quantity':     '1.0000000',
+    'price':        '0.20'
+}
+
+# Timestamp the request
+timestamp = int(time.time() * 1000) # UNIX timestamp in milliseconds
+params['timestamp'] = timestamp
+
+# Sign the request
+payload = '&'.join([f'{param}={value}' for param, value in sorted(params.items())])
+
+signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))
+params['signature'] = signature.decode('ASCII')
+
+# Send the request
+request = {
+    'id': 'my_new_order',
+    'method': 'order.place',
+    'params': params
+}
+
+ws = create_connection("wss://ws-api.binance.com:443/ws-api/v3")
+ws.send(json.dumps(request))
+result =  ws.recv()
+ws.close()
+
+print(result)
 ```
 
-# Session Authentication
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/request-security](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/request-security)
+
+## Session Authentication
 
 **Note:** Only _Ed25519_ keys are supported for this feature.
 
@@ -1975,7 +2281,7 @@ account owning the authenticated API key.
 **Note:** You still have to specify the `timestamp` parameter for `SIGNED`
 requests.
 
-### Authenticate after connection[​](/docs/binance-spot-api-docs/websocket-api/session-authentication#authenticate-after-connection "Direct link to Authenticate after connection")
+#### Authenticate after connection
 
 You can authenticate an already established connection using session
 authentication requests:
@@ -1994,11 +2300,18 @@ IP address is not whitelisted, API key was deleted, API key doesn't have correct
 permissions, etc), after the next request the session will be revoked with the
 following error message:
 
-```
-{  "id": null,  "status": 401,  "error": {    "code": -2015,    "msg": "Invalid API-key, IP, or permissions for action."  }}
+```json
+{
+  "id": null,
+  "status": 401,
+  "error": {
+    "code": -2015,
+    "msg": "Invalid API-key, IP, or permissions for action."
+  }
+}
 ```
 
-### Authorize _ad hoc_ requests[​](/docs/binance-spot-api-docs/websocket-api/session-authentication#authorize-ad-hoc-requests "Direct link to authorize-ad-hoc-requests")
+#### Authorize _ad hoc_ requests
 
 Only one API key can be authenticated with the WebSocket connection. The
 authenticated API key is used by default for requests that require an `apiKey`
@@ -2010,30 +2323,39 @@ For example, you might want to authenticate your `USER_DATA` key to be used by
 default, but specify the `TRADE` key with an explicit signature when placing
 orders.
 
-# Data sources
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/session-authentication](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/session-authentication)
+
+## Data sources
 
 - The API system is asynchronous. Some delay in the response is normal and
   expected.
 - Each method has a data source indicating where the data is coming from, and
   thus how up-to-date it is.
 
-| Data Source     | Latency  | Description                                                      |
-| --------------- | -------- | ---------------------------------------------------------------- |
-| Matching Engine | lowest   | The Matching Engine produces the response directly               |
-| Memory          | low      | Data is fetched from API server's local or external memory cache |
-| Database        | moderate | Data is retrieved from the database                              |
+| Data Source       | Latency    | Description                                                        |
+| ----------------- | ---------- | ------------------------------------------------------------------ |
+| \-Matching Engine | \-lowest   | \-The Matching Engine produces the response directly               |
+| \-Memory          | \-low      | \-Data is fetched from API server's local or external memory cache |
+| \-Database        | \-moderate | \-Data is retrieved from the database                              |
 
 - Some methods have more than one data source (e.g., Memory => Database).
 
   This means that the API will look for the latest data in that order: first in
   the cache, then in the database.
 
-# General requests
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/data-sources](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/data-sources)
 
-### Test connectivity[​](/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity "Direct link to Test connectivity")
+## General requests
 
-```
-{  "id": "922bcc6e-9de8-440d-9e84-7c80933a8d0d",  "method": "ping"}
+#### Test connectivity
+
+```json
+{
+  "id": "922bcc6e-9de8-440d-9e84-7c80933a8d0d",
+  "method": "ping"
+}
 ```
 
 Test connectivity to the WebSocket API.
@@ -2051,14 +2373,30 @@ your application.
 
 **Response:**
 
-```
-{  "id": "922bcc6e-9de8-440d-9e84-7c80933a8d0d",  "status": 200,  "result": {},  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 1    }  ]}
+```json
+{
+  "id": "922bcc6e-9de8-440d-9e84-7c80933a8d0d",
+  "status": 200,
+  "result": {},
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 1
+    }
+  ]
+}
 ```
 
-### Check server time[​](/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time "Direct link to Check server time")
+#### Check server time
 
-```
-{  "id": "187d3cb2-942d-484c-8271-4e2141bbadb1",  "method": "time"}
+```json
+{
+  "id": "187d3cb2-942d-484c-8271-4e2141bbadb1",
+  "method": "time"
+}
 ```
 
 Test connectivity to the WebSocket API and get the current server time.
@@ -2071,14 +2409,35 @@ Test connectivity to the WebSocket API and get the current server time.
 
 **Response:**
 
-```
-{  "id": "187d3cb2-942d-484c-8271-4e2141bbadb1",  "status": 200,  "result": {    "serverTime": 1656400526260  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 1    }  ]}
+```json
+{
+  "id": "187d3cb2-942d-484c-8271-4e2141bbadb1",
+  "status": 200,
+  "result": {
+    "serverTime": 1656400526260
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 1
+    }
+  ]
+}
 ```
 
-### Exchange information[​](/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information "Direct link to Exchange information")
+#### Exchange information
 
-```
-{  "id": "5494febb-d167-46a2-996d-70533eb4d976",  "method": "exchangeInfo",  "params": {    "symbols": ["BNBBTC"]  }}
+```json
+{
+  "id": "5494febb-d167-46a2-996d-70533eb4d976",
+  "method": "exchangeInfo",
+  "params": {
+    "symbols": ["BNBBTC"]
+  }
+}
 ```
 
 Query current exchange trading rules, rate limits, and symbol information.
@@ -2087,16 +2446,13 @@ Query current exchange trading rules, rate limits, and symbol information.
 
 **Parameters:**
 
-| Name                 | Type            | Mandatory                                                                                           | Description              |
-| -------------------- | --------------- | --------------------------------------------------------------------------------------------------- | ------------------------ |
-| `symbol`             | STRING          | NO                                                                                                  | Describe a single symbol |
-| `symbols`            | ARRAY of STRING | Describe multiple symbols                                                                           |
-| `permissions`        | ARRAY of STRING | Filter symbols by permissions                                                                       |
-| `showPermissionSets` | BOOLEAN         | Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`. |
-| `symbolStatus`       | ENUM            | Filters symbols that have this `tradingStatus`.                                                     |
-
-Valid values: `TRADING`, `HALT`, `BREAK`  
-Cannot be used in combination with `symbol` or `symbols` |
+| Name                   | Type              | Mandatory                                                                                                                                           | Description                |
+| ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| \-`symbol`             | \-STRING          | \-NO                                                                                                                                                | \-Describe a single symbol |
+| \-`symbols`            | \-ARRAY of STRING | \-Describe multiple symbols                                                                                                                         |
+| \-`permissions`        | \-ARRAY of STRING | \-Filter symbols by permissions                                                                                                                     |
+| \-`showPermissionSets` | \-BOOLEAN         | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`.                                               |
+| \-`symbolStatus`       | \-ENUM            | \-Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbol` or `symbols` |
 
 Notes:
 
@@ -2126,16 +2482,131 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "5494febb-d167-46a2-996d-70533eb4d976",  "status": 200,  "result": {    "timezone": "UTC",    "serverTime": 1655969291181,    // Global rate limits. See "Rate limits" section.    "rateLimits": [      {        "rateLimitType": "REQUEST_WEIGHT",    // Rate limit type: REQUEST_WEIGHT, ORDERS, CONNECTIONS        "interval": "MINUTE",                 // Rate limit interval: SECOND, MINUTE, DAY        "intervalNum": 1,                     // Rate limit interval multiplier (i.e., "1 minute")        "limit": 6000                         // Rate limit per interval      },      {        "rateLimitType": "ORDERS",        "interval": "SECOND",        "intervalNum": 10,        "limit": 50      },      {        "rateLimitType": "ORDERS",        "interval": "DAY",        "intervalNum": 1,        "limit": 160000      },      {        "rateLimitType": "CONNECTIONS",        "interval": "MINUTE",        "intervalNum": 5,        "limit": 300      }    ],    // Exchange filters are explained on the "Filters" page:    // https://github.com/binance/binance-spot-api-docs/blob/master/filters.md    // All exchange filters are optional.    "exchangeFilters": [],    "symbols": [      {        "symbol": "BNBBTC",        "status": "TRADING",        "baseAsset": "BNB",        "baseAssetPrecision": 8,        "quoteAsset": "BTC",        "quotePrecision": 8,        "quoteAssetPrecision": 8,        "baseCommissionPrecision": 8,        "quoteCommissionPrecision": 8,        "orderTypes": [          "LIMIT",          "LIMIT_MAKER",          "MARKET",          "STOP_LOSS_LIMIT",          "TAKE_PROFIT_LIMIT"        ],        "icebergAllowed": true,        "ocoAllowed": true,        "otoAllowed": true,        "quoteOrderQtyMarketAllowed": true,        "allowTrailingStop": true,        "cancelReplaceAllowed": true,        "allowAmend":false,        "isSpotTradingAllowed": true,        "isMarginTradingAllowed": true,        // Symbol filters are explained on the "Filters" page:        // https://github.com/binance/binance-spot-api-docs/blob/master/filters.md        // All symbol filters are optional.        "filters": [          {            "filterType": "PRICE_FILTER",            "minPrice": "0.00000100",            "maxPrice": "100000.00000000",            "tickSize": "0.00000100"          },          {            "filterType": "LOT_SIZE",            "minQty": "0.00100000",            "maxQty": "100000.00000000",            "stepSize": "0.00100000"          }        ],        "permissions": [],        "permissionSets": [          [            "SPOT",            "MARGIN",            "TRD_GRP_004"          ]        ],        "defaultSelfTradePreventionMode": "NONE",        "allowedSelfTradePreventionModes": [          "NONE"        ]      }    ],    // Optional field. Present only when SOR is available.    // https://github.com/binance/binance-spot-api-docs/blob/master/faqs/sor_faq.md    "sors": [      {        "baseAsset": "BTC",        "symbols": [          "BTCUSDT",          "BTCUSDC"        ]      }    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 20    }  ]}
+```json
+{
+  "id": "5494febb-d167-46a2-996d-70533eb4d976",
+  "status": 200,
+  "result": {
+    "timezone": "UTC",
+    "serverTime": 1655969291181,
+    // Global rate limits. See "Rate limits" section.
+    "rateLimits": [
+      {
+        "rateLimitType": "REQUEST_WEIGHT", // Rate limit type: REQUEST_WEIGHT, ORDERS, CONNECTIONS
+        "interval": "MINUTE", // Rate limit interval: SECOND, MINUTE, DAY
+        "intervalNum": 1, // Rate limit interval multiplier (i.e., "1 minute")
+        "limit": 6000 // Rate limit per interval
+      },
+      {
+        "rateLimitType": "ORDERS",
+        "interval": "SECOND",
+        "intervalNum": 10,
+        "limit": 50
+      },
+      {
+        "rateLimitType": "ORDERS",
+        "interval": "DAY",
+        "intervalNum": 1,
+        "limit": 160000
+      },
+      {
+        "rateLimitType": "CONNECTIONS",
+        "interval": "MINUTE",
+        "intervalNum": 5,
+        "limit": 300
+      }
+    ],
+    // Exchange filters are explained on the "Filters" page:
+    // https://github.com/binance/binance-spot-api-docs/blob/master/filters.md
+    // All exchange filters are optional.
+    "exchangeFilters": [],
+    "symbols": [
+      {
+        "symbol": "BNBBTC",
+        "status": "TRADING",
+        "baseAsset": "BNB",
+        "baseAssetPrecision": 8,
+        "quoteAsset": "BTC",
+        "quotePrecision": 8,
+        "quoteAssetPrecision": 8,
+        "baseCommissionPrecision": 8,
+        "quoteCommissionPrecision": 8,
+        "orderTypes": [
+          "LIMIT",
+          "LIMIT_MAKER",
+          "MARKET",
+          "STOP_LOSS_LIMIT",
+          "TAKE_PROFIT_LIMIT"
+        ],
+        "icebergAllowed": true,
+        "ocoAllowed": true,
+        "otoAllowed": true,
+        "quoteOrderQtyMarketAllowed": true,
+        "allowTrailingStop": true,
+        "cancelReplaceAllowed": true,
+        "allowAmend": false,
+        "isSpotTradingAllowed": true,
+        "isMarginTradingAllowed": true,
+        // Symbol filters are explained on the "Filters" page:
+        // https://github.com/binance/binance-spot-api-docs/blob/master/filters.md
+        // All symbol filters are optional.
+        "filters": [
+          {
+            "filterType": "PRICE_FILTER",
+            "minPrice": "0.00000100",
+            "maxPrice": "100000.00000000",
+            "tickSize": "0.00000100"
+          },
+          {
+            "filterType": "LOT_SIZE",
+            "minQty": "0.00100000",
+            "maxQty": "100000.00000000",
+            "stepSize": "0.00100000"
+          }
+        ],
+        "permissions": [],
+        "permissionSets": [["SPOT", "MARGIN", "TRD_GRP_004"]],
+        "defaultSelfTradePreventionMode": "NONE",
+        "allowedSelfTradePreventionModes": ["NONE"]
+      }
+    ],
+    // Optional field. Present only when SOR is available.
+    // https://github.com/binance/binance-spot-api-docs/blob/master/faqs/sor_faq.md
+    "sors": [
+      {
+        "baseAsset": "BTC",
+        "symbols": ["BTCUSDT", "BTCUSDC"]
+      }
+    ]
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 20
+    }
+  ]
+}
 ```
 
-# Market data requests
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests)
 
-### Order book[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book "Direct link to Order book")
+## Market data requests
 
-```
-{  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",  "method": "depth",  "params": {    "symbol": "BNBBTC",    "limit": 5  }}
+#### Order book
+
+```json
+{
+  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",
+  "method": "depth",
+  "params": {
+    "symbol": "BNBBTC",
+    "limit": 5
+  }
+}
 ```
 
 Get current order book.
@@ -2153,32 +2624,73 @@ You can use `depth` request together with `<symbol>@depth` streams to
 
 **Weight:** Adjusted based on the limit:
 
-| Limit     | Weight |
-| --------- | ------ |
-| 1–100     | 5      |
-| 101–500   | 25     |
-| 501–1000  | 50     |
-| 1001–5000 | 250    |
+| Limit       | Weight |
+| ----------- | ------ |
+| \-1–100     | \-5    |
+| \-101–500   | \-25   |
+| \-501–1000  | \-50   |
+| \-1001–5000 | \-250  |
 
 **Parameters:**
 
-| Name     | Type   | Mandatory | Description                 |
-| -------- | ------ | --------- | --------------------------- |
-| `symbol` | STRING | YES       |                             |
-| `limit`  | INT    | NO        | Default: 100; Maximum: 5000 |
+| Name       | Type     | Mandatory | Description                   |
+| ---------- | -------- | --------- | ----------------------------- |
+| \-`symbol` | \-STRING | \-YES     |                               |
+| \-`limit`  | \-INT    | \-NO      | \-Default: 100; Maximum: 5000 |
 
 **Data Source:** Memory
 
 **Response:**
 
-```
-{  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",  "status": 200,  "result": {    "lastUpdateId": 2731179239,    // Bid levels are sorted from highest to lowest price.    "bids": [      [        "0.01379900",   // Price        "3.43200000"    // Quantity      ],      [        "0.01379800",        "3.24300000"      ],      [        "0.01379700",        "10.45500000"      ],      [        "0.01379600",        "3.82100000"      ],      [        "0.01379500",        "10.26200000"      ]    ],    // Ask levels are sorted from lowest to highest price.    "asks": [      [        "0.01380000",        "5.91700000"      ],      [        "0.01380100",        "6.01400000"      ],      [        "0.01380200",        "0.26800000"      ],      [        "0.01380300",        "0.33800000"      ],      [        "0.01380400",        "0.26800000"      ]    ]  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "51e2affb-0aba-4821-ba75-f2625006eb43",
+  "status": 200,
+  "result": {
+    "lastUpdateId": 2731179239,
+    // Bid levels are sorted from highest to lowest price.
+    "bids": [
+      [
+        "0.01379900", // Price
+        "3.43200000" // Quantity
+      ],
+      ["0.01379800", "3.24300000"],
+      ["0.01379700", "10.45500000"],
+      ["0.01379600", "3.82100000"],
+      ["0.01379500", "10.26200000"]
+    ],
+    // Ask levels are sorted from lowest to highest price.
+    "asks": [
+      ["0.01380000", "5.91700000"],
+      ["0.01380100", "6.01400000"],
+      ["0.01380200", "0.26800000"],
+      ["0.01380300", "0.33800000"],
+      ["0.01380400", "0.26800000"]
+    ]
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### Recent trades[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades "Direct link to Recent trades")
+#### Recent trades
 
-```
-{  "id": "409a20bd-253d-41db-a6dd-687862a5882f",  "method": "trades.recent",  "params": {    "symbol": "BNBBTC",    "limit": 1  }}
+```json
+{
+  "id": "409a20bd-253d-41db-a6dd-687862a5882f",
+  "method": "trades.recent",
+  "params": {
+    "symbol": "BNBBTC",
+    "limit": 1
+  }
+}
 ```
 
 Get recent trades.
@@ -2192,23 +2704,54 @@ WebSocket Streams:
 
 **Parameters:**
 
-| Name     | Type   | Mandatory | Description                 |
-| -------- | ------ | --------- | --------------------------- |
-| `symbol` | STRING | YES       |                             |
-| `limit`  | INT    | NO        | Default: 500; Maximum: 1000 |
+| Name       | Type     | Mandatory | Description                   |
+| ---------- | -------- | --------- | ----------------------------- |
+| \-`symbol` | \-STRING | \-YES     |                               |
+| \-`limit`  | \-INT    | \-NO      | \-Default: 500; Maximum: 1000 |
 
 **Data Source:** Memory
 
 **Response:**
 
-```
-{  "id": "409a20bd-253d-41db-a6dd-687862a5882f",  "status": 200,  "result": [    {      "id": 194686783,      "price": "0.01361000",      "qty": "0.01400000",      "quoteQty": "0.00019054",      "time": 1660009530807,      "isBuyerMaker": true,      "isBestMatch": true    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "409a20bd-253d-41db-a6dd-687862a5882f",
+  "status": 200,
+  "result": [
+    {
+      "id": 194686783,
+      "price": "0.01361000",
+      "qty": "0.01400000",
+      "quoteQty": "0.00019054",
+      "time": 1660009530807,
+      "isBuyerMaker": true,
+      "isBestMatch": true
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### Historical trades[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades "Direct link to Historical trades")
+#### Historical trades
 
-```
-{  "id": "cffc9c7d-4efc-4ce0-b587-6b87448f052a",  "method": "trades.historical",  "params": {    "symbol": "BNBBTC",    "fromId": 0,    "limit": 1  }}
+```json
+{
+  "id": "cffc9c7d-4efc-4ce0-b587-6b87448f052a",
+  "method": "trades.historical",
+  "params": {
+    "symbol": "BNBBTC",
+    "fromId": 0,
+    "limit": 1
+  }
+}
 ```
 
 Get historical trades.
@@ -2217,11 +2760,11 @@ Get historical trades.
 
 **Parameters:**
 
-| Name     | Type   | Mandatory | Description                 |
-| -------- | ------ | --------- | --------------------------- |
-| `symbol` | STRING | YES       |                             |
-| `fromId` | INT    | NO        | Trade ID to begin at        |
-| `limit`  | INT    | NO        | Default: 500; Maximum: 1000 |
+| Name       | Type     | Mandatory | Description                   |
+| ---------- | -------- | --------- | ----------------------------- |
+| \-`symbol` | \-STRING | \-YES     |                               |
+| \-`fromId` | \-INT    | \-NO      | \-Trade ID to begin at        |
+| \-`limit`  | \-INT    | \-NO      | \-Default: 500; Maximum: 1000 |
 
 Notes:
 
@@ -2231,14 +2774,45 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "cffc9c7d-4efc-4ce0-b587-6b87448f052a",  "status": 200,  "result": [    {      "id": 0,      "price": "0.00005000",      "qty": "40.00000000",      "quoteQty": "0.00200000",      "time": 1500004800376,      "isBuyerMaker": true,      "isBestMatch": true    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 10    }  ]}
+```json
+{
+  "id": "cffc9c7d-4efc-4ce0-b587-6b87448f052a",
+  "status": 200,
+  "result": [
+    {
+      "id": 0,
+      "price": "0.00005000",
+      "qty": "40.00000000",
+      "quoteQty": "0.00200000",
+      "time": 1500004800376,
+      "isBuyerMaker": true,
+      "isBestMatch": true
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 10
+    }
+  ]
+}
 ```
 
-### Aggregate trades[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades "Direct link to Aggregate trades")
+#### Aggregate trades
 
-```
-{  "id": "189da436-d4bd-48ca-9f95-9f613d621717",  "method": "trades.aggregate",  "params": {    "symbol": "BNBBTC",    "fromId": 50000000,    "limit": 1  }}
+```json
+{
+  "id": "189da436-d4bd-48ca-9f95-9f613d621717",
+  "method": "trades.aggregate",
+  "params": {
+    "symbol": "BNBBTC",
+    "fromId": 50000000,
+    "limit": 1
+  }
+}
 ```
 
 Get aggregate trades.
@@ -2260,13 +2834,13 @@ If you need historical aggregate trade data, please consider using
 
 **Parameters:**
 
-| Name        | Type   | Mandatory | Description                    |
-| ----------- | ------ | --------- | ------------------------------ |
-| `symbol`    | STRING | YES       |                                |
-| `fromId`    | INT    | NO        | Aggregate trade ID to begin at |
-| `startTime` | LONG   | NO        |                                |
-| `endTime`   | LONG   | NO        |                                |
-| `limit`     | INT    | NO        | Default: 500; Maximum: 1000    |
+| Name          | Type     | Mandatory | Description                      |
+| ------------- | -------- | --------- | -------------------------------- |
+| \-`symbol`    | \-STRING | \-YES     |                                  |
+| \-`fromId`    | \-INT    | \-NO      | \-Aggregate trade ID to begin at |
+| \-`startTime` | \-LONG   | \-NO      |                                  |
+| \-`endTime`   | \-LONG   | \-NO      |                                  |
+| \-`limit`     | \-INT    | \-NO      | \-Default: 500; Maximum: 1000    |
 
 Notes:
 
@@ -2286,14 +2860,47 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "189da436-d4bd-48ca-9f95-9f613d621717",  "status": 200,  "result": [    {      "a": 50000000,        // Aggregate trade ID      "p": "0.00274100",    // Price      "q": "57.19000000",   // Quantity      "f": 59120167,        // First trade ID      "l": 59120170,        // Last trade ID      "T": 1565877971222,   // Timestamp      "m": true,            // Was the buyer the maker?      "M": true             // Was the trade the best price match?    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "189da436-d4bd-48ca-9f95-9f613d621717",
+  "status": 200,
+  "result": [
+    {
+      "a": 50000000, // Aggregate trade ID
+      "p": "0.00274100", // Price
+      "q": "57.19000000", // Quantity
+      "f": 59120167, // First trade ID
+      "l": 59120170, // Last trade ID
+      "T": 1565877971222, // Timestamp
+      "m": true, // Was the buyer the maker?
+      "M": true // Was the trade the best price match?
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### Klines[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines "Direct link to Klines")
+#### Klines
 
-```
-{  "id": "1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b",  "method": "klines",  "params": {    "symbol": "BNBBTC",    "interval": "1h",    "startTime": 1655969280000,    "limit": 1  }}
+```json
+{
+  "id": "1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b",
+  "method": "klines",
+  "params": {
+    "symbol": "BNBBTC",
+    "interval": "1h",
+    "startTime": 1655969280000,
+    "limit": 1
+  }
+}
 ```
 
 Get klines (candlestick bars).
@@ -2312,25 +2919,25 @@ If you need historical kline data, please consider using
 
 **Parameters:**
 
-| Name        | Type   | Mandatory | Description                 |
-| ----------- | ------ | --------- | --------------------------- |
-| `symbol`    | STRING | YES       |                             |
-| `interval`  | ENUM   | YES       |                             |
-| `startTime` | LONG   | NO        |                             |
-| `endTime`   | LONG   | NO        |                             |
-| `timeZone`  | STRING | NO        | Default: 0 (UTC)            |
-| `limit`     | INT    | NO        | Default: 500; Maximum: 1000 |
+| Name          | Type     | Mandatory | Description                   |
+| ------------- | -------- | --------- | ----------------------------- |
+| \-`symbol`    | \-STRING | \-YES     |                               |
+| \-`interval`  | \-ENUM   | \-YES     |                               |
+| \-`startTime` | \-LONG   | \-NO      |                               |
+| \-`endTime`   | \-LONG   | \-NO      |                               |
+| \-`timeZone`  | \-STRING | \-NO      | \-Default: 0 (UTC)            |
+| \-`limit`     | \-INT    | \-NO      | \-Default: 500; Maximum: 1000 |
 
 Supported kline intervals (case-sensitive):
 
-| Interval | `interval` value                    |
-| -------- | ----------------------------------- |
-| seconds  | `1s`                                |
-| minutes  | `1m`, `3m`, `5m`, `15m`, `30m`      |
-| hours    | `1h`, `2h`, `4h`, `6h`, `8h`, `12h` |
-| days     | `1d`, `3d`                          |
-| weeks    | `1w`                                |
-| months   | `1M`                                |
+| Interval  | `interval` value                      |
+| --------- | ------------------------------------- |
+| \-seconds | \-`1s`                                |
+| \-minutes | \-`1m`, `3m`, `5m`, `15m`, `30m`      |
+| \-hours   | \-`1h`, `2h`, `4h`, `6h`, `8h`, `12h` |
+| \-days    | \-`1d`, `3d`                          |
+| \-weeks   | \-`1w`                                |
+| \-months  | \-`1M`                                |
 
 Notes:
 
@@ -2349,14 +2956,51 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b",  "status": 200,  "result": [    [      1655971200000,      // Kline open time      "0.01086000",       // Open price      "0.01086600",       // High price      "0.01083600",       // Low price      "0.01083800",       // Close price      "2290.53800000",    // Volume      1655974799999,      // Kline close time      "24.85074442",      // Quote asset volume      2283,               // Number of trades      "1171.64000000",    // Taker buy base asset volume      "12.71225884",      // Taker buy quote asset volume      "0"                 // Unused field, ignore    ]  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b",
+  "status": 200,
+  "result": [
+    [
+      1655971200000, // Kline open time
+      "0.01086000", // Open price
+      "0.01086600", // High price
+      "0.01083600", // Low price
+      "0.01083800", // Close price
+      "2290.53800000", // Volume
+      1655974799999, // Kline close time
+      "24.85074442", // Quote asset volume
+      2283, // Number of trades
+      "1171.64000000", // Taker buy base asset volume
+      "12.71225884", // Taker buy quote asset volume
+      "0" // Unused field, ignore
+    ]
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### UI Klines[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines "Direct link to UI Klines")
+#### UI Klines
 
-```
-{  "id": "b137468a-fb20-4c06-bd6b-625148eec958",  "method": "uiKlines",  "params": {    "symbol": "BNBBTC",    "interval": "1h",    "startTime": 1655969280000,    "limit": 1  }}
+```json
+{
+  "id": "b137468a-fb20-4c06-bd6b-625148eec958",
+  "method": "uiKlines",
+  "params": {
+    "symbol": "BNBBTC",
+    "interval": "1h",
+    "startTime": 1655969280000,
+    "limit": 1
+  }
+}
 ```
 
 Get klines (candlestick bars) optimized for presentation.
@@ -2370,14 +3014,14 @@ optimized for presentation of candlestick charts.
 
 **Parameters:**
 
-| Name        | Type   | Mandatory | Description                                                                                    |
-| ----------- | ------ | --------- | ---------------------------------------------------------------------------------------------- |
-| `symbol`    | STRING | YES       |                                                                                                |
-| `interval`  | ENUM   | YES       | See [`klines`](/docs/binance-spot-api-docs/websocket-api/market-data-requests#kline-intervals) |
-| `startTime` | LONG   | NO        |                                                                                                |
-| `endTime`   | LONG   | NO        |                                                                                                |
-| `timeZone`  | STRING | NO        | Default: 0 (UTC)                                                                               |
-| `limit`     | INT    | NO        | Default: 500; Maximum: 1000                                                                    |
+| Name          | Type     | Mandatory | Description                                                                                      |
+| ------------- | -------- | --------- | ------------------------------------------------------------------------------------------------ |
+| \-`symbol`    | \-STRING | \-YES     |                                                                                                  |
+| \-`interval`  | \-ENUM   | \-YES     | \-See [`klines`](/docs/binance-spot-api-docs/websocket-api/market-data-requests#kline-intervals) |
+| \-`startTime` | \-LONG   | \-NO      |                                                                                                  |
+| \-`endTime`   | \-LONG   | \-NO      |                                                                                                  |
+| \-`timeZone`  | \-STRING | \-NO      | \-Default: 0 (UTC)                                                                               |
+| \-`limit`     | \-INT    | \-NO      | \-Default: 500; Maximum: 1000                                                                    |
 
 Notes:
 
@@ -2396,14 +3040,48 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "b137468a-fb20-4c06-bd6b-625148eec958",  "status": 200,  "result": [    [      1655971200000,      // Kline open time      "0.01086000",       // Open price      "0.01086600",       // High price      "0.01083600",       // Low price      "0.01083800",       // Close price      "2290.53800000",    // Volume      1655974799999,      // Kline close time      "24.85074442",      // Quote asset volume      2283,               // Number of trades      "1171.64000000",    // Taker buy base asset volume      "12.71225884",      // Taker buy quote asset volume      "0"                 // Unused field, ignore    ]  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "b137468a-fb20-4c06-bd6b-625148eec958",
+  "status": 200,
+  "result": [
+    [
+      1655971200000, // Kline open time
+      "0.01086000", // Open price
+      "0.01086600", // High price
+      "0.01083600", // Low price
+      "0.01083800", // Close price
+      "2290.53800000", // Volume
+      1655974799999, // Kline close time
+      "24.85074442", // Quote asset volume
+      2283, // Number of trades
+      "1171.64000000", // Taker buy base asset volume
+      "12.71225884", // Taker buy quote asset volume
+      "0" // Unused field, ignore
+    ]
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### Current average price[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price "Direct link to Current average price")
+#### Current average price
 
-```
-{  "id": "ddbfb65f-9ebf-42ec-8240-8f0f91de0867",  "method": "avgPrice",  "params": {    "symbol": "BNBBTC"  }}
+```json
+{
+  "id": "ddbfb65f-9ebf-42ec-8240-8f0f91de0867",
+  "method": "avgPrice",
+  "params": {
+    "symbol": "BNBBTC"
+  }
+}
 ```
 
 Get current average price for a symbol.
@@ -2412,22 +3090,45 @@ Get current average price for a symbol.
 
 **Parameters:**
 
-| Name     | Type   | Mandatory | Description |
-| -------- | ------ | --------- | ----------- |
-| `symbol` | STRING | YES       |             |
+| Name       | Type     | Mandatory | Description |
+| ---------- | -------- | --------- | ----------- |
+| \-`symbol` | \-STRING | \-YES     |             |
 
 **Data Source:** Memory
 
 **Response:**
 
-```
-{  "id": "ddbfb65f-9ebf-42ec-8240-8f0f91de0867",  "status": 200,  "result": {    "mins": 5,                    // Average price interval (in minutes)    "price": "9.35751834",        // Average price    "closeTime": 1694061154503    // Last trade time  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "ddbfb65f-9ebf-42ec-8240-8f0f91de0867",
+  "status": 200,
+  "result": {
+    "mins": 5, // Average price interval (in minutes)
+    "price": "9.35751834", // Average price
+    "closeTime": 1694061154503 // Last trade time
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### 24hr ticker price change statistics[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics "Direct link to 24hr ticker price change statistics")
+#### 24hr ticker price change statistics
 
-```
-{  "id": "93fb61ef-89f8-4d6e-b022-4f035a3fadad",  "method": "ticker.24hr",  "params": {    "symbol": "BNBBTC"  }}
+```json
+{
+  "id": "93fb61ef-89f8-4d6e-b022-4f035a3fadad",
+  "method": "ticker.24hr",
+  "params": {
+    "symbol": "BNBBTC"
+  }
+}
 ```
 
 Get 24-hour rolling window price change statistics.
@@ -2448,20 +3149,20 @@ request.
 
 **Weight:** Adjusted based on the number of requested symbols:
 
-| Symbols     | Weight |
-| ----------- | ------ |
-| 1–20        | 2      |
-| 21–100      | 40     |
-| 101 or more | 80     |
-| all symbols | 80     |
+| Symbols       | Weight |
+| ------------- | ------ |
+| \-1–20        | \-2    |
+| \-21–100      | \-40   |
+| \-101 or more | \-80   |
+| \-all symbols | \-80   |
 
 **Parameters:**
 
-| Name      | Type            | Mandatory                         | Description                             |
-| --------- | --------------- | --------------------------------- | --------------------------------------- |
-| `symbol`  | STRING          | NO                                | Query ticker for a single symbol        |
-| `symbols` | ARRAY of STRING | Query ticker for multiple symbols |
-| `type`    | ENUM            | NO                                | Ticker type: `FULL` (default) or `MINI` |
+| Name        | Type              | Mandatory                           | Description                               |
+| ----------- | ----------------- | ----------------------------------- | ----------------------------------------- |
+| \-`symbol`  | \-STRING          | \-NO                                | \-Query ticker for a single symbol        |
+| \-`symbols` | \-ARRAY of STRING | \-Query ticker for multiple symbols |
+| \-`type`    | \-ENUM            | \-NO                                | \-Ticker type: `FULL` (default) or `MINI` |
 
 Notes:
 
@@ -2475,26 +3176,154 @@ Notes:
 
 `FULL` type, for a single symbol:
 
-```
-{  "id": "93fb61ef-89f8-4d6e-b022-4f035a3fadad",  "status": 200,  "result": {    "symbol": "BNBBTC",    "priceChange": "0.00013900",    "priceChangePercent": "1.020",    "weightedAvgPrice": "0.01382453",    "prevClosePrice": "0.01362800",    "lastPrice": "0.01376700",    "lastQty": "1.78800000",    "bidPrice": "0.01376700",    "bidQty": "4.64600000",    "askPrice": "0.01376800",    "askQty": "14.31400000",    "openPrice": "0.01362800",    "highPrice": "0.01414900",    "lowPrice": "0.01346600",    "volume": "69412.40500000",    "quoteVolume": "959.59411487",    "openTime": 1660014164909,    "closeTime": 1660100564909,    "firstId": 194696115,       // First trade ID    "lastId": 194968287,        // Last trade ID    "count": 272173             // Number of trades  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "93fb61ef-89f8-4d6e-b022-4f035a3fadad",
+  "status": 200,
+  "result": {
+    "symbol": "BNBBTC",
+    "priceChange": "0.00013900",
+    "priceChangePercent": "1.020",
+    "weightedAvgPrice": "0.01382453",
+    "prevClosePrice": "0.01362800",
+    "lastPrice": "0.01376700",
+    "lastQty": "1.78800000",
+    "bidPrice": "0.01376700",
+    "bidQty": "4.64600000",
+    "askPrice": "0.01376800",
+    "askQty": "14.31400000",
+    "openPrice": "0.01362800",
+    "highPrice": "0.01414900",
+    "lowPrice": "0.01346600",
+    "volume": "69412.40500000",
+    "quoteVolume": "959.59411487",
+    "openTime": 1660014164909,
+    "closeTime": 1660100564909,
+    "firstId": 194696115, // First trade ID
+    "lastId": 194968287, // Last trade ID
+    "count": 272173 // Number of trades
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
 `MINI` type, for a single symbol:
 
-```
-{  "id": "9fa2a91b-3fca-4ed7-a9ad-58e3b67483de",  "status": 200,  "result": {    "symbol": "BNBBTC",    "openPrice": "0.01362800",    "highPrice": "0.01414900",    "lowPrice": "0.01346600",    "lastPrice": "0.01376700",    "volume": "69412.40500000",    "quoteVolume": "959.59411487",    "openTime": 1660014164909,    "closeTime": 1660100564909,    "firstId": 194696115,       // First trade ID    "lastId": 194968287,        // Last trade ID    "count": 272173             // Number of trades  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "9fa2a91b-3fca-4ed7-a9ad-58e3b67483de",
+  "status": 200,
+  "result": {
+    "symbol": "BNBBTC",
+    "openPrice": "0.01362800",
+    "highPrice": "0.01414900",
+    "lowPrice": "0.01346600",
+    "lastPrice": "0.01376700",
+    "volume": "69412.40500000",
+    "quoteVolume": "959.59411487",
+    "openTime": 1660014164909,
+    "closeTime": 1660100564909,
+    "firstId": 194696115, // First trade ID
+    "lastId": 194968287, // Last trade ID
+    "count": 272173 // Number of trades
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
 If more than one symbol is requested, response returns an array:
 
-```
-{  "id": "901be0d9-fd3b-45e4-acd6-10c580d03430",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "priceChange": "0.00016500",      "priceChangePercent": "1.213",      "weightedAvgPrice": "0.01382508",      "prevClosePrice": "0.01360800",      "lastPrice": "0.01377200",      "lastQty": "1.01400000",      "bidPrice": "0.01377100",      "bidQty": "7.55700000",      "askPrice": "0.01377200",      "askQty": "4.37900000",      "openPrice": "0.01360700",      "highPrice": "0.01414900",      "lowPrice": "0.01346600",      "volume": "69376.27900000",      "quoteVolume": "959.13277091",      "openTime": 1660014615517,      "closeTime": 1660101015517,      "firstId": 194697254,      "lastId": 194969483,      "count": 272230    },    {      "symbol": "BTCUSDT",      "priceChange": "-938.06000000",      "priceChangePercent": "-3.938",      "weightedAvgPrice": "23265.34432003",      "prevClosePrice": "23819.17000000",      "lastPrice": "22880.91000000",      "lastQty": "0.00536000",      "bidPrice": "22880.40000000",      "bidQty": "0.00424000",      "askPrice": "22880.91000000",      "askQty": "0.04276000",      "openPrice": "23818.97000000",      "highPrice": "23933.25000000",      "lowPrice": "22664.69000000",      "volume": "153508.37606000",      "quoteVolume": "3571425225.04441220",      "openTime": 1660014615977,      "closeTime": 1660101015977,      "firstId": 1592019902,      "lastId": 1597301762,      "count": 5281861    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "901be0d9-fd3b-45e4-acd6-10c580d03430",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BNBBTC",
+      "priceChange": "0.00016500",
+      "priceChangePercent": "1.213",
+      "weightedAvgPrice": "0.01382508",
+      "prevClosePrice": "0.01360800",
+      "lastPrice": "0.01377200",
+      "lastQty": "1.01400000",
+      "bidPrice": "0.01377100",
+      "bidQty": "7.55700000",
+      "askPrice": "0.01377200",
+      "askQty": "4.37900000",
+      "openPrice": "0.01360700",
+      "highPrice": "0.01414900",
+      "lowPrice": "0.01346600",
+      "volume": "69376.27900000",
+      "quoteVolume": "959.13277091",
+      "openTime": 1660014615517,
+      "closeTime": 1660101015517,
+      "firstId": 194697254,
+      "lastId": 194969483,
+      "count": 272230
+    },
+    {
+      "symbol": "BTCUSDT",
+      "priceChange": "-938.06000000",
+      "priceChangePercent": "-3.938",
+      "weightedAvgPrice": "23265.34432003",
+      "prevClosePrice": "23819.17000000",
+      "lastPrice": "22880.91000000",
+      "lastQty": "0.00536000",
+      "bidPrice": "22880.40000000",
+      "bidQty": "0.00424000",
+      "askPrice": "22880.91000000",
+      "askQty": "0.04276000",
+      "openPrice": "23818.97000000",
+      "highPrice": "23933.25000000",
+      "lowPrice": "22664.69000000",
+      "volume": "153508.37606000",
+      "quoteVolume": "3571425225.04441220",
+      "openTime": 1660014615977,
+      "closeTime": 1660101015977,
+      "firstId": 1592019902,
+      "lastId": 1597301762,
+      "count": 5281861
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
-### Trading Day Ticker[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#trading-day-ticker "Direct link to Trading Day Ticker")
+#### Trading Day Ticker
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "method": "ticker.tradingDay",  "params": {    "symbols": [      "BNBBTC",      "BTCUSDT"    ],    "timeZone": "00:00"  }}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "method": "ticker.tradingDay",
+  "params": {
+    "symbols": ["BNBBTC", "BTCUSDT"],
+    "timeZone": "00:00"
+  }
+}
 ```
 
 Price change statistics for a trading day.
@@ -2508,13 +3337,10 @@ request is more than 50.
 
 **Parameters:**
 
-| Name                                  | Type            | Mandatory                         | Description                     |
-| ------------------------------------- | --------------- | --------------------------------- | ------------------------------- |
-| `symbol`                              | STRING          | YES                               | Query ticker of a single symbol |
-| `symbols`                             | ARRAY of STRING | Query ticker for multiple symbols |
-| `timeZone`                            | STRING          | NO                                | Default: 0 (UTC)                |
-| `type`                                | ENUM            | NO                                | Supported values: FULL or MINI. |
-| If none provided, the default is FULL |
+| | | -symbol | -STRING | -YES | -Query ticker of a single symbol -symbols |
+-ARRAY of STRING | -Query ticker for multiple symbols -timeZone | -STRING | -NO
+| -Default: 0 (UTC) -type | -ENUM | -NO | -Supported values: FULL or MINI. If
+none provided, the default is FULL |
 
 **Notes:**
 
@@ -2528,34 +3354,186 @@ request is more than 50.
 
 With `symbol`:
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": {    "symbol": "BTCUSDT",    "priceChange": "-83.13000000",                // Absolute price change    "priceChangePercent": "-0.317",               // Relative price change in percent    "weightedAvgPrice": "26234.58803036",         // quoteVolume / volume    "openPrice": "26304.80000000",    "highPrice": "26397.46000000",    "lowPrice": "26088.34000000",    "lastPrice": "26221.67000000",    "volume": "18495.35066000",                   // Volume in base asset    "quoteVolume": "485217905.04210480",    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 3220151555,    "lastId": 3220849281,    "count": 697727  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "status": 200,
+  "result": {
+    "symbol": "BTCUSDT",
+    "priceChange": "-83.13000000", // Absolute price change
+    "priceChangePercent": "-0.317", // Relative price change in percent
+    "weightedAvgPrice": "26234.58803036", // quoteVolume / volume
+    "openPrice": "26304.80000000",
+    "highPrice": "26397.46000000",
+    "lowPrice": "26088.34000000",
+    "lastPrice": "26221.67000000",
+    "volume": "18495.35066000", // Volume in base asset
+    "quoteVolume": "485217905.04210480",
+    "openTime": 1695686400000,
+    "closeTime": 1695772799999,
+    "firstId": 3220151555,
+    "lastId": 3220849281,
+    "count": 697727
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
 ```
 
 With `symbols`:
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": [    {      "symbol": "BTCUSDT",      "priceChange": "-83.13000000",      "priceChangePercent": "-0.317",      "weightedAvgPrice": "26234.58803036",      "openPrice": "26304.80000000",      "highPrice": "26397.46000000",      "lowPrice": "26088.34000000",      "lastPrice": "26221.67000000",      "volume": "18495.35066000",      "quoteVolume": "485217905.04210480",      "openTime": 1695686400000,      "closeTime": 1695772799999,      "firstId": 3220151555,      "lastId": 3220849281,      "count": 697727    },    {      "symbol": "BNBUSDT",      "priceChange": "2.60000000",      "priceChangePercent": "1.238",      "weightedAvgPrice": "211.92276958",      "openPrice": "210.00000000",      "highPrice": "213.70000000",      "lowPrice": "209.70000000",      "lastPrice": "212.60000000",      "volume": "280709.58900000",      "quoteVolume": "59488753.54750000",      "openTime": 1695686400000,      "closeTime": 1695772799999,      "firstId": 672397461,      "lastId": 672496158,      "count": 98698    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 8    }  ]}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BTCUSDT",
+      "priceChange": "-83.13000000",
+      "priceChangePercent": "-0.317",
+      "weightedAvgPrice": "26234.58803036",
+      "openPrice": "26304.80000000",
+      "highPrice": "26397.46000000",
+      "lowPrice": "26088.34000000",
+      "lastPrice": "26221.67000000",
+      "volume": "18495.35066000",
+      "quoteVolume": "485217905.04210480",
+      "openTime": 1695686400000,
+      "closeTime": 1695772799999,
+      "firstId": 3220151555,
+      "lastId": 3220849281,
+      "count": 697727
+    },
+    {
+      "symbol": "BNBUSDT",
+      "priceChange": "2.60000000",
+      "priceChangePercent": "1.238",
+      "weightedAvgPrice": "211.92276958",
+      "openPrice": "210.00000000",
+      "highPrice": "213.70000000",
+      "lowPrice": "209.70000000",
+      "lastPrice": "212.60000000",
+      "volume": "280709.58900000",
+      "quoteVolume": "59488753.54750000",
+      "openTime": 1695686400000,
+      "closeTime": 1695772799999,
+      "firstId": 672397461,
+      "lastId": 672496158,
+      "count": 98698
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 8
+    }
+  ]
+}
 ```
 
 **Response: - MINI**
 
 With `symbol`:
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": {    "symbol": "BTCUSDT",    "openPrice": "26304.80000000",    "highPrice": "26397.46000000",    "lowPrice": "26088.34000000",    "lastPrice": "26221.67000000",    "volume": "18495.35066000",                  // Volume in base asset    "quoteVolume": "485217905.04210480",         // Volume in quote asset    "openTime": 1695686400000,    "closeTime": 1695772799999,    "firstId": 3220151555,                       // Trade ID of the first trade in the interval    "lastId": 3220849281,                        // Trade ID of the last trade in the interval    "count": 697727                              // Number of trades in the interval  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "status": 200,
+  "result": {
+    "symbol": "BTCUSDT",
+    "openPrice": "26304.80000000",
+    "highPrice": "26397.46000000",
+    "lowPrice": "26088.34000000",
+    "lastPrice": "26221.67000000",
+    "volume": "18495.35066000", // Volume in base asset
+    "quoteVolume": "485217905.04210480", // Volume in quote asset
+    "openTime": 1695686400000,
+    "closeTime": 1695772799999,
+    "firstId": 3220151555, // Trade ID of the first trade in the interval
+    "lastId": 3220849281, // Trade ID of the last trade in the interval
+    "count": 697727 // Number of trades in the interval
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
 ```
 
 With `symbols`:
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": [    {      "symbol": "BTCUSDT",      "openPrice": "26304.80000000",      "highPrice": "26397.46000000",      "lowPrice": "26088.34000000",      "lastPrice": "26221.67000000",      "volume": "18495.35066000",      "quoteVolume": "485217905.04210480",      "openTime": 1695686400000,      "closeTime": 1695772799999,      "firstId": 3220151555,      "lastId": 3220849281,      "count": 697727    },    {      "symbol": "BNBUSDT",      "openPrice": "210.00000000",      "highPrice": "213.70000000",      "lowPrice": "209.70000000",      "lastPrice": "212.60000000",      "volume": "280709.58900000",      "quoteVolume": "59488753.54750000",      "openTime": 1695686400000,      "closeTime": 1695772799999,      "firstId": 672397461,      "lastId": 672496158,      "count": 98698    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 8    }  ]}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BTCUSDT",
+      "openPrice": "26304.80000000",
+      "highPrice": "26397.46000000",
+      "lowPrice": "26088.34000000",
+      "lastPrice": "26221.67000000",
+      "volume": "18495.35066000",
+      "quoteVolume": "485217905.04210480",
+      "openTime": 1695686400000,
+      "closeTime": 1695772799999,
+      "firstId": 3220151555,
+      "lastId": 3220849281,
+      "count": 697727
+    },
+    {
+      "symbol": "BNBUSDT",
+      "openPrice": "210.00000000",
+      "highPrice": "213.70000000",
+      "lowPrice": "209.70000000",
+      "lastPrice": "212.60000000",
+      "volume": "280709.58900000",
+      "quoteVolume": "59488753.54750000",
+      "openTime": 1695686400000,
+      "closeTime": 1695772799999,
+      "firstId": 672397461,
+      "lastId": 672496158,
+      "count": 98698
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 8
+    }
+  ]
+}
 ```
 
-### Rolling window price change statistics[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics "Direct link to Rolling window price change statistics")
+#### Rolling window price change statistics
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "method": "ticker",  "params": {    "symbols": [      "BNBBTC",      "BTCUSDT"    ],    "windowSize": "7d"  }}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "method": "ticker",
+  "params": {
+    "symbols": ["BNBBTC", "BTCUSDT"],
+    "windowSize": "7d"
+  }
+}
 ```
 
 Get rolling window price change statistics with a custom window.
@@ -2574,8 +3552,9 @@ Window computation example
 For example, a request for `"windowSize": "7d"` might result in the following
 window:
 
-```
-"openTime": 1659580020000,"closeTime": 1660184865291,
+```javascript
+"openTime": 1659580020000,
+"closeTime": 1660184865291,
 ```
 
 Time of the request – `closeTime` – is 1660184865291 (August 11, 2022
@@ -2593,27 +3572,27 @@ WebSocket Streams:
 
 **Weight:** Adjusted based on the number of requested symbols:
 
-| Symbols | Weight       |
-| ------- | ------------ |
-| 1–50    | 4 per symbol |
-| 51–100  | 200          |
+| Symbols  | Weight         |
+| -------- | -------------- |
+| \-1–50   | \-4 per symbol |
+| \-51–100 | \-200          |
 
 **Parameters:**
 
-| Name         | Type            | Mandatory                         | Description                             |
-| ------------ | --------------- | --------------------------------- | --------------------------------------- |
-| `symbol`     | STRING          | YES                               | Query ticker of a single symbol         |
-| `symbols`    | ARRAY of STRING | Query ticker for multiple symbols |
-| `type`       | ENUM            | NO                                | Ticker type: `FULL` (default) or `MINI` |
-| `windowSize` | ENUM            | NO                                | Default `1d`                            |
+| Name           | Type              | Mandatory                           | Description                               |
+| -------------- | ----------------- | ----------------------------------- | ----------------------------------------- |
+| \-`symbol`     | \-STRING          | \-YES                               | \-Query ticker of a single symbol         |
+| \-`symbols`    | \-ARRAY of STRING | \-Query ticker for multiple symbols |
+| \-`type`       | \-ENUM            | \-NO                                | \-Ticker type: `FULL` (default) or `MINI` |
+| \-`windowSize` | \-ENUM            | \-NO                                | \-Default `1d`                            |
 
 Supported window sizes:
 
-| Unit    | `windowSize` value   |
-| ------- | -------------------- |
-| minutes | `1m`, `2m` ... `59m` |
-| hours   | `1h`, `2h` ... `23h` |
-| days    | `1d`, `2d` ... `7d`  |
+| Unit      | `windowSize` value     |
+| --------- | ---------------------- |
+| \-minutes | \-`1m`, `2m` ... `59m` |
+| \-hours   | \-`1h`, `2h` ... `23h` |
+| \-days    | \-`1d`, `2d` ... `7d`  |
 
 Notes:
 
@@ -2627,26 +3606,135 @@ Notes:
 
 `FULL` type, for a single symbol:
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": {    "symbol": "BNBBTC",    "priceChange": "0.00061500",    "priceChangePercent": "4.735",    "weightedAvgPrice": "0.01368242",    "openPrice": "0.01298900",    "highPrice": "0.01418800",    "lowPrice": "0.01296000",    "lastPrice": "0.01360400",    "volume": "587179.23900000",    "quoteVolume": "8034.03382165",    "openTime": 1659580020000,    "closeTime": 1660184865291,    "firstId": 192977765,       // First trade ID    "lastId": 195365758,        // Last trade ID    "count": 2387994            // Number of trades  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "status": 200,
+  "result": {
+    "symbol": "BNBBTC",
+    "priceChange": "0.00061500",
+    "priceChangePercent": "4.735",
+    "weightedAvgPrice": "0.01368242",
+    "openPrice": "0.01298900",
+    "highPrice": "0.01418800",
+    "lowPrice": "0.01296000",
+    "lastPrice": "0.01360400",
+    "volume": "587179.23900000",
+    "quoteVolume": "8034.03382165",
+    "openTime": 1659580020000,
+    "closeTime": 1660184865291,
+    "firstId": 192977765, // First trade ID
+    "lastId": 195365758, // Last trade ID
+    "count": 2387994 // Number of trades
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
 ```
 
 `MINI` type, for a single symbol:
 
-```
-{  "id": "bdb7c503-542c-495c-b797-4d2ee2e91173",  "status": 200,  "result": {    "symbol": "BNBBTC",    "openPrice": "0.01298900",    "highPrice": "0.01418800",    "lowPrice": "0.01296000",    "lastPrice": "0.01360400",    "volume": "587179.23900000",    "quoteVolume": "8034.03382165",    "openTime": 1659580020000,    "closeTime": 1660184865291,    "firstId": 192977765,       // First trade ID    "lastId": 195365758,        // Last trade ID    "count": 2387994            // Number of trades  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
+```json
+{
+  "id": "bdb7c503-542c-495c-b797-4d2ee2e91173",
+  "status": 200,
+  "result": {
+    "symbol": "BNBBTC",
+    "openPrice": "0.01298900",
+    "highPrice": "0.01418800",
+    "lowPrice": "0.01296000",
+    "lastPrice": "0.01360400",
+    "volume": "587179.23900000",
+    "quoteVolume": "8034.03382165",
+    "openTime": 1659580020000,
+    "closeTime": 1660184865291,
+    "firstId": 192977765, // First trade ID
+    "lastId": 195365758, // Last trade ID
+    "count": 2387994 // Number of trades
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
 ```
 
 If more than one symbol is requested, response returns an array:
 
-```
-{  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "priceChange": "0.00061500",      "priceChangePercent": "4.735",      "weightedAvgPrice": "0.01368242",      "openPrice": "0.01298900",      "highPrice": "0.01418800",      "lowPrice": "0.01296000",      "lastPrice": "0.01360400",      "volume": "587169.48600000",      "quoteVolume": "8033.90114517",      "openTime": 1659580020000,      "closeTime": 1660184820927,      "firstId": 192977765,      "lastId": 195365700,      "count": 2387936    },    {      "symbol": "BTCUSDT",      "priceChange": "1182.92000000",      "priceChangePercent": "5.113",      "weightedAvgPrice": "23349.27074846",      "openPrice": "23135.33000000",      "highPrice": "24491.22000000",      "lowPrice": "22400.00000000",      "lastPrice": "24318.25000000",      "volume": "1039498.10978000",      "quoteVolume": "24271522807.76838630",      "openTime": 1659580020000,      "closeTime": 1660184820927,      "firstId": 1568787779,      "lastId": 1604337406,      "count": 35549628    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 8    }  ]}
+```json
+{
+  "id": "f4b3b507-c8f2-442a-81a6-b2f12daa030f",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BNBBTC",
+      "priceChange": "0.00061500",
+      "priceChangePercent": "4.735",
+      "weightedAvgPrice": "0.01368242",
+      "openPrice": "0.01298900",
+      "highPrice": "0.01418800",
+      "lowPrice": "0.01296000",
+      "lastPrice": "0.01360400",
+      "volume": "587169.48600000",
+      "quoteVolume": "8033.90114517",
+      "openTime": 1659580020000,
+      "closeTime": 1660184820927,
+      "firstId": 192977765,
+      "lastId": 195365700,
+      "count": 2387936
+    },
+    {
+      "symbol": "BTCUSDT",
+      "priceChange": "1182.92000000",
+      "priceChangePercent": "5.113",
+      "weightedAvgPrice": "23349.27074846",
+      "openPrice": "23135.33000000",
+      "highPrice": "24491.22000000",
+      "lowPrice": "22400.00000000",
+      "lastPrice": "24318.25000000",
+      "volume": "1039498.10978000",
+      "quoteVolume": "24271522807.76838630",
+      "openTime": 1659580020000,
+      "closeTime": 1660184820927,
+      "firstId": 1568787779,
+      "lastId": 1604337406,
+      "count": 35549628
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 8
+    }
+  ]
+}
 ```
 
-### Symbol price ticker[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-price-ticker "Direct link to Symbol price ticker")
+#### Symbol price ticker
 
-```
-{  "id": "043a7cf2-bde3-4888-9604-c8ac41fcba4d",  "method": "ticker.price",  "params": {    "symbol": "BNBBTC"  }}
+```json
+{
+  "id": "043a7cf2-bde3-4888-9604-c8ac41fcba4d",
+  "method": "ticker.price",
+  "params": {
+    "symbol": "BNBBTC"
+  }
+}
 ```
 
 Get the latest market price for a symbol.
@@ -2659,18 +3747,18 @@ Streams:
 
 **Weight:** Adjusted based on the number of requested symbols:
 
-| Parameter | Weight |
-| --------- | ------ |
-| `symbol`  | 2      |
-| `symbols` | 4      |
-| none      | 4      |
+| Parameter   | Weight |
+| ----------- | ------ |
+| \-`symbol`  | \-2    |
+| \-`symbols` | \-4    |
+| \-none      | \-4    |
 
 **Parameters:**
 
-| Name      | Type            | Mandatory                        | Description                     |
-| --------- | --------------- | -------------------------------- | ------------------------------- |
-| `symbol`  | STRING          | NO                               | Query price for a single symbol |
-| `symbols` | ARRAY of STRING | Query price for multiple symbols |
+| Name        | Type              | Mandatory                          | Description                       |
+| ----------- | ----------------- | ---------------------------------- | --------------------------------- |
+| \-`symbol`  | \-STRING          | \-NO                               | \-Query price for a single symbol |
+| \-`symbols` | \-ARRAY of STRING | \-Query price for multiple symbols |
 
 Notes:
 
@@ -2682,20 +3770,68 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "043a7cf2-bde3-4888-9604-c8ac41fcba4d",  "status": 200,  "result": {    "symbol": "BNBBTC",    "price": "0.01361900"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "043a7cf2-bde3-4888-9604-c8ac41fcba4d",
+  "status": 200,
+  "result": {
+    "symbol": "BNBBTC",
+    "price": "0.01361900"
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
 If more than one symbol is requested, response returns an array:
 
-```
-{  "id": "e739e673-24c8-4adf-9cfa-b81f30330b09",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "price": "0.01363700"    },    {      "symbol": "BTCUSDT",      "price": "24267.15000000"    },    {      "symbol": "BNBBUSD",      "price": "331.10000000"    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
+```json
+{
+  "id": "e739e673-24c8-4adf-9cfa-b81f30330b09",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BNBBTC",
+      "price": "0.01363700"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "price": "24267.15000000"
+    },
+    {
+      "symbol": "BNBBUSD",
+      "price": "331.10000000"
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
 ```
 
-### Symbol order book ticker[​](/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker "Direct link to Symbol order book ticker")
+#### Symbol order book ticker
 
-```
-{  "id": "057deb3a-2990-41d1-b58b-98ea0f09e1b4",  "method": "ticker.book",  "params": {    "symbols": [      "BNBBTC",      "BTCUSDT"    ]  }}
+```json
+{
+  "id": "057deb3a-2990-41d1-b58b-98ea0f09e1b4",
+  "method": "ticker.book",
+  "params": {
+    "symbols": ["BNBBTC", "BTCUSDT"]
+  }
+}
 ```
 
 Get the current best price and quantity on the order book.
@@ -2707,18 +3843,18 @@ WebSocket Streams:
 
 **Weight:** Adjusted based on the number of requested symbols:
 
-| Parameter | Weight |
-| --------- | ------ |
-| `symbol`  | 2      |
-| `symbols` | 4      |
-| none      | 4      |
+| Parameter   | Weight |
+| ----------- | ------ |
+| \-`symbol`  | \-2    |
+| \-`symbols` | \-4    |
+| \-none      | \-4    |
 
 **Parameters:**
 
-| Name      | Type            | Mandatory                         | Description                      |
-| --------- | --------------- | --------------------------------- | -------------------------------- |
-| `symbol`  | STRING          | NO                                | Query ticker for a single symbol |
-| `symbols` | ARRAY of STRING | Query ticker for multiple symbols |
+| Name        | Type              | Mandatory                           | Description                        |
+| ----------- | ----------------- | ----------------------------------- | ---------------------------------- |
+| \-`symbol`  | \-STRING          | \-NO                                | \-Query ticker for a single symbol |
+| \-`symbols` | \-ARRAY of STRING | \-Query ticker for multiple symbols |
 
 Notes:
 
@@ -2730,12 +3866,62 @@ Notes:
 
 **Response:**
 
-```
-{  "id": "9d32157c-a556-4d27-9866-66760a174b57",  "status": 200,  "result": {    "symbol": "BNBBTC",    "bidPrice": "0.01358000",    "bidQty": "12.53400000",    "askPrice": "0.01358100",    "askQty": "17.83700000"  },  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 2    }  ]}
+```json
+{
+  "id": "9d32157c-a556-4d27-9866-66760a174b57",
+  "status": 200,
+  "result": {
+    "symbol": "BNBBTC",
+    "bidPrice": "0.01358000",
+    "bidQty": "12.53400000",
+    "askPrice": "0.01358100",
+    "askQty": "17.83700000"
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}
 ```
 
 If more than one symbol is requested, response returns an array:
 
+```json
+{
+  "id": "057deb3a-2990-41d1-b58b-98ea0f09e1b4",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BNBBTC",
+      "bidPrice": "0.01358000",
+      "bidQty": "12.53400000",
+      "askPrice": "0.01358100",
+      "askQty": "17.83700000"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "bidPrice": "23980.49000000",
+      "bidQty": "0.01000000",
+      "askPrice": "23981.31000000",
+      "askQty": "0.01512000"
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
 ```
-{  "id": "057deb3a-2990-41d1-b58b-98ea0f09e1b4",  "status": 200,  "result": [    {      "symbol": "BNBBTC",      "bidPrice": "0.01358000",      "bidQty": "12.53400000",      "askPrice": "0.01358100",      "askQty": "17.83700000"    },    {      "symbol": "BTCUSDT",      "bidPrice": "23980.49000000",      "bidQty": "0.01000000",      "askPrice": "23981.31000000",      "askQty": "0.01512000"    }  ],  "rateLimits": [    {      "rateLimitType": "REQUEST_WEIGHT",      "interval": "MINUTE",      "intervalNum": 1,      "limit": 6000,      "count": 4    }  ]}
-```
+
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests)

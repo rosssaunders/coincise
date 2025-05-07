@@ -12,12 +12,13 @@
     "extract:private_websocket": "node src/index.js ./config/private_websocket.json",
     "extract:fix": "node src/index.js ./config/fix.json",
     "extract:sbe": "node src/index.js ./config/sbe.json",
-    "extract:change_log": "node src/index.js ./config/change_log.json"
+    "extract:change_log": "node src/index.js ./config/change_log.json",
+    "extract:all": "npm run extract:public_rest && npm run extract:private_rest && npm run extract:public_websocket && npm run extract:private_websocket && npm run extract:fix && npm run extract:sbe && npm run extract:change_log"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^24.8.0",
+    "puppeteer": "^24.8",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2",
     "jsdom": "26.1.0"

@@ -1,8 +1,8 @@
 # Binance Spot SBE API Documentation
 
-# SBE Market Data Streams
+## SBE Market Data Streams
 
-## General Information[​](/docs/binance-spot-api-docs/sbe-market-data-streams#general-information "Direct link to General Information")
+### General Information
 
 - The base endpoint is **stream-sbe.binance.com** or
   **stream-sbe.binance.com:9443**.
@@ -41,7 +41,7 @@
     in text frames (containing JSON), and events are always sent in binary
     frames (containing SBE).
 
-## WebSocket Limits[​](/docs/binance-spot-api-docs/sbe-market-data-streams#websocket-limits "Direct link to WebSocket Limits")
+### WebSocket Limits
 
 - WebSocket connections have a rate limit of **5 requests per second**.
   - Only messages from your client are considered:
@@ -55,9 +55,9 @@
 - There is a limit of **300 connection attempts every 5 minutes per IP
   address**.
 
-## Available Streams[​](/docs/binance-spot-api-docs/sbe-market-data-streams#available-streams "Direct link to Available Streams")
+### Available Streams
 
-### Trades Streams[​](/docs/binance-spot-api-docs/sbe-market-data-streams#trades-streams "Direct link to Trades Streams")
+#### Trades Streams
 
 Raw trade information, pushed in real-time.
 
@@ -67,7 +67,7 @@ Raw trade information, pushed in real-time.
 
 **Update Speed**: Real time
 
-### Best Bid/Ask Streams[​](/docs/binance-spot-api-docs/sbe-market-data-streams#best-bidask-streams "Direct link to Best Bid/Ask Streams")
+#### Best Bid/Ask Streams
 
 The best bid and ask price and quantity, pushed in real-time when the order book
 changes.
@@ -91,7 +91,7 @@ an undelivered event queued at time T1 (where T1 < T2), the event for T1 is
 dropped, and we will deliver only the event for T2. This is done on a per-symbol
 basis.
 
-### Diff. Depth Streams[​](/docs/binance-spot-api-docs/sbe-market-data-streams#diff-depth-streams "Direct link to Diff. Depth Streams")
+#### Diff. Depth Streams
 
 Incremental updates to the order book, pushed at regular intervals. Use this
 stream to maintain a local order book.
@@ -104,7 +104,7 @@ stream to maintain a local order book.
 
 **Update Speed:** 100 ms
 
-### Partial Book Depth Streams[​](/docs/binance-spot-api-docs/sbe-market-data-streams#partial-book-depth-streams "Direct link to Partial Book Depth Streams")
+#### Partial Book Depth Streams
 
 Snapshots of the top 20 levels of the order book, pushed at regular intervals.
 
@@ -113,3 +113,6 @@ Snapshots of the top 20 levels of the order book, pushed at regular intervals.
 **Stream Name**: <symbol>@depth20
 
 **Update Speed:** 100ms
+
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/sbe-market-data-streams](https://developers.binance.com/docs/binance-spot-api-docs/sbe-market-data-streams)
