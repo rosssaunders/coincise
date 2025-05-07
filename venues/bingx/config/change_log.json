@@ -1,0 +1,7 @@
+{
+  "urls": ["https://bingx-api.github.io/docs/#/en-us/spot/changelog"],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/spot",
+    "outputFileName": "change_log.md"
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "title": "BingX Spot Private WebSocket API",
   "urls": [
     "https://bingx-api.github.io/docs/#/en-us/spot/socket/",
     "https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html",

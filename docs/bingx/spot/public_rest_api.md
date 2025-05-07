@@ -1,4 +1,6 @@
-# Introduction
+# BingX Spot Public REST API
+
+## Introduction
 
 Welcome to the [BingX](https://bingx.com) API, welcome to sign up for the BingX
 BrokerProject
@@ -13,7 +15,7 @@ If you have any questions or feedback, you can join the
 
 ---
 
-# Frequently Asked Questions
+## Frequently Asked Questions
 
 Q: What is UID?
 
@@ -116,9 +118,9 @@ do not exceed 10/s.
 
 ---
 
-# General Info
+## General Info
 
-## Service Address
+### Service Address
 
 https://open-api.bingx.com
 
@@ -129,15 +131,15 @@ with the primary domain name open-api.bingx.com
 HTTP 200 status code indicates a successful response. The response body might
 contain a message which will be displayed accordingly.
 
-## Common Error Codes
+### Common Error Codes
 
-#### Types:
+##### Types:
 
 - 4XX error codes are used to indicate wrong request content, behavior, format.
 
 - 5XX error codes are used to indicate problems with the Bingx service.
 
-#### Common business error codes:
+##### Common business error codes:
 
 - 100001 - signature verification failed#
 
@@ -180,13 +182,13 @@ contain a message which will be displayed accordingly.
 - Incorrect apiKey
 - Null apiKey
 
-#### Notes:
+##### Notes:
 
 - If it fails, there will be an error description included in the response body.
 
 - Errors may be thrown from every interface.
 
-## Rate limit
+### Rate limit
 
 If the request is too frequent, the system will automatically restrict the
 request and recover after 5 minutes;
@@ -199,7 +201,7 @@ window according to "X-RateLimit-Requests-Remain" (remaining number of frequency
 limits) and "X-RateLimit-Requests-Expire" (window expiration time) in the Http
 Header. time, and dynamically adjust your request frequency based on this value.
 
-#### REST API
+##### REST API
 
 The API requests are subject to different rate limits based on UID and IP.
 Please refer to the respective API documentation for UID rate limits. IP rate
@@ -216,15 +218,15 @@ limits are based on the following grouping rules:
   group is 1000 requests per 10 seconds, with an individual IP rate limit of 200
   requests per 10 seconds for each interface.
 
-## Server time
+### Server time
 
 https://open-api.bingx.com/openApi/spot/v1/server/time
 
 ---
 
-# Market Data
+## Market Data
 
-## Spot trading symbols
+### Spot trading symbols
 
 GET /openApi/spot/v1/common/symbols
 
@@ -251,7 +253,7 @@ request parameters https://open-api.bingx.com
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                             |
 | -------------- | ------ | -------- | ------------------------------------------------------- |
@@ -259,13 +261,13 @@ rate limitation by IP in group Number: 1
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                                            |
 | -------------- | ----- | ------------------------------------------------------ |
 | symbols        | Array | Symbol list, refer to the table below for order fields |
 
-### Order Parameters
+#### Order Parameters
 
 | Parameter Name | Type    | Description                                                                                                    |
 | -------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
@@ -283,7 +285,7 @@ rate limitation by IP in group Number: 1
 | offTime        | long    | offline time                                                                                                   |
 | maintainTime   | long    | trading suspension time                                                                                        |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -295,7 +297,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Recent Trades List
+### Recent Trades List
 
 GET /openApi/spot/v1/market/trades
 
@@ -305,7 +307,7 @@ Content-Type:request body(application/json)
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                             |
 | -------------- | ------ | -------- | ------------------------------------------------------- |
@@ -314,7 +316,7 @@ rate limitation by IP in group Number: 1
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description    |
 | -------------- | ------- | -------------- |
@@ -324,7 +326,7 @@ rate limitation by IP in group Number: 1
 | time           | long    | time           |
 | buyerMaker     | boolean | Buyer or not   |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -336,7 +338,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Order Book
+### Order Book
 
 GET /openApi/spot/v1/market/depth
 
@@ -346,7 +348,7 @@ Content-Type:request body(application/json)
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                             |
 | -------------- | ------ | -------- | ------------------------------------------------------- |
@@ -355,7 +357,7 @@ rate limitation by IP in group Number: 1
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                                  |
 | -------------- | ----- | -------------------------------------------- |
@@ -363,7 +365,7 @@ rate limitation by IP in group Number: 1
 | asks           | array | first element price, second element quantity |
 | ts             | int   | Timestamp of depth, Unit: milliseconds       |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -375,7 +377,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Kline/Candlestick Data
+### Kline/Candlestick Data
 
 GET /openApi/spot/v2/market/kline
 
@@ -413,7 +415,7 @@ request parameters https://open-api.bingx.com
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                      |
 | -------------- | ------ | -------- | ---------------------------------------------------------------- |
@@ -425,13 +427,13 @@ rate limitation by IP in group Number: 1
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds          |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds              |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description             |
 | -------------- | ----- | ----------------------- |
 | klines         | array | Candlestick chart array |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -443,7 +445,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## 24hr Ticker Price Change Statistics
+### 24hr Ticker Price Change Statistics
 
 GET /openApi/spot/v1/ticker/24hr
 
@@ -467,7 +469,7 @@ request parameters https://open-api.bingx.com
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                                  |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------- |
@@ -475,7 +477,7 @@ rate limitation by IP in group Number: 1
 | timestamp      | int64  | yes      | The timestamp of the request, in milliseconds                                                |
 | recvWindow     | int64  | no       | Request valid time window value, unit: millisecond                                           |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name     | Type    | Description                                            |
 | ------------------ | ------- | ------------------------------------------------------ |
@@ -495,7 +497,7 @@ rate limitation by IP in group Number: 1
 | askQty             | float64 | ask quantity                                           |
 | priceChangePercent | string  | Price change percentage field                          |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -507,7 +509,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Order Book aggregation
+### Order Book aggregation
 
 GET /openApi/spot/v2/market/depth
 
@@ -519,7 +521,7 @@ Interface Parameters
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                           |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------- |
@@ -527,7 +529,7 @@ rate limitation by IP in group Number: 1
 | depth          | int64  | Yes      | Query depth                                                                           |
 | type           | string | Yes      | step0 default precision, step1 to step5 are 10 to 100000 times precision respectively |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                                                                                          |
 | -------------- | ----- | ---------------------------------------------------------------------------------------------------- |
@@ -535,7 +537,7 @@ rate limitation by IP in group Number: 1
 | asks           | array | Sell depth, where the first element of the array is the price and the second element is the quantity |
 | ts             | int64 | Timestamp                                                                                            |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -547,7 +549,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Symbol Price Ticker
+### Symbol Price Ticker
 
 GET /openApi/spot/v1/ticker/price
 
@@ -559,13 +561,13 @@ Interface Parameters
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                     |
 | -------------- | ------ | -------- | ------------------------------- |
 | symbol         | string | Yes      | Trading pair, such as: BTC_USDT |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                     |
 | -------------- | ------ | ------------------------------- |
@@ -573,7 +575,7 @@ rate limitation by IP in group Number: 1
 | symbol         | string | Trading pair, such as: BTC_USDT |
 | timestamp      | int64  | Timestamp                       |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -585,7 +587,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Symbol Order Book Ticker
+### Symbol Order Book Ticker
 
 GET /openApi/spot/v1/ticker/bookTicker
 
@@ -597,13 +599,13 @@ Interface Parameters
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                     |
 | -------------- | ------ | -------- | ------------------------------- |
 | symbol         | string | Yes      | Trading pair, such as: BTC_USDT |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                     |
 | -------------- | ------ | ------------------------------- |
@@ -614,7 +616,7 @@ rate limitation by IP in group Number: 1
 | askPrice       | string | Best ask price                  |
 | askVolume      | string | Best ask volume                 |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -626,7 +628,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Historical K-line
+### Historical K-line
 
 GET /openApi/market/his/v1/kline
 
@@ -652,7 +654,7 @@ Interface Parameters
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                |
 | -------------- | ------ | -------- | ---------------------------------------------------------- |
@@ -662,13 +664,13 @@ rate limitation by IP in group Number: 1
 | endTime        | int64  | No       | End time, unit: milliseconds                               |
 | limit          | int64  | No       | Default value: 500 Maximum value: 500                      |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description  |
 | -------------- | ----- | ------------ |
 | klines         | array | K-line array |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -680,7 +682,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Old Trade Lookup
+### Old Trade Lookup
 
 GET /openApi/market/his/v1/trade
 
@@ -690,7 +692,7 @@ Content-Type:request body(application/json)
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                |
 | -------------- | ------ | -------- | ---------------------------------------------------------- |
@@ -698,7 +700,7 @@ rate limitation by IP in group Number: 1
 | limit          | int    | no       | Default 100, maximum 500                                   |
 | fromId         | string | no       | The last recorded tid                                      |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description |
 | -------------- | ------- | ----------- |
@@ -708,7 +710,7 @@ rate limitation by IP in group Number: 1
 | time           | long    | Time        |
 | buyerMaker     | boolean | Buyer maker |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

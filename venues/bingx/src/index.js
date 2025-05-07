@@ -2,9 +2,10 @@ import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
 import TurndownService from "turndown"
 import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
 import fs from "fs"
-import { getConfig } from "./config/bingx.js"
+import { getConfig } from "./config.js"
 import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import { JSDOM } from "jsdom"
 
 async function loadBrowser() {
   // Only return the browser instance, not an object
@@ -492,6 +493,21 @@ function convertToMarkdown(html) {
   return turndownService.turndown(html)
 }
 
+// Generic heading demotion utility (descending order)
+const demoteHeadings = dom => {
+  for (let level = 6; level >= 1; level--) {
+    const selector = `h${level}`
+    if (level < 6) {
+      const headings = dom.window.document.querySelectorAll(selector)
+      headings.forEach(heading => {
+        const newHeading = dom.window.document.createElement(`h${level + 1}`)
+        newHeading.textContent = heading.textContent
+        heading.parentNode.replaceChild(newHeading, heading)
+      })
+    }
+  }
+}
+
 async function main() {
   let browser
 
@@ -510,7 +526,7 @@ async function main() {
       type = "publicWebSocket"
     }
 
-    const { urls, outputConfig } = getConfig(type)
+    const { urls, outputConfig, title } = getConfig(type)
 
     console.log(`\x1b[34m%s\x1b[0m`, `📚 Generating ${type} API documentation`)
 
@@ -543,8 +559,17 @@ async function main() {
     // Convert all the html to markdown and combine into a single file
     let combinedMarkdown = ""
 
+    if (title) {
+      combinedMarkdown += `# ${title}\n\n`
+    }
+
     for (const html of result) {
-      const markdown = await convertToMarkdown(html)
+      // Demote all headings by one level using JSDOM
+      const dom = new JSDOM(html)
+      demoteHeadings(dom)
+      const markdown = await convertToMarkdown(
+        dom.window.document.body.innerHTML
+      )
       combinedMarkdown += markdown + "\n\n---\n\n"
     }
 

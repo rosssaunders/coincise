@@ -1,4 +1,6 @@
-# Introduction
+# BingX Spot Private REST API
+
+## Introduction
 
 Welcome to the [BingX](https://bingx.com) API, welcome to sign up for the BingX
 BrokerProject
@@ -13,7 +15,7 @@ If you have any questions or feedback, you can join the
 
 ---
 
-# Frequently Asked Questions
+## Frequently Asked Questions
 
 Q: What is UID?
 
@@ -116,9 +118,9 @@ do not exceed 10/s.
 
 ---
 
-# General Info
+## General Info
 
-## Service Address
+### Service Address
 
 https://open-api.bingx.com
 
@@ -129,15 +131,15 @@ with the primary domain name open-api.bingx.com
 HTTP 200 status code indicates a successful response. The response body might
 contain a message which will be displayed accordingly.
 
-## Common Error Codes
+### Common Error Codes
 
-#### Types:
+##### Types:
 
 - 4XX error codes are used to indicate wrong request content, behavior, format.
 
 - 5XX error codes are used to indicate problems with the Bingx service.
 
-#### Common business error codes:
+##### Common business error codes:
 
 - 100001 - signature verification failed#
 
@@ -180,13 +182,13 @@ contain a message which will be displayed accordingly.
 - Incorrect apiKey
 - Null apiKey
 
-#### Notes:
+##### Notes:
 
 - If it fails, there will be an error description included in the response body.
 
 - Errors may be thrown from every interface.
 
-## Rate limit
+### Rate limit
 
 If the request is too frequent, the system will automatically restrict the
 request and recover after 5 minutes;
@@ -199,7 +201,7 @@ window according to "X-RateLimit-Requests-Remain" (remaining number of frequency
 limits) and "X-RateLimit-Requests-Expire" (window expiration time) in the Http
 Header. time, and dynamically adjust your request frequency based on this value.
 
-#### REST API
+##### REST API
 
 The API requests are subject to different rate limits based on UID and IP.
 Please refer to the respective API documentation for UID rate limits. IP rate
@@ -216,15 +218,15 @@ limits are based on the following grouping rules:
   group is 1000 requests per 10 seconds, with an individual IP rate limit of 200
   requests per 10 seconds for each interface.
 
-## Server time
+### Server time
 
 https://open-api.bingx.com/openApi/spot/v1/server/time
 
 ---
 
-# Authentication
+## Authentication
 
-## Generate an API Key
+### Generate an API Key
 
 - Before being able to sign any requests, you must create an API Key at the API
   Management page on[BingX](https://bingx.com)Upon creating a key you will have
@@ -236,13 +238,13 @@ https://open-api.bingx.com/openApi/spot/v1/server/time
 If the API key is accidentally leaked, please delete it immediately and produce
 a new API key
 
-## Permission Settings
+### Permission Settings
 
 - The default permission for newly created APIs is read-only.
 - If you need to perform write operations such as placing an order through the
   API, you need to modify it to the corresponding permission on the UI.
 
-## Make Requests
+### Make Requests
 
 All private REST requests must contain the following parameters:
 
@@ -254,7 +256,7 @@ All private REST requests must contain the following parameters:
   sent before 5000 milliseconds, the request will be considered invalid. This
   time window value can be defined by sending the optional parameter recvWindow.
 
-## Signature Description
+### Signature Description
 
 signatureRequest parameter by using HMAC SHA256 encode
 
@@ -319,7 +321,7 @@ openssl dgst -sha256 -hmac
 
 {"recvWindow":0,"subAccountString":"abc12345","timestamp":1696751141337,"signature":"1e63e8cfd1c04919881e60cf369e404b9b7c87d3a09bc300f1abfdcce7da57e8"}
 
-## Requests
+### Requests
 
 Root URL for REST access: https://open-api.bingx.com
 
@@ -349,9 +351,9 @@ Success
 
 ---
 
-# Wallet deposits and withdrawals
+## Wallet deposits and withdrawals
 
-## Deposit records
+### Deposit records
 
 GET /openApi/api/v3/capital/deposit/hisrec
 
@@ -361,7 +363,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                         |
 | -------------- | ------ | -------- | --------------------------------------------------- |
@@ -374,7 +376,7 @@ Content-Type:request body(application/json)
 | recvWindow     | LONG   | no       | Execution window time, cannot be greater than 60000 |
 | timestamp      | LONG   | yes      | current timestamp 1658748648396                     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description                                         |
 | -------------- | ------- | --------------------------------------------------- |
@@ -391,7 +393,7 @@ Content-Type:request body(application/json)
 | confirmTimes   | LONG    | Network confirmation times                          |
 | sourceAddress  | String  | Source address                                      |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -403,7 +405,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Withdraw records
+### Withdraw records
 
 GET /openApi/api/v3/capital/withdraw/history
 
@@ -413,7 +415,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name  | Type   | Required | Description                                                                                                                                                                       |
 | --------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -428,7 +430,7 @@ Content-Type:request body(application/json)
 | recvWindow      | LONG   | no       | Execution window time, cannot be greater than 60000                                                                                                                               |
 | timestamp       | LONG   | yes      | current timestamp e.g.1658748648396                                                                                                                                               |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type    | Description                                                                                                                                                                       |
 | --------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -448,7 +450,7 @@ Content-Type:request body(application/json)
 | transferType    | int     | Transfer type: 1 Withdrawal, 2 Internal transfer                                                                                                                                  |
 | addressTag      | string  | Some currencies like XRP/XMR allow filling in secondary address tags                                                                                                              |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -460,7 +462,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query currency deposit and withdrawal data
+### Query currency deposit and withdrawal data
 
 GET /openApi/wallets/v1/capital/config/getall
 
@@ -472,7 +474,7 @@ Content-Type:request body(application/json)
 
 Get information of coins,And query the limit corresponding to the coins
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                             |
 | -------------- | ------ | -------- | ------------------------------------------------------- |
@@ -480,7 +482,7 @@ Get information of coins,And query the limit corresponding to the coins
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description         |
 | -------------- | ------- | ------------------- |
@@ -488,7 +490,7 @@ Get information of coins,And query the limit corresponding to the coins
 | name           | string  | Coin name           |
 | networkList    | Network | Network information |
 
-### Data Parameters
+#### Data Parameters
 
 |                   | Description                                                          |
 | ----------------- | -------------------------------------------------------------------- |
@@ -508,7 +510,7 @@ Get information of coins,And query the limit corresponding to the coins
 | contractAddress   | Contract address                                                     |
 | needTagOrMemo     | Whether memo or tag is required, true: required, false: not required |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -520,7 +522,7 @@ Get information of coins,And query the limit corresponding to the coins
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Withdraw
+### Withdraw
 
 POST /openApi/wallets/v1/capital/withdraw/apply
 
@@ -532,7 +534,7 @@ Content-Type:request body(application/json)
 
 Specify user account to initiate coin withdrawal
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name  | Type    | Required | Description                                                                                                     |
 | --------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------- |
@@ -546,14 +548,14 @@ Specify user account to initiate coin withdrawal
 | recvWindow      | int64   | no       | Timestamp of initiating the request, Unit: milliseconds                                                         |
 | timestamp       | int64   | yes      | Request valid time window value, Unit: milliseconds                                                             |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type   | Description                                                                                                     |
 | --------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
 | id              | string | The platform returns the unique ID of the internal transfer record.                                             |
 | withdrawOrderId | string | Customer-defined withdrawal ID, a combination of numbers and letters, with a length of less than 100 characters |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -565,7 +567,7 @@ Specify user account to initiate coin withdrawal
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Main Account Deposit Address
+### Main Account Deposit Address
 
 GET /openApi/wallets/v1/capital/deposit/address
 
@@ -579,7 +581,7 @@ This endpoint is used for a mother account to query the deposit address of a
 specific coin in the blockchain it belongs to. Only available for mother
 accounts.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                |
 | -------------- | ------ | -------- | ------------------------------------------ |
@@ -589,7 +591,7 @@ accounts.
 | timestamp      | int64  | Yes      | Timestamp of the request in milliseconds   |
 | recvWindow     | int64  | No       | Request window validity, in milliseconds   |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name    | Type   | Description                                       |
 | ----------------- | ------ | ------------------------------------------------- |
@@ -602,7 +604,7 @@ accounts.
 | tag               | string | Address tag                                       |
 | status            | int    | 0 for activated, 1 for applied, 2 for not applied |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -614,7 +616,7 @@ accounts.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Deposit risk control records
+### Deposit risk control records
 
 GET /openApi/wallets/v1/capital/deposit/riskRecords
 
@@ -627,12 +629,12 @@ Content-Type:request body(application/json)
 Used to query the recharge records in risk control for users and their
 sub-accounts
 
-### Request Parameters
+#### Request Parameters
 
 |     | Parameter Name | Type | Required | Description |
 | --- | -------------- | ---- | -------- | ----------- |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type     | Description      |
 | -------------- | -------- | ---------------- |
@@ -643,7 +645,7 @@ sub-accounts
 | address        | string   | Recharge address |
 | insetTime      | datetime | Creation time    |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -657,9 +659,9 @@ sub-accounts
 
 ---
 
-# Fund Account
+## Fund Account
 
-## Query Assets
+### Query Assets
 
 GET /openApi/spot/v1/account/balance
 
@@ -669,20 +671,20 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                                             |
 | -------------- | ----- | -------- | ------------------------------------------------------- |
 | recvWindow     | int64 | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64 | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                                             |
 | -------------- | ----- | ------------------------------------------------------- |
 | balances       | Array | Asset list, element fields refer to the following table |
 
-### Order Parameters
+#### Order Parameters
 
 | Parameter Name | Type   | Description     |
 | -------------- | ------ | --------------- |
@@ -691,7 +693,7 @@ Content-Type:request body(application/json)
 | free           | string | Available asset |
 | locked         | string | Freeze asset    |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -703,7 +705,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Asset Transfer
+### Asset Transfer
 
 POST /openApi/api/v3/post/asset/transfer
 
@@ -727,7 +729,7 @@ _6\. Run the following example code_
 
 request parameters https://open-api.bingx.com
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                         |
 | -------------- | ------- | -------- | --------------------------------------------------- |
@@ -737,13 +739,13 @@ request parameters https://open-api.bingx.com
 | recvWindow     | LONG    | no       | Execution window time, cannot be greater than 60000 |
 | timestamp      | LONG    | yes      | current timestamp e.g. 1658748648396                |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type | Description    |
 | -------------- | ---- | -------------- |
 | tranId         | LONG | Transaction ID |
 
-### Data Parameters
+#### Data Parameters
 
 |                   | Description                          |
 | ----------------- | ------------------------------------ |
@@ -754,7 +756,7 @@ request parameters https://open-api.bingx.com
 | SFUTURES_PFUTURES | Standard Contract->Perpetual Futures |
 | PFUTURES_SFUTURES | Perpetual Futures->Standard Contract |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -766,7 +768,7 @@ request parameters https://open-api.bingx.com
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Asset transfer records
+### Asset transfer records
 
 GET /openApi/api/v3/asset/transfer
 
@@ -776,7 +778,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type | Required | Description                                         |
 | -------------- | ---- | -------- | --------------------------------------------------- |
@@ -789,7 +791,7 @@ Content-Type:request body(application/json)
 | recvWindow     | LONG | no       | Execution window time, cannot be greater than 60000 |
 | timestamp      | LONG | yes      | current timestamp e.g.1658748648396                 |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description         |
 | -------------- | ------- | ------------------- |
@@ -802,7 +804,7 @@ Content-Type:request body(application/json)
 | tranId         | LONG    | Transaction ID      |
 | timestamp      | LONG    | Transfer time stamp |
 
-### Data Parameters
+#### Data Parameters
 
 |                   | Description                             |
 | ----------------- | --------------------------------------- |
@@ -821,7 +823,7 @@ Content-Type:request body(application/json)
 | CTRADING_SFUTURES | Copy Trade Account -> Standard Contract |
 | CTRADING_PFUTURES | Copy Trade Account -> Perpetual Futures |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -833,7 +835,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Main Accoun internal transfer
+### Main Accoun internal transfer
 
 POST /openApi/wallets/v1/capital/innerTransfer/apply
 
@@ -849,7 +851,7 @@ only allowed between main accounts and from main accounts to sub-accounts.
 For internal transfers within sub-accounts, please use the dedicated interface:
 [User internal transfer](https://bingx-api.github.io/docs/#/en-us/common/account-api.html#User%20internal%20transfer)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type    | Required | Description                                                                                                        |
 | ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -863,14 +865,14 @@ For internal transfers within sub-accounts, please use the dedicated interface:
 | timestamp        | int64   | Yes      | The timestamp of the request, in milliseconds.                                                                     |
 | recvWindow       | int64   | No       | Request validity time window, unit: milliseconds                                                                   |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name   | Type   | Description                                                                                                        |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
 | id               | string | The platform returns the unique ID of the internal transfer record.                                                |
 | transferClientId | string | Custom ID for internal transfer by the client, combination of numbers and letters, length less than 100 characters |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -882,7 +884,7 @@ For internal transfers within sub-accounts, please use the dedicated interface:
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Main account internal transfer records
+### Main account internal transfer records
 
 GET /openApi/wallets/v1/capital/innerTransfer/records
 
@@ -895,7 +897,7 @@ Content-Type:request body(application/json)
 This endpoint is used for the parent user to query their own inner transfer
 records. Only available for parent users.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type   | Required | Description                                                                                                                                               |
 | ---------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -908,7 +910,7 @@ records. Only available for parent users.
 | timestamp        | int64  | Yes      | Request timestamp in milliseconds                                                                                                                         |
 | recvWindow       | int64  | No       | Request valid time window in milliseconds                                                                                                                 |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name   | Type    | Description                                                                                                                                               |
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -924,7 +926,7 @@ records. Only available for parent users.
 | fromUid          | long    | Payer's account                                                                                                                                           |
 | recordType       | string  | Out: transfer out record, in: transfer in record                                                                                                          |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -936,7 +938,7 @@ records. Only available for parent users.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Asset overview
+### Asset overview
 
 GET /openApi/account/v1/allAccountBalance
 
@@ -946,7 +948,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                                                                                                                                                                                                                                                 |
 | -------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -954,14 +956,14 @@ Content-Type:request body(application/json)
 | timestamp      | int64  | 是       | Request valid time window value, Unit: milliseconds                                                                                                                                                                                                                                                         |
 | recvWindow     | int64  | 否       | Timestamp of initiating the request, Unit: milliseconds                                                                                                                                                                                                                                                     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                                                                                                                                                                                                                                                                                                 |
 | -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | accountType    | string | Account type, if left blank, all assets of the account will be checked by default. spot: spot (fund account), stdFutures: standard futures account, coinMPerp: coin base account, USDTMPerp: U base account, copyTrading: copy trading account, grid: grid account, eran: wealth account, c2c: c2c account. |
 | usdtBalance    | string | Equivalent to USDT amount                                                                                                                                                                                                                                                                                   |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -975,9 +977,9 @@ Content-Type:request body(application/json)
 
 ---
 
-# Trades Endpoints
+## Trades Endpoints
 
-## Place order
+### Place order
 
 POST /openApi/spot/v1/trade/order
 
@@ -987,7 +989,7 @@ API KEY permission: Spot Trading
 
 Content-Type:request body(application/json)
 
-### Description
+#### Description
 
 Can be used to place 1 order on spot
 
@@ -1023,7 +1025,7 @@ If the spot trader of copy trading has enabled the function
 - SELL need to use another specific
   endpoint:[POST /openApi/copyTrading/v1/spot/trader/sellOrder](http://localhost:1024/#/en-us/copyTrade/trader-interface.html#Trader%20sells%20spot%20assets%20based%20on%20buy%20order%20number)
 
-### Order Type
+#### Order Type
 
 MARKET: Market Price
 
@@ -1037,7 +1039,7 @@ TRIGGER\_ Limit: Price limit plan commission
 
 TRIGGER\_ Market: Market price plan commission
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type    | Required | Description                                                                                                                                                                                       |
 | ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1053,7 +1055,7 @@ TRIGGER\_ Market: Market price plan commission
 | recvWindow       | float64 | no       | Request valid time window value, Unit: milliseconds                                                                                                                                               |
 | timestamp        | int64   | yes      | Timestamp of initiating the request, Unit: milliseconds                                                                                                                                           |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type   | Description                                                            |
 | ------------------- | ------ | ---------------------------------------------------------------------- |
@@ -1069,7 +1071,7 @@ TRIGGER\_ Market: Market price plan commission
 | side                | string | BUY/SELL                                                               |
 | clientOrderID       | string | Customized order ID for users                                          |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                                                                                                      |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1095,7 +1097,7 @@ TRIGGER\_ Market: Market price plan commission
 | 100421     | cancel fail, order not exist                                                                                                                                                                                                                     |
 | 100400     | the order you want to cancel is FILLED or CANCELLED already, or is not a valid order id ,please verify                                                                                                                                           |
 
-## Place multiple orders
+### Place multiple orders
 
 POST /openApi/spot/v1/trade/batchOrders
 
@@ -1105,7 +1107,7 @@ API KEY permission: Spot Trading
 
 Content-Type:request body(application/json)
 
-### Description
+#### Description
 
 Can be used to place orders in bulk on spot
 
@@ -1142,20 +1144,20 @@ Trading Rules:
 - place batch orders, how to sign the request? please refer to
   [Perpetual: place batch orders](https://bingx-api.github.io/docs/#/swapV2/trade-api.html#Bulk%20order)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                                                                                                                                                                                                                     |
 | -------------- | ----- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | data           | array | Yes      | The request array for placing orders, limited to 5 orders.                                                                                                                                                                      |
 | sync           | bool  | no       | sync=false (default false if not filled in): parallel ordering (but all orders need to have the same symbol/side/type), sync = true (multiple orders are ordered serially, all orders do not require the same symbol/side/type) |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                       |
 | -------------- | ----- | --------------------------------- |
 | orders         | array | Response array for a single order |
 
-### Data Parameters
+#### Data Parameters
 
 |                  | Description                                                                                                                                                                                       |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1171,7 +1173,7 @@ Trading Rules:
 | recvWindow       | Request validity time window, unit: milliseconds                                                                                                                                                  |
 | timestamp        | Request timestamp, unit: milliseconds                                                                                                                                                             |
 
-### Order Parameters
+#### Order Parameters
 
 |                     | Description                                                                                                                                                                 |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1187,7 +1189,7 @@ Trading Rules:
 | side                | Transaction type, BUY = buy SELL = sell                                                                                                                                     |
 | clientOrderID       | Customized order ID for users                                                                                                                                               |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1199,7 +1201,7 @@ Trading Rules:
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Cancel Order
+### Cancel Order
 
 POST /openApi/spot/v1/trade/cancel
 
@@ -1209,7 +1211,7 @@ API KEY permission: Spot Trading
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name     | Type    | Required | Description                                                                                                                                                       |
 | ------------------ | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1220,7 +1222,7 @@ Content-Type:request body(application/json)
 | recvWindow         | float64 | no       | Request valid time window value, Unit: milliseconds                                                                                                               |
 | timestamp          | int64   | yes      | Timestamp of initiating the request, Unit: milliseconds                                                                                                           |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type   | Description                                                                |
 | ------------------- | ------ | -------------------------------------------------------------------------- |
@@ -1236,7 +1238,7 @@ Content-Type:request body(application/json)
 | clientOrderID       | string | Customized order ID for users                                              |
 | stopPrice           | string | trigger price                                                              |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1248,7 +1250,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Cancel multiple orders
+### Cancel multiple orders
 
 POST /openApi/spot/v1/trade/cancelOrders
 
@@ -1258,7 +1260,7 @@ API KEY permission: Spot Trading
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                                                                                                                                            |
 | -------------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1269,7 +1271,7 @@ Content-Type:request body(application/json)
 | recvWindow     | float64 | no       | Request valid time window value, Unit: milliseconds                                                                                                                    |
 | timestamp      | int64   | yes      | Timestamp of initiating the request, Unit: milliseconds                                                                                                                |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type    | Description                                                                |
 | ------------------- | ------- | -------------------------------------------------------------------------- |
@@ -1285,7 +1287,7 @@ Content-Type:request body(application/json)
 | clientOrderID       | string  | Customized order ID for users                                              |
 | stopPrice           | float64 | trigger price                                                              |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1297,7 +1299,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Cancel all Open Orders on a Symbol
+### Cancel all Open Orders on a Symbol
 
 POST /openApi/spot/v1/trade/cancelOpenOrders
 
@@ -1307,7 +1309,7 @@ API KEY permission: Spot Trading
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                                        |
 | -------------- | ------- | -------- | ------------------------------------------------------------------ |
@@ -1315,7 +1317,7 @@ Content-Type:request body(application/json)
 | recvWindow     | float64 | no       | Request valid time window value, Unit: milliseconds                |
 | timestamp      | int64   | yes      | Timestamp of initiating the request, Unit: milliseconds            |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type   | Description                                                                |
 | ------------------- | ------ | -------------------------------------------------------------------------- |
@@ -1331,7 +1333,7 @@ Content-Type:request body(application/json)
 | clientOrderID       | string | Customized order ID for users                                              |
 | stopPrice           | string | trigger price                                                              |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1343,7 +1345,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Cancel an Existing Order and Send a New Orde
+### Cancel an Existing Order and Send a New Orde
 
 POST /openApi/spot/v1/trade/order/cancelReplace
 
@@ -1353,7 +1355,7 @@ API KEY permission: Spot Trading
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name      | Type    | Required | Description                                                                                                                                                                                            |
 | ------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1372,7 +1374,7 @@ Content-Type:request body(application/json)
 | recvWindow          | float64 | no       | Request valid time window in milliseconds.                                                                                                                                                             |
 | timestamp           | int64   | yes      | Request timestamp in milliseconds.                                                                                                                                                                     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type   | Description                                                                                                                                   |
 | ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1390,7 +1392,7 @@ Content-Type:request body(application/json)
 | cancelRestrictions  | string | Cancel orders in specific states: NEW (new order), PENDING (pending), PARTIALLY_FILLED (partially filled)                                     |
 | transactTime        | int64  | Transaction timestamp                                                                                                                         |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1402,7 +1404,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query Order details
+### Query Order details
 
 GET /openApi/spot/v1/trade/query
 
@@ -1412,7 +1414,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                                                                                                                                       |
 | -------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1422,7 +1424,7 @@ Content-Type:request body(application/json)
 | recvWindow     | float64 | no       | Request valid time window value, Unit: milliseconds                                                                                                               |
 | timestamp      | int64   | yes      | Timestamp of initiating the request, Unit: milliseconds                                                                                                           |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type   | Description                                                                |
 | ------------------- | ------ | -------------------------------------------------------------------------- |
@@ -1444,7 +1446,7 @@ Content-Type:request body(application/json)
 | stopPrice           | string | trigger price                                                              |
 | avgPrice            | string | average fill price                                                         |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1456,7 +1458,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Current Open Orders
+### Current Open Orders
 
 GET /openApi/spot/v1/trade/openOrders
 
@@ -1466,7 +1468,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                                            |
 | -------------- | ------- | -------- | ---------------------------------------------------------------------- |
@@ -1474,13 +1476,13 @@ Content-Type:request body(application/json)
 | recvWindow     | float64 | no       | Request valid time window value, Unit: milliseconds                    |
 | timestamp      | int64   | yes      | Timestamp of initiating the request, Unit: milliseconds                |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                                                              |
 | -------------- | ----- | ------------------------------------------------------------------------ |
 | orders         | Array | Order list,max length is 2000, refer to the table below for order fields |
 
-### Order Parameters
+#### Order Parameters
 
 | Parameter Name      | Type   | Description                                                                |
 | ------------------- | ------ | -------------------------------------------------------------------------- |
@@ -1498,7 +1500,7 @@ Content-Type:request body(application/json)
 | origQuoteOrderQty   | string | Original quote order quantity                                              |
 | stopPrice           | string | trigger price                                                              |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1510,7 +1512,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query Order history
+### Query Order history
 
 GET /openApi/spot/v1/trade/historyOrders
 
@@ -1526,7 +1528,7 @@ Notice:
   be returned.
 - If startTime and endTime are provided, orderId is not required.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                                                    |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------- |
@@ -1541,13 +1543,13 @@ Notice:
 | recvWindow     | int64  | no       | Request valid time window value, Unit: milliseconds                                                            |
 | timestamp      | int64  | yes      | Timestamp of initiating the request, Unit: milliseconds                                                        |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type  | Description                                                              |
 | -------------- | ----- | ------------------------------------------------------------------------ |
 | orders         | Array | Order list,max length is 2000, refer to the table below for order fields |
 
-### Order Parameters
+#### Order Parameters
 
 | Parameter Name      | Type    | Description                                                                |
 | ------------------- | ------- | -------------------------------------------------------------------------- |
@@ -1567,7 +1569,7 @@ Notice:
 | stopPrice           | string  | trigger price                                                              |
 | avgPrice            | string  | average fill price                                                         |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1579,7 +1581,7 @@ Notice:
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query transaction details
+### Query transaction details
 
 GET /openApi/spot/v1/trade/myTrades
 
@@ -1598,7 +1600,7 @@ Content-Type:request body(application/json)
 
 - Return to the list sorted by time field, from smallest to largest
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                                       |
 | -------------- | ------- | -------- | ----------------------------------------------------------------- |
@@ -1611,7 +1613,7 @@ Content-Type:request body(application/json)
 | recvWindow     | float64 | No       | Request valid time window, unit: milliseconds                     |
 | timestamp      | int64   | Yes      | Request timestamp, unit: milliseconds                             |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type    | Description                 |
 | --------------- | ------- | --------------------------- |
@@ -1627,7 +1629,7 @@ Content-Type:request body(application/json)
 | isBuyer         | bool    | Whether the buyer           |
 | isMaker         | bool    | Whether the maker           |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1639,7 +1641,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query Trading Commission Rate
+### Query Trading Commission Rate
 
 GET /openApi/spot/v1/user/commissionRate
 
@@ -1651,7 +1653,7 @@ Content-Type:request body(application/json)
 
 Used to query the current trading commission rate for spot trading.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                               |
 | -------------- | ------- | -------- | --------------------------------------------------------- |
@@ -1659,14 +1661,14 @@ Used to query the current trading commission rate for spot trading.
 | recvWindow     | float64 | No       | Request valid time window in milliseconds                 |
 | timestamp      | int64   | Yes      | Request timestamp in milliseconds                         |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name      | Type    | Description           |
 | ------------------- | ------- | --------------------- |
 | takerCommissionRate | float64 | Taker commission rate |
 | makerCommissionRate | float64 | Maker commission rate |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1678,7 +1680,7 @@ Used to query the current trading commission rate for spot trading.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Cancel All After
+### Cancel All After
 
 POST /openApi/spot/v1/trade/cancelAllAfter
 
@@ -1703,14 +1705,14 @@ HTTP request
 
 Interface parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                        |
 | -------------- | ------ | -------- | -------------------------------------------------- |
 | type           | string | Yes      | Request type: ACTIVATE-Activate, CLOSE-Close       |
 | timeOut        | int    | Yes      | Activate countdown time (seconds), range: 10s-120s |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                                                                    |
 | -------------- | ------ | ------------------------------------------------------------------------------ |
@@ -1718,7 +1720,7 @@ Interface parameters
 | status         | Status | ACTIVATED (Activation successful)/CLOSED (Closed successfully)/FAILED (Failed) |
 | note           | string | Explanation                                                                    |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1730,7 +1732,7 @@ Interface parameters
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Create an OCO Order
+### Create an OCO Order
 
 POST /openApi/spot/v1/oco/order
 
@@ -1743,7 +1745,7 @@ Content-Type:request body(application/json)
 Send a new one-cancels-the-other (OCO) order, and initiating one of them
 immediately cancels the other order
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name     | Type    | Required | Description                                                                               |
 | ------------------ | ------- | -------- | ----------------------------------------------------------------------------------------- |
@@ -1759,7 +1761,7 @@ immediately cancels the other order
 | recvWindow         | float64 | No       | Request validity time window, in milliseconds                                             |
 | timestamp          | int64   | Yes      | Request timestamp, in milliseconds                                                        |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description                                                                                                                                                    |
 | -------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1773,7 +1775,7 @@ immediately cancels the other order
 | status         | string  | Order status, NEW for new order, PENDING for pending, PARTIALLY_FILLED for partially filled, FILLED for fully filled, CANCELED for canceled, FAILED for failed |
 | side           | string  | Order type, BUY for buy, SELL for sell                                                                                                                         |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1785,7 +1787,7 @@ immediately cancels the other order
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Cancel an OCO Order List
+### Cancel an OCO Order List
 
 POST /openApi/spot/v1/oco/cancel
 
@@ -1797,7 +1799,7 @@ Content-Type:request body(application/json)
 
 Used to cancel the entire OCOC order
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                                                |
 | -------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------- |
@@ -1806,14 +1808,14 @@ Used to cancel the entire OCOC order
 | recvWindow     | int64  | No       | Request validity window, in milliseconds                                                                   |
 | timestamp      | int64  | Yes      | Request timestamp, in milliseconds                                                                         |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description           |
 | -------------- | ------ | --------------------- |
 | orderId        | string | Order ID              |
 | clientOrderId  | string | User-defined order ID |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1825,7 +1827,7 @@ Used to cancel the entire OCOC order
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query an OCO Order List
+### Query an OCO Order List
 
 GET /openApi/spot/v1/oco/orderList
 
@@ -1837,7 +1839,7 @@ Content-Type:request body(application/json)
 
 Query the OCO order list
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                        |
 | -------------- | ------ | -------- | ---------------------------------------------------------------------------------- |
@@ -1846,7 +1848,7 @@ Query the OCO order list
 | recvWindow     | int64  | No       | Request valid time window, in milliseconds                                         |
 | timestamp      | int64  | Yes      | Request timestamp, in milliseconds                                                 |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type    | Description                                             |
 | --------------- | ------- | ------------------------------------------------------- |
@@ -1861,7 +1863,7 @@ Query the OCO order list
 | quantity        | float64 | Order quantity                                          |
 | orderListId     | string  | OCO order group ID                                      |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1873,7 +1875,7 @@ Query the OCO order list
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query All Open OCO Orders
+### Query All Open OCO Orders
 
 GET /openApi/spot/v1/oco/openOrderList
 
@@ -1885,7 +1887,7 @@ Content-Type:request body(application/json)
 
 Query the list of orders that are currently in the pending order state
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                              |
 | -------------- | ----- | -------- | ---------------------------------------- |
@@ -1894,7 +1896,7 @@ Query the list of orders that are currently in the pending order state
 | recvWindow     | int64 | No       | Request validity window, in milliseconds |
 | timestamp      | int64 | Yes      | Request timestamp, in milliseconds       |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type    | Description                                             |
 | --------------- | ------- | ------------------------------------------------------- |
@@ -1909,7 +1911,7 @@ Query the list of orders that are currently in the pending order state
 | quantity        | float64 | Order quantity                                          |
 | orderListId     | string  | OCO order group ID                                      |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1921,7 +1923,7 @@ Query the list of orders that are currently in the pending order state
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query OCO Historical Order List
+### Query OCO Historical Order List
 
 GET /openApi/spot/v1/oco/historyOrderList
 
@@ -1933,7 +1935,7 @@ Content-Type:request body(application/json)
 
 Query OCO historical order list
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                              |
 | -------------- | ----- | -------- | ---------------------------------------- |
@@ -1944,7 +1946,7 @@ Query OCO historical order list
 | recvWindow     | int64 | No       | Request validity window, in milliseconds |
 | timestamp      | int64 | Yes      | Request timestamp, in milliseconds       |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type    | Description                                             |
 | --------------- | ------- | ------------------------------------------------------- |
@@ -1959,7 +1961,7 @@ Query OCO historical order list
 | quantity        | float64 | Order quantity                                          |
 | orderListId     | string  | OCO order group ID                                      |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1973,9 +1975,9 @@ Query OCO historical order list
 
 ---
 
-# Sub-account management
+## Sub-account management
 
-## Create sub-account
+### Create sub-account
 
 POST /openApi/subAccount/v1/create
 
@@ -1989,7 +1991,7 @@ This API is used to create a sub-account, which needs to be implemented through
 the API key of the master account. The user who verifies the signature of this
 API must be main account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type   | Required | Field Description                                                                               |
 | ---------------- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
@@ -1998,7 +2000,7 @@ API must be main account.
 | recvWindow       | long   | yes      |                                                                                                 |
 | timestamp        | long   | yes      |                                                                                                 |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name   | Type   | Field Description            |
 | ---------------- | ------ | ---------------------------- |
@@ -2006,7 +2008,7 @@ API must be main account.
 | subAccountString | string | Sub account username         |
 | note             | string | Sub account note information |
 
-## Query user API Key permissions
+### Query user API Key permissions
 
 GET /openApi/v1/account/apiPermissions
 
@@ -2019,14 +2021,14 @@ Content-Type:request body(application/json)
 Query the user's APIKEY permissions, which can be used by both main and sub
 account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                                             |
 | -------------- | ----- | -------- | ------------------------------------------------------- |
 | recvWindow     | int64 | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64 | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                                                                                                                                           |
 | -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2035,7 +2037,7 @@ account.
 | ipAddresses    | array  | ip whitelist                                                                                                                                          |
 | note           | String | Remark                                                                                                                                                |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2047,7 +2049,7 @@ account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query account uid
+### Query account uid
 
 GET /openApi/account/v1/uid
 
@@ -2059,20 +2061,20 @@ Content-Type:request body(application/json)
 
 Query account uid,which can be used by both main and sub account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                                             |
 | -------------- | ----- | -------- | ------------------------------------------------------- |
 | recvWindow     | int64 | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64 | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type | Description |
 | -------------- | ---- | ----------- |
 | uid            | long | uid         |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2084,7 +2086,7 @@ Query account uid,which can be used by both main and sub account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Get sub-account list
+### Get sub-account list
 
 GET /openApi/subAccount/v1/list
 
@@ -2099,7 +2101,7 @@ status of each sub-account, and can also query the information of the designated
 sub-account. The user who verifies the signature of this API must be main
 account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type   | Required | Description                                             |
 | ---------------- | ------ | -------- | ------------------------------------------------------- |
@@ -2111,7 +2113,7 @@ account
 | recvWindow       | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp        | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name   | Type   | Description                  |
 | ---------------- | ------ | ---------------------------- |
@@ -2121,7 +2123,7 @@ account
 | freeze           | bool   | Has it been frozen           |
 | createTime       | long   | Creation time                |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2133,7 +2135,7 @@ account
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query sub-account spot assets
+### Query sub-account spot assets
 
 GET /openApi/subAccount/v1/assets
 
@@ -2146,7 +2148,7 @@ Content-Type:request body(application/json)
 To check the balance of the spot account of each currency of the sub-account.
 The user who verifies the signature of this API must be main account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Description                                             |
 | -------------- | ----- | -------- | ------------------------------------------------------- |
@@ -2154,7 +2156,7 @@ The user who verifies the signature of this API must be main account
 | recvWindow     | int64 | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64 | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description     |
 | -------------- | ------ | --------------- |
@@ -2162,7 +2164,7 @@ The user who verifies the signature of this API must be main account
 | free           | double | Available limit |
 | locked         | double | Lock in assets  |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2174,7 +2176,7 @@ The user who verifies the signature of this API must be main account
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Create an API Key for a sub-account
+### Create an API Key for a sub-account
 
 POST /openApi/subAccount/v1/apiKey/create
 
@@ -2187,7 +2189,7 @@ Content-Type:request body(application/json)
 This API is used to create an API key for a sub-user of the main account. The
 user who verifies the signature of this API must be main account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                                                                                                           |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2198,7 +2200,7 @@ user who verifies the signature of this API must be main account
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds                                                                                     |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds                                                                                         |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Field Description                                                                                                                 |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -2208,7 +2210,7 @@ user who verifies the signature of this API must be main account
 | ipAddresses    | Array  | IP whitelist                                                                                                                      |
 | note           | string | notes                                                                                                                             |
 
-## Query the API Key of a sub-account
+### Query the API Key of a sub-account
 
 GET /openApi/account/v1/apiKey/query
 
@@ -2222,7 +2224,7 @@ This interface is used by the main account to query its own API key information,
 and the main user to query the API key information of the sub-user. The user who
 verifies the signature of this API must be main account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                             |
 | -------------- | ------ | -------- | ------------------------------------------------------- |
@@ -2231,7 +2233,7 @@ verifies the signature of this API must be main account.
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                                                                                                                       |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -2242,7 +2244,7 @@ verifies the signature of this API must be main account.
 | createTime     | long   | Creation time                                                                                                                     |
 | updateTime     | long   | update time                                                                                                                       |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2254,7 +2256,7 @@ verifies the signature of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Reset the API Key of a sub-account
+### Reset the API Key of a sub-account
 
 POST /openApi/subAccount/v1/apiKey/edit
 
@@ -2268,7 +2270,7 @@ This API is used for the main account to edit the API key remarks, permissions,
 and IP addresses of the sub-account. The user who verifies the signature of this
 API must be main account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                                                                                                 |
 | -------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -2280,7 +2282,7 @@ API must be main account
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds                                                                           |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds                                                                               |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Field Description                                                                                                                 |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -2288,7 +2290,7 @@ API must be main account
 | ipAddresses    | Array  | IP whitelist                                                                                                                      |
 | note           | string | notes                                                                                                                             |
 
-## Delete the API Key of sub-accounts
+### Delete the API Key of sub-accounts
 
 POST /openApi/subAccount/v1/apiKey/del
 
@@ -2301,7 +2303,7 @@ Content-Type:request body(application/json)
 This API is used for the main user to delete the API key of the sub-account. The
 user who verifies the signature of this API must be main account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                       |
 | -------------- | ------ | -------- | ------------------------------------------------------- |
@@ -2310,12 +2312,12 @@ user who verifies the signature of this API must be main account
 | recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type | Field Description |
 | -------------- | ---- | ----------------- |
 
-## Freeze and unfreeze sub-accounts
+### Freeze and unfreeze sub-accounts
 
 POST /openApi/subAccount/v1/updateStatus
 
@@ -2330,7 +2332,7 @@ under the parent user, and the sub-accounts in the frozen state will not be able
 to log in and trade. The user who verifies the signature of this API must be
 main account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type  | Required | Field Description                                       |
 | -------------- | ----- | -------- | ------------------------------------------------------- |
@@ -2339,14 +2341,14 @@ main account
 | recvWindow     | int64 | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64 | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type | Field Description  |
 | -------------- | ---- | ------------------ |
 | subUid         | long | Sub account uid    |
 | freeze         | bool | Has it been frozen |
 
-## Authorize sub-account internal transfers
+### Authorize sub-account internal transfers
 
 POST /openApi/account/v1/innerTransfer/authorizeSubAccount
 
@@ -2364,7 +2366,7 @@ sub-account, and the sub-account can transfer assets to the main account by
 default, without separate settings. The user who verifies the signature of this
 API must be main account
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type    | Required | Description                                             |
 | -------------- | ------- | -------- | ------------------------------------------------------- |
@@ -2373,7 +2375,7 @@ API must be main account
 | recvWindow     | int64   | no       | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64   | yes      | Request valid time window value, Unit: milliseconds     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description |
 | -------------- | ------- | ----------- | ------------------------------------------------------- |
@@ -2382,7 +2384,7 @@ API must be main account
 | recvWindow     | int64   | no          | Timestamp of initiating the request, Unit: milliseconds |
 | timestamp      | int64   | yes         | Request valid time window value, Unit: milliseconds     |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2394,7 +2396,7 @@ API must be main account
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Sub-account internal transfer
+### Sub-account internal transfer
 
 POST /openApi/wallets/v1/capital/subAccountInnerTransfer/apply
 
@@ -2419,7 +2421,7 @@ Note: Before using this interface, please make sure that the corresponding
 sub-account has been authorized for internal transfers. You can use the api
 [Authorize Sub-Account Internal Transfers](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Authorize%20sub%20account%20internal%20transfer).
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name  | Type    | Required | Description                                                             |
 | --------------- | ------- | -------- | ----------------------------------------------------------------------- |
@@ -2432,13 +2434,13 @@ sub-account has been authorized for internal transfers. You can use the api
 | timestamp       | int64   | yes      | The timestamp of the request, in milliseconds                           |
 | recvWindow      | int64   | no       | Request valid time empty window value, in milliseconds                  |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                                                         |
 | -------------- | ------ | ------------------------------------------------------------------- |
 | id             | string | The platform returns the unique ID of the internal transfer record. |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2450,7 +2452,7 @@ sub-account has been authorized for internal transfers. You can use the api
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Main Accoun internal transfer
+### Main Accoun internal transfer
 
 POST /openApi/wallets/v1/capital/innerTransfer/apply
 
@@ -2466,7 +2468,7 @@ only allowed between main accounts and from main accounts to sub-accounts.
 For internal transfers within sub-accounts, please use the dedicated interface:
 [User internal transfer](https://bingx-api.github.io/docs/#/en-us/common/account-api.html#User%20internal%20transfer)
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type    | Required | Description                                                                                                        |
 | ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -2480,14 +2482,14 @@ For internal transfers within sub-accounts, please use the dedicated interface:
 | timestamp        | int64   | Yes      | The timestamp of the request, in milliseconds.                                                                     |
 | recvWindow       | int64   | No       | Request validity time window, unit: milliseconds                                                                   |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name   | Type   | Description                                                                                                        |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
 | id               | string | The platform returns the unique ID of the internal transfer record.                                                |
 | transferClientId | string | Custom ID for internal transfer by the client, combination of numbers and letters, length less than 100 characters |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2499,7 +2501,7 @@ For internal transfers within sub-accounts, please use the dedicated interface:
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Create deposit address for sub-account
+### Create deposit address for sub-account
 
 POST /openApi/wallets/v1/capital/deposit/createSubAddress
 
@@ -2514,7 +2516,7 @@ sub-user. Each currency supports only one recharge address, limited to the
 master user.The user who verifies the signature of this API must be main
 account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                 |
 | -------------- | ------ | -------- | ----------------------------------------------------------- |
@@ -2525,7 +2527,7 @@ account.
 | timestamp      | int64  | Yes      | Request timestamp in milliseconds                           |
 | recvWindow     | int64  | No       | Request valid time window, in milliseconds                  |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name    | Type    | Description                                                                |
 | ----------------- | ------- | -------------------------------------------------------------------------- |
@@ -2537,7 +2539,7 @@ account.
 | status            | decimal | Address status: 0 for activated, 1 for pending, 2 for not applied          |
 | ts                | long    | Creation time in Unix timestamp format in milliseconds, e.g. 1597026383085 |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2549,7 +2551,7 @@ account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Get sub-account deposit address
+### Get sub-account deposit address
 
 GET /openApi/wallets/v1/capital/subAccount/deposit/address
 
@@ -2563,7 +2565,7 @@ This endpoint is used for the parent user to query the deposit address of a
 specific coin for a child user in the blockchain where the child user is
 located. The user who verifies the signature of this API must be main account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                |
 | -------------- | ------ | -------- | ------------------------------------------ |
@@ -2574,7 +2576,7 @@ located. The user who verifies the signature of this API must be main account.
 | timestamp      | int64  | Yes      | Timestamp of the request in milliseconds   |
 | recvWindow     | int64  | No       | Request valid time window, in milliseconds |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name    | Type   | Description                              |
 | ----------------- | ------ | ---------------------------------------- |
@@ -2587,7 +2589,7 @@ located. The user who verifies the signature of this API must be main account.
 | tag               | string | Address tag                              |
 | status            | int    | 0: Activated, 1: Applied, 2: Not applied |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2599,7 +2601,7 @@ located. The user who verifies the signature of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Get sub-account deposit records
+### Get sub-account deposit records
 
 GET /openApi/wallets/v1/capital/deposit/subHisrec
 
@@ -2612,7 +2614,7 @@ Content-Type:request body(application/json)
 This node is used for the main user to query the deposit history of the
 sub-user. The user who verifies the signature of this API must be main account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                                            |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------ |
@@ -2626,7 +2628,7 @@ sub-user. The user who verifies the signature of this API must be main account.
 | timestamp      | int64  | yes      | Request timestamp in milliseconds                                                                      |
 | recvWindow     | int64  | no       | Request valid time window, in milliseconds                                                             |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name     | Type    | Description                                            |
 | ------------------ | ------- | ------------------------------------------------------ |
@@ -2645,7 +2647,7 @@ sub-user. The user who verifies the signature of this API must be main account.
 | unlockConfirmTimes | int     | Number of confirmations required to unlock the deposit |
 | confirmTimes       | int     | Number of confirmations                                |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2657,7 +2659,7 @@ sub-user. The user who verifies the signature of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query sub-account internal transfer records
+### Query sub-account internal transfer records
 
 GET /openApi/wallets/v1/capital/subAccount/innerTransfer/records
 
@@ -2670,7 +2672,7 @@ Content-Type:request body(application/json)
 This node is used for sub-accounts to query their own internal transfer
 records,The user who verifies the signature of this API must be sub-account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name   | Type   | Required | Description                                                                                                                                               |
 | ---------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2683,7 +2685,7 @@ records,The user who verifies the signature of this API must be sub-account.
 | timestamp        | int64  | yes      | Request timestamp in milliseconds                                                                                                                         |
 | recvWindow       | int64  | no       | Request valid time window, in milliseconds                                                                                                                |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name   | Type    | Description                                                                                                                                               |
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2699,7 +2701,7 @@ records,The user who verifies the signature of this API must be sub-account.
 | fromUid          | long    | Payer's account                                                                                                                                           |
 | recordType       | string  | Out: transfer out record, in: transfer in record                                                                                                          |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2711,7 +2713,7 @@ records,The user who verifies the signature of this API must be sub-account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query Sub-Account Transfer History (For Master Account Operations Only)
+### Query Sub-Account Transfer History (For Master Account Operations Only)
 
 GET /openApi/account/transfer/v1/subAccount/asset/transferHistory
 
@@ -2724,7 +2726,7 @@ API must be main account.
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                 |
 | -------------- | ------ | -------- | ------------------------------------------- |
@@ -2738,7 +2740,7 @@ rate limitation by IP in group Number: 1
 | recvWindow     | LONG   | No       | Execution window time, cannot exceed 60000  |
 | timestamp      | LONG   | Yes      | Current timestamp, e.g., 1658748648396      |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type    | Description         |
 | -------------- | ------- | ------------------- |
@@ -2753,7 +2755,7 @@ rate limitation by IP in group Number: 1
 | fromUid        | LONG    | UID of the sender   |
 | toUid          | LONG    | UID of the receiver |
 
-### Data Parameters
+#### Data Parameters
 
 |                               | Description                                                 |
 | ----------------------------- | ----------------------------------------------------------- |
@@ -2776,7 +2778,7 @@ rate limitation by IP in group Number: 1
 | SUB_SWAP_TO_MAIN_CONTRACT     | Sub-account perpetual swap to master account contract       |
 | SUB_SWAP_TO_MAIN_SWAP         | Sub-account perpetual swap to master account perpetual swap |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2788,7 +2790,7 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## Query the transferable amount of funds in the parent-child account (only for parent account operations).
+### Query the transferable amount of funds in the parent-child account (only for parent account operations).
 
 POST /openApi/account/transfer/v1/subAccount/transferAsset/supportCoins
 
@@ -2803,7 +2805,7 @@ API Parameters
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name  | Type | Required | Field Description                                                                        |
 | --------------- | ---- | -------- | ---------------------------------------------------------------------------------------- |
@@ -2814,7 +2816,7 @@ rate limitation by IP in group Number: 1
 | recvWindow      | LONG | No       | Execution window time, cannot exceed 60000                                               |
 | timestamp       | LONG | Yes      | Current timestamp, e.g., 1658748648396                                                   |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name  | Type    | Field Description         |
 | --------------- | ------- | ------------------------- |
@@ -2823,7 +2825,7 @@ rate limitation by IP in group Number: 1
 | name            | STRING  | Coin name, e.g., USDT     |
 | availableAmount | DECIMAL | Available transfer amount |
 
-## Sub-Account Asset Transfer Interface (For Master Account Operations Only)
+### Sub-Account Asset Transfer Interface (For Master Account Operations Only)
 
 POST /openApi/account/transfer/v1/subAccount/transferAsset
 
@@ -2838,7 +2840,7 @@ API Parameters
 
 rate limitation by IP in group Number: 1
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name  | Type    | Required | Field Description                                                                        |
 | --------------- | ------- | -------- | ---------------------------------------------------------------------------------------- |
@@ -2854,13 +2856,13 @@ rate limitation by IP in group Number: 1
 | recvWindow      | LONG    | No       | Execution window time, cannot exceed 60000                                               |
 | timestamp       | LONG    | Yes      | Current timestamp, e.g., 1658748648396                                                   |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Field Description  |
 | -------------- | ------ | ------------------ |
 | tranId         | STRING | Transfer record ID |
 
-## Batch inquiry of sub account asset overview
+### Batch inquiry of sub account asset overview
 
 GET /openApi/subAccount/v1/allAccountBalance
 
@@ -2873,7 +2875,7 @@ Content-Type:request body(application/json)
 Batch inquiry of sub account asset overview, The user who verifies the signature
 of this API must be main account.
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description                                                                                                                                                                                                                                                                                                 |
 | -------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2884,7 +2886,7 @@ of this API must be main account.
 | timestamp      | int64  | 是       | Request valid time window value, Unit: milliseconds                                                                                                                                                                                                                                                         |
 | recvWindow     | int64  | 否       | Timestamp of initiating the request, Unit: milliseconds                                                                                                                                                                                                                                                     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description                                                                                                                                                                                                                                                                                                 |
 | -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2892,7 +2894,7 @@ of this API must be main account.
 | accountType    | string | Account type, if left blank, all assets of the account will be checked by default. spot: spot (fund account), stdFutures: standard futures account, coinMPerp: coin base account, USDTMPerp: U base account, copyTrading: copy trading account, grid: grid account, eran: wealth account, c2c: c2c account. |
 | usdtBalance    | string | Equivalent to USDT amount                                                                                                                                                                                                                                                                                   |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

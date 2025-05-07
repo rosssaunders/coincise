@@ -1,6 +1,8 @@
-# Introduction
+# BingX Spot Public WebSocket API
 
-## Connection Limits
+## Introduction
+
+### Connection Limits
 
 A single websocket is limited to a maximum of 200 topics; exceeding this will
 return error code 100416.
@@ -8,16 +10,16 @@ return error code 100416.
 A single IP is limited to a maximum of 60 websockets; exceeding this will return
 error code 100419.
 
-## Access
+### Access
 
 Market Websocket access URL: wss://open-api-ws.bingx.com/market
 
-## Data Compression
+### Data Compression
 
 All response data from Websocket server are compressed into GZIP format. Clients
 have to decompress them for further use.
 
-## Heartbeats
+### Heartbeats
 
 Once the Websocket Client and Websocket Server get connected, the server will
 send a heartbeat- ping message every 5 seconds (the frequency might change).
@@ -29,7 +31,7 @@ message.
 
 {"pong":"2177c68e4d0e45679965f482929b59c2","time":"2022-06-07T16:27:36.323+0800"}
 
-## Unsubscribe
+### Unsubscribe
 
 The format of unsubscription is as follows:
 
@@ -39,11 +41,11 @@ Confirmation of Unsubscription:
 
 { "id": "id1", "code": 0, "msg": "" }
 
-### Symbol Description
+#### Symbol Description
 
 Symbol must be fully capitalized
 
-## Subscriptions
+### Subscriptions
 
 After successfully establishing a connection with the Websocket server, the
 Websocket client sends the following request to subscribe to a specific topic:
@@ -105,7 +107,7 @@ receive the update message pushed by the server.
 
 ---
 
-# Listen Key
+## Listen Key
 
 websocket interface
 
@@ -115,7 +117,7 @@ account subscription data stream /market?listenKey=
 
 wss://open-api-ws.bingx.com/market?listenKey=a8ea75681542e66f1a50a1616dd06ed77dab61baa0c296bca03a9b13ee5f2dd7
 
-## generate Listen Key
+### generate Listen Key
 
 POST /openApi/user/auth/userDataStream
 
@@ -135,19 +137,19 @@ response
 
 {"listenKey":"a8ea75681542e66f1a50a1616dd06ed77dab61baa0c296bca03a9b13ee5f2dd7"}
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description |
 | -------------- | ------ | -------- | ----------- |
 | X-BX-APIKEY    | string | no       | API KEY     |
 
-### Response Parameters
+#### Response Parameters
 
 | Parameter Name | Type   | Description |
 | -------------- | ------ | ----------- |
 | listenKey      | string | listen Key  |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -159,7 +161,7 @@ response
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## extend Listen Key Validity period
+### extend Listen Key Validity period
 
 rate limitation by UID: 2/s & rate limitation by IP in group Number: 2
 
@@ -196,13 +198,13 @@ request parameters https://open-api.bingx.com
 
 PUT /openApi/user/auth/userDataStream
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description |
 | -------------- | ------ | -------- | ----------- |
 | listenKey      | string | yes      | listen Key  |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -214,7 +216,7 @@ PUT /openApi/user/auth/userDataStream
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-## delete Listen Key
+### delete Listen Key
 
 rate limitation by UID: 2/s & rate limitation by IP in group Number: 2
 
@@ -250,13 +252,13 @@ request parameters https://open-api.bingx.com
 
 DELETE /openApi/user/auth/userDataStream
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Description |
 | -------------- | ------ | -------- | ----------- |
 | listenKey      | string | yes      | listen Key  |
 
-### Errors
+#### Errors
 
 | Error Code | Description                                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -270,9 +272,9 @@ DELETE /openApi/user/auth/userDataStream
 
 ---
 
-# Websocket Market Data
+## Websocket Market Data
 
-## Subscription transaction by transaction
+### Subscription transaction by transaction
 
 Subscribe to the trade detail data of a trading pair
 
@@ -290,13 +292,13 @@ Subscription example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                                    |
 | -------------- | ------ | -------- | -------------------------------------------------------------------- |
 | symbol         | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
 
-### Data Parameters
+#### Data Parameters
 
 |     | Description                                                                                                                  |
 | --- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -309,7 +311,7 @@ Subscription Parameters
 | T   | transaction time                                                                                                             |
 | m   | Whether the buyer is a market maker. If true, this transaction is an active sell order, otherwise it is an active buy order. |
 
-## K-line Streams
+### K-line Streams
 
 Subscribe to market k-line data of one trading pair
 
@@ -324,14 +326,14 @@ Subscription Example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                                    |
 | -------------- | ------ | -------- | -------------------------------------------------------------------- |
 | symbol         | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
 | interval       | string | yes      | Reference field description, K-line type                             |
 
-### Data Parameters
+#### Data Parameters
 
 |     | Description  |
 | --- | ------------ |
@@ -340,7 +342,7 @@ Subscription Parameters
 | e   | Event Type   |
 | s   | trading pair |
 
-### Order Parameters
+#### Order Parameters
 
 |     | Description                                             |
 | --- | ------------------------------------------------------- |
@@ -356,7 +358,7 @@ Subscription Parameters
 | t   | The starting time of this K-line                        |
 | v   | Trading volume during this K-line period                |
 
-## Subscribe Market Depth Data
+### Subscribe Market Depth Data
 
 Push limited file depth information every 300ms .default level 20
 
@@ -371,13 +373,13 @@ Subscription example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                                    |
 | -------------- | ------ | -------- | -------------------------------------------------------------------- |
 | symbol         | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
 
-### Order Parameters
+#### Order Parameters
 
 |          | Description |
 | -------- | ----------- |
@@ -387,7 +389,7 @@ Subscription Parameters
 | level50  | level 50    |
 | level100 | level 100   |
 
-## Subscribe to 24-hour Price Change
+### Subscribe to 24-hour Price Change
 
 Pushes data of 24-hour price change every 1000ms
 
@@ -402,13 +404,13 @@ Subscription Example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description            |
 | -------------- | ------ | -------- | ---------------------------- |
 | symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
 
-## Spot Latest Trade Price
+### Spot Latest Trade Price
 
 Real-time Push
 
@@ -423,13 +425,13 @@ Subscription Example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description            |
 | -------------- | ------ | -------- | ---------------------------- |
 | symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
 
-## Spot Best Order Book
+### Spot Best Order Book
 
 Real-time Push
 
@@ -444,13 +446,13 @@ Subscription Example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description            |
 | -------------- | ------ | -------- | ---------------------------- |
 | symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
 
-## Incremental and Full Depth Information
+### Incremental and Full Depth Information
 
 Push incremental depth information of 1000 levels every 500ms.
 
@@ -498,7 +500,7 @@ Subscription Example
 
 Subscription Parameters
 
-### Request Parameters
+#### Request Parameters
 
 | Parameter Name | Type   | Required | Field Description                                        |
 | -------------- | ------ | -------- | -------------------------------------------------------- |

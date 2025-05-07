@@ -21,7 +21,7 @@ export function getConfig(type = "private") {
 
   // Define the path to the JSON config file
   const configPath = path.resolve(
-    path.join(__dirname, "../../config", `${configType}.json`)
+    path.join(__dirname, "../config", `${configType}.json`)
   )
 
   try {

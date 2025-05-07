@@ -1,4 +1,5 @@
 {
+  "title": "BingX Spot Public WebSocket API",
   "urls": [
     "https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits",
     "https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html",

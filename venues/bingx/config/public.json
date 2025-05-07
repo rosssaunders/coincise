@@ -5,6 +5,7 @@
     "https://bingx-api.github.io/docs/#/en-us/spot/base-info.html",
     "https://bingx-api.github.io/docs/#/en-us/spot/market-api.html"
   ],
+  "title": "BingX Spot Public REST API",
   "outputConfig": {
     "docsDir": "../../docs/bingx/spot",
     "outputFileName": "public_rest_api.md"
