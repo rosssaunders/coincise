@@ -560,6 +560,7 @@ async function main() {
     let combinedMarkdown = ""
 
     if (title) {
+      console.log(`\x1b[34m%s\x1b[0m`, `📄 Adding title: ${title}`)
       combinedMarkdown += `# ${title}\n\n`
     }
 
