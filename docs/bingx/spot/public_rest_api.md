@@ -13,6 +13,9 @@ depth of a Trading Pair.
 If you have any questions or feedback, you can join the
 [API issue Telegram group](https://t.me/+uSWmuaKA5sw2MzE1).
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/common/introduce)
+
 ---
 
 ## Frequently Asked Questions
@@ -115,6 +118,9 @@ Q: How many channels can be subscribed per IP address on BingX?
 
 A: Currently, there is no limit, but there is a subscription rate limit. Please
 do not exceed 10/s.
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/swapV2/q&a)
 
 ---
 
@@ -221,6 +227,9 @@ limits are based on the following grouping rules:
 ### Server time
 
 https://open-api.bingx.com/openApi/spot/v1/server/time
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
 
 ---
 
@@ -721,5 +730,8 @@ rate limitation by IP in group Number: 1
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
 
 ---

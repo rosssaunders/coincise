@@ -105,6 +105,9 @@ receive the update message pushed by the server.
 
 100503:"SERVER_BUSY"
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/)
+
 ---
 
 ## Listen Key
@@ -270,6 +273,9 @@ DELETE /openApi/user/auth/userDataStream
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html)
+
 ---
 
 ## Websocket Account Data
@@ -398,5 +404,8 @@ Push data
 | cw  | The total assets in the account after the change in the asset account |
 | wb  | The total assets in the account after the change in the asset account |
 | lk  | Locked Asset                                                          |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription%20order%20update%20data)
 
 ---

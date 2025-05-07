@@ -105,6 +105,9 @@ receive the update message pushed by the server.
 
 100503:"SERVER_BUSY"
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits)
+
 ---
 
 ## Listen Key
@@ -269,6 +272,9 @@ DELETE /openApi/user/auth/userDataStream
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html)
 
 ---
 
@@ -505,5 +511,8 @@ Subscription Parameters
 | Parameter Name | Type   | Required | Field Description                                        |
 | -------------- | ------ | -------- | -------------------------------------------------------- |
 | symbol         | string | Yes      | Symbol name, the symbol must include a '-' like BTC-USDT |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
 
 ---

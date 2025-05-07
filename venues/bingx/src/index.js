@@ -563,14 +563,16 @@ async function main() {
       combinedMarkdown += `# ${title}\n\n`
     }
 
-    for (const html of result) {
+    for (let i = 0; i < result.length; i++) {
+      const html = result[i]
+      const url = urls[i]
       // Demote all headings by one level using JSDOM
       const dom = new JSDOM(html)
       demoteHeadings(dom)
       const markdown = await convertToMarkdown(
         dom.window.document.body.innerHTML
       )
-      combinedMarkdown += markdown + "\n\n---\n\n"
+      combinedMarkdown += `${markdown}\n\n> **Source:** [original URL](${url})\n\n---\n\n`
     }
 
     // Save the combined markdown to a single file

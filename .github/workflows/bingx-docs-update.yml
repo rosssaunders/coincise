@@ -41,8 +41,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run BingX scraper
-        run: npm run all
+      - name: Run BingX Private REST Scraper
+        run: npm run private
+
+      - name: Run BingX Public REST Scraper
+        run: npm run public
+
+      - name: Run BingX Private WebSocket Scraper
+        run: npm run privateWs
+
+      - name: Run BingX Public WebSocket Scraper
+        run: npm run publicWs
+
+      - name: Run BingX Change Log Scraper
+        run: npm run change_log
 
       - name: Check for changes
         id: git-check
