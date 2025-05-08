@@ -1020,7 +1020,7 @@ account interface.
 
 #### Permission: Read
 
-#### HTTP请求
+#### HTTP Request
 
 `GET /api/v5/account/balance`
 
@@ -1352,7 +1352,7 @@ Obtain basic information about accounts and positions on the same time snapshot
 
 #### Permission: Read
 
-#### HTTP请求
+#### HTTP Request
 
 `GET /api/v5/account/account-position-risk`
 
@@ -1824,7 +1824,7 @@ amount or open amount is not supported under the cross mode of derivatives.
 | **Parameter** | **Type** | Required    | Description                                                                                                                                                                                                                                                                      |
 | ------------- | -------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | instId        | String   | Yes         | Single instrument or multiple instruments (no more than 5) in the smae instrument type separated with comma, e.g. <code>BTC-USDT,ETH-USDT</code>                                                                                                                                 |
-| tdMode        | String   | Yes         | Trade mode<br><code>cross</code><br><code>isolated</code><br><code>cash</code><br><code>spot_isolated</code>                                                                                                                                                                     |
+| tdMode        | String   | Yes         | Trade mode<br><code>cross</code><br><code>isolated</code><br><code>cash</code><br><code>spot_isolated</code>: only applicable to <code>Spot and futures mode</code>.                                                                                                             |
 | ccy           | String   | Conditional | Currency used for margin<br>Applicable to <code>isolated</code> <code>MARGIN</code> and <code>cross</code> <code>MARGIN</code> orders in <code>Spot and futures mode</code>.                                                                                                     |
 | px            | String   | No          | Price<br>When the price is not specified, it will be calculated according to the current limit price for <code>FUTURES</code> and <code>SWAP</code>, the last traded price for other instrument types.<br>The parameter will be ignored when multiple instruments are specified. |
 | leverage      | String   | No          | Leverage for instrument<br>The default is current leverage<br>Only applicable to <code>MARGIN/FUTURES/SWAP</code>                                                                                                                                                                |
@@ -1861,7 +1861,7 @@ cross margin positions.
 | ------------- | -------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | instId        | String   | Yes         | Single instrument or multiple instruments (no more than 5) separated with comma, e.g. <code>BTC-USDT,ETH-USDT</code>                                                  |
 | ccy           | String   | Conditional | Currency used for margin<br>Applicable to <code>isolated</code> <code>MARGIN</code> and <code>cross</code> <code>MARGIN</code> in <code>Spot and futures mode</code>. |
-| tdMode        | String   | Yes         | Trade mode<br><code>cross</code><br><code>isolated</code><br><code>cash</code><br><code>spot_isolated</code>                                                          |
+| tdMode        | String   | Yes         | Trade mode<br><code>cross</code><br><code>isolated</code><br><code>cash</code><br><code>spot_isolated</code>: only applicable to <code>Spot and futures mode</code>   |
 | reduceOnly    | Boolean  | No          | Whether to reduce position only<br>Only applicable to <code>MARGIN</code>                                                                                             |
 | px            | String   | No          | The price of closing position.<br>Only applicable to reduceOnly <code>MARGIN</code>.                                                                                  |
 
@@ -2135,7 +2135,7 @@ Get the user's current leveraged currency borrowing market interest rate
 
 #### Permission: Read
 
-#### HTTP请求
+#### HTTP Request
 
 `GET /api/v5/account/interest-rate`
 
@@ -2267,7 +2267,7 @@ Only applicable to Portfolio margin account
 
 #### Permission: Read
 
-#### HTTP请求
+#### HTTP Request
 
 `GET /api/v5/account/risk-state`
 
@@ -2651,7 +2651,7 @@ Retrieve a greeks list of all assets in the account.
 
 #### Permission: Read
 
-#### HTTP请求
+#### HTTP Request
 
 `GET /api/v5/account/greeks`
 
@@ -4719,7 +4719,7 @@ For details, please refer to
 
 #### Rate limit rule: User ID
 
-#### HTTP请求
+#### HTTP Request
 
 `GET /api/v5/trade/account-rate-limit`
 
