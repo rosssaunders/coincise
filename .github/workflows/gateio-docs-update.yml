@@ -41,8 +41,41 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Gate.io scraper
-        run: npm start
+      - name: Run extract:change-log
+        run: npm run extract:change-log
+
+      - name: Run extract:spot-unified
+        run: npm run extract:spot-unified
+
+      - name: Run extract:spot-trading
+        run: npm run extract:spot-trading
+
+      - name: Run extract:spot-account
+        run: npm run extract:spot-account
+
+      - name: Run extract:options-trading
+        run: npm run extract:options-trading
+
+      - name: Run extract:futures-trading
+        run: npm run extract:futures-trading
+
+      - name: Run extract:delivery-trading
+        run: npm run extract:delivery-trading
+
+      - name: Run extract:websocket-spot
+        run: npm run extract:websocket-spot
+
+      - name: Run extract:websocket-delivery
+        run: npm run extract:websocket-delivery
+
+      - name: Run extract:websocket-futures
+        run: npm run extract:websocket-futures
+
+      - name: Run extract:websocket-options
+        run: npm run extract:websocket-options
+
+      - name: Run extract:websocket-unified
+        run: npm run extract:websocket-unified
 
       - name: Check for changes
         id: git-check

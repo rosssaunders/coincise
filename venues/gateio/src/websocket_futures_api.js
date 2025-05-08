@@ -1,13 +1,11 @@
 import fs from "fs"
 import path from "path"
 import TurndownService from "turndown"
+import { gfm, tables } from "turndown-plugin-gfm"
 import { fileURLToPath } from "url"
-import { downloadHtml, processHtml } from "./websocket_docs_utils.js"
-import {
-  addTableRule,
-  addListItemWithTableRule,
-  addCodeBlockRule
-} from "./websocket_docs_utils.js"
+import { downloadHtml, processHtml } from "./utils.js"
+import { extractChangelog } from "./websocket_utils.js"
+import { addListItemWithTableRule, addCodeBlockRule } from "./utils.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
 import process from "process"
 
@@ -22,7 +20,8 @@ async function run() {
     headingStyle: "atx",
     codeBlockStyle: "fenced"
   })
-  addTableRule(turndownService)
+  turndownService.use(gfm)
+  turndownService.use(tables)
   addListItemWithTableRule(turndownService)
   addCodeBlockRule(turndownService)
 
@@ -34,13 +33,38 @@ async function run() {
     )
     const outputFilePath = path.join(
       __dirname,
-      `../../../docs/gateio/websocket_perps_api.md`
+      `../../../docs/gateio/futures/websocket_api.md`
+    )
+    const changelogFilePath = path.join(
+      __dirname,
+      `../../../docs/gateio/futures/websocket_change_log.md`
     )
 
     try {
       await downloadHtml(url, htmlFilePath)
       const html = fs.readFileSync(htmlFilePath, "utf8")
-      const markdown = processHtml(html, turndownService)
+
+      // Extract changelog section and get modified HTML
+      const { html: modifiedHtml, changelog } = extractChangelog(html)
+
+      if (changelog) {
+        // Convert changelog to markdown and save to separate file
+        const changelogMarkdown = turndownService.turndown(changelog)
+        fs.writeFileSync(changelogFilePath, changelogMarkdown)
+        console.log(`Changelog extracted and saved to: ${changelogFilePath}`)
+
+        // Format the changelog markdown file
+        try {
+          await formatMarkdown(changelogFilePath)
+          console.log(`Formatted: ${changelogFilePath}`)
+        } catch (err) {
+          console.error("Error formatting changelog markdown:", err)
+          console.error("Stack trace:", err.stack)
+        }
+      }
+
+      // Process the modified HTML (without changelog)
+      const markdown = processHtml(modifiedHtml, turndownService)
       fs.writeFileSync(outputFilePath, markdown)
       console.log(`Markdown file created at: ${outputFilePath}`)
 

@@ -3,17 +3,19 @@ import path from "path"
 import TurndownService from "turndown"
 import { gfm, tables } from "turndown-plugin-gfm"
 import { fileURLToPath } from "url"
-import process from "process"
 import { downloadHtml, processHtml } from "./utils.js"
 import { extractChangelog } from "./websocket_utils.js"
 import { addListItemWithTableRule, addCodeBlockRule } from "./utils.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import process from "process"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // List of endpoints to scrape
-const endpoints = ["options/ws/en/"]
+const endpoints = ["delivery/ws/en/"]
+
+// Function to extract changelog section and remove it from main content has been moved to websocket_utils.js
 
 async function run() {
   const turndownService = new TurndownService({
@@ -33,11 +35,11 @@ async function run() {
     )
     const outputFilePath = path.join(
       __dirname,
-      `../../../docs/gateio/options/websocket_api.md`
+      `../../../docs/gateio/delivery/websocket_api.md`
     )
     const changelogFilePath = path.join(
       __dirname,
-      `../../../docs/gateio/options/websocket_change_log.md`
+      `../../../docs/gateio/delivery/websocket_change_log.md`
     )
 
     try {
@@ -91,4 +93,13 @@ async function run() {
   }
 }
 
-run().catch(console.error)
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  run().catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
+}
+
+export { run }

@@ -1,0 +1,12 @@
+{
+  "url": "https://www.gate.io/docs/developers/apiv4/en/",
+  "sections": [
+    "gate-api-v4-v4-97-0",
+    "general",
+    "api",
+    "authentication",
+    "faq",
+    "options"
+  ],
+  "outputFile": "options/private_rest_trading_api.md"
+}

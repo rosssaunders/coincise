@@ -17,218 +17,6 @@ Base URLs:
 - Real Trading: `wss://op-ws.gateio.live/v4/ws`
 - TestNet: `wss://op-ws-testnet.gateio.live/v4/ws`
 
-## [#](#changelog) Changelog
-
-```python
-# !/usr/bin/env python
-# coding: utf-8
-
-import hashlib
-import hmac
-import json
-import logging
-import time
-
-from websocket import WebSocketApp
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-class GateWebSocketApp(WebSocketApp):
-
-   def __init__(self, url, api_key, api_secret, **kwargs):
-      super(GateWebSocketApp, self).__init__(url, **kwargs)
-      self._api_key = api_key
-      self._api_secret = api_secret
-
-   def _send_ping(self, interval, event, payload):
-      while not event.wait(interval):
-         self.last_ping_tm = time.time()
-         if self.sock:
-            try:
-               self.sock.ping(payload)
-            except Exception as ex:
-               logger.warning("send_ping routine terminated: {}".format(ex))
-               break
-            try:
-               self._request("options.ping", auth_required=False)
-            except Exception as e:
-               raise e
-
-   def _request(self, channel, event=None, payload=None, auth_required=True):
-      current_time = int(time.time())
-      data = {
-         "time": current_time,
-         "channel": channel,
-         "event": event,
-         "payload": payload,
-      }
-      if auth_required:
-         message = 'channel=%s&event=%s&time=%d' % (channel, event, current_time)
-         data['auth'] = {
-            "method": "api_key",
-            "KEY": self._api_key,
-            "SIGN": self.get_sign(message),
-         }
-      data = json.dumps(data)
-      logger.info('request: %s', data)
-      self.send(data)
-
-   def get_sign(self, message):
-      h = hmac.new(self._api_secret.encode("utf8"), message.encode("utf8"), hashlib.sha512)
-      return h.hexdigest()
-
-   def subscribe(self, channel, payload=None, auth_required=True):
-      self._request(channel, "subscribe", payload, auth_required)
-
-   def unsubscribe(self, channel, payload=None, auth_required=True):
-        self._request(channel, "unsubscribe", payload, auth_required)
-
-def on_message(ws, message):
-    # type: (GateWebSocketApp, str) -> None
-    # handle message received
-    logger.info("message received from server: {}".format(message))
-
-def on_open(ws):
-    # type: (GateWebSocketApp) -> None
-    # subscribe to channels interested
-    logger.info('websocket connected')
-    ws.subscribe("options.contract_tickers", ['BTC_USDT-20211231-59800-C'], False)
-
-if __name__ == "__main__":
-    logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.DEBUG)
-    app = GateWebSocketApp("wss://op-ws.gateio.live/v4/ws",
-                           "YOUR_API_KEY",
-                           "YOUR_API_SECRET",
-                           on_open=on_open,
-                           on_message=on_message)
-    app.run_forever(ping_interval=5)
-```
-
-```go
-package main
-
-import (
-	"crypto/hmac"
-	"crypto/sha512"
-	"crypto/tls"
-	"encoding/hex"
-	"encoding/json"
-	"fmt"
-	"io"
-	"net/url"
-	"time"
-
-	"github.com/gorilla/websocket"
-)
-
-type Msg struct {
-	Time    int64    `json:"time"`
-	Channel string   `json:"channel"`
-	Event   string   `json:"event"`
-	Payload []string `json:"payload"`
-	Auth    *Auth    `json:"auth"`
-}
-
-type Auth struct {
-	Method string `json:"method"`
-	KEY    string `json:"KEY"`
-	SIGN   string `json:"SIGN"`
-}
-
-const (
-	Key    = "YOUR_API_KEY"
-	Secret = "YOUR_API_SECRETY"
-)
-
-func sign(channel, event string, t int64) string {
-	message := fmt.Sprintf("channel=%s&event=%s&time=%d", channel, event, t)
-	h2 := hmac.New(sha512.New, []byte(Secret))
-	io.WriteString(h2, message)
-	return hex.EncodeToString(h2.Sum(nil))
-}
-
-func (msg *Msg) sign() {
-	signStr := sign(msg.Channel, msg.Event, msg.Time)
-	msg.Auth = &Auth{
-		Method: "api_key",
-		KEY:    Key,
-		SIGN:   signStr,
-	}
-}
-
-func (msg *Msg) send(c *websocket.Conn) error {
-	msgByte, err := json.Marshal(msg)
-	if err != nil {
-		return err
-	}
-	return c.WriteMessage(websocket.TextMessage, msgByte)
-}
-
-func NewMsg(channel, event string, t int64, payload []string) *Msg {
-	return &Msg{
-		Time:    t,
-		Channel: channel,
-		Event:   event,
-		Payload: payload,
-	}
-}
-
-func main() {
-	u := url.URL{Scheme: "wss", Host: "op-ws.gateio.live", Path: "/v4/ws"}
-	websocket.DefaultDialer.TLSClientConfig = &tls.Config{RootCAs: nil, InsecureSkipVerify: true}
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-	if err != nil {
-		panic(err)
-	}
-	c.SetPingHandler(nil)
-
-	// read msg
-	go func() {
-		for {
-			_, message, err := c.ReadMessage()
-			if err != nil {
-				c.Close()
-				panic(err)
-			}
-			fmt.Printf("recv: %s\n", message)
-		}
-	}()
-
-	t := time.Now().Unix()
-	pingMsg := NewMsg("options.ping", "", t, []string{})
-	err = pingMsg.send(c)
-	if err != nil {
-		panic(err)
-	}
-
-	// subscribe order book
-	orderBookMsg := NewMsg("options.order_book", "subscribe", t, []string{"BTC_USDT-20211231-59800-C"})
-	err = orderBookMsg.send(c)
-	if err != nil {
-		panic(err)
-	}
-
-	// subscribe positions
-	positionsMsg := NewMsg("options.positions", "subscribe", t, []string{"USERID", "BTC_USDT-20211231-59800-C"})
-	positionsMsg.sign()
-	err = positionsMsg.send(c)
-	if err != nil {
-		panic(err)
-	}
-
-	select {}
-}
-```
-
-2024.11-28
-
-- `options.usertrades` add new fields `fee`,`text`
-
-2021-12-28
-
-- Initial release
-
 ## [#](#api-overview) API Overview
 
 ### [#](#method) Method
@@ -261,24 +49,24 @@ and `payload`.
 
 | parameter | type    | required | description                                               |
 | --------- | ------- | -------- | --------------------------------------------------------- |
-| time      | Integer | Yes      | request time                                              |
-| channel   | String  | Yes      | request subscribe/unsubscribe channel                     |
-| auth      | String  | no       | request auth info, see Authentication section for details |
-| event     | String  | Yes      | request event (subscribe/unsubscribe/update/all)          |
-| payload   | Array   | Yes      | request detail parameters                                 |
+| `time`    | Integer | Yes      | request time                                              |
+| `channel` | String  | Yes      | request subscribe/unsubscribe channel                     |
+| `auth`    | String  | no       | request auth info, see Authentication section for details |
+| `event`   | String  | Yes      | request event (subscribe/unsubscribe/update/all)          |
+| `payload` | Array   | Yes      | request detail parameters                                 |
 
 ### [#](#response) Response
 
 Similar with request, response follows a common format composed of `time`,
 `channel`, `event` , `error` and `result`.
 
-| Field   | type    | required | description                                                                                      |
-| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------ |
-| time    | Integer | Yes      | response time                                                                                    |
-| channel | String  | Yes      | response channel                                                                                 |
-| event   | String  | Yes      | response channel event (update/all)                                                              |
-| error   | Object  | Yes      | response channel event (update/all)                                                              |
-| result  | Any     | Yes      | New data notification from the server, or response to client requests. Null iferror is not null. |
+| Field     | type    | required | description                                                                                        |
+| --------- | ------- | -------- | -------------------------------------------------------------------------------------------------- |
+| `time`    | Integer | Yes      | response time                                                                                      |
+| `channel` | String  | Yes      | response channel                                                                                   |
+| `event`   | String  | Yes      | response channel event (update/all)                                                                |
+| `error`   | Object  | Yes      | response channel event (update/all)                                                                |
+| `result`  | Any     | Yes      | New data notification from the server, or response to client requests. Null if`error` is not null. |
 
 Note: type of `result` is channel specific if it's server-initiated data update
 notification, but response to client subscription request always set the
@@ -294,12 +82,12 @@ update notification format for simplicity.
 In case of error, you receive a message containing the proper error code and
 message within an error object.
 
-| Code | Message                 |
-| ---- | ----------------------- |
-| 1    | invalid argument struct |
-| 2    | invalid argument        |
-| 3    | service error           |
-| 4    | authentication fail     |
+| Code | Message                   |
+| ---- | ------------------------- |
+| `1`  | `invalid argument struct` |
+| `2`  | `invalid argument`        |
+| `3`  | `service error`           |
+| `4`  | `authentication fail`     |
 
 ## [#](#authentication) Authentication
 
@@ -339,11 +127,11 @@ private, e.g. `options.orders` channel to retrieve user orders update.
 Authentication are sent by `auth` field in request body with the following
 format:
 
-| Field  | Type   | Description                                                                       |
-| ------ | ------ | --------------------------------------------------------------------------------- |
-| method | String | Authentication method. Currently only one method api_key is accepted              |
-| KEY    | String | Gate APIv4 user key string                                                        |
-| SIGN   | String | Authentication signature generated using GateAPIv4 secret and request information |
+| Field    | Type   | Description                                                                       |
+| -------- | ------ | --------------------------------------------------------------------------------- |
+| `method` | String | Authentication method. Currently only one method `api_key` is accepted            |
+| `KEY`    | String | Gate APIv4 user key string                                                        |
+| `SIGN`   | String | Authentication signature generated using GateAPIv4 secret and request information |
 
 WebSocket authentication uses the same signature calculation method with Gate
 APIv4 API, i.e., `HexEncode(HMAC_SHA512(secret, signature_string))`, but has the
@@ -440,9 +228,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description   |
-| ------- | ------------- | -------- | ------------- |
-| payload | Array[String] | Yes      | Contract list |
+| Field     | Type            | Required | Description   |
+| --------- | --------------- | -------- | ------------- |
+| `payload` | `Array[String]` | Yes      | Contract list |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -485,24 +273,24 @@ Notification example
 
 Result format:
 
-| Field            | Type           | Description                                                       |
-| ---------------- | -------------- | ----------------------------------------------------------------- |
-| result           | Object         | Ticker Object                                                     |
-| »» name          | string         | Options contract name                                             |
-| »»last_price     | string         | Last trading price                                                |
-| »» mark_price    | string         | Current mark price                                                |
-| »» index_price   | string         | Current index price                                               |
-| »» ask1_size     | integer(int64) | Best ask size                                                     |
-| »» ask1_price    | string         | Best ask price                                                    |
-| »» bid1_size     | integer(int64) | Best bid size                                                     |
-| »» bid1_price    | string         | Best bid price                                                    |
-| »» position_size | integer(int64) | Current total long position size                                  |
-| »» mark_iv       | string         | Implied volatility                                                |
-| »» bid_iv        | string         | Bid side implied volatility                                       |
-| »» ask_iv        | string         | Ask side implied volatility                                       |
-| »» leverage      | string         | Current leverage. Formula: underlying_price / mark_price \* delta |
-| »» delta         | string         | Delta                                                             |
-| »» gamma         | string         | Gamma                                                             |
+| Field              | Type           | Description                                                        |
+| ------------------ | -------------- | ------------------------------------------------------------------ |
+| `result`           | Object         | Ticker Object                                                      |
+| »» `name`          | string         | Options contract name                                              |
+| »»`last_price`     | string         | Last trading price                                                 |
+| »» `mark_price`    | string         | Current mark price                                                 |
+| »» `index_price`   | string         | Current index price                                                |
+| »» `ask1_size`     | integer(int64) | Best ask size                                                      |
+| »» `ask1_price`    | string         | Best ask price                                                     |
+| »» `bid1_size`     | integer(int64) | Best bid size                                                      |
+| »» `bid1_price`    | string         | Best bid price                                                     |
+| »» `position_size` | integer(int64) | Current total long position size                                   |
+| »» `mark_iv`       | string         | Implied volatility                                                 |
+| »» `bid_iv`        | string         | Bid side implied volatility                                        |
+| »» `ask_iv`        | string         | Ask side implied volatility                                        |
+| »» `leverage`      | string         | Current leverage. Formula: `underlying_price / mark_price * delta` |
+| »» `delta`         | string         | Delta                                                              |
+| »» `gamma`         | string         | Gamma                                                              |
 
 # [#](#underlying-tickers-channel) Underlying Tickers Channel
 
@@ -538,9 +326,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description     |
-| ------- | ------------- | -------- | --------------- |
-| payload | Array[String] | Yes      | Underlying list |
+| Field     | Type            | Required | Description     |
+| --------- | --------------- | -------- | --------------- |
+| `payload` | `Array[String]` | Yes      | Underlying list |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -569,13 +357,13 @@ Notification example
 
 Result format:
 
-| Field         | Type           | Description                                                        |
-| ------------- | -------------- | ------------------------------------------------------------------ |
-| result        | Object         | Ticker Object                                                      |
-| »name         | String         | Underlying name                                                    |
-| »trade_put    | integer(int64) | Total put options trades amount in last 24h (unit: contract size)  |
-| » trade_call  | integer(int64) | Total call options trades amount in last 24h (unit: contract size) |
-| » index_price | string         | Index price (quote currency)                                       |
+| Field           | Type           | Description                                                        |
+| --------------- | -------------- | ------------------------------------------------------------------ |
+| `result`        | Object         | Ticker Object                                                      |
+| »`name`         | String         | Underlying name                                                    |
+| »`trade_put`    | integer(int64) | Total put options trades amount in last 24h (unit: contract size)  |
+| » `trade_call`  | integer(int64) | Total call options trades amount in last 24h (unit: contract size) |
+| » `index_price` | string         | Index price (quote currency)                                       |
 
 # [#](#public-contract-trades-channel) Public Contract Trades Channel
 
@@ -611,9 +399,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description   |
-| ------- | ------------- | -------- | ------------- |
-| payload | Array[String] | Yes      | Contract list |
+| Field     | Type            | Required | Description   |
+| --------- | --------------- | -------- | ------------- |
+| `payload` | `Array[String]` | Yes      | Contract list |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -650,16 +438,16 @@ user trades channel below will notify all user related trades.
 
 Result format:
 
-| Field            | Type   | Description                                              |
-| ---------------- | ------ | -------------------------------------------------------- |
-| result           | Array  | Array of trades                                          |
-| »contract        | String | Options contract name                                    |
-| »size            | int    | Trading size                                             |
-| »id              | int    | Trade ID                                                 |
-| »create_time     | int    | Trading time (the time of the transaction)               |
-| » create_time_ms | int    | Trading time, with milliseconds set to 3 decimal places. |
-| »price           | Float  | Trading price                                            |
-| »underlying      | String | underlying name                                          |
+| Field              | Type   | Description                                              |
+| ------------------ | ------ | -------------------------------------------------------- |
+| `result`           | Array  | Array of trades                                          |
+| »`contract`        | String | Options contract name                                    |
+| »`size`            | int    | Trading size                                             |
+| »`id`              | int    | Trade ID                                                 |
+| »`create_time`     | int    | Trading time (the time of the transaction)               |
+| » `create_time_ms` | int    | Trading time, with milliseconds set to 3 decimal places. |
+| »`price`           | Float  | Trading price                                            |
+| »`underlying`      | String | underlying name                                          |
 
 # [#](#public-underlying-trades-channel) Public Underlying Trades Channel
 
@@ -697,9 +485,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description     |
-| ------- | ------------- | -------- | --------------- |
-| payload | Array[String] | Yes      | Underlying list |
+| Field     | Type            | Required | Description     |
+| --------- | --------------- | -------- | --------------- |
+| `payload` | `Array[String]` | Yes      | Underlying list |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -734,17 +522,17 @@ Notification example
 
 Result format:
 
-| Field            | Type   | Description                                              |
-| ---------------- | ------ | -------------------------------------------------------- |
-| result           | Array  | Array of trades                                          |
-| »contract        | String | Options contract name                                    |
-| »size            | int    | Trading size                                             |
-| »id              | int    | Trade ID                                                 |
-| »create_time     | int    | Trading time                                             |
-| » create_time_ms | int    | Trading time, with milliseconds set to 3 decimal places. |
-| »price           | Float  | Trading price                                            |
-| »underlying      | String | underlying name                                          |
-| »is_call         | Bool   | true: CALL，false:PUT                                    |
+| Field              | Type   | Description                                              |
+| ------------------ | ------ | -------------------------------------------------------- |
+| `result`           | Array  | Array of trades                                          |
+| »`contract`        | String | Options contract name                                    |
+| »`size`            | int    | Trading size                                             |
+| »`id`              | int    | Trade ID                                                 |
+| »`create_time`     | int    | Trading time                                             |
+| » `create_time_ms` | int    | Trading time, with milliseconds set to 3 decimal places. |
+| »`price`           | Float  | Trading price                                            |
+| »`underlying`      | String | underlying name                                          |
+| »`is_call`         | Bool   | true: CALL，false:PUT                                    |
 
 # [#](#underlying-price-channel) Underlying Price Channel
 
@@ -779,9 +567,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description     |
-| ------- | ------------- | -------- | --------------- |
-| payload | Array[String] | Yes      | Underlying list |
+| Field     | Type            | Required | Description     |
+| --------- | --------------- | -------- | --------------- |
+| `payload` | `Array[String]` | Yes      | Underlying list |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -810,13 +598,13 @@ Notification example
 
 Result format:
 
-| Field       | Type   | Description                                       |
-| ----------- | ------ | ------------------------------------------------- |
-| result      | Object | Object of price update                            |
-| »underlying | String | Options underlying name                           |
-| »price      | Float  | underlying price                                  |
-| »time       | int    | update time (time from gate engin)                |
-| »time_ms    | int    | update time in millisecond (time from gate engin) |
+| Field         | Type   | Description                                       |
+| ------------- | ------ | ------------------------------------------------- |
+| `result`      | Object | Object of price update                            |
+| »`underlying` | String | Options underlying name                           |
+| »`price`      | Float  | underlying price                                  |
+| »`time`       | int    | update time (time from gate engin)                |
+| »`time_ms`    | int    | update time in millisecond (time from gate engin) |
 
 # [#](#mark-price-channel) Mark Price Channel
 
@@ -851,9 +639,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description    |
-| ------- | ------------- | -------- | -------------- |
-| payload | Array[String] | Yes      | Contracts list |
+| Field     | Type            | Required | Description    |
+| --------- | --------------- | -------- | -------------- |
+| `payload` | `Array[String]` | Yes      | Contracts list |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -882,13 +670,13 @@ Notification example
 
 Result format:
 
-| Field     | Type   | Description                |
-| --------- | ------ | -------------------------- |
-| result    | Object | Object of mark price       |
-| »contract | String | Options contract name      |
-| »price    | Float  | underlying price           |
-| »time     | int    | update time                |
-| »time_ms  | int    | update time in millisecond |
+| Field       | Type   | Description                |
+| ----------- | ------ | -------------------------- |
+| `result`    | Object | Object of mark price       |
+| »`contract` | String | Options contract name      |
+| »`price`    | Float  | underlying price           |
+| »`time`     | int    | update time                |
+| »`time_ms`  | int    | update time in millisecond |
 
 # [#](#settlements-channel) Settlements Channel
 
@@ -923,9 +711,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description    |
-| ------- | ------------- | -------- | -------------- |
-| payload | Array[String] | Yes      | Contracts list |
+| Field     | Type            | Required | Description    |
+| --------- | --------------- | -------- | -------------- |
+| `payload` | `Array[String]` | Yes      | Contracts list |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -964,7 +752,7 @@ Result format:
 
 | Field           | Type   | Description                                          |
 | --------------- | ------ | ---------------------------------------------------- |
-| result          | Object | Object of settlement                                 |
+| `result`        | Object | Object of settlement                                 |
 | » time          | Int    | Last changed time of configuration (settlement time) |
 | » time_ms       | Int    | Last changed time in millisecond of configuration    |
 | » contract      | string | Contract name                                        |
@@ -1011,9 +799,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description    |
-| ------- | ------------- | -------- | -------------- |
-| payload | Array[String] | Yes      | Contracts list |
+| Field     | Type            | Required | Description    |
+| --------- | --------------- | -------- | -------------- |
+| `payload` | `Array[String]` | Yes      | Contracts list |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -1065,14 +853,14 @@ Result format:
 
 | Field                 | Type           | Description                                                                                                                                                                                                     |
 | --------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| result                | Object         | Contract Object                                                                                                                                                                                                 |
+| `result`              | Object         | Contract Object                                                                                                                                                                                                 |
 | » contract            | string         | Options contract                                                                                                                                                                                                |
 | » tag                 | string         | Tag                                                                                                                                                                                                             |
 | » create_time         | integer(int64) | Creation time of the contract                                                                                                                                                                                   |
 | » expiration_time     | integer(int64) | Expiration time of the contract                                                                                                                                                                                 |
 | » init_margin_high    | float          | Initial position margin high                                                                                                                                                                                    |
 | » init_margin_low     | float          | Initial position margin low                                                                                                                                                                                     |
-| » is_call             | boolean        | true means call options, while false is put options                                                                                                                                                             |
+| » is_call             | boolean        | `true` means call options, while `false` is put options                                                                                                                                                         |
 | » maint_margin_base   | float          | Position maintenance margin base                                                                                                                                                                                |
 | » multiplier          | string         | Multiplier used in converting from invoicing to settlement currency                                                                                                                                             |
 | » underlying          | string         | Underlying                                                                                                                                                                                                      |
@@ -1127,11 +915,11 @@ print(ws.recv())
 
 Payload format:
 
-| Field      | Type          | Required | Description                                               |
-| ---------- | ------------- | -------- | --------------------------------------------------------- |
-| payload    | Array[String] | Yes      | Subscription parameters. From left to right, interval, cp |
-| » interval | String        | Yes      | Candlestick data point interval                           |
-| » contract | String        | Yes      | Options contract name                                     |
+| Field        | Type            | Required | Description                                                   |
+| ------------ | --------------- | -------- | ------------------------------------------------------------- |
+| `payload`    | `Array[String]` | Yes      | Subscription parameters. From left to right, `interval`, `cp` |
+| » `interval` | String          | Yes      | Candlestick data point interval                               |
+| » `contract` | String          | Yes      | Options contract name                                         |
 
 #### [#](#enumerated-values) Enumerated Values
 
@@ -1181,17 +969,17 @@ Notification example
 
 Result format:
 
-| Field  | Type    | Description                                                 |
-| ------ | ------- | ----------------------------------------------------------- |
-| result | Array   | Array of Candlesticks                                       |
-| t      | Integer | Unix timestamp in seconds                                   |
-| o      | String  | Open price                                                  |
-| c      | String  | Close price                                                 |
-| h      | String  | Highest price                                               |
-| l      | String  | Lowest price                                                |
-| v      | Integer | Total volume                                                |
-| a      | String  | Amount                                                      |
-| n      | String  | Name of the subscription, in the format of <interval>\_<cp> |
+| Field    | Type    | Description                                                  |
+| -------- | ------- | ------------------------------------------------------------ |
+| `result` | Array   | Array of Candlesticks                                        |
+| `t`      | Integer | Unix timestamp in seconds                                    |
+| `o`      | String  | Open price                                                   |
+| `c`      | String  | Close price                                                  |
+| `h`      | String  | Highest price                                                |
+| `l`      | String  | Lowest price                                                 |
+| `v`      | Integer | Total volume                                                 |
+| `a`      | String  | Amount                                                       |
+| `n`      | String  | Name of the subscription, in the format of `<interval>_<cp>` |
 
 # [#](#underlying-candlesticks-channel) Underlying Candlesticks Channel
 
@@ -1228,11 +1016,11 @@ print(ws.recv())
 
 Payload format:
 
-| Field      | Type          | Required | Description                                               |
-| ---------- | ------------- | -------- | --------------------------------------------------------- |
-| payload    | Array[String] | Yes      | Subscription parameters. From left to right, interval, cp |
-| » interval | String        | Yes      | Candlestick data point interval                           |
-| » contract | String        | Yes      | Options contract name                                     |
+| Field        | Type            | Required | Description                                                   |
+| ------------ | --------------- | -------- | ------------------------------------------------------------- |
+| `payload`    | `Array[String]` | Yes      | Subscription parameters. From left to right, `interval`, `cp` |
+| » `interval` | String          | Yes      | Candlestick data point interval                               |
+| » `contract` | String          | Yes      | Options contract name                                         |
 
 #### [#](#enumerated-values-2) Enumerated Values
 
@@ -1282,17 +1070,17 @@ Notification example
 
 Result format:
 
-| Field  | Type    | Description                                                 |
-| ------ | ------- | ----------------------------------------------------------- |
-| result | Array   | Array of Candlesticks                                       |
-| t      | Integer | Unix timestamp in seconds                                   |
-| o      | String  | Open price                                                  |
-| c      | String  | Close price                                                 |
-| h      | String  | Highest price                                               |
-| l      | String  | Lowest price                                                |
-| v      | Integer | Total volume                                                |
-| a      | String  | Amount                                                      |
-| n      | String  | Name of the subscription, in the format of <interval>\_<cp> |
+| Field    | Type    | Description                                                  |
+| -------- | ------- | ------------------------------------------------------------ |
+| `result` | Array   | Array of Candlesticks                                        |
+| `t`      | Integer | Unix timestamp in seconds                                    |
+| `o`      | String  | Open price                                                   |
+| `c`      | String  | Close price                                                  |
+| `h`      | String  | Highest price                                                |
+| `l`      | String  | Lowest price                                                 |
+| `v`      | Integer | Total volume                                                 |
+| `a`      | String  | Amount                                                       |
+| `n`      | String  | Name of the subscription, in the format of `<interval>_<cp>` |
 
 # [#](#order-book-channel) Order Book Channel
 
@@ -1376,9 +1164,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type          | Required | Description       |
-| ------- | ------------- | -------- | ----------------- |
-| payload | Array[String] | Yes      | List of contracts |
+| Field     | Type            | Required | Description       |
+| --------- | --------------- | -------- | ----------------- |
+| `payload` | `Array[String]` | Yes      | List of contracts |
 
 You can subscribe/unsubscribe multiple times. Contracts subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -1413,16 +1201,16 @@ Notification example
 
 Result format:
 
-| Field  | Type    | Description                                   |
-| ------ | ------- | --------------------------------------------- |
-| result | object  | Order book ticker object                      |
-| » t    | Integer | Order book update time in milliseconds        |
-| » u    | String  | Order book update ID                          |
-| » s    | String  | Contract name                                 |
-| » b    | String  | Best bid price. If no bids, it's empty string |
-| » B    | Integer | Best bid size. If no bids, it will be 0       |
-| » a    | String  | Best ask price. If no asks, it's empty string |
-| » A    | Integer | Best ask size. If no asks, it will be 0       |
+| Field    | Type    | Description                                   |
+| -------- | ------- | --------------------------------------------- |
+| `result` | object  | Order book ticker object                      |
+| » `t`    | Integer | Order book update time in milliseconds        |
+| » `u`    | String  | Order book update ID                          |
+| » `s`    | String  | Contract name                                 |
+| » `b`    | String  | Best bid price. If no bids, it's empty string |
+| » `B`    | Integer | Best bid size. If no bids, it will be 0       |
+| » `a`    | String  | Best ask price. If no asks, it's empty string |
+| » `A`    | Integer | Best ask size. If no asks, it will be 0       |
 
 ## [#](#changed-order-book-levels) Changed order book levels
 
@@ -1455,12 +1243,12 @@ print(ws.recv())
 
 Payload format:
 
-| Field      | Type          | Required | Description                                                     |
-| ---------- | ------------- | -------- | --------------------------------------------------------------- |
-| payload    | Array[String] | Yes      | Subscription parameters, from left to right, contract, interval |
-| » contract | String        | Yes      | Contract name                                                   |
-| » interval | String        | Yes      | Notification update speed                                       |
-| » level    | String        | No       | Optional level interested. Only updates within are notified.    |
+| Field        | Type            | Required | Description                                                         |
+| ------------ | --------------- | -------- | ------------------------------------------------------------------- |
+| `payload`    | `Array[String]` | Yes      | Subscription parameters, from left to right, `contract`, `interval` |
+| » `contract` | String          | Yes      | Contract name                                                       |
+| » `interval` | String          | Yes      | Notification update speed                                           |
+| » `level`    | String          | No       | Optional level interested. Only updates within are notified.        |
 
 #### [#](#enumerated-values-3) Enumerated Values
 
@@ -1523,19 +1311,19 @@ Notification example
 
 Result format:
 
-| Field  | Type    | Description                                                               |
-| ------ | ------- | ------------------------------------------------------------------------- |
-| result | object  | Changed asks and bids since last update                                   |
-| » t    | Integer | Order book update time in milliseconds                                    |
-| » s    | String  | Contract name                                                             |
-| » U    | Integer | First order book update ID since last update                              |
-| » u    | Integer | Last order book update ID since last update                               |
-| » b    | String  | Changed bids                                                              |
-| »» p   | String  | Changed price                                                             |
-| »» s   | String  | Absolute size value after change. If 0, remove this price from order book |
-| » a    | String  | Changed asks                                                              |
-| »» p   | String  | Changed price                                                             |
-| »» s   | String  | Absolute size value after change. If 0, remove this price from order book |
+| Field    | Type    | Description                                                               |
+| -------- | ------- | ------------------------------------------------------------------------- |
+| `result` | object  | Changed asks and bids since last update                                   |
+| » `t`    | Integer | Order book update time in milliseconds                                    |
+| » `s`    | String  | Contract name                                                             |
+| » `U`    | Integer | First order book update ID since last update                              |
+| » `u`    | Integer | Last order book update ID since last update                               |
+| » `b`    | String  | Changed bids                                                              |
+| »» `p`   | String  | Changed price                                                             |
+| »» `s`   | String  | Absolute size value after change. If 0, remove this price from order book |
+| » `a`    | String  | Changed asks                                                              |
+| »» `p`   | String  | Changed price                                                             |
+| »» `s`   | String  | Absolute size value after change. If 0, remove this price from order book |
 
 ## [#](#limited-level-full-order-book-snapshot) Limited-Level Full Order Book Snapshot
 
@@ -1568,11 +1356,11 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| contract | String | Yes      | Contract name                        |
-| limit    | String | Yes      | Limit, legal limits:50, 20, 10, 5, 1 |
-| accuracy | String | Yes      | Now only support "0"                 |
+| Field      | Type   | Required | Description                          |
+| ---------- | ------ | -------- | ------------------------------------ |
+| `contract` | String | Yes      | Contract name                        |
+| `limit`    | String | Yes      | Limit, legal limits:50, 20, 10, 5, 1 |
+| `accuracy` | String | Yes      | Now only support "0"                 |
 
 #### [#](#enumerated-values-4) Enumerated Values
 
@@ -1650,13 +1438,13 @@ Or
 
 Result format:
 
-| Field  | Type    | Description                                                                                                                        |
-| ------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| result | Array   | Array of objects                                                                                                                   |
-| »c     | String  | Options contract name                                                                                                              |
-| »s     | Integer | This number is the final value, the calculated value. Positive Numbers represent long(bids), Negative number represent short(asks) |
-| »p     | String  | This order book price                                                                                                              |
-| »id    | Integer | This price order book id                                                                                                           |
+| Field    | Type    | Description                                                                                                                        |
+| -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `result` | Array   | Array of objects                                                                                                                   |
+| »`c`     | String  | Options contract name                                                                                                              |
+| »`s`     | Integer | This number is the final value, the calculated value. Positive Numbers represent long(bids), Negative number represent short(asks) |
+| »`p`     | String  | This order book price                                                                                                              |
+| »`id`    | Integer | This price order book id                                                                                                           |
 
 # [#](#orders-channel) Orders Channel
 
@@ -1694,10 +1482,10 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description           |
-| -------- | ------ | -------- | --------------------- |
-| user id  | String | Yes      | User id               |
-| contract | String | Yes      | Options contract name |
+| Field      | Type   | Required | Description           |
+| ---------- | ------ | -------- | --------------------- |
+| `user id`  | String | Yes      | User id               |
+| `contract` | String | Yes      | Options contract name |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -1753,31 +1541,31 @@ updated in one notification.
 
 Result format:
 
-| Field            | Type           | Description                                                                                                                                                                                                                                                                                                                                             |
-| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| result           | Array[Object]  | Updated order list                                                                                                                                                                                                                                                                                                                                      |
-| » id             | integer(int64) | Options order ID                                                                                                                                                                                                                                                                                                                                        |
-| » user           | String         | User ID                                                                                                                                                                                                                                                                                                                                                 |
-| » create_time    | integer(int64) | Creation time of order                                                                                                                                                                                                                                                                                                                                  |
-| » finish_as      | string         | How the order was finished. - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is IOC, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while reduce-only set- position_closed: cancelled because of position close |
-| » status         | string         | Order status - open: waiting to be traded - finished: finished                                                                                                                                                                                                                                                                                          |
-| » contract       | string         | Contract name                                                                                                                                                                                                                                                                                                                                           |
-| » size           | integer(int64) | Order size. Specify positive number to make a bid, and negative number to ask                                                                                                                                                                                                                                                                           |
-| » iceberg        | integer(int64) | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                                                                                                                                                                                                                                     |
-| » price          | string         | Order price. 0 for market order with tif set as ioc                                                                                                                                                                                                                                                                                                     |
-| » is_close       | boolean        | Is the order to close position                                                                                                                                                                                                                                                                                                                          |
-| » is_reduce_only | boolean        | Is the order reduce-only                                                                                                                                                                                                                                                                                                                                |
-| » is_liq         | boolean        | Is the order for liquidation                                                                                                                                                                                                                                                                                                                            |
-| » tif            | string         | Time in force - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce-only                                                                                                                                                                                                                                   |
-| » left           | integer(int64) | Size left to be traded                                                                                                                                                                                                                                                                                                                                  |
-| » fill_price     | string         | Fill price of the order                                                                                                                                                                                                                                                                                                                                 |
-| » tkfr           | Float          | Taker fee                                                                                                                                                                                                                                                                                                                                               |
-| » mkfr           | Float          | Maker fee                                                                                                                                                                                                                                                                                                                                               |
-| » refu           | integer        | Reference user ID                                                                                                                                                                                                                                                                                                                                       |
-| » refr           | Float          | Referrer rebate                                                                                                                                                                                                                                                                                                                                         |
-| » underlying     | String         | underlying name                                                                                                                                                                                                                                                                                                                                         |
-| » time           | int            | Creation time of message                                                                                                                                                                                                                                                                                                                                |
-| » time_ms        | Int            | Creation time of message in millisecond                                                                                                                                                                                                                                                                                                                 |
+| Field            | Type            | Description                                                                                                                                                                                                                                                                                                                                                 |
+| ---------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `result`         | `Array[Object]` | Updated order list                                                                                                                                                                                                                                                                                                                                          |
+| » id             | integer(int64)  | Options order ID                                                                                                                                                                                                                                                                                                                                            |
+| » user           | String          | User ID                                                                                                                                                                                                                                                                                                                                                     |
+| » create_time    | integer(int64)  | Creation time of order                                                                                                                                                                                                                                                                                                                                      |
+| » finish_as      | string          | How the order was finished. - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while `reduce-only` set- position_closed: cancelled because of position close |
+| » status         | string          | Order status - `open`: waiting to be traded - `finished`: finished                                                                                                                                                                                                                                                                                          |
+| » contract       | string          | Contract name                                                                                                                                                                                                                                                                                                                                               |
+| » size           | integer(int64)  | Order size. Specify positive number to make a bid, and negative number to ask                                                                                                                                                                                                                                                                               |
+| » iceberg        | integer(int64)  | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                                                                                                                                                                                                                                         |
+| » price          | string          | Order price. 0 for market order with `tif` set as `ioc`                                                                                                                                                                                                                                                                                                     |
+| » is_close       | boolean         | Is the order to close position                                                                                                                                                                                                                                                                                                                              |
+| » is_reduce_only | boolean         | Is the order reduce-only                                                                                                                                                                                                                                                                                                                                    |
+| » is_liq         | boolean         | Is the order for liquidation                                                                                                                                                                                                                                                                                                                                |
+| » tif            | string          | Time in force - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce-only                                                                                                                                                                                                                                       |
+| » left           | integer(int64)  | Size left to be traded                                                                                                                                                                                                                                                                                                                                      |
+| » fill_price     | string          | Fill price of the order                                                                                                                                                                                                                                                                                                                                     |
+| » tkfr           | Float           | Taker fee                                                                                                                                                                                                                                                                                                                                                   |
+| » mkfr           | Float           | Maker fee                                                                                                                                                                                                                                                                                                                                                   |
+| » refu           | integer         | Reference user ID                                                                                                                                                                                                                                                                                                                                           |
+| » refr           | Float           | Referrer rebate                                                                                                                                                                                                                                                                                                                                             |
+| » underlying     | String          | underlying name                                                                                                                                                                                                                                                                                                                                             |
+| » time           | int             | Creation time of message                                                                                                                                                                                                                                                                                                                                    |
+| » time_ms        | Int             | Creation time of message in millisecond                                                                                                                                                                                                                                                                                                                     |
 
 # [#](#user-trades-channel) User Trades Channel
 
@@ -1815,10 +1603,10 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description           |
-| -------- | ------ | -------- | --------------------- |
-| user id  | String | Yes      | User id               |
-| contract | String | Yes      | Options contract name |
+| Field      | Type   | Required | Description           |
+| ---------- | ------ | -------- | --------------------- |
+| `user id`  | String | Yes      | User id               |
+| `contract` | String | Yes      | Options contract name |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -1862,19 +1650,19 @@ will be updated in one notification.
 
 Result format:
 
-| Field           | type    | description                 |
-| --------------- | ------- | --------------------------- |
-| result          | Array   | Array of objects            |
-| »contract       | String  | Options contract name       |
-| »create_time    | Integer | Create time                 |
-| »create_time_ms | Integer | Create time in milliseconds |
-| »id             | String  | Trades id                   |
-| »order          | String  | Order Id                    |
-| »price          | String  | Trade price                 |
-| »size           | Integer | Trades size                 |
-| »role           | String  | User role (maker/taker)     |
-| »fee            | String  | Fee deducted                |
-| »text           | String  | User defined information    |
+| Field             | type    | description                 |
+| ----------------- | ------- | --------------------------- |
+| `result`          | Array   | Array of objects            |
+| »`contract`       | String  | Options contract name       |
+| »`create_time`    | Integer | Create time                 |
+| »`create_time_ms` | Integer | Create time in milliseconds |
+| »`id`             | String  | Trades id                   |
+| »`order`          | String  | Order Id                    |
+| »`price`          | String  | Trade price                 |
+| »`size`           | Integer | Trades size                 |
+| »`role`           | String  | User role (maker/taker)     |
+| »`fee`            | String  | Fee deducted                |
+| »`text`           | String  | User defined information    |
 
 #### [#](#enumerated-values-5) Enumerated Values
 
@@ -1919,10 +1707,10 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description           |
-| -------- | ------ | -------- | --------------------- |
-| user id  | String | Yes      | User id               |
-| contract | String | Yes      | Options contract name |
+| Field      | Type   | Required | Description           |
+| ---------- | ------ | -------- | --------------------- |
+| `user id`  | String | Yes      | User id               |
+| `contract` | String | Yes      | Options contract name |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -1957,7 +1745,7 @@ Result format:
 
 | Field          | Type   | Description                        |
 | -------------- | ------ | ---------------------------------- |
-| result         | Array  | Array of objects                   |
+| `result`       | Array  | Array of objects                   |
 | » time         | int64  | Position close time                |
 | » time         | int64  | Position close time in millisecond |
 | » user         | string | User id                            |
@@ -2001,10 +1789,10 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description           |
-| -------- | ------ | -------- | --------------------- |
-| user id  | String | yes      | user id               |
-| contract | String | yes      | Options contract name |
+| Field      | Type   | Required | Description           |
+| ---------- | ------ | -------- | --------------------- |
+| `user id`  | String | yes      | user id               |
+| `contract` | String | yes      | Options contract name |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -2039,19 +1827,19 @@ Notification example
 }
 ```
 
-| Field          | Type    | Description                 |
-| -------------- | ------- | --------------------------- |
-| result         | Array   | Array of objects            |
-| »realised_pnl  | Float   | Realized PNL                |
-| »settle_price  | Float   | settlement price            |
-| »settle_profit | Integer | Settlement profit per size  |
-| »strike_price  | float   | Strike price                |
-| »underlying    | string  | underlying name             |
-| »size          | Integer | Trade size                  |
-| »time          | Integer | settle time                 |
-| »time_ms       | Integer | settle time in milliseconds |
-| »user          | String  | User id                     |
-| »contract      | String  | Options contract name       |
+| Field            | Type    | Description                 |
+| ---------------- | ------- | --------------------------- |
+| `result`         | Array   | Array of objects            |
+| »`realised_pnl`  | Float   | Realized PNL                |
+| »`settle_price`  | Float   | settlement price            |
+| »`settle_profit` | Integer | Settlement profit per size  |
+| »`strike_price`  | float   | Strike price                |
+| »`underlying`    | string  | underlying name             |
+| »`size`          | Integer | Trade size                  |
+| »`time`          | Integer | settle time                 |
+| »`time_ms`       | Integer | settle time in milliseconds |
+| »`user`          | String  | User id                     |
+| »`contract`      | String  | Options contract name       |
 
 # [#](#position-closes-channel) Position Closes Channel
 
@@ -2089,10 +1877,10 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description           |
-| -------- | ------ | -------- | --------------------- |
-| user id  | String | yes      | user id               |
-| contract | String | yes      | Options contract name |
+| Field      | Type   | Required | Description           |
+| ---------- | ------ | -------- | --------------------- |
+| `user id`  | String | yes      | user id               |
+| `contract` | String | yes      | Options contract name |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -2128,17 +1916,17 @@ Notification example
 
 Result format:
 
-| Field       | Type    | Description                  |
-| ----------- | ------- | ---------------------------- |
-| result      | Array   | Array of objects             |
-| »contract   | String  | Options contract name        |
-| »pnl        | Float   | Profit & loss                |
-| »side       | String  | Position side, long or short |
-| »text       | String  | Text of close order          |
-| »time       | Integer | Position close time          |
-| »time_ms    | Integer | Time in milliseconds         |
-| »user       | String  | User id                      |
-| »underlying | string  | underlying name              |
+| Field         | Type    | Description                  |
+| ------------- | ------- | ---------------------------- |
+| `result`      | Array   | Array of objects             |
+| »`contract`   | String  | Options contract name        |
+| »`pnl`        | Float   | Profit & loss                |
+| »`side`       | String  | Position side, long or short |
+| »`text`       | String  | Text of close order          |
+| »`time`       | Integer | Position close time          |
+| »`time_ms`    | Integer | Time in milliseconds         |
+| »`user`       | String  | User id                      |
+| »`underlying` | string  | underlying name              |
 
 #### [#](#enumerated-values-6) Enumerated Values
 
@@ -2181,9 +1969,9 @@ print(ws.recv())
 
 Payload format:
 
-| Field   | Type   | Required | Description |
-| ------- | ------ | -------- | ----------- |
-| user id | String | Yes      | User id     |
+| Field     | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| `user id` | String | Yes      | User id     |
 
 WARNING
 
@@ -2214,16 +2002,16 @@ Notification example
 
 Result format:
 
-| Field    | Type    | Description            |
-| -------- | ------- | ---------------------- |
-| result   | Array   | Array of objects       |
-| »balance | Float   | Balance after changed  |
-| »change  | Float   | Change size            |
-| »text    | String  | Balance change message |
-| »time    | Integer | Balance change Time    |
-| »time_ms | Integer | Time in milliseconds   |
-| »type    | String  | Type                   |
-| »user    | String  | User id                |
+| Field      | Type    | Description            |
+| ---------- | ------- | ---------------------- |
+| `result`   | Array   | Array of objects       |
+| »`balance` | Float   | Balance after changed  |
+| »`change`  | Float   | Change size            |
+| »`text`    | String  | Balance change message |
+| »`time`    | Integer | Balance change Time    |
+| »`time_ms` | Integer | Time in milliseconds   |
+| »`type`    | String  | Type                   |
+| »`user`    | String  | User id                |
 
 # [#](#positions-channel) Positions Channel
 
@@ -2259,10 +2047,10 @@ print(ws.recv())
 
 Payload format:
 
-| Field    | Type   | Required | Description           |
-| -------- | ------ | -------- | --------------------- |
-| user id  | String | Yes      | User id               |
-| contract | String | Yes      | Options contract name |
+| Field      | Type   | Required | Description           |
+| ---------- | ------ | -------- | --------------------- |
+| `user id`  | String | Yes      | User id               |
+| `contract` | String | Yes      | Options contract name |
 
 You can subscribe/unsubscribe multiple times. Contract subscribed earlier will
 not be overridden unless explicitly unsubscribed to.
@@ -2295,15 +2083,15 @@ Notification example
 
 Result format:
 
-| Field         | Type    | Description                           |
-| ------------- | ------- | ------------------------------------- |
-| result        | Array   | Array of objects                      |
-| »contract     | String  | Options contract name                 |
-| »entry_price  | Float   | Entry price                           |
-| »realised_pnl | Float   | Realized PNL                          |
-| »size         | Integer | Contract size                         |
-| »time         | Integer | Update unix timestamp                 |
-| »time_ms      | Integer | Update unix timestamp in milliseconds |
-| »user         | String  | User id                               |
+| Field           | Type    | Description                           |
+| --------------- | ------- | ------------------------------------- |
+| `result`        | Array   | Array of objects                      |
+| »`contract`     | String  | Options contract name                 |
+| »`entry_price`  | Float   | Entry price                           |
+| »`realised_pnl` | Float   | Realized PNL                          |
+| »`size`         | Integer | Contract size                         |
+| »`time`         | Integer | Update unix timestamp                 |
+| »`time_ms`      | Integer | Update unix timestamp in milliseconds |
+| »`user`         | String  | User id                               |
 
 Last Updated: 11/28/2024, 2:26:55 AM
