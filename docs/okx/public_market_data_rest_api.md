@@ -77,6 +77,18 @@ reached.
 When a product is going to be delisted (e.g. when a FUTURES contract is settled
 or OPTION contract is exercised), the instrument will not be available.
 
+Instruments REST endpoints and WebSocket channel will update \`expTime\` once
+the delisting announcement is published.  
+Instruments REST endpoint and WebSocket channel will update \`listTime\` once
+the listing announcement is published:  
+1\. For \`SPOT/MARGIN/SWAP\`, this event is only applicable to \`instType\`,
+\`instId\`, \`listTime\`, \`state\`.  
+2\. For \`FUTURES\`, this event is only applicable to \`instType\`,
+\`instFamily\`, \`listTime\`, \`state\`.  
+3\. Other fields will be "" temporarily, but they will be updated at least 5
+minutes in advance of the \`listTime\`, then the WebSocket subscription using
+related \`instId\`/\`instFamily\` can be available.
+
 ---
 
 ### Get estimated delivery/exercise price

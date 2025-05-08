@@ -820,30 +820,30 @@ represent the total number of liquidations on OKX.
 
 | Parameter     | Type             | Required | Description                                                                                                |
 | ------------- | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| op            | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                        |
+| op            | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code>                                            |
 | args          | Array of objects | Yes      | List of subscribed channels                                                                                |
 | &gt; channel  | String           | Yes      | Channel name<br><code>liquidation-orders</code>                                                            |
 | &gt; instType | String           | Yes      | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>MARGIN</code><br><code>OPTION</code> |
 
 #### Response Parameters
 
-| **Parameter**    | **Type**         | **Description**                                                                                                                                                                              |
-| ---------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| arg              | Object           | Successfully subscribed channel                                                                                                                                                              |
-| &gt; channel     | String           | Channel name                                                                                                                                                                                 |
-| &gt; instId      | String           | Instrument ID                                                                                                                                                                                |
-| data             | Array of objects | Subscribed data                                                                                                                                                                              |
-| &gt; instType    | String           | Instrument type                                                                                                                                                                              |
-| &gt; instId      | String           | Instrument ID, e.g. <code>BTC-USD-SWAP</code>                                                                                                                                                |
-| &gt; uly         | String           | Underlying, only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                                                    |
-| &gt; details     | Array of objects | Liquidation details                                                                                                                                                                          |
-| &gt;&gt; side    | String           | Order side, <code>buy</code> <code>sell</code>, only applicable to <code>FUTURES</code>/<code>SWAP</code>                                                                                    |
-| &gt;&gt; posSide | String           | Position mode side<br><code>long</code>: Hedge mode long<br><code>short</code>: Hedge mode short<br><code>net</code>: Net mode                                                               |
-| &gt;&gt; bkPx    | String           | Bankruptcy price. The price of the transaction with the system's liquidation account, only applicable to <code>FUTURES</code>/<code>SWAP</code>                                              |
-| &gt;&gt; sz      | String           | Quantity of liquidation, only applicable to <code>MARGIN/FUTURES/SWAP</code>.<br>For <code>MARGIN</code>, the unit is base currency.<br>For <code>FUTURES/SWAP</code>, the unit is contract. |
-| &gt;&gt; bkLoss  | String           | Bankruptcy loss                                                                                                                                                                              |
-| &gt;&gt; ccy     | String           | Liquidation currency, only applicable to <code>MARGIN</code>                                                                                                                                 |
-| &gt;&gt; ts      | String           | Liquidation time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                     |
+| **Parameter**    | **Type**         | **Description**                                                                                                                                                                                                        |
+| ---------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| arg              | Object           | Successfully subscribed channel                                                                                                                                                                                        |
+| &gt; channel     | String           | Channel name                                                                                                                                                                                                           |
+| &gt; instId      | String           | Instrument ID                                                                                                                                                                                                          |
+| data             | Array of objects | Subscribed data                                                                                                                                                                                                        |
+| &gt; instType    | String           | Instrument type                                                                                                                                                                                                        |
+| &gt; instId      | String           | Instrument ID, e.g. <code>BTC-USD-SWAP</code>                                                                                                                                                                          |
+| &gt; uly         | String           | Underlying<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                                                                                 |
+| &gt; details     | Array of objects | Liquidation details                                                                                                                                                                                                    |
+| &gt;&gt; side    | String           | Order side<br><code>buy</code><br><code>sell</code><br>Applicable to <code>FUTURES</code>/<code>SWAP</code>                                                                                                            |
+| &gt;&gt; posSide | String           | Position mode side<br><code>long</code>: Hedge mode long<br><code>short</code>: Hedge mode short<br><code>net</code>: Net mode                                                                                         |
+| &gt;&gt; bkPx    | String           | Bankruptcy price. The price of the transaction with the system's liquidation account, only applicable to <code>FUTURES</code>/<code>SWAP</code>                                                                        |
+| &gt;&gt; sz      | String           | Quantity of liquidation, only applicable to <code>MARGIN</code>/<code>FUTURES</code>/<code>SWAP</code>.<br>For <code>MARGIN</code>, the unit is base currency.<br>For <code>FUTURES/SWAP</code>, the unit is contract. |
+| &gt;&gt; bkLoss  | String           | Bankruptcy loss                                                                                                                                                                                                        |
+| &gt;&gt; ccy     | String           | Liquidation currency, only applicable to <code>MARGIN</code>                                                                                                                                                           |
+| &gt;&gt; ts      | String           | Liquidation time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                                               |
 
 ---
 
@@ -927,11 +927,11 @@ applicable to VIP 1 and above users in the trading fee tier.
 
 #### Request parameters
 
-| Parameter    | Type             | Required | Description                                                         |
-| ------------ | ---------------- | -------- | ------------------------------------------------------------------- |
-| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> |
-| args         | Array of objects | Yes      | List of subscribed channels                                         |
-| &gt; channel | String           | Yes      | Channel name<br><code>economic-calendar</code>                      |
+| Parameter    | Type             | Required | Description                                                     |
+| ------------ | ---------------- | -------- | --------------------------------------------------------------- |
+| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code> |
+| args         | Array of objects | Yes      | List of subscribed channels                                     |
+| &gt; channel | String           | Yes      | Channel name<br><code>economic-calendar</code>                  |
 
 #### Response parameters
 
@@ -949,7 +949,7 @@ applicable to VIP 1 and above users in the trading fee tier.
 | Parameter        | Type             | Description                                                                                                                |
 | ---------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | arg              | Object           | Successfully subscribed channel                                                                                            |
-| &gt; channel     | String           | Channel name                                                                                                               |
+| &gt; channel     | String           | Channel name<br><code>economic-calendar</code>                                                                             |
 | data             | Array of objects | Subscribed data                                                                                                            |
 | &gt; event       | string           | Event name                                                                                                                 |
 | &gt; region      | string           | Country, region or entity                                                                                                  |
