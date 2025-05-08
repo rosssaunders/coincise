@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-97-0) Gate API v4 v4.97.0
+# [#](#gate-api-v4-v4-97-3) Gate API v4 v4.97.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2387,16 +2387,16 @@ Record time range cannot exceed 30 days
 
 ### Parameters
 
-| Name              | In        | Type           | Required | Description                                                                                                                                                                 |
-| ----------------- | --------- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency          | query     | string         | false    | Filter by currency. Return all currency records if not specified                                                                                                            |
-| withdraw_id       | undefined | undefined      | false    | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| asset_class       | undefined | undefined      | false    | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
-| withdraw_order_id | undefined | undefined      | false    | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
-| from              | query     | integer(int64) | false    | Time range beginning, default to 7 days before current time                                                                                                                 |
-| to                | query     | integer(int64) | false    | Time range ending, default to current time                                                                                                                                  |
-| limit             | query     | integer        | false    | Maximum number of records to be returned in a single list                                                                                                                   |
-| offset            | query     | integer        | false    | List offset, starting from 0                                                                                                                                                |
+| Name              | In    | Type           | Required | Description                                                                                                                                                                 |
+| ----------------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency          | query | string         | false    | Filter by currency. Return all currency records if not specified                                                                                                            |
+| withdraw_id       | query | string         | false    | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
+| asset_class       | query | string         | false    | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
+| withdraw_order_id | query | string         | false    | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
+| from              | query | integer(int64) | false    | Time range beginning, default to 7 days before current time                                                                                                                 |
+| to                | query | integer(int64) | false    | Time range ending, default to current time                                                                                                                                  |
+| limit             | query | integer        | false    | Maximum number of records to be returned in a single list                                                                                                                   |
+| offset            | query | integer        | false    | List offset, starting from 0                                                                                                                                                |
 
 #### [#](#detailed-descriptions-2) Detailed descriptions
 
