@@ -500,7 +500,7 @@ New version API document website release
 - Added issue feedback function, developers can directly feedback API issues to
   the BingX team through this website
 
-> **Source:** >
+> **Source:**
 > [original URL](https://bingx-api.github.io/docs/#/en-us/spot/changelog)
 
 ---
