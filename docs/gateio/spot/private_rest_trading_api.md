@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-97-0) Gate API v4 v4.97.0
+# [#](#gate-api-v4-v4-97-3) Gate API v4 v4.97.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2870,8 +2870,7 @@ _List spot accounts_
     "currency": "ETH",
     "available": "968.8",
     "locked": "0",
-    "update_id": 98,
-    "refresh_time": 1746669376888
+    "update_id": 98
   }
 ]
 ```
@@ -2886,13 +2885,12 @@ _List spot accounts_
 
 Status Code **200**
 
-| Name           | Type           | Description                    |
-| -------------- | -------------- | ------------------------------ |
-| » currency     | string         | Currency detail                |
-| » available    | string         | Available amount               |
-| » locked       | string         | Locked amount, used in trading |
-| » update_id    | integer(int64) | Version number                 |
-| » refresh_time | integer(int64) | Asset Refresh Time (ms)        |
+| Name        | Type           | Description                    |
+| ----------- | -------------- | ------------------------------ |
+| » currency  | string         | Currency detail                |
+| » available | string         | Available amount               |
+| » locked    | string         | Locked amount, used in trading |
+| » update_id | integer(int64) | Version number                 |
 
 WARNING
 
