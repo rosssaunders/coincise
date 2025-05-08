@@ -5,6 +5,7 @@ import { fileURLToPath } from "url"
 import turndownService from "./turndownService.js"
 import { launchBrowserAndLoadPage } from "./puppeteerUtils.js"
 import { warn, info, error, success } from "./logger.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 // --- Configuration ---
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -258,6 +259,11 @@ async function convertHtmlToMarkdown(apiType) {
       const fullOutputPath = path.join(config.outputDir, outputFile)
       const absoluteOutputPath = path.resolve(process.cwd(), fullOutputPath)
       fs.writeFileSync(fullOutputPath, markdownContent)
+
+      // Format the generated markdown file
+      await formatMarkdown(fullOutputPath)
+      info(`Formatted ${fullOutputPath} using Prettier`)
+
       info(`Successfully processed ${configFile} for ${apiType} API.`)
       info(`Output file: ${fullOutputPath}`)
       info(`Absolute path: ${absoluteOutputPath}`)

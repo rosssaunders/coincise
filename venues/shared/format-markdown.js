@@ -28,6 +28,9 @@ export const formatMarkdown = async filePath => {
 
     // Explicitly load the project's prettier config
     const prettierConfig = await prettier.resolveConfig(filePath)
+    if (!prettierConfig) {
+      throw new Error(`Could not resolve Prettier config for ${filePath}`)
+    }
 
     // Format the content with Prettier using the project's explicit config
     const formattedContent = await prettier.format(content, {
