@@ -1079,7 +1079,7 @@ Response Example
 | cTime                 | String | Creation time<br>Unix second timestamp, e.g. 1622697148 |
 | uTime                 | String | Update time<br>Unix second timestamp, e.g. 1622697148   |
 | tradeScope            | String | Trader tag<br>taker Taker<br>maker Maker                |
-| feeDetail             | Array  | Transaction fee breakdown                               |
+| feeDetail             | Object | Transaction fee breakdown                               |
 | &gt;deduction         | String | Discount or not                                         |
 | &gt;feeCoin           | String | Transaction fee coin                                    |
 | &gt;totalDeductionFee | String | Total transaction fee discount                          |
