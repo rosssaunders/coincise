@@ -7,7 +7,7 @@ import BrowserUtils from "./browserUtils.js"
 import MarkdownUtils from "./markdownUtils.js"
 import ExtractionUtils from "./extractionUtils.js"
 import ConfigUtils from "./configUtils.js"
-import { formatMarkdown } from "../../../shared/format-markdown.js"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 /**
  * Main application class for extracting Deribit API documentation

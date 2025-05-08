@@ -1,7 +1,7 @@
 "use strict"
 
 import process from "process"
-import DeribitDocExtractor from "./DeribitDocExtractor.js"
+import DeribitDocExtractor from "./extractor.js"
 
 /**
  * Main execution function
