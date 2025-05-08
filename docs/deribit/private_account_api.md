@@ -465,10 +465,11 @@ between subaccounts.
 
 ### Parameters
 
-| Parameter     | Required | Type    | Enum | Description    |
-| ------------- | -------- | ------- | ---- | -------------- |
-| refresh_token | true     | string  |      | Refresh token  |
-| subject_id    | true     | integer |      | New subject id |
+| Parameter     | Required | Type    | Enum | Description                                                                                                                                                             |
+| ------------- | -------- | ------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| refresh_token | true     | string  |      | Refresh token                                                                                                                                                           |
+| subject_id    | true     | integer |      | New subject id                                                                                                                                                          |
+| scope         | false    | string  |      | Optional scope override for the new session. Cannot exceed caller's permissions. Supports <code>session</code> scope for direct session creation during token exchange. |
 
 ### Response
 
@@ -1636,7 +1637,7 @@ when logging out, they can override this setting with `Tag 9003.`
 
 # Accessing historical trades and orders using API
 
-- Updated 27 days ago
+- Updated 1 month ago
 
 #### Overview
 
