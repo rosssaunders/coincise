@@ -2481,12 +2481,12 @@ margin accounts.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-- GET /api/v2/mix/market/loan-growth
+- GET /api/v2/margin/market/loan-growth
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/mix/market/loan-growth?symbol=BTCUSDT"
+curl "https://api.bitget.com/api/v2/margin/market/loan-growth?symbol=BTCUSDT"
 ```
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
