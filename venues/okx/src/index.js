@@ -13,6 +13,7 @@ import {
 } from "fs"
 import { join } from "path"
 import process from "process"
+import { formatMarkdown } from "../../shared/format-markdown.js"
 
 /**
  * Extracts sections from the document based on the section configuration
@@ -133,6 +134,11 @@ async function processConfig(document, config) {
 
   // Save the combined markdown to the configured output file
   writeFileSync(config.output_file, combinedMarkdown)
+
+  // Format the markdown file by calling the Prettier shared function
+  await formatMarkdown(config.output_file)
+  console.log(`Formatted markdown file: ${config.output_file}`)
+
   console.log(`Created documentation file: ${config.output_file}`)
 }
 

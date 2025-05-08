@@ -41,8 +41,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run OKX scraper
-        run: npm start
+      - name: Extract private REST API docs
+        run: npm run extract:private-rest
+
+      - name: Extract private WebSocket API docs
+        run: npm run extract:private-ws
+
+      - name: Extract public REST API docs
+        run: npm run extract:public-rest
+
+      - name: Extract public WebSocket API docs
+        run: npm run extract:public-ws
 
       - name: Check for changes
         id: git-check
