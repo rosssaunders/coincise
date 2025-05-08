@@ -3,8 +3,6 @@
  */
 
 import { JSDOM } from "jsdom"
-// const jsdom = require('jsdom');
-// const { JSDOM } = jsdom;
 
 /**
  * Process authentication HTML to markdown table

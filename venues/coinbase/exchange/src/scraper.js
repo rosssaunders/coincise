@@ -2,7 +2,7 @@
  * Main scraper for Coinbase Exchange API documentation
  */
 
-import { launchBrowser } from "../../shared/puppeteer.js"
+import { launchBrowser } from "../../../shared/puppeteer.js"
 import fs from "fs"
 import path from "path"
 import process from "process"
@@ -20,7 +20,7 @@ import {
   generateMarkdownDocument
 } from "./processors/formatters.js"
 import TurndownService from "turndown"
-import { formatMarkdown } from "../../shared/format-markdown.js"
+import { formatMarkdown } from "../../../shared/format-markdown.js"
 
 /**
  * Convert HTML content to Markdown

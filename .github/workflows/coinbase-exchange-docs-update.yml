@@ -41,8 +41,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Coinbase Exchange scraper
-        run: npm run all
+      - name: Run Private REST API scraper
+        run: npm run privaterestapi
+        
+      - name: Run Public REST API scraper
+        run: npm run publicrestapi
+        
+      - name: Run WebSocket API scraper
+        run: npm run websocketapi
 
       - name: Check for changes
         id: git-check
