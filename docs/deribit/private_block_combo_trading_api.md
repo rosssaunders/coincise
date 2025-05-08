@@ -465,10 +465,11 @@ between subaccounts.
 
 ### Parameters
 
-| Parameter     | Required | Type    | Enum | Description    |
-| ------------- | -------- | ------- | ---- | -------------- |
-| refresh_token | true     | string  |      | Refresh token  |
-| subject_id    | true     | integer |      | New subject id |
+| Parameter     | Required | Type    | Enum | Description                                                                                                                                                             |
+| ------------- | -------- | ------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| refresh_token | true     | string  |      | Refresh token                                                                                                                                                           |
+| subject_id    | true     | integer |      | New subject id                                                                                                                                                          |
+| scope         | false    | string  |      | Optional scope override for the new session. Cannot exceed caller's permissions. Supports <code>session</code> scope for direct session creation during token exchange. |
 
 ### Response
 
