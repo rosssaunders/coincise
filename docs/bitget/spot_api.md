@@ -446,9 +446,11 @@ Rate limit: 10 req/sec/IP
 
 ### Description[​](#description "Direct link to Description")
 
-Get Market Trades  
-It supports to get the data within 30days. You can download the older data on
-our [web](https://www.bitget.com/data-download)
+Get Market Trades
+
+- The time interval between startTime and endTime should not exceed 7 days.
+- It supports to get the data within 90days. You can download the older data on
+  our [web](https://www.bitget.com/data-download)
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
