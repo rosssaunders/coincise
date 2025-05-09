@@ -9,7 +9,7 @@
 You are allowed to send **600 requests within a 5-second window per IP** by
 default. This limit applies to all traffic directed to `api.bybit.com`,
 `api.bybick.com`, and local site hostnames such as `api.bybit.kz`. If you
-encounter the error **“403, access too frequent”**, it indicates that your IP
+encounter the error **"403, access too frequent"**, it indicates that your IP
 has exceeded the allowed request frequency. In this case, you should terminate
 all HTTP sessions and wait for at least 10 minutes. The ban will be lifted
 automatically.
@@ -206,15 +206,15 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 
 #### Spread Trading[​](#spread-trading "Direct link to heading")
 
-| Method |                                    Path                                    | Limit       | Upgradable |
-| :----- | :------------------------------------------------------------------------: | ----------- | ---------- |
-| POST   |    <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a>    | 100 req/min | N          |
-| POST   |     <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a>     | 100 req/min | N          |
-| POST   |    <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a>    | 100 req/min | N          |
-| POST   |  <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a>   | 100 req/min | N          |
-| GET    |   <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a>    | 50 req/s    | N          |
-| GET    | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s    | N          |
-| GET    | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s    | N          |
+| Method |                                    Path                                    | Limit    | Upgradable |
+| :----- | :------------------------------------------------------------------------: | -------- | ---------- |
+| POST   |    <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a>    | 20 req/s | N          |
+| POST   |     <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a>     | 20 req/s | N          |
+| POST   |    <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a>    | 20 req/s | N          |
+| POST   |  <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a>   | 5 req/s  | N          |
+| GET    |   <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a>    | 50 req/s | N          |
+| GET    | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N          |
+| GET    | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N          |
 
 ## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 
@@ -416,7 +416,10 @@ _closed status_
 - `CreateByUser`
 - `CreateByFutureSpread` Spread order
 - `CreateByAdminClosing`
-- `CreateBySettle` USDC Futures delivery; Position closed by contract delisted
+- `CreateBySettle` USDC Futures delivery; position closed as a result of the
+  delisting of a contract. This is recorded as a
+  [trade](/docs/v5/order/execution) but not an
+  [order](/docs/v5/order/order-list).
 - `CreateByStopOrder` Futures conditional order
 - `CreateByTakeProfit` Futures take profit order
 - `CreateByPartialTakeProfit` Futures partial take profit order
@@ -635,6 +638,9 @@ Also known as the "standard account".
 - `CancelBySettle` cancelled due to delisting contract
 - `CancelByTpSlTsClear` TP/SL order cancelled when the position is cleared
 - `CancelBySmp` cancelled by [SMP](https://bybit-exchange.github.io/docs/v5/smp)
+- `CancelByDCP` cancelled by DCP triggering
+- `CancelByRebalance` Spread trading: the order price of a single leg order is
+  outside the limit price range.
 
 _Options:_
 
@@ -850,7 +856,10 @@ _USDT Perpetual_:
 _USDT Futures_:
 
 - `BTCUSDT-21FEB25`
-- `ETHUSDT-14FEB25`
+- `ETHUSDT-14FEB25`  
+  The types of USDT Futures contracts offered by Bybit include: Weekly,
+  Bi-Weekly, Tri-Weekly, Monthly, Bi-Monthly, Quarterly, Bi-Quarterly,
+  Tri-Quarterly
 
 _USDC Perpetual_:
 
@@ -1135,7 +1144,8 @@ with the example of BTCUSDT:
 |      3400071      | The net asset is not satisfied                                                                                                                                                             |
 |      3401010      | Cannot switch to PM mode (for copy trading master trader)                                                                                                                                  |
 |      3400139      | The total value of your positions and orders has exceeded the risk limit for a Perpetual or Futures contract                                                                               |
-|      500010       | The sub-account specified does not belong to the parent account                                                                                                                            |
+|       34040       | Not modified. Indicates you already set this TP/SL value or you didn't pass a required parameter                                                                                           |
+|      500010       | The subaccount specified does not belong to the parent account                                                                                                                             |
 |      500011       | The Uid 592334 provided is not associated with a Unified Trading Account                                                                                                                   |
 
 ## Spot Trade[​](#spot-trade "Direct link to heading")
@@ -1315,108 +1325,109 @@ with the example of BTCUSDT:
 
 ## Asset[​](#asset "Direct link to heading")
 
-|       Code        | Description                                                                                                                                              |
-| :---------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|      131001       | openapi svc error                                                                                                                                        |
-|      131002       | Parameter error                                                                                                                                          |
-|      131002       | Withdraw address chain or destination tag are not equal                                                                                                  |
-|      131003       | Internal error                                                                                                                                           |
-|      131004       | KYC needed                                                                                                                                               |
-|      131066       | This address does not support withdrawals for the time being. Please switch to another address for withdrawing                                           |
-|      131067       | Travel rule verification failed, please contact the target exchange. Travel rule for KR user                                                             |
-|      131068       | Travel rule information is insufficient, please provide additional details. Travel rule for KR user                                                      |
-|      131069       | Unable to withdraw to the receipt, please contact the target the exchange. Travel rule for KR user                                                       |
-|      131070       | The recipient's name is mismatched with the targeted exchange. Travel rule for KR user                                                                   |
-|      131071       | The recipient has not undergone KYC verification. Travel rule for KR user                                                                                |
-|      131072       | Your withdrawal currency is not supported by the target exchange. Travel rule for KR user                                                                |
-|      131073       | Your withdrawal address has not been included in the target exchange. Travel rule for KR user                                                            |
-|      131074       | Beneficiary info is required, please refer to the latest api document. Travel rule for KR user                                                           |
-|      131075       | InternalAddressCannotBeYourself                                                                                                                          |
-|      131076       | internal transfer not support sub-accounts                                                                                                               |
-|      131077       | receive user not exist                                                                                                                                   |
-|      131078       | receive user deposit has been banned                                                                                                                     |
-|      131079       | receive user need kyc                                                                                                                                    |
-|      131080       | User left retry times is zero                                                                                                                            |
-|      131081       | Do not input memo/tag,please.                                                                                                                            |
-|      131082       | Do not repeat the request                                                                                                                                |
-|      131083       | Withdraw only allowed from address book                                                                                                                  |
-|      131084       | Withdraw failed because of Uta Upgrading                                                                                                                 |
-|      131085       | Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered)                                                           |
-|      131086       | Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered)                                                                       |
-|      131087       | your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again                                                  |
-|      131088       | The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s       |
-|      131089       | User sensitive operation, withdrawal is prohibited within 24 hours                                                                                       |
-|      131090       | User withdraw has been banned                                                                                                                            |
-|      131091       | Blocked login status does not allow withdrawals                                                                                                          |
-|      131092       | User status is abnormal                                                                                                                                  |
-|      131093       | The withdrawal address is not in the whitelist                                                                                                           |
-|      131094       | UserId is not in the whitelist                                                                                                                           |
-|      131095       | Withdrawl amount exceeds the 24 hour platform limit                                                                                                      |
-|      131096       | Withdraw amount does not satify the lower limit or upper limit                                                                                           |
-|      131097       | Withdrawal of this currency has been closed                                                                                                              |
-|      131098       | Withdrawal currently is not availble from new address                                                                                                    |
-|      131099       | Hot wallet status can cancel the withdraw                                                                                                                |
-|      131200       | Service error                                                                                                                                            |
-|      131201       | Internal error                                                                                                                                           |
-|      131202       | Invalid memberId                                                                                                                                         |
-|      131203       | Request parameter error                                                                                                                                  |
-|      131204       | Account info error                                                                                                                                       |
-|      131205       | Query transfer error                                                                                                                                     |
-|      131206       | cannot be transfer                                                                                                                                       |
-|      131207       | Account not exist                                                                                                                                        |
-|      131208       | Forbid transfer                                                                                                                                          |
-|      131209       | Get subMember relation error                                                                                                                             |
-|      131210       | Amount accuracy error                                                                                                                                    |
-|      131211       | fromAccountType can't be the same as toAccountType                                                                                                       |
-|      131212       | Insufficient balance                                                                                                                                     |
-|      131213       | TransferLTV check error                                                                                                                                  |
-|      131214       | TransferId exist                                                                                                                                         |
-|      131215       | Amount error                                                                                                                                             |
-|      131216       | Query balance error                                                                                                                                      |
-|      131217       | Risk check error                                                                                                                                         |
-|      131227       | Sub-account do not have universal transfer permission                                                                                                    |
-|      131228       | your balance is not enough. Please check transfer safe amount                                                                                            |
-|      131229       | Due to compliance requirements, the current currency is not allowed to transfer                                                                          |
-|      131230       | The system is busy, please try again later                                                                                                               |
-|      131231       | Transfers into this account are not supported                                                                                                            |
-|      131232       | Transfers out this account are not supported                                                                                                             |
-|      131233       | can not transfer the coin that not supported for islamic account                                                                                         |
-|      140001       | Switching the PM spot hedging switch is not allowed in non PM mode                                                                                       |
-| <del>140002</del> | <del>Institutional lending users do not support PM spot hedging</del>                                                                                    |
-|      140003       | You have position(s) being liquidated, please try again later.                                                                                           |
-|      140004       | Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated. |
-|      140005       | Risk level after switching modes exceeds threshold                                                                                                       |
-|      141004       | sub member is not normal                                                                                                                                 |
-|      141025       | This sub-account has assets and cannot be deleted                                                                                                        |
-|      181000       | category is null                                                                                                                                         |
-|      181001       | category only support linear or option or spot.                                                                                                          |
-|      181002       | symbol is null.                                                                                                                                          |
-|      181003       | side is null.                                                                                                                                            |
-|      181004       | side only support Buy or Sell.                                                                                                                           |
-|      181005       | orderStatus is wrong                                                                                                                                     |
-|      181006       | startTime is not number                                                                                                                                  |
-|      181007       | endTime is not number                                                                                                                                    |
-|      181008       | Parameter startTime and endTime are both needed                                                                                                          |
-|      181009       | Parameter startTime needs to be smaller than endTime                                                                                                     |
-|      181010       | The time range between startTime and endTime cannot exceed 7 days                                                                                        |
-|      181011       | limit is not a number                                                                                                                                    |
-|      181012       | symbol not exist                                                                                                                                         |
-|      181013       | Only support settleCoin: usdc                                                                                                                            |
-|      181014       | Classic account is not supported                                                                                                                         |
-|      181018       | Invalid expDate.                                                                                                                                         |
-|      181019       | Parameter expDate can't be earlier than 2 years                                                                                                          |
-|      182000       | symbol related quote price is null                                                                                                                       |
-|      182200       | Please upgrade UTA first.                                                                                                                                |
-|      182201       | You must enter 2 time parameters.                                                                                                                        |
-|      182202       | The start time must be less than the end time                                                                                                            |
-|      182203       | Please enter valid characters                                                                                                                            |
-|      182204       | Coin does not exist                                                                                                                                      |
-|      182205       | User level does not exist                                                                                                                                |
-|      700000       | accountType/quoteTxId cannot be null                                                                                                                     |
-|      700001       | quote fail:no dealer can used                                                                                                                            |
-|      700004       | order does not exist                                                                                                                                     |
-|      700007       | Large Amount Limit                                                                                                                                       |
-|      700012       | UTA upgrading, don't allow to apply for quote                                                                                                            |
+|       Code        | Description                                                                                                                                                  |
+| :---------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      131001       | openapi svc error                                                                                                                                            |
+|      131002       | Parameter error                                                                                                                                              |
+|      131002       | Withdraw address chain or destination tag are not equal                                                                                                      |
+|      131003       | Internal error                                                                                                                                               |
+|      131004       | KYC needed                                                                                                                                                   |
+|      131065       | Your KYC information is incomplete, please go to the KYC information page of the web or app to complete the information. kyc=India client may encounter this |
+|      131066       | This address does not support withdrawals for the time being. Please switch to another address for withdrawing                                               |
+|      131067       | Travel rule verification failed, please contact the target exchange. Travel rule for KR user                                                                 |
+|      131068       | Travel rule information is insufficient, please provide additional details. Travel rule for KR user                                                          |
+|      131069       | Unable to withdraw to the receipt, please contact the target the exchange. Travel rule for KR user                                                           |
+|      131070       | The recipient's name is mismatched with the targeted exchange. Travel rule for KR user                                                                       |
+|      131071       | The recipient has not undergone KYC verification. Travel rule for KR user                                                                                    |
+|      131072       | Your withdrawal currency is not supported by the target exchange. Travel rule for KR user                                                                    |
+|      131073       | Your withdrawal address has not been included in the target exchange. Travel rule for KR user                                                                |
+|      131074       | Beneficiary info is required, please refer to the latest api document. Travel rule for KR user                                                               |
+|      131075       | InternalAddressCannotBeYourself                                                                                                                              |
+|      131076       | internal transfer not support subaccounts                                                                                                                    |
+|      131077       | receive user not exist                                                                                                                                       |
+|      131078       | receive user deposit has been banned                                                                                                                         |
+|      131079       | receive user need kyc                                                                                                                                        |
+|      131080       | User left retry times is zero                                                                                                                                |
+|      131081       | Do not input memo/tag,please.                                                                                                                                |
+|      131082       | Do not repeat the request                                                                                                                                    |
+|      131083       | Withdraw only allowed from address book                                                                                                                      |
+|      131084       | Withdraw failed because of Uta Upgrading                                                                                                                     |
+|      131085       | Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered)                                                               |
+|      131086       | Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered)                                                                           |
+|      131087       | your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again                                                      |
+|      131088       | The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s           |
+|      131089       | User sensitive operation, withdrawal is prohibited within 24 hours                                                                                           |
+|      131090       | User withdraw has been banned                                                                                                                                |
+|      131091       | Blocked login status does not allow withdrawals                                                                                                              |
+|      131092       | User status is abnormal                                                                                                                                      |
+|      131093       | The withdrawal address is not in the whitelist                                                                                                               |
+|      131094       | UserId is not in the whitelist                                                                                                                               |
+|      131095       | Withdrawl amount exceeds the 24 hour platform limit                                                                                                          |
+|      131096       | Withdraw amount does not satify the lower limit or upper limit                                                                                               |
+|      131097       | Withdrawal of this currency has been closed                                                                                                                  |
+|      131098       | Withdrawal currently is not availble from new address                                                                                                        |
+|      131099       | Hot wallet status can cancel the withdraw                                                                                                                    |
+|      131200       | Service error                                                                                                                                                |
+|      131201       | Internal error                                                                                                                                               |
+|      131202       | Invalid memberId                                                                                                                                             |
+|      131203       | Request parameter error                                                                                                                                      |
+|      131204       | Account info error                                                                                                                                           |
+|      131205       | Query transfer error                                                                                                                                         |
+|      131206       | cannot be transfer                                                                                                                                           |
+|      131207       | Account not exist                                                                                                                                            |
+|      131208       | Forbid transfer                                                                                                                                              |
+|      131209       | Get subMember relation error                                                                                                                                 |
+|      131210       | Amount accuracy error                                                                                                                                        |
+|      131211       | fromAccountType can't be the same as toAccountType                                                                                                           |
+|      131212       | Insufficient balance                                                                                                                                         |
+|      131213       | TransferLTV check error                                                                                                                                      |
+|      131214       | TransferId exist                                                                                                                                             |
+|      131215       | Amount error                                                                                                                                                 |
+|      131216       | Query balance error                                                                                                                                          |
+|      131217       | Risk check error                                                                                                                                             |
+|      131227       | subaccount do not have universal transfer permission                                                                                                         |
+|      131228       | your balance is not enough. Please check transfer safe amount                                                                                                |
+|      131229       | Due to compliance requirements, the current currency is not allowed to transfer                                                                              |
+|      131230       | The system is busy, please try again later                                                                                                                   |
+|      131231       | Transfers into this account are not supported                                                                                                                |
+|      131232       | Transfers out this account are not supported                                                                                                                 |
+|      131233       | can not transfer the coin that not supported for islamic account                                                                                             |
+|      140001       | Switching the PM spot hedging switch is not allowed in non PM mode                                                                                           |
+| <del>140002</del> | <del>Institutional lending users do not support PM spot hedging</del>                                                                                        |
+|      140003       | You have position(s) being liquidated, please try again later.                                                                                               |
+|      140004       | Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated.     |
+|      140005       | Risk level after switching modes exceeds threshold                                                                                                           |
+|      141004       | sub member is not normal                                                                                                                                     |
+|      141025       | This subaccount has assets and cannot be deleted                                                                                                             |
+|      181000       | category is null                                                                                                                                             |
+|      181001       | category only support linear or option or spot.                                                                                                              |
+|      181002       | symbol is null.                                                                                                                                              |
+|      181003       | side is null.                                                                                                                                                |
+|      181004       | side only support Buy or Sell.                                                                                                                               |
+|      181005       | orderStatus is wrong                                                                                                                                         |
+|      181006       | startTime is not number                                                                                                                                      |
+|      181007       | endTime is not number                                                                                                                                        |
+|      181008       | Parameter startTime and endTime are both needed                                                                                                              |
+|      181009       | Parameter startTime needs to be smaller than endTime                                                                                                         |
+|      181010       | The time range between startTime and endTime cannot exceed 7 days                                                                                            |
+|      181011       | limit is not a number                                                                                                                                        |
+|      181012       | symbol not exist                                                                                                                                             |
+|      181013       | Only support settleCoin: usdc                                                                                                                                |
+|      181014       | Classic account is not supported                                                                                                                             |
+|      181018       | Invalid expDate.                                                                                                                                             |
+|      181019       | Parameter expDate can't be earlier than 2 years                                                                                                              |
+|      182000       | symbol related quote price is null                                                                                                                           |
+|      182200       | Please upgrade UTA first.                                                                                                                                    |
+|      182201       | You must enter 2 time parameters.                                                                                                                            |
+|      182202       | The start time must be less than the end time                                                                                                                |
+|      182203       | Please enter valid characters                                                                                                                                |
+|      182204       | Coin does not exist                                                                                                                                          |
+|      182205       | User level does not exist                                                                                                                                    |
+|      700000       | accountType/quoteTxId cannot be null                                                                                                                         |
+|      700001       | quote fail:no dealer can used                                                                                                                                |
+|      700004       | order does not exist                                                                                                                                         |
+|      700007       | Large Amount Limit                                                                                                                                           |
+|      700012       | UTA upgrading, don't allow to apply for quote                                                                                                                |
 
 ## Crypto Loan[​](#crypto-loan "Direct link to heading")
 
@@ -2240,7 +2251,7 @@ GET `/v5/market/tickers`
 | &gt; basisRate                                                      | string | Basis rate                                                                                           |
 | &gt; basis                                                          | string | Basis                                                                                                |
 | &gt; deliveryFeeRate                                                | string | Delivery fee rate                                                                                    |
-| &gt; deliveryTime                                                   | string | Delivery timestamp (ms), applicable to expired futures only                                          |
+| &gt; deliveryTime                                                   | string | Delivery timestamp (ms), applicable to expiry futures only                                           |
 | &gt; ask1Size                                                       | string | Best ask size                                                                                        |
 | &gt; bid1Price                                                      | string | Best bid price                                                                                       |
 | &gt; ask1Price                                                      | string | Best ask price                                                                                       |
