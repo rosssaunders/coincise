@@ -46,5 +46,5 @@ export const config = {
   },
 
   // Output directory for the generated Markdown files
-  outputDir: "../../../docs/kucoin"
+  outputDir: "../../docs/kucoin"
 }

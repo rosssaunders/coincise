@@ -60,14 +60,6 @@ export const writeToFile = async (filePath, content) => {
   console.log(`File written successfully: ${filePath}`)
 
   // Format the markdown file if it is a markdown file
-  if (filePath.endsWith(".md") || filePath.endsWith(".markdown")) {
-    try {
-      await formatMarkdown(filePath)
-      console.log(`Formatted: ${filePath}`)
-    } catch (err) {
-      console.error("Error formatting markdown:", err)
-      console.error("Stack trace:", err.stack)
-      process.exit(1)
-    }
-  }
+  await formatMarkdown(filePath)
+  console.log(`Formatted: ${filePath}`)
 }
