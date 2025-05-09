@@ -1,6 +1,6 @@
 # Bitget Futures API Documentation
 
-# Futures Trading API
+## Futures Trading API
 
 This section introduces the API documentation for Futures trading.
 
@@ -28,15 +28,19 @@ Every account has certain demo coins, you could check your demo coin balance by
 calling the [Account List](/api-doc/contract/account/Get-Account-List) API with
 above demo trading product type
 
-# VIP Fee Rate
+> **Source:** [original URL](https://www.bitget.com/api-doc/contract/intro)
+
+---
+
+## VIP Fee Rate
 
 Rate limit:10 req/sec/IP
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get VIP fee rate
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/vip-fee-rate
 
@@ -46,7 +50,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/vip-fee-rate"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 N/A
 
@@ -56,7 +60,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695794449789,    "data": [        {            "level": "1",            "dealAmount": "100000",            "assetAmount": "50000",            "takerFeeRate": "0.0006",            "makerFeeRate": "0.0004",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        },        {            "level": "2",            "dealAmount": "200000",            "assetAmount": "500000",            "takerFeeRate": "0.0006",            "makerFeeRate": "0.0004",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter               | Type   | Description                                                      |
 | :---------------------- | :----- | :--------------------------------------------------------------- |
@@ -68,15 +72,20 @@ Response Example
 | &gt; btcWithdrawAmount  | String | 24-hour withdrawal limit (BTC)                                   |
 | &gt; usdtWithdrawAmount | String | 24-hour withdrawal limit (USDT)                                  |
 
-# Get Interest rate history
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-VIP-Fee-Rate)
+
+---
+
+## Get Interest rate history
 
 Frequency limit:5 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Interest rate history
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/union-interest-rate-history
 
@@ -86,7 +95,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/union-interest-rate-history?coin=USDT"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description |
 | :-------- | :----- | :------- | :---------- |
@@ -98,7 +107,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725948522731,    "data": {        "coin": "USDT",        "historyInterestRateList": [            {                "ts": "1723533015946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            },            {                "ts": "1723446615946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            },            {                "ts": "1723360215946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            }        ]    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter               | Type   | Description           |
 | :---------------------- | :----- | :-------------------- |
@@ -108,15 +117,20 @@ Response Example
 | &gt; dailyInterestRate  | String | Daily interest rate   |
 | &gt; ts                 | String | Interest time         |
 
-# Get Interest Exchange Rate
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Interest-Rate)
+
+---
+
+## Get Interest Exchange Rate
 
 Rate limit:5 requests/sec/IP
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Interest exchange rate
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/exchange-rate
 
@@ -126,7 +140,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/exchange-rate"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 N/A
 
@@ -136,7 +150,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725948315516,    "data": [        {            "coin": "BTC",            "exchangeRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "1000",                    "exchangeRate": "0.99"                },                {                    "tier": "2",                    "minAmount": "1000",                    "maxAmount": "5000",                    "exchangeRate": "0.98"                },                {                    "tier": "3",                    "minAmount": "5000",                    "maxAmount": "10000",                    "exchangeRate": "0.97"                },                {                    "tier": "4",                    "minAmount": "10000",                    "maxAmount": "50000",                    "exchangeRate": "0.96"                },                {                    "tier": "5",                    "minAmount": "50000",                    "maxAmount": "-1",                    "exchangeRate": "0.95"                }            ]        },        {            "coin": "ETH",            "exchangeRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "1000",                    "exchangeRate": "0.99"                },                {                    "tier": "2",                    "minAmount": "1000",                    "maxAmount": "5000",                    "exchangeRate": "0.98"                },                {                    "tier": "3",                    "minAmount": "5000",                    "maxAmount": "10000",                    "exchangeRate": "0.97"                },                {                    "tier": "4",                    "minAmount": "10000",                    "maxAmount": "50000",                    "exchangeRate": "0.96"                },                {                    "tier": "5",                    "minAmount": "50000",                    "maxAmount": "-1",                    "exchangeRate": "0.95"                }            ]        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter         | Type   | Description                                         |
 | :---------------- | :----- | :-------------------------------------------------- |
@@ -147,15 +161,20 @@ Response Example
 | &gt; maxAmount    | String | Max<br><code>-1</code> means there is no limitation |
 | &gt; exchangeRate | String | Exchange rate                                       |
 
-# Get Discount Rate
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Exchange-Rate)
+
+---
+
+## Get Discount Rate
 
 Frequency limit:5 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Discount Rate
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/discount-rate
 
@@ -165,7 +184,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/discount-rate"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 N/A
 
@@ -175,7 +194,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725848381845,    "data": [        {            "coin": "BTC",            "userLimit": "100",            "totalLimit": "1500",            "discountRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "10000",                    "discountRate": "0.99"                },                {                    "tier": "2",                    "minAmount": "10000",                    "maxAmount": "100000",                    "discountRate": "0.95"                },                {                    "tier": "3",                    "minAmount": "100000",                    "maxAmount": "200000",                    "discountRate": "0.9"                },                {                    "tier": "4",                    "minAmount": "200000",                    "maxAmount": "-1",                    "discountRate": "0.8"                }            ]        },        {            "coin": "ETH",            "userLimit": "50000",            "totalLimit": "500000000",            "discountRateList": [                {                    "tier": "1",                    "minAmount": "0",                    "maxAmount": "100",                    "discountRate": "0.9"                },                {                    "tier": "2",                    "minAmount": "100",                    "maxAmount": "5000",                    "discountRate": "0.7"                },                {                    "tier": "3",                    "minAmount": "5000",                    "maxAmount": "-1",                    "discountRate": "0.5"                }            ]        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter         | Type   | Description          |
 | :---------------- | :----- | :------------------- |
@@ -188,15 +207,20 @@ Response Example
 | &gt; maxAmount    | String | Max                  |
 | &gt; discountRate | String | Discount rate        |
 
-# Get Merge Market Depth
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Discount-Rate)
+
+---
+
+## Get Merge Market Depth
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get merge depth data
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/merge-depth
 
@@ -206,7 +230,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/merge-depth?productType=usdt-futures&symbol=BTCUSDT"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -221,7 +245,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695870963008,    "data": {        "asks": [            [                26347.5,                0.25            ],            [                26348.0,                0.16            ]        ],        "bids": [            [                26346.5,                0.16            ],            [                26346.0,                0.32            ]        ],        "ts": "1695870968804",        "scale": "0.1",        "precision": "scale0",        "isMaxPrecision": "NO"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter      | Type               | Description                                                                                               |
 | :------------- | :----------------- | :-------------------------------------------------------------------------------------------------------- |
@@ -236,15 +260,20 @@ Response Example
 | isMaxPrecision | String             | YES indicates that the current accuracy is the maximum, NO indicates that it is not the maximum accuracy. |
 | ts             | String             | Timestamp                                                                                                 |
 
-# Get Ticker
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Merge-Depth)
+
+---
+
+## Get Ticker
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get ticker data of the given 'productType' and 'symbol'
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/ticker
 
@@ -254,7 +283,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/ticker?productType=COIN-FUTURES&symbol=ETHUSDM24"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -267,7 +296,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695794095685,    "data": [        {            "symbol": "ETHUSD_231229",            "lastPr": "1829.3",            "askPr": "1829.8",            "bidPr": "1829.3",            "bidSz": "0.054",            "askSz": "0.785",            "high24h": "0",            "low24h": "0",            "ts": "1695794098184",            "change24h": "0",            "baseVolume": "0",            "quoteVolume": "0",            "usdtVolume": "0",            "openUtc": "0",            "changeUtc24h": "0",            "indexPrice": "1822.15",            "fundingRate": "0",            "holdingAmount": "9488.49",            "deliveryStartTime": "1693538723186",            "deliveryTime": "1703836799000",            "deliveryStatus": "delivery_normal",            "open24h": "0",            "markPrice": "1829"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter              | Type   | Description                                                                                                                                                                                                                                                                                                                                                                    |
 | :--------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -295,15 +324,20 @@ Response Example
 | &gt; deliveryStatus    | String | Delivery status (only for delivery contracts; <code>delivery_config_period</code>: Newly listed currency pairs are configured<br><code>delivery_normal</code>: Trading normally<br><code>delivery_before</code>: 10 minutes before delivery, opening positions are prohibited<br><code>delivery_period</code>: Delivery, opening, closing, and canceling orders are prohibited |
 | &gt; markPrice         | String | Mark price                                                                                                                                                                                                                                                                                                                                                                     |
 
-# Get All Tickers
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Ticker)
+
+---
+
+## Get All Tickers
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get all ticker data of the given 'productType'
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/tickers
 
@@ -313,7 +347,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/tickers?productType=COIN-FUTURES"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -325,7 +359,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695794269124,    "data": [        {            "symbol": "BTCUSD",            "lastPr": "29904.5",            "askPr": "29904.5",            "bidPr": "29903.5",            "bidSz": "0.5091",            "askSz": "2.2694",            "high24h": "0",            "low24h": "0",            "ts": "1695794271400",            "change24h": "0",            "baseVolume": "0",            "quoteVolume": "0",            "usdtVolume": "0",            "openUtc": "0",            "changeUtc24h": "0",            "indexPrice": "29132.353333",            "fundingRate": "-0.0007",            "holdingAmount": "125.6844",            "deliveryStartTime": null,            "deliveryTime": null,            "deliveryStatus": "delivery_normal",            "open24h": "0",            "markPrice": "12345"        },        {            "symbol": "ETHUSD_231229",            "lastPr": "1829.3",            "askPr": "1829.8",            "bidPr": "1829.3",            "bidSz": "0.054",            "askSz": "0.785",            "high24h": "0",            "low24h": "0",            "ts": "1695794271400",            "change24h": "0",            "baseVolume": "0",            "quoteVolume": "0",            "usdtVolume": "0",            "openUtc": "0",            "changeUtc24h": "0",            "indexPrice": "1822.15",            "fundingRate": "0",            "holdingAmount": "9488.49",            "deliveryStartTime": "1693538723186",            "deliveryTime": "1703836799000",            "deliveryStatus": "delivery_normal",            "open24h": "0",            "markPrice": "1234"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter              | Type   | Description                                                                                                                                                                                                                                                                                                                                                                    |
 | :--------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -353,15 +387,20 @@ Response Example
 | &gt; deliveryStatus    | String | Delivery status (only for delivery contracts; <code>delivery_config_period</code>: Newly listed currency pairs are configured<br><code>delivery_normal</code>: Trading normally<br><code>delivery_before</code>: 10 minutes before delivery, opening positions are prohibited<br><code>delivery_period</code>: Delivery, opening, closing, and canceling orders are prohibited |
 | &gt; markPrice         | String | Mark price                                                                                                                                                                                                                                                                                                                                                                     |
 
-# Get Recent Transactions
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-All-Symbol-Ticker)
+
+---
+
+## Get Recent Transactions
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get the record of last 100 transactions
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/fills
 
@@ -371,7 +410,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/fills?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -385,7 +424,7 @@ Response Example
 {    "code": "00000",    "data": [        {            "tradeId": "1",            "price": "29990.5",            "size": "0.0166",            "side": "sell",            "ts": "1627116776464",            "symbol": "BTCUSDT"        },        {            "tradeId": "2",            "price": "30007.0",            "size": "0.0166",            "side": "buy",            "ts": "1627116600875",            "symbol": "BTCUSDT"        }    ],    "msg": "success",    "requestTime": 1690313813709}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter        | Type   | Description                                                            |
 | :--------------- | :----- | :--------------------------------------------------------------------- |
@@ -396,16 +435,21 @@ Response Example
 | &gt;&gt; ts      | String | Milliseconds format of current data timestamp Unix, e.g. 1597026383085 |
 | &gt;&gt; symbol  | String | Trading Pair name e.g. ETHUSDT                                         |
 
-# Get History Transactions
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Recent-Fills)
+
+---
+
+## Get History Transactions
 
 Frequency limit: 10 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 - Get transaction records of the last 90 days
 - The time interval between startTime and endTime should not exceed 7 days.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/fills-history
 
@@ -415,7 +459,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/fills-history?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -432,7 +476,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695865481335,    "data": [        {            "tradeId": "1",            "price": "26372.5",            "size": "9.25",            "side": "Sell",            "ts": "1695865151000",            "symbol": "BTCUSDT"        },        {            "tradeId": "2",            "price": "26383",            "size": "12.12",            "side": "Buy",            "ts": "1695865115000",            "symbol": "BTCUSDT"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter    | Type   | Description                                                                         |
 | :----------- | :----- | :---------------------------------------------------------------------------------- |
@@ -443,11 +487,16 @@ Response Example
 | &gt; ts      | String | Current data timestamp<br>Unix timestamp in milliseconds format, e.g. 1597026383085 |
 | &gt; symbol  | String | Trading pair name                                                                   |
 
-# Get Candlestick Data
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Fills-History)
+
+---
+
+## Get Candlestick Data
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 By default, 100 records are returned. If there is no data, an empty array is
 returned. The queryable data history varies depending on the k-line granularity.
@@ -461,7 +510,7 @@ The rules are as follows:
 4H can be checked for up to 240 days;  
 6H can be checked for up to 360 days
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/candles
 
@@ -471,7 +520,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/candles?symbol=BTCUSDT&granularity=5m&limit=100&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :---------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -489,7 +538,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695865615662,    "data": [        [            "1695835800000",            "26210.5",            "26210.5",            "26194.5",            "26194.5",            "26.26",            "687897.63"        ],        [            "1695836100000",            "26194.5",            "26194.5",            "26171",            "26171",            "17.98",            "470618.72"        ]    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                                                                       |
 | :-------- | :----- | :---------------------------------------------------------------------------------------------------------------- |
@@ -501,15 +550,20 @@ Response Example
 | index[5]  | String | Trading volume of the base coin                                                                                   |
 | index[6]  | String | Trading volume of quote currency                                                                                  |
 
-# Get Historical Candlestick
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Candle-Data)
+
+---
+
+## Get Historical Candlestick
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Query all historical K-line data and return a maximum of 200 pieces of data.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/history-candles
 
@@ -519,7 +573,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/history-candles?symbol=BTCUSDT&granularity=1W&limit=200&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :---------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -536,7 +590,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695865864944,    "data": [        [            "1687708800000",            "27176.93",            "27177.43",            "27166.93",            "27177.43",            "2990.08",            "81246917.3294"        ],        [            "1688313600000",            "27177.43",            "27177.43",            "24000",            "24001",            "2989.1",            "72450031.0448"        ]    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                               |
 | :-------- | :----- | :-------------------------------------------------------- |
@@ -548,16 +602,21 @@ Response Example
 | index[5]  | String | Trading volume of the base coin                           |
 | index[6]  | String | Trading volume of quote currency                          |
 
-# Get Historical Index Price Candlestick
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-History-Candle-Data)
+
+---
+
+## Get Historical Index Price Candlestick
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Query the historical K-line data of contract index price, and return a maximum
 of 200 pieces of data.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/history-index-candles
 
@@ -567,7 +626,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/history-index-candles?symbol=BTCUSDT&granularity=5m&endTime=1691329771000&limit=100&startTime=1688824171000&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :---------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -584,7 +643,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695795177323,    "data": [        [            "1691328900000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ],        [            "1691329200000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ]    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                               |
 | :-------- | :----- | :-------------------------------------------------------- |
@@ -596,15 +655,20 @@ Response Example
 | index[5]  | String | Trading volume of the base coin                           |
 | index[6]  | String | Trading volume of quote currency                          |
 
-# Get Historical Mark Price Candlestick
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data)
+
+---
+
+## Get Historical Mark Price Candlestick
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get historical mark price candle data
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/history-mark-candles
 
@@ -614,7 +678,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/history-mark-candles?symbol=BTCUSDT&granularity=5m&endTime=1691329771000&limit=100&startTime=1688824171000&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :---------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -631,7 +695,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695795362764,    "data": [        [            "1691299500000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ],        [            "1691299800000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ]    ]  }
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                               |
 | :-------- | :----- | :-------------------------------------------------------- |
@@ -643,15 +707,20 @@ Response Example
 | index[5]  | String | Trading volume of the base coin                           |
 | index[6]  | String | Trading volume of quote currency                          |
 
-# Get Open Interest
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-History-Mark-Candle-Data)
+
+---
+
+## Get Open Interest
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get the total positions of a certain trading pair on the platform
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/open-interest
 
@@ -661,7 +730,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/open-interest?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -674,7 +743,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695796780343,    "data": {        "openInterestList": [            {                "symbol": "BTCUSDT",                "size": "34278.06"            }        ],        "ts": "1695796781616"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter            | Type   | Description                                                                |
 | :------------------- | :----- | :------------------------------------------------------------------------- |
@@ -683,16 +752,21 @@ Response Example
 | &gt;&gt;symbol       | String | Trading pair name                                                          |
 | &gt;&gt;size         | String | Total open interest of the platform<br>Specific coins, eg.: ETH in ETHUSDT |
 
-# Get Next Funding Time
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Open-Interest)
+
+---
+
+## Get Next Funding Time
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get the next settlement time of the contract and the settlement period of the
 contract
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/funding-time
 
@@ -702,7 +776,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/funding-time?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -715,7 +789,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695796425096,    "data": [        {            "symbol": "BTCUSDT",            "nextFundingTime": "1695801600000",            "ratePeriod": "8"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter            | Type   | Description                                |
 | :------------------- | :----- | :----------------------------------------- |
@@ -723,15 +797,20 @@ Response Example
 | &gt; nextFundingTime | String | Next settlement time(ms)                   |
 | &gt; ratePeriod      | String | Rate settlement cycle<br>The unit is hour. |
 
-# Get Mark/Index/Market Prices
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Symbol-Next-Funding-Time)
+
+---
+
+## Get Mark/Index/Market Prices
 
 20 times/s, frequency is limited according to user ID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get market/index/mark prices
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/symbol-price
 
@@ -741,7 +820,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/symbol-price?productType=usdt-futures&symbol=BTCUSDT"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -754,7 +833,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695793384294,    "data": [        {            "symbol": "BTCUSDT",            "price": "26242",            "indexPrice": "34867",            "markPrice": "25555",            "ts": "1695793390482"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter       | Type   | Description                                                               |
 | :-------------- | :----- | :------------------------------------------------------------------------ |
@@ -764,15 +843,20 @@ Response Example
 | &gt; markPrice  | String | Mark price                                                                |
 | &gt; ts         | String | Milliseconds format of current data timestamp Unix, e.g.<br>1672410780000 |
 
-# Get Historical Funding Rates
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Symbol-Price)
+
+---
+
+## Get Historical Funding Rates
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get the historical funding rate of the contract
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/history-fund-rate
 
@@ -782,7 +866,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/history-fund-rate?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -797,7 +881,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695796546319,    "data": [        {            "symbol": "BTCUSDT",            "fundingRate": "0.0005",            "fundingTime": "1695776400000"        },        {            "symbol": "BTCUSDT",            "fundingRate": "0.000013",            "fundingTime": "1695715200000"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter       | Type   | Description       |
 | :-------------- | :----- | :---------------- |
@@ -805,15 +889,20 @@ Response Example
 | &gt;fundingRate | String | Funding rate      |
 | &gt;fundingTime | String | Settlement time   |
 
-# Get Current Funding Rate
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-History-Funding-Rate)
+
+---
+
+## Get Current Funding Rate
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get the current funding rate of the contract
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/current-fund-rate
 
@@ -823,11 +912,11 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/current-fund-rate?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol      | String | Yes      | Trading pair                                                                                                                                                                                                                                                                                                                                     |
+| symbol      | String | No       | Trading pair                                                                                                                                                                                                                                                                                                                                     |
 | productType | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT professional futures<br><code>COIN-FUTURES</code> Mixed futures<br><code>USDC-FUTURES</code> USDC professional futures<br><code>SUSDT-FUTURES</code> USDT professional futures demo<br><code>SCOIN-FUTURES</code> Mixed futures demo<br><code>SUSDC-FUTURES</code> USDC professional futures demo |
 
 Response Example
@@ -836,7 +925,7 @@ Response Example
 {  "code": "00000",  "msg": "success",  "requestTime": 1743054548546,  "data": [    {      "symbol": "BTCUSDT",      "fundingRate": "0.000068",      "fundingRateInterval": "8",      "nextUpdate": "1743062400000",      "minFundingRate": "-0.003",      "maxFundingRate": "0.003"    }  ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter               | Type   | Description                                                                                                                                |
 | :---------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -847,15 +936,20 @@ Response Example
 | &gt;minFundingRate      | String | Lower limit of funding rate<br>Returned in decimal form. 0.025 represents 2.5%.                                                            |
 | &gt;maxFundingRate      | String | Upper limit of funding rate<br>Returned in decimal form. 0.025 represents 2.5%.                                                            |
 
-# Get Contract OI Limit
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate)
+
+---
+
+## Get Contract OI Limit
 
 Rate Limit: 10 req/sec/IP
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Interface is used to get future contract OI Limit.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/oi-limit
 
@@ -865,7 +959,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/oi-limit?productType=usdt-futures&symbol=BTCUSDT"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                               |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -878,7 +972,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1741596239587,    "data": [        {            "symbol": "BTCUSDT",            "notionalValue": "100000",            "totalNotionalValue": "200000"        },        {            "symbol": "BCHUSDT",            "notionalValue": "100000",            "totalNotionalValue": "200000"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter               | Type   | Description                                          |
 | :---------------------- | :----- | :--------------------------------------------------- |
@@ -886,15 +980,20 @@ Response Example
 | &gt; notionalValue      | String | Individual User Position Notional Value              |
 | &gt; totalNotionalValue | String | Sub-account and Main-account Position Notional Value |
 
-# Get Contract Config
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-Contracts-Oi)
+
+---
+
+## Get Contract Config
 
 Rate Limit: 20 req/sec/IP
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Interface is used to get future contract details.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/contracts
 
@@ -904,7 +1003,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/contracts?productType=usdt-futures&symbol=BTCUSDT"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -917,7 +1016,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695793701269,    "data": [        {            "symbol": "BTCUSDT",            "baseCoin": "BTC",            "quoteCoin": "USDT",            "buyLimitPriceRatio": "0.9",            "sellLimitPriceRatio": "0.9",            "feeRateUpRatio": "0.1",            "makerFeeRate": "0.0004",            "takerFeeRate": "0.0006",            "openCostUpRatio": "0.1",            "supportMarginCoins": [                "USDT"            ],            "minTradeNum": "0.01",            "priceEndStep": "1",            "volumePlace": "2",            "pricePlace": "1",            "sizeMultiplier": "0.01",            "symbolType": "perpetual",            "minTradeUSDT": "5",            "maxSymbolOrderNum": "999999",            "maxProductOrderNum": "999999",            "maxPositionNum": "150",            "symbolStatus": "normal",            "offTime": "-1",            "limitOpenTime": "-1",            "deliveryTime": "",            "deliveryStartTime": "",            "launchTime": "",            "fundInterval": "8",            "minLever": "1",            "maxLever": "125",            "posLimit": "0.05",            "maintainTime": "1680165535278"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                   | Type               | Description                                                                                                                                                                                                                                                                                                |
 | :-------------------------- | :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -954,15 +1053,20 @@ Response Example
 | &gt; posLimit               | String             | Position limits                                                                                                                                                                                                                                                                                            |
 | &gt; maintainTime           | String             | Maintenance time (there will be a value when the status is under maintenance/upcoming maintenance)                                                                                                                                                                                                         |
 
-# Get Single Account
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts)
+
+---
+
+## Get Single Account
 
 Frequency limit: 10 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get account details with the given 'marginCoin' and 'productType'
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/account/account
 
@@ -972,7 +1076,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/account/account?symbol=btcusdt&productType=USDT-FUTURES&marginCoin=usdt" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -986,7 +1090,7 @@ Response Example
 {  "code": "00000",  "data": {    "marginCoin": "USDT",    "locked": "0",    "available": "13168.86110692",    "crossedMaxAvailable": "13168.86110692",    "isolatedMaxAvailable": "13168.86110692",    "maxTransferOut": "13168.86110692",    "accountEquity": "13178.86110692",    "usdtEquity": "13178.861106922",    "btcEquity": "0.344746495477",    "crossedRiskRate": "0",    "crossedMarginLeverage": "20",    "isolatedLongLever": "20",    "isolatedShortLever": "20",    "marginMode": "crossed",    "posMode": "hedge_mode",    "unrealizedPL": "",    "coupon": "0",    "crossedUnrealizedPL":"23",    "isolatedUnrealizedPL":"0",    "assetMode": "union"  },  "msg": "success",  "requestTime": 1627292199523}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                 | Type   | Description                                                                                    |
 | :------------------------ | :----- | :--------------------------------------------------------------------------------------------- |
@@ -1011,15 +1115,20 @@ Response Example
 | &gt;isolatedUnrealizedPL  | String | unrealizedPL for isolated                                                                      |
 | &gt;assetMode             | String | Assets mode<br><code>union</code> Multi-assets mode<br><code>single</code> Single-assets mode  |
 
-# Get Account List
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Get-Single-Account)
+
+---
+
+## Get Account List
 
 Frequency limit: 10 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Query all account information under a certain product type
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/account/accounts
 
@@ -1029,7 +1138,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/account/accounts?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1041,7 +1150,7 @@ Response Example
 {    "code": "00000",    "data": [        {            "marginCoin": "USDT",            "locked": "0.31876482",            "available": "10575.26735771",            "crossedMaxAvailable": "10580.56434289",            "isolatedMaxAvailable": "10580.56434289",            "maxTransferOut": "10572.92904289",            "accountEquity": "10582.90265771",            "usdtEquity": "10582.902657719473",            "btcEquity": "0.204885807029",            "crossedRiskRate": "0",            "unrealizedPL": "",            "coupon": "0",            "unionTotalMagin": "111,1",            "unionAvailable": "1111.1",            "unionMm": "111",            "assetList": [                {                    "coin": "BTC",                    "balance": "1.2",                    "available": "1.2"                }            ],            "isolatedMargin": "23.43",            "crossedMargin": "34.34",            "crossedUnrealizedPL":"23",            "isolatedUnrealizedPL":"0",            "assetMode": "union"        }    ],    "msg": "success",    "requestTime": 1630901215622}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                | Type   | Description                                                                                   |
 | :----------------------- | :----- | :-------------------------------------------------------------------------------------------- |
@@ -1070,16 +1179,21 @@ Response Example
 | &gt;isolatedUnrealizedPL | String | unrealizedPL for isolated                                                                     |
 | &gt;assetMode            | String | Assets mode<br><code>union</code> Multi-assets mode<br><code>single</code> Single-assets mode |
 
-# Get Subaccount Assets
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Get-Account-List)
+
+---
+
+## Get Subaccount Assets
 
 Frequency limit: 1 time/10s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Query the contract asset information of all sub-accounts. **ND Brokers are not
 allowed to call this endpoint**
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/account/sub-account-assets
 
@@ -1089,7 +1203,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/account/sub-account-assets?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1101,7 +1215,7 @@ Response Example
 {    "code": "00000",    "data": [        {            "userId": 1234567890,            "assetList": [                {                    "marginCoin": "USDT",                    "locked": "0",                    "available": "23.123",                    "crossedMaxAvailable": "23.123",                    "isolatedMaxAvailable": "23.123",                    "maxTransferOut": "23.123",                    "accountEquity": "23.123",                    "usdtEquity": "23.123",                    "btcEquity": "0.001403612744",                    "unrealizedPL": "0",                    "coupon": ""                }            ]        },        {            "userId": 1234567890,            "assetList": [                {                    "marginCoin": "USDT",                    "locked": "0",                    "available": "11",                    "crossedMaxAvailable": "11",                    "isolatedMaxAvailable": "11",                    "maxTransferOut": "11",                    "accountEquity": "11",                    "usdtEquity": "11",                    "btcEquity": "0.000667722189",                    "unrealizedPL": "0",                    "coupon": ""                }            ]        }    ],    "msg": "success",    "requestTime": 1630901215622}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                    | Type   | Description                                                                              |
 | :--------------------------- | :----- | :--------------------------------------------------------------------------------------- |
@@ -1119,15 +1233,20 @@ Response Example
 | &gt;&gt;unrealizedPL         | String | PnL of open positions                                                                    |
 | &gt;&gt;coupon               | String | Trading bonus                                                                            |
 
-# Get USDT-M futures Interest history
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Get-Sub-Account-Contract-Assets)
+
+---
+
+## Get USDT-M futures Interest history
 
 Frequency limit： 5 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get USDT-M futures Interest history
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/account/interest-history
 
@@ -1137,7 +1256,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/account/interest-history?productType=usdt-futures&startTime=1725330167000&endTime=1725848567893" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                       |
 | :---------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------- |
@@ -1154,7 +1273,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725875190690,    "data": {        "nextSettleTime": "1725876300000",        "borrowAmount": "0",        "borrowLimit": "600000",        "interestList": [            {                "coin": "USDT",                "liability": "100",                "interestFreeLimit": "100",                "interestLimit": "500",                "hourInterestRate": "0.12",                "interest": "0.12",                "cTime": "1725848567893"            }         ],        "endId": "xxxxxxxxxxxxxxx"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter             | Type               | Description                                       |
 | :-------------------- | :----------------- | :------------------------------------------------ |
@@ -1171,15 +1290,20 @@ Response Example
 | &gt;cTime             | String             | create time                                       |
 | endId                 | String             | This is used when 'idLessThan' is set as a range. |
 
-# My Estimated Open Count
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Interest-History)
+
+---
+
+## My Estimated Open Count
 
 Frequency limit: 10 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get estimated open count per UID
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/account/open-count
 
@@ -1189,7 +1313,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/account/open-count?productType=usdt-futures&symbol=ethusdt&marginCoin=USDT&openPrice=23189.5&leverage=20&openAmount=5000" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1206,21 +1330,26 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695812285073,    "data": {        "size": "0.47"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description         |
 | :-------- | :----- | :------------------ |
 | size      | String | Estimated open size |
 
-# Set Isolated Position Auto Margin
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Est-Open-Count)
+
+---
+
+## Set Isolated Position Auto Margin
 
 Frequency limit: 5 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Adjust isolated position auto margin
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/account/set-auto-margin
 
@@ -1230,7 +1359,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/account/set-auto-margin" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "btcusdt","autoMargin": "on","marginCoin": "usdt","holdSide": "long"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter  | Type   | Required | Description                                                                                        |
 | :--------- | :----- | :------- | :------------------------------------------------------------------------------------------------- |
@@ -1245,21 +1374,26 @@ Response Example
 {    "code": "00000",    "data": "success",    "msg": "success",    "requestTime": 1627293357336}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                    |
 | :-------- | :----- | :----------------------------- |
 | code      | String | ‘00000’: success; others: fail |
 
-# Change Leverage
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Set-Auto-Margin)
+
+---
+
+## Change Leverage
 
 Frequency limit: 5 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Adjust the leverage on the given symbol and productType
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/account/set-leverage
 
@@ -1269,7 +1403,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/account/set-leverage" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol":"btcusdt","productType":"USDT-FUTURES","marginCoin":"usdt","leverage":"20","holdSide":"long"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1285,7 +1419,7 @@ Response Example
 {    "code": "00000",    "data": {        "symbol": "BTCUSDT",        "marginCoin": "USDT",        "longLeverage": "25",        "shortLeverage": "20",        "crossMarginLeverage": "20",        "marginMode": "crossed"    },    "msg": "success",    "requestTime": 1627293049406}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter           | Type   | Description                                                                     |
 | :------------------ | :----- | :------------------------------------------------------------------------------ |
@@ -1296,15 +1430,20 @@ Response Example
 | crossMarginLeverage | String | Leverage of 'crossed' margin mode                                               |
 | marginMode          | String | Margin mode.<br>isolated – isolated margin mode;<br>crossed – cross margin mode |
 
-# Adjust Position Margin
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Change-Leverage)
+
+---
+
+## Adjust Position Margin
 
 Rate limit: 5 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Add or reduce the margin（**only for isolated margin mode**）
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/account/set-margin
 
@@ -1314,7 +1453,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "btcusdt","productType": "USDT-FUTURES","marginCoin": "usdt","amount": "20","holdSide": "long"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1330,21 +1469,26 @@ Response Example
 {    "code": "00000",    "data": "",    "msg": "success",    "requestTime": 1627293357336}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                    |
 | :-------- | :----- | :----------------------------- |
 | code      | String | ‘00000’: success; others: fail |
 
-# Set USDT-M Futures Asset Mode
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Change-Margin)
+
+---
+
+## Set USDT-M Futures Asset Mode
 
 Frequency limit: 2 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Set USDT-M Futures Asset Mode
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/account/set-asset-mode
 
@@ -1354,7 +1498,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/account/set-asset-mode" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"productType": "USDT-FUTURES","assetMode": "union"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                      |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------- |
@@ -1367,21 +1511,26 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725848356656,    "data": "success"}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                               |
 | :-------- | :----- | :---------------------------------------- |
 | data      | String | 'success' mean set the asset mode success |
 
-# Change Margin Mode
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Set-Asset-Mode)
+
+---
+
+## Change Margin Mode
 
 Frequency limit: 5 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 This interface cannot be used when the users have an open position or an order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/account/set-margin-mode
 
@@ -1391,7 +1540,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin-mode" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "btcusdt","productType": "USDT-FUTURES","marginCoin": "usdt","marginMode": "isolated"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1406,7 +1555,7 @@ Response Example
 {    "code": "00000",    "data": {        "symbol": "BTCUSDT",        "marginCoin": "USDT",        "longLeverage": "25",        "shortLeverage": "20",        "marginMode": "isolated"    },    "msg": "success",    "requestTime": 1627293445916}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter    | Type   | Description                                                                                              |
 | :----------- | :----- | :------------------------------------------------------------------------------------------------------- |
@@ -1416,11 +1565,16 @@ Response Example
 | shortLeveage | String | Leverage of short positions                                                                              |
 | marginMode   | String | Margin mode.<br><code>isolated</code>: isolated margin mode<br><code>crossed</code>: crossed margin mode |
 
-# Change Position Mode
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Change-Margin-Mode)
+
+---
+
+## Change Position Mode
 
 Frequency limit: 5 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Adjust the position mode between 'one way mode' and 'hedge mode'
 
@@ -1431,7 +1585,7 @@ under the product type. Changes the user's position mode for all symbol futures:
 hedging mode or one-way mode.When users hold positions or orders on any side of
 any trading pair in the specific product type, the request may fail.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/account/set-position-mode
 
@@ -1441,7 +1595,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/account/set-position-mode" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"productType": "USDT-FUTURES","posMode": "one_way_mode"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1454,22 +1608,27 @@ Response Example
 {    "code": "00000",    "msg": "success",    "data": {        "posMode": "one_way_mode"    },    "requestTime": 1627293445916}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                           |
 | :-------- | :----- | :-------------------------------------------------------------------- |
 | posMode   | String | Position mode<br>one_way_mode: one-way mode<br>hedge_mode: hedge mode |
 
-# Get Account Bills
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Change-Hold-Mode)
+
+---
+
+## Get Account Bills
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Account bills(It only supports to get the data within 90days. The older data
 can be downloaded from web)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/account/bill
 
@@ -1479,7 +1638,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/account/bill?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | :----------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1498,7 +1657,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695809161807,    "data": {        "bills": [            {                "billId": "1",                "symbol": "BTCUSDT",                "amount": "-0.004992",                "fee": "0",                "feeByCoupon": "",                "businessType": "contract_settle_fee",                "coin": "USDT",                "balance":"232.21",                "cTime": "1695715200654"            },            {                "billId": "2",                "symbol": "ETHUSDT",                "amount": "0",                "fee": "-0.222012",                "feeByCoupon": "",                "businessType": "open_long",                "coin": "USDT",                "balance":"232.21",                "cTime": "1695714563516"            }        ],        "endId": "2"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter        | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | :--------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1514,15 +1673,20 @@ Response Example
 | &gt;balance      | String | Balance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | &gt;cTime        | String | Created Time, ms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
-# Get Position Tier
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/account/Get-Account-Bill)
+
+---
+
+## Get Position Tier
 
 Frequency limit: 10 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get the position gradient configuration of a certain trading pair
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/market/query-position-lever
 
@@ -1532,7 +1696,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/market/query-position-lever?symbol=BTCUSDT&productType=usdt-futures"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1545,7 +1709,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695796884470,    "data": [        {            "symbol": "BTCUSDT",            "level": "1",            "startUnit": "0",            "endUnit": "50000",            "leverage": "125",            "keepMarginRate": "0.004"        },        {            "symbol": "BTCUSDT",            "level": "2",            "startUnit": "50000",            "endUnit": "200000",            "leverage": "100",            "keepMarginRate": "0.005"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter              | Type   | Description                                                                                                                                                                                                                          |
 | :--------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1556,16 +1720,21 @@ Response Example
 | &gt;&gt;leverage       | String | Leverage                                                                                                                                                                                                                             |
 | &gt;&gt;keepMarginRate | String | Maintenance margin rate: The margin amount corresponds to the position quantity tier. When the margin rate of a position is less than the maintenance margin rate, it will trigger a forced partial liquidation or full liquidation. |
 
-# Get Single Position
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/position/Get-Query-Position-Lever)
+
+---
+
+## Get Single Position
 
 Rate limit: 10 requests/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Returns position information of a single symbol, response including estimated
 liquidation price.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/position/single-position
 
@@ -1575,7 +1744,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/position/single-position?symbol=btcusdt&productType=USDT-FUTURES&marginCoin=usdt" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1589,7 +1758,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 21312312312321,    "data": [        {            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openDelegateSize": "0.01",            "marginSize": "9.6695050093373343",            "available": "0.01",            "locked": "0.09",            "total": "0.01",            "leverage": "20",            "achievedProfits": "0",            "openPriceAvg": "25000",            "marginMode": "isolated",            "posMode": "hedge_mode",            "unrealizedPL": "1",            "liquidationPrice": "24144.1124161806977798",            "keepMarginRate": "0.004",            "markPrice": "25100",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "marginRatio": "0.1082149545822005",            "assetMode":"single",            "uTime": "1691382137999",            "autoMargin": "on",            "cTime": "1691382137448"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter            | Type   | Description                                                                                                                                            |
 | :------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1619,15 +1788,20 @@ Response Example
 | &gt;uTime            | String | Last updated time, timestamp, milliseconds                                                                                                             |
 | &gt;autoMargin       | String | Auto Margin<br><code>on</code> Auto Margin Call<br><code>off</code> No Auto Margin Call<br>                                                            |
 
-# Get All Positions
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/position/get-single-position)
+
+---
+
+## Get All Positions
 
 Rate limit: 5 requests/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Returns information about all current positions with the given `productType`
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/position/all-position
 
@@ -1637,7 +1811,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/position/all-position?productType=USDT-FUTURES&marginCoin=USDT" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1650,7 +1824,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 21312312312321,    "data": [        {            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openDelegateSize": "0.01",            "marginSize": "9.6695050093373343",            "available": "0.01",            "locked": "0.09",            "total": "0.01",            "leverage": "20",            "achievedProfits": "0",            "openPriceAvg": "25000",            "marginMode": "isolated",            "posMode": "hedge_mode",            "unrealizedPL": "1",            "liquidationPrice": "24144.1124161806977798",            "keepMarginRate": "0.004",            "markPrice": "25100",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "takeProfit": "3",            "stopLoss": "2",            "takeProfitId": "11111111",            "stopLossId": "11111111",            "marginRatio": "0.1082149545822005",            "assetMode":"single",            "cTime": "1691382137448",            "uTime": "1691382137999"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter            | Type   | Description                                                                                                                                            |
 | :------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1683,15 +1857,20 @@ Response Example
 | &gt;assetMode        | String | <code>single</code> : single asset mode<br><code>union</code> multi-Assets mode                                                                        |
 | &gt;uTime            | String | Last updated time, timestamp, milliseconds                                                                                                             |
 
-# Get Historical Position
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/position/get-all-position)
+
+---
+
+## Get Historical Position
 
 20times/S （uid）
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Check position history (Only check the data within 3 months)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/position/history-position
 
@@ -1701,7 +1880,7 @@ Request
 curl "https://api.bitget.com/api/v2/mix/position/history-position?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :---------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1718,7 +1897,7 @@ Response
 {    "code": "00000",    "msg": "success",    "requestTime": 1312312312321,    "data": {        "list":[{            "positionId": "xxxxxxxxxxx",            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openAvgPrice": "32000",            "closeAvgPrice": "32500",            "marginMode": "isolated",            "openTotalPos": "0.01",            "closeTotalPos": "0.01",            "pnl": "14.1",            "netProfit": "12.1",            "totalFunding": "0.1",            "openFee": "0.01",            "closeFee": "0.01",            "cTime": "1988824171000",            "uTime": "1988824171000"        }],        "endId":"23423432423423234"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter         | Type   | Description                                                                                 |
 | :---------------- | :----- | :------------------------------------------------------------------------------------------ |
@@ -1741,12 +1920,17 @@ Response
 | &gt;cTime         | String | Create time Timestamp milliseconds                                                          |
 | endId             | String | ID of the last data。id value is tracking No and use it to check based on idLessThan        |
 
-# Place Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/position/Get-History-Position)
+
+---
+
+## Place Order
 
 - Rate limit: 10 requests/second/UID
 - Rate limit: 1 request/second/UID for **copy trading traders**
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 - Ignore the `tradeSide` parameter when position mode is in `one-way-mode`
 - In “hedge-mode”, when there is limit close order occupying the position, if
@@ -1767,7 +1951,7 @@ Response
   the `clientOid` set in the request to query order details or retrieve the
   orderId from the current pending orders.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/place-order
 
@@ -1777,7 +1961,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/place-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{ "symbol": "ETHUSDT", "productType": "USDT-FUTURES", "marginMode": "isolated", "marginCoin": "USDT", "size": "0.1", "price": "2000", "side": "sell", "tradeSide": "open", "orderType": "limit", "force": "gtc", "clientOid": "121211212122" }'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter                     | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------------------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1805,19 +1989,24 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695806875837,    "data": {        "clientOid": "121211212122",        "orderId": "121211212122"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description        |
 | :-------- | :----- | :----------------- |
 | orderId   | String | Order ID           |
 | clientOid | String | Customize order ID |
 
-# Reversal
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Place-Order)
+
+---
+
+## Reversal
 
 - Rate limit: 10 req/sec/UID
 - Rate limit: 1 req/sec/UID for **copy trading traders**
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 - `side` and `tradeSide`：
   - In `one-way-mode`, do NOT add the `tradeSide` parameter in request
@@ -1840,7 +2029,7 @@ Response Example
       position, if the `size` was set 10 or 11 in request, then the current
       position will be closed and a new 10 size short position will be opened
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/click-backhand
 
@@ -1850,7 +2039,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/click-backhand" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "symbol": "ethusdt",     "productType": "USDT-FUTURES",     "marginCoin": "usdt",     "size": "30",     "clientOid": "12345"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                             |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1868,26 +2057,31 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695806875837,    "data": {        "clientOid": "121211212122",        "orderId": "1"    }}
 ```
 
-### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+#### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
 
 | Parameter | Type   | Description        |
 | :-------- | :----- | :----------------- |
 | orderId   | String | Order ID           |
 | clientOid | String | Customize order ID |
 
-# Batch Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Reversal)
+
+---
+
+## Batch Order
 
 - Rate limit: 5 requests/second/UID
 - Rate limit: 1 request/second/UID for **copy trading traders**
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 - Supports TP/SL feature. If the current underlying asset does not exist in the
   position, it is intended to preset the TP/SL. If the current underlying exists
   in the position, it is intended to modify the TP/SL
 - Ignore the `tradeSide` parameter when position mode is in `one-way-mode`
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/batch-place-order
 
@@ -1897,7 +2091,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/batch-place-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{     "symbol": "BTCUSDT",     "productType": "usdt-futures",     "marginMode": "crossed",     "marginCoin": "USDT",     "orderList": [{             "size": "1",             "side": "buy",             "tradeSide": "open",             "orderType": "market",             "force": "gtc",             "clientOid": "123456",             "reduceOnly": "NO",             "presetStopSurplusPrice": "20000",             "presetStopLossPrice": "10000"         }     ] }'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter                  | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :------------------------- | :----------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1924,7 +2118,7 @@ Response Example
 {    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": []    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type               | Description           |
 | :------------ | :----------------- | :-------------------- |
@@ -1937,12 +2131,17 @@ Response Example
 | &gt;errorMsg  | String             | Failure reason        |
 | &gt;errorCode | String             | Failure code          |
 
-# Modify Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Batch-Order)
+
+---
+
+## Modify Order
 
 Speed limit is 10 times/s for average users. Frequency limit imposed according
 to user ID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Interface for order modification, used to modify an pending order, such as its
 TP/SL and/or price/size.
@@ -1960,7 +2159,7 @@ TP/SL and/or price/size.
 - If you only modify the TPSL, please do not pass price and size. If you only
   pass one of TP or SL, the other one will be cancelled
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/modify-order
 
@@ -1970,7 +2169,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{ "orderId": "1","newClientOid": "1212112121223", "symbol": "ETHUSDT", "productType": "usdt-futures", "marginCoin": "USDT", "newSize": "0.04", "newPrice": "1800.00" }'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter                 | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :------------------------ | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1990,22 +2189,27 @@ Response Example
 {    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#121212121212"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+#### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
 
 | Parameter | Type   | Description        |
 | :-------- | :----- | :----------------- |
 | orderId   | String | Order ID           |
 | clientOid | String | Customize order ID |
 
-# Cancel Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Modify-Order)
+
+---
+
+## Cancel Order
 
 Frequency limit: 10 times/1s
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel a pending order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/cancel-order
 
@@ -2015,7 +2219,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-order" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "orderId": "1",    "symbol": "BTCUSDT",    "productType": "usdt-futures",    "marginCoin": "USDT"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2031,24 +2235,29 @@ Response Example
 {    "code": "00000",    "data": {        "orderId": "123",        "clientOid": ""    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+#### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
 
 | Parameter | Type   | Description          |
 | :-------- | :----- | :------------------- |
 | orderId   | String | Order ID             |
 | clientOid | String | Client customized ID |
 
-# Batch Cancel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Cancel-Order)
+
+---
+
+## Batch Cancel
 
 Speed limit is 10 times/s for average users. Frequency limit imposed according
 to user ID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Order cancelling interface, can be used to cancel by product type and trading
 pair.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/batch-cancel-orders
 
@@ -2058,7 +2267,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/batch-cancel-orders" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "symbol": "BTCUSDT",    "productType": "usdt-futures",    "marginCoin": "USDT",    "orderIdList": [        {            "orderId":"121211212122"        }    ]}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2075,7 +2284,7 @@ Response Example
 {    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": [            {                "orderId": "232",                "clientOid": "321342",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type               | Description                                        |
 | :------------ | :----------------- | :------------------------------------------------- |
@@ -2088,15 +2297,20 @@ Response Example
 | &gt;errorMsg  | String             | Failure reason                                     |
 | &gt;errorCode | String             | Error code                                         |
 
-# Flash Close Position
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Batch-Cancel-Orders)
+
+---
+
+## Flash Close Position
 
 Frequency limit: 1 time/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 close position at market price
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/close-positions
 
@@ -2106,7 +2320,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/close-positions" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{"symbol": "BTCUSDT","productType":"USDT-FUTURES","holdSide": "long"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                 |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2120,7 +2334,7 @@ Response Example
 {    "code": "00000",     "data": {        "successList": [            {                "orderId": "123",                 "clientOid": "xxxxx",                "symbol": "BTCUSDT"            }        ],         "failureList": [            {                "orderId": "1234",                 "clientOid": "321",                 "symbol": "BTCUSDT",                "errorMsg": "xxx",                 "errorCode": "xxxx"            }        ]    },     "msg": "success",     "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type               | Description                                                                                                                         |
 | :------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -2135,15 +2349,20 @@ Response Example
 | &gt;errorMsg  | String             | Failure reason                                                                                                                      |
 | &gt;errorCode | String             | Failure code                                                                                                                        |
 
-# Get Order Detail
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position)
+
+---
+
+## Get Order Detail
 
 Frequency limit: 10 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get order detail
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/detail
 
@@ -2153,7 +2372,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/detail?symbol=ETHUSDT&orderId=1&clientOid=1&productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2168,7 +2387,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695823012595,    "data": {        "symbol": "ethusdt",        "size": "2",        "orderId": "123456",        "clientOid": "77777",        "baseVolume": "2",        "priceAvg": "1900",        "fee": "",        "price": "1900",        "state": "filled",        "side": "buy",        "force": "gtc",        "totalProfits": "2112",        "posSide": "long",        "marginCoin": "usdt",        "presetStopSurplusPrice": "1910",        "presetStopLossPrice": "1890",        "quoteVolume": "1900",        "orderType": "limit",        "leverage": "20",        "marginMode": "cross",        "reduceOnly": "yes",        "enterPointSource": "api",        "tradeSide": "",        "posMode": "one_way_mode",        "orderSource": "normal",        "cancelReason": "",        "cTime": "1627300098776",        "uTime": "1627300098776"    }}
 ```
 
-### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
+#### Return Parameter[​](#return-parameter "Direct link to Return Parameter")
 
 | Parameter              | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | :--------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2201,16 +2420,21 @@ Response Example
 | cTime                  | String | Creation time, ms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | uTime                  | String | Update time, ms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
-# Get Order Fill Details
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Get-Order-Details)
+
+---
+
+## Get Order Fill Details
 
 Speed limit is 10 times/s for average users. Frequency limit imposed according
 to user ID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get order fill details
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/fills
 
@@ -2220,7 +2444,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/fills?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2238,7 +2462,7 @@ Response Example
 {    "code": "00000",    "data": {        "fillList": [            {                "tradeId": "123",                "symbol": "ethusdt",                "orderId": "121212",                "price": "1900",                "baseVolume": "1",                "feeDetail": [                    {                        "deduction": "yes",                        "feeCoin": "BGB",                        "totalDeductionFee": "-0.017118519726",                        "totalFee": "-0.017118519726"                    }                ],                "side": "buy",                "quoteVolume": "1902",                "profit": "102",                "enterPointSource": "api",                "tradeSide": "close",                "posMode": "hedge_mode",                "tradeScope": "taker",                "cTime": "1627293509612"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                 | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | :------------------------ | :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2263,15 +2487,20 @@ Response Example
 | &gt;cTime                 | String             | Date of transaction<br>endId<br>String<br>The final order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | endId                     | String             | The final Transaction ID.<br>This is used when idLessThan/idGreaterThan is set as a range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-# Get Historical Transaction Details
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills)
+
+---
+
+## Get Historical Transaction Details
 
 Frequency limit: 10 times/1s (uid)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get order fill history
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/fill-history
 
@@ -2281,7 +2510,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/fill-history?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                           |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2299,7 +2528,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1699267238892,    "data": {        "fillList": [            {                "tradeId": "xxxx",                "symbol": "ETHUSDT",                "orderId": "xxxx",                "price": "1801.33",                "baseVolume": "0.02",                "feeDetail": [                    {                        "deduction": "no",                        "feeCoin": "USDT",                        "totalDeductionFee": "0",                        "totalFee": "-0.02161596"                    }                ],                "side": "sell",                "quoteVolume": "36.0266",                "profit": "0.0252",                "enterPointSource": "ios",                "tradeSide": "sell_single",                "posMode": "one_way_mode",                "tradeScope": "taker",                "cTime": "1698730804882"            }        ],        "endId": "123456789"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                 | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | :------------------------ | :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2324,15 +2553,20 @@ Response Example
 | &gt;tradeScope            | String             | Trader tag<br>taker: Taker<br>maker: Maker                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &gt;cTime                 | String             | Date of transaction<br>endId<br>String<br>The final order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-# Get Pending Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Get-Fill-History)
+
+---
+
+## Get Pending Orders
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 To query all existing pending orders.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/orders-pending
 
@@ -2342,7 +2576,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/orders-pending?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2362,7 +2596,7 @@ Response Example
 {    "code": "00000",    "data": {        "entrustedList": [            {                "symbol": "ethusdt",                "size": "100",                "orderId": "123",                "clientOid": "12321",                "baseVolume": "12.1",                "fee": "",                "price": "1900",                "priceAvg": "1903",                "status": "partially_filled",                "side": "buy",                "force": "gtc",                "totalProfits": "0",                "posSide": "long",                "marginCoin": "usdt",                "quoteVolume": "22001.21",                "leverage": "20",                "marginMode": "cross",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "1627293505612",                "presetStopSurplusPrice": "2001",                "presetStopSurplusType": "mark_price",                "presetStopSurplusExecutePrice": "2201",                "presetStopLossPrice": "1800",                "presetStopLossType": "mark_price",                "presetStopLossExecutePrice":"1900"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                         | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | :-------------------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2400,16 +2634,21 @@ Response Example
 | &gt;presetStopLossExecutePrice    | String             | Stop Loss Execution price<br>If it is 0 or not filled in, it means market price execution.If it is greater than 0, it means limit price execution.<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | endId                             | String             | The final order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
-# Get History Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Get-Orders-Pending)
+
+---
+
+## Get History Order
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get history order(It only supports to get the data within 90days. The older data
 can be downloaded from web)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/orders-history
 
@@ -2419,7 +2658,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/orders-history?productType=usdt-futures" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2439,7 +2678,7 @@ Response Example
 {    "code": "00000",    "data": {        "entrustedList": [            {                "symbol": "ethusdt",                "size": "100",                "orderId": "123",                "clientOid": "12321",                "baseVolume": "12.1",                "fee": "-0.00854",                "price": "1900",                "priceAvg": "1903",                "status": "filled",                "side": "buy",                "force": "gtc",                "totalProfits": "0",                "posSide": "long",                "marginCoin": "usdt",                "quoteVolume": "22001.21",                "leverage": "20",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "1627293505612",                "presetStopSurplusPrice": "2001",                "presetStopLossPrice": "1800"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                  | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | :------------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2473,13 +2712,18 @@ Response Example
 | &gt;presetStopSurplusPrice | String             | Take profit price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | &gt;presetStopLossPrice    | String             | Stop loss price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
-# Cancel All Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Get-Orders-History)
+
+---
+
+## Cancel All Orders
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/cancel-all-orders
 
@@ -2489,7 +2733,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-all-orders" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:zh-CN" \  -H "Content-Type: application/json" \  -d '{    "productType": "USDT-FUTURES",    "marginCoin": "USDT"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2504,7 +2748,7 @@ Response Example
 {    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": [            {                "orderId": "232",                "clientOid": "321342",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type               | Description                                        |
 | :------------ | :----------------- | :------------------------------------------------- |
@@ -2517,15 +2761,20 @@ Response Example
 | &gt;errorMsg  | String             | Failure reason                                     |
 | &gt;errorCode | String             | Error code                                         |
 
-# Trigger Sub Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders)
+
+---
+
+## Trigger Sub Order
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get trigger executed futures orders
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/plan-sub-order
 
@@ -2535,7 +2784,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/plan-sub-order?planOrderId=xxxxxxxxxxxxxxxxxx&productType=USDT-FUTURES&planType=normal_plan" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2549,7 +2798,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1710813939206,    "data": [        {            "orderId": "xxxxxxxxxxxxx",            "price": "0.4188",            "type": "limit",            "status": "success"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                                                                                                                                                |
 | :-------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2558,15 +2807,20 @@ Response Example
 | type      | String | Order type<br>limit<br>market                                                                                                                                                              |
 | status    | String | Plan order trigger status<br>success: trigger success<br>fail: trigger failed<br>cancelled: cancelled<br>in_progress: trigger spot placing order<br>in_progress_tracking: tracking trigger |
 
-# Stop-profit and stop-loss plan orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Plan-Sub-Orders)
+
+---
+
+## Stop-profit and stop-loss plan orders
 
 Speed limit is 10 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Place a stop-profit and stop-loss plan order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/place-tpsl-order
 
@@ -2576,7 +2830,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/place-tpsl-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"marginCoin": "USDT","productType": "usdt-futures","symbol": "ethusdt","planType": "profit_plan","triggerPrice": "2000","triggerType": "mark_price","executePrice": "0","holdSide": "long","size": "1","rangeRate": "","clientOid": "1234"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                        |
 | :----------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2599,22 +2853,27 @@ Response Example
 {    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                 |
 | :-------- | :----- | :-------------------------- |
 | orderId   | String | Trigger order ID            |
 | clientOid | String | Customized trigger order ID |
 
-# Simultaneous Stop-profit and stop-loss plan orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Place-Tpsl-Order)
+
+---
+
+## Simultaneous Stop-profit and stop-loss plan orders
 
 Speed limit is 10 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Place a stop-profit and stop-loss plan order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/place-pos-tpsl
 
@@ -2624,7 +2883,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/place-pos-tpsl" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{        "marginCoin": "USDT",        "productType": "usdt-futures",        "symbol": "BTCUSDT",        "stopSurplusTriggerPrice": "69000",        "stopSurplusTriggerType": "mark_price",        "stopSurplusExecutePrice": "69001",        "stopLossTriggerPrice": "55001",        "stopLossTriggerType": "mark_price",        "stopLossExecutePrice": "55000",        "holdSide": "long"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter               | Type   | Required | Description                                                                                                                                                                                                                                                        |
 | :---------------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2646,22 +2905,27 @@ Response Example
 {    "code": "00000",    "data": [        {            "orderId": "xxxxxxxxxxx"        },        {            "orderId": "xxxxxxxxxxx"        }    ],    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description      |
 | :-------- | :----- | :--------------- |
 | orderId   | String | Trigger order ID |
 
-# Place Trigger Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Place-Pos-Tpsl-Order)
+
+---
+
+## Place Trigger Order
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 The interface for placing an trigger or trailing stop order with TP/SL setting
 feature.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/place-plan-order
 
@@ -2671,7 +2935,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/place-plan-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{ "planType":"normal_plan", "symbol": "BTCUSDT", "productType": "USDT-FUTURES", "marginMode": "isolated", "marginCoin": "USDT", "size": "0.01", "price": "24000", "callbackRatio": "", "triggerPrice": "24100", "triggerType": "mark_price", "side": "buy", "tradeSide": "open", "orderType":"limit", "clientOid": "121212121212", "reduceOnly": "NO", "presetStopSurplusPrice": "", "stopSurplusTriggerPrice": "", "stopSurplusTriggerType": "", "presetStopLossPrice": "", "stopLossTriggerPrice": "", "stopLossTriggerType": "" }'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter               | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                  |
 | :---------------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2704,22 +2968,27 @@ Response Example
 {    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#121212121212"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                 |
 | :-------- | :----- | :-------------------------- |
 | orderId   | String | Trigger order ID            |
 | clientOid | String | Customized trigger order ID |
 
-# Modify the stop-profit and stop-loss plan order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Place-Plan-Order)
+
+---
+
+## Modify the stop-profit and stop-loss plan order
 
 Speed limit is 10 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Modify the stop-profit and stop-loss plan order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/modify-tpsl-order
 
@@ -2729,7 +2998,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-tpsl-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"orderId": "1","clientOid": "2","marginCoin": "USDT","productType": "usdt-futures","symbol": "ethusdt","triggerPrice": "2001","triggerType": "fill_price","executePrice": "0","size": "2","rangeRate": ""}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                                                                 |
 | :----------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2750,23 +3019,28 @@ Response Example
 {    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                 |
 | :-------- | :----- | :-------------------------- |
 | orderId   | String | Trigger order ID            |
 | clientOid | String | Customized trigger order ID |
 
-# Modify Trigger Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Modify-Tpsl-Order)
+
+---
+
+## Modify Trigger Order
 
 Speed limit is 10 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Interface for trigger order modification, used to modify an pending order, such
 as its TP/SL and/or triggerPrice.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/modify-plan-order
 
@@ -2776,7 +3050,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-plan-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{        "planType":"normal_plan",        "orderId": "123",        "clientOid": "321123",        "symbol": "ethusdt",        "productType": "usdt-futures",        "newSize": "3",        "newPrice": "2001",        "newCallbackRatio": "",        "newTriggerPrice": "2000",        "newTriggerType": "fill_price",        "newStopSurplusExecutePrice": "2049",        "newStopSurplusTriggerPrice": "2050",        "newStopSurplusTriggerType": "mark_price",        "newStopLossExecutePrice": "5",        "newStopLossTriggerPrice": "1970",        "newStopLossTriggerType": "mark_price"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter                  | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                  |
 | :------------------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2801,22 +3075,27 @@ Response Example
 {    "code": "00000",    "data": {        "orderId": "21627293504612",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                 |
 | :-------- | :----- | :-------------------------- |
 | orderId   | String | Trigger order ID            |
 | clientOid | String | Customized trigger order ID |
 
-# Get Pending Trigger Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Modify-Plan-Order)
+
+---
+
+## Get Pending Trigger Order
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Can be used to query one or all current trigger orders.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/orders-plan-pending
 
@@ -2826,7 +3105,7 @@ Request Example
 curl -X GET "https://api.bitget.com/api/v2/mix/order/orders-plan-pending?orderId=123&clientOid=1234&planType=profit_loss&productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2847,7 +3126,7 @@ Response Example
 {    "code": "00000",    "data": {        "entrustedList": [            {                "planType": "normal_plan",                "symbol": "ethusdt",                "size": "1",                "orderId": "123",                "clientOid": "121212",                "price": "1900",                "executePrice": "1900",                "callbackRatio": "",                "triggerPrice": "1901",                "triggerType": "mark_price",                "planStatus": "not_trigger",                "side": "buy",                "posSide": "long",                "marginCoin": "usdt",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "",                "stopSurplusExecutePrice": "2001",                "stopSurplusTriggerPrice": "2002",                "stopSurplusTriggerType": "fill_price",                "stopLossExecutePrice": "1800",                "stopLossTriggerPrice": "1820",                "stopLossTriggerType": "fill_price"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                   | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :-------------------------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2882,18 +3161,23 @@ Response Example
 | &gt;stopLossTriggerType     | String             | Setting stop-loss trigger type<br>fill_price: filled price<br>mark_price: mark price<br>index_price: index price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | endId                       | String             | This is used when idLessThan/idGreaterThan is set as a range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
-# Cancel Trigger Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/get-orders-plan-pending)
+
+---
+
+## Cancel Trigger Order
 
 Speed limit is 10 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Interface for cancelling trigger orders, can be used to cancel by 'productType',
 'symbol' and/or trigger ID list.
 
 All orders that fall under that'productType' and 'symbol' will be cancelled.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/mix/order/cancel-plan-order
 
@@ -2903,7 +3187,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-plan-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{  "orderIdList": [    {      "orderId": "123",      "clientOid": "321"    },    {      "orderId": "",      "clientOid": "666"    },    {      "orderId": "123",      "clientOid": ""    }  ],  "symbol": "ETHUSDT",  "productType": "usdt-futures",  "marginCoin": "USDT"}'
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2921,7 +3205,7 @@ Response Example
 {    "code": "00000",    "data": {        "successList": [            {                "orderId": "121212121212",                "clientOid": "123"            },            {                "orderId": "123",                "clientOid": ""            }        ],        "failureList": [            {                "orderId": "3",                "clientOid": "123",                "errorMsg": "notExistend"            },            {                "orderId": "21221",                "clientOid": "",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter      | Type               | Description                                        |
 | :------------- | :----------------- | :------------------------------------------------- |
@@ -2933,15 +3217,20 @@ Response Example
 | &gt; clientOid | String             | Customize order ID                                 |
 | &gt;errorMsg   | String             | Failure reason                                     |
 
-# Get History Trigger Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order)
+
+---
+
+## Get History Trigger Order
 
 Speed limit is 10 times/s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Can be used to query one or all previous common orders and trigger orders.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/mix/order/orders-plan-history
 
@@ -2951,7 +3240,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/mix/order/orders-plan-history?planType=normal_plan&symbol=ETHUSDT&productType=usdt-futures" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2972,7 +3261,7 @@ Response Example
 {    "code": "00000",    "data": {        "entrustedList": [            {                "planType": "normal_plan",                "symbol": "ethusdt",                "size": "1",                "orderId": "123",                "executeOrderId": "123456",                "clientOid": "",                "planStatus": "executed",                "price": "1990",                "executePrice"： "1990"，                "priceAvg": "1999.2",                "baseVolume": "1",                "callbackRatio": "",                "triggerPrice": "1989",                "triggerType": "fill_price",                "side": "buy",                "posSide": "long",                "marginCoin": "usdt",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "cTime": "1627293504612",                "uTime": "",                "stopSurplusExecutePrice": "2001",                "stopSurplusTriggerPrice": "2002",                "stopSurplusTriggerType": "fill_price",                "stopLossExecutePrice": "1800",                "stopLossTriggerPrice": "1820",                "stopLossTriggerType": "fill_price"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter                   | Type               | Description                                                                                                                                                                                                                                       |
 | :-------------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3008,9 +3297,14 @@ Response Example
 | &gt;stopLossTriggerType     | String             | Setting stop-loss trigger type<br>fill_price: filled price<br>mark_price: mark price                                                                                                                                                              |
 | endId                       | String             | The last Trigger order ID.<br>This is used when idLessThan/idGreaterThan is set as a range.                                                                                                                                                       |
 
-# Market Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/plan/orders-plan-history)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Market Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Retrieve the latest traded price, bid price, ask price and 24-hour trading
 volume of the instruments. When there is a change (deal, buy, sell, issue):
@@ -3022,7 +3316,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "ticker",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                              |
 | :------------ | :----------------- | :------- | :--------------------------------------- |
@@ -3038,7 +3332,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "ticker",        "instId": "BTCUSDT"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                |
 | :------------ | :----- | :------------------------- |
@@ -3056,7 +3350,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "ticker",        "instId": "BTCUSDT"    },    "data": [        {            "instId": "BTCUSDT",            "lastPr": "27000.5",            "bidPr": "27000",            "askPr": "27000.5",            "bidSz": "2.71",            "askSz": "8.76",            "open24h": "27000.5",            "high24h": "30668.5",            "low24h": "26999.0",            "change24h": "-0.00002",            "fundingRate": "0.000010",            "nextFundingTime": "1695722400000",            "markPrice": "27000.0",            "indexPrice": "25702.4",            "holdingAmount": "929.502",            "baseVolume": "368.900",            "quoteVolume": "10152429.961",            "openUtc": "27000.5",            "symbolType": 1,            "symbol": "BTCUSDT",            "deliveryPrice": "0",            "ts": "1695715383021"        }    ],    "ts": 1695715383039}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter           | Type    | Description                                                                                                                                                                                                         |
 | :------------------ | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3089,9 +3383,14 @@ Push Data
 | &gt;askSz           | String  | selling amount                                                                                                                                                                                                      |
 | &gt;open24h         | String  | Entry price of the last 24 hours, The opening time is compared on a 24-hour basis. i.e.: Now it is 7:00 PM of the 2nd day of the month, then the corresponding opening time is 7:00 PM of the 1st day of the month. |
 
-# Candlestick Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Candlestick Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Retrieve the candlesticks data of a symbol. Data will be pushed every 500 ms.
 
@@ -3107,7 +3406,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "candle1m",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | :------------ | :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3123,7 +3422,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "candle1m",        "instId": "BTCUSDT"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | :------------ | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3141,7 +3440,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "candle1m",        "instId": "BTCUSDT"    },    "data": [        [            "1695685500000",            "27000",            "27000.5",            "27000",            "27000.5",            "0.057",            "1539.0155",            "1539.0155"        ]    ],    "ts": 1695715462250}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter     | Type               | Description                                                          |
 | :------------ | :----------------- | :------------------------------------------------------------------- |
@@ -3159,9 +3458,14 @@ Push Data
 | &gt; index[6] | String             | Trading volume of quote currency                                     |
 | &gt; index[7] | String             | Trading volume of USDT                                               |
 
-# Depth Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Depth Channel
+
+#### Description[​](#description "Direct link to Description")
 
 This is the channel to get the depth data  
 Default data push frequency for `books`, `books5`, `books15` is **150ms**  
@@ -3173,7 +3477,7 @@ Default data push frequency for `books1`:**100ms**
 - `books5`: 5 depth levels. Push `snapshot` each time
 - `books15`: 15 depth levels. Push `snapshot` each time
 
-#### Checksum[​](#checksum "Direct link to Checksum")
+##### Checksum[​](#checksum "Direct link to Checksum")
 
 Calculate Checksum
 
@@ -3224,7 +3528,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "books5",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3240,7 +3544,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "books5",        "instId": "BTCUSDT"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3258,7 +3562,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "books5",        "instId": "BTCUSDT"    },    "data": [        {            "asks": [                [                    "27000.5",                    "8.760"                ],                [                    "27001.0",                    "0.400"                ]            ],            "bids": [                [                    "27000.0",                    "2.710"                ],                [                    "26999.5",                    "1.460"                ]            ],            "checksum": 0,            "seq": 123,            "ts": "1695716059516"        }    ],    "ts": 1695716059516}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter     | Type               | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3274,9 +3578,14 @@ Push Data
 | &gt; checksum | Long               | Testing and                                                                                                                                                                                                                                                                                                                                      |
 | &gt; seq      | Long               | Serial number.<br>It increases when the order book is updated and can be used to determine whether there is packet loss or out-of-order packets.                                                                                                                                                                                                 |
 
-# Public Trade Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Public Trade Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Get the public trade data(taker orders)
 
@@ -3286,7 +3595,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "trade",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3302,7 +3611,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "trade",        "instId": "BTCUSDT"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3320,7 +3629,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "trade",        "instId": "BTCUSDT"    },    "data": [        {            "ts": "1695716760565",            "price": "27000.5",            "size": "0.001",            "side": "buy",            "tradeId": "1111111111"        },        {            "ts": "1695716759514",            "price": "27000.0",            "size": "0.001",            "side": "sell",            "tradeId": "1111111111"        }    ],    "ts": 1695716761589}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter     | Type               | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3336,9 +3645,14 @@ Push Data
 | &gt; side     | String             | Filled side, sell/buy                                                                                                                                                                                                                                                                                                                            |
 | &gt; tradeId  | String             | tradeId                                                                                                                                                                                                                                                                                                                                          |
 
-# Account channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Account channel
+
+#### Description[​](#description "Direct link to Description")
 
 Subscribe account channel
 
@@ -3354,7 +3668,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "account",            "coin": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3370,7 +3684,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "account",        "coin": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :------------ | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3388,7 +3702,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "account",        "coin": "default"    },    "data": [      {        "marginCoin": "USDT",        "frozen": "0.00000000",        "available": "11.98545761",        "maxOpenPosAvailable": "11.98545761",        "maxTransferOut": "11.98545761",        "equity": "11.98545761",        "usdtEquity": "11.985457617660",        "crossedRiskRate": "0",        "unrealizedPL": "0.000000000000"      }    ],    "ts": 1695717225146}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter               | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :---------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3408,9 +3722,14 @@ Push Data
 | &gt;crossedRiskRate     | String             | Risk ratio in cross margin mode                                                                                                                                                                                                                                                                                                                                                                                     |
 | &gt;unrealizedPL        | String             | Unrealized PnL                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-# Position Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/private/Account-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Position Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Subscribe the position channel
 
@@ -3426,7 +3745,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "positions",            "instId": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3442,7 +3761,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "positions",        "instId": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3460,7 +3779,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "positions",        "instId": "default"    },    "data": [        {            "posId": "1",            "instId": "ETHUSDT",            "marginCoin": "USDT",            "marginSize": "9.5",            "marginMode": "crossed",            "holdSide": "short",            "posMode": "hedge_mode",            "total": "0.1",            "available": "0.1",            "frozen": "0",            "openPriceAvg": "1900",            "leverage": 20,            "achievedProfits": "0",            "unrealizedPL": "0",            "unrealizedPLR": "0",            "liquidationPrice": "5788.108475905242",            "keepMarginRate": "0.005",            "marginRate": "0.004416374196",            "cTime": "1695649246169",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "uTime": "1695711602568",            "autoMargin": "off"        }    ],    "ts": 1695717430441}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter               | Type               | Description                                                                                                                                                                                                                                                                                                                                      |
 | :---------------------- | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3495,9 +3814,14 @@ Push Data
 | &gt; cTime              | String             | Position creation time, milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                                                                                                                                                                 |
 | &gt; uTime              | String             | Lastest position update time, milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                                                                                                                                                           |
 
-# Fill Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Fill Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Trade details channel
 
@@ -3509,7 +3833,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "fill",            "instId": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3525,7 +3849,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "fill",        "instId": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3543,7 +3867,7 @@ Push Data
 {    "action":"snapshot",    "arg":{        "instType":"USDT-FUTURES",        "channel":"fill",        "instId":"default"    },    "data":[        {            "orderId":"111",            "clientOid":"111",            "tradeId":"222",            "symbol":"BTCUSDT",            "side":"buy",            "orderType":"market",            "posMode":"one_way_mode",            "price":"51000.5",            "baseVolume":"0.01",            "quoteVolume":"510.005",            "profit":"0",            "tradeSide":"open",            "tradeScope":"taker",            "feeDetail":[                {                    "feeCoin":"USDT",                    "deduction":"no",                    "totalDeductionFee":"0",                    "totalFee":"-0.183717"                }            ],            "cTime":"1703577336606",            "uTime":"1703577336606"        }    ],    "ts":1703577336700}
 ```
 
-### 推送数据参数[​](#推送数据参数 "Direct link to 推送数据参数")
+#### 推送数据参数[​](#推送数据参数 "Direct link to 推送数据参数")
 
 | 返回字段                               | 参数类型           | 字段说明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :------------------------------------- | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3574,9 +3898,14 @@ Push Data
 | &gt; cTime                             | String             | Create Time，milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &gt; uTime                             | String             | Update Time，milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
-# Order Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/private/Fill-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Order Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Subscribe the order channel
 
@@ -3592,7 +3921,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "orders",            "instId": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3608,7 +3937,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders",        "instId": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3626,7 +3955,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders",        "instId": "default"    },    "data": [        {            "accBaseVolume": "0.01",            "cTime": "1695718781129",            "clientOId": "1",            "feeDetail": [                {                    "feeCoin": "USDT",                    "fee": "-0.162003"                }            ],            "fillFee": "-0.162003",            "fillFeeCoin": "USDT",            "fillNotionalUsd": "270.005",            "fillPrice": "27000.5",            "baseVolume": "0.01",            "fillTime": "1695718781146",            "force": "gtc",            "instId": "BTCUSDT",            "leverage": "20",            "marginCoin": "USDT",            "marginMode": "crossed",            "notionalUsd": "270",            "orderId": "1",            "orderType": "market",            "pnl": "0",            "posMode": "hedge_mode",            "posSide": "long",            "price": "0",            "priceAvg": "27000.5",            "reduceOnly": "no",            "stpMode": "cancel_taker",            "side": "buy",            "size": "0.01",            "enterPointSource": "WEB",            "status": "filled",            "tradeScope": "T",            "tradeId": "1111111111",            "tradeSide": "open",            "presetStopSurplusPrice": "21.4",            "totalProfits": "11221.45",            "presetStopLossPrice": "21.5",            "cancelReason": "normal_cancel",            "uTime": "1695718781146"        }    ],    "ts": 1695718781206}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter                   | Type               | Description                                                                                                                                                                                                                                                                                                                                      |
 | :-------------------------- | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3674,9 +4003,14 @@ Push Data
 | &gt; stpMode                | String             | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders                                                                                                                                  |
 | &gt; totalProfits           | String             | Total profits                                                                                                                                                                                                                                                                                                                                    |
 
-# Trigger Order Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/private/Order-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Trigger Order Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Subscribe trigger order channel
 
@@ -3689,7 +4023,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "orders-algo",            "instId": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3705,7 +4039,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3723,7 +4057,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    },    "data": [        {            "instId": "BTCUSDT",            "orderId": "1",            "clientOid": "1",            "triggerPrice": "27000.000000000",            "triggerType": "fill_price",            "triggerTime": "1695719197612",            "planType": "pl",            "price": "27000.000000000",            "executePrice": "27000.000000000",            "size": "0.020000000",            "actualSize": "0.000000000",            "orderType": "market",            "side": "buy",            "tradeSide": "open",            "posSide": "long",            "marginCoin": "USDT",            "status": "live",            "posMode": "hedge_mode",            "enterPointSource": "web",            "stopSurplusTriggerType": "fill_price",            "stopLossTriggerType": "fill_price",            "stpMode": "cancel_taker",            "cTime": "1695719197612",            "uTime": "1695719197612"        }    ],    "ts": 1695719197733}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter                    | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                   |
 | :--------------------------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3761,9 +4095,14 @@ Push Data
 | &gt; uTime                   | String             | Order update time, Milliseconds format of updated data timestamp Unix, e.g. 1597026383085                                                                                                                                                                                                                                                                                                     |
 | &gt; stpMode                 | String             | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders                                                                                                                                                                               |
 
-# History Position Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/private/Plan-Order-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## History Position Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Subscribe the position channel
 
@@ -3775,7 +4114,7 @@ Request Example
 {    "args":[        {            "channel":"positions-history",            "instId":"default",            "instType":"USDT-FUTURES"        }    ],    "op":"subscribe"}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3791,7 +4130,7 @@ Response Example
 {    "event":"subscribe",    "arg":{        "instType":"USDT-FUTURES",        "channel":"positions-history",        "instId":"default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3809,7 +4148,7 @@ Push Data
 {    "action":"snapshot",    "arg":{        "instType":"USDT-FUTURES",        "channel":"positions-history",        "instId":"default"    },    "data":[        {            "posId":"1",            "instId":"BTCUSDT",            "marginCoin":"USDT",            "marginMode":"crossed",            "holdSide":"short",            "posMode":"one_way_mode",            "openPriceAvg":"20000.0",            "closePriceAvg":"26221.0",            "openSize":"0.010",            "closeSize":"0.010",            "achievedProfits":"-62.21000000",            "settleFee":"-0.02277989",            "openFee":"-0.12000000",            "closeFee":"-0.15732600",            "cTime":"1696907951177",            "uTime":"1697090609976"        }    ],    "ts":1697099840122}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter            | Type               | Description                                                                                                                                                                                                                                                                                                                                      |
 | :------------------- | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3836,7 +4175,12 @@ Push Data
 | &gt; cTime           | String             | Position creation time, milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                                                                                                                                                                 |
 | &gt; uTime           | String             | Lastest position update time, milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                                                                                                                                                           |
 
-# Rest API Error Code
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/websocket/private/History-Positions-Channel)
+
+---
+
+## Rest API Error Code
 
 | Error message | Error code                                                                                                                                                                                                                                                                                                                                                                       | http status code |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
@@ -4717,7 +5061,12 @@ Push Data
 | 22045         | Insufficient liquidity in the market, please operate later                                                                                                                                                                                                                                                                                                                       | 400              |
 | 22067         | ADL processing，forbid operate the symbol:{0}                                                                                                                                                                                                                                                                                                                                    | 400              |
 
-# WebSocket Error Code
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/error-code/restapi)
+
+---
+
+## WebSocket Error Code
 
 | Error Message                       | Error Code |
 | :---------------------------------- | :--------- |
@@ -4734,3 +5083,8 @@ Push Data
 | Request timestamp expired           | 30014      |
 | Invalid signature                   | 30015      |
 | Param error                         | 30016      |
+
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/contract/error-code/websocket)
+
+---
