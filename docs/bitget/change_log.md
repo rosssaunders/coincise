@@ -1,0 +1,434 @@
+# Bitget API Change Log
+
+## Changelog
+
+### \[May 09, 2025\] Obtain the adjustment of the input parameters for the current funding rate.[​](#may-09-2025-obtain-the-adjustment-of-the-input-parameters-for-the-current-funding-rate "Direct link to may-09-2025-obtain-the-adjustment-of-the-input-parameters-for-the-current-funding-rate")
+
+Interface：/api/v2/mix/market/current-fund-rate
+
+Changes：
+
+- Obtain that the request parameter `symbol` of the current funding rate is
+  changed to be non-mandatory.
+
+### \[May 09, 2025\] Optimized the API for retrieving spot assets of sub-accounts.[​](#may-09-2025-optimized-the-api-for-retrieving-spot-assets-of-sub-accounts "Direct link to may-09-2025-optimized-the-api-for-retrieving-spot-assets-of-sub-accounts")
+
+Interface：/api/v2/spot/account/subaccount-assets
+
+Changes：
+
+- Added pagination parameters: `idLessThan` (pagination cursor) and `limit`
+  (items per page).
+- Added return field: `id` (cursor ID)
+
+### \[May 09, 2025\] Optimized the API for querying announcements.[​](#may-09-2025-optimized-the-api-for-querying-announcements "Direct link to may-09-2025-optimized-the-api-for-querying-announcements")
+
+Interface：/api/v2/public/annoucements
+
+Changes：
+
+- New announcement types added  
+  `product_updates`: Product Updates  
+  `security`: Security  
+  `api_trading`: API Trading
+- Added pagination parameters: `cursor` (pagination cursor ID) and `limit`
+  (items per page).
+- Deprecated announcement type: `trading_competitions_promotions` (Trading
+  Competitions and Promotions)
+- The return field `annDesc` (Announcement Description) is deprecated.
+
+### \[May 08, 2025\] Interface for adding leverage interest rate records[​](#may-08-2025-interface-for-adding-leverage-interest-rate-records "Direct link to may-08-2025-interface-for-adding-leverage-interest-rate-records")
+
+Interface： /api/v2/margin/interest-rate-record Changes：
+
+- The interface for adding leverage interest rate records supports users to
+  query the interest rate record data based on the trading pairs.
+
+### \[May 08, 2025\] Optimization of the query range for public transaction details of spot/contract.[​](#may-08-2025-optimization-of-the-query-range-for-public-transaction-details-of-spotcontract "Direct link to may-08-2025-optimization-of-the-query-range-for-public-transaction-details-of-spotcontract")
+
+Interface： /api/v2/spot/market/fills-history;
+/api/v2/mix/market/fills-history；
+
+Changes：
+
+- Adjust the time span from 7 days to 90 days, which means it supports querying
+  public transaction data from the past three months.
+
+### \[May 08, 2025\] Add preset stop - profit and stop - loss execution prices for contract orders.[​](#may-08-2025-add-preset-stop---profit-and-stop---loss-execution-prices-for-contract-orders "Direct link to may-08-2025-add-preset-stop---profit-and-stop---loss-execution-prices-for-contract-orders")
+
+Interface： /api/v2/mix/order/place-order
+
+Changes：
+
+- Add request parameters  
+  `presetStopSurplusExecutePrice` Preset stop-profit execution price  
+  `presetStopLossExecutePrice` Preset stop-loss execution price
+
+### \[May 08, 2025\] Add "utime" to the WebSocket push for cross-margin/isolated-margin leverage order channels.[​](#may-08-2025-add-utime-to-the-websocket-push-for-cross-marginisolated-margin-leverage-order-channels "Direct link to may-08-2025-add-utime-to-the-websocket-push-for-cross-marginisolated-margin-leverage-order-channels")
+
+Channels: Cross-margin Leverage Order Channel, Isolated-margin Leverage Order
+Channel
+
+Changes：
+
+- Add to the push data `utime`
+
+### \[Apr 10, 2025\] Adjustment to virtual sub-account API key related endpoints[​](#apr-10-2025-adjustment-to-virtual-sub-account-api-key-related-endpoints "Direct link to apr-10-2025-adjustment-to-virtual-sub-account-api-key-related-endpoints")
+
+### \[Apr 30,2025\] For the trading details of the WS futures, push fields are added to the spot/futures depth channels.[​](#apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels "Direct link to apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels")
+
+Channels: futures Trading Details Channel, Spot Depth Channel, Contract Depth
+Channel
+
+Changes:
+
+- Add the `clientOid` field to the pushed information of the futures Trading
+  Details Channel.
+- Add the `seq` field to the pushed information of the Spot Depth Channel and
+  the futures Depth Channel.
+
+### \[Apr 23, 2025\] Added groupType enumeration for get account bills.[​](#apr-23-2025-added-grouptype-enumeration-for-get-account-bills "Direct link to apr-23-2025-added-grouptype-enumeration-for-get-account-bills")
+
+Interface：/api/v2/spot/account/bills
+
+Changes：
+
+- Added a new bill type enumeration `groupType` for input parameters and return
+  values when fetching bill transaction details.
+
+### \[Apr 21,2025\] Delete error code 40882[​](#apr-212025-delete-error-code-40882 "Direct link to apr-212025-delete-error-code-40882")
+
+Removed content:
+
+- Removed error code `code 40882`:"You are currently a trader and you cannot
+  switch to the full position mode|400|"
+
+### \[Apr 14,2025\] Add New Endpoint: Get ND Broker Sub-accounts Deposit and Withdrawal Records[​](#apr-142025-add-new-endpoint-get-nd-broker-sub-accounts-deposit-and-withdrawal-records "Direct link to apr-142025-add-new-endpoint-get-nd-broker-sub-accounts-deposit-and-withdrawal-records")
+
+Interface：/api/v2/broker/all-sub-deposit-withdrawal
+
+Changes：
+
+- Adding new endpoint to get ND Broker sub-accounts deposit and withdrawal
+  records within **90 days**
+
+### \[Apr 10,2025\] Adjustment to virtual sub-account API key related endpoints[​](#apr-102025-adjustment-to-virtual-sub-account-api-key-related-endpoints "Direct link to apr-102025-adjustment-to-virtual-sub-account-api-key-related-endpoints")
+
+Interface：/api/v2/user/create-virtual-subaccount-apikey，/api/v2/user/modify-virtual-subaccount-apikey，/api/v2/user/virtual-subaccount-apikey-list
+
+Changes：
+
+- The `permList` parameter in the create, modify, and query sub-account API key
+  interfaces now includes the `transfer`: wallet transfer permission.
+- The modify and query sub-account API key interfaces now support regular
+  sub-accounts
+
+### \[Apr 10,2025\] Added new field `offTime` in the response of Get Spot Symbol Info interface[​](#apr-102025-added-new-field-offtime-in-the-response-of-get-spot-symbol-info-interface "Direct link to apr-102025-added-new-field-offtime-in-the-response-of-get-spot-symbol-info-interface")
+
+Interface：/api/v2/spot/public/symbols
+
+Changes:
+
+- Added new field `offTime` in the response
+- The response parameter "maxTradeAmount" is fixed to return
+  `900000000000000000000`; please disregard this response parameter.
+
+### \[Apr 09, 2025\] Added ADL ranking interface.[​](#apr-09-2025-added-adl-ranking-interface "Direct link to apr-09-2025-added-adl-ranking-interface")
+
+Endpoints：/api/v2/mix/position/adlRank  
+Additional content：
+
+- Supports obtaining ADL rankings for users across various trading pairs.
+
+### \[Apr 08, 2025\] Added APIs for new order initiator key creation & follower order setup.[​](#apr-08-2025-added-apis-for-new-order-initiator-key-creation--follower-order-setup "Direct link to apr-08-2025-added-apis-for-new-order-initiator-key-creation--follower-order-setup")
+
+Endpoints：/api/v2/copy/mix-trader/create-copy-api  
+Additional content：
+
+- New version interface for order initiators to create order API keys.
+
+Endpoints：/api/v2/copy/mix-follower/copy-settings  
+Additional content：
+
+- New version interface for follower order-following setup.
+
+### \[Apr 02, 2025\] Adjustment of input parameters for estimated interest and loanable amount[​](#apr-02-2025-adjustment-of-input-parameters-for-estimated-interest-and-loanable-amount "Direct link to apr-02-2025-adjustment-of-input-parameters-for-estimated-interest-and-loanable-amount")
+
+Endpoints：/api/v2/earn/loan/public/hour-interest, /api/v2/earn/loan/borrow
+
+- Additional content： Adjust the input parameter for the daily to  
+  `SEVEN`: 7 days  
+  `THIRTY`: 30 days  
+  `FLEXIBLE`: Flexible
+
+### \[Mar 27, 2025\] Updates include new fields in futures contract & funding rate interfaces' return values, and adjusted input params for spot transaction details.[​](#mar-27-2025-updates-include-new-fields-in-futures-contract--funding-rate-interfaces-return-values-and-adjusted-input-params-for-spot-transaction-details "Direct link to mar-27-2025-updates-include-new-fields-in-futures-contract--funding-rate-interfaces-return-values-and-adjusted-input-params-for-spot-transaction-details")
+
+Endpoints：/api/v2/mix/account/accounts  
+Additional content：
+
+- The return value of the futures contract account interface has been updated
+  with a new field `available`, which represents the maximum transferable amount
+  of combined margin in the current currency.
+
+Endpoints：/api/v2/mix/market/current-fund-rate  
+Additional content：
+
+- The return value of the interface for obtaining the current funding rate has
+  been updated with new parameters, including fundingRateInterval, upper and
+  lower limits of funding rate, and next update time.
+
+Endpoints：/api/v2/spot/trade/fills  
+Changes content：
+
+- The `symbol` in the request parameters has been changed from required to
+  optional.
+
+### \[Mar 22, 2025\] New Response Fields in Futures Account Channel[​](#mar-22-2025-new-response-fields-in-futures-account-channel "Direct link to mar-22-2025-new-response-fields-in-futures-account-channel")
+
+Channel: Futures - Private Channel - Account Channel  
+Change: Add "crossedRiskRate"(Risk ratio in cross margin mode) and
+"unrealizedPL"(Unrealized PnL) in push data
+
+### \[Mar 20,2025\] For Spot get order information endpoints, it is adjusted to only support to get the order data within 2 hours when queried by `clientOid`[​](#mar-202025-for-spot-get-order-information-endpoints-it-is-adjusted-to-only-support-to-get-the-order-data-within-2-hours-when-queried-by-clientoid "Direct link to mar-202025-for-spot-get-order-information-endpoints-it-is-adjusted-to-only-support-to-get-the-order-data-within-2-hours-when-queried-by-clientoid")
+
+Endpoints: Spot get order info interfaces  
+Change: Querying order information based on `ClientOid` only supports to get the
+data within last 2 hours.
+
+### \[Mar 18,2025\] Adjust the input parameter instructions for modifying the ApiKey permissions of a sub-account.[​](#mar-182025-adjust-the-input-parameter-instructions-for-modifying-the-apikey-permissions-of-a-sub-account "Direct link to mar-182025-adjust-the-input-parameter-instructions-for-modifying-the-apikey-permissions-of-a-sub-account")
+
+**Endpoints:** ：/api/v2/broker/manage/modify-subaccount-apikey  
+Changes content：
+
+- Modify the sub-account ApiKey permissions: The input parameter permType
+  (permission type) has been changed to a required field.
+
+### \[Mar 12,2025\] Adjustment to the period input parameter for obtaining contract initiative buying and selling volume information.[​](#mar-122025-adjustment-to-the-period-input-parameter-for-obtaining-contract-initiative-buying-and-selling-volume-information "Direct link to mar-122025-adjustment-to-the-period-input-parameter-for-obtaining-contract-initiative-buying-and-selling-volume-information")
+
+**Endpoints:** ：/api/v2/mix/market/long-short  
+Changes content：
+
+- Change the input parameter period field from `1d` to `1Dutc`.
+
+### \[Mar 11,2025\] API for new OI position limit information in contracts[​](#mar-112025-api-for-new-oi-position-limit-information-in-contracts "Direct link to mar-112025-api-for-new-oi-position-limit-information-in-contracts")
+
+**Endpoints:** ：/api/v2/mix/market/oi-limit  
+Additional content：
+
+- API for new OI position limit information in contracts
+
+### \[Feb 19,2025\] Add a description for instId in the public channel for Margin.[​](#feb-192025-add-a-description-for-instid-in-the-public-channel-for-margin "Direct link to feb-192025-add-a-description-for-instid-in-the-public-channel-for-margin")
+
+Changes content：
+
+- Add a description for instId in the public channel for Margin. Only
+  supports：`default`
+
+### \[Feb 18,2025\] Add the userId response field to the broker sub-account recharge records.[​](#feb-182025-add-the-userid-response-field-to-the-broker-sub-account-recharge-records "Direct link to feb-182025-add-the-userid-response-field-to-the-broker-sub-account-recharge-records")
+
+**Endpoints:** ：/api/v2/broker/subaccount-deposit  
+Changes content：
+
+- Add the userId response field to the broker sub-account recharge records.
+
+### \[Feb 07,2025\] Add instructions for using the classic account simulation environment.[​](#feb-072025-add-instructions-for-using-the-classic-account-simulation-environment "Direct link to feb-072025-add-instructions-for-using-the-classic-account-simulation-environment")
+
+Additional content：
+
+- Instructions for subscribing to simulation environment messages via Websocket.
+- Instructions for using RestApi to conduct API trading in the simulation
+  environment.
+
+### \[Feb 03,2025\] New addition to futures error codes:[​](#feb-032025-new-addition-to-futures-error-codes "Direct link to feb-032025-new-addition-to-futures-error-codes")
+
+Additional content:
+
+- New contract error `code 22067` has been added, meaning: "Operations are
+  prohibited during ADL processing."
+
+### \[Jan 16,2025\] The futures contract financial record has added an enumeration for the futureTaxType parameter.[​](#jan-162025-the-futures-contract-financial-record-has-added-an-enumeration-for-the-futuretaxtype-parameter "Direct link to jan-162025-the-futures-contract-financial-record-has-added-an-enumeration-for-the-futuretaxtype-parameter")
+
+**Endpoints:** ：/api/v2/tax/future-record  
+Additional content:
+
+- Add the enumeration type and description for the return value parameter
+  `futureTaxType`
+
+### \[Jan 15,2025\] Bitget to adjust the calculation of USDC-M perpetual futures index price from USD to USDC[​](#jan-152025-bitget-to-adjust-the-calculation-of-usdc-m-perpetual-futures-index-price-from-usd-to-usdc "Direct link to jan-152025-bitget-to-adjust-the-calculation-of-usdc-m-perpetual-futures-index-price-from-usd-to-usdc")
+
+Key adjustments
+
+- Index price and mark price: The index price and mark price of USDC-M perpetual
+  futures will now be denominated in USDC.
+- Order book prices: Order book prices for USDC-M perpetual futures will also be
+  denominated in USDC.
+
+For more details, please refer to:
+[https://www.bitget.com/support/articles/12560603820643](https://www.bitget.com/support/articles/12560603820643)
+
+### \[Dec 24,2024\] The rate limit change on Convert endpoint[​](#dec-242024-the-rate-limit-change-on-convert-endpoint "Direct link to dec-242024-the-rate-limit-change-on-convert-endpoint")
+
+/api/v2/convert/trade, The rate limit is changed from 10 req/sec/UID to 5
+req/sec/UID
+
+### \[Dec 16,2024\] Get Spot TransferRecords endpoint adjust parameters[​](#dec-162024-get-spot-transferrecords-endpoint-adjust-parameters "Direct link to dec-162024-get-spot-transferrecords-endpoint-adjust-parameters")
+
+Endpoints: Get Account Transfer Records Change: The "idLessThan" parameter for
+the spot account transfer record interface has been deprecated, and a new
+"pageNum" parameter has been added.
+
+### \[Nov 22,2024\] Websocket connection limit update[​](#nov-222024-websocket-connection-limit-update "Direct link to nov-222024-websocket-connection-limit-update")
+
+**Connection instructions**:  
+**Connection limit**: 300 connection requests/IP/5min, Max 100 connections/IP  
+**Subscription limit**: 240 subscription requests/Hour/connection, Max 1000
+channel subscription/connection
+
+If there’s a network problem, the system will automatically disconnect the
+connection.
+
+To keep the connection stable:
+
+1.  **Websocket will be forcibly disconnected every 24 hours, please add the
+    reconnection mechanism in your code**
+2.  Users set a 30 seconds timer to a send string "ping", and expect a string
+    "pong" as response. If no string "pong" received, please reconnect
+3.  Websocket server will disconnect the connection if there is no string "ping"
+    received for 2 min
+4.  The Websocket server accepts up to 10 messages per second. The message
+    includes:
+
+- String "ping"
+- JSON message, such as subscribe, unsubscribe.
+
+5.  If the user sends more messages than the limit, the connection will be
+    disconnected. The IP which is repeatedly disconnected may be blocked by the
+    server
+6.  We highly recommend you to subscribe **less than 50 channels in one
+    connection**. The connections with less channel subscriptions will be more
+    stable.
+
+### \[Oct 17,2024\] The update on calculation method for the `change24h` field in the Futrues and SPOT ticker interfaces[​](#oct-172024-the-update-on-calculation-method-for-the-change24h-field-in-the-futrues-and-spot-ticker-interfaces "Direct link to oct-172024-the-update-on-calculation-method-for-the-change24h-field-in-the-futrues-and-spot-ticker-interfaces")
+
+**Endpoints:**
+
+- /api/v2/spot/market/tickers, SPOT Get Ticker Information
+- /api/v2/mix/market/ticker, Futures Get Single Ticker
+- /api/v2/mix/market/tickers, Futures Get All Tickers
+
+**Change:**  
+The calculation of the `change24h` field in the API response will change from
+the price fluctuation from 00:00 in the UTC+8 time zone to the current time, to
+the price fluctuation over the past 24 hours from the current time.
+
+### \[Sep 24,2024\] The APIs for USDT-M Futures Multi-assets Mode requirements have been launched.[​](#sep-242024-the-apis-for-usdt-m-futures-multi-assets-mode-requirements-have-been-launched "Direct link to sep-242024-the-apis-for-usdt-m-futures-multi-assets-mode-requirements-have-been-launched")
+
+Endpoints: APIs for USDT-M Futures Multi-assets Mode
+
+### \[Aug 28,2024\] Get Merchant Advertisement List endpoint Adjust the maximum value of the 'limit' parameter to 20[​](#aug-282024-get-merchant-advertisement-list-endpoint-adjust-the-maximum-value-of-the-limit-parameter-to-20 "Direct link to aug-282024-get-merchant-advertisement-list-endpoint-adjust-the-maximum-value-of-the-limit-parameter-to-20")
+
+Endpoints: Get Merchant Advertisement List Change: Adjust the maximum value of
+the 'limit' parameter to 20
+
+### \[Aug 15,2024\] API rate limit adjustment[​](#aug-152024-api-rate-limit-adjustment "Direct link to aug-152024-api-rate-limit-adjustment")
+
+| Endpoints                                       | Old rate limit | New rate limit |
+| ----------------------------------------------- | -------------- | -------------- |
+| /api/v2/copy/mix-trader/order-close-positions   | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/order-current-track     | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/query-current-orders  | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/query-history-orders  | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/order-history-track     | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/profits-group-coin-date | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/profit-history-summarys | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/profit-history-details  | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/profit-details          | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/order-modify-tpsl       | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/order-total-detail      | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-broker/query-traders           | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/settings              | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/close-positions       | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/setting-tpsl          | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/query-settings        | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/cancel-trader         | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/config-settings-base    | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-follower/query-traders         | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/config-query-followers  | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/config-remove-follower  | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/config-query-symbols    | 20 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-trader/config-setting-symbols  | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/mix-broker/query-history-traces    | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/spot/trade/batch-cancel-plan-order      | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/spot/account/deduct-info                | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-follower/query-current-orders | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-follower/query-settings       | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-follower/query-history-orders | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-follower/query-traders        | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-trader/config-query-settings  | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-trader/order-history-track    | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-trader/profit-summarys        | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-trader/profit-history-details | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-trader/profit-details         | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/copy/spot-trader/order-total-detail     | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/user/virtual-subaccount-apikey-list     | 10 req/sec/UID | 5 req/sec/UID  |
+| /api/v2/broker/account/subaccount-withdrawal    | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/spot/account/switch-deduct              | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-follower/order-close-tracking | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-follower/cancel-trader        | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-follower/stop-order           | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-follower/settings             | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-follower/setting-tpsl         | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-trader/order-close-tracking   | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-trader/config-setting-symbols | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-trader/config-remove-follower | 10 req/sec/UID | 1 req/sec/UID  |
+| /api/v2/copy/spot-trader/order-modify-tpsl      | 10 req/sec/UID | 1 req/sec/UID  |
+
+### \[Jul 03,2024\] Withdrawal and get deposit addresses supports Bitcoin Lightning Network[​](#jul-032024-withdrawal-and-get-deposit-addresses-supports-bitcoin-lightning-network "Direct link to jul-032024-withdrawal-and-get-deposit-addresses-supports-bitcoin-lightning-network")
+
+Endpoints: Withdraw, Get Deposit Address, Get SubAccount Deposit Address Change:
+Get the deposit address to support obtaining the Bitcoin Lightning Network
+invoice address, and the withdrawal endpoint supports withdrawal from the
+Bitcoin Lightning Network invoice address
+
+### \[Jun 25,2024\] Adjustment on Get P2P Merchant List Interface[​](#jun-252024-adjustment-on-get-p2p-merchant-list-interface "Direct link to jun-252024-adjustment-on-get-p2p-merchant-list-interface")
+
+Parameter `merchantId` has been removed from **Get P2P Merchant List** Interface
+
+### \[Mar 15,2024\] Adjustment on the time range for Get History Trigger Order[​](#mar-152024-adjustment-on-the-time-range-for-get-history-trigger-order "Direct link to mar-152024-adjustment-on-the-time-range-for-get-history-trigger-order")
+
+Endpoint: Get History Trigger Order
+
+1.  The interval between `startTime` and `endTime` has been limited to 90 days
+2.  Only historical records within the past 90 days are supported.
+
+### \[Feb 6,2023\] Add `newSize` field in the push parameters of Spot Order Channel for Websocket[​](#feb-62023-add-newsize-field-in-the-push-parameters-of-spot-order-channel-for-websocket "Direct link to feb-62023-add-newsize-field-in-the-push-parameters-of-spot-order-channel-for-websocket")
+
+The spot order channel push now includes a new parameter `newSize`, which will
+gradually replace the existing parameter `size` in subsequent updates.
+
+`newSize` represents the order quantity, following the specified rules:
+
+- when `orderType=limit`, `newSize` represents the quantity of base coin,
+- when `orderType=market`and`side=buy`, `newSize` represents the quantity of
+  quote coin,
+- when `orderType=market`and`side=sell`, `newSize` represents the quantity of
+  base coin.
+
+### \[Jan 19,2024\] Adjustment on the time range for tax endpoints per request[​](#jan-192024-adjustment-on-the-time-range-for-tax-endpoints-per-request "Direct link to jan-192024-adjustment-on-the-time-range-for-tax-endpoints-per-request")
+
+Endpoints: Spot Transaction Records, Futures Transaction Records, Margin
+Transaction Records, P2P Transaction Records Change: The interval between
+`startTime` and `endTime` has been adjusted from one year to 30 days
+
+### \[Dec 27,2023\] Adjustment for the withdrawal of Broker's sub-account[​](#dec-272023-adjustment-for-the-withdrawal-of-brokers-sub-account "Direct link to dec-272023-adjustment-for-the-withdrawal-of-brokers-sub-account")
+
+The request param `dest` no longer supports the input `internal_transfer`.  
+The request param `toType` has been removed.
+
+### \[Nov 16,2023\] Add 'errorCode' field in batch-cancel-orders response[​](#nov-162023-add-errorcode-field-in-batch-cancel-orders-response "Direct link to nov-162023-add-errorcode-field-in-batch-cancel-orders-response")
+
+Added a new response parameter, errorCode, to the batch cancel order endpoint.
+
+> **Source:** [original URL](https://www.bitget.com/api-doc/common/changelog)
+
+---

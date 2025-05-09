@@ -4,8 +4,6 @@
   "base_url": "https://www.bitget.com/api-doc",
   "urls": [
     "/common/intro",
-    "/common/release-note",
-    "/common/changelog",
     "/common/quick-start",
     "/common/faq",
     "/common/sdk-postman",

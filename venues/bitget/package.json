@@ -5,11 +5,10 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "process:common": "node src/index.js config/common.json",
-    "process:spot": "node src/index.js config/spot.json",
-    "process:future": "node src/index.js config/future.json",
-    "start": "npm run process:common && npm run process:spot && npm run process:future",
-    "start:sequential": "node src/utils/run-sequential.js"
+    "extract:common": "node src/index.js config/common.json",
+    "extract:spot": "node src/index.js config/spot.json",
+    "extract:future": "node src/index.js config/future.json",
+    "extract:change_log": "node src/index.js config/change_log.json"
   },
   "dependencies": {
     "axios": "1.9.0",

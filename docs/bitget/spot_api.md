@@ -1,12 +1,12 @@
 # Bitget Spot API Documentation
 
-# Spot Trading API
+## Spot Trading API
 
 This section introduces the API documentation for spot trading.
 
 For more details, please refer to the menu on the left.
 
-## Updates[​](#updates "Direct link to Updates")
+### Updates[​](#updates "Direct link to Updates")
 
 Bitget will announce information about API updates and deprecations in advance.
 We recommend that you follow and subscribe to our announcements to stay informed
@@ -17,7 +17,7 @@ You can click [Latest News](javascript:;) to subscribe to announcements.
 Further more, an API to get notification could be found
 [here](/api-doc/common/notice/Get-All-Notices)
 
-## Contact Us[​](#contact-us "Direct link to Contact Us")
+### Contact Us[​](#contact-us "Direct link to Contact Us")
 
 If you have any questions or suggestions, you can contact us by the following
 approaches:
@@ -25,15 +25,19 @@ approaches:
 - Send an email to [API@bitget.com](mailto:API@bitget.com).
 - [Telegram](https://t.me/bitgetOpenapi)
 
-# Get Coin Info
+> **Source:** [original URL](https://www.bitget.com/api-doc/spot/intro)
+
+---
+
+## Get Coin Info
 
 Frequency limit: 3 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get spot coin information,supporting both individual and full queries.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/public/coins
 
@@ -43,7 +47,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/public/coins"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                                                                             |
 | :-------- | :----- | :------- | :-------------------------------------------------------------------------------------- |
@@ -55,7 +59,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695799900330,    "data": [        {            "coinId": "1",            "coin": "BTC",            "transfer": "true",            "chains": [                {                    "chain": "BTC",                    "needTag": "false",                    "withdrawable": "true",                    "rechargeable": "true",                    "withdrawFee": "0.005",                    "extraWithdrawFee": "0",                    "depositConfirm": "1",                    "withdrawConfirm": "1",                    "minDepositAmount": "0.001",                    "minWithdrawAmount": "0.001",                    "browserUrl": "https://blockchair.com/bitcoin/testnet/transaction/",                    "contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",                    "withdrawStep": "0",                    "withdrawMinScale": "8",                    "congestion":"normal"                }            ]        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter              | Type    | Description                                                                                                                                                                  |
 | :--------------------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -79,15 +83,20 @@ Response Example
 | &gt; withdrawMinScale  | String  | Decimal places of withdrawal amount                                                                                                                                          |
 | &gt; congestion        | String  | chain network status<br><code>normal</code>: normal<br><code>congested</code>: congestion                                                                                    |
 
-# Get Symbol Info
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Coin-List)
+
+---
+
+## Get Symbol Info
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get spot trading pair information,supporting both individual and full queries
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/public/symbols
 
@@ -97,7 +106,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/public/symbols"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                                                                                                             |
 | :-------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------- |
@@ -109,7 +118,7 @@ Response Example
 {  "code": "00000",  "msg": "success",  "requestTime": 1744276707885,  "data": [    {      "symbol": "BTCUSDT",      "baseCoin": "BTC",      "quoteCoin": "USDT",      "minTradeAmount": "0",      "maxTradeAmount": "900000000000000000000",      "takerFeeRate": "0.002",      "makerFeeRate": "0.002",      "pricePrecision": "2",      "quantityPrecision": "6",      "quotePrecision": "8",      "status": "online",      "minTradeUSDT": "1",      "buyLimitPriceRatio": "0.05",      "sellLimitPriceRatio": "0.05",      "areaSymbol": "no",      "orderQuantity": "200",      "openTime": "1532454360000",      "offTime": ""    }  ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter           | Type   | Description                                                                                                                                          |
 | :------------------ | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -131,15 +140,20 @@ Response Example
 | areaSymbol          | String | Area symbol<br><code>yes</code>, <code>no</code>                                                                                                     |
 | offTime             | String | Symbol off time, e.g: 1744797600000                                                                                                                  |
 
-# Get VIP Fee Rate
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Symbols)
+
+---
+
+## Get VIP Fee Rate
 
 Frequency limit: 10 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get VIP Fee Rate
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/vip-fee-rate
 
@@ -149,7 +163,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/vip-fee-rate"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 N/A
 
@@ -159,7 +173,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1675759699382,    "data": [        {            "level": 1,            "dealAmount": "1000000",            "assetAmount": "50000",            "takerFeeRate": "0",            "makerFeeRate": "0",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter          | Type   | Description                                                                      |
 | :----------------- | :----- | :------------------------------------------------------------------------------- |
@@ -171,15 +185,20 @@ Response Example
 | btcWithdrawAmount  | String | 24-hour withdrawal limit in BTC                                                  |
 | usdtWithdrawAmount | String | 24-hour withdrawal limit in USDT                                                 |
 
-# Get Ticker Information
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-VIP-Fee-Rate)
+
+---
+
+## Get Ticker Information
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Ticker Information,Supports both single and batch queries
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/tickers
 
@@ -189,7 +208,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/tickers?symbol=BTCUSDT"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                                                                                                             |
 | :-------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------- |
@@ -201,7 +220,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": [        {            "symbol": "BTCUSDT",            "high24h": "37775.65",            "open": "35134.2",            "low24h": "34413.1",            "lastPr": "34413.1",            "quoteVolume": "0",            "baseVolume": "0",            "usdtVolume": "0",            "bidPr": "0",            "askPr": "0",            "bidSz": "0.0663",            "askSz": "0.0119",            "openUtc": "23856.72",            "ts": "1625125755277",            "changeUtc24h": "0.00301",            "change24h": "0.00069"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter    | Type   | Description                                                 |
 | :----------- | :----- | :---------------------------------------------------------- |
@@ -222,15 +241,20 @@ Response Example
 | changeUtc24h | String | Change at UTC+0, 0.01 means 1%.                             |
 | change24h    | String | 24-hour change, 0.01 means 1%.                              |
 
-# Get Merge Depth
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Tickers)
+
+---
+
+## Get Merge Depth
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Merge Depth
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/merge-depth
 
@@ -240,7 +264,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/merge-depth?symbol=BTCUSDT&precision=scale0&limit=100"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | :-------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -254,7 +278,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "asks": [            [                "38084.5",                "0.0039"            ],            [                "38085.7",                "0.0018"            ],            [                "38086.7",                "0.0310"            ],            [                "38088.2",                "0.5303"            ]        ],        "bids": [            [                "38073.7",                "0.4993000000000000"            ],            [                "38073.4",                "0.4500"            ],            [                "38073.3",                "0.1179"            ],            [                "38071.5",                "0.2162"            ]        ],        "ts": "1622102974025",        "scale":"0.1",        "precision":"scale0",        "isMaxPrecision":"YES"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter      | Type   | Description                                                                         |
 | :------------- | :----- | :---------------------------------------------------------------------------------- |
@@ -265,15 +289,20 @@ Response Example
 | isMaxPrecision | String | Is max precision<br>YES:yes<br>NO:no                                                |
 | ts             | String | time                                                                                |
 
-# Get OrderBook Depth
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Merge-Orderbook)
+
+---
+
+## Get OrderBook Depth
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get OrderBook Depth
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/orderbook
 
@@ -283,7 +312,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/orderbook?symbol=BTCUSDT&type=step0&limit=100"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                                                                |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------- |
@@ -297,7 +326,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1698303884579,    "data": {        "asks": [            [                "34567.15",                "0.0131"            ],            [                "34567.25",                "0.0144"            ]        ],        "bids": [            [                "34567",                "0.2917"            ],            [                "34566.85",                "0.0145"            ]        ],        "ts": "1698303884584"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                                         |
 | :-------- | :----- | :---------------------------------------------------------------------------------- |
@@ -305,15 +334,20 @@ Response Example
 | bids      | Array  | Bid depth                                                                           |
 | ts        | String | time                                                                                |
 
-# Get Candlestick Data
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Orderbook)
+
+---
+
+## Get Candlestick Data
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Candlestick Data
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/candles
 
@@ -323,7 +357,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/candles?symbol=BTCUSDT&granularity=1min&startTime=1659076670000&endTime=1659080270000&limit=100"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :---------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -339,7 +373,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695800278693,    "data": [        [            "1656604800000",            "37834.5",            "37849.5",            "37773.5",            "37773.5",            "428.3462",            "16198849.1079",            "16198849.1079"        ],        [            "1656604800000",            "37834.5",            "37849.5",            "37773.5",            "37773.5",            "428.3462",            "16198849.1079",            "16198849.1079"        ]    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                          |
 | :-------- | :----- | :------------------------------------------------------------------- |
@@ -352,15 +386,20 @@ Response Example
 | index[6]  | String | Trading volume in USDT                                               |
 | index[7]  | String | Trading volume in quote currency, e.g. "USDT" in the "BTCUSDT" pair. |
 
-# Get History Candlestick Data
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Candle-Data)
+
+---
+
+## Get History Candlestick Data
 
 Frequency limit: 20 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get History Candlestick Data
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/history-candles
 
@@ -370,7 +409,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/history-candles?symbol=BTCUSDT&granularity=1min&endTime=1659080270000&limit=100"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                                                                                                           |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -385,7 +424,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695799900330,    "data": [        [            "1646064000000",            "43500.8",            "48207.2",            "38516",            "46451.9",            "2581.4668",            "118062073.82644",            "118062073.82644"        ],        [            "1648742400000",            "46451.9",            "55199.6",            "15522.1",            "38892.5",            "42331329.5473",            "1726993402150.991724",            "1726993402150.991724"        ],        [            "1654012800000",            "38892.5",            "38892.5",            "38892.5",            "38892.5",            "0",            "0",            "0"        ],        [            "1654012800000",            "39270.4",            "39270.4",            "37834.5",            "37834.5",            "42.444",            "1619934.779",            "1619934.779"        ],        [            "1656604800000",            "37834.5",            "37849.5",            "37773.5",            "37773.5",            "428.3462",            "16198849.1079",            "16198849.1079"        ]    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                          |
 | :-------- | :----- | :------------------------------------------------------------------- |
@@ -398,15 +437,20 @@ Response Example
 | index[6]  | String | Trading volume in USDT                                               |
 | index[7]  | String | Trading volume in quote currency, e.g. "USDT" in the "BTCUSDT" pair. |
 
-# Get Recent Trades
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data)
+
+---
+
+## Get Recent Trades
 
 Frequency limit: 10 times/1s (IP)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Recent Trades
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/fills
 
@@ -416,7 +460,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/fills?symbol=BTCUSDT&limit=100"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                     |
 | :-------- | :----- | :------- | :------------------------------ |
@@ -429,7 +473,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": [        {            "symbol": "BFTUSDT",            "tradeId": "1",            "side": "buy",            "price": "2.38735",            "size": "2470.6224",            "ts": "1622097282536"        },        {            "symbol": "BFTUSDT",            "tradeId": "2",            "side": "sell",            "price": "2.38649",            "size": "3239.7976",            "ts": "1622097280642"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                      |
 | :-------- | :----- | :--------------------------------------------------------------- |
@@ -440,11 +484,16 @@ Response Example
 | size      | String | Filled quantity                                                  |
 | ts        | String | Transaction time, Unix millisecond timestamp, e.g. 1690196141868 |
 
-# Get Market Trades
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades)
+
+---
+
+## Get Market Trades
 
 Rate limit: 10 req/sec/IP
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Market Trades
 
@@ -452,7 +501,7 @@ Get Market Trades
 - It supports to get the data within 90days. You can download the older data on
   our [web](https://www.bitget.com/data-download)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/market/fills-history
 
@@ -462,7 +511,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/market/fills-history?symbol=BTCUSDT&limit=20&startTime=1678965010861&endTime=1678965910861"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter  | Type   | Required | Description                                                                                               |
 | :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------- |
@@ -478,7 +527,7 @@ Response Example
 {  "code": "00000",  "msg": "success",  "requestTime": 1744275754521,  "data": [    {      "symbol": "ETHUSDT",      "tradeId": "1294151170843025500",      "side": "Buy",      "price": "1592.58",      "size": "2.1982",      "ts": "1744275603000"    },    {      "symbol": "ETHUSDT",      "tradeId": "1294151170834636801",      "side": "Sell",      "price": "1592.57",      "size": "0.0045",      "ts": "1744275603000"    }  ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description                                                                      |
 | :-------- | :----- | :------------------------------------------------------------------------------- |
@@ -489,16 +538,21 @@ Response Example
 | size      | String | Filled quantity                                                                  |
 | ts        | String | Transaction time(second level)<br>Unix millisecond timestamp, e.g. 1744275603000 |
 
-# Place Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/market/Get-Market-Trades)
+
+---
+
+## Place Order
 
 Rate limit: 10 requests/second/UID  
 Rate limit: 1 request/second/UID for **copy trading traders**
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Place Order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/place-order
 
@@ -508,7 +562,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/place-order" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*******" \  -H "ACCESS-PASSPHRASE:*****" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" \    -d '{"symbol": "BTCUSDT","side": "buy","orderType": "limit","force":"gtc","price":"23222.5","size":"1","clientOid":"121211212122"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter              | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                           |
 | :--------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -535,22 +589,27 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "orderId": "1001",        "clientOid": "121211212122"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description     |
 | :-------- | :----- | :-------------- |
 | orderId   | String | Order ID        |
 | clientOid | String | Custom order ID |
 
-# Cancel an Existing Order and Send a New Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Place-Order)
+
+---
+
+## Cancel an Existing Order and Send a New Order
 
 Rate limit: 5 requests/second/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel an Existing Order and Send a New Order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/cancel-replace-order
 
@@ -560,7 +619,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-replace-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{    "orderId":"xxxxxxxxxxxxxxx",    "clientOid":"",    "symbol": "BTCUSDT",    "price":"3.24",    "size":"4"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter              | Type   | Required | Description                                                                                                                                                                                                                                 |
 | :--------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -581,7 +640,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725345009763,    "data": {        "orderId": "xxxxxxxxxxxxxxx",        "clientOid": null,        "success": "success",        "msg": null    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description                                                                       |
 | :-------- | :----- | :-------------------------------------------------------------------------------- |
@@ -590,15 +649,20 @@ Response Example
 | success   | String | operate success<br><code>success</code>: success<br><code>failure</code>: failure |
 | msg       | String | Failure reason                                                                    |
 
-# Batch Cancel Existing Order and Send New Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Cancel-Replace-Order)
+
+---
+
+## Batch Cancel Existing Order and Send New Orders
 
 Rate limit: 5 requests/second/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel an Existing Order and Send a New Order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/batch-cancel-replace-order
 
@@ -608,7 +672,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-replace-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{    "orderList": [        {            "orderId":"xxxxxxxxxxxxxxxxx",            "clientOid":"",            "symbol": "BTCUSDT",            "price":"3.17",            "size":"5"        }    ]}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter                   | Type   | Required | Description                                                                                                                                                                                                                                 |
 | :-------------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -630,7 +694,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1725341809524,    "data": [        {            "orderId": "xxxxxxxxxxxxxxxxxxxxxx",            "clientOid": null,            "success": "failure",            "msg": "xxxxxx"        }    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description                                                                       |
 | :-------- | :----- | :-------------------------------------------------------------------------------- |
@@ -639,15 +703,20 @@ Response Example
 | success   | String | operate success<br><code>success</code>: success<br><code>failure</code>: failure |
 | msg       | String | Failure reason                                                                    |
 
-# Cancel Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Replace-Order)
+
+---
+
+## Cancel Order
 
 Frequency limit:10 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel Order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/cancel-order
 
@@ -657,7 +726,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "BTCUSDT","orderId": "121211212122"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                                                                                    |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------- |
@@ -672,22 +741,27 @@ Response Example
 {    "code": "00000",    "message": "success",    "requestTime": 1234567891234,    "data": {        "orderId": "121211212122",        "clientOid": "xx001"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description     |
 | :-------- | :----- | :-------------- |
 | orderId   | String | Order ID        |
 | clientOid | String | Client Order ID |
 
-# Batch Place Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Cancel-Order)
+
+---
+
+## Batch Place Orders
 
 Frequency limit: 5 times/1s (UID)Trader frequency limit: 1 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Place Orders in Batch
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/batch-orders
 
@@ -697,7 +771,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-orders" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol":"BTCUSDT","orderList":[{"side":"buy","orderType":"limit","force":"gtc","price":"23222.5","size":"1","clientOid":"121211212122"}] }'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter                  | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                           |
 | :------------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -723,7 +797,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1666336231317,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "1"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "1",                "errorMsg": "clientOrderId duplicate"            }        ]    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter     | Type   | Description             |
 | :------------ | :----- | :---------------------- |
@@ -736,15 +810,20 @@ Response Example
 | &gt;errorMsg  | String | Error information       |
 | &gt;errorCode | String | Error code              |
 
-# Batch Cancel Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Batch-Place-Orders)
+
+---
+
+## Batch Cancel Orders
 
 Frequency limit:10 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel Orders in Batch
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/batch-cancel-order
 
@@ -754,7 +833,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{    "symbol": "",    "batchMode"："multiple",    "orderList": [        {            "orderId":"121211212122",            "symbol":"BTCUSDT",            "clientOid":"121211212122"        }    ]}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter      | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                            |
 | :------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -771,7 +850,7 @@ Response Example
 {    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "121211212122"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "xxx001",                "errorMsg": "duplicate clientOrderId"            }        ]    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter     | Type   | Description             |
 | :------------ | :----- | :---------------------- |
@@ -784,15 +863,20 @@ Response Example
 | &gt;errorMsg  | String | Error information       |
 | &gt;errorCode | String | Error code              |
 
-# Cancel Order by Symbol
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders)
+
+---
+
+## Cancel Order by Symbol
 
 Frequency limit: 5 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel order by symbol
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/cancel-symbol-order
 
@@ -802,7 +886,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-symbol-order" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \   -d '{"symbol": "BTCUSDT"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                     |
 | :-------- | :----- | :------- | :------------------------------ |
@@ -814,21 +898,26 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1698313139948,    "data": {        "symbol": "BGBUSDT"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description                                                                                                                               |
 | :-------- | :----- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol    | String | Cancelled symbol (This request is executed asynchronously. If you need to know the result, please query the Get History Orders endpoint.) |
 
-# Get Order Info
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders)
+
+---
+
+## Get Order Info
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Order Info
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/orderInfo
 
@@ -838,7 +927,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/orderInfo?orderId=1234567890" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter     | Type   | Required | Description                                                               |
 | :------------ | :----- | :------- | :------------------------------------------------------------------------ |
@@ -853,7 +942,7 @@ Response Example
 {  "code": "00000",  "msg": "success",  "requestTime": 1695865476577,  "data": [    {      "userId": "**********",      "symbol": "BTCUSDT",      "orderId": "121211212122",      "clientOid": "121211212122",      "price": "0",      "size": "10.0000000000000000",      "orderType": "market",      "side": "buy",      "status": "filled",      "priceAvg": "13000.0000000000000000",      "baseVolume": "0.0007000000000000",      "quoteVolume": "9.1000000000000000",      "enterPointSource": "API",      "feeDetail": "{\"BGB\":{\"deduction\":true,\"feeCoinCode\":\"BGB\",\"totalDeductionFee\":-0.0041,\"totalFee\":-0.0041},\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0}}",      "orderSource": "market",      "cancelReason": "",      "cTime": "1695865232127",      "uTime": "1695865233051"    }  ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter                  | Type   | Description                                                                                                                                                                                                                                                                                |
 | :------------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -888,15 +977,20 @@ Response Example
 | &gt;&gt; totalFee          | String | The total fee amount to be paid, unit：currency obtained from the transaction.                                                                                                                                                                                                             |
 | cancelReason               | String | Cancel reason<br><code>normal_cancel</code>: Normal cancel<br><code>stp_cancel</code>: Cancelled by STP                                                                                                                                                                                    |
 
-# Get Current Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Get-Order-Info)
+
+---
+
+## Get Current Orders
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Unfilled Orders
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/unfilled-orders
 
@@ -906,7 +1000,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/unfilled-orders?symbol=BTCUSDT&startTime=1659036670000&endTime=1659076670000&limit=20" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \
 ```
 
-### Request parameter[​](#request-parameter "Direct link to Request parameter")
+#### Request parameter[​](#request-parameter "Direct link to Request parameter")
 
 | Parameter     | Type   | Required | Description                                                                                                                         |
 | :------------ | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -926,7 +1020,7 @@ Response Example
 {  "code": "00000",  "message": "success",  "requestTime": 1695808949356,  "data": [    {      "userId": "**********",      "symbol": "btcusdt",      "orderId": "2222222",      "clientOid": "xxxxxxx",      "priceAvg": "34829.12",      "size": "1",      "orderType": "limit",      "side": "buy",      "status": "new",      "basePrice": "0",      "baseVolume": "0",      "quoteVolume": "0",      "enterPointSource": "WEB",      "presetTakeProfitPrice": "70000",      "executeTakeProfitPrice": "",      "presetStopLossPrice": "10000",      "executeStopLossPrice": "",      "cTime": "1622697148",      "tpslType": "normal",      "triggerPrice": null    }  ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter              | Type   | Description                                                                                                                                                                                                                                                                                                                        |
 | :--------------------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -953,16 +1047,21 @@ Response Example
 | triggerPrice           | String | spot tpsl trigger price(Only valid when <code>tpslType</code> is <code>tpsl</code>)                                                                                                                                                                                                                                                |
 | tpslType               | String | <code>normal</code> spot order<br><code>tpsl</code> spot tpsl order                                                                                                                                                                                                                                                                |
 
-# Get History Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Get-Unfilled-Orders)
+
+---
+
+## Get History Orders
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get History Orders(It only supports to get the data within 90days. The older
 data can be downloaded from web)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/history-orders
 
@@ -972,7 +1071,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/history-orders?symbol=BTCUSDT&startTime=1659036670000&endTime=1659076670000&limit=20" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### request parameter[​](#request-parameter "Direct link to request parameter")
+#### request parameter[​](#request-parameter "Direct link to request parameter")
 
 | Parameter     | Type   | Required | Description                                                                                                                                                           |
 | :------------ | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -992,7 +1091,7 @@ Response Example
 {    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "userId": "*********",            "symbol": "ETHUSDT",            "orderId": "*****************************",            "clientOid": "*****************************",            "price": "0",            "size": "20.0000000000000000",            "orderType": "market",            "side": "buy",            "status": "filled",            "priceAvg": "1598.1000000000000000",            "baseVolume": "0.0125000000000000",            "quoteVolume": "19.9762500000000000",            "enterPointSource": "WEB",            "feeDetail": "{\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0},\"USDT\":{\"deduction\":false,\"feeCoinCode\":\"ETH\",\"totalDeductionFee\":0,\"totalFee\":-0.1120792560000000}}",            "orderSource": "market",            "cTime": "1698736299656",            "uTime": "1698736300363",            "tpslType": "normal",            "cancelReason": "",            "triggerPrice": null        }    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter                  | Type   | Description                                                                                                                                                                                                                                                                                |
 | :------------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1029,16 +1128,21 @@ Response Example
 | tpslType                   | String | <code>normal</code> spot order<br><code>tpsl</code> spot tpsl order                                                                                                                                                                                                                        |
 | cancelReason               | String | Cancel reason<br><code>normal_cancel</code>: Normal cancel<br><code>stp_cancel</code>: Cancelled by STP                                                                                                                                                                                    |
 
-# Get Fills
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Get-History-Orders)
+
+---
+
+## Get Fills
 
 Frequency limit:10 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Fills(It only supports to get the data within 90days.The older data can be
 downloaded from web)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/fills
 
@@ -1048,7 +1152,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/fills?symbol=BTCUSDT&startTime=1659036670000&endTime=1659076670000&limit=20" \    -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" \
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type   | Required | Description                                                                                                                                                                                               |
 | :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1065,7 +1169,7 @@ Response Example
 {  "code": "00000",  "msg": "success",  "requestTime": 1695865274510,  "data": [    {      "userId": "**********",      "symbol": "BTCUSDT",      "orderId": "12345678910",      "tradeId": "12345678910",      "orderType": "market",      "side": "buy",      "priceAvg": "13000",      "size": "0.0007",      "amount": "9.1",      "feeDetail": {        "deduction": "no",        "feeCoin": "BTC",        "totalDeductionFee": "",        "totalFee": "-0.0000007"      },      "tradeScope": "taker",      "cTime": "1695865232579",      "uTime": "1695865233027"    }  ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter             | Type   | Description                                             |
 | :-------------------- | :----- | :------------------------------------------------------ |
@@ -1087,15 +1191,20 @@ Response Example
 | &gt;totalDeductionFee | String | Total transaction fee discount                          |
 | &gt;totalFee          | String | Total transaction fee                                   |
 
-# Place Plan Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/trade/Get-Fills)
+
+---
+
+## Place Plan Order
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Place plan order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/place-plan-order
 
@@ -1105,7 +1214,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/place-plan-order" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" \    -d '{"symbol": "TRXUSDT", "side": "buy", "triggerPrice": 0.041572, "executePrice": "0.041572", "size": 151, "triggerType": "market_price", "orderType": "limit","clientOid": "12345", "force": "gtc"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter    | Type   | Required | Description                                                                                                                                                                                                                                |
 | :----------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1127,22 +1236,27 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1668134576535,    "data": {        "orderId": "121211212122",        "clientOid": "121211212122"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description          |
 | :-------- | :----- | :------------------- |
 | orderId   | String | Order ID             |
 | clientOid | String | Client customized ID |
 
-# Modify Plan Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order)
+
+---
+
+## Modify Plan Order
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Modify Plan Order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/modify-plan-order
 
@@ -1152,7 +1266,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/modify-plan-order" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" \    -d '{"orderId": "121211212122", "triggerPrice": 0.041222, "executePrice":"0.041272", "size": 156, "orderType":"limit"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter    | Type   | Required | Description                                                                                                                             |
 | :----------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1169,22 +1283,27 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1668134576535,    "data": {        "orderId": "121211212122",        "clientOid": "121211212122"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description          |
 | :-------- | :----- | :------------------- |
 | orderId   | String | Order ID             |
 | clientOid | String | Client customized ID |
 
-# Cancel Plan Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Modify-Plan-Order)
+
+---
+
+## Cancel Plan Order
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel Plan order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/cancel-plan-order
 
@@ -1194,7 +1313,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-plan-order" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" \    -d '{"orderId": "121211212122"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                  |
 | :-------- | :----- | :------- | :------------------------------------------- |
@@ -1207,21 +1326,26 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1668134497496,    "data": {        "result":"success"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description                  |
 | :-------- | :----- | :--------------------------- |
 | result    | String | Result is success or failure |
 
-# Get Current Plan Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Cancel-Plan-Order)
+
+---
+
+## Get Current Plan Orders
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Current Plan Orders
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/current-plan-order
 
@@ -1231,7 +1355,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/current-plan-order?symbol=BTCUSDT&limit=10" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type   | Required | Description                                                                                                                                                                 |
 | :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1247,7 +1371,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1668134581005,    "data": {        "nextFlag": false,        "idLessThan": "1",        "orderList": [            {                "orderId": "121211212122",                "clientOid": "121211212122",                "symbol": "TRXUSDT",                "size": "151",                "executePrice": "0.041572",                "triggerPrice": "0.041572",                "status": "not_trigger",                "orderType": "limit",                "side": "buy",                "planType":"amount",                "triggerType": "fill_price",                "enterPointSource": "API",                "uTime": "1668134576563",                "cTime": "1668134576563"            }        ]    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter        | Type   | Description                                                                                                                                                                                                                                                                                                        |
 | :--------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1266,15 +1390,20 @@ Response Example
 | cTime            | String | Creation time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                                                      |
 | uTime            | String | Update time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                                                        |
 
-# Get Plan Sub Order
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order)
+
+---
+
+## Get Plan Sub Order
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Plan Sub Order
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/plan-sub-order
 
@@ -1284,7 +1413,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/plan-sub-order?planOrderId=xxxxxxxxxxxxxxxxxx" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter   | Type   | Required | Description   |
 | :---------- | :----- | :------- | :------------ |
@@ -1296,7 +1425,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1710813939206,    "data": [        {            "orderId": "xxxxxxxxxxxxx",            "price": "0.4188",            "type": "limit",            "status": "success"        }    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type    | Description                                                                                                                                                                                |
 | :-------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1305,15 +1434,20 @@ Response Example
 | type      | String  | Order type<br>limit Limit price<br>market Market price                                                                                                                                     |
 | status    | String  | Plan order trigger status<br>success: trigger success<br>fail: trigger failed<br>cancelled: cancelled<br>in_progress: trigger spot placing order<br>in_progress_tracking: tracking trigger |
 
-# Get History Plan Orders
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Get-Plan-Sub-Order)
+
+---
+
+## Get History Plan Orders
 
 Frequency limit: 20 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get History Plan Orders
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/trade/history-plan-order
 
@@ -1323,7 +1457,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/trade/history-plan-order?symbol=BTCUSDT&startTime=1659036670000&endTime=1659076670000&limit=20" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                                    |
 | :-------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1338,7 +1472,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1668134581005,    "data": {        "nextFlag": false,        "idLessThan": "1",        "orderList": [            {                "orderId": "121211212122",                "clientOid": "121211212122",                "symbol": "TRXUSDT",                "size": "151",                "executePrice": "0.041572",                "triggerPrice": "0.041572",                "status": "not_trigger",                "orderType": "limit",                "side": "buy",                "planType":"amount",                "triggerType": "fill_price",                "enterPointSource": "API",                "uTime": "1668134576563",                "cTime": "1668134576563"            }        ]    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter            | Type    | Description                                                                                                                                                                                                                                                                                                        |
 | :------------------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1360,15 +1494,20 @@ Response Example
 | &gt;cTime            | String  | Creation time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                                                      |
 | &gt;uTime            | String  | Update time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                                                        |
 
-# Cancel Plan Orders in Batch
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Get-History-Plan-Order)
+
+---
+
+## Cancel Plan Orders in Batch
 
 Rate limit: 5 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Cancel Plan Orders in Batch
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/batch-cancel-plan-order
 
@@ -1378,7 +1517,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-plan-order" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" \    -d '{ "symbolList": ["BTCUSDT", "ETHUSDT"] }'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type                | Required | Description                                                                                                            |
 | :--------- | :------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------- |
@@ -1390,7 +1529,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683876261117,    "data": {        "successList":[{            "orderId": "121211212122",            "clientOid": "121211212122"        }],        "failureList":[{            "orderId": "121211212122",            "clientOid": "121211212122",            "errorMsg": "failure"        }]    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter     | Type               | Description                                        |
 | :------------ | :----------------- | :------------------------------------------------- |
@@ -1402,15 +1541,20 @@ Response Example
 | &gt;clientOid | String             | Customize order ID                                 |
 | &gt;errorMsg  | String             | Failure reason                                     |
 
-# Get Account Information
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order)
+
+---
+
+## Get Account Information
 
 Frequency limit: 1 time/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get account information(SPOT read or SPOT read/write permission needed)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/info
 
@@ -1420,7 +1564,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/info" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type | Required | Description |
 | :-------- | :--- | :------- | :---------- |
@@ -1432,7 +1576,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "userId": "**********",        "inviterId": "**********",        "ips": "127.0.0.1",        "authorities": [            "trade",            "readonly"        ],        "parentId": 1,        "traderType": "trader",        "channelCode": "XXX",        "channel": "YYY",        "regisTime":"1246566789345"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter   | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :---------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1446,15 +1590,20 @@ Response Example
 | traderType  | String | trader: Is trader, not_trader: not trader                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | regisTime   | String | Register time                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-# Get Account Assets
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Account-Info)
+
+---
+
+## Get Account Assets
 
 Frequency limit: 10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Account Assets
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/assets
 
@@ -1464,7 +1613,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/assets?coin=USDT" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                       |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1477,7 +1626,7 @@ Response Example
 {    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "coin": "usdt",            "available": "0",            "frozen": "0",            "locked": "0",            "limitAvailable": "0",            "uTime": "1622697148"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter      | Type   | Description                                                                                    |
 | :------------- | :----- | :--------------------------------------------------------------------------------------------- |
@@ -1488,16 +1637,21 @@ Response Example
 | limitAvailable | String | Restricted availability<br>For spot copy trading                                               |
 | uTime          | String | Update time(ms)                                                                                |
 
-# Get Sub-accounts Assets
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Account-Assets)
+
+---
+
+## Get Sub-accounts Assets
 
 Frequency limit: 10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Sub-accounts Assets(only return the sub-accounts which assets > 0).  
 **ND Brokers are not allowed to call this endpoint**
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/subaccount-assets
 
@@ -1507,22 +1661,24 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/subaccount-assets" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-------- | :--- | :------- | :---------- |
-| N/A       |      |          |
+| Parameter  | Type   | Required | Description                                                                                                                          |
+| :--------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| idLessThan | String | No       | Cursor ID<br>Pagination cursor. Do not pass it in the first request. For subsequent requests, pass the last ID returned previously.. |
+| limit      | String | No       | The number of sub-accounts returned per page.<br>The default value is 10, and the maximum value is 50.                               |
 
 Response Example
 
 ```
-{    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "userId": 1234567890,            "assetsList": [                {                    "coin": "BTC",                    "available": "1.1",                    "limitAvailable": "12.1",                    "frozen": "0",                    "locked": "1.1",                    "uTime": "1337654897651"                }            ]        },        {            "userId": 1234567890,            "assetsList": [                {                    "coin": "ETH",                    "available": "12.1",                    "limitAvailable": "12.1",                    "frozen": "0",                    "locked": "1.1",                    "uTime": "1337654897651"                }            ]        }    ]}
+{  "code": "00000",  "message": "success",  "requestTime": 1695808949356,  "data": [    {      "id": 1111,      "userId": 1234567890,      "assetsList": [        {          "coin": "BTC",          "available": "1.1",          "limitAvailable": "12.1",          "frozen": "0",          "locked": "1.1",          "uTime": "1337654897651"        }      ]    },    {      "id": 2222,      "userId": 1234567890,      "assetsList": [        {          "coin": "ETH",          "available": "12.1",          "limitAvailable": "12.1",          "frozen": "0",          "locked": "1.1",          "uTime": "1337654897651"        }      ]    }  ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter           | Type   | Description                                      |
 | :------------------ | :----- | :----------------------------------------------- |
+| id                  | String | Cursor ID                                        |
 | userId              | String | User ID                                          |
 | assetsList          | Array  | List of spot assets                              |
 | &gt; coin           | String | Token name                                       |
@@ -1532,15 +1688,20 @@ Response Example
 | &gt; locked         | String | Assets locked                                    |
 | &gt; uTime          | string | update time, Unix, ms                            |
 
-# Modify Deposit Account
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets)
+
+---
+
+## Modify Deposit Account
 
 Frequency limit:10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Modify the auto-transfer account type of deposit
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/wallet/modify-deposit-account
 
@@ -1550,7 +1711,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/wallet/modify-deposit-account" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{    "coin":"USDT",    "accountType":"USDT-FUTURES"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter   | Type   | Required | Description                                                                                                                                                                                                                                             |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1563,21 +1724,26 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": "success"}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description  |
 | :-------- | :----- | :----------- |
 | data      | String | success/fail |
 
-# Get Account Bills
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account)
+
+---
+
+## Get Account Bills
 
 Frequency limit: 10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Account Bills
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/bills
 
@@ -1587,7 +1753,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/bills" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | :----------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1605,7 +1771,7 @@ Response Example
 {    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "cTime": "1622697148",            "coin": "usdt",            "groupType": "deposit",            "businessType": "transfer-in",            "size": "1",            "balance": "1",            "fees": "0",            "billId": "1291"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter    | Type   | Description                                                                                                                                                                                                                                                                                                                              |
 | :----------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1618,15 +1784,20 @@ Response Example
 | fees         | String | Transaction fees                                                                                                                                                                                                                                                                                                                         |
 | billId       | String | Billing ID                                                                                                                                                                                                                                                                                                                               |
 
-# Transfer
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Account-Bills)
+
+---
+
+## Transfer
 
 Rate limit: 10 requests/second/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Transfer assets between different `productType` accounts
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/wallet/transfer
 
@@ -1636,7 +1807,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/wallet/transfer" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{    "fromType":"spot",    "toType":"isolated_margin",    "amount":"300",    "symbol":"BTCUSDT",    "clientOid":"1",    "coin":"USDT"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                           |
 | :-------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1653,22 +1824,27 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "transferId": "123456",        "clientOid": "x123"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter  | Type   | Description     |
 | :--------- | :----- | :-------------- |
 | transferId | String | Transfer ID     |
 | clientOid  | String | Custom order ID |
 
-# GET Transferable Coin List
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Wallet-Transfer)
+
+---
+
+## GET Transferable Coin List
 
 Frequency limit:10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get transferable coin list
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/wallet/transfer-coin-info
 
@@ -1678,7 +1854,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/wallet/transfer-coin-info?fromType=isolated_margin&toType=spot" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \ }'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                   |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1691,17 +1867,22 @@ Response Example
 {    "code":"00000",    "msg":"success",    "requestTime":1683875302853,    "data":[        "BTC",        "USDT",        "ETH"    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type | Description                                                           |
 | :-------- | :--- | :-------------------------------------------------------------------- |
 | data      | List | transfer_in and transfer_out of accounts supports coins intersection. |
 
-# Sub Transfer
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Transfer-Coins)
+
+---
+
+## Sub Transfer
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 The types of transfers supported by this interface include
 
@@ -1716,7 +1897,7 @@ The types of transfers supported by this interface include
 Only the parent account API Key can use this endpoint, and the API Key must bind
 IP
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/wallet/subaccount-transfer
 
@@ -1726,7 +1907,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/wallet/transfer" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{"fromUserId":"1","toUserId":"2","fromType":"spot","toType":"spot","amount":"10","coin":"USDT","clientOid":"1"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                           |
 | :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1745,18 +1926,23 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "transferId": "123456",        "clientOid": "x123"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter  | Type   | Description     |
 | :--------- | :----- | :-------------- |
 | transferId | String | Transfer ID     |
 | clientOid  | String | Custom order ID |
 
-# Withdraw
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Sub-Transfer)
+
+---
+
+## Withdraw
 
 Rate limit:5 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 - Coin withdrawals including on-chain withdrawals and internal transfers(the
   address needs to be added in the address book on web)
@@ -1765,7 +1951,7 @@ Rate limit:5 req/sec/UID
   parameters can be referenced for completion: `memberCode`, `identityType`,
   `companyName`, `firstName`, and `lastName`.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/wallet/withdrawal
 
@@ -1775,7 +1961,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/wallet/withdrawal" \  -H "ACCESS-KEY:your apiKey" \  -H "ACCESS-SIGN:*" \  -H "ACCESS-PASSPHRASE:*" \  -H "ACCESS-TIMESTAMP:1659076670000" \  -H "locale:en-US" \  -H "Content-Type: application/json" \  -d '{"coin": "USDT","transferType":"on_chain","address": "*******************************************","chain": "trc20","size": "0.009"}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | :----------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1801,22 +1987,27 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "orderId": "123",        "clientOid": "123"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter | Type   | Description     |
 | :-------- | :----- | :-------------- |
 | orderId   | String | Order ID        |
 | clientOid | String | Custom order ID |
 
-# Get MainSub Transfer Record
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal)
+
+---
+
+## Get MainSub Transfer Record
 
 Rate limit: 20 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get transfer record
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/sub-main-trans-record
 
@@ -1826,7 +2017,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/sub-main-trans-record?coin=USDT&startTime=1699510219000&endTime=1699684880000" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter  | Type   | Required | Description                                                                                                                                                                                                           |
 | :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1845,7 +2036,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1700556280430,    "data": [        {            "coin": "USDT",            "status": "Successful",            "toType": "usdt_futures",            "fromType": "spot",            "size": "1020.00000000",            "ts": "1691476360467",            "clientOid": "xxxx",            "transferId": "xxxx",            "fromUserId": "xxxx",            "toUserId": "xxxx"        }    ]}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter  | Type   | Description                                                                                                                                                                                                                                                                  |
 | :--------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1860,15 +2051,20 @@ Response Example
 | fromUserId | String | the user ID who initiate the trasnfer ID                                                                                                                                                                                                                                     |
 | toUserId   | String | The user ID who receive the trnasfer                                                                                                                                                                                                                                         |
 
-# Get Transfer Record
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords)
+
+---
+
+## Get Transfer Record
 
 Frequency limit: 20 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get transfer record
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/transferRecords
 
@@ -1878,7 +2074,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/transferRecords?coin=USDT&fromType=exchange&startTime=1659076670&endTime=1659076670&limit=100" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter  | Type   | Required | Description                                                                                                                                                                                                                                                                |
 | :--------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1897,7 +2093,7 @@ Response Example
 {    "code": "00000",    "data": [        {            "coin": "btc",            "status": "Successful",            "toType": "usdt_futures",            "toSymbol": "",            "fromType": "spot",            "fromSymbol": "BTC/USD",            "size": "1000.00000000",            "ts": "1631070374488",            "clientOid": "1",            "transferId": "1"        }    ],    "msg": "success",    "requestTime": 1631608142260}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter  | Type   | Description                                                                                                                                                                                                                                                                          |
 | :--------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1912,13 +2108,18 @@ Response Example
 | clientOid  | String | Order ID customized by user                                                                                                                                                                                                                                                          |
 | transferId | String | Transfer order ID                                                                                                                                                                                                                                                                    |
 
-# Switch BGB Deduct
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Account-TransferRecords)
+
+---
+
+## Switch BGB Deduct
 
 Rate Limit: 1 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/account/switch-deduct
 
@@ -1928,7 +2129,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/account/switch-deduct" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{"deduct":"on"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description |
 | :-------- | :----- | :------- | :---------- |
@@ -1940,20 +2141,25 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": true}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type | Description |
 | :-------- | :--- | :---------- |
 
-# Get Deposit Address
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Switch-Deduct)
+
+---
+
+## Get Deposit Address
 
 Frequency limit: 10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Deposit Address
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/wallet/deposit-address
 
@@ -1963,7 +2169,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/wallet/deposit-address?coin=USDT&chain=trc20" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                          |
 | :-------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1977,7 +2183,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "address": "xxx",        "chain": "BTC-Bitcoin",        "coin": "BTC",        "tag": "",        "url": "https://btc.com/xxx"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description        |
 | :-------- | :----- | :----------------- |
@@ -1987,16 +2193,21 @@ Response Example
 | tag       | String | Tag                |
 | url       | String | blockchain address |
 
-# Get SubAccount Deposit Address
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address)
+
+---
+
+## Get SubAccount Deposit Address
 
 Rate limit: 10 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Sub-account Deposit Address(Please ensure that queried sub-account has
 deposit permission enabled)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/wallet/subaccount-deposit-address
 
@@ -2006,7 +2217,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/wallet/subaccount-deposit-address?coin=USDT&chain=ERC20&subUid=123" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                     |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2021,7 +2232,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "address": "xxx",        "chain": "BTC-Bitcoin",        "coin": "BTC",        "tag": "",        "url": "https://btc.com/xxx"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description        |
 | :-------- | :----- | :----------------- |
@@ -2031,13 +2242,18 @@ Response Example
 | tag       | String | Tag                |
 | url       | String | blockchain address |
 
-# Get BGB Deduct Info
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Address)
+
+---
+
+## Get BGB Deduct Info
 
 Rate limit: 5 req/sec/UID
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/account/deduct-info
 
@@ -2047,7 +2263,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/account/deduct-info" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type | Required | Description |
 | :-------- | :--- | :------- | :---------- |
@@ -2058,17 +2274,22 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "deduct": "on"    }}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description |
 | :-------- | :----- | :---------- |
 | deduct    | String | on / off    |
 
-# Cancel Withdrawal
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info)
+
+---
+
+## Cancel Withdrawal
 
 Frequency limit:10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 1.  The user center can set the switch \[Cancel Withdrawal\], and there is a
     "regret period" of 1 minute to cancel the withdrawal.
@@ -2078,7 +2299,7 @@ Frequency limit:10 times/1s (User ID)
 3.  Small-amount automatic currency withdrawals do not require manual review,
     and the withdrawal cannot be revoked.
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/wallet/cancel-withdrawal
 
@@ -2088,7 +2309,7 @@ Request Example
 curl -X POST "https://api.bitget.com/api/v2/spot/wallet/cancel-withdrawal" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*******" \   -H "ACCESS-PASSPHRASE:*****" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" \     -d '{    "orderId":"1231231312312"}'
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type   | Required | Description      |
 | :-------- | :----- | :------- | :--------------- |
@@ -2100,19 +2321,24 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": "success"}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type   | Description  |
 | :-------- | :----- | :----------- |
 | data      | String | success/fail |
 
-# Get SubAccount Deposit Records
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal)
+
+---
+
+## Get SubAccount Deposit Records
 
 Frequency limit:10 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/wallet/subaccount-deposit-records
 
@@ -2122,7 +2348,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/wallet/subaccount-deposit-records?subUid=12121212&coin=USDT&idLessThan=1111120137173336063&limit=5" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type   | Required | Description                                                                                                                         |
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -2139,7 +2365,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1654507973411,    "data": [        {            "orderId": "1",            "tradeId": "1",            "coin": "USDT",            "size": "10.00000000",            "status": "success",            "toAddress": "0x51xxx",            "dest": "on_chain",            "chain": "erc20",            "fromAddress": "0x52xxx",            "cTime": "1653290769222",            "uTime": "1653290769222"        }    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter   | Type   | Description                                                                                                                                                                                       |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2158,15 +2384,20 @@ Response Example
 | cTime       | String | Creation time in ms                                                                                                                                                                               |
 | uTime       | String | Update time in ms                                                                                                                                                                                 |
 
-# Get Withdrawal Records
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Record)
+
+---
+
+## Get Withdrawal Records
 
 Frequency limit:10 times/1s (User ID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Withdrawal Records
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/wallet/withdrawal-records
 
@@ -2176,7 +2407,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/wallet/withdrawal-records?coin=USDT&clientOid=123&startTime=1659036670000&endTime=1659076670000&limit=20" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type   | Required | Description                                                                                                                         |
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -2194,7 +2425,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1654507973411,    "data": [        {            "orderId": "1",            "tradeId": "1",            "coin": "USDT",            "dest": "dest",            "clientOid": "123",            "type": "withdraw",            "tag": "",            "size": "10.00000000",            "fee": "-1.00000000",            "status": "success",            "toAddress": "1",            "fromAddress": "2",            "confirm": "100",            "chain": "erc20",            "cTime": "1653290769222",            "uTime": "1653290769222"        }    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter   | Type   | Description                                                                                                                                                                                          |
 | :---------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2215,15 +2446,20 @@ Response Example
 | cTime       | String | Creation time(ms)                                                                                                                                                                                    |
 | uTime       | String | Update time(ms)                                                                                                                                                                                      |
 
-# Get Deposit Records
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record)
+
+---
+
+## Get Deposit Records
 
 Frequency limit:10 times/1s (UID)
 
-### Description[​](#description "Direct link to Description")
+#### Description[​](#description "Direct link to Description")
 
 Get Deposit Records(Not include Fiat deposit record)
 
-### HTTP Request[​](#http-request "Direct link to HTTP Request")
+#### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - GET /api/v2/spot/wallet/deposit-records
 
@@ -2233,7 +2469,7 @@ Request Example
 curl "https://api.bitget.com/api/v2/spot/wallet/deposit-records?coin=USDT&startTime=1659036670000&endTime=1659076670000&limit=20" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
-### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
+#### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter  | Type   | Required | Description                                                                                                                         |
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -2250,7 +2486,7 @@ Response Example
 {    "code": "00000",    "msg": "success",    "requestTime": 1654507973411,    "data": [        {            "orderId": "1",            "tradeId": "1",            "coin": "USDT",            "type": "deposit",            "size": "10.00000000",            "status": "success",            "toAddress": "0x51xxx",            "dest": "on_chain",            "chain": "erc20",            "fromAddress": "0x52xxx",            "cTime": "1653290769222",            "uTime": "1653290769222"        }    ]}
 ```
 
-### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
+#### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter   | Type   | Description                                                                                                                                                                                       |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2267,9 +2503,14 @@ Response Example
 | cTime       | String | Creation time, ms                                                                                                                                                                                 |
 | uTime       | String | Edit time, ms                                                                                                                                                                                     |
 
-# Market Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Market Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Get the product's latest price, bid price, bid price and 24h trading volume
 information. Frequency of data push: 100ms ~ 300ms
@@ -2280,7 +2521,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "ticker",            "instId": "ETHUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type   | Required           | Description                                     |
 | :------------ | :----- | :----------------- | :---------------------------------------------- |
@@ -2296,7 +2537,7 @@ Response Example
 {  "event": "subscribe",  "arg": {    "instType": "SPOT",    "channel": "ticker",    "instId": "ETHUSDT"  }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                        |
 | :------------ | :----- | :--------------------------------- |
@@ -2314,7 +2555,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "SPOT",        "channel": "ticker",        "instId": "ETHUSDT"    },    "data": [        {            "instId": "ETHUSDT",            "lastPr": "2200.10",            "open24h": "0.00",            "high24h": "0.00",            "low24h": "0.00",            "change24h": "0.00",            "bidPr": "1792",            "askPr": "2200.1",            "bidSz": "0.0084",            "askSz": "19740.8811",            "baseVolume": "0.0000",            "quoteVolume": "0.0000",            "openUtc": "0.00",            "changeUtc24h": "0",            "ts": "1695702438018"        }    ],    "ts": 1695702438029}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter         | Type               | Description                                                                    |
 | :---------------- | :----------------- | :----------------------------------------------------------------------------- |
@@ -2340,9 +2581,14 @@ Push Data
 | &gt; askSz        | String             | Selling amount                                                                 |
 | &gt; change24h    | String             | 24-hour change, 0.01 means 1%.                                                 |
 
-# Candlestick Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Candlestick Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Get the candlestick data of the product
 
@@ -2355,7 +2601,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "candle1m",            "instId": "ETHUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :------------ | :----------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2371,7 +2617,7 @@ Response Example
 {  "event": "subscribe",  "arg": {    "instType": "SPOT",    "channel": "candle1m",    "instId": "ETHUSDT"  }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2389,7 +2635,7 @@ Push Data
 {  "action": "snapshot",  "arg": {    "instType": "SPOT",    "channel": "candle1m",    "instId": "ETHUSDT"  },  "data": [    [      "1695672780000",      "2200.1",      "2200.1",      "2200.1",      "2200.1",      "0",      "0",      "0"    ]  ],  "ts": 1695702747821}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter     | Type               | Description                                                          |
 | :------------ | :----------------- | :------------------------------------------------------------------- |
@@ -2408,9 +2654,14 @@ Push Data
 | &gt; index[6] | String             | Trading volume of quote currency                                     |
 | &gt; index[7] | String             | Trading volume (USDT)                                                |
 
-# Trading Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Trading Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Push once if any trade is matched(taker orders)
 
@@ -2423,7 +2674,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "trade",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                          |
 | :------------ | :----------------- | :------- | :----------------------------------- |
@@ -2439,7 +2690,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "SPOT",        "channel": "trade",        "instId": "BTCUSDT"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                                               |
 | :------------ | :----- | :------------------------------------------------------------------------ |
@@ -2457,7 +2708,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "SPOT",        "channel": "trade",        "instId": "BTCUSDT"    },    "data": [        {            "ts": "1695709835822",            "price": "26293.4",            "size": "0.0013",            "side": "buy",            "tradeId": "1000000000"        }    ],    "ts": 1695711090682}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter     | Type               | Description                                                                   |
 | :------------ | :----------------- | :---------------------------------------------------------------------------- |
@@ -2473,9 +2724,14 @@ Push Data
 | &gt; size     | String             | Transaction quantity                                                          |
 | &gt; side     | String             | Transaction direction                                                         |
 
-# Depth Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Depth Channel
+
+#### Description[​](#description "Direct link to Description")
 
 This is the channel to get the depth data  
 Default data push frequency for `books`, `books5`, `books15` is **200ms**  
@@ -2487,7 +2743,7 @@ Default data push frequency for `books1` is **60ms**
 - `books5`: 5 depth levels. Push `snapshot` each time
 - `books15`: 15 depth levels. Push `snapshot` each time
 
-#### Checksum[​](#checksum "Direct link to Checksum")
+##### Checksum[​](#checksum "Direct link to Checksum")
 
 Calculate Checksum
 
@@ -2538,7 +2794,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "books5",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                            |
 | :------------ | :----------------- | :------- | :----------------------------------------------------- |
@@ -2554,7 +2810,7 @@ Response Example
 {  "event": "subscribe",  "arg": {    "instType": "SPOT",    "channel": "books5",    "instId": "BTCUSDT"  }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                                            |
 | :------------ | :----- | :----------------------------------------------------- |
@@ -2572,7 +2828,7 @@ Push Data
 {  "action": "snapshot",  "arg": {    "instType": "SPOT",    "channel": "books5",    "instId": "BTCUSDT"  },  "data": [    {      "asks": [        [          "26274.9",          "0.0009"        ],        [          "26275.0",          "0.0500"        ]      ],      "bids": [        [          "26274.8",          "0.0009"        ],        [          "26274.7",          "0.0027"        ]      ],      "checksum": 0,       "seq": 123,      "ts": "1695710946294"    }  ],  "ts": 1695710946294}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter     | Type               | Description                                                                                                                                      |
 | :------------ | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2589,9 +2845,14 @@ Push Data
 | &gt; checksum | Long               | Checksum                                                                                                                                         |
 | &gt; seq      | Long               | Serial number.<br>It increases when the order book is updated and can be used to determine whether there is packet loss or out-of-order packets. |
 
-# Fill Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Fill Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Trade Details channel
 
@@ -2601,7 +2862,7 @@ Request
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "fill",            "instId": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type   | Required | Description                       |
 | :------------ | :----- | :------- | :-------------------------------- |
@@ -2617,7 +2878,7 @@ Response
 {    "event": "subscribe",    "arg": {        "instType": "SPOT",        "channel": "fill",        "instId": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                       |
 | :------------ | :----- | :-------------------------------- |
@@ -2635,7 +2896,7 @@ Push Data
 {    "action":"snapshot",    "arg":{        "instType":"SPOT",        "channel":"fill",        "instId":"default"    },    "data":[        {            "orderId":"111",            "tradeId":"111",            "symbol":"BTCUSDT",            "orderType":"limit",            "side":"buy",            "priceAvg":"42740.41",            "size":"0.0006",            "amount":"25.644246",            "tradeScope":"marker",            "feeDetail":[                {                    "feeCoin":"USDT",                    "deduction":"no",                    "totalDeductionFee":"0",                    "totalFee":"0.01538655"                }            ],            "cTime":"1703580202094",            "uTime":"1703580202094"        },        {            "orderId":"111",            "tradeId":"222",            "symbol":"BTCUSDT",            "orderType":"limit",            "side":"buy",            "priceAvg":"42741.46",            "size":"0.0006",            "amount":"25.644876",                        "tradeScope":"marker",            "feeDetail":[                {                    "feeCoin":"USDT",                    "deduction":"no",                    "totalDeductionFee":"0",                    "totalFee":"0.01538693"                }            ],            "cTime":"1703580202094",            "uTime":"1703580202094"        }    ],    "ts":1703580202416}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter                              | Type               | Description                                                                                   |
 | :------------------------------------- | :----------------- | :-------------------------------------------------------------------------------------------- |
@@ -2662,9 +2923,14 @@ Push Data
 | &gt; cTime                             | String             | Create Time，milliseconds format of Unix timestamp, e.g.1597026383085                         |
 | &gt; uTime                             | String             | Update Time，milliseconds format of Unix timestamp, e.g.1597026383085                         |
 
-# Order Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/private/Fill-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Order Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Get order information. Initial subscriptions will not trigger any push
 notifications.
@@ -2682,7 +2948,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "orders",            "instId": "BTCUSDT"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                         |
 | :------------ | :----------------- | :------- | :---------------------------------------------------------------------------------- |
@@ -2698,7 +2964,7 @@ Response Example
 {  "event": "subscribe",  "arg": {    "instType": "SPOT",    "channel": "orders",    "instId": "BTCUSDT"  }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                        |
 | :------------ | :----- | :--------------------------------- |
@@ -2716,7 +2982,7 @@ Push Data
 {  "action": "snapshot",  "arg": {    "instType": "SPOT",    "channel": "orders",    "instId": "BTCUSDT"  },  "data": [    {      "instId": "BTCUSDT",      "orderId": "1",      "clientOid": "1",      "size": "8.0000",      "newSize": "500.0000",      "notional": "8.000000",      "orderType": "market",      "force": "gtc",      "side": "buy",      "fillPrice": "26256.0",      "tradeId": "1",      "baseVolume": "0.0003",      "fillTime": "1695797773286",      "fillFee": "-0.00000018",      "fillFeeCoin": "BTC",      "tradeScope": "T",      "accBaseVolume": "0.0003",      "priceAvg": "26256.0",      "status": "partially_filled",      "cTime": "1695797773257",      "uTime": "1695797773326",      "stpMode": "cancel_taker",      "feeDetail": [        {          "feeCoin": "BTC",          "fee": "-0.00000018"        }      ],      "enterPointSource": "WEB"    }  ],  "ts": 1695797773370}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter             | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :-------------------- | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2754,9 +3020,14 @@ Push Data
 | &gt; uTime            | String             | Order Update time, milliseconds format of Unix timestamp, e.g.1630410492847                                                                                                                                                                                                                                                                                                                                                               |
 | &gt; stpMode          | String             | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders                                                                                                                                                                                                                           |
 
-# Trigger Order Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Trigger Order Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Subscribe trigger order channel
 
@@ -2766,7 +3037,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "orders-algo",            "instId": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                              |
 | :------------ | :----------------- | :------- | :--------------------------------------- |
@@ -2782,7 +3053,7 @@ Response Example
 {    "event": "subscribe",    "arg": {        "instType": "SPOT",        "channel": "orders-algo",        "instId": "default"    }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                       |
 | :------------ | :----- | :-------------------------------- |
@@ -2800,7 +3071,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    },    "data": [        {            "instId": "BTCUSDT",            "orderId": "1",            "clientOid": "1",            "triggerPrice": "27000.000000000",            "triggerType": "fill_price",            "planType": "amount",            "price": "27000.000000000",            "size": "0.020000000",            "actualSize": "0.000000000",            "orderType": "market",            "side": "buy",            "status": "live",            "executePrice": "0.1",            "enterPointSource": "web",            "cTime": "1695719197612",            "uTime": "1695719197612",            "stpMode": "cancel_taker"        }    ],    "ts": 1695719197733}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter             | Type               | Description                                                                                                                                                                                                                                       |
 | :-------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2828,9 +3099,14 @@ Push Data
 | &gt; uTime            | String             | Order update time, Milliseconds format of updated data timestamp Unix, e.g. 1597026383085                                                                                                                                                         |
 | &gt; stpMode          | String             | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders                                   |
 
-# Account Channel
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/private/Plan-Order-Channel)
 
-### Description[​](#description "Direct link to Description")
+---
+
+## Account Channel
+
+#### Description[​](#description "Direct link to Description")
 
 Get account information, push data according to the subscription dimensions for
 the first subscription.
@@ -2848,7 +3124,7 @@ Request Example
 {    "op": "subscribe",    "args": [        {            "instType": "SPOT",            "channel": "account",            "coin": "default"        }    ]}
 ```
 
-### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+#### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter     | Type               | Required | Description                                                                             |
 | :------------ | :----------------- | :------- | :-------------------------------------------------------------------------------------- |
@@ -2864,7 +3140,7 @@ Response Example
 {  "event": "subscribe",  "arg": {    "instType": "SPOT",    "channel": "account",    "coin": "default"  }}
 ```
 
-### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+#### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
 | Parameter     | Type   | Description                        |
 | :------------ | :----- | :--------------------------------- |
@@ -2882,7 +3158,7 @@ Push Data
 {    "action": "snapshot",    "arg": {        "instType": "SPOT",        "channel": "account",        "coin": "default"    },    "data": [        {            "coin": "USDT",            "available": "100000",            "frozen": "0",            "locked": "0",            "limitAvailable": "0",            "uTime":"1697092295506"        }    ],    "ts": 1695713887792}
 ```
 
-### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+#### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
 | Parameter           | Type               | Description                                                                      |
 | :------------------ | :----------------- | :------------------------------------------------------------------------------- |
@@ -2899,7 +3175,12 @@ Push Data
 | &gt; limitAvailable | String             | Restricted availability For spot copy trading                                    |
 | &gt; uTime          | String             | Update time                                                                      |
 
-# Rest API Error Code
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/websocket/private/Account-Channel)
+
+---
+
+## Rest API Error Code
 
 | Error message | Error code                                                                                                                                                                                                                                                                                                                                                                       | http status code |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
@@ -3855,7 +4136,12 @@ Push Data
 | 70229         | Place order error                                                                                                                                                                                                                                                                                                                                                                | 400              |
 | 90001         | The single subscription limit cannot be exceeded {0}                                                                                                                                                                                                                                                                                                                             | 400              |
 
-# WebSocket Error Code
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/error-code/restapi)
+
+---
+
+## WebSocket Error Code
 
 | Error Message                       | Error Code |
 | :---------------------------------- | :--------- |
@@ -3872,3 +4158,8 @@ Push Data
 | Request timestamp expired           | 30014      |
 | Invalid signature                   | 30015      |
 | Param error                         | 30016      |
+
+> **Source:**
+> [original URL](https://www.bitget.com/api-doc/spot/error-code/websocket)
+
+---

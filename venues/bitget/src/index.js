@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import * as fs from "fs"
 import puppeteer from "puppeteer"
 import * as cheerio from "cheerio"
 import path from "path"
@@ -7,6 +7,7 @@ import { gfm, tables } from "turndown-plugin-gfm"
 import { argv } from "process"
 import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import { JSDOM } from "jsdom"
 
 // Add delay between requests
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -74,20 +75,38 @@ async function processPage(page, fullUrl) {
   // Get the outer HTML of the markdown content
   const outerHtml = markdownDiv.html()
 
-  // Convert to markdown using Turndown with the HTML string
-  return turndownService.turndown(outerHtml)
+  return outerHtml
+}
+
+function dropHeadingsOneLevel(html) {
+  const dom = new JSDOM(html)
+  const { document } = dom.window
+  for (let i = 5; i >= 1; i--) {
+    const oldHeading = `h${i}`
+    const newHeading = `h${i + 1}`
+    document.querySelectorAll(oldHeading).forEach(node => {
+      const newNode = document.createElement(newHeading)
+      newNode.innerHTML = node.innerHTML
+      // Copy attributes if any
+      for (const attr of node.attributes) {
+        newNode.setAttribute(attr.name, attr.value)
+      }
+      node.replaceWith(newNode)
+    })
+  }
+  return document.body.innerHTML
 }
 
 async function convertToMarkdown(configPath) {
   let browser
   try {
     // Read the config file
-    const config = JSON.parse(await fs.readFile(configPath, "utf8"))
+    const config = JSON.parse(await fs.promises.readFile(configPath, "utf8"))
 
     const outputDir = "../../docs/bitget"
 
     // Create output directory if it doesn't exist
-    await fs.mkdir(outputDir, { recursive: true })
+    await fs.promises.mkdir(outputDir, { recursive: true })
 
     // Initialize markdown content with a header
     let markdownContent = `# ${config.title}\n\n`
@@ -95,7 +114,24 @@ async function convertToMarkdown(configPath) {
     // Launch browser once for all requests
     browser = await puppeteer.launch({
       headless: "new",
-      args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"]
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--single-process",
+        "--no-first-run",
+        "--no-zygote",
+        "--disable-extensions",
+        "--disable-component-extensions-with-background-pages",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-web-security",
+        "--disable-features=IsolateOrigins,site-per-process",
+        "--password-store=basic"
+      ],
+      timeout: 30000, // Browser launch timeout
+      ignoreHTTPSErrors: true
     })
 
     // Process each link
@@ -107,59 +143,63 @@ async function convertToMarkdown(configPath) {
       // Construct the full URL
       const fullUrl = `${config.base_url}${relativePath}`
 
-      try {
-        console.log(`Processing: ${fullUrl}`)
+      console.log(`Processing: ${fullUrl}`)
 
-        // Add delay between requests
-        await delay(1000)
+      // Add delay between requests
+      await delay(1000)
 
-        // Create a new page for each request
-        const page = await browser.newPage()
+      // Create a new page for each request
+      const page = await browser.newPage()
 
-        // Set viewport and user agent
-        await page.setUserAgent(
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-        )
+      // Set viewport, timeout, and request interception
+      await page.setViewport({ width: 1920, height: 1080 })
+      page.setDefaultTimeout(30000) // For operations like waitForSelector, evaluate
 
-        // Process the page with retry logic
-        const sectionContent = await retryWithBackoff(
-          () => processPage(page, fullUrl),
-          3, // max retries
-          5000 // initial delay in ms
-        )
-
-        if (sectionContent) {
-          // Add a newline before each section to ensure proper separation
-          markdownContent += "\n\n" + sectionContent
+      await page.setRequestInterception(true)
+      page.on("request", req => {
+        const resourceType = req.resourceType()
+        if (["document", "script", "xhr", "fetch"].includes(resourceType)) {
+          req.continue()
+        } else {
+          req.abort()
         }
+      })
 
-        // Close the page after processing
-        await page.close()
-      } catch (error) {
-        console.error(`Error processing ${fullUrl}:`, error.message)
-        // Add a longer delay on error
-        await delay(5000)
+      // Set user agent
+      await page.setUserAgent(
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+      )
+
+      // Process the page with retry logic
+      let sectionHTMLContent = await retryWithBackoff(
+        () => processPage(page, fullUrl),
+        3, // max retries
+        5000 // initial delay in ms
+      )
+
+      sectionHTMLContent = dropHeadingsOneLevel(sectionHTMLContent)
+
+      // Convert to markdown using Turndown with the HTML string
+      const sectionMDContent = turndownService.turndown(sectionHTMLContent)
+
+      if (sectionMDContent) {
+        // Add a newline before each section to ensure proper separation
+        markdownContent += "\n\n" + sectionMDContent
+        markdownContent += `\n\n> **Source:** [original URL](${fullUrl})\n\n---\n\n`
       }
+
+      // Close the page after processing
+      await page.close()
     }
 
     // Save the markdown content
     const outputPath = path.join(outputDir, config.output_file)
-    await fs.writeFile(outputPath, markdownContent)
-    console.log(
-      `\nMarkdown file has been created successfully at ${outputPath}!`
-    )
+    await fs.promises.writeFile(outputPath, markdownContent) // Changed to use fs.promises.writeFile
+    console.log(`Markdown file has been created successfully at ${outputPath}!`)
 
     // Format the markdown file
-    try {
-      await formatMarkdown(outputPath)
-      console.log(`Formatted: ${outputPath}`)
-    } catch (err) {
-      console.error(`Error formatting markdown:`, err)
-      process.exit(1)
-    }
-  } catch (error) {
-    console.error("Error converting to markdown:", error)
-    process.exit(1)
+    await formatMarkdown(outputPath)
+    console.log(`Formatted: ${outputPath}`)
   } finally {
     // Close the browser
     if (browser) {

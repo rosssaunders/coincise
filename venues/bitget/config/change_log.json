@@ -1,0 +1,6 @@
+{
+  "title": "Bitget API Change Log",
+  "output_file": "change_log.md",
+  "base_url": "https://www.bitget.com/api-doc",
+  "urls": ["/common/changelog"]
+}

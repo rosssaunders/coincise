@@ -41,8 +41,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Bitget scraper
-        run: npm run start:sequential
+      - name: Run Bitget scraper - Common
+        run: npm run extract:common
+
+      - name: Run Bitget scraper - Spot
+        run: npm run extract:spot
+
+      - name: Run Bitget scraper - Future
+        run: npm run extract:future
+
+      - name: Run Bitget scraper - Change Log
+        run: npm run extract:change_log
 
       - name: Check for changes
         id: git-check
