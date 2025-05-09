@@ -34,7 +34,7 @@ jobs:
 
       - name: Install shared dependencies
         run: |
-          pushd ../shared
+          pushd ../../shared
           npm install
           popd
 
@@ -43,10 +43,10 @@ jobs:
 
       - name: Run Private REST API scraper
         run: npm run privaterestapi
-        
+
       - name: Run Public REST API scraper
         run: npm run publicrestapi
-        
+
       - name: Run WebSocket API scraper
         run: npm run websocketapi
 
