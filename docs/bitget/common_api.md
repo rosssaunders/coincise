@@ -474,6 +474,44 @@ impact the overall return.
 
 # Changelog
 
+## \[May 08, 2025\] Interface for adding leverage interest rate records[​](#may-08-2025-interface-for-adding-leverage-interest-rate-records "Direct link to may-08-2025-interface-for-adding-leverage-interest-rate-records")
+
+Interface： /api/v2/margin/interest-rate-record Changes：
+
+- The interface for adding leverage interest rate records supports users to
+  query the interest rate record data based on the trading pairs.
+
+## \[May 08, 2025\] Optimization of the query range for public transaction details of spot/contract.[​](#may-08-2025-optimization-of-the-query-range-for-public-transaction-details-of-spotcontract "Direct link to may-08-2025-optimization-of-the-query-range-for-public-transaction-details-of-spotcontract")
+
+Interface： /api/v2/spot/market/fills-history;
+/api/v2/mix/market/fills-history；
+
+Changes：
+
+- Adjust the time span from 7 days to 90 days, which means it supports querying
+  public transaction data from the past three months.
+
+## \[May 08, 2025\] Add preset stop - profit and stop - loss execution prices for contract orders.[​](#may-08-2025-add-preset-stop---profit-and-stop---loss-execution-prices-for-contract-orders "Direct link to may-08-2025-add-preset-stop---profit-and-stop---loss-execution-prices-for-contract-orders")
+
+Interface： /api/v2/mix/order/place-order
+
+Changes：
+
+- Add request parameters  
+  `presetStopSurplusExecutePrice` Preset stop-profit execution price  
+  `presetStopLossExecutePrice` Preset stop-loss execution price
+
+## \[May 08, 2025\] Add "utime" to the WebSocket push for cross-margin/isolated-margin leverage order channels.[​](#may-08-2025-add-utime-to-the-websocket-push-for-cross-marginisolated-margin-leverage-order-channels "Direct link to may-08-2025-add-utime-to-the-websocket-push-for-cross-marginisolated-margin-leverage-order-channels")
+
+Channels: Cross-margin Leverage Order Channel, Isolated-margin Leverage Order
+Channel
+
+Changes：
+
+- Add to the push data `utime`
+
+## \[Apr 10, 2025\] Adjustment to virtual sub-account API key related endpoints[​](#apr-10-2025-adjustment-to-virtual-sub-account-api-key-related-endpoints "Direct link to apr-10-2025-adjustment-to-virtual-sub-account-api-key-related-endpoints")
+
 ## \[Apr 30,2025\] For the trading details of the WS futures, push fields are added to the spot/futures depth channels.[​](#apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels "Direct link to apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels")
 
 Channels: futures Trading Details Channel, Spot Depth Channel, Contract Depth
