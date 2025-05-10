@@ -517,7 +517,7 @@ price to fluctuate.
 ### Get position tiers
 
 Retrieve position tiers information, maximum leverage depends on your borrowings
-and margin ratio.
+and Maintenance margin ratio.
 
 #### Rate Limit: 10 requests per 2 seconds
 
@@ -549,7 +549,7 @@ and margin ratio.
 | tier          | String   | Tiers                                                                                                                                                                                                                                  |
 | minSz         | String   | The minimum borrowing amount or position of this gear is only applicable to margin/options/perpetual/delivery, the minimum position is 0 by default<br>It will return the minimum borrowing amount when <code>ccy</code> takes effect. |
 | maxSz         | String   | The maximum borrowing amount or number of positions held in this position is only applicable to margin/options/perpetual/delivery<br>It will return the maximum borrowing amount when <code>ccy</code> takes effect.                   |
-| mmr           | String   | Maintenance margin requirement rate                                                                                                                                                                                                    |
+| mmr           | String   | Position maintenance margin requirement rate                                                                                                                                                                                           |
 | imr           | String   | Initial margin requirement rate                                                                                                                                                                                                        |
 | maxLever      | String   | Maximum available leverage                                                                                                                                                                                                             |
 | optMgnFactor  | String   | Option Margin Coefficient (only applicable to options)                                                                                                                                                                                 |

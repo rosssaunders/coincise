@@ -9,7 +9,7 @@
 You are allowed to send **600 requests within a 5-second window per IP** by
 default. This limit applies to all traffic directed to `api.bybit.com`,
 `api.bybick.com`, and local site hostnames such as `api.bybit.kz`. If you
-encounter the error **“403, access too frequent”**, it indicates that your IP
+encounter the error **"403, access too frequent"**, it indicates that your IP
 has exceeded the allowed request frequency. In this case, you should terminate
 all HTTP sessions and wait for at least 10 minutes. The ban will be lifted
 automatically.
@@ -206,15 +206,15 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 
 #### Spread Trading[​](#spread-trading "Direct link to heading")
 
-| Method |                                    Path                                    | Limit       | Upgradable |
-| :----- | :------------------------------------------------------------------------: | ----------- | ---------- |
-| POST   |    <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a>    | 100 req/min | N          |
-| POST   |     <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a>     | 100 req/min | N          |
-| POST   |    <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a>    | 100 req/min | N          |
-| POST   |  <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a>   | 100 req/min | N          |
-| GET    |   <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a>    | 50 req/s    | N          |
-| GET    | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s    | N          |
-| GET    | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s    | N          |
+| Method |                                    Path                                    | Limit    | Upgradable |
+| :----- | :------------------------------------------------------------------------: | -------- | ---------- |
+| POST   |    <a href="/docs/v5/spread/trade/create-order">Create Spread Order</a>    | 20 req/s | N          |
+| POST   |     <a href="/docs/v5/spread/trade/amend-order">Amend Spread Order</a>     | 20 req/s | N          |
+| POST   |    <a href="/docs/v5/spread/trade/cancel-order">Cancel Spread Order</a>    | 20 req/s | N          |
+| POST   |  <a href="/docs/v5/spread/trade/cancel-all">Cancel All Spread Orders</a>   | 5 req/s  | N          |
+| GET    |   <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a>    | 50 req/s | N          |
+| GET    | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N          |
+| GET    | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N          |
 
 ## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 
@@ -416,7 +416,10 @@ _closed status_
 - `CreateByUser`
 - `CreateByFutureSpread` Spread order
 - `CreateByAdminClosing`
-- `CreateBySettle` USDC Futures delivery; Position closed by contract delisted
+- `CreateBySettle` USDC Futures delivery; position closed as a result of the
+  delisting of a contract. This is recorded as a
+  [trade](/docs/v5/order/execution) but not an
+  [order](/docs/v5/order/order-list).
 - `CreateByStopOrder` Futures conditional order
 - `CreateByTakeProfit` Futures take profit order
 - `CreateByPartialTakeProfit` Futures partial take profit order
@@ -635,6 +638,9 @@ Also known as the "standard account".
 - `CancelBySettle` cancelled due to delisting contract
 - `CancelByTpSlTsClear` TP/SL order cancelled when the position is cleared
 - `CancelBySmp` cancelled by [SMP](https://bybit-exchange.github.io/docs/v5/smp)
+- `CancelByDCP` cancelled by DCP triggering
+- `CancelByRebalance` Spread trading: the order price of a single leg order is
+  outside the limit price range.
 
 _Options:_
 
@@ -850,7 +856,10 @@ _USDT Perpetual_:
 _USDT Futures_:
 
 - `BTCUSDT-21FEB25`
-- `ETHUSDT-14FEB25`
+- `ETHUSDT-14FEB25`  
+  The types of USDT Futures contracts offered by Bybit include: Weekly,
+  Bi-Weekly, Tri-Weekly, Monthly, Bi-Monthly, Quarterly, Bi-Quarterly,
+  Tri-Quarterly
 
 _USDC Perpetual_:
 
@@ -1135,7 +1144,8 @@ with the example of BTCUSDT:
 |      3400071      | The net asset is not satisfied                                                                                                                                                             |
 |      3401010      | Cannot switch to PM mode (for copy trading master trader)                                                                                                                                  |
 |      3400139      | The total value of your positions and orders has exceeded the risk limit for a Perpetual or Futures contract                                                                               |
-|      500010       | The sub-account specified does not belong to the parent account                                                                                                                            |
+|       34040       | Not modified. Indicates you already set this TP/SL value or you didn't pass a required parameter                                                                                           |
+|      500010       | The subaccount specified does not belong to the parent account                                                                                                                             |
 |      500011       | The Uid 592334 provided is not associated with a Unified Trading Account                                                                                                                   |
 
 ## Spot Trade[​](#spot-trade "Direct link to heading")
@@ -1315,108 +1325,109 @@ with the example of BTCUSDT:
 
 ## Asset[​](#asset "Direct link to heading")
 
-|       Code        | Description                                                                                                                                              |
-| :---------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|      131001       | openapi svc error                                                                                                                                        |
-|      131002       | Parameter error                                                                                                                                          |
-|      131002       | Withdraw address chain or destination tag are not equal                                                                                                  |
-|      131003       | Internal error                                                                                                                                           |
-|      131004       | KYC needed                                                                                                                                               |
-|      131066       | This address does not support withdrawals for the time being. Please switch to another address for withdrawing                                           |
-|      131067       | Travel rule verification failed, please contact the target exchange. Travel rule for KR user                                                             |
-|      131068       | Travel rule information is insufficient, please provide additional details. Travel rule for KR user                                                      |
-|      131069       | Unable to withdraw to the receipt, please contact the target the exchange. Travel rule for KR user                                                       |
-|      131070       | The recipient's name is mismatched with the targeted exchange. Travel rule for KR user                                                                   |
-|      131071       | The recipient has not undergone KYC verification. Travel rule for KR user                                                                                |
-|      131072       | Your withdrawal currency is not supported by the target exchange. Travel rule for KR user                                                                |
-|      131073       | Your withdrawal address has not been included in the target exchange. Travel rule for KR user                                                            |
-|      131074       | Beneficiary info is required, please refer to the latest api document. Travel rule for KR user                                                           |
-|      131075       | InternalAddressCannotBeYourself                                                                                                                          |
-|      131076       | internal transfer not support sub-accounts                                                                                                               |
-|      131077       | receive user not exist                                                                                                                                   |
-|      131078       | receive user deposit has been banned                                                                                                                     |
-|      131079       | receive user need kyc                                                                                                                                    |
-|      131080       | User left retry times is zero                                                                                                                            |
-|      131081       | Do not input memo/tag,please.                                                                                                                            |
-|      131082       | Do not repeat the request                                                                                                                                |
-|      131083       | Withdraw only allowed from address book                                                                                                                  |
-|      131084       | Withdraw failed because of Uta Upgrading                                                                                                                 |
-|      131085       | Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered)                                                           |
-|      131086       | Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered)                                                                       |
-|      131087       | your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again                                                  |
-|      131088       | The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s       |
-|      131089       | User sensitive operation, withdrawal is prohibited within 24 hours                                                                                       |
-|      131090       | User withdraw has been banned                                                                                                                            |
-|      131091       | Blocked login status does not allow withdrawals                                                                                                          |
-|      131092       | User status is abnormal                                                                                                                                  |
-|      131093       | The withdrawal address is not in the whitelist                                                                                                           |
-|      131094       | UserId is not in the whitelist                                                                                                                           |
-|      131095       | Withdrawl amount exceeds the 24 hour platform limit                                                                                                      |
-|      131096       | Withdraw amount does not satify the lower limit or upper limit                                                                                           |
-|      131097       | Withdrawal of this currency has been closed                                                                                                              |
-|      131098       | Withdrawal currently is not availble from new address                                                                                                    |
-|      131099       | Hot wallet status can cancel the withdraw                                                                                                                |
-|      131200       | Service error                                                                                                                                            |
-|      131201       | Internal error                                                                                                                                           |
-|      131202       | Invalid memberId                                                                                                                                         |
-|      131203       | Request parameter error                                                                                                                                  |
-|      131204       | Account info error                                                                                                                                       |
-|      131205       | Query transfer error                                                                                                                                     |
-|      131206       | cannot be transfer                                                                                                                                       |
-|      131207       | Account not exist                                                                                                                                        |
-|      131208       | Forbid transfer                                                                                                                                          |
-|      131209       | Get subMember relation error                                                                                                                             |
-|      131210       | Amount accuracy error                                                                                                                                    |
-|      131211       | fromAccountType can't be the same as toAccountType                                                                                                       |
-|      131212       | Insufficient balance                                                                                                                                     |
-|      131213       | TransferLTV check error                                                                                                                                  |
-|      131214       | TransferId exist                                                                                                                                         |
-|      131215       | Amount error                                                                                                                                             |
-|      131216       | Query balance error                                                                                                                                      |
-|      131217       | Risk check error                                                                                                                                         |
-|      131227       | Sub-account do not have universal transfer permission                                                                                                    |
-|      131228       | your balance is not enough. Please check transfer safe amount                                                                                            |
-|      131229       | Due to compliance requirements, the current currency is not allowed to transfer                                                                          |
-|      131230       | The system is busy, please try again later                                                                                                               |
-|      131231       | Transfers into this account are not supported                                                                                                            |
-|      131232       | Transfers out this account are not supported                                                                                                             |
-|      131233       | can not transfer the coin that not supported for islamic account                                                                                         |
-|      140001       | Switching the PM spot hedging switch is not allowed in non PM mode                                                                                       |
-| <del>140002</del> | <del>Institutional lending users do not support PM spot hedging</del>                                                                                    |
-|      140003       | You have position(s) being liquidated, please try again later.                                                                                           |
-|      140004       | Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated. |
-|      140005       | Risk level after switching modes exceeds threshold                                                                                                       |
-|      141004       | sub member is not normal                                                                                                                                 |
-|      141025       | This sub-account has assets and cannot be deleted                                                                                                        |
-|      181000       | category is null                                                                                                                                         |
-|      181001       | category only support linear or option or spot.                                                                                                          |
-|      181002       | symbol is null.                                                                                                                                          |
-|      181003       | side is null.                                                                                                                                            |
-|      181004       | side only support Buy or Sell.                                                                                                                           |
-|      181005       | orderStatus is wrong                                                                                                                                     |
-|      181006       | startTime is not number                                                                                                                                  |
-|      181007       | endTime is not number                                                                                                                                    |
-|      181008       | Parameter startTime and endTime are both needed                                                                                                          |
-|      181009       | Parameter startTime needs to be smaller than endTime                                                                                                     |
-|      181010       | The time range between startTime and endTime cannot exceed 7 days                                                                                        |
-|      181011       | limit is not a number                                                                                                                                    |
-|      181012       | symbol not exist                                                                                                                                         |
-|      181013       | Only support settleCoin: usdc                                                                                                                            |
-|      181014       | Classic account is not supported                                                                                                                         |
-|      181018       | Invalid expDate.                                                                                                                                         |
-|      181019       | Parameter expDate can't be earlier than 2 years                                                                                                          |
-|      182000       | symbol related quote price is null                                                                                                                       |
-|      182200       | Please upgrade UTA first.                                                                                                                                |
-|      182201       | You must enter 2 time parameters.                                                                                                                        |
-|      182202       | The start time must be less than the end time                                                                                                            |
-|      182203       | Please enter valid characters                                                                                                                            |
-|      182204       | Coin does not exist                                                                                                                                      |
-|      182205       | User level does not exist                                                                                                                                |
-|      700000       | accountType/quoteTxId cannot be null                                                                                                                     |
-|      700001       | quote fail:no dealer can used                                                                                                                            |
-|      700004       | order does not exist                                                                                                                                     |
-|      700007       | Large Amount Limit                                                                                                                                       |
-|      700012       | UTA upgrading, don't allow to apply for quote                                                                                                            |
+|       Code        | Description                                                                                                                                                  |
+| :---------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      131001       | openapi svc error                                                                                                                                            |
+|      131002       | Parameter error                                                                                                                                              |
+|      131002       | Withdraw address chain or destination tag are not equal                                                                                                      |
+|      131003       | Internal error                                                                                                                                               |
+|      131004       | KYC needed                                                                                                                                                   |
+|      131065       | Your KYC information is incomplete, please go to the KYC information page of the web or app to complete the information. kyc=India client may encounter this |
+|      131066       | This address does not support withdrawals for the time being. Please switch to another address for withdrawing                                               |
+|      131067       | Travel rule verification failed, please contact the target exchange. Travel rule for KR user                                                                 |
+|      131068       | Travel rule information is insufficient, please provide additional details. Travel rule for KR user                                                          |
+|      131069       | Unable to withdraw to the receipt, please contact the target the exchange. Travel rule for KR user                                                           |
+|      131070       | The recipient's name is mismatched with the targeted exchange. Travel rule for KR user                                                                       |
+|      131071       | The recipient has not undergone KYC verification. Travel rule for KR user                                                                                    |
+|      131072       | Your withdrawal currency is not supported by the target exchange. Travel rule for KR user                                                                    |
+|      131073       | Your withdrawal address has not been included in the target exchange. Travel rule for KR user                                                                |
+|      131074       | Beneficiary info is required, please refer to the latest api document. Travel rule for KR user                                                               |
+|      131075       | InternalAddressCannotBeYourself                                                                                                                              |
+|      131076       | internal transfer not support subaccounts                                                                                                                    |
+|      131077       | receive user not exist                                                                                                                                       |
+|      131078       | receive user deposit has been banned                                                                                                                         |
+|      131079       | receive user need kyc                                                                                                                                        |
+|      131080       | User left retry times is zero                                                                                                                                |
+|      131081       | Do not input memo/tag,please.                                                                                                                                |
+|      131082       | Do not repeat the request                                                                                                                                    |
+|      131083       | Withdraw only allowed from address book                                                                                                                      |
+|      131084       | Withdraw failed because of Uta Upgrading                                                                                                                     |
+|      131085       | Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered)                                                               |
+|      131086       | Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered)                                                                           |
+|      131087       | your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again                                                      |
+|      131088       | The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s           |
+|      131089       | User sensitive operation, withdrawal is prohibited within 24 hours                                                                                           |
+|      131090       | User withdraw has been banned                                                                                                                                |
+|      131091       | Blocked login status does not allow withdrawals                                                                                                              |
+|      131092       | User status is abnormal                                                                                                                                      |
+|      131093       | The withdrawal address is not in the whitelist                                                                                                               |
+|      131094       | UserId is not in the whitelist                                                                                                                               |
+|      131095       | Withdrawl amount exceeds the 24 hour platform limit                                                                                                          |
+|      131096       | Withdraw amount does not satify the lower limit or upper limit                                                                                               |
+|      131097       | Withdrawal of this currency has been closed                                                                                                                  |
+|      131098       | Withdrawal currently is not availble from new address                                                                                                        |
+|      131099       | Hot wallet status can cancel the withdraw                                                                                                                    |
+|      131200       | Service error                                                                                                                                                |
+|      131201       | Internal error                                                                                                                                               |
+|      131202       | Invalid memberId                                                                                                                                             |
+|      131203       | Request parameter error                                                                                                                                      |
+|      131204       | Account info error                                                                                                                                           |
+|      131205       | Query transfer error                                                                                                                                         |
+|      131206       | cannot be transfer                                                                                                                                           |
+|      131207       | Account not exist                                                                                                                                            |
+|      131208       | Forbid transfer                                                                                                                                              |
+|      131209       | Get subMember relation error                                                                                                                                 |
+|      131210       | Amount accuracy error                                                                                                                                        |
+|      131211       | fromAccountType can't be the same as toAccountType                                                                                                           |
+|      131212       | Insufficient balance                                                                                                                                         |
+|      131213       | TransferLTV check error                                                                                                                                      |
+|      131214       | TransferId exist                                                                                                                                             |
+|      131215       | Amount error                                                                                                                                                 |
+|      131216       | Query balance error                                                                                                                                          |
+|      131217       | Risk check error                                                                                                                                             |
+|      131227       | subaccount do not have universal transfer permission                                                                                                         |
+|      131228       | your balance is not enough. Please check transfer safe amount                                                                                                |
+|      131229       | Due to compliance requirements, the current currency is not allowed to transfer                                                                              |
+|      131230       | The system is busy, please try again later                                                                                                                   |
+|      131231       | Transfers into this account are not supported                                                                                                                |
+|      131232       | Transfers out this account are not supported                                                                                                                 |
+|      131233       | can not transfer the coin that not supported for islamic account                                                                                             |
+|      140001       | Switching the PM spot hedging switch is not allowed in non PM mode                                                                                           |
+| <del>140002</del> | <del>Institutional lending users do not support PM spot hedging</del>                                                                                        |
+|      140003       | You have position(s) being liquidated, please try again later.                                                                                               |
+|      140004       | Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated.     |
+|      140005       | Risk level after switching modes exceeds threshold                                                                                                           |
+|      141004       | sub member is not normal                                                                                                                                     |
+|      141025       | This subaccount has assets and cannot be deleted                                                                                                             |
+|      181000       | category is null                                                                                                                                             |
+|      181001       | category only support linear or option or spot.                                                                                                              |
+|      181002       | symbol is null.                                                                                                                                              |
+|      181003       | side is null.                                                                                                                                                |
+|      181004       | side only support Buy or Sell.                                                                                                                               |
+|      181005       | orderStatus is wrong                                                                                                                                         |
+|      181006       | startTime is not number                                                                                                                                      |
+|      181007       | endTime is not number                                                                                                                                        |
+|      181008       | Parameter startTime and endTime are both needed                                                                                                              |
+|      181009       | Parameter startTime needs to be smaller than endTime                                                                                                         |
+|      181010       | The time range between startTime and endTime cannot exceed 7 days                                                                                            |
+|      181011       | limit is not a number                                                                                                                                        |
+|      181012       | symbol not exist                                                                                                                                             |
+|      181013       | Only support settleCoin: usdc                                                                                                                                |
+|      181014       | Classic account is not supported                                                                                                                             |
+|      181018       | Invalid expDate.                                                                                                                                             |
+|      181019       | Parameter expDate can't be earlier than 2 years                                                                                                              |
+|      182000       | symbol related quote price is null                                                                                                                           |
+|      182200       | Please upgrade UTA first.                                                                                                                                    |
+|      182201       | You must enter 2 time parameters.                                                                                                                            |
+|      182202       | The start time must be less than the end time                                                                                                                |
+|      182203       | Please enter valid characters                                                                                                                                |
+|      182204       | Coin does not exist                                                                                                                                          |
+|      182205       | User level does not exist                                                                                                                                    |
+|      700000       | accountType/quoteTxId cannot be null                                                                                                                         |
+|      700001       | quote fail:no dealer can used                                                                                                                                |
+|      700004       | order does not exist                                                                                                                                         |
+|      700007       | Large Amount Limit                                                                                                                                           |
+|      700012       | UTA upgrading, don't allow to apply for quote                                                                                                                |
 
 ## Crypto Loan[​](#crypto-loan "Direct link to heading")
 
@@ -1583,7 +1594,7 @@ info
 - **Risk control limit notice:**  
   Bybit will monitor on your API requests. When the total number of orders of a
   single user (aggregated the number of orders across main account and
-  sub-accounts) within a day (UTC 0 - UTC 24) exceeds a certain upper limit, the
+  subaccounts) within a day (UTC 0 - UTC 24) exceeds a certain upper limit, the
   platform will reserve the right to remind, warn, and impose necessary
   restrictions. Customers who use API default to acceptance of these terms and
   have the obligation to cooperate with adjustments.
@@ -2347,7 +2358,7 @@ info
 - **Risk control limit notice:**  
   Bybit will monitor on your API requests. When the total number of orders of a
   single user (aggregated the number of orders across main account and
-  sub-accounts) within a day (UTC 0 - UTC 24) exceeds a certain upper limit, the
+  subaccounts) within a day (UTC 0 - UTC 24) exceeds a certain upper limit, the
   platform will reserve the right to remind, warn, and impose necessary
   restrictions. Customers who use API default to acceptance of these terms and
   have the obligation to cooperate with adjustments.
@@ -2463,7 +2474,7 @@ This endpoint allows you to amend more than one open order in a single request.
 
 - You can modify **unfilled** or **partially filled** orders. Conditional orders
   are not supported.
-- A maximum of 20 orders (option), 10 orders (inverse), 10 orders (linear), 10
+- A maximum of 20 orders (option), 20 orders (inverse), 20 orders (linear), 10
   orders (spot) can be amended per request.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
@@ -2560,7 +2571,7 @@ important
 - If `orderId` and `orderLinkId` is not matched, the system will process
   `orderId` first.
 - You can cancel **unfilled** or **partially filled** orders.
-- A maximum of 20 orders (option), 10 orders (inverse), 10 orders (linear), 10
+- A maximum of 20 orders (option), 20 orders (inverse), 20 orders (linear), 10
   orders (spot) can be cancelled per request.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
@@ -2728,8 +2739,8 @@ tip
 After the request is successfully sent, the system needs a certain time to take
 effect. It is recommended to query or set again after 10 seconds
 
-- You can use [this endpoint](/docs/v5/account/account-info) to get your current
-  DCP configuration.
+- You can use [this endpoint](/docs/v5/account/dcp-info) to get your current DCP
+  configuration.
 - Your private websocket connection **must** subscribe
   ["dcp" topic](/docs/v5/websocket/private/dcp) in order to trigger DCP
   successfully
@@ -3133,20 +3144,20 @@ POST `/v5/position/trading-stop`
 | :-------------------------------------------------- | :-------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <a href="/docs/v5/enum#category">category</a>       | <strong>true</strong> | string  | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>, <code>inverse</code></li><li>Classic account: <code>linear</code>, <code>inverse</code></li></ul> |
 | symbol                                              | <strong>true</strong> | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                     |
+| tpslMode                                            | <strong>true</strong> | string  | TP/SL mode<li><code>Full</code>: entire position TP/SL</li><li><code>Partial</code>: partial position TP/SL</li>                                                                                                                           |
+| <a href="/docs/v5/enum#positionidx">positionIdx</a> | true                  | integer | Used to identify positions in different position modes.<ul><li><code>0</code>: one-way mode</li><li><code>1</code>: hedge-mode Buy side</li><li><code>2</code>: hedge-mode Sell side</li></ul>                                             |
 | takeProfit                                          | false                 | string  | Cannot be less than 0, 0 means cancel TP                                                                                                                                                                                                   |
 | stopLoss                                            | false                 | string  | Cannot be less than 0, 0 means cancel SL                                                                                                                                                                                                   |
 | trailingStop                                        | false                 | string  | Trailing stop by price distance. Cannot be less than 0, 0 means cancel TS                                                                                                                                                                  |
 | <a href="/docs/v5/enum#triggerby">tpTriggerBy</a>   | false                 | string  | Take profit trigger price type                                                                                                                                                                                                             |
 | <a href="/docs/v5/enum#triggerby">slTriggerBy</a>   | false                 | string  | Stop loss trigger price type                                                                                                                                                                                                               |
 | activePrice                                         | false                 | string  | Trailing stop trigger price. Trailing stop will be triggered when this price is reached <strong>only</strong>                                                                                                                              |
-| tpslMode                                            | true                  | string  | TP/SL mode<li><code>Full</code>: entire position TP/SL</li><li><code>Partial</code>: partial position TP/SL</li>                                                                                                                           |
 | tpSize                                              | false                 | string  | Take profit size<br>valid for TP/SL partial mode, note: the value of tpSize and slSize must equal                                                                                                                                          |
 | slSize                                              | false                 | string  | Stop loss size<br>valid for TP/SL partial mode, note: the value of tpSize and slSize must equal                                                                                                                                            |
 | tpLimitPrice                                        | false                 | string  | The limit order price when take profit price is triggered. Only works when tpslMode=Partial and tpOrderType=Limit                                                                                                                          |
 | slLimitPrice                                        | false                 | string  | The limit order price when stop loss price is triggered. Only works when tpslMode=Partial and slOrderType=Limit                                                                                                                            |
 | tpOrderType                                         | false                 | string  | The order type when take profit is triggered. <code>Market</code>(default), <code>Limit</code><br>For tpslMode=Full, it only supports tpOrderType="Market"                                                                                 |
 | slOrderType                                         | false                 | string  | The order type when stop loss is triggered. <code>Market</code>(default), <code>Limit</code><br>For tpslMode=Full, it only supports slOrderType="Market"                                                                                   |
-| <a href="/docs/v5/enum#positionidx">positionIdx</a> | <strong>true</strong> | integer | Used to identify positions in different position modes.<ul><li><code>0</code>: one-way mode</li><li><code>1</code>: hedge-mode Buy side</li><li><code>2</code>: hedge-mode Sell side</li></ul>                                             |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -4494,17 +4505,17 @@ GET `/v5/account/transaction-log`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                           | Required | Type    | Comments                                                                                                                                                                                                                                                                                                                                                  |
-| :-------------------------------------------------- | :------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="/docs/v5/enum#accounttype">accountType</a> | false    | string  | Account Type. <code>UNIFIED</code>                                                                                                                                                                                                                                                                                                                        |
-| <a href="/docs/v5/enum#category">category</a>       | false    | string  | Product type<li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>: <code>spot</code>,<code>linear</code>,<code>option</code>,<code>inverse</code></li><li><a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>spot</code>,<code>linear</code>,<code>option</code></li>                                                                                     |
-| currency                                            | false    | string  | Currency, uppercase only                                                                                                                                                                                                                                                                                                                                  |
-| baseCoin                                            | false    | string  | BaseCoin, uppercase only. e.g., BTC of BTCPERP                                                                                                                                                                                                                                                                                                            |
-| <a href="/docs/v5/enum#typeuta-translog">type</a>   | false    | string  | Types of transaction logs                                                                                                                                                                                                                                                                                                                                 |
-| startTime                                           | false    | integer | The start timestamp (ms)<ul><li>startTime and endTime are not passed, return 24 hours by default</li><li>Only startTime is passed, return range between startTime and startTime+7 days</li><li>Only endTime is passed, return range between endTime-7 days and endTime</li><li>If both are passed, the rule is endTime - startTime &lt;= 7 days</li></ul> |
-| endTime                                             | false    | integer | The end timestamp (ms)                                                                                                                                                                                                                                                                                                                                    |
-| limit                                               | false    | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>20</code>                                                                                                                                                                                                                                                                 |
-| cursor                                              | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                                                                                                                                                                                                                           |
+| Parameter                                           | Required | Type    | Comments                                                                                                                                                                                                                                                                                                                                                      |
+| :-------------------------------------------------- | :------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="/docs/v5/enum#accounttype">accountType</a> | false    | string  | Account Type. <code>UNIFIED</code>                                                                                                                                                                                                                                                                                                                            |
+| <a href="/docs/v5/enum#category">category</a>       | false    | string  | Product type<li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>: <code>spot</code>,<code>linear</code>,<code>option</code>,<code>inverse</code></li><li><a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>spot</code>,<code>linear</code>,<code>option</code></li>                                                                                         |
+| currency                                            | false    | string  | Currency, uppercase only                                                                                                                                                                                                                                                                                                                                      |
+| baseCoin                                            | false    | string  | BaseCoin, uppercase only. e.g., BTC of BTCPERP                                                                                                                                                                                                                                                                                                                |
+| <a href="/docs/v5/enum#typeuta-translog">type</a>   | false    | string  | Types of transaction logs                                                                                                                                                                                                                                                                                                                                     |
+| startTime                                           | false    | integer | The start timestamp (ms)<ul><li>startTime and endTime are not passed, return 24 hours by default</li><li>Only startTime is passed, return range between startTime and startTime+24 hours</li><li>Only endTime is passed, return range between endTime-24 hours and endTime</li><li>If both are passed, the rule is endTime - startTime &lt;= 7 days</li></ul> |
+| endTime                                             | false    | integer | The end timestamp (ms)                                                                                                                                                                                                                                                                                                                                        |
+| limit                                               | false    | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>20</code>                                                                                                                                                                                                                                                                     |
+| cursor                                              | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                                                                                                                                                                                                                               |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -5175,24 +5186,24 @@ GET `/v5/asset/coin/query-info`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                      | Type    | Comments                                                                                             |
-| :----------------------------- | :------ | ---------------------------------------------------------------------------------------------------- |
-| rows                           | array   | Object                                                                                               |
-| &gt; name                      | integer | Coin name                                                                                            |
-| &gt; coin                      | string  | Coin                                                                                                 |
-| &gt; remainAmount              | string  | Maximum withdraw amount per transaction                                                              |
-| &gt; chains                    | array   | Object                                                                                               |
-| &gt;&gt; chain                 | string  | Chain                                                                                                |
-| &gt;&gt; chainType             | string  | Chain type                                                                                           |
-| &gt;&gt; confirmation          | string  | The number of confirmation for deposit                                                               |
-| &gt;&gt; withdrawFee           | string  | withdraw fee. <em>If withdraw fee is empty, It means that this coin does not support withdrawal</em> |
-| &gt;&gt; depositMin            | string  | Min. deposit                                                                                         |
-| &gt;&gt; withdrawMin           | string  | Min. withdraw                                                                                        |
-| &gt;&gt; minAccuracy           | string  | The precision of withdraw or deposit                                                                 |
-| &gt;&gt; chainDeposit          | string  | The chain status of deposit. <code>0</code>: suspend. <code>1</code>: normal                         |
-| &gt;&gt; chainWithdraw         | string  | The chain status of withdraw. <code>0</code>: suspend. <code>1</code>: normal                        |
-| &gt;&gt; withdrawPercentageFee | string  | The withdraw fee percentage. It is a real figure, e.g., 0.022 means 2.2%                             |
-| &gt;&gt; contractAddress       | string  | Contract address. <code>""</code> means no contract address                                          |
+| Parameter                      | Type   | Comments                                                                                             |
+| :----------------------------- | :----- | ---------------------------------------------------------------------------------------------------- |
+| rows                           | array  | Object                                                                                               |
+| &gt; name                      | string | Coin name                                                                                            |
+| &gt; coin                      | string | Coin                                                                                                 |
+| &gt; remainAmount              | string | Maximum withdraw amount per transaction                                                              |
+| &gt; chains                    | array  | Object                                                                                               |
+| &gt;&gt; chain                 | string | Chain                                                                                                |
+| &gt;&gt; chainType             | string | Chain type                                                                                           |
+| &gt;&gt; confirmation          | string | The number of confirmation for deposit                                                               |
+| &gt;&gt; withdrawFee           | string | withdraw fee. <em>If withdraw fee is empty, It means that this coin does not support withdrawal</em> |
+| &gt;&gt; depositMin            | string | Min. deposit                                                                                         |
+| &gt;&gt; withdrawMin           | string | Min. withdraw                                                                                        |
+| &gt;&gt; minAccuracy           | string | The precision of withdraw or deposit                                                                 |
+| &gt;&gt; chainDeposit          | string | The chain status of deposit. <code>0</code>: suspend. <code>1</code>: normal                         |
+| &gt;&gt; chainWithdraw         | string | The chain status of withdraw. <code>0</code>: suspend. <code>1</code>: normal                        |
+| &gt;&gt; withdrawPercentageFee | string | The withdraw fee percentage. It is a real figure, e.g., 0.022 means 2.2%                             |
+| &gt;&gt; contractAddress       | string | Contract address. <code>""</code> means no contract address                                          |
 
 [RUN >>](/docs/api-explorer/v5/asset/coin-info)
 
@@ -6413,12 +6424,12 @@ POST `/v5/asset/withdraw/create`
 | accountType                        | false                 | string  | Select the wallet to be withdrawn from<ul><li><code>FUND</code>: Funding wallet</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | feeType                            | false                 | integer | Handling fee option<ul><li><code>0</code>(default): input amount is the actual amount received, so you have to calculate handling fee manually</li><li><code>1</code>: input amount is not the actual amount you received, the system will help to deduct the handling fee automatically</li></ul>                                                                                                                                                                                                                                                                                                                         |
 | requestId                          | false                 | string  | Customised ID, globally unique, it is used for idempotent verification<li>A combination of letters (case sensitive) and numbers, which can be pure letters or pure numbers and the length must be between 1 and 32 digits</li>                                                                                                                                                                                                                                                                                                                                                                                             |
-| beneficiary                        | false                 | Object  | Travel rule info. It is <strong>required</strong> for kyc=KOR (Korean) users, and users who registered in <a href="https://www.bybit-tr.com/en-TR/" target="_blank" rel="noopener noreferrer">Bybit Turkey(TR)</a>, <a href="https://www.bybit.kz/kk-KAZ/" target="_blank" rel="noopener noreferrer">Bybit Kazakhstan(KZ)</a>, Bybit Indonesia (ID)                                                                                                                                                                                                                                                                        |
+| beneficiary                        | false                 | Object  | Travel rule info. It is <strong>required</strong> for kyc/kyb=KOR (Korean), kyc=IND (India) users, and users who registered in <a href="https://www.bybit-tr.com/en-TR/" target="_blank" rel="noopener noreferrer">Bybit Turkey(TR)</a>, <a href="https://www.bybit.kz/kk-KAZ/" target="_blank" rel="noopener noreferrer">Bybit Kazakhstan(KZ)</a>, Bybit Indonesia (ID)                                                                                                                                                                                                                                                   |
 | &gt; vaspEntityId                  | false                 | string  | Receiver exchange entity Id. Please call this <a href="/docs/v5/asset/withdraw/vasp-list">endpoint</a> to get this ID.<li><b>Required</b> param for Korean users</li><li><b>Ignored by </b>TR, KZ users</li>                                                                                                                                                                                                                                                                                                                                                                                                               |
-| &gt; beneficiaryName               | false                 | string  | Receiver exchange user KYC name<br><b>Rules for Korean users</b>:<li>Please refer to target exchange kyc name</li><li>When vaspEntityId="others", this field can be null</li><b>Rules for TR, KZ users</b>: it is a <strong>required</strong> param, fill with individual name or company name                                                                                                                                                                                                                                                                                                                             |
-| &gt; beneficiaryLegalType          | false                 | string  | Beneficiary legal type, <code>individual</code>(default), <code>company</code><li><b>Required</b> param for TR, KZ users</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| &gt; beneficiaryWalletType         | false                 | string  | Beneficiary wallet type, <code>0</code>: custodial/exchange wallet (default), <code>1</code>: non custodial/exchane wallet<li><b>Required</b> param for TR, KZ users</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| &gt; beneficiaryUnhostedWalletType | false                 | string  | Beneficiary unhosted wallet type, <code>0</code>: Your own wallet, <code>1</code>: others' wallet<li><b>Required</b> param for TR, KZ users when "beneficiaryWalletType=1"</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; beneficiaryName               | false                 | string  | Receiver exchange user KYC name<br><b>Rules for Korean users</b>:<li>Please refer to target exchange kyc name</li><li>When vaspEntityId="others", this field can be null</li><b>Rules for TR, KZ, kyc=IND users</b>: it is a <strong>required</strong> param, fill with individual name or company name                                                                                                                                                                                                                                                                                                                    |
+| &gt; beneficiaryLegalType          | false                 | string  | Beneficiary legal type, <code>individual</code>(default), <code>company</code><li><b>Required</b> param for TR, KZ, kyc=IND users</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| &gt; beneficiaryWalletType         | false                 | string  | Beneficiary wallet type, <code>0</code>: custodial/exchange wallet (default), <code>1</code>: non custodial/exchane wallet<li><b>Required</b> param for TR, KZ, kyc=IND users</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                         |
+| &gt; beneficiaryUnhostedWalletType | false                 | string  | Beneficiary unhosted wallet type, <code>0</code>: Your own wallet, <code>1</code>: others' wallet<li><b>Required</b> param for TR, KZ, kyc=IND users when "beneficiaryWalletType=1"</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &gt; beneficiaryPoiNumber          | false                 | string  | Beneficiary ducument number<li><b>Required</b> param for TR, KZ users</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | &gt; beneficiaryPoiType            | false                 | string  | Beneficiary ducument type<li><b>Required</b> param for TR, KZ users: ID card, Passport, driver license, residence permit, Business ID, etc</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | &gt; beneficiaryPoiIssuingCountry  | false                 | string  | Beneficiary ducument issuing country<li><b>Required</b> param for TR, KZ users: refer to <a href="https://www.iban.com/country-codes" target="_blank" rel="noopener noreferrer">Alpha-3 country code</a></li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                              |
@@ -7523,7 +7534,7 @@ POST /v5/user/update-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxx
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.modify_master_api_key(    ips=["*"],    permissions={            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "Derivatives": [                "DerivativesTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.modify_master_api_key(    ips="*",    permissions={            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "Derivatives": [                "DerivativesTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }))
 ```
 
 ```
@@ -7604,7 +7615,7 @@ POST /v5/user/update-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAP
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.modify_sub_api_key(    readOnly=0,    ips=["*"],    permissions={            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "Derivatives": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }))
+from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.modify_sub_api_key(    readOnly=0,    ips="*",    permissions={            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "Derivatives": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }))
 ```
 
 ```
@@ -8927,14 +8938,14 @@ GET `/v5/broker/earnings-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type    | Comments                                                                                                                                                  |
-| :-------- | :------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| bizType   | false    | string  | Business type. <code>SPOT</code>, <code>DERIVATIVES</code>, <code>OPTIONS</code>, <code>CONVERT</code>                                                    |
-| begin     | false    | string  | Begin date, in the format of YYYYMMDD, e.g, 20231201, search the data from 1st Dec 2023 00:00:00 UTC (include)                                            |
-| end       | false    | string  | End date, in the format of YYYYMMDD, e.g, 20231201, search the data before 2nd Dec 2023 00:00:00 UTC (exclude)                                            |
-| uid       | false    | string  | <ul><li>To get results for a specific sub-account: Enter the sub-account UID</li><li>To get results for all sub-accounts: Leave the field empty</li></ul> |
-| limit     | false    | integer | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                                             |
-| cursor    | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                           |
+| Parameter | Required | Type    | Comments                                                                                                                                               |
+| :-------- | :------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| bizType   | false    | string  | Business type. <code>SPOT</code>, <code>DERIVATIVES</code>, <code>OPTIONS</code>, <code>CONVERT</code>                                                 |
+| begin     | false    | string  | Begin date, in the format of YYYYMMDD, e.g, 20231201, search the data from 1st Dec 2023 00:00:00 UTC (include)                                         |
+| end       | false    | string  | End date, in the format of YYYYMMDD, e.g, 20231201, search the data before 2nd Dec 2023 00:00:00 UTC (exclude)                                         |
+| uid       | false    | string  | <ul><li>To get results for a specific subaccount: Enter the subaccount UID</li><li>To get results for all subaccounts: Leave the field empty</li></ul> |
+| limit     | false    | integer | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                                          |
+| cursor    | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                        |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
