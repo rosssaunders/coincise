@@ -42,8 +42,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run HTX scraper
-        run: npm run runall
+      - name: Run HTX scraper - Spot Private REST
+        run: npm run privaterestspot
+
+      - name: Run HTX scraper - Spot Public REST
+        run: npm run publicrestspot
+
+      - name: Run HTX scraper - Spot Private WebSocket
+        run: npm run privatewebsocketspot
+
+      - name: Run HTX scraper - Spot Public WebSocket
+        run: npm run publicwebsocketspot
+
+      - name: Run HTX scraper - Spot FIX
+        run: npm run fixspot
+
+      - name: Run HTX scraper - USDT-M Private REST
+        run: npm run privaterestusdtm
+
+      - name: Run HTX scraper - USDT-M Public REST
+        run: npm run publicrestusdtm
+
+      - name: Run HTX scraper - USDT-M Private WebSocket
+        run: npm run privatewebsocketusdtm
+
+      - name: Run HTX scraper - USDT-M Public WebSocket
+        run: npm run publicwebsocketusdtm
+
+      - name: Run HTX scraper - COIN-M Private REST
+        run: npm run privaterestcoinm
+
+      - name: Run HTX scraper - COIN-M Public REST
+        run: npm run publicrestcoinm
 
       - name: Check for changes
         id: git-check
