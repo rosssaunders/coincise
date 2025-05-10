@@ -55,12 +55,14 @@ jobs:
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "docs: update Crypto.com API documentation"
-          title: "Weekly Crypto.com API Documentation Update"
-          body: "Automated weekly update of Crypto.com API documentation"
+          title: "Crypto.com API Documentation Update"
           branch: "cryptocom-docs-update"
           base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
+          reviewers: "@rosssaunders"
+          labels: "auto-docs-update"
+          body: ""

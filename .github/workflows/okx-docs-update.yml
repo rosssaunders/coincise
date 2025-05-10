@@ -64,12 +64,14 @@ jobs:
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "docs: update OKX API documentation"
-          title: "Weekly OKX API Documentation Update"
-          body: "Automated weekly update of OKX API documentation"
+          title: "OKX API Documentation Update"
           branch: "okx-docs-update"
           base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
+          body: ""
+          reviewers: "@rosssaunders"
+          labels: "auto-docs-update"

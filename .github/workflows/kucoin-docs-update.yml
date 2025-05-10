@@ -55,12 +55,14 @@ jobs:
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "docs: update KuCoin API documentation"
-          title: "Weekly KuCoin API Documentation Update"
-          body: "Automated weekly update of KuCoin API documentation"
+          title: "KuCoin API Documentation Update"
           branch: "kucoin-docs-update"
           base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
+          body: ""
+          reviewers: "@rosssaunders"
+          labels: "auto-docs-update"

@@ -55,12 +55,14 @@ jobs:
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "docs: update MEXC API documentation"
-          title: "Weekly MEXC API Documentation Update"
-          body: "Automated weekly update of MEXC API documentation"
+          title: "MEXC API Documentation Update"
           branch: "mexc-docs-update"
           base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
+          body: ""
+          reviewers: "@rosssaunders"
+          labels: "auto-docs-update"
