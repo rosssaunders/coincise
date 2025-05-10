@@ -1,31 +1,32 @@
 # Coinbase Exchange API Documentation
 
-Generated on 5/4/2025 12:12:22 AM
+Generated on 5/10/2025 12:25:35 AM
 
 ## Table of Contents
 
-- [Welcome to Exchange APIs](#welcome-to-exchange-apis)
-- [Quickstart: Making Your First REST API Call](#quickstart-making-your-first-rest-api-call)
-- [Exchange Sandbox](#exchange-sandbox)
-- [Exchange Matching Engine](#exchange-matching-engine)
-- [Exchange Rate Limits Overview](#exchange-rate-limits-overview)
-- [Exchange Systems & Operations](#exchange-systems-operations)
-- [Exchange REST API Requests](#exchange-rest-api-requests)
-- [Exchange REST API Authentication](#exchange-rest-api-authentication)
-- [Exchange REST API Rate Limits](#exchange-rest-api-rate-limits)
-- [Exchange REST API Pagination](#exchange-rest-api-pagination)
-- [Exchange Profiles](#exchange-profiles)
-- [Exchange Types](#exchange-types)
-- [Exchange WebSocket Overview](#exchange-websocket-overview)
-- [Exchange WebSocket Best Practices](#exchange-websocket-best-practices)
-- [Exchange WebSocket Authentication](#exchange-websocket-authentication)
-- [Exchange WebSocket Channels](#exchange-websocket-channels)
-- [Exchange WebSocket Rate Limits](#exchange-websocket-rate-limits)
-- [Exchange WebSocket Errors](#exchange-websocket-errors)
+* [Welcome to Exchange APIs](#welcome-to-exchange-apis)
+* [Quickstart: Making Your First REST API Call](#quickstart-making-your-first-rest-api-call)
+* [Exchange Sandbox](#exchange-sandbox)
+* [Exchange Matching Engine](#exchange-matching-engine)
+* [Exchange Rate Limits Overview](#exchange-rate-limits-overview)
+* [Exchange Systems & Operations](#exchange-systems-operations)
+* [Exchange REST API Requests](#exchange-rest-api-requests)
+* [Exchange REST API Authentication](#exchange-rest-api-authentication)
+* [Exchange REST API Rate Limits](#exchange-rest-api-rate-limits)
+* [Exchange REST API Pagination](#exchange-rest-api-pagination)
+* [Exchange Profiles](#exchange-profiles)
+* [Exchange Types](#exchange-types)
+* [Exchange WebSocket Overview](#exchange-websocket-overview)
+* [Exchange WebSocket Best Practices](#exchange-websocket-best-practices)
+* [Exchange WebSocket Authentication](#exchange-websocket-authentication)
+* [Exchange WebSocket Channels](#exchange-websocket-channels)
+* [Exchange WebSocket Rate Limits](#exchange-websocket-rate-limits)
+* [Exchange WebSocket Errors](#exchange-websocket-errors)
 
 ---
 
 # Welcome to Exchange APIs
+
 
 
 
@@ -66,9 +67,11 @@ By accessing the Exchange Market Data API, you agree to be bound by the
 
 Last updated on **Apr 2, 2025**
 
+
 ---
 
 # Quickstart: Making Your First REST API Call
+
 
 This quickstart walks through creating an API key, setting up the Exchange Go
 SDK, and making your first few REST API calls.
@@ -170,9 +173,11 @@ func main() {    credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CR
 
 Last updated on **Dec 17, 2024**
 
+
 ---
 
 # Exchange Sandbox
+
 
 A public sandbox is available for testing API connectivity and web trading.
 
@@ -246,9 +251,11 @@ To add or remove funds in the sandbox web interface:
 
 Last updated on **Aug 27, 2024**
 
+
 ---
 
 # Exchange Matching Engine
+
 
 Coinbase Exchange operates a continuous first-come, first-serve order book.
 Orders are executed in price-time priority as received by the matching engine.
@@ -315,9 +322,11 @@ A's order was first to the trading engine and User A has price priority.
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange Rate Limits Overview
+
 
 ## Summary
 
@@ -430,9 +439,11 @@ below represents the state of your token bucket after a series of requests:
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange Systems & Operations
+
 
 ## Deployment
 
@@ -515,9 +526,11 @@ is no guarantee that it will remain static over time.
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange REST API Requests
+
 
 All requests and responses are `application/json` content type and follow
 typical HTTP response status codes for success and failure.
@@ -554,9 +567,11 @@ below.
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange REST API Authentication
+
 
 This page explains how to sign and authenticate REST API endpoints with API keys
 that let you control authorization.
@@ -673,9 +688,11 @@ The following example demonstrates how to generate a signature in Javascript:
 
 Last updated on **May 20, 2024**
 
+
 ---
 
 # Exchange REST API Rate Limits
+
 
 Public endpoints are throttled by IP and private endpoints by profile ID. Some
 endpoints (like `/fills`) may have custom rate limits.
@@ -714,9 +731,11 @@ Rate limits do not apply to
 
 Last updated on **Dec 7, 2024**
 
+
 ---
 
 # Exchange REST API Pagination
+
 
 Coinbase Exchange uses cursor pagination for all REST requests which return
 arrays.
@@ -773,9 +792,11 @@ would request pages `before` the first page.
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange Profiles
+
 
 Profiles are the equivalent of portfolios on the
 [Coinbase Exchange](https://exchange.coinbase.com/portfolios) website. The
@@ -797,9 +818,11 @@ API key associatd with a deleted profile are automatically set to "View."
 
 Last updated on **May 9, 2024**
 
+
 ---
 
 # Exchange Types
+
 
 ## Timestamps
 
@@ -829,9 +852,11 @@ which requires a UUID, both forms (with and without dashes) are accepted.
 
 Last updated on **May 8, 2024**
 
+
 ---
 
 # Exchange WebSocket Overview
+
 
 The WebSocket feed is publicly available and provides real-time market data
 updates for orders and trades. Two endpoints are supported in both production
@@ -998,9 +1023,11 @@ import asyncio, base64, hashlib, hmac, json, os, time, websocketsAPI_KEY = str(o
 
 Last updated on **May 20, 2024**
 
+
 ---
 
 # Exchange WebSocket Best Practices
+
 
 - You can subscribe to both `ws-feed` (Coinbase Market Data) and `ws-direct`
   (Coinbase Direct Market Data), but if `ws-direct` is your primary connection,
@@ -1047,9 +1074,11 @@ Last updated on **May 20, 2024**
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange WebSocket Authentication
+
 
 The following WebSocket feeds require authentication:
 
@@ -1109,9 +1138,11 @@ Feed. The benefits of authenticating are:
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange WebSocket Channels
+
 
 ## Heartbeat Channel
 
@@ -1673,9 +1704,11 @@ Clients can subscribe to this channel using the following subscribe messages:
 
 Last updated on **Apr 2, 2025**
 
+
 ---
 
 # Exchange WebSocket Rate Limits
+
 
 Coinbase Exchange real-time WebSocket market data updates provide fast insight
 into order flow and trades. This means that you are responsible for reading the
@@ -1731,9 +1764,11 @@ in the Help docs.
 
 Last updated on **Feb 25, 2025**
 
+
 ---
 
 # Exchange WebSocket Errors
+
 
 An error message displays when the client is actively disconnected for any of
 these reasons:
@@ -1753,4 +1788,6 @@ issues.
 
 Last updated on **Feb 25, 2025**
 
+
 ---
+
