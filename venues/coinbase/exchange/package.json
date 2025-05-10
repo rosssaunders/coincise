@@ -5,22 +5,16 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "scrape": "node src/index.js scrape",
-    "batch": "node src/index.js batch",
-    "batch:config": "node src/index.js batch -c",
     "privaterestapi": "node src/index.js batch -c config/private_rest_api.json",
     "publicrestapi": "node src/index.js batch -c config/public_rest_api.json",
     "websocketapi": "node src/index.js batch -c config/websocket_api.json",
-    "all": "npm run privaterestapi && npm run publicrestapi && npm run websocketapi",
-    "batch:output": "node src/index.js batch -o",
-    "help": "node src/index.js help"
+    "all": "npm run privaterestapi && npm run publicrestapi && npm run websocketapi"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "jsdom": "26.1.0",
-    "puppeteer": "24.7.2",
+    "puppeteer": "24.8.2",
     "turndown": "7.2.0",
     "turndown-plugin-gfm": "1.0.2"
   },

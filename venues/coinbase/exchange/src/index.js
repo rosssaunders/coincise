@@ -147,10 +147,10 @@ main().catch(error => {
   process.exit(1)
 })
 
-// Export the main functionality for use as a module
-export {
-  scrapeApiDocumentation,
-  processAuthSection,
-  processRequestParams,
-  processBatch
-}
+// // Export the main functionality for use as a module
+// export {
+//   scrapeApiDocumentation,
+//   processAuthSection,
+//   processRequestParams,
+//   processBatch
+// }

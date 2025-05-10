@@ -5,7 +5,6 @@
 import { launchBrowser } from "../../../shared/puppeteer.js"
 import fs from "fs"
 import path from "path"
-import process from "process"
 import { delay, ensureDirectoryExists } from "./utils/utils.js"
 import {
   extractArticleContent,
@@ -155,6 +154,21 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     await page.waitForSelector("article", { timeout: 60000 })
     console.log("Page loaded successfully")
 
+    page.evaluate(() => {
+      // Click the cookie banner button by looking for the button with the specific text
+      // <button class="sc-aXZVg bkHjSZ">Accept all</button>
+      // This is a more robust way to find the button
+      const acceptButton = Array.from(document.querySelectorAll("button")).find(
+        button => button.textContent.trim() === "Accept all"
+      )
+      if (acceptButton) {
+        acceptButton.click()
+        console.log("Cookie banner accepted")
+      } else {
+        console.log("Cookie banner button not found")
+      }
+    })
+
     // Extract content from the <article> tag
     console.log("Extracting article content...")
     const articleHtml = await extractArticleContent(page, { html: true })
@@ -168,11 +182,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
 
     if (authSectionHtml) {
       // Process the auth section HTML to create markdown
-      try {
-        authMarkdown = processAuthSection(authSectionHtml)
-      } catch (error) {
-        console.error("Error processing authentication section:", error)
-      }
+      authMarkdown = processAuthSection(authSectionHtml)
     }
 
     // Extract path and query parameters sections if they exist
@@ -183,20 +193,12 @@ const scrapeApiDocumentation = async (url, outputPath) => {
 
     if (paramsResults.pathParams) {
       // Process the path params HTML to create markdown
-      try {
-        pathParamsMarkdown = processRequestParams(paramsResults.pathParams)
-      } catch (error) {
-        console.error("Error processing path parameters section:", error)
-      }
+      pathParamsMarkdown = processRequestParams(paramsResults.pathParams)
     }
 
     if (paramsResults.queryParams) {
       // Process the query params HTML to create markdown
-      try {
-        queryParamsMarkdown = processRequestParams(paramsResults.queryParams)
-      } catch (error) {
-        console.error("Error processing query parameters section:", error)
-      }
+      queryParamsMarkdown = processRequestParams(paramsResults.queryParams)
     }
 
     // Extract request parameters section if it exists
@@ -206,77 +208,64 @@ const scrapeApiDocumentation = async (url, outputPath) => {
 
     if (requestParamsHtml) {
       // Process the request params HTML to create markdown
-      try {
-        requestParamsMarkdown = processRequestParams(requestParamsHtml)
-      } catch (error) {
-        console.error("Error processing request parameters section:", error)
-      }
+      requestParamsMarkdown = processRequestParams(requestParamsHtml)
     }
 
     // Save all modal content
     console.log("Extracting response details...")
     const modalResults = []
 
+    // Without this the page is not full loaded. I can't a better way to wait
+    await delay(5000)
+
+    // Scroll to the last H3
+    const headings = await page.$$("h3")
+    for (const heading of headings) {
+      await heading.scrollIntoView()
+    }
+
     // Select all the buttons related to HTTP codes
     const buttons = await page.$$(".apiResponseSchemaPickerOption_OMBh")
     console.log(`Found ${buttons.length} response schema buttons`)
 
-    for (const [index, button] of buttons.entries()) {
-      try {
-        // Get button text for identification
-        const buttonText = await page.evaluate(el => el.textContent, button)
-        console.log(
-          `Processing response schema ${index + 1}/${buttons.length}: ${buttonText}`
-        )
+    for (const [index, button] of Array.from(buttons.entries())) {
+      //Get button text for identification
+      const buttonText = await page.evaluate(el => el.textContent, button)
+      console.log(
+        `Processing response schema ${index + 1}/${buttons.length}: ${buttonText}`
+      )
 
-        // Click the button to open the modal
-        await button.click()
+      await button.click()
 
-        // Wait for the modal content to appear
-        await page.waitForSelector(".cds-modal", {
-          visible: true,
-          timeout: 30000
-        })
+      // Wait for modal content to be visible - hard fail if not found
+      await page.waitForSelector(".cds-modal", {
+        visible: true,
+        timeout: 5000
+      })
 
-        // Wait a bit for animation to complete
-        await delay(1000)
-
-        // Extract information from the modal
-        const modalContent = await extractModalContent(page)
-
-        modalResults.push({
-          buttonText,
-          modalContent
-        })
-
-        // Close the modal by pressing the Escape key
-        await page.keyboard.press("Escape")
-
-        // Wait for the modal to close
-        try {
-          await page.waitForSelector(".cds-modal", {
-            hidden: true,
-            timeout: 5000
-          })
-        } catch {
-          // Try clicking outside the modal
-          await page.mouse.click(10, 10)
-          await delay(500)
-        }
-
-        // Wait a moment before proceeding to the next button
-        await delay(1000)
-      } catch (error) {
-        console.error(`Error processing response schema ${index + 1}:`, error)
-
-        // Try to close modal if there was an error
-        try {
-          await page.keyboard.press("Escape")
-          await delay(1000)
-        } catch {
-          // Ignore errors in error handling
-        }
+      const modal = await page.$(".cds-modal") // Changed from querySelector to $
+      if (!modal) {
+        console.error("Modal not found")
+        continue
       }
+
+      await page.click(".cds-interactable-i9xooc6") // Changed from querySelector to $
+
+      //Extract information from the modal
+      const modalContent = await extractModalContent(page)
+
+      modalResults.push({
+        buttonText,
+        modalContent
+      })
+
+      // Wait for modal content to be visible - hard fail if not found
+      await page.waitForSelector(".cds-modal", {
+        hidden: true,
+        timeout: 2000
+      })
+
+      //await delay(1000) // Wait for 1 second to ensure the modal is closed
     }
 
     // Generate markdown and save to file
@@ -298,14 +287,8 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     console.log(`Markdown documentation saved to: ${outputPath}`)
 
     // Format the markdown file
-    try {
-      await formatMarkdown(outputPath)
-      console.log(`Formatted: ${outputPath}`)
-    } catch (err) {
-      console.error("Error formatting markdown:", err)
-      console.error("Stack trace:", err.stack)
-      process.exit(1)
-    }
+    await formatMarkdown(outputPath)
+    console.log(`Formatted: ${outputPath}`)
 
     return outputPath
   } catch (error) {
