@@ -471,9 +471,6 @@ async function main() {
     } else {
       logger.info("No content was scraped from any URL.")
     }
-  } catch (error) {
-    logger.error("Error in main function:", error.message)
-    logger.error("Error stack:", error.stack)
   } finally {
     await browser.close()
   }
