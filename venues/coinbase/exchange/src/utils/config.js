@@ -9,12 +9,8 @@ import fs from "fs"
  * @returns {Object} The parsed config object
  */
 export const readConfig = configPath => {
-  try {
-    const configContent = fs.readFileSync(configPath, "utf8")
-    return JSON.parse(configContent)
-  } catch (error) {
-    throw new Error(`Failed to read config file: ${error.message}`)
-  }
+  const configContent = fs.readFileSync(configPath, "utf8")
+  return JSON.parse(configContent)
 }
 
 /**
@@ -23,12 +19,8 @@ export const readConfig = configPath => {
  * @param {string} outputDir - Path to the output directory
  */
 export const ensureOutputDirectory = outputDir => {
-  try {
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true })
-    }
-  } catch (error) {
-    throw new Error(`Failed to create output directory: ${error.message}`)
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true })
   }
 }
 

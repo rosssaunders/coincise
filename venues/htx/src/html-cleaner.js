@@ -72,19 +72,13 @@ export async function cleanHtml(html) {
       const preContent = document.createElement("pre")
       preContent.appendChild(codeBlock)
 
-      try {
-        const formatted = await prettier.format(p.textContent, {
-          parser: "java",
-          plugins: [javaPlugin]
-        })
+      const formatted = await prettier.format(p.textContent, {
+        parser: "java",
+        plugins: [javaPlugin]
+      })
 
-        codeBlock.textContent = formatted
-        p.parentNode.replaceChild(preContent, p)
-      } catch (error) {
-        console.error("Error formatting Java code:", error)
-        codeBlock.textContent = p.textContent // Fallback to unformatted text
-        p.parentNode.replaceChild(preContent, p)
-      }
+      codeBlock.textContent = formatted
+      p.parentNode.replaceChild(preContent, p)
     }
   }
 

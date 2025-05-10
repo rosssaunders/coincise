@@ -28,22 +28,17 @@ class DeribitDocExtractor {
    * Initialize the application
    */
   async initialize() {
-    try {
-      // Load and validate configuration
-      this.config = await ConfigUtils.loadConfig(this.configPath)
-      console.log(
-        `Loaded configuration with ${this.config.sections.length} sections to extract`
-      )
+    // Load and validate configuration
+    this.config = await ConfigUtils.loadConfig(this.configPath)
+    console.log(
+      `Loaded configuration with ${this.config.sections.length} sections to extract`
+    )
 
-      // Initialize Turndown service for Markdown conversion
-      this.turndownService = MarkdownUtils.initTurndownService()
+    // Initialize Turndown service for Markdown conversion
+    this.turndownService = MarkdownUtils.initTurndownService()
 
-      // Initialize browser
-      this.browser = await BrowserUtils.initBrowser()
-    } catch (error) {
-      console.error(`Initialization failed: ${error.message}`)
-      throw error
-    }
+    // Initialize browser
+    this.browser = await BrowserUtils.initBrowser()
   }
 
   /**
@@ -142,54 +137,43 @@ class DeribitDocExtractor {
    * Run the extraction process
    */
   async run() {
-    try {
-      console.log("Starting documentation extraction process...")
+    console.log("Starting documentation extraction process...")
 
-      // Extract the main API documentation
-      console.log("Extracting selected API documentation sections...")
-      const mainContent = await this.extractApiDocumentation()
-      console.log("API documentation extraction complete")
+    // Extract the main API documentation
+    console.log("Extracting selected API documentation sections...")
+    const mainContent = await this.extractApiDocumentation()
+    console.log("API documentation extraction complete")
 
-      // Extract support articles if specified
-      console.log("Extracting support articles...")
-      const supportContent = await this.extractSupportArticles()
-      console.log("Support articles extraction complete")
+    // Extract support articles if specified
+    console.log("Extracting support articles...")
+    const supportContent = await this.extractSupportArticles()
+    console.log("Support articles extraction complete")
 
-      // Combine the content
-      console.log("Creating documentation file...")
-      let combinedMarkdown = `# ${this.config.title || "Deribit API Documentation"}\n\n`
+    // Combine the content
+    console.log("Creating documentation file...")
+    let combinedMarkdown = `# ${this.config.title || "Deribit API Documentation"}\n\n`
 
-      // Add the main API documentation
-      combinedMarkdown += `${mainContent}\n\n`
+    // Add the main API documentation
+    combinedMarkdown += `${mainContent}\n\n`
 
-      // Add support articles if any were extracted
-      if (supportContent.trim()) {
-        combinedMarkdown += supportContent
-      }
-
-      // Ensure output directory exists
-      const outputDir = path.dirname(this.config.output)
-      await fs.mkdir(outputDir, { recursive: true })
-
-      // Write the combined markdown to the output file
-      await fs.writeFile(this.config.output, combinedMarkdown)
-      console.log(`Documentation written to: ${this.config.output}`)
-
-      // Format the markdown file
-      try {
-        await formatMarkdown(this.config.output)
-        console.log(`Formatted: ${this.config.output}`)
-      } catch (err) {
-        console.error("Error formatting markdown:", err)
-        console.error("Stack trace:", err.stack)
-        process.exit(1)
-      }
-
-      console.log("Documentation extraction complete!")
-    } catch (error) {
-      console.error("Error in extraction process:", error)
-      throw error
+    // Add support articles if any were extracted
+    if (supportContent.trim()) {
+      combinedMarkdown += supportContent
     }
+
+    // Ensure output directory exists
+    const outputDir = path.dirname(this.config.output)
+    await fs.mkdir(outputDir, { recursive: true })
+
+    // Write the combined markdown to the output file
+    await fs.writeFile(this.config.output, combinedMarkdown)
+    console.log(`Documentation written to: ${this.config.output}`)
+
+    // Format the markdown file
+    await formatMarkdown(this.config.output)
+    console.log(`Formatted: ${this.config.output}`)
+
+    console.log("Documentation extraction complete!")
   }
 }
 

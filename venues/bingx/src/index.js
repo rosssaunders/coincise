@@ -581,13 +581,8 @@ async function main() {
     fs.writeFileSync(outputPath, combinedMarkdown)
 
     // Format the markdown file
-    try {
-      await formatMarkdown(outputPath)
-      console.log(`Formatted: ${outputPath}`)
-    } catch (err) {
-      console.error(`Error formatting markdown:`, err)
-      process.exit(1)
-    }
+    await formatMarkdown(outputPath)
+    console.log(`Formatted: ${outputPath}`)
 
     // Print a visually appealing success message
     console.log(
@@ -596,10 +591,6 @@ async function main() {
     )
     console.log(`📄 File: ${outputPath}`)
     console.log(`📦 Size: ${(combinedMarkdown.length / 1024).toFixed(2)} KB`)
-  } catch (error) {
-    console.error("\x1b[31m%s\x1b[0m", `❌ Error: ${error.message}`)
-    console.error(error)
-    process.exit(1) // Exit with error code
   } finally {
     if (browser) {
       await browser.close()
@@ -607,4 +598,11 @@ async function main() {
   }
 }
 
-main()
+// Only run main() if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => {
+    console.error("Unhandled error in main:", error)
+    console.error("Stack trace:", error.stack)
+    process.exit(1)
+  })
+}

@@ -24,25 +24,9 @@ export function getConfig(type = "private") {
     path.join(__dirname, "../config", `${configType}.json`)
   )
 
-  try {
-    // Read and parse the JSON config file
-    const configData = fs.readFileSync(configPath, "utf8")
-    return JSON.parse(configData)
-  } catch (error) {
-    console.error(
-      `Error loading configuration from ${configPath}:`,
-      error.message
-    )
-
-    // Fallback to private config if there's an error
-    if (configType !== "private") {
-      console.log("Falling back to private configuration")
-      return getConfig("private")
-    }
-
-    // If even the private config fails, throw the error
-    throw error
-  }
+  // Read and parse the JSON config file
+  const configData = fs.readFileSync(configPath, "utf8")
+  return JSON.parse(configData)
 }
 
 // Default export for backward compatibility

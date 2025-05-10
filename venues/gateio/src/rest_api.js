@@ -107,14 +107,8 @@ function processSectionHtml(document, section, turndownService) {
 
 // Function to load config from file
 const loadConfig = configPath => {
-  try {
-    const configContent = fs.readFileSync(configPath, "utf8")
-    return JSON.parse(configContent)
-  } catch (error) {
-    console.error(`Error loading config from ${configPath}:`, error)
-    console.error("Stack trace:", error.stack)
-    process.exit(1)
-  }
+  const configContent = fs.readFileSync(configPath, "utf8")
+  return JSON.parse(configContent)
 }
 
 // Main execution

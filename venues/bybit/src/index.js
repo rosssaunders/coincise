@@ -8,21 +8,16 @@ import { generatePrivateWebsocketDocs } from "./processors/privateWebsocketProce
 import process from "process"
 
 async function main() {
-  try {
-    // Setup logger
-    await setupLogger()
+  // Setup logger
+  await setupLogger()
 
-    // Generate documentation for each API type sequentially
-    await generatePublicRestDocs()
-    await generatePrivateRestDocs()
-    await generatePublicWebsocketDocs()
-    await generatePrivateWebsocketDocs()
+  // Generate documentation for each API type sequentially
+  await generatePublicRestDocs()
+  await generatePrivateRestDocs()
+  await generatePublicWebsocketDocs()
+  await generatePrivateWebsocketDocs()
 
-    console.log("\n🎉 Documentation generation completed successfully! 🎉\n")
-  } catch (error) {
-    console.error("Error generating documentation:", error)
-    process.exit(1)
-  }
+  console.log("\n🎉 Documentation generation completed successfully! 🎉\n")
 }
 
 // Only run main() if this is the main module

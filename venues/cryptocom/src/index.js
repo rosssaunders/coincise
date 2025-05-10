@@ -104,18 +104,13 @@ async function main() {
     )
 
     // Format the markdown file
-    try {
-      await formatMarkdown(filepath)
-      console.log(`Formatted: ${filepath}`)
-    } catch (err) {
-      console.error("Error formatting markdown:", err)
-      console.error("Stack trace:", err.stack)
-      process.exit(1)
-    }
+    await formatMarkdown(filepath)
+    console.log(`Formatted: ${filepath}`)
   }
 }
 
 main().catch(err => {
   console.error(err)
+  console.error("Stack trace:", err.stack)
   process.exit(1)
 })

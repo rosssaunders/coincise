@@ -270,13 +270,6 @@ async function convertHtmlToMarkdown(apiType) {
     }
 
     success(`Markdown files successfully generated for ${apiType} API`)
-  } catch (err) {
-    error("An error occurred during processing", [
-      err.message,
-      "Stack trace:",
-      err.stack
-    ])
-    process.exit(1)
   } finally {
     if (browser) {
       info("Closing Puppeteer...")

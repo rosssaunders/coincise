@@ -13,19 +13,12 @@ class ConfigUtils {
    * @throws {Error} - If the configuration is invalid
    */
   static async loadConfig(configPath) {
-    try {
-      const configData = await fs.readFile(configPath, "utf8")
-      const config = JSON.parse(configData)
+    const configData = await fs.readFile(configPath, "utf8")
+    const config = JSON.parse(configData)
 
-      this.validateConfig(config)
+    this.validateConfig(config)
 
-      return config
-    } catch (error) {
-      if (error.code === "ENOENT") {
-        throw new Error(`Configuration file not found: ${configPath}`)
-      }
-      throw error
-    }
+    return config
   }
 
   /**

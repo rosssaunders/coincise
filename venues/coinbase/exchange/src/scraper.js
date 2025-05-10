@@ -291,10 +291,6 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     console.log(`Formatted: ${outputPath}`)
 
     return outputPath
-  } catch (error) {
-    console.error(`Error during scraping: ${error.message}`)
-    // Propagate error to caller instead of swallowing it
-    throw error
   } finally {
     // Close the browser if it was opened
     if (browser) {

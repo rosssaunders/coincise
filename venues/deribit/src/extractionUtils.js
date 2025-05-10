@@ -94,57 +94,52 @@ class ExtractionUtils {
    * @returns {Promise<string|null>} - The extracted content or null if extraction failed
    */
   static async extractSupportArticle(page, url) {
-    try {
-      // Load the support article with a longer timeout
-      await page.goto(url, {
-        waitUntil: "networkidle0",
-        timeout: 60000
-      })
+    // Load the support article with a longer timeout
+    await page.goto(url, {
+      waitUntil: "networkidle0",
+      timeout: 60000
+    })
 
-      // Add a random delay to simulate human behavior
-      await delay(Math.random() * 2000 + 1000)
+    // Add a random delay to simulate human behavior
+    await delay(Math.random() * 2000 + 1000)
 
-      // Wait for the article to be present with a longer timeout
-      await page.waitForSelector("article", { timeout: 60000 })
+    // Wait for the article to be present with a longer timeout
+    await page.waitForSelector("article", { timeout: 60000 })
 
-      // Extract the article content
-      const content = await page.evaluate(() => {
-        // Get the article element
-        const article = document.querySelector("article")
-        if (!article) {
-          console.log("Article not found in DOM")
-          return null
-        }
-
-        // Get the header and content section
-        const header = article.querySelector("header.mb-5")
-        const contentSection = article.querySelector(
-          'section.content[itemprop="articleBody"]'
-        )
-
-        if (!header || !contentSection) {
-          console.log("Required sections not found in article")
-          return null
-        }
-
-        // Create a container for the content
-        const container = document.createElement("div")
-        container.appendChild(header.cloneNode(true))
-        container.appendChild(contentSection.cloneNode(true))
-
-        return container.innerHTML
-      })
-
-      if (!content) {
-        console.error(`No article content found for ${url}`)
+    // Extract the article content
+    const content = await page.evaluate(() => {
+      // Get the article element
+      const article = document.querySelector("article")
+      if (!article) {
+        console.log("Article not found in DOM")
         return null
       }
 
-      return content
-    } catch (error) {
-      console.error(`Error processing ${url}:`, error)
-      return null
+      // Get the header and content section
+      const header = article.querySelector("header.mb-5")
+      const contentSection = article.querySelector(
+        'section.content[itemprop="articleBody"]'
+      )
+
+      if (!header || !contentSection) {
+        console.log("Required sections not found in article")
+        throw new Error("Required sections not found")
+      }
+
+      // Create a container for the content
+      const container = document.createElement("div")
+      container.appendChild(header.cloneNode(true))
+      container.appendChild(contentSection.cloneNode(true))
+
+      return container.innerHTML
+    })
+
+    if (!content) {
+      console.error(`No article content found for ${url}`)
+      throw new Error("No content found")
     }
+
+    return content
   }
 }
 

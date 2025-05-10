@@ -7,7 +7,6 @@ import path from "path"
 import { fileURLToPath } from "url"
 import { launchBrowser, configurePage } from "../../../shared/puppeteer.js"
 import { formatMarkdown } from "../../../shared/format-markdown.js"
-import process from "process"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -107,23 +106,12 @@ export class BaseProcessor {
       fs.writeFileSync(outputPath, markdownContent)
 
       // Format the markdown file
-      try {
-        await formatMarkdown(outputPath)
-        console.log(`Formatted: ${outputPath}`)
-      } catch (err) {
-        console.error(`Error formatting markdown:`, err)
-        process.exit(1)
-      }
+      await formatMarkdown(outputPath)
+      console.log(`Formatted: ${outputPath}`)
 
       console.log(
         `\n✨ ${this.processorType} API documentation successfully generated! ✨\n📄 Output file: ${output_file}\n`
       )
-    } catch (error) {
-      console.error(
-        `Error generating ${this.processorType} API documentation:`,
-        error
-      )
-      throw error
     } finally {
       await this.cleanup()
     }

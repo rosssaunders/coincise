@@ -160,17 +160,11 @@ function loadConfigurations() {
     .map(file => join(configDir, file))
 
   if (configFiles.length === 0) {
-    console.error("No configuration files found in the config directory.")
-    process.exit(1)
+    throw new Error("No configuration files found in the config directory.")
   }
 
   return configFiles.map(file => {
-    try {
-      return JSON.parse(readFileSync(file, "utf8"))
-    } catch (error) {
-      console.error(`Error parsing configuration file ${file}:`, error)
-      process.exit(1)
-    }
+    return JSON.parse(readFileSync(file, "utf8"))
   })
 }
 
@@ -178,92 +172,79 @@ function loadConfigurations() {
  * Main function to run the extraction process
  */
 async function main() {
-  try {
-    let configs = []
+  let configs = []
 
-    // Check if a specific config file is provided as a command-line argument
-    if (process.argv.length > 2) {
-      const configPath = process.argv[2]
-      if (existsSync(configPath)) {
-        try {
-          const config = JSON.parse(readFileSync(configPath, "utf8"))
-          configs = [config]
-          console.log(`Using config file: ${configPath}`)
-        } catch (error) {
-          console.error(
-            `Error parsing configuration file ${configPath}:`,
-            error
-          )
-          process.exit(1)
-        }
-      } else {
-        console.error(`Configuration file not found: ${configPath}`)
-        process.exit(1)
-      }
+  // Check if a specific config file is provided as a command-line argument
+  if (process.argv.length > 2) {
+    const configPath = process.argv[2]
+    if (existsSync(configPath)) {
+      const config = JSON.parse(readFileSync(configPath, "utf8"))
+      configs = [config]
+      console.log(`Using config file: ${configPath}`)
     } else {
-      // Load all configurations from the config directory
-      configs = loadConfigurations()
+      throw new Error(
+        `Configuration file not found: ${configPath}. Please provide a valid path.`
+      )
     }
-
-    if (configs.length === 0) {
-      console.error("No valid configurations found.")
-      process.exit(1)
-    }
-
-    // Get URL from the first config (all configs should have the same URL)
-    const url = configs[0].url
-    console.log(`Fetching documentation from ${url}`)
-
-    // Launch browser and get page content
-    const browser = await launchBrowser()
-    const page = await browser.newPage()
-    await page.goto(url, { waitUntil: "networkidle0" })
-    const content = await page.content()
-    await browser.close()
-
-    // Save HTML for reference
-    writeFileSync("okx.html", content)
-    console.log("Saved raw HTML to okx.html")
-
-    // Parse HTML with JSDOM
-    const dom = new JSDOM(content)
-    const document = dom.window.document
-
-    const darkBoxes = dom.window.document.querySelectorAll("div.dark-box")
-    darkBoxes.forEach(box => box.remove())
-
-    // Remove "Response Example" blockquotes
-    const responseExamples = document.querySelectorAll("blockquote")
-    responseExamples.forEach(blockquote => {
-      const text = blockquote.textContent.trim()
-      if (text.toLowerCase().includes("example")) {
-        blockquote.remove()
-      }
-
-      if (text.toLowerCase().includes("format description")) {
-        blockquote.remove()
-      }
-    })
-
-    // Remove the Highlight divs
-    const highlights = document.querySelectorAll("div.highlight")
-    highlights.forEach(highlight => highlight.remove())
-
-    // Process each configuration
-    for (const config of configs) {
-      await processConfig(document, config)
-    }
-
-    // Clean up
-    if (existsSync("okx.html")) {
-      unlinkSync("okx.html")
-    }
-
-    console.log("All documentation files have been generated successfully!")
-  } catch (error) {
-    console.error("Error:", error)
-    process.exit(1)
+  } else {
+    // Load all configurations from the config directory
+    configs = loadConfigurations()
   }
+
+  if (configs.length === 0) {
+    throw new Error("No valid configurations found.")
+  }
+
+  // Get URL from the first config (all configs should have the same URL)
+  const url = configs[0].url
+  console.log(`Fetching documentation from ${url}`)
+
+  // Launch browser and get page content
+  const browser = await launchBrowser()
+  const page = await browser.newPage()
+  await page.goto(url, { waitUntil: "networkidle0" })
+  const content = await page.content()
+  await browser.close()
+
+  // Save HTML for reference
+  writeFileSync("okx.html", content)
+  console.log("Saved raw HTML to okx.html")
+
+  // Parse HTML with JSDOM
+  const dom = new JSDOM(content)
+  const document = dom.window.document
+
+  const darkBoxes = dom.window.document.querySelectorAll("div.dark-box")
+  darkBoxes.forEach(box => box.remove())
+
+  // Remove "Response Example" blockquotes
+  const responseExamples = document.querySelectorAll("blockquote")
+  responseExamples.forEach(blockquote => {
+    const text = blockquote.textContent.trim()
+    if (text.toLowerCase().includes("example")) {
+      blockquote.remove()
+    }
+
+    if (text.toLowerCase().includes("format description")) {
+      blockquote.remove()
+    }
+  })
+
+  // Remove the Highlight divs
+  const highlights = document.querySelectorAll("div.highlight")
+  highlights.forEach(highlight => highlight.remove())
+
+  // Process each configuration
+  for (const config of configs) {
+    await processConfig(document, config)
+  }
+
+  // Clean up
+  if (existsSync("okx.html")) {
+    unlinkSync("okx.html")
+  }
+
+  console.log("All documentation files have been generated successfully!")
 }
 
 // Only run main() if this is the main module

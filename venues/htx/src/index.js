@@ -345,19 +345,15 @@ async function scrapePageForEndpoint(browser, url) {
             // Wait a moment for clipboard operation to complete
             await new Promise(resolve => setTimeout(resolve, 100))
 
-            try {
-              // Get the copied JSON from clipboard
-              const jsonText = await navigator.clipboard.readText()
-              if (jsonText) {
-                // Replace the react-json-view with a code block
-                const codeBlock = document.createElement("pre")
-                const code = document.createElement("code")
-                code.textContent = jsonText
-                codeBlock.appendChild(code)
-                jsonView.parentNode.replaceChild(codeBlock, jsonView)
-              }
-            } catch (error) {
-              console.error("Failed to read clipboard:", error)
+            // Get the copied JSON from clipboard
+            const jsonText = await navigator.clipboard.readText()
+            if (jsonText) {
+              // Replace the react-json-view with a code block
+              const codeBlock = document.createElement("pre")
+              const code = document.createElement("code")
+              code.textContent = jsonText
+              codeBlock.appendChild(code)
+              jsonView.parentNode.replaceChild(codeBlock, jsonView)
             }
           }
         }

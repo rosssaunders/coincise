@@ -22,18 +22,10 @@ export const processUrl = async (urlConfig, outputDir) => {
   const filename = generateFilename(url, urlConfig.filename)
   const outputPath = path.join(outputDir, filename)
 
-  try {
-    // Attempt to scrape the API documentation
-    await scrapeApiDocumentation(url, outputPath)
-    console.log(`✅ Scraping completed successfully for ${url}`)
-    return outputPath
-  } catch (error) {
-    // Log the error with more detail
-    console.error(`❌ Error scraping ${url}: ${error.message}`)
-
-    // Re-throw the error to be handled by the caller
-    throw error
-  }
+  // Attempt to scrape the API documentation
+  await scrapeApiDocumentation(url, outputPath)
+  console.log(`✅ Scraping completed successfully for ${url}`)
+  return outputPath
 }
 
 /**
@@ -43,23 +35,18 @@ export const processUrl = async (urlConfig, outputDir) => {
  * @returns {string} The title extracted from the file
  */
 export const extractTitle = filePath => {
-  try {
-    const content = fs.readFileSync(filePath, "utf8")
-    const lines = content.split("\n")
+  const content = fs.readFileSync(filePath, "utf8")
+  const lines = content.split("\n")
 
-    // Find the first heading
-    for (const line of lines) {
-      if (line.startsWith("#")) {
-        return line.replace(/^#+\s*/, "").trim()
-      }
+  // Find the first heading
+  for (const line of lines) {
+    if (line.startsWith("#")) {
+      return line.replace(/^#+\s*/, "").trim()
     }
-
-    // If no heading found, use the filename without extension
-    return path.basename(filePath, ".md")
-  } catch {
-    console.warn(`Warning: Could not extract title from ${filePath}`)
-    return path.basename(filePath, ".md")
   }
+
+  // If no heading found, use the filename without extension
+  return path.basename(filePath, ".md")
 }
 
 /**

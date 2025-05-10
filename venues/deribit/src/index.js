@@ -26,9 +26,6 @@ const main = async () => {
     await extractor.run()
 
     process.exit(0)
-  } catch (error) {
-    console.error("Unhandled error:", error)
-    process.exit(1)
   } finally {
     // Clean up resources
     await extractor.cleanup()
