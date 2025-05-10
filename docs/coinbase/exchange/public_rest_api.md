@@ -1,7 +1,5 @@
 # Coinbase Exchange API Documentation
 
-Generated on 5/4/2025 12:11:31 AM
-
 ## Table of Contents
 
 - [Welcome to Exchange APIs](#welcome-to-exchange-apis)
@@ -1277,6 +1275,29 @@ are in quote currency units.
 | ---------- | ------ | -------- | ----------- |
 | product_id | string | Yes      |             |
 
+## API Response Details
+
+### Response: 200
+
+| Property                  | Type   | Description |
+| ------------------------- | ------ | ----------- |
+| open                      | string |             |
+| high                      | string |             |
+| low                       | string |             |
+| last                      | string |             |
+| volume                    | string |             |
+| volume_30day              | string |             |
+| rfq_volume_24hour         | string |             |
+| rfq_volume_30day          | string |             |
+| conversions_volume_24hour | string |             |
+| conversions_volume_30day  | string |             |
+
+### Response: 500 An unexpected error response.
+
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
+
 ---
 
 # Get product ticker
@@ -1314,6 +1335,12 @@ WebSocket stream and listening for match messages, rather than polling.
 | time               | date-time |             |
 | rfq_volume         | string    |             |
 | conversions_volume | string    |             |
+
+### Response: 500 An unexpected error response.
+
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| message  | string |             |
 
 ---
 
