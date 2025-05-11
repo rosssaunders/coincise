@@ -1,7 +1,5 @@
 # Coinbase Exchange API Documentation
 
-Generated on 5/4/2025 12:08:18 AM
-
 ## Table of Contents
 
 - [Welcome to Exchange APIs](#welcome-to-exchange-apis)
