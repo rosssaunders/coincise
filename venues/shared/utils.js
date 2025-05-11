@@ -158,12 +158,9 @@ export const fetchContent = async (url, options = {}) => {
     }
 
     return content
-  } catch (error) {
-    console.error(`Error fetching content from ${url}:`, error)
-    throw error
   } finally {
-    if (page) await page.close().catch(console.error)
-    if (browser) await browser.close().catch(console.error)
+    if (page) await page.close()
+    if (browser) await browser.close()
   }
 }
 

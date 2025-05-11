@@ -24,51 +24,6 @@ export const createTurndownBuilder = () => {
   // Return object with builder methods
   return {
     /**
-     * Add code block handling rule
-     * @returns {Object} The builder object for chaining
-     */
-    withCodeBlocks() {
-      // service.addRule("codeBlocks", {
-      //   filter: ["pre"],
-      //   replacement: function (content, node) {
-      //     // Extract language from class name, checking for "language-" pattern in the className
-      //     const codeElement = node.querySelector("code")
-      //     let language = ""
-      //     if (codeElement && codeElement.className) {
-      //       const classNames = codeElement.className.split(" ")
-      //       for (const className of classNames) {
-      //         if (className.includes("language-")) {
-      //           language = className.replace("language-", "")
-      //           break
-      //         }
-      //       }
-      //     }
-
-      //     // Try to format JSON content for better readability
-      //     let formattedContent = content.trim()
-      //     if (
-      //       language === "javascript" ||
-      //       language === "json" ||
-      //       (!language && content.trim().match(/^[{\[]/))
-      //     ) {
-      //       try {
-      //         // First attempt to parse with JSON5 which supports comments
-      //         const jsonObj = JSON5.parse(content.trim())
-      //         formattedContent = JSON.stringify(jsonObj, null, 2)
-      //       } catch (error) {
-      //         // If JSON5 parsing fails, use the original content
-      //         console.warn("Failed to parse JSON in code block:", error.message)
-      //         console.warn("JSON content that failed to parse:", content.trim())
-      //       }
-      //     }
-
-      //     return `\n\`\`\`${language}\n${formattedContent}\n\`\`\`\n`
-      //   }
-      // })
-      return this
-    },
-
-    /**
      * Add support for tables without headers
      * @returns {Object} The builder object for chaining
      */
@@ -94,7 +49,6 @@ export const createTurndownBuilder = () => {
             return `\n| ${headerRow} |\n| ${contentRows} |\n`
           }
 
-          // add a new line after in case two tables are next to each other
           return content
         }
       })
