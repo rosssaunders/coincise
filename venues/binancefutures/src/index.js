@@ -28,10 +28,7 @@ const BASE_URL = "https://developers.binance.com/docs"
  * @returns {TurndownService} Configured Turndown service
  */
 function configureTurndown() {
-  return createTurndownBuilder()
-    .withCodeBlocks()
-    .withTablesWithoutHeaders()
-    .build()
+  return createTurndownBuilder().withTablesWithoutHeaders().build()
 }
 
 // Load config
@@ -285,118 +282,112 @@ async function processAll() {
     for (const endpoint of endpoints) {
       const url = `${BASE_URL}/${endpoint}`
       console.log(`Fetching: ${url}`)
-      try {
-        const page = await getPage(url, {
-          selector: ".theme-doc-markdown.markdown",
-          timeout: 30000,
-          browser
-        })
 
-        // Extract the page content
-        const html = await page.evaluate(async sel => {
-          const el = document.querySelector(sel)
-          if (!el) {
-            window.puppeteerError(`Selector '${sel}' not found on page.`)
-            return document.body.innerHTML // Or throw an error
-          }
+      const page = await getPage(url, {
+        selector: ".theme-doc-markdown.markdown",
+        timeout: 30000,
+        browser
+      })
 
-          // Find all code block containers where class starts with 'codeBlock'
-          const codeBlockContainers = Array.from(
-            el.querySelectorAll("div")
-          ).filter(div =>
-            Array.from(div.classList).some(cls =>
-              cls.startsWith("codeBlockContainer")
-            )
+      // Extract the page content
+      const html = await page.evaluate(async sel => {
+        const el = document.querySelector(sel)
+        if (!el) {
+          window.puppeteerError(`Selector '${sel}' not found on page.`)
+          return document.body.innerHTML // Or throw an error
+        }
+
+        // Find all code block containers where class starts with 'codeBlock'
+        const codeBlockContainers = Array.from(
+          el.querySelectorAll("div")
+        ).filter(div =>
+          Array.from(div.classList).some(cls =>
+            cls.startsWith("codeBlockContainer")
           )
+        )
 
-          for (const container of codeBlockContainers) {
-            // Find the code element and the copy button within the container
-            const codeElement = container.querySelector("pre code")
-            if (codeElement) {
-              // If the code block uses .token-line spans, join them with newlines
-              const tokenLines = codeElement.querySelectorAll(".token-line")
-              let codeText
-              if (tokenLines.length > 0) {
-                codeText = Array.from(tokenLines)
-                  .map(line => line.textContent)
-                  .join("\n")
-              } else {
-                codeText = codeElement.textContent
-              }
-              codeElement.textContent = codeText
+        for (const container of codeBlockContainers) {
+          // Find the code element and the copy button within the container
+          const codeElement = container.querySelector("pre code")
+          if (codeElement) {
+            // If the code block uses .token-line spans, join them with newlines
+            const tokenLines = codeElement.querySelectorAll(".token-line")
+            let codeText
+            if (tokenLines.length > 0) {
+              codeText = Array.from(tokenLines)
+                .map(line => line.textContent)
+                .join("\n")
+            } else {
+              codeText = codeElement.textContent
+            }
+            codeElement.textContent = codeText
 
-              // workout what language it is
-              // <div class="language-shell">
-              // <div class="language-javascript">
-              const classList = container.className.split(" ")
-              const languageClass = classList.find(cls =>
-                cls.startsWith("language-")
-              )
+            // workout what language it is
+            // <div class="language-shell">
+            // <div class="language-javascript">
+            const classList = container.className.split(" ")
+            const languageClass = classList.find(cls =>
+              cls.startsWith("language-")
+            )
 
-              // split the class name to get the language
-              const language = languageClass
-                ? languageClass.split("-")[1]
-                : null
+            // split the class name to get the language
+            const language = languageClass ? languageClass.split("-")[1] : null
 
-              // if language is not found, check the code text
-              // and set it to JSON if it looks like JSON
-              if (language) {
-                if (language === "bash") {
-                  codeElement.className = "language-bash"
-                } else if (language === "console" || language === "shell") {
-                  codeElement.className = "language-shell"
-                } else if (language === "json") {
+            // if language is not found, check the code text
+            // and set it to JSON if it looks like JSON
+            if (language) {
+              if (language === "bash") {
+                codeElement.className = "language-bash"
+              } else if (language === "console" || language === "shell") {
+                codeElement.className = "language-shell"
+              } else if (language === "json") {
+                codeElement.className = "language-json"
+              } else if (language === "javascript") {
+                if (
+                  codeText.trim().startsWith("{") ||
+                  codeText.trim().startsWith("[")
+                ) {
                   codeElement.className = "language-json"
-                } else if (language === "javascript") {
-                  if (
-                    codeText.trim().startsWith("{") ||
-                    codeText.trim().startsWith("[")
-                  ) {
-                    codeElement.className = "language-json"
-                  } else {
-                    codeElement.className = "language-javascript"
-                  }
                 } else {
-                  window.puppeteerLog(`Language '${language}`)
-                  codeElement.className = "language-xyz1"
+                  codeElement.className = "language-javascript"
                 }
               } else {
-                window.puppeteerLog(`Language '${language}'`)
-                codeElement.className = "language-xyz2"
+                window.puppeteerLog(`Language '${language}`)
+                codeElement.className = "language-xyz1"
               }
+            } else {
+              window.puppeteerLog(`Language '${language}'`)
+              codeElement.className = "language-xyz2"
             }
           }
+        }
 
-          return el.innerHTML
-        }, ".theme-doc-markdown.markdown")
+        return el.innerHTML
+      }, ".theme-doc-markdown.markdown")
 
-        const dom = new JSDOM(html)
-        const document = dom.window.document
+      const dom = new JSDOM(html)
+      const document = dom.window.document
 
-        // Convert error codes section to table BEFORE adjusting headings
-        convertErrorCodesToHtmlTable(document)
+      // Convert error codes section to table BEFORE adjusting headings
+      convertErrorCodesToHtmlTable(document)
 
-        // in the source HTML, tables are stacked without a seperator. write a function that
-        // uses the JSDOM to detect when table elements are next to each other and add a seperator
-        insertTableSeparators(document)
+      // in the source HTML, tables are stacked without a seperator. write a function that
+      // uses the JSDOM to detect when table elements are next to each other and add a seperator
+      insertTableSeparators(document)
 
-        // Adjust heading levels down by one
-        adjustHeadingLevels(document)
+      // Adjust heading levels down by one
+      adjustHeadingLevels(document)
 
-        const cleanedHtml = dom.serialize()
+      const cleanedHtml = dom.serialize()
 
-        // Convert to markdown
-        const md = turndownService.turndown(cleanedHtml)
+      // Convert to markdown
+      const md = turndownService.turndown(cleanedHtml)
 
-        // Add source URL link at the beginning of the section
-        const sourceLink = `> Source: [${url}](${url})\n\n`
+      // Add source URL link at the beginning of the section
+      const sourceLink = `> Source: [${url}](${url})\n\n`
 
-        if (md) content += md + "\n\n" + sourceLink
-        await politeDelay(1000) // polite delay
-      } catch (err) {
-        console.error(err.message)
-        process.exit(1) // Exit immediately on error
-      }
+      if (md) content += md + "\n\n" + sourceLink
+      await politeDelay(1000) // polite delay
     }
 
     const outPath = path.join(DOCS_ROOT, output_file)
