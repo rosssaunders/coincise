@@ -5268,14 +5268,14 @@ For execution status of individual orders, use
 
 **Parameters**:
 
-| Name                  | Type     | Mandatory                           | Description                               |
-| --------------------- | -------- | ----------------------------------- | ----------------------------------------- |
-| \-`origClientOrderId` | \-STRING | \-YES                               | \-Query order list by `listClientOrderId` |
-| \-`orderListId`       | \-INT    | \-Query order list by `orderListId` |
-| \-`apiKey`            | \-STRING | \-YES                               |                                           |
-| \-`recvWindow`        | \-LONG   | \-NO                                | \-The value cannot be greater than 60000  |
-| \-`signature`         | \-STRING | \-YES                               |                                           |
-| \-`timestamp`         | \-LONG   | \-YES                               |                                           |
+| Name                  | Type     | Mandatory                                                                                  | Description                                                                                      |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| \-`origClientOrderId` | \-STRING | \-NO\*                                                                                     | \-Query order list by `listClientOrderId`.`orderListId` or `origClientOrderId` must be provided. |
+| \-`orderListId`       | \-INT    | \-Query order list by `orderListId`.`orderListId` or `origClientOrderId` must be provided. |
+| \-`apiKey`            | \-STRING | \-YES                                                                                      |                                                                                                  |
+| \-`recvWindow`        | \-LONG   | \-NO                                                                                       | \-The value cannot be greater than 60000                                                         |
+| \-`signature`         | \-STRING | \-YES                                                                                      |                                                                                                  |
+| \-`timestamp`         | \-LONG   | \-YES                                                                                      |                                                                                                  |
 
 Notes:
 

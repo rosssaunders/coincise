@@ -3049,12 +3049,12 @@ Retrieves a specific order list based on provided optional parameters.
 
 **Parameters:**
 
-| Name                | Type     | Mandatory | Description                                                    |
-| ------------------- | -------- | --------- | -------------------------------------------------------------- |
-| \-orderListId       | \-LONG   | \-NO      | \-Either `orderListId` or `listClientOrderId` must be provided |
-| \-origClientOrderId | \-STRING | \-NO      | \-Either `orderListId` or `listClientOrderId` must be provided |
-| \-recvWindow        | \-LONG   | \-NO      | \-The value cannot be greater than `60000`                     |
-| \-timestamp         | \-LONG   | \-YES     |                                                                |
+| Name                | Type     | Mandatory | Description                                                                                       |
+| ------------------- | -------- | --------- | ------------------------------------------------------------------------------------------------- |
+| \-orderListId       | \-LONG   | \-NO\*    | \-Query order list by `orderListId`. `orderListId` or `origClientOrderId` must be provided.       |
+| \-origClientOrderId | \-STRING | \-NO\*    | \-Query order list by `listClientOrderId`. `orderListId` or `origClientOrderId` must be provided. |
+| \-recvWindow        | \-LONG   | \-NO      | \-The value cannot be greater than `60000`                                                        |
+| \-timestamp         | \-LONG   | \-YES     |                                                                                                   |
 
 **Data Source:** Database
 
