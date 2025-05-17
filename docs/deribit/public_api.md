@@ -899,7 +899,7 @@ _This method takes no parameters_
 
 # Rate Limits
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 Deribit uses a volume-tiered rate limit system, focusing primarily on matching
 engine requests. These rate limits are implemented to ensure the robustness of
@@ -1084,7 +1084,7 @@ quote_cancel
 
 # Connection Management
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 ## Connection[](#heading-1)
 
@@ -1172,7 +1172,7 @@ when logging out, they can override this setting with `Tag 9003.`
 
 # API Usage Policy
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 Deribit is committed to providing a fast, reliable, and efficient trading
 platform for all users. To maintain the integrity and performance of our system,
@@ -1296,7 +1296,7 @@ reach out to our support team.
 
 # Server Infrastructure
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 ## Server Infrastructure[](#heading-1)
 
@@ -1412,7 +1412,7 @@ LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
 
 # Asia Gateway
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 To offer faster access to the Deribit platform for clients located in Asia, we
 offer a gateway connecting to Deribit from Hong Kong.
@@ -1431,7 +1431,7 @@ Please use [asia.deribit.com](http://asia.deribit.com) to access the gateway.
 
 # Deribit AWS Endpoint Service instruction
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 In order to offer its customers residing in AWS a direct connection to its
 backend systems, Deribit has created an AWS Endpoint Service for customers to
@@ -1616,7 +1616,7 @@ for you.
 
 # Deribit AWS Multicast Service Instruction
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 ## Introduction[](#heading-1)
 
