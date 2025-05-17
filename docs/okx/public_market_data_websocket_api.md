@@ -126,8 +126,8 @@ First concatenate `timestamp`, `method`, `requestPath`, strings, then use HMAC
 SHA256 method to encrypt the concatenated string with SecretKey, and then
 perform Base64 encoding.
 
-**secretKey**: The security key generated when the user applies for APIKey, e.g.
-: 22582BD0CFF14C41EDBF1AB98506286D
+**secretKey**: The security key generated when the user applies for API key,
+e.g. `22582BD0CFF14C41EDBF1AB98506286D`
 
 **Example of timestamp**: const timestamp = '' + Date.now() / 1,000
 
