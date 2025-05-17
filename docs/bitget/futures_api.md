@@ -1995,6 +1995,11 @@ Response
   latest reduce-only order request will not include an `orderId`. You can use
   the `clientOid` set in the request to query order details or retrieve the
   orderId from the current pending orders.
+- For elite traders, please strictly adhere to the list of trading pairs
+  specified in the
+  [Available trading pairs and parameters for elite traders](https://www.bitget.com/zh-CN/support/articles/12560603808895)
+  when placing orders using the Copy Trading API Key. Trading pairs outside the
+  announced list are not available for copy trading.
 
 #### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
