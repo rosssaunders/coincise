@@ -2,6 +2,10 @@
 
 ## Change Log
 
+2025-05-14
+
+- Public: New investigation questionnaire added.
+
 2025-04-25
 
 - Perpetual USDⓈ-M Futures: Order placement, cancellation, and query now support
