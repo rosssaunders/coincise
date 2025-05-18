@@ -13,6 +13,12 @@ depth of a Trading Pair.
 If you have any questions or feedback, you can join the
 [API issue Telegram group](https://t.me/+uSWmuaKA5sw2MzE1).
 
+BingX sincerely invites you to participate in the API function user survey and
+share your ideas so that we can better serve you and enhance your trading
+experience.
+
+[Fill in the questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSd0yjx5okwQG1D7tf4pBAcf4WbMW8zE-Ew01ardWGCwoIZoMg/viewform)
+
 > **Source:**
 > [original URL](https://bingx-api.github.io/docs/#/en-us/common/introduce)
 

@@ -1364,7 +1364,7 @@ This is a private method; it can only be used after authentication.
 
 # Rate Limits
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 Deribit uses a volume-tiered rate limit system, focusing primarily on matching
 engine requests. These rate limits are implemented to ensure the robustness of
@@ -1549,7 +1549,7 @@ quote_cancel
 
 # Connection Management
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 ## Connection[](#heading-1)
 
@@ -1704,7 +1704,7 @@ false, "post_only": false, "self_trade": false, "contracts": 2505,
 
 # API Usage Policy
 
-- Updated 1 month ago
+- Updated 2 months ago
 
 Deribit is committed to providing a fast, reliable, and efficient trading
 platform for all users. To maintain the integrity and performance of our system,

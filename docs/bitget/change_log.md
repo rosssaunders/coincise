@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### \[May 14, 2025\] New version: Order-taking staff API Key creation interface adds currency pair range description.[​](#may-14-2025-new-version-order-taking-staff-api-key-creation-interface-adds-currency-pair-range-description "Direct link to may-14-2025-new-version-order-taking-staff-api-key-creation-interface-adds-currency-pair-range-description")
+
+Interface：/api/v2/copy/mix-trader/create-copy-api  
+Changes：
+
+- New: Added description for order-taking currency pair range.
+
 ### \[May 09, 2025\] Obtain the adjustment of the input parameters for the current funding rate.[​](#may-09-2025-obtain-the-adjustment-of-the-input-parameters-for-the-current-funding-rate "Direct link to may-09-2025-obtain-the-adjustment-of-the-input-parameters-for-the-current-funding-rate")
 
 Interface：/api/v2/mix/market/current-fund-rate
@@ -72,8 +79,6 @@ Channel
 Changes：
 
 - Add to the push data `utime`
-
-### \[Apr 10, 2025\] Adjustment to virtual sub-account API key related endpoints[​](#apr-10-2025-adjustment-to-virtual-sub-account-api-key-related-endpoints "Direct link to apr-10-2025-adjustment-to-virtual-sub-account-api-key-related-endpoints")
 
 ### \[Apr 30,2025\] For the trading details of the WS futures, push fields are added to the spot/futures depth channels.[​](#apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels "Direct link to apr-302025-for-the-trading-details-of-the-ws-futures-push-fields-are-added-to-the-spotfutures-depth-channels")
 

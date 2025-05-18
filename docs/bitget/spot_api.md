@@ -550,7 +550,11 @@ Rate limit: 1 request/second/UID for **copy trading traders**
 
 #### Description[​](#description "Direct link to Description")
 
-Place Order
+- For elite traders, please strictly adhere to the list of trading pairs
+  specified in the
+  [Available trading pairs and parameters for elite traders](https://www.bitget.com/zh-CN/support/articles/12560603808895)
+  when placing orders using the Copy Trading API Key. Trading pairs outside the
+  announced list are not available for copy trading.
 
 #### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
@@ -2457,7 +2461,7 @@ Frequency limit:10 times/1s (UID)
 
 #### Description[​](#description "Direct link to Description")
 
-Get Deposit Records(Not include Fiat deposit record)
+Get Deposit Records
 
 #### HTTP Request[​](#http-request "Direct link to HTTP Request")
 

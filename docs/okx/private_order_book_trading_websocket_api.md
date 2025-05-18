@@ -126,8 +126,8 @@ First concatenate `timestamp`, `method`, `requestPath`, strings, then use HMAC
 SHA256 method to encrypt the concatenated string with SecretKey, and then
 perform Base64 encoding.
 
-**secretKey**: The security key generated when the user applies for APIKey, e.g.
-: 22582BD0CFF14C41EDBF1AB98506286D
+**secretKey**: The security key generated when the user applies for API key,
+e.g. `22582BD0CFF14C41EDBF1AB98506286D`
 
 **Example of timestamp**: const timestamp = '' + Date.now() / 1,000
 
@@ -261,12 +261,8 @@ Error Code from 60000 to 64002
 | 60014      | Requests too frequent                                                                                                                                                                                                                                            |
 | 60018      | Wrong URL or {0} doesn't exist. Please use the correct URL, channel and parameters referring to API document.                                                                                                                                                    |
 | 60019      | Invalid op: {op}                                                                                                                                                                                                                                                 |
-| 60020      | APIKey subscription amount exceeds the limit {0}.                                                                                                                                                                                                                |
-| 60021      | This operation does not support multiple accounts login.                                                                                                                                                                                                         |
-| 60022      | Bulk login partially succeeded                                                                                                                                                                                                                                   |
 | 60023      | Bulk login requests too frequent                                                                                                                                                                                                                                 |
 | 60024      | Wrong passphrase                                                                                                                                                                                                                                                 |
-| 60025      | token subscription amount exceeds the limit {0}                                                                                                                                                                                                                  |
 | 60026      | Batch login by APIKey and token simultaneously is not supported.                                                                                                                                                                                                 |
 | 60027      | Parameter {0} can not be empty.                                                                                                                                                                                                                                  |
 | 60028      | The current operation is not supported by this URL. Please use the correct WebSocket URL for the operation.                                                                                                                                                      |
@@ -279,6 +275,9 @@ Error Code from 60000 to 64002
 | 64001      | This channel has been migrated to the '/business' URL. Please subscribe using the new URL. More details can refer to: https://www.okx.com/help-center/changes-to-v5-api-websocket-subscription-parameter-and-url.                                                |
 | 64002      | This channel is not supported by "/business" URL. Please use "/private" URL(for private channels), or "/public" URL(for public channels). More details can refer to: https://www.okx.com/help-center/changes-to-v5-api-websocket-subscription-parameter-and-url. |
 | 64003      | Your trading fee tier doesn't meet the requirement to access this channel                                                                                                                                                                                        |
+| 64004      | Subscribe to both {channelName} and books-l2-tbt for {instId} is not allowed. Unsubscribe books-l2-tbt first.                                                                                                                                                    |
+| 64007      | Operation {0} failed due to WebSocket internal error. Please try again later.                                                                                                                                                                                    |
+| 64008      | The connection will soon be closed for a service upgrade. Please reconnect.                                                                                                                                                                                      |
 
 #### Close Frame
 
