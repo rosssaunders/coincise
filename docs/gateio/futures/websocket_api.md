@@ -24,7 +24,7 @@ Base URLs:
 Base URLs:
 
 - Real Trading: `wss://fx-ws.gateio.ws/v4/ws/usdt`
-- TestNet: `wss://fx-ws-testnet.gateio.ws/v4/ws/usdt`
+- TestNet: `wss://ws-testnet.gate.io/v4/ws/futures/usdt`
 
 WARNING
 
@@ -5222,11 +5222,11 @@ Error object has the following format:
 
 Explanation of rate limit-related error codes:
 
-| Code  | Description                            |
-| ----- | -------------------------------------- |
-| `100` | Internal rate limiting exception error |
-| `311` | Contract rate limit                    |
-| `312` | Contract engine rate limit             |
+| Code  | Description                              |
+| ----- | ---------------------------------------- |
+| `100` | Internal rate limiting exception error   |
+| `311` | Futures rate limit                       |
+| `312` | Futures rate limiting based on fill rate |
 
 ## [#](#login) Login
 
@@ -7267,4 +7267,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                             |
 | »»`message`      | String  | Detailed error message                                                                                          |
 
-Last Updated: 5/6/2025, 9:20:49 AM
+Last Updated: 5/13/2025, 8:40:28 AM

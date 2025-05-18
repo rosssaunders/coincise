@@ -221,7 +221,8 @@ the examples with the tabs in the top right.
 
 Base URLs:
 
-- `wss://api.gateio.ws/ws/v4/`
+- Real Trading: `wss://api.gateio.ws/ws/v4/`
+- TestNet: `wss://ws-testnet.gate.io/v4/ws/spot`
 
 ### [#](#sdk) SDK
 
@@ -3670,7 +3671,7 @@ Explanation of rate limit-related error codes:
 | ----- | -------------------------------------- |
 | `100` | Internal rate limiting exception error |
 | `211` | Spot trading rate limit                |
-| `212` | Spot trading engine rate limit         |
+| `212` | Spot rate limiting based on fill rate  |
 
 ## [#](#login) Login
 
@@ -5882,4 +5883,4 @@ Result format:
 | »»`label`        | String  | denotes error type in string format                                                               |
 | »»`message`      | String  | detailed error message                                                                            |
 
-Last Updated: 5/8/2025, 8:36:05 AM
+Last Updated: 5/13/2025, 8:40:28 AM
