@@ -40,7 +40,7 @@ function processSectionHtml(document, section, turndownService) {
 
   // Find the section based on the heading id
   const heading = document.querySelector(
-    `div.content-block h1[id="${section}"]`
+    `div.content-block h1[id^="${section}"]`
   )
   if (!heading) {
     throw new Error(`Section not found: ${section}`)
