@@ -1,0 +1,17 @@
+{
+  "name": "upbit-monitor",
+  "version": "1.0.0",
+  "description": "Upbit API documentation monitor",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "format": "node -e \"import('../../shared/format-markdown.js').then(({formatMarkdown}) => formatMarkdown('../../docs/upbit/change_log.md'))\""
+  },
+  "dependencies": {
+    "jsdom": "^22.1.0",
+    "node-fetch": "^3.3.2",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}
