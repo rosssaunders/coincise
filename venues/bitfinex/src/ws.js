@@ -59,24 +59,13 @@ const fetchContent = async url => {
     }
 
     return content
-  } catch (error) {
-    console.error(`Error fetching content from ${url}:`, error)
-    throw error // Re-throw the error to be handled by the caller
   } finally {
-    try {
-      if (page) {
-        await page.close()
-      }
-    } catch (error) {
-      console.error("Error closing page:", error)
+    if (page) {
+      await page.close()
     }
 
-    try {
-      if (browser) {
-        await browser.close()
-      }
-    } catch (error) {
-      console.error("Error closing browser:", error)
+    if (browser) {
+      await browser.close()
     }
   }
 }
@@ -156,111 +145,96 @@ const extractLinks = htmlContent => {
 const processUrl = async (url, baseUrl, turndownService) => {
   const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`
 
-  try {
-    const content = await fetchContent(fullUrl)
+  const content = await fetchContent(fullUrl)
 
-    // Extract main content
-    const { document } = new JSDOM(content).window
-    const mainContent = document.querySelector(".content-body") || document.body
+  // Extract main content
+  const { document } = new JSDOM(content).window
+  const mainContent = document.querySelector(".content-body") || document.body
 
-    if (!mainContent) {
-      throw new Error(`No main content found on ${fullUrl}`)
-    }
-
-    // Convert HTML to Markdown
-    return turndownService.turndown(mainContent.innerHTML)
-  } catch (error) {
-    console.error(`Failed to process URL ${fullUrl}:`, error)
-    throw error // Re-throw to be handled by the main function
+  if (!mainContent) {
+    throw new Error(`No main content found on ${fullUrl}`)
   }
+
+  // Convert HTML to Markdown
+  return turndownService.turndown(mainContent.innerHTML)
 }
 
 /**
  * Main function to extract WebSocket documentation
  */
 const main = async () => {
-  try {
-    // Configure Turndown
-    const turndownService = configureTurndown()
+  // Configure Turndown
+  const turndownService = configureTurndown()
 
-    let markdown = `# ${config.title}\n\n`
+  let markdown = `# ${config.title}\n\n`
 
-    // Process each URL in the configuration
-    for (const url of config.urls) {
-      console.log(`Processing URL: ${url}`)
+  // Process each URL in the configuration
+  for (const url of config.urls) {
+    console.log(`Processing URL: ${url}`)
 
-      // Fetch content from the URL
-      const content = await fetchContent(url)
-      if (!content) {
-        console.error(`Failed to fetch content from ${url}`)
-        process.exit(1)
-      }
-
-      // Extract the main content
-      const { document } = new JSDOM(content).window
-      const mainContent =
-        document.querySelector(".content-body") || document.body
-
-      // Convert to markdown and add to the output
-      const pageMarkdown = turndownService.turndown(mainContent.innerHTML)
-      markdown += `${pageMarkdown}\n\n---\n\n`
-
-      // If this is the main page with links to other pages, extract and process those links
-      if (url === config.mainDocsUrl) {
-        const links = extractLinks(content)
-        if (links.length === 0) {
-          console.error("No links found in the main documentation page")
-          process.exit(1)
-        }
-
-        // Process each linked page
-        for (const link of links) {
-          console.log(`Processing endpoint: ${link.title}`)
-
-          const endpointMarkdown = await processUrl(
-            link.url,
-            config.baseUrl,
-            turndownService
-          )
-          if (!endpointMarkdown) {
-            console.error(`Failed to process endpoint: ${link.title}`)
-            process.exit(1)
-          }
-          markdown += `## ${link.title}\n\n${endpointMarkdown}\n\n---\n\n`
-        }
-      }
-    }
-
-    // Ensure output directory exists
-    const outputDir = path.dirname(path.join(__dirname, config.output))
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true })
-    }
-
-    // Write the markdown file
-    const outputPath = path.join(__dirname, config.output)
-    fs.writeFileSync(outputPath, markdown)
-
-    // Format the markdown file
-    try {
-      await formatMarkdown(outputPath)
-      console.log(`Formatted: ${outputPath}`)
-    } catch (err) {
-      console.error(`Error formatting markdown:`, err)
+    // Fetch content from the URL
+    const content = await fetchContent(url)
+    if (!content) {
+      console.error(`Failed to fetch content from ${url}`)
       process.exit(1)
     }
 
-    console.log(
-      `Successfully extracted WebSocket documentation to ${config.output}`
-    )
-  } catch (error) {
-    console.error("Error extracting WebSocket documentation:", error)
-    process.exit(1)
+    // Extract the main content
+    const { document } = new JSDOM(content).window
+    const mainContent = document.querySelector(".content-body") || document.body
+
+    // Convert to markdown and add to the output
+    const pageMarkdown = turndownService.turndown(mainContent.innerHTML)
+    markdown += `${pageMarkdown}\n\n---\n\n`
+
+    // If this is the main page with links to other pages, extract and process those links
+    if (url === config.mainDocsUrl) {
+      const links = extractLinks(content)
+      if (links.length === 0) {
+        console.error("No links found in the main documentation page")
+        process.exit(1)
+      }
+
+      // Process each linked page
+      for (const link of links) {
+        console.log(`Processing endpoint: ${link.title}`)
+
+        const endpointMarkdown = await processUrl(
+          link.url,
+          config.baseUrl,
+          turndownService
+        )
+        if (!endpointMarkdown) {
+          console.error(`Failed to process endpoint: ${link.title}`)
+          process.exit(1)
+        }
+        markdown += `## ${link.title}\n\n${endpointMarkdown}\n\n---\n\n`
+      }
+    }
   }
+
+  // Ensure output directory exists
+  const outputDir = path.dirname(path.join(__dirname, config.output))
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true })
+  }
+
+  // Write the markdown file
+  const outputPath = path.join(__dirname, config.output)
+  fs.writeFileSync(outputPath, markdown)
+
+  // Format the markdown file
+  await formatMarkdown(outputPath)
+  console.log(`Formatted: ${outputPath}`)
+
+  console.log(
+    `Successfully extracted WebSocket documentation to ${config.output}`
+  )
 }
 
 // Execute the main function
 main().catch(error => {
   console.error("Fatal error:", error)
+  console.error("Stack trace:", error.stack)
   process.exit(1)
 })

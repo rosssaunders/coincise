@@ -1,31 +1,89 @@
 # Upbit API Change Log
 
-## 2023-10-17
+added
 
-### Bug Fix
+# [\[Notice\] Addition of 'Candle Data' Minute Intervals to WebSocket](/changelog/websocket_candles_miniutes)
 
-Fixed stability issues with the market data API endpoints.
+9 days ago by Upbit Developer Center
 
-## 2023-09-15
+`# WEBSOCKET` `#CANDLE` `#MinuteInterval`
 
-### New Features
+added
 
-Added new endpoints for retrieving historical price data:
+# [\[Notice\] Addition of 'Cancel Digital Asset Withdrawal'](/changelog/cancel-digital-asset-withdrawal)
 
-- `/v1/candles/days`
-- `/v1/candles/weeks`
-- `/v1/candles/months`
+29 days ago by Upbit Developer Center
 
-### Improvements
+`#NEW` `#Cancel Digital Asset Withdrawal`
 
-- Improved error handling for API authentication failures
-- Enhanced rate limiting to provide better feedback
+improved
 
-## 2023-08-22
+# [\[Important\] 30-Level Order Book and Stop-Limit Order Policy Update](/changelog/orderbook_expansion)
 
-### API Changes
+30 days ago by Upbit Developer Center
 
-- Modified response format for `/v1/market/all` endpoint
-- Added new fields to order response objects
+`#Policy` `#30-Level` `#orderbook expansion`
+
+# [\[Important\] Binance/BitGet Allowlisted Withdrawal Wallet Address deleted and re-registration required (2/25 23:00 SGT ~)](/changelog/vasp_uuid_change_action_needed)
+
+3 months ago by Upbit Developer Center
+
+Dear Traders,
+
+We are informing you about changes to the Open API and the scheduled
+implementation timeline.
+
+(※ Upbit Singapore Only)
+
+# [\[Important\] Notice of UUID Change for Binance/Bitget deposit Verification (2/25 22:30 SGT estimated)](/changelog/vasp_uuid_change)
+
+3 months ago by Upbit Developer Center
+
+Dear Traders,
+
+We are informing you about changes to the Open API and the scheduled
+implementation timeline.
+
+added
+
+# [Addition of 'Cancel And New Order'](/changelog/cancel_and_new_oreder)
+
+3 months ago by Upbit Developer Center
+
+Dear Traders,
+
+added
+
+# [WebSocket 'Candle' Feature Added](/changelog/websocket_candle)
+
+4 months ago by Upbit Developer Center
+
+Dear Traders,
+
+# [\[Notice\] Scheduled Server Maintenance(Upbit Sigapore, Upbit Indonesia, Upbit Thailand)](/changelog/notice-scheduled-server-maintenance)
+
+5 months ago by Upbit Developer Center
+
+Dear Traders,
+
+improved
+
+# [Support for Timestamp Format in Closed Orders (/v1/orders/closed)](/changelog/closed_order_support_timestamp)
+
+5 months ago by Upbit Developer Center
+
+Dear Traders,
+
+added
+
+# [Addition of Batch Order Cancel, Order List Cancel features](/changelog/new_delete_orders)
+
+5 months ago by Upbit Developer Center
+
+Dear Traders,
+
+1 of 5[
+
+](/changelog?page=2)
 
 > **Source:** [Upbit Changelog](https://global-docs.upbit.com/changelog)

@@ -48,9 +48,6 @@ const fetchMainDocContent = async url => {
     })
 
     return content
-  } catch (error) {
-    console.error(`Error fetching main doc from ${url}:`, error)
-    throw error
   } finally {
     await browser.close()
   }
@@ -189,9 +186,6 @@ const fetchEndpointContent = async (url, baseUrl) => {
     }
 
     return content
-  } catch (error) {
-    console.error(`Error fetching ${fullUrl}:`, error)
-    throw error // Re-throw the error to be handled by the caller
   } finally {
     if (page) {
       await page.close().catch(console.error)
@@ -212,19 +206,14 @@ const fetchEndpointContent = async (url, baseUrl) => {
 const processEndpoint = async (endpoint, baseUrl, turndownService) => {
   console.log(`Processing endpoint: ${endpoint.title}`)
 
-  try {
-    const content = await fetchEndpointContent(endpoint.url, baseUrl)
+  const content = await fetchEndpointContent(endpoint.url, baseUrl)
 
-    // Convert HTML to Markdown
-    const markdown = turndownService.turndown(content)
+  // Convert HTML to Markdown
+  const markdown = turndownService.turndown(content)
 
-    return {
-      ...endpoint,
-      markdown
-    }
-  } catch (error) {
-    console.error(`Failed to process endpoint ${endpoint.title}:`, error)
-    throw error // Re-throw to be handled by the main function
+  return {
+    ...endpoint,
+    markdown
   }
 }
 
@@ -232,93 +221,76 @@ const processEndpoint = async (endpoint, baseUrl, turndownService) => {
  * Main function to extract endpoints and generate markdown
  */
 const main = async () => {
-  try {
-    // Determine the URL to fetch from
-    const docUrl = config.docUrl || "https://docs.bitfinex.com/docs/rest-auth"
+  // Determine the URL to fetch from
+  const docUrl = config.docUrl || "https://docs.bitfinex.com/docs/rest-auth"
 
-    // Fetch HTML content from the URL instead of reading local file
-    const htmlContent = await fetchMainDocContent(docUrl)
-    if (!htmlContent) {
-      console.error("Failed to fetch main documentation content")
-      process.exit(1)
-    }
-
-    // Extract endpoints by section
-    const sections = extractEndpointsBySection(htmlContent)
-    if (Object.keys(sections).length === 0) {
-      console.error("No sections found in the documentation")
-      process.exit(1)
-    }
-
-    // Configure Turndown
-    const turndownService = configureTurndown()
-
-    // Generate markdown for URL and Authentication sections
-    const { document } = new JSDOM(htmlContent).window
-    const urlSection =
-      document.querySelector("#url")?.parentElement.nextElementSibling
-    const authSection =
-      document.querySelector("#authentication")?.parentElement
-        .nextElementSibling
-
-    let markdown = `# ${config.title}\n\n`
-
-    // Add URL information
-    if (urlSection) {
-      markdown += `## URL\n\n${turndownService.turndown(urlSection.outerHTML)}\n\n`
-    } else {
-      markdown += `## URL\n\nAuthenticated endpoints should use the following domain: \`https://api.bitfinex.com\`.\n\n`
-    }
-
-    // Add Authentication information
-    if (authSection) {
-      markdown += `## Authentication\n\n${turndownService.turndown(authSection.outerHTML)}\n\n`
-    } else {
-      markdown += `## Authentication\n\nAuthenticated endpoints require users to sign their requests using a pair of API-KEY and API-SECRET.\n\n`
-    }
-
-    // Process each section and its endpoints
-    for (const [sectionName, endpoints] of Object.entries(sections)) {
-      console.log(
-        `Processing section: ${sectionName} (${endpoints.length} endpoints)`
-      )
-
-      markdown += `## ${sectionName}\n\n`
-
-      // Process each endpoint in the section
-      for (const endpoint of endpoints) {
-        try {
-          const processedEndpoint = await processEndpoint(
-            endpoint,
-            config.baseUrl,
-            turndownService
-          )
-          markdown += `### ${processedEndpoint.title}\n\n${processedEndpoint.markdown}\n\n`
-        } catch (error) {
-          console.error(`Failed to process endpoint ${endpoint.title}:`, error)
-          // Continue with next endpoint even if one fails
-          continue
-        }
-      }
-    }
-
-    // Write the markdown to a file
-    const outputPath = path.join(__dirname, "../output.md")
-    fs.writeFileSync(outputPath, markdown)
-    console.log(`Documentation written to ${outputPath}`)
-
-    // Format the markdown file
-    try {
-      await formatMarkdown(outputPath)
-      console.log(`Formatted: ${outputPath}`)
-    } catch (err) {
-      console.error(`Error formatting markdown:`, err)
-      process.exit(1)
-    }
-  } catch (error) {
-    console.error("Error in main function:", error)
+  // Fetch HTML content from the URL instead of reading local file
+  const htmlContent = await fetchMainDocContent(docUrl)
+  if (!htmlContent) {
+    console.error("Failed to fetch main documentation content")
     process.exit(1)
   }
+
+  // Extract endpoints by section
+  const sections = extractEndpointsBySection(htmlContent)
+  if (Object.keys(sections).length === 0) {
+    console.error("No sections found in the documentation")
+    process.exit(1)
+  }
+
+  // Configure Turndown
+  const turndownService = configureTurndown()
+
+  // Generate markdown for URL and Authentication sections
+  const { document } = new JSDOM(htmlContent).window
+  const urlSection =
+    document.querySelector("#url")?.parentElement.nextElementSibling
+  const authSection =
+    document.querySelector("#authentication")?.parentElement.nextElementSibling
+
+  let markdown = `# ${config.title}\n\n`
+
+  // Add URL information
+  if (urlSection) {
+    markdown += `## URL\n\n${turndownService.turndown(urlSection.outerHTML)}\n\n`
+  } else {
+    markdown += `## URL\n\nAuthenticated endpoints should use the following domain: \`https://api.bitfinex.com\`.\n\n`
+  }
+
+  // Add Authentication information
+  if (authSection) {
+    markdown += `## Authentication\n\n${turndownService.turndown(authSection.outerHTML)}\n\n`
+  } else {
+    markdown += `## Authentication\n\nAuthenticated endpoints require users to sign their requests using a pair of API-KEY and API-SECRET.\n\n`
+  }
+
+  // Process each section and its endpoints
+  for (const [sectionName, endpoints] of Object.entries(sections)) {
+    console.log(
+      `Processing section: ${sectionName} (${endpoints.length} endpoints)`
+    )
+
+    markdown += `## ${sectionName}\n\n`
+
+    // Process each endpoint in the section
+    for (const endpoint of endpoints) {
+      const processedEndpoint = await processEndpoint(
+        endpoint,
+        config.baseUrl,
+        turndownService
+      )
+      markdown += `### ${processedEndpoint.title}\n\n${processedEndpoint.markdown}\n\n`
+    }
+  }
+
+  // Write the markdown to a file
+  const outputPath = path.join(__dirname, "../output.md")
+  fs.writeFileSync(outputPath, markdown)
+  console.log(`Documentation written to ${outputPath}`)
+
+  // Format the markdown file
+  await formatMarkdown(outputPath)
+  console.log(`Formatted: ${outputPath}`)
 }
 
 // Only run main() if this is the main module
