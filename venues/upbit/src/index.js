@@ -4,10 +4,10 @@ import fs from "fs"
 import { JSDOM } from "jsdom"
 import TurndownService from "turndown"
 import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
-import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
 import path from "path"
 import { fileURLToPath } from "url"
+import fetch from "node-fetch"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -50,58 +50,48 @@ function convertToMarkdown(html) {
 /**
  * Fetch the HTML content of the Upbit changelog page
  * @param {string} url - URL of the Upbit changelog
- * @param {object} browser - Puppeteer browser instance
  * @returns {Promise<string>} - HTML content of the page
  */
-async function getChangelogHTML(url, browser) {
+async function getChangelogHTML(url) {
   console.log(`🌐 Fetching content from: ${url}`)
-  const page = await browser.newPage()
-  await configurePage(page)
-  
-  // Set a normal browser user-agent
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-  )
   
   try {
-    await page.goto(url, {
-      waitUntil: "networkidle2",
-      timeout: 30000
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
+      }
     })
     
-    // Wait for the main content to load
-    await page.waitForSelector("main", { timeout: 10000 })
-    
-    // Extract the HTML content
-    const html = await page.evaluate(() => {
-      // Target the main content area which contains the changelog
-      const mainContent = document.querySelector("main")
-      return mainContent ? mainContent.innerHTML : document.body.innerHTML
-    })
-    
-    if (!html || html.trim() === "") {
-      throw new Error(`Failed to extract content from ${url}`)
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`)
     }
     
-    return html
+    const html = await response.text()
+    
+    if (!html || html.trim() === "") {
+      throw new Error(`Empty content received from ${url}`)
+    }
+    
+    // Use JSDOM to extract the main content
+    const dom = new JSDOM(html)
+    const mainContent = dom.window.document.querySelector("main")
+    
+    if (!mainContent) {
+      console.warn("Main content not found, using body instead")
+      return dom.window.document.body.innerHTML
+    }
+    
+    return mainContent.innerHTML
   } catch (error) {
     console.error(`Error fetching content from ${url}:`, error)
     throw error
-  } finally {
-    await page.close()
   }
 }
 
 async function main() {
-  let browser
-
   try {
     // Get configuration
     const { urls, outputConfig, title } = getConfig()
-    
-    // Initialize browser
-    browser = await launchBrowser()
-    console.log("🌐 Browser launched successfully")
     
     // Create docs directory if it doesn't exist
     const { docsDir, outputFileName } = outputConfig
@@ -125,10 +115,10 @@ async function main() {
       const startTime = Date.now()
       
       // Fetch and process HTML content
-      const html = await getChangelogHTML(url, browser)
+      const html = await getChangelogHTML(url)
       
       // Create DOM from HTML to process content
-      const dom = new JSDOM(html)
+      const dom = new JSDOM(`<div>${html}</div>`)
       
       // Convert HTML to Markdown
       const markdown = convertToMarkdown(dom.window.document.body.innerHTML)
@@ -152,12 +142,6 @@ async function main() {
   } catch (error) {
     console.error("❌ Error in main process:", error)
     process.exit(1)
-  } finally {
-    // Clean up browser
-    if (browser) {
-      await browser.close()
-      console.log("🌐 Browser closed")
-    }
   }
 }
 

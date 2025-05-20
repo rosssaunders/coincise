@@ -7,11 +7,12 @@
     "format": "prettier --write \"**/*.js\""
   },
   "dependencies": {
-    "jsdom": "^26.0.0",
-    "puppeteer": "24.7.2",
-    "turndown": "^7.1.2",
-    "turndown-plugin-gfm": "^1.0.2",
-    "json5": "^2.2.3"
+    "jsdom": "^26.1.0",
+    "json5": "^2.2.3",
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^24.7.2",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "type": "module",
   "devDependencies": {
