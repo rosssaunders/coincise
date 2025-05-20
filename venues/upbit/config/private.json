@@ -1,0 +1,8 @@
+{
+  "urls": ["https://global-docs.upbit.com/changelog"],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "outputFileName": "change_log.md"
+  },
+  "title": "Upbit API Change Log"
+}
