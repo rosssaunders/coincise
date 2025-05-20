@@ -1,50 +1,54 @@
 "use strict"
 
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import { dirname } from "path"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+/**
+ * Read and parse a JSON config file
+ *
+ * @param {string} configPath - Path to the JSON config file
+ * @returns {Object} The parsed config object
+ */
+const readConfig = (configPath) => {
+  try {
+    const configContent = fs.readFileSync(configPath, "utf8")
+    return JSON.parse(configContent)
+  } catch (error) {
+    console.error(`Error reading config file ${configPath}:`, error.message)
+    process.exit(1)
+  }
+}
+
+/**
+ * Get config file path from command-line arguments or use default
+ *
+ * @param {string[]} args - Command-line arguments
+ * @returns {string} Path to the config file
+ */
+export const parseConfigPath = (args) => {
+  let configPath = path.resolve(__dirname, "../config/config.json")
+
+  for (let i = 0; i < args.length; i++) {
+    if ((args[i] === "-c" || args[i] === "--config") && i + 1 < args.length) {
+      configPath = args[i + 1]
+      // If the path is not absolute, make it relative to the current directory
+      if (!path.isAbsolute(configPath)) {
+        configPath = path.resolve(process.cwd(), configPath)
+      }
+      break
+    }
+  }
+
+  return configPath
+}
+
 /**
  * Configuration for the KuCoin API documentation extraction
+ * Loads from a JSON config file, with optional path specified via command-line arguments
  */
-export const config = {
-  // Base URL for the raw content from GitHub
-  baseGithubUrl:
-    "https://raw.githubusercontent.com/Kucoin/kucoin-universal-sdk/main",
-
-  // URLs for the API specification JSON files to download
-  apiSpecUrls: {
-    rest: {
-      spot: [
-        "/spec/rest/api/openapi-spot-market.json",
-        "/spec/rest/api/openapi-spot-order.json"
-      ],
-      futures: [
-        "/spec/rest/api/openapi-futures-market.json",
-        "/spec/rest/api/openapi-futures-order.json",
-        "/spec/rest/api/openapi-futures-positions.json",
-        "/spec/rest/api/openapi-futures-fundingfees.json"
-      ],
-      margin: [
-        "/spec/rest/api/openapi-margin-market.json",
-        "/spec/rest/api/openapi-margin-order.json",
-        "/spec/rest/api/openapi-margin-credit.json",
-        "/spec/rest/api/openapi-margin-debit.json",
-        "/spec/rest/api/openapi-margin-risklimit.json"
-      ]
-    },
-    ws: {
-      spot: [
-        "/spec/ws/openapi-spot-public.json",
-        "/spec/ws/openapi-spot-private.json"
-      ],
-      futures: [
-        "/spec/ws/openapi-futures-public.json",
-        "/spec/ws/openapi-futures-private.json"
-      ],
-      margin: [
-        "/spec/ws/openapi-margin-public.json",
-        "/spec/ws/openapi-margin-private.json"
-      ]
-    }
-  },
-
-  // Output directory for the generated Markdown files
-  outputDir: "../../docs/kucoin"
-}
+export const config = readConfig(parseConfigPath(process.argv))
