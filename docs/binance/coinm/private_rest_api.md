@@ -1202,7 +1202,6 @@ PUT `/dapi/v1/order`
 >   - When the order is `GTX` and the new price will cause it to be executed
 >     immediately
 > - One order can only be modfied for less than 10000 times
-> - Modify order will set `selfTradePreventionMode` to `NONE`
 
 ### Response Example
 
