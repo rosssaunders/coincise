@@ -1894,7 +1894,6 @@ limit(X-MBX-ORDER-COUNT-1M); 1 on IP rate limit(x-mbx-used-weight-1m)
 >   - When the order is `GTX` and the new price will cause it to be executed
 >     immediately
 > - One order can only be modfied for less than 10000 times
-> - Modify order will set `selfTradePreventionMode` to `NONE`
 
 ### Response Example
 
