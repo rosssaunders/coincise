@@ -1,7 +1,7 @@
-# [#](#gate-io-unified-websocket) Gate.io Unified WebSocket
+# [#](#gate-unified-websocket) Gate Unified WebSocket
 
-Gate.io provides a simple and robust Websocket API to integrate gate.io unified
-trade status into your business or application.
+Gate provides a simple and robust Websocket API to integrate Gate unified trade
+status into your business or application.
 
 We have language bindings in `Python`, more in the future! You can view code
 examples in the dark area to the right, and you can switch the programming
@@ -110,9 +110,9 @@ You can log into the console to retrieve futures API key and secret.
 
 **Check Server/Client connectivity.**
 
-**gate.io unified use the protocol layer ping/pong message.The server will
-initiate a ping message actively. If the client does not reply, the client will
-be disconnected.**
+**Gate unified use the protocol layer ping/pong message.The server will initiate
+a ping message actively. If the client does not reply, the client will be
+disconnected.**
 
 [websocket rfc (opens new window)](https://tools.ietf.org/html/rfc6455)
 
@@ -474,4 +474,4 @@ The above command returns JSON structured like this:
 
   `unsubscribe`
 
-Last Updated: 2/10/2025, 3:36:25 AM
+Last Updated: 5/19/2025, 3:42:48 AM

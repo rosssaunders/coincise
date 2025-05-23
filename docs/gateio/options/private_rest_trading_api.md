@@ -1,9 +1,9 @@
-# [#](#gate-api-v4-v4-97-2) Gate API v4 v4.97.2
+# [#](#gate-api-v4-v4-97-4) Gate API v4 v4.97.4
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate.io API
+Welcome to Gate API
 
 APIv4 provides spot, margin and futures trading operations. There are public
 APIs to retrieve the real-time market statistics, and private APIs which needs
@@ -14,7 +14,7 @@ authentication to trade on user's behalf.
 **REST API BaseURL:**
 
 - Live trading: `https://api.gateio.ws/api/v4`
-- Futures TestNet trading: `https://fx-api-testnet.gateio.ws/api/v4`
+- TestNet trading: `https://api-testnet.gateapi.io/api/v4`
 - Futures live trading alternative (futures only):
   `https://fx-api.gateio.ws/api/v4`
 
@@ -83,7 +83,7 @@ provide a professional market maker's service rate scheme for professional
 institutional market makers according to their contribution to the platform's
 liquidity.
 
-1.  Provide Gateio UID
+1.  Provide Gate UID
 2.  Provide other transaction volume screenshot or VIP level
 3.  Brief introduction of market making method and scale
 
@@ -109,7 +109,7 @@ If you encounter API errors, it is recommended that you sort out the following
 content, so that we can quickly analyze the problem for you:
 
 1.  Problem Description
-2.  Gateio UID
+2.  Gate UID
 3.  Request URI and parameters
 4.  Error Code
 5.  Responses
@@ -126,7 +126,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 ### [#](#matching-priority) Matching priority
 
-Gate.io Order matching follows Price Priority > Time priority principle.
+Gate Order matching follows Price Priority > Time priority principle.
 
 Suppose that the order book is as follows：
 
@@ -150,7 +150,7 @@ subsequent filling or being cancelled.
 
 ## [#](#data-center) Data Center
 
-Gate.io data center is located in AWS Japan's ap-northeast-1 region.
+Gate data center is located in AWS Japan's ap-northeast-1 region.
 
 ## [#](#api-overview) API Overview
 
@@ -589,8 +589,8 @@ TIP
 The Portfolio Margin Account is no longer maintained, please refer to the new
 version of the [Unified Account](#unified-account)
 
-Since version `4.25.0`, we start supporting portfolio margin account. Gate.io's
-Portfolio Margin Account is a new feature of Gate.io's trading system. Its main
+Since version `4.25.0`, we start supporting portfolio margin account. Gate's
+Portfolio Margin Account is a new feature of Gate's trading system. Its main
 function is to break the capital isolation between cross-margin leverage account
 and USD cross-margin perpetual contract account inside a Classic Account and
 achieve the multi-currency margin sharing among multi-product lines. Thanks to
@@ -1471,7 +1471,7 @@ directly.
 - 3205 : Futures Copy Trading - Performance Fee Paid
 - 3206 : Futures Copy Trading - Performance Fee Refund
 - 3301 : Affiliate Ultra Direct Superior Rebate Income
-- 3302 : Gate.TR&Gate.io Transfer
+- 3302 : Gate.TR&Gate Transfer
 - 3321 : Affiliate Ultra Indirect Superior Rebate Income
 - 3341 : Affiliate Ultra User Rebate Income
 - 3390 : API Broker Rebate Income

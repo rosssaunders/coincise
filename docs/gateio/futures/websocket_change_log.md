@@ -1,5 +1,10 @@
 ## [#](#changelog) Changelog
 
+2025-05-22
+
+- Added documentation for the Order Book V2 API
+- Added a new field `full` to `futures.order_book_update`
+
 2025-04-25
 
 - Futures Account Trade has added a new `futures.order_cancel_ids` channel.
