@@ -133,6 +133,34 @@ change this behavior.
 - `ONLY_ACKS(2)`: Receive only ACK messages whether operation succeeded or
   failed. Disables ExecutionReport push.
 
+#### Timing Security
+
+- All requests require a `SendingTime(52)` field which should be the current
+  timestamp.
+- An additional optional field, `RecvWindow(25000)`, specifies for how long the
+  request stays valid in milliseconds.
+- If `RecvWindow(25000)` is not specified, it defaults to 5000 milliseconds only
+  for the Logon`<A>` request. For other requests if unset, the RecvWindow check
+  is not executed.
+  - Maximum `RecvWindow(25000)` is 60000 milliseconds.
+- Request processing logic is as follows:
+
+```javascript
+serverTime = getCurrentTime()
+if (SendingTime < (serverTime + 1 second) && (serverTime - SendingTime) <= RecvWindow) {
+  // begin processing request
+  serverTime = getCurrentTime()
+  if (serverTime - SendingTime) <= RecvWindow {
+    // forward request to Matching Engine
+  } else {
+    // reject request
+  }
+  // finish processing request
+} else {
+  // reject request
+}
+```
+
 #### How to sign Logon`<A>` request
 
 The [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) message
