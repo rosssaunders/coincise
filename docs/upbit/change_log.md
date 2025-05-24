@@ -12,7 +12,7 @@ added
 
 # [\[Notice\] Addition of 'Cancel Digital Asset Withdrawal'](/changelog/cancel-digital-asset-withdrawal)
 
-29 days ago by Upbit Developer Center
+30 days ago by Upbit Developer Center
 
 `#NEW` `#Cancel Digital Asset Withdrawal`
 
