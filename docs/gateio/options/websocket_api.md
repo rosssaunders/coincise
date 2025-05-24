@@ -1,6 +1,6 @@
-# [#](#gate-io-options-websocket-v4) Gate.io Options WebSocket v4
+# [#](#gate-options-websocket-v4) Gate Options WebSocket v4
 
-Gate.io provides a simple and robust Websocket API to integrate gate.io options
+Gate provides a simple and robust Websocket API to integrate Gate options
 underlying trade status into your business or application.
 
 We have language bindings in `Python`, more in the future! You can view code
@@ -369,8 +369,8 @@ Result format:
 
 `options.trades`
 
-This channel sends a trade message whenever a trade occurs at gate.io. It
-includes details of the trade, such as price, amount, time.
+This channel sends a trade message whenever a trade occurs at Gate. It includes
+details of the trade, such as price, amount, time.
 
 **push type**: `continuous`
 
@@ -454,9 +454,9 @@ Result format:
 `options.ul_trades`
 
 This channel sends all trades message under underlying whenever a trade occurs
-at gate.io. It includes details of the trade, such as price, amount,
-time.\*\*Not a underlying trade data, it's all contracts trades data which
-contract under underlying \*\*
+at Gate. It includes details of the trade, such as price, amount, time.\*\*Not a
+underlying trade data, it's all contracts trades data which contract under
+underlying \*\*
 
 **push type**: `continuous`
 
@@ -603,8 +603,8 @@ Result format:
 | `result`      | Object | Object of price update                            |
 | »`underlying` | String | Options underlying name                           |
 | »`price`      | Float  | underlying price                                  |
-| »`time`       | int    | update time (time from gate engin)                |
-| »`time_ms`    | int    | update time in millisecond (time from gate engin) |
+| »`time`       | int    | update time (time from Gate engin)                |
+| »`time_ms`    | int    | update time in millisecond (time from Gate engin) |
 
 # [#](#mark-price-channel) Mark Price Channel
 
@@ -1084,7 +1084,7 @@ Result format:
 
 # [#](#order-book-channel) Order Book Channel
 
-The order_book channel allow you to keep track of the state of the gate.io order
+The order_book channel allow you to keep track of the state of the Gate order
 book depth. It is provided on a price aggregated basis, with customizable
 precision.
 
@@ -2094,4 +2094,4 @@ Result format:
 | »`time_ms`      | Integer | Update unix timestamp in milliseconds |
 | »`user`         | String  | User id                               |
 
-Last Updated: 11/28/2024, 2:26:55 AM
+Last Updated: 5/19/2025, 3:42:48 AM

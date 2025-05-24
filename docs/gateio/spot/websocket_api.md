@@ -210,8 +210,8 @@ func main() {
 }
 ```
 
-Gate.io provides a simple and robust Websocket API to integrate spot trade
-status into your business or application.
+Gate provides a simple and robust Websocket API to integrate spot trade status
+into your business or application.
 
 We have language bindings in `Python` and `Golang`. You can view code examples
 in the dark area to the right, and you can switch the programming language of
@@ -824,11 +824,15 @@ Result format:
 | side     | buy   |
 | side     | sell  |
 
-# [#](#public-trades-channel-v2-lite) Public Trades Channel V2(lite)
+# [#](#public-trades-channel-v2-deprecated) Public Trades Channel V2(Deprecated)
 
 `spot.trades_v2`
 
 **update speed:** realtime
+
+**It is recommended to use the public trade channel `spot.trades` as the first
+choice. The V2 version of the public trade channel `spot.trades_v2` is no longer
+maintained and may be deprecated in the future.**
 
 This channel sends a trade message whenever a trade occurs. It includes details
 of the trade, such as price, amount, time and type.
@@ -1799,6 +1803,10 @@ remarked when amending the order |
 
 **update speed:** realtime
 
+**Difference between the orders channel `spot.orders` and the V2 version
+`spot.orders_v2`:** `spot.orders_v2` does not include fee-related fields,
+specifically: `fee`, `point_fee`, `gt_fee`, and `rebated_fee`.
+
 Notify changes of orders created in subscribed currency pairs. Including order
 creation, fill, close and cancellation
 
@@ -2187,6 +2195,11 @@ Result format:
 `spot.usertrades_v2`
 
 **update speed:** realtime
+
+**Difference between the user trades channel `spot.usertrades` and its V2
+version `spot.usertrades_v2`:** `spot.usertrades_v2` does not include
+fee-related fields, specifically: `fee`, `point_fee`, `gt_fee` and
+`fee_currency`.
 
 Notify user's personal trades in specified currency pairs. Unlike `spot.trades`
 channel, this is a private channel and notify all trades related to user
@@ -5883,4 +5896,4 @@ Result format:
 | »»`label`        | String  | denotes error type in string format                                                               |
 | »»`message`      | String  | detailed error message                                                                            |
 
-Last Updated: 5/13/2025, 8:40:28 AM
+Last Updated: 5/19/2025, 3:21:37 AM

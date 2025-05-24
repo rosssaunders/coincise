@@ -1,6 +1,6 @@
-# [#](#gate-io-delivery-websocket-v4) Gate.io Delivery WebSocket v4
+# [#](#gate-delivery-websocket-v4) Gate Delivery WebSocket v4
 
-Gate.io provides a simple and robust Websocket API to integrate gate.io BTC/USDT
+Gate provides a simple and robust Websocket API to integrate Gate BTC/USDT
 delivery contract trade status into your business or application.
 
 We have language bindings in `Python`, more in the future! You can view code
@@ -137,7 +137,7 @@ You can log into the console to retrieve delivery API key and secret.
 
 **Check Server/Client connectivity.**
 
-**gate.io delivery contract use the protocol layer ping/pong message.The server
+**Gate delivery contract use the protocol layer ping/pong message.The server
 will initiate a ping message actively. If the client does not reply, the client
 will be disconnected.**
 
@@ -332,7 +332,7 @@ The above command returns JSON structured like this:
 
 # [#](#trades-api) Trades API
 
-**This channel sends a trade message whenever a trade occurs at gate.io. It
+**This channel sends a trade message whenever a trade occurs at Gate. It
 includes details of the trade, such as price, amount, time and type.**
 
 ## [#](#trades-subscription) Trades subscription
@@ -466,8 +466,8 @@ The above command returns JSON structured like this:
 
 # [#](#order-book-api) Order Book API
 
-**The order_book channel allow you to keep track of the state of the gate.io
-order book depth. It is provided on a price aggregated basis, with customizable
+**The order_book channel allow you to keep track of the state of the Gate order
+book depth. It is provided on a price aggregated basis, with customizable
 precision.**
 
 There are three different order book channels for subscription:
@@ -2618,4 +2618,4 @@ The above command returns JSON structured like this:
 
   `unsubscribe`
 
-Last Updated: 3/21/2025, 6:23:28 AM
+Last Updated: 5/19/2025, 3:42:48 AM

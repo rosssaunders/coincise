@@ -1,11 +1,11 @@
-# [#](#gate-io-futures-websocket-v4) Gate.io Futures WebSocket v4
+# [#](#gate-futures-websocket-v4) Gate Futures WebSocket v4
 
-Gate.io provides a simple and robust Websocket API to integrate gate.io BTC/USDT
+Gate provides a simple and robust Websocket API to integrate Gate BTC/USDT
 futures contract trade status into your business or application.
 
-We have language bindings in `Python`, more in the future! You can view code
-examples in the dark area to the right, and you can switch the programming
-language of the examples with the tabs in the top right.
+We have language bindings in `Python` and `Golang` , more in the future! You can
+view code examples in the dark area to the right, and you can switch the
+programming language of the examples with the tabs in the top right.
 
 ## [#](#server-url) Server URL
 
@@ -206,9 +206,9 @@ You can log into the console to retrieve futures API key and secret.
 
 **Check Server/Client connectivity.**
 
-**gate.io futures contract use the protocol layer ping/pong message.The server
-will initiate a ping message actively. If the client does not reply, the client
-will be disconnected.**
+**Gate futures contract use the protocol layer ping/pong message.The server will
+initiate a ping message actively. If the client does not reply, the client will
+be disconnected.**
 
 [websocket rfc (opens new window)](https://tools.ietf.org/html/rfc6455)
 
@@ -538,7 +538,7 @@ The above command returns JSON structured like this:
 
 # [#](#trades-api) Trades API
 
-**This channel sends a trade message whenever a trade occurs at gate.io. It
+**This channel sends a trade message whenever a trade occurs at Gate. It
 includes details of the trade, such as price, amount, time and type.**
 
 ## [#](#trades-subscription) Trades subscription
@@ -750,8 +750,8 @@ The above command returns JSON structured like this:
 
 # [#](#order-book-api) Order Book API
 
-**The order_book channel allow you to keep track of the state of the gate.io
-order book depth. It is provided on a price aggregated basis, with customizable
+**The order_book channel allow you to keep track of the state of the Gate order
+book depth. It is provided on a price aggregated basis, with customizable
 precision.**
 
 There are three different order book channels for subscription:
@@ -1352,20 +1352,21 @@ The above command returns JSON structured like this:
 
 * params
 
-  | field    | type    | description                                                               |
-  | -------- | ------- | ------------------------------------------------------------------------- |
-  | `result` | Object  | Changed asks and bids since last update                                   |
-  | »`t`     | Integer | Order book generation timestamp in milliseconds                           |
-  | »`s`     | String  | Contract name                                                             |
-  | »`U`     | Integer | First order book update ID since last update                              |
-  | »`u`     | Integer | Last order book update ID since last update                               |
-  | »`b`     | Array   | Changed bids                                                              |
-  | »»`p`    | String  | Changed price                                                             |
-  | »»`s`    | Integer | Absolute size value after change. If 0, remove this price from order book |
-  | »`a`     | Array   | Changed asks                                                              |
-  | »»`p`    | String  | Changed price                                                             |
-  | »»`s`    | Integer | Absolute size value after change. If 0, remove this price from order book |
-  | »`l`     | String  | Depth level (For example, 100 represents a depth update of 100 levels)    |
+  | field    | type    | description                                                                                                                                                                                                                                                                                                                                |
+  | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | `result` | Object  | Changed asks and bids since last update                                                                                                                                                                                                                                                                                                    |
+  | »`t`     | Integer | Order book generation timestamp in milliseconds                                                                                                                                                                                                                                                                                            |
+  | »`full`  | Boolean | `true` indicates a full depth snapshot (e.g., if the subscribed `level` is 100, the pushed data will contain 100 levels of depth). Upon receiving this, the user should replace the local order book with the provided data.`false` indicates incremental depth updates. When the value is `false`, this field is omitted from the message |
+  | »`s`     | String  | Contract name                                                                                                                                                                                                                                                                                                                              |
+  | »`U`     | Integer | First order book update ID since last update                                                                                                                                                                                                                                                                                               |
+  | »`u`     | Integer | Last order book update ID since last update                                                                                                                                                                                                                                                                                                |
+  | »`b`     | Array   | Changed bids                                                                                                                                                                                                                                                                                                                               |
+  | »»`p`    | String  | Changed price                                                                                                                                                                                                                                                                                                                              |
+  | »»`s`    | Integer | Absolute size value after change. If 0, remove this price from order book                                                                                                                                                                                                                                                                  |
+  | »`a`     | Array   | Changed asks                                                                                                                                                                                                                                                                                                                               |
+  | »»`p`    | String  | Changed price                                                                                                                                                                                                                                                                                                                              |
+  | »»`s`    | Integer | Absolute size value after change. If 0, remove this price from order book                                                                                                                                                                                                                                                                  |
+  | »`l`     | String  | Depth level (For example, 100 represents a depth update of 100 levels)                                                                                                                                                                                                                                                                     |
 
 ## [#](#order-book-update-unsubscription) Order book update unsubscription
 
@@ -1442,6 +1443,290 @@ The above command returns JSON structured like this:
 
   `unsubscribe`
 
+# [#](#order-book-v2-api) Order Book V2 API
+
+**Provide a faster method for retrieving depth information**
+
+## [#](#maintain-local-depth) Maintain local depth
+
+Note:
+
+1.  Full Depth Snapshot Push (`full=true`):When the channel pushes full depth
+    data, the local depth should be completely replaced with the received data.
+    Additionally, the `depth ID` should be updated to the value of the `u` field
+    in the message. Note that the server may send full depth snapshots multiple
+    times.
+    1.  The first message pushed after subscribing to this channel is a full
+        depth snapshot.
+2.  Incremental Depth Push (`full=false`):Incremental messages do not include
+    the full field. Instead, each message contains the fields `U` (starting
+    depth ID) and `u` (ending depth ID).
+    1.  If `U` equals the local `depth ID` + `1`, it indicates a continuous
+        depth update:
+        1.  Replace the local depth ID with the value of `u` from the message.
+        2.  If `a` (asks) and `b` (bids) in the update are not empty, update the
+            corresponding bid and ask depth levels based on price.(Each
+            `level[0]` represents the price, and `level[1]` represents the
+            quantity.)If `level[1]` is `"0"`, the corresponding price level
+            should be removed from the order book.
+    2.  If `U` ≠ local `depth ID` + `1`, the depth data is not continuous. In
+        this case, you must unsubscribe from the market and resubscribe to
+        retrieve the initial depth snapshot.
+3.  Subscription Limitations:For the same contract’s depth stream, a single
+    connection is allowed to subscribe only once. Duplicate subscription
+    attempts will result in an error. Example of a failed attempt:
+
+```json
+{
+  "time": 1747391482,
+  "time_ms": 1747391482960,
+  "id": 1,
+  "conn_id": "d9db9373dc5e081e",
+  "trace_id": "ee001938590e183db957bd5ba71651c0",
+  "channel": "futures.obu",
+  "event": "subscribe",
+  "payload": ["ob.BTC_USDT.400"],
+  "error": {
+    "code": 2,
+    "message": "Alert sub ob.BTC_USDT.400"
+  },
+  "result": {
+    "status": "fail"
+  }
+}
+```
+
+## [#](#order-book-v2-subscription) Order book V2 subscription
+
+Code example
+
+```python
+from websocket import create_connection
+
+ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/usdt")
+ws.send('{"time" : 123456, "channel" : "futures.obu",
+        "event": "subscribe", "payload" : ["ob.BTC_USDT.400"]}')
+print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time" : 123456, "channel" : "futures.obu", "event": "subscribe", "payload" : ["ob.BTC_USDT.400"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+  "time": 1747391482,
+  "time_ms": 1747391482384,
+  "id": 1,
+  "conn_id": "d9db9373dc5e081e",
+  "trace_id": "ee001938590e183db957bd5ba71651c0",
+  "channel": "futures.obu",
+  "event": "subscribe",
+  "payload": ["ob.BTC_USDT.400"],
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+### [#](#request-13) Request
+
+- channel
+
+  `futures.obu`
+
+- event
+
+  `subscribe`
+
+- params
+
+  `payload`It is a list containing stream names. The format is:
+  ob.{symbol}.{level}; for example, ob.BTC_USDT.400, ob.BTC_USDT.50
+
+  The `level` enum values are: 400, 50; Update frequency: 400-level updates
+  every 100 ms; 50-level updates every 20 ms.
+
+## [#](#order-book-v2-update-notification) Order book V2 update notification
+
+Example of full depth push:
+
+```json
+{
+  "channel": "futures.obu",
+  "result": {
+    "t": 1743673026995,
+    "full": true,
+    "s": "ob.BTC_USDT.400",
+    "u": 79072179673,
+    "b": [["83705.9", "30166"]],
+    "a": [["83706", "4208"]]
+  },
+  "time_ms": 1743673026999
+}
+```
+
+Example of incremental push:
+
+```json
+{
+  "channel": "futures.obu",
+  "result": {
+    "t": 1743673027017,
+    "s": "ob.BTC_USDT.400",
+    "U": 79072179674,
+    "u": 79072179694,
+    "b": [
+      ["83702.2", "62"],
+      ["83702.1", "0"],
+      ["83702", "0"],
+      ["83685.6", "120"],
+      ["83685", "239"]
+    ]
+  },
+  "time_ms": 1743673027020
+}
+```
+
+**Notify contract order book v2 update**
+
+### [#](#notify-6) Notify
+
+- channel
+
+  `futures.obu`
+
+- event
+
+  `update`
+
+- params
+
+| field             | type                    | description                                                                                                     |
+| ----------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `result`          | Object                  | Ask and bid price changes since the previous update                                                             |
+| »`t`              | Integer                 | Order book generation timestamp (in milliseconds)                                                               |
+| »`s`              | String                  | Name of the depth stream                                                                                        |
+| »`U`              | Integer                 | Starting order book update ID of this update                                                                    |
+| »`u`              | Integer                 | Ending order book update ID of this update                                                                      |
+| »`b`              | `Array[OrderBookArray]` | Bids updates since the last update                                                                              |
+| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth. |
+| »`a`              | `Array[OrderBookArray]` | Asks updates since the last update                                                                              |
+| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth. |
+
+## [#](#order-book-v2-update-unsubscription) Order book V2 update unsubscription
+
+Code example
+
+```python
+from websocket import create_connection
+
+ws = create_connection("wss://fx-ws-testnet.gateio.ws/v4/ws/btc")
+ws.send(
+  '{"time" : 123456, "channel" : "futures.obu", "event": "unsubscribe", "payload" : ["ob.BTC_USDT.400"]}')
+print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://fx-ws-testnet.gateio.ws/v4/ws/btc"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time" : 123456, "channel" : "futures.obu", "event": "unsubscribe", "payload" : ["ob.BTC_USDT.400"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+  "time": 1743673617,
+  "time_ms": 1743673617242,
+  "id": 1,
+  "conn_id": "7b06ff199a98ab0e",
+  "trace_id": "8f86e4021a84440e502f73fde5b94918",
+  "channel": "futures.obu",
+  "event": "unsubscribe",
+  "payload": ["ob.BTC_USDT.400"],
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+**Unsubscribe specified contract order book v2**
+
+### [#](#request-14) Request
+
+- channel
+
+  `futures.obu`
+
+- event
+
+  `unsubscribe`
+
 # [#](#candlesticks-api) Candlesticks API
 
 **Provides a way to access charting candlestick info.**
@@ -1512,7 +1797,7 @@ The above command returns JSON structured like this:
 }
 ```
 
-### [#](#request-13) Request
+### [#](#request-15) Request
 
 - channel
 
@@ -1564,7 +1849,7 @@ The above command returns JSON structured like this:
 
 **Notify kline information of subscribed contract.**
 
-### [#](#notify-6) Notify
+### [#](#notify-7) Notify
 
 - channel
 
@@ -1656,7 +1941,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe specified contract kline information.**
 
-### [#](#request-14) Request
+### [#](#request-16) Request
 
 - channel
 
@@ -1979,7 +2264,7 @@ The above command returns JSON structured like this:
 
 **Subscribe futures contract stats.**
 
-### [#](#request-15) Request
+### [#](#request-17) Request
 
 - channel
 
@@ -2028,7 +2313,7 @@ The above command returns JSON structured like this:
 
 **Notify subscribed contract stats.**
 
-### [#](#notify-7) Notify
+### [#](#notify-8) Notify
 
 - channel
 
@@ -2138,7 +2423,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe contract stats.**
 
-### [#](#request-16) Request
+### [#](#request-18) Request
 
 - channel
 
@@ -2260,7 +2545,7 @@ The above command returns JSON structured like this:
 
 **Subscribe user orders update**
 
-### [#](#request-17) Request
+### [#](#request-19) Request
 
 - channel
 
@@ -2321,7 +2606,7 @@ The above command returns JSON structured like this:
 
 **Notify user orders information when an order is put, updated or finished.**
 
-### [#](#notify-8) Notify
+### [#](#notify-9) Notify
 
 - channel
 
@@ -2493,7 +2778,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe user orders update notification, for all contract.**
 
-### [#](#request-18) Request
+### [#](#request-20) Request
 
 - channel
 
@@ -2607,7 +2892,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user trades update.**
 
-### [#](#request-19) Request
+### [#](#request-21) Request
 
 - channel
 
@@ -2652,7 +2937,7 @@ The above command returns JSON structured like this:
 
 **Notify user trades update.**
 
-### [#](#notify-9) Notify
+### [#](#notify-10) Notify
 
 - channel
 
@@ -2775,7 +3060,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe user trades update.**
 
-### [#](#request-20) Request
+### [#](#request-22) Request
 
 - channel
 
@@ -2889,7 +3174,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user liquidates update.**
 
-### [#](#request-21) Request
+### [#](#request-23) Request
 
 - channel
 
@@ -2937,7 +3222,7 @@ The above command returns JSON structured like this:
 
 **Notify liquidates update.**
 
-### [#](#notify-10) Notify
+### [#](#notify-11) Notify
 
 - channel
 
@@ -3063,7 +3348,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe liquidates update.**
 
-### [#](#request-22) Request
+### [#](#request-24) Request
 
 - channel
 
@@ -3177,7 +3462,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user auto_deleverages update.**
 
-### [#](#request-23) Request
+### [#](#request-25) Request
 
 - channel
 
@@ -3219,7 +3504,7 @@ The above command returns JSON structured like this:
 
 **Notify auto_deleverages update.**
 
-### [#](#notify-11) Notify
+### [#](#notify-12) Notify
 
 - channel
 
@@ -3339,7 +3624,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe auto_deleverages update.**
 
-### [#](#request-24) Request
+### [#](#request-26) Request
 
 - channel
 
@@ -3453,7 +3738,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user position_closes update.**
 
-### [#](#request-25) Request
+### [#](#request-27) Request
 
 - channel
 
@@ -3494,7 +3779,7 @@ The above command returns JSON structured like this:
 
 **Notify position_closes update.**
 
-### [#](#notify-12) Notify
+### [#](#notify-13) Notify
 
 - channel
 
@@ -3613,7 +3898,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe position_closes update.**
 
-### [#](#request-26) Request
+### [#](#request-28) Request
 
 - channel
 
@@ -3724,7 +4009,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user balances update.**
 
-### [#](#request-27) Request
+### [#](#request-29) Request
 
 - channel
 
@@ -3765,7 +4050,7 @@ The above command returns JSON structured like this:
 
 **Notify balances update.**
 
-### [#](#notify-13) Notify
+### [#](#notify-14) Notify
 
 - channel
 
@@ -3987,7 +4272,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user reduce_risk_limits update.**
 
-### [#](#request-28) Request
+### [#](#request-30) Request
 
 - channel
 
@@ -4030,7 +4315,7 @@ The above command returns JSON structured like this:
 
 **Notify reduce risk limits update.**
 
-### [#](#notify-14) Notify
+### [#](#notify-15) Notify
 
 - channel
 
@@ -4136,7 +4421,7 @@ func main() {
 
 **Unsubscribe reduce risk limits update.**
 
-### [#](#request-29) Request
+### [#](#request-31) Request
 
 - channel
 
@@ -4249,7 +4534,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user positions update.**
 
-### [#](#request-30) Request
+### [#](#request-32) Request
 
 - channel
 
@@ -4303,7 +4588,7 @@ The above command returns JSON structured like this:
 
 **Notify positions update.**
 
-### [#](#notify-15) Notify
+### [#](#notify-16) Notify
 
 - channel
 
@@ -4432,7 +4717,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe positions update.**
 
-### [#](#request-31) Request
+### [#](#request-33) Request
 
 - channel
 
@@ -4544,7 +4829,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user auto orders update.**
 
-### [#](#request-32) Request
+### [#](#request-34) Request
 
 - channel
 
@@ -4611,7 +4896,7 @@ The above command returns JSON structured like this:
 
 **Notify auto orders update.**
 
-### [#](#notify-16) Notify
+### [#](#notify-17) Notify
 
 - channel
 
@@ -4733,7 +5018,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe auto orders update.**
 
-### [#](#request-33) Request
+### [#](#request-35) Request
 
 - channel
 
@@ -7267,4 +7552,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                             |
 | »»`message`      | String  | Detailed error message                                                                                          |
 
-Last Updated: 5/13/2025, 8:40:28 AM
+Last Updated: 5/22/2025, 8:34:33 AM

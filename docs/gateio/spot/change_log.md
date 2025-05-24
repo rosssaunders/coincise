@@ -9,7 +9,6 @@
   chart
 - New feature `POST /futures/{settle}/positions/cross_mode` endpoint, Switch to
   the full position-by-store mode
-- Add `refresh_time` field in `GET /spot/accounts` response
 
 **v4.96.0**
 
