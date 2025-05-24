@@ -219,6 +219,16 @@ header.
   - A: clientOid supports \[0-9\], \[a-z\],\[A-Z\] and \[-,+,\_,#\], length less
     than 50
 
+- Q14: Is there a fixed regular release data for backend?
+
+  - A: Yes.The current fixed regular release date for backend is **every
+    Tuesday, Wednesday, and Thursday from 14:00 PM to 17:00 PM (UTC +8)**(Except
+    for emergency upgrade). During the regular release time window, the RestAPI
+    may return 45001, 40725, or 40808 error responses. Users can retry after
+    receiving these error responses. WebSocket connections may be disconnected
+    during the release period. WebSocket users are advised to implement a
+    reconnection mechanism in their code.
+
 > **Source:** [original URL](https://www.bitget.com/api-doc/common/faq)
 
 ---
@@ -293,7 +303,7 @@ encrypted result through **BASE64**.
 - method：Request method (POST/GET), all uppercase.
 - requestPath：Request interface path.
 - queryString：The query string in the request URL (the request parameter after
-  the ?). **Need to be sorted in ascending alphabetical order by key**
+  the ?).
 - body：The request body in string format. If the request body is empty (usually
   a GET request), the body can be omitted.
 
@@ -2304,7 +2314,7 @@ Response Example
 
 ## Get Virtual Subaccounts
 
-Frequency limit: 10 times/1s (User ID)
+Rate limit: 1 req/sec/UID
 
 #### Description[​](#description "Direct link to Description")
 
@@ -2331,7 +2341,7 @@ curl "https://api.bitget.com/api/v2/user/virtual-subaccount-list?limit=20" \  -H
 Response Example
 
 ```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": {        "endId": 51,        "subAccountList": [            {                "subAccountUid": "********",                "subAccountName": "****@*****.com",                "status": "normal",                "permList": [                    "read",                    "spot_trade",                    "contract_trade"                ],                "label": "mySub01",                "accountType":"hosting",                "bindingTime":"1653287983475",                "cTime": "1653287983475",                "uTime": "1682660169573"            }        ]    }}
+{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": {        "endId": 51,        "subAccountList": [            {                "subAccountUid": "********",                "subAccountName": "****@*****.com",                "status": "normal",                "permList": [                    "read",                    "spot_trade",                    "contract_trade"                ],                "label": "mySub01",                "cTime": "1653287983475",                "uTime": "1682660169573"            }        ]    }}
 ```
 
 #### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -2,6 +2,24 @@
 
 ## Changelog
 
+### \[May 19, 2025\] Update on Regular Release Date[​](#may-19-2025-update-on-regular-release-date "Direct link to may-19-2025-update-on-regular-release-date")
+
+The current fixed regular release date for backend is **every Tuesday,
+Wednesday, and Thursday from 14:00 PM to 17:00 PM (UTC +8)**(Except for
+emergency upgrade).  
+During the regular release time window, the RestAPI may return 45001, 40725, or
+40808 error responses. Users can retry after receiving these error responses.
+WebSocket connections may be disconnected during the release period. WebSocket
+users are advised to implement a reconnection mechanism in their code.
+
+### \[May 19,2025\] Adjustment of the Spot place-plan-order API[​](#may-192025-adjustment-of-the-spot-place-plan-order-api "Direct link to may-192025-adjustment-of-the-spot-place-plan-order-api")
+
+Interface：/api/v2/spot/trade/place-plan-order
+
+Changes：
+
+- The `force` field was invalid when placing an order and has been deleted.
+
 ### \[May 14, 2025\] New version: Order-taking staff API Key creation interface adds currency pair range description.[​](#may-14-2025-new-version-order-taking-staff-api-key-creation-interface-adds-currency-pair-range-description "Direct link to may-14-2025-new-version-order-taking-staff-api-key-creation-interface-adds-currency-pair-range-description")
 
 Interface：/api/v2/copy/mix-trader/create-copy-api  
