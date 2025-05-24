@@ -3982,7 +3982,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("YOUR_API_KEY", "YOUR_API_SECRET")client.NewUtaBybitServiceNoParams().UpgradeToUTA(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("YOUR_API_KEY", "YOUR_API_SECRET")client.NewUtaBybitServiceNoParams().UpgradeToUTA(context.Background())
 ```
 
 ```
@@ -4497,7 +4497,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 Query transaction logs in Unified account, it supports up to 2 years data
 
 > **Apply to**: [UTA2.0](/docs/v5/acct-mode#uta-20),
-> [UTA1.0](/docs/v5/acct-mode#uta-10)(execept inverse)
+> [UTA1.0](/docs/v5/acct-mode#uta-10)(except inverse)
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
