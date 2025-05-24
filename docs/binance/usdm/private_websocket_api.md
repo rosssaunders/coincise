@@ -1609,8 +1609,8 @@ When new order created, order status changed will push such event. event type is
     "l": "0", // Order Last Filled Quantity
     "z": "0", // Order Filled Accumulated Quantity
     "L": "0", // Last Filled Price
-    "N": "USDT", // Commission Asset, will not push if no commission
-    "n": "0", // Commission, will not push if no commission
+    "N": "USDT", // Commission Asset
+    "n": "0", // Commission
     "T": 1568879465650, // Order Trade Time
     "t": 0, // Trade Id
     "b": "0", // Bids Notional
