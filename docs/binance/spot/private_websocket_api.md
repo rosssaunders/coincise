@@ -1941,22 +1941,29 @@ Event fields:
 #### Timing security
 
 - `SIGNED` requests also require a `timestamp` parameter which should be the
-  current millisecond timestamp.
+  current timestamp either in milliseconds or microseconds. (See
+  [General API Information](/docs/binance-spot-api-docs/websocket-api/request-security#general-api-information))
 - An additional optional parameter, `recvWindow`, specifies for how long the
-  request stays valid.
-
+  request stays valid and may only be specified in milliseconds.
   - If `recvWindow` is not sent, **it defaults to 5000 milliseconds**.
   - Maximum `recvWindow` is 60000 milliseconds.
-
 - Request processing logic is as follows:
 
-  ```javascript
-  if (timestamp < serverTime + 1000 && serverTime - timestamp <= recvWindow) {
-    // process request
+```javascript
+serverTime = getCurrentTime()
+if (timestamp < (serverTime + 1 second) && (serverTime - timestamp) <= recvWindow) {
+  // begin processing request
+  serverTime = getCurrentTime()
+  if (serverTime - timestamp) <= recvWindow {
+    // forward request to Matching Engine
   } else {
     // reject request
   }
-  ```
+  // finish processing request
+} else {
+  // reject request
+}
+```
 
 **Serious trading is about timing.** Networks can be unstable and unreliable,
 which can lead to requests taking varying amounts of time to reach the servers.
