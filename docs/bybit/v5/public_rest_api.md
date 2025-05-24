@@ -1561,7 +1561,7 @@ import com.bybit.api.client.service.BybitApiClientFactory;var client = BybitApiC
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))client.NewUtaBybitServiceNoParams().GetServerTime(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))client.NewUtaBybitServiceNoParams().GetServerTime(context.Background())
 ```
 
 ```
@@ -1632,7 +1632,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetMarketKline(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetMarketKline(context.Background())
 ```
 
 ```
@@ -1706,7 +1706,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetMarkPriceKline(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetMarkPriceKline(context.Background())
 ```
 
 ```
@@ -1780,7 +1780,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetIndexPriceKline(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetIndexPriceKline(context.Background())
 ```
 
 ```
@@ -1854,7 +1854,7 @@ from pybit.unified_trading import HTTPsession = HTTP()print(session.get_premium_
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetPremiumIndexPriceKline(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT", "interval": "1"}client.NewUtaBybitServiceWithParams(params).GetPremiumIndexPriceKline(context.Background())
 ```
 
 ```
@@ -2034,7 +2034,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetInstrumentInfo(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetInstrumentInfo(context.Background())
 ```
 
 ```
@@ -2060,7 +2060,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "option", "symbol": "ETH-3JAN23-1250-P"}client.NewUtaBybitServiceWithParams(params).GetInstrumentInfo(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "option", "symbol": "ETH-3JAN23-1250-P"}client.NewUtaBybitServiceWithParams(params).GetInstrumentInfo(context.Background())
 ```
 
 ```
@@ -2086,7 +2086,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetInstrumentInfo(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetInstrumentInfo(context.Background())
 ```
 
 ```
@@ -2181,7 +2181,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetOrderBookInfo(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetOrderBookInfo(context.Background())
 ```
 
 ```
@@ -2333,7 +2333,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "inverse", "symbol": "BTCUSD"}client.NewUtaBybitServiceWithParams(params).GetMarketTickers(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "inverse", "symbol": "BTCUSD"}client.NewUtaBybitServiceWithParams(params).GetMarketTickers(context.Background())
 ```
 
 ```
@@ -2359,7 +2359,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "option", "symbol": "BTC-30DEC22-18000-C"}client.NewUtaBybitServiceWithParams(params).GetMarketTickers(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "option", "symbol": "BTC-30DEC22-18000-C"}client.NewUtaBybitServiceWithParams(params).GetMarketTickers(context.Background())
 ```
 
 ```
@@ -2385,7 +2385,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetMarketTickers(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetMarketTickers(context.Background())
 ```
 
 ```
@@ -2476,7 +2476,7 @@ from pybit.unified_trading import HTTPsession = HTTP()print(session.get_funding_
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetFundingRateHistory(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "spot", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetFundingRateHistory(context.Background())
 ```
 
 ```
@@ -2556,7 +2556,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetPublicRecentTrades(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetPublicRecentTrades(context.Background())
 ```
 
 ```
@@ -2633,7 +2633,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetOpenInterests(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetOpenInterests(context.Background())
 ```
 
 ```
@@ -2728,12 +2728,15 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 
 Query for Bybit
 [insurance pool](https://www.bybit.com/en/announcement-info/insurance-fund/)
-data (BTC/USDT/USDC etc). The data is updated every 24 hours.
+data (BTC/USDT/USDC etc)
 
 info
 
-Since the insurance pool data is updated every 24 hours, it is possible that you
-get ADL trade but the insruance pool still has sufficient funds.
+- The isolated insurance pool balance is updated every 1 minute, and shared
+  insurance pool balance is updated every 24 hours
+- Please note that you may receive data from the previous minute. This is due to
+  multiple backend containers starting at different times, which may cause a
+  slight delay. You can always rely on the latest minute data for accuracy.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -2747,14 +2750,14 @@ GET `/v5/market/insurance`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter    | Type   | Comments                                                                                                                                                              |
-| :----------- | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| updatedTime  | string | Data updated time (ms)                                                                                                                                                |
-| list         | array  | Object                                                                                                                                                                |
-| &gt; coin    | string | Coin                                                                                                                                                                  |
-| &gt; symbols | string | <li>For an independent insurance pool, you may see <code>"BTCUSDT,ETHUSDT,SOLUSDT"</code></li><li>For non-independent insurance pool, it returns <code>""</code></li> |
-| &gt; balance | string | Balance                                                                                                                                                               |
-| &gt; value   | string | USD value                                                                                                                                                             |
+| Parameter    | Type   | Comments                                                                                                                                                                             |
+| :----------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| updatedTime  | string | Data updated time (ms)                                                                                                                                                               |
+| list         | array  | Object                                                                                                                                                                               |
+| &gt; coin    | string | Coin                                                                                                                                                                                 |
+| &gt; symbols | string | <li>symbols with <code>"BTCUSDT,ETHUSDT,SOLUSDT"</code> mean these contracts are shared with one insurance pool</li><li>For an isolated insurance pool, it returns one contract</li> |
+| &gt; balance | string | Balance                                                                                                                                                                              |
+| &gt; value   | string | USD value                                                                                                                                                                            |
 
 [RUN >>](/docs/api-explorer/v5/market/insurance)
 
@@ -2769,15 +2772,15 @@ GET `/v5/market/insurance`
 - Node.js
 
 ```
-GET /v5/market/insurance?coin=ETH HTTP/1.1Host: api-testnet.bybit.com
+GET /v5/market/insurance?coin=USDT HTTP/1.1Host: api-testnet.bybit.com
 ```
 
 ```
-from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.get_insurance(    coin="ETH",))
+from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.get_insurance(    coin="USDT",))
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetMarketInsurance(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetMarketInsurance(context.Background())
 ```
 
 ```
@@ -2785,13 +2788,13 @@ import com.bybit.api.client.domain.market.request.MarketDataRequest;import com.b
 ```
 
 ```
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getInsurance({        coin: 'ETH',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getInsurance({        coin: 'USDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "updatedTime": "1714003200000",        "list": [            {                "coin": "USDT",                "symbols": "MERLUSDT,10000000AIDOGEUSDT,ZEUSUSDT",                "balance": "902178.57602476",                "value": "901898.0963091522"            },            {                "coin": "USDT",                "symbols": "SOLUSDT,OMNIUSDT,ALGOUSDT",                "balance": "14454.51626125",                "value": "14449.515598975464"            },            {                "coin": "USDT",                "symbols": "XLMUSDT,WUSDT",                "balance": "23.45018235",                "value": "22.992864174376344"            },            {                "coin": "USDT",                "symbols": "AGIUSDT,WIFUSDT",                "balance": "10002",                "value": "9998.896846613574"            },            {                "coin": "USDT",                "symbols": "",                "balance": "10148045273.618073",                "value": "10144896808.587431"            }        ]    },    "retExtInfo": {},    "time": 1714028451228}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "updatedTime": "1714003200000",        "list": [            {                "coin": "USDT",                "symbols": "MERLUSDT,10000000AIDOGEUSDT,ZEUSUSDT",                "balance": "902178.57602476",                "value": "901898.0963091522"            },            {                "coin": "USDT",                "symbols": "SOLUSDT,OMNIUSDT,ALGOUSDT",                "balance": "14454.51626125",                "value": "14449.515598975464"            },            {                "coin": "USDT",                "symbols": "XLMUSDT,WUSDT",                "balance": "23.45018235",                "value": "22.992864174376344"            },            {                "coin": "USDT",                "symbols": "AGIUSDT,WIFUSDT",                "balance": "10002",                "value": "9998.896846613574"            }        ]    },    "retExtInfo": {},    "time": 1714028451228}
 ```
 
 # Get Risk Limit
@@ -2855,7 +2858,7 @@ from pybit.unified_trading import HTTPsession = HTTP(testnet=True)print(session.
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetMarketRiskLimits(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT"}client.NewUtaBybitServiceWithParams(params).GetMarketRiskLimits(context.Background())
 ```
 
 ```
@@ -2929,7 +2932,7 @@ from pybit.unified_trading import HTTPsession = HTTP()print(session.get_option_d
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "ETH-26DEC22-1400-C"}client.NewUtaBybitServiceWithParams(params).GetDeliveryPrice(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "ETH-26DEC22-1400-C"}client.NewUtaBybitServiceWithParams(params).GetDeliveryPrice(context.Background())
 ```
 
 ```
@@ -2996,7 +2999,7 @@ GET /v5/market/account-ratio?category=linear&symbol=BTCUSDT&period=1h&limit=2&st
 ```
 
 ```
-import (    "context"    "fmt"    bybit "github.com/wuhewuhe/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT", "period": "5min"}client.NewUtaBybitServiceWithParams(params).GetLongShortRatio(context.Background())
+import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api")client := bybit.NewBybitHttpClient("", "", bybit.WithBaseURL(bybit.TESTNET))params := map[string]interface{}{"category": "linear", "symbol": "BTCUSDT", "period": "5min"}client.NewUtaBybitServiceWithParams(params).GetLongShortRatio(context.Background())
 ```
 
 ```
