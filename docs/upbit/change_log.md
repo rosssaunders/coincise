@@ -4,7 +4,7 @@ added
 
 # [\[Notice\] Addition of 'Candle Data' Minute Intervals to WebSocket](/changelog/websocket_candles_miniutes)
 
-9 days ago by Upbit Developer Center
+13 days ago by Upbit Developer Center
 
 `# WEBSOCKET` `#CANDLE` `#MinuteInterval`
 
@@ -12,7 +12,7 @@ added
 
 # [\[Notice\] Addition of 'Cancel Digital Asset Withdrawal'](/changelog/cancel-digital-asset-withdrawal)
 
-30 days ago by Upbit Developer Center
+about 1 month ago by Upbit Developer Center
 
 `#NEW` `#Cancel Digital Asset Withdrawal`
 
@@ -20,7 +20,7 @@ improved
 
 # [\[Important\] 30-Level Order Book and Stop-Limit Order Policy Update](/changelog/orderbook_expansion)
 
-30 days ago by Upbit Developer Center
+about 1 month ago by Upbit Developer Center
 
 `#Policy` `#30-Level` `#orderbook expansion`
 
@@ -48,7 +48,7 @@ added
 
 # [Addition of 'Cancel And New Order'](/changelog/cancel_and_new_oreder)
 
-3 months ago by Upbit Developer Center
+4 months ago by Upbit Developer Center
 
 Dear Traders,
 
