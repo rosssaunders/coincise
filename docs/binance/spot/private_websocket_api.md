@@ -1658,7 +1658,7 @@ To apply an event to your local order book, follow this update procedure:
   disconnected after the 24-hour mark.
 - Responses are in JSON by default. To receive responses in SBE, refer to the
   [SBE FAQ](/docs/binance-spot-api-docs/faqs/sbe_faq) page.
-- The WebSocket server will send a `ping frame` every 20 seconds.\`
+- The WebSocket server will send a `ping frame` every 20 seconds.
   - If the WebSocket server does not receive a `pong frame` back from the
     connection within a minute the connection will be disconnected.
   - When you receive a ping, you must send a pong with a copy of ping's payload
@@ -1669,7 +1669,7 @@ To apply an event to your local order book, follow this update procedure:
 - All timestamps in the JSON responses are in **milliseconds in UTC by
   default**. To receive the information in microseconds, please add the
   parameter `timeUnit=MICROSECOND` or `timeUnit=microsecond` in the URL.
-- Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp)` can be passed
+- Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp`) can be passed
   in milliseconds or microseconds.
 - All field names and values are **case-sensitive**, unless noted otherwise.
 - If there are enums or terms you want clarification on, please see
@@ -1858,7 +1858,7 @@ error codes and messages.
 User Data Stream events for non-SBE sessions are sent as JSON in **text
 frames**, one event per frame.
 
-Events in SBE sessions will be sent as **binary frames.**
+Events in SBE sessions will be sent as **binary frames**.
 
 Please refer to
 [`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
@@ -3217,99 +3217,6 @@ With `computeCommissionRates`:
 }
 ```
 
-#### Query order (USER_DATA)
-
-```json
-{
-  "id": "aa62318a-5a97-4f3b-bdc7-640bbe33b291",
-  "method": "order.status",
-  "params": {
-    "symbol": "BTCUSDT",
-    "orderId": 12569099453,
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
-    "signature": "2c3aab5a078ee4ea465ecd95523b77289f61476c2f238ec10c55ea6cb11a6f35",
-    "timestamp": 1660801720951
-  }
-}
-```
-
-Check execution status of an order.
-
-**Weight:** 4
-
-**Parameters:**
-
-| Name                  | Type     | Mandatory                         | Description                              |
-| --------------------- | -------- | --------------------------------- | ---------------------------------------- |
-| \-`symbol`            | \-STRING | \-YES                             |                                          |
-| \-`orderId`           | \-INT    | \-YES                             | \-Lookup order by `orderId`              |
-| \-`origClientOrderId` | \-STRING | \-Lookup order by `clientOrderId` |
-| \-`apiKey`            | \-STRING | \-YES                             |                                          |
-| \-`recvWindow`        | \-LONG   | \-NO                              | \-The value cannot be greater than 60000 |
-| \-`signature`         | \-STRING | \-YES                             |                                          |
-| \-`timestamp`         | \-LONG   | \-YES                             |                                          |
-
-Notes:
-
-- If both `orderId` and `origClientOrderId` are provided, the `orderId` is
-  searched first, then the `origClientOrderId` from that result is checked
-  against that order. If both conditions are not met the request will be
-  rejected.
-- For some historical orders the `cummulativeQuoteQty` response field may be
-  negative, meaning the data is not available at this time.
-
-**Data Source:** Memory => Database
-
-**Response:**
-
-```json
-{
-  "id": "aa62318a-5a97-4f3b-bdc7-640bbe33b291",
-  "status": 200,
-  "result": {
-    "symbol": "BTCUSDT",
-    "orderId": 12569099453,
-    "orderListId": -1, // set only for orders of an order list
-    "clientOrderId": "4d96324ff9d44481926157",
-    "price": "23416.10000000",
-    "origQty": "0.00847000",
-    "executedQty": "0.00847000",
-    "cummulativeQuoteQty": "198.33521500",
-    "status": "FILLED",
-    "timeInForce": "GTC",
-    "type": "LIMIT",
-    "side": "SELL",
-    "stopPrice": "0.00000000", // always present, zero if order type does not use stopPrice
-    "trailingDelta": 10, // present only if trailingDelta set for the order
-    "trailingTime": -1, // present only if trailingDelta set for the order
-    "icebergQty": "0.00000000", // always present, zero for non-iceberg orders
-    "time": 1660801715639, // time when the order was placed
-    "updateTime": 1660801717945, // time of the last update to the order
-    "isWorking": true,
-    "workingTime": 1660801715639,
-    "origQuoteOrderQty": "0.00000000", // always present, zero if order type does not use quoteOrderQty
-    "strategyId": 37463720, // present only if strategyId set for the order
-    "strategyType": 1000000, // present only if strategyType set for the order
-    "selfTradePreventionMode": "NONE",
-    "preventedMatchId": 0, // present only if the order expired due to STP
-    "preventedQuantity": "1.200000" // present only if the order expired due to STP
-  },
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 4
-    }
-  ]
-}
-```
-
-**Note:** The payload above does not show all fields that can appear. Please
-refer to
-[Conditional fields in Order Responses](/docs/binance-spot-api-docs/websocket-api/trading-requests#conditional-fields-in-order-responses).
-
 #### Cancel order (TRADE)
 
 ```json
@@ -3429,7 +3336,7 @@ When an order list is canceled:
         "clientOrderId": "Tnu2IP0J5Y4mxw3IATBfmW"
       }
     ],
-    //order list's leg status format is the same as for individual orders.
+    //order list order's status format is the same as for individual orders.
     "orderReports": [
       {
         "symbol": "BTCUSDT",
@@ -3460,6 +3367,7 @@ When an order list is canceled:
         "price": "23400.00000000",
         "origQty": "0.00850000",
         "executedQty": "0.00000000",
+        "origQuoteOrderQty": "0.000000",
         "cummulativeQuoteQty": "0.00000000",
         "status": "CANCELED",
         "timeInForce": "GTC",
@@ -3577,8 +3485,7 @@ Values smaller than 1000000 are reserved and cannot be used.
 
 The allowed enums is dependent on what is configured on the symbol.
 
-The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE,
-DECREMENT.
+Supported values: [STP Modes](/docs/binance-spot-api-docs/enums.md#stpmodes).
 
 | | \-`cancelRestrictions` | \-ENUM | \-NO | \-Supported values: `ONLY_NEW` -
 Cancel will succeed if the order status is `NEW`. `ONLY_PARTIALLY_FILLED` -
@@ -3666,7 +3573,7 @@ Notes:
 - Like
   [`order.cancel`](/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-trade),
   if you cancel an individual order from an order list, the entire order list is
-  cancelled.
+  canceled.
 - The performance for canceling an order (single cancel or as part of a
   cancel-replace) is always better when only `orderId` is sent. Sending
   `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
@@ -4227,105 +4134,6 @@ Response for an order which is part of an Order list:
 refer to
 [Conditional fields in Order Responses](/docs/binance-spot-api-docs/websocket-api/trading-requests#conditional-fields-in-order-responses).
 
-#### Current open orders (USER_DATA)
-
-```json
-{
-  "id": "55f07876-4f6f-4c47-87dc-43e5fff3f2e7",
-  "method": "openOrders.status",
-  "params": {
-    "symbol": "BTCUSDT",
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
-    "signature": "d632b3fdb8a81dd44f82c7c901833309dd714fe508772a89b0a35b0ee0c48b89",
-    "timestamp": 1660813156812
-  }
-}
-```
-
-Query execution status of all open orders.
-
-If you need to continuously monitor order status updates, please consider using
-WebSocket Streams:
-
-- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
-  request
-- [`executionReport`](/docs/binance-spot-api-docs/user-data-stream#order-update)
-  user data stream event
-
-**Weight:** Adjusted based on the number of requested symbols:
-
-| Parameter  | Weight |
-| ---------- | ------ |
-| \-`symbol` | \-6    |
-| \-none     | \-80   |
-
-**Parameters:**
-
-| Name           | Type     | Mandatory | Description                                            |
-| -------------- | -------- | --------- | ------------------------------------------------------ |
-| \-`symbol`     | \-STRING | \-NO      | \-If omitted, open orders for all symbols are returned |
-| \-`apiKey`     | \-STRING | \-YES     |                                                        |
-| \-`recvWindow` | \-LONG   | \-NO      | \-The value cannot be greater than `60000`             |
-| \-`signature`  | \-STRING | \-YES     |                                                        |
-| \-`timestamp`  | \-LONG   | \-YES     |                                                        |
-
-**Data Source:** Memory => Database
-
-**Response:**
-
-Status reports for open orders are identical to
-[`order.status`](/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data).
-
-Note that some fields are optional and included only for orders that set them.
-
-Open orders are always returned as a flat list. If all symbols are requested,
-use the `symbol` field to tell which symbol the orders belong to.
-
-```json
-{
-  "id": "55f07876-4f6f-4c47-87dc-43e5fff3f2e7",
-  "status": 200,
-  "result": [
-    {
-      "symbol": "BTCUSDT",
-      "orderId": 12569099453,
-      "orderListId": -1,
-      "clientOrderId": "4d96324ff9d44481926157",
-      "price": "23416.10000000",
-      "origQty": "0.00847000",
-      "executedQty": "0.00720000",
-      "origQuoteOrderQty": "0.000000",
-      "cummulativeQuoteQty": "172.43931000",
-      "status": "PARTIALLY_FILLED",
-      "timeInForce": "GTC",
-      "type": "LIMIT",
-      "side": "SELL",
-      "stopPrice": "0.00000000",
-      "icebergQty": "0.00000000",
-      "time": 1660801715639,
-      "updateTime": 1660801717945,
-      "isWorking": true,
-      "workingTime": 1660801715639,
-      "origQuoteOrderQty": "0.00000000",
-      "selfTradePreventionMode": "NONE"
-    }
-  ],
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 6
-    }
-  ]
-}
-```
-
-**Note:** The payload above does not show all fields that can appear. Please
-refer to
-[Conditional fields in Order Responses](/docs/binance-spot-api-docs/websocket-api/trading-requests#conditional-fields-in-order-responses).
-
 #### Cancel open orders (TRADE)
 
 ```json
@@ -4702,7 +4510,7 @@ for more examples.
 }
 ```
 
-Send in an one-cancels the other (OCO) pair, where activation of one order
+Send in an one-cancels-the-other (OCO) pair, where activation of one order
 immediately cancels the other.
 
 - An OCO has 2 orders called the **above order** and **below order**.
@@ -4738,7 +4546,7 @@ immediately cancels the other.
 | \-`aboveClientOrderId`      | \-STRING  | \-NO      | \-Arbitrary unique ID among open orders for the above order. Automatically generated if not sent                                                                                                                                                                                                          |
 | \-`aboveIcebergQty`         | \-LONG    | \-NO      | \-Note that this can only be used if `aboveTimeInForce` is `GTC`.                                                                                                                                                                                                                                         |
 | \-`abovePrice`              | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.                                                                                                                                                                                     |
-| \-`aboveStopPrice`          | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.                                                                                                                            |
+| \-`aboveStopPrice`          | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.                                                                                                                           |
 | \-`aboveTrailingDelta`      | \-LONG    | \-NO      | \-See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq).                                                                                                                                                                                                                      |
 | \-`aboveTimeInForce`        | \-DECIMAL | \-NO      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.                                                                                                                                                                                                                                    |
 | \-`aboveStrategyId`         | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the above order within an order strategy.                                                                                                                                                                                                                           |
@@ -4747,7 +4555,7 @@ immediately cancels the other.
 | \-`belowClientOrderId`      | \-STRING  | \-NO      |                                                                                                                                                                                                                                                                                                           |
 | \-`belowIcebergQty`         | \-LONG    | \-NO      | \-Note that this can only be used if `belowTimeInForce` is `GTC`.                                                                                                                                                                                                                                         |
 | \-`belowPrice`              | \-DECIMAL | \-NO      | \-Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.                                                                                                                                                                                     |
-| \-`belowStopPrice`          | \-DECIMAL | \-NO      | \-Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT` or `TAKE_PROFIT_LIMIT`. Either `belowStopPrice` or `belowTrailingDelta` or both, must be specified.                                                                                                                           |
+| \-`belowStopPrice`          | \-DECIMAL | \-NO      | \-Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT` or `TAKE_PROFIT_LIMIT`. Either `belowStopPrice` or `belowTrailingDelta` or both, must be specified.                                                                                                                         |
 | \-`belowTrailingDelta`      | \-LONG    | \-NO      | \-See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq).                                                                                                                                                                                                                      |
 | \-`belowTimeInForce`        | \-ENUM    | \-NO      | \-Required if `belowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`                                                                                                                                                                                                                                     |
 | \-`belowStrategyId`         | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the below order within an order strategy.                                                                                                                                                                                                                           |
@@ -4892,6 +4700,10 @@ Places an OTO.
   is only placed on the order book when the working order gets **fully filled**.
 - If either the working order or the pending order is cancelled individually,
   the other order in the order list will also be canceled or expired.
+- When the order list is placed, if the working order gets **immediately fully
+  filled**, the placement response will show the working order as `FILLED` but
+  the pending order will still appear as `PENDING_NEW`. You need to query the
+  status of the pending order again to see its updated status.
 - OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and
   `MAX_NUM_ORDERS` filter.
 
@@ -4905,26 +4717,26 @@ Places an OTO.
 | --------------------------- | --------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | \-`symbol`                  | \-STRING  | \-YES     |                                                                                                                                                                                                                                                                                                             |
 | \-`listClientOrderId`       | \-STRING  | \-NO      | \-Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`. |
-| \-`newOrderRespType`        | \-ENUM    | \-NO      | \-Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#order-response-type-neworderresptype)                                                                                                                                                              |
-| \-`selfTradePreventionMode` | \-ENUM    | \-NO      | \-The allowed values are dependent on what is configured on the symbol. See [STP Modes](/docs/binance-spot-api-docs/enums#stp-modes)                                                                                                                                                                        |
+| \-`newOrderRespType`        | \-ENUM    | \-NO      | \-Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype)                                                                                                                                                                                 |
+| \-`selfTradePreventionMode` | \-ENUM    | \-NO      | \-The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes)                                                                                                                                                           |
 | \-`workingType`             | \-ENUM    | \-YES     | \-Supported values: `LIMIT`,`LIMIT_MAKER`                                                                                                                                                                                                                                                                   |
-| \-`workingSide`             | \-ENUM    | \-YES     | \-Supported values: [Order Side](/docs/binance-spot-api-docs/enums#order-side-side)                                                                                                                                                                                                                         |
+| \-`workingSide`             | \-ENUM    | \-YES     | \-Supported values: [Order side](/docs/binance-spot-api-docs/enums#side)                                                                                                                                                                                                                                    |
 | \-`workingClientOrderId`    | \-STRING  | \-NO      | \-Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.                                                                                                                                                                                                         |
 | \-`workingPrice`            | \-DECIMAL | \-YES     |                                                                                                                                                                                                                                                                                                             |
 | \-`workingQuantity`         | \-DECIMAL | \-YES     | \-Sets the quantity for the working order.                                                                                                                                                                                                                                                                  |
 | \-`workingIcebergQty`       | \-DECIMAL | \-NO      | \-This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.                                                                                                                                                                                                             |
-| \-`workingTimeInForce`      | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/websocket-api/trading-requests#timeInForce)                                                                                                                                                                                                 |
+| \-`workingTimeInForce`      | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce)                                                                                                                                                                                                                          |
 | \-`workingStrategyId`       | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the working order within an order strategy.                                                                                                                                                                                                                           |
 | \-`workingStrategyType`     | \-INT     | \-NO      | \-Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                              |
-| \-`pendingType`             | \-ENUM    | \-YES     | \-Supported values: [Order Types](/docs/binance-spot-api-docs/websocket-api/trading-requests#order-type) Note that `MARKET` orders using `quoteOrderQty` are not supported.                                                                                                                                 |
-| \-`pendingSide`             | \-ENUM    | \-YES     | \-Supported values: [Order Side](/docs/binance-spot-api-docs/enums#order-side-side)                                                                                                                                                                                                                         |
+| \-`pendingType`             | \-ENUM    | \-YES     | \-Supported values: [Order types](/docs/binance-spot-api-docs/websocket-api/trading-requests#order-type). Note that `MARKET` orders using `quoteOrderQty` are not supported.                                                                                                                                |
+| \-`pendingSide`             | \-ENUM    | \-YES     | \-Supported values: [Order side](/docs/binance-spot-api-docs/enums#side)                                                                                                                                                                                                                                    |
 | \-`pendingClientOrderId`    | \-STRING  | \-NO      | \-Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.                                                                                                                                                                                                         |
 | \-`pendingPrice`            | \-DECIMAL | \-NO      |                                                                                                                                                                                                                                                                                                             |
 | \-`pendingStopPrice`        | \-DECIMAL | \-NO      |                                                                                                                                                                                                                                                                                                             |
 | \-`pendingTrailingDelta`    | \-DECIMAL | \-NO      |                                                                                                                                                                                                                                                                                                             |
 | \-`pendingQuantity`         | \-DECIMAL | \-YES     | \-Sets the quantity for the pending order.                                                                                                                                                                                                                                                                  |
 | \-`pendingIcebergQty`       | \-DECIMAL | \-NO      | \-This can only be used if `pendingTimeInForce` is `GTC`, or if `pendingType` is `LIMIT_MAKER`.                                                                                                                                                                                                             |
-| \-`pendingTimeInForce`      | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/websocket-api/trading-requests#timeInForce)                                                                                                                                                                                                 |
+| \-`pendingTimeInForce`      | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce)                                                                                                                                                                                                                          |
 | \-`pendingStrategyId`       | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the pending order within an order strategy.                                                                                                                                                                                                                           |
 | \-`pendingStrategyType`     | \-INT     | \-NO      | \-Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                              |
 | \-`recvWindow`              | \-LONG    | \-NO      | \-The value cannot be greater than `60000`.                                                                                                                                                                                                                                                                 |
@@ -4936,12 +4748,12 @@ Places an OTO.
 Depending on the `pendingType` or `workingType`, some optional parameters will
 become mandatory.
 
-| Type                                                      | Additional mandatory parameters                                          | Additional information |
-| --------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------- |
-| \-`workingType` = `LIMIT`                                 | \-`workingTimeInForce`                                                   |                        |
-| \-`pendingType`\= `LIMIT`                                 | \-`pendingPrice`, `pendingTimeInForce`                                   |                        |
-| \-`pendingType`\= `STOP_LOSS` or `TAKE_PROFIT`            | \-`pendingStopPrice` and/or `pendingTrailingDelta`                       |                        |
-| \-`pendingType`\=`STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | \-`pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |                        |
+| Type                                                      | Additional mandatory parameters                                                          | Additional information |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------- |
+| \-`workingType` = `LIMIT`                                 | \-`workingTimeInForce`                                                                   |                        |
+| \-`pendingType` = `LIMIT`                                 | \-`pendingPrice`, `pendingTimeInForce`                                                   |                        |
+| \-`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`            | \-`pendingStopPrice` and/or `pendingTrailingDelta`                                       |                        |
+| \-`pendingType` =`STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | \-`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |                        |
 
 **Data Source:**
 
@@ -5073,6 +4885,9 @@ Place an OTOCO.
 - OTOCO has 2 pending orders (pending above and pending below), forming an OCO
   pair. The pending orders are only placed on the order book when the working
   order gets **fully filled**.
+  - The rules of the pending above and pending below follow the same rules as
+    the
+    [Order list OCO](/docs/binance-spot-api-docs/websocket-api/trading-requests#new-order-list---oco-trade).
 - OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and
   `MAX_NUM_ORDERS` filter.
 
@@ -5086,15 +4901,15 @@ Place an OTOCO.
 | ----------------------------- | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | \-`symbol`                    | \-STRING  | \-YES     |                                                                                                                                                                                                                                                                                                                                                |
 | \-`listClientOrderId`         | \-STRING  | \-NO      | \-Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`. |
-| \-`newOrderRespType`          | \-ENUM    | \-NO      | \-Format the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#order-response-type-neworderresptype)                                                                                                                                                                                                    |
-| \-`selfTradePreventionMode`   | \-ENUM    | \-NO      | \-The allowed values are dependent on what is configured on the symbol. See [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes)                                                                                                                                                                                                            |
+| \-`newOrderRespType`          | \-ENUM    | \-NO      | \-Format of the JSON response. Supported values: [Order Response Type](/docs/binance-spot-api-docs/enums#orderresponsetype)                                                                                                                                                                                                                    |
+| \-`selfTradePreventionMode`   | \-ENUM    | \-NO      | \-The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes)                                                                                                                                                                                              |
 | \-`workingType`               | \-ENUM    | \-YES     | \-Supported values: `LIMIT`, `LIMIT_MAKER`                                                                                                                                                                                                                                                                                                     |
 | \-`workingSide`               | \-ENUM    | \-YES     | \-Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side)                                                                                                                                                                                                                                                                       |
 | \-`workingClientOrderId`      | \-STRING  | \-NO      | \-Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.                                                                                                                                                                                                                                            |
 | \-`workingPrice`              | \-DECIMAL | \-YES     |                                                                                                                                                                                                                                                                                                                                                |
 | \-`workingQuantity`           | \-DECIMAL | \-YES     |                                                                                                                                                                                                                                                                                                                                                |
 | \-`workingIcebergQty`         | \-DECIMAL | \-NO      | \-This can only be used if `workingTimeInForce` is `GTC`.                                                                                                                                                                                                                                                                                      |
-| \-`workingTimeInForce`        | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/websocket-api/trading-requests#timeInForce)                                                                                                                                                                                                                                    |
+| \-`workingTimeInForce`        | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce)                                                                                                                                                                                                                                                             |
 | \-`workingStrategyId`         | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the working order within an order strategy.                                                                                                                                                                                                                                                              |
 | \-`workingStrategyType`       | \-INT     | \-NO      | \-Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                                                                 |
 | \-`pendingSide`               | \-ENUM    | \-YES     | \-Supported values: [Order Side](/docs/binance-spot-api-docs/enums#side)                                                                                                                                                                                                                                                                       |
@@ -5110,11 +4925,11 @@ Place an OTOCO.
 | \-`pendingAboveStrategyType`  | \-INT     | \-NO      | \-Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                                                           |
 | \-`pendingBelowType`          | \-ENUM    | \-NO      | \-Supported values: `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`,`TAKE_PROFIT_LIMIT`                                                                                                                                                                                                                                                          |
 | \-`pendingBelowClientOrderId` | \-STRING  | \-NO      | \-Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.                                                                                                                                                                                                                                      |
-| \-`pendingBelowPrice`         | \-DECIMAL | \-NO      | \-Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price                                                                                                                                                                                                                                         |
+| \-`pendingBelowPrice`         | \-DECIMAL | \-NO      | \-Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify the limit price.                                                                                                                                                                                                                                    |
 | \-`pendingBelowStopPrice`     | \-DECIMAL | \-NO      | \-Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.                                                                                                                                             |
 | \-`pendingBelowTrailingDelta` | \-DECIMAL | \-NO      |                                                                                                                                                                                                                                                                                                                                                |
 | \-`pendingBelowIcebergQty`    | \-DECIMAL | \-NO      | \-This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.                                                                                                                                                                                                                                      |
-| \-`pendingBelowTimeInForce`   | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/websocket-api/trading-requests#timeInForce)                                                                                                                                                                                                                                    |
+| \-`pendingBelowTimeInForce`   | \-ENUM    | \-NO      | \-Supported values: [Time In Force](/docs/binance-spot-api-docs/enums#timeinforce)                                                                                                                                                                                                                                                             |
 | \-`pendingBelowStrategyId`    | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the pending below order within an order strategy.                                                                                                                                                                                                                                                        |
 | \-`pendingBelowStrategyType`  | \-INT     | \-NO      | \-Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                                                           |
 | \-`recvWindow`                | \-LONG    | \-NO      | \-The value cannot be greater than `60000`.                                                                                                                                                                                                                                                                                                    |
@@ -5251,86 +5066,6 @@ optional parameters will become mandatory.
 refer to
 [Conditional fields in Order Responses](/docs/binance-spot-api-docs/websocket-api/trading-requests#conditional-fields-in-order-responses).
 
-##### Query Order list (USER_DATA)
-
-```json
-{
-  "id": "b53fd5ff-82c7-4a04-bd64-5f9dc42c2100",
-  "method": "orderList.status",
-  "params": {
-    "origClientOrderId": "08985fedd9ea2cf6b28996",
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
-    "signature": "d12f4e8892d46c0ddfbd43d556ff6d818581b3be22a02810c2c20cb719aed6a4",
-    "timestamp": 1660801713965
-  }
-}
-```
-
-Check execution status of an Order list.
-
-For execution status of individual orders, use
-[`order.status`](/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data).
-
-**Weight:** 4
-
-**Parameters**:
-
-| Name                  | Type     | Mandatory                                                                                  | Description                                                                                      |
-| --------------------- | -------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| \-`origClientOrderId` | \-STRING | \-NO\*                                                                                     | \-Query order list by `listClientOrderId`.`orderListId` or `origClientOrderId` must be provided. |
-| \-`orderListId`       | \-INT    | \-Query order list by `orderListId`.`orderListId` or `origClientOrderId` must be provided. |
-| \-`apiKey`            | \-STRING | \-YES                                                                                      |                                                                                                  |
-| \-`recvWindow`        | \-LONG   | \-NO                                                                                       | \-The value cannot be greater than 60000                                                         |
-| \-`signature`         | \-STRING | \-YES                                                                                      |                                                                                                  |
-| \-`timestamp`         | \-LONG   | \-YES                                                                                      |                                                                                                  |
-
-Notes:
-
-- `origClientOrderId` refers to `listClientOrderId` of the order list itself.
-- If both `origClientOrderId` and `orderListId` parameters are specified, only
-  `origClientOrderId` is used and `orderListId` is ignored.
-
-**Data Source:** Database
-
-**Response:**
-
-```json
-{
-  "id": "b53fd5ff-82c7-4a04-bd64-5f9dc42c2100",
-  "status": 200,
-  "result": {
-    "orderListId": 1274512,
-    "contingencyType": "OCO",
-    "listStatusType": "EXEC_STARTED",
-    "listOrderStatus": "EXECUTING",
-    "listClientOrderId": "08985fedd9ea2cf6b28996",
-    "transactionTime": 1660801713793,
-    "symbol": "BTCUSDT",
-    "orders": [
-      {
-        "symbol": "BTCUSDT",
-        "orderId": 12569138901,
-        "clientOrderId": "BqtFCj5odMoWtSqGk2X9tU"
-      },
-      {
-        "symbol": "BTCUSDT",
-        "orderId": 12569138902,
-        "clientOrderId": "jLnZpj5enfMXTuhKB1d0us"
-      }
-    ]
-  },
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 4
-    }
-  ]
-}
-```
-
 ##### Cancel Order list (TRADE)
 
 ```json
@@ -5366,9 +5101,11 @@ Cancel an active order list.
 
 Notes:
 
-- If both `orderListId` and `listClientOrderId` parameters are specified, only
-  `orderListId` is used and `listClientOrderId` is ignored.
-- Canceling an individual leg with
+- If both `orderListId` and `listClientOrderId` parameters are provided, the
+  `orderListId` is searched first, then the `listClientOrderId` from that result
+  is checked against that order. If both conditions are not met the request will
+  be rejected.
+- Canceling an individual order with
   [`order.cancel`](/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-trade)
   will cancel the entire order list as well.
 
@@ -5450,84 +5187,6 @@ Notes:
 }
 ```
 
-##### Current open Order lists (USER_DATA)
-
-```json
-{
-  "id": "3a4437e2-41a3-4c19-897c-9cadc5dce8b6",
-  "method": "openOrderLists.status",
-  "params": {
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
-    "signature": "1bea8b157dd78c3da30359bddcd999e4049749fe50b828e620e12f64e8b433c9",
-    "timestamp": 1660801713831
-  }
-}
-```
-
-Query execution status of all open order lists.
-
-If you need to continuously monitor order status updates, please consider using
-WebSocket Streams:
-
-- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
-  request
-- [`executionReport`](/docs/binance-spot-api-docs/user-data-stream#order-update)
-  user data stream event
-
-**Weight**: 6
-
-**Parameters:**
-
-| Name           | Type     | Mandatory | Description                                |
-| -------------- | -------- | --------- | ------------------------------------------ |
-| \-`apiKey`     | \-STRING | \-YES     |                                            |
-| \-`recvWindow` | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-`signature`  | \-STRING | \-YES     |                                            |
-| \-`timestamp`  | \-LONG   | \-YES     |                                            |
-
-**Data Source:** Database
-
-**Response:**
-
-```json
-{
-  "id": "3a4437e2-41a3-4c19-897c-9cadc5dce8b6",
-  "status": 200,
-  "result": [
-    {
-      "orderListId": 0,
-      "contingencyType": "OCO",
-      "listStatusType": "EXEC_STARTED",
-      "listOrderStatus": "EXECUTING",
-      "listClientOrderId": "08985fedd9ea2cf6b28996",
-      "transactionTime": 1660801713793,
-      "symbol": "BTCUSDT",
-      "orders": [
-        {
-          "symbol": "BTCUSDT",
-          "orderId": 4,
-          "clientOrderId": "CUhLgTXnX5n2c0gWiLpV4d"
-        },
-        {
-          "symbol": "BTCUSDT",
-          "orderId": 5,
-          "clientOrderId": "1ZqG7bBuYwaF4SU8CwnwHm"
-        }
-      ]
-    }
-  ],
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 6
-    }
-  ]
-}
-```
-
 #### SOR
 
 ##### Place new order using SOR (TRADE)
@@ -5554,6 +5213,8 @@ Places an order using smart order routing (SOR).
 
 This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS`
 filter.
+
+Read [SOR FAQ](/docs/faqs/sor_faq) to learn more.
 
 **Weight:** 1
 
@@ -5840,55 +5501,180 @@ Query information about your account.
 }
 ```
 
-#### Unfilled Order Count (USER_DATA)
+#### Query order (USER_DATA)
 
 ```json
 {
-  "id": "d3783d8d-f8d1-4d2c-b8a0-b7596af5a664",
-  "method": "account.rateLimits.orders",
+  "id": "aa62318a-5a97-4f3b-bdc7-640bbe33b291",
+  "method": "order.status",
   "params": {
+    "symbol": "BTCUSDT",
+    "orderId": 12569099453,
     "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
-    "signature": "76289424d6e288f4dc47d167ac824e859dabf78736f4348abbbac848d719eb94",
-    "timestamp": 1660801839500
+    "signature": "2c3aab5a078ee4ea465ecd95523b77289f61476c2f238ec10c55ea6cb11a6f35",
+    "timestamp": 1660801720951
   }
 }
 ```
 
-Query your current unfilled order count for all intervals.
+Check execution status of an order.
 
-**Weight:** 40
+**Weight:** 4
 
 **Parameters:**
 
-| Name           | Type     | Mandatory | Description                                |
-| -------------- | -------- | --------- | ------------------------------------------ |
-| \-`apiKey`     | \-STRING | \-YES     |                                            |
-| \-`recvWindow` | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-`signature`  | \-STRING | \-YES     |                                            |
-| \-`timestamp`  | \-LONG   | \-YES     |                                            |
+| Name                  | Type     | Mandatory                         | Description                              |
+| --------------------- | -------- | --------------------------------- | ---------------------------------------- |
+| \-`symbol`            | \-STRING | \-YES                             |                                          |
+| \-`orderId`           | \-INT    | \-YES                             | \-Lookup order by `orderId`              |
+| \-`origClientOrderId` | \-STRING | \-Lookup order by `clientOrderId` |
+| \-`apiKey`            | \-STRING | \-YES                             |                                          |
+| \-`recvWindow`        | \-LONG   | \-NO                              | \-The value cannot be greater than 60000 |
+| \-`signature`         | \-STRING | \-YES                             |                                          |
+| \-`timestamp`         | \-LONG   | \-YES                             |                                          |
 
-**Data Source:** Memory
+Notes:
+
+- If both `orderId` and `origClientOrderId` are provided, the `orderId` is
+  searched first, then the `origClientOrderId` from that result is checked
+  against that order. If both conditions are not met the request will be
+  rejected.
+- For some historical orders the `cummulativeQuoteQty` response field may be
+  negative, meaning the data is not available at this time.
+
+**Data Source:** Memory => Database
 
 **Response:**
 
 ```json
 {
-  "id": "d3783d8d-f8d1-4d2c-b8a0-b7596af5a664",
+  "id": "aa62318a-5a97-4f3b-bdc7-640bbe33b291",
+  "status": 200,
+  "result": {
+    "symbol": "BTCUSDT",
+    "orderId": 12569099453,
+    "orderListId": -1, // set only for orders of an order list
+    "clientOrderId": "4d96324ff9d44481926157",
+    "price": "23416.10000000",
+    "origQty": "0.00847000",
+    "executedQty": "0.00847000",
+    "cummulativeQuoteQty": "198.33521500",
+    "status": "FILLED",
+    "timeInForce": "GTC",
+    "type": "LIMIT",
+    "side": "SELL",
+    "stopPrice": "0.00000000", // always present, zero if order type does not use stopPrice
+    "trailingDelta": 10, // present only if trailingDelta set for the order
+    "trailingTime": -1, // present only if trailingDelta set for the order
+    "icebergQty": "0.00000000", // always present, zero for non-iceberg orders
+    "time": 1660801715639, // time when the order was placed
+    "updateTime": 1660801717945, // time of the last update to the order
+    "isWorking": true,
+    "workingTime": 1660801715639,
+    "origQuoteOrderQty": "0.00000000", // always present, zero if order type does not use quoteOrderQty
+    "strategyId": 37463720, // present only if strategyId set for the order
+    "strategyType": 1000000, // present only if strategyType set for the order
+    "selfTradePreventionMode": "NONE",
+    "preventedMatchId": 0, // present only if the order expired due to STP
+    "preventedQuantity": "1.200000" // present only if the order expired due to STP
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
+```
+
+**Note:** The payload above does not show all fields that can appear. Please
+refer to
+[Conditional fields in Order Responses](/docs/binance-spot-api-docs/websocket-api/trading-requests#conditional-fields-in-order-responses).
+
+#### Current open orders (USER_DATA)
+
+```json
+{
+  "id": "55f07876-4f6f-4c47-87dc-43e5fff3f2e7",
+  "method": "openOrders.status",
+  "params": {
+    "symbol": "BTCUSDT",
+    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "signature": "d632b3fdb8a81dd44f82c7c901833309dd714fe508772a89b0a35b0ee0c48b89",
+    "timestamp": 1660813156812
+  }
+}
+```
+
+Query execution status of all open orders.
+
+If you need to continuously monitor order status updates, please consider using
+WebSocket Streams:
+
+- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
+  request
+- [`executionReport`](/docs/binance-spot-api-docs/user-data-stream#order-update)
+  user data stream event
+
+**Weight:** Adjusted based on the number of requested symbols:
+
+| Parameter  | Weight |
+| ---------- | ------ |
+| \-`symbol` | \-6    |
+| \-none     | \-80   |
+
+**Parameters:**
+
+| Name           | Type     | Mandatory | Description                                            |
+| -------------- | -------- | --------- | ------------------------------------------------------ |
+| \-`symbol`     | \-STRING | \-NO      | \-If omitted, open orders for all symbols are returned |
+| \-`apiKey`     | \-STRING | \-YES     |                                                        |
+| \-`recvWindow` | \-LONG   | \-NO      | \-The value cannot be greater than `60000`             |
+| \-`signature`  | \-STRING | \-YES     |                                                        |
+| \-`timestamp`  | \-LONG   | \-YES     |                                                        |
+
+**Data Source:** Memory => Database
+
+**Response:**
+
+Status reports for open orders are identical to
+[`order.status`](/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-user_data).
+
+Note that some fields are optional and included only for orders that set them.
+
+Open orders are always returned as a flat list. If all symbols are requested,
+use the `symbol` field to tell which symbol the orders belong to.
+
+```json
+{
+  "id": "55f07876-4f6f-4c47-87dc-43e5fff3f2e7",
   "status": 200,
   "result": [
     {
-      "rateLimitType": "ORDERS",
-      "interval": "SECOND",
-      "intervalNum": 10,
-      "limit": 50,
-      "count": 0
-    },
-    {
-      "rateLimitType": "ORDERS",
-      "interval": "DAY",
-      "intervalNum": 1,
-      "limit": 160000,
-      "count": 0
+      "symbol": "BTCUSDT",
+      "orderId": 12569099453,
+      "orderListId": -1,
+      "clientOrderId": "4d96324ff9d44481926157",
+      "price": "23416.10000000",
+      "origQty": "0.00847000",
+      "executedQty": "0.00720000",
+      "origQuoteOrderQty": "0.000000",
+      "cummulativeQuoteQty": "172.43931000",
+      "status": "PARTIALLY_FILLED",
+      "timeInForce": "GTC",
+      "type": "LIMIT",
+      "side": "SELL",
+      "stopPrice": "0.00000000",
+      "icebergQty": "0.00000000",
+      "time": 1660801715639,
+      "updateTime": 1660801717945,
+      "isWorking": true,
+      "workingTime": 1660801715639,
+      "origQuoteOrderQty": "0.00000000",
+      "selfTradePreventionMode": "NONE"
     }
   ],
   "rateLimits": [
@@ -5897,11 +5683,15 @@ Query your current unfilled order count for all intervals.
       "interval": "MINUTE",
       "intervalNum": 1,
       "limit": 6000,
-      "count": 40
+      "count": 6
     }
   ]
 }
 ```
+
+**Note:** The payload above does not show all fields that can appear. Please
+refer to
+[Conditional fields in Order Responses](/docs/binance-spot-api-docs/websocket-api/trading-requests#conditional-fields-in-order-responses).
 
 #### Account order history (USER_DATA)
 
@@ -6003,7 +5793,165 @@ Note that some fields are optional and included only for orders that set them.
 }
 ```
 
-#### Account Order list history (USER_DATA)
+#### Query Order list (USER_DATA)
+
+```json
+{
+  "id": "b53fd5ff-82c7-4a04-bd64-5f9dc42c2100",
+  "method": "orderList.status",
+  "params": {
+    "origClientOrderId": "08985fedd9ea2cf6b28996",
+    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "signature": "d12f4e8892d46c0ddfbd43d556ff6d818581b3be22a02810c2c20cb719aed6a4",
+    "timestamp": 1660801713965
+  }
+}
+```
+
+Check execution status of an Order list.
+
+For execution status of individual orders, use
+[`order.status`](/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-user_data).
+
+**Weight:** 4
+
+**Parameters**:
+
+| Name                  | Type     | Mandatory                                                                                  | Description                                                                                      |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| \-`origClientOrderId` | \-STRING | \-NO\*                                                                                     | \-Query order list by `listClientOrderId`.`orderListId` or `origClientOrderId` must be provided. |
+| \-`orderListId`       | \-INT    | \-Query order list by `orderListId`.`orderListId` or `origClientOrderId` must be provided. |
+| \-`apiKey`            | \-STRING | \-YES                                                                                      |                                                                                                  |
+| \-`recvWindow`        | \-LONG   | \-NO                                                                                       | \-The value cannot be greater than 60000                                                         |
+| \-`signature`         | \-STRING | \-YES                                                                                      |                                                                                                  |
+| \-`timestamp`         | \-LONG   | \-YES                                                                                      |                                                                                                  |
+
+Notes:
+
+- `origClientOrderId` refers to `listClientOrderId` of the order list itself.
+- If both `origClientOrderId` and `orderListId` parameters are specified, only
+  `origClientOrderId` is used and `orderListId` is ignored.
+
+**Data Source:** Database
+
+**Response:**
+
+```json
+{
+  "id": "b53fd5ff-82c7-4a04-bd64-5f9dc42c2100",
+  "status": 200,
+  "result": {
+    "orderListId": 1274512,
+    "contingencyType": "OCO",
+    "listStatusType": "EXEC_STARTED",
+    "listOrderStatus": "EXECUTING",
+    "listClientOrderId": "08985fedd9ea2cf6b28996",
+    "transactionTime": 1660801713793,
+    "symbol": "BTCUSDT",
+    "orders": [
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138901,
+        "clientOrderId": "BqtFCj5odMoWtSqGk2X9tU"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138902,
+        "clientOrderId": "jLnZpj5enfMXTuhKB1d0us"
+      }
+    ]
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}
+```
+
+#### Current open Order lists (USER_DATA)
+
+```json
+{
+  "id": "3a4437e2-41a3-4c19-897c-9cadc5dce8b6",
+  "method": "openOrderLists.status",
+  "params": {
+    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "signature": "1bea8b157dd78c3da30359bddcd999e4049749fe50b828e620e12f64e8b433c9",
+    "timestamp": 1660801713831
+  }
+}
+```
+
+Query execution status of all open order lists.
+
+If you need to continuously monitor order status updates, please consider using
+WebSocket Streams:
+
+- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
+  request
+- [`executionReport`](/docs/binance-spot-api-docs/user-data-stream#order-update)
+  user data stream event
+
+**Weight**: 6
+
+**Parameters:**
+
+| Name           | Type     | Mandatory | Description                                |
+| -------------- | -------- | --------- | ------------------------------------------ |
+| \-`apiKey`     | \-STRING | \-YES     |                                            |
+| \-`recvWindow` | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
+| \-`signature`  | \-STRING | \-YES     |                                            |
+| \-`timestamp`  | \-LONG   | \-YES     |                                            |
+
+**Data Source:** Database
+
+**Response:**
+
+```json
+{
+  "id": "3a4437e2-41a3-4c19-897c-9cadc5dce8b6",
+  "status": 200,
+  "result": [
+    {
+      "orderListId": 0,
+      "contingencyType": "OCO",
+      "listStatusType": "EXEC_STARTED",
+      "listOrderStatus": "EXECUTING",
+      "listClientOrderId": "08985fedd9ea2cf6b28996",
+      "transactionTime": 1660801713793,
+      "symbol": "BTCUSDT",
+      "orders": [
+        {
+          "symbol": "BTCUSDT",
+          "orderId": 4,
+          "clientOrderId": "CUhLgTXnX5n2c0gWiLpV4d"
+        },
+        {
+          "symbol": "BTCUSDT",
+          "orderId": 5,
+          "clientOrderId": "1ZqG7bBuYwaF4SU8CwnwHm"
+        }
+      ]
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 6
+    }
+  ]
+}
+```
+
+#### Account order list history (USER_DATA)
 
 ```json
 {
@@ -6197,6 +6145,69 @@ Notes:
       "intervalNum": 1,
       "limit": 6000,
       "count": 20
+    }
+  ]
+}
+```
+
+#### Unfilled Order Count (USER_DATA)
+
+```json
+{
+  "id": "d3783d8d-f8d1-4d2c-b8a0-b7596af5a664",
+  "method": "account.rateLimits.orders",
+  "params": {
+    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "signature": "76289424d6e288f4dc47d167ac824e859dabf78736f4348abbbac848d719eb94",
+    "timestamp": 1660801839500
+  }
+}
+```
+
+Query your current unfilled order count for all intervals.
+
+**Weight:** 40
+
+**Parameters:**
+
+| Name           | Type     | Mandatory | Description                                |
+| -------------- | -------- | --------- | ------------------------------------------ |
+| \-`apiKey`     | \-STRING | \-YES     |                                            |
+| \-`recvWindow` | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
+| \-`signature`  | \-STRING | \-YES     |                                            |
+| \-`timestamp`  | \-LONG   | \-YES     |                                            |
+
+**Data Source:** Memory
+
+**Response:**
+
+```json
+{
+  "id": "d3783d8d-f8d1-4d2c-b8a0-b7596af5a664",
+  "status": 200,
+  "result": [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 0
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 0
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 40
     }
   ]
 }
@@ -6459,8 +6470,6 @@ Queries all amendments of a single order.
 
 **Weight**: 4
 
-**Data Source:** Database
-
 **Parameters:**
 
 | Name              | Type     | Mandatory | Description                                 |
@@ -6471,6 +6480,8 @@ Queries all amendments of a single order.
 | \-limit           | \-INT    | \-NO      | \-Default:500; Maximum: 1000                |
 | \-recvWindow      | \-LONG   | \-NO      | \-The value cannot be greater than `60000`. |
 | \-timestamp       | \-LONG   | \-YES     |                                             |
+
+**Data Source:** Database
 
 **Response:**
 

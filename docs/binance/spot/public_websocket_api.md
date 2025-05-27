@@ -1392,7 +1392,7 @@ To apply an event to your local order book, follow this update procedure:
   disconnected after the 24-hour mark.
 - Responses are in JSON by default. To receive responses in SBE, refer to the
   [SBE FAQ](/docs/binance-spot-api-docs/faqs/sbe_faq) page.
-- The WebSocket server will send a `ping frame` every 20 seconds.\`
+- The WebSocket server will send a `ping frame` every 20 seconds.
   - If the WebSocket server does not receive a `pong frame` back from the
     connection within a minute the connection will be disconnected.
   - When you receive a ping, you must send a pong with a copy of ping's payload
@@ -1403,7 +1403,7 @@ To apply an event to your local order book, follow this update procedure:
 - All timestamps in the JSON responses are in **milliseconds in UTC by
   default**. To receive the information in microseconds, please add the
   parameter `timeUnit=MICROSECOND` or `timeUnit=microsecond` in the URL.
-- Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp)` can be passed
+- Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp`) can be passed
   in milliseconds or microseconds.
 - All field names and values are **case-sensitive**, unless noted otherwise.
 - If there are enums or terms you want clarification on, please see
@@ -1592,7 +1592,7 @@ error codes and messages.
 User Data Stream events for non-SBE sessions are sent as JSON in **text
 frames**, one event per frame.
 
-Events in SBE sessions will be sent as **binary frames.**
+Events in SBE sessions will be sent as **binary frames**.
 
 Please refer to
 [`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
