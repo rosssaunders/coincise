@@ -225,7 +225,11 @@ Retrieve funding rate.
 
 #### Rate Limit: 20 requests per 2 seconds
 
-#### Rate limit rule: IP + Instrument ID
+#### Rate limit rule: IP + Instrument ID (if instId ≠ ANY)
+
+#### Rate Limit: 1 requests per 2 seconds
+
+#### Rate limit rule: IP + Instrument ID (if instId = ANY)
 
 #### HTTP Request
 
@@ -233,16 +237,16 @@ Retrieve funding rate.
 
 #### Request Parameters
 
-| Parameter | Type   | Required | Description                                                                           |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| instId    | String | Yes      | Instrument ID, e.g. <code>BTC-USD-SWAP</code><br>only applicable to <code>SWAP</code> |
+| Parameter | Type   | Required | Description                                                                                                                                                   |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| instId    | String | Yes      | Instrument ID, e.g. <code>BTC-USD-SWAP</code> or <code>ANY</code> to return the funding rate info of all swap symbols<br>only applicable to <code>SWAP</code> |
 
 #### Response Parameters
 
 | **Parameter**   | **Type** | **Description**                                                                                                                                                                                                                 |
 | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | instType        | String   | Instrument type <code>SWAP</code>                                                                                                                                                                                               |
-| instId          | String   | Instrument ID, e.g. <code>BTC-USD-SWAP</code>                                                                                                                                                                                   |
+| instId          | String   | Instrument ID, e.g. <code>BTC-USD-SWAP</code> or <code>ANY</code>                                                                                                                                                               |
 | method          | String   | Funding rate mechanism<br><code>current_period</code><del><br><code>next_period</code></del>(no longer supported)                                                                                                               |
 | formulaType     | String   | Formula type<br><code>noRate</code>: old funding rate formula<br><code>withRate</code>: new funding rate formula                                                                                                                |
 | fundingRate     | String   | Current funding rate                                                                                                                                                                                                            |

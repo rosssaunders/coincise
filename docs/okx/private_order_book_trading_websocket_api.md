@@ -313,8 +313,8 @@ The Production Trading URL:
 
 ## Demo Trading Services
 
-Currently, the V5 API works for Demo Trading, but some functions are not
-supported, such as `withdraw`,`deposit`,`purchase/redemption`, etc.
+Currently, the API works for Demo Trading, but some functions are not supported,
+such as `withdraw`,`deposit`,`purchase/redemption`, etc.
 
 The Demo Trading URL:
 
@@ -328,7 +328,7 @@ account, you can log in directly.
 
 Start API Demo Trading by the following steps:  
 Login OKX —> Trade —> Demo Trading —> Personal Center —> Demo Trading API ->
-Create Demo Trading V5 API Key —> Start your Demo Trading
+Create Demo Trading API Key —> Start your Demo Trading
 
 Note: \`x-simulated-trading: 1\` needs to be added to the header of the Demo
 Trading request.
