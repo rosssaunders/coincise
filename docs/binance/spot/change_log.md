@@ -2,7 +2,17 @@
 
 ## CHANGELOG for Binance's API
 
-**Last Updated: 2025-05-22**
+**Last Updated: 2025-05-28**
+
+#### 2025-05-28
+
+- Documented API timeout value and error under General API Information for each
+  API:
+  - [FIX](/docs/binance-spot-api-docs/fix-api#general-api-information)
+  - [REST](/docs/rest-api.md#general-api-information)
+  - [WebSocket](/docs/web-socket-api.md#general-api-information)
+
+---
 
 #### 2025-05-22
 

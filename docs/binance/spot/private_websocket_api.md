@@ -1675,6 +1675,15 @@ To apply an event to your local order book, follow this update procedure:
 - If there are enums or terms you want clarification on, please see
   [SPOT Glossary](/docs/binance-spot-api-docs/faqs/spot_glossary) for more
   information.
+- APIs have a timeout of 10 seconds when processing a request. If a response
+  from the Matching Engine takes longer than this, the API responds with
+  "Timeout waiting for response from backend server. Send status unknown;
+  execution status unknown."
+  [(-1007 TIMEOUT)](/docs/binance-spot-api-docs/errors#-1007-timeout)
+  - This does not always mean that the request failed in the Matching Engine.
+  - If the status of the request has not appeared in
+    [User Data Stream](/docs/binance-spot-api-docs/user-data-stream), please
+    perform an API query for its status.
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-api-information](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-api-information)
