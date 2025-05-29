@@ -923,6 +923,22 @@ _Option_:
 - `CancelTaker`
 - `CancelBoth`
 
+### extraFees.feeType[​](#extrafeesfeetype "Direct link to heading")
+
+- `UNKNOWN`
+- `TAX` Government tax. Only for Indonesian site
+- `CFX` Indonesian foreign exchange tax. Only for Indonesian site
+- `WHT` EU withholding tax. Only for EU site
+
+### extraFees.subFeeType[​](#extrafeessubfeetype "Direct link to heading")
+
+- `UNKNOWN`
+- `TAX_PNN` Tax fee, fiat currency to digital currency. Only for Indonesian site
+- `TAX_PPH` Tax fee, digital currency to fiat currency. Only for Indonesian site
+- `CFX_FIEE` CFX fee, fiat currency to digital currency. Only for Indonesian
+  site
+- `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
+
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
 with the example of BTCUSDT:
@@ -2897,6 +2913,7 @@ GET `/v5/market/delivery-price`
 | <a href="/docs/v5/enum#category">category</a> | <strong>true</strong> | string  | Product type. <code>linear</code>, <code>inverse</code>, <code>option</code>                                    |
 | symbol                                        | false                 | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                          |
 | baseCoin                                      | false                 | string  | Base coin, uppercase only. Default: <code>BTC</code>. <em>Valid for <code>option</code> only</em>               |
+| settleCoin                                    | false                 | string  | Settle coin, uppercase only. Default: <code>USDC</code>.                                                        |
 | limit                                         | false                 | integer | Limit for data size per page. [<code>1</code>, <code>200</code>]. Default: <code>50</code>                      |
 | cursor                                        | false                 | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set |
 

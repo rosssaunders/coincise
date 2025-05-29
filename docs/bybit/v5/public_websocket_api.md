@@ -923,6 +923,22 @@ _Option_:
 - `CancelTaker`
 - `CancelBoth`
 
+### extraFees.feeType[​](#extrafeesfeetype "Direct link to heading")
+
+- `UNKNOWN`
+- `TAX` Government tax. Only for Indonesian site
+- `CFX` Indonesian foreign exchange tax. Only for Indonesian site
+- `WHT` EU withholding tax. Only for EU site
+
+### extraFees.subFeeType[​](#extrafeessubfeetype "Direct link to heading")
+
+- `UNKNOWN`
+- `TAX_PNN` Tax fee, fiat currency to digital currency. Only for Indonesian site
+- `TAX_PPH` Tax fee, digital currency to fiat currency. Only for Indonesian site
+- `CFX_FIEE` CFX fee, fiat currency to digital currency. Only for Indonesian
+  site
+- `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
+
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
 with the example of BTCUSDT:
