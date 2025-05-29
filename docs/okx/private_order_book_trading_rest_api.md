@@ -632,8 +632,8 @@ The Production Trading URL:
 
 ## Demo Trading Services
 
-Currently, the V5 API works for Demo Trading, but some functions are not
-supported, such as `withdraw`,`deposit`,`purchase/redemption`, etc.
+Currently, the API works for Demo Trading, but some functions are not supported,
+such as `withdraw`,`deposit`,`purchase/redemption`, etc.
 
 The Demo Trading URL:
 
@@ -647,7 +647,7 @@ account, you can log in directly.
 
 Start API Demo Trading by the following steps:  
 Login OKX —> Trade —> Demo Trading —> Personal Center —> Demo Trading API ->
-Create Demo Trading V5 API Key —> Start your Demo Trading
+Create Demo Trading API Key —> Start your Demo Trading
 
 Note: \`x-simulated-trading: 1\` needs to be added to the header of the Demo
 Trading request.
@@ -1681,8 +1681,8 @@ none
 | posMode             | String           | Position mode<br><code>long_short_mode</code>: long/short, only applicable to <code>FUTURES</code>/<code>SWAP</code><br><code>net_mode</code>: net                                                                                                                                                                                                                                                              |
 | autoLoan            | Boolean          | Whether to borrow coins automatically<br><code>true</code>: borrow coins automatically<br><code>false</code>: not borrow coins automatically                                                                                                                                                                                                                                                                    |
 | greeksType          | String           | Current display type of Greeks<br><code>PA</code>: Greeks in coins<br><code>BS</code>: Black-Scholes Greeks in dollars                                                                                                                                                                                                                                                                                          |
-| level               | String           | The user level of the current real trading volume on the platform, e.g <code>Lv1</code>                                                                                                                                                                                                                                                                                                                         |
-| levelTmp            | String           | Temporary experience user level of special users, e.g <code>Lv3</code>                                                                                                                                                                                                                                                                                                                                          |
+| level               | String           | The user level of the current real trading volume on the platform, e.g <code>Lv1</code>, which means regular user level.                                                                                                                                                                                                                                                                                        |
+| levelTmp            | String           | Temporary experience user level of special users, e.g <code>Lv1</code>                                                                                                                                                                                                                                                                                                                                          |
 | ctIsoMode           | String           | Contract isolated margin trading settings<br><code>automatic</code>: Auto transfers<br><code>autonomy</code>: Manual transfers                                                                                                                                                                                                                                                                                  |
 | mgnIsoMode          | String           | Margin isolated margin trading settings<br><code>auto_transfers_ccy</code>: New auto transfers, enabling both base and quote currency as the margin for isolated margin trading<br><code>automatic</code>: Auto transfers<br><code>quick_margin</code>: Quick Margin Mode (For new accounts, including subaccounts, some defaults will be <code>automatic</code>, and others will be <code>quick_margin</code>) |
 | spotOffsetType      | String           | <del>Risk offset type<br><code>1</code>: Spot-Derivatives(USDT) to be offsetted<br><code>2</code>: Spot-Derivatives(Coin) to be offsetted<br><code>3</code>: Only derivatives to be offsetted<br>Only applicable to <code>Portfolio margin</code></del><br>(Deprecated)                                                                                                                                         |
@@ -5202,7 +5202,7 @@ supported for 1s candlestick).
 
 #### Rate limit rule: IP
 
-\=#### HTTP Request
+#### HTTP Request
 
 `GET /api/v5/market/history-candles`
 
