@@ -1,6 +1,6 @@
 # Deribit Private Account API Documentation
 
-# Deribit API v2.1.1
+# Deribit API v2.1.0
 
 # Overview
 
