@@ -58,7 +58,7 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         id: ai-summary
         run: |
-          cd ../../../  # Move back to root directory for git operations
+          cd ../..  # Move back to root directory for git operations
           # Generate AI summary using the shared utility
           SUMMARY=$(cd venues/shared && npm run generate-pr-summary ../../ 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           # Escape the summary for GitHub Actions
