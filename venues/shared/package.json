@@ -4,11 +4,15 @@
   "description": "Shared utilities for crypto API documentation extraction",
   "type": "module",
   "main": "utils.js",
+  "scripts": {
+    "generate-pr-summary": "node generate-pr-summary.js"
+  },
   "dependencies": {
+    "json5": "^2.2.3",
+    "openai": "^4.103.0",
     "prettier": "^3.2.4",
     "puppeteer": "^24.8.0",
     "turndown": "^7.1.2",
-    "turndown-plugin-gfm": "^1.0.2",
-    "json5": "^2.2.3"
+    "turndown-plugin-gfm": "^1.0.2"
   }
 }

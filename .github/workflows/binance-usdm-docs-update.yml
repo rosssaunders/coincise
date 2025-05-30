@@ -63,6 +63,20 @@ jobs:
           # Check if there are any changes
           git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
 
+      - name: Generate AI PR Summary
+        if: steps.git-check.outputs.changes == 'true'
+        id: ai-summary
+        run: |
+          cd ../../../  # Move back to root directory for git operations
+          # Generate AI summary using the shared utility
+          SUMMARY=$(cd venues/shared && npm run generate-pr-summary ../../ 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          # Escape the summary for GitHub Actions
+          echo "summary<<EOF" >> $GITHUB_OUTPUT
+          echo "$SUMMARY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v7
@@ -73,6 +87,6 @@ jobs:
           base: "main"
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
-          body: ""
+          body: ${{ steps.ai-summary.outputs.summary }}
           reviewers: "@rosssaunders"
           labels: "auto-docs-update"
