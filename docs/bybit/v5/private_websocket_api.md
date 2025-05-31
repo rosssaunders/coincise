@@ -1535,6 +1535,12 @@ with the example of BTCUSDT:
 | 180018 | internal error                                                 |
 | 180019 | empty order link id                                            |
 
+## User[​](#user "Direct link to heading")
+
+| Code  | Description                                  |
+| :---: | :------------------------------------------- |
+| 81007 | Bybit Europe is not supported create API Key |
+
 # Connect
 
 **[WebSocket public stream](/docs/v5/websocket/public/orderbook):**
@@ -1544,15 +1550,15 @@ with the example of BTCUSDT:
   USDT, USDC perpetual & USDT Futures:
   `wss://stream.bybit.com/v5/public/linear`  
   Inverse contract: `wss://stream.bybit.com/v5/public/inverse`  
-  Spread trading: `wss://stream.bybit.com/v5/public/spread` USDT/USDC Options:
-  `wss://stream.bybit.com/v5/public/option`
+  Spread trading: `wss://stream.bybit.com/v5/public/spread`  
+  USDT/USDC Options: `wss://stream.bybit.com/v5/public/option`
 - **Testnet:**  
   Spot: `wss://stream-testnet.bybit.com/v5/public/spot`  
   USDT,USDC perpetual & USDT Futures:
   `wss://stream-testnet.bybit.com/v5/public/linear`  
   Inverse contract: `wss://stream-testnet.bybit.com/v5/public/inverse`  
-  Spread trading: `wss://stream-testnet.bybit.com/v5/public/spread` USDT/USDC
-  Options: `wss://stream-testnet.bybit.com/v5/public/option`
+  Spread trading: `wss://stream-testnet.bybit.com/v5/public/spread`  
+  USDT/USDC Options: `wss://stream-testnet.bybit.com/v5/public/option`
 
 **[WebSocket private stream](/docs/v5/websocket/private/order):**
 
