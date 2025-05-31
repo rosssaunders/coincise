@@ -1,0 +1,13 @@
+{
+  "name": "ai-pr-summary",
+  "version": "1.0.0",
+  "description": "AI-powered PR summary generator for crypto API documentation",
+  "type": "module",
+  "main": "ai-pr-summary.js",
+  "scripts": {
+    "generate-pr-summary": "node generate-pr-summary.js"
+  },
+  "dependencies": {
+    "openai": "^4.103.0"
+  }
+}
