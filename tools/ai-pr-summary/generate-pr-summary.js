@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 
 import { generatePrSummary } from "./ai-pr-summary.js"
-import { fileURLToPath } from "url"
-import { dirname, join } from "path"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 
 /**
  * CLI script to generate AI-powered PR summaries
- * Usage: node generate-pr-summary.js [working-directory]
+ * Usage: node generate-pr-summary.js [working-directory] [max-diff-length]
  */
 async function main() {
   try {
     const workingDir = process.argv[2] || process.cwd()
+    const maxDiffLength = process.argv[3] ? parseInt(process.argv[3], 10) : 8000
 
     // Only log to stderr to keep stdout clean for workflows
     console.error("Generating AI-powered PR summary...")
     console.error(`Working directory: ${workingDir}`)
+    console.error(`Max diff length: ${maxDiffLength}`)
 
-    const summary = await generatePrSummary(undefined, workingDir)
+    const summary = await generatePrSummary(
+      undefined,
+      workingDir,
+      maxDiffLength
+    )
 
     // Output the summary to stdout so it can be captured by workflows
     console.log("---PR_SUMMARY_START---")

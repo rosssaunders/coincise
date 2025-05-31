@@ -5,9 +5,14 @@ import { execSync } from "child_process"
  * Generate an AI-powered PR summary based on git changes
  * @param {string} [apiKey] - OpenAI API key (defaults to OPENAI_API_KEY env var)
  * @param {string} [workingDir] - Working directory for git operations (defaults to current dir)
+ * @param {number} [maxDiffLength] - Maximum diff length before truncation (defaults to 8000)
  * @returns {Promise<string>} Generated PR summary
  */
-export async function generatePrSummary(apiKey, workingDir = process.cwd()) {
+export async function generatePrSummary(
+  apiKey,
+  workingDir = process.cwd(),
+  maxDiffLength = 8000
+) {
   try {
     const openai = new OpenAI({
       apiKey: apiKey || process.env.OPENAI_API_KEY
@@ -30,7 +35,6 @@ export async function generatePrSummary(apiKey, workingDir = process.cwd()) {
     })
 
     // Truncate diff if it's too long to avoid token limits
-    const maxDiffLength = 8000
     const truncatedDiff =
       detailedDiff.length > maxDiffLength
         ? detailedDiff.substring(0, maxDiffLength) +

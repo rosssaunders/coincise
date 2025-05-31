@@ -38,6 +38,11 @@ jobs:
           npm install
           popd
 
+      - name: Install AI PR summary tool dependencies
+        run: |
+          cd ../../tools/ai-pr-summary
+          npm install
+
       - name: Install dependencies
         run: npm ci
 
@@ -58,8 +63,8 @@ jobs:
         id: ai-summary
         run: |
           cd ../..  # Move back to root directory for git operations
-          # Generate AI summary using the shared utility
-          SUMMARY=$(cd venues/shared && npm run generate-pr-summary ../../ 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          # Generate AI summary using the AI PR summary tool (max diff length: 15000)
+          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           # Escape the summary for GitHub Actions
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT
