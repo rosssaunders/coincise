@@ -41,7 +41,9 @@ instruments info of current account, please refer to
 | optType          | String   | Option type, <code>C</code>: Call <code>P</code>: put<br>Only applicable to <code>OPTION</code>                                                                                                                                                                                                                                                                                             |
 | stk              | String   | Strike price<br>Only applicable to <code>OPTION</code>                                                                                                                                                                                                                                                                                                                                      |
 | listTime         | String   | Listing time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                                                                                                                                                                                                                        |
-| auctionEndTime   | String   | The end time of call auction, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code><br>Only applicable to <code>SPOT</code> that are listed through call auctions, return "" in other cases                                                                                                                                                                                |
+| auctionEndTime   | String   | <del>The end time of call auction, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code><br>Only applicable to <code>SPOT</code> that are listed through call auctions, return "" in other cases (deprecated, use contTdSwTime)</del>                                                                                                                                      |
+| contTdSwTime     | String   | Continuous trading switch time. The switch time from call auction, prequote to continuous trading, Unix timestamp format in milliseconds. e.g. <code>1597026383085</code>.<br>Only applicable to <code>SPOT</code>/<code>MARGIN</code> that are listed through call auction or prequote, return "" in other cases.                                                                          |
+| openType         | String   | Open type<br><code>fix_price</code>: fix price opening<br><code>pre_quote</code>: pre-quote<br><code>call_auction</code>: call auction<br>Only applicable to <code>SPOT</code>/<code>MARGIN</code>, return "" for all other business lines                                                                                                                                                  |
 | expTime          | String   | Expiry time<br>Applicable to <code>SPOT</code>/<code>MARGIN</code>/<code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>. For <code>FUTURES</code>/<code>OPTION</code>, it is natural delivery/exercise time. It is the instrument offline time when there is <code>SPOT/MARGIN/FUTURES/SWAP/</code> manual offline. Update once change.                                               |
 | lever            | String   | Max Leverage,<br>Not applicable to <code>SPOT</code>, <code>OPTION</code>                                                                                                                                                                                                                                                                                                                   |
 | tickSz           | String   | Tick size, e.g. <code>0.0001</code><br>For Option, it is minimum tickSz among tick band, please use "Get option tick bands" if you want get option tickBands.                                                                                                                                                                                                                               |
@@ -64,12 +66,14 @@ instruments info of current account, please refer to
 When a new contract is going to be listed, the instrument data of the new
 contract will be available with status preopen. When a product is going to be
 delisted (e.g. when a FUTURES contract is settled or OPTION contract is
-exercised), the instrument will not be available listTime and auctionEndTime  
-For spot symbols listed through a call auction, listTime represents the start
-time of the auction, and auctionEndTime indicates the end of the auction and the
-start of continuous trading. For other scenarios, listTime will mark the
-beginning of continuous trading, and auctionEndTime will return an empty value
-"".
+exercised), the instrument will not be available
+
+listTime and contTdSwTime  
+For spot symbols listed through a call auction or pre-open, listTime represents
+the start time of the auction or pre-open, and contTdSwTime indicates the end of
+the auction or pre-open and the start of continuous trading. For other
+scenarios, listTime will mark the beginning of continuous trading, and
+contTdSwTime will return an empty value "".
 
 state  
 The state will always change from \`preopen\` to \`live\` when the listTime is
@@ -253,8 +257,8 @@ Retrieve funding rate.
 | nextFundingRate | String   | <del>Forecasted funding rate for the next period<br>The nextFundingRate will be "" if the method is <code>current_period</code></del>(no longer supported)                                                                      |
 | fundingTime     | String   | Settlement time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                                                         |
 | nextFundingTime | String   | Forecasted funding time for the next period , Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                            |
-| minFundingRate  | String   | The lower limit of the predicted funding rate of the next cycle                                                                                                                                                                 |
-| maxFundingRate  | String   | The upper limit of the predicted funding rate of the next cycle                                                                                                                                                                 |
+| minFundingRate  | String   | The lower limit of the funding rate                                                                                                                                                                                             |
+| maxFundingRate  | String   | The upper limit of the funding rate                                                                                                                                                                                             |
 | interestRate    | String   | Interest rate                                                                                                                                                                                                                   |
 | impactValue     | String   | Depth weighted amount (in the unit of quote currency)                                                                                                                                                                           |
 | settState       | String   | Settlement state of funding rate<br><code>processing</code><br><code>settled</code>                                                                                                                                             |
@@ -446,19 +450,20 @@ Retrieve discount rate level and interest-free quota.
 
 #### Response Parameters
 
-| **Parameter**       | **Type**         | **Description**                                                                            |
-| ------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
-| ccy                 | String           | Currency                                                                                   |
-| amt                 | String           | Interest-free quota                                                                        |
-| discountLv          | String           | <del>Discount rate level.(Deprecated)<del></del></del>                                     |
-| minDiscountRate     | String           | Minimum discount rate when it exceeds the maximum amount of the last tier.                 |
-| details             | Array of objects | New discount details.                                                                      |
-| &gt; discountRate   | String           | Discount rate                                                                              |
-| &gt; maxAmt         | String           | Tier - upper bound.<br>The unit is the currency like BTC. "" means positive infinity       |
-| &gt; minAmt         | String           | Tier - lower bound.<br>The unit is the currency like BTC. The minimum is 0                 |
-| &gt; tier           | String           | Tiers                                                                                      |
-| &gt; liqPenaltyRate | String           | Liquidation penalty rate                                                                   |
-| &gt; disCcyEq       | String           | Discount equity in currency for quick calculation if your equity is the<code>maxAmt</code> |
+| **Parameter**       | **Type**         | **Description**                                                                             |
+| ------------------- | ---------------- | ------------------------------------------------------------------------------------------- |
+| ccy                 | String           | Currency                                                                                    |
+| collateralRestrict  | Boolean          | Platform level collateralized borrow restriction<br><code>true</code><br><code>false</code> |
+| amt                 | String           | Interest-free quota                                                                         |
+| discountLv          | String           | <del>Discount rate level.(Deprecated)<del></del></del>                                      |
+| minDiscountRate     | String           | Minimum discount rate when it exceeds the maximum amount of the last tier.                  |
+| details             | Array of objects | New discount details.                                                                       |
+| &gt; discountRate   | String           | Discount rate                                                                               |
+| &gt; maxAmt         | String           | Tier - upper bound.<br>The unit is the currency like BTC. "" means positive infinity        |
+| &gt; minAmt         | String           | Tier - lower bound.<br>The unit is the currency like BTC. The minimum is 0                  |
+| &gt; tier           | String           | Tiers                                                                                       |
+| &gt; liqPenaltyRate | String           | Liquidation penalty rate                                                                    |
+| &gt; disCcyEq       | String           | Discount equity in currency for quick calculation if your equity is the<code>maxAmt</code>  |
 
 ---
 
