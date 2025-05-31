@@ -255,17 +255,19 @@ trading pairs, trading suspension, etc.).
 
 #### Request Parameters
 
-| Parameter     | Type             | Required | Description                                                                                                                     |
-| ------------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| op            | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                             |
-| args          | Array of objects | Yes      | List of subscribed channels                                                                                                     |
-| &gt; channel  | String           | Yes      | Channel name<br><code>instruments</code>                                                                                        |
-| &gt; instType | String           | Yes      | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> |
+| Parameter     | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id            | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op            | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args          | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel  | String           | Yes      | Channel name<br><code>instruments</code>                                                                                                                                                                                                         |
+| &gt; instType | String           | Yes      | Instrument type<br><code>SPOT</code><br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                  |
 
 #### Response parameters
 
 | Parameter     | Type   | Required | Description                                                                                                                     |
 | ------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| id            | String | No       | Unique identifier of the message                                                                                                |
 | event         | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code>                                               |
 | arg           | Object | No       | Subscribed channel                                                                                                              |
 | &gt; channel  | String | Yes      | Channel name                                                                                                                    |
@@ -296,7 +298,9 @@ trading pairs, trading suspension, etc.).
 | &gt; optType          | String           | Option type<br><code>C</code>: Call<br><code>P</code>: Put<br>Only applicable to <code>OPTION</code>                                                                                                                                                                                                                                                          |
 | &gt; stk              | String           | Strike price<br>Only applicable to <code>OPTION</code>                                                                                                                                                                                                                                                                                                        |
 | &gt; listTime         | String           | Listing time<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                                                                                                                                                                                                                 |
-| &gt; auctionEndTime   | String           | The end time of call auction, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code><br>Only applicable to <code>SPOT</code> that are listed through call auctions, return "" in other cases                                                                                                                                                  |
+| &gt; auctionEndTime   | String           | <del>The end time of call auction, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code><br>Only applicable to <code>SPOT</code> that are listed through call auctions, return "" in other cases (deprecated, use contTdSwTime)</del>                                                                                                        |
+| &gt; contTdSwTime     | String           | Continuous trading switch time. The switch time from call auction, prequote to continuous trading, Unix timestamp format in milliseconds. e.g. <code>1597026383085</code>.<br>Only applicable to <code>SPOT</code>/<code>MARGIN</code> that are listed through call auction or prequote, return "" in other cases.                                            |
+| &gt; openType         | String           | Open type<br><code>fix_price</code>: fix price opening<br><code>pre_quote</code>: pre-quote<br><code>call_auction</code>: call auction<br>Only applicable to <code>SPOT</code>/<code>MARGIN</code>, return "" for all other business lines                                                                                                                    |
 | &gt; expTime          | String           | Expiry time<br>Applicable to <code>SPOT</code>/<code>MARGIN</code>/<code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>. For <code>FUTURES</code>/<code>OPTION</code>, it is the delivery/exercise time. It can also be the delisting time of the trading instrument. Update once change.                                                               |
 | &gt; lever            | String           | Max Leverage<br>Not applicable to <code>SPOT</code>/<code>OPTION</code>, used to distinguish between <code>MARGIN</code> and <code>SPOT</code>.                                                                                                                                                                                                               |
 | &gt; tickSz           | String           | Tick size, e.g. <code>0.0001</code><br>For Option, it is minimum tickSz among tick band.                                                                                                                                                                                                                                                                      |
@@ -321,12 +325,12 @@ new contract will be available with status preopen. When a product is going to
 be delisted (e.g. when a FUTURES contract is settled or OPTION contract is
 exercised), the instrument status will be changed to expired.
 
-listTime and auctionEndTime  
-For spot symbols listed through a call auction, listTime represents the start
-time of the auction, and auctionEndTime indicates the end of the auction and the
-start of continuous trading. For other scenarios, listTime will mark the
-beginning of continuous trading, and auctionEndTime will return an empty value
-"".
+listTime and contTdSwTime  
+For spot symbols listed through a call auction or pre-open, listTime represents
+the start time of the auction or pre-open, and contTdSwTime indicates the end of
+the auction or pre-open and the start of continuous trading. For other
+scenarios, listTime will mark the beginning of continuous trading, and
+contTdSwTime will return an empty value "".
 
 state  
 The state will always change from \`preopen\` to \`live\` when the listTime is
@@ -353,17 +357,19 @@ updates.
 
 #### Request Parameters
 
-| Parameter    | Type             | Required | Description                                                         |
-| ------------ | ---------------- | -------- | ------------------------------------------------------------------- |
-| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> |
-| args         | Array of objects | Yes      | List of subscribed channels                                         |
-| &gt; channel | String           | Yes      | Channel name<br><code>open-interest</code>                          |
-| &gt; instId  | String           | Yes      | Instrument ID                                                       |
+| Parameter    | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel | String           | Yes      | Channel name<br><code>open-interest</code>                                                                                                                                                                                                       |
+| &gt; instId  | String           | Yes      | Instrument ID                                                                                                                                                                                                                                    |
 
 #### Response parameters
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | Yes      | Channel name                                                                      |
@@ -399,17 +405,19 @@ Retrieve funding rate. Data will be pushed in 30s to 90s.
 
 #### Request Parameters
 
-| Parameter    | Type             | Required | Description                                                         |
-| ------------ | ---------------- | -------- | ------------------------------------------------------------------- |
-| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> |
-| args         | Array of objects | Yes      | List of subscribed channels                                         |
-| &gt; channel | String           | Yes      | Channel name<br><code>funding-rate</code>                           |
-| &gt; instId  | String           | Yes      | Instrument ID                                                       |
+| Parameter    | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel | String           | Yes      | Channel name<br><code>funding-rate</code>                                                                                                                                                                                                        |
+| &gt; instId  | String           | Yes      | Instrument ID                                                                                                                                                                                                                                    |
 
 #### Response parameters
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | yes      | Channel name                                                                      |
@@ -464,17 +472,19 @@ when there is no changes on limit.
 
 #### Request Parameters
 
-| Parameter    | Type             | Required | Description                                                         |
-| ------------ | ---------------- | -------- | ------------------------------------------------------------------- |
-| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> |
-| args         | Array of objects | Yes      | List of subscribed channels                                         |
-| &gt; channel | String           | Yes      | Channel name<br><code>price-limit</code>                            |
-| &gt; instId  | String           | Yes      | Instrument ID                                                       |
+| Parameter    | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel | String           | Yes      | Channel name<br><code>price-limit</code>                                                                                                                                                                                                         |
+| &gt; instId  | String           | Yes      | Instrument ID                                                                                                                                                                                                                                    |
 
 #### Response parameters
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | Yes      | Channel name                                                                      |
@@ -511,17 +521,19 @@ pushed at once.
 
 #### Request Parameters
 
-| Parameter       | Type             | Required | Description                                                         |
-| --------------- | ---------------- | -------- | ------------------------------------------------------------------- |
-| op              | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> |
-| args            | Array of objects | Yes      | List of subscribed channels                                         |
-| &gt; channel    | String           | Yes      | Channel name<br><code>opt-summary</code>                            |
-| &gt; instFamily | String           | Yes      | Instrument family                                                   |
+| Parameter       | Type             | Required | Description                                                                                                                                                                                                                                      |
+| --------------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id              | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op              | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args            | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel    | String           | Yes      | Channel name<br><code>opt-summary</code>                                                                                                                                                                                                         |
+| &gt; instFamily | String           | Yes      | Instrument family                                                                                                                                                                                                                                |
 
 #### Response parameters
 
 | Parameter       | Type   | Required | Description                                                                       |
 | --------------- | ------ | -------- | --------------------------------------------------------------------------------- |
+| id              | String | No       | Unique identifier of the message                                                  |
 | event           | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg             | Object | No       | Subscribed channel                                                                |
 | &gt; channel    | String | Yes      | Channel name                                                                      |
@@ -574,19 +586,21 @@ delivery/exercise/settlement, and will be pushed if there is any price change.
 
 #### Request Parameters
 
-| Parameter       | Type             | Required    | Description                                                                             |
-| --------------- | ---------------- | ----------- | --------------------------------------------------------------------------------------- |
-| op              | String           | Yes         | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                     |
-| args            | Array of objects | Yes         | List of subscribed channels                                                             |
-| &gt; channel    | String           | Yes         | Channel name<br><code>estimated-price</code>                                            |
-| &gt; instType   | String           | Yes         | Instrument type<br><code>OPTION</code><br><code>FUTURES</code>                          |
-| &gt; instFamily | String           | Conditional | Instrument family<br>Either <code>instFamily</code> or <code>instId</code> is required. |
-| &gt; instId     | String           | Conditional | Instrument ID<br>Either <code>instFamily</code> or <code>instId</code> is required.     |
+| Parameter       | Type             | Required    | Description                                                                                                                                                                                                                                      |
+| --------------- | ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id              | String           | No          | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op              | String           | Yes         | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args            | Array of objects | Yes         | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel    | String           | Yes         | Channel name<br><code>estimated-price</code>                                                                                                                                                                                                     |
+| &gt; instType   | String           | Yes         | Instrument type<br><code>OPTION</code><br><code>FUTURES</code>                                                                                                                                                                                   |
+| &gt; instFamily | String           | Conditional | Instrument family<br>Either <code>instFamily</code> or <code>instId</code> is required.                                                                                                                                                          |
+| &gt; instId     | String           | Conditional | Instrument ID<br>Either <code>instFamily</code> or <code>instId</code> is required.                                                                                                                                                              |
 
 #### Response parameters
 
 | Parameter       | Type   | Required    | Description                                                                       |
 | --------------- | ------ | ----------- | --------------------------------------------------------------------------------- |
+| id              | String | No          | Unique identifier of the message                                                  |
 | event           | String | Yes         | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg             | Object | No          | Subscribed channel                                                                |
 | &gt; channel    | String | Yes         | Channel name                                                                      |
@@ -627,17 +641,19 @@ change.
 
 #### Request Parameters
 
-| Parameter    | Type             | Required | Description                                                         |
-| ------------ | ---------------- | -------- | ------------------------------------------------------------------- |
-| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br> |
-| args         | Array of objects | Yes      | List of subscribed channels                                         |
-| &gt; channel | String           | Yes      | Channel name<br><code>mark-price</code>                             |
-| &gt; instId  | String           | Yes      | Instrument ID                                                       |
+| Parameter    | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel | String           | Yes      | Channel name<br><code>mark-price</code>                                                                                                                                                                                                          |
+| &gt; instId  | String           | Yes      | Instrument ID                                                                                                                                                                                                                                    |
 
 #### Response parameters
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | Yes      | Channel name                                                                      |
@@ -672,17 +688,19 @@ otherwise push once a minute.
 
 #### Request Parameters
 
-| Parameter    | Type             | Required | Description                                                                       |
-| ------------ | ---------------- | -------- | --------------------------------------------------------------------------------- |
-| op           | String           | Yes      | <code>subscribe</code> <code>unsubscribe</code>                                   |
-| args         | Array of objects | Yes      | List of subscribed channels                                                       |
-| &gt; channel | String           | Yes      | Channel name<br><code>index-tickers</code>                                        |
-| &gt; instId  | String           | Yes      | Index with USD, USDT, BTC, USDC as the quote currency, e.g. <code>BTC-USDT</code> |
+| Parameter    | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op           | String           | Yes      | <code>subscribe</code> <code>unsubscribe</code>                                                                                                                                                                                                  |
+| args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel | String           | Yes      | Channel name<br><code>index-tickers</code>                                                                                                                                                                                                       |
+| &gt; instId  | String           | Yes      | Index with USD, USDT, BTC, USDC as the quote currency, e.g. <code>BTC-USDT</code>                                                                                                                                                                |
 
 #### Response parameters
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | <code>subscribe</code> <code>unsubscribe</code> <code>error</code>                |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | Yes      | Channel name<br><code>index-tickers</code>                                        |
@@ -723,6 +741,7 @@ fastest interval 1 second push the data.
 
 | Parameter    | Type             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ------------ | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | op           | String           | Yes      | Operation<br><code>subscribe</code> <code>unsubscribe</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | &gt; channel | String           | Yes      | Channel name<br><code>mark-price-candle3M</code><br><code>mark-price-candle1M</code><br><code>mark-price-candle1W</code><br><code>mark-price-candle1D</code><br><code>mark-price-candle2D</code><br><code>mark-price-candle3D</code><br><code>mark-price-candle5D</code><br><code>mark-price-candle12H</code><br><code>mark-price-candle6H</code><br><code>mark-price-candle4H</code><br><code>mark-price-candle2H</code><br><code>mark-price-candle1H</code><br><code>mark-price-candle30m</code><br><code>mark-price-candle15m</code><br><code>mark-price-candle5m</code><br><code>mark-price-candle3m</code><br><code>mark-price-candle1m</code><br><code>mark-price-candle1Yutc</code><br><code>mark-price-candle3Mutc</code><br><code>mark-price-candle1Mutc</code><br><code>mark-price-candle1Wutc</code><br><code>mark-price-candle1Dutc</code><br><code>mark-price-candle2Dutc</code><br><code>mark-price-candle3Dutc</code><br><code>mark-price-candle5Dutc</code><br><code>mark-price-candle12Hutc</code><br><code>mark-price-candle6Hutc</code> |
@@ -732,6 +751,7 @@ fastest interval 1 second push the data.
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | Yes      | Channel name                                                                      |
@@ -770,6 +790,7 @@ interval 1 second push the data. .
 
 | Parameter    | Type             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ------------ | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | &gt; channel | String           | Yes      | Channel name<br><code>index-candle3M</code><br><code>index-candle1M</code><br><code>index-candle1W</code><br><code>index-candle1D</code><br><code>index-candle2D</code><br><code>index-candle3D</code><br><code>index-candle5D</code><br><code>index-candle12H</code><br><code>index-candle6H</code><br><code>index-candle4H</code><br><code>index -candle2H</code><br><code>index-candle1H</code><br><code>index-candle30m</code><br><code>index-candle15m</code><br><code>index-candle5m</code><br><code>index-candle3m</code><br><code>index-candle1m</code><br><code>index-candle3Mutc</code><br><code>index-candle1Mutc</code><br><code>index-candle1Wutc</code><br><code>index-candle1Dutc</code><br><code>index-candle2Dutc</code><br><code>index-candle3Dutc</code><br><code>index-candle5Dutc</code><br><code>index-candle12Hutc</code><br><code>index-candle6Hutc</code> |
@@ -779,6 +800,7 @@ interval 1 second push the data. .
 
 | Parameter    | Type   | Required | Description                                     |
 | ------------ | ------ | -------- | ----------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                |
 | event        | String | Yes      | <code>subscribe</code> <code>unsubscribe</code> |
 | arg          | Object | No       | Subscribed channel                              |
 | &gt; channel | String | Yes      | Channel name                                    |
@@ -818,17 +840,19 @@ represent the total number of liquidations on OKX.
 
 #### Request Parameters
 
-| Parameter     | Type             | Required | Description                                                                                                |
-| ------------- | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| op            | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code>                                            |
-| args          | Array of objects | Yes      | List of subscribed channels                                                                                |
-| &gt; channel  | String           | Yes      | Channel name<br><code>liquidation-orders</code>                                                            |
-| &gt; instType | String           | Yes      | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>MARGIN</code><br><code>OPTION</code> |
+| Parameter     | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id            | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op            | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code>                                                                                                                                                                                  |
+| args          | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel  | String           | Yes      | Channel name<br><code>liquidation-orders</code>                                                                                                                                                                                                  |
+| &gt; instType | String           | Yes      | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>MARGIN</code><br><code>OPTION</code>                                                                                                                                       |
 
 #### Response Parameters
 
 | **Parameter**    | **Type**         | **Description**                                                                                                                                                                                                        |
 | ---------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | String           | Unique identifier of the message                                                                                                                                                                                       |
 | arg              | Object           | Successfully subscribed channel                                                                                                                                                                                        |
 | &gt; channel     | String           | Channel name                                                                                                                                                                                                           |
 | &gt; instId      | String           | Instrument ID                                                                                                                                                                                                          |
@@ -867,18 +891,20 @@ For more ADL details, please refer to
 
 #### Request Parameters
 
-| Parameter       | Type             | Required | Description                                                                         |
-| --------------- | ---------------- | -------- | ----------------------------------------------------------------------------------- |
-| op              | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                 |
-| args            | Array of objects | Yes      | List of subscribed channels                                                         |
-| &gt; channel    | String           | Yes      | Channel name<br><code>adl-warning</code>                                            |
-| &gt; instType   | String           | Yes      | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> |
-| &gt; instFamily | String           | No       | Instrument family                                                                   |
+| Parameter       | Type             | Required | Description                                                                                                                                                                                                                                      |
+| --------------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id              | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op              | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code><br>                                                                                                                                                                              |
+| args            | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel    | String           | Yes      | Channel name<br><code>adl-warning</code>                                                                                                                                                                                                         |
+| &gt; instType   | String           | Yes      | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                                                              |
+| &gt; instFamily | String           | No       | Instrument family                                                                                                                                                                                                                                |
 
 #### Response parameters
 
 | Parameter       | Type   | Required | Description                                                                       |
 | --------------- | ------ | -------- | --------------------------------------------------------------------------------- |
+| id              | String | No       | Unique identifier of the message                                                  |
 | event           | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg             | Object | No       | Subscribed channel                                                                |
 | &gt; channel    | String | Yes      | Channel name<br><code>adl-warning</code>                                          |
@@ -927,16 +953,18 @@ applicable to VIP 1 and above users in the trading fee tier.
 
 #### Request parameters
 
-| Parameter    | Type             | Required | Description                                                     |
-| ------------ | ---------------- | -------- | --------------------------------------------------------------- |
-| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code> |
-| args         | Array of objects | Yes      | List of subscribed channels                                     |
-| &gt; channel | String           | Yes      | Channel name<br><code>economic-calendar</code>                  |
+| Parameter    | Type             | Required | Description                                                                                                                                                                                                                                      |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id           | String           | No       | Unique identifier of the message<br>Provided by client. It will be returned in response message for identifying the corresponding request.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters. |
+| op           | String           | Yes      | Operation<br><code>subscribe</code><br><code>unsubscribe</code>                                                                                                                                                                                  |
+| args         | Array of objects | Yes      | List of subscribed channels                                                                                                                                                                                                                      |
+| &gt; channel | String           | Yes      | Channel name<br><code>economic-calendar</code>                                                                                                                                                                                                   |
 
 #### Response parameters
 
 | Parameter    | Type   | Required | Description                                                                       |
 | ------------ | ------ | -------- | --------------------------------------------------------------------------------- |
+| id           | String | No       | Unique identifier of the message                                                  |
 | event        | String | Yes      | Event<br><code>subscribe</code><br><code>unsubscribe</code><br><code>error</code> |
 | arg          | Object | No       | Subscribed channel                                                                |
 | &gt; channel | String | Yes      | Channel name                                                                      |
