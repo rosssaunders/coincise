@@ -202,20 +202,12 @@ async function processConfig(configFile) {
 
   // Ensure output directory exists
   const outputDir = config.output_dir
-  try {
-    if (!existsSync(outputDir)) {
-      mkdirSync(outputDir, { recursive: true })
-      console.info(`Created output directory: ${outputDir}`)
-    }
-  } catch (error) {
-    console.error(`Failed to create output directory: ${outputDir}`, error)
-    console.error("Stack trace:", error.stack)
-    process.exit(1)
+  if (!existsSync(outputDir)) {
+    mkdirSync(outputDir, { recursive: true })
+    console.info(`Created output directory: ${outputDir}`)
   }
-
   // Read outputDir and sectionTitles from config
   const sectionTitles = config.section_titles || []
-
   // For each required section, convert to markdown and write to its own file
   for (const sectionTitle of sectionTitles) {
     const html = allSections[sectionTitle]
@@ -239,14 +231,9 @@ async function processConfig(configFile) {
       console.warn(`Section not found: ${sectionTitle}`)
       markdown = `# ${sectionTitle}\n\n_Not found in source documentation._\n`
     }
-    try {
-      writeFileSync(filePath, markdown, "utf8")
-      console.info(`Wrote section to: ${filePath}`)
-    } catch (error) {
-      console.error(`Failed to write section file: ${filePath}`, error)
-      console.error("Stack trace:", error.stack)
-      process.exit(1)
-    }
+    // Write section file (no try/catch, let errors propagate to main)
+    writeFileSync(filePath, markdown, "utf8")
+    console.info(`Wrote section to: ${filePath}`)
   }
 
   console.log(`\nExtraction completed!`)
@@ -263,6 +250,7 @@ async function main() {
     await processConfig(configFile)
   } catch (error) {
     console.error("Extraction failed:", error)
+    console.error("Stack trace:", error.stack)
     process.exit(1)
   }
 }
