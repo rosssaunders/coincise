@@ -1,0 +1,28 @@
+{
+  "title": "Bitmart Futures API Documentation", 
+  "output_file": "futures_api.md",
+  "base_url": "https://developer-pro.bitmart.com/en",
+  "urls": [
+    "/futures/intro",
+    "/futures/change-log",
+    "/futures/v1/authentication",
+    "/futures/v1/rate-limit",
+    "/futures/v1/response-format",
+    "/futures/v1/public/contracts",
+    "/futures/v1/public/quote",
+    "/futures/v1/public/depth",
+    "/futures/v1/public/openinterest",
+    "/futures/v1/public/fundingrate",
+    "/futures/v1/public/kline",
+    "/futures/v1/trade/submit-order",
+    "/futures/v1/trade/cancel-order",
+    "/futures/v1/trade/cancel-orders",
+    "/futures/v1/trade/order-detail",
+    "/futures/v1/trade/order-history",
+    "/futures/v1/trade/open-orders",
+    "/futures/v1/trade/order-trades",
+    "/futures/v1/trade/account",
+    "/futures/v1/trade/position",
+    "/futures/v1/trade/position-history"
+  ]
+}

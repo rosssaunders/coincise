@@ -1,0 +1,28 @@
+{
+  "title": "Bitmart Contract API Documentation",
+  "output_file": "contract_api.md",
+  "base_url": "https://developer-pro.bitmart.com/en",
+  "urls": [
+    "/contract/intro",
+    "/contract/change-log",
+    "/contract/v1/authentication",
+    "/contract/v1/rate-limit",
+    "/contract/v1/response-format",
+    "/contract/v1/public/contracts",
+    "/contract/v1/public/quote",
+    "/contract/v1/public/depth",
+    "/contract/v1/public/openinterest",
+    "/contract/v1/public/fundingrate",
+    "/contract/v1/public/kline",
+    "/contract/v1/trade/submit-order",
+    "/contract/v1/trade/cancel-order",
+    "/contract/v1/trade/cancel-orders",
+    "/contract/v1/trade/order-detail",
+    "/contract/v1/trade/order-history",
+    "/contract/v1/trade/open-orders",
+    "/contract/v1/trade/order-trades",
+    "/contract/v1/trade/account",
+    "/contract/v1/trade/position",
+    "/contract/v1/trade/position-history"
+  ]
+}

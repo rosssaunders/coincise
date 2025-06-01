@@ -1,0 +1,8 @@
+{
+  "title": "Bitmart Spot API Documentation (Test)",
+  "output_file": "spot_api_test.md",
+  "base_url": "https://developer-pro.bitmart.com/en",
+  "urls": [
+    "/spot/intro"
+  ]
+}

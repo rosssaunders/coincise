@@ -1,0 +1,24 @@
+{
+  "name": "bitmart-api-converter",
+  "version": "1.0.0",
+  "description": "Convert Bitmart API documentation to markdown",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "extract:spot": "node src/index.js config/spot.json",
+    "extract:contract": "node src/index.js config/contract.json",
+    "extract:futures": "node src/index.js config/futures.json"
+  },
+  "dependencies": {
+    "axios": "1.9.0",
+    "cheerio": "1.0.0",
+    "puppeteer": "^24.8.0",
+    "turndown": "7.2.0",
+    "turndown-plugin-gfm": "1.0.2",
+    "jsdom": "26.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
