@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * 0" # Every Sunday at midnight
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   changelog:
     runs-on: ubuntu-latest
@@ -50,8 +53,7 @@ jobs:
         with:
           commit-message: "chore: update docs changelog"
           branch:
-            ${{ github.head_ref || format('docs-changelog/update-{0}',
-            github.run_id) }}
+            ${{ github.head_ref || format('docs-changelog/update-{0}', github.run_id) }}
           title: "Weekly Docs Changelog Update"
           body: |
             This PR updates the docs changelog with all `docs:` commits from the past week.
