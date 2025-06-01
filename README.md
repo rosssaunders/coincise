@@ -88,6 +88,19 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures     | [REST API](docs/kucoin/rest/futures_api.md)                                       | 2025-04-26   |
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures     | [WebSocket API](docs/kucoin/ws/futures_api.md)                                    | 2025-04-26   |
 
+## Copilot Agent Firewall Configuration
+
+For GitHub Copilot Agent to access the venue API documentation when working on this repository, the firewall needs to be configured to allow access to the required domains and URLs.
+
+**Configuration files:**
+- [`copilot-firewall-allowlist.md`](copilot-firewall-allowlist.md) - Human-readable documentation with setup instructions
+- [`copilot-firewall-allowlist.json`](copilot-firewall-allowlist.json) - Machine-readable configuration for automation
+
+**Quick setup:**
+Set the `COPILOT_AGENT_FIREWALL_ALLOW_LIST_ADDITIONS` GitHub Actions variable to the comma-separated list from either configuration file.
+
+This allowlist covers all 15+ cryptocurrency exchanges whose API documentation is scraped by the venue extraction scripts.
+
 ## Contributing
 
 Feel free to submit PRs for missing crypto venues or endpoints.
