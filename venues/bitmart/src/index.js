@@ -194,9 +194,6 @@ async function processConfig(configFile) {
     await browser.close()
   }
 
-  // Format the markdown
-  const formattedMarkdown = formatMarkdown(fullMarkdown)
-  
   // Write output file
   const outputDir = path.resolve('../../docs/bitmart')
   const outputPath = path.join(outputDir, config.output_file)
@@ -206,7 +203,10 @@ async function processConfig(configFile) {
     fs.mkdirSync(outputDir, { recursive: true })
   }
   
-  fs.writeFileSync(outputPath, formattedMarkdown)
+  fs.writeFileSync(outputPath, fullMarkdown)
+  
+  // Format the markdown file
+  await formatMarkdown(outputPath)
   
   console.log(`\nExtraction completed!`)
   console.log(`Processed URLs: ${processedUrls}/${config.urls.length}`)
