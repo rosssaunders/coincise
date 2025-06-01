@@ -7,7 +7,6 @@
   "scripts": {
     "start": "node src/index.js",
     "extract:spot": "node src/index.js config/spot.json",
-    "extract:contract": "node src/index.js config/contract.json",
     "extract:futures": "node src/index.js config/futures.json"
   },
   "dependencies": {

@@ -1,8 +1,0 @@
-{
-  "title": "Bitmart Contract API Documentation",
-  "output_file": "contract_api.md",
-  "base_url": "https://developer-pro.bitmart.com/en",
-  "urls": [
-    "/contract/"
-  ]
-}
