@@ -1535,6 +1535,12 @@ with the example of BTCUSDT:
 | 180018 | internal error                                                 |
 | 180019 | empty order link id                                            |
 
+## User[​](#user "Direct link to heading")
+
+| Code  | Description                                  |
+| :---: | :------------------------------------------- |
+| 81007 | Bybit Europe is not supported create API Key |
+
 # Get Bybit Server Time
 
 ### HTTP Request[​](#http-request "Direct link to heading")
