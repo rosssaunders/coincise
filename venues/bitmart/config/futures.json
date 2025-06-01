@@ -1,0 +1,20 @@
+{
+  "title": "Bitmart Futures API Documentation",
+  "output_file": "futures_api.md",
+  "base_url": "https://developer-pro.bitmart.com/en",
+  "urls": ["/futuresv2/"],
+  "output_dir": "../../docs/bitmart/futures",
+  "section_titles": [
+    "Update Plan",
+    "Change Log",
+    "Introduction",
+    "Basic Information",
+    "Futures Market Data",
+    "Futures Account Data",
+    "Futures Trading",
+    "Sub-Account",
+    "WebSocket Subscription",
+    "Futures Affiliate Endpoints",
+    "Error Code"
+  ]
+}

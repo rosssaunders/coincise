@@ -1,0 +1,20 @@
+{
+  "title": "Bitmart Spot API Documentation",
+  "output_file": "spot_api.md",
+  "base_url": "https://developer-pro.bitmart.com/en",
+  "urls": ["/spot/"],
+  "output_dir": "../../docs/bitmart/spot",
+  "section_titles": [
+    "Change Log",
+    "Introduction",
+    "Basic Information",
+    "System Status",
+    "Public Market Data",
+    "Funding Account",
+    "Spot / Margin Trading",
+    "Error Code",
+    "Sub-Account",
+    "WebSocket Subscription",
+    "Margin Loan"
+  ]
+}
