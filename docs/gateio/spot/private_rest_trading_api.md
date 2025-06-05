@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-97-4) Gate API v4 v4.97.4
+# [#](#gate-api-v4-v4-98-1) Gate API v4 v4.98.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2207,7 +2207,9 @@ _List all currency pairs supported_
     "precision": 6,
     "trade_status": "tradable",
     "sell_start": 1516378650,
-    "buy_start": 1516378650
+    "buy_start": 1516378650,
+    "delisting_time": 0,
+    "trade_url": "https://www.gate.io/trade/ETH_USDT"
   }
 ]
 ```
@@ -2245,8 +2247,10 @@ Status Code **200**
 \- sellable: can be sold  
 \- tradable: can be bought or sold | | »» sell_start | integer(int64) | Sell
 start unix timestamp in seconds | | »» buy_start | integer(int64) | Buy start
-unix timestamp in seconds | | »» type | string | Trading pair type, normal:
-normal, premarket: pre-market |
+unix timestamp in seconds | | »» delisting_time | integer(int64) | Expected time
+to remove the shelves, Unix timestamp in seconds | | »» type | string | Trading
+pair type, normal: normal, premarket: pre-market | | »» trade_url | string |
+Transaction link |
 
 #### [#](#enumerated-values-5) Enumerated Values
 
@@ -2293,7 +2297,9 @@ _Get details of a specifc currency pair_
   "precision": 6,
   "trade_status": "tradable",
   "sell_start": 1516378650,
-  "buy_start": 1516378650
+  "buy_start": 1516378650,
+  "delisting_time": 0,
+  "trade_url": "https://www.gate.io/trade/ETH_USDT"
 }
 ```
 
@@ -2330,8 +2336,10 @@ _Spot currency pair_
 \- sellable: can be sold  
 \- tradable: can be bought or sold | | » sell_start | integer(int64) | Sell
 start unix timestamp in seconds | | » buy_start | integer(int64) | Buy start
-unix timestamp in seconds | | » type | string | Trading pair type, normal:
-normal, premarket: pre-market |
+unix timestamp in seconds | | » delisting_time | integer(int64) | Expected time
+to remove the shelves, Unix timestamp in seconds | | » type | string | Trading
+pair type, normal: normal, premarket: pre-market | | » trade_url | string |
+Transaction link |
 
 #### [#](#enumerated-values-6) Enumerated Values
 

@@ -1,5 +1,13 @@
 # [#](#changelog) Changelog
 
+**v4.98.0**
+
+- New feature `/earn/uni/rate` endpoint, Currency estimate annualized interest
+  rate
+- Add `delisting_time`、`trade_url` field in
+  `GET /spot/currency_pairs`、`GET /spot/currency_pairs/{currency_pair}`
+  endpoint
+
 **v4.97.0**
 
 - New feature `GET /unified/batch_borrowable` endpoint, Batch query unified
@@ -119,9 +127,10 @@ to the new interface as soon as possible
 
 - Add `x-gate-exptime` field in
   `POST /futures/{settle}/orders`、`POST /spot/batch_order` header.
-- Add
-  `cross_order_margin`、`cross_initial_margin`、`cross_maintenance_margin`、`cross_unrealised_pnl`、`cross_available`、`isolated_position_margin`
-  field in `POST /futures/{settle}/dual_mode` response.
+
+Add
+`cross_order_margin`、`cross_initial_margin`、`cross_maintenance_margin`、`cross_unrealised_pnl`、`cross_available`、`isolated_position_margin`
+field in `POST /futures/{settle}/dual_mode` response.
 
 **v4.84.0**
 
