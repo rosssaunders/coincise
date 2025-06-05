@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-97-4) Gate API v4 v4.97.4
+# [#](#gate-api-v4-v4-98-1) Gate API v4 v4.98.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2454,7 +2454,7 @@ Status Code **200**
 | » amount            | string | Currency amount                                                                                                     |
 | » fee               | string | fee                                                                                                                 |
 | » currency          | string | Currency name                                                                                                       |
-| » address           | string | 提现地址                                                                                                            |
+| » address           | string | Withdrawal address                                                                                                  |
 | » fail_reason       | string | The reason for withdrawal failure is that there is a value when status = CANCEL, and the rest of the state is empty |
 | » timestamp2        | string | The withdrawal end time, i.e.: withdrawal cancel time or withdrawal success time                                    |
 
@@ -2674,12 +2674,13 @@ main user's spot account is used no matter which sub user's account is operated.
 | Name               | In   | Type   | Required | Description                                                                                                                                                                                                                               |
 | ------------------ | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | body               | body | object | true     | none                                                                                                                                                                                                                                      |
-| » currency         | body | string | true     | Transfer currency name                                                                                                                                                                                                                    |
 | » sub_account      | body | string | true     | Sub account user ID                                                                                                                                                                                                                       |
-| » direction        | body | string | true     | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
-| » amount           | body | string | true     | Transfer amount                                                                                                                                                                                                                           |
-| » client_order_id  | body | string | false    | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
 | » sub_account_type | body | string | false    | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
+| » currency         | body | string | true     | Transfer currency name                                                                                                                                                                                                                    |
+| » amount           | body | string | true     | Transfer amount                                                                                                                                                                                                                           |
+| » direction        | body | string | true     | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
+| » client_order_id  | body | string | false    | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
+| » status           | body | string | false    | Sub-account transfer record status, currently only success                                                                                                                                                                                |
 
 > Example responses
 
@@ -2766,15 +2767,16 @@ Status Code **200**
 | Name               | Type   | Description                                                                                                                                                                                                                               |
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _None_             | array  | none                                                                                                                                                                                                                                      |
-| » currency         | string | Transfer currency name                                                                                                                                                                                                                    |
-| » sub_account      | string | Sub account user ID                                                                                                                                                                                                                       |
-| » direction        | string | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
-| » amount           | string | Transfer amount                                                                                                                                                                                                                           |
-| » uid              | string | Main account user ID                                                                                                                                                                                                                      |
-| » client_order_id  | string | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
 | » timest           | string | Transfer timestamp                                                                                                                                                                                                                        |
-| » source           | string | Where the operation is initiated from                                                                                                                                                                                                     |
+| » uid              | string | Main account user ID                                                                                                                                                                                                                      |
+| » sub_account      | string | Sub account user ID                                                                                                                                                                                                                       |
 | » sub_account_type | string | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
+| » currency         | string | Transfer currency name                                                                                                                                                                                                                    |
+| » amount           | string | Transfer amount                                                                                                                                                                                                                           |
+| » direction        | string | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
+| » source           | string | Where the operation is initiated from                                                                                                                                                                                                     |
+| » client_order_id  | string | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
+| » status           | string | Sub-account transfer record status, currently only success                                                                                                                                                                                |
 
 WARNING
 
