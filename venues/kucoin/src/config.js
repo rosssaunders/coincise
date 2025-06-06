@@ -14,7 +14,7 @@ const __dirname = dirname(__filename)
  * @param {string} configPath - Path to the JSON config file
  * @returns {Object} The parsed config object
  */
-const readConfig = (configPath) => {
+const readConfig = configPath => {
   try {
     const configContent = fs.readFileSync(configPath, "utf8")
     return JSON.parse(configContent)
@@ -30,7 +30,7 @@ const readConfig = (configPath) => {
  * @param {string[]} args - Command-line arguments
  * @returns {string} Path to the config file
  */
-export const parseConfigPath = (args) => {
+export const parseConfigPath = args => {
   let configPath = path.resolve(__dirname, "../config/config.json")
 
   for (let i = 0; i < args.length; i++) {
