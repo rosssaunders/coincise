@@ -1,5 +1,24 @@
 # Change Log
 
+#### 2025-06-05
+
+###### REST API
+
+*   \[更新\] `/contract/public/details` Applicable to query contract details
+    *   Feat：Add new response field： **status**
+    *   Feat：Add new response field： **delist\_time**
+
+* * *
+
+#### 2025-06-04
+
+###### REST API
+
+*   \[New\] `/contract/public/leverage-bracket`
+    *   Feat: Support retrieving risk limit bracket
+
+* * *
+
 #### 2025-05-08
 
 ###### REST API
