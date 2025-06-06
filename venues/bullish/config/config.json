@@ -1,0 +1,5 @@
+{
+  "specUrl": "https://api.exchange.bullish.com/docs/v2/open-api/api-doc.yml",
+  "outputFile": "../../docs/bullish/trading_api.md",
+  "title": "Bullish Trading API"
+}
