@@ -7326,6 +7326,9 @@ Order list notification example
         "id": 74046543,
         "user": 6790020,
         "create_time": 1681196535.01,
+        "finish_time": 1681196535.01,
+        "update_time": 1681196535.01,
+        "finish_as": "filled",
         "status": "open",
         "contract": "BTC_USDT",
         "size": 10,
@@ -7552,4 +7555,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                             |
 | »»`message`      | String  | Detailed error message                                                                                          |
 
-Last Updated: 5/22/2025, 8:34:33 AM
+Last Updated: 6/5/2025, 9:08:58 AM
