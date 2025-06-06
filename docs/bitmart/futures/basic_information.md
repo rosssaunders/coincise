@@ -96,6 +96,7 @@ The speed of the public interface is limited according to the IP, and the speed 
 | /contract/public/funding-rate-history | Get history Funding Rate | IP | 12 times/2 sec 
 | /contract/public/kline | Get K-line | IP | 12 times/2 sec 
 | /contract/public/markprice-kline | Get Mark Price K-line | IP | 12 times/2 sec 
+| /contract/public/leverage-bracket | Get Contract Leverage Risk Limit | IP | 12次/2s 
 
 | Futures Trade Endpoints | Endpoint Name | Limit Target | Rate |
 | --- | --- | --- | --- |

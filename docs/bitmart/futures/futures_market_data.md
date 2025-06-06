@@ -26,7 +26,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Response
 
-`{   "code": 1000,   "message": "Ok",   "trace": "9b92a999-9463-4c96-91a4-93ad1cad0d72",   "data": {     "symbols": [       {         "symbol": "BTCUSDT",         "product_type": 1,         "open_timestamp": 1594080000123,         "expire_timestamp": 0,         "settle_timestamp": 0,         "base_currency": "BTC",         "quote_currency": "USDT",         "last_price": "23920",         "volume_24h": "18969368",         "turnover_24h": "458933659.7858",         "index_price": "23945.25191635",         "index_name": "BTCUSDT",         "contract_size": "0.001",         "min_leverage": "1",         "max_leverage": "100",         "price_precision": "0.1",         "vol_precision": "1",         "max_volume": "500000",         "market_max_volume": "500000",         "min_volume": "1",         "funding_rate": "0.0001",         "expected_funding_rate": "0.00011",         "open_interest": "4134180870",         "open_interest_value": "94100888927.0433258",         "high_24h": "23900",         "low_24h": "23100",         "change_24h": "0.004",         "funding_interval_hours": 8       },       ...     ]   } }`
+`{   "code": 1000,   "message": "Ok",   "trace": "9b92a999-9463-4c96-91a4-93ad1cad0d72",   "data": {     "symbols": [       {         "symbol": "BTCUSDT",         "product_type": 1,         "open_timestamp": 1594080000123,         "expire_timestamp": 0,         "settle_timestamp": 0,         "base_currency": "BTC",         "quote_currency": "USDT",         "last_price": "23920",         "volume_24h": "18969368",         "turnover_24h": "458933659.7858",         "index_price": "23945.25191635",         "index_name": "BTCUSDT",         "contract_size": "0.001",         "min_leverage": "1",         "max_leverage": "100",         "price_precision": "0.1",         "vol_precision": "1",         "max_volume": "500000",         "market_max_volume": "500000",         "min_volume": "1",         "funding_rate": "0.0001",         "expected_funding_rate": "0.00011",         "open_interest": "4134180870",         "open_interest_value": "94100888927.0433258",         "high_24h": "23900",         "low_24h": "23100",         "change_24h": "0.004",         "funding_interval_hours": 8,         "status": "Delisted",         "delist_time": 1745830379       },       ...     ]   } }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -65,6 +65,8 @@ Description of the trading pair details field:
 | low_24h | String | 24h Low 
 | change_24h | String | 24h Change 
 | funding_interval_hours | Int | Funding interval 
+| status | String | Status<br>-<code>Trading</code><br>-<code>Delisted</code> 
+| delist_time | Int | Delisting time(UTC+0) 
 
 ## Get Market Depth
 
@@ -303,4 +305,41 @@ Description of the list details field:
 | --- | --- | --- |
 | symbol | String | Instrument name, e.g. BTCUSDT 
 | funding_rate | String | Actual funding rate 
-| funding_time | String | Settlement time, Unix timestamp format in milliseconds, e.g. 1733738400000
+| funding_time | String | Settlement time, Unix timestamp format in milliseconds, e.g. 1733738400000 
+
+## Get Current Leverage Risk Limit
+
+`Applicable for checking the current leverage risk limit of a specified contract`
+
+#### Request URL
+
+`GET https://api-cloud-v2.bitmart.com/contract/public/leverage-bracket`
+
+#### Request Limit
+
+See [Detailed Rate Limit](#rate-limit)
+
+#### Request Parameter
+
+> Request
+
+`curl https://api-cloud-v2.bitmart.com/contract/public/leverage-bracket?symbol=BTCUSDT`
+
+| Field | Type | Required? | Description |
+| --- | --- | --- | --- |
+| symbol | String | No | Symbol of the contract(like BTCUSDT) 
+
+#### Response Data
+
+> Response
+
+`{   "code": 1000,   "message": "Ok",   "data": {     "rules": [       {         "symbol": "FUNUSDT",         "brackets": [           {             "bracket": 1,             "initial_leverage": 50,             "notional_cap": "10000",             "notional_floor": "0",             "maint_margin_ratio": "0.01",             "cum": "0"           },           {             "bracket": 2,             "initial_leverage": 25,             "notional_cap": "100000",             "notional_floor": "10000",             "maint_margin_ratio": "0.02",             "cum": "100"           },           {             "bracket": 3,             "initial_leverage": 20,             "notional_cap": "200000",             "notional_floor": "100000",             "maint_margin_ratio": "0.025",             "cum": "600"           },           {             "bracket": 4,             "initial_leverage": 16,             "notional_cap": "400000",             "notional_floor": "200000",             "maint_margin_ratio": "0.03125",             "cum": "1850"           },           {             "bracket": 5,             "initial_leverage": 10,             "notional_cap": "700000",             "notional_floor": "400000",             "maint_margin_ratio": "0.05",             "cum": "9350"           },           {             "bracket": 6,             "initial_leverage": 8,             "notional_cap": "1100000",             "notional_floor": "700000",             "maint_margin_ratio": "0.0625",             "cum": "18100"           },           {             "bracket": 7,             "initial_leverage": 5,             "notional_cap": "1600000",             "notional_floor": "1100000",             "maint_margin_ratio": "0.1",             "cum": "59350"           },           {             "bracket": 8,             "initial_leverage": 4,             "notional_cap": "2200000",             "notional_floor": "1600000",             "maint_margin_ratio": "0.125",             "cum": "99350"           },           {             "bracket": 9,             "initial_leverage": 2,             "notional_cap": "2900000",             "notional_floor": "2200000",             "maint_margin_ratio": "0.25",             "cum": "374350"           },           {             "bracket": 10,             "initial_leverage": 1,             "notional_cap": "3700000",             "notional_floor": "2900000",             "maint_margin_ratio": "0.5",             "cum": "1099350"           }         ]       }     ]   },   "trace": "02bae860-de73-4a82-a1f5-fe38cd769275" }`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| bracket | Int | Risk bracket / Margin tier 
+| initial_leverage | Int | Maximum leverage in this bracket 
+| notional_cap | String | Maximum notional value in this bracket 
+| notional_floor | String | Minimum notional value in this bracket 
+| maint_margin_ratio | String | Maintenance margin ratio 
+| cum | String | Cumulative maintenance margin amount
