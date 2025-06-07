@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-98-0) Gate API v4 v4.98.0
+# [#](#gate-api-v4-v4-98-1) Gate API v4 v4.98.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.

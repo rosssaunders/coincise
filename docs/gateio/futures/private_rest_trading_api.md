@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-98-0) Gate API v4 v4.98.0
+# [#](#gate-api-v4-v4-98-1) Gate API v4 v4.98.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2023,7 +2023,7 @@ _List all futures contracts_
 | limit  | query | integer | false    | Maximum number of records to be returned in a single list |
 | offset | query | integer | false    | List offset, starting from 0                              |
 
-#### [#](#enumerated-values-33) Enumerated Values
+#### [#](#enumerated-values-30) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2106,7 +2106,7 @@ _Get a single contract_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-34) Enumerated Values
+#### [#](#enumerated-values-31) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2192,7 +2192,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | limit    | query | integer | false    | Maximum number of order depth data in asks or bids                                                   |
 | with_id  | query | boolean | false    | Whether the order book update ID will be returned. This ID increases by 1 on every order book update |
 
-#### [#](#enumerated-values-35) Enumerated Values
+#### [#](#enumerated-values-32) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2288,7 +2288,7 @@ This parameter is deprecated. Use `from` and `to` instead to limit time range
 `limit` will be used to limit response items. If items between `from` and `to`
 are more than `limit`, only `limit` number will be returned.
 
-#### [#](#enumerated-values-36) Enumerated Values
+#### [#](#enumerated-values-33) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2360,7 +2360,7 @@ limit when specifying `from`, `to` and `interval`
 | limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.                    |
 | interval | query | string         | false    | Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0. Note that 30d means 1 natual month, not 30 days |
 
-#### [#](#enumerated-values-37) Enumerated Values
+#### [#](#enumerated-values-34) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2431,7 +2431,7 @@ limit when specifying from, to and interval
 | limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
 | interval | query | string         | false    | Interval time between data points                                                                                                                  |
 
-#### [#](#enumerated-values-38) Enumerated Values
+#### [#](#enumerated-values-35) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2490,7 +2490,7 @@ _List futures tickers_
 | settle   | path  | string | true     | Settle currency                                         |
 | contract | query | string | false    | Futures contract, return related data only if specified |
 
-#### [#](#enumerated-values-39) Enumerated Values
+#### [#](#enumerated-values-36) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2582,7 +2582,7 @@ _Funding rate history_
 | from     | query | integer(int64) | false    | Start timestamp                                           |
 | to       | query | integer(int64) | false    | End timestamp                                             |
 
-#### [#](#enumerated-values-40) Enumerated Values
+#### [#](#enumerated-values-37) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2634,7 +2634,7 @@ _Futures insurance balance history_
 | settle | path  | string  | true     | Settle currency                                           |
 | limit  | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-41) Enumerated Values
+#### [#](#enumerated-values-38) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2690,7 +2690,7 @@ _Futures stats_
 | interval | query | string         | false    | none             |
 | limit    | query | integer        | false    | none             |
 
-#### [#](#enumerated-values-42) Enumerated Values
+#### [#](#enumerated-values-39) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2765,7 +2765,7 @@ _Get index constituents_
 | settle | path | string | true     | Settle currency |
 | index  | path | string | true     | Index name      |
 
-#### [#](#enumerated-values-43) Enumerated Values
+#### [#](#enumerated-values-40) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2843,7 +2843,7 @@ not be returned in public endpoints. Refer to field description for detail.
 | to       | query | integer(int64) | false    | End timestamp                                             |
 | limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-44) Enumerated Values
+#### [#](#enumerated-values-41) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2912,7 +2912,7 @@ takes effect when the 'contract' parameter is empty.
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | offset   | query | integer | false    | List offset, starting from 0                              |
 
-#### [#](#enumerated-values-45) Enumerated Values
+#### [#](#enumerated-values-42) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2989,7 +2989,7 @@ _Query futures account_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-46) Enumerated Values
+#### [#](#enumerated-values-43) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3127,7 +3127,7 @@ this field after 2023-10-30.
 - point_refr: POINT Referrer rebate
 - bonus_offset: bouns deduction
 
-#### [#](#enumerated-values-47) Enumerated Values
+#### [#](#enumerated-values-44) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3184,7 +3184,7 @@ string | Futures contract, the field is only available for data after
 2023-10-30. | | » trade_id | string | trade id | | » id | string
 | 账户变更记录 id |
 
-#### [#](#enumerated-values-48) Enumerated Values
+#### [#](#enumerated-values-45) Enumerated Values
 
 | Property | Value        |
 | -------- | ------------ |
@@ -3219,7 +3219,7 @@ _List all positions of a user_
 | limit   | query | integer | false    | Maximum number of records to be returned in a single list |
 | offset  | query | integer | false    | List offset, starting from 0                              |
 
-#### [#](#enumerated-values-49) Enumerated Values
+#### [#](#enumerated-values-46) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3294,7 +3294,7 @@ _Get single position_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-50) Enumerated Values
+#### [#](#enumerated-values-47) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3368,7 +3368,7 @@ _Update position margin_
 | contract | path  | string | true     | Futures contract                                                                  |
 | change   | query | string | true     | Margin change. Use positive number to increase margin, negative number otherwise. |
 
-#### [#](#enumerated-values-51) Enumerated Values
+#### [#](#enumerated-values-48) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3443,7 +3443,7 @@ _Update position leverage_
 | leverage             | query | string | true     | New position leverage                                  |
 | cross_leverage_limit | query | string | false    | Cross margin leverage(valid only when `leverage` is 0) |
 
-#### [#](#enumerated-values-52) Enumerated Values
+#### [#](#enumerated-values-49) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3527,7 +3527,7 @@ _Switch to the full position-by-store mode_
 | » mode     | body | string | true     | Full position-by-position model, ISOLATED-by-position, CROSS-full position |
 | » contract | body | string | true     | Contract Market                                                            |
 
-#### [#](#enumerated-values-53) Enumerated Values
+#### [#](#enumerated-values-50) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3601,7 +3601,7 @@ _Update position risk limit_
 | contract   | path  | string | true     | Futures contract     |
 | risk_limit | query | string | true     | New Risk Limit Value |
 
-#### [#](#enumerated-values-54) Enumerated Values
+#### [#](#enumerated-values-51) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3677,7 +3677,7 @@ open
 | settle    | path  | string  | true     | Settle currency             |
 | dual_mode | query | boolean | true     | Whether to enable dual mode |
 
-#### [#](#enumerated-values-55) Enumerated Values
+#### [#](#enumerated-values-52) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3793,7 +3793,7 @@ _Retrieve position detail in dual mode_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-56) Enumerated Values
+#### [#](#enumerated-values-53) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3870,7 +3870,7 @@ _Update position margin in dual mode_
 | change    | query | string | true     | Margin change. Use positive number to increase margin, negative number otherwise. |
 | dual_side | query | string | true     | Long or short position                                                            |
 
-#### [#](#enumerated-values-57) Enumerated Values
+#### [#](#enumerated-values-54) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3947,7 +3947,7 @@ _Update position leverage in dual mode_
 | leverage             | query | string | true     | New position leverage                                  |
 | cross_leverage_limit | query | string | false    | Cross margin leverage(valid only when `leverage` is 0) |
 
-#### [#](#enumerated-values-58) Enumerated Values
+#### [#](#enumerated-values-55) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4023,7 +4023,7 @@ _Update position risk limit in dual mode_
 | contract   | path  | string | true     | Futures contract     |
 | risk_limit | query | string | true     | New Risk Limit Value |
 
-#### [#](#enumerated-values-59) Enumerated Values
+#### [#](#enumerated-values-56) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4197,7 +4197,7 @@ self-trade prevetion strategies
 - co: Cancel oldest, Cancel old orders and keep new ones
 - cb: Cancel both, Both old and new orders will be cancelled
 
-#### [#](#enumerated-values-60) Enumerated Values
+#### [#](#enumerated-values-57) Enumerated Values
 
 | Parameter   | Value       |
 | ----------- | ----------- |
@@ -4280,7 +4280,7 @@ _List futures orders_
 | last_id  | query | string  | false    | Specify list staring point using the `id` of last record in previous list-query results |
 | settle   | path  | string  | true     | Settle currency                                                                         |
 
-#### [#](#enumerated-values-61) Enumerated Values
+#### [#](#enumerated-values-58) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4357,7 +4357,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | side           | query  | string | false    | Specify all buy orders or all sell orders, if not specify them, both are included. Revoke all buy orders and revoke all sell orders and make ask |
 | settle         | path   | string | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-62) Enumerated Values
+#### [#](#enumerated-values-59) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4427,7 +4427,7 @@ _List Futures Orders By Time Range_
 | limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset   | query | integer        | false    | List offset, starting from 0                              |
 
-#### [#](#enumerated-values-63) Enumerated Values
+#### [#](#enumerated-values-60) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4533,7 +4533,7 @@ _Create a batch of futures orders_
 | body           | body   | array\[[FuturesOrder](#schemafuturesorder)\] | true     | none                                                                                                                                             |
 | settle         | path   | string                                       | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-64) Enumerated Values
+#### [#](#enumerated-values-61) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4665,7 +4665,7 @@ the `stp_act` of the taker.
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` |
 
-#### [#](#enumerated-values-65) Enumerated Values
+#### [#](#enumerated-values-62) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -4719,7 +4719,7 @@ Operations based on custom ID can only be checked when the order is in
 orderbook. When the order is finished, it can be checked within 60 seconds after
 the end of the order. After that, only order ID is accepted.
 
-#### [#](#enumerated-values-66) Enumerated Values
+#### [#](#enumerated-values-63) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4791,7 +4791,7 @@ Operations based on custom ID can only be checked when the order is in
 orderbook. When the order is finished, it can be checked within 60 seconds after
 the end of the order. After that, only order ID is accepted.
 
-#### [#](#enumerated-values-67) Enumerated Values
+#### [#](#enumerated-values-64) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4888,7 +4888,7 @@ Operations based on custom ID can only be checked when the order is in
 orderbook. When the order is finished, it can be checked within 60 seconds after
 the end of the order. After that, only order ID is accepted.
 
-#### [#](#enumerated-values-68) Enumerated Values
+#### [#](#enumerated-values-65) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4968,7 +4968,7 @@ retrieved id
 This parameter is deprecated. If you need to iterate through and retrieve more
 records, we recommend using 'GET /futures/{settle}/my_trades_timerange'.
 
-#### [#](#enumerated-values-69) Enumerated Values
+#### [#](#enumerated-values-66) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5029,7 +5029,7 @@ Available values are `taker` and `maker` | | » text | string | User defined
 information | | » fee | string | Fee deducted | | » point_fee | string | Points
 used to deduct fee |
 
-#### [#](#enumerated-values-70) Enumerated Values
+#### [#](#enumerated-values-67) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5067,7 +5067,7 @@ _List personal trading history by time range_
 | offset   | query | integer        | false    | List offset, starting from 0                              |
 | role     | query | string         | false    | Query role, maker or taker.                               |
 
-#### [#](#enumerated-values-71) Enumerated Values
+#### [#](#enumerated-values-68) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5127,7 +5127,7 @@ Available values are `taker` and `maker` | | » text | string | User defined
 information | | » fee | string | Fee deducted | | » point_fee | string | Points
 used to deduct fee |
 
-#### [#](#enumerated-values-72) Enumerated Values
+#### [#](#enumerated-values-69) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5166,7 +5166,7 @@ _List position close history_
 | side     | query | string         | false    | Query side. long or shot                                  |
 | pnl      | query | string         | false    | Query profit or loss                                      |
 
-#### [#](#enumerated-values-73) Enumerated Values
+#### [#](#enumerated-values-70) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5224,7 +5224,7 @@ Status Code **200**
 | » long_price      | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price. |
 | » short_price     | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price  |
 
-#### [#](#enumerated-values-74) Enumerated Values
+#### [#](#enumerated-values-71) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5252,7 +5252,7 @@ _List liquidation history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a liquidation timestamp                           |
 
-#### [#](#enumerated-values-75) Enumerated Values
+#### [#](#enumerated-values-72) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5329,7 +5329,7 @@ _List Auto-Deleveraging History_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify an auto-deleveraging timestamp                    |
 
-#### [#](#enumerated-values-76) Enumerated Values
+#### [#](#enumerated-values-73) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5425,7 +5425,7 @@ will expire and the cacnel function will be cancelled.
 **» timeout**: Countdown time, in seconds At least 5 seconds, 0 means cancel the
 countdown
 
-#### [#](#enumerated-values-77) Enumerated Values
+#### [#](#enumerated-values-74) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5477,7 +5477,7 @@ _Query user trading fee rates_
 | settle   | path  | string | true     | Settle currency                                         |
 | contract | query | string | false    | Futures contract, return related data only if specified |
 
-#### [#](#enumerated-values-78) Enumerated Values
+#### [#](#enumerated-values-75) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5550,7 +5550,7 @@ maximum of 20 records.
 | body           | body   | array\[string\] | true     | none                                                                                                                                             |
 | settle         | path   | string          | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-79) Enumerated Values
+#### [#](#enumerated-values-76) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5626,7 +5626,7 @@ orders in one request.
 | body           | body   | array\[[BatchAmendOrderReq](#schemabatchamendorderreq)\] | true     | none                                                                                                                                             |
 | settle         | path   | string                                                   | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-80) Enumerated Values
+#### [#](#enumerated-values-77) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5758,7 +5758,7 @@ the `stp_act` of the taker.
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` |
 
-#### [#](#enumerated-values-81) Enumerated Values
+#### [#](#enumerated-values-78) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -5897,7 +5897,7 @@ set auto_size
 The two types of entrusted order stop-profit and stop-loss are read-only and
 cannot be passed in through requests
 
-#### [#](#enumerated-values-82) Enumerated Values
+#### [#](#enumerated-values-79) Enumerated Values
 
 | Parameter        | Value |
 | ---------------- | ----- |
@@ -5961,7 +5961,7 @@ _List All Price-triggered Orders_
 | offset   | query | integer | false    | List offset, starting from 0                              |
 | settle   | path  | string  | true     | Settle currency                                           |
 
-#### [#](#enumerated-values-83) Enumerated Values
+#### [#](#enumerated-values-80) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -6027,7 +6027,7 @@ _Cancel All Price-triggered Orders_
 | contract | query | string | false    | Futures contract, return related data only if specified |
 | settle   | path  | string | true     | Settle currency                                         |
 
-#### [#](#enumerated-values-84) Enumerated Values
+#### [#](#enumerated-values-81) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -6091,7 +6091,7 @@ _Get a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-85) Enumerated Values
+#### [#](#enumerated-values-82) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -6153,7 +6153,7 @@ _cancel a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-86) Enumerated Values
+#### [#](#enumerated-values-83) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
