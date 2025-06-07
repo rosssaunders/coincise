@@ -4,7 +4,7 @@
 
 ###### REST API
 
-*   \[更新\] `/contract/public/details` Applicable to query contract details
+*   \[Update\] `/contract/public/details` Applicable to query contract details
     *   Feat：Add new response field： **status**
     *   Feat：Add new response field： **delist\_time**
 
