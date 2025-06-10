@@ -53,6 +53,11 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-05-29
+
+  - transaction_time_ns field was added into `user.order.{instrument_name}`
+    response
+
 - 2025-03-14
 
   - Removed deprecated attributes system_label in `private/get-accounts`

@@ -53,6 +53,11 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-05-29
+
+  - transaction_time_ns field was added into `user.order.{instrument_name}`
+    response
+
 - 2025-03-14
 
   - Removed deprecated attributes system_label in `private/get-accounts`
@@ -977,6 +982,7 @@ Websocket (User API) Websocket (Market Data Subscriptions)
           "create_time": 1613575617173,
           "create_time_ns": "1613575617173123456",
           "update_time": 1613575617173
+          "transaction_time_ns": "1613570791060827635",
         }]
       }
     }
@@ -1036,8 +1042,10 @@ string | Cumulative executed fee | | status | string | Order status:
 \- `EXPIRED` | | update_user_id | string | Updated user | | order_date | string
 | Order creation date | | create_time | number | Order creation timestamp | |
 create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
-| number | Order update timestamp | | instrument_name | string | e.g.
-BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees |
+| number | Order update timestamp | | transaction_time_ns | string | Order
+transaction timestamp (nanosecond). This field is equivalent to
+TransactTime(Tag 60) in FIX | | instrument_name | string | e.g. BTCUSD-PERP | |
+fee_instrument_name | string | Currency used for the fees |
 
 Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and
 `cumulative_quantity` > 0.

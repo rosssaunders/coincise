@@ -53,6 +53,11 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-05-29
+
+  - transaction_time_ns field was added into `user.order.{instrument_name}`
+    response
+
 - 2025-03-14
 
   - Removed deprecated attributes system_label in `private/get-accounts`
@@ -1251,7 +1256,7 @@ GET
           "c": "0.03955106",      // 24-hour price change, null if there weren't any trades
           "b": "51170.000000",    // The current best bid price, null if there aren't any bids
           "k": "51180.000000",    // The current best ask price, null if there aren't any asks
-          "t": 1613580710768
+          "t": 1613580710768      // The published timestamp in ms
         }]
       }
     }
@@ -1286,7 +1291,7 @@ GET
 | c    | string | 24-hour price change, null if there weren't any trades          |
 | b    | string | The current best bid price, null if there aren't any bids       |
 | k    | string | The current best ask price, null if there aren't any asks       |
-| t    | number | Trade timestamp                                                 |
+| t    | number | The published timestamp in ms                                   |
 
 ## public/get-valuations
 
