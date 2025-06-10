@@ -231,7 +231,7 @@ Client will receive the information in the following scenarios:
 
 - Websocket disconnect for service upgrade
 
-30 seconds prior to the upgrade of the WebSocket service, the notification
+60 seconds prior to the upgrade of the WebSocket service, the notification
 message will be sent to users indicating that the connection will soon be
 disconnected. Users are encouraged to establish a new connection to prevent any
 disruptions caused by disconnection.
