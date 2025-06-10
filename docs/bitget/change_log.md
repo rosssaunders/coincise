@@ -2,6 +2,15 @@
 
 ## Changelog
 
+### \[June 09, 2025\] Get Contract Information Adds Maximum Order Quantity Fields[​](#june-09-2025-get-contract-information-adds-maximum-order-quantity-fields "Direct link to june-09-2025-get-contract-information-adds-maximum-order-quantity-fields")
+
+Interface：/api/v2/mix/market/contracts  
+Changes：
+
+- Added maxMarketOrderQty field for the maximum quantity of a single market
+  order.
+- Added maxOrderQty field for the maximum quantity of a single limit order.
+
 ### \[May 19, 2025\] Update on Regular Release Date[​](#may-19-2025-update-on-regular-release-date "Direct link to may-19-2025-update-on-regular-release-date")
 
 The current fixed regular release date for backend is **every Tuesday,
