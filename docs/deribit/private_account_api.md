@@ -1364,19 +1364,21 @@ This is a private method; it can only be used after authentication.
 
 # Rate Limits
 
-- Updated 2 months ago
+- Updated 11 hours ago
 
-Deribit uses a volume-tiered rate limit system, focusing primarily on matching
-engine requests. These rate limits are implemented to ensure the robustness of
-our system's order processing capabilities.
+To maintain fair and stable access to our API, Deribit uses a credit-based rate
+limiting system. This system ensures efficient use of platform resources while
+accommodating different trading volumes.
 
-**General Mechanism of Rate Limits**
+#### **Credit-Based System**
 
-Our rate limiting approach is based on a credit system, where each request
-consumes a certain number of credits and the credits are periodically refilled.
-Exceeding the rate limit results in a "too_many_requests" 10028 error. If you
-receive this error, it means you have used all of your credits, and will need to
-wait for a credit refill. Key elements of this system include:
+Each API request consumes a certain number of credits. The number of available
+credits per second depends on your account’s trading activity and associated
+tier. Requests that exceed your current available credits will be rejected with
+a `too_many_requests error` (code `10028`). If you receive this error, it means
+you have used all of your credits, and will need to wait for a credit refill. 
+
+Key elements of this system include:
 
 - **Credit Refill**: Credits are replenished at a consistent rate, ensuring a
   steady flow of allowable requests.
@@ -1385,7 +1387,24 @@ wait for a credit refill. Key elements of this system include:
 - **Cost per Request**: Every API request consumes a predefined number of
   credits from the user's available credit pool.
 
-**Default Settings for Non-Matching Engine Requests**
+#### **Matching vs Non-Matching Engine Requests**
+
+There are two main categories of API requests:
+
+- **Matching engine requests**: These interact with the order book, such as
+  placing or cancelling an order.
+- **Non-matching engine requests**: These involve general queries, such as
+  retrieving account information or market data.
+
+Each type of request consumes credits at a different rate.
+
+### Note
+
+The `public/get_instruments` endpoint has a unique rate limit: 1 request per 10
+seconds, with a burst allowance of 5. This limit is enforced separately from the
+standard credit system.
+
+#### **Default Settings for Non-Matching Engine Requests**
 
 - **Cost per Request**: 500 credits.
 - **Maximum Credits**: 50,000 credits.
@@ -1394,81 +1413,80 @@ wait for a credit refill. Key elements of this system include:
 - **Burst Capacity**: Allows up to 100 requests at once, considering the maximum
   credit pool.
 
-**Matching Engine Requests**
+**Matching Engine Requests** 
 
 Each sub-account has an hourly updated rate limit, applicable across all books.
 Users can check their current rate limits via the
-**/private/get_account_summary** method.
+[**/private/get_account_summary**](https://docs.deribit.com/#private-get_account_summary)method.
 
-<table class="MuiTableContainer-root deribit-42 css-kge0eu" style="-webkit-text-stroke-width:0px;box-sizing:inherit;color:rgb(255, 255, 255);font-family:Roboto;font-size:13.7143px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin-bottom:0.5em;orphans:2;overflow-x:auto;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;width:852px;word-spacing:0px;" width="852" xml:id="UUID-9325394c-bca6-d0a5-291f-b19978b3ca89_informaltable-id4637951699055"><tbody><tr><td><p><span class="bold"><strong>Tier Level</strong></span></p></td><td><p><span class="bold"><strong>7-Day Trading Volume</strong></span></p></td><td><p><span class="bold"><strong>Sustained Rate Limit (Requests/Second)</strong></span></p></td><td><p><span class="bold"><strong>Burst Rate Limit</strong></span></p></td><td><p><span class="bold"><strong>Description</strong></span></p></td></tr><tr><td><p><span class="bold"><strong>Tier 1</strong></span></p></td><td><p>Over USD 25 million</p></td><td><p>30 requests/second</p></td><td><p>100 requests (burst)</p></td><td><p>Suitable for high-volume traders, allowing up to 100 requests in a rapid burst or a steady rate of 30 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 2</strong></span></p></td><td><p>Over USD 5 million</p></td><td><p>20 requests/second</p></td><td><p>50 requests (burst)</p></td><td><p>Designed for medium-volume traders, permitting up to 50 requests in a burst or 20 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 3</strong></span></p></td><td><p>Over USD 1 million</p></td><td><p>10 requests/second</p></td><td><p>30 requests (burst)</p></td><td><p>Appropriate for active traders, enabling up to 30 requests in a burst or 10 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 4</strong></span></p></td><td><p>Up to USD 1 million</p></td><td><p>5 requests/second</p></td><td><p>20 requests (burst)</p></td><td><p>For regular traders, allowing up to 20 requests in a burst or a steady rate of 5 requests per second.</p></td></tr></tbody></table>
+<table><tbody><tr><td><p><span class="bold"><strong>Tier Level</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>7-Day Trading Volume</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Sustained Rate Limit (Requests/Second)</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Burst Rate Limit</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Description</strong></span>&nbsp;</p></td></tr><tr><td><p><span class="bold"><strong>Tier 1</strong></span>&nbsp;</p></td><td><p>Over USD 25 million</p></td><td><p>30 requests/second</p></td><td><p>100 requests (burst)</p></td><td><p>Suitable for high-volume traders, allowing up to 100 requests in a rapid burst or a steady rate of 30 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 2</strong></span>&nbsp;</p></td><td><p>Over USD 5 million</p></td><td><p>20 requests/second</p></td><td><p>50 requests (burst)</p></td><td><p>Designed for medium-volume traders, permitting up to 50 requests in a burst or 20 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 3</strong></span>&nbsp;</p></td><td><p>Over USD 1 million</p></td><td><p>10 requests/second</p></td><td><p>30 requests (burst)</p></td><td><p>Appropriate for active traders, enabling up to 30 requests in a burst or 10 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 4</strong></span>&nbsp;</p></td><td><p>Up to USD 1 million</p></td><td><p>5 requests/second</p></td><td><p>20 requests (burst)</p></td><td><p>For regular traders, allowing up to 20 requests in a burst or a steady rate of 5 requests per second.</p></td></tr></tbody></table>
 
-## Checking current rate limits[](#heading-1)
+### Tip
+
+Using WebSocket subscriptions for real-time data reduces REST credit
+consumption.
+
+#### Checking current rate limits
 
 Users can access the current rate limits by calling the
 [**/private/get_account_summary**](https://docs.deribit.com/next/#private-get_account_summary)
-method and receiving limits field in response. The configuration of rate limits
-can be either on a per-currency basis or a default set applied globally across
-all currencies. Per-currency limits are not the default setting and are enabled
-only for specific clients upon request.
+method and receiving `limits` field in response. The configuration of rate
+limits can be either on a per-currency basis or a default set applied globally
+across all currencies. Per-currency limits are not the default setting and are
+enabled only for specific clients upon request.
 
-## **Limits field**[](#heading-2)
+#### **Limits field**
 
-non_matching_engine: Describes rate limits applicable to requests that do not
+`non_matching_engine`: Describes rate limits applicable to requests that do not
 involve the matching engine. Defined by:
 
-- burst: The maximum number of requests permitted in a short burst.
-- rate: The sustained number of requests allowed over time.
+- `burst`: The maximum number of requests permitted in a short burst.
+- `rate`: The sustained number of requests allowed over time.
 
-matching_engine: Outlines rate limits related to operations that utilize the
+`matching_engine`: Outlines rate limits related to operations that utilize the
 matching engine, with the following structure:
 
-**Common Limits for All Configurations:**
+#### **Common Limits for All Configurations**
 
-- spot: Specific limits for spot trading, involving two different currencies.
-- cancel_all: Limits applicable to canceling all orders across all currencies or
-  canceling by label without specifying the currency.
+#### **Spot and Cancel Limits**
 
-**When** limits_per_currencyis set to false, the following default limits apply
-globally across all currencies:
+- `spot`: Applies to spot trading between two different currencies.
+- `cancel_all`: Used when canceling all orders globally or by label without
+  specifying a currency.
 
-- trading: Total trading limits applied to all trading operations.
-- maximum_quotes: Limits on the maximum number of quotes permissible.
-- maximum_mass_quotes: Limits on mass quoting operations.
-- guaranteed_mass_quotes: Guaranteed number of mass quotes that can be made.
+#### **Global vs. Per-Currency Limits**
 
-**When** limits_per_currencyis set to true, rate limits are defined separately
-for each settlement currency, providing detailed control:
+- When `limits_per_currency` **\=** `false`, limits apply globally:
 
-- Each currency is represented by its code as a key in the matching_engine
-  object.
+  - `trading`: Overall trading operations
+  - `maximum_quotes`: Total number of quotes
+  - `maximum_mass_quotes`: Mass quoting operations
+  - `guaranteed_mass_quotes`: Guaranteed mass quotes
 
-Under each currency key, the limits are categorized as follows:
+- When `limits_per_currency` **\=** `true`, limits are set **per settlement
+  currency** under the `matching_engine` object:
 
-- trading: Limits specific to trading activities for that currency.
-- maximum_quotes: Limits for the maximum number of quotes specific to the
-  currency.
-- maximum_mass_quotes: Limits for mass quoting operations for the currency.
-- guaranteed_mass_quotes: Guaranteed number of mass quotes for the currency.
+  - Each currency key includes:
 
-## **Additional Context for Cancel Operations**[](#heading-3)
+    - `trading`: Per-currency trading limits
+    - `maximum_quotes`: Per-currency quote limits
+    - `maximum_mass_quotes`: Per-currency mass quoting limits
+    - `guaranteed_mass_quotes`: Per-currency guaranteed mass quotes
 
-private/cancel_all: This endpoint utilizes the cancel_all limit from the
-matching_engine to determine allowable rates for canceling all orders across the
-platform.
+#### **Cancel Endpoint Logic**
 
-private/cancel_all_by_currency/instrument: For operations targeted at specific
-currencies or instruments, the relevant limits under trading from the
-matching_engine apply. If the operation involves spot trading, the spot limit is
-applicable.
+- [**private/cancel_all**](https://docs.deribit.com/#private-cancel_all): Uses
+  the global `cancel_all` limit.
+- [**private/cancel_all_by_currency**](https://docs.deribit.com/#private-cancel_all_by_currency)**/**[**instrument**](https://docs.deribit.com/#private-cancel_all_by_instrument):
+  Applies the relevant trading or spot limit for the specified currency or
+  instrument.
+- [**private/cancel_all_by_kind_or_type**](https://docs.deribit.com/#private-cancel_all_by_kind_or_type):
 
-private/cancel_all_by_kind_or_type: The applicable limits depend on the
-parameters specified in the request:
+  - No currency specified → uses cancel_all
+  - Specific currency → uses per-currency trading limit
+  - Spot instrument → uses spot limit
 
-- For **all** currencies: thecancel_alllimit.
-- For a **specific** currency: the corresponding currency limit.
-- For **spot** operations: the spot limit.
-
-**Example for users without per currency config (default):**
+**Example for users without per currency config (default):** 
 
 { "non_matching_engine": { "burst": 1500, "rate": 1000 }, "limits_per_currency":
 false, "matching_engine": { "trading": { "total": { "burst": 20, "rate": 5 } },
@@ -1477,7 +1495,7 @@ false, "matching_engine": { "trading": { "total": { "burst": 20, "rate": 5 } },
 "guaranteed_mass_quotes": { "burst": 2, "rate": 2 }, "cancel_all": { "burst":
 250, "rate": 200 } } }
 
-**Example for users with per currency config:**
+**Example for users with per currency config:** 
 
 { "non_matching_engine": { "burst": 1500, "rate": 1000 }, "limits_per_currency":
 true, "matching_engine": { "cancel_all": { "burst": 250, "rate": 200 }, "spot":
@@ -1495,61 +1513,44 @@ true, "matching_engine": { "cancel_all": { "burst": 250, "rate": 200 }, "spot":
 "guaranteed_mass_quotes": { "burst": 2, "rate": 2 }, "trading": { "perpetuals":
 { "burst": 20, "rate": 10 }, "total": { "burst": 150, "rate": 100 } } } } }
 
-## Overview of Matching Engine Requests[](#heading-4)
+#### **Matching Engine Requests Overview**
 
-All requests not in the list below are treated as non-matching engine requests.
+All requests **not listed below** are treated as **non-matching engine**
+requests.
 
-**API V2**
+- `private/buy`
+- `private/sell`
+- `private/edit`
+- `private/edit_by_label`
+- `private/cancel`
+- `private/cancel_by_label`
+- `private/cancel_all`
+- `private/cancel_all_by_instrument`
+- `private/cancel_all_by_currency`
+- `private/cancel_all_by_kind_or_type`
+- `private/close_position`
+- `private/verify_block_trade`
+- `private/execute_block_trade`
+- `private/move_positions`
+- `private/mass_quote`
+- `private/cancel_quotes`
+- `private/add_block_rfq_quote`
+- `private/edit_block_rfq_quote`
+- `private/cancel_block_rfq_quote`
+- `private/cancel_all_block_rfq_quotes`
 
-/api/v2/private/buy
+#### **FIX Message Types**
 
-/api/v2/private/sell
-
-/api/v2/private/edit
-
-/api/v2/private/edit_by_label
-
-/api/v2/private/cancel
-
-/api/v2/private/cancel_by_label
-
-/api/v2/private/cancel_all
-
-/api/v2/private/cancel_all_by_instrument
-
-/api/v2/private/cancel_all_by_currency
-
-/api/v2/private/cancel_all_by_kind_or_type
-
-/api/v2/private/close_position
-
-/api/v2/private/verify_block_trade
-
-/api/v2/private/execute_block_trade
-
- /api/v2/private/move_positions
-
-/api/v2/private/mass_quote
-
- /api/v2/private/cancel_quotes
-
-**FIX**
-
-new_order_single
-
-order_cancel_request
-
-order_mass_cancel_request
-
-order_cancel_replace_request
-
-mass_quote
-
-quote_cancel
+- `new_order_single`
+- `order_cancel_request`
+- `order_mass_cancel_request`
+- `order_cancel_replace_request`
+- `mass_quote`
+- `quote_cancel`
 
 # Connection Management
 
-- Updated 2 months ago
+- Updated 11 hours ago
 
 ## Connection[](#heading-1)
 
@@ -1588,7 +1589,7 @@ connection with a named session.
   every subsequent request.
 - Re-authenticating with a refresh token under session scope does not add new
   sessions but refreshes the existing one.
-- **A maximum of 16 sessions per UID is allowed**. When session 17 is opened the
+- **A maximum of 16 sessions per key is allowed**. When session 17 is opened the
   Deribit removes the one that was not refreshed in the longest time.
 
 ## Connection Lifetime[](#heading-3)
