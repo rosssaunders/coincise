@@ -1181,7 +1181,7 @@ Sent by the server in a response to the
 [InstrumentListRequest`<x>`](/docs/binance-spot-api-docs/fix-api#instrumentlistrequest).
 
 > \[!NOTE\] More detailed symbol information is available through the
-> [exchangeInfo](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#exchange-information)
+> [exchangeInfo](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api/general-endpoints.md#exchange-information)
 > endpoint.
 
 | Tag       | Name                    | Type         | Required | Description                                  |
