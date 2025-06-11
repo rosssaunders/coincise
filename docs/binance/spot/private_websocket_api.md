@@ -6,12 +6,12 @@
 
 - There are currently two ways to subscribe to the User Data Stream:
   - **\[Preferred\]** Subscribing directly through the
-    [WebSocket API](/docs/binance-spot-api-docs/web-socket-api.md#user_data_stream_subscribe)
+    [WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
     using an API Key.
   - **\[Deprecated\]** Generating a **listen key** using
-    [the REST API](/docs/binance-spot-api-docs/rest-api.md#user-data-stream-requests)
+    [the REST API](/docs/binance-spot-api-docs/rest-api/account-endpoints#user-data-stream-requests)
     or
-    [the WebSocket API](/docs/binance-spot-api-docs/web-socket-api.md#user-data-stream-requests)
+    [the WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
     and using it to listen on **stream.binance.com**
 - Both sources will push all events related to your account **in real-time**.
 - How to use a listen key on **stream.binance.com**:

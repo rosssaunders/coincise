@@ -21,8 +21,8 @@ REST and WebSocket API:
 - Documented API timeout value and error under General API Information for each
   API:
   - [FIX](/docs/binance-spot-api-docs/fix-api#general-api-information)
-  - [REST](/docs/rest-api.md#general-api-information)
-  - [WebSocket](/docs/web-socket-api.md#general-api-information)
+  - [REST](/docs/binance-spot-api-docs/rest-api/general-api-information)
+  - [WebSocket](/docs/binance-spot-api-docs/websocket-api/general-api-information)
 
 ---
 
@@ -50,8 +50,8 @@ REST and WebSocket API:
       and Unfilled Order Count (order placement endpoints of all APIs).
   - The documentation for Timing security has been updated to reflect the
     additional check.
-    - [REST API](/docs/rest-api.md#timing-security)
-    - [WebSocket API](/docs/web-socket-api.md#timing-security)
+    - [REST API](/docs/binance-spot-api-docs/rest-api/endpoint-security-type#timing-security)
+    - [WebSocket API](/docs/binance-spot-api-docs/websocket-api/request-security#timing-security)
     - [FIX API](/docs/binance-spot-api-docs/fix-api#timing-security)
 - Fixed a bug in FIX Market Data message InstrumentList `<y>`. Previously, the
   value of `NoRelatedSym(146)` could have been incorrect.
@@ -175,7 +175,7 @@ take a week to complete.
   `listenKey` is now deprecated.**
   - This feature will be removed from our systems at a later date.
 - **Instead, you should get user data updates by subscribing to the
-  [User Data Stream on the WebSocket API](/docs/web-socket-api.md)**.
+  [User Data Stream on the WebSocket API](/docs/websocket-api)**.
   - This should offer slightly better performance **(lower latency)**.
   - This requires the use of an Ed25519 API Key.
 - In a future update, information about the base WebSocket endpoint for the User
@@ -588,8 +588,10 @@ REST and WebSocket API:
 #### 2024-10-17
 
 Changes to Exchange Information (i.e.
-[`GET /api/v3/exchangeInfo`](/docs/rest-api.md#exchangeInfo) from REST and
-[`exchangeInfo`](/docs/web-socket-api.md#exchangeInfo) for WebSocket API).
+[`GET /api/v3/exchangeInfo`](/docs/binance-spot-api-docs/rest-api/general-endpoints#exchangeInfo)
+from REST and
+[`exchangeInfo`](/docs/binance-spot-api-docs/websocket-api/general-requests#exchangeInfo)
+for WebSocket API).
 
 - A new optional parameter `showPermissionSets` can be used to hide the
   permissions from `permissionsSets`; This can be used for a reduced payload
