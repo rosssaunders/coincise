@@ -907,7 +907,20 @@ _This method takes no parameters_
 
 # Rate Limits
 
-- Updated 1 day ago
+- Updated 16 hours ago
+
+### Caution
+
+#### **Exchange-Wide Compliance (OTV & API Usage Policy)**
+
+All API traffic—whether authenticated or public—**must follow Deribit’s broader
+trading-integrity rules**, including the **Order-to-Volume (OTV) limits** and
+other anti-abuse protections. Violations can trigger immediate session
+disconnects, additional throttling, or stronger enforcement actions.
+
+For full guidelines, please review our
+[API Usage Policy](/hc/en-us/articles/25944617449373#UUID-56019658-17b2-b28e-ee98-3335977015d2 "API Usage Policy")
+(which also covers OTV thresholds and other exchange-abuse rules).
 
 To maintain fair and stable access to our API, Deribit uses a credit-based rate
 limiting system. This system ensures efficient use of platform resources while
@@ -915,20 +928,79 @@ accommodating different trading volumes.
 
 #### **Credit-Based System**
 
-Each API request consumes a certain number of credits. The number of available
-credits per second depends on your account’s trading activity and associated
-tier. Requests that exceed your current available credits will be rejected with
-a `too_many_requests error` (code `10028`). If you receive this error, it means
-you have used all of your credits, and will need to wait for a credit refill. 
+Each API request consumes a certain number of credits. The refill rate and
+maximum credit pool for your account depend on your trading activity and tier.
+**If a request arrives when no credits remain, we immediately send a**
+`too_many_requests` **(**`code 10028`**) or similar error and terminate the
+session.** After a disconnect, you must wait for credits to replenish and then
+re-establish a new connection before sending additional requests.
 
 Key elements of this system include:
 
-- **Credit Refill**: Credits are replenished at a consistent rate, ensuring a
-  steady flow of allowable requests.
-- **Maximum Credits**: Each user is allocated a maximum number of credits, which
-  sets the limit on how many requests can be made in a given period.
-- **Cost per Request**: Every API request consumes a predefined number of
-  credits from the user's available credit pool.
+#### **Credit Refill**
+
+Credits are **replenished continuously at a fixed rate**, depending on your
+account’s tier. This refill acts like a **leaky bucket**: each second, a certain
+number of credits “drip” back into your account’s credit pool. You can think of
+this as a “credits per second” (CPS) refill rate.
+
+- **Example**: If your refill rate is 20 credits/second, and each request costs
+  1 credit, you can sustainably send 20 requests per second without depleting
+  your credits.
+- The refill continues **even when you’re not making requests**, allowing you to
+  accumulate credits back up to your **maximum credit limit**.
+- If your maximum credit cap is 200 and your refill rate is 20 credits/sec, it
+  will take 10 seconds to fully refill from 0 to 200.
+
+This refill mechanism helps to:
+
+- Allow **burst activity** (e.g., submitting multiple orders at once), as long
+  as it doesn’t exceed the maximum credit limit.
+- Encourage **consistent and predictable usage**, minimizing sudden surges that
+  could strain the system.
+
+#### **Maximum Credits**
+
+This is the **upper bound** of your available credit pool. You cannot accumulate
+more credits than this cap, regardless of how long you wait. It determines the
+size of request bursts you can make.
+
+#### **Cost per Request**
+
+Each API endpoint consumes a different number of credits. More
+resource-intensive endpoints may cost more than lightweight ones.
+
+### Tip
+
+Using WebSocket subscriptions for real-time data reduces REST credit
+consumption.
+
+### Important
+
+The `public/get_instruments` endpoint has a unique rate limit: 1 request per 10
+seconds, with a burst allowance of 5. This limit is enforced separately from the
+standard credit system.
+
+### Warning
+
+#### **Webpage Usage Also Consumes API Credits**
+
+Please note that using the
+[**Deribit web platform**](https://www.deribit.com/futures/BTC-PERPETUAL) also
+generates API requests behind the scenes. This means **browsing certain pages
+(e.g., order book, positions, account info)** can **consume credits from your
+API rate limit**, just like programmatic API calls.
+
+If you are running automated scripts or trading bots in parallel with an open
+Deribit web session, you may reach your credit limit more quickly than expected.
+When this happens, you may receive a `too_many_requests` error (code `10028`),
+even if your script appears to be within the expected request volume.
+
+To optimize performance:
+
+- **Avoid keeping multiple browser tabs open** on data-intensive pages.
+- Consider logging out of the web interface when running high-frequency
+  strategies.
 
 #### **Matching vs Non-Matching Engine Requests**
 
@@ -940,12 +1012,6 @@ There are two main categories of API requests:
   retrieving account information or market data.
 
 Each type of request consumes credits at a different rate.
-
-### Note
-
-The `public/get_instruments` endpoint has a unique rate limit: 1 request per 10
-seconds, with a burst allowance of 5. This limit is enforced separately from the
-standard credit system.
 
 #### **Default Settings for Non-Matching Engine Requests**
 
@@ -960,14 +1026,37 @@ standard credit system.
 
 Each sub-account has an hourly updated rate limit, applicable across all books.
 Users can check their current rate limits via the
-[**/private/get_account_summary**](https://docs.deribit.com/#private-get_account_summary)method.
+[**/private/get_account_summary**](https://docs.deribit.com/#private-get_account_summary)
+method.
 
 <table><tbody><tr><td><p><span class="bold"><strong>Tier Level</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>7-Day Trading Volume</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Sustained Rate Limit (Requests/Second)</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Burst Rate Limit</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Description</strong></span>&nbsp;</p></td></tr><tr><td><p><span class="bold"><strong>Tier 1</strong></span>&nbsp;</p></td><td><p>Over USD 25 million</p></td><td><p>30 requests/second</p></td><td><p>100 requests (burst)</p></td><td><p>Suitable for high-volume traders, allowing up to 100 requests in a rapid burst or a steady rate of 30 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 2</strong></span>&nbsp;</p></td><td><p>Over USD 5 million</p></td><td><p>20 requests/second</p></td><td><p>50 requests (burst)</p></td><td><p>Designed for medium-volume traders, permitting up to 50 requests in a burst or 20 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 3</strong></span>&nbsp;</p></td><td><p>Over USD 1 million</p></td><td><p>10 requests/second</p></td><td><p>30 requests (burst)</p></td><td><p>Appropriate for active traders, enabling up to 30 requests in a burst or 10 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 4</strong></span>&nbsp;</p></td><td><p>Up to USD 1 million</p></td><td><p>5 requests/second</p></td><td><p>20 requests (burst)</p></td><td><p>For regular traders, allowing up to 20 requests in a burst or a steady rate of 5 requests per second.</p></td></tr></tbody></table>
 
-### Tip
+### Important
 
-Using WebSocket subscriptions for real-time data reduces REST credit
-consumption.
+#### **Public Access Limitations**
+
+Public, **non-authorized** API requests are rate-limited on a **per-IP
+basis**—they do not draw from the account-level credit pool. If an IP exceeds
+its public request allowance, subsequent calls may be **temporarily rejected**
+or the connection **disconnected** to protect platform stability.
+
+Whenever possible, use **authorized requests tied to your API key**.
+Authenticated traffic benefits from:
+
+- **Higher and more transparent limits** that scale with your account’s tier.
+- **Client-ID visibility**, letting us distinguish heavy legitimate usage from
+  abusive traffic—so rather than an immediate block, we can apply graduated
+  safeguards if your limit is exceeded.
+
+In short, authorized requests are always the safer, more reliable option for
+sustained or high-frequency access.
+
+### Important
+
+Production and [Testnet](#UUID-452cc7f8-1f88-823a-717c-28157a54a917 "Testnet")
+operate **on separate, independently-tracked rate-limit pools**. **Limits are
+not shared** between environments—exceeding Testnet limits will not affect your
+Production credits, and vice-versa.
 
 #### Checking current rate limits
 
@@ -977,6 +1066,12 @@ method and receiving `limits` field in response. The configuration of rate
 limits can be either on a per-currency basis or a default set applied globally
 across all currencies. Per-currency limits are not the default setting and are
 enabled only for specific clients upon request.
+
+### Notice
+
+Per-currency rate limits currently are used **exclusively to decrease** access
+limits for specific currencies when needed. They are not applied to increase
+rate limits.
 
 #### **Limits field**
 
@@ -1061,39 +1156,39 @@ true, "matching_engine": { "cancel_all": { "burst": 250, "rate": 200 }, "spot":
 All requests **not listed below** are treated as **non-matching engine**
 requests.
 
-- `private/buy`
-- `private/sell`
-- `private/edit`
-- `private/edit_by_label`
-- `private/cancel`
-- `private/cancel_by_label`
-- `private/cancel_all`
-- `private/cancel_all_by_instrument`
-- `private/cancel_all_by_currency`
-- `private/cancel_all_by_kind_or_type`
-- `private/close_position`
-- `private/verify_block_trade`
-- `private/execute_block_trade`
-- `private/move_positions`
-- `private/mass_quote`
-- `private/cancel_quotes`
-- `private/add_block_rfq_quote`
-- `private/edit_block_rfq_quote`
-- `private/cancel_block_rfq_quote`
-- `private/cancel_all_block_rfq_quotes`
+- `private/buy` 
+- `private/sell` 
+- `private/edit` 
+- `private/edit_by_label` 
+- `private/cancel` 
+- `private/cancel_by_label` 
+- `private/cancel_all` 
+- `private/cancel_all_by_instrument` 
+- `private/cancel_all_by_currency` 
+- `private/cancel_all_by_kind_or_type` 
+- `private/close_position` 
+- `private/verify_block_trade` 
+- `private/execute_block_trade` 
+- `private/move_positions` 
+- `private/mass_quote` 
+- `private/cancel_quotes` 
+- `private/add_block_rfq_quote` 
+- `private/edit_block_rfq_quote` 
+- `private/cancel_block_rfq_quote` 
+- `private/cancel_all_block_rfq_quotes` 
 
 #### **FIX Message Types**
 
-- `new_order_single`
-- `order_cancel_request`
-- `order_mass_cancel_request`
-- `order_cancel_replace_request`
-- `mass_quote`
+- `new_order_single` 
+- `order_cancel_request` 
+- `order_mass_cancel_request` 
+- `order_cancel_replace_request` 
+- `mass_quote` 
 - `quote_cancel`
 
 # Connection Management
 
-- Updated 1 day ago
+- Updated 2 days ago
 
 ## Connection[](#heading-1)
 
