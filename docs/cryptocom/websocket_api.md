@@ -53,6 +53,11 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-06-10
+
+  - `private/amend-order` was added
+  - `public/get-announcements` was added
+
 - 2025-05-29
 
   - transaction_time_ns field was added into `user.order.{instrument_name}`

@@ -53,6 +53,11 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-06-10
+
+  - `private/amend-order` was added
+  - `public/get-announcements` was added
+
 - 2025-05-29
 
   - transaction_time_ns field was added into `user.order.{instrument_name}`
@@ -1529,6 +1534,107 @@ POST
 | ---------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | order_id   | string of number | Newly created order ID                                                                                                                                                            |
 | client_oid | string           | If a Client Order ID was provided in the request, otherwise, will be the `nonce` in the request. As nonce can be the same among orders, it is recommened to specify `client_oid`. |
+
+## private/amend-order
+
+> Request Sample (amend by order_id)
+
+    {
+        "id": 53,
+        "method": "private/amend-order",
+        "api_key": ${api_key},
+        "params": {
+            "order_id": order_id,
+            "new_price": "82000",
+            "new_quantity": "0.0002",
+        },
+        "nonce": 1587846358253
+    }
+
+> Response Sample (amend by order_id)
+
+    {
+        "id": 53,
+        "method": "private/amend-order",
+        "code": 0,
+        "result": {
+            "client_oid": "53",
+            "order_id": "6530219466236720401"
+        }
+    }
+
+> Request Sample (amend by orig_client_id)
+
+    {
+        "id": 55,
+        "method": "private/amend-order",
+        "api_key": ${api_key},
+        "params": {
+            "orig_client_oid": "53",
+            "new_price": "83000",
+            "new_quantity": "0.0001",
+        },
+        "nonce": 1587846358253
+    }
+
+> Response Sample (amend by orig_client_id)
+
+    {
+        "id": 55,
+        "method": "private/amend-order",
+        "code": 0,
+        "result": {
+            "client_oid": "55",
+            "order_id": "6530219466236720401"
+        }
+    }
+
+Amend an existing order on the Exchange.
+
+This call is asynchronous, so the response is simply a confirmation of the
+request.
+
+The `user.order` subscription can be used to check when the order is
+successfully created.
+
+Please note that amend order is designed as a convenience function such that it
+performs cancel and then create behind the scene. Original order priority will
+be cancelled with the new one created. For faster performance, it is recommended
+to use `private/cancel-order`, and then `private/create-order` instead.
+
+### Request Params
+
+| Name                                                   | Type             | Required | Description                       |
+| ------------------------------------------------------ | ---------------- | -------- | --------------------------------- |
+| Order_id                                               | string of number | Depends  | Optional Order ID                 |
+| Either `order_id` or `orig_client_oid` must be present |
+| orig_client_oid                                        | string           | Depends  | Optional Original Client Order ID |
+
+Either `order_id` or `orig_client_oid` must be present  
+If both exist together, `order_id` will have higher priority | | new_price |
+string | Y | The new amended price  
+If no change required, input original value | | new_quantity | string | Y | The
+new amended quantity  
+If no change required, input original value |
+
+Remark:  
+Either `new_price` or `new_quantity` must input a new value, otherwise request
+will be rejected.
+
+### Applies To
+
+REST Websocket (User API)
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+| Name       | Type   | Description     |
+| ---------- | ------ | --------------- |
+| client_oid | string | client order ID |
+| order_id   | string | order ID        |
 
 ## private/cancel-order
 
