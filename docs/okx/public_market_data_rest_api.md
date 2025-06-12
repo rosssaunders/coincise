@@ -227,13 +227,9 @@ Retrieve settlement records of futures in the last 3 months.
 
 Retrieve funding rate.
 
-#### Rate Limit: 20 requests per 2 seconds
+#### Rate Limit: 10 requests per 2 seconds
 
-#### Rate limit rule: IP + Instrument ID (if instId ≠ ANY)
-
-#### Rate Limit: 1 requests per 2 seconds
-
-#### Rate limit rule: IP + Instrument ID (if instId = ANY)
+#### Rate limit rule: IP + Instrument ID
 
 #### HTTP Request
 
