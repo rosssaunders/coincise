@@ -170,7 +170,7 @@ if (SendingTime < (serverTime + 1 second) && (serverTime - SendingTime) <= RecvW
 }
 ```
 
-#### How to sign Logon`<A>` request
+#### How to sign Logon `<A>` request
 
 The [Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) message
 authenticates your connection to the FIX API. This must be the first message
@@ -406,7 +406,7 @@ Appears at the end of every message.
 
 ### Administrative Messages
 
-#### Heartbeat`<0>`
+#### Heartbeat `<0>`
 
 Sent by the server if there is no outgoing traffic during the heartbeat interval
 (`HeartBtInt (108)` in
@@ -421,7 +421,7 @@ Sent by the client or the server in response to a
 | ----- | ----------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
 | \-112 | \-TestReqID | \-STRING | \-N      | \-When Heartbeat`<35>` is sent in response to TestRequest`<1>`, must mirror the value in TestRequest`<1>`. |
 
-#### TestRequest`<1>`
+#### TestRequest `<1>`
 
 Sent by the server if there is no incoming traffic during the heartbeat interval
 (`HeartBtInt (108)` in
@@ -438,7 +438,7 @@ Sent by the client to request a
 | ----- | ----------- | -------- | -------- | ------------------------------------------------------------------------ |
 | \-112 | \-TestReqID | \-STRING | \-Y      | \-Arbitrary string that must be included in the Heartbeat`<0>` response. |
 
-#### Reject`<3>`
+#### Reject `<3>`
 
 Sent by the server in response to an invalid message that cannot be processed.
 
@@ -457,7 +457,7 @@ reason.
 | \-25016 | \-ErrorCode           | \-INT    | \-N      | \-API error code (see [Error Codes](/docs/binance-spot-api-docs/errors)).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | \-58    | \-Text                | \-STRING | \-N      | \-Human-readable error message.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-#### Logon`<A>`
+#### Logon `<A>`
 
 Sent by the client to authenticate the connection. Logon`<A>` must be the first
 message sent by the client.
@@ -500,7 +500,7 @@ Sent by the server in response to a successful logon.
 8=FIX.4.4|9=113|35=A|34=1|49=SPOT|52=20240612-08:52:21.636837|56=5JQmUOsm|98=0|108=30|25037=4392a152-3481-4499-921a-6d42c50702e2|10=051|
 ```
 
-#### Logout`<5>`
+#### Logout `<5>`
 
 Sent to initiate the process of closing the connection, and also when responding
 to Logout.
@@ -568,7 +568,7 @@ Resend requests are currently not supported.
 > \[!NOTE\] The messages below can only be used for the FIX Order Entry and FIX
 > Drop Copy Sessions.
 
-##### NewOrderSingle`<D>`
+##### NewOrderSingle `<D>`
 
 Sent by the client to submit a new order for execution.
 
@@ -662,7 +662,7 @@ Required fields based on Binance OrderType:
 | \-`TAKE_PROFIT_LIMIT` | \-38, 44, 59, 1102 or 25009     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | \-`LIMIT_MAKER`       | \-38, 44                        | \-This is a `LIMIT` order that will be rejected if the order immediately matches and trades as a taker. This is also known as a POST-ONLY order.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-##### ExecutionReport`<8>`
+##### ExecutionReport `<8>`
 
 Sent by the server whenever an order state changes.
 
@@ -738,7 +738,7 @@ Sent by the server whenever an order state changes.
 8=FIX.4.4|9=330|35=8|34=2|49=SPOT|52=20240611-09:01:46.228950|56=qNXO12fH|11=1718096506197867067|14=0.00000000|17=144|32=0.00000000|37=76|38=5.00000000|39=0|40=2|44=10.00000000|54=1|55=LTCBNB|59=4|60=20240611-09:01:46.228000|150=0|151=5.00000000|636=Y|1057=Y|25001=1|25017=0.00000000|25018=20240611-09:01:46.228000|25023=20240611-09:01:46.228000|10=095|
 ```
 
-##### OrderCancelRequest`<F>`
+##### OrderCancelRequest `<F>`
 
 Sent by the client to cancel an order or an order list.
 
@@ -789,7 +789,7 @@ canceled.
 - [Reject`<3>`](/docs/binance-spot-api-docs/fix-api#reject) if the message is
   rejected.
 
-##### OrderCancelReject`<9>`
+##### OrderCancelReject `<9>`
 
 Sent by the server when
 [OrderCancelRequest`<F>`](/docs/binance-spot-api-docs/fix-api#ordercancelrequest)
@@ -814,7 +814,7 @@ has failed.
 8=FIX.4.4|9=137|35=9|34=2|49=SPOT|52=20240613-01:12:41.320869|56=OlZb8ht8|11=1718241161272843932|37=2|55=LTCBNB|58=Unknown order sent.|434=1|25016=-1013|10=087|
 ```
 
-##### OrderCancelRequestAndNewOrderSingle`<XCN>`
+##### OrderCancelRequestAndNewOrderSingle `<XCN>`
 
 Sent by the client to cancel an order and submit a new one for execution.
 
@@ -885,7 +885,7 @@ supported field combinations when describing the new order.
 - [Reject`<3>`](/docs/binance-spot-api-docs/fix-api#reject) if the message is
   rejected.
 
-##### OrderMassCancelRequest`<q>`
+##### OrderMassCancelRequest `<q>`
 
 Sent by the client to cancel all open orders on a symbol.
 
@@ -914,7 +914,7 @@ Sent by the client to cancel all open orders on a symbol.
 - [Reject`<3>`](/docs/binance-spot-api-docs/fix-api#reject) if the message is
   rejected.
 
-##### OrderMassCancelReport`<r>`
+##### OrderMassCancelReport `<r>`
 
 Sent by the server in response to
 [OrderMassCancelRequest`<q>`](/docs/binance-spot-api-docs/fix-api#ordermasscancelrequest).
@@ -936,7 +936,7 @@ Sent by the server in response to
 8=FIX.4.4|9=109|35=r|34=2|49=SPOT|52=20240613-01:24:36.949763|56=dpYPesqv|11=1718241876901971671|55=LTCBNB|530=1|531=1|533=5|10=083|
 ```
 
-##### NewOrderList`<E>`
+##### NewOrderList `<E>`
 
 Sent by the client to submit a list of orders for execution.
 
@@ -1007,7 +1007,7 @@ for supported order types and triggering instructions.
 | \-OTOCO         | \-`2`                   | \-1. working order 2. pending below order 3. pending above order | \-1. working order=`SELL` or `BUY` 2. pending below order=`SELL` 3. pending above order=`SELL` | \-1. working order=`LIMIT` or `LIMIT_MAKER` 2. pending below order=`STOP_LOSS` or `STOP_LOSS_LIMIT` 3. pending above order=`TAKE_PROFIT` | \-1. working order:NONE 2. pending below order:`25010=2 | 25011=3 | 25012=0 | 25013=2 | 25011=1                    | 25012=2 | 25013=2 | `3\. pending above order:`25010=2 | 25011=3 | 25012=0 | 25013=2 | 25011=1 | 25012=1 | 25013=2 | `   |
 | \-OTOCO         | \-`2`                   | \-1. working order 2. pending below order 3. pending above order | \-1. working order=`SELL` or `BUY` 2. pending below order=`BUY` 3. pending above order=`BUY`   | \-1. working order=`LIMIT` or `LIMIT_MAKER` 2. pending below order=`TAKE_PROFIT` 3. pending above order=`STOP_LOSS` or `STOP_LOSS_LIMIT` | \-1. working order:NONE 2. pending below order:`25010=2 | 25011=3 | 25012=0 | 25013=2 | 25011=1                    | 25012=2 | 25013=2 | `3\. pending above order:`25010=2 | 25011=3 | 25012=0 | 25013=2 | 25011=1 | 25012=1 | 25013=2 | `   |
 
-##### ListStatus`<N>`
+##### ListStatus `<N>`
 
 Sent by the server whenever an order list state changes.
 
@@ -1045,7 +1045,7 @@ Sent by the server whenever an order list state changes.
 8=FIX.4.4|9=293|35=N|34=2|49=SPOT|52=20240607-02:19:07.837191|56=Eg13pOvN|55=BTCUSDT|60=20240607-02:19:07.836000|66=25|73=2|55=BTCUSDT|37=52|11=w1717726747805308656|55=BTCUSDT|37=53|11=p1717726747805308656|25010=1|25011=3|25012=0|25013=1|429=4|431=3|1385=2|25014=1717726747805308656|25015=1717726747805308656|10=162|
 ```
 
-##### OrderAmendKeepPriorityRequest`<XAK>`
+##### OrderAmendKeepPriorityRequest `<XAK>`
 
 Sent by the client to reduce the original quantity of their order.
 
@@ -1096,7 +1096,7 @@ to learn more.
   [ListStatus `<N>`](/docs/binance-spot-api-docs/fix-api#liststatus) if the
   request succeeded for amending an order which is part of an Order list.
 
-#### OrderAmendReject`<XAR>`
+#### OrderAmendReject `<XAR>`
 
 Sent by the server when the OrderAmendKeepPriorityRequest `<XAK>` has failed.
 
@@ -1118,7 +1118,7 @@ Sent by the server when the OrderAmendKeepPriorityRequest `<XAK>` has failed.
 
 #### Limit Messages
 
-##### LimitQuery`<XLQ>`
+##### LimitQuery `<XLQ>`
 
 Sent by the client to query current limits.
 
@@ -1132,7 +1132,7 @@ Sent by the client to query current limits.
 8=FIX.4.4|9=82|35=XLQ|34=2|49=7buKHZxZ|52=20240614-05:35:35.357|56=SPOT|6136=1718343335357229749|10=170|
 ```
 
-##### LimitResponse`<XLR>`
+##### LimitResponse `<XLR>`
 
 Sent by the server in response to
 [LimitQuery`<XLQ>`](/docs/binance-spot-api-docs/fix-api#limitquery).
@@ -1157,7 +1157,7 @@ Sent by the server in response to
 
 > \[!NOTE\] The messages below can only be used for the FIX Market Data.
 
-##### InstrumentListRequest`<x>`
+##### InstrumentListRequest `<x>`
 
 Sent by the client to query information about active instruments (i.e., those
 that have the TRADING status). If used for an inactive instrument, it will be
@@ -1175,7 +1175,7 @@ responded to with a [Reject`<3>`](/docs/binance-spot-api-docs/fix-api#reject).
 8=FIX.4.4|9=92|35=x|49=BMDWATCH|56=SPOT|34=2|52=20250114-08:46:56.096691|320=BTCUSDT_INFO|559=0|55=BTCUSDT|10=164|
 ```
 
-##### InstrumentList`<y>`
+##### InstrumentList `<y>`
 
 Sent by the server in a response to the
 [InstrumentListRequest`<x>`](/docs/binance-spot-api-docs/fix-api#instrumentlistrequest).
@@ -1204,7 +1204,7 @@ Sent by the server in a response to the
 8=FIX.4.4|9=218|35=y|49=SPOT|56=BMDWATCH|34=2|52=20250114-08:46:56.100147|320=BTCUSDT_INFO|146=1|55=BTCUSDT|15=USDT|562=0.00001000|1140=9000.00000000|25039=0.00001000|25040=0.00000001|25041=76.79001236|25042=0.00000001|969=0.01000000|10=093|
 ```
 
-##### MarketDataRequest`<V>`
+##### MarketDataRequest `<V>`
 
 Sent by the client to subscribe to or unsubscribe from market data stream.
 
@@ -1294,7 +1294,7 @@ book.
 8=FIX.4.4|9=79|35=V|49=TRADER1|56=SPOT|34=7|52=20241122-06:41:56.966969|262=TRADE_STREAM|263=2|264=1|10=113|
 ```
 
-#### MarketDataRequestReject`<Y>`
+#### MarketDataRequestReject `<Y>`
 
 Sent by the server in a response to an invalid MarketDataRequest `<V>`.
 
@@ -1311,7 +1311,7 @@ Sent by the server in a response to an invalid MarketDataRequest `<V>`.
 8=FIX.4.4|9=0000218|35=Y|49=SPOT|56=EXAMPLE|34=5|52=20241019-05:39:36.688964|262=BOOK_TICKER_2|281=2|25016=-1191|58=Similar subscription is already active on this connection. Symbol='BNBBUSD', active subscription id: 'BOOK_TICKER_1'.|10=137|
 ```
 
-#### MarketDataSnapshot`<W>`
+#### MarketDataSnapshot `<W>`
 
 Sent by the server in response to a
 [MarketDataRequest`<V>`](/docs/binance-spot-api-docs/fix-api#marketdatarequest),
@@ -1336,7 +1336,7 @@ subscriptions.
 8=FIX.4.4|9=0000107|35=W|49=SPOT|56=EXAMPLE|34=34|52=20241019-05:41:52.867164|262=BOOK_TICKER_1_2|55=BNBBUSD|25044=0|268=0|10=151|
 ```
 
-#### MarketDataIncrementalRefresh`<X>`
+#### MarketDataIncrementalRefresh `<X>`
 
 Sent by the server when there is a change in a subscribed stream.
 
