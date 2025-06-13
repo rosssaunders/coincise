@@ -209,7 +209,7 @@ const inputBody = '{
     },
     "allowMaxTimeWindow": {
       "type": "integer",
-      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
       "format": "int64",
       "example": [
         10,
@@ -219,7 +219,7 @@ const inputBody = '{
     },
     "clientTimestamp": {
       "type": "integer",
-      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if allowMaxTimeWindow is specified.",
       "format": "int64",
       "example": [
         1740711735178
@@ -430,13 +430,13 @@ parameters specified.
     },
     "allowMaxTimeWindow": {
       "type": "integer",
-      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
       "format": "int64",
       "example": [10, 20, 30]
     },
     "clientTimestamp": {
       "type": "integer",
-      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if allowMaxTimeWindow is specified.",
       "format": "int64",
       "example": [1740711735178]
     }
@@ -466,8 +466,8 @@ parameters specified.
 | » tags               | body | string         | false    | Order tag, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | » cancelAfter        | body | integer(int64) | false    | Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1                                                                                                                                                                                                                                                                                                                                                  |
 | » funds              | body | string         | false    | When **type** is market, select one out of two: size or funds                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| » allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.                                                                                                                                                                                                                                                                                                                                      |
-| » clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| » allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.                                                                                                                                                                                                                                                                                                                            |
+| » clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP, Need to be defined if allowMaxTimeWindow is specified.                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 #### Detailed descriptions
 
@@ -873,7 +873,7 @@ const inputBody = '{
     },
     "allowMaxTimeWindow": {
       "type": "integer",
-      "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
+      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
       "format": "int64",
       "example": [
         10,
@@ -883,7 +883,7 @@ const inputBody = '{
     },
     "clientTimestamp": {
       "type": "integer",
-      "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
+      "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.",
       "format": "int64",
       "example": [
         1740711735178
@@ -1094,13 +1094,13 @@ for returning data integrity, please select this interface.
     },
     "allowMaxTimeWindow": {
       "type": "integer",
-      "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
+      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
       "format": "int64",
       "example": [10, 20, 30]
     },
     "clientTimestamp": {
       "type": "integer",
-      "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
+      "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.",
       "format": "int64",
       "example": [1740711735178]
     }
@@ -1130,8 +1130,8 @@ for returning data integrity, please select this interface.
 | » tags               | body | string         | false    | Order tag, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | » cancelAfter        | body | integer(int64) | false    | Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1                                                                                                                                                                                                                                                                                                                                             |
 | » funds              | body | string         | false    | When **type** is market, select one out of two: size or funds                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| » allowMaxTimeWindow | body | integer(int64) | false    | The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.                                                                                                                                                                                                                                          |
-| » clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| » allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.                                                                                                                                                                                                                                                                                                                       |
+| » clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.                                                                                                                                                                                                                                                                                                                                                                                             |
 
 #### Detailed descriptions
 
@@ -1502,7 +1502,7 @@ const inputBody = '{
     },
     "allowMaxTimeWindow": {
       "type": "integer",
-      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
       "format": "int64",
       "example": [
         10,
@@ -1512,7 +1512,7 @@ const inputBody = '{
     },
     "clientTimestamp": {
       "type": "integer",
-      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if allowMaxTimeWindow is specified.",
       "format": "int64",
       "example": [
         1740711735178
@@ -1722,13 +1722,13 @@ the order will not enter the matching system, and the order cannot be queried.
     },
     "allowMaxTimeWindow": {
       "type": "integer",
-      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+      "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
       "format": "int64",
       "example": [10, 20, 30]
     },
     "clientTimestamp": {
       "type": "integer",
-      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+      "description": "Equal to KC-API-TIMESTAMP, Need to be defined if allowMaxTimeWindow is specified.",
       "format": "int64",
       "example": [1740711735178]
     }
@@ -1758,8 +1758,8 @@ the order will not enter the matching system, and the order cannot be queried.
 | » tags               | body | string         | false    | Order tag, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | » cancelAfter        | body | integer(int64) | false    | Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1                                                                                                                                                                                                                                                                                                                                                  |
 | » funds              | body | string         | false    | When **type** is market, select one out of two: size or funds                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| » allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.                                                                                                                                                                                                                                                                                                                                      |
-| » clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| » allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.                                                                                                                                                                                                                                                                                                                            |
+| » clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP, Need to be defined if allowMaxTimeWindow is specified.                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 #### Detailed descriptions
 
@@ -2055,7 +2055,7 @@ const inputBody = '{
           },
           "clientTimestamp": {
             "type": "integer",
-            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
+            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.",
             "format": "int64",
             "example": [
               1740711735178
@@ -2063,7 +2063,7 @@ const inputBody = '{
           },
           "allowMaxTimeWindow": {
             "type": "integer",
-            "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
+            "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
             "format": "int64",
             "example": [
               10,
@@ -2279,13 +2279,13 @@ limit orders of the same trading pair
           },
           "clientTimestamp": {
             "type": "integer",
-            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
+            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.",
             "format": "int64",
             "example": [1740711735178]
           },
           "allowMaxTimeWindow": {
             "type": "integer",
-            "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
+            "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
             "format": "int64",
             "example": [10, 20, 30]
           }
@@ -2321,8 +2321,8 @@ limit orders of the same trading pair
 | »» tags               | body | string         | false    | Order tag, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | »» remark             | body | string         | false    | Order placement remarks, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                            |
 | »» funds              | body | string         | false    | When **type** is market, select one out of two: size or funds                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| »» clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| »» allowMaxTimeWindow | body | integer(int64) | false    | The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.                                                                                                                                                                                                                                          |
+| »» clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.                                                                                                                                                                                                                                                                                                                                                                                             |
+| »» allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.                                                                                                                                                                                                                                                                                                                       |
 
 #### Detailed descriptions
 
@@ -2595,7 +2595,7 @@ const inputBody = '{
           },
           "allowMaxTimeWindow": {
             "type": "integer",
-            "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
+            "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
             "format": "int64",
             "example": [
               10,
@@ -2605,7 +2605,7 @@ const inputBody = '{
           },
           "clientTimestamp": {
             "type": "integer",
-            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
+            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.",
             "format": "int64",
             "example": [
               1740711735178
@@ -2819,13 +2819,13 @@ limit orders of the same trading pair
           },
           "allowMaxTimeWindow": {
             "type": "integer",
-            "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
+            "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.",
             "format": "int64",
             "example": [10, 20, 30]
           },
           "clientTimestamp": {
             "type": "integer",
-            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
+            "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.",
             "format": "int64",
             "example": [1740711735178]
           }
@@ -2861,8 +2861,8 @@ limit orders of the same trading pair
 | »» tags               | body | string         | false    | Order tag, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | »» remark             | body | string         | false    | Order placement remarks, length cannot exceed 20 characters (ASCII)                                                                                                                                                                                                                                                                                                                                                                                                            |
 | »» funds              | body | string         | false    | When **type** is market, select one out of two: size or funds                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| »» allowMaxTimeWindow | body | integer(int64) | false    | The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.                                                                                                                                                                                                                                          |
-| »» clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »» allowMaxTimeWindow | body | integer(int64) | false    | Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < Gateway received the message time, this order will fail.                                                                                                                                                                                                                                                                                                                       |
+| »» clientTimestamp    | body | integer(int64) | false    | Equal to KC-API-TIMESTAMP. Needs to be defined if allowMaxTimeWindow is specified.                                                                                                                                                                                                                                                                                                                                                                                             |
 
 #### Detailed descriptions
 

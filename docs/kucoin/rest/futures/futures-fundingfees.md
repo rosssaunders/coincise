@@ -21,7 +21,7 @@ fundingfees
 
 <h1 id="futures-default">Default</h1>
 
-## Get Current Funding Rate.
+## Get Current Funding Rate
 
 <a id="opId001"></a>
 
@@ -61,7 +61,7 @@ print(r.json())
 
 Get Current Funding Rate.
 
-<h3 id="get-current-funding-rate.-parameters">Parameters</h3>
+<h3 id="get-current-funding-rate-parameters">Parameters</h3>
 
 | Name   | In   | Type   | Required | Description                                                                                                        |
 | ------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -91,7 +91,7 @@ Get Current Funding Rate.
         },
         "timePoint": {
           "type": "integer",
-          "description": "The funding rate settlement time point of the previous cycle\n(milliseconds)\n",
+          "description": "The funding rate settlement time point of the previous cycle\n(milliseconds)\nBefore going live, the system will pre-generate the first funding rate record to ensure the billing cycle can start immediately after the contract is launched.\n The timePoint field represents the time the funding rate data was generated, not the actual time it takes effect or is settled.\n The first actual settlement will occur at the designated settlement time (00:00 / 08:00 / 14:00) after the contract goes live.\n\n",
           "format": "int64"
         },
         "value": {
@@ -109,6 +109,28 @@ Get Current Funding Rate.
         "fundingRateFloor": {
           "type": "number",
           "description": "Minimum Funding Rate"
+        },
+        "period": {
+          "type": "integer",
+          "enum": [1, 0],
+          "description": "Indicates whether the current funding fee is charged within this cycle",
+          "x-api-enum": [
+            {
+              "value": 1,
+              "name": "1",
+              "description": "Indicates that funding will be charged in the current cycle"
+            },
+            {
+              "value": 0,
+              "name": "0",
+              "description": "Indicates a cross-cycle expense record that is not charged in the current cycle."
+            }
+          ]
+        },
+        "fundingTime": {
+          "type": "integer",
+          "description": "Indicates the next funding fee settlement time point, which can be used to synchronize periodic settlement timing.",
+          "format": "int64"
         }
       },
       "required": [
@@ -118,7 +140,9 @@ Get Current Funding Rate.
         "value",
         "predictedValue",
         "fundingRateCap",
-        "fundingRateFloor"
+        "fundingRateFloor",
+        "period",
+        "fundingTime"
       ]
     }
   },
@@ -126,27 +150,36 @@ Get Current Funding Rate.
 }
 ```
 
-<h3 id="get-current-funding-rate.-responses">Responses</h3>
+<h3 id="get-current-funding-rate-responses">Responses</h3>
 
 | Status | Meaning                                                 | Description | Schema |
 | ------ | ------------------------------------------------------- | ----------- | ------ |
 | 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
-<h3 id="get-current-funding-rate.-responseschema">Response Schema</h3>
+<h3 id="get-current-funding-rate-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-| Name                | Type           | Required | Restrictions | Description                                                                    |
-| ------------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------ |
-| » code              | string         | true     | none         | none                                                                           |
-| » data              | object         | true     | none         | none                                                                           |
-| »» symbol           | string         | true     | none         | Funding Rate Symbol                                                            |
-| »» granularity      | integer        | true     | none         | Granularity (milliseconds)                                                     |
-| »» timePoint        | integer(int64) | true     | none         | The funding rate settlement time point of the previous cycle<br>(milliseconds) |
-| »» value            | number         | true     | none         | Current cycle funding rate                                                     |
-| »» predictedValue   | number         | true     | none         | Predicted funding rate                                                         |
-| »» fundingRateCap   | number         | true     | none         | Maximum Funding Rate                                                           |
-| »» fundingRateFloor | number         | true     | none         | Minimum Funding Rate                                                           |
+| Name                | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » code              | string         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » data              | object         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »» symbol           | string         | true     | none         | Funding Rate Symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| »» granularity      | integer        | true     | none         | Granularity (milliseconds)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| »» timePoint        | integer(int64) | true     | none         | The funding rate settlement time point of the previous cycle<br>(milliseconds)<br>Before going live, the system will pre-generate the first funding rate record to ensure the billing cycle can start immediately after the contract is launched.<br> The timePoint field represents the time the funding rate data was generated, not the actual time it takes effect or is settled.<br> The first actual settlement will occur at the designated settlement time (00:00 / 08:00 / 14:00) after the contract goes live. |
+| »» value            | number         | true     | none         | Current cycle funding rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| »» predictedValue   | number         | true     | none         | Predicted funding rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| »» fundingRateCap   | number         | true     | none         | Maximum Funding Rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »» fundingRateFloor | number         | true     | none         | Minimum Funding Rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »» period           | integer        | true     | none         | Indicates whether the current funding fee is charged within this cycle                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| »» fundingTime      | integer(int64) | true     | none         | Indicates the next funding fee settlement time point, which can be used to synchronize periodic settlement timing.                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+#### Enumerated Values
+
+| Property | Value |
+| -------- | ----- |
+| period   | 1     |
+| period   | 0     |
 
 <aside class="success">
 This operation does not require authentication
