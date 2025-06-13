@@ -1478,20 +1478,18 @@ Parameters:
 
 Response:
 
-| Name                                      | Description                                        |
-| ----------------------------------------- | -------------------------------------------------- |
-| amount                                    | deposit amount                                     |
-| coin                                      | coin                                               |
-| network                                   | deposit network                                    |
-| status                                    | deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY, |
-| 4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED |
-| address                                   | deposit adress                                     |
-| addressTag                                | addressTag                                         |
-| txId                                      | txId                                               |
-| insertTime                                | insertTime                                         |
-| unlockConfirm                             | unlockConfirm                                      |
-| confirmTimes                              | confirmTimes                                       |
-| memo                                      | memo                                               |
+| Name    | Description                                        |
+| ------- | -------------------------------------------------- |
+| amount  | deposit amount                                     |
+| coin    | coin                                               |
+| network | deposit network                                    |
+| status  | deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY, |
+
+4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED  
+8:REFUND,9:PRE_SUCCESS,10:INVALID,  
+11:RESTRICTED,12:COMPLETED | | address | deposit adress | | addressTag |
+addressTag | | txId | txId | | insertTime | insertTime | | unlockConfirm |
+unlockConfirm | | confirmTimes | confirmTimes | | memo | memo |
 
 ## Withdraw History (supporting network)
 
@@ -2220,18 +2218,18 @@ the last 7 days.
 
 **Response**
 
-| Name            | Description     |
-| --------------- | --------------- |
-| page            | page            |
-| totalRecords    | totalRecords    |
-| totalPage       | totalPage       |
-| tranId          | tranId          |
-| asset           | asset           |
-| amount          | amount          |
-| fromAccountType | fromAccountType |
-| toAccountType   | toAccountType   |
-| status          | status          |
-| timestamp       | timestamp       |
+| Name            | Description                      |
+| --------------- | -------------------------------- |
+| page            | page                             |
+| totalRecords    | totalRecords                     |
+| totalPage       | totalPage                        |
+| tranId          | tranId                           |
+| asset           | asset                            |
+| amount          | amount                           |
+| fromAccountType | fromAccountType                  |
+| toAccountType   | toAccountType                    |
+| status          | status:"SUCCESS","FAILED","WAIT" |
+| timestamp       | timestamp                        |
 
 ## Withdraw(previous,offline soon)
 
