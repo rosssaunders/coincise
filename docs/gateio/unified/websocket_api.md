@@ -252,17 +252,17 @@ The above command returns JSON structured like this:
   | -------- | ----- | ---------------- |
   | `result` | Array | Array of objects |
 
-  | field | type    | field full name (non-push field) | description                   |
-  | ----- | ------- | -------------------------------- | ----------------------------- |
-  | `u`   | integer | `user_id`                        | user id                       |
-  | `t`   | integer | `refresh_time`                   | data refresh time             |
-  | `r`   | string  | `total_initial_margin_rate`      | total initial margin rate     |
-  | `R`   | string  | `total_maintenance_margin_rate`  | total maintenance margin rate |
-  | `b`   | string  | `total_margin_balance`           | total margin balance          |
-  | `e`   | string  | `unified_margin_total_equity`    | portfolio margin total equity |
-  | `l`   | string  | `unified_margin_total_liab`      | portfolio margin total liab   |
-  | `T`   | string  | `unified_margin_total`           | portfolio margin total        |
-  | `a`   | string  | `total_available_margin`         | total available margin        |
+  | field | type    | field full name (non-push field) | description                             |
+  | ----- | ------- | -------------------------------- | --------------------------------------- |
+  | `u`   | integer | `user_id`                        | user id                                 |
+  | `t`   | integer | `refresh_time`                   | data refresh time                       |
+  | `r`   | string  | `total_initial_margin_rate`      | total initial margin rate (unit: %)     |
+  | `R`   | string  | `total_maintenance_margin_rate`  | total maintenance margin rate (unit: %) |
+  | `b`   | string  | `total_margin_balance`           | total margin balance                    |
+  | `e`   | string  | `unified_margin_total_equity`    | portfolio margin total equity           |
+  | `l`   | string  | `unified_margin_total_liab`      | portfolio margin total liab             |
+  | `T`   | string  | `unified_margin_total`           | portfolio margin total                  |
+  | `a`   | string  | `total_available_margin`         | total available margin                  |
 
 ## [#](#cancel-subscription) Cancel subscription
 
@@ -391,6 +391,21 @@ The above command returns JSON structured like this:
         "e": "1086390.949548",
         "tl": "0.00",
         "b": "1086390.949548"
+      },
+      "USDT": {
+        "a": "8724.23263378",
+        "f": "0.00",
+        "e": "8724.23263378",
+        "tl": "0.00",
+        "b": "8724.23263378",
+        "cb": "8724.23263378",
+        "mb": "8724.23263378",
+        "im": "0.00",
+        "imr": "9999.99",
+        "mm": "0.00",
+        "mmr": "9999.99",
+        "am": "8724.23263378",
+        "iam": "8724.23263378"
       }
     }
   }
@@ -415,16 +430,25 @@ The above command returns JSON structured like this:
   | -------- | ----- | ---------------- |
   | `result` | Array | Array of objects |
 
-  | field | type    | field full name (non-push field) | description       |
-  | ----- | ------- | -------------------------------- | ----------------- |
-  | `u`   | integer | `user_id`                        | user id           |
-  | `t`   | integer | `refresh_time`                   | data refresh time |
-  | `dts` | map     | `details`                        | assets detail map |
-  | `>a`  | string  | `available`                      | availabe amount   |
-  | `>f`  | string  | `freeze`                         | locked amount     |
-  | `>e`  | string  | `equity`                         | equity            |
-  | `>tl` | string  | `total_liab`                     | total liabilities |
-  | `>b`  | string  | `balance`                        | balance           |
+  | field                                                                                                                         | type    | field full name (non-push field) | description                                           |
+  | ----------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------------- | ----------------------------------------------------- |
+  | `u`                                                                                                                           | integer | `user_id`                        | user id                                               |
+  | `t`                                                                                                                           | integer | `refresh_time`                   | data refresh time                                     |
+  | `dts`                                                                                                                         | map     | `details`                        | assets detail map                                     |
+  | `>a`                                                                                                                          | string  | `available`                      | availabe amount                                       |
+  | `>f`                                                                                                                          | string  | `freeze`                         | locked amount                                         |
+  | `>e`                                                                                                                          | string  | `equity`                         | equity                                                |
+  | `>tl`                                                                                                                         | string  | `total_liab`                     | total liabilities                                     |
+  | `>b`                                                                                                                          | string  | `balance`                        | balance                                               |
+  | The following fields: These fields are used in the single-currency margin mode and are only pushed when the currency is USDT. |         |                                  |                                                       |
+  | `>cb`                                                                                                                         | string  | `cross_balance`                  | cross margin balance                                  |
+  | `>mb`                                                                                                                         | string  | `margin_balance`                 | cross margin collateral balance                       |
+  | `>im`                                                                                                                         | string  | `initial_margin`                 | total initial margin (cross margin)                   |
+  | `>mm`                                                                                                                         | string  | `maintenance_margin`             | total maintenance margin (cross margin)               |
+  | `>imr`                                                                                                                        | string  | `initial_margin_rate`            | total initial margin rate (cross margin, unit: %)     |
+  | `>mmr`                                                                                                                        | string  | `maintenance_margin_rate`        | total maintenance margin rate (cross margin, unit: %) |
+  | `>am`                                                                                                                         | string  | `available_margin`               | total available margin balance                        |
+  | `>iam`                                                                                                                        | string  | `iso_available_margin`           | isolated margin available for opening positions       |
 
 ## [#](#cancel-subscription-2) Cancel subscription
 
@@ -474,4 +498,4 @@ The above command returns JSON structured like this:
 
   `unsubscribe`
 
-Last Updated: 5/19/2025, 3:42:48 AM
+Last Updated: 6/12/2025, 7:58:10 AM

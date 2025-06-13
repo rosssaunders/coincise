@@ -1,5 +1,10 @@
 ## [#](#changelog) Changelog
 
+2025-06-12
+
+- Added supplementary field descriptions for the `unified.assets` and
+  `unified.asset_detail` channels.
+
 2025-02-10
 
 - `unified.assets` channel remove field `c`(`credit_available_margin`). This
