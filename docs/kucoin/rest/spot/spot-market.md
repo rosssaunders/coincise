@@ -271,8 +271,8 @@ Request the currency details of a specified currency via this endpoint.
 
 | Name     | In    | Type   | Required | Description                                                                                                                                                                              |
 | -------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency | path  | string | true     | Path parameter, Currency                                                                                                                                                                 |
 | chain    | query | string | false    | Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies. |
+| currency | path  | string | true     | Path parameter, Currency                                                                                                                                                                 |
 
 > Example responses
 
@@ -389,7 +389,6 @@ Request the currency details of a specified currency via this endpoint.
             "required": [
               "chainName",
               "withdrawalMinSize",
-              "depositMinSize",
               "withdrawFeeRate",
               "withdrawalMinFee",
               "isWithdrawEnabled",
@@ -398,8 +397,6 @@ Request the currency details of a specified currency via this endpoint.
               "preConfirms",
               "contractAddress",
               "withdrawPrecision",
-              "maxWithdraw",
-              "maxDeposit",
               "needTag",
               "chainId"
             ]
@@ -412,8 +409,6 @@ Request the currency details of a specified currency via this endpoint.
         "name",
         "fullName",
         "precision",
-        "confirms",
-        "contractAddress",
         "isMarginEnabled",
         "isDebitEnabled",
         "chains"
@@ -442,14 +437,14 @@ Status Code **200**
 | »» name               | string   | true     | none         | Currency name; will change after renaming                                                                          |
 | »» fullName           | string   | true     | none         | Full currency name; will change after renaming                                                                     |
 | »» precision          | integer  | true     | none         | Currency precision                                                                                                 |
-| »» confirms           | integer  | true     | none         | Number of block confirmations                                                                                      |
-| »» contractAddress    | string   | true     | none         | Contract address                                                                                                   |
+| »» confirms           | integer  | false    | none         | Number of block confirmations                                                                                      |
+| »» contractAddress    | string   | false    | none         | Contract address                                                                                                   |
 | »» isMarginEnabled    | boolean  | true     | none         | Margin support or not                                                                                              |
 | »» isDebitEnabled     | boolean  | true     | none         | Debit support or not                                                                                               |
 | »» chains             | [object] | true     | none         | Chain list                                                                                                         |
 | »»» chainName         | string   | true     | none         | Chain name of currency                                                                                             |
 | »»» withdrawalMinSize | string   | true     | none         | Minimum withdrawal amount                                                                                          |
-| »»» depositMinSize    | string   | true     | none         | Minimum deposit amount                                                                                             |
+| »»» depositMinSize    | string   | false    | none         | Minimum deposit amount                                                                                             |
 | »»» withdrawFeeRate   | string   | true     | none         | Withdraw fee rate                                                                                                  |
 | »»» withdrawalMinFee  | string   | true     | none         | Minimum fees charged for withdrawal                                                                                |
 | »»» isWithdrawEnabled | boolean  | true     | none         | Withdrawal support or not                                                                                          |
@@ -458,8 +453,8 @@ Status Code **200**
 | »»» preConfirms       | integer  | true     | none         | The number of blocks (confirmations) for advance on-chain verification                                             |
 | »»» contractAddress   | string   | true     | none         | Contract address                                                                                                   |
 | »»» withdrawPrecision | integer  | true     | none         | Withdrawal precision bit, indicating the maximum supported length after the decimal point of the withdrawal amount |
-| »»» maxWithdraw       | number   | true     | none         | Maximum amount of single withdrawal                                                                                |
-| »»» maxDeposit        | string   | true     | none         | Maximum amount of single deposit (only applicable to Lightning Network)                                            |
+| »»» maxWithdraw       | number   | false    | none         | Maximum amount of single withdrawal                                                                                |
+| »»» maxDeposit        | string   | false    | none         | Maximum amount of single deposit (only applicable to Lightning Network)                                            |
 | »»» needTag           | boolean  | true     | none         | Need for memo/tag or not                                                                                           |
 | »»» chainId           | string   | true     | none         | Chain id of currency                                                                                               |
 
@@ -636,8 +631,6 @@ used for trading.
               "required": [
                 "chainName",
                 "withdrawalMinSize",
-                "depositMinSize",
-                "withdrawFeeRate",
                 "withdrawalMinFee",
                 "isWithdrawEnabled",
                 "isDepositEnabled",
@@ -645,10 +638,9 @@ used for trading.
                 "preConfirms",
                 "contractAddress",
                 "withdrawPrecision",
-                "maxWithdraw",
-                "maxDeposit",
                 "needTag",
-                "chainId"
+                "chainId",
+                "withdrawFeeRate"
               ]
             },
             "description": "Chain list"
@@ -697,7 +689,7 @@ Status Code **200**
 | »» chains             | [object] | true     | none         | Chain list                                                                                                         |
 | »»» chainName         | string   | true     | none         | Chain name of currency                                                                                             |
 | »»» withdrawalMinSize | string   | true     | none         | Minimum withdrawal amount                                                                                          |
-| »»» depositMinSize    | string   | true     | none         | Minimum deposit amount                                                                                             |
+| »»» depositMinSize    | string   | false    | none         | Minimum deposit amount                                                                                             |
 | »»» withdrawFeeRate   | string   | true     | none         | Withdraw fee rate                                                                                                  |
 | »»» withdrawalMinFee  | string   | true     | none         | Minimum fees charged for withdrawal                                                                                |
 | »»» isWithdrawEnabled | boolean  | true     | none         | Withdrawal support or not                                                                                          |
@@ -706,8 +698,8 @@ Status Code **200**
 | »»» preConfirms       | integer  | true     | none         | The number of blocks (confirmations) for advance on-chain verification                                             |
 | »»» contractAddress   | string   | true     | none         | Contract address                                                                                                   |
 | »»» withdrawPrecision | integer  | true     | none         | Withdrawal precision bit, indicating the maximum supported length after the decimal point of the withdrawal amount |
-| »»» maxWithdraw       | string   | true     | none         | Maximum amount of single withdrawal                                                                                |
-| »»» maxDeposit        | string   | true     | none         | Maximum amount of single deposit (only applicable to Lightning Network)                                            |
+| »»» maxWithdraw       | string   | false    | none         | Maximum amount of single withdrawal                                                                                |
+| »»» maxDeposit        | string   | false    | none         | Maximum amount of single deposit (only applicable to Lightning Network)                                            |
 | »»» needTag           | boolean  | true     | none         | Need for memo/tag or not                                                                                           |
 | »»» chainId           | string   | true     | none         | Chain id of currency                                                                                               |
 | »»» depositFeeRate    | string   | false    | none         | Deposit fee rate (some currencies have this param; the default is empty)                                           |
@@ -945,13 +937,7 @@ to get the market information of the trading symbol, please use Get All Tickers.
         "makerFeeCoefficient",
         "takerFeeCoefficient",
         "st",
-        "callauctionIsEnabled",
-        "callauctionPriceFloor",
-        "callauctionPriceCeiling",
-        "callauctionFirstStageStartTime",
-        "callauctionSecondStageStartTime",
-        "callauctionThirdStageStartTime",
-        "tradingStartTime"
+        "callauctionIsEnabled"
       ]
     }
   },
@@ -995,12 +981,12 @@ Status Code **200**
 | »» takerFeeCoefficient             | string         | true     | none         | The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee                                                                                                                                      |
 | »» st                              | boolean        | true     | none         | Whether it is a [Special Treatment](https://www.kucoin.com/legal/special-treatment) symbol                                                                                                                                                                                                                            |
 | »» callauctionIsEnabled            | boolean        | true     | none         | The [call auction](https://www.kucoin.com/support/40999744334105) status returns true/false                                                                                                                                                                                                                           |
-| »» callauctionPriceFloor           | string         | true     | none         | The lowest price declared in the call auction                                                                                                                                                                                                                                                                         |
-| »» callauctionPriceCeiling         | string         | true     | none         | The highest bid price in the call auction                                                                                                                                                                                                                                                                             |
-| »» callauctionFirstStageStartTime  | integer(int64) | true     | none         | The first phase of the call auction starts at (Allow add orders, allow cancel orders)                                                                                                                                                                                                                                 |
-| »» callauctionSecondStageStartTime | integer(int64) | true     | none         | The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)                                                                                                                                                                                                                          |
-| »» callauctionThirdStageStartTime  | integer(int64) | true     | none         | The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)                                                                                                                                                                                                                     |
-| »» tradingStartTime                | integer(int64) | true     | none         | Official opening time (end time of the third phase of call auction)                                                                                                                                                                                                                                                   |
+| »» callauctionPriceFloor           | string         | false    | none         | The lowest price declared in the call auction                                                                                                                                                                                                                                                                         |
+| »» callauctionPriceCeiling         | string         | false    | none         | The highest bid price in the call auction                                                                                                                                                                                                                                                                             |
+| »» callauctionFirstStageStartTime  | integer(int64) | false    | none         | The first phase of the call auction starts at (Allow add orders, allow cancel orders)                                                                                                                                                                                                                                 |
+| »» callauctionSecondStageStartTime | integer(int64) | false    | none         | The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)                                                                                                                                                                                                                          |
+| »» callauctionThirdStageStartTime  | integer(int64) | false    | none         | The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)                                                                                                                                                                                                                     |
+| »» tradingStartTime                | integer(int64) | false    | none         | Official opening time (end time of the third phase of call auction)                                                                                                                                                                                                                                                   |
 
 #### Enumerated Values
 
@@ -1244,13 +1230,7 @@ Tickers.
           "makerFeeCoefficient",
           "takerFeeCoefficient",
           "st",
-          "callauctionIsEnabled",
-          "callauctionPriceFloor",
-          "callauctionPriceCeiling",
-          "callauctionFirstStageStartTime",
-          "callauctionSecondStageStartTime",
-          "callauctionThirdStageStartTime",
-          "tradingStartTime"
+          "callauctionIsEnabled"
         ]
       }
     }
@@ -1295,12 +1275,12 @@ Status Code **200**
 | »» takerFeeCoefficient             | string         | true     | none         | The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee                                                                                                                                                    |
 | »» st                              | boolean        | true     | none         | Whether it is a [Special Treatment](https://www.kucoin.com/legal/special-treatment) symbol                                                                                                                                                                                                                                          |
 | »» callauctionIsEnabled            | boolean        | true     | none         | The [call auction](https://www.kucoin.com/support/40999744334105) status returns true/false                                                                                                                                                                                                                                         |
-| »» callauctionPriceFloor           | string         | true     | none         | The lowest price declared in the call auction                                                                                                                                                                                                                                                                                       |
-| »» callauctionPriceCeiling         | string         | true     | none         | The highest bid price in the call auction                                                                                                                                                                                                                                                                                           |
-| »» callauctionFirstStageStartTime  | integer(int64) | true     | none         | The first phase of the call auction starts at (Allow add orders, allow cancel orders)                                                                                                                                                                                                                                               |
-| »» callauctionSecondStageStartTime | integer(int64) | true     | none         | The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)                                                                                                                                                                                                                                        |
-| »» callauctionThirdStageStartTime  | integer(int64) | true     | none         | The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)                                                                                                                                                                                                                                   |
-| »» tradingStartTime                | integer(int64) | true     | none         | Official opening time (end time of the third phase of call auction)                                                                                                                                                                                                                                                                 |
+| »» callauctionPriceFloor           | string         | false    | none         | The lowest price declared in the call auction                                                                                                                                                                                                                                                                                       |
+| »» callauctionPriceCeiling         | string         | false    | none         | The highest bid price in the call auction                                                                                                                                                                                                                                                                                           |
+| »» callauctionFirstStageStartTime  | integer(int64) | false    | none         | The first phase of the call auction starts at (Allow add orders, allow cancel orders)                                                                                                                                                                                                                                               |
+| »» callauctionSecondStageStartTime | integer(int64) | false    | none         | The second phase of the call auction starts at (Allow add orders, don't allow cancel orders)                                                                                                                                                                                                                                        |
+| »» callauctionThirdStageStartTime  | integer(int64) | false    | none         | The third phase of the call auction starts at (Don't allow add orders, don't allow cancel orders)                                                                                                                                                                                                                                   |
+| »» tradingStartTime                | integer(int64) | false    | none         | Official opening time (end time of the third phase of call auction)                                                                                                                                                                                                                                                                 |
 
 #### Enumerated Values
 
@@ -2538,19 +2518,19 @@ estimated transaction quantity, bid price range, and ask price range.
         },
         "time": {
           "type": "integer",
-          "format": "int64",
-          "description": "Timestamp (ms)"
+          "description": "Timestamp (ms)",
+          "format": "int64"
         }
       },
       "required": [
-        "symbol",
-        "estimatedPrice",
-        "estimatedSize",
         "sellOrderRangeLowPrice",
         "sellOrderRangeHighPrice",
         "buyOrderRangeLowPrice",
         "buyOrderRangeHighPrice",
-        "time"
+        "time",
+        "symbol",
+        "estimatedPrice",
+        "estimatedSize"
       ]
     }
   },

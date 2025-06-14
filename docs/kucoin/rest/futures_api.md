@@ -1007,15 +1007,10 @@ contract such as the symbol name, tick size, mark price, etc.
           "takerFeeRate",
           "takerFixFee",
           "makerFixFee",
-          "settlementFee",
           "isDeleverage",
           "isQuanto",
           "isInverse",
           "markMethod",
-          "fairMethod",
-          "fundingBaseSymbol",
-          "fundingQuoteSymbol",
-          "fundingRateSymbol",
           "indexSymbol",
           "settlementSymbol",
           "status",
@@ -1094,15 +1089,15 @@ Status Code **200**
 | »» takerFeeRate            | number         | true     | none         | Taker fee rate                                                                                                                                                                                                                                                                                                                                           |
 | »» takerFixFee             | number         | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
 | »» makerFixFee             | number         | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
-| »» settlementFee           | number         | true     | none         | Settlement fee                                                                                                                                                                                                                                                                                                                                           |
+| »» settlementFee           | number         | false    | none         | Settlement fee                                                                                                                                                                                                                                                                                                                                           |
 | »» isDeleverage            | boolean        | true     | none         | Enabled ADL or not                                                                                                                                                                                                                                                                                                                                       |
 | »» isQuanto                | boolean        | true     | none         | Deprecated param                                                                                                                                                                                                                                                                                                                                         |
 | »» isInverse               | boolean        | true     | none         | Whether it is a reverse contract                                                                                                                                                                                                                                                                                                                         |
 | »» markMethod              | string         | true     | none         | Marking method                                                                                                                                                                                                                                                                                                                                           |
-| »» fairMethod              | string         | true     | none         | Fair price marking method; the Futures contract is null                                                                                                                                                                                                                                                                                                  |
-| »» fundingBaseSymbol       | string         | true     | none         | Ticker symbol of the base currency                                                                                                                                                                                                                                                                                                                       |
-| »» fundingQuoteSymbol      | string         | true     | none         | Ticker symbol of the quote currency                                                                                                                                                                                                                                                                                                                      |
-| »» fundingRateSymbol       | string         | true     | none         | Funding rate symbol                                                                                                                                                                                                                                                                                                                                      |
+| »» fairMethod              | string         | false    | none         | Fair price marking method; the Futures contract is null                                                                                                                                                                                                                                                                                                  |
+| »» fundingBaseSymbol       | string         | false    | none         | Ticker symbol of the base currency                                                                                                                                                                                                                                                                                                                       |
+| »» fundingQuoteSymbol      | string         | false    | none         | Ticker symbol of the quote currency                                                                                                                                                                                                                                                                                                                      |
+| »» fundingRateSymbol       | string         | false    | none         | Funding rate symbol                                                                                                                                                                                                                                                                                                                                      |
 | »» indexSymbol             | string         | true     | none         | Index symbol                                                                                                                                                                                                                                                                                                                                             |
 | »» settlementSymbol        | string         | true     | none         | Settlement symbol                                                                                                                                                                                                                                                                                                                                        |
 | »» status                  | string         | true     | none         | Contract status                                                                                                                                                                                                                                                                                                                                          |
@@ -1961,7 +1956,25 @@ requested data is not real-time.
               },
               "stop": {
                 "type": "string",
-                "description": "A mark to the stop order type"
+                "description": "A mark to the stop order type",
+                "enum": ["down", "up", ""],
+                "x-api-enum": [
+                  {
+                    "value": "down",
+                    "name": "down",
+                    "description": "Triggers when the price reaches or goes below the stopPrice."
+                  },
+                  {
+                    "value": "up",
+                    "name": "up",
+                    "description": "Triggers when the price reaches or goes above the stopPrice."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "feeRate": {
                 "type": "string",
@@ -2186,6 +2199,9 @@ Status Code **200**
 | side        | sell        |
 | liquidity   | taker       |
 | liquidity   | maker       |
+| stop        | down        |
+| stop        | up          |
+| stop        |             |
 | marginMode  | ISOLATED    |
 | marginMode  | CROSS       |
 | displayType | limit       |
@@ -4282,11 +4298,52 @@ List your current orders.
               },
               "stop": {
                 "type": "string",
-                "description": "Stop order type (stop limit or stop market)"
+                "description": "A mark to the stop order type",
+                "enum": ["down", "up", ""],
+                "x-api-enum": [
+                  {
+                    "value": "down",
+                    "name": "down",
+                    "description": "Triggers when the price reaches or goes below the stopPrice."
+                  },
+                  {
+                    "value": "up",
+                    "name": "up",
+                    "description": "Triggers when the price reaches or goes above the stopPrice."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopPriceType": {
                 "type": "string",
-                "description": "Trigger price type of stop orders"
+                "description": "Trigger price type of stop orders",
+                "enum": ["TP", "MP", "IP", ""],
+                "x-api-enum": [
+                  {
+                    "value": "TP",
+                    "name": "trade price",
+                    "description": "TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message."
+                  },
+                  {
+                    "value": "MP",
+                    "name": "mark price",
+                    "description": "MP for mark price. The mark price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "IP",
+                    "name": "index price",
+                    "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopTriggered": {
                 "type": "boolean",
@@ -4476,7 +4533,7 @@ Status Code **200**
 | »»» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »»» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »»» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
-| »»» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »»» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »»» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »»» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »»» stopPrice      | integer        | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -4504,6 +4561,18 @@ Status Code **200**
 | »»» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
 | »»» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
 | »»» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
+
+#### Enumerated Values
+
+| Property      | Value |
+| ------------- | ----- |
+| stop          | down  |
+| stop          | up    |
+| stop          |       |
+| stopPriceType | TP    |
+| stopPriceType | MP    |
+| stopPriceType | IP    |
+| stopPriceType |       |
 
 <aside class="success">
 This operation does not require authentication
@@ -7122,11 +7191,52 @@ be queried through the general order interface
               },
               "stop": {
                 "type": "string",
-                "description": "Stop order type (stop limit or stop market)"
+                "description": "A mark to the stop order type",
+                "enum": ["down", "up", ""],
+                "x-api-enum": [
+                  {
+                    "value": "down",
+                    "name": "down",
+                    "description": "Triggers when the price reaches or goes below the stopPrice."
+                  },
+                  {
+                    "value": "up",
+                    "name": "up",
+                    "description": "Triggers when the price reaches or goes above the stopPrice."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopPriceType": {
                 "type": "string",
-                "description": "Trigger price type of stop orders"
+                "description": "Trigger price type of stop orders",
+                "enum": ["TP", "MP", "IP", ""],
+                "x-api-enum": [
+                  {
+                    "value": "TP",
+                    "name": "trade price",
+                    "description": "TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message."
+                  },
+                  {
+                    "value": "MP",
+                    "name": "mark price",
+                    "description": "MP for mark price. The mark price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "IP",
+                    "name": "index price",
+                    "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopTriggered": {
                 "type": "boolean",
@@ -7316,7 +7426,7 @@ Status Code **200**
 | »»» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »»» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »»» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
-| »»» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »»» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »»» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »»» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »»» stopPrice      | string         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -7344,6 +7454,18 @@ Status Code **200**
 | »»» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
 | »»» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
 | »»» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
+
+#### Enumerated Values
+
+| Property      | Value |
+| ------------- | ----- |
+| stop          | down  |
+| stop          | up    |
+| stop          |       |
+| stopPriceType | TP    |
+| stopPriceType | MP    |
+| stopPriceType | IP    |
+| stopPriceType |       |
 
 <aside class="success">
 This operation does not require authentication
@@ -7500,18 +7622,31 @@ Get a single order by order id (including a stop order).
         },
         "stop": {
           "type": "string",
-          "description": "Stop order type (stop limit or stop market)\n"
+          "description": "A mark to the stop order type",
+          "enum": ["down", "up", ""],
+          "x-api-enum": [
+            {
+              "value": "down",
+              "name": "down",
+              "description": "Triggers when the price reaches or goes below the stopPrice."
+            },
+            {
+              "value": "up",
+              "name": "up",
+              "description": "Triggers when the price reaches or goes above the stopPrice."
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
+            }
+          ]
         },
         "stopPriceType": {
           "type": "string",
           "description": "Trigger price type of stop orders",
-          "enum": ["", "TP", "MP", "IP"],
+          "enum": ["TP", "MP", "IP", ""],
           "x-api-enum": [
-            {
-              "value": "",
-              "name": "NULL",
-              "description": ""
-            },
             {
               "value": "TP",
               "name": "trade price",
@@ -7526,6 +7661,11 @@ Get a single order by order id (including a stop order).
               "value": "IP",
               "name": "index price",
               "description": "IP for index price, The index price can be obtained through relevant OPEN API for index services"
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
             }
           ]
         },
@@ -7733,7 +7873,7 @@ Status Code **200**
 | »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »» stp            | string         | true     | none         | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.                                                                                                                          |
-| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »» stopPrice      | number         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -7774,10 +7914,13 @@ Status Code **200**
 | stp           | CN       |
 | stp           | CO       |
 | stp           | CB       |
-| stopPriceType |          |
+| stop          | down     |
+| stop          | up       |
+| stop          |          |
 | stopPriceType | TP       |
 | stopPriceType | MP       |
 | stopPriceType | IP       |
+| stopPriceType |          |
 | marginMode    | CROSS    |
 | marginMode    | ISOLATED |
 | status        | open     |
@@ -7942,18 +8085,31 @@ Get a single order by client order ID (including a stop order).
         },
         "stop": {
           "type": "string",
-          "description": "Stop order type (stop limit or stop market)\n"
+          "description": "A mark to the stop order type",
+          "enum": ["down", "up", ""],
+          "x-api-enum": [
+            {
+              "value": "down",
+              "name": "down",
+              "description": "Triggers when the price reaches or goes below the stopPrice."
+            },
+            {
+              "value": "up",
+              "name": "up",
+              "description": "Triggers when the price reaches or goes above the stopPrice."
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
+            }
+          ]
         },
         "stopPriceType": {
           "type": "string",
           "description": "Trigger price type of stop orders",
-          "enum": ["", "TP", "MP", "IP"],
+          "enum": ["TP", "MP", "IP", ""],
           "x-api-enum": [
-            {
-              "value": "",
-              "name": "NULL",
-              "description": "None"
-            },
             {
               "value": "TP",
               "name": "trade price",
@@ -7968,6 +8124,11 @@ Get a single order by client order ID (including a stop order).
               "value": "IP",
               "name": "index price",
               "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
             }
           ]
         },
@@ -8176,7 +8337,7 @@ Status Code **200**
 | »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »» stp            | string         | true     | none         | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.                                                                                                                              |
-| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »» stopPrice      | number         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -8217,10 +8378,13 @@ Status Code **200**
 | stp           | CN       |
 | stp           | CO       |
 | stp           | CB       |
-| stopPriceType |          |
+| stop          | down     |
+| stop          | up       |
+| stop          |          |
 | stopPriceType | TP       |
 | stopPriceType | MP       |
 | stopPriceType | IP       |
+| stopPriceType |          |
 | marginMode    | CROSS    |
 | marginMode    | ISOLATED |
 | status        | open     |
@@ -8335,11 +8499,52 @@ your recent traded order history with low latency, you may query this endpoint.
           },
           "stop": {
             "type": "string",
-            "description": "Stop order type (stop limit or stop market)\n"
+            "description": "A mark to the stop order type",
+            "enum": ["down", "up", ""],
+            "x-api-enum": [
+              {
+                "value": "down",
+                "name": "down",
+                "description": "Triggers when the price reaches or goes below the stopPrice."
+              },
+              {
+                "value": "up",
+                "name": "up",
+                "description": "Triggers when the price reaches or goes above the stopPrice."
+              },
+              {
+                "value": "",
+                "name": "None",
+                "description": "Not a stop order"
+              }
+            ]
           },
           "stopPriceType": {
             "type": "string",
-            "description": "Trigger price type of stop orders\n"
+            "description": "Trigger price type of stop orders",
+            "enum": ["TP", "MP", "IP", ""],
+            "x-api-enum": [
+              {
+                "value": "TP",
+                "name": "trade price",
+                "description": "TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message."
+              },
+              {
+                "value": "MP",
+                "name": "mark price",
+                "description": "MP for mark price. The mark price can be obtained through relevant OPEN API for index services."
+              },
+              {
+                "value": "IP",
+                "name": "index price",
+                "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+              },
+              {
+                "value": "",
+                "name": "None",
+                "description": "Not a stop order"
+              }
+            ]
           },
           "stopTriggered": {
             "type": "boolean",
@@ -8521,7 +8726,7 @@ Status Code **200**
 | »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
-| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »» stopPrice      | integer        | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -8549,6 +8754,18 @@ Status Code **200**
 | »» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
 | »» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
 | »» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
+
+#### Enumerated Values
+
+| Property      | Value |
+| ------------- | ----- |
+| stop          | down  |
+| stop          | up    |
+| stop          |       |
+| stopPriceType | TP    |
+| stopPriceType | MP    |
+| stopPriceType | IP    |
+| stopPriceType |       |
 
 <aside class="success">
 This operation does not require authentication
@@ -8812,7 +9029,25 @@ recently traded order history with low latency, you may query this endpoint.
           },
           "stop": {
             "type": "string",
-            "description": "A mark to the stop order type\n"
+            "description": "A mark to the stop order type",
+            "enum": ["down", "up", ""],
+            "x-api-enum": [
+              {
+                "value": "down",
+                "name": "down",
+                "description": "Triggers when the price reaches or goes below the stopPrice."
+              },
+              {
+                "value": "up",
+                "name": "up",
+                "description": "Triggers when the price reaches or goes above the stopPrice."
+              },
+              {
+                "value": "",
+                "name": "None",
+                "description": "Not a stop order"
+              }
+            ]
           },
           "feeRate": {
             "type": "string",
@@ -9022,6 +9257,9 @@ Status Code **200**
 | side        | sell        |
 | liquidity   | taker       |
 | liquidity   | maker       |
+| stop        | down        |
+| stop        | up          |
+| stop        |             |
 | marginMode  | ISOLATED    |
 | marginMode  | CROSS       |
 | displayType | limit       |
@@ -9361,9 +9599,214 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## Get Max Open Size
+## Batch Switch Margin Mode
 
 <a id="opId003"></a>
+
+> Code samples
+
+```javascript
+const inputBody = '{
+  "type": "object",
+  "properties": {
+    "marginMode": {
+      "type": "string",
+      "description": "Modified margin model: ISOLATED (isolated), CROSS (cross margin).",
+      "enum": [
+        "ISOLATED",
+        "CROSS"
+      ],
+      "x-api-enum": [
+        {
+          "value": "ISOLATED",
+          "name": "ISOLATED",
+          "description": "Isolated Margin Mode"
+        },
+        {
+          "value": "CROSS",
+          "name": "CROSS",
+          "description": "Cross Margin MOde"
+        }
+      ]
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symbol list of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) "
+    }
+  },
+  "required": [
+    "marginMode",
+    "symbols"
+  ]
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+};
+
+fetch('/api/v2/position/batchChangeMarginMode',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/api/v2/position/batchChangeMarginMode', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /api/v2/position/batchChangeMarginMode`
+
+Batch modify the margin mode of the symbols.
+
+> Body parameter
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "marginMode": {
+      "type": "string",
+      "description": "Modified margin model: ISOLATED (isolated), CROSS (cross margin).",
+      "enum": ["ISOLATED", "CROSS"],
+      "x-api-enum": [
+        {
+          "value": "ISOLATED",
+          "name": "ISOLATED",
+          "description": "Isolated Margin Mode"
+        },
+        {
+          "value": "CROSS",
+          "name": "CROSS",
+          "description": "Cross Margin MOde"
+        }
+      ]
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symbol list of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) "
+    }
+  },
+  "required": ["marginMode", "symbols"]
+}
+```
+
+<h3 id="batch-switch-margin-mode-parameters">Parameters</h3>
+
+| Name         | In   | Type     | Required | Description                                                                                                             |
+| ------------ | ---- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| body         | body | object   | false    | none                                                                                                                    |
+| » marginMode | body | string   | true     | Modified margin model: ISOLATED (isolated), CROSS (cross margin).                                                       |
+| » symbols    | body | [string] | true     | Symbol list of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+
+#### Enumerated Values
+
+| Parameter    | Value    |
+| ------------ | -------- |
+| » marginMode | ISOLATED |
+| » marginMode | CROSS    |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "marginMode": {
+          "type": "object",
+          "properties": {},
+          "description": "Target Margin Model, Symbols that failed to be modified will also be included",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error code"
+              },
+              "msg": {
+                "type": "string",
+                "description": "Error message"
+              },
+              "symbol": {
+                "type": "string",
+                "description": "Symbol"
+              }
+            }
+          },
+          "description": "Symbol which modification failed"
+        }
+      },
+      "required": ["marginMode", "errors"]
+    }
+  },
+  "required": ["code", "data"]
+}
+```
+
+<h3 id="batch-switch-margin-mode-responses">Responses</h3>
+
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
+
+<h3 id="batch-switch-margin-mode-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name                         | Type     | Required | Restrictions | Description                                                                   |
+| ---------------------------- | -------- | -------- | ------------ | ----------------------------------------------------------------------------- |
+| » code                       | string   | true     | none         | none                                                                          |
+| » data                       | object   | true     | none         | none                                                                          |
+| »» marginMode                | object   | true     | none         | Target Margin Model, Symbols that failed to be modified will also be included |
+| »»» **additionalProperties** | string   | false    | none         | none                                                                          |
+| »» errors                    | [object] | true     | none         | Symbol which modification failed                                              |
+| »»» code                     | string   | false    | none         | Error code                                                                    |
+| »»» msg                      | string   | false    | none         | Error message                                                                 |
+| »»» symbol                   | string   | false    | none         | Symbol                                                                        |
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get Max Open Size
+
+<a id="opId004"></a>
 
 > Code samples
 
@@ -9486,7 +9929,7 @@ This operation does not require authentication
 
 ## Get Position Details
 
-<a id="opId004"></a>
+<a id="opId005"></a>
 
 > Code samples
 
@@ -9567,7 +10010,7 @@ Get the position details of a specified position.
         },
         "openingTimestamp": {
           "type": "integer",
-          "description": "Open time\n",
+          "description": "First opening time",
           "format": "int64"
         },
         "currentTimestamp": {
@@ -9702,7 +10145,7 @@ Get the position details of a specified position.
         },
         "maintMarginReq": {
           "type": "number",
-          "description": "Maintenance margin requirement **Only applicable to Isolated Margin**\n"
+          "description": "Maintenance margin requirement\n"
         },
         "riskLimit": {
           "type": "integer",
@@ -9738,7 +10181,7 @@ Get the position details of a specified position.
         },
         "posMaint": {
           "type": "number",
-          "description": "Maintenance margin **Only applicable to Isolated Margin**\n"
+          "description": "Maintenance margin\n"
         },
         "maintMargin": {
           "type": "number",
@@ -9806,7 +10249,7 @@ Status Code **200**
 | »» symbol            | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                      |
 | »» crossMode         | boolean        | true     | none         | Whether it is cross margin.                                                                                                                             |
 | »» delevPercentage   | number         | true     | none         | ADL ranking percentile                                                                                                                                  |
-| »» openingTimestamp  | integer(int64) | true     | none         | Open time                                                                                                                                               |
+| »» openingTimestamp  | integer(int64) | true     | none         | First opening time                                                                                                                                      |
 | »» currentTimestamp  | integer(int64) | true     | none         | Current timestamp                                                                                                                                       |
 | »» currentQty        | integer        | true     | none         | Current postion quantity                                                                                                                                |
 | »» currentCost       | number         | true     | none         | Current postion value                                                                                                                                   |
@@ -9834,7 +10277,7 @@ Status Code **200**
 | »» positionSide      | string         | true     | none         | Position Side                                                                                                                                           |
 | »» leverage          | number         | true     | none         | Leverage                                                                                                                                                |
 | »» autoDeposit       | boolean        | false    | none         | Auto deposit margin or not **Only applicable to Isolated Margin**                                                                                       |
-| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement **Only applicable to Isolated Margin**                                                                                   |
+| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement                                                                                                                          |
 | »» riskLimit         | integer        | false    | none         | Risk limit **Only applicable to Isolated Margin**                                                                                                       |
 | »» realLeverage      | number         | false    | none         | Leverage of the order **Only applicable to Isolated Margin**                                                                                            |
 | »» posCross          | number         | false    | none         | added margin **Only applicable to Isolated Margin**                                                                                                     |
@@ -9843,7 +10286,7 @@ Status Code **200**
 | »» posCommCommon     | number         | false    | none         | Part of bankruptcy cost (positioning, add margin) **Only applicable to Isolated Margin**                                                                |
 | »» posLoss           | number         | false    | none         | Funding fees paid out **Only applicable to Isolated Margin**                                                                                            |
 | »» posFunding        | number         | false    | none         | The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**                                                     |
-| »» posMaint          | number         | false    | none         | Maintenance margin **Only applicable to Isolated Margin**                                                                                               |
+| »» posMaint          | number         | false    | none         | Maintenance margin                                                                                                                                      |
 | »» maintMargin       | number         | false    | none         | Position margin **Only applicable to Isolated Margin**                                                                                                  |
 | »» maintainMargin    | number         | false    | none         | Maintenance margin rate **Only applicable to Isolated Margin**                                                                                          |
 
@@ -9861,7 +10304,7 @@ This operation does not require authentication
 
 ## Get Position List
 
-<a id="opId005"></a>
+<a id="opId006"></a>
 
 > Code samples
 
@@ -9901,9 +10344,9 @@ Get the position details of a specified position.
 
 <h3 id="get-position-list-parameters">Parameters</h3>
 
-| Name     | In    | Type   | Required | Description                                                                                                                                   |
-| -------- | ----- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency | query | string | false    | Currency code, Please refer to [rootSymbol](https://www.kucoin.com/docs-new/api-221752070) , such as USDT,XBT. Query all positions when empty |
+| Name     | In    | Type   | Required | Description                                                                                                                                         |
+| -------- | ----- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency | query | string | false    | Quote currency code, Please refer to [rootSymbol](https://www.kucoin.com/docs-new/api-221752070) , such as USDT,XBT. Query all positions when empty |
 
 > Example responses
 
@@ -9940,7 +10383,7 @@ Get the position details of a specified position.
           },
           "openingTimestamp": {
             "type": "integer",
-            "description": "Open time\n",
+            "description": "First opening time",
             "format": "int64"
           },
           "currentTimestamp": {
@@ -10075,7 +10518,7 @@ Get the position details of a specified position.
           },
           "maintMarginReq": {
             "type": "number",
-            "description": "Maintenance margin requirement **Only applicable to Isolated Margin**\n"
+            "description": "Maintenance margin requirement\n"
           },
           "riskLimit": {
             "type": "number",
@@ -10111,7 +10554,7 @@ Get the position details of a specified position.
           },
           "posMaint": {
             "type": "number",
-            "description": "Maintenance margin **Only applicable to Isolated Margin**\n"
+            "description": "Maintenance margin"
           },
           "maintMargin": {
             "type": "number",
@@ -10180,7 +10623,7 @@ Status Code **200**
 | »» symbol            | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                      |
 | »» crossMode         | boolean        | true     | none         | Whether it is cross margin.                                                                                                                             |
 | »» delevPercentage   | number         | true     | none         | ADL ranking percentile                                                                                                                                  |
-| »» openingTimestamp  | integer(int64) | true     | none         | Open time                                                                                                                                               |
+| »» openingTimestamp  | integer(int64) | true     | none         | First opening time                                                                                                                                      |
 | »» currentTimestamp  | integer(int64) | true     | none         | Current timestamp                                                                                                                                       |
 | »» currentQty        | integer        | true     | none         | Current postion quantity                                                                                                                                |
 | »» currentCost       | number         | true     | none         | Current postion value                                                                                                                                   |
@@ -10208,7 +10651,7 @@ Status Code **200**
 | »» positionSide      | string         | true     | none         | Position Side                                                                                                                                           |
 | »» leverage          | number         | true     | none         | Leverage                                                                                                                                                |
 | »» autoDeposit       | boolean        | false    | none         | Auto deposit margin or not **Only applicable to Isolated Margin**                                                                                       |
-| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement **Only applicable to Isolated Margin**                                                                                   |
+| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement                                                                                                                          |
 | »» riskLimit         | number         | false    | none         | Risk limit **Only applicable to Isolated Margin**                                                                                                       |
 | »» realLeverage      | number         | false    | none         | Leverage of the order **Only applicable to Isolated Margin**                                                                                            |
 | »» posCross          | number         | false    | none         | added margin **Only applicable to Isolated Margin**                                                                                                     |
@@ -10217,7 +10660,7 @@ Status Code **200**
 | »» posCommCommon     | number         | false    | none         | Part of bankruptcy cost (positioning, add margin) **Only applicable to Isolated Margin**                                                                |
 | »» posLoss           | number         | false    | none         | Funding fees paid out **Only applicable to Isolated Margin**                                                                                            |
 | »» posFunding        | number         | false    | none         | The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**                                                     |
-| »» posMaint          | number         | false    | none         | Maintenance margin **Only applicable to Isolated Margin**                                                                                               |
+| »» posMaint          | number         | false    | none         | Maintenance margin                                                                                                                                      |
 | »» maintMargin       | number         | false    | none         | Position margin **Only applicable to Isolated Margin**                                                                                                  |
 | »» maintainMargin    | number         | false    | none         | Maintenance margin rate **Only applicable to Isolated Margin**                                                                                          |
 
@@ -10235,7 +10678,7 @@ This operation does not require authentication
 
 ## Get Positions History
 
-<a id="opId006"></a>
+<a id="opId007"></a>
 
 > Code samples
 
@@ -10516,7 +10959,7 @@ This operation does not require authentication
 
 ## Get Max Withdraw Margin
 
-<a id="opId007"></a>
+<a id="opId008"></a>
 
 > Code samples
 
@@ -10606,7 +11049,7 @@ This operation does not require authentication
 
 ## Get Cross Margin Leverage
 
-<a id="opId008"></a>
+<a id="opId009"></a>
 
 > Code samples
 
@@ -10707,7 +11150,7 @@ This operation does not require authentication
 
 ## Modify Cross Margin Leverage
 
-<a id="opId009"></a>
+<a id="opId010"></a>
 
 > Code samples
 
@@ -10832,7 +11275,7 @@ This operation does not require authentication
 
 ## Add Isolated Margin
 
-<a id="opId010"></a>
+<a id="opId011"></a>
 
 > Code samples
 
@@ -11195,7 +11638,7 @@ This operation does not require authentication
 
 ## Remove Isolated Margin
 
-<a id="opId011"></a>
+<a id="opId012"></a>
 
 > Code samples
 
@@ -11319,9 +11762,171 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## Get Cross Margin Risk Limit
+
+<a id="opId013"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch("/api/v2/batchGetCrossOrderLimit?symbol=XBTUSDTM,XBTUSDTM%2CETHUSDTM", {
+  method: "GET",
+
+  headers: headers
+})
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/api/v2/batchGetCrossOrderLimit', params={
+  'symbol': [
+  "XBTUSDTM",
+  "XBTUSDTM,ETHUSDTM"
+]
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /api/v2/batchGetCrossOrderLimit`
+
+Batch get cross margin risk limit.
+
+<h3 id="get-cross-margin-risk-limit-parameters">Parameters</h3>
+
+| Name        | In    | Type    | Required | Description                                                                                                                                                                          |
+| ----------- | ----- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| symbol      | query | string  | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220), (You may add up to 50 symbols. Use a halfwidth comma to each IP) |
+| totalMargin | query | string  | false    | The position opening amount, in the contract's settlement currency.                                                                                                                  |
+| leverage    | query | integer | false    | Calculates the max position size at the specified leverage.                                                                                                                          |
+
+#### Detailed descriptions
+
+**totalMargin**: The position opening amount, in the contract's settlement
+currency. Defaults to 10,000 in margin currency for max position calculation.
+For USDT/USDC, it's 10,000 USD; for others, it's 10,000 divided by the token's
+USDT price.
+
+**leverage**: Calculates the max position size at the specified leverage.
+Defaults to the symbol’s max cross leverage.
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)"
+          },
+          "maxOpenSize": {
+            "type": "integer",
+            "description": "Maximum amount of open position(Unit is **lots**)\n"
+          },
+          "maxOpenValue": {
+            "type": "string",
+            "description": "Maximum value of open position(Unit is **quoteCcy**)\n"
+          },
+          "totalMargin": {
+            "type": "string",
+            "description": "Margin amount used for max position calculation."
+          },
+          "price": {
+            "type": "string",
+            "description": "Price used for max position calculation. Defaults to latest transaction price"
+          },
+          "leverage": {
+            "type": "string",
+            "description": "Leverage used for max position calculation."
+          },
+          "mmr": {
+            "type": "string",
+            "description": "Maintenance Margin Rate"
+          },
+          "imr": {
+            "type": "string",
+            "description": "Initial Margin Rate"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Margin Currency"
+          }
+        },
+        "required": [
+          "symbol",
+          "maxOpenSize",
+          "maxOpenValue",
+          "totalMargin",
+          "price",
+          "leverage",
+          "mmr",
+          "imr",
+          "currency"
+        ]
+      }
+    }
+  },
+  "required": ["code", "data"]
+}
+```
+
+<h3 id="get-cross-margin-risk-limit-responses">Responses</h3>
+
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
+
+<h3 id="get-cross-margin-risk-limit-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name            | Type     | Required | Restrictions | Description                                                                                                        |
+| --------------- | -------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code          | string   | true     | none         | none                                                                                                               |
+| » data          | [object] | true     | none         | none                                                                                                               |
+| »» symbol       | string   | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» maxOpenSize  | integer  | true     | none         | Maximum amount of open position(Unit is **lots**)                                                                  |
+| »» maxOpenValue | string   | true     | none         | Maximum value of open position(Unit is **quoteCcy**)                                                               |
+| »» totalMargin  | string   | true     | none         | Margin amount used for max position calculation.                                                                   |
+| »» price        | string   | true     | none         | Price used for max position calculation. Defaults to latest transaction price                                      |
+| »» leverage     | string   | true     | none         | Leverage used for max position calculation.                                                                        |
+| »» mmr          | string   | true     | none         | Maintenance Margin Rate                                                                                            |
+| »» imr          | string   | true     | none         | Initial Margin Rate                                                                                                |
+| »» currency     | string   | true     | none         | Margin Currency                                                                                                    |
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Get Isolated Margin Risk Limit
 
-<a id="opId012"></a>
+<a id="opId014"></a>
 
 > Code samples
 
@@ -11455,7 +12060,7 @@ This operation does not require authentication
 
 ## Modify Isolated Margin Risk Limit
 
-<a id="opId013"></a>
+<a id="opId015"></a>
 
 > Code samples
 
@@ -11582,7 +12187,7 @@ This operation does not require authentication
 
 ## Modify Isolated Margin Auto-Deposit Status
 
-<a id="opId014"></a>
+<a id="opId016"></a>
 
 > Code samples
 
@@ -11711,7 +12316,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## Get Current Funding Rate.
+## Get Current Funding Rate
 
 <a id="opId001"></a>
 
@@ -11751,7 +12356,7 @@ print(r.json())
 
 Get Current Funding Rate.
 
-<h3 id="get-current-funding-rate.-parameters">Parameters</h3>
+<h3 id="get-current-funding-rate-parameters">Parameters</h3>
 
 | Name   | In   | Type   | Required | Description                                                                                                        |
 | ------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -11781,7 +12386,7 @@ Get Current Funding Rate.
         },
         "timePoint": {
           "type": "integer",
-          "description": "The funding rate settlement time point of the previous cycle\n(milliseconds)\n",
+          "description": "The funding rate settlement time point of the previous cycle\n(milliseconds)\nBefore going live, the system will pre-generate the first funding rate record to ensure the billing cycle can start immediately after the contract is launched.\n The timePoint field represents the time the funding rate data was generated, not the actual time it takes effect or is settled.\n The first actual settlement will occur at the designated settlement time (00:00 / 08:00 / 14:00) after the contract goes live.\n\n",
           "format": "int64"
         },
         "value": {
@@ -11799,6 +12404,28 @@ Get Current Funding Rate.
         "fundingRateFloor": {
           "type": "number",
           "description": "Minimum Funding Rate"
+        },
+        "period": {
+          "type": "integer",
+          "enum": [1, 0],
+          "description": "Indicates whether the current funding fee is charged within this cycle",
+          "x-api-enum": [
+            {
+              "value": 1,
+              "name": "1",
+              "description": "Indicates that funding will be charged in the current cycle"
+            },
+            {
+              "value": 0,
+              "name": "0",
+              "description": "Indicates a cross-cycle expense record that is not charged in the current cycle."
+            }
+          ]
+        },
+        "fundingTime": {
+          "type": "integer",
+          "description": "Indicates the next funding fee settlement time point, which can be used to synchronize periodic settlement timing.",
+          "format": "int64"
         }
       },
       "required": [
@@ -11808,7 +12435,9 @@ Get Current Funding Rate.
         "value",
         "predictedValue",
         "fundingRateCap",
-        "fundingRateFloor"
+        "fundingRateFloor",
+        "period",
+        "fundingTime"
       ]
     }
   },
@@ -11816,27 +12445,36 @@ Get Current Funding Rate.
 }
 ```
 
-<h3 id="get-current-funding-rate.-responses">Responses</h3>
+<h3 id="get-current-funding-rate-responses">Responses</h3>
 
 | Status | Meaning                                                 | Description | Schema |
 | ------ | ------------------------------------------------------- | ----------- | ------ |
 | 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
 
-<h3 id="get-current-funding-rate.-responseschema">Response Schema</h3>
+<h3 id="get-current-funding-rate-responseschema">Response Schema</h3>
 
 Status Code **200**
 
-| Name                | Type           | Required | Restrictions | Description                                                                    |
-| ------------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------ |
-| » code              | string         | true     | none         | none                                                                           |
-| » data              | object         | true     | none         | none                                                                           |
-| »» symbol           | string         | true     | none         | Funding Rate Symbol                                                            |
-| »» granularity      | integer        | true     | none         | Granularity (milliseconds)                                                     |
-| »» timePoint        | integer(int64) | true     | none         | The funding rate settlement time point of the previous cycle<br>(milliseconds) |
-| »» value            | number         | true     | none         | Current cycle funding rate                                                     |
-| »» predictedValue   | number         | true     | none         | Predicted funding rate                                                         |
-| »» fundingRateCap   | number         | true     | none         | Maximum Funding Rate                                                           |
-| »» fundingRateFloor | number         | true     | none         | Minimum Funding Rate                                                           |
+| Name                | Type           | Required | Restrictions | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » code              | string         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » data              | object         | true     | none         | none                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »» symbol           | string         | true     | none         | Funding Rate Symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| »» granularity      | integer        | true     | none         | Granularity (milliseconds)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| »» timePoint        | integer(int64) | true     | none         | The funding rate settlement time point of the previous cycle<br>(milliseconds)<br>Before going live, the system will pre-generate the first funding rate record to ensure the billing cycle can start immediately after the contract is launched.<br> The timePoint field represents the time the funding rate data was generated, not the actual time it takes effect or is settled.<br> The first actual settlement will occur at the designated settlement time (00:00 / 08:00 / 14:00) after the contract goes live. |
+| »» value            | number         | true     | none         | Current cycle funding rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| »» predictedValue   | number         | true     | none         | Predicted funding rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| »» fundingRateCap   | number         | true     | none         | Maximum Funding Rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »» fundingRateFloor | number         | true     | none         | Minimum Funding Rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| »» period           | integer        | true     | none         | Indicates whether the current funding fee is charged within this cycle                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| »» fundingTime      | integer(int64) | true     | none         | Indicates the next funding fee settlement time point, which can be used to synchronize periodic settlement timing.                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+#### Enumerated Values
+
+| Property | Value |
+| -------- | ----- |
+| period   | 1     |
+| period   | 0     |
 
 <aside class="success">
 This operation does not require authentication

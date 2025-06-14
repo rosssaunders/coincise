@@ -342,9 +342,214 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## Get Max Open Size
+## Batch Switch Margin Mode
 
 <a id="opId003"></a>
+
+> Code samples
+
+```javascript
+const inputBody = '{
+  "type": "object",
+  "properties": {
+    "marginMode": {
+      "type": "string",
+      "description": "Modified margin model: ISOLATED (isolated), CROSS (cross margin).",
+      "enum": [
+        "ISOLATED",
+        "CROSS"
+      ],
+      "x-api-enum": [
+        {
+          "value": "ISOLATED",
+          "name": "ISOLATED",
+          "description": "Isolated Margin Mode"
+        },
+        {
+          "value": "CROSS",
+          "name": "CROSS",
+          "description": "Cross Margin MOde"
+        }
+      ]
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symbol list of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) "
+    }
+  },
+  "required": [
+    "marginMode",
+    "symbols"
+  ]
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+};
+
+fetch('/api/v2/position/batchChangeMarginMode',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/api/v2/position/batchChangeMarginMode', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /api/v2/position/batchChangeMarginMode`
+
+Batch modify the margin mode of the symbols.
+
+> Body parameter
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "marginMode": {
+      "type": "string",
+      "description": "Modified margin model: ISOLATED (isolated), CROSS (cross margin).",
+      "enum": ["ISOLATED", "CROSS"],
+      "x-api-enum": [
+        {
+          "value": "ISOLATED",
+          "name": "ISOLATED",
+          "description": "Isolated Margin Mode"
+        },
+        {
+          "value": "CROSS",
+          "name": "CROSS",
+          "description": "Cross Margin MOde"
+        }
+      ]
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symbol list of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) "
+    }
+  },
+  "required": ["marginMode", "symbols"]
+}
+```
+
+<h3 id="batch-switch-margin-mode-parameters">Parameters</h3>
+
+| Name         | In   | Type     | Required | Description                                                                                                             |
+| ------------ | ---- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| body         | body | object   | false    | none                                                                                                                    |
+| » marginMode | body | string   | true     | Modified margin model: ISOLATED (isolated), CROSS (cross margin).                                                       |
+| » symbols    | body | [string] | true     | Symbol list of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+
+#### Enumerated Values
+
+| Parameter    | Value    |
+| ------------ | -------- |
+| » marginMode | ISOLATED |
+| » marginMode | CROSS    |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "marginMode": {
+          "type": "object",
+          "properties": {},
+          "description": "Target Margin Model, Symbols that failed to be modified will also be included",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error code"
+              },
+              "msg": {
+                "type": "string",
+                "description": "Error message"
+              },
+              "symbol": {
+                "type": "string",
+                "description": "Symbol"
+              }
+            }
+          },
+          "description": "Symbol which modification failed"
+        }
+      },
+      "required": ["marginMode", "errors"]
+    }
+  },
+  "required": ["code", "data"]
+}
+```
+
+<h3 id="batch-switch-margin-mode-responses">Responses</h3>
+
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
+
+<h3 id="batch-switch-margin-mode-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name                         | Type     | Required | Restrictions | Description                                                                   |
+| ---------------------------- | -------- | -------- | ------------ | ----------------------------------------------------------------------------- |
+| » code                       | string   | true     | none         | none                                                                          |
+| » data                       | object   | true     | none         | none                                                                          |
+| »» marginMode                | object   | true     | none         | Target Margin Model, Symbols that failed to be modified will also be included |
+| »»» **additionalProperties** | string   | false    | none         | none                                                                          |
+| »» errors                    | [object] | true     | none         | Symbol which modification failed                                              |
+| »»» code                     | string   | false    | none         | Error code                                                                    |
+| »»» msg                      | string   | false    | none         | Error message                                                                 |
+| »»» symbol                   | string   | false    | none         | Symbol                                                                        |
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get Max Open Size
+
+<a id="opId004"></a>
 
 > Code samples
 
@@ -467,7 +672,7 @@ This operation does not require authentication
 
 ## Get Position Details
 
-<a id="opId004"></a>
+<a id="opId005"></a>
 
 > Code samples
 
@@ -548,7 +753,7 @@ Get the position details of a specified position.
         },
         "openingTimestamp": {
           "type": "integer",
-          "description": "Open time\n",
+          "description": "First opening time",
           "format": "int64"
         },
         "currentTimestamp": {
@@ -683,7 +888,7 @@ Get the position details of a specified position.
         },
         "maintMarginReq": {
           "type": "number",
-          "description": "Maintenance margin requirement **Only applicable to Isolated Margin**\n"
+          "description": "Maintenance margin requirement\n"
         },
         "riskLimit": {
           "type": "integer",
@@ -719,7 +924,7 @@ Get the position details of a specified position.
         },
         "posMaint": {
           "type": "number",
-          "description": "Maintenance margin **Only applicable to Isolated Margin**\n"
+          "description": "Maintenance margin\n"
         },
         "maintMargin": {
           "type": "number",
@@ -787,7 +992,7 @@ Status Code **200**
 | »» symbol            | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                      |
 | »» crossMode         | boolean        | true     | none         | Whether it is cross margin.                                                                                                                             |
 | »» delevPercentage   | number         | true     | none         | ADL ranking percentile                                                                                                                                  |
-| »» openingTimestamp  | integer(int64) | true     | none         | Open time                                                                                                                                               |
+| »» openingTimestamp  | integer(int64) | true     | none         | First opening time                                                                                                                                      |
 | »» currentTimestamp  | integer(int64) | true     | none         | Current timestamp                                                                                                                                       |
 | »» currentQty        | integer        | true     | none         | Current postion quantity                                                                                                                                |
 | »» currentCost       | number         | true     | none         | Current postion value                                                                                                                                   |
@@ -815,7 +1020,7 @@ Status Code **200**
 | »» positionSide      | string         | true     | none         | Position Side                                                                                                                                           |
 | »» leverage          | number         | true     | none         | Leverage                                                                                                                                                |
 | »» autoDeposit       | boolean        | false    | none         | Auto deposit margin or not **Only applicable to Isolated Margin**                                                                                       |
-| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement **Only applicable to Isolated Margin**                                                                                   |
+| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement                                                                                                                          |
 | »» riskLimit         | integer        | false    | none         | Risk limit **Only applicable to Isolated Margin**                                                                                                       |
 | »» realLeverage      | number         | false    | none         | Leverage of the order **Only applicable to Isolated Margin**                                                                                            |
 | »» posCross          | number         | false    | none         | added margin **Only applicable to Isolated Margin**                                                                                                     |
@@ -824,7 +1029,7 @@ Status Code **200**
 | »» posCommCommon     | number         | false    | none         | Part of bankruptcy cost (positioning, add margin) **Only applicable to Isolated Margin**                                                                |
 | »» posLoss           | number         | false    | none         | Funding fees paid out **Only applicable to Isolated Margin**                                                                                            |
 | »» posFunding        | number         | false    | none         | The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**                                                     |
-| »» posMaint          | number         | false    | none         | Maintenance margin **Only applicable to Isolated Margin**                                                                                               |
+| »» posMaint          | number         | false    | none         | Maintenance margin                                                                                                                                      |
 | »» maintMargin       | number         | false    | none         | Position margin **Only applicable to Isolated Margin**                                                                                                  |
 | »» maintainMargin    | number         | false    | none         | Maintenance margin rate **Only applicable to Isolated Margin**                                                                                          |
 
@@ -842,7 +1047,7 @@ This operation does not require authentication
 
 ## Get Position List
 
-<a id="opId005"></a>
+<a id="opId006"></a>
 
 > Code samples
 
@@ -882,9 +1087,9 @@ Get the position details of a specified position.
 
 <h3 id="get-position-list-parameters">Parameters</h3>
 
-| Name     | In    | Type   | Required | Description                                                                                                                                   |
-| -------- | ----- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency | query | string | false    | Currency code, Please refer to [rootSymbol](https://www.kucoin.com/docs-new/api-221752070) , such as USDT,XBT. Query all positions when empty |
+| Name     | In    | Type   | Required | Description                                                                                                                                         |
+| -------- | ----- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency | query | string | false    | Quote currency code, Please refer to [rootSymbol](https://www.kucoin.com/docs-new/api-221752070) , such as USDT,XBT. Query all positions when empty |
 
 > Example responses
 
@@ -921,7 +1126,7 @@ Get the position details of a specified position.
           },
           "openingTimestamp": {
             "type": "integer",
-            "description": "Open time\n",
+            "description": "First opening time",
             "format": "int64"
           },
           "currentTimestamp": {
@@ -1056,7 +1261,7 @@ Get the position details of a specified position.
           },
           "maintMarginReq": {
             "type": "number",
-            "description": "Maintenance margin requirement **Only applicable to Isolated Margin**\n"
+            "description": "Maintenance margin requirement\n"
           },
           "riskLimit": {
             "type": "number",
@@ -1092,7 +1297,7 @@ Get the position details of a specified position.
           },
           "posMaint": {
             "type": "number",
-            "description": "Maintenance margin **Only applicable to Isolated Margin**\n"
+            "description": "Maintenance margin"
           },
           "maintMargin": {
             "type": "number",
@@ -1161,7 +1366,7 @@ Status Code **200**
 | »» symbol            | string         | true     | none         | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)                                      |
 | »» crossMode         | boolean        | true     | none         | Whether it is cross margin.                                                                                                                             |
 | »» delevPercentage   | number         | true     | none         | ADL ranking percentile                                                                                                                                  |
-| »» openingTimestamp  | integer(int64) | true     | none         | Open time                                                                                                                                               |
+| »» openingTimestamp  | integer(int64) | true     | none         | First opening time                                                                                                                                      |
 | »» currentTimestamp  | integer(int64) | true     | none         | Current timestamp                                                                                                                                       |
 | »» currentQty        | integer        | true     | none         | Current postion quantity                                                                                                                                |
 | »» currentCost       | number         | true     | none         | Current postion value                                                                                                                                   |
@@ -1189,7 +1394,7 @@ Status Code **200**
 | »» positionSide      | string         | true     | none         | Position Side                                                                                                                                           |
 | »» leverage          | number         | true     | none         | Leverage                                                                                                                                                |
 | »» autoDeposit       | boolean        | false    | none         | Auto deposit margin or not **Only applicable to Isolated Margin**                                                                                       |
-| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement **Only applicable to Isolated Margin**                                                                                   |
+| »» maintMarginReq    | number         | false    | none         | Maintenance margin requirement                                                                                                                          |
 | »» riskLimit         | number         | false    | none         | Risk limit **Only applicable to Isolated Margin**                                                                                                       |
 | »» realLeverage      | number         | false    | none         | Leverage of the order **Only applicable to Isolated Margin**                                                                                            |
 | »» posCross          | number         | false    | none         | added margin **Only applicable to Isolated Margin**                                                                                                     |
@@ -1198,7 +1403,7 @@ Status Code **200**
 | »» posCommCommon     | number         | false    | none         | Part of bankruptcy cost (positioning, add margin) **Only applicable to Isolated Margin**                                                                |
 | »» posLoss           | number         | false    | none         | Funding fees paid out **Only applicable to Isolated Margin**                                                                                            |
 | »» posFunding        | number         | false    | none         | The current remaining unsettled funding fee for the position **Only applicable to Isolated Margin**                                                     |
-| »» posMaint          | number         | false    | none         | Maintenance margin **Only applicable to Isolated Margin**                                                                                               |
+| »» posMaint          | number         | false    | none         | Maintenance margin                                                                                                                                      |
 | »» maintMargin       | number         | false    | none         | Position margin **Only applicable to Isolated Margin**                                                                                                  |
 | »» maintainMargin    | number         | false    | none         | Maintenance margin rate **Only applicable to Isolated Margin**                                                                                          |
 
@@ -1216,7 +1421,7 @@ This operation does not require authentication
 
 ## Get Positions History
 
-<a id="opId006"></a>
+<a id="opId007"></a>
 
 > Code samples
 
@@ -1497,7 +1702,7 @@ This operation does not require authentication
 
 ## Get Max Withdraw Margin
 
-<a id="opId007"></a>
+<a id="opId008"></a>
 
 > Code samples
 
@@ -1587,7 +1792,7 @@ This operation does not require authentication
 
 ## Get Cross Margin Leverage
 
-<a id="opId008"></a>
+<a id="opId009"></a>
 
 > Code samples
 
@@ -1688,7 +1893,7 @@ This operation does not require authentication
 
 ## Modify Cross Margin Leverage
 
-<a id="opId009"></a>
+<a id="opId010"></a>
 
 > Code samples
 
@@ -1813,7 +2018,7 @@ This operation does not require authentication
 
 ## Add Isolated Margin
 
-<a id="opId010"></a>
+<a id="opId011"></a>
 
 > Code samples
 
@@ -2176,7 +2381,7 @@ This operation does not require authentication
 
 ## Remove Isolated Margin
 
-<a id="opId011"></a>
+<a id="opId012"></a>
 
 > Code samples
 
@@ -2300,9 +2505,171 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## Get Cross Margin Risk Limit
+
+<a id="opId013"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch("/api/v2/batchGetCrossOrderLimit?symbol=XBTUSDTM,XBTUSDTM%2CETHUSDTM", {
+  method: "GET",
+
+  headers: headers
+})
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/api/v2/batchGetCrossOrderLimit', params={
+  'symbol': [
+  "XBTUSDTM",
+  "XBTUSDTM,ETHUSDTM"
+]
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /api/v2/batchGetCrossOrderLimit`
+
+Batch get cross margin risk limit.
+
+<h3 id="get-cross-margin-risk-limit-parameters">Parameters</h3>
+
+| Name        | In    | Type    | Required | Description                                                                                                                                                                          |
+| ----------- | ----- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| symbol      | query | string  | true     | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220), (You may add up to 50 symbols. Use a halfwidth comma to each IP) |
+| totalMargin | query | string  | false    | The position opening amount, in the contract's settlement currency.                                                                                                                  |
+| leverage    | query | integer | false    | Calculates the max position size at the specified leverage.                                                                                                                          |
+
+#### Detailed descriptions
+
+**totalMargin**: The position opening amount, in the contract's settlement
+currency. Defaults to 10,000 in margin currency for max position calculation.
+For USDT/USDC, it's 10,000 USD; for others, it's 10,000 divided by the token's
+USDT price.
+
+**leverage**: Calculates the max position size at the specified leverage.
+Defaults to the symbol’s max cross leverage.
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)"
+          },
+          "maxOpenSize": {
+            "type": "integer",
+            "description": "Maximum amount of open position(Unit is **lots**)\n"
+          },
+          "maxOpenValue": {
+            "type": "string",
+            "description": "Maximum value of open position(Unit is **quoteCcy**)\n"
+          },
+          "totalMargin": {
+            "type": "string",
+            "description": "Margin amount used for max position calculation."
+          },
+          "price": {
+            "type": "string",
+            "description": "Price used for max position calculation. Defaults to latest transaction price"
+          },
+          "leverage": {
+            "type": "string",
+            "description": "Leverage used for max position calculation."
+          },
+          "mmr": {
+            "type": "string",
+            "description": "Maintenance Margin Rate"
+          },
+          "imr": {
+            "type": "string",
+            "description": "Initial Margin Rate"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Margin Currency"
+          }
+        },
+        "required": [
+          "symbol",
+          "maxOpenSize",
+          "maxOpenValue",
+          "totalMargin",
+          "price",
+          "leverage",
+          "mmr",
+          "imr",
+          "currency"
+        ]
+      }
+    }
+  },
+  "required": ["code", "data"]
+}
+```
+
+<h3 id="get-cross-margin-risk-limit-responses">Responses</h3>
+
+| Status | Meaning                                                 | Description | Schema |
+| ------ | ------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline |
+
+<h3 id="get-cross-margin-risk-limit-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name            | Type     | Required | Restrictions | Description                                                                                                        |
+| --------------- | -------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| » code          | string   | true     | none         | none                                                                                                               |
+| » data          | [object] | true     | none         | none                                                                                                               |
+| »» symbol       | string   | true     | none         | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| »» maxOpenSize  | integer  | true     | none         | Maximum amount of open position(Unit is **lots**)                                                                  |
+| »» maxOpenValue | string   | true     | none         | Maximum value of open position(Unit is **quoteCcy**)                                                               |
+| »» totalMargin  | string   | true     | none         | Margin amount used for max position calculation.                                                                   |
+| »» price        | string   | true     | none         | Price used for max position calculation. Defaults to latest transaction price                                      |
+| »» leverage     | string   | true     | none         | Leverage used for max position calculation.                                                                        |
+| »» mmr          | string   | true     | none         | Maintenance Margin Rate                                                                                            |
+| »» imr          | string   | true     | none         | Initial Margin Rate                                                                                                |
+| »» currency     | string   | true     | none         | Margin Currency                                                                                                    |
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Get Isolated Margin Risk Limit
 
-<a id="opId012"></a>
+<a id="opId014"></a>
 
 > Code samples
 
@@ -2436,7 +2803,7 @@ This operation does not require authentication
 
 ## Modify Isolated Margin Risk Limit
 
-<a id="opId013"></a>
+<a id="opId015"></a>
 
 > Code samples
 
@@ -2563,7 +2930,7 @@ This operation does not require authentication
 
 ## Modify Isolated Margin Auto-Deposit Status
 
-<a id="opId014"></a>
+<a id="opId016"></a>
 
 > Code samples
 

@@ -785,11 +785,52 @@ List your current orders.
               },
               "stop": {
                 "type": "string",
-                "description": "Stop order type (stop limit or stop market)"
+                "description": "A mark to the stop order type",
+                "enum": ["down", "up", ""],
+                "x-api-enum": [
+                  {
+                    "value": "down",
+                    "name": "down",
+                    "description": "Triggers when the price reaches or goes below the stopPrice."
+                  },
+                  {
+                    "value": "up",
+                    "name": "up",
+                    "description": "Triggers when the price reaches or goes above the stopPrice."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopPriceType": {
                 "type": "string",
-                "description": "Trigger price type of stop orders"
+                "description": "Trigger price type of stop orders",
+                "enum": ["TP", "MP", "IP", ""],
+                "x-api-enum": [
+                  {
+                    "value": "TP",
+                    "name": "trade price",
+                    "description": "TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message."
+                  },
+                  {
+                    "value": "MP",
+                    "name": "mark price",
+                    "description": "MP for mark price. The mark price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "IP",
+                    "name": "index price",
+                    "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopTriggered": {
                 "type": "boolean",
@@ -979,7 +1020,7 @@ Status Code **200**
 | »»» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »»» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »»» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
-| »»» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »»» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »»» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »»» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »»» stopPrice      | integer        | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -1007,6 +1048,18 @@ Status Code **200**
 | »»» filledSize     | integer        | true     | none         | Value of the executed orders                                                                                                                                                                                                                                               |
 | »»» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
 | »»» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
+
+#### Enumerated Values
+
+| Property      | Value |
+| ------------- | ----- |
+| stop          | down  |
+| stop          | up    |
+| stop          |       |
+| stopPriceType | TP    |
+| stopPriceType | MP    |
+| stopPriceType | IP    |
+| stopPriceType |       |
 
 <aside class="success">
 This operation does not require authentication
@@ -3625,11 +3678,52 @@ be queried through the general order interface
               },
               "stop": {
                 "type": "string",
-                "description": "Stop order type (stop limit or stop market)"
+                "description": "A mark to the stop order type",
+                "enum": ["down", "up", ""],
+                "x-api-enum": [
+                  {
+                    "value": "down",
+                    "name": "down",
+                    "description": "Triggers when the price reaches or goes below the stopPrice."
+                  },
+                  {
+                    "value": "up",
+                    "name": "up",
+                    "description": "Triggers when the price reaches or goes above the stopPrice."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopPriceType": {
                 "type": "string",
-                "description": "Trigger price type of stop orders"
+                "description": "Trigger price type of stop orders",
+                "enum": ["TP", "MP", "IP", ""],
+                "x-api-enum": [
+                  {
+                    "value": "TP",
+                    "name": "trade price",
+                    "description": "TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message."
+                  },
+                  {
+                    "value": "MP",
+                    "name": "mark price",
+                    "description": "MP for mark price. The mark price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "IP",
+                    "name": "index price",
+                    "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "stopTriggered": {
                 "type": "boolean",
@@ -3819,7 +3913,7 @@ Status Code **200**
 | »»» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »»» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »»» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
-| »»» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »»» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »»» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »»» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »»» stopPrice      | string         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -3847,6 +3941,18 @@ Status Code **200**
 | »»» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
 | »»» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
 | »»» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
+
+#### Enumerated Values
+
+| Property      | Value |
+| ------------- | ----- |
+| stop          | down  |
+| stop          | up    |
+| stop          |       |
+| stopPriceType | TP    |
+| stopPriceType | MP    |
+| stopPriceType | IP    |
+| stopPriceType |       |
 
 <aside class="success">
 This operation does not require authentication
@@ -4003,18 +4109,31 @@ Get a single order by order id (including a stop order).
         },
         "stop": {
           "type": "string",
-          "description": "Stop order type (stop limit or stop market)\n"
+          "description": "A mark to the stop order type",
+          "enum": ["down", "up", ""],
+          "x-api-enum": [
+            {
+              "value": "down",
+              "name": "down",
+              "description": "Triggers when the price reaches or goes below the stopPrice."
+            },
+            {
+              "value": "up",
+              "name": "up",
+              "description": "Triggers when the price reaches or goes above the stopPrice."
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
+            }
+          ]
         },
         "stopPriceType": {
           "type": "string",
           "description": "Trigger price type of stop orders",
-          "enum": ["", "TP", "MP", "IP"],
+          "enum": ["TP", "MP", "IP", ""],
           "x-api-enum": [
-            {
-              "value": "",
-              "name": "NULL",
-              "description": ""
-            },
             {
               "value": "TP",
               "name": "trade price",
@@ -4029,6 +4148,11 @@ Get a single order by order id (including a stop order).
               "value": "IP",
               "name": "index price",
               "description": "IP for index price, The index price can be obtained through relevant OPEN API for index services"
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
             }
           ]
         },
@@ -4236,7 +4360,7 @@ Status Code **200**
 | »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »» stp            | string         | true     | none         | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.                                                                                                                          |
-| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »» stopPrice      | number         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -4277,10 +4401,13 @@ Status Code **200**
 | stp           | CN       |
 | stp           | CO       |
 | stp           | CB       |
-| stopPriceType |          |
+| stop          | down     |
+| stop          | up       |
+| stop          |          |
 | stopPriceType | TP       |
 | stopPriceType | MP       |
 | stopPriceType | IP       |
+| stopPriceType |          |
 | marginMode    | CROSS    |
 | marginMode    | ISOLATED |
 | status        | open     |
@@ -4445,18 +4572,31 @@ Get a single order by client order ID (including a stop order).
         },
         "stop": {
           "type": "string",
-          "description": "Stop order type (stop limit or stop market)\n"
+          "description": "A mark to the stop order type",
+          "enum": ["down", "up", ""],
+          "x-api-enum": [
+            {
+              "value": "down",
+              "name": "down",
+              "description": "Triggers when the price reaches or goes below the stopPrice."
+            },
+            {
+              "value": "up",
+              "name": "up",
+              "description": "Triggers when the price reaches or goes above the stopPrice."
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
+            }
+          ]
         },
         "stopPriceType": {
           "type": "string",
           "description": "Trigger price type of stop orders",
-          "enum": ["", "TP", "MP", "IP"],
+          "enum": ["TP", "MP", "IP", ""],
           "x-api-enum": [
-            {
-              "value": "",
-              "name": "NULL",
-              "description": "None"
-            },
             {
               "value": "TP",
               "name": "trade price",
@@ -4471,6 +4611,11 @@ Get a single order by client order ID (including a stop order).
               "value": "IP",
               "name": "index price",
               "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+            },
+            {
+              "value": "",
+              "name": "None",
+              "description": "Not a stop order"
             }
           ]
         },
@@ -4679,7 +4824,7 @@ Status Code **200**
 | »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »» stp            | string         | true     | none         | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. DC not currently supported.                                                                                                                              |
-| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »» stopPrice      | number         | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -4720,10 +4865,13 @@ Status Code **200**
 | stp           | CN       |
 | stp           | CO       |
 | stp           | CB       |
-| stopPriceType |          |
+| stop          | down     |
+| stop          | up       |
+| stop          |          |
 | stopPriceType | TP       |
 | stopPriceType | MP       |
 | stopPriceType | IP       |
+| stopPriceType |          |
 | marginMode    | CROSS    |
 | marginMode    | ISOLATED |
 | status        | open     |
@@ -4838,11 +4986,52 @@ your recent traded order history with low latency, you may query this endpoint.
           },
           "stop": {
             "type": "string",
-            "description": "Stop order type (stop limit or stop market)\n"
+            "description": "A mark to the stop order type",
+            "enum": ["down", "up", ""],
+            "x-api-enum": [
+              {
+                "value": "down",
+                "name": "down",
+                "description": "Triggers when the price reaches or goes below the stopPrice."
+              },
+              {
+                "value": "up",
+                "name": "up",
+                "description": "Triggers when the price reaches or goes above the stopPrice."
+              },
+              {
+                "value": "",
+                "name": "None",
+                "description": "Not a stop order"
+              }
+            ]
           },
           "stopPriceType": {
             "type": "string",
-            "description": "Trigger price type of stop orders\n"
+            "description": "Trigger price type of stop orders",
+            "enum": ["TP", "MP", "IP", ""],
+            "x-api-enum": [
+              {
+                "value": "TP",
+                "name": "trade price",
+                "description": "TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message."
+              },
+              {
+                "value": "MP",
+                "name": "mark price",
+                "description": "MP for mark price. The mark price can be obtained through relevant OPEN API for index services."
+              },
+              {
+                "value": "IP",
+                "name": "index price",
+                "description": "IP for index price. The index price can be obtained through relevant OPEN API for index services."
+              },
+              {
+                "value": "",
+                "name": "None",
+                "description": "Not a stop order"
+              }
+            ]
           },
           "stopTriggered": {
             "type": "boolean",
@@ -5024,7 +5213,7 @@ Status Code **200**
 | »» dealValue      | string         | true     | none         | Executed size of funds                                                                                                                                                                                                                                                     |
 | »» dealSize       | integer        | true     | none         | Executed quantity                                                                                                                                                                                                                                                          |
 | »» stp            | string         | true     | none         | self trade prevention                                                                                                                                                                                                                                                      |
-| »» stop           | string         | true     | none         | Stop order type (stop limit or stop market)                                                                                                                                                                                                                                |
+| »» stop           | string         | true     | none         | A mark to the stop order type                                                                                                                                                                                                                                              |
 | »» stopPriceType  | string         | true     | none         | Trigger price type of stop orders                                                                                                                                                                                                                                          |
 | »» stopTriggered  | boolean        | true     | none         | Mark to show whether the stop order is triggered                                                                                                                                                                                                                           |
 | »» stopPrice      | integer        | true     | none         | Trigger price of stop orders                                                                                                                                                                                                                                               |
@@ -5052,6 +5241,18 @@ Status Code **200**
 | »» filledValue    | string         | true     | none         | Executed order quantity                                                                                                                                                                                                                                                    |
 | »» status         | string         | true     | none         | order status: “open” or “done”                                                                                                                                                                                                                                             |
 | »» reduceOnly     | boolean        | true     | none         | A mark to reduce the position size only                                                                                                                                                                                                                                    |
+
+#### Enumerated Values
+
+| Property      | Value |
+| ------------- | ----- |
+| stop          | down  |
+| stop          | up    |
+| stop          |       |
+| stopPriceType | TP    |
+| stopPriceType | MP    |
+| stopPriceType | IP    |
+| stopPriceType |       |
 
 <aside class="success">
 This operation does not require authentication
@@ -5315,7 +5516,25 @@ recently traded order history with low latency, you may query this endpoint.
           },
           "stop": {
             "type": "string",
-            "description": "A mark to the stop order type\n"
+            "description": "A mark to the stop order type",
+            "enum": ["down", "up", ""],
+            "x-api-enum": [
+              {
+                "value": "down",
+                "name": "down",
+                "description": "Triggers when the price reaches or goes below the stopPrice."
+              },
+              {
+                "value": "up",
+                "name": "up",
+                "description": "Triggers when the price reaches or goes above the stopPrice."
+              },
+              {
+                "value": "",
+                "name": "None",
+                "description": "Not a stop order"
+              }
+            ]
           },
           "feeRate": {
             "type": "string",
@@ -5525,6 +5744,9 @@ Status Code **200**
 | side        | sell        |
 | liquidity   | taker       |
 | liquidity   | maker       |
+| stop        | down        |
+| stop        | up          |
+| stop        |             |
 | marginMode  | ISOLATED    |
 | marginMode  | CROSS       |
 | displayType | limit       |
@@ -5713,7 +5935,25 @@ requested data is not real-time.
               },
               "stop": {
                 "type": "string",
-                "description": "A mark to the stop order type"
+                "description": "A mark to the stop order type",
+                "enum": ["down", "up", ""],
+                "x-api-enum": [
+                  {
+                    "value": "down",
+                    "name": "down",
+                    "description": "Triggers when the price reaches or goes below the stopPrice."
+                  },
+                  {
+                    "value": "up",
+                    "name": "up",
+                    "description": "Triggers when the price reaches or goes above the stopPrice."
+                  },
+                  {
+                    "value": "",
+                    "name": "None",
+                    "description": "Not a stop order"
+                  }
+                ]
               },
               "feeRate": {
                 "type": "string",
@@ -5938,6 +6178,9 @@ Status Code **200**
 | side        | sell        |
 | liquidity   | taker       |
 | liquidity   | maker       |
+| stop        | down        |
+| stop        | up          |
+| stop        |             |
 | marginMode  | ISOLATED    |
 | marginMode  | CROSS       |
 | displayType | limit       |
