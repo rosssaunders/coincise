@@ -1,5 +1,10 @@
 ### [#](#changelog) Changelog
 
+2025-06-12
+
+- The enumeration values of the field have been updated, impacting both
+  `spot.orders` and `spot.orders_v2` channels
+
 2025-04-18
 
 - Add additional code examples to the documentation.
