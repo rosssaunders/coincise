@@ -1598,9 +1598,10 @@ The `user.order` subscription can be used to check when the order is
 successfully created.
 
 Please note that amend order is designed as a convenience function such that it
-performs cancel and then create behind the scene. Original order priority will
-be cancelled with the new one created. For faster performance, it is recommended
-to use `private/cancel-order`, and then `private/create-order` instead.
+performs cancel and then create behind the scene. The new order will lose queue
+priority, except if the amend is only to amend down order quantity. For faster
+performance, it is recommended to use `private/cancel-order`, and then
+`private/create-order` instead.
 
 ### Request Params
 
