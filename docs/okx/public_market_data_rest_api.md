@@ -259,7 +259,7 @@ Retrieve funding rate.
 | impactValue     | String   | Depth weighted amount (in the unit of quote currency)                                                                                                                                                                           |
 | settState       | String   | Settlement state of funding rate<br><code>processing</code><br><code>settled</code>                                                                                                                                             |
 | settFundingRate | String   | If settState = <code>processing</code>, it is the funding rate that is being used for current settlement cycle.<br>If settState = <code>settled</code>, it is the funding rate that is being used for previous settlement cycle |
-| premium         | String   | Premium between the mid price of perps market and the index price                                                                                                                                                               |
+| premium         | String   | Premium index<br>formula: [(Best bid + Best ask) / 2 – Index price] / Index price                                                                                                                                               |
 | ts              | String   | Data return time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                                                        |
 
 For some altcoins perpetual swaps with significant fluctuations in funding
@@ -763,7 +763,7 @@ It will return premium data in the past 6 months.
 | **Parameter** | **Type** | **Description**                                                                              |
 | ------------- | -------- | -------------------------------------------------------------------------------------------- |
 | instId        | String   | Instrument ID, e.g. <code>BTC-USDT-SWAP</code>                                               |
-| premium       | String   | Premium between the mid price of perps market and the index price                            |
+| premium       | String   | Premium index<br>formula: [(Best bid + Best ask) / 2 – Index price] / Index price            |
 | ts            | String   | Data generation time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code> |
 
 ---
