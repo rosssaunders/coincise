@@ -1198,7 +1198,7 @@ with the example of BTCUSDT:
 | 170139 | Order has been filled.                                                                                                                                                                                    |
 | 170140 | Order value exceeded lower limit                                                                                                                                                                          |
 | 170141 | Duplicate clientOrderId                                                                                                                                                                                   |
-| 170142 | Order has been canceled                                                                                                                                                                                   |
+| 170142 | Order has been cancelled                                                                                                                                                                                  |
 | 170143 | Cannot be found on order book                                                                                                                                                                             |
 | 170144 | Order has been locked                                                                                                                                                                                     |
 | 170145 | This order type does not support cancellation                                                                                                                                                             |
@@ -1806,15 +1806,15 @@ info
 | ts            | number  | The timestamp (ms) that the system generates the data                                                                                                                                                                                                                                                                                                          |
 | data          | map     | Object                                                                                                                                                                                                                                                                                                                                                         |
 | &gt; s        | string  | Symbol name                                                                                                                                                                                                                                                                                                                                                    |
-| &gt; b        | array   | Bids. For <code>snapshot</code> stream, the element is sorted by price in descending order                                                                                                                                                                                                                                                                     |
+| &gt; b        | array   | Bids. For <code>snapshot</code> stream. Sorted by price in descending order                                                                                                                                                                                                                                                                                    |
 | &gt;&gt; b[0] | string  | Bid price                                                                                                                                                                                                                                                                                                                                                      |
 | &gt;&gt; b[1] | string  | Bid size<li>The delta data has size=0, which means that all quotations for this price have been filled or cancelled</li>                                                                                                                                                                                                                                       |
-| &gt; a        | array   | Asks. For <code>snapshot</code> stream, the element is sorted by price in ascending order                                                                                                                                                                                                                                                                      |
+| &gt; a        | array   | Asks. For <code>snapshot</code> stream. Sorted by price in ascending order                                                                                                                                                                                                                                                                                     |
 | &gt;&gt; a[0] | string  | Ask price                                                                                                                                                                                                                                                                                                                                                      |
 | &gt;&gt; a[1] | string  | Ask size<li>The delta data has size=0, which means that all quotations for this price have been filled or cancelled</li>                                                                                                                                                                                                                                       |
 | &gt; u        | integer | Update ID<li>Occasionally, you'll receive "u"=1, which is a snapshot data due to the restart of the service. So please overwrite your local orderbook</li><li>For level 1 of linear, inverse Perps and Futures, the snapshot data will be pushed again when there is no change in 3 seconds, and the "u" will be the same as that in the previous message</li> |
 | &gt; seq      | integer | Cross sequence<li>You can use this field to compare different levels orderbook data, and for the smaller seq, then it means the data is generated earlier.</li>                                                                                                                                                                                                |
-| cts           | number  | The timestamp from the match engine when this orderbook data is produced. It can be correlated with <code>T</code> from <a href="/docs/v5/websocket/public/trade">public trade channel</a>                                                                                                                                                                     |
+| cts           | number  | The timestamp from the matching engine when this orderbook data is produced. It can be correlated with <code>T</code> from <a href="/docs/v5/websocket/public/trade">public trade channel</a>                                                                                                                                                                  |
 
 ### Subscribe Example[​](#subscribe-example "Direct link to heading")
 
@@ -1849,26 +1849,26 @@ Push frequency: **real-time**
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                        | Type    | Comments                                                                     |
-| :----------------------------------------------- | :------ | ---------------------------------------------------------------------------- |
-| id                                               | string  | Message id. <em>Unique field for option</em>                                 |
-| topic                                            | string  | Topic name                                                                   |
-| type                                             | string  | Data type. <code>snapshot</code>                                             |
-| ts                                               | number  | The timestamp (ms) that the system generates the data                        |
-| data                                             | array   | Object. The element in the array is sort by matching time in ascending order |
-| &gt; T                                           | number  | The timestamp (ms) that the order is filled                                  |
-| &gt; s                                           | string  | Symbol name                                                                  |
-| &gt; S                                           | string  | Side of taker. <code>Buy</code>,<code>Sell</code>                            |
-| &gt; v                                           | string  | Trade size                                                                   |
-| &gt; p                                           | string  | Trade price                                                                  |
-| &gt; <a href="/docs/v5/enum#tickdirection">L</a> | string  | Direction of price change. <em>Unique field for Perps &amp; futures</em>     |
-| &gt; i                                           | string  | Trade ID                                                                     |
-| &gt; BT                                          | boolean | Whether it is a block trade order or not                                     |
-| &gt; RPI                                         | boolean | Whether it is a RPI trade or not                                             |
-| &gt; mP                                          | string  | Mark price, unique field for <code>option</code>                             |
-| &gt; iP                                          | string  | Index price, unique field for <code>option</code>                            |
-| &gt; mIv                                         | string  | Mark iv, unique field for <code>option</code>                                |
-| &gt; iv                                          | string  | iv, unique field for <code>option</code>                                     |
+| Parameter                                        | Type    | Comments                                                                 |
+| :----------------------------------------------- | :------ | ------------------------------------------------------------------------ |
+| id                                               | string  | Message id. <em>Unique field for option</em>                             |
+| topic                                            | string  | Topic name                                                               |
+| type                                             | string  | Data type. <code>snapshot</code>                                         |
+| ts                                               | number  | The timestamp (ms) that the system generates the data                    |
+| data                                             | array   | Object. Sorted by the time the trade was matched in ascending order      |
+| &gt; T                                           | number  | The timestamp (ms) that the order is filled                              |
+| &gt; s                                           | string  | Symbol name                                                              |
+| &gt; S                                           | string  | Side of taker. <code>Buy</code>,<code>Sell</code>                        |
+| &gt; v                                           | string  | Trade size                                                               |
+| &gt; p                                           | string  | Trade price                                                              |
+| &gt; <a href="/docs/v5/enum#tickdirection">L</a> | string  | Direction of price change. <em>Unique field for Perps &amp; futures</em> |
+| &gt; i                                           | string  | Trade ID                                                                 |
+| &gt; BT                                          | boolean | Whether it is a block trade order or not                                 |
+| &gt; RPI                                         | boolean | Whether it is a RPI trade or not                                         |
+| &gt; mP                                          | string  | Mark price, unique field for <code>option</code>                         |
+| &gt; iP                                          | string  | Index price, unique field for <code>option</code>                        |
+| &gt; mIv                                         | string  | Mark iv, unique field for <code>option</code>                            |
+| &gt; iv                                          | string  | iv, unique field for <code>option</code>                                 |
 
 ### Subscribe Example[​](#subscribe-example "Direct link to heading")
 

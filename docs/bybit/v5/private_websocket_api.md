@@ -1198,7 +1198,7 @@ with the example of BTCUSDT:
 | 170139 | Order has been filled.                                                                                                                                                                                    |
 | 170140 | Order value exceeded lower limit                                                                                                                                                                          |
 | 170141 | Duplicate clientOrderId                                                                                                                                                                                   |
-| 170142 | Order has been canceled                                                                                                                                                                                   |
+| 170142 | Order has been cancelled                                                                                                                                                                                  |
 | 170143 | Cannot be found on order book                                                                                                                                                                             |
 | 170144 | Order has been locked                                                                                                                                                                                     |
 | 170145 | This order type does not support cancellation                                                                                                                                                             |
@@ -1875,7 +1875,7 @@ info
 | &gt; execPnl                                                 | string  | Profit and Loss for each close position execution. The value keeps consistent with the field "cashFlow" in the <a href="/docs/v5/account/transaction-log">Get Transaction Log</a>                                                                                                                      |
 | &gt; <a href="/docs/v5/enum#exectype">execType</a>           | string  | Executed type. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                     |
 | &gt; execValue                                               | string  | Executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                              |
-| &gt; execTime                                                | string  | Executed timestamp（ms）                                                                                                                                                                                                                                                                               |
+| &gt; execTime                                                | string  | Executed timestamp (ms)                                                                                                                                                                                                                                                                                |
 | &gt; isMaker                                                 | boolean | Is maker order. <code>true</code>: maker, <code>false</code>: taker                                                                                                                                                                                                                                    |
 | &gt; feeRate                                                 | string  | Trading fee rate. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                  |
 | &gt; tradeIv                                                 | string  | Implied volatility. valid for <code>option</code>                                                                                                                                                                                                                                                      |
@@ -1935,7 +1935,7 @@ info
 | &gt; execPrice                                     | string  | Execution price                                                                                                                                                                                                                                                                   |
 | &gt; execQty                                       | string  | Execution qty                                                                                                                                                                                                                                                                     |
 | &gt; side                                          | string  | Side. <code>Buy</code>,<code>Sell</code>                                                                                                                                                                                                                                          |
-| &gt; execTime                                      | string  | Executed timestamp（ms）                                                                                                                                                                                                                                                          |
+| &gt; execTime                                      | string  | Executed timestamp (ms)                                                                                                                                                                                                                                                           |
 | &gt; seq                                           | long    | Cross sequence, used to associate each fill and each position update<ul><li>The seq will be the same when conclude multiple transactions at the same time</li><li>Different symbols may have the same seq, please use seq + symbol to check unique</li></ul>                      |
 
 ### Subscribe Example[​](#subscribe-example "Direct link to heading")
@@ -2301,9 +2301,9 @@ info
   [here](/docs/v5/rate-limit#api-rate-limit-rules-for-vips)
 
 - The account rate limit is shared between websocket and http batch orders
-- The ack of batch create/amend/cancel order request indicates that the request
-  is successfully accepted. Please use websocket order stream to confirm the
-  order status
+- The acknowledgement of batch create/amend/cancel order requests indicates that
+  the request was sucessfully accepted. The request is asynchronous so please
+  use the websocket to confirm the order status.
 
 ### Request Parameters[​](#request-parameters-2 "Direct link to heading")
 
