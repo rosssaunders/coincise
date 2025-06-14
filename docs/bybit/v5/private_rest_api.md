@@ -1198,7 +1198,7 @@ with the example of BTCUSDT:
 | 170139 | Order has been filled.                                                                                                                                                                                    |
 | 170140 | Order value exceeded lower limit                                                                                                                                                                          |
 | 170141 | Duplicate clientOrderId                                                                                                                                                                                   |
-| 170142 | Order has been canceled                                                                                                                                                                                   |
+| 170142 | Order has been cancelled                                                                                                                                                                                  |
 | 170143 | Cannot be found on order book                                                                                                                                                                             |
 | 170144 | Order has been locked                                                                                                                                                                                     |
 | 170145 | This order type does not support cancellation                                                                                                                                                             |
@@ -1679,8 +1679,9 @@ POST `/v5/order/create`
 
 info
 
-The ack of create order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of an place order request indicates that the request was
+sucessfully accepted. This request is asynchronous so please use the websocket
+to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/create-order)
 
@@ -1758,8 +1759,9 @@ POST `/v5/order/amend`
 
 info
 
-The ack of amend order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of an amend order request indicates that the request was
+sucessfully accepted. This request is asynchronous so please use the websocket
+to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/amend-order)
 
@@ -1838,8 +1840,9 @@ POST `/v5/order/cancel`
 
 info
 
-The ack of cancel order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of an cancel order request indicates that the request was
+sucessfully accepted. This request is asynchronous so please use the websocket
+to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/cancel-order)
 
@@ -1889,10 +1892,10 @@ And to query older order records, please use the
 
 tip
 
-- [UTA2.0](/docs/v5/acct-mode#uta-20) can query filled, canceled, and rejected
+- [UTA2.0](/docs/v5/acct-mode#uta-20) can query filled, cancelled, and rejected
   orders to the most recent 500 orders for spot, linear, inverse and option
   categories
-- [UTA1.0](/docs/v5/acct-mode#uta-10) can query filled, canceled, and rejected
+- [UTA1.0](/docs/v5/acct-mode#uta-10) can query filled, cancelled, and rejected
   orders to the most recent 500 orders for spot, linear, and option categories.
   The inverse category is not subject to this limitation.
 - You can query by symbol, baseCoin, orderId and orderLinkId, and if you pass
@@ -1903,7 +1906,7 @@ tip
 info
 
 - classic account spot can return open orders only
-- After a server release or restart, filled, canceled, and rejected orders of
+- After a server release or restart, filled, cancelled, and rejected orders of
   Unified account should only be queried through
   [order history](/docs/v5/order/order-list).
 
@@ -2053,8 +2056,9 @@ POST `/v5/order/cancel-all`
 
 info
 
-The ack of cancel-all order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of create/amend/cancel order requests indicates that the
+request was sucessfully accepted. The request is asynchronous so please use the
+websocket to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/cancel-all)
 
@@ -2308,7 +2312,7 @@ GET `/v5/execution/list`
 | &gt; execQty                                                 | string  | Execution qty                                                                                                                                                                                                                                                                                                                             |
 | &gt; <a href="/docs/v5/enum#exectype">execType</a>           | string  | Executed type. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                        |
 | &gt; execValue                                               | string  | Executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                 |
-| &gt; execTime                                                | string  | Executed timestamp（ms）                                                                                                                                                                                                                                                                                                                  |
+| &gt; execTime                                                | string  | Executed timestamp (ms)                                                                                                                                                                                                                                                                                                                   |
 | &gt; feeCurrency                                             | string  | Spot trading fee currency <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                             |
 | &gt; isMaker                                                 | boolean | Is maker order. <code>true</code>: maker, <code>false</code>: taker                                                                                                                                                                                                                                                                       |
 | &gt; feeRate                                                 | string  | Trading fee rate. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                     |
@@ -2444,8 +2448,9 @@ POST `/v5/order/create-batch`
 
 info
 
-The ack of create order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of an place order request indicates that the request was
+sucessfully accepted. This request is asynchronous so please use the websocket
+to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/batch-place)
 
@@ -2544,8 +2549,9 @@ POST `/v5/order/amend-batch`
 
 info
 
-The ack of amend order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of an amend order request indicates that the request was
+sucessfully accepted. This request is asynchronous so please use the websocket
+to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/batch-amend)
 
@@ -2629,8 +2635,9 @@ POST `/v5/order/cancel-batch`
 
 info
 
-The ack of cancel order request indicates that the request is successfully
-accepted. Please use websocket order stream to confirm the order status
+The acknowledgement of an cancel order request indicates that the request was
+sucessfully accepted. This request is asynchronous so please use the websocket
+to confirm the order status.
 
 [RUN >>](/docs/api-explorer/v5/trade/batch-cancel)
 
@@ -3060,7 +3067,7 @@ tip
 | Result                  | All USDT perpetual trading pairs are one-way mode                                                                                                 |
 | <b>Change 1</b>         | -                                                                                                                                                 | -                      | Set BTCUSDT to hedge-mode |
 | Result                  | BTCUSDT becomes hedge-mode, and all other symbols keep one-way mode                                                                               |
-| list new symbol ETHUSDT | ETHUSDT is one-way mode （inherit default rules）                                                                                                 |
+| list new symbol ETHUSDT | ETHUSDT is one-way mode (inherit default rules)                                                                                                   |
 | <b>Change 2</b>         | -                                                                                                                                                 | Set USDT to hedge-mode | -                         |
 | Result                  | All current trading pairs with no positions or orders are hedge-mode, and no adjustments will be made for trading pairs with positions and orders |
 | list new symbol SOLUSDT | SOLUSDT is hedge-mode (Inherit coin rule)                                                                                                         |
@@ -4518,7 +4525,8 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 
 # Get Transaction Log
 
-Query transaction logs in Unified account, it supports up to 2 years data
+Query for transaction logs in your Unified account. It supports up to 2 years
+worth of data.
 
 > **Apply to**: [UTA2.0](/docs/v5/acct-mode#uta-20),
 > [UTA1.0](/docs/v5/acct-mode#uta-10)(except inverse)
@@ -4543,32 +4551,32 @@ GET `/v5/account/transaction-log`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                              | Type   | Comments                                                                                                                                                                                                                                                                                                                                                                          |
-| :----------------------------------------------------- | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| list                                                   | array  | Object                                                                                                                                                                                                                                                                                                                                                                            |
-| &gt; id                                                | string | Unique id                                                                                                                                                                                                                                                                                                                                                                         |
-| &gt; symbol                                            | string | Symbol name                                                                                                                                                                                                                                                                                                                                                                       |
-| &gt; category                                          | string | Product type                                                                                                                                                                                                                                                                                                                                                                      |
-| &gt; side                                              | string | Side. <code>Buy</code>,<code>Sell</code>,<code>None</code>                                                                                                                                                                                                                                                                                                                        |
-| &gt; transactionTime                                   | string | Transaction timestamp (ms)                                                                                                                                                                                                                                                                                                                                                        |
-| &gt; <a href="/docs/v5/enum#typeuta-translog">type</a> | string | Type                                                                                                                                                                                                                                                                                                                                                                              |
-| &gt; transSubType                                      | string | Transaction sub type, <code>movePosition</code>, used for the logs generated by move position. <code>""</code> by default                                                                                                                                                                                                                                                         |
-| &gt; qty                                               | string | Quantity<li>Spot: the negative means the qty of this currency is decreased, the positive means the qty of this currency is increased</li><li>Perps &amp; Futures: it is the quantity for each trade entry and it does not have direction</li>                                                                                                                                     |
-| &gt; size                                              | string | Size. The rest position size after the trade is executed, and it has direction, i.e., short with "-"                                                                                                                                                                                                                                                                              |
-| &gt; currency                                          | string | e.g., USDC, USDT, BTC, ETH                                                                                                                                                                                                                                                                                                                                                        |
-| &gt; tradePrice                                        | string | Trade price                                                                                                                                                                                                                                                                                                                                                                       |
-| &gt; funding                                           | string | Funding fee<ul><li>Positive value means receiving funding fee</li><li>Negative value means deducting funding fee</li><li>For USDC Perp, as funding settlement and session settlement are occurred at the same time, so they are in the same log. Please refer to <code>funding</code> to understand funding fee, and <code>cashFlow</code> to understand 8-hour P&amp;L</li></ul> |
-| &gt; fee                                               | string | Trading fee<ul><li>Positive fee value means expense</li><li>Negative fee value means rebates</li></ul>                                                                                                                                                                                                                                                                            |
-| &gt; cashFlow                                          | string | Cash flow, e.g., (1) close the position, and unRPL converts to RPL, (2) 8-hour session settlement for USDC Perp and Futures, (3) transfer in or transfer out. This does not include trading fee, funding fee                                                                                                                                                                      |
-| &gt; change                                            | string | Change = cashFlow + funding - fee                                                                                                                                                                                                                                                                                                                                                 |
-| &gt; cashBalance                                       | string | Cash balance. This is the wallet balance after a cash change                                                                                                                                                                                                                                                                                                                      |
-| &gt; feeRate                                           | string | <ul><li>When type=<code>TRADE</code>, then it is trading fee rate</li><li>When type=<code>SETTLEMENT</code>, it means funding fee rate. For side=Buy, feeRate=market fee rate; For side=Sell, feeRate= - market fee rate</li></ul>                                                                                                                                                |
-| &gt; bonusChange                                       | string | The change of bonus                                                                                                                                                                                                                                                                                                                                                               |
-| &gt; tradeId                                           | string | Trade ID                                                                                                                                                                                                                                                                                                                                                                          |
-| &gt; orderId                                           | string | Order ID                                                                                                                                                                                                                                                                                                                                                                          |
-| &gt; orderLinkId                                       | string | User customised order ID                                                                                                                                                                                                                                                                                                                                                          |
-| &gt; extraFees                                         | string | Trading fee rate information. Currently, this data is returned only for spot orders placed on the Indonesian site or spot fiat currency orders placed on the EU site. In other cases, an empty string is returned. Enum: <a href="/docs/v5/enum#extrafeesfeetype">feeType</a>, <a href="/docs/v5/enum#extrafeessubfeetype">subFeeType</a>                                         |
-| nextPageCursor                                         | string | Refer to the <code>cursor</code> request parameter                                                                                                                                                                                                                                                                                                                                |
+| Parameter                                              | Type   | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :----------------------------------------------------- | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| list                                                   | array  | Object                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; id                                                | string | Unique id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; symbol                                            | string | Symbol name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| &gt; category                                          | string | Product type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; side                                              | string | Side. <code>Buy</code>,<code>Sell</code>,<code>None</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; transactionTime                                   | string | Transaction timestamp (ms)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; <a href="/docs/v5/enum#typeuta-translog">type</a> | string | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| &gt; transSubType                                      | string | Transaction sub type, <code>movePosition</code>, used for the logs generated by move position. <code>""</code> by default                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; qty                                               | string | Quantity<li>Spot: the negative means the qty of this currency is decreased, the positive means the qty of this currency is increased</li><li>Perps &amp; Futures: it is the quantity for each trade entry and it does not have direction</li>                                                                                                                                                                                                                                                                                                                         |
+| &gt; size                                              | string | Size. The rest position size after the trade is executed, and it has direction, i.e., short with "-"                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| &gt; currency                                          | string | e.g., USDC, USDT, BTC, ETH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; tradePrice                                        | string | Trade price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| &gt; funding                                           | string | Funding fee<ul><li>Positive fee value means an expense; negative fee value means a rebate. This is opposite to the <code>execFee</code> from <a href="https://bybit-exchange.github.io/docs/v5/order/execution" target="_blank" rel="noopener noreferrer">Get Trade History</a>.</li><li>For USDC Perp, as funding settlement and session settlement occur at the same time, they are represented in a single record at settlement. Please refer to <code>funding</code> to understand funding fee, and <code>cashFlow</code> to understand 8-hour P&amp;L.</li></ul> |
+| &gt; fee                                               | string | Trading fee<ul><li>Positive fee value means expense</li><li>Negative fee value means rebates</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; cashFlow                                          | string | Cash flow, e.g., (1) close the position, and unRPL converts to RPL, (2) 8-hour session settlement for USDC Perp and Futures, (3) transfer in or transfer out. This does not include trading fee, funding fee                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; change                                            | string | Change = cashFlow + funding - fee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| &gt; cashBalance                                       | string | Cash balance. This is the wallet balance after a cash change                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; feeRate                                           | string | <ul><li>When type=<code>TRADE</code>, then it is trading fee rate</li><li>When type=<code>SETTLEMENT</code>, it means funding fee rate. For side=Buy, feeRate=market fee rate; For side=Sell, feeRate= - market fee rate</li></ul>                                                                                                                                                                                                                                                                                                                                    |
+| &gt; bonusChange                                       | string | The change of bonus                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt; tradeId                                           | string | Trade ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; orderId                                           | string | Order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; orderLinkId                                       | string | User customised order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; extraFees                                         | string | Trading fee rate information. Currently, this data is returned only for spot orders placed on the Indonesian site or spot fiat currency orders placed on the EU site. In other cases, an empty string is returned. Enum: <a href="/docs/v5/enum#extrafeesfeetype">feeType</a>, <a href="/docs/v5/enum#extrafeessubfeetype">subFeeType</a>                                                                                                                                                                                                                             |
+| nextPageCursor                                         | string | Refer to the <code>cursor</code> request parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 [RUN >>](/docs/api-explorer/v5/account/transaction-log)
 
@@ -4832,7 +4840,7 @@ prevents simultaneous trade executions on quotes provided by the MM within a
 short time span. The MM can automatically pull their quotes if the number of
 contracts traded for an underlying asset exceeds the configured threshold within
 a certain time frame. Once MMP is triggered, any pre-existing MMP orders will be
-**automatically canceled**, and new orders tagged as MMP will be **rejected**
+**automatically cancelled**, and new orders tagged as MMP will be **rejected**
 for a specific duration — known as the frozen period — so that MM can reassess
 the market and modify the quotes.
 
@@ -5211,24 +5219,25 @@ GET `/v5/asset/coin/query-info`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                      | Type   | Comments                                                                                             |
-| :----------------------------- | :----- | ---------------------------------------------------------------------------------------------------- |
-| rows                           | array  | Object                                                                                               |
-| &gt; name                      | string | Coin name                                                                                            |
-| &gt; coin                      | string | Coin                                                                                                 |
-| &gt; remainAmount              | string | Maximum withdraw amount per transaction                                                              |
-| &gt; chains                    | array  | Object                                                                                               |
-| &gt;&gt; chain                 | string | Chain                                                                                                |
-| &gt;&gt; chainType             | string | Chain type                                                                                           |
-| &gt;&gt; confirmation          | string | The number of confirmation for deposit                                                               |
-| &gt;&gt; withdrawFee           | string | withdraw fee. <em>If withdraw fee is empty, It means that this coin does not support withdrawal</em> |
-| &gt;&gt; depositMin            | string | Min. deposit                                                                                         |
-| &gt;&gt; withdrawMin           | string | Min. withdraw                                                                                        |
-| &gt;&gt; minAccuracy           | string | The precision of withdraw or deposit                                                                 |
-| &gt;&gt; chainDeposit          | string | The chain status of deposit. <code>0</code>: suspend. <code>1</code>: normal                         |
-| &gt;&gt; chainWithdraw         | string | The chain status of withdraw. <code>0</code>: suspend. <code>1</code>: normal                        |
-| &gt;&gt; withdrawPercentageFee | string | The withdraw fee percentage. It is a real figure, e.g., 0.022 means 2.2%                             |
-| &gt;&gt; contractAddress       | string | Contract address. <code>""</code> means no contract address                                          |
+| Parameter                      | Type   | Comments                                                                                                                                            |
+| :----------------------------- | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| rows                           | array  | Object                                                                                                                                              |
+| &gt; name                      | string | Coin name                                                                                                                                           |
+| &gt; coin                      | string | Coin                                                                                                                                                |
+| &gt; remainAmount              | string | Maximum withdraw amount per transaction                                                                                                             |
+| &gt; chains                    | array  | Object                                                                                                                                              |
+| &gt;&gt; chain                 | string | Chain                                                                                                                                               |
+| &gt;&gt; chainType             | string | Chain type                                                                                                                                          |
+| &gt;&gt; confirmation          | string | Number of confirmations for deposit: Once this number is reached, your funds will be credited to your account and available for trading             |
+| &gt;&gt; withdrawFee           | string | withdraw fee. <em>If withdraw fee is empty, It means that this coin does not support withdrawal</em>                                                |
+| &gt;&gt; depositMin            | string | Min. deposit                                                                                                                                        |
+| &gt;&gt; withdrawMin           | string | Min. withdraw                                                                                                                                       |
+| &gt;&gt; minAccuracy           | string | The precision of withdraw or deposit                                                                                                                |
+| &gt;&gt; chainDeposit          | string | The chain status of deposit. <code>0</code>: suspend. <code>1</code>: normal                                                                        |
+| &gt;&gt; chainWithdraw         | string | The chain status of withdraw. <code>0</code>: suspend. <code>1</code>: normal                                                                       |
+| &gt;&gt; withdrawPercentageFee | string | The withdraw fee percentage. It is a real figure, e.g., 0.022 means 2.2%                                                                            |
+| &gt;&gt; contractAddress       | string | Contract address. <code>""</code> means no contract address                                                                                         |
+| &gt;&gt; safeConfirmNumber     | string | Number of security confirmations: Once this number is reached, your USD equivalent worth funds will be fully unlocked and available for withdrawal. |
 
 [RUN >>](/docs/api-explorer/v5/asset/coin-info)
 
@@ -5255,7 +5264,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "rows": [            {                "name": "MNT",                "coin": "MNT",                "remainAmount": "10000000",                "chains": [                    {                        "chainType": "Ethereum",                        "confirmation": "6",                        "withdrawFee": "3",                        "depositMin": "0",                        "withdrawMin": "3",                        "chain": "ETH",                        "chainDeposit": "1",                        "chainWithdraw": "1",                        "minAccuracy": "8",                        "withdrawPercentageFee": "0",                        "contractAddress": "0x3c3a81e81dc49a522a592e7622a7e711c06bf354"                    },                    {                        "chainType": "Mantle Network",                        "confirmation": "100",                        "withdrawFee": "0",                        "depositMin": "0",                        "withdrawMin": "10",                        "chain": "MANTLE",                        "chainDeposit": "1",                        "chainWithdraw": "1",                        "minAccuracy": "8",                        "withdrawPercentageFee": "0",                        "contractAddress": ""                    }                ]            }        ]    },    "retExtInfo": {},    "time": 1736395486989}
+{    "retCode": 0,    "retMsg": "success",    "result": {        "rows": [            {                "name": "MNT",                "coin": "MNT",                "remainAmount": "10000000",                "chains": [                    {                        "chainType": "Ethereum",                        "confirmation": "6",                        "withdrawFee": "3",                        "depositMin": "0",                        "withdrawMin": "3",                        "chain": "ETH",                        "chainDeposit": "1",                        "chainWithdraw": "1",                        "minAccuracy": "8",                        "withdrawPercentageFee": "0",                        "contractAddress": "0x3c3a81e81dc49a522a592e7622a7e711c06bf354",                        "safeConfirmNumber": "65"                    },                    {                        "chainType": "Mantle Network",                        "confirmation": "100",                        "withdrawFee": "0",                        "depositMin": "0",                        "withdrawMin": "10",                        "chain": "MANTLE",                        "chainDeposit": "1",                        "chainWithdraw": "1",                        "minAccuracy": "8",                        "withdrawPercentageFee": "0",                        "contractAddress": "",                        "safeConfirmNumber": "100"                    }                ]            }        ]    },    "retExtInfo": {},    "time": 1736395486989}
 ```
 
 # Get Sub UID
@@ -5953,7 +5962,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 
 # Get Deposit Records (on-chain)
 
-Query deposit records.
+Query deposit records
 
 tip
 
@@ -5968,19 +5977,22 @@ GET `/v5/asset/deposit/query-record`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type    | Comments                                                                                                             |
-| :-------- | :------- | :------ | -------------------------------------------------------------------------------------------------------------------- |
-| coin      | false    | string  | Coin, uppercase only                                                                                                 |
-| startTime | false    | integer | The start timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em> |
-| endTime   | false    | integer | The end timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>   |
-| limit     | false    | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>50</code>                            |
-| cursor    | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set      |
+| Parameter | Required | Type    | Comments                                                                                                                                         |
+| :-------- | :------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id        | false    | string  | Internal ID: Can be used to uniquely identify and filter the deposit. When combined with other parameters, this field takes the highest priority |
+| txID      | false    | string  | Transaction ID: Please note that data generated before Jan 1, 2024 cannot be queried using txID                                                  |
+| coin      | false    | string  | Coin, uppercase only                                                                                                                             |
+| startTime | false    | integer | The start timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>                             |
+| endTime   | false    | integer | The end timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>                               |
+| limit     | false    | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>50</code>                                                        |
+| cursor    | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                  |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
 | Parameter                                             | Type    | Comments                                                                                                                                      |
 | :---------------------------------------------------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | rows                                                  | array   | Object                                                                                                                                        |
+| &gt; id                                               | string  | Unique ID                                                                                                                                     |
 | &gt; coin                                             | string  | Coin                                                                                                                                          |
 | &gt; chain                                            | string  | Chain                                                                                                                                         |
 | &gt; amount                                           | string  | Amount                                                                                                                                        |
@@ -6023,7 +6035,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "rows": [            {                "coin": "USDT",                "chain": "ETH",                "amount": "10000",                "txID": "skip-notification-scene-test-amount-202212270944-533285-USDT",                "status": 3,                "toAddress": "test-amount-address",                "tag": "",                "depositFee": "",                "successAt": "1672134274000",                "confirmations": "10000",                "txIndex": "",                "blockHash": "",                "batchReleaseLimit": "-1",                "depositType": "0",                "fromAddress": ""            }        ],        "nextPageCursor": "eyJtaW5JRCI6MTA0NjA0MywibWF4SUQiOjEwNDYwNDN9"    },    "retExtInfo": {},    "time": 1672191992512}
+{    "retCode": 0,    "retMsg": "success",    "result": {        "rows": [            {                "id": "1319723",                "coin": "USDT",                "chain": "ETH",                "amount": "10000",                "txID": "skip-notification-scene-test-amount-202212270944-533285-USDT",                "status": 3,                "toAddress": "test-amount-address",                "tag": "",                "depositFee": "",                "successAt": "1672134274000",                "confirmations": "10000",                "txIndex": "",                "blockHash": "",                "batchReleaseLimit": "-1",                "depositType": "0",                "fromAddress": ""            }        ],        "nextPageCursor": "eyJtaW5JRCI6MTA0NjA0MywibWF4SUQiOjEwNDYwNDN9"    },    "retExtInfo": {},    "time": 1672191992512}
 ```
 
 # Get Sub Deposit Records (on-chain)
@@ -6041,20 +6053,23 @@ GET `/v5/asset/deposit/query-sub-member-record`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter   | Required              | Type    | Comments                                                                                                             |
-| :---------- | :-------------------- | :------ | -------------------------------------------------------------------------------------------------------------------- |
-| subMemberId | <strong>true</strong> | string  | Sub UID                                                                                                              |
-| coin        | false                 | string  | Coin, uppercase only                                                                                                 |
-| startTime   | false                 | integer | The start timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em> |
-| endTime     | false                 | integer | The end timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>   |
-| limit       | false                 | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>50</code>                            |
-| cursor      | false                 | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set      |
+| Parameter   | Required              | Type    | Comments                                                                                                                                         |
+| :---------- | :-------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id          | false                 | string  | Internal ID: Can be used to uniquely identify and filter the deposit. When combined with other parameters, this field takes the highest priority |
+| txID        | false                 | string  | Transaction ID: Please note that data generated before Jan 1, 2024 cannot be queried using txID                                                  |
+| subMemberId | <strong>true</strong> | string  | Sub UID                                                                                                                                          |
+| coin        | false                 | string  | Coin, uppercase only                                                                                                                             |
+| startTime   | false                 | integer | The start timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>                             |
+| endTime     | false                 | integer | The end timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>                               |
+| limit       | false                 | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>50</code>                                                        |
+| cursor      | false                 | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                  |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
 | Parameter                                             | Type    | Comments                                                                                                                                      |
 | :---------------------------------------------------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | rows                                                  | array   | Object                                                                                                                                        |
+| &gt; id                                               | string  | Unique ID                                                                                                                                     |
 | &gt; coin                                             | string  | Coin                                                                                                                                          |
 | &gt; chain                                            | string  | Chain                                                                                                                                         |
 | &gt; amount                                           | string  | Amount                                                                                                                                        |
@@ -9102,20 +9117,23 @@ GET `/v5/broker/asset/query-sub-member-deposit-record`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter   | Required | Type    | Comments                                                                                                             |
-| :---------- | :------- | :------ | -------------------------------------------------------------------------------------------------------------------- |
-| subMemberId | false    | string  | Sub UID                                                                                                              |
-| coin        | false    | string  | Coin, uppercase only                                                                                                 |
-| startTime   | false    | integer | The start timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em> |
-| endTime     | false    | integer | The end timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>   |
-| limit       | false    | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>50</code>                            |
-| cursor      | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set      |
+| Parameter   | Required | Type    | Comments                                                                                                                                         |
+| :---------- | :------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id          | false    | string  | Internal ID: Can be used to uniquely identify and filter the deposit. When combined with other parameters, this field takes the highest priority |
+| txID        | false    | string  | Transaction ID: Please note that data generated before Jan 1, 2024 cannot be queried using txID                                                  |
+| subMemberId | false    | string  | Sub UID                                                                                                                                          |
+| coin        | false    | string  | Coin, uppercase only                                                                                                                             |
+| startTime   | false    | integer | The start timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>                             |
+| endTime     | false    | integer | The end timestamp (ms) <em>Note: the query logic is actually effective based on <strong>second</strong> level</em>                               |
+| limit       | false    | integer | Limit for data size per page. [<code>1</code>, <code>50</code>]. Default: <code>50</code>                                                        |
+| cursor      | false    | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                  |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
 | Parameter                                             | Type    | Comments                                                                                                                                      |
 | :---------------------------------------------------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | rows                                                  | array   | Object                                                                                                                                        |
+| &gt; id                                               | string  | Unique ID                                                                                                                                     |
 | &gt; subMemberId                                      | string  | Sub account user ID                                                                                                                           |
 | &gt; coin                                             | string  | Coin                                                                                                                                          |
 | &gt; chain                                            | string  | Chain                                                                                                                                         |
@@ -9316,7 +9334,7 @@ In times of high demand for loans in the market for a specific cryptocurrency,
 the redemption of the principal may encounter delays and is expected to be
 processed within 48 hours. The redemption of on-chain products may take up to a
 few days to complete. Once the redemption request is initiated, it cannot be
-canceled.
+cancelled.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
