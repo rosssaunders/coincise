@@ -2,6 +2,13 @@
 
 ## Change Log
 
+2025-06-12
+
+- USDT-M Perp Futures: The order placement API response now includes an
+  ‘executedQty’ field.
+- USDT-M Perp Futures: Added ‘closePosition’ field to responses of both the
+  single order details query and open orders query.
+
 2025-05-14
 
 - Public: New investigation questionnaire added.
