@@ -4,33 +4,33 @@ improved
 
 # [\[Notice\] New Response Fields Added to Allowlisted Withdrawal Address API (7/7 estimated)](/changelog/allowlisted_withdrawal_address_update)
 
-about 13 hours ago
+4 days ago
 
 # [\[Important\] BingX vasp_uuid Update & Withdrawal Wallet Re-registration Required (June 5, 2025)](/changelog/vasp_uuid_change_bingx)
 
-6 days ago
+9 days ago
 
 added
 
 # [\[Notice\] Self-Match Prevention (SMP) Feature to Be Released on July 2](/changelog/smp)
 
-8 days ago
+11 days ago
 
 added
 
 # [\[Notice\] Post Only Order Condition to Be Supported on July 2](/changelog/post_only)
 
-8 days ago
+11 days ago
 
 # [\[Notice\] Update to WebSocket API Orderbook Unit Options on July 2](/changelog/notice-update-to-websocket-api-orderbook-unit-option)
 
-8 days ago
+11 days ago
 
 added
 
 # [\[Notice\] Addition of 'Candle Data' Minute Intervals to WebSocket](/changelog/websocket_candles_miniutes)
 
-29 days ago
+about 1 month ago
 
 added
 
