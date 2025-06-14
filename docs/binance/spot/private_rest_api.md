@@ -539,7 +539,7 @@ to learn more.
 
 ## Error codes for Binance
 
-**Last Updated: 2025-04-08**
+**Last Updated: 2025-06-11**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
@@ -642,6 +642,8 @@ but messages can vary. Here is the error JSON payload:
 | \-2015 | \-REJECTED_MBX_KEY​                      | \-Invalid API-key, IP, or permissions for action.                                                                                                                                                                                                                                                                                             |
 | \-2016 | \-NO_TRADING_WINDOW​                     | \-No trading window could be found for the symbol. Try ticker/24hrs instead.                                                                                                                                                                                                                                                                  |
 | \-2026 | \-ORDER_ARCHIVED​                        | \-Order was canceled or expired with no executed qty over 90 days ago and has been archived.                                                                                                                                                                                                                                                  |
+| \-2035 | \-SUBSCRIPTION_ACTIVE​                   | \-User Data Stream subscription already active.                                                                                                                                                                                                                                                                                               |
+| \-2036 | \-SUBSCRIPTION_INACTIVE​                 | \-User Data Stream subscription not active.                                                                                                                                                                                                                                                                                                   |
 | \-2039 | \-CLIENT_ORDER_ID_INVALID​               | \-Client order ID is not correct for this order ID.                                                                                                                                                                                                                                                                                           |
 | \-2021 | \-Order cancel-replace partially failed​ | \-This code is sent when either the cancellation of the order failed or the new order placement failed but not both.                                                                                                                                                                                                                          |
 | \-2022 | \-Order cancel-replace failed.​          | \-This code is sent when both the cancellation of the order failed and the new order placement failed.                                                                                                                                                                                                                                        |
@@ -1326,7 +1328,7 @@ Current exchange trading rules and symbol information
       "quoteOrderQtyMarketAllowed": true,
       "allowTrailingStop": false,
       "cancelReplaceAllowed": false,
-      "allowAmend": false,
+      "amendAllowed": false,
       "isSpotTradingAllowed": true,
       "isMarginTradingAllowed": true,
       "filters": [
