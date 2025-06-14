@@ -907,7 +907,7 @@ _This method takes no parameters_
 
 # Rate Limits
 
-- Updated 16 hours ago
+- Updated 14 hours ago
 
 ### Caution
 
@@ -1053,7 +1053,8 @@ sustained or high-frequency access.
 
 ### Important
 
-Production and [Testnet](#UUID-452cc7f8-1f88-823a-717c-28157a54a917 "Testnet")
+Production and
+[Testnet environment](/hc/en-us/articles/#UUID-fff4d97c-2873-59b1-b9d0-df2e24468be3 "Register at Testnet Deribit")
 operate **on separate, independently-tracked rate-limit pools**. **Limits are
 not shared** between environments—exceeding Testnet limits will not affect your
 Production credits, and vice-versa.
@@ -1188,25 +1189,51 @@ requests.
 
 # Connection Management
 
-- Updated 2 days ago
+- Updated 14 hours ago
+
+Users can connect to the Deribit platform using either a **connection-scoped**
+or **session-scoped** authentication token. Each approach has different
+properties, lifespans, and limitations. Understanding how these scopes work
+helps ensure reliable connectivity, optimal use of WebSocket features, and
+compliance with platform limits such as the number of simultaneous connections
+or sessions per API key.
+
+#### Limits
+
+- Max number of subaccounts: **20**
+- Max number of API keys per (sub)account: **8**
+- Max number of connections per IP: **32**
+- Max number of sessions per API key: **16**
 
 ## Connection[](#heading-1)
 
-A connection is a single, continuous link between a client and a server over a
-network. Users can authenticate with the `connection` scope as these connections
-are exempt from the session limit. It is also set and used automatically by the
-server when neither `connection` nor `session` scope is provided within the
-request.
+A **connection** is a single, continuous link between a client and a server over
+a network. Users can authenticate with the `connection` scope, and these
+authentication connections are **not counted against the limit**. When neither
+`connection` nor `session` scope is specified in the request, the server will
+default to using the `connection` scope.
 
 **Connection scope**
 
-- Access and refresh tokens are strictly tied to the specific connection in
-  which they were granted.
 - Tokens are valid only during the active connection. Once the connection is
   terminated, the tokens become invalid, requiring a new authentication process
   for a new connection.
-- **A maximum of 32 connections per IP address is permitted**. If a 33rd
-  connection attempt is made, it will not be successful.
+- Access and refresh tokens are strictly tied to the specific connection in
+  which they were granted.
+
+### Caution
+
+**A maximum of 32 simultaneous connections per IP** address is allowed. This
+includes all types of connections — both with connection and session scope. For
+example, you may have 16 `session`\-scoped and 16 `connection`\-scoped
+connections, or 1 session and 31 standard connections. Any 33rd connection
+attempt from the same IP will be rejected and HTTP 429 will be returned.
+
+### Note
+
+The Deribit **webpage uses 2 active connections per user session**. Keep this in
+mind when designing high-frequency or multi-tab integrations to avoid
+unintentionally exceeding the limit.
 
 ## Session[](#heading-2)
 
@@ -1227,16 +1254,57 @@ connection with a named session.
   every subsequent request.
 - Re-authenticating with a refresh token under session scope does not add new
   sessions but refreshes the existing one.
-- **A maximum of 16 sessions per key is allowed**. When session 17 is opened the
-  Deribit removes the one that was not refreshed in the longest time.
+- **A maximum of 16 sessions per API key is allowed**. When session 17 is opened
+  the Deribit removes the one that was not refreshed in the longest time.
 
-## Connection Lifetime[](#heading-3)
+## Best Practices for Efficient and Reliable Connection Management[](#heading-3)
+
+1.  **Prefer Subscriptions Over REST Polling** 
+
+    - Use WebSocket [**subscriptions**](https://docs.deribit.com/#subscriptions)
+      (e.g., subscribe) whenever possible instead of continuously polling data
+      via REST endpoints.
+    - Subscriptions are **more efficient**, reduce latency, and help stay within
+      [rate limits](/hc/en-us/articles/25944617523357#UUID-9325394c-bca6-d0a5-291f-b19978b3ca89 "Rate Limits").
+
+2.  **Do Not Use WebSocket Like REST** 
+
+    - Avoid patterns like:
+
+      Open session → Read once → Close → Repeat.
+
+      This is inefficient and may lead to **connection churn** and throttling.
+
+    - Instead, **keep sessions open** and use **real-time subscriptions** or
+      batched requests.
+
+3.  **Use Authenticated Requests Whenever Possible** 
+
+    - Even for public data, prefer **authenticated WebSocket connections**.
+    - Authenticated users benefit from **higher rate limits** and are **less
+      likely to be IP rate-limited** or disconnected.
+    - If any abuse or misuse is detected, we **proactively reach out** to
+      authenticated clients before taking restrictive measures.
+
+4.  **Avoid Overloading Your Connection** 
+
+    - Subscribing to **too many channels at once** can cause a
+      `connection_too_slow` error. This happens when the client **cannot read
+      all incoming events fast enough**, causing a **backlog** of pending
+      messages.
+    - To avoid disconnection:
+
+      - Only subscribe to necessary channels.
+      - Make sure your client reads and processes messages efficiently and
+        continuously.
+
+## HTTP Connection Lifetime[](#heading-4)
 
 Each established HTTP connection has an expiration timer of 15 minutes. Users
 wishing to maintain an HTTP connection beyond this period should utilize
 signature authorization for continued access without impacting session limits.
 
-## Cancel on disconnect[](#heading-4)
+## Cancel on disconnect[](#heading-5)
 
 The Cancel on Disconnect (COD) feature in the
 [API](https://docs.deribit.com/#private-enable_cancel_on_disconnect) supports
