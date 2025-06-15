@@ -28,13 +28,24 @@ class ConfigUtils {
    */
   static validateConfig(config) {
     // Validate sections property
+    if (!config.sections || !Array.isArray(config.sections)) {
+      throw new Error('Configuration must contain a "sections" array')
+    }
+
+    // Validate supportArticles if present
+    if (config.supportArticles && !Array.isArray(config.supportArticles)) {
+      throw new Error(
+        'Configuration "supportArticles" must be an array when provided'
+      )
+    }
+
+    // Require either sections or supportArticles to have content
     if (
-      !config.sections ||
-      !Array.isArray(config.sections) ||
-      config.sections.length === 0
+      config.sections.length === 0 &&
+      (!config.supportArticles || config.supportArticles.length === 0)
     ) {
       throw new Error(
-        'Configuration must contain a "sections" array with at least one section name'
+        "Configuration must contain either sections to extract or supportArticles to process"
       )
     }
 
@@ -46,13 +57,6 @@ class ConfigUtils {
     // Validate title property (optional)
     if (config.title && typeof config.title !== "string") {
       throw new Error('Configuration "title" must be a string when provided')
-    }
-
-    // Validate supportArticles if present
-    if (config.supportArticles && !Array.isArray(config.supportArticles)) {
-      throw new Error(
-        'Configuration "supportArticles" must be an array when provided'
-      )
     }
   }
 }

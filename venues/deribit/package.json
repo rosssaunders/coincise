@@ -5,11 +5,12 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "privatetradingapi": "node src/index.js config/private_trading_api.json",
-    "publicapi": "node src/index.js config/public_api.json",
-    "privateblockapi": "node src/index.js config/private_block_api.json",
-    "privateaccountapi": "node src/index.js config/private_account_api.json",
-    "all": "npm run publicapi && npm run privatetradingapi && npm run privateblockapi && npm run privateaccountapi"
+    "extract:private_trading_api": "node src/index.js config/private_trading_api.json",
+    "extract:public_api": "node src/index.js config/public_api.json",
+    "extract:private_block_api": "node src/index.js config/private_block_api.json",
+    "extract:private_account_api": "node src/index.js config/private_account_api.json",
+    "extract:connection": "node src/index.js config/connection.json",
+    "all": "npm run extract:public_api && npm run extract:private_trading_api && npm run extract:private_block_api && npm run extract:private_account_api && npm run extract:connection"
   },
   "dependencies": {
     "puppeteer": "^24.8.0",

@@ -9,15 +9,6 @@
     "Market Data",
     "RPC Error Codes"
   ],
-  "supportArticles": [
-    "https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits",
-    "https://support.deribit.com/hc/en-us/articles/25944603459613-Connection-Management",
-    "https://support.deribit.com/hc/en-us/articles/25944617449373-API-Usage-Policy",
-    "https://support.deribit.com/hc/en-us/articles/25944617582877-Server-Infrastructure",
-    "https://support.deribit.com/hc/en-us/articles/25944635815197-Asia-Gateway",
-    "https://support.deribit.com/hc/en-us/articles/25944588342941-Deribit-AWS-Endpoint-Service-instruction",
-    "https://support.deribit.com/hc/en-us/articles/25944617728285-Deribit-AWS-Multicast-Service-Instruction"
-  ],
   "output": "../../docs/deribit/public_api.md",
   "title": "Deribit Public API Documentation"
 }

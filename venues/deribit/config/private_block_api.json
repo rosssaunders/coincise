@@ -12,11 +12,6 @@
     "Wallet",
     "RPC Error Codes"
   ],
-  "supportArticles": [
-    "https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits",
-    "https://support.deribit.com/hc/en-us/articles/25944603459613-Connection-Management",
-    "https://support.deribit.com/hc/en-us/articles/25944617449373-API-Usage-Policy"
-  ],
   "output": "../../docs/deribit/private_block_combo_trading_api.md",
   "title": "Deribit Private Block and Combo Trading API Documentation"
 }
