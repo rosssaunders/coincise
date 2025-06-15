@@ -1377,7 +1377,7 @@ This is a private method; it can only be used after authentication.
 
 # Rate Limits
 
-- Updated 14 hours ago
+- Updated 1 day ago
 
 ### Caution
 
@@ -1659,7 +1659,7 @@ requests.
 
 # Connection Management
 
-- Updated 14 hours ago
+- Updated 1 day ago
 
 Users can connect to the Deribit platform using either a **connection-scoped**
 or **session-scoped** authentication token. Each approach has different
