@@ -2480,10 +2480,7 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most
-144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
-3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
-shared by all the altcoins contracts delivered by different date).
+Rate Limit: 20 times/2s
 
 Interface description: Get Contract Elements info
 

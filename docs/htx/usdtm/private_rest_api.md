@@ -3683,21 +3683,34 @@ Interface description: The interface only supports cross margin mode.
 
 #### Response Parameter
 
-| Parameter      | Data Type    | Required | Description                                                                  | Value Range              |
-| -------------- | ------------ | -------- | ---------------------------------------------------------------------------- | ------------------------ |
-| status         | string       | true     | Request Processing Result                                                    | "ok" , "error"           |
-| ts             | long         | true     | Time of Respond Generation, Unit: Millisecond                                |                          |
-| DATA_START     | object array | true     |                                                                              |                          |
-| sub_uid        | long         | true     | sub-account UID                                                              |                          |
-| LIST_START     | object array | true     |                                                                              |                          |
-| margin_mode    | string       | true     | margin mode                                                                  | cross: cross margin mode |
-| margin_account | string       | true     | margin account                                                               | "USDT"...                |
-| margin_asset   | string       | true     | margin asset                                                                 |                          |
-| margin_balance | decimal      | true     | account equity                                                               |                          |
-| risk_rate      | decimal      | true     | margin rate                                                                  |                          |
-| query_id       | long         | true     | Query id, which can be used as the from_id field for the next query request. |                          |
-| LIST_END       |              | false    |                                                                              |                          |
-| DATA_END       |              | false    |                                                                              |                          |
+| Parameter               | Data Type    | Required | Description                                                                  | Value Range                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------- | ------------ | -------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| status                  | string       | true     | Request Processing Result                                                    | "ok" , "error"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ts                      | long         | true     | Time of Respond Generation, Unit: Millisecond                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| DATA_START              | object array | true     |                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| sub_uid                 | long         | true     | sub-account UID                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| LIST_START              | object array | true     |                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| margin_mode             | string       | true     | margin mode                                                                  | cross: cross margin mode                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| margin_account          | string       | true     | margin account                                                               | "USDT"...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| margin_asset            | string       | true     | margin asset                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| margin_balance          | decimal      | true     | account equity                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| risk_rate               | decimal      | true     | margin rate                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| query_id                | long         | true     | Query id, which can be used as the from_id field for the next query request. |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| DATA_END                | object array | false    |                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| sub_uid                 | long         | true     | sub-account UID                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| query_id                | long         | true     | Query id, which can be used as the from_id field for the next query request. |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| LIST_END                |              | false    |                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| state                   | String       | true     | Account status                                                               | 1(NORMAL): The account is functioning normally for trading and transfers. 3 (LIQUIDATING): The account is under liquidation, and trading, transfers, and the receipt of funding fees are unavailable. 5(ADL): The account is under auto deleveraging, and trading, transfers, and the receipt of funding fees are unavailable. 6(OPEN_LIMIT): Orders are being canceled for risk management. Only ADL orders are allowed for futures trading; transfers in are permitted, but transfers out are not allowed. |
+| equity                  | String       | true     | Account Equity                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| initial_margin          | String       | true     | Initial margin                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| maintenance_margin      | String       | true     | Maintenance margin                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| maintenance_margin_rate | String       | true     | Maintenance margin ratio                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| profit_unreal           | String       | true     | Unrealized PnL                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| available_margin        | String       | true     | Available collateral                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| created_time            | String       | true     | Account creation time                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| updated_time            | String       | true     | Account update time                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| details                 | list         | true     |                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| DATA_START              | object array | true     |                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 Notes:
 
@@ -3721,19 +3734,126 @@ gained contract trading permission).
   "status": "ok",
   "data": [
     {
-      "sub_uid": 123456789,
+      "query_id": 20699714,
+      "sub_uid": 414513021,
+      "list": [],
+      "asset_multi_sub": {
+        "state": "normal",
+        "equity": "0",
+        "initial_margin": "0",
+        "maintenance_margin": "0",
+        "maintenance_margin_rate": "0",
+        "profit_unreal": "0",
+        "available_margin": "0",
+        "created_time": 1743393157729,
+        "updated_time": 1743393157729,
+        "details": []
+      }
+    },
+    {
+      "query_id": 20785109,
+      "sub_uid": 415353372,
       "list": [
         {
-          "margin_balance": 163.56170812955912,
-          "risk_rate": 78.89672939225149,
+          "margin_balance": 0,
+          "risk_rate": null,
           "margin_asset": "USDT",
           "margin_mode": "cross",
-          "margin_account": "USDT"
+          "margin_account": "USDT",
+          "trade_partition": "USDT"
         }
-      ]
+      ],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 20829528,
+      "sub_uid": 415779795,
+      "list": [],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 27711735,
+      "sub_uid": 486424213,
+      "list": [
+        {
+          "margin_balance": 5e-9,
+          "risk_rate": null,
+          "margin_asset": "USDT",
+          "margin_mode": "cross",
+          "margin_account": "USDT",
+          "trade_partition": "USDT"
+        }
+      ],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 30091410,
+      "sub_uid": 511356054,
+      "list": [
+        {
+          "margin_balance": 3.5e-15,
+          "risk_rate": null,
+          "margin_asset": "USDT",
+          "margin_mode": "cross",
+          "margin_account": "USDT",
+          "trade_partition": "USDT"
+        }
+      ],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 32131301,
+      "sub_uid": 531926803,
+      "list": [
+        {
+          "margin_balance": 0,
+          "risk_rate": null,
+          "margin_asset": "USDT",
+          "margin_mode": "cross",
+          "margin_account": "USDT",
+          "trade_partition": "USDT"
+        }
+      ],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 32131360,
+      "sub_uid": 531927396,
+      "list": [
+        {
+          "margin_balance": 0,
+          "risk_rate": null,
+          "margin_asset": "USDT",
+          "margin_mode": "cross",
+          "margin_account": "USDT",
+          "trade_partition": "USDT"
+        }
+      ],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 32551209,
+      "sub_uid": 536147469,
+      "list": [],
+      "asset_multi_sub": null
+    },
+    {
+      "query_id": 32674241,
+      "sub_uid": 537382988,
+      "list": [
+        {
+          "margin_balance": 0,
+          "risk_rate": null,
+          "margin_asset": "USDT",
+          "margin_mode": "cross",
+          "margin_account": "USDT",
+          "trade_partition": "USDT"
+        }
+      ],
+      "asset_multi_sub": null
     }
   ],
-  "ts": 1606962745633
+  "ts": 1743393401798
 }
 ```
 
@@ -3883,25 +4003,39 @@ the first the position
 
 #### Response Parameter
 
-| Parameter               | Data Type    | Required | Description                                   | Value Range    |
-| ----------------------- | ------------ | -------- | --------------------------------------------- | -------------- |
-| status                  | string       | true     | result of server handled request              | "ok" , "error" |
-| ts                      | long         | true     | Time of Respond Generation，Unit：Millisecond |                |
-| DATA_START              | object       | true     |                                               |                |
-| SUB_LIST_START          | object array | true     |                                               |                |
-| sub_uid                 | long         | true     | sub uid                                       |                |
-| ACCOUNT_INFO_LIST_START | object array | true     |                                               |                |
-| margin_mode             | string       | true     | margin mode                                   | cross；        |
-| margin_account          | string       | true     | margin account                                | such as:USDT”  |
-| margin_asset            | string       | true     | margin asset                                  |                |
-| margin_balance          | decimal      | true     | margin balance                                |                |
-| risk_rate               | decimal      | true     | risk rate                                     |                |
-| ACCOUNT_INFO_LIST_END   |              | false    |                                               |                |
-| SUB_LIST_END            |              | false    |                                               |                |
-| current_page            | int          | true     | current page                                  |                |
-| total_page              | int          | true     | total page                                    |                |
-| total_size              | int          | true     | total size                                    |                |
-| DATA_END                |              | false    |                                               |                |
+| Parameter               | Data Type    | Required | Description                                   | Value Range                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------- | ------------ | -------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| status                  | string       | true     | result of server handled request              | "ok" , "error"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ts                      | long         | true     | Time of Respond Generation，Unit：Millisecond |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| DATA_START              | object       | true     |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| SUB_LIST_START          | object array | true     |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| sub_uid                 | long         | true     | sub uid                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ACCOUNT_INFO_LIST_START | object array | true     |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| margin_mode             | string       | true     | margin mode                                   | cross；                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| margin_account          | string       | true     | margin account                                | such as:USDT”                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| margin_asset            | string       | true     | margin asset                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| margin_balance          | decimal      | true     | margin balance                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| risk_rate               | decimal      | true     | risk rate                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ACCOUNT_INFO_LIST_END   |              | false    |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| SUB_LIST_END            |              | false    | sub-account UID                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| UNITE_SUB_LIST_START    | object array | true     | unite sub list                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| sub_uid                 | long         | true     |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ASSET_MULTI_SUB_START   | object array | true     | Account status                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| state                   | String       | true     | Account Equity                                | 1(NORMAL): The account is functioning normally for trading and transfers. 3 (LIQUIDATING): The account is under liquidation, and trading, transfers, and the receipt of funding fees are unavailable. 5(ADL): The account is under auto deleveraging, and trading, transfers, and the receipt of funding fees are unavailable. 6(OPEN_LIMIT): Orders are being canceled for risk management. Only ADL orders are allowed for futures trading; transfers in are permitted, but transfers out are not allowed. |
+| equity                  | String       | true     | Account Equity                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| initial_margin          | String       | true     | Initial margin                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| maintenance_margin      | String       | true     | Maintenance margin                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| maintenance_margin_rate | String       | true     | Maintenance margin ratio                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| profit_unreal           | String       | true     | Unrealized PnL                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| available_margin        | String       | true     | Available collateral                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| created_time            | String       | true     | Account creation time                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| updated_time            | String       | true     | Account update time                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| details                 | list         | true     |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| UNITE_SUB_LIST_START    | object array | true     |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| current_page            | int          | true     | current page                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| total_page              | int          | true     | total page                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| total_size              | int          | true     | total size                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| DATA_END                |              | false    |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 #### Request example
 
@@ -3923,23 +4057,114 @@ the first the position
   "data": {
     "total_page": 1,
     "current_page": 1,
-    "total_size": 1,
+    "total_size": 9,
     "sub_list": [
       {
-        "sub_uid": 12345678,
+        "sub_uid": 415353372,
         "account_info_list": [
           {
-            "margin_balance": 2,
+            "margin_balance": 0,
             "risk_rate": null,
             "margin_asset": "USDT",
             "margin_mode": "cross",
-            "margin_account": "USDT"
+            "margin_account": "USDT",
+            "trade_partition": "USDT"
+          }
+        ]
+      },
+      {
+        "sub_uid": 415779795,
+        "account_info_list": []
+      },
+      {
+        "sub_uid": 486424213,
+        "account_info_list": [
+          {
+            "margin_balance": 5e-9,
+            "risk_rate": null,
+            "margin_asset": "USDT",
+            "margin_mode": "cross",
+            "margin_account": "USDT",
+            "trade_partition": "USDT"
+          }
+        ]
+      },
+      {
+        "sub_uid": 511356054,
+        "account_info_list": [
+          {
+            "margin_balance": 3.5e-15,
+            "risk_rate": null,
+            "margin_asset": "USDT",
+            "margin_mode": "cross",
+            "margin_account": "USDT",
+            "trade_partition": "USDT"
+          }
+        ]
+      },
+      {
+        "sub_uid": 531926803,
+        "account_info_list": [
+          {
+            "margin_balance": 0,
+            "risk_rate": null,
+            "margin_asset": "USDT",
+            "margin_mode": "cross",
+            "margin_account": "USDT",
+            "trade_partition": "USDT"
+          }
+        ]
+      },
+      {
+        "sub_uid": 531927396,
+        "account_info_list": [
+          {
+            "margin_balance": 0,
+            "risk_rate": null,
+            "margin_asset": "USDT",
+            "margin_mode": "cross",
+            "margin_account": "USDT",
+            "trade_partition": "USDT"
+          }
+        ]
+      },
+      {
+        "sub_uid": 536147469,
+        "account_info_list": []
+      },
+      {
+        "sub_uid": 537382988,
+        "account_info_list": [
+          {
+            "margin_balance": 0,
+            "risk_rate": null,
+            "margin_asset": "USDT",
+            "margin_mode": "cross",
+            "margin_account": "USDT",
+            "trade_partition": "USDT"
           }
         ]
       }
+    ],
+    "unite_sub_list": [
+      {
+        "sub_uid": 414513021,
+        "asset_multi_sub": {
+          "state": "normal",
+          "equity": "0",
+          "initial_margin": "0",
+          "maintenance_margin": "0",
+          "maintenance_margin_rate": "0",
+          "profit_unreal": "0",
+          "available_margin": "0",
+          "created_time": 1743393157729,
+          "updated_time": 1743393157729,
+          "details": []
+        }
+      }
     ]
   },
-  "ts": 1612504845679
+  "ts": 1743393714820
 }
 ```
 
@@ -13596,7 +13821,7 @@ isolated- margin account.
 | DATA_START            | object array | true     | USDT-M unified account                                                                  |                                                                                |
 | margin_balance        | decimal      | true     | margin account                                                                          |                                                                                |
 | margin_static         | decimal      | true     | Static equity,excluding profit and loss                                                 |                                                                                |
-| cross_profit_unreal   | decimal      | true     | cross unrealized profit and loss of the currency                                        |                                                                                |
+| cross_profit_unreal   | decimal      | true     | account unrealized profit and loss of the currency                                      |                                                                                |
 | cross_margin_static   | decimal      | true     | Cross-margin static equity,excluding isolated position assets                           |                                                                                |
 | margin_asset          | string       | true     | Margin Currency (Pricing Currency)                                                      | USDT                                                                           |
 | margin_frozen         | decimal      | true     | Freeze Margin (Frozen Quantity of Cross Margin & Isolated Margin)                       |                                                                                |
