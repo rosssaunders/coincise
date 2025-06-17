@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### \[Jun 16, 2025\] The ADL ranking interface has added the position direction.[​](#jun-16-2025-the-adl-ranking-interface-has-added-the-position-direction "Direct link to jun-16-2025-the-adl-ranking-interface-has-added-the-position-direction")
+
+Interface：/api/v2/mix/position/adlRank  
+Changes：
+
+- The ADL ranking interface has added the position direction `holdSide` field。
+
 ### \[June 09, 2025\] Get Contract Information Adds Maximum Order Quantity Fields[​](#june-09-2025-get-contract-information-adds-maximum-order-quantity-fields "Direct link to june-09-2025-get-contract-information-adds-maximum-order-quantity-fields")
 
 Interface：/api/v2/mix/market/contracts  

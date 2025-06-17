@@ -1054,6 +1054,7 @@ Response Example
 | &gt; maintainTime           | String             | Maintenance time (there will be a value when the status is under maintenance/upcoming maintenance)                                                                                                                                                                                                         |
 | &gt; maxMarketOrderQty      | String             | Maximum order quantity for a single market order<br>This refers to the maximum allowed quantity when placing an order using the base coin                                                                                                                                                                  |
 | &gt; maxOrderQty            | String             | Maximum order quantity for a single limit order<br>This refers to the maximum allowed quantity when placing an order using the base coin                                                                                                                                                                   |
+| &gt; openTime               | String             | This field has been deprecated                                                                                                                                                                                                                                                                             |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts)
