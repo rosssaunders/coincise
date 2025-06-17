@@ -4,7 +4,7 @@
 
 # Rate Limits
 
-- Updated 1 day ago
+- Updated 3 days ago
 
 ### Caution
 
@@ -286,7 +286,7 @@ requests.
 
 # Connection Management
 
-- Updated 1 day ago
+- Updated 3 days ago
 
 Users can connect to the Deribit platform using either a **connection-scoped**
 or **session-scoped** authentication token. Each approach has different
@@ -441,7 +441,7 @@ when logging out, they can override this setting with `Tag 9003.`
 
 # API Usage Policy
 
-- Updated 2 months ago
+- Updated 3 months ago
 
 Deribit is committed to providing a fast, reliable, and efficient trading
 platform for all users. To maintain the integrity and performance of our system,
@@ -565,7 +565,7 @@ reach out to our support team.
 
 # Server Infrastructure
 
-- Updated 2 months ago
+- Updated 3 months ago
 
 ## Server Infrastructure[](#heading-1)
 
@@ -681,7 +681,7 @@ LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
 
 # Asia Gateway
 
-- Updated 2 months ago
+- Updated 3 months ago
 
 To offer faster access to the Deribit platform for clients located in Asia, we
 offer a gateway connecting to Deribit from Hong Kong.
@@ -700,7 +700,7 @@ Please use [asia.deribit.com](http://asia.deribit.com) to access the gateway.
 
 # Deribit AWS Endpoint Service instruction
 
-- Updated 2 months ago
+- Updated 3 months ago
 
 In order to offer its customers residing in AWS a direct connection to its
 backend systems, Deribit has created an AWS Endpoint Service for customers to
@@ -885,7 +885,7 @@ for you.
 
 # Deribit AWS Multicast Service Instruction
 
-- Updated 2 months ago
+- Updated 3 months ago
 
 ## Introduction[](#heading-1)
 
