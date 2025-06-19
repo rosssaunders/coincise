@@ -5989,26 +5989,28 @@ GET `/v5/asset/deposit/query-record`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                             | Type    | Comments                                                                                                                                      |
-| :---------------------------------------------------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| rows                                                  | array   | Object                                                                                                                                        |
-| &gt; id                                               | string  | Unique ID                                                                                                                                     |
-| &gt; coin                                             | string  | Coin                                                                                                                                          |
-| &gt; chain                                            | string  | Chain                                                                                                                                         |
-| &gt; amount                                           | string  | Amount                                                                                                                                        |
-| &gt; txID                                             | string  | Transaction ID                                                                                                                                |
-| &gt; <a href="/docs/v5/enum#depositstatus">status</a> | integer | Deposit status                                                                                                                                |
-| &gt; toAddress                                        | string  | Deposit target address                                                                                                                        |
-| &gt; tag                                              | string  | Tag of deposit target address                                                                                                                 |
-| &gt; depositFee                                       | string  | Deposit fee                                                                                                                                   |
-| &gt; successAt                                        | string  | Last updated time                                                                                                                             |
-| &gt; confirmations                                    | string  | Number of confirmation blocks                                                                                                                 |
-| &gt; txIndex                                          | string  | Transaction sequence number                                                                                                                   |
-| &gt; blockHash                                        | string  | Hash number on the chain                                                                                                                      |
-| &gt; batchReleaseLimit                                | string  | The deposit limit for this coin in this chain. <code>"-1"</code> means no limit                                                               |
-| &gt; depositType                                      | string  | The deposit type. <code>0</code>: normal deposit, <code>10</code>: the deposit reaches daily deposit limit, <code>20</code>: abnormal deposit |
-| &gt; fromAddress                                      | string  | From address of deposit, only shown when the deposit comes from on-chain and from address is unique, otherwise gives <code>""</code>          |
-| nextPageCursor                                        | string  | Refer to the <code>cursor</code> request parameter                                                                                            |
+| Parameter                                             | Type    | Comments                                                                                                                                                     |
+| :---------------------------------------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| rows                                                  | array   | Object                                                                                                                                                       |
+| &gt; id                                               | string  | Unique ID                                                                                                                                                    |
+| &gt; coin                                             | string  | Coin                                                                                                                                                         |
+| &gt; chain                                            | string  | Chain                                                                                                                                                        |
+| &gt; amount                                           | string  | Amount                                                                                                                                                       |
+| &gt; txID                                             | string  | Transaction ID                                                                                                                                               |
+| &gt; <a href="/docs/v5/enum#depositstatus">status</a> | integer | Deposit status                                                                                                                                               |
+| &gt; toAddress                                        | string  | Deposit target address                                                                                                                                       |
+| &gt; tag                                              | string  | Tag of deposit target address                                                                                                                                |
+| &gt; depositFee                                       | string  | Deposit fee                                                                                                                                                  |
+| &gt; successAt                                        | string  | Last updated time                                                                                                                                            |
+| &gt; confirmations                                    | string  | Number of confirmation blocks                                                                                                                                |
+| &gt; txIndex                                          | string  | Transaction sequence number                                                                                                                                  |
+| &gt; blockHash                                        | string  | Hash number on the chain                                                                                                                                     |
+| &gt; batchReleaseLimit                                | string  | The deposit limit for this coin in this chain. <code>"-1"</code> means no limit                                                                              |
+| &gt; depositType                                      | string  | The deposit type. <code>0</code>: normal deposit, <code>10</code>: the deposit reaches daily deposit limit, <code>20</code>: abnormal deposit                |
+| &gt; fromAddress                                      | string  | From address of deposit, only shown when the deposit comes from on-chain and from address is unique, otherwise gives <code>""</code>                         |
+| &gt; taxStatus                                        | string  | This field is used for tax purposes by Bybit EU (Austria) users                                                                                              |
+| &gt; taxStatus                                        | string  | This field is used for tax purposes by Bybit EU (Austria) users<li>0: No reporting required</li><li>1: Reporting pending</li><li>2: Reporting completed</li> |
+| nextPageCursor                                        | string  | Refer to the <code>cursor</code> request parameter                                                                                                           |
 
 [RUN >>](/docs/api-explorer/v5/asset/deposit-record)
 
@@ -6066,26 +6068,28 @@ GET `/v5/asset/deposit/query-sub-member-record`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                             | Type    | Comments                                                                                                                                      |
-| :---------------------------------------------------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| rows                                                  | array   | Object                                                                                                                                        |
-| &gt; id                                               | string  | Unique ID                                                                                                                                     |
-| &gt; coin                                             | string  | Coin                                                                                                                                          |
-| &gt; chain                                            | string  | Chain                                                                                                                                         |
-| &gt; amount                                           | string  | Amount                                                                                                                                        |
-| &gt; txID                                             | string  | Transaction ID                                                                                                                                |
-| &gt; <a href="/docs/v5/enum#depositstatus">status</a> | integer | Deposit status                                                                                                                                |
-| &gt; toAddress                                        | string  | Deposit target address                                                                                                                        |
-| &gt; tag                                              | string  | Tag of deposit target address                                                                                                                 |
-| &gt; depositFee                                       | string  | Deposit fee                                                                                                                                   |
-| &gt; successAt                                        | string  | Last updated time                                                                                                                             |
-| &gt; confirmations                                    | string  | Number of confirmation blocks                                                                                                                 |
-| &gt; txIndex                                          | string  | Transaction sequence number                                                                                                                   |
-| &gt; blockHash                                        | string  | Hash number on the chain                                                                                                                      |
-| &gt; batchReleaseLimit                                | string  | The deposit limit for this coin in this chain. <code>"-1"</code> means no limit                                                               |
-| &gt; depositType                                      | string  | The deposit type. <code>0</code>: normal deposit, <code>10</code>: the deposit reaches daily deposit limit, <code>20</code>: abnormal deposit |
-| &gt; fromAddress                                      | string  | From address of deposit, only shown when the deposit comes from on-chain and from address is unique, otherwise gives <code>""</code>          |
-| nextPageCursor                                        | string  | Refer to the <code>cursor</code> request parameter                                                                                            |
+| Parameter                                             | Type    | Comments                                                                                                                                                     |
+| :---------------------------------------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| rows                                                  | array   | Object                                                                                                                                                       |
+| &gt; id                                               | string  | Unique ID                                                                                                                                                    |
+| &gt; coin                                             | string  | Coin                                                                                                                                                         |
+| &gt; chain                                            | string  | Chain                                                                                                                                                        |
+| &gt; amount                                           | string  | Amount                                                                                                                                                       |
+| &gt; txID                                             | string  | Transaction ID                                                                                                                                               |
+| &gt; <a href="/docs/v5/enum#depositstatus">status</a> | integer | Deposit status                                                                                                                                               |
+| &gt; toAddress                                        | string  | Deposit target address                                                                                                                                       |
+| &gt; tag                                              | string  | Tag of deposit target address                                                                                                                                |
+| &gt; depositFee                                       | string  | Deposit fee                                                                                                                                                  |
+| &gt; successAt                                        | string  | Last updated time                                                                                                                                            |
+| &gt; confirmations                                    | string  | Number of confirmation blocks                                                                                                                                |
+| &gt; txIndex                                          | string  | Transaction sequence number                                                                                                                                  |
+| &gt; blockHash                                        | string  | Hash number on the chain                                                                                                                                     |
+| &gt; batchReleaseLimit                                | string  | The deposit limit for this coin in this chain. <code>"-1"</code> means no limit                                                                              |
+| &gt; depositType                                      | string  | The deposit type. <code>0</code>: normal deposit, <code>10</code>: the deposit reaches daily deposit limit, <code>20</code>: abnormal deposit                |
+| &gt; fromAddress                                      | string  | From address of deposit, only shown when the deposit comes from on-chain and from address is unique, otherwise gives <code>""</code>                         |
+| &gt; taxStatus                                        | string  | This field is used for tax purposes by Bybit EU (Austria) users<li>0: No reporting required</li><li>1: Reporting pending</li><li>2: Reporting completed</li> |
+| &gt; taxDepositRecordsId                              | string  | This field is used for tax purposes by Bybit EU (Austria) users                                                                                              |
+| nextPageCursor                                        | string  | Refer to the <code>cursor</code> request parameter                                                                                                           |
 
 [RUN >>](/docs/api-explorer/v5/asset/sub-deposit-record)
 
@@ -6142,18 +6146,20 @@ GET `/v5/asset/deposit/query-internal-record`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter        | Type    | Comments                                                                  |
-| :--------------- | :------ | ------------------------------------------------------------------------- |
-| rows             | array   | Object                                                                    |
-| &gt; id          | string  | ID                                                                        |
-| &gt; type        | integer | <code>1</code>: Internal deposit                                          |
-| &gt; coin        | string  | Deposit coin                                                              |
-| &gt; amount      | string  | Deposit amount                                                            |
-| &gt; status      | integer | <ul><li>1=Processing</li><li>2=Success</li><li>3=deposit failed</li></ul> |
-| &gt; address     | string  | Email address or phone number                                             |
-| &gt; createdTime | string  | Deposit created timestamp                                                 |
-| &gt; txID        | string  | Internal transfer transaction ID                                          |
-| nextPageCursor   | string  | cursor information: used for pagination. Default value: <code>""</code>   |
+| Parameter        | Type    | Comments                                                                                                                                                     |
+| :--------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| rows             | array   | Object                                                                                                                                                       |
+| &gt; id          | string  | ID                                                                                                                                                           |
+| &gt; type        | integer | <code>1</code>: Internal deposit                                                                                                                             |
+| &gt; coin        | string  | Deposit coin                                                                                                                                                 |
+| &gt; amount      | string  | Deposit amount                                                                                                                                               |
+| &gt; status      | integer | <ul><li>1=Processing</li><li>2=Success</li><li>3=deposit failed</li></ul>                                                                                    |
+| &gt; address     | string  | Email address or phone number                                                                                                                                |
+| &gt; createdTime | string  | Deposit created timestamp                                                                                                                                    |
+| &gt; txID        | string  | Internal transfer transaction ID                                                                                                                             |
+| &gt; taxStatus   | string  | This field is used for tax purposes by Bybit EU (Austria) users                                                                                              |
+| &gt; taxStatus   | string  | This field is used for tax purposes by Bybit EU (Austria) users<li>0: No reporting required</li><li>1: Reporting pending</li><li>2: Reporting completed</li> |
+| nextPageCursor   | string  | cursor information: used for pagination. Default value: <code>""</code>                                                                                      |
 
 [RUN >>](/docs/api-explorer/v5/asset/internal-deposit-record)
 
@@ -9130,27 +9136,29 @@ GET `/v5/broker/asset/query-sub-member-deposit-record`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                             | Type    | Comments                                                                                                                                      |
-| :---------------------------------------------------- | :------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| rows                                                  | array   | Object                                                                                                                                        |
-| &gt; id                                               | string  | Unique ID                                                                                                                                     |
-| &gt; subMemberId                                      | string  | Sub account user ID                                                                                                                           |
-| &gt; coin                                             | string  | Coin                                                                                                                                          |
-| &gt; chain                                            | string  | Chain                                                                                                                                         |
-| &gt; amount                                           | string  | Amount                                                                                                                                        |
-| &gt; txID                                             | string  | Transaction ID                                                                                                                                |
-| &gt; <a href="/docs/v5/enum#depositstatus">status</a> | integer | Deposit status                                                                                                                                |
-| &gt; toAddress                                        | string  | Deposit target address                                                                                                                        |
-| &gt; tag                                              | string  | Tag of deposit target address                                                                                                                 |
-| &gt; depositFee                                       | string  | Deposit fee                                                                                                                                   |
-| &gt; successAt                                        | string  | Last updated time                                                                                                                             |
-| &gt; confirmations                                    | string  | Number of confirmation blocks                                                                                                                 |
-| &gt; txIndex                                          | string  | Transaction sequence number                                                                                                                   |
-| &gt; blockHash                                        | string  | Hash number on the chain                                                                                                                      |
-| &gt; batchReleaseLimit                                | string  | The deposit limit for this coin in this chain. <code>"-1"</code> means no limit                                                               |
-| &gt; depositType                                      | string  | The deposit type. <code>0</code>: normal deposit, <code>10</code>: the deposit reaches daily deposit limit, <code>20</code>: abnormal deposit |
-| &gt; fromAddress                                      | string  | From address of deposit, only shown when the deposit comes from on-chain and from address is unique, otherwise gives <code>""</code>          |
-| nextPageCursor                                        | string  | Refer to the <code>cursor</code> request parameter                                                                                            |
+| Parameter                                             | Type    | Comments                                                                                                                                                     |
+| :---------------------------------------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| rows                                                  | array   | Object                                                                                                                                                       |
+| &gt; id                                               | string  | Unique ID                                                                                                                                                    |
+| &gt; subMemberId                                      | string  | Sub account user ID                                                                                                                                          |
+| &gt; coin                                             | string  | Coin                                                                                                                                                         |
+| &gt; chain                                            | string  | Chain                                                                                                                                                        |
+| &gt; amount                                           | string  | Amount                                                                                                                                                       |
+| &gt; txID                                             | string  | Transaction ID                                                                                                                                               |
+| &gt; <a href="/docs/v5/enum#depositstatus">status</a> | integer | Deposit status                                                                                                                                               |
+| &gt; toAddress                                        | string  | Deposit target address                                                                                                                                       |
+| &gt; tag                                              | string  | Tag of deposit target address                                                                                                                                |
+| &gt; depositFee                                       | string  | Deposit fee                                                                                                                                                  |
+| &gt; successAt                                        | string  | Last updated time                                                                                                                                            |
+| &gt; confirmations                                    | string  | Number of confirmation blocks                                                                                                                                |
+| &gt; txIndex                                          | string  | Transaction sequence number                                                                                                                                  |
+| &gt; blockHash                                        | string  | Hash number on the chain                                                                                                                                     |
+| &gt; batchReleaseLimit                                | string  | The deposit limit for this coin in this chain. <code>"-1"</code> means no limit                                                                              |
+| &gt; depositType                                      | string  | The deposit type. <code>0</code>: normal deposit, <code>10</code>: the deposit reaches daily deposit limit, <code>20</code>: abnormal deposit                |
+| &gt; fromAddress                                      | string  | From address of deposit, only shown when the deposit comes from on-chain and from address is unique, otherwise gives <code>""</code>                         |
+| &gt; taxStatus                                        | string  | This field is used for tax purposes by Bybit EU (Austria) users<li>0: No reporting required</li><li>1: Reporting pending</li><li>2: Reporting completed</li> |
+| &gt; taxDepositRecordsId                              | string  | This field is used for tax purposes by Bybit EU (Austria) users                                                                                              |
+| nextPageCursor                                        | string  | Refer to the <code>cursor</code> request parameter                                                                                                           |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
