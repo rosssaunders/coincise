@@ -224,10 +224,10 @@ header.
   - A: Yes.The current fixed regular release date for backend is **every
     Tuesday, Wednesday, and Thursday from 14:00 PM to 17:00 PM (UTC +8)**(Except
     for emergency upgrade). During the regular release time window, the RestAPI
-    may return 45001, 40725, or 40808 error responses. Users can retry after
-    receiving these error responses. WebSocket connections may be disconnected
-    during the release period. WebSocket users are advised to implement a
-    reconnection mechanism in their code.
+    may return 45001, 40725, 40808 or 40015 error responses. Users can retry
+    after receiving these error responses. WebSocket connections may be
+    disconnected during the release period. WebSocket users are advised to
+    implement a reconnection mechanism in their code.
 
 > **Source:** [original URL](https://www.bitget.com/api-doc/common/faq)
 
