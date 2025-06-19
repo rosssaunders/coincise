@@ -287,7 +287,7 @@ Response Example
 | precision      | String | Current gear, e.g. "scale1"                                                         |
 | scale          | String | Actual precision value, e.g. "0.1"                                                  |
 | isMaxPrecision | String | Is max precision<br>YES:yes<br>NO:no                                                |
-| ts             | String | time                                                                                |
+| ts             | String | Matching engine timestamp(ms), e.g. 1597026383085                                   |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/market/Merge-Orderbook)
@@ -332,7 +332,7 @@ Response Example
 | :-------- | :----- | :---------------------------------------------------------------------------------- |
 | asks      | Array  | Ask depth<br>e.g. ["38084.5","0.5"] ，"38084.5" is price，"0.5" is base coin volume |
 | bids      | Array  | Bid depth                                                                           |
-| ts        | String | time                                                                                |
+| ts        | String | Matching engine timestamp(ms), e.g. 1597026383085                                   |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/market/Get-Orderbook)

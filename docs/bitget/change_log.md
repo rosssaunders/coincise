@@ -2,6 +2,15 @@
 
 ## Changelog
 
+### \[Jun 17, 2025\]Spot merged trading depth, spot trading depth, futures merged depth interfaces: ts field adjustment[​](#jun-17-2025spot-merged-trading-depth-spot-trading-depth-futures-merged-depth-interfaces-ts-field-adjustment "Direct link to jun-17-2025spot-merged-trading-depth-spot-trading-depth-futures-merged-depth-interfaces-ts-field-adjustment")
+
+Interface：/api/v2/mix/market/merge-depth,/api/v2/spot/market/orderbook,/api/v2/spot/market/merge-depth
+
+Changes：
+
+- Spot merged trading depth, spot trading depth, and futures merged depth
+  interfaces: ts field adjusted to matching engine timestamp
+
 ### \[Jun 16, 2025\] The ADL ranking interface has added the position direction.[​](#jun-16-2025-the-adl-ranking-interface-has-added-the-position-direction "Direct link to jun-16-2025-the-adl-ranking-interface-has-added-the-position-direction")
 
 Interface：/api/v2/mix/position/adlRank  
