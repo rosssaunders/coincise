@@ -4,7 +4,7 @@
 
 # Rate Limits
 
-- Updated 3 days ago
+- Updated 5 days ago
 
 ### Caution
 
@@ -286,7 +286,7 @@ requests.
 
 # Connection Management
 
-- Updated 3 days ago
+- Updated 5 days ago
 
 Users can connect to the Deribit platform using either a **connection-scoped**
 or **session-scoped** authentication token. Each approach has different
