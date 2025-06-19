@@ -327,6 +327,7 @@ To send an authenticated request, you must follow these steps:
 7. [Fetch Trading Account Ids](#overview--fetch-trading-account-ids)
 8. [Send The HTTP Authenticated Request](#overview--send-the-http-authenticated-request)
 9. [How To Ensure The Order Of _Create Order_ or _Cancel Order_ Requests](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests)
+10. [How do EMS/Brokers Flag Their Executions Sent To Bullish](#overview--how-do-emsbrokers-flag-their-executions-sent-to-bullish)
 
 ## Generate An API Key
 
@@ -1195,9 +1196,7 @@ for a sample Python script.
 
 - `/trading-api/v1/market-data/trades`
 
-This is an enhanced API for
-[Anonymous Trades WebSocket](#overview--anonymous-trades-websocket-unauthenticated)
-that allows simultaneous trade subscriptions to multiple markets. Additionally,
+This allows simultaneous trade subscriptions to multiple markets. Additionally,
 instead of sending trades one by one, trades are sent in batches.
 
 Upon subscribing to a market, the client will first receive a snapshot of the
@@ -1931,7 +1930,7 @@ Establishing a websocket connection
 | quoteFee              | String | quote fee, see [asset value](#overview--price-and-quantity-precision) format                                                                  |
 | status                | String | order status                                                                                                                                  |
 | statusReason          | String | status reason, describes why the order is in a specific state                                                                                 |
-| statusReasonCode      | String | status reason code, see [details](#overview--order-statusreasoncode-map)                                                                      |
+| statusReasonCode      | String | status reason code, see [details](#overview--error--rejection-codes)                                                                          |
 | createdAtDatetime     | String | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                                     |
 | createdAtTimestamp    | String | denotes the time the order was ACK'd by the exchange                                                                                          |
 | baseCurrentQuantity   | String | amount of base asset this AMM instruction currently holds, only for AMM instruction with `OPEN` status                                        |
@@ -2047,7 +2046,9 @@ Bullish currently has 2 test assets.
 
 ## 2025 Changes
 
-- July
+- June
+  - new REST API - [Get Historical Trades](#get-/v1/history/trades)
+  - new REST API - [Get Historical Orders](#get-/v2/history/orders)
 - May
   - Deprecated Features to be removed June 2025:
     - Hybrid OrderBook WebSocket (unauthenticated)
@@ -2499,6 +2500,8 @@ _Get Orders_
 
 Retrieve a list of orders placed by a trading account with specified filters.
 
+- Only the last 24 hours of data is available for querying
+
 This endpoint requires [authentication](#overview--generate-a-jwt-token) and
 supports [pagination](#overview--pagination-support). To filter by
 `createdAtDatetime` and `createdAtTimestamp`, additional parameters are
@@ -2541,22 +2544,17 @@ endpoint is subjected to rate limiting.
     "type": "object",
     "required": [
       "orderId",
-      "handle",
       "clientOrderId",
       "symbol",
       "price",
       "stopPrice",
       "averageFillPrice",
-      "margin",
       "allowBorrow",
       "quantity",
       "quantityFilled",
       "quoteAmount",
       "baseFee",
       "quoteFee",
-      "borrowedQuantity",
-      "borrowedBaseQuantity",
-      "borrowedQuoteQuantity",
       "isLiquidation",
       "side",
       "type",
@@ -2568,16 +2566,6 @@ endpoint is subjected to rate limiting.
       "createdAtDatetime"
     ],
     "properties": {
-      "handle": {
-        "deprecated": true,
-        "allOf": [
-          {
-            "description": "Unique numeric (i64) identifier generated on the client side expressed as a string value",
-            "type": "string",
-            "example": "187"
-          }
-        ]
-      },
       "clientOrderId": {
         "allOf": [
           {
@@ -2636,12 +2624,6 @@ endpoint is subjected to rate limiting.
           }
         ]
       },
-      "margin": {
-        "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
-        "type": "boolean",
-        "deprecated": true,
-        "example": false
-      },
       "allowBorrow": {
         "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
         "type": "boolean",
@@ -2691,17 +2673,6 @@ endpoint is subjected to rate limiting.
       "quoteFee": {
         "description": "quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format",
         "example": "0.0010",
-        "allOf": [
-          {
-            "description": "see [asset value](#overview--price-and-quantity-precision) format",
-            "type": "string",
-            "example": "1.00000000"
-          }
-        ]
-      },
-      "borrowedQuantity": {
-        "deprecated": true,
-        "description": "quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format - BUY order borrows quote, SELL order borrows base",
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -2784,7 +2755,7 @@ endpoint is subjected to rate limiting.
         "example": "User cancelled"
       },
       "statusReasonCode": {
-        "description": "status reason code, see [details](#overview--order-statusreasoncode-map)",
+        "description": "status reason code, see [details](#overview--error--rejection-codes)",
         "type": "string",
         "example": "1002"
       },
@@ -2794,7 +2765,7 @@ endpoint is subjected to rate limiting.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -2829,35 +2800,32 @@ endpoint is subjected to rate limiting.
 
 Status Code **200**
 
-| Name                    | Type                                                        | Required | Restrictions | Description                                                                                                                             |
-| ----------------------- | ----------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| _anonymous_             | [[Order](#schemaorder)]                                     | false    | none         | none                                                                                                                                    |
-| » handle                | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                |
-| » clientOrderId         | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                |
-| » orderId               | [OrderID](#schemaorderid)                                   | true     | none         | unique order ID                                                                                                                         |
-| » symbol                | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol                                                                                                                           |
-| » price                 | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                                |
-| » averageFillPrice      | [AssetValue](#schemaassetvalue)                             | true     | none         | average fill price, see [asset value](#overview--price-and-quantity-precision) format                                                   |
-| » stopPrice             | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                                           |
-| » margin                | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                                |
-| » allowBorrow           | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                                |
-| » quantity              | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                             |
-| » quantityFilled        | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity filled, see [asset value](#overview--price-and-quantity-precision) format                                                      |
-| » quoteAmount           | [AssetValue](#schemaassetvalue)                             | true     | none         | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format                           |
-| » baseFee               | [AssetValue](#schemaassetvalue)                             | true     | none         | base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format              |
-| » quoteFee              | [AssetValue](#schemaassetvalue)                             | true     | none         | quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format             |
-| » borrowedQuantity      | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format - BUY order borrows quote, SELL order borrows base |
-| » borrowedBaseQuantity  | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                                    |
-| » borrowedQuoteQuantity | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                                    |
-| » isLiquidation         | boolean                                                     | true     | none         | indicates if the order was executed as a liquidation order                                                                              |
-| » side                  | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side                                                                                                                              |
-| » type                  | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type                                                                                                                              |
-| » timeInForce           | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force                                                                                                                           |
-| » status                | [OrderStatusAsString](#schemaorderstatusasstring)           | true     | none         | order status                                                                                                                            |
-| » statusReason          | string                                                      | true     | none         | status reason, describes why the order is in a specific state                                                                           |
-| » statusReasonCode      | string                                                      | true     | none         | status reason code, see [details](#overview--order-statusreasoncode-map)                                                                |
-| » createdAtDatetime     | [DateTime](#schemadatetime)(date-time)                      | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                               |
-| » createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)(string)       | true     | none         | denotes the time the order was ACK'd by the exchange                                                                                    |
+| Name                    | Type                                                        | Required | Restrictions | Description                                                                                                                 |
+| ----------------------- | ----------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_             | [[Order](#schemaorder)]                                     | false    | none         | none                                                                                                                        |
+| » clientOrderId         | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                    |
+| » orderId               | [OrderID](#schemaorderid)                                   | true     | none         | unique order ID                                                                                                             |
+| » symbol                | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol                                                                                                               |
+| » price                 | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                    |
+| » averageFillPrice      | [AssetValue](#schemaassetvalue)                             | true     | none         | average fill price, see [asset value](#overview--price-and-quantity-precision) format                                       |
+| » stopPrice             | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                               |
+| » allowBorrow           | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                    |
+| » quantity              | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                 |
+| » quantityFilled        | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity filled, see [asset value](#overview--price-and-quantity-precision) format                                          |
+| » quoteAmount           | [AssetValue](#schemaassetvalue)                             | true     | none         | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format               |
+| » baseFee               | [AssetValue](#schemaassetvalue)                             | true     | none         | base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format  |
+| » quoteFee              | [AssetValue](#schemaassetvalue)                             | true     | none         | quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format |
+| » borrowedBaseQuantity  | [AssetValue](#schemaassetvalue)                             | false    | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                        |
+| » borrowedQuoteQuantity | [AssetValue](#schemaassetvalue)                             | false    | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                        |
+| » isLiquidation         | boolean                                                     | true     | none         | indicates if the order was executed as a liquidation order                                                                  |
+| » side                  | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side                                                                                                                  |
+| » type                  | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type                                                                                                                  |
+| » timeInForce           | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force                                                                                                               |
+| » status                | [OrderStatusAsString](#schemaorderstatusasstring)           | true     | none         | order status                                                                                                                |
+| » statusReason          | string                                                      | true     | none         | status reason, describes why the order is in a specific state                                                               |
+| » statusReasonCode      | string                                                      | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                        |
+| » createdAtDatetime     | [DateTime](#schemadatetime)(date-time)                      | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                   |
+| » createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)(string)       | true     | none         | denotes the time the order was ACK'd by the exchange                                                                        |
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3154,22 +3122,17 @@ subjected to rate limiting.
   "type": "object",
   "required": [
     "orderId",
-    "handle",
     "clientOrderId",
     "symbol",
     "price",
     "stopPrice",
     "averageFillPrice",
-    "margin",
     "allowBorrow",
     "quantity",
     "quantityFilled",
     "quoteAmount",
     "baseFee",
     "quoteFee",
-    "borrowedQuantity",
-    "borrowedBaseQuantity",
-    "borrowedQuoteQuantity",
     "isLiquidation",
     "side",
     "type",
@@ -3181,16 +3144,6 @@ subjected to rate limiting.
     "createdAtDatetime"
   ],
   "properties": {
-    "handle": {
-      "deprecated": true,
-      "allOf": [
-        {
-          "description": "Unique numeric (i64) identifier generated on the client side expressed as a string value",
-          "type": "string",
-          "example": "187"
-        }
-      ]
-    },
     "clientOrderId": {
       "allOf": [
         {
@@ -3249,12 +3202,6 @@ subjected to rate limiting.
         }
       ]
     },
-    "margin": {
-      "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
-      "type": "boolean",
-      "deprecated": true,
-      "example": false
-    },
     "allowBorrow": {
       "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
       "type": "boolean",
@@ -3304,17 +3251,6 @@ subjected to rate limiting.
     "quoteFee": {
       "description": "quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format",
       "example": "0.0010",
-      "allOf": [
-        {
-          "description": "see [asset value](#overview--price-and-quantity-precision) format",
-          "type": "string",
-          "example": "1.00000000"
-        }
-      ]
-    },
-    "borrowedQuantity": {
-      "deprecated": true,
-      "description": "quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format - BUY order borrows quote, SELL order borrows base",
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -3397,7 +3333,7 @@ subjected to rate limiting.
       "example": "User cancelled"
     },
     "statusReasonCode": {
-      "description": "status reason code, see [details](#overview--order-statusreasoncode-map)",
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
       "type": "string",
       "example": "1002"
     },
@@ -3407,7 +3343,7 @@ subjected to rate limiting.
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -3900,7 +3836,7 @@ Gets a list of AMM instructions based on applied filters.
         "example": "Ok"
       },
       "statusReasonCode": {
-        "description": "status reason code, see [details](#overview--order-statusreasoncode-map)",
+        "description": "status reason code, see [details](#overview--error--rejection-codes)",
         "type": "integer",
         "example": 1001
       },
@@ -3910,7 +3846,7 @@ Gets a list of AMM instructions based on applied filters.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -4060,7 +3996,7 @@ Gets a list of AMM instructions based on applied filters.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -4115,7 +4051,7 @@ Status Code **200**
 | » quoteFee              | [AssetValue](#schemaassetvalue)                       | true     | none         | quote fee, see [asset value](#overview--price-and-quantity-precision) format                                                                  |
 | » status                | [OrderStatusAsString](#schemaorderstatusasstring)     | true     | none         | order status                                                                                                                                  |
 | » statusReason          | string                                                | true     | none         | status reason, describes why the order is in a specific state                                                                                 |
-| » statusReasonCode      | integer                                               | true     | none         | status reason code, see [details](#overview--order-statusreasoncode-map)                                                                      |
+| » statusReasonCode      | integer                                               | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                                          |
 | » createdAtDatetime     | [DateTime](#schemadatetime)(date-time)                | false    | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                                     |
 | » createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the order was ACK'd by the exchange                                                                                          |
 | » 24HrApy               | string                                                | false    | none         | APY of the last 24 Hours, only for AMM instructions with `OPEN` status                                                                        |
@@ -4536,7 +4472,7 @@ header
       "example": "Ok"
     },
     "statusReasonCode": {
-      "description": "status reason code, see [details](#overview--order-statusreasoncode-map)",
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
       "type": "integer",
       "example": 1001
     },
@@ -4546,7 +4482,7 @@ header
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -4696,7 +4632,7 @@ header
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -6214,7 +6150,7 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
       "example": "Withdrawal accepted"
     },
     "statusReasonCode": {
-      "description": "status reason code, see [details](#overview--custody-statusreasoncode-map)",
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
       "type": "integer",
       "example": 1001
     },
@@ -6312,6 +6248,7 @@ Get a list of trades based on specified filters.
 
 - requires [bearer token](#overview--add-authenticated-request-header) in
   authorization header
+- Only the last 24 hours of data is available for querying
 - [supports pagination](#overview--pagination-support)
 - filtering on `createdAtDatetime`, `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
@@ -6480,7 +6417,7 @@ Get a list of trades based on specified filters.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -6761,7 +6698,7 @@ header
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -6972,7 +6909,7 @@ header
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -7193,7 +7130,7 @@ header
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -7300,7 +7237,7 @@ Get Current Exchange Time
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -8071,7 +8008,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": 8
       },
       "priceBuffer": {
-        "description": "buffer range of limit price from the last traded price",
+        "description": "buffer range of limit price from the last traded price.",
         "type": "string",
         "example": 0.3
       },
@@ -8274,7 +8211,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         }
       },
       "marketType": {
-        "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\"",
+        "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\", \"DATED_FUTURE\" for market like \"BTC-USDC-20250901\", \"OPTION\" for market like \"BTC-USDC-20250901-90000-C\"",
         "allOf": [
           {
             "type": "string",
@@ -8332,57 +8269,57 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 
 Status Code **200**
 
-| Name                            | Type                                            | Required | Restrictions | Description                                                                                                                                                   |
-| ------------------------------- | ----------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _anonymous_                     | [[Market](#schemamarket)]                       | false    | none         | none                                                                                                                                                          |
-| » marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                              |
-| » symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                 |
-| » baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                               |
-| » underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                              |
-| » quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                              |
-| » underlyingQuoteSymbol         | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying quote asset symbol (only applies to derivative market)                                                                                             |
-| » quoteAssetId                  | [AssetID](#schemaassetid)                       | true     | none         | quote asset id                                                                                                                                                |
-| » baseAssetId                   | [AssetID](#schemaassetid)                       | true     | none         | base asset id                                                                                                                                                 |
-| » quotePrecision                | integer                                         | true     | none         | quote precision                                                                                                                                               |
-| » basePrecision                 | integer                                         | true     | none         | base precision                                                                                                                                                |
-| » pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                            |
-| » quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                         |
-| » costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                         |
-| » priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price                                                                                                        |
-| » minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                             |
-| » maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                             |
-| » maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                |
-| » minPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                |
-| » maxCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format                                             |
-| » minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                             |
-| » timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                     |
-| » tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                  |
-| » liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                          |
-| » liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                          |
-| » makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                           |
-| » takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                           |
-| » roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                         |
-| » makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                        |
-| » orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                          |
-| » spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                          |
-| » marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                        |
-| » marketEnabled                 | boolean                                         | true     | none         | market enabled                                                                                                                                                |
-| » createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                          |
-| » cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                          |
-| » liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                           |
-| » liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                       |
-| » feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-) |
-| » feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                      |
-| »» feeTierId                    | [FeeTierId](#schemafeetierid)                   | true     | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)                                                                                     |
-| »» staticSpreadFee              | string                                          | true     | none         | static spread fee                                                                                                                                             |
-| »» isDislocationEnabled         | boolean                                         | true     | none         | dislocation enabled/disabled                                                                                                                                  |
-| » marketType                    | [MarketTypeAsString](#schemamarkettypeasstring) | true     | none         | market type, e.g. "SPOT" for market like "BTCUSD", "PERPETUAL" for market like "BTC-USDC-PERP"                                                                |
-| » contractMultiplier            | integer                                         | false    | none         | contract multiplier. (only applies to perpetual market)                                                                                                       |
-| » settlementAssetSymbol         | string                                          | false    | none         | settlement asset symbol. (only applies to perpetual market)                                                                                                   |
-| » openInterestUSD               | string                                          | true     | none         | cumulative notional value of all open interest for a specific derivative contract on the exchange.                                                            |
-| » concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                      |
-| » concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                     |
-| » expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                        |
+| Name                            | Type                                            | Required | Restrictions | Description                                                                                                                                                                                              |
+| ------------------------------- | ----------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_                     | [[Market](#schemamarket)]                       | false    | none         | none                                                                                                                                                                                                     |
+| » marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                                                                         |
+| » symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                                                            |
+| » baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                                                                          |
+| » underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                                                                         |
+| » quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                                                                         |
+| » underlyingQuoteSymbol         | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying quote asset symbol (only applies to derivative market)                                                                                                                                        |
+| » quoteAssetId                  | [AssetID](#schemaassetid)                       | true     | none         | quote asset id                                                                                                                                                                                           |
+| » baseAssetId                   | [AssetID](#schemaassetid)                       | true     | none         | base asset id                                                                                                                                                                                            |
+| » quotePrecision                | integer                                         | true     | none         | quote precision                                                                                                                                                                                          |
+| » basePrecision                 | integer                                         | true     | none         | base precision                                                                                                                                                                                           |
+| » pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                                                                       |
+| » quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                                                                    |
+| » costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                                                                    |
+| » priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price.                                                                                                                                                  |
+| » minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
+| » maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
+| » maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
+| » minPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
+| » maxCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
+| » minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
+| » timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                                                                |
+| » tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                             |
+| » liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                                                                     |
+| » liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                                                                     |
+| » makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
+| » takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
+| » roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                                                                    |
+| » makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                                                                   |
+| » orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                                                                     |
+| » spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                                                                     |
+| » marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                                                                   |
+| » marketEnabled                 | boolean                                         | true     | none         | market enabled                                                                                                                                                                                           |
+| » createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                                                                     |
+| » cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                                                                     |
+| » liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                                                                      |
+| » liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                                                                  |
+| » feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)                                            |
+| » feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                                                                 |
+| »» feeTierId                    | [FeeTierId](#schemafeetierid)                   | true     | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)                                                                                                                                |
+| »» staticSpreadFee              | string                                          | true     | none         | static spread fee                                                                                                                                                                                        |
+| »» isDislocationEnabled         | boolean                                         | true     | none         | dislocation enabled/disabled                                                                                                                                                                             |
+| » marketType                    | [MarketTypeAsString](#schemamarkettypeasstring) | true     | none         | market type, e.g. "SPOT" for market like "BTCUSD", "PERPETUAL" for market like "BTC-USDC-PERP", "DATED_FUTURE" for market like "BTC-USDC-20250901", "OPTION" for market like "BTC-USDC-20250901-90000-C" |
+| » contractMultiplier            | integer                                         | false    | none         | contract multiplier. (only applies to perpetual market)                                                                                                                                                  |
+| » settlementAssetSymbol         | string                                          | false    | none         | settlement asset symbol. (only applies to perpetual market)                                                                                                                                              |
+| » openInterestUSD               | string                                          | true     | none         | cumulative notional value of all open interest for a specific derivative contract on the exchange.                                                                                                       |
+| » concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                                                                 |
+| » concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                                                                |
+| » expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                                                                   |
 
 #### Enumerated Values
 
@@ -8599,7 +8536,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": 8
     },
     "priceBuffer": {
-      "description": "buffer range of limit price from the last traded price",
+      "description": "buffer range of limit price from the last traded price.",
       "type": "string",
       "example": 0.3
     },
@@ -8802,7 +8739,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       }
     },
     "marketType": {
-      "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\"",
+      "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\", \"DATED_FUTURE\" for market like \"BTC-USDC-20250901\", \"OPTION\" for market like \"BTC-USDC-20250901-90000-C\"",
       "allOf": [
         {
           "type": "string",
@@ -8993,7 +8930,7 @@ Get Order Book by Market Symbol
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -9175,7 +9112,7 @@ Get Market Trades by Market Symbol.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -9315,7 +9252,7 @@ Get Current Tick by Market Symbol.
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -9512,7 +9449,7 @@ Get Current Tick by Market Symbol.
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -9624,7 +9561,7 @@ const headers = {
 }
 
 fetch(
-  "https://api.exchange.bullish.com/trading-api/v1/markets/{symbol}/candle?createdAtDatetime%5Bgte%5D=2021-05-20T01%3A01%3A01.000Z&createdAtDatetime%5Blte%5D=2021-05-20T01%3A01%3A01.000Z&timeBucket=1m",
+  "https://api.exchange.bullish.com/trading-api/v1/markets/{symbol}/candle?createdAtDatetime%5Bgte%5D=2025-05-20T01%3A01%3A01.000Z&createdAtDatetime%5Blte%5D=2025-05-20T01%3A01%3A01.000Z&timeBucket=1m",
   {
     method: "GET",
 
@@ -9646,7 +9583,7 @@ headers = {
 }
 
 r = requests.get('https://api.exchange.bullish.com/trading-api/v1/markets/{symbol}/candle', params={
-  'createdAtDatetime[gte]': '2021-05-20T01:01:01.000Z',  'createdAtDatetime[lte]': '2021-05-20T01:01:01.000Z',  'timeBucket': '1m'
+  'createdAtDatetime[gte]': '2025-05-20T01:01:01.000Z',  'createdAtDatetime[lte]': '2025-05-20T01:01:01.000Z',  'timeBucket': '1m'
 }, headers = headers)
 
 print(r.json())
@@ -9764,7 +9701,7 @@ Get Current OHLCV Candle by Market Symbol
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -11249,7 +11186,7 @@ Get derivatives positions
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -11271,7 +11208,7 @@ Get derivatives positions
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -11337,6 +11274,697 @@ jwtTokenAuth
 
 <h1 id="bullish-trading-api-history">history</h1>
 
+## trade-get-orders-v2
+
+<a id="opIdtrade-get-orders-v2"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
+    description:
+      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
+    schema: {
+      type: "string"
+    },
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v2/history/orders?tradingAccountId=111000000000001",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
+  "schema": {
+    "type": "string"
+  },
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v2/history/orders', params={
+  'tradingAccountId': '111000000000001'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v2/history/orders`
+
+_Get Historical Orders_
+
+Retrieve a list of orders placed by a trading account with specified filters.
+
+- Only the last 90 days of data is available for querying
+
+This endpoint requires [authentication](#overview--generate-a-jwt-token) and
+supports [pagination](#overview--pagination-support). To filter by
+`createdAtDatetime` and `createdAtTimestamp`, additional parameters are
+required. For detailed instructions, see the
+[Filtering Support](#overview--filtering-support) section. Additionally, this
+endpoint is subjected to rate limiting.
+
+<h3 id="trade-get-orders-v2-parameters">Parameters</h3>
+
+| Name                   | In     | Type                                                                            | Required | Description                                                                                  |
+| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol                 | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                         |
+| orderId                | query  | [OrderID](#schemaorderid)                                                       | false    | none                                                                                         |
+| clientOrderId          | query  | [OrderHandle](#schemaorderhandle)                                               | false    | Unique numeric (i64) identifier generated on the client side expressed as a string value     |
+| side                   | query  | [OrderSide](#schemaorderside)                                                   | false    | order side                                                                                   |
+| status                 | query  | [OrderStatus](#schemaorderstatus)                                               | false    | order status                                                                                 |
+| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+
+#### Enumerated Values
+
+| Parameter | Value     |
+| --------- | --------- |
+| side      | BUY       |
+| side      | SELL      |
+| status    | OPEN      |
+| status    | CLOSED    |
+| status    | CANCELLED |
+| status    | REJECTED  |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "array",
+  "minItems": 0,
+  "maxItems": 10,
+  "items": {
+    "type": "object",
+    "required": [
+      "orderId",
+      "clientOrderId",
+      "symbol",
+      "price",
+      "stopPrice",
+      "averageFillPrice",
+      "allowBorrow",
+      "quantity",
+      "quantityFilled",
+      "quoteAmount",
+      "baseFee",
+      "quoteFee",
+      "isLiquidation",
+      "side",
+      "type",
+      "timeInForce",
+      "status",
+      "statusReason",
+      "statusReasonCode",
+      "createdAtTimestamp",
+      "createdAtDatetime"
+    ],
+    "properties": {
+      "clientOrderId": {
+        "allOf": [
+          {
+            "description": "Unique numeric (i64) identifier generated on the client side expressed as a string value",
+            "type": "string",
+            "example": "187"
+          }
+        ]
+      },
+      "orderId": {
+        "description": "unique order ID",
+        "allOf": [
+          {
+            "type": "string",
+            "example": "297735387747975680"
+          }
+        ]
+      },
+      "symbol": {
+        "description": "market symbol",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
+            "example": "BTCUSDC"
+          }
+        ]
+      },
+      "price": {
+        "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "averageFillPrice": {
+        "description": "average fill price, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "stopPrice": {
+        "description": "stop price, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "allowBorrow": {
+        "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
+        "type": "boolean",
+        "example": false
+      },
+      "quantity": {
+        "description": "quantity, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "quantityFilled": {
+        "description": "quantity filled, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "quoteAmount": {
+        "description": "quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "baseFee": {
+        "description": "base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format",
+        "example": "0.00100000",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "quoteFee": {
+        "description": "quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format",
+        "example": "0.0010",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "borrowedBaseQuantity": {
+        "description": "quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "borrowedQuoteQuantity": {
+        "description": "quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "isLiquidation": {
+        "description": "indicates if the order was executed as a liquidation order",
+        "type": "boolean",
+        "example": false
+      },
+      "side": {
+        "description": "order side",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "order side can have the following string values `\"BUY\"`, `\"SELL\"`",
+            "example": "BUY"
+          }
+        ],
+        "example": "BUY"
+      },
+      "type": {
+        "description": "order type",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "example": "LMT"
+          }
+        ],
+        "example": "LMT"
+      },
+      "timeInForce": {
+        "description": "time in force",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "time in force can have the following string values `\"GTC\"`, `\"FOK\"`, `\"IOC\"`, see [details](#overview--order-timeinforce)"
+          }
+        ],
+        "example": "GTC"
+      },
+      "status": {
+        "description": "order status",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "order status can have the following string values `\"OPEN\"`, `\"CLOSED\"`, `\"CANCELLED\"`, `\"REJECTED\"`",
+            "example": "OPEN"
+          }
+        ],
+        "example": "OPEN"
+      },
+      "statusReason": {
+        "description": "status reason, describes why the order is in a specific state",
+        "type": "string",
+        "example": "User cancelled"
+      },
+      "statusReasonCode": {
+        "description": "status reason code, see [details](#overview--error--rejection-codes)",
+        "type": "string",
+        "example": "1002"
+      },
+      "createdAtDatetime": {
+        "description": "denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-20T01:01:01.000Z",
+            "description": "ISO 8601 with millisecond as string"
+          }
+        ]
+      },
+      "createdAtTimestamp": {
+        "description": "denotes the time the order was ACK'd by the exchange",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "string",
+            "example": "1621490985000",
+            "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+<h3 id="trade-get-orders-v2-responses">Responses</h3>
+
+| Status | Meaning                                                                    | Description           | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | Inline |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)            | Not Authenticated     | None   |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | Access Forbidden      | None   |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
+
+<h3 id="trade-get-orders-v2-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name                    | Type                                                        | Required | Restrictions | Description                                                                                                                 |
+| ----------------------- | ----------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_             | [[Order](#schemaorder)]                                     | false    | none         | none                                                                                                                        |
+| » clientOrderId         | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                    |
+| » orderId               | [OrderID](#schemaorderid)                                   | true     | none         | unique order ID                                                                                                             |
+| » symbol                | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol                                                                                                               |
+| » price                 | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                    |
+| » averageFillPrice      | [AssetValue](#schemaassetvalue)                             | true     | none         | average fill price, see [asset value](#overview--price-and-quantity-precision) format                                       |
+| » stopPrice             | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                               |
+| » allowBorrow           | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                    |
+| » quantity              | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                 |
+| » quantityFilled        | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity filled, see [asset value](#overview--price-and-quantity-precision) format                                          |
+| » quoteAmount           | [AssetValue](#schemaassetvalue)                             | true     | none         | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format               |
+| » baseFee               | [AssetValue](#schemaassetvalue)                             | true     | none         | base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format  |
+| » quoteFee              | [AssetValue](#schemaassetvalue)                             | true     | none         | quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format |
+| » borrowedBaseQuantity  | [AssetValue](#schemaassetvalue)                             | false    | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                        |
+| » borrowedQuoteQuantity | [AssetValue](#schemaassetvalue)                             | false    | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                        |
+| » isLiquidation         | boolean                                                     | true     | none         | indicates if the order was executed as a liquidation order                                                                  |
+| » side                  | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side                                                                                                                  |
+| » type                  | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type                                                                                                                  |
+| » timeInForce           | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force                                                                                                               |
+| » status                | [OrderStatusAsString](#schemaorderstatusasstring)           | true     | none         | order status                                                                                                                |
+| » statusReason          | string                                                      | true     | none         | status reason, describes why the order is in a specific state                                                               |
+| » statusReasonCode      | string                                                      | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                        |
+| » createdAtDatetime     | [DateTime](#schemadatetime)(date-time)                      | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                   |
+| » createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)(string)       | true     | none         | denotes the time the order was ACK'd by the exchange                                                                        |
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwtTokenAuth
+</aside>
+
+## trade-get-trades
+
+<a id="opIdtrade-get-trades"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
+    description:
+      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
+    schema: {
+      type: "string"
+    },
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/history/trades?tradingAccountId=111000000000001",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
+  "schema": {
+    "type": "string"
+  },
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/history/trades', params={
+  'tradingAccountId': '111000000000001'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/history/trades`
+
+_Get Historical Trades_
+
+Get a list of trades based on specified filters.
+
+- requires [bearer token](#overview--add-authenticated-request-header) in
+  authorization header
+- Only the last 90 days of data is available for querying
+- [supports pagination](#overview--pagination-support)
+- filtering on `createdAtDatetime`, `createdAtTimestamp` requires additional
+  keywords, [see filtering support](#overview--filtering-support)
+
+**Ratelimited:** `True`
+
+<h3 id="trade-get-trades-parameters">Parameters</h3>
+
+| Name                   | In     | Type                                                                            | Required | Description                                                                                  |
+| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol                 | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                         |
+| orderId                | query  | [OrderID](#schemaorderid)                                                       | false    | unique order ID                                                                              |
+| tradeId                | query  | [TradeID](#schematradeid)                                                       | false    | unique trade ID                                                                              |
+| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "array",
+  "minItems": 0,
+  "maxItems": 10,
+  "items": {
+    "type": "object",
+    "required": [
+      "tradeId",
+      "orderId",
+      "symbol",
+      "price",
+      "quantity",
+      "quoteAmount",
+      "baseFee",
+      "quoteFee",
+      "side",
+      "isTaker",
+      "tradeRebateAmount",
+      "tradeRebateAssetSymbol",
+      "createdAtTimestamp",
+      "createdAtDatetime"
+    ],
+    "properties": {
+      "tradeId": {
+        "description": "unique trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "example": "100020000000000060"
+          }
+        ]
+      },
+      "orderId": {
+        "description": "unique order ID",
+        "allOf": [
+          {
+            "type": "string",
+            "example": "297735387747975680"
+          }
+        ]
+      },
+      "symbol": {
+        "description": "market symbol",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
+            "example": "BTCUSDC"
+          }
+        ]
+      },
+      "price": {
+        "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "quantity": {
+        "description": "quantity, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "quoteAmount": {
+        "description": "quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "baseFee": {
+        "description": "base fee, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "quoteFee": {
+        "description": "quote fee, see [asset value](#overview--price-and-quantity-precision) format",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "side": {
+        "description": "order side",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "order side can have the following string values `\"BUY\"`, `\"SELL\"`",
+            "example": "BUY"
+          }
+        ],
+        "example": "BUY"
+      },
+      "isTaker": {
+        "description": "denotes whether this is a taker's trade",
+        "allOf": [
+          {
+            "type": "boolean",
+            "format": "true or false",
+            "example": true
+          }
+        ]
+      },
+      "tradeRebateAmount": {
+        "description": "amount of rebate that is credited to the user as part of the trade.",
+        "allOf": [
+          {
+            "description": "see [asset value](#overview--price-and-quantity-precision) format",
+            "type": "string",
+            "example": "1.00000000"
+          }
+        ]
+      },
+      "tradeRebateAssetSymbol": {
+        "description": "the symbol of the asset in which the rebate is paid",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "asset symbol as denoted in the world",
+            "example": "USDC"
+          }
+        ]
+      },
+      "createdAtDatetime": {
+        "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-20T01:01:01.000Z",
+            "description": "ISO 8601 with millisecond as string"
+          }
+        ]
+      },
+      "createdAtTimestamp": {
+        "description": "denotes the time the trade was executed by the exchange",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "string",
+            "example": "1621490985000",
+            "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+<h3 id="trade-get-trades-responses">Responses</h3>
+
+| Status | Meaning                                                                    | Description           | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | Inline |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)            | Not Authenticated     | None   |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | Access Forbidden      | None   |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
+
+<h3 id="trade-get-trades-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name                     | Type                                                  | Required | Restrictions | Description                                                                                                   |
+| ------------------------ | ----------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------- |
+| _anonymous_              | [[Trade](#schematrade)]                               | false    | none         | none                                                                                                          |
+| » tradeId                | [TradeID](#schematradeid)                             | true     | none         | unique trade ID                                                                                               |
+| » orderId                | [OrderID](#schemaorderid)                             | true     | none         | unique order ID                                                                                               |
+| » symbol                 | [MarketSymbol](#schemamarketsymbol)                   | true     | none         | market symbol                                                                                                 |
+| » price                  | [AssetValue](#schemaassetvalue)                       | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                      |
+| » quantity               | [AssetValue](#schemaassetvalue)                       | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                   |
+| » quoteAmount            | [AssetValue](#schemaassetvalue)                       | true     | none         | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format |
+| » baseFee                | [AssetValue](#schemaassetvalue)                       | true     | none         | base fee, see [asset value](#overview--price-and-quantity-precision) format                                   |
+| » quoteFee               | [AssetValue](#schemaassetvalue)                       | true     | none         | quote fee, see [asset value](#overview--price-and-quantity-precision) format                                  |
+| » side                   | [OrderSideAsString](#schemaordersideasstring)         | true     | none         | order side                                                                                                    |
+| » isTaker                | [Boolean](#schemaboolean)(true or false)              | true     | none         | denotes whether this is a taker's trade                                                                       |
+| » tradeRebateAmount      | [AssetValue](#schemaassetvalue)                       | true     | none         | amount of rebate that is credited to the user as part of the trade.                                           |
+| » tradeRebateAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)           | true     | none         | the symbol of the asset in which the rebate is paid                                                           |
+| » createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
+| » createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwtTokenAuth
+</aside>
+
 ## get-derivatives-settlement-history
 
 <a id="opIdget-derivatives-settlement-history"></a>
@@ -11357,7 +11985,7 @@ const headers = {
 }
 
 fetch(
-  "https://api.exchange.bullish.com/trading-api/v1/history/derivatives-settlement?settlementDatetime%5Bgte%5D=2021-05-20T01%3A01%3A01.000Z&settlementDatetime%5Blte%5D=2021-05-20T01%3A01%3A01.000Z",
+  "https://api.exchange.bullish.com/trading-api/v1/history/derivatives-settlement?settlementDatetime%5Bgte%5D=2025-05-20T01%3A01%3A01.000Z&settlementDatetime%5Blte%5D=2025-05-20T01%3A01%3A01.000Z",
   {
     method: "GET",
 
@@ -11386,7 +12014,7 @@ headers = {
 }
 
 r = requests.get('https://api.exchange.bullish.com/trading-api/v1/history/derivatives-settlement', params={
-  'settlementDatetime[gte]': '2021-05-20T01:01:01.000Z',  'settlementDatetime[lte]': '2021-05-20T01:01:01.000Z'
+  'settlementDatetime[gte]': '2025-05-20T01:01:01.000Z',  'settlementDatetime[lte]': '2025-05-20T01:01:01.000Z'
 }, headers = headers)
 
 print(r.json())
@@ -11530,7 +12158,7 @@ Get historical derivatives settlement.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -11612,7 +12240,7 @@ const headers = {
 }
 
 fetch(
-  "https://api.exchange.bullish.com/trading-api/v1/history/transfer?createdAtDatetime%5Bgte%5D=2021-05-20T01%3A01%3A01.000Z&createdAtDatetime%5Blte%5D=2021-05-20T01%3A01%3A01.000Z",
+  "https://api.exchange.bullish.com/trading-api/v1/history/transfer?createdAtDatetime%5Bgte%5D=2025-05-20T01%3A01%3A01.000Z&createdAtDatetime%5Blte%5D=2025-05-20T01%3A01%3A01.000Z",
   {
     method: "GET",
 
@@ -11641,7 +12269,7 @@ headers = {
 }
 
 r = requests.get('https://api.exchange.bullish.com/trading-api/v1/history/transfer', params={
-  'createdAtDatetime[gte]': '2021-05-20T01:01:01.000Z',  'createdAtDatetime[lte]': '2021-05-20T01:01:01.000Z'
+  'createdAtDatetime[gte]': '2025-05-20T01:01:01.000Z',  'createdAtDatetime[lte]': '2025-05-20T01:01:01.000Z'
 }, headers = headers)
 
 print(r.json())
@@ -11753,7 +12381,7 @@ Get historical transfers.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -11940,7 +12568,7 @@ of data at a time.
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -12117,7 +12745,7 @@ const headers = {
 }
 
 fetch(
-  "https://api.exchange.bullish.com/trading-api/v1/history/borrow-interest?assetSymbol=BTC&createdAtDatetime%5Bgte%5D=2021-05-20T01%3A01%3A01.000Z&createdAtDatetime%5Blte%5D=2021-05-20T01%3A01%3A01.000Z",
+  "https://api.exchange.bullish.com/trading-api/v1/history/borrow-interest?assetSymbol=BTC&createdAtDatetime%5Bgte%5D=2025-05-20T01%3A01%3A01.000Z&createdAtDatetime%5Blte%5D=2025-05-20T01%3A01%3A01.000Z",
   {
     method: "GET",
 
@@ -12146,7 +12774,7 @@ headers = {
 }
 
 r = requests.get('https://api.exchange.bullish.com/trading-api/v1/history/borrow-interest', params={
-  'assetSymbol': 'BTC',  'createdAtDatetime[gte]': '2021-05-20T01:01:01.000Z',  'createdAtDatetime[lte]': '2021-05-20T01:01:01.000Z'
+  'assetSymbol': 'BTC',  'createdAtDatetime[gte]': '2025-05-20T01:01:01.000Z',  'createdAtDatetime[lte]': '2025-05-20T01:01:01.000Z'
 }, headers = headers)
 
 print(r.json())
@@ -12364,7 +12992,7 @@ Retrieves the index price of all supported assets
           {
             "type": "string",
             "format": "date-time",
-            "example": "2021-05-20T01:01:01.000Z",
+            "example": "2025-05-20T01:01:01.000Z",
             "description": "ISO 8601 with millisecond as string"
           }
         ]
@@ -12495,7 +13123,7 @@ Retrieves the index price of a specified asset
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -13366,7 +13994,7 @@ number of seconds since EPOCH as integer
 <a id="tocsdatetime"></a>
 
 ```json
-"2021-05-20T01:01:01.000Z"
+"2025-05-20T01:01:01.000Z"
 ```
 
 ISO 8601 with millisecond as string
@@ -14017,7 +14645,7 @@ last updated time of transaction
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -14147,7 +14775,7 @@ last updated time of transaction
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -16986,22 +17614,17 @@ JWT authorizer you obtain along with the
   "type": "object",
   "required": [
     "orderId",
-    "handle",
     "clientOrderId",
     "symbol",
     "price",
     "stopPrice",
     "averageFillPrice",
-    "margin",
     "allowBorrow",
     "quantity",
     "quantityFilled",
     "quoteAmount",
     "baseFee",
     "quoteFee",
-    "borrowedQuantity",
-    "borrowedBaseQuantity",
-    "borrowedQuoteQuantity",
     "isLiquidation",
     "side",
     "type",
@@ -17013,16 +17636,6 @@ JWT authorizer you obtain along with the
     "createdAtDatetime"
   ],
   "properties": {
-    "handle": {
-      "deprecated": true,
-      "allOf": [
-        {
-          "description": "Unique numeric (i64) identifier generated on the client side expressed as a string value",
-          "type": "string",
-          "example": "187"
-        }
-      ]
-    },
     "clientOrderId": {
       "allOf": [
         {
@@ -17081,12 +17694,6 @@ JWT authorizer you obtain along with the
         }
       ]
     },
-    "margin": {
-      "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
-      "type": "boolean",
-      "deprecated": true,
-      "example": false
-    },
     "allowBorrow": {
       "description": "indicates if the order was allowed to borrow (does not indicate that borrowing occurred)",
       "type": "boolean",
@@ -17136,17 +17743,6 @@ JWT authorizer you obtain along with the
     "quoteFee": {
       "description": "quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format",
       "example": "0.0010",
-      "allOf": [
-        {
-          "description": "see [asset value](#overview--price-and-quantity-precision) format",
-          "type": "string",
-          "example": "1.00000000"
-        }
-      ]
-    },
-    "borrowedQuantity": {
-      "deprecated": true,
-      "description": "quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format - BUY order borrows quote, SELL order borrows base",
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -17229,7 +17825,7 @@ JWT authorizer you obtain along with the
       "example": "User cancelled"
     },
     "statusReasonCode": {
-      "description": "status reason code, see [details](#overview--order-statusreasoncode-map)",
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
       "type": "string",
       "example": "1002"
     },
@@ -17239,7 +17835,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -17261,34 +17857,31 @@ JWT authorizer you obtain along with the
 
 ### Properties
 
-| Name                  | Type                                                        | Required | Restrictions | Description                                                                                                                             |
-| --------------------- | ----------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| handle                | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                |
-| clientOrderId         | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                |
-| orderId               | [OrderID](#schemaorderid)                                   | true     | none         | unique order ID                                                                                                                         |
-| symbol                | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol                                                                                                                           |
-| price                 | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                                |
-| averageFillPrice      | [AssetValue](#schemaassetvalue)                             | true     | none         | average fill price, see [asset value](#overview--price-and-quantity-precision) format                                                   |
-| stopPrice             | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                                           |
-| margin                | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                                |
-| allowBorrow           | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                                |
-| quantity              | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                             |
-| quantityFilled        | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity filled, see [asset value](#overview--price-and-quantity-precision) format                                                      |
-| quoteAmount           | [AssetValue](#schemaassetvalue)                             | true     | none         | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format                           |
-| baseFee               | [AssetValue](#schemaassetvalue)                             | true     | none         | base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format              |
-| quoteFee              | [AssetValue](#schemaassetvalue)                             | true     | none         | quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format             |
-| borrowedQuantity      | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format - BUY order borrows quote, SELL order borrows base |
-| borrowedBaseQuantity  | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                                    |
-| borrowedQuoteQuantity | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                                    |
-| isLiquidation         | boolean                                                     | true     | none         | indicates if the order was executed as a liquidation order                                                                              |
-| side                  | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side                                                                                                                              |
-| type                  | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type                                                                                                                              |
-| timeInForce           | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force                                                                                                                           |
-| status                | [OrderStatusAsString](#schemaorderstatusasstring)           | true     | none         | order status                                                                                                                            |
-| statusReason          | string                                                      | true     | none         | status reason, describes why the order is in a specific state                                                                           |
-| statusReasonCode      | string                                                      | true     | none         | status reason code, see [details](#overview--order-statusreasoncode-map)                                                                |
-| createdAtDatetime     | [DateTime](#schemadatetime)                                 | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                               |
-| createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)               | true     | none         | denotes the time the order was ACK'd by the exchange                                                                                    |
+| Name                  | Type                                                        | Required | Restrictions | Description                                                                                                                 |
+| --------------------- | ----------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| clientOrderId         | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                    |
+| orderId               | [OrderID](#schemaorderid)                                   | true     | none         | unique order ID                                                                                                             |
+| symbol                | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol                                                                                                               |
+| price                 | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                    |
+| averageFillPrice      | [AssetValue](#schemaassetvalue)                             | true     | none         | average fill price, see [asset value](#overview--price-and-quantity-precision) format                                       |
+| stopPrice             | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                               |
+| allowBorrow           | boolean                                                     | true     | none         | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                    |
+| quantity              | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                 |
+| quantityFilled        | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity filled, see [asset value](#overview--price-and-quantity-precision) format                                          |
+| quoteAmount           | [AssetValue](#schemaassetvalue)                             | true     | none         | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format               |
+| baseFee               | [AssetValue](#schemaassetvalue)                             | true     | none         | base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format  |
+| quoteFee              | [AssetValue](#schemaassetvalue)                             | true     | none         | quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format |
+| borrowedBaseQuantity  | [AssetValue](#schemaassetvalue)                             | false    | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                        |
+| borrowedQuoteQuantity | [AssetValue](#schemaassetvalue)                             | false    | none         | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                        |
+| isLiquidation         | boolean                                                     | true     | none         | indicates if the order was executed as a liquidation order                                                                  |
+| side                  | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side                                                                                                                  |
+| type                  | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type                                                                                                                  |
+| timeInForce           | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force                                                                                                               |
+| status                | [OrderStatusAsString](#schemaorderstatusasstring)           | true     | none         | order status                                                                                                                |
+| statusReason          | string                                                      | true     | none         | status reason, describes why the order is in a specific state                                                               |
+| statusReasonCode      | string                                                      | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                        |
+| createdAtDatetime     | [DateTime](#schemadatetime)                                 | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                   |
+| createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)               | true     | none         | denotes the time the order was ACK'd by the exchange                                                                        |
 
 <h2 id="tocS_AMMInstruction">AMMInstruction</h2>
 <!-- backwards compatibility -->
@@ -17402,7 +17995,7 @@ JWT authorizer you obtain along with the
       "example": "Ok"
     },
     "statusReasonCode": {
-      "description": "status reason code, see [details](#overview--order-statusreasoncode-map)",
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
       "type": "integer",
       "example": 1001
     },
@@ -17412,7 +18005,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -17562,7 +18155,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -17603,7 +18196,7 @@ JWT authorizer you obtain along with the
 | quoteFee              | [AssetValue](#schemaassetvalue)                   | true     | none         | quote fee, see [asset value](#overview--price-and-quantity-precision) format                                                                  |
 | status                | [OrderStatusAsString](#schemaorderstatusasstring) | true     | none         | order status                                                                                                                                  |
 | statusReason          | string                                            | true     | none         | status reason, describes why the order is in a specific state                                                                                 |
-| statusReasonCode      | integer                                           | true     | none         | status reason code, see [details](#overview--order-statusreasoncode-map)                                                                      |
+| statusReasonCode      | integer                                           | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                                          |
 | createdAtDatetime     | [DateTime](#schemadatetime)                       | false    | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                                     |
 | createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)     | true     | none         | denotes the time the order was ACK'd by the exchange                                                                                          |
 | 24HrApy               | string                                            | false    | none         | APY of the last 24 Hours, only for AMM instructions with `OPEN` status                                                                        |
@@ -17722,7 +18315,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -17842,7 +18435,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -18256,7 +18849,7 @@ JWT authorizer you obtain along with the
       "example": "Withdrawal accepted"
     },
     "statusReasonCode": {
-      "description": "status reason code, see [details](#overview--custody-statusreasoncode-map)",
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
       "type": "integer",
       "example": 1001
     },
@@ -18275,11 +18868,11 @@ JWT authorizer you obtain along with the
 
 ### Properties
 
-| Name                 | Type                                                | Required | Restrictions | Description                                                                |
-| -------------------- | --------------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------- |
-| statusReason         | string                                              | false    | none         | status reason, describes why withdrawal challenge is in a specific state   |
-| statusReasonCode     | integer                                             | false    | none         | status reason code, see [details](#overview--custody-statusreasoncode-map) |
-| custodyTransactionId | [CustodyTransactionID](#schemacustodytransactionid) | false    | none         | unique identifier for tracking a withdrawal during signing and in history  |
+| Name                 | Type                                                | Required | Restrictions | Description                                                               |
+| -------------------- | --------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------- |
+| statusReason         | string                                              | false    | none         | status reason, describes why withdrawal challenge is in a specific state  |
+| statusReasonCode     | integer                                             | false    | none         | status reason code, see [details](#overview--error--rejection-codes)      |
+| custodyTransactionId | [CustodyTransactionID](#schemacustodytransactionid) | false    | none         | unique identifier for tracking a withdrawal during signing and in history |
 
 <h2 id="tocS_CustodyHistory">CustodyHistory</h2>
 <!-- backwards compatibility -->
@@ -19113,7 +19706,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -19193,7 +19786,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -19390,7 +19983,7 @@ JWT authorizer you obtain along with the
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -20052,7 +20645,7 @@ unique asset ID
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -20125,7 +20718,7 @@ unique asset ID
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -20312,7 +20905,7 @@ unique asset ID
       "example": 8
     },
     "priceBuffer": {
-      "description": "buffer range of limit price from the last traded price",
+      "description": "buffer range of limit price from the last traded price.",
       "type": "string",
       "example": 0.3
     },
@@ -20515,7 +21108,7 @@ unique asset ID
       }
     },
     "marketType": {
-      "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\"",
+      "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\", \"DATED_FUTURE\" for market like \"BTC-USDC-20250901\", \"OPTION\" for market like \"BTC-USDC-20250901-90000-C\"",
       "allOf": [
         {
           "type": "string",
@@ -20561,53 +21154,53 @@ unique asset ID
 
 ### Properties
 
-| Name                          | Type                                            | Required | Restrictions | Description                                                                                                                                                   |
-| ----------------------------- | ----------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                              |
-| symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                 |
-| baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                               |
-| underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                              |
-| quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                              |
-| underlyingQuoteSymbol         | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying quote asset symbol (only applies to derivative market)                                                                                             |
-| quoteAssetId                  | [AssetID](#schemaassetid)                       | true     | none         | quote asset id                                                                                                                                                |
-| baseAssetId                   | [AssetID](#schemaassetid)                       | true     | none         | base asset id                                                                                                                                                 |
-| quotePrecision                | integer                                         | true     | none         | quote precision                                                                                                                                               |
-| basePrecision                 | integer                                         | true     | none         | base precision                                                                                                                                                |
-| pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                            |
-| quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                         |
-| costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                         |
-| priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price                                                                                                        |
-| minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                             |
-| maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                             |
-| maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                |
-| minPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                |
-| maxCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format                                             |
-| minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                             |
-| timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                     |
-| tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                  |
-| liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                          |
-| liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                          |
-| makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                           |
-| takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                           |
-| roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                         |
-| makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                        |
-| orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                          |
-| spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                          |
-| marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                        |
-| marketEnabled                 | boolean                                         | true     | none         | market enabled                                                                                                                                                |
-| createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                          |
-| cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                          |
-| liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                           |
-| liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                       |
-| feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-) |
-| feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                      |
-| marketType                    | [MarketTypeAsString](#schemamarkettypeasstring) | true     | none         | market type, e.g. "SPOT" for market like "BTCUSD", "PERPETUAL" for market like "BTC-USDC-PERP"                                                                |
-| contractMultiplier            | integer                                         | false    | none         | contract multiplier. (only applies to perpetual market)                                                                                                       |
-| settlementAssetSymbol         | string                                          | false    | none         | settlement asset symbol. (only applies to perpetual market)                                                                                                   |
-| openInterestUSD               | string                                          | true     | none         | cumulative notional value of all open interest for a specific derivative contract on the exchange.                                                            |
-| concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                      |
-| concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                     |
-| expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                        |
+| Name                          | Type                                            | Required | Restrictions | Description                                                                                                                                                                                              |
+| ----------------------------- | ----------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                                                                         |
+| symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                                                            |
+| baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                                                                          |
+| underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                                                                         |
+| quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                                                                         |
+| underlyingQuoteSymbol         | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying quote asset symbol (only applies to derivative market)                                                                                                                                        |
+| quoteAssetId                  | [AssetID](#schemaassetid)                       | true     | none         | quote asset id                                                                                                                                                                                           |
+| baseAssetId                   | [AssetID](#schemaassetid)                       | true     | none         | base asset id                                                                                                                                                                                            |
+| quotePrecision                | integer                                         | true     | none         | quote precision                                                                                                                                                                                          |
+| basePrecision                 | integer                                         | true     | none         | base precision                                                                                                                                                                                           |
+| pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                                                                       |
+| quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                                                                    |
+| costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                                                                    |
+| priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price.                                                                                                                                                  |
+| minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
+| maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
+| maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
+| minPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
+| maxCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
+| minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
+| timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                                                                |
+| tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                             |
+| liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                                                                     |
+| liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                                                                     |
+| makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
+| takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
+| roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                                                                    |
+| makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                                                                   |
+| orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                                                                     |
+| spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                                                                     |
+| marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                                                                   |
+| marketEnabled                 | boolean                                         | true     | none         | market enabled                                                                                                                                                                                           |
+| createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                                                                     |
+| cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                                                                     |
+| liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                                                                      |
+| liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                                                                  |
+| feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)                                            |
+| feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                                                                 |
+| marketType                    | [MarketTypeAsString](#schemamarkettypeasstring) | true     | none         | market type, e.g. "SPOT" for market like "BTCUSD", "PERPETUAL" for market like "BTC-USDC-PERP", "DATED_FUTURE" for market like "BTC-USDC-20250901", "OPTION" for market like "BTC-USDC-20250901-90000-C" |
+| contractMultiplier            | integer                                         | false    | none         | contract multiplier. (only applies to perpetual market)                                                                                                                                                  |
+| settlementAssetSymbol         | string                                          | false    | none         | settlement asset symbol. (only applies to perpetual market)                                                                                                                                              |
+| openInterestUSD               | string                                          | true     | none         | cumulative notional value of all open interest for a specific derivative contract on the exchange.                                                                                                       |
+| concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                                                                 |
+| concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                                                                |
+| expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                                                                   |
 
 <h2 id="tocS_Asset">Asset</h2>
 <!-- backwards compatibility -->
@@ -20897,7 +21490,7 @@ unique asset ID
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -21044,7 +21637,7 @@ unique asset ID
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -21134,15 +21727,18 @@ time in force
 ```json
 {
   "type": "string",
+  "description": "Order Types supported for the market.",
   "enum": ["LMT", "MKT", "STOP_LIMIT"]
 }
 ```
 
+Order Types supported for the market.
+
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description |
-| ----------- | ------ | -------- | ------------ | ----------- |
-| _anonymous_ | string | false    | none         | none        |
+| Name        | Type   | Required | Restrictions | Description                           |
+| ----------- | ------ | -------- | ------------ | ------------------------------------- |
+| _anonymous_ | string | false    | none         | Order Types supported for the market. |
 
 #### Enumerated Values
 
@@ -21484,7 +22080,7 @@ as string
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -21506,7 +22102,7 @@ as string
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -21665,7 +22261,7 @@ Derivatives Position of one market for the trading account
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
@@ -21788,7 +22384,7 @@ Derivatives Settlement of one market for the trading account
         {
           "type": "string",
           "format": "date-time",
-          "example": "2021-05-20T01:01:01.000Z",
+          "example": "2025-05-20T01:01:01.000Z",
           "description": "ISO 8601 with millisecond as string"
         }
       ]
