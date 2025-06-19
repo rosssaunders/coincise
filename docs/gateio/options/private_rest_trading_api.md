@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-98-0) Gate API v4 v4.98.0
+# [#](#gate-api-v4-v4-99-0) Gate API v4 v4.99.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -87,7 +87,7 @@ liquidity.
 2.  Provide other transaction volume screenshot or VIP level
 3.  Brief introduction of market making method and scale
 
-Provide the above content and submit to [mm@gate.io](mailto:mm@gate.io) , we
+Provide the above content and submit to [mm@gate.com](mailto:mm@gate.com) , we
 will accept within 3 working days.
 
 TIP
@@ -102,8 +102,9 @@ any of the following ways:
 
 - Submit Work Order Feedback
 - Online Work Order Feedback
-- Send your contact information and questions to [mm@gate.io](mailto:mm@gate.io)
-  We will assign technical specialists to serve you.
+- Send your contact information and questions to
+  [mm@gate.com](mailto:mm@gate.com) We will assign technical specialists to
+  serve you.
 
 If you encounter API errors, it is recommended that you sort out the following
 content, so that we can quickly analyze the problem for you:
@@ -2467,7 +2468,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | limit    | query | integer | false    | Maximum number of order depth data in asks or bids                                                   |
 | with_id  | query | boolean | false    | Whether the order book update ID will be returned. This ID increases by 1 on every order book update |
 
-#### [#](#enumerated-values-119) Enumerated Values
+#### [#](#enumerated-values-115) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2673,7 +2674,7 @@ _Get options candlesticks_
 | to       | query | integer(int64) | false    | End timestamp                                             |
 | interval | query | string         | false    | Interval time between data points                         |
 
-#### [#](#enumerated-values-120) Enumerated Values
+#### [#](#enumerated-values-116) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2740,7 +2741,7 @@ _Mark price candlesticks of an underlying_
 | to         | query | integer(int64) | false    | End timestamp                                             |
 | interval   | query | string         | false    | Interval time between data points                         |
 
-#### [#](#enumerated-values-121) Enumerated Values
+#### [#](#enumerated-values-117) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2919,7 +2920,7 @@ Status Code **200**
 | » orders_limit                                                     | integer(int32) | Maximum number of outstanding orders                                                        |
 | » position_notional_limit                                          | integer(int64) | Notional value upper limit, including the nominal value of positions and outstanding orders |
 
-#### [#](#enumerated-values-122) Enumerated Values
+#### [#](#enumerated-values-118) Enumerated Values
 
 | Property    | Value |
 | ----------- | ----- |
@@ -2959,7 +2960,7 @@ _List account changing history_
 - refr: Referrer rebate
 - set: settlement PNL
 
-#### [#](#enumerated-values-123) Enumerated Values
+#### [#](#enumerated-values-119) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3229,7 +3230,7 @@ Status Code **200**
 | » text        | string         | Text of close order          |
 | » settle_size | string         | settlement size              |
 
-#### [#](#enumerated-values-124) Enumerated Values
+#### [#](#enumerated-values-120) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3300,7 +3301,7 @@ _Create an options order_
 - liquidation: from liquidation
 - insurance: from insurance
 
-#### [#](#enumerated-values-125) Enumerated Values
+#### [#](#enumerated-values-121) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3400,7 +3401,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Reference user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-126) Enumerated Values
+#### [#](#enumerated-values-122) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3443,7 +3444,7 @@ _List options orders_
 | from       | query | integer(int64) | false    | Start timestamp                                           |
 | to         | query | integer(int64) | false    | End timestamp                                             |
 
-#### [#](#enumerated-values-127) Enumerated Values
+#### [#](#enumerated-values-123) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -3545,7 +3546,7 @@ how the order is created:
 string | Maker fee | | »» refu | integer | Reference user ID | | »» refr |
 string | Referrer rebate |
 
-#### [#](#enumerated-values-128) Enumerated Values
+#### [#](#enumerated-values-124) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3584,7 +3585,7 @@ _Cancel all `open` orders matched_
 | underlying | query | string | false    | Underlying                                       |
 | side       | query | string | false    | All bids or asks. Both included if not specified |
 
-#### [#](#enumerated-values-129) Enumerated Values
+#### [#](#enumerated-values-125) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3686,7 +3687,7 @@ how the order is created:
 string | Maker fee | | »» refu | integer | Reference user ID | | »» refr |
 string | Referrer rebate |
 
-#### [#](#enumerated-values-130) Enumerated Values
+#### [#](#enumerated-values-126) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3815,7 +3816,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Reference user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-131) Enumerated Values
+#### [#](#enumerated-values-127) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3944,7 +3945,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Reference user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-132) Enumerated Values
+#### [#](#enumerated-values-128) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -4100,7 +4101,7 @@ Status Code **200**
 | » underlying_price | string         | Underlying price (quote currency)                    |
 | » role             | string         | Trade role. Available values are `taker` and `maker` |
 
-#### [#](#enumerated-values-133) Enumerated Values
+#### [#](#enumerated-values-129) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |

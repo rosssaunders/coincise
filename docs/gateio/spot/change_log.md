@@ -1,5 +1,11 @@
 # [#](#changelog) Changelog
 
+**v4.99.0**
+
+- Add `refresh_time` field in `GET /spot/accounts`、`GET /spot/real_accounts`
+  endpoint response
+- Remove the `PUT /earn/uni/interest_reinvest` endpoint
+
 **v4.98.0**
 
 - New feature `/earn/uni/rate` endpoint, Currency estimate annualized interest
