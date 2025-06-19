@@ -2,6 +2,11 @@
 
 ## Change Log
 
+2025-06-17
+
+- USDT-M Perp Futures: Websocket ‘Market Depth Data’ push intervals adjusted to
+  200ms and 500ms.
+
 2025-06-12
 
 - USDT-M Perp Futures: The order placement API response now includes an
