@@ -273,8 +273,7 @@ to determine the funding fee interval of a contract.
 
 ### Get funding rate history
 
-Retrieve funding rate history. This endpoint can retrieve data from the last 3
-months.
+Retrieve funding rate history. This endpoint can return up to 400 records.
 
 #### Rate Limit: 10 requests per 2 seconds
 
