@@ -1,5 +1,14 @@
 # Change Log
 
+#### 2025-06-20
+
+###### REST API
+
+*   \[New\] `/contract/public/market-trade` Query the latest trade data
+    *   Feat: Retrieve up to the most recent 100 trade records
+
+* * *
+
 #### 2025-06-05
 
 ###### REST API
