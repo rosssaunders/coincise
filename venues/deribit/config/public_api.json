@@ -6,7 +6,7 @@
     "Session management",
     "Supporting",
     "Subscription management",
-    "Market Data",
+    "Market data",
     "RPC Error Codes"
   ],
   "output": "../../docs/deribit/public_api.md",

@@ -4,8 +4,6 @@
 
 # Rate Limits
 
-- Updated 8 days ago
-
 ### Caution
 
 #### **Exchange-Wide Compliance (OTV & API Usage Policy)**
@@ -286,8 +284,6 @@ requests.
 
 # Connection Management
 
-- Updated 8 days ago
-
 Users can connect to the Deribit platform using either a **connection-scoped**
 or **session-scoped** authentication token. Each approach has different
 properties, lifespans, and limitations. Understanding how these scopes work
@@ -441,8 +437,6 @@ when logging out, they can override this setting with `Tag 9003.`
 
 # API Usage Policy
 
-- Updated 3 months ago
-
 Deribit is committed to providing a fast, reliable, and efficient trading
 platform for all users. To maintain the integrity and performance of our system,
 we are introducing new guidelines for API usage. These guidelines are aimed at
@@ -565,8 +559,6 @@ reach out to our support team.
 
 # Server Infrastructure
 
-- Updated 3 months ago
-
 ## Server Infrastructure[](#heading-1)
 
 Deribit infrastructure is hosted in Equinix LD4 in Slough (UK). Traders can
@@ -681,8 +673,6 @@ LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
 
 # Asia Gateway
 
-- Updated 3 months ago
-
 To offer faster access to the Deribit platform for clients located in Asia, we
 offer a gateway connecting to Deribit from Hong Kong.
 
@@ -699,8 +689,6 @@ FIX connections are not supported via the Asia Gateway.
 Please use [asia.deribit.com](http://asia.deribit.com) to access the gateway.
 
 # Deribit AWS Endpoint Service instruction
-
-- Updated 3 months ago
 
 In order to offer its customers residing in AWS a direct connection to its
 backend systems, Deribit has created an AWS Endpoint Service for customers to
@@ -884,8 +872,6 @@ your UID alongside the exact time window so we can trace it back from the logs
 for you.
 
 # Deribit AWS Multicast Service Instruction
-
-- Updated 3 months ago
 
 ## Introduction[](#heading-1)
 
@@ -1103,8 +1089,6 @@ your UID alongside the exact time window so we can trace it back from the logs
 for you.
 
 # Accessing historical trades and orders using API
-
-- Updated 2 months ago
 
 #### Overview
 

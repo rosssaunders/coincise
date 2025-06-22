@@ -115,6 +115,12 @@ class ExtractionUtils {
         return null
       }
 
+      // Remove the updated timestamp if present
+      const updatedTimestamp = article.querySelector("li.text-gray-600.okt")
+      if (updatedTimestamp) {
+        updatedTimestamp.remove()
+      }
+
       // Get the header and content section
       const header = article.querySelector("header.mb-5")
       const contentSection = article.querySelector(
