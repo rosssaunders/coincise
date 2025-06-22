@@ -4,27 +4,27 @@ improved
 
 # [\[Notice\] New Response Fields Added to Allowlisted Withdrawal Address API (7/7 estimated)](/changelog/allowlisted_withdrawal_address_update)
 
-6 days ago
+13 days ago
 
 # [\[Important\] BingX vasp_uuid Update & Withdrawal Wallet Re-registration Required (June 5, 2025)](/changelog/vasp_uuid_change_bingx)
 
-11 days ago
+18 days ago
 
 added
 
 # [\[Notice\] Self-Match Prevention (SMP) Feature to Be Released on July 2](/changelog/smp)
 
-13 days ago
+20 days ago
 
 added
 
 # [\[Notice\] Post Only Order Condition to Be Supported on July 2](/changelog/post_only)
 
-13 days ago
+20 days ago
 
 # [\[Notice\] Update to WebSocket API Orderbook Unit Options on July 2](/changelog/notice-update-to-websocket-api-orderbook-unit-option)
 
-13 days ago
+20 days ago
 
 added
 
@@ -36,13 +36,13 @@ added
 
 # [\[Notice\] Addition of 'Cancel Digital Asset Withdrawal'](/changelog/cancel-digital-asset-withdrawal)
 
-about 2 months ago
+2 months ago
 
 improved
 
 # [\[Important\] 30-Level Order Book and Stop-Limit Order Policy Update](/changelog/orderbook_expansion)
 
-about 2 months ago
+2 months ago
 
 # [\[Important\] Binance/BitGet Allowlisted Withdrawal Wallet Address deleted and re-registration required (2/25 23:00 SGT ~)](/changelog/vasp_uuid_change_action_needed)
 
