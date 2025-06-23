@@ -1287,3 +1287,1398 @@ Adjusted based on the limit:
 
 > Source:
 > [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book)
+
+## Recent Trades List
+
+### API Description
+
+Get recent market trades
+
+### HTTP Request
+
+GET `/fapi/v1/trades`
+
+### Request Weight
+
+**5**
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description            |
+| ------ | ------ | --------- | ---------------------- |
+| symbol | STRING | YES       |                        |
+| limit  | INT    | NO        | Default 500; max 1000. |
+
+> - Market trades means trades filled in the order book. Only market trades will
+>   be returned, which means the insurance fund trades and ADL trades won't be
+>   returned.
+
+### Response Example
+
+```json
+[
+  {
+    "id": 28457,
+    "price": "4.00000100",
+    "qty": "12.00000000",
+    "quoteQty": "48.00",
+    "time": 1499865549590,
+    "isBuyerMaker": true
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List)
+
+## Old Trades Lookup (MARKET_DATA)
+
+### API Description
+
+Get older market historical trades.
+
+### HTTP Request
+
+GET `/fapi/v1/historicalTrades`
+
+### Request Weight
+
+**20**
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description                                             |
+| ------ | ------ | --------- | ------------------------------------------------------- |
+| symbol | STRING | YES       |                                                         |
+| limit  | INT    | NO        | Default 100; max 500.                                   |
+| fromId | LONG   | NO        | TradeId to fetch from. Default gets most recent trades. |
+
+> - Market trades means trades filled in the order book. Only market trades will
+>   be returned, which means the insurance fund trades and ADL trades won't be
+>   returned.
+> - Only supports data from within the last three months
+
+### Response Example
+
+```json
+[
+  {
+    "id": 28457,
+    "price": "4.00000100",
+    "qty": "12.00000000",
+    "quoteQty": "8000.00",
+    "time": 1499865549590,
+    "isBuyerMaker": true
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup)
+
+## Compressed/Aggregate Trades List
+
+### API Description
+
+Get compressed, aggregate market trades. Market trades that fill in 100ms with
+the same price and the same taking side will have the quantity aggregated.
+
+### HTTP Request
+
+GET `/fapi/v1/aggTrades`
+
+### Request Weight
+
+20
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                              |
+| --------- | ------ | --------- | -------------------------------------------------------- |
+| symbol    | STRING | YES       |                                                          |
+| fromId    | LONG   | NO        | ID to get aggregate trades from INCLUSIVE.               |
+| startTime | LONG   | NO        | Timestamp in ms to get aggregate trades from INCLUSIVE.  |
+| endTime   | LONG   | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |
+| limit     | INT    | NO        | Default 500; max 1000.                                   |
+
+> - support querying futures trade histories that are not older than one year
+> - If both `startTime` and `endTime` are sent, time between `startTime` and
+>   `endTime` must be less than 1 hour.
+> - If `fromId`, `startTime`, and `endTime` are not sent, the most recent
+>   aggregate trades will be returned.
+> - Only market trades will be aggregated and returned, which means the
+>   insurance fund trades and ADL trades won't be aggregated.
+> - Sending both `startTime`/`endTime` and `fromId` might cause response
+>   timeout, please send either `fromId` or `startTime`/`endTime`
+
+### Response Example
+
+```json
+[
+  {
+    "a": 26129, // Aggregate tradeId
+    "p": "0.01633102", // Price
+    "q": "4.70443515", // Quantity
+    "f": 27781, // First tradeId
+    "l": 27781, // Last tradeId
+    "T": 1498793709153, // Timestamp
+    "m": true // Was the buyer the maker?
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List)
+
+## Kline/Candlestick Data
+
+### API Description
+
+Kline/candlestick bars for a symbol. Klines are uniquely identified by their
+open time.
+
+### HTTP Request
+
+GET `/fapi/v1/klines`
+
+### Request Weight
+
+based on parameter `LIMIT`
+
+| LIMIT         | weight |
+| ------------- | ------ |
+| \[1,100)      | 1      |
+| \[100, 500)   | 2      |
+| \[500, 1000\] | 5      |
+| \> 1000       | 10     |
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description            |
+| --------- | ------ | --------- | ---------------------- |
+| symbol    | STRING | YES       |                        |
+| interval  | ENUM   | YES       |                        |
+| startTime | LONG   | NO        |                        |
+| endTime   | LONG   | NO        |                        |
+| limit     | INT    | NO        | Default 500; max 1500. |
+
+> - If startTime and endTime are not sent, the most recent klines are returned.
+
+### Response Example
+
+```json
+[
+  [
+    1499040000000, // Open time
+    "0.01634790", // Open
+    "0.80000000", // High
+    "0.01575800", // Low
+    "0.01577100", // Close
+    "148976.11427815", // Volume
+    1499644799999, // Close time
+    "2434.19055334", // Quote asset volume
+    308, // Number of trades
+    "1756.87402397", // Taker buy base asset volume
+    "28.46694368", // Taker buy quote asset volume
+    "17928899.62484339" // Ignore.
+  ]
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data)
+
+## Continuous Contract Kline/Candlestick Data
+
+### API Description
+
+Kline/candlestick bars for a specific contract type. Klines are uniquely
+identified by their open time.
+
+### HTTP Request
+
+GET `/fapi/v1/continuousKlines`
+
+### Request Weight
+
+based on parameter `LIMIT`
+
+| LIMIT         | weight |
+| ------------- | ------ |
+| \[1,100)      | 1      |
+| \[100, 500)   | 2      |
+| \[500, 1000\] | 5      |
+| \> 1000       | 10     |
+
+### Request Parameters
+
+| Name         | Type   | Mandatory | Description            |
+| ------------ | ------ | --------- | ---------------------- |
+| pair         | STRING | YES       |                        |
+| contractType | ENUM   | YES       |                        |
+| interval     | ENUM   | YES       |                        |
+| startTime    | LONG   | NO        |                        |
+| endTime      | LONG   | NO        |                        |
+| limit        | INT    | NO        | Default 500; max 1500. |
+
+> - If startTime and endTime are not sent, the most recent klines are returned.
+
+> - Contract type:
+>   - PERPETUAL
+>   - CURRENT_QUARTER
+>   - NEXT_QUARTER
+
+### Response Example
+
+```json
+[
+  [
+    1607444700000, // Open time
+    "18879.99", // Open
+    "18900.00", // High
+    "18878.98", // Low
+    "18896.13", // Close (or latest price)
+    "492.363", // Volume
+    1607444759999, // Close time
+    "9302145.66080", // Quote asset volume
+    1874, // Number of trades
+    "385.983", // Taker buy volume
+    "7292402.33267", // Taker buy quote asset volume
+    "0" // Ignore.
+  ]
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data)
+
+## Index Price Kline/Candlestick Data
+
+### API Description
+
+Kline/candlestick bars for the index price of a pair. Klines are uniquely
+identified by their open time.
+
+### HTTP Request
+
+GET `/fapi/v1/indexPriceKlines`
+
+### Request Weight
+
+based on parameter `LIMIT`
+
+| LIMIT         | weight |
+| ------------- | ------ |
+| \[1,100)      | 1      |
+| \[100, 500)   | 2      |
+| \[500, 1000\] | 5      |
+| \> 1000       | 10     |
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description            |
+| --------- | ------ | --------- | ---------------------- |
+| pair      | STRING | YES       |                        |
+| interval  | ENUM   | YES       |                        |
+| startTime | LONG   | NO        |                        |
+| endTime   | LONG   | NO        |                        |
+| limit     | INT    | NO        | Default 500; max 1500. |
+
+- If startTime and endTime are not sent, the most recent klines are returned.
+
+### Response Example
+
+```json
+[
+  [
+    1591256400000, // Open time
+    "9653.69440000", // Open
+    "9653.69640000", // High
+    "9651.38600000", // Low
+    "9651.55200000", // Close (or latest price)
+    "0	", // Ignore
+    1591256459999, // Close time
+    "0", // Ignore
+    60, // Ignore
+    "0", // Ignore
+    "0", // Ignore
+    "0" // Ignore
+  ]
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data)
+
+## Mark Price Kline/Candlestick Data
+
+### API Description
+
+Kline/candlestick bars for the mark price of a symbol. Klines are uniquely
+identified by their open time.
+
+### HTTP Request
+
+GET `/fapi/v1/markPriceKlines`
+
+### Request Weight
+
+based on parameter `LIMIT`
+
+| LIMIT         | weight |
+| ------------- | ------ |
+| \[1,100)      | 1      |
+| \[100, 500)   | 2      |
+| \[500, 1000\] | 5      |
+| \> 1000       | 10     |
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description            |
+| --------- | ------ | --------- | ---------------------- |
+| symbol    | STRING | YES       |                        |
+| interval  | ENUM   | YES       |                        |
+| startTime | LONG   | NO        |                        |
+| endTime   | LONG   | NO        |                        |
+| limit     | INT    | NO        | Default 500; max 1500. |
+
+> - If startTime and endTime are not sent, the most recent klines are returned.
+
+### Response Example
+
+```json
+[
+  [
+    1591256460000, // Open time
+    "9653.29201333", // Open
+    "9654.56401333", // High
+    "9653.07367333", // Low
+    "9653.07367333", // Close (or latest price)
+    "0	", // Ignore
+    1591256519999, // Close time
+    "0", // Ignore
+    60, // Ignore
+    "0", // Ignore
+    "0", // Ignore
+    "0" // Ignore
+  ]
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data)
+
+## Premium index Kline Data
+
+### API Description
+
+Premium index kline bars of a symbol. Klines are uniquely identified by their
+open time.
+
+### HTTP Request
+
+GET `/fapi/v1/premiumIndexKlines`
+
+### Request Weight
+
+based on parameter `LIMIT`
+
+| LIMIT         | weight |
+| ------------- | ------ |
+| \[1,100)      | 1      |
+| \[100, 500)   | 2      |
+| \[500, 1000\] | 5      |
+| \> 1000       | 10     |
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description            |
+| --------- | ------ | --------- | ---------------------- |
+| symbol    | STRING | YES       |                        |
+| interval  | ENUM   | YES       |                        |
+| startTime | LONG   | NO        |                        |
+| endTime   | LONG   | NO        |                        |
+| limit     | INT    | NO        | Default 500; max 1500. |
+
+> - If startTime and endTime are not sent, the most recent klines are returned.
+
+### Response Example
+
+```json
+[
+  [
+    1691603820000, // Open time
+    "-0.00042931", // Open
+    "-0.00023641", // High
+    "-0.00059406", // Low
+    "-0.00043659", // Close
+    "0", // Ignore
+    1691603879999, // Close time
+    "0", // Ignore
+    12, // Ignore
+    "0", // Ignore
+    "0", // Ignore
+    "0" // Ignore
+  ]
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data)
+
+## Mark Price
+
+### API Description
+
+Mark Price and Funding Rate
+
+### HTTP Request
+
+GET `/fapi/v1/premiumIndex`
+
+### Request Weight
+
+**1**
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+
+### Response Example
+
+> **Response:**
+
+```json
+{
+  "symbol": "BTCUSDT",
+  "markPrice": "11793.63104562", // mark price
+  "indexPrice": "11781.80495970", // index price
+  "estimatedSettlePrice": "11781.16138815", // Estimated Settle Price, only useful in the last hour before the settlement starts.
+  "lastFundingRate": "0.00038246", // This is the Latest funding rate
+  "interestRate": "0.00010000",
+  "nextFundingTime": 1597392000000,
+  "time": 1597370495002
+}
+```
+
+> **OR (when symbol not sent)**
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "markPrice": "11793.63104562", // mark price
+    "indexPrice": "11781.80495970", // index price
+    "estimatedSettlePrice": "11781.16138815", // Estimated Settle Price, only useful in the last hour before the settlement starts.
+    "lastFundingRate": "0.00038246", // This is the Latest funding rate
+    "interestRate": "0.00010000",
+    "nextFundingTime": 1597392000000,
+    "time": 1597370495002
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price)
+
+## Get Funding Rate History
+
+### API Description
+
+Get Funding Rate History
+
+### HTTP Request
+
+GET `/fapi/v1/fundingRate`
+
+### Request Weight
+
+share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                          |
+| --------- | ------ | --------- | ---------------------------------------------------- |
+| symbol    | STRING | NO        |                                                      |
+| startTime | LONG   | NO        | Timestamp in ms to get funding rate from INCLUSIVE.  |
+| endTime   | LONG   | NO        | Timestamp in ms to get funding rate until INCLUSIVE. |
+| limit     | INT    | NO        | Default 100; max 1000                                |
+
+> - If `startTime` and `endTime` are not sent, the most recent `limit` datas are
+>   returned.
+> - If the number of data between `startTime` and `endTime` is larger than
+>   `limit`, return as `startTime` + `limit`.
+> - In ascending order.
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "fundingRate": "-0.03750000",
+    "fundingTime": 1570608000000,
+    "markPrice": "34287.54619963" // mark price associated with a particular funding fee charge
+  },
+  {
+    "symbol": "BTCUSDT",
+    "fundingRate": "0.00010000",
+    "fundingTime": 1570636800000,
+    "markPrice": "34287.54619963"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History)
+
+## Get Funding Rate Info
+
+### API Description
+
+Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor /
+fundingIntervalHours adjustment
+
+### HTTP Request
+
+GET `/fapi/v1/fundingInfo`
+
+### Request Weight
+
+**0** share 500/5min/IP rate limit with `GET /fapi/v1/fundingInfo`
+
+### Request Parameters
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "BLZUSDT",
+    "adjustedFundingRateCap": "0.02500000",
+    "adjustedFundingRateFloor": "-0.02500000",
+    "fundingIntervalHours": 8,
+    "disclaimer": false // ingore
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info)
+
+## 24hr Ticker Price Change Statistics
+
+### API Description
+
+24 hour rolling window price change statistics.  
+**Careful** when accessing this with no symbol.
+
+### HTTP Request
+
+GET `/fapi/v1/ticker/24hr`
+
+### Request Weight
+
+**1** for a single symbol;  
+**40** when the symbol parameter is omitted
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+
+> - If the symbol is not sent, tickers for all symbols will be returned in an
+>   array.
+
+### Response Example
+
+> **Response:**
+
+```json
+{
+  "symbol": "BTCUSDT",
+  "priceChange": "-94.99999800",
+  "priceChangePercent": "-95.960",
+  "weightedAvgPrice": "0.29628482",
+  "lastPrice": "4.00000200",
+  "lastQty": "200.00000000",
+  "openPrice": "99.00000000",
+  "highPrice": "100.00000000",
+  "lowPrice": "0.10000000",
+  "volume": "8913.30000000",
+  "quoteVolume": "15.30000000",
+  "openTime": 1499783499040,
+  "closeTime": 1499869899040,
+  "firstId": 28385, // First tradeId
+  "lastId": 28460, // Last tradeId
+  "count": 76 // Trade count
+}
+```
+
+> OR
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "priceChange": "-94.99999800",
+    "priceChangePercent": "-95.960",
+    "weightedAvgPrice": "0.29628482",
+    "lastPrice": "4.00000200",
+    "lastQty": "200.00000000",
+    "openPrice": "99.00000000",
+    "highPrice": "100.00000000",
+    "lowPrice": "0.10000000",
+    "volume": "8913.30000000",
+    "quoteVolume": "15.30000000",
+    "openTime": 1499783499040,
+    "closeTime": 1499869899040,
+    "firstId": 28385, // First tradeId
+    "lastId": 28460, // Last tradeId
+    "count": 76 // Trade count
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics)
+
+## Symbol Price Ticker
+
+### API Description
+
+Latest price for a symbol or symbols.
+
+### HTTP Request
+
+GET `/fapi/v1/ticker/price`
+
+**Weight:**
+
+**1** for a single symbol;  
+**2** when the symbol parameter is omitted
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+
+> - If the symbol is not sent, prices for all symbols will be returned in an
+>   array.
+
+### Response Example
+
+```json
+{
+  "symbol": "BTCUSDT",
+  "price": "6000.01",
+  "time": 1589437530011 // Transaction time
+}
+```
+
+> OR
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "price": "6000.01",
+    "time": 1589437530011
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker)
+
+## Symbol Price Ticker V2
+
+### API Description
+
+Latest price for a symbol or symbols.
+
+### HTTP Request
+
+GET `/fapi/v2/ticker/price`
+
+**Weight:**
+
+**1** for a single symbol;  
+**2** when the symbol parameter is omitted
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+
+> - If the symbol is not sent, prices for all symbols will be returned in an
+>   array.
+> - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from
+>   this endpoint, please ignore.
+
+### Response Example
+
+```json
+{
+  "symbol": "BTCUSDT",
+  "price": "6000.01",
+  "time": 1589437530011 // Transaction time
+}
+```
+
+> OR
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "price": "6000.01",
+    "time": 1589437530011
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-v2)
+
+## Symbol Order Book Ticker
+
+### API Description
+
+Best price/qty on the order book for a symbol or symbols.
+
+### HTTP Request
+
+GET `/fapi/v1/ticker/bookTicker`
+
+### Request Weight
+
+**2** for a single symbol;  
+**5** when the symbol parameter is omitted
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+
+> - If the symbol is not sent, bookTickers for all symbols will be returned in
+>   an array.
+> - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from
+>   this endpoint, please ignore.
+
+### Response Example
+
+```json
+{
+  "symbol": "BTCUSDT",
+  "bidPrice": "4.00000000",
+  "bidQty": "431.00000000",
+  "askPrice": "4.00000200",
+  "askQty": "9.00000000",
+  "time": 1589437530011 // Transaction time
+}
+```
+
+> OR
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "bidPrice": "4.00000000",
+    "bidQty": "431.00000000",
+    "askPrice": "4.00000200",
+    "askQty": "9.00000000",
+    "time": 1589437530011
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker)
+
+## Quarterly Contract Settlement Price
+
+### API Description
+
+Latest price for a symbol or symbols.
+
+### HTTP Request
+
+GET `/futures/data/delivery-price`
+
+### Request Weight
+
+**0**
+
+### Request Parameters
+
+| Name | Type   | Mandatory | Description |
+| ---- | ------ | --------- | ----------- |
+| pair | STRING | YES       | e.g BTCUSDT |
+
+### Response Example
+
+```json
+[
+  {
+    "deliveryTime": 1695945600000,
+    "deliveryPrice": 27103.0
+  },
+  {
+    "deliveryTime": 1688083200000,
+    "deliveryPrice": 30733.6
+  },
+  {
+    "deliveryTime": 1680220800000,
+    "deliveryPrice": 27814.2
+  },
+  {
+    "deliveryTime": 1648166400000,
+    "deliveryPrice": 44066.3
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price)
+
+## Open Interest
+
+### API Description
+
+Get present open interest of a specific symbol.
+
+### HTTP Request
+
+GET `/fapi/v1/openInterest`
+
+### Request Weight
+
+**1**
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | YES       |             |
+
+### Response Example
+
+```json
+{
+  "openInterest": "10659.509",
+  "symbol": "BTCUSDT",
+  "time": 1589437530011 // Transaction time
+}
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest)
+
+## Open Interest Statistics
+
+### API Description
+
+Open Interest Statistics
+
+### HTTP Request
+
+GET `/futures/data/openInterestHist`
+
+### Request Weight
+
+**0**
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| symbol    | STRING | YES       |                                                 |
+| period    | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit     | LONG   | NO        | default 30, max 500                             |
+| startTime | LONG   | NO        |                                                 |
+| endTime   | LONG   | NO        |                                                 |
+
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 1 month is available.
+> - IP rate limit 1000 requests/5min
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "sumOpenInterest": "20403.63700000", // total open interest
+    "sumOpenInterestValue": "150570784.07809979", // total open interest value
+    "timestamp": "1583127900000"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "sumOpenInterest": "20401.36700000",
+    "sumOpenInterestValue": "149940752.14464448",
+    "timestamp": "1583128200000"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics)
+
+## Top Trader Long/Short Ratio (Positions)
+
+### API Description
+
+The proportion of net long and net short positions to total open positions of
+the top 20% users with the highest margin balance. Long Position % = Long
+positions of top traders / Total open positions of top traders Short Position %
+= Short positions of top traders / Total open positions of top traders
+Long/Short Ratio (Positions) = Long Position % / Short Position %
+
+### HTTP Request
+
+GET `/futures/data/topLongShortPositionRatio`
+
+### Request Weight
+
+**0**
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| symbol    | STRING | YES       |                                                 |
+| period    | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit     | LONG   | NO        | default 30, max 500                             |
+| startTime | LONG   | NO        |                                                 |
+| endTime   | LONG   | NO        |                                                 |
+
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
+> - IP rate limit 1000 requests/5min
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "longShortRatio": "1.4342", // long/short position ratio of top traders
+    "longAccount": "0.5891", // long positions ratio of top traders
+    "shortAccount": "0.4108", // short positions ratio of top traders
+    "timestamp": "1583139600000"
+  },
+
+  {
+    "symbol": "BTCUSDT",
+    "longShortRatio": "1.4337",
+    "longAccount": "0.3583",
+    "shortAccount": "0.6417",
+    "timestamp": "1583139900000"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio)
+
+## Top Trader Long/Short Ratio (Accounts)
+
+### API Description
+
+The proportion of net long and net short accounts to total accounts of the top
+20% users with the highest margin balance. Each account is counted once only.
+Long Account % = Accounts of top traders with net long positions / Total
+accounts of top traders with open positions Short Account % = Accounts of top
+traders with net short positions / Total accounts of top traders with open
+positions Long/Short Ratio (Accounts) = Long Account % / Short Account %
+
+### HTTP Request
+
+GET `/futures/data/topLongShortAccountRatio`
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| symbol    | STRING | YES       |                                                 |
+| period    | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit     | LONG   | NO        | default 30, max 500                             |
+| startTime | LONG   | NO        |                                                 |
+| endTime   | LONG   | NO        |                                                 |
+
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
+> - IP rate limit 1000 requests/5min
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "longShortRatio": "1.8105", // long/short account num ratio of top traders
+    "longAccount": "0.6442", // long account num ratio of top traders
+    "shortAccount": "0.3558", // long account num ratio of top traders
+    "timestamp": "1583139600000"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "longShortRatio": "0.5576",
+    "longAccount": "0.3580",
+    "shortAccount": "0.6420",
+    "timestamp": "1583139900000"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio)
+
+## Long/Short Ratio
+
+### API Description
+
+Query symbol Long/Short Ratio
+
+### HTTP Request
+
+GET `/futures/data/globalLongShortAccountRatio`
+
+### Request Weight
+
+**0**
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| symbol    | STRING | YES       |                                                 |
+| period    | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit     | LONG   | NO        | default 30, max 500                             |
+| startTime | LONG   | NO        |                                                 |
+| endTime   | LONG   | NO        |                                                 |
+
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
+> - IP rate limit 1000 requests/5min
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "BTCUSDT", // long/short account num ratio of all traders
+    "longShortRatio": "0.1960", //long account num ratio of all traders
+    "longAccount": "0.6622", // short account num ratio of all traders
+    "shortAccount": "0.3378",
+    "timestamp": "1583139600000"
+  },
+
+  {
+    "symbol": "BTCUSDT",
+    "longShortRatio": "1.9559",
+    "longAccount": "0.6617",
+    "shortAccount": "0.3382",
+    "timestamp": "1583139900000"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio)
+
+## Taker Buy/Sell Volume
+
+### API Description
+
+Taker Buy/Sell Volume
+
+### HTTP Request
+
+GET `/futures/data/takerlongshortRatio`
+
+### Request Weight
+
+**0**
+
+### Request Parameters
+
+| Name      | Type   | Mandatory | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| symbol    | STRING | YES       |                                                 |
+| period    | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit     | LONG   | NO        | default 30, max 500                             |
+| startTime | LONG   | NO        |                                                 |
+| endTime   | LONG   | NO        |                                                 |
+
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
+> - IP rate limit 1000 requests/5min
+
+### Response Example
+
+```json
+[
+  {
+    "buySellRatio": "1.5586",
+    "buyVol": "387.3300",
+    "sellVol": "248.5030",
+    "timestamp": "1585614900000"
+  },
+  {
+    "buySellRatio": "1.3104",
+    "buyVol": "343.9290",
+    "sellVol": "248.5030",
+    "timestamp": "1583139900000"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume)
+
+## Basis
+
+### API Description
+
+Query future basis
+
+### HTTP Request
+
+GET `/futures/data/basis`
+
+### Request Weight
+
+**0**
+
+### Request Parameters
+
+| Name         | Type   | Mandatory | Description                                     |
+| ------------ | ------ | --------- | ----------------------------------------------- |
+| pair         | STRING | YES       | BTCUSDT                                         |
+| contractType | ENUM   | YES       | CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL        |
+| period       | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit        | LONG   | YES       | Default 30,Max 500                              |
+| startTime    | LONG   | NO        |                                                 |
+| endTime      | LONG   | NO        |                                                 |
+
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
+
+### Response Example
+
+```json
+[
+  {
+    "indexPrice": "34400.15945055",
+    "contractType": "PERPETUAL",
+    "basisRate": "0.0004",
+    "futuresPrice": "34414.10",
+    "annualizedBasisRate": "",
+    "basis": "13.94054945",
+    "pair": "BTCUSDT",
+    "timestamp": 1698742800000
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis)
+
+## Composite Index Symbol Information
+
+### API Description
+
+Query composite index symbol information
+
+### HTTP Request
+
+GET `/fapi/v1/indexInfo`
+
+### Request Weight
+
+**1**
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+
+> - Only for composite index symbols
+
+### Response Example
+
+```json
+[
+  {
+    "symbol": "DEFIUSDT",
+    "time": 1589437530011, // Current time
+    "component": "baseAsset", //Component asset
+    "baseAssetList": [
+      {
+        "baseAsset": "BAL",
+        "quoteAsset": "USDT",
+        "weightInQuantity": "1.04406228",
+        "weightInPercentage": "0.02783900"
+      },
+      {
+        "baseAsset": "BAND",
+        "quoteAsset": "USDT",
+        "weightInQuantity": "3.53782729",
+        "weightInPercentage": "0.03935200"
+      }
+    ]
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information)
+
+## Multi-Assets Mode Asset Index
+
+### API Description
+
+asset index for Multi-Assets mode
+
+### HTTP Request
+
+GET `/fapi/v1/assetIndex`
+
+### Request Weight
+
+**1** for a single symbol; **10** when the symbol parameter is omitted
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        | Asset pair  |
+
+### Response Example
+
+> **Response:**
+
+```json
+{
+  "symbol": "ADAUSD",
+  "time": 1635740268004,
+  "index": "1.92957370",
+  "bidBuffer": "0.10000000",
+  "askBuffer": "0.10000000",
+  "bidRate": "1.73661633",
+  "askRate": "2.12253107",
+  "autoExchangeBidBuffer": "0.05000000",
+  "autoExchangeAskBuffer": "0.05000000",
+  "autoExchangeBidRate": "1.83309501",
+  "autoExchangeAskRate": "2.02605238"
+}
+```
+
+> Or(without symbol)
+
+```json
+[
+  {
+    "symbol": "ADAUSD",
+    "time": 1635740268004,
+    "index": "1.92957370",
+    "bidBuffer": "0.10000000",
+    "askBuffer": "0.10000000",
+    "bidRate": "1.73661633",
+    "askRate": "2.12253107",
+    "autoExchangeBidBuffer": "0.05000000",
+    "autoExchangeAskBuffer": "0.05000000",
+    "autoExchangeBidRate": "1.83309501",
+    "autoExchangeAskRate": "2.02605238"
+  }
+]
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index)
+
+## Query Index Price Constituents
+
+### API Description
+
+Query index price constituents
+
+### HTTP Request
+
+GET `/fapi/v1/constituents`
+
+### Request Weight
+
+**2**
+
+### Request Parameters
+
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | YES       |             |
+
+### Response Example
+
+```json
+{
+  "symbol": "BTCUSDT",
+  "time": 1745401553408,
+  "constituents": [
+    {
+      "exchange": "binance",
+      "symbol": "BTCUSDT",
+      "price": "94057.03000000",
+      "weight": "0.51282051"
+    },
+    {
+      "exchange": "coinbase",
+      "symbol": "BTC-USDT",
+      "price": "94140.58000000",
+      "weight": "0.15384615"
+    },
+    {
+      "exchange": "gateio",
+      "symbol": "BTC_USDT",
+      "price": "94060.10000000",
+      "weight": "0.02564103"
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "BTC-USDT",
+      "price": "94096.70000000",
+      "weight": "0.07692308"
+    },
+    {
+      "exchange": "mxc",
+      "symbol": "BTCUSDT",
+      "price": "94057.02000000",
+      "weight": "0.07692308"
+    },
+    {
+      "exchange": "bitget",
+      "symbol": "BTCUSDT",
+      "price": "94064.03000000",
+      "weight": "0.07692308"
+    },
+    {
+      "exchange": "bybit",
+      "symbol": "BTCUSDT",
+      "price": "94067.90000000",
+      "weight": "0.07692308"
+    }
+  ]
+}
+```
+
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents)

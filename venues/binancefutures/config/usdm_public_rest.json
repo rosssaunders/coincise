@@ -1,5 +1,5 @@
 {
-  "endpoints2": [
+  "endpoints": [
     "derivatives/quick-start",
     "derivatives/usds-margined-futures/general-info",
     "derivatives/usds-margined-futures/common-definition",
@@ -34,16 +34,6 @@
     "derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information",
     "derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index",
     "derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents"
-  ],
-  "endpoints": [
-    "derivatives/quick-start",
-    "derivatives/usds-margined-futures/general-info",
-    "derivatives/usds-margined-futures/common-definition",
-    "derivatives/usds-margined-futures/error-code",
-    "derivatives/usds-margined-futures/market-data/rest-api",
-    "derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time",
-    "derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information",
-    "derivatives/usds-margined-futures/market-data/rest-api/Order-Book"
   ],
   "output_file": "binance/usdm/public_rest_api.md",
   "title": "Binance USDM Futures Public REST API Documentation"
