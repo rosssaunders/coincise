@@ -559,7 +559,7 @@ reach out to our support team.
 
 # Server Infrastructure
 
-## Server Infrastructure[](#heading-1)
+#### Server Infrastructure
 
 Deribit infrastructure is hosted in Equinix LD4 in Slough (UK). Traders can
 connect to our infrastructure in multiple ways: 
@@ -590,9 +590,9 @@ IP & Ports: 
 - 9881-FIX
 - 9883-FIX SSL
 
-[](https://support.deribit.com/hc/article_attachments/25944673358237)[![Deribit Global System Structure](/hc/article_attachments/25944673358237)](/hc/article_attachments/25944673358237)
+[](https://support.deribit.com/hc/article_attachments/28338442549789)[![Deribit Global System Structure](/hc/article_attachments/28338442549789)](/hc/article_attachments/28338442549789)
 
-## Hosting in the Client Rack[](#heading-2)
+#### Hosting in the Client Rack
 
 Clients can order a server for £250 + VAT (per server) a month.
 
@@ -635,9 +635,9 @@ Therefore, if interested, don't hesitate to get in touch with
   DRB Hosting
 - Network connectivity must be at the hot (back) side of the server
 
-## Cross Connects [](#heading-3)
+#### Cross Connects 
 
-For cross-connect, we recommend an LC-LC 10 Gb 50/125 OM3 fibre connection. The
+For cross-connect, we recommend an LC-LC 10 Gb 9/125µm OS2 fibre connection. The
 cross-connect should be a 10-gigabit cross-connect. Deribit will use policing on
 its switch to have an effective speed of 1-gigabit. It is mandatory to have a
 secondary, redundant cross connection.
@@ -647,7 +647,7 @@ Equinix fees. If you would like to cross-connect, please get in touch with your
 Equinix manager to request the service, and please write at systems@deribit.com
 to receive the LOA (valid for both the primary/secondary connection).
 
-## Q&A[](#heading-4)
+#### Q&A
 
 **What is the speed difference between the cross-connect and the hosted
 solution?**
