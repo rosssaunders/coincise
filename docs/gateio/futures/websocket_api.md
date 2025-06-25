@@ -1636,17 +1636,18 @@ Example of incremental push:
 
 - params
 
-| field             | type                    | description                                                                                                     |
-| ----------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `result`          | Object                  | Ask and bid price changes since the previous update                                                             |
-| »`t`              | Integer                 | Order book generation timestamp (in milliseconds)                                                               |
-| »`s`              | String                  | Name of the depth stream                                                                                        |
-| »`U`              | Integer                 | Starting order book update ID of this update                                                                    |
-| »`u`              | Integer                 | Ending order book update ID of this update                                                                      |
-| »`b`              | `Array[OrderBookArray]` | Bids updates since the last update                                                                              |
-| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth. |
-| »`a`              | `Array[OrderBookArray]` | Asks updates since the last update                                                                              |
-| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth. |
+| field             | type                    | description                                                                                                                                            |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result`          | Object                  | Ask and bid price changes since the previous update                                                                                                    |
+| »`t`              | Integer                 | Order book generation timestamp (in milliseconds)                                                                                                      |
+| »`full`           | Boolean                 | `true` indicates a full depth snapshot; `false` indicates incremental depth updates. When the value is `false`, this field is omitted from the message |
+| »`s`              | String                  | Name of the depth stream                                                                                                                               |
+| »`U`              | Integer                 | Starting order book update ID of this update                                                                                                           |
+| »`u`              | Integer                 | Ending order book update ID of this update                                                                                                             |
+| »`b`              | `Array[OrderBookArray]` | Bids updates since the last update                                                                                                                     |
+| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth.                                        |
+| »`a`              | `Array[OrderBookArray]` | Asks updates since the last update                                                                                                                     |
+| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth.                                        |
 
 ## [#](#order-book-v2-update-unsubscription) Order book V2 update unsubscription
 
@@ -7555,4 +7556,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                             |
 | »»`message`      | String  | Detailed error message                                                                                          |
 
-Last Updated: 6/5/2025, 9:08:58 AM
+Last Updated: 6/24/2025, 8:35:16 AM

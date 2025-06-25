@@ -2459,7 +2459,6 @@ Status Code **200**
 
 | Name             | Type           | Description                                     |
 | ---------------- | -------------- | ----------------------------------------------- |
-| _None_           | array          | \[Loan\]                                        |
 | » _None_         | object         | Loan                                            |
 | »» currency      | string         | Currency                                        |
 | »» currency_pair | string         | Currency pair                                   |
@@ -2583,7 +2582,6 @@ Status Code **200**
 
 | Name             | Type           | Description                                |
 | ---------------- | -------------- | ------------------------------------------ |
-| _None_           | array          | \[Interest record\]                        |
 | » _None_         | object         | Interest record                            |
 | »» currency      | string         | Currency name                              |
 | »» currency_pair | string         | Currency pair                              |
