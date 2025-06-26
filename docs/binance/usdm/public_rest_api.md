@@ -1145,14 +1145,14 @@ NONE
   "assets": [
     // assets information
     {
-      "asset": "BUSD",
+      "asset": "BTC",
       "marginAvailable": true, // whether the asset can be used as margin in Multi-Assets mode
-      "autoAssetExchange": 0 // auto-exchange threshold in Multi-Assets margin mode
+      "autoAssetExchange": "-0.10" // auto-exchange threshold in Multi-Assets margin mode
     },
     {
       "asset": "USDT",
       "marginAvailable": true,
-      "autoAssetExchange": 0
+      "autoAssetExchange": "0"
     },
     {
       "asset": "BNB",
@@ -1216,7 +1216,7 @@ NONE
           "filterType": "PERCENT_PRICE",
           "multiplierUp": "1.1500",
           "multiplierDown": "0.8500",
-          "multiplierDecimal": 4
+          "multiplierDecimal": "4"
         }
       ],
       "OrderType": [
