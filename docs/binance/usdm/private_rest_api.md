@@ -868,7 +868,7 @@ Different accounts with the same `tradeGroupId` are considered part of the same
 according to the taker-order's STP mode.
 
 A user can confirm if their accounts are under the same `tradeGroupId` from the
-API either from `GET fapi/v3/account` (REST API).
+API either from `GET /fapi/v1/accountConfig` (REST API).
 
 If the value is `-1`, then the `tradeGroupId` has not been set for that account,
 so the STP may only take place between orders of the same account.
