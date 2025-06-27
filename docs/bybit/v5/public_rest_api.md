@@ -1557,6 +1557,7 @@ with the example of BTCUSDT:
 | Code  | Description                                  |
 | :---: | :------------------------------------------- |
 | 81007 | Bybit Europe is not supported create API Key |
+| 20096 | need KYC authentication                      |
 
 # Get Bybit Server Time
 
