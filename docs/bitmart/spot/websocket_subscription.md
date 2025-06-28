@@ -264,7 +264,7 @@ Return data description:
 | base_volume_24h | String | 24-hour traded volume in base currency 
 | quote_volume_24h | String | 24-hour traded volume in quote currency 
 | s_t | Long | Create Time (timestamp in seconds) (The field will be removed, please use the ms_t field) 
-| ms_t | Long | Create Time (timestamp in millisecond) 
+| ms_t | Long | Data push Timestamp (timestamp in millisecond) 
 | fluctuation | String | 24-hour Price change 
 | bid_px | String | Best bid price 
 | bid_sz | String | Best bid quantity 
@@ -384,7 +384,7 @@ Return data description:
 | symbol | String | Trading pair, <code>BTC_USDT</code> 
 | asks | List<string></string> | Ask depth 
 | bids | List<string></string> | Bid depth 
-| ms_t | Long | Timestamp (in millisecond) 
+| ms_t | Long | Data push Timestamp (Timestamp in millisecond) 
 
 An example of the array of asks and bids values: \["161.96","7.37567"\], 161.96 is the price, and 7.37567 is the quantity.
 
@@ -441,7 +441,7 @@ Return data description:
 | symbol | String | Trading pair, <code>BTC_USDT</code> 
 | asks | List<string></string> | Ask depth 
 | bids | List<string></string> | Bid depth 
-| ms_t | Long | Timestamp (in millisecond) 
+| ms_t | Long | Data push Timestamp (Timestamp in millisecond) 
 | version | Long | data version 
 | type | String | data type<br>-<code>snapshot</code>=Full depth snapshot data<br>-<code>update</code>=Incremental depth data 
 
@@ -642,8 +642,8 @@ Return data description:
 | exec_type | string | Whether the trade was created by a maker or a taker.<br>-<code>M</code>=Maker<br>-<code>T</code>=Taker 
 | detail_id | string | Trade id 
 | client_order_id | string | Client-defined OrderId 
-| create_time | String | Order Create Time (in milliseconds) 
-| update_time | String | Order Update Time (in milliseconds) 
+| create_time | String | Order Create Timestamp (in milliseconds) 
+| update_time | String | Order Update Timestamp (in milliseconds) 
 | order_mode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=margin 
 | entrust_type | String | Order Type<br>-<code>NORMAL</code>=Normal trade order(Limit Order or Market Order)<br>-<code>LIMIT_MAKER</code>=PostOnly Order<br>-<code>IOC</code>=IOC Order 
 | order_state | String | Order State<br>-<code>new</code>=The order has been accepted by the engine.<br>-<code>partially_filled</code>=A part of the order has been filled.<br>-<code>filled</code>=The order has been completed.<br>-<code>canceled</code>=The order has been canceled by the user.<br>-<code>partially_canceled</code>=A part of the order has been filled , and the order has been canceled. 
