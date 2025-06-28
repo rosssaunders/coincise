@@ -3735,6 +3735,7 @@ succeeded, which failed, and why:
         "orderId": 125690984230,
         "orderListId": -1,
         "clientOrderId": "91fe37ce9e69c90d6358c0",
+        "transactTime": 1684804350068,
         "price": "23450.00000000",
         "origQty": "0.00847000",
         "executedQty": "0.00001000",
