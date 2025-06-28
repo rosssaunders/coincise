@@ -1,0 +1,45 @@
+name: AutoDoc Issue Creator
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  create-ccxt-issue:
+    if:
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.labels.*.name, 'auto-docs-update')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Changed Files
+        id: changed-files
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create Issue in CCXT Repository
+        run: |
+          chmod +x .github/scripts/create-ccxt-issue.sh
+          .github/scripts/create-ccxt-issue.sh \
+            "${{ github.event.pull_request.title }}" \
+            "${{ github.event.pull_request.number }}" \
+            "${{ github.event.pull_request.html_url }}" \
+            "${{ github.event.pull_request.body }}" \
+            "${{ github.event.pull_request.merged_by.login }}" \
+            "${{ github.event.pull_request.merged_at }}" \
+            "${{ github.repository_owner }}" \
+            "${{ github.event.repository.name }}" \
+            "${{ steps.changed-files.outputs.changed_files }}"
+        env:
+          GH_TOKEN: ${{ secrets.PAT_GITHUB }}
