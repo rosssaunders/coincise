@@ -1,6 +1,6 @@
 # Upbit API Change Log
 
-improved
+improved x
 
 # [\[Notice\] New Response Fields Added to Allowlisted Withdrawal Address API (7/7 estimated)](/changelog/allowlisted_withdrawal_address_update)
 
