@@ -43,10 +43,10 @@ TEMP_FILE=$(mktemp)
 echo "$FORMATTED_BODY" > "$TEMP_FILE"
 
 gh issue create \
-  --repo ccxt/ccxt \
+  --repo rosssaunders/ccrxt \
   --title "[AutoDoc] $PR_TITLE" \
   --assignee "$MERGED_BY" \
-  --label "autodoc,documentation" \
+  --label "autodoc" \
   --body-file "$TEMP_FILE"
 
 # Clean up
