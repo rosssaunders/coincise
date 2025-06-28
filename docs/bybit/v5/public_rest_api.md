@@ -769,6 +769,8 @@ _Options:_
 - `FLEXIBLE_STAKING_SUBSCRIPTION` Byfi flexible stake subscription
 - `FLEXIBLE_STAKING_REDEMPTION` Byfi flexible stake redemption
 - `FIXED_STAKING_SUBSCRIPTION` Byfi fixed stake subscription
+- `FLEXIBLE_STAKING_REFUND` Byfi flexiable stake refund
+- `FIXED_STAKING_REFUND` Byfi fixed stake refund
 - `PREMARKET_TRANSFER_OUT`
 - `PREMARKET_DELIVERY_SELL_NEW_COIN`
 - `PREMARKET_DELIVERY_BUY_NEW_COIN`
@@ -788,6 +790,21 @@ _Options:_
 - `PEF_TRANSFER_IN`
 - `PEF_TRANSFER_OUT`
 - `PEF_PROFIT_SHARE`
+- `ONCHAINEARN_SUBSCRIPTION` tranfer out for on chain earn
+- `ONCHAINEARN_REPEMPTION` tranfer in for on chain earn
+- `ONCHAINEARN_REFUND` tranfer in for on chain earn failed
+- `STRUCTURE_PRODUCT_SUBSCRIPTION` tranfer out for structure product
+- `STRUCTURE_PRODUCT_REFUND` tranfer in for structure product
+- `CLASSIC_WEALTH_MANAGEMENT_SUBSCRIPTION` tranfer out for classic wealth
+  management
+- `PREMIMUM_WEALTH_MANAGEMENT_SUBSCRIPTION` tranfer in for classic wealth
+  management
+- `PREMIMUM_WEALTH_MANAGEMENT_REFUND` tranfer in for classic wealth management
+  refund
+- `LIQUIDITY_MINING_SUBSCRIPTION` tranfer out for liquidity mining
+- `LIQUIDITY_MINING_REFUND` tranfer in for liquidity mining
+- `PWM_SUBSCRIPTION` tranfer out for PWM
+- `PWM_REFUND` tranfer in for PWM
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -1540,6 +1557,7 @@ with the example of BTCUSDT:
 | Code  | Description                                  |
 | :---: | :------------------------------------------- |
 | 81007 | Bybit Europe is not supported create API Key |
+| 20096 | need KYC authentication                      |
 
 # Get Bybit Server Time
 

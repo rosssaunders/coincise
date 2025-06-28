@@ -1,5 +1,9 @@
 ### [#](#changelog) Changelog
 
+2025-06-24
+
+- Added documentation for the Order Book V2 API
+
 2025-06-12
 
 - The enumeration values of the field have been updated, impacting both

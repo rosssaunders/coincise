@@ -16,7 +16,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "symbol":"BTC_USDT",     "side":"buy",     "type":"limit",     "size":"10",     "price":"7000" }' https://api-cloud.bitmart.com/spot/v2/submit_order`
+`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "symbol":"BTC_USDT",     "side":"buy",     "type":"limit",     "size":"10",     "price":"7000"     "stpMode":"none" }' https://api-cloud.bitmart.com/spot/v2/submit_order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -24,6 +24,7 @@ See [Detailed Rate Limit](#rate-limit)
 | side | String | Yes | Side<br>-<code>buy</code>=Buy order<br>-<code>sell</code>=Sell order 
 | type | String | Yes | Order type<br>-<code>limit</code>=Limit order<br>-<code>market</code>=Market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | client_order_id | String | No | Client-defined OrderId(A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters) 
+| stpMode | String | No | Self transaction protection type(default:none)<br>-<code>none</code><br>-<code>cancel_maker</code><br>-<code>cancel_taker</code><br>-<code>cancel_both</code> 
 
 #### Special Parameters for Limit Orders/PostOnly Orders/IOC Orders (`type`\=limit/limit\_maker/ioc)
 
@@ -67,6 +68,19 @@ Sell-limit-maker
 Buy-ioc,Sell-ioc
 
 *   After the order is placed, all orders that cannot be filled immediately are cancelled immediately
+
+Self trade prevention (STP)
+
+The trading platform imposes self trade prevention at account level. The default STP mode is none. Users can also utilize the stpMode request parameter of the placing order endpoint to determine the stpMode of a certain order.Self trade prevention will not lead to latency.
+
+*   Orders placed via OpenAPI: If both sides of the matched trade are orders submitted through OpenAPI, the system will execute based on the stpMode configuration of the Taker order.
+*   Mixed orders: If one side of the matched trade is an OpenAPI order and the other is a Web/App order, the handling will be determined by the stpMode setting of the OpenAPI order.
+
+There are three STP modes.
+
+1.  Cancel Maker: Which cancels the maker order to prevent self-trading. Then, the taker order continues to match with the next order based on the order book priority.
+2.  Cancel Taker: The taker order is canceled to prevent self-trading. If the user's own maker order is lower in the order book priority, the taker order is partially filled and then canceled. FOK orders are always honored and canceled if they would result in self-trading.
+3.  Cancel Both: Both taker and maker orders are canceled to prevent self-trading. If the user's own maker order is lower in the order book priority, the taker order is partially filled. Then, the remaining quantity of the taker order and the first maker order are canceled. FOK orders are not supported in this mode.
 
 #### Response Data
 
@@ -134,7 +148,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "symbol":"BTC_USDT",     "orderParams":[{           "clientOrderId":"123456789",           "size":"0.1",           "price":"8800",           "side":"buy",           "type":"limit"     }],     "recvWindow":5000 }' https://api-cloud.bitmart.com/spot/v4/batch_orders`
+`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "symbol":"BTC_USDT",     "orderParams":[{           "clientOrderId":"123456789",           "size":"0.1",           "price":"8800",           "side":"buy",           "type":"limit"           "stpMode":"none"     }],     "recvWindow":5000 }' https://api-cloud.bitmart.com/spot/v4/batch_orders`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -149,6 +163,7 @@ See [Detailed Rate Limit](#rate-limit)
 | side | String | Yes | Side<br>-<code>buy</code>=Buy order<br>-<code>sell</code>=Sell order 
 | type | String | Yes | Order type<br>-<code>limit</code>=Limit order<br>-<code>market</code>=Market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | clientOrderId | String | No | Client-defined OrderId(A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters) 
+| stpMode | String | No | Self transaction protection type(default:none)<br>-<code>none</code><br>-<code>cancel_maker</code><br>-<code>cancel_taker</code><br>-<code>cancel_both</code> 
 
 ###### Special Parameters for Limit Orders/PostOnly Orders/IOC Orders (`type`\=limit/limit\_maker/ioc)
 
@@ -192,6 +207,19 @@ Sell-limit-maker
 Buy-ioc,Sell-ioc
 
 *   After the order is placed, all orders that cannot be filled immediately are cancelled immediately
+
+Self trade prevention (STP)
+
+The trading platform imposes self trade prevention at account level. The default STP mode is none. Users can also utilize the stpMode request parameter of the placing order endpoint to determine the stpMode of a certain order.Self trade prevention will not lead to latency.
+
+*   Orders placed via OpenAPI: If both sides of the matched trade are orders submitted through OpenAPI, the system will execute based on the stpMode configuration of the Taker order.
+*   Mixed orders: If one side of the matched trade is an OpenAPI order and the other is a Web/App order, the handling will be determined by the stpMode setting of the OpenAPI order.
+
+There are three STP modes.
+
+1.  Cancel Maker: Which cancels the maker order to prevent self-trading. Then, the taker order continues to match with the next order based on the order book priority.
+2.  Cancel Taker: The taker order is canceled to prevent self-trading. If the user's own maker order is lower in the order book priority, the taker order is partially filled and then canceled. FOK orders are always honored and canceled if they would result in self-trading.
+3.  Cancel Both: Both taker and maker orders are canceled to prevent self-trading. If the user's own maker order is lower in the order book priority, the taker order is partially filled. Then, the remaining quantity of the taker order and the first maker order are canceled. FOK orders are not supported in this mode.
 
 #### Response Data
 
@@ -388,7 +416,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Response
 
-`{   "code" : 1000,   "message" : "success",   "data" : {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000",     "filledNotional" : "3999.90000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   },   "trace" : "8aab576e50024648ae45e3cfaf90f9cf.60.16817015721880197" }`
+`{   "code" : 1000,   "message" : "success",   "data" : {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "stpMode": "cancel_maker",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000",     "filledNotional" : "3999.90000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   },   "trace" : "8aab576e50024648ae45e3cfaf90f9cf.60.16817015721880197" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -399,7 +427,8 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | state | String | Order status<br>-<code>new</code>=The order has been accepted by the engine.<br>-<code>partially_filled</code>=A part of the order has been filled.<br>-<code>filled</code>=The order has been completed.<br>-<code>canceled</code>=The order has been canceled.<br>-<code>partially_canceled</code>=A part of the order has been filled , and the order has been canceled. 
-| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled. 
+| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled.<br>-<code>stp</code>=Stp Cancelled. 
+| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
 | price | String | Order price 
 | priceAvg | String | Average execution price of the order 
 | size | String | Order quantity 
@@ -444,7 +473,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Response
 
-`{   "code" : 1000,   "message" : "success",   "data" : {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000",     "filledNotional" : "3999.90000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   },   "trace" : "8aab576e50024648ae45e3cfaf90f9cf.60.16817015721880197" }`
+`{   "code" : 1000,   "message" : "success",   "data" : {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "stpMode": "cancel_maker",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000",     "filledNotional" : "3999.90000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   },   "trace" : "8aab576e50024648ae45e3cfaf90f9cf.60.16817015721880197" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -455,7 +484,8 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | state | String | Order status<br>-<code>new</code>=The order has been accepted by the engine.<br>-<code>partially_filled</code>=A part of the order has been filled.<br>-<code>filled</code>=The order has been completed.<br>-<code>canceled</code>=The order has been canceled.<br>-<code>partially_canceled</code>=A part of the order has been filled , and the order has been canceled. 
-| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled. 
+| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled.<br>-<code>stp</code>=Stp Cancelled. 
+| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
 | price | String | Order price 
 | priceAvg | String | Average execution price of the order 
 | size | String | Order quantity 
@@ -507,7 +537,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Response
 
-`{   "code" : 1000,   "message" : "success",   "data" : [ {     "orderId" : "125213058731346056",     "clientOrderId" : "125213058731346056",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "new",     "cancelSource" : "",     "price" : "800.00",     "priceAvg" : "0.00",     "size" : "0.10000",     "filledSize" : "0.00000",     "notional" : "80.00000000",     "filledNotional" : "0.00000000",     "createTime" : 1681892198608,     "updateTime" : 1681892198946   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.60.16818922069220005" }`
+`{   "code" : 1000,   "message" : "success",   "data" : [ {     "orderId" : "125213058731346056",     "clientOrderId" : "125213058731346056",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "new",     "cancelSource" : "",     "stpMode": "cancel_maker",     "price" : "800.00",     "priceAvg" : "0.00",     "size" : "0.10000",     "filledSize" : "0.00000",     "notional" : "80.00000000",     "filledNotional" : "0.00000000",     "createTime" : 1681892198608,     "updateTime" : 1681892198946   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.60.16818922069220005" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -518,7 +548,8 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | state | String | Order status<br>-<code>new</code>=The order has been accepted by the engine.<br>-<code>partially_filled</code>=a part of the order has been filled. 
-| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled. 
+| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled.<br>-<code>stp</code>=Stp Cancelled. 
+| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
 | price | String | Order price 
 | priceAvg | String | Average execution price of the order 
 | size | String | Order quantity 
@@ -569,7 +600,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Response
 
-`{   "code" : 1000,   "message" : "success",   "data" : [ {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000000",     "filledNotional" : "3999.90000000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   } ],   "trace" : "acc282ba9e434cc1a90bf6326de9e119.64.16818913787390001" }`
+`{   "code" : 1000,   "message" : "success",   "data" : [ {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "stpMode": "cancel_maker",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000000",     "filledNotional" : "3999.90000000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   } ],   "trace" : "acc282ba9e434cc1a90bf6326de9e119.64.16818913787390001" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -580,7 +611,8 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | state | String | Order status<br>-<code>filled</code>=The order has been completed.<br>-<code>canceled</code>=The order has been canceled.<br>-<code>partially_canceled</code>=A part of the order has been filled , and the order has been canceled. 
-| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled. 
+| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled.<br>-<code>stp</code>=Stp Cancelled. 
+| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
 | price | String | Order price 
 | priceAvg | String | Average execution price of the order 
 | size | String | Order quantity 
@@ -631,7 +663,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Response
 
-`{   "code" : 1000,   "message" : "success",   "data" : [ {     "tradeId" : "125277182593091639",     "orderId" : "125213058731346053",     "clientOrderId" : "125213058731346053",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "price" : "39999.00",     "size" : "0.10000",     "notional" : "3999.90000000",     "fee" : "9.99975000",     "feeCoinName" : "USDT",     "tradeRole" : "taker",     "createTime" : 1681891896569,     "updateTime" : 1681891896569   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.61.16819603026240455" }`
+`{   "code" : 1000,   "message" : "success",   "data" : [ {     "tradeId" : "125277182593091639",     "orderId" : "125213058731346053",     "clientOrderId" : "125213058731346053",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "stpMode": "cancel_maker",     "price" : "39999.00",     "size" : "0.10000",     "notional" : "3999.90000000",     "fee" : "9.99975000",     "feeCoinName" : "USDT",     "tradeRole" : "taker",     "createTime" : 1681891896569,     "updateTime" : 1681891896569   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.61.16819603026240455" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -642,6 +674,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | side | String | Order side<br>-<code>buy</code>=buy<br>-<code>sell</code>=sell 
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
+| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
 | price | String | Transaction price 
 | size | String | Transaction quantity 
 | notional | String | Transaction amount 
@@ -682,7 +715,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Response
 
-`{   "code" : 1000,   "message" : "success",   "data" : [ {     "tradeId" : "122177405911172002",     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "price" : "39999.00",     "size" : "0.10000",     "notional" : "3999.90000000",     "fee" : "9.99975000",     "feeCoinName" : "USDT",     "tradeRole" : "taker",     "createTime" : 1681701559210,     "updateTime" : 1681701559210   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.62.16818934219090007" }`
+`{   "code" : 1000,   "message" : "success",   "data" : [ {     "tradeId" : "122177405911172002",     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "stpMode": "cancel_maker",     "price" : "39999.00",     "size" : "0.10000",     "notional" : "3999.90000000",     "fee" : "9.99975000",     "feeCoinName" : "USDT",     "tradeRole" : "taker",     "createTime" : 1681701559210,     "updateTime" : 1681701559210   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.62.16818934219090007" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -693,6 +726,7 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | side | String | Order side<br>-<code>buy</code>=buy<br>-<code>sell</code>=sell 
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
+| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
 | price | String | Transaction price 
 | size | String | Transaction quantity 
 | notional | String | Transaction amount 

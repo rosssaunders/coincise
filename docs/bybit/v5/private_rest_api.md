@@ -769,6 +769,8 @@ _Options:_
 - `FLEXIBLE_STAKING_SUBSCRIPTION` Byfi flexible stake subscription
 - `FLEXIBLE_STAKING_REDEMPTION` Byfi flexible stake redemption
 - `FIXED_STAKING_SUBSCRIPTION` Byfi fixed stake subscription
+- `FLEXIBLE_STAKING_REFUND` Byfi flexiable stake refund
+- `FIXED_STAKING_REFUND` Byfi fixed stake refund
 - `PREMARKET_TRANSFER_OUT`
 - `PREMARKET_DELIVERY_SELL_NEW_COIN`
 - `PREMARKET_DELIVERY_BUY_NEW_COIN`
@@ -788,6 +790,21 @@ _Options:_
 - `PEF_TRANSFER_IN`
 - `PEF_TRANSFER_OUT`
 - `PEF_PROFIT_SHARE`
+- `ONCHAINEARN_SUBSCRIPTION` tranfer out for on chain earn
+- `ONCHAINEARN_REPEMPTION` tranfer in for on chain earn
+- `ONCHAINEARN_REFUND` tranfer in for on chain earn failed
+- `STRUCTURE_PRODUCT_SUBSCRIPTION` tranfer out for structure product
+- `STRUCTURE_PRODUCT_REFUND` tranfer in for structure product
+- `CLASSIC_WEALTH_MANAGEMENT_SUBSCRIPTION` tranfer out for classic wealth
+  management
+- `PREMIMUM_WEALTH_MANAGEMENT_SUBSCRIPTION` tranfer in for classic wealth
+  management
+- `PREMIMUM_WEALTH_MANAGEMENT_REFUND` tranfer in for classic wealth management
+  refund
+- `LIQUIDITY_MINING_SUBSCRIPTION` tranfer out for liquidity mining
+- `LIQUIDITY_MINING_REFUND` tranfer in for liquidity mining
+- `PWM_SUBSCRIPTION` tranfer out for PWM
+- `PWM_REFUND` tranfer in for PWM
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -1540,6 +1557,7 @@ with the example of BTCUSDT:
 | Code  | Description                                  |
 | :---: | :------------------------------------------- |
 | 81007 | Bybit Europe is not supported create API Key |
+| 20096 | need KYC authentication                      |
 
 # Place Order
 
@@ -2307,6 +2325,7 @@ GET `/v5/execution/list`
 | &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>                                                                                                                                                                                                                                                                                        |
 | &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type. If the order is not stop order, it either returns <code>UNKNOWN</code> or <code>""</code>. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                           |
 | &gt; execFee                                                 | string  | Executed trading fee. You can get spot fee currency instruction <a href="/docs/v5/enum#spot-fee-currency-instruction">here</a>                                                                                                                                                                                                            |
+| &gt; execFeeV2                                               | string  | Spot leg transaction fee, only works for execType=<code>FutureSpread</code>                                                                                                                                                                                                                                                               |
 | &gt; execId                                                  | string  | Execution ID                                                                                                                                                                                                                                                                                                                              |
 | &gt; execPrice                                               | string  | Execution price                                                                                                                                                                                                                                                                                                                           |
 | &gt; execQty                                                 | string  | Execution qty                                                                                                                                                                                                                                                                                                                             |
@@ -3382,7 +3401,7 @@ GET `/v5/position/closed-pnl`
 
 | Parameter                                     | Required              | Type    | Comments                                                                                                                                                                                                                                                                                                                                                |
 | :-------------------------------------------- | :-------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="/docs/v5/enum#category">category</a> | <strong>true</strong> | string  | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>(USDT Contract, USDC Contract), <code>inverse</code></li><li>Classic account: <code>linear</code>(USDT Perps), <code>inverse</code></li></ul>                                                                    |
+| <a href="/docs/v5/enum#category">category</a> | <strong>true</strong> | string  | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>(USDT Contract, USDC Contract), <code>inverse</code>, <code>option</code></li><li>Classic account: <code>linear</code>(USDT Perps), <code>inverse</code></li></ul>                                               |
 | symbol                                        | false                 | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                                                                                                                                  |
 | startTime                                     | false                 | integer | The start timestamp (ms)<ul><li>startTime and endTime are not passed, return 7 days by default</li><li>Only startTime is passed, return range between startTime and startTime+7 days</li><li>Only endTime is passed, return range between endTime-7 days and endTime</li><li>If both are passed, the rule is endTime - startTime &lt;= 7 days</li></ul> |
 | endTime                                       | false                 | integer | The end timestamp (ms)                                                                                                                                                                                                                                                                                                                                  |
@@ -3410,6 +3429,8 @@ GET `/v5/position/closed-pnl`
 | &gt; closedPnl                                       | string | Closed PnL                                                                                                                                 |
 | &gt; fillCount                                       | string | The number of fills in a single order                                                                                                      |
 | &gt; leverage                                        | string | leverage                                                                                                                                   |
+| &gt; openFee                                         | string | Open position trading fee                                                                                                                  |
+| &gt; closeFee                                        | string | Close position trading fee                                                                                                                 |
 | &gt; createdTime                                     | string | The created time (ms)                                                                                                                      |
 | &gt; updatedTime                                     | string | The updated time (ms)                                                                                                                      |
 | nextPageCursor                                       | string | Refer to the <code>cursor</code> request parameter                                                                                         |
@@ -5043,6 +5064,7 @@ GET `/v5/asset/delivery-record`
 | &gt; symbol        | string | Symbol name                                        |
 | &gt; side          | string | <code>Buy</code>,<code>Sell</code>                 |
 | &gt; position      | string | Executed size                                      |
+| &gt; entryPrice    | string | Avg entry price                                    |
 | &gt; deliveryPrice | string | Delivery price                                     |
 | &gt; strike        | string | Exercise price                                     |
 | &gt; fee           | string | Trading fee                                        |

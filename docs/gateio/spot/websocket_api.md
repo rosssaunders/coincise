@@ -1569,6 +1569,297 @@ Result format:
 | »`asks`            | `Array[OrderBookArray]` | Top level asks in current snapshot, sort by price from low to high     |
 | »»`OrderBookArray` | `Array[String]`         | \[Price, Amount\] pair                                                 |
 
+# [#](#order-book-v2-api) Order Book V2 API
+
+**Provide a faster method for retrieving depth information**
+
+## [#](#maintain-local-depth) Maintain local depth
+
+Note:
+
+1.  Full Depth Snapshot Push (`full=true`):When the channel pushes full depth
+    data, the local depth should be completely replaced with the received data.
+    Additionally, the `depth ID` should be updated to the value of the `u` field
+    in the message. Note that the server may send full depth snapshots multiple
+    times.
+    1.  The first message pushed after subscribing to this channel is a full
+        depth snapshot.
+2.  Incremental Depth Push (`full=false`):Incremental messages do not include
+    the full field. Instead, each message contains the fields `U` (starting
+    depth ID) and `u` (ending depth ID).
+    1.  If `U` equals the local `depth ID` + `1`, it indicates a continuous
+        depth update:
+        1.  Replace the local depth ID with the value of `u` from the message.
+        2.  If `a` (asks) and `b` (bids) in the update are not empty, update the
+            corresponding bid and ask depth levels based on price.(Each
+            `level[0]` represents the price, and `level[1]` represents the
+            quantity.)If `level[1]` is `"0"`, the corresponding price level
+            should be removed from the order book.
+    2.  If `U` ≠ local `depth ID` + `1`, the depth data is not continuous. In
+        this case, you must unsubscribe from the market and resubscribe to
+        retrieve the initial depth snapshot.
+3.  Subscription Limitations:For the same spot trading pair and the same depth
+    stream, a single connection is allowed to subscribe only once. Duplicate
+    subscription attempts will result in an error. Example of a failed attempt:
+
+```json
+{
+  "time": 1747391482,
+  "time_ms": 1747391482960,
+  "id": 1,
+  "conn_id": "d9db9373dc5e081e",
+  "trace_id": "ee001938590e183db957bd5ba71651c0",
+  "channel": "spot.obu",
+  "event": "subscribe",
+  "payload": ["ob.BTC_USDT.400"],
+  "error": {
+    "code": 2,
+    "message": "Alert sub ob.BTC_USDT.400"
+  },
+  "result": {
+    "status": "fail"
+  }
+}
+```
+
+## [#](#order-book-v2-subscription) Order book V2 subscription
+
+Code example
+
+```python
+from websocket import create_connection
+
+ws = create_connection("wss://api.gateio.ws/ws/v4/")
+ws.send('{"time" : 123456, "channel" : "spot.obu",
+        "event": "subscribe", "payload" : ["ob.BTC_USDT.50"]}')
+print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://api.gateio.ws/ws/v4/"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time" : 123456, "channel" : "spot.obu", "event": "subscribe", "payload" : ["ob.BTC_USDT.50"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+  "time": 1747054611,
+  "time_ms": 1747054611614,
+  "conn_id": "d7de96c024f2a5b2",
+  "trace_id": "e6fd9bdd617fcdb80d0762ffa33e71f6",
+  "channel": "spot.obu",
+  "event": "subscribe",
+  "payload": ["ob.BTC_USDT.50"],
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+### [#](#request) Request
+
+- channel
+
+  `spot.obu`
+
+- event
+
+  `subscribe`
+
+- params
+
+  `payload`It is a list containing stream names. The format is:
+  ob.{symbol}.{level}; for example, ob.BTC_USDT.400, ob.BTC_USDT.50
+
+  The `level` enum values are: 400, 50; Update frequency: 400-level updates
+  every 100 ms; 50-level updates every 20 ms.
+
+## [#](#order-book-v2-update-notification) Order book V2 update notification
+
+Example of full depth push:
+
+```json
+{
+  "channel": "spot.obu",
+  "result": {
+    "t": 1747054612673,
+    "full": true,
+    "s": "ob.BTC_USDT.50",
+    "u": 73777715168,
+    "b": [
+      ["104027.1", "509392"],
+      ["104027", "477932"]
+    ],
+    "a": [
+      ["104027.2", "44617"],
+      ["104027.4", "39322"]
+    ]
+  },
+  "time_ms": 1747054612848
+}
+```
+
+Example of incremental push:
+
+```json
+{
+  "channel": "spot.obu",
+  "result": {
+    "t": 1747054612695,
+    "s": "ob.BTC_USDT.50",
+    "U": 73777715169,
+    "u": 73777715212,
+    "b": [
+      ["104024.5", "10343"],
+      ["104014.5", "509392"]
+    ],
+    "a": [
+      ["104027.2", "0"],
+      ["104027.4", "0"]
+    ]
+  },
+  "time_ms": 1747054612925
+}
+```
+
+**Notify contract order book v2 update**
+
+### [#](#notify) Notify
+
+- channel
+
+  `spot.obu`
+
+- event
+
+  `update`
+
+- params
+
+| field             | type                    | description                                                                                                                                            |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result`          | Object                  | Ask and bid price changes since the previous update                                                                                                    |
+| »`t`              | Integer                 | Order book generation timestamp (in milliseconds)                                                                                                      |
+| »`full`           | Boolean                 | `true` indicates a full depth snapshot; `false` indicates incremental depth updates. When the value is `false`, this field is omitted from the message |
+| »`s`              | String                  | Name of the depth stream                                                                                                                               |
+| »`U`              | Integer                 | Starting order book update ID of this update                                                                                                           |
+| »`u`              | Integer                 | Ending order book update ID of this update                                                                                                             |
+| »`b`              | `Array[OrderBookArray]` | Bids updates since the last update                                                                                                                     |
+| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth.                                        |
+| »`a`              | `Array[OrderBookArray]` | Asks updates since the last update                                                                                                                     |
+| »» OrderBookArray | `Array[String]`         | An array pair \[Price, Amount\]; if Amount = 0, the corresponding entry should be removed from the local depth.                                        |
+
+## [#](#order-book-v2-update-unsubscription) Order book V2 update unsubscription
+
+Code example
+
+```python
+from websocket import create_connection
+
+ws = create_connection("wss://api.gateio.ws/ws/v4/")
+ws.send(
+  '{"time" : 123456, "channel" : "spot.obu", "event": "unsubscribe", "payload" : ["ob.BTC_USDT.50"]}')
+print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://api.gateio.ws/ws/v4/"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("dial error:", err)
+	}
+	defer conn.Close()
+
+	msg := `{"time" : 123456, "channel" : "spot.obu", "event": "unsubscribe", "payload" : ["ob.BTC_USDT.50"]}`
+
+	err = conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	if err != nil {
+		log.Fatal("write message error:", err)
+	}
+
+	_, message, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("read message error:", err)
+	}
+
+	fmt.Println(string(message))
+}
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+  "time": 1743673617,
+  "time_ms": 1743673617242,
+  "id": 1,
+  "conn_id": "7b06ff199a98ab0e",
+  "trace_id": "8f86e4021a84440e502f73fde5b94918",
+  "channel": "spot.obu",
+  "event": "unsubscribe",
+  "payload": ["ob.BTC_USDT.50"],
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+**Unsubscribe specified contract order book v2**
+
+### [#](#request-2) Request
+
+- channel
+
+  `spot.obu`
+
+- event
+
+  `unsubscribe`
+
 # [#](#orders-channel) Orders Channel
 
 `spot.orders`
@@ -5610,7 +5901,7 @@ You can use this channel and event `api` to query orders.
 GET /spot/orders
 ```
 
-### [#](#request) Request
+### [#](#request-3) Request
 
 Code example: Login is required before making requests
 
@@ -5900,4 +6191,4 @@ Result format:
 | »»`label`        | String  | denotes error type in string format                                                               |
 | »»`message`      | String  | detailed error message                                                                            |
 
-Last Updated: 6/12/2025, 7:58:10 AM
+Last Updated: 6/24/2025, 8:35:16 AM

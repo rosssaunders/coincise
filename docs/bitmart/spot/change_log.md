@@ -1,5 +1,32 @@
 # Change Log
 
+#### 2025-06-24
+
+###### REST API
+
+*   \[Update\] `/spot/v2/submit_order` New Order(v2) (SIGNED)
+    *   Feat：Add new request parameter field **stpMode**, Set self transaction protection type
+*   \[Update\] `/spot/v4/batch_orders` New Batch Order(v4) (SIGNED)
+    *   Feat：Add new request parameter field **stpMode**, Set self transaction protection type
+*   \[Update\] `/spot/v4/query/order` Query Order By Id (v4) (SIGNED)
+    *   Feat：Add new response field **stpMode**, Identify self transaction protection type
+    *   Feat: Response field **cancelSource** add new value **stp**
+*   \[Update\] `/spot/v4/query/client-order` Query Order By clientOrderId(v4) (SIGNED)
+    *   Feat：Add new response field **stpMode**, Identify self transaction protection type
+    *   Feat: Response field **cancelSource** add new value **stp**
+*   \[Update\] `/spot/v4/query/open-orders` Current Open Orders(v4) (SIGNED)
+    *   Feat：Add new response field **stpMode**, Identify self transaction protection type
+    *   Feat: Response field **cancelSource** add new value **stp**
+*   \[Update\] `/spot/v4/query/history-orders`Account Orders(v4) (SIGNED)
+    *   Feat：Add new response field **stpMode**, Identify self transaction protection type
+    *   Feat: Response field **cancelSource** add new value **stp**
+*   \[Update\] `/spot/v4/query/trades` Account Trade List(v4) (SIGNED)
+    *   Feat：Add new response field **stpMode**, Identify self transaction protection type
+*   \[Update\] `/spot/v4/query/order-trades` Order Trade List(v4) (SIGNED)
+    *   Feat：Add new response field **stpMode**, Identify self transaction protection type
+
+* * *
+
 #### 2025-05-29
 
 ###### Websocket Stream

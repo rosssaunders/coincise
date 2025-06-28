@@ -212,6 +212,14 @@ It is recommended to use a recvWindow of less than 5 seconds! It cannot exceed 6
 
 *   `user`\=User manually canceled.
 *   `system`\=System automatically canceled.
+*   `stp`\=Stp Cancelled.
+
+#### Self transaction protection type （Field:stpMode)
+
+*   `none`\=none
+*   `cancel_maker`\=cancel\_maker
+*   `cancel_taker`\=cancel\_taker
+*   `cancel_both`\=cancel\_both
 
 #### Order Side （Field:side)
 
