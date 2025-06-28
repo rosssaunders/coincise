@@ -33,7 +33,7 @@ View the complete diff changes: https://github.com/%s/%s/pull/%s.diff
 EOF
 
 # Create the issue using GitHub CLI with proper escaping
-echo "Creating issue in ccxt/ccxt..."
+echo "Creating issue in rosssaunders/ccrxt..."
 
 # Use printf to format the issue body safely
 FORMATTED_BODY=$(printf "$ISSUE_BODY" "$REPO_OWNER" "$REPO_NAME" "$PR_TITLE" "$PR_NUMBER" "$PR_URL" "$MERGED_BY" "$MERGED_AT" "$PR_BODY" "$REPO_OWNER" "$REPO_NAME" "$PR_NUMBER" "$PR_NUMBER")
