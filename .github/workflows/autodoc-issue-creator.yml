@@ -20,14 +20,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Changed Files
-        id: changed-files
-        run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
-          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
       - name: Create Issue in CCXT Repository
         run: |
           chmod +x .github/scripts/create-ccxt-issue.sh
@@ -39,7 +31,6 @@ jobs:
             "${{ github.event.pull_request.merged_by.login }}" \
             "${{ github.event.pull_request.merged_at }}" \
             "${{ github.repository_owner }}" \
-            "${{ github.event.repository.name }}" \
-            "${{ steps.changed-files.outputs.changed_files }}"
+            "${{ github.event.repository.name }}"
         env:
           GH_TOKEN: ${{ secrets.PAT_GITHUB }}

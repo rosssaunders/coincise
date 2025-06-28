@@ -15,14 +15,12 @@ The workflow is triggered when:
 
 1. **Collects PR Information**: Gathers all relevant information about the
    merged PR
-2. **Gets Changed Files**: Identifies which files were modified in the PR
-3. **Creates CCXT Issue**: Automatically creates an issue in the ccxt/ccxt
+2. **Creates CCXT Issue**: Automatically creates an issue in the ccxt/ccxt
    repository with:
    - PR title, number, and URL
    - Who merged it and when
    - Original PR description
-   - Link to raw diff
-   - List of changed files
+   - Link to raw diff (`.diff` URL)
 
 ## Required Secrets
 
@@ -55,16 +53,20 @@ Updated Binance Spot API documentation with new endpoints and parameter changes.
 ## Raw Diff
 View the complete diff changes: https://github.com/rosssaunders/cryptoapidocs/pull/123.diff
 
-## Changed Files
-```
-
-docs/binance/spot/public_rest_api.md docs/binance/spot/private_rest_api.md
-
-```
-
 ---
 *This issue was automatically created by the AutoDoc workflow when PR #123 was merged.*
 ```
+
+## Raw Diff URL
+
+The workflow provides a direct link to the raw diff using GitHub's `.diff` URL
+format:
+
+- **Format**: `https://github.com/{owner}/{repo}/pull/{number}.diff`
+- **Example**: `https://github.com/rosssaunders/cryptoapidocs/pull/123.diff`
+
+This provides a clean, machine-readable diff that shows exactly what changed in
+the PR.
 
 ## Dependencies
 

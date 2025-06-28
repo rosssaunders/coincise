@@ -11,7 +11,6 @@ MERGED_BY="$5"
 MERGED_AT="$6"
 REPO_OWNER="$7"
 REPO_NAME="$8"
-CHANGED_FILES="$9"
 
 # Construct the issue body
 ISSUE_BODY="## AutoDoc Update from $REPO_OWNER/$REPO_NAME
@@ -27,11 +26,6 @@ $PR_BODY
 
 ## Raw Diff
 View the complete diff changes: https://github.com/$REPO_OWNER/$REPO_NAME/pull/$PR_NUMBER.diff
-
-## Changed Files
-\`\`\`
-$CHANGED_FILES
-\`\`\`
 
 ---
 *This issue was automatically created by the AutoDoc workflow when PR #$PR_NUMBER was merged.*"
