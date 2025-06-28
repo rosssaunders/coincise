@@ -42,6 +42,7 @@ FORMATTED_BODY=$(printf "$ISSUE_BODY" "$REPO_OWNER" "$REPO_NAME" "$PR_TITLE" "$P
 TEMP_FILE=$(mktemp)
 echo "$FORMATTED_BODY" > "$TEMP_FILE"
 
+# Create the issue - note: the user needs to have write access to the target repository
 gh issue create \
   --repo rosssaunders/ccrxt \
   --title "[AutoDoc] $PR_TITLE" \
