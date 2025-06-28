@@ -87,8 +87,8 @@ See [Detailed Rate Limit](#rate-limit)
 | preset_stop_loss_price_type | Int | Pre-set SL price type<br>-<code>1</code>=last_price<br>-<code>2</code>=fair_price 
 | preset_take_profit_price | String | Pre-set TP price 
 | preset_stop_loss_price | String | Pre-set SL price 
-| create_time | Long | Create time 
-| update_time | Long | Update time 
+| create_time | Long | Order created timestamp (ms) 
+| update_time | Long | Latest transaction timestamp (ms) 
 
 ## Get Order History (KEYED)
 
@@ -150,8 +150,8 @@ See [Detailed Rate Limit](#rate-limit)
 | preset_stop_loss_price_type | Int | Pre-set SL price type<br>-<code>0</code>=unset<br>-<code>1</code>=last_price<br>-<code>2</code>=fair_price 
 | preset_take_profit_price | String | Pre-set TP price 
 | preset_stop_loss_price | String | Pre-set SL price 
-| create_time | Long | Create time 
-| update_time | Long | Update time 
+| create_time | Long | Order created timestamp (ms) 
+| update_time | Long | Order updated timestamp (ms) 
 
 ## Get All Open Orders (KEYED)
 
@@ -207,8 +207,8 @@ See [Detailed Rate Limit](#rate-limit)
 | preset_stop_loss_price_type | Int | Pre-set SL price type<br>-<code>1</code>=last_price<br>-<code>2</code>=fair_price 
 | preset_take_profit_price | String | Pre-set TP price 
 | preset_stop_loss_price | String | Pre-set SL price 
-| create_time | Long | Create time 
-| update_time | Long | Update time 
+| create_time | Long | Order created timestamp (ms) 
+| update_time | Long | Order updated timestamp (ms) 
 
 ## Get All Current Plan Orders (KEYED)
 
@@ -263,8 +263,8 @@ See [Detailed Rate Limit](#rate-limit)
 | preset_stop_loss_price_type | Int | Pre-set SL price type<br>-<code>1</code>=last_price<br>-<code>2</code>=fair_price 
 | preset_take_profit_price | String | Pre-set TP price 
 | preset_stop_loss_price | String | Pre-set SL price 
-| create_time | Long | Create time 
-| update_time | Long | Update time 
+| create_time | Long | Order created timestamp (ms) 
+| update_time | Long | Order updated timestamp (ms) 
 
 ## Get Current Position (KEYED)
 
@@ -318,7 +318,7 @@ See [Detailed Rate Limit](#rate-limit)
 | realized_value | String | Realized PnL 
 | position_type | Int | position type<br>-<code>1</code>=long<br>-<code>2</code>=short 
 | account | String | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
-| timestamp | Long | Current timestamp 
+| timestamp | Long | Current timestamp(ms) 
 
 ## Get Current Position V2 (KEYED)
 
@@ -383,7 +383,7 @@ See [Detailed Rate Limit](#rate-limit)
 | realized_value | String | Realized PnL 
 | initial_margin | String | Position margin 
 | account | String | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
-| timestamp | Long | Current timestamp 
+| timestamp | Long | Current timestamp(ms) 
 
 ## Get Current Position Risk Details(KEYED)
 
@@ -481,7 +481,7 @@ See [Detailed Rate Limit](#rate-limit)
 | realised_profit | String | realised profit 
 | paid_fees | String | paid fees 
 | account | String | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
-| create_time | Long | Create time 
+| create_time | Long | Transaction create timestamp (ms) 
 
 ## Get Transaction History (KEYED)
 
@@ -527,7 +527,7 @@ See [Detailed Rate Limit](#rate-limit)
 | account | String | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
 | amount | String | Amount, supports positive and negative values 
 | asset | String | Transaction currency 
-| time | String | Transaction time, timestamp in ms 
+| time | String | Transaction timestamp, timestamp in ms 
 | tran_id | String | Transaction ID 
 
 ## Get Transfer List (SIGNED)

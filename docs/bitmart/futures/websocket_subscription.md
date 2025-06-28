@@ -294,7 +294,7 @@ Return data description:
 | symbol | String | Symbol of the contract(like <code>BTCUSDT</code>) 
 | way | Long | Trading side<br>-<code>1</code>=bid<br>-<code>2</code>=ask 
 | depths | List | Array of depth details 
-| ms_t | Long | Timestamp (in millisecond) 
+| ms_t | Long | Data push timestamp (in millisecond) 
 
 **Instruction**
 
@@ -353,7 +353,7 @@ Return data description:
 | symbol | String | Symbol of the contract（like <code>BTCUSDT</code>） 
 | asks | List | Asks Depth Array 
 | bids | List | Bids Depth Array 
-| ms_t | Long | Timestamp (in millisecond) 
+| ms_t | Long | Data push timestamp (in millisecond) 
 
 **Instruction** Description of the `asks` `bids` details field:
 
@@ -419,7 +419,7 @@ Return data description:
 | symbol | String | Symbol of the contract (like <code>BTCUSDT</code>) 
 | asks | List | Asks Depth Array 
 | bids | List | Bids Depth Array 
-| ms_t | Long | Timestamp (in millisecond) 
+| ms_t | Long | Data push timestamp (in millisecond) 
 | version | Long | data version 
 | type | String | data type<br>-<code>snapshot</code>=Full depth snapshot data<br>-<code>update</code>=Incremental depth data 
 
@@ -491,7 +491,7 @@ Return data description:
 | best_bid_vol | String | Best bid volume 
 | best_ask_price | String | Best ask price 
 | best_ask_vol | String | Best ask volume 
-| ms_t | Long | Timestamp (in millisecond) 
+| ms_t | Long | Data push timestamp (in millisecond) 
 
 * * *
 
@@ -534,7 +534,7 @@ Return data description:
 | deal_vol | String | deal vol 
 | way | Int | Trading type<br>-<code>1</code>=buy_open_long sell_open_short<br>-<code>2</code>=buy_open_long sell_close_long<br>-<code>3</code>=buy_close_short sell_open_short<br>-<code>4</code>=buy_close_short sell_close_long<br>-<code>5</code>=sell_open_short buy_open_long<br>-<code>6</code>=sell_open_short buy_close_short<br>-<code>7</code>=sell_close_long buy_open_long<br>-<code>8</code>=sell_close_long buy_close_short 
 | m | Bool | -<code>true</code>=buyer is maker<br>-<code>false</code>=seller is maker 
-| created_at | String | create time 
+| created_at | String | transaction create time(ms) 
 
 ## 【Public】KlineBin Channel
 
@@ -588,7 +588,7 @@ Return data description:
 | l | String | Lowest Price 
 | c | String | Closing Price 
 | v | String | Turnover 
-| ts | Long | Timestamp 
+| ts | Long | K-line timestamp（in second） 
 
 ## 【Public】MarkPrice KlineBin Channel
 
@@ -642,7 +642,7 @@ Return data description:
 | l | String | Lowest Price 
 | c | String | Closing Price 
 | v | String | Turnover 
-| ts | Long | Timestamp 
+| ts | Long | Data push timestamp (in second) 
 
 ## 【Private】Login
 
@@ -770,8 +770,8 @@ Return data description:
 | close_avg_price | String | Average close price 
 | open_avg_price | String | Average opening price 
 | liquidate_price | String | Liquidation price 
-| create_time | Long | Create time 
-| update_time | Long | Update time 
+| create_time | Long | Position created timestamp (ms) 
+| update_time | Long | Position updated timestamp (ms) 
 | position_mode | String | Position mode<br>-<code>hedge_mode</code><br>-<code>one_way_mode</code> 
 
 ## 【Private】Order Channel
@@ -818,8 +818,8 @@ Return data description:
 | deal_size | String | Deal amount 
 | price | String | Consignment price 
 | state | Int | Order status<br>-<code>1</code>=status_approval<br>-<code>2</code>=status_check<br>-<code>4</code>=status_finish 
-| create_time | Long | Create time 
-| update_time | Long | Update time 
+| create_time | Long | Order created timestamp (ms) 
+| update_time | Long | Order updated timestamp (ms) 
 | plan_order_id | String | Trigger plan order id 
 | last_trade | object | recently trade info for this order，return null if not exist 
 | trigger_price | String | Trigger price of TP/SL / plan order 

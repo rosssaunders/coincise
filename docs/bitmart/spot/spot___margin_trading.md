@@ -548,8 +548,8 @@ Refer to [Rate Limitation Details](#cad33537ae)
 | orderMode | String | Order mode<br>-<code>spot</code>=spot<br>-<code>iso_margin</code>=isolated margin 
 | type | String | Order type<br>-<code>limit</code>=limit order<br>-<code>market</code>=market order<br>-<code>limit_maker</code>=PostOnly order<br>-<code>ioc</code>=IOC order 
 | state | String | Order status<br>-<code>new</code>=The order has been accepted by the engine.<br>-<code>partially_filled</code>=a part of the order has been filled. 
-| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled.<br>-<code>stp</code>=Stp Cancelled. 
-| stpMode | String | Self transaction protection type<br>-<code>none</code>=none<br>-<code>cancel_maker</code>=cancel_maker<br>-<code>cancel_taker</code>=cancel_taker<br>-<code>cancel_both</code>=cancel_both 
+| cancelSource | String | Order cancellation reason(Return value only if the order state is <strong>canceled</strong> or <strong>partially_canceled</strong>, otherwise it will return an empty string)<br>-<code>user</code>=User manually canceled.<br>-<code>system</code>=System automatically canceled. 
+| stpMode | String | 自成交保护类型<br>-<code>none</code>=不使用<br>-<code>cancel_maker</code>=撤销maker<br>-<code>cancel_taker</code>=撤销taker<br>-<code>cancel_both</code>=全部撤销 
 | price | String | Order price 
 | priceAvg | String | Average execution price of the order 
 | size | String | Order quantity 
