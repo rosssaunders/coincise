@@ -1,0 +1,19 @@
+{
+  "name": "backpack-exchange-api-doc-generator",
+  "version": "1.0.0",
+  "description": "Backpack Exchange API Documentation Generator",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "extract:config": "node src/index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^24.8.0",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
