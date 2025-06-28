@@ -12,31 +12,44 @@ MERGED_AT="$6"
 REPO_OWNER="$7"
 REPO_NAME="$8"
 
-# Construct the issue body
-ISSUE_BODY="## AutoDoc Update from $REPO_OWNER/$REPO_NAME
+# Construct the issue body - use a here document to avoid escaping issues
+read -r -d '' ISSUE_BODY << 'EOF'
+## AutoDoc Update from %s/%s
 
-**PR Title:** $PR_TITLE
-**PR Number:** #$PR_NUMBER
-**PR URL:** $PR_URL
-**Merged by:** @$MERGED_BY
-**Merged at:** $MERGED_AT
+**PR Title:** %s
+**PR Number:** #%s
+**PR URL:** %s
+**Merged by:** @%s
+**Merged at:** %s
 
 ## PR Description
-$PR_BODY
+%s
 
 ## Raw Diff
-View the complete diff changes: https://github.com/$REPO_OWNER/$REPO_NAME/pull/$PR_NUMBER.diff
+View the complete diff changes: https://github.com/%s/%s/pull/%s.diff
 
 ---
-*This issue was automatically created by the AutoDoc workflow when PR #$PR_NUMBER was merged.*"
+*This issue was automatically created by the AutoDoc workflow when PR #%s was merged.*
+EOF
 
-# Create the issue using GitHub CLI
+# Create the issue using GitHub CLI with proper escaping
 echo "Creating issue in ccxt/ccxt..."
+
+# Use printf to format the issue body safely
+FORMATTED_BODY=$(printf "$ISSUE_BODY" "$REPO_OWNER" "$REPO_NAME" "$PR_TITLE" "$PR_NUMBER" "$PR_URL" "$MERGED_BY" "$MERGED_AT" "$PR_BODY" "$REPO_OWNER" "$REPO_NAME" "$PR_NUMBER" "$PR_NUMBER")
+
+# Create the issue using a temporary file to avoid command line escaping issues
+TEMP_FILE=$(mktemp)
+echo "$FORMATTED_BODY" > "$TEMP_FILE"
+
 gh issue create \
   --repo ccxt/ccxt \
   --title "[AutoDoc] $PR_TITLE" \
   --assignee "$MERGED_BY" \
   --label "autodoc,documentation" \
-  --body "$ISSUE_BODY"
+  --body-file "$TEMP_FILE"
+
+# Clean up
+rm -f "$TEMP_FILE"
 
 echo "Issue created successfully!" 
