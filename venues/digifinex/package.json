@@ -1,0 +1,21 @@
+{
+  "name": "digifinex-docs-extractor",
+  "version": "1.0.0",
+  "description": "DigiFinex API documentation extractor",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "extract:public": "node src/index.js public",
+    "extract:private": "node src/index.js private",
+    "extract:websocket-github": "node src/websocket-github.js",
+    "extract:all": "node src/index.js all && node src/websocket-github.js"
+  },
+  "dependencies": {
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "puppeteer": "^22.0.0",
+    "prettier": "^3.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

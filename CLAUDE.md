@@ -3,7 +3,10 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with
 code in this repository.
 
-# Coincise Projects Rules
+This file consolidates all project instructions from the .github/instructions/
+directory to provide a single source of truth for development standards.
+
+# Concise Projects Rules
 
 ## Project Structure
 
@@ -42,7 +45,8 @@ Optional dependencies must be justified in the project's README.md.
 - All files must use `.js` extension
 - Use ES6 modules (`import`/`export`)
 - Enable strict mode in all files
-- Use async/await for asynchronous operations
+- Prefer synchronous calls over asynchronous ones whenever possible
+- Use async/await for asynchronous operations only when necessary
 - Follow functional programming paradigms and avoid object-oriented code
 - DO NOT use ES6 classes unless absolutely necessary
 - Use arrow functions where appropriate
@@ -70,6 +74,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 - All scripts must exit with a non-zero exit code when errors occur to ensure
   CI/CD pipelines can detect failures
 - Error messages should be descriptive and include context about what failed
+
+## Error Handling
+
+- Do not catch errors in your code. All errors must propagate back to the main
+  function.
+- The main function must always print the error and its stack trace to the
+  console before exiting.
 
 ## Logging Standards
 
@@ -109,13 +120,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 
 - Each venue has a separate workflow file for automatically updating the
   documentation and raising a PR if anything has changed
-- The workflow should run weekly at midnight on Saturday night / Sunday morning
+- The workflow should run every day at 00:00 UTC
 - Workflows must execute the extraction scripts using the package.json scripts
+  with separate steps for each config file
 - Example workflow command: `npm run extract:config`
 
-## Puppeteer scraping rules
+## Puppeteer Scraping Rules
 
-1. Browser Launch Configuration
+### Browser Launch Configuration
 
    - Always run in headless mode [`headless: 'new'`]
    - Disable sandbox features for container compatibility
@@ -138,32 +150,48 @@ if (import.meta.url === `file://${process.argv[1]}`) {
    - Set reasonable timeout of 30 seconds [`timeout: 30000`]
    - Ignore HTTPS errors [`ignoreHTTPSErrors: true`]
 
-2. Page Configuration
+### Page Configuration
 
-   - Set viewport to 1920x1080 resolution
-   - Use 30 second timeout for navigation
-   - Use 30 second timeout for other operations
+- Set viewport to 1920x1080 resolution
+- Use 30 second timeout for navigation
+- Use 30 second timeout for other operations
 
-3. Resource Optimization
+### Resource Optimization
 
-   - Enable request interception
-   - Only allow essential resource types:
-     - HTML documents
-     - JavaScript files
-     - XHR requests
-     - Fetch requests
-   - Block unnecessary resources like images and fonts
+- Enable request interception
+- Only allow essential resource types:
+  - HTML documents
+  - JavaScript files
+  - XHR requests
+  - Fetch requests
+- Block unnecessary resources like images and fonts
 
-4. Error Handling
+### Error Handling
 
-   - Exit process on critical errors
-   - Log all errors with clear messages
-   - Include URL in error messages for debugging
+- Exit process on critical errors
+- Log all errors with clear messages
+- Include URL in error messages for debugging
 
-5. Performance Guidelines
-   - Add polite delays between requests
-   - Use proper cleanup for browser and page instances
-   - Implement proper error handling and resource cleanup
+### Performance Guidelines
+
+- Add polite delays between requests
+- Use proper cleanup for browser and page instances
+- Implement proper error handling and resource cleanup
 
 These rules should be applied when analyzing or generating Puppeteer-based web
 scraping code for documentation extraction.
+
+---
+
+## Instruction Sources
+
+This CLAUDE.md file consolidates instructions from the following files in the 
+.github/instructions/ directory:
+
+- `github-workflows.instructions.md` - GitHub workflow standards
+- `javascript-standards.instructions.md` - JavaScript coding standards and error handling
+- `project-structure.instructions.md` - Project structure and entry point requirements  
+- `puppeteer.instructions.md` - Puppeteer scraping configuration and best practices
+
+Any updates to project standards should be made in the respective instruction files
+in .github/instructions/ and then consolidated into this CLAUDE.md file.
