@@ -35,89 +35,89 @@ The Access Key and Secret Key will be randomly generated and provided by BitMart
 
 ###### Read-Only Permissions:
 
-| API Name | Description | Authentication Type |
+| API Name | Authentication Type | Description |
 | --- | --- | --- |
-| /account/v1/wallet | Query account assets | KEYED 
-| /account/v1/deposit/address | Query deposit addresses for each currency | KEYED 
-| /account/v1/withdraw/address/list | Query withdraw address list | KEYED 
-| /account/v2/deposit-withdraw/history | Query deposit and withdrawal history | KEYED 
-| /account/v1/deposit-withdraw/detail | Query deposit and withdrawal details | KEYED 
-| /spot/v1/wallet | Query wallet balance for all currencies | KEYED 
-| /spot/v4/query/order | Query order by id (v4) | SIGNED 
-| /spot/v4/query/client-order | Query order by client order id (v4) | SIGNED 
-| /spot/v4/query/open-orders | Current open orders (v4) | SIGNED 
-| /spot/v4/query/history-orders | Account orders (v4) | SIGNED 
-| /spot/v4/query/trades | Account trade list (v4) | SIGNED 
-| /spot/v4/query/order-trades | Order trade list(v4) | SIGNED 
-| /spot/v1/user_fee | Query basic fee rate for current user | KEYED 
-| /spot/v1/trade_fee | Query fee rate for a specific trading pair for current user | KEYED 
-| /spot/v1/margin/isolated/pairs | Query loan interest rate and limit for a trading pair | KEYED 
-| /spot/v1/margin/isolated/account | Query isolated margin account information | KEYED 
-| /spot/v1/margin/isolated/borrow_record | Query isolated margin borrowing record | KEYED 
-| /spot/v1/margin/isolated/repay_record | Query isolated margin repayment record | KEYED 
-| /contract/private/get-open-orders | Query Contract All Open Orders | KEYED 
-| /contract/private/order | Query contract order details | KEYED 
-| /contract/private/trade-fee-rate | Query Trade Fee Rate | KEYED 
-| /contract/private/order-history | Query contract order history | KEYED 
-| /contract/private/trades | Query contract trade details | KEYED 
-| /contract/private/transaction-history | Get Contract Transaction History | KEYED 
-| /contract/private/assets-detail | Query contract asset details | KEYED 
-| /contract/private/position | Query position details | KEYED 
-| /contract/private/position-v2 | Query position details V2 | KEYED 
-| /contract/private/current-plan-order | Query Current Plan Orders | KEYED 
-| /contract/private/position-risk | Query Position Risk Details | KEYED 
-| /contract/private/get-position-mode | Get position mode | KEYED 
+| /account/v1/wallet | KEYED | Query account assets 
+| /account/v1/deposit/address | KEYED | Query deposit addresses for each currency 
+| /account/v1/withdraw/address/list | KEYED | Query withdraw address list 
+| /account/v2/deposit-withdraw/history | KEYED | Query deposit and withdrawal history 
+| /account/v1/deposit-withdraw/detail | KEYED | Query deposit and withdrawal details 
+| /spot/v1/wallet | KEYED | Query wallet balance for all currencies 
+| /spot/v4/query/order | SIGNED | Query order by id (v4) 
+| /spot/v4/query/client-order | SIGNED | Query order by client order id (v4) 
+| /spot/v4/query/open-orders | SIGNED | Current open orders (v4) 
+| /spot/v4/query/history-orders | SIGNED | Account orders (v4) 
+| /spot/v4/query/trades | SIGNED | Account trade list (v4) 
+| /spot/v4/query/order-trades | SIGNED | Order trade list(v4) 
+| /spot/v1/user_fee | KEYED | Query basic fee rate for current user 
+| /spot/v1/trade_fee | KEYED | Query fee rate for a specific trading pair for current user 
+| /spot/v1/margin/isolated/pairs | KEYED | Query loan interest rate and limit for a trading pair 
+| /spot/v1/margin/isolated/account | KEYED | Query isolated margin account information 
+| /spot/v1/margin/isolated/borrow_record | KEYED | Query isolated margin borrowing record 
+| /spot/v1/margin/isolated/repay_record | KEYED | Query isolated margin repayment record 
+| /contract/private/get-open-orders | KEYED | Query Contract All Open Orders 
+| /contract/private/order | KEYED | Query contract order details 
+| /contract/private/trade-fee-rate | KEYED | Query Trade Fee Rate 
+| /contract/private/order-history | KEYED | Query contract order history 
+| /contract/private/trades | KEYED | Query contract trade details 
+| /contract/private/transaction-history | KEYED | Get Contract Transaction History 
+| /contract/private/assets-detail | KEYED | Query contract asset details 
+| /contract/private/position | KEYED | Query position details 
+| /contract/private/position-v2 | KEYED | Query position details V2 
+| /contract/private/current-plan-order | KEYED | Query Current Plan Orders 
+| /contract/private/position-risk | KEYED | Query Position Risk Details 
+| /contract/private/get-position-mode | KEYED | Get position mode 
 
 ###### Withdraw Permissions:
 
-| API Name | Description | Authentication Type |
+| API Name | Authentication Type | Description |
 | --- | --- | --- |
-| /account/v1/withdraw/charge | Query withdrawal limits | KEYED 
-| /account/v1/withdraw/apply | Apply for withdrawal | SIGNED 
+| /account/v1/withdraw/charge | KEYED | Query withdrawal limits 
+| /account/v1/withdraw/apply | SIGNED | Apply for withdrawal 
 
 ###### Spot-Trade Permissions:
 
-| API Name | Description | Authentication Type |
+| API Name | Authentication Type | Description |
 | --- | --- | --- |
-| /spot/v1/submit_order | Place an order | SIGNED 
-| /spot/v2/submit_order | Place an order | SIGNED 
-| /spot/v1/batch_orders | Place multiple orders | SIGNED 
-| /spot/v2/batch_orders | Place multiple orders | SIGNED 
-| /spot/v4/batch_orders | Place multiple orders | SIGNED 
-| /spot/v1/cancel_order | Cancel an unfinished order | SIGNED 
-| /spot/v3/cancel_order | Cancel an unfinished order | SIGNED 
-| /spot/v1/cancel_orders | Cancel multiple orders | SIGNED 
-| /spot/v4/cancel_orders | Cancel multiple orders | SIGNED 
+| /spot/v1/submit_order | SIGNED | Place an order 
+| /spot/v2/submit_order | SIGNED | Place an order 
+| /spot/v1/batch_orders | SIGNED | Place multiple orders 
+| /spot/v2/batch_orders | SIGNED | Place multiple orders 
+| /spot/v4/batch_orders | SIGNED | Place multiple orders 
+| /spot/v1/cancel_order | SIGNED | Cancel an unfinished order 
+| /spot/v3/cancel_order | SIGNED | Cancel an unfinished order 
+| /spot/v1/cancel_orders | SIGNED | Cancel multiple orders 
+| /spot/v4/cancel_orders | SIGNED | Cancel multiple orders 
 
 ###### Margin-Trade Permissions:
 
-| API Name | Description | Authentication Type |
+| API Name | Authentication Type | Description |
 | --- | --- | --- |
-| /spot/v1/margin/submit_order | Margin order placement | SIGNED 
-| /spot/v1/margin/isolated/transfer | Transfer funds between margin and spot accounts | SIGNED 
-| /spot/v1/margin/isolated/borrow | Isolated margin borrowing | SIGNED 
-| /spot/v1/margin/isolated/repay | Repay isolated margin debt | SIGNED 
+| /spot/v1/margin/submit_order | SIGNED | Margin order placement 
+| /spot/v1/margin/isolated/transfer | SIGNED | Transfer funds between margin and spot accounts 
+| /spot/v1/margin/isolated/borrow | SIGNED | Isolated margin borrowing 
+| /spot/v1/margin/isolated/repay | SIGNED | Repay isolated margin debt 
 
 ###### Future-Trade Permissions:
 
-| API Name | Description | Authentication Type |
+| API Name | Authentication Type | Description |
 | --- | --- | --- |
-| /contract/private/submit-order | Place an order for a futures contract | SIGNED 
-| /contract/private/cancel-order | Cancel a single futures order | SIGNED 
-| /contract/private/cancel-orders | Batch cancel futures orders | SIGNED 
-| /contract/private/submit-plan-order | Place a plan order for futures contracts | SIGNED 
-| /contract/private/cancel-plan-order | Cancel futures plan orders | SIGNED 
-| /account/v1/transfer-contract | Future account transfer | SIGNED 
-| /account/v1/transfer-contract-list | Get Future account transfer list | SIGNED 
-| /contract/private/submit-tp-sl-order | Place a tp or sl order for a futures contract | SIGNED 
-| /contract/private/modify-plan-order | Modify a plan order for a futures contract | SIGNED 
-| /contract/private/modify-preset-plan-order | Modify a preset plan order for a futures contract | SIGNED 
-| /contract/private/modify-tp-sl-order | Modify a tp or sl order for a futures contract | SIGNED 
-| /contract/private/submit-trail-order | Place a trail order for futures contracts | SIGNED 
-| /contract/private/cancel-trail-order | Cancel futures trail order | SIGNED 
-| /contract/private/modify-limit-order | Modify futures limit order | SIGNED 
-| /contract/private/cancel-all-after | Timed cancel all open orders | SIGNED 
-| /contract/private/set-position-mode | Set position mode | SIGNED 
+| /contract/private/submit-order | SIGNED | Place an order for a futures contract 
+| /contract/private/cancel-order | SIGNED | Cancel a single futures order 
+| /contract/private/cancel-orders | SIGNED | Batch cancel futures orders 
+| /contract/private/submit-plan-order | SIGNED | Place a plan order for futures contracts 
+| /contract/private/cancel-plan-order | SIGNED | Cancel futures plan orders 
+| /account/v1/transfer-contract | SIGNED | Future account transfer 
+| /account/v1/transfer-contract-list | SIGNED | Get Future account transfer list 
+| /contract/private/submit-tp-sl-order | SIGNED | Place a tp or sl order for a futures contract 
+| /contract/private/modify-plan-order | SIGNED | Modify a plan order for a futures contract 
+| /contract/private/modify-preset-plan-order | SIGNED | Modify a preset plan order for a futures contract 
+| /contract/private/modify-tp-sl-order | SIGNED | Modify a tp or sl order for a futures contract 
+| /contract/private/submit-trail-order | SIGNED | Place a trail order for futures contracts 
+| /contract/private/cancel-trail-order | SIGNED | Cancel futures trail order 
+| /contract/private/modify-limit-order | SIGNED | Modify futures limit order 
+| /contract/private/cancel-all-after | SIGNED | Timed cancel all open orders 
+| /contract/private/set-position-mode | SIGNED | Set position mode 
 
 ###### Sub-Account Permissions:
 
@@ -137,22 +137,22 @@ Same as above futures trading authority
 
 ###### Sub-Account Inter-Account Transfer Permissions:
 
-| API Name | Description | Authentication Type |
+| API Name | Authentication Type | Description |
 | --- | --- | --- |
-| /account/sub-account/main/v1/sub-to-main | Sub-Account Transfer to Main-Account (For Main Account, use spot account) | SIGNED 
-| /account/sub-account/sub/v1/sub-to-main | Sub-Account Transfer to Main-Account (For Sub-Account, use spot account) | SIGNED 
-| /account/sub-account/main/v1/main-to-sub | Main-Account Transfer to Sub-Account (For Main Account, use spot account) | SIGNED 
-| /account/sub-account/main/v1/sub-to-sub | Sub-Account Transfer to Sub-Account (For Main Account, use spot account) | SIGNED 
-| /account/sub-account/main/v1/transfer-list | Get Sub-Account Transfer History (For Main Account, use spot account) | KEYED 
-| /account/sub-account/v1/transfer-history | Get Account Spot Asset Transfer History (For Main/Sub Account, use spot account) | KEYED 
-| /account/sub-account/main/v1/wallet | Get Sub-Account Spot Wallet Balance (For Main Account, use spot account) | KEYED 
-| /account/sub-account/main/v1/subaccount-list | Get Sub-Account List (For Main Account, use spot account) | KEYED 
-| /account/contract/sub-account/main/v1/sub-to-main | Sub-Account Transfer to Main-Account (For Main Account, use futures account) | SIGNED 
-| /account/contract/sub-account/main/v1/main-to-sub | Main-Account Transfer to Sub-Account (For Main Account, use futures account) | SIGNED 
-| /account/contract/sub-account/sub/v1/sub-to-main | Sub-Account Transfer to Main-Account (For Sub-Account, use futures account) | SIGNED 
-| /account/contract/sub-account/main/v1/wallet | Get Sub-Account Futures Wallet Balance (For Main Account, use futures account) | KEYED 
-| /account/contract/sub-account/v1/transfer-history | Get Account Futures Asset Transfer History (For Main/Sub Account, use futures account) | KEYED 
-| /account/contract/sub-account/main/v1/transfer-list | Get Sub-Account Transfer History (For Main Account, use futures account) | KEYED 
+| /account/sub-account/main/v1/sub-to-main | SIGNED | Sub-Account Transfer to Main-Account (For Main Account, use spot account) 
+| /account/sub-account/sub/v1/sub-to-main | SIGNED | Sub-Account Transfer to Main-Account (For Sub-Account, use spot account) 
+| /account/sub-account/main/v1/main-to-sub | SIGNED | Main-Account Transfer to Sub-Account (For Main Account, use spot account) 
+| /account/sub-account/main/v1/sub-to-sub | SIGNED | Sub-Account Transfer to Sub-Account (For Main Account, use spot account) 
+| /account/sub-account/main/v1/transfer-list | KEYED | Get Sub-Account Transfer History (For Main Account, use spot account) 
+| /account/sub-account/v1/transfer-history | KEYED | Get Account Spot Asset Transfer History (For Main/Sub Account, use spot account) 
+| /account/sub-account/main/v1/wallet | KEYED | Get Sub-Account Spot Wallet Balance (For Main Account, use spot account) 
+| /account/sub-account/main/v1/subaccount-list | KEYED | Get Sub-Account List (For Main Account, use spot account) 
+| /account/contract/sub-account/main/v1/sub-to-main | SIGNED | Sub-Account Transfer to Main-Account (For Main Account, use futures account) 
+| /account/contract/sub-account/main/v1/main-to-sub | SIGNED | Main-Account Transfer to Sub-Account (For Main Account, use futures account) 
+| /account/contract/sub-account/sub/v1/sub-to-main | SIGNED | Sub-Account Transfer to Main-Account (For Sub-Account, use futures account) 
+| /account/contract/sub-account/main/v1/wallet | KEYED | Get Sub-Account Futures Wallet Balance (For Main Account, use futures account) 
+| /account/contract/sub-account/v1/transfer-history | KEYED | Get Account Futures Asset Transfer History (For Main/Sub Account, use futures account) 
+| /account/contract/sub-account/main/v1/transfer-list | KEYED | Get Sub-Account Transfer History (For Main Account, use futures account) 
 
 ## API Library
 
