@@ -59,7 +59,16 @@ File changes summary:
 ${gitDiff}
 \`\`\`
 
-Generate a PR summary:`
+Generate a PR summary with two sections:
+1. A detailed PR summary with bullet points
+2. A Twitter/X friendly update (max 280 characters) that highlights the key changes in an engaging way. Use relevant emojis and make it suitable for social media.
+
+Format your response as:
+## PR Summary
+[detailed summary with bullet points]
+
+## Twitter/X Update
+[concise social media update]`
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1",
@@ -67,14 +76,14 @@ Generate a PR summary:`
         {
           role: "system",
           content:
-            "You are a technical documentation assistant that creates clear, concise PR summaries for API documentation updates."
+            "You are a technical documentation assistant that creates clear, concise PR summaries for API documentation updates. You also create engaging Twitter/X updates that highlight key changes in a social media friendly format with emojis."
         },
         {
           role: "user",
           content: prompt
         }
       ],
-      max_tokens: 500,
+      max_tokens: 700,
       temperature: 0.3
     })
 
