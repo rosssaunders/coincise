@@ -5,11 +5,34 @@ import { downloadOpenApiSpecs } from "./downloader.js"
 import { convertSpecsToMarkdown } from "./converter.js"
 import { config } from "./config.js"
 import { createOutputDirectories } from "./fileUtils.js"
+import { scrapeRateLimit } from "./rateLimitScraper.js"
+
+/**
+ * Check if rate limit scraping is requested
+ * @returns {boolean} True if --rate-limit flag is present
+ */
+function shouldScrapeRateLimit() {
+  return process.argv.includes("--rate-limit")
+}
 
 /**
  * Main function to download OpenAPI specs and convert them to Markdown
  */
 async function main() {
+  // Check if rate limit scraping is requested
+  if (shouldScrapeRateLimit()) {
+    console.log("Starting KuCoin rate limit documentation scraping...")
+    
+    // Create output directories if they don't exist
+    await createOutputDirectories(config.outputDir)
+    
+    // Scrape rate limit documentation
+    await scrapeRateLimit(config)
+    
+    console.log("KuCoin rate limit documentation scraping completed successfully!")
+    return
+  }
+
   console.log("Starting KuCoin API documentation extraction...")
 
   // Create output directories if they don't exist

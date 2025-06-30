@@ -5,7 +5,8 @@
   "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "extract:rate-limit": "node src/index.js --rate-limit"
   },
   "dependencies": {
     "jsdom": "26.1.0",
