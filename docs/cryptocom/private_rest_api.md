@@ -3100,7 +3100,8 @@ Default: 100.
 Max: 100. |
 
 **Note**: If you omit all parameters, you still need to pass in an empty
-`params` block like `params: {}` for API request consistency
+`params` block like `params: {}` for API request consistency  
+get-trades time window can only be up to 7 days for maximum.
 
 ### Applies To
 

@@ -1291,6 +1291,8 @@ Nanosecond is recommended for accurate pagination | | end_ts | number or string
 Default: current system timestamp.  
 Nanosecond is recommended for accurate pagination |
 
+**Note**: get-trades time window can only be up to 7 days for maximum.
+
 ### Applies To
 
 REST
