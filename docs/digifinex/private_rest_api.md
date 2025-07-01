@@ -8,21 +8,15 @@ Source: https://docs.digifinex.com/en-ww/spot/v3/rest.html
 
 ## Digifinex API Trading Rules
 
-In order to provide a better API trading environment, avoid malicious
-manipulation and disruption of the market integrity, DigiFinex hereby publish
-risk-control quantitative indicators and anti-manipulation rules.
+In order to provide a better API trading environment, avoid malicious manipulation and disruption of the market integrity, DigiFinex hereby publish risk-control quantitative indicators and anti-manipulation rules.
 
 ### Quantitative Indicators
 
-The indicators record and calculated by all orders on certain trading pair
-within one time period.
+The indicators record and calculated by all orders on certain trading pair within one time period.
 
-- Filling Ratio（FR） FR = Total number of Filled Orders / Total Number of
-  Orders
+- Filling Ratio（FR） FR = Total number of Filled Orders / Total Number of Orders
 - Filling Weight（FW） FW = Totall Filled Amount / Total Order Amount
-- Cancellation Ratio（CR） CR = Total Number of Fully-Cancelled Orders / Total
-  Number of Orders In which the Fully-Cancelled Orders indicate orders with
-  zero-filled amount and cancelled within 5 seconds after order placement.
+- Cancellation Ratio（CR） CR = Total Number of Fully-Cancelled Orders / Total Number of Orders In which the Fully-Cancelled Orders indicate orders with zero-filled amount and cancelled within 5 seconds after order placement.
 
 ### Trigger Conditions
 
@@ -34,10 +28,7 @@ within one time period.
 
 ### Risk Control and API Ban
 
-API Users violated any anti-manipulation rules will be banned for API trading
-for 30 minutes. The time will extend to 24 hours after third ban within 3 hours.
-During that time, banned user cannot place new order through API or creat new
-API key, order placement and cancellation will not be affected whatsoever.
+API Users violated any anti-manipulation rules will be banned for API trading for 30 minutes. The time will extend to 24 hours after third ban within 3 hours. During that time, banned user cannot place new order through API or creat new API key, order placement and cancellation will not be affected whatsoever.
 
 ## Trading Interface List
 
@@ -45,17 +36,13 @@ API key, order placement and cancellation will not be affected whatsoever.
 
 ### Overview
 
-The API request may be tampered during internet, therefore all private API must
-be signed by your API Key (Secrete Key).
+The API request may be tampered during internet, therefore all private API must be signed by your API Key (Secrete Key).
 
-Each API Key has permission property, please check the API permission, and make
-sure your API key has proper permission.
+Each API Key has permission property, please check the API permission, and make sure your API key has proper permission.
 
 Signature Method：
 
-The signature may be different if the request text is different, therefore the
-request should be normalized before signing. Below signing steps take the Create
-New Order as an example:
+The signature may be different if the request text is different, therefore the request should be normalized before signing. Below signing steps take the Create New Order as an example:
 
 1.  Create new order Parameters.
 
@@ -65,8 +52,7 @@ New Order as an example:
 
 `symbol=trx_usdt&price=0.01&amount=1&type=buy`
 
-1.  Use the pre-signed text and your Secret Key to generate a
-    signature（Example: Secret:01234567890123456789abcd）:
+1.  Use the pre-signed text and your Secret Key to generate a signature（Example: Secret:01234567890123456789abcd）:
 
 `7e2d0636cab21fd41c828b8c6ce8f77e643febecdeaeab0771c01dc4d7dbef38`
 

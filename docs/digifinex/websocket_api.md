@@ -4,7 +4,7 @@
 >
 > **Source**: https://raw.githubusercontent.com/DigiFinex/api/master/Websocket_API_en.md
 >
-> **Last Updated**: 2025-06-30T20:35:13.148Z
+> **Last Updated**: 2025-07-01T00:38:48.805Z
 
 ---
 
