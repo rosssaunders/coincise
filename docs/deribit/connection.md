@@ -306,6 +306,30 @@ authentication connections are **not counted against the limit**. When neither
 `connection` nor `session` scope is specified in the request, the server will
 default to using the `connection` scope.
 
+### Connection limit
+
+Deribit enforces a limit of **32 simultaneous connections per IP address**,
+regardless of whether the user is authenticated. This limit applies to all
+currently open connections, including:
+
+- **HTTP requests (GET/POST)** — each request opens a new connection for its
+  duration
+- **WebSocket connections** — the connection remains open for the duration of
+  the connection
+
+### Caution
+
+The 32-connection limit covers both **session-scoped** and **connection-scoped**
+connections. For example, you may open 16 of each type, or 1 session-scoped and
+31 standard connections. Any attempt to establish a **33rd connection from the
+same IP** will be rejected with an **HTTP 429 (Too Many Requests)** response.
+
+### Note
+
+The Deribit **webpage uses 2 active connections per user session**. Keep this in
+mind when designing high-frequency or multi-tab integrations to avoid
+unintentionally exceeding the limit.
+
 **Connection scope**
 
 - Tokens are valid only during the active connection. Once the connection is
@@ -314,26 +338,26 @@ default to using the `connection` scope.
 - Access and refresh tokens are strictly tied to the specific connection in
   which they were granted.
 
-### Caution
-
-**A maximum of 32 simultaneous connections per IP** address is allowed. This
-includes all types of connections — both with connection and session scope. For
-example, you may have 16 `session`\-scoped and 16 `connection`\-scoped
-connections, or 1 session and 31 standard connections. Any 33rd connection
-attempt from the same IP will be rejected and HTTP 429 will be returned.
-
-### Note
-
-The Deribit **webpage uses 2 active connections per user session**. Keep this in
-mind when designing high-frequency or multi-tab integrations to avoid
-unintentionally exceeding the limit.
-
 ## Session[](#heading-2)
 
 A session extends beyond a single connection and represents a period of
 interaction between a user and a server, potentially across multiple
 connections. Users can authenticate with the `session:name` scope to bind their
 connection with a named session.
+
+### Session limit
+
+Deribit enforces a **limit of 16 active sessions per API key or
+username/password login**.
+
+A new session is created when:
+
+- You generate a new authentication token and specify a session name via the
+  `session:name` scope, or
+- You call the public/auth endpoint without providing a session name.
+
+If a new session is created beyond the 16-session limit, the **oldest active
+session is automatically removed**.
 
 **Session scope**
 
@@ -347,8 +371,6 @@ connection with a named session.
   every subsequent request.
 - Re-authenticating with a refresh token under session scope does not add new
   sessions but refreshes the existing one.
-- **A maximum of 16 sessions per API key is allowed**. When session 17 is opened
-  the Deribit removes the one that was not refreshed in the longest time.
 
 ## Best Practices for Efficient and Reliable Connection Management[](#heading-3)
 
