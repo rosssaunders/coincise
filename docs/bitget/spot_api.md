@@ -139,6 +139,7 @@ Response Example
 | orderQuantity       | String | The maximum number of orders allowed for the current symbol                                                                                          |
 | areaSymbol          | String | Area symbol<br><code>yes</code>, <code>no</code>                                                                                                     |
 | offTime             | String | Symbol off time, e.g: 1744797600000                                                                                                                  |
+| openTime            | String | This field has been deprecated                                                                                                                       |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/market/Get-Symbols)
