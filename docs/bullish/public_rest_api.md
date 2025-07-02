@@ -56,18 +56,11 @@ The API:
 
 # Connectivity Options
 
-Bullish offers 3 options for connectivity:
-
-1. Cloudflare
-2. Cloudflare Bypass
-3. Direct Connect via AWS or GCP
-
-Cloudflare Bypass and Direct Connect allow for a more optimised connection with
-improved latencies. In GCP, generally our most optimal connection is to operate
-within asia-southeast1-a Availability Zone. Please note, this may change at any
-given moment and without warning to another Availability Zone within
-asia-southeast1 for operational reasons. For AWS or GCP connectivity details,
-please contact your sales representative.
+In GCP, generally our most optimal connection is to operate within
+asia-southeast1-a Availability Zone. Please note, this may change at any given
+moment and without warning to another Availability Zone within asia-southeast1
+for operational reasons. For AWS or GCP connectivity details, please contact
+your sales representative
 
 # FIX API
 
@@ -170,32 +163,47 @@ links to the previous and next pages:
 
 # Rate Limits
 
-## Rate Limits per IP address
+## Public Endpoints
+
+The below mentioned public endpoints will be rate limited. For more information
+please reach out to your Bullish customer support.
+
+- [/trading-api/v1/markets](#get-/v1/markets) and subpaths
+- [/trading-api/v1/market-data](#overview--multi-orderbook-websocket-unauthenticated)
+  and subpaths
+- [/trading-api/v1/history/markets](#get-/v1/history/markets/-symbol-/trades)
+  and subpaths
+- [/trading-api/v1/assets](#get-/v1/assets) and subpaths
+- [/trading-api/v1/index-prices](#get-/v1/index-prices) and subpaths
+- [/trading-api/v1/index-data](#overview--index-data-websocket-unauthenticated)
+  and subpaths
+
+## Private Endpoints
+
+API endpoints denoted by `Ratelimited: True` in the description are also subject
+to rate limits. e.g. [Create Order](#post-/v2/orders). The API endpoints fall
+under the below categories. The rate limit for each category is _independently_
+applied.
+
+- Unauthenticated endpoints, rate limited at 50 requests per second.
+- Authenticated `/orders` endpoints, rate limited at 50 requests per second.
+- Other Authenticated endpoints, rate limited at 50 requests per second.
+
+### Rate Limits per IP address
 
 Each IP address is subject to a blanket rate limit of 500 requests per 10
 seconds (approximately 50 requests per second). If an IP address is rate
 limited, the http response status code will be `429 Too Many Requests` and the
 IP address is blocked from making any requests for 60 seconds.
 
-## Global Rate Limit
+### Global Rate Limit
 
 The global rate limit is an additional rate limit specific to the exchange. It
 is used to help limit the flow of orders into the exchange. It affects all
 clients fairly. When the global rate limit is breached the
 `x-ratelimit-global-breach` header value will be set to `true` else `false`.
 
-## Rate Limits per API category
-
-In addition, API endpoints denoted by `Ratelimited: True` in the description are
-also subject to rate limits. e.g. [Create Order](#post-/v2/orders). The API
-endpoints fall under the below categories. The rate limit for each category is
-_independently_ applied.
-
-- Unauthenticated endpoints, rate limited at 50 requests per second.
-- Authenticated `/orders` endpoints, rate limited at 50 requests per second.
-- Other Authenticated endpoints, rate limited at 50 requests per second.
-
-## Rate Limits Info
+### Rate Limits Info
 
 When rate limits are not exceeded, the http response header of the API endpoint
 called will contain the below:
@@ -209,7 +217,7 @@ called will contain the below:
 - `x-ratelimit-global-breach`: true/false, indicating whether the global limit
   has been breached.
 
-## Exceeding Rate Limits
+### Exceeding Rate Limits
 
 When rate limits are exceeded, the API endpoint will return the http response
 status code `429 Too Many Requests` and the http response body will be:
@@ -222,7 +230,7 @@ status code `429 Too Many Requests` and the http response body will be:
 }
 ```
 
-## Exceeding The Global Rate Limit
+### Exceeding The Global Rate Limit
 
 When the global rate limit is exceeded, the API endpoint will return the http
 response status code `429 Too Many Requests` and the http response body will be:
@@ -235,19 +243,12 @@ response status code `429 Too Many Requests` and the http response body will be:
 }
 ```
 
-## Increasing Rate Limits
-
-Bullish has a tiered rate limit offering based on volume.
-
-|                   | Default      | 30-Day Volume between $1B USD and $2B USD | 30-Day Volume over $2B USD |
-| ----------------- | ------------ | ----------------------------------------- | -------------------------- |
-| Cloudflare        | 50 msgs/sec  | same as default                           | same as default            |
-| Cloudflare Bypass | 100 msgs/sec | up to 200 msgs/sec                        | up to 500 msgs/sec         |
+### Increasing Rate Limits
 
 For more information on increasing your rate limits, please reach out to your
 sales representative.
 
-## Obtaining Your Rate Limit Token
+### Obtaining Your Rate Limit Token
 
 Each trading account has a unique rate limit token that can be obtained by
 querying [Get Trading Accounts](#get-/v1/accounts/trading-accounts). The rate
@@ -805,10 +806,10 @@ a set of topics that can be subscribed to.
 ## Servers
 
 - `wss://api.exchange.bullish.com` - PRODUCTION
-- `wss://registered.api.exchange.bullish.com` - PRODUCTION (Cloudflare Bypass)
+- `wss://registered.api.exchange.bullish.com` - PRODUCTION
 - `wss://prod.access.bullish.com` - PRODUCTION (Direct Connect)
 - `wss://api.simnext.bullish-test.com` - SANDBOX
-- `wss://registered.api.simnext.bullish-test.com` - SANDBOX (Cloudflare Bypass)
+- `wss://registered.api.simnext.bullish-test.com` - SANDBOX
 - `wss://simnext.access.bullish.com` - SANDBOX (Direct Connect)
 
 ## Max Open WebSocket Connections
@@ -2563,28 +2564,28 @@ Get supported assets. Clients can ignore [test assets](#overview--test-assets).
       },
       "apr": {
         "description": "annualized percentage rate",
-        "type": "String",
+        "type": "string",
         "example": "12.50"
       },
       "collateralRating": {
         "deprecated": true,
         "description": "collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`",
-        "type": "String",
+        "type": "string",
         "example": "95.00"
       },
       "maxBorrow": {
         "description": "maximum quantity that can be borrowed for this asset",
-        "type": "String",
+        "type": "string",
         "example": "10.00000000"
       },
       "totalOfferedLoanQuantity": {
         "description": "quantity of an asset that is across all loan offers on the exchange",
-        "type": "String",
+        "type": "string",
         "example": "5.00000000"
       },
       "loanBorrowedQuantity": {
         "description": "amount of loans that is currently being borrowed for the asset",
-        "type": "String",
+        "type": "string",
         "example": "3.00000000"
       },
       "collateralBands": {
@@ -2597,12 +2598,12 @@ Get supported assets. Clients can ignore [test assets](#overview--test-assets).
               "properties": {
                 "collateralPercentage": {
                   "description": "collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral",
-                  "type": "String",
+                  "type": "string",
                   "example": "95.00"
                 },
                 "bandLimitUSD": {
                   "description": "upper limit in USD for this band",
-                  "type": "String",
+                  "type": "string",
                   "example": "1000000.0000"
                 }
               }
@@ -2618,52 +2619,52 @@ Get supported assets. Clients can ignore [test assets](#overview--test-assets).
             "properties": {
               "symbol": {
                 "description": "underlying asset symbol",
-                "type": "String",
+                "type": "string",
                 "example": "BTC"
               },
               "assetId": {
                 "description": "underlying asset ID",
-                "type": "String",
+                "type": "string",
                 "example": "1"
               },
               "bpmMinReturnStart": {
                 "description": "start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-                "type": "String",
+                "type": "string",
                 "example": "40.0000"
               },
               "bpmMinReturnEnd": {
                 "description": "end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-                "type": "String",
+                "type": "string",
                 "example": "20.0000"
               },
               "bpmMaxReturnStart": {
                 "description": "start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-                "type": "String",
+                "type": "string",
                 "example": "30.0000"
               },
               "bpmMaxReturnEnd": {
                 "description": "end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-                "type": "String",
+                "type": "string",
                 "example": "50.0000"
               },
               "marketRiskFloorPctStart": {
                 "description": "the percentage range of risk reduction allowed for a portfolio",
-                "type": "String",
+                "type": "string",
                 "example": "1.00"
               },
               "marketRiskFloorPctEnd": {
                 "description": "the percentage range of risk reduction allowed for a portfolio",
-                "type": "String",
+                "type": "string",
                 "example": "5.00"
               },
               "bpmTransitionDateTimeStart": {
                 "description": "the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-                "type": "String",
+                "type": "string",
                 "example": "2024-08-02T12:00:00.000Z"
               },
               "bpmTransitionDateTimeEnd": {
                 "description": "the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-                "type": "String",
+                "type": "string",
                 "example": "2024-08-02T18:00:00.000Z"
               }
             }
@@ -2696,25 +2697,25 @@ Status Code **200**
 | » precision                   | string                                    | true     | none         | number of decimal digits 'after the dot' for asset amount                                                                                                                                                                                                                                                                                                                                                                                                      |
 | » minBalanceInterest          | [AssetValue](#schemaassetvalue)           | true     | none         | see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                                                                                                                                                                                                                              |
 | » minFee                      | [AssetValue](#schemaassetvalue)           | true     | none         | minimum fee                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| » apr                         | String                                    | true     | none         | annualized percentage rate                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| » collateralRating            | String                                    | true     | none         | collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`                                                                                                                                                                                                                                                                                                                                          |
-| » maxBorrow                   | String                                    | true     | none         | maximum quantity that can be borrowed for this asset                                                                                                                                                                                                                                                                                                                                                                                                           |
-| » totalOfferedLoanQuantity    | String                                    | true     | none         | quantity of an asset that is across all loan offers on the exchange                                                                                                                                                                                                                                                                                                                                                                                            |
-| » loanBorrowedQuantity        | String                                    | true     | none         | amount of loans that is currently being borrowed for the asset                                                                                                                                                                                                                                                                                                                                                                                                 |
+| » apr                         | string                                    | true     | none         | annualized percentage rate                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| » collateralRating            | string                                    | true     | none         | collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`                                                                                                                                                                                                                                                                                                                                          |
+| » maxBorrow                   | string                                    | true     | none         | maximum quantity that can be borrowed for this asset                                                                                                                                                                                                                                                                                                                                                                                                           |
+| » totalOfferedLoanQuantity    | string                                    | true     | none         | quantity of an asset that is across all loan offers on the exchange                                                                                                                                                                                                                                                                                                                                                                                            |
+| » loanBorrowedQuantity        | string                                    | true     | none         | amount of loans that is currently being borrowed for the asset                                                                                                                                                                                                                                                                                                                                                                                                 |
 | » collateralBands             | [allOf]                                   | true     | none         | list of collateral bands for the asset. A collateral band holds the upper limit of the USD notional and the corresponding collateral percentage which applies to it. An asset's collateral value will be capped by the highest limit of the collateral bands, any remaining amount greater than this limit will have a collateral percentage of 0. If an asset has an empty list of CollateralBands, this signifies that the asset has a collateralValue of 0. |
-| »» collateralPercentage       | String                                    | false    | none         | collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral                                                                                                                                                                                                                                                                                                                    |
-| »» bandLimitUSD               | String                                    | false    | none         | upper limit in USD for this band                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| »» collateralPercentage       | string                                    | false    | none         | collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral                                                                                                                                                                                                                                                                                                                    |
+| »» bandLimitUSD               | string                                    | false    | none         | upper limit in USD for this band                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | » underlyingAsset             | [UnderlyingAsset](#schemaunderlyingasset) | true     | none         | underlying asset for the asset.                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| »» symbol                     | String                                    | false    | none         | underlying asset symbol                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| »» assetId                    | String                                    | false    | none         | underlying asset ID                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| »» bpmMinReturnStart          | String                                    | false    | none         | start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                        |
-| »» bpmMinReturnEnd            | String                                    | false    | none         | end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                          |
-| »» bpmMaxReturnStart          | String                                    | false    | none         | start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                          |
-| »» bpmMaxReturnEnd            | String                                    | false    | none         | end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                            |
-| »» marketRiskFloorPctStart    | String                                    | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                                                                                                                                                                                                                                                                                                                                                 |
-| »» marketRiskFloorPctEnd      | String                                    | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                                                                                                                                                                                                                                                                                                                                                 |
-| »» bpmTransitionDateTimeStart | String                                    | false    | none         | the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset                                                                                                                                                                                                                                                                                                                                  |
-| »» bpmTransitionDateTimeEnd   | String                                    | false    | none         | the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset                                                                                                                                                                                                                                                                                                                                    |
+| »» symbol                     | string                                    | false    | none         | underlying asset symbol                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| »» assetId                    | string                                    | false    | none         | underlying asset ID                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| »» bpmMinReturnStart          | string                                    | false    | none         | start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                        |
+| »» bpmMinReturnEnd            | string                                    | false    | none         | end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                          |
+| »» bpmMaxReturnStart          | string                                    | false    | none         | start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                          |
+| »» bpmMaxReturnEnd            | string                                    | false    | none         | end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                                                                                                                                                                                                                                                                                                                                                            |
+| »» marketRiskFloorPctStart    | string                                    | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »» marketRiskFloorPctEnd      | string                                    | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                                                                                                                                                                                                                                                                                                                                                 |
+| »» bpmTransitionDateTimeStart | string                                    | false    | none         | the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset                                                                                                                                                                                                                                                                                                                                  |
+| »» bpmTransitionDateTimeEnd   | string                                    | false    | none         | the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset                                                                                                                                                                                                                                                                                                                                    |
 
 <aside class="success">
 This operation does not require authentication
@@ -2761,6 +2762,12 @@ print(r.json())
 _Get Asset by Symbol_
 
 Get Asset by Symbol
+
+<h3 id="asset-data-get-asset-parameters">Parameters</h3>
+
+| Name   | In   | Type   | Required | Description |
+| ------ | ---- | ------ | -------- | ----------- |
+| symbol | path | string | true     | none        |
 
 > Example responses
 
@@ -2841,28 +2848,28 @@ Get Asset by Symbol
     },
     "apr": {
       "description": "annualized percentage rate",
-      "type": "String",
+      "type": "string",
       "example": "12.50"
     },
     "collateralRating": {
       "deprecated": true,
       "description": "collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`",
-      "type": "String",
+      "type": "string",
       "example": "95.00"
     },
     "maxBorrow": {
       "description": "maximum quantity that can be borrowed for this asset",
-      "type": "String",
+      "type": "string",
       "example": "10.00000000"
     },
     "totalOfferedLoanQuantity": {
       "description": "quantity of an asset that is across all loan offers on the exchange",
-      "type": "String",
+      "type": "string",
       "example": "5.00000000"
     },
     "loanBorrowedQuantity": {
       "description": "amount of loans that is currently being borrowed for the asset",
-      "type": "String",
+      "type": "string",
       "example": "3.00000000"
     },
     "collateralBands": {
@@ -2875,12 +2882,12 @@ Get Asset by Symbol
             "properties": {
               "collateralPercentage": {
                 "description": "collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral",
-                "type": "String",
+                "type": "string",
                 "example": "95.00"
               },
               "bandLimitUSD": {
                 "description": "upper limit in USD for this band",
-                "type": "String",
+                "type": "string",
                 "example": "1000000.0000"
               }
             }
@@ -2896,52 +2903,52 @@ Get Asset by Symbol
           "properties": {
             "symbol": {
               "description": "underlying asset symbol",
-              "type": "String",
+              "type": "string",
               "example": "BTC"
             },
             "assetId": {
               "description": "underlying asset ID",
-              "type": "String",
+              "type": "string",
               "example": "1"
             },
             "bpmMinReturnStart": {
               "description": "start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "40.0000"
             },
             "bpmMinReturnEnd": {
               "description": "end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "20.0000"
             },
             "bpmMaxReturnStart": {
               "description": "start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "30.0000"
             },
             "bpmMaxReturnEnd": {
               "description": "end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "50.0000"
             },
             "marketRiskFloorPctStart": {
               "description": "the percentage range of risk reduction allowed for a portfolio",
-              "type": "String",
+              "type": "string",
               "example": "1.00"
             },
             "marketRiskFloorPctEnd": {
               "description": "the percentage range of risk reduction allowed for a portfolio",
-              "type": "String",
+              "type": "string",
               "example": "5.00"
             },
             "bpmTransitionDateTimeStart": {
               "description": "the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-              "type": "String",
+              "type": "string",
               "example": "2024-08-02T12:00:00.000Z"
             },
             "bpmTransitionDateTimeEnd": {
               "description": "the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-              "type": "String",
+              "type": "string",
               "example": "2024-08-02T18:00:00.000Z"
             }
           }

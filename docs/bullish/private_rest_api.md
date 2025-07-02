@@ -56,18 +56,11 @@ The API:
 
 # Connectivity Options
 
-Bullish offers 3 options for connectivity:
-
-1. Cloudflare
-2. Cloudflare Bypass
-3. Direct Connect via AWS or GCP
-
-Cloudflare Bypass and Direct Connect allow for a more optimised connection with
-improved latencies. In GCP, generally our most optimal connection is to operate
-within asia-southeast1-a Availability Zone. Please note, this may change at any
-given moment and without warning to another Availability Zone within
-asia-southeast1 for operational reasons. For AWS or GCP connectivity details,
-please contact your sales representative.
+In GCP, generally our most optimal connection is to operate within
+asia-southeast1-a Availability Zone. Please note, this may change at any given
+moment and without warning to another Availability Zone within asia-southeast1
+for operational reasons. For AWS or GCP connectivity details, please contact
+your sales representative
 
 # FIX API
 
@@ -170,32 +163,47 @@ links to the previous and next pages:
 
 # Rate Limits
 
-## Rate Limits per IP address
+## Public Endpoints
+
+The below mentioned public endpoints will be rate limited. For more information
+please reach out to your Bullish customer support.
+
+- [/trading-api/v1/markets](#get-/v1/markets) and subpaths
+- [/trading-api/v1/market-data](#overview--multi-orderbook-websocket-unauthenticated)
+  and subpaths
+- [/trading-api/v1/history/markets](#get-/v1/history/markets/-symbol-/trades)
+  and subpaths
+- [/trading-api/v1/assets](#get-/v1/assets) and subpaths
+- [/trading-api/v1/index-prices](#get-/v1/index-prices) and subpaths
+- [/trading-api/v1/index-data](#overview--index-data-websocket-unauthenticated)
+  and subpaths
+
+## Private Endpoints
+
+API endpoints denoted by `Ratelimited: True` in the description are also subject
+to rate limits. e.g. [Create Order](#post-/v2/orders). The API endpoints fall
+under the below categories. The rate limit for each category is _independently_
+applied.
+
+- Unauthenticated endpoints, rate limited at 50 requests per second.
+- Authenticated `/orders` endpoints, rate limited at 50 requests per second.
+- Other Authenticated endpoints, rate limited at 50 requests per second.
+
+### Rate Limits per IP address
 
 Each IP address is subject to a blanket rate limit of 500 requests per 10
 seconds (approximately 50 requests per second). If an IP address is rate
 limited, the http response status code will be `429 Too Many Requests` and the
 IP address is blocked from making any requests for 60 seconds.
 
-## Global Rate Limit
+### Global Rate Limit
 
 The global rate limit is an additional rate limit specific to the exchange. It
 is used to help limit the flow of orders into the exchange. It affects all
 clients fairly. When the global rate limit is breached the
 `x-ratelimit-global-breach` header value will be set to `true` else `false`.
 
-## Rate Limits per API category
-
-In addition, API endpoints denoted by `Ratelimited: True` in the description are
-also subject to rate limits. e.g. [Create Order](#post-/v2/orders). The API
-endpoints fall under the below categories. The rate limit for each category is
-_independently_ applied.
-
-- Unauthenticated endpoints, rate limited at 50 requests per second.
-- Authenticated `/orders` endpoints, rate limited at 50 requests per second.
-- Other Authenticated endpoints, rate limited at 50 requests per second.
-
-## Rate Limits Info
+### Rate Limits Info
 
 When rate limits are not exceeded, the http response header of the API endpoint
 called will contain the below:
@@ -209,7 +217,7 @@ called will contain the below:
 - `x-ratelimit-global-breach`: true/false, indicating whether the global limit
   has been breached.
 
-## Exceeding Rate Limits
+### Exceeding Rate Limits
 
 When rate limits are exceeded, the API endpoint will return the http response
 status code `429 Too Many Requests` and the http response body will be:
@@ -222,7 +230,7 @@ status code `429 Too Many Requests` and the http response body will be:
 }
 ```
 
-## Exceeding The Global Rate Limit
+### Exceeding The Global Rate Limit
 
 When the global rate limit is exceeded, the API endpoint will return the http
 response status code `429 Too Many Requests` and the http response body will be:
@@ -235,19 +243,12 @@ response status code `429 Too Many Requests` and the http response body will be:
 }
 ```
 
-## Increasing Rate Limits
-
-Bullish has a tiered rate limit offering based on volume.
-
-|                   | Default      | 30-Day Volume between $1B USD and $2B USD | 30-Day Volume over $2B USD |
-| ----------------- | ------------ | ----------------------------------------- | -------------------------- |
-| Cloudflare        | 50 msgs/sec  | same as default                           | same as default            |
-| Cloudflare Bypass | 100 msgs/sec | up to 200 msgs/sec                        | up to 500 msgs/sec         |
+### Increasing Rate Limits
 
 For more information on increasing your rate limits, please reach out to your
 sales representative.
 
-## Obtaining Your Rate Limit Token
+### Obtaining Your Rate Limit Token
 
 Each trading account has a unique rate limit token that can be obtained by
 querying [Get Trading Accounts](#get-/v1/accounts/trading-accounts). The rate
@@ -805,10 +806,10 @@ a set of topics that can be subscribed to.
 ## Servers
 
 - `wss://api.exchange.bullish.com` - PRODUCTION
-- `wss://registered.api.exchange.bullish.com` - PRODUCTION (Cloudflare Bypass)
+- `wss://registered.api.exchange.bullish.com` - PRODUCTION
 - `wss://prod.access.bullish.com` - PRODUCTION (Direct Connect)
 - `wss://api.simnext.bullish-test.com` - SANDBOX
-- `wss://registered.api.simnext.bullish-test.com` - SANDBOX (Cloudflare Bypass)
+- `wss://registered.api.simnext.bullish-test.com` - SANDBOX
 - `wss://simnext.access.bullish.com` - SANDBOX (Direct Connect)
 
 ## Max Open WebSocket Connections
@@ -2361,11 +2362,6 @@ Authenticated APIs for interacting with orders
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -2391,10 +2387,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -2424,14 +2416,14 @@ endpoint is subjected to rate limiting.
 
 <h3 id="trade-get-orders-v2-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| symbol           | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                         |
-| clientOrderId    | query  | [OrderHandle](#schemaorderhandle)                                               | false    | Unique numeric (i64) identifier generated on the client side expressed as a string value     |
-| side             | query  | [OrderSide](#schemaorderside)                                                   | false    | order side                                                                                   |
-| status           | query  | [OrderStatus](#schemaorderstatus)                                               | false    | order status                                                                                 |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                         |
+| clientOrderId    | query  | [OrderHandle](#schemaorderhandle)           | false    | Unique numeric (i64) identifier generated on the client side expressed as a string value     |
+| side             | query  | [OrderSide](#schemaorderside)               | false    | order side                                                                                   |
+| status           | query  | [OrderStatus](#schemaorderstatus)           | false    | order status                                                                                 |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 
 #### Enumerated Values
 
@@ -2768,29 +2760,18 @@ const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
   'Authorization':{
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE':{
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-TIMESTAMP':{
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
-  'BX-NONCE':undefined,
+  'BX-NONCE':{
+  "type": "string"
+},
   'BX-NONCE-WINDOW-ENABLED':{
-  "description": "string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests)\n",
   "type": "string",
   "enum": [
     "false",
@@ -2820,29 +2801,18 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE': {
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-TIMESTAMP': {
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
-  'BX-NONCE': undefined,
+  'BX-NONCE': {
+  "type": "string"
+},
   'BX-NONCE-WINDOW-ENABLED': {
-  "description": "string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests)\n",
   "type": "string",
   "enum": [
     "false",
@@ -2894,14 +2864,14 @@ accepted.
 
 <h3 id="trade-create-order-v2-parameters">Parameters</h3>
 
-| Name                    | In     | Type                                                                                                | Required | Description                                                                                                                                                         |
-| ----------------------- | ------ | --------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorization           | header | [#/components/headers/Authorization](#schema#/components/headers/authorization)                     | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                        |
-| BX-SIGNATURE            | header | [#/components/headers/BX-SIGNATURE](#schema#/components/headers/bx-signature)                       | true     | signature obtained using the [signing format](#overview--signing-format)                                                                                            |
-| BX-TIMESTAMP            | header | [#/components/headers/BX-TIMESTAMP](#schema#/components/headers/bx-timestamp)                       | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                 |
-| BX-NONCE                | header | undefined                                                                                           | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                          |
-| BX-NONCE-WINDOW-ENABLED | header | [#/components/headers/BX-NONCE-WINDOW-ENABLED](#schema#/components/headers/bx-nonce-window-enabled) | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests) |
-| body                    | body   | [CreateOrderCommandV3](#schemacreateordercommandv3)                                                 | true     | new order request body                                                                                                                                              |
+| Name                    | In     | Type                                                | Required | Description                                                                                                                                                         |
+| ----------------------- | ------ | --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization           | header | string                                              | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                        |
+| BX-SIGNATURE            | header | string                                              | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests)                                          |
+| BX-TIMESTAMP            | header | string                                              | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                 |
+| BX-NONCE                | header | string                                              | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                          |
+| BX-NONCE-WINDOW-ENABLED | header | string                                              | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests) |
+| body                    | body   | [CreateOrderCommandV3](#schemacreateordercommandv3) | true     | new order request body                                                                                                                                              |
 
 #### Detailed descriptions
 
@@ -2963,11 +2933,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -2993,10 +2958,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -3020,11 +2981,11 @@ subjected to rate limiting.
 
 <h3 id="trade-get-order-by-id-v2-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
-| orderId          | path   | number                                                                          | true     | order ID                                                                                     |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
+| orderId          | path   | number                                      | true     | order ID                                                                                     |
 
 > Example responses
 
@@ -3291,9 +3252,255 @@ To perform this operation, you must be authenticated by means of one of the foll
 jwtTokenAuth
 </aside>
 
-## command-entry
+## command-entry-cancellations
 
-<a id="opIdcommand-entry"></a>
+<a id="opIdcommand-entry-cancellations"></a>
+
+> Code samples
+
+```javascript
+const inputBody = '{
+  "commandType": "V3CancelOrder",
+  "orderId": "297735387747975680",
+  "symbol": "BTCUSDC",
+  "tradingAccountId": "111000000000001",
+  "x-widdershins-oldRef": "#/components/schemas/CancelOrderCommandV3/example"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':{
+  "type": "string"
+},
+  'BX-SIGNATURE':{
+  "type": "string"
+},
+  'BX-TIMESTAMP':{
+  "type": "string"
+},
+  'BX-NONCE':{
+  "type": "string"
+},
+  'BX-NONCE-WINDOW-ENABLED':{
+  "type": "string",
+  "enum": [
+    "false",
+    "true"
+  ],
+  "default": "false"
+}
+};
+
+fetch('https://api.exchange.bullish.com/trading-api/v2/command#cancellations',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+},
+  'BX-SIGNATURE': {
+  "type": "string"
+},
+  'BX-TIMESTAMP': {
+  "type": "string"
+},
+  'BX-NONCE': {
+  "type": "string"
+},
+  'BX-NONCE-WINDOW-ENABLED': {
+  "type": "string",
+  "enum": [
+    "false",
+    "true"
+  ],
+  "default": "false"
+}
+}
+
+r = requests.post('https://api.exchange.bullish.com/trading-api/v2/command#cancellations', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /v2/command#cancellations`
+
+_Order Cancellation Commands_
+
+Submits a command to the trading engine. A successful response indicates that
+the command entry was acknowledged but does not indicate that the command was
+executed. This endpoint uses the [signing format](#overview--signing-format)
+which does not require strict field ordering and addition of null fields in the
+request body. Quantities and prices does not require strict precision. Eg. for
+asset precision of 4 - `100`, `100.0`, `100.00`, `100.000` and `100.0000` are
+all accepted.
+
+Command schemas and examples are provided below. Supported commands:
+
+- V3CancelOrder
+- V1CancelAllOrders
+- V1CancelAllOrdersByMarket
+- V1DelayedCancelAllOrders
+- V1UnsetDelayedCancelAllOrders
+
+Requires
+
+- [bearer token](#overview--add-authenticated-request-header) in authorization
+  header
+
+**Ratelimited:** `True`. Higher tiers of rate limits available by providing the
+`BX-RATELIMIT-TOKEN` request header.
+
+> Body parameter
+
+> Only one of `orderId` or `clientOrderId` can be used in the cancel order
+> command
+
+```json
+{
+  "commandType": "V3CancelOrder",
+  "orderId": "297735387747975680",
+  "symbol": "BTCUSDC",
+  "tradingAccountId": "111000000000001",
+  "x-widdershins-oldRef": "#/components/schemas/CancelOrderCommandV3/example"
+}
+```
+
+<h3 id="command-entry-cancellations-parameters">Parameters</h3>
+
+| Name                    | In     | Type   | Required | Description                                                                                                                                                         |
+| ----------------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization           | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                        |
+| BX-SIGNATURE            | header | string | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests)                                          |
+| BX-TIMESTAMP            | header | string | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                 |
+| BX-NONCE                | header | string | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                          |
+| BX-NONCE-WINDOW-ENABLED | header | string | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests) |
+| body                    | body   | any    | true     | none                                                                                                                                                                |
+
+#### Detailed descriptions
+
+**BX-NONCE-WINDOW-ENABLED**: string representation of a boolean value,
+[enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests)
+
+#### Enumerated Values
+
+| Parameter               | Value |
+| ----------------------- | ----- |
+| BX-NONCE-WINDOW-ENABLED | false |
+| BX-NONCE-WINDOW-ENABLED | true  |
+
+> Example responses
+
+> Only one of `orderId` or `clientOrderId` present
+
+```json
+{
+  "message": "Command acknowledged - CancelOrder",
+  "requestId": "633910976353665024",
+  "orderId": "633910775316480001"
+}
+```
+
+> Status OK. This means a command was successfully acknowledged.
+
+```json
+{
+  "message": "Command acknowledged - CancelAllOrders",
+  "requestId": "633900538459062272"
+}
+```
+
+```json
+{
+  "message": "Command acknowledged - CancelAllOrdersByMarket",
+  "requestId": "633914459442118656"
+}
+```
+
+```json
+{
+  "message": "Command acknowledged - DelayedCancelAllOrders",
+  "requestId": "633914459442118656"
+}
+```
+
+```json
+{
+  "message": "Command acknowledged - UnsetDelayedCancelAllOrders",
+  "requestId": "633914459442118656"
+}
+```
+
+> 400 Response
+
+```json
+{
+  "type": "object",
+  "required": ["message", "errorCode", "errorCodeName"],
+  "properties": {
+    "message": {
+      "description": "message",
+      "type": "string",
+      "example": "Missing signature header"
+    },
+    "errorCode": {
+      "description": "unique error code",
+      "type": "integer",
+      "example": 6029
+    },
+    "errorCodeName": {
+      "description": "unique error code name",
+      "type": "string",
+      "example": "MISSING_SIGNATURE_HEADER"
+    }
+  }
+}
+```
+
+<h3 id="command-entry-cancellations-responses">Responses</h3>
+
+| Status | Meaning                                                          | Description                                                    | Schema |
+| ------ | ---------------------------------------------------------------- | -------------------------------------------------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | Status OK. This means a command was successfully acknowledged. | Inline |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | Bad Request                                                    |
+
+For example, sending a request with the `BX-SIGNATURE` header missing will
+result in the following
+response:|[BadOrderEntryResponse](#schemabadorderentryresponse)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not
+Authenticated|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Access
+Forbidden|None|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Too Many
+Requests|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
+Server Error|None|
+
+<h3 id="command-entry-cancellations-responseschema">Response Schema</h3>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwtTokenAuth
+</aside>
+
+## command-entry-amend
+
+<a id="opIdcommand-entry-amend"></a>
 
 > Code samples
 
@@ -3313,29 +3520,18 @@ const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
   'Authorization':{
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE':{
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-TIMESTAMP':{
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
-  'BX-NONCE':undefined,
+  'BX-NONCE':{
+  "type": "string"
+},
   'BX-NONCE-WINDOW-ENABLED':{
-  "description": "string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests)\n",
   "type": "string",
   "enum": [
     "false",
@@ -3365,29 +3561,18 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE': {
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-TIMESTAMP': {
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
-  'BX-NONCE': undefined,
+  'BX-NONCE': {
+  "type": "string"
+},
   'BX-NONCE-WINDOW-ENABLED': {
-  "description": "string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests)\n",
   "type": "string",
   "enum": [
     "false",
@@ -3445,22 +3630,21 @@ Requires
 }
 ```
 
-<h3 id="command-entry-parameters">Parameters</h3>
+<h3 id="command-entry-amend-parameters">Parameters</h3>
 
-| Name                    | In     | Type                                                                                                | Required | Description                                                                                                                                                          |
-| ----------------------- | ------ | --------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorization           | header | [#/components/headers/Authorization](#schema#/components/headers/authorization)                     | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                         |
-| BX-SIGNATURE            | header | [#/components/headers/BX-SIGNATURE](#schema#/components/headers/bx-signature)                       | true     | signature obtained using the [signing format](#overview--signing-format)                                                                                             |
-| BX-TIMESTAMP            | header | [#/components/headers/BX-TIMESTAMP](#schema#/components/headers/bx-timestamp)                       | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                  |
-| BX-NONCE                | header | undefined                                                                                           | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                           |
-| BX-NONCE-WINDOW-ENABLED | header | [#/components/headers/BX-NONCE-WINDOW-ENABLED](#schema#/components/headers/bx-nonce-window-enabled) | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests), |
-| body                    | body   | any                                                                                                 | true     | none                                                                                                                                                                 |
+| Name                    | In     | Type   | Required | Description                                                                                                                                                         |
+| ----------------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization           | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                        |
+| BX-SIGNATURE            | header | string | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests)                                          |
+| BX-TIMESTAMP            | header | string | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                 |
+| BX-NONCE                | header | string | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                          |
+| BX-NONCE-WINDOW-ENABLED | header | string | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests) |
+| body                    | body   | any    | true     | none                                                                                                                                                                |
 
 #### Detailed descriptions
 
 **BX-NONCE-WINDOW-ENABLED**: string representation of a boolean value,
-[enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests),
-only valid for `V3CancelOrder`
+[enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests)
 
 #### Enumerated Values
 
@@ -3508,7 +3692,7 @@ only valid for `V3CancelOrder`
 }
 ```
 
-<h3 id="command-entry-responses">Responses</h3>
+<h3 id="command-entry-amend-responses">Responses</h3>
 
 | Status | Meaning                                                          | Description                                                    | Schema |
 | ------ | ---------------------------------------------------------------- | -------------------------------------------------------------- | ------ |
@@ -3527,7 +3711,7 @@ Requests|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
 Server Error|None|
 
-<h3 id="command-entry-responseschema">Response Schema</h3>
+<h3 id="command-entry-amend-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -3561,11 +3745,6 @@ across all endpoints of type **/wallets/\***
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -3588,10 +3767,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -3616,11 +3791,11 @@ header
 
 <h3 id="custody-get-history-parameters">Parameters</h3>
 
-| Name                   | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| Name                   | In     | Type                        | Required | Description                                                                                  |
+| ---------------------- | ------ | --------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | string                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime) | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime) | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
 
 > Example responses
 
@@ -3786,11 +3961,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -3816,10 +3986,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -3849,10 +4015,10 @@ see
 
 <h3 id="custody-get-limits-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| symbol        | path   | [CustodySymbol](#schemacustodysymbol)                                           | true     | none                                                                                         |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| Name          | In     | Type                                  | Required | Description                                                                                  |
+| ------------- | ------ | ------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol        | path   | [CustodySymbol](#schemacustodysymbol) | true     | none                                                                                         |
 
 > Example responses
 
@@ -3906,9 +4072,9 @@ To perform this operation, you must be authenticated by means of one of the foll
 jwtTokenAuth
 </aside>
 
-## custody-get-deposit-instructions
+## custody-get-deposit-instructions-crypto
 
-<a id="opIdcustody-get-deposit-instructions"></a>
+<a id="opIdcustody-get-deposit-instructions-crypto"></a>
 
 > Code samples
 
@@ -3916,11 +4082,335 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/wallets/deposit-instructions/crypto/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/wallets/deposit-instructions/crypto/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/wallets/deposit-instructions/crypto/{symbol}`
+
+_Get Deposit Instructions for Crypto_
+
+Get deposit instructions, requires
+[bearer token](#overview--add-authenticated-request-header) in authorization
+header
+
+Please note that Custody endpoints utilize a non-multiplied asset format for
+long decimal assets like SHIB and PEPE, ensuring consistency with real-world
+asset representation. This differs from Trading endpoints, which use a
+multiplied asset format, such as SHIB1M and PEPE1M. For more information, please
+see
+[help centre](https://bullishexchange.atlassian.net/wiki/spaces/BHC/pages/20807684/Understanding+Multiplied+Assets+PEPE1M+and+SHIB1M)
+
+**Ratelimited:** `True` - see [custody limits](#tag--custody)
+
+<h3 id="custody-get-deposit-instructions-crypto-parameters">Parameters</h3>
+
+| Name          | In     | Type                                  | Required | Description                                                                                  |
+| ------------- | ------ | ------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol        | path   | [CustodySymbol](#schemacustodysymbol) | true     | none                                                                                         |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["network", "symbol", "address"],
+    "properties": {
+      "network": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "EOS",
+            "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+          }
+        ]
+      },
+      "symbol": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "USDC",
+            "description": "symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB"
+          }
+        ]
+      },
+      "memo": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "925891241",
+            "description": "memo or destination tag used during deposit to help identify account to credit funds to"
+          }
+        ]
+      },
+      "address": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+            "description": "an address on the given network"
+          }
+        ]
+      }
     },
+    "example": {
+      "network": "ETH",
+      "symbol": "USDC",
+      "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+    }
+  }
+}
+```
+
+<h3 id="custody-get-deposit-instructions-crypto-responses">Responses</h3>
+
+| Status | Meaning                                                                    | Description           | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | Inline |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
+
+<h3 id="custody-get-deposit-instructions-crypto-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name        | Type                                                                          | Required | Restrictions | Description                                                                             |
+| ----------- | ----------------------------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------- |
+| _anonymous_ | [[CustodyCryptoDepositInstructions](#schemacustodycryptodepositinstructions)] | false    | none         | none                                                                                    |
+| » network   | [NetworkID](#schemanetworkid)                                                 | true     | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                             |
+| » symbol    | [CustodySymbol](#schemacustodysymbol)                                         | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                            |
+| » memo      | [CustodyDepositMemo](#schemacustodydepositmemo)                               | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to |
+| » address   | [CustodyNetworkAddress](#schemacustodynetworkaddress)                         | true     | none         | an address on the given network                                                         |
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwtTokenAuth
+</aside>
+
+## custody-get-withdrawal-instructions-crypto
+
+<a id="opIdcustody-get-withdrawal-instructions-crypto"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/wallets/withdrawal-instructions/crypto/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/wallets/withdrawal-instructions/crypto/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/wallets/withdrawal-instructions/crypto/{symbol}`
+
+_Get Withdrawal Instructions for Crypto_
+
+Get withdrawal instructions added by the user, requires
+[bearer token](#overview--add-authenticated-request-header) in authorization
+header. Please note that before withdrawal destinations can be used for
+withdrawing to, they must be whitelisted on the Bullish website
+
+Please note that Custody endpoints utilize a non-multiplied asset format for
+long decimal assets like SHIB and PEPE, ensuring consistency with real-world
+asset representation. This differs from Trading endpoints, which use a
+multiplied asset format, such as SHIB1M and PEPE1M. For more information, please
+see
+[help centre](https://bullishexchange.atlassian.net/wiki/spaces/BHC/pages/20807684/Understanding+Multiplied+Assets+PEPE1M+and+SHIB1M)
+
+**Ratelimited:** `True` - see [custody limits](#tag--custody)
+
+<h3 id="custody-get-withdrawal-instructions-crypto-parameters">Parameters</h3>
+
+| Name          | In     | Type                                  | Required | Description                                                                                  |
+| ------------- | ------ | ------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol        | path   | [CustodySymbol](#schemacustodysymbol) | true     | none                                                                                         |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "network": {
+        "example": "ETH",
+        "allOf": [
+          {
+            "type": "string",
+            "example": "EOS",
+            "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+          }
+        ]
+      },
+      "symbol": {
+        "example": "USDC",
+        "allOf": [
+          {
+            "type": "string",
+            "example": "USDC",
+            "description": "symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB"
+          }
+        ]
+      },
+      "address": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+            "description": "an address on the given network"
+          }
+        ]
+      },
+      "fee": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "3.00",
+            "description": "withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)"
+          }
+        ]
+      },
+      "memo": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "MZAXEMRXA",
+            "description": "memo or destination tag that will be used as a reference on transaction"
+          }
+        ]
+      },
+      "label": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "Our cold wallet",
+            "description": "descriptive label of destination provided by user"
+          }
+        ]
+      },
+      "destinationId": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "1560ec0b406c0d909bb9f5f827dd6aa14a1f638884f33a2a3134878102e78038",
+            "description": "destination id provided by bullish that uniquely identifies a whitelisted address or account"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+<h3 id="custody-get-withdrawal-instructions-crypto-responses">Responses</h3>
+
+| Status | Meaning                                                                    | Description           | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | Inline |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
+
+<h3 id="custody-get-withdrawal-instructions-crypto-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+| Name            | Type                                                                                | Required | Restrictions | Description                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
+| _anonymous_     | [[CustodyCryptoWithdrawalInstructions](#schemacustodycryptowithdrawalinstructions)] | false    | none         | none                                                                                                        |
+| » network       | [NetworkID](#schemanetworkid)                                                       | false    | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                 |
+| » symbol        | [CustodySymbol](#schemacustodysymbol)                                               | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                |
+| » address       | [CustodyNetworkAddress](#schemacustodynetworkaddress)                               | false    | none         | an address on the given network                                                                             |
+| » fee           | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)                                 | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
+| » memo          | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)                               | false    | none         | memo or destination tag that will be used as a reference on transaction                                     |
+| » label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel)                             | false    | none         | descriptive label of destination provided by user                                                           |
+| » destinationId | [CustodyDestinationID](#schemacustodydestinationid)                                 | false    | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwtTokenAuth
+</aside>
+
+## custody-get-deposit-instructions-fiat
+
+<a id="opIdcustody-get-deposit-instructions-fiat"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
     type: "string"
   }
 }
@@ -3946,10 +4436,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -3970,12 +4456,12 @@ header
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-deposit-instructions-parameters">Parameters</h3>
+<h3 id="custody-get-deposit-instructions-fiat-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| symbol        | path   | [InstrumentId](#schemainstrumentid)                                             | true     | none                                                                                         |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| Name          | In     | Type                                | Required | Description                                                                                  |
+| ------------- | ------ | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string                              | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol        | path   | [InstrumentId](#schemainstrumentid) | true     | none                                                                                         |
 
 > Example responses
 
@@ -4064,7 +4550,7 @@ header
 }
 ```
 
-<h3 id="custody-get-deposit-instructions-responses">Responses</h3>
+<h3 id="custody-get-deposit-instructions-fiat-responses">Responses</h3>
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -4072,7 +4558,7 @@ header
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-deposit-instructions-responseschema">Response Schema</h3>
+<h3 id="custody-get-deposit-instructions-fiat-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -4095,9 +4581,9 @@ To perform this operation, you must be authenticated by means of one of the foll
 jwtTokenAuth
 </aside>
 
-## custody-get-withdrawal-instructions
+## custody-get-withdrawal-instructions-fiat
 
-<a id="opIdcustody-get-withdrawal-instructions"></a>
+<a id="opIdcustody-get-withdrawal-instructions-fiat"></a>
 
 > Code samples
 
@@ -4105,11 +4591,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -4135,10 +4616,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -4160,12 +4637,12 @@ withdrawing to, they must be whitelisted on the Bullish website.
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-withdrawal-instructions-parameters">Parameters</h3>
+<h3 id="custody-get-withdrawal-instructions-fiat-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| symbol        | path   | [CustodyFiatSymbol](#schemacustodyfiatsymbol)                                   | true     | none                                                                                         |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| Name          | In     | Type                                          | Required | Description                                                                                  |
+| ------------- | ------ | --------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                        | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol        | path   | [CustodyFiatSymbol](#schemacustodyfiatsymbol) | true     | none                                                                                         |
 
 > Example responses
 
@@ -4329,7 +4806,7 @@ withdrawing to, they must be whitelisted on the Bullish website.
 }
 ```
 
-<h3 id="custody-get-withdrawal-instructions-responses">Responses</h3>
+<h3 id="custody-get-withdrawal-instructions-fiat-responses">Responses</h3>
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -4337,7 +4814,7 @@ withdrawing to, they must be whitelisted on the Bullish website.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-withdrawal-instructions-responseschema">Response Schema</h3>
+<h3 id="custody-get-withdrawal-instructions-fiat-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -4475,17 +4952,9 @@ const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
   'Authorization':{
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE':{
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 };
@@ -4510,17 +4979,9 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE': {
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -4696,11 +5157,11 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
 
 <h3 id="custody-withdrawal-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| BX-SIGNATURE  | header | [#/components/headers/BX-SIGNATURE](#schema#/components/headers/bx-signature)   | true     | ECDSA signature created by signing the request with an ECDSA Key                             |
-| body          | body   | [CustodyApiEcdsaWithdrawalRequest](#schemacustodyapiecdsawithdrawalrequest)     | true     | withdrawal request                                                                           |
+| Name          | In     | Type                                                                        | Required | Description                                                                                                                |
+| ------------- | ------ | --------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                               |
+| BX-SIGNATURE  | header | string                                                                      | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests) |
+| body          | body   | [CustodyApiEcdsaWithdrawalRequest](#schemacustodyapiecdsawithdrawalrequest) | true     | withdrawal request                                                                                                         |
 
 > Example responses
 
@@ -4760,11 +5221,6 @@ Authenticated APIs for reading trade data
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -4790,10 +5246,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -4823,12 +5275,12 @@ Get a list of trades based on specified filters.
 
 <h3 id="trade-get-trades-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| symbol           | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                         |
-| orderId          | query  | [OrderID](#schemaorderid)                                                       | false    | unique order ID                                                                              |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                         |
+| orderId          | query  | [OrderID](#schemaorderid)                   | false    | unique order ID                                                                              |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 
 > Example responses
 
@@ -5051,11 +5503,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -5081,10 +5528,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -5109,11 +5552,11 @@ header
 
 <h3 id="trade-get-trade-by-id-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| tradeId          | path   | number                                                                          | true     | trade ID                                                                                     |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| tradeId          | path   | number                                      | true     | trade ID                                                                                     |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 
 > Example responses
 
@@ -5314,11 +5757,6 @@ Authenticated APIs for reading account data
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -5344,10 +5782,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -5372,10 +5806,10 @@ header
 
 <h3 id="user-get-asset-accounts-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 
 > Example responses
 
@@ -5538,11 +5972,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -5568,10 +5997,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -5596,11 +6021,11 @@ header
 
 <h3 id="user-get-asset-account-by-symbol-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| symbol           | path   | [AssetSymbol](#schemaassetsymbol)                                               | true     | none                                                                                         |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol           | path   | [AssetSymbol](#schemaassetsymbol)           | true     | none                                                                                         |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 
 > Example responses
 
@@ -5743,11 +6168,6 @@ jwtTokenAuth
 ```javascript
 const headers = {
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -5769,10 +6189,6 @@ fetch("https://api.exchange.bullish.com/trading-api/v1/users/logout", {
 import requests
 headers = {
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -5795,9 +6211,9 @@ header.
 
 <h3 id="logout-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| Name          | In     | Type   | Required | Description                                                                                  |
+| ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
 
 <h3 id="logout-responses">Responses</h3>
 
@@ -5821,98 +6237,223 @@ jwtTokenAuth
 > Code samples
 
 ```javascript
-const headers = {
-  Accept: "application/json",
-  "BX-SIGNATURE": {
-    description:
-      "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-    schema: {
-      type: "string"
+const inputBody = '{
+  "type": "object",
+  "required": [
+    "timestamp",
+    "nonce",
+    "authorizer",
+    "command"
+  ],
+  "properties": {
+    "publicKey": {
+      "allOf": [
+        {
+          "type": "string",
+          "example": "PUB_R1_6PTdfWbXvXWQduhcCiRooGHTVpriu15xMqfr7EDq6sWLDj7NjS"
+        }
+      ]
     },
-    type: "string"
-  },
-  "BX-TIMESTAMP": {
-    description: "command timestamp is the number of milliseconds since EPOCH",
-    schema: {
-      type: "string"
+    "signature": {
+      "allOf": [
+        {
+          "type": "string",
+          "example": "SIG_R1_K35d5hSY5FbNoJwrCfmH6QvPG7m9XmhL2mgWYcSB7q2hKJ2mv39Luck9WBJroSB635ZAXhdg36TYG7QJX1fTidbsMvyE8N"
+        }
+      ]
     },
-    type: "string"
-  },
-  "BX-NONCE": undefined,
-  "BX-PUBLIC-KEY": {
-    description: "Public key being used to generate the JWT",
-    schema: {
-      type: "string"
-    },
-    type: "string"
+    "loginPayload": {
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "userId",
+            "nonce",
+            "expirationTime",
+            "biometricsUsed",
+            "sessionKey"
+          ],
+          "properties": {
+            "userId": {
+              "description": "Bullish user ID corresponding to the metadata",
+              "allOf": [
+                {
+                  "type": "string",
+                  "example": "12345",
+                  "description": "Bullish user ID"
+                }
+              ]
+            },
+            "nonce": {
+              "description": "epoch timestamp in seconds; note this login API nonce has no connection to the orders API nonce",
+              "allOf": [
+                {
+                  "type": "integer",
+                  "format": "int64",
+                  "example": 1621490985,
+                  "description": "number of seconds since EPOCH as integer"
+                }
+              ]
+            },
+            "expirationTime": {
+              "description": "epoch timestamp in seconds that is 5 minutes in the future",
+              "allOf": [
+                {
+                  "type": "integer",
+                  "format": "int64",
+                  "example": 1621490985,
+                  "description": "number of seconds since EPOCH as integer"
+                }
+              ]
+            },
+            "biometricsUsed": {
+              "description": "biometrics flag. always `false`",
+              "type": "boolean",
+              "example": false
+            },
+            "sessionKey": {
+              "description": "session key. always `null`",
+              "type": "string",
+              "example": null
+            }
+          }
+        }
+      ]
+    }
   }
-}
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+};
 
-fetch("https://api.exchange.bullish.com/trading-api/v1/users/hmac/login", {
-  method: "GET",
-
+fetch('https://api.exchange.bullish.com/trading-api/v2/users/login',
+{
+  method: 'POST',
+  body: inputBody,
   headers: headers
 })
-  .then(function (res) {
-    return res.json()
-  })
-  .then(function (body) {
-    console.log(body)
-  })
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
 
 ```python
 import requests
 headers = {
-  'Accept': 'application/json',
-  'BX-SIGNATURE': {
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
-  "type": "string"
-},
-  'BX-TIMESTAMP': {
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
-  "type": "string"
-},
-  'BX-NONCE': undefined,
-  'BX-PUBLIC-KEY': {
-  "description": "Public key being used to generate the JWT",
-  "schema": {
-    "type": "string"
-  },
-  "type": "string"
-}
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
 }
 
-r = requests.get('https://api.exchange.bullish.com/trading-api/v1/users/hmac/login', headers = headers)
+r = requests.post('https://api.exchange.bullish.com/trading-api/v2/users/login', headers = headers)
 
 print(r.json())
 
 ```
 
-`GET /v1/users/hmac/login`
+`POST /v2/users/login`
 
-_HMAC Login_
+_Login_
 
-Login and generate a new session associated with a JWT using HMAC. Once you log
-in from an IP, the same IP must be used for the duration of the session for any
-subsequent requests.
+Login and generate a new session associated with a JWT. Once you log in from an
+IP, the same IP must be used for the duration of the session for any subsequent
+requests.
 
 **Ratelimited:** `True`
 
+> Body parameter
+
+```json
+{
+  "type": "object",
+  "required": ["timestamp", "nonce", "authorizer", "command"],
+  "properties": {
+    "publicKey": {
+      "allOf": [
+        {
+          "type": "string",
+          "example": "PUB_R1_6PTdfWbXvXWQduhcCiRooGHTVpriu15xMqfr7EDq6sWLDj7NjS"
+        }
+      ]
+    },
+    "signature": {
+      "allOf": [
+        {
+          "type": "string",
+          "example": "SIG_R1_K35d5hSY5FbNoJwrCfmH6QvPG7m9XmhL2mgWYcSB7q2hKJ2mv39Luck9WBJroSB635ZAXhdg36TYG7QJX1fTidbsMvyE8N"
+        }
+      ]
+    },
+    "loginPayload": {
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "userId",
+            "nonce",
+            "expirationTime",
+            "biometricsUsed",
+            "sessionKey"
+          ],
+          "properties": {
+            "userId": {
+              "description": "Bullish user ID corresponding to the metadata",
+              "allOf": [
+                {
+                  "type": "string",
+                  "example": "12345",
+                  "description": "Bullish user ID"
+                }
+              ]
+            },
+            "nonce": {
+              "description": "epoch timestamp in seconds; note this login API nonce has no connection to the orders API nonce",
+              "allOf": [
+                {
+                  "type": "integer",
+                  "format": "int64",
+                  "example": 1621490985,
+                  "description": "number of seconds since EPOCH as integer"
+                }
+              ]
+            },
+            "expirationTime": {
+              "description": "epoch timestamp in seconds that is 5 minutes in the future",
+              "allOf": [
+                {
+                  "type": "integer",
+                  "format": "int64",
+                  "example": 1621490985,
+                  "description": "number of seconds since EPOCH as integer"
+                }
+              ]
+            },
+            "biometricsUsed": {
+              "description": "biometrics flag. always `false`",
+              "type": "boolean",
+              "example": false
+            },
+            "sessionKey": {
+              "description": "session key. always `null`",
+              "type": "string",
+              "example": null
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
 <h3 id="login-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                                                          |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| BX-SIGNATURE  | header | [#/components/headers/BX-SIGNATURE](#schema#/components/headers/bx-signature)   | true     | HMAC signature is a signature resulted from the [signed message of the `login` request](#overview--add-authenticated-request-header) |
-| BX-TIMESTAMP  | header | [#/components/headers/BX-TIMESTAMP](#schema#/components/headers/bx-timestamp)   | true     | timestamp is the number of milliseconds since EPOCH                                                                                  |
-| BX-NONCE      | header | undefined                                                                       | true     | nonce is a client side incremented 64-bit unsigned integer                                                                           |
-| BX-PUBLIC-KEY | header | [#/components/headers/BX-PUBLIC-KEY](#schema#/components/headers/bx-public-key) | true     | public key for the HMAC Key being used to generate the JWT                                                                           |
+| Name | In   | Type                                | Required | Description        |
+| ---- | ---- | ----------------------------------- | -------- | ------------------ |
+| body | body | [LoginRequest](#schemaloginrequest) | true     | login request body |
 
 > Example responses
 
@@ -5964,6 +6505,135 @@ subsequent requests.
 This operation does not require authentication
 </aside>
 
+## hmac-login
+
+<a id="opIdhmac-login"></a>
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  "BX-SIGNATURE": {
+    type: "string"
+  },
+  "BX-TIMESTAMP": {
+    type: "string"
+  },
+  "BX-NONCE": {
+    type: "string"
+  },
+  "BX-PUBLIC-KEY": {
+    type: "string"
+  }
+}
+
+fetch("https://api.exchange.bullish.com/trading-api/v1/users/hmac/login", {
+  method: "GET",
+
+  headers: headers
+})
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'BX-SIGNATURE': {
+  "type": "string"
+},
+  'BX-TIMESTAMP': {
+  "type": "string"
+},
+  'BX-NONCE': {
+  "type": "string"
+},
+  'BX-PUBLIC-KEY': {
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/users/hmac/login', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/users/hmac/login`
+
+_HMAC Login_
+
+Login and generate a new session associated with a JWT using HMAC. Once you log
+in from an IP, the same IP must be used for the duration of the session for any
+subsequent requests.
+
+**Ratelimited:** `True`
+
+<h3 id="hmac-login-parameters">Parameters</h3>
+
+| Name          | In     | Type   | Required | Description                                                                                                                |
+| ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| BX-SIGNATURE  | header | string | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests) |
+| BX-TIMESTAMP  | header | string | true     | timestamp is the number of milliseconds since EPOCH                                                                        |
+| BX-NONCE      | header | string | true     | nonce is a client side incremented unsigned 64 bit integer                                                                 |
+| BX-PUBLIC-KEY | header | string | true     | public key being used to generate the JWT                                                                                  |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": ["authorizer", "token"],
+  "properties": {
+    "authorizer": {
+      "description": "Authorizer",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "03E02367E8C900000500000000000000",
+          "description": "JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)"
+        }
+      ]
+    },
+    "token": {
+      "description": "JWT token",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2FuZGVlcCByYWtocmEifQ.wyVq6PlKaldWXtu-jz2hJCvkGl1lM2S7HUKCH8LnXp0",
+          "description": "JWT token"
+        }
+      ]
+    }
+  }
+}
+```
+
+<h3 id="hmac-login-responses">Responses</h3>
+
+| Status | Meaning                                                                    | Description                                           | Schema                                |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | returns JWT and the `authorizer` for signing requests | [LoginResponse](#schemaloginresponse) |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | Bad Request                                           | None                                  |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)            | Not Authenticated                                     | None                                  |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | Access Forbidden                                      | None                                  |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests                                     | None                                  |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                 | None                                  |
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="bullish-trading-api-trading-accounts">trading-accounts</h1>
 
 ## user-get-trading-accounts
@@ -5976,11 +6646,6 @@ This operation does not require authentication
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -6006,10 +6671,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -6033,9 +6694,9 @@ API
 
 <h3 id="user-get-trading-accounts-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| Name          | In     | Type   | Required | Description                                                                                  |
+| ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
 
 > Example responses
 
@@ -6134,7 +6795,7 @@ API
       },
       "isDefaulted": {
         "description": "whether the trading account is defaulted",
-        "type": "String",
+        "type": "string",
         "example": "false"
       },
       "tradeFeeRate": {
@@ -6298,7 +6959,7 @@ Status Code **200**
 | » tradingAccountDescription               | string                                                    | true     | none         | description of the trading account                                                                                                                      |
 | » isPrimaryAccount                        | string                                                    | true     | none         | whether this is the primary account                                                                                                                     |
 | » rateLimitToken                          | string                                                    | true     | none         | unique rate limit token of the trading account                                                                                                          |
-| » isDefaulted                             | String                                                    | true     | none         | whether the trading account is defaulted                                                                                                                |
+| » isDefaulted                             | string                                                    | true     | none         | whether the trading account is defaulted                                                                                                                |
 | » tradeFeeRate                            | [allOf]                                                   | true     | none         | Trade fees per `feeGroupId` for this trading account                                                                                                    |
 | »» feeGroupId                             | integer                                                   | true     | none         | Identifier for this particular fee tier                                                                                                                 |
 | »» makerFee                               | string                                                    | true     | none         | Maker Fee in basis points (bps)                                                                                                                         |
@@ -6338,17 +6999,12 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
 
 fetch(
-  "https://api.exchange.bullish.com/trading-api/v1/accounts/trading-accounts/{tradingAccountId}?tradingAccountId=111000000000001",
+  "https://api.exchange.bullish.com/trading-api/v1/accounts/trading-accounts/{tradingAccountId}",
   {
     method: "GET",
 
@@ -6368,17 +7024,11 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
 
-r = requests.get('https://api.exchange.bullish.com/trading-api/v1/accounts/trading-accounts/{tradingAccountId}', params={
-  'tradingAccountId': '111000000000001'
-}, headers = headers)
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/accounts/trading-accounts/{tradingAccountId}', headers = headers)
 
 print(r.json())
 
@@ -6397,10 +7047,10 @@ header.
 
 <h3 id="user-get-trading-account-by-id-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| tradingAccountId | path   | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 
 > Example responses
 
@@ -6495,7 +7145,7 @@ header.
     },
     "isDefaulted": {
       "description": "whether the trading account is defaulted",
-      "type": "String",
+      "type": "string",
       "example": "false"
     },
     "tradeFeeRate": {
@@ -6758,27 +7408,17 @@ const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
   'Authorization':{
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE':{
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-TIMESTAMP':{
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
-  'BX-NONCE':undefined
+  'BX-NONCE':{
+  "type": "string"
+}
 };
 
 fetch('https://api.exchange.bullish.com/trading-api/v1/command?commandType=V1TransferAsset',
@@ -6801,36 +7441,28 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-SIGNATURE': {
-  "description": "command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
   'BX-TIMESTAMP': {
-  "description": "command timestamp is the number of milliseconds since EPOCH",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 },
-  'BX-NONCE': undefined
+  'BX-NONCE': {
+  "type": "string"
+}
 }
 
-r = requests.post('https://api.exchange.bullish.com/trading-api/v1/command?commandType=V1TransferAsset', headers = headers)
+r = requests.post('https://api.exchange.bullish.com/trading-api/v1/command', params={
+  'commandType': 'V1TransferAsset'
+}, headers = headers)
 
 print(r.json())
 
 ```
 
-`POST /v1/command?commandType=V1TransferAsset`
+`POST /v1/command`
 
 _Transfer Asset_
 
@@ -6937,13 +7569,20 @@ Send command to transfer asset between two trading accounts.
 
 <h3 id="command-parameters">Parameters</h3>
 
-| Name          | In     | Type                                                                            | Required | Description                                                                                                                          |
-| ------------- | ------ | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                         |
-| BX-SIGNATURE  | header | [#/components/headers/BX-SIGNATURE](#schema#/components/headers/bx-signature)   | true     | command signature is a signature resulted from the [signed message of the `<COMMAND>`](#overview--construct-the-bx-signature-header) |
-| BX-TIMESTAMP  | header | [#/components/headers/BX-TIMESTAMP](#schema#/components/headers/bx-timestamp)   | true     | command timestamp is the number of milliseconds since EPOCH                                                                          |
-| BX-NONCE      | header | undefined                                                                       | true     | command nonce is a client side incremented unsigned 64 bit integer                                                                   |
-| body          | body   | [TradingAccountTransferRequest](#schematradingaccounttransferrequest)           | true     | Command for action                                                                                                                   |
+| Name          | In     | Type                                                                  | Required | Description                                                                                                                |
+| ------------- | ------ | --------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                                                | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                               |
+| BX-SIGNATURE  | header | string                                                                | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests) |
+| BX-TIMESTAMP  | header | string                                                                | true     | timestamp is the number of milliseconds since EPOCH                                                                        |
+| BX-NONCE      | header | string                                                                | true     | nonce is a client side incremented unsigned 64 bit integer                                                                 |
+| commandType   | query  | string                                                                | true     | The command type, must be 'V1TransferAsset'                                                                                |
+| body          | body   | [TradingAccountTransferRequest](#schematradingaccounttransferrequest) | true     | Command for action                                                                                                         |
+
+#### Enumerated Values
+
+| Parameter   | Value           |
+| ----------- | --------------- |
+| commandType | V1TransferAsset |
 
 > Example responses
 
@@ -6992,11 +7631,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -7019,10 +7653,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -7041,11 +7671,11 @@ Get derivatives positions
 
 <h3 id="get-derivatives-positions-parameters">Parameters</h3>
 
-| Name             | In     | Type                                                                            | Required | Description                                                                                                                                                                                                  |
-| ---------------- | ------ | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization    | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                     | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
-| symbol           | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                                                                                                                                         |
+| Name             | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
+| symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                                                                                                                                         |
 
 > Example responses
 
@@ -7255,9 +7885,9 @@ jwtTokenAuth
 
 <h1 id="bullish-trading-api-history">history</h1>
 
-## trade-get-orders-v2
+## trade-get-orders-history-v2
 
-<a id="opIdtrade-get-orders-v2"></a>
+<a id="opIdtrade-get-orders-history-v2"></a>
 
 > Code samples
 
@@ -7265,11 +7895,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -7295,10 +7920,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -7326,19 +7947,19 @@ required. For detailed instructions, see the
 [Filtering Support](#overview--filtering-support) section. Additionally, this
 endpoint is subjected to rate limiting.
 
-<h3 id="trade-get-orders-v2-parameters">Parameters</h3>
+<h3 id="trade-get-orders-history-v2-parameters">Parameters</h3>
 
-| Name                   | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| symbol                 | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                         |
-| orderId                | query  | [OrderID](#schemaorderid)                                                       | false    | none                                                                                         |
-| clientOrderId          | query  | [OrderHandle](#schemaorderhandle)                                               | false    | Unique numeric (i64) identifier generated on the client side expressed as a string value     |
-| side                   | query  | [OrderSide](#schemaorderside)                                                   | false    | order side                                                                                   |
-| status                 | query  | [OrderStatus](#schemaorderstatus)                                               | false    | order status                                                                                 |
-| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| Name                   | In     | Type                                        | Required | Description                                                                                  |
+| ---------------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol                 | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                         |
+| orderId                | query  | [OrderID](#schemaorderid)                   | false    | none                                                                                         |
+| clientOrderId          | query  | [OrderHandle](#schemaorderhandle)           | false    | Unique numeric (i64) identifier generated on the client side expressed as a string value     |
+| side                   | query  | [OrderSide](#schemaorderside)               | false    | order side                                                                                   |
+| status                 | query  | [OrderStatus](#schemaorderstatus)           | false    | order status                                                                                 |
+| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                 | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                 | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
 
 #### Enumerated Values
 
@@ -7606,7 +8227,7 @@ endpoint is subjected to rate limiting.
 }
 ```
 
-<h3 id="trade-get-orders-v2-responses">Responses</h3>
+<h3 id="trade-get-orders-history-v2-responses">Responses</h3>
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -7616,7 +8237,7 @@ endpoint is subjected to rate limiting.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="trade-get-orders-v2-responseschema">Response Schema</h3>
+<h3 id="trade-get-orders-history-v2-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -7652,9 +8273,9 @@ To perform this operation, you must be authenticated by means of one of the foll
 jwtTokenAuth
 </aside>
 
-## trade-get-trades
+## trade-get-trades-history
 
-<a id="opIdtrade-get-trades"></a>
+<a id="opIdtrade-get-trades-history"></a>
 
 > Code samples
 
@@ -7662,11 +8283,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -7692,10 +8308,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -7723,17 +8335,17 @@ Get a list of trades based on specified filters.
 
 **Ratelimited:** `True`
 
-<h3 id="trade-get-trades-parameters">Parameters</h3>
+<h3 id="trade-get-trades-history-parameters">Parameters</h3>
 
-| Name                   | In     | Type                                                                            | Required | Description                                                                                  |
-| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| symbol                 | query  | [MarketSymbol](#schemamarketsymbol)                                             | false    | none                                                                                         |
-| orderId                | query  | [OrderID](#schemaorderid)                                                       | false    | unique order ID                                                                              |
-| tradeId                | query  | [TradeID](#schematradeid)                                                       | false    | unique trade ID                                                                              |
-| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid)                                     | true     | Id of the trading account                                                                    |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| Name                   | In     | Type                                        | Required | Description                                                                                  |
+| ---------------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| symbol                 | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                         |
+| orderId                | query  | [OrderID](#schemaorderid)                   | false    | unique order ID                                                                              |
+| tradeId                | query  | [TradeID](#schematradeid)                   | false    | unique trade ID                                                                              |
+| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                 | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                 | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
 
 > Example responses
 
@@ -7909,7 +8521,7 @@ Get a list of trades based on specified filters.
 }
 ```
 
-<h3 id="trade-get-trades-responses">Responses</h3>
+<h3 id="trade-get-trades-history-responses">Responses</h3>
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -7919,7 +8531,7 @@ Get a list of trades based on specified filters.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="trade-get-trades-responseschema">Response Schema</h3>
+<h3 id="trade-get-trades-history-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -7956,11 +8568,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -7986,10 +8593,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -8014,13 +8617,13 @@ Get historical derivatives settlement.
 
 <h3 id="get-derivatives-settlement-history-parameters">Parameters</h3>
 
-| Name                    | In     | Type                                                                            | Required | Description                                                                                                                                                                                                  |
-| ----------------------- | ------ | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization           | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [ token ](#overview--generate-a-jwt-token)                                                                                                               |
-| tradingAccountId        | query  | [TradingAccountId](#schematradingaccountid)                                     | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
-| symbol                  | query  | [DatedFutureMarketSymbol](#schemadatedfuturemarketsymbol)                       | false    | none                                                                                                                                                                                                         |
-| settlementDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | true     | start timestamp of window, ISO 8601 with millisecond as string                                                                                                                                               |
-| settlementDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | true     | end timestamp of window, ISO 8601 with millisecond as string                                                                                                                                                 |
+| Name                    | In     | Type                                                      | Required | Description                                                                                                                                                                                                  |
+| ----------------------- | ------ | --------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authorization           | header | string                                                    | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
+| tradingAccountId        | query  | [TradingAccountId](#schematradingaccountid)               | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
+| symbol                  | query  | [DatedFutureMarketSymbol](#schemadatedfuturemarketsymbol) | false    | none                                                                                                                                                                                                         |
+| settlementDatetime[gte] | query  | [DateTime](#schemadatetime)                               | true     | start timestamp of window, ISO 8601 with millisecond as string                                                                                                                                               |
+| settlementDatetime[lte] | query  | [DateTime](#schemadatetime)                               | true     | end timestamp of window, ISO 8601 with millisecond as string                                                                                                                                                 |
 
 > Example responses
 
@@ -8211,11 +8814,6 @@ jwtTokenAuth
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -8241,10 +8839,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -8269,15 +8863,15 @@ Get historical transfers.
 
 <h3 id="get-transfer-history-parameters">Parameters</h3>
 
-| Name                   | In     | Type                                                                            | Required | Description                                                                                                                                                                                                  |
-| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
-| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid)                                     | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
-| status                 | query  | string                                                                          | false    | Status of the transfer request. Defaults to `CLOSED`                                                                                                                                                         |
-| requestId              | query  | string                                                                          | false    | Unique identifier of the transfer request                                                                                                                                                                    |
-| assetSymbol            | query  | [AssetSymbol](#schemaassetsymbol)                                               | false    | Asset symbol of the transfer request                                                                                                                                                                         |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | true     | start datetime of window, ISO 8601 with millisecond as string                                                                                                                                                |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | true     | end datetime of window, ISO 8601 with millisecond as string                                                                                                                                                  |
+| Name                   | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
+| ---------------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authorization          | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
+| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid) | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
+| status                 | query  | string                                      | false    | Status of the transfer request. Defaults to `CLOSED`                                                                                                                                                         |
+| requestId              | query  | string                                      | false    | Unique identifier of the transfer request                                                                                                                                                                    |
+| assetSymbol            | query  | [AssetSymbol](#schemaassetsymbol)           | false    | Asset symbol of the transfer request                                                                                                                                                                         |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                 | true     | start datetime of window, ISO 8601 with millisecond as string                                                                                                                                                |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                 | true     | end datetime of window, ISO 8601 with millisecond as string                                                                                                                                                  |
 
 > Example responses
 
@@ -8716,11 +9310,6 @@ This operation does not require authentication
 const headers = {
   Accept: "application/json",
   Authorization: {
-    description:
-      "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-    schema: {
-      type: "string"
-    },
     type: "string"
   }
 }
@@ -8746,10 +9335,6 @@ import requests
 headers = {
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -8779,13 +9364,13 @@ charged in the particular hour for the asset.
 
 <h3 id="market-data-get-historical-borrow-interest-parameters">Parameters</h3>
 
-| Name                   | In     | Type                                                                            | Required | Description                                                                                                                                                                                                  |
-| ---------------------- | ------ | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization          | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
-| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid)                                     | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
-| assetSymbol            | query  | [AssetSymbol](#schemaassetsymbol)                                               | true     | none                                                                                                                                                                                                         |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                                                     | true     | start timestamp of period, ISO 8601 with millisecond as string                                                                                                                                               |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                                                     | true     | end timestamp of period, ISO 8601 with millisecond as string                                                                                                                                                 |
+| Name                   | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
+| ---------------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authorization          | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
+| tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid) | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
+| assetSymbol            | query  | [AssetSymbol](#schemaassetsymbol)           | true     | none                                                                                                                                                                                                         |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                 | true     | start timestamp of period, ISO 8601 with millisecond as string                                                                                                                                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                 | true     | end timestamp of period, ISO 8601 with millisecond as string                                                                                                                                                 |
 
 > Example responses
 
@@ -9008,10 +9593,6 @@ const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
   'Authorization':{
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 };
@@ -9036,10 +9617,6 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': {
-  "description": "authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)",
-  "schema": {
-    "type": "string"
-  },
   "type": "string"
 }
 }
@@ -9160,11 +9737,11 @@ details on top of your portfolio specifics to see simulated results.
 
 <h3 id="simulate-portfolio-margin-parameters">Parameters</h3>
 
-| Name            | In     | Type                                                                            | Required | Description                                                                                    |
-| --------------- | ------ | ------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| Authorization   | header | [#/components/headers/Authorization](#schema#/components/headers/authorization) | false    | authorization header, its value must be 'Bearer ' + [ token ](#overview--generate-a-jwt-token) |
-| includeExisting | query  | [Boolean](#schemaboolean)                                                       | false    | none                                                                                           |
-| body            | body   | [PortfolioSimulationRequest](#schemaportfoliosimulationrequest)                 | false    | none                                                                                           |
+| Name            | In     | Type                                                            | Required | Description                                                                                  |
+| --------------- | ------ | --------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization   | header | string                                                          | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| includeExisting | query  | [Boolean](#schemaboolean)                                       | false    | none                                                                                         |
+| body            | body   | [PortfolioSimulationRequest](#schemaportfoliosimulationrequest) | false    | none                                                                                         |
 
 > Example responses
 
@@ -11214,7 +11791,7 @@ last updated time of transaction
     },
     "isDefaulted": {
       "description": "whether the trading account is defaulted",
-      "type": "String",
+      "type": "string",
       "example": "false"
     },
     "tradeFeeRate": {
@@ -11364,7 +11941,7 @@ last updated time of transaction
 | tradingAccountDescription  | string                                      | true     | none         | description of the trading account                                                                                                                      |
 | isPrimaryAccount           | string                                      | true     | none         | whether this is the primary account                                                                                                                     |
 | rateLimitToken             | string                                      | true     | none         | unique rate limit token of the trading account                                                                                                          |
-| isDefaulted                | String                                      | true     | none         | whether the trading account is defaulted                                                                                                                |
+| isDefaulted                | string                                      | true     | none         | whether the trading account is defaulted                                                                                                                |
 | tradeFeeRate               | [allOf]                                     | true     | none         | Trade fees per `feeGroupId` for this trading account                                                                                                    |
 | riskLimitUSD               | string                                      | true     | none         | The maximum allowed borrowing for this trading account (in USD currency)                                                                                |
 | totalLiabilitiesUSD        | string                                      | true     | none         | The The total liabilities for this trading account (in USD currency)                                                                                    |
@@ -16158,12 +16735,12 @@ unique asset ID
   "properties": {
     "collateralPercentage": {
       "description": "collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral",
-      "type": "String",
+      "type": "string",
       "example": "95.00"
     },
     "bandLimitUSD": {
       "description": "upper limit in USD for this band",
-      "type": "String",
+      "type": "string",
       "example": "1000000.0000"
     }
   }
@@ -16174,8 +16751,8 @@ unique asset ID
 
 | Name                 | Type   | Required | Restrictions | Description                                                                                                                                 |
 | -------------------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| collateralPercentage | String | false    | none         | collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral |
-| bandLimitUSD         | String | false    | none         | upper limit in USD for this band                                                                                                            |
+| collateralPercentage | string | false    | none         | collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral |
+| bandLimitUSD         | string | false    | none         | upper limit in USD for this band                                                                                                            |
 
 <h2 id="tocS_UnderlyingAsset">UnderlyingAsset</h2>
 <!-- backwards compatibility -->
@@ -16190,52 +16767,52 @@ unique asset ID
   "properties": {
     "symbol": {
       "description": "underlying asset symbol",
-      "type": "String",
+      "type": "string",
       "example": "BTC"
     },
     "assetId": {
       "description": "underlying asset ID",
-      "type": "String",
+      "type": "string",
       "example": "1"
     },
     "bpmMinReturnStart": {
       "description": "start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-      "type": "String",
+      "type": "string",
       "example": "40.0000"
     },
     "bpmMinReturnEnd": {
       "description": "end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-      "type": "String",
+      "type": "string",
       "example": "20.0000"
     },
     "bpmMaxReturnStart": {
       "description": "start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-      "type": "String",
+      "type": "string",
       "example": "30.0000"
     },
     "bpmMaxReturnEnd": {
       "description": "end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-      "type": "String",
+      "type": "string",
       "example": "50.0000"
     },
     "marketRiskFloorPctStart": {
       "description": "the percentage range of risk reduction allowed for a portfolio",
-      "type": "String",
+      "type": "string",
       "example": "1.00"
     },
     "marketRiskFloorPctEnd": {
       "description": "the percentage range of risk reduction allowed for a portfolio",
-      "type": "String",
+      "type": "string",
       "example": "5.00"
     },
     "bpmTransitionDateTimeStart": {
       "description": "the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-      "type": "String",
+      "type": "string",
       "example": "2024-08-02T12:00:00.000Z"
     },
     "bpmTransitionDateTimeEnd": {
       "description": "the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-      "type": "String",
+      "type": "string",
       "example": "2024-08-02T18:00:00.000Z"
     }
   }
@@ -16246,16 +16823,16 @@ unique asset ID
 
 | Name                       | Type   | Required | Restrictions | Description                                                                                                                   |
 | -------------------------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| symbol                     | String | false    | none         | underlying asset symbol                                                                                                       |
-| assetId                    | String | false    | none         | underlying asset ID                                                                                                           |
-| bpmMinReturnStart          | String | false    | none         | start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                       |
-| bpmMinReturnEnd            | String | false    | none         | end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                         |
-| bpmMaxReturnStart          | String | false    | none         | start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                         |
-| bpmMaxReturnEnd            | String | false    | none         | end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                           |
-| marketRiskFloorPctStart    | String | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                |
-| marketRiskFloorPctEnd      | String | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                |
-| bpmTransitionDateTimeStart | String | false    | none         | the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset |
-| bpmTransitionDateTimeEnd   | String | false    | none         | the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset   |
+| symbol                     | string | false    | none         | underlying asset symbol                                                                                                       |
+| assetId                    | string | false    | none         | underlying asset ID                                                                                                           |
+| bpmMinReturnStart          | string | false    | none         | start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                       |
+| bpmMinReturnEnd            | string | false    | none         | end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours                                         |
+| bpmMaxReturnStart          | string | false    | none         | start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                         |
+| bpmMaxReturnEnd            | string | false    | none         | end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours                                           |
+| marketRiskFloorPctStart    | string | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                |
+| marketRiskFloorPctEnd      | string | false    | none         | the percentage range of risk reduction allowed for a portfolio                                                                |
+| bpmTransitionDateTimeStart | string | false    | none         | the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset |
+| bpmTransitionDateTimeEnd   | string | false    | none         | the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset   |
 
 <h2 id="tocS_PriceQuantityTuple">PriceQuantityTuple</h2>
 <!-- backwards compatibility -->
@@ -17020,28 +17597,28 @@ unique asset ID
     },
     "apr": {
       "description": "annualized percentage rate",
-      "type": "String",
+      "type": "string",
       "example": "12.50"
     },
     "collateralRating": {
       "deprecated": true,
       "description": "collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`",
-      "type": "String",
+      "type": "string",
       "example": "95.00"
     },
     "maxBorrow": {
       "description": "maximum quantity that can be borrowed for this asset",
-      "type": "String",
+      "type": "string",
       "example": "10.00000000"
     },
     "totalOfferedLoanQuantity": {
       "description": "quantity of an asset that is across all loan offers on the exchange",
-      "type": "String",
+      "type": "string",
       "example": "5.00000000"
     },
     "loanBorrowedQuantity": {
       "description": "amount of loans that is currently being borrowed for the asset",
-      "type": "String",
+      "type": "string",
       "example": "3.00000000"
     },
     "collateralBands": {
@@ -17054,12 +17631,12 @@ unique asset ID
             "properties": {
               "collateralPercentage": {
                 "description": "collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral",
-                "type": "String",
+                "type": "string",
                 "example": "95.00"
               },
               "bandLimitUSD": {
                 "description": "upper limit in USD for this band",
-                "type": "String",
+                "type": "string",
                 "example": "1000000.0000"
               }
             }
@@ -17075,52 +17652,52 @@ unique asset ID
           "properties": {
             "symbol": {
               "description": "underlying asset symbol",
-              "type": "String",
+              "type": "string",
               "example": "BTC"
             },
             "assetId": {
               "description": "underlying asset ID",
-              "type": "String",
+              "type": "string",
               "example": "1"
             },
             "bpmMinReturnStart": {
               "description": "start of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "40.0000"
             },
             "bpmMinReturnEnd": {
               "description": "end of the 1/1000 biggest downward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "20.0000"
             },
             "bpmMaxReturnStart": {
               "description": "start of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "30.0000"
             },
             "bpmMaxReturnEnd": {
               "description": "end of the 1/1000 biggest upward price movement of an underlying asset over 6 hours",
-              "type": "String",
+              "type": "string",
               "example": "50.0000"
             },
             "marketRiskFloorPctStart": {
               "description": "the percentage range of risk reduction allowed for a portfolio",
-              "type": "String",
+              "type": "string",
               "example": "1.00"
             },
             "marketRiskFloorPctEnd": {
               "description": "the percentage range of risk reduction allowed for a portfolio",
-              "type": "String",
+              "type": "string",
               "example": "5.00"
             },
             "bpmTransitionDateTimeStart": {
               "description": "the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-              "type": "String",
+              "type": "string",
               "example": "2024-08-02T12:00:00.000Z"
             },
             "bpmTransitionDateTimeEnd": {
               "description": "the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset",
-              "type": "String",
+              "type": "string",
               "example": "2024-08-02T18:00:00.000Z"
             }
           }
@@ -17141,11 +17718,11 @@ unique asset ID
 | precision                | string                                    | true     | none         | number of decimal digits 'after the dot' for asset amount                                                                                                                                                                                                                                                                                                                                                                                                      |
 | minBalanceInterest       | [AssetValue](#schemaassetvalue)           | true     | none         | see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                                                                                                                                                                                                                              |
 | minFee                   | [AssetValue](#schemaassetvalue)           | true     | none         | minimum fee                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| apr                      | String                                    | true     | none         | annualized percentage rate                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| collateralRating         | String                                    | true     | none         | collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`                                                                                                                                                                                                                                                                                                                                          |
-| maxBorrow                | String                                    | true     | none         | maximum quantity that can be borrowed for this asset                                                                                                                                                                                                                                                                                                                                                                                                           |
-| totalOfferedLoanQuantity | String                                    | true     | none         | quantity of an asset that is across all loan offers on the exchange                                                                                                                                                                                                                                                                                                                                                                                            |
-| loanBorrowedQuantity     | String                                    | true     | none         | amount of loans that is currently being borrowed for the asset                                                                                                                                                                                                                                                                                                                                                                                                 |
+| apr                      | string                                    | true     | none         | annualized percentage rate                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| collateralRating         | string                                    | true     | none         | collateral rating applied to this asset, a value of 100.00 indicates 100%. `Deprecated in favour of collateral bands`                                                                                                                                                                                                                                                                                                                                          |
+| maxBorrow                | string                                    | true     | none         | maximum quantity that can be borrowed for this asset                                                                                                                                                                                                                                                                                                                                                                                                           |
+| totalOfferedLoanQuantity | string                                    | true     | none         | quantity of an asset that is across all loan offers on the exchange                                                                                                                                                                                                                                                                                                                                                                                            |
+| loanBorrowedQuantity     | string                                    | true     | none         | amount of loans that is currently being borrowed for the asset                                                                                                                                                                                                                                                                                                                                                                                                 |
 | collateralBands          | [allOf]                                   | true     | none         | list of collateral bands for the asset. A collateral band holds the upper limit of the USD notional and the corresponding collateral percentage which applies to it. An asset's collateral value will be capped by the highest limit of the collateral bands, any remaining amount greater than this limit will have a collateral percentage of 0. If an asset has an empty list of CollateralBands, this signifies that the asset has a collateralValue of 0. |
 | underlyingAsset          | [UnderlyingAsset](#schemaunderlyingasset) | true     | none         | underlying asset for the asset.                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
