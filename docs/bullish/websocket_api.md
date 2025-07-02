@@ -56,18 +56,11 @@ The API:
 
 # Connectivity Options
 
-Bullish offers 3 options for connectivity:
-
-1. Cloudflare
-2. Cloudflare Bypass
-3. Direct Connect via AWS or GCP
-
-Cloudflare Bypass and Direct Connect allow for a more optimised connection with
-improved latencies. In GCP, generally our most optimal connection is to operate
-within asia-southeast1-a Availability Zone. Please note, this may change at any
-given moment and without warning to another Availability Zone within
-asia-southeast1 for operational reasons. For AWS or GCP connectivity details,
-please contact your sales representative.
+In GCP, generally our most optimal connection is to operate within
+asia-southeast1-a Availability Zone. Please note, this may change at any given
+moment and without warning to another Availability Zone within asia-southeast1
+for operational reasons. For AWS or GCP connectivity details, please contact
+your sales representative
 
 # FIX API
 
@@ -170,32 +163,47 @@ links to the previous and next pages:
 
 # Rate Limits
 
-## Rate Limits per IP address
+## Public Endpoints
+
+The below mentioned public endpoints will be rate limited. For more information
+please reach out to your Bullish customer support.
+
+- [/trading-api/v1/markets](#get-/v1/markets) and subpaths
+- [/trading-api/v1/market-data](#overview--multi-orderbook-websocket-unauthenticated)
+  and subpaths
+- [/trading-api/v1/history/markets](#get-/v1/history/markets/-symbol-/trades)
+  and subpaths
+- [/trading-api/v1/assets](#get-/v1/assets) and subpaths
+- [/trading-api/v1/index-prices](#get-/v1/index-prices) and subpaths
+- [/trading-api/v1/index-data](#overview--index-data-websocket-unauthenticated)
+  and subpaths
+
+## Private Endpoints
+
+API endpoints denoted by `Ratelimited: True` in the description are also subject
+to rate limits. e.g. [Create Order](#post-/v2/orders). The API endpoints fall
+under the below categories. The rate limit for each category is _independently_
+applied.
+
+- Unauthenticated endpoints, rate limited at 50 requests per second.
+- Authenticated `/orders` endpoints, rate limited at 50 requests per second.
+- Other Authenticated endpoints, rate limited at 50 requests per second.
+
+### Rate Limits per IP address
 
 Each IP address is subject to a blanket rate limit of 500 requests per 10
 seconds (approximately 50 requests per second). If an IP address is rate
 limited, the http response status code will be `429 Too Many Requests` and the
 IP address is blocked from making any requests for 60 seconds.
 
-## Global Rate Limit
+### Global Rate Limit
 
 The global rate limit is an additional rate limit specific to the exchange. It
 is used to help limit the flow of orders into the exchange. It affects all
 clients fairly. When the global rate limit is breached the
 `x-ratelimit-global-breach` header value will be set to `true` else `false`.
 
-## Rate Limits per API category
-
-In addition, API endpoints denoted by `Ratelimited: True` in the description are
-also subject to rate limits. e.g. [Create Order](#post-/v2/orders). The API
-endpoints fall under the below categories. The rate limit for each category is
-_independently_ applied.
-
-- Unauthenticated endpoints, rate limited at 50 requests per second.
-- Authenticated `/orders` endpoints, rate limited at 50 requests per second.
-- Other Authenticated endpoints, rate limited at 50 requests per second.
-
-## Rate Limits Info
+### Rate Limits Info
 
 When rate limits are not exceeded, the http response header of the API endpoint
 called will contain the below:
@@ -209,7 +217,7 @@ called will contain the below:
 - `x-ratelimit-global-breach`: true/false, indicating whether the global limit
   has been breached.
 
-## Exceeding Rate Limits
+### Exceeding Rate Limits
 
 When rate limits are exceeded, the API endpoint will return the http response
 status code `429 Too Many Requests` and the http response body will be:
@@ -222,7 +230,7 @@ status code `429 Too Many Requests` and the http response body will be:
 }
 ```
 
-## Exceeding The Global Rate Limit
+### Exceeding The Global Rate Limit
 
 When the global rate limit is exceeded, the API endpoint will return the http
 response status code `429 Too Many Requests` and the http response body will be:
@@ -235,19 +243,12 @@ response status code `429 Too Many Requests` and the http response body will be:
 }
 ```
 
-## Increasing Rate Limits
-
-Bullish has a tiered rate limit offering based on volume.
-
-|                   | Default      | 30-Day Volume between $1B USD and $2B USD | 30-Day Volume over $2B USD |
-| ----------------- | ------------ | ----------------------------------------- | -------------------------- |
-| Cloudflare        | 50 msgs/sec  | same as default                           | same as default            |
-| Cloudflare Bypass | 100 msgs/sec | up to 200 msgs/sec                        | up to 500 msgs/sec         |
+### Increasing Rate Limits
 
 For more information on increasing your rate limits, please reach out to your
 sales representative.
 
-## Obtaining Your Rate Limit Token
+### Obtaining Your Rate Limit Token
 
 Each trading account has a unique rate limit token that can be obtained by
 querying [Get Trading Accounts](#get-/v1/accounts/trading-accounts). The rate
@@ -805,10 +806,10 @@ a set of topics that can be subscribed to.
 ## Servers
 
 - `wss://api.exchange.bullish.com` - PRODUCTION
-- `wss://registered.api.exchange.bullish.com` - PRODUCTION (Cloudflare Bypass)
+- `wss://registered.api.exchange.bullish.com` - PRODUCTION
 - `wss://prod.access.bullish.com` - PRODUCTION (Direct Connect)
 - `wss://api.simnext.bullish-test.com` - SANDBOX
-- `wss://registered.api.simnext.bullish-test.com` - SANDBOX (Cloudflare Bypass)
+- `wss://registered.api.simnext.bullish-test.com` - SANDBOX
 - `wss://simnext.access.bullish.com` - SANDBOX (Direct Connect)
 
 ## Max Open WebSocket Connections
@@ -2358,10 +2359,10 @@ a set of topics that can be subscribed to.
 ## Servers
 
 - `wss://api.exchange.bullish.com` - PRODUCTION
-- `wss://registered.api.exchange.bullish.com` - PRODUCTION (Cloudflare Bypass)
+- `wss://registered.api.exchange.bullish.com` - PRODUCTION
 - `wss://prod.access.bullish.com` - PRODUCTION (Direct Connect)
 - `wss://api.simnext.bullish-test.com` - SANDBOX
-- `wss://registered.api.simnext.bullish-test.com` - SANDBOX (Cloudflare Bypass)
+- `wss://registered.api.simnext.bullish-test.com` - SANDBOX
 - `wss://simnext.access.bullish.com` - SANDBOX (Direct Connect)
 
 ## Max Open WebSocket Connections
