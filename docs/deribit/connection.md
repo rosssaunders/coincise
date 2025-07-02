@@ -436,6 +436,13 @@ disconnect is not supported via HTTP.
   enabled by default for new connections without the need to set it individually
   for each one.
 
+### Tip
+
+To improve the reliability of COD triggering, it is recommended to
+[**enable heartbeats**](https://docs.deribit.com/#public-set_heartbeat) on your
+WebSocket connections. Heartbeats allow the platform to detect stale or dropped
+connections more quickly and activate COD sooner if needed.
+
 ### FIX implementation
 
 Upon initiating a session with the `Logon (A)` message, users have the option to
