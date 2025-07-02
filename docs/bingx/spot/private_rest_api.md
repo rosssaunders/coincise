@@ -2355,7 +2355,7 @@ account
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-### Query sub-account spot assets
+### Query sub-account Fund Account
 
 GET /openApi/subAccount/v1/assets
 
@@ -2365,7 +2365,7 @@ API KEY permission: Read
 
 Content-Type:request body(application/json)
 
-To check the balance of the spot account of each currency of the sub-account.
+To check the balance of the Fund Account of each currency of the sub-account.
 The user who verifies the signature of this API must be main account
 
 #### Request Parameters

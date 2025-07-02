@@ -2,6 +2,14 @@
 
 ## Change Log
 
+2025-06-30
+
+- USDT-M Perp Futures: Added displayName field to 'USDT-M Perp Futures symbols'
+  interface.
+- Coin-M Perp Futures: Added displayName field to 'Contract Information'
+  interface.
+- Spot: Added displayName field to 'Spot trading symbols' interface.
+
 2025-06-17
 
 - USDT-M Perp Futures: Websocket ‘Market Depth Data’ push intervals adjusted to

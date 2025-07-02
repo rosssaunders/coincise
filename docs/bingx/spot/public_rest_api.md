@@ -284,21 +284,22 @@ rate limitation by IP in group Number: 1
 
 #### Order Parameters
 
-| Parameter Name | Type    | Description                                                                                                    |
-| -------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
-| symbol         | string  | Trading pair                                                                                                   |
-| tickSize       | float64 | Price step                                                                                                     |
-| stepSize       | float64 | Quantity step                                                                                                  |
-| minQty         | float64 | Version upgrade, this field is deprecated, please ignore this field,the formula is: minQty= minNotional/price  |
-| maxQty         | float64 | Version upgrade, this field is deprecated, please ignore this field,the formula is: maxQty = maxNotional/price |
-| minNotional    | float64 | Minimum transaction amount                                                                                     |
-| maxNotional    | float64 | Maximum transaction amount                                                                                     |
-| status         | int     | 0 offline, 1 online, 5 pre-open, 25 trading suspended                                                          |
-| apiStateBuy    | Boolean | available buy via api                                                                                          |
-| apiStateSell   | Boolean | available sell via api                                                                                         |
-| timeOnline     | long    | online time                                                                                                    |
-| offTime        | long    | offline time                                                                                                   |
-| maintainTime   | long    | trading suspension time                                                                                        |
+| Parameter Name | Type    | Description                                                                                                                                   |
+| -------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol         | string  | Trading pair                                                                                                                                  |
+| tickSize       | float64 | Price step                                                                                                                                    |
+| stepSize       | float64 | Quantity step                                                                                                                                 |
+| minQty         | float64 | Version upgrade, this field is deprecated, please ignore this field,the formula is: minQty= minNotional/price                                 |
+| maxQty         | float64 | Version upgrade, this field is deprecated, please ignore this field,the formula is: maxQty = maxNotional/price                                |
+| minNotional    | float64 | Minimum transaction amount                                                                                                                    |
+| maxNotional    | float64 | Maximum transaction amount                                                                                                                    |
+| status         | int     | 0 offline, 1 online, 5 pre-open, 25 trading suspended                                                                                         |
+| apiStateBuy    | Boolean | available buy via api                                                                                                                         |
+| apiStateSell   | Boolean | available sell via api                                                                                                                        |
+| timeOnline     | long    | online time                                                                                                                                   |
+| offTime        | long    | offline time                                                                                                                                  |
+| maintainTime   | long    | trading suspension time                                                                                                                       |
+| displayName    | string  | The trading pair name displayed on the platform is for display purposes only. Unlike the symbol, which is primarily used for order placement. |
 
 #### Errors
 
