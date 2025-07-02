@@ -1,5 +1,13 @@
 # [#](#changelog) Changelog
 
+**v4.100.0**
+
+- Add alpha account query and account book query functionality
+- New feature `GET /earn/staking/coins` endpoint, Query on-chain staking coin
+  types
+- New feature `POST /earn/staking/swap` endpoint, On-chain staking coin swap
+- Add `sub_broker_info` object field in broker commission and transaction APIs
+
 **v4.99.0**
 
 - Add `refresh_time` field in `GET /spot/accounts`、`GET /spot/real_accounts`
