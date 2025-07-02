@@ -1034,6 +1034,7 @@ Codes are universal,but messages can vary.
 | 5039 | INVALID_SELF_TRADE_PREVENTION_MODE​            | Invalid self trade prevention mode                                                                                                                                                                                                                     |
 | 5040 | FUTURE_GOOD_TILL_DATE​                         | The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 (UTC 9999-12-31 23:59:59)                                                                                                           |
 | 5041 | BBO_ORDER_REJECT​                              | No depth matches this BBO order                                                                                                                                                                                                                        |
+| 5043 | BBO_ORDER_REJECT​                              | A pending modification already exists for this order.                                                                                                                                                                                                  |
 
 ### 10xx - General Server or Network issues
 
