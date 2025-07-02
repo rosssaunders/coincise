@@ -946,6 +946,7 @@ _Option_:
 - `TAX` Government tax. Only for Indonesian site
 - `CFX` Indonesian foreign exchange tax. Only for Indonesian site
 - `WHT` EU withholding tax. Only for EU site
+- `GST` Indian GST tax. Only for kyc=Indian users
 
 ### extraFees.subFeeType[​](#extrafeessubfeetype "Direct link to heading")
 
@@ -955,6 +956,7 @@ _Option_:
 - `CFX_FIEE` CFX fee, fiat currency to digital currency. Only for Indonesian
   site
 - `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
+- `IND_GST` Indian GST tax. Only for kyc=Indian users
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -2133,131 +2135,26 @@ from pybit.unified_trading import WebSocketfrom time import sleepws = WebSocket(
 {    "topic": "allLiquidation.ROSEUSDT",    "type": "snapshot",    "ts": 1739502303204,    "data": [        {            "T": 1739502302929,            "s": "ROSEUSDT",            "S": "Sell",            "v": "20000",            "p": "0.04499"        }    ]}
 ```
 
-# LT Kline
+# Page Not Found
 
-Subscribe to the leveraged token kline stream.
+We could not find what you were looking for.
 
-tip
+Please contact the owner of the site that linked you to the original URL and let
+them know their link is broken.
 
-If `confirm`\=true, this means that the candle has closed. Otherwise, the candle
-is still open and updating.
+# Page Not Found
 
-**Available intervals:**
+We could not find what you were looking for.
 
-- `1` `3` `5` `15` `30` (min)
-- `60` `120` `240` `360` `720` (min)
-- `D` (day)
-- `W` (week)
-- `M` (month)
+Please contact the owner of the site that linked you to the original URL and let
+them know their link is broken.
 
-**Push frequency:** 1-60s
+# Page Not Found
 
-**Topic:**  
-`kline_lt.{interval}.{symbol}` e.g., kline_lt.30.BTC3SUSDT
+We could not find what you were looking for.
 
-### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter                                          | Type    | Comments                                                                                       |
-| :------------------------------------------------- | :------ | ---------------------------------------------------------------------------------------------- |
-| topic                                              | string  | Topic name                                                                                     |
-| type                                               | string  | Data type. <code>snapshot</code>                                                               |
-| ts                                                 | number  | The timestamp (ms) that the system generates the data                                          |
-| data                                               | array   | Object                                                                                         |
-| &gt; start                                         | number  | The start timestamp (ms)                                                                       |
-| &gt; end                                           | number  | The end timestamp (ms). It is current timestamp if it does not reach to the end time of candle |
-| &gt; <a href="/docs/v5/enum#interval">interval</a> | string  | Kline interval                                                                                 |
-| &gt; open                                          | string  | Open price                                                                                     |
-| &gt; close                                         | string  | Close price                                                                                    |
-| &gt; high                                          | string  | Highest price                                                                                  |
-| &gt; low                                           | string  | Lowest price                                                                                   |
-| &gt; confirm                                       | boolean | Whether the tick is ended or not                                                               |
-| &gt; timestamp                                     | number  | The timestamp (ms) of the last matched order in the candle                                     |
-
-### Subscribe Example[​](#subscribe-example "Direct link to heading")
-
-```
-from pybit.unified_trading import WebSocketfrom time import sleepws = WebSocket(    testnet=True,    channel_type="spot",)def handle_message(message):    print(message)ws.lt_kline_stream(    interval=30,    symbol="EOS3LUSDT",    callback=handle_message)while True:    sleep(1)
-```
-
-### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "type": "snapshot",    "topic": "kline_lt.5.EOS3LUSDT",    "data": [        {            "start": 1672325100000,            "end": 1672325399999,            "interval": "5",            "open": "0.416039541212402799",            "close": "0.41477848043290448",            "high": "0.416039541212402799",            "low": "0.409734237314911206",            "confirm": false,            "timestamp": 1672325322393        }    ],    "ts": 1672325322393}
-```
-
-# LT Ticker
-
-Subscribe to the leveraged token ticker stream.
-
-**Push frequency:** 300ms
-
-**Topic:**  
-`tickers_lt.{symbol}` e.g.,tickers_lt.BTC3SUSDT
-
-### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter         | Type   | Comments                                              |
-| :---------------- | :----- | ----------------------------------------------------- |
-| topic             | string | Topic name                                            |
-| type              | string | Data type. <code>snapshot</code>                      |
-| ts                | number | The timestamp (ms) that the system generates the data |
-| data              | array  | Object                                                |
-| &gt; symbol       | string | Symbol name                                           |
-| &gt; price24hPcnt | string | Market price change percentage in the past 24 hours   |
-| &gt; lastPrice    | string | The last price                                        |
-| &gt; prevPrice24h | string | Market price 24 hours ago                             |
-| &gt; highPrice24h | string | Highest price in the past 24 hours                    |
-| &gt; lowPrice24h  | string | Lowest price in the past 24 hours                     |
-
-### Subscribe Example[​](#subscribe-example "Direct link to heading")
-
-```
-from pybit.unified_trading import WebSocketfrom time import sleepws = WebSocket(    testnet=True,    channel_type="spot",)def handle_message(message):    print(message)ws.lt_ticker_stream(    symbol="EOS3LUSDT",    callback=handle_message)while True:    sleep(1)
-```
-
-### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "topic": "tickers_lt.EOS3LUSDT",    "ts": 1672325446847,    "type": "snapshot",    "data": {        "symbol": "EOS3LUSDT",        "lastPrice": "0.41477848043290448",        "highPrice24h": "0.435285472510871305",        "lowPrice24h": "0.394601507960931382",        "prevPrice24h": "0.431502290172376349",        "price24hPcnt": "-0.0388"    }}
-```
-
-# LT Nav
-
-Subscribe to the leveraged token nav stream.
-
-**Push frequency:** 300ms
-
-**Topic:**  
-`lt.{symbol}` e.g.,lt.BTC3SUSDT
-
-### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter           | Type   | Comments                                                 |
-| :------------------ | :----- | -------------------------------------------------------- |
-| topic               | string | Topic name                                               |
-| type                | string | Data type. <code>snapshot</code>                         |
-| ts                  | number | The timestamp (ms) that the system generates the data    |
-| data                | array  | Object                                                   |
-| &gt; time           | number | The generated timestamp of nav                           |
-| &gt; symbol         | string | Symbol name                                              |
-| &gt; nav            | string | Net asset value                                          |
-| &gt; basketPosition | string | Total position value = basket value \* total circulation |
-| &gt; leverage       | string | Leverage                                                 |
-| &gt; basketLoan     | string | Basket loan                                              |
-| &gt; circulation    | string | Circulation                                              |
-| &gt; basket         | string | Basket                                                   |
-
-### Subscribe Example[​](#subscribe-example "Direct link to heading")
-
-```
-from pybit.unified_trading import WebSocketfrom time import sleepws = WebSocket(    testnet=True,    channel_type="spot",)def handle_message(message):    print(message)ws.lt_nav_stream(    symbol="EOS3LUSDT",    callback=handle_message)while True:    sleep(1)
-```
-
-### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "topic": "lt.EOS3LUSDT",    "ts": 1672325564669,    "type": "snapshot",    "data": {        "symbol": "EOS3LUSDT",        "time": 1672325564554,        "nav": "0.413517419653406162",        "basketPosition": "1.261060779498318641",        "leverage": "2.656197506416192150",        "basketLoan": "-0.684866519289629374",        "circulation": "72767.309468460367138199",        "basket": "91764.000000292013277472"    }}
-```
+Please contact the owner of the site that linked you to the original URL and let
+them know their link is broken.
 
 # Liquidation (deprecated)
 

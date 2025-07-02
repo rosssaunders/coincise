@@ -946,6 +946,7 @@ _Option_:
 - `TAX` Government tax. Only for Indonesian site
 - `CFX` Indonesian foreign exchange tax. Only for Indonesian site
 - `WHT` EU withholding tax. Only for EU site
+- `GST` Indian GST tax. Only for kyc=Indian users
 
 ### extraFees.subFeeType[​](#extrafeessubfeetype "Direct link to heading")
 
@@ -955,6 +956,7 @@ _Option_:
 - `CFX_FIEE` CFX fee, fiat currency to digital currency. Only for Indonesian
   site
 - `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
+- `IND_GST` Indian GST tax. Only for kyc=Indian users
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
