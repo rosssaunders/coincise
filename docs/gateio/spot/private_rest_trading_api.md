@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-99-0) Gate API v4 v4.99.0
+# [#](#gate-api-v4-v4-100-0) Gate API v4 v4.100.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2253,7 +2253,7 @@ to remove the shelves, Unix timestamp in seconds | | »» type | string | Tradin
 pair type, normal: normal, premarket: pre-market | | »» trade_url | string |
 Transaction link |
 
-#### [#](#enumerated-values-6) Enumerated Values
+#### [#](#enumerated-values-9) Enumerated Values
 
 | Property     | Value      |
 | ------------ | ---------- |
@@ -2342,7 +2342,7 @@ to remove the shelves, Unix timestamp in seconds | | » type | string | Trading
 pair type, normal: normal, premarket: pre-market | | » trade_url | string |
 Transaction link |
 
-#### [#](#enumerated-values-7) Enumerated Values
+#### [#](#enumerated-values-10) Enumerated Values
 
 | Property     | Value      |
 | ------------ | ---------- |
@@ -2371,7 +2371,7 @@ of them
 | currency_pair | query | string | false    | Currency pair |
 | timezone      | query | string | false    | Timezone      |
 
-#### [#](#enumerated-values-8) Enumerated Values
+#### [#](#enumerated-values-11) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2605,7 +2605,7 @@ Status Code **200**
 | It is used to track and identify trades in the specific market |
 | » text                                                         | string | User defined information. No value in public endpoints               |
 
-#### [#](#enumerated-values-9) Enumerated Values
+#### [#](#enumerated-values-12) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -2637,7 +2637,7 @@ limit when specifying from, to and interval
 | to            | query | integer(int64) | false    | End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time                                                          |
 | interval      | query | string         | false    | Interval time between data points. Note that `30d` means 1 natual month, not 30 days                                                               |
 
-#### [#](#enumerated-values-10) Enumerated Values
+#### [#](#enumerated-values-13) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3151,7 +3151,7 @@ string | How the order was finished.
 \- ioc: time in force is `IOC`, finish immediately  
 \- stp: cancelled because self trade prevention |
 
-#### [#](#enumerated-values-11) Enumerated Values
+#### [#](#enumerated-values-14) Enumerated Values
 
 | Property      | Value        |
 | ------------- | ------------ |
@@ -3358,7 +3358,7 @@ return '-'
 \- stp: Cancelled due to self-trade prevention  
 \- unknown: Unknown |
 
-#### [#](#enumerated-values-12) Enumerated Values
+#### [#](#enumerated-values-15) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -3596,7 +3596,7 @@ string | Order completion statuses include:
 \- stp: Cancelled due to self-trade prevention  
 \- unknown: Unknown |
 
-#### [#](#enumerated-values-13) Enumerated Values
+#### [#](#enumerated-values-16) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -3789,7 +3789,7 @@ returned based on action_mode. This field is only valid during the request and
 is not included in the response result ACK: Asynchronous mode, only returns key
 order fields RESULT: No clearing information FULL: Full mode (default)
 
-#### [#](#enumerated-values-14) Enumerated Values
+#### [#](#enumerated-values-17) Enumerated Values
 
 | Parameter       | Value  |
 | --------------- | ------ |
@@ -4006,7 +4006,7 @@ ACK: Asynchronous mode, only returns key order fields
 RESULT: No clearing information  
 FULL: Full mode (default) |
 
-#### [#](#enumerated-values-15) Enumerated Values
+#### [#](#enumerated-values-18) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -4241,7 +4241,7 @@ string | Order completion statuses include:
 \- stp: Cancelled due to self-trade prevention  
 \- unknown: Unknown |
 
-#### [#](#enumerated-values-16) Enumerated Values
+#### [#](#enumerated-values-19) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -4467,7 +4467,7 @@ string | How the order was finished.
 \- ioc: time in force is `IOC`, finish immediately  
 \- stp: cancelled because self trade prevention |
 
-#### [#](#enumerated-values-17) Enumerated Values
+#### [#](#enumerated-values-20) Enumerated Values
 
 | Property      | Value     |
 | ------------- | --------- |
@@ -4746,7 +4746,7 @@ string | Order completion statuses include:
 \- stp: Cancelled due to self-trade prevention  
 \- unknown: Unknown |
 
-#### [#](#enumerated-values-18) Enumerated Values
+#### [#](#enumerated-values-21) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -5000,7 +5000,7 @@ string | Order completion statuses include:
 \- stp: Cancelled due to self-trade prevention  
 \- unknown: Unknown |
 
-#### [#](#enumerated-values-19) Enumerated Values
+#### [#](#enumerated-values-22) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -5225,7 +5225,7 @@ string | Order completion statuses include:
 \- stp: Cancelled due to self-trade prevention  
 \- unknown: Unknown |
 
-#### [#](#enumerated-values-20) Enumerated Values
+#### [#](#enumerated-values-23) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -5355,7 +5355,7 @@ Status Code **200**
 | It is used to track and identify trades in the specific market |
 | » text                                                         | string | User defined information. No value in public endpoints               |
 
-#### [#](#enumerated-values-21) Enumerated Values
+#### [#](#enumerated-values-24) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5649,7 +5649,7 @@ string | How the order was finished.
 \- ioc: time in force is `IOC`, finish immediately  
 \- stp: cancelled because self trade prevention |
 
-#### [#](#enumerated-values-22) Enumerated Values
+#### [#](#enumerated-values-25) Enumerated Values
 
 | Property      | Value        |
 | ------------- | ------------ |
@@ -5826,7 +5826,7 @@ according to `side`
 - api: api
 - app: app
 
-#### [#](#enumerated-values-23) Enumerated Values
+#### [#](#enumerated-values-26) Enumerated Values
 
 | Parameter        | Value   |
 | ---------------- | ------- |
@@ -5890,7 +5890,7 @@ _Retrieve running auto order list_
 | limit   | query | integer | false    | Maximum number of records to be returned in a single list            |
 | offset  | query | integer | false    | List offset, starting from 0                                         |
 
-#### [#](#enumerated-values-24) Enumerated Values
+#### [#](#enumerated-values-27) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -5958,7 +5958,7 @@ _Cancel All Price-triggered Orders_
 | market  | query | string | false    | Currency pair                                                        |
 | account | query | string | false    | Trading account type. Portfolio margin account must set to `unified` |
 
-#### [#](#enumerated-values-25) Enumerated Values
+#### [#](#enumerated-values-28) Enumerated Values
 
 | Parameter | Value   |
 | --------- | ------- |

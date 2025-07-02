@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-99-0) Gate API v4 v4.99.0
+# [#](#gate-api-v4-v4-100-0) Gate API v4 v4.100.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2661,12 +2661,12 @@ main user's spot account is used no matter which sub user's account is operated.
 
 ```
 {
-  "client_order_id": "da3ce7a088c8b0372b741419c7829033",
-  "currency": "BTC",
   "sub_account": "10002",
-  "direction": "to",
+  "sub_account_type": "spot",
+  "currency": "BTC",
   "amount": "1",
-  "sub_account_type": "spot"
+  "direction": "to",
+  "client_order_id": "da3ce7a088c8b0372b741419c7829033"
 }
 ```
 
@@ -2676,12 +2676,11 @@ main user's spot account is used no matter which sub user's account is operated.
 | ------------------ | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | body               | body | object | true     | none                                                                                                                                                                                                                                      |
 | » sub_account      | body | string | true     | Sub account user ID                                                                                                                                                                                                                       |
-| » sub_account_type | body | string | false    | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
+| » sub_account_type | body | string | false    | 操作的子账号交易账户， spot - 现货账户， futures - 永续合约账户， delivery - 交割合约账户, options - 期权账户                                                                                                                             |
 | » currency         | body | string | true     | Transfer currency name                                                                                                                                                                                                                    |
 | » amount           | body | string | true     | Transfer amount                                                                                                                                                                                                                           |
 | » direction        | body | string | true     | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
 | » client_order_id  | body | string | false    | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
-| » status           | body | string | false    | Sub-account transfer record status, currently only success                                                                                                                                                                                |
 
 > Example responses
 
@@ -2742,15 +2741,16 @@ Record time range cannot exceed 30 days
 ```
 [
   {
-    "uid": "10001",
     "timest": "1592809000",
+    "uid": "10001",
+    "sub_account": "10002",
+    "sub_account_type": "spot",
+    "currency": "BTC",
+    "amount": "1",
+    "direction": "to",
     "source": "web",
     "client_order_id": "da3ce7a088c8b0372b741419c7829033",
-    "currency": "BTC",
-    "sub_account": "10002",
-    "direction": "to",
-    "amount": "1",
-    "sub_account_type": "spot"
+    "status": "success"
   }
 ]
 ```
@@ -2767,11 +2767,10 @@ Status Code **200**
 
 | Name               | Type   | Description                                                                                                                                                                                                                               |
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _None_             | array  | none                                                                                                                                                                                                                                      |
 | » timest           | string | Transfer timestamp                                                                                                                                                                                                                        |
 | » uid              | string | Main account user ID                                                                                                                                                                                                                      |
 | » sub_account      | string | Sub account user ID                                                                                                                                                                                                                       |
-| » sub_account_type | string | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
+| » sub_account_type | string | 操作的子账号交易账户， spot - 现货账户， futures - 永续合约账户， delivery - 交割合约账户, options - 期权账户                                                                                                                             |
 | » currency         | string | Transfer currency name                                                                                                                                                                                                                    |
 | » amount           | string | Transfer amount                                                                                                                                                                                                                           |
 | » direction        | string | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
@@ -4177,39 +4176,9 @@ _Create API Key of the sub-account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description          | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Created Successfully | Inline |
-
-### Response Schema
-
-Status Code **200**
-
-| Name      | Type           | Description                                         |
-| --------- | -------------- | --------------------------------------------------- |
-| » user_id | string         | User ID                                             |
-| » mode    | integer(int32) | Mode: 1 - classic 2 - portfolio account             |
-| » name    | string         | API key name                                        |
-| » perms   | array          | none                                                |
-| »» name   | string         | Permission function name (no value will be cleared) |
-
-\- wallet: wallet  
-\- spot: spot/leverage  
-\- futures: perpetual contract  
-\- delivery: delivery contract  
-\- earn: financial management  
-\- custody: custody  
-\- options: options  
-\- account: account information  
-\- loan: loan  
-\- margin: leverage  
-\- unified: unified account  
-\- copy: copy | | »» read_only | boolean | read only | | » ip_whitelist | array
-| ip white list (list will be removed if no value is passed) | | » key | string
-| API Key | | » state | integer(int32) | State 1 - normal 2 - locked 3 - frozen
-| | » created_at | integer(int64) | Creation time | | » updated_at |
-integer(int64) | Last update time | | » last_access | integer(int64) | Last
-access time |
+| Status | Meaning                                                                    | Description          | Schema                                |
+| ------ | -------------------------------------------------------------------------- | -------------------- | ------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Created Successfully | [SubAccountKey](#schemasubaccountkey) |
 
 WARNING
 
