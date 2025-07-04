@@ -612,18 +612,25 @@ provide different /24 subnets from the 172.16.0.0/12 block to establish the
 connection to third parties. Details of the BGP peering will be provided once a
 cross-connect is requested.
 
-IP & Ports: 
+**IP & Ports:** 
 
 - www.deribit.com (load balancer)
 - 443 - HTTPS
 - 9881-FIX
 - 9883-FIX SSL
 
-[](https://support.deribit.com/hc/article_attachments/28338442549789)[![Deribit Global System Structure](/hc/article_attachments/28338442549789)](/hc/article_attachments/28338442549789)
+**Colo connection:**
+
+- 8020 - HTTP
+- 8021 - API
+- 8022 - WS
+- 8025 - FIX
+
+[](https://support.deribit.com/hc/article_attachments/28584430759709)[![Deribit Global System Structure](/hc/article_attachments/28584430759709)](/hc/article_attachments/28584430759709)
 
 #### Hosting in the Client Rack
 
-Clients can order a server for £250 + VAT (per server) a month.
+Clients can order a server for £250 + VAT (per rack unit) a month.
 
 Service includes:
 
@@ -732,7 +739,8 @@ allow connectivity to be initiated from your VPC to the Deribit VPC, never in
 the other direction, so you have complete control over which network traffic
 will be able to go through the VPC Endpoint. The Deribit Endpoint Service will
 be accessible on the same TCP ports as via the internet (443, 8020, 8021, 8022
-and 8025). Consult Deribit for the port number that’s best for you. 
+and 8025). Consult Deribit for the port number that’s best for you or scroll
+below for more information.
 
 1.  Create VPC Endpoint
 
@@ -744,12 +752,12 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     the Deribit service. From the menu choose ‘Endpoints’, ‘Create Endpoint’.
     Select ‘PrivateLink Ready partner services’: 
 
-    [](https://support.deribit.com/hc/article_attachments/25944657490461)[![aws_endpoint_privatelink_ready_partner_services.png](/hc/article_attachments/25944657490461)](/hc/article_attachments/25944657490461)
+    [](https://support.deribit.com/hc/article_attachments/28583308419613)[![aws_endpoint_privatelink_ready_partner_services.png](/hc/article_attachments/28583308419613)](/hc/article_attachments/28583308419613)
 
     Fill in the name belonging to your specific region and click ‘Verify
     Service’:
 
-    **Table 3. Deribit services for AWS regions**
+    **Table 2. Deribit services for AWS regions**
 
     | AWS region
 
@@ -765,20 +773,20 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     The following status should appear indicating that the Deribit service was
     successfully located:
 
-    [](https://support.deribit.com/hc/article_attachments/25944657591581)[![aws_endpoint_service_name_verified.png](/hc/article_attachments/25944657591581)](/hc/article_attachments/25944657591581)
+    [](https://support.deribit.com/hc/article_attachments/28583308477725)[![aws_endpoint_service_name_verified.png](/hc/article_attachments/28583308477725)](/hc/article_attachments/28583308477725)
 
     In order to connect to the Endpoint using custom private DNS (explained
     further), make sure default private DNS is not enabled under Additional
     settings: 
 
-    [](https://support.deribit.com/hc/article_attachments/25944657632925)[![aws_endpoint_enable_dns_name.png](/hc/article_attachments/25944657632925)](/hc/article_attachments/25944657632925)
+    [](https://support.deribit.com/hc/article_attachments/28583340756765)[![aws_endpoint_enable_dns_name.png](/hc/article_attachments/28583340756765)](/hc/article_attachments/28583340756765)
 
     Now select the VPC in which the VPC Endpoint should be created, followed by
     the Availability Zones in which to enable the VPC Endpoint. For
     redundancy/high availability purposes, Deribit has made its service
     available in two Availability Zones per region:
 
-    **Table 4. Availability Zones for AWS regions**
+    **Table 3. Availability Zones for AWS regions**
 
     | AWS region
 
@@ -794,11 +802,11 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     We recommend creating the VPC Endpoint in both AZ’s and recommend your
     application is also available in both AZ’s. 
 
-    You can create and attach a Security Group to the VPC Endpoint for security
+    Create and attach a Security Group to the VPC Endpoint for security
     purposes, and add Tags according to your company policies. If you do not
     define a Security Group, the Default Security Group will be associated: 
 
-    [](https://support.deribit.com/hc/article_attachments/25944657720989)[![aws_endpoint_default_security_group.png](/hc/article_attachments/25944657720989)](/hc/article_attachments/25944657720989)
+    [](https://support.deribit.com/hc/article_attachments/28583354032797)[![aws_endpoint_default_security_group.png](/hc/article_attachments/28583354032797)](/hc/article_attachments/28583354032797)
 
     Make sure the associated Security Group has Inbound Rules allowing traffic
     from your VPC to access the Endpoint. To edit go to the ‘Inbound Rules’ tab,
@@ -806,7 +814,7 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     allowed to access the Deribit backend. For example in this case my entire
     VPC with CIDR range 10.0.0.0/16 over destination port 8020: 
 
-    [](https://support.deribit.com/hc/article_attachments/25944657805981)[![aws_endpoint_inbound_rule.png](/hc/article_attachments/25944657805981)](/hc/article_attachments/25944657805981)
+    [](https://support.deribit.com/hc/article_attachments/28583360103325)[![aws_endpoint_inbound_rule.png](/hc/article_attachments/28583360103325)](/hc/article_attachments/28583360103325)
 
     Click ‘Save rules’. Click ‘Create Endpoint’ to finalize. 
 
@@ -816,7 +824,7 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     Deribit AWS account, until that happens the VPC Endpoint in your account
     will remain in the ‘pending acceptance’ state:
 
-    [](https://support.deribit.com/hc/article_attachments/25944657839005)[![aws_endpoint_pending_acceptance.png](/hc/article_attachments/25944657839005)](/hc/article_attachments/25944657839005)
+    [](https://support.deribit.com/hc/article_attachments/28583308700445)[![aws_endpoint_pending_acceptance.png](/hc/article_attachments/28583308700445)](/hc/article_attachments/28583308700445)
 
     In order to inform Deribit you have created a connection request, please
     send an email to ‘aws-support@sentillia.com’ following the below guidelines:
@@ -835,7 +843,7 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     after a few minutes the status of the VPC Endpoint will change to
     ‘available’. It is now ready for use:
 
-    [](https://support.deribit.com/hc/article_attachments/25944674006429)[![aws_endpoint_status_available.png](/hc/article_attachments/25944674006429)](/hc/article_attachments/25944674006429)
+    [](https://support.deribit.com/hc/article_attachments/28583341079837)[![aws_endpoint_status_available.png](/hc/article_attachments/28583341079837)](/hc/article_attachments/28583341079837)
 
 3.  Route network traffic to VPC Endpoint
 
@@ -855,7 +863,7 @@ and 8025). Consult Deribit for the port number that’s best for you. 
     Within that hosted zone choose ‘Create record’, select the ‘Simple Routing’
     policy:
 
-    [](https://support.deribit.com/hc/article_attachments/25944639033757)[![aws_endpoint_simple_routing_policy.png](/hc/article_attachments/25944639033757)](/hc/article_attachments/25944639033757)
+    [](https://support.deribit.com/hc/article_attachments/28583330327965)[![aws_endpoint_simple_routing_policy.png](/hc/article_attachments/28583330327965)](/hc/article_attachments/28583330327965)
 
     Click Next and choose ‘Define simple record’. Fill in the record details:
 
@@ -869,7 +877,7 @@ and 8025). Consult Deribit for the port number that’s best for you. 
       the one with the region (for example ‘eu-west-2’ or ‘ap-northeast-1’), not
       the one ending with ‘a/b’.
 
-    [](https://support.deribit.com/hc/article_attachments/25944620339741)[![aws_endpoint_define_simple_record.png](/hc/article_attachments/25944620339741)](/hc/article_attachments/25944620339741)
+    [](https://support.deribit.com/hc/article_attachments/28583341214109)[![aws_endpoint_define_simple_record.png](/hc/article_attachments/28583341214109)](/hc/article_attachments/28583341214109)
 
     Select ‘Define simple record’ and ‘Create records’. It is being created and
     will take a few minutes to become available.
@@ -884,7 +892,7 @@ and 8025). Consult Deribit for the port number that’s best for you. 
 
 ## Troubleshooting[](#heading-1)
 
-**Why am I getting a response error 404 ?**
+**Why am I getting a response error 404 ?** 
 
 Verify the following:
 
@@ -893,12 +901,21 @@ Verify the following:
 2.  Confirm that step number 3 in the setup guide is correctly configured, and
     that the DNS point to gateway.deribit.com
 
-**IP whitelisting - I wish to whitelist my IP**
+**IP whitelisting - I wish to whitelist my IP** 
 
 This can be done via the API itself directly without our intervening, If you
 wish to be sure about the IP address? Simply send a request and let us know with
 your UID alongside the exact time window so we can trace it back from the logs
 for you.
+
+**What is the difference between each port ?**
+
+- **8020 (HTTP):** Used for standard web traffic.
+- **8021 (API):** Designated for API (Application Programming Interface)
+  communication.
+- **8022 (WS):** Used for WebSocket connections.
+- **8025 (FIX):** Dedicated to the FIX (Financial Information eXchange)
+  protocol, primarily for orders.
 
 # Deribit AWS Multicast Service Instruction
 
@@ -931,27 +948,27 @@ Make sure you select Europe (London) eu-west-2 region or the Asia Pacific
 (Tokyo) ap-northeast-1 region. Go to Resource Access Manager, select shared with
 me → Resource shares.
 
-[](https://support.deribit.com/hc/article_attachments/25944620396061)[![image2.png](/hc/article_attachments/25944620396061)](/hc/article_attachments/25944620396061)
+[](https://support.deribit.com/hc/article_attachments/28586575840797)[![image2.png](/hc/article_attachments/28586575840797)](/hc/article_attachments/28586575840797)
 
 Click on the name of the Pending share and click Accept
 
-[](https://support.deribit.com/hc/article_attachments/25944654790301)[![image4.png](/hc/article_attachments/25944654790301)](/hc/article_attachments/25944654790301)
+[](https://support.deribit.com/hc/article_attachments/28586575897501)[![image4.png](/hc/article_attachments/28586575897501)](/hc/article_attachments/28586575897501)
 
 ## Configure Transit gateway multicast[](#heading-2)
 
 Create a Transit gateway attachment to the shared transit gateway and attach the
 subnets in your own VPC where you want to be able to receive multicast traffic.
 
-[](https://support.deribit.com/hc/article_attachments/25944658248861)[![image3.png](/hc/article_attachments/25944658248861)](/hc/article_attachments/25944658248861)
+[](https://support.deribit.com/hc/article_attachments/28586564722077)[![image3.png](/hc/article_attachments/28586564722077)](/hc/article_attachments/28586564722077)
 
 Go to the Transit gateway multicast in the VPC dashboard, select tab:
 Associations and Click Create association.
 
-[](https://support.deribit.com/hc/article_attachments/25944645807133)[![image6.png](/hc/article_attachments/25944645807133)](/hc/article_attachments/25944645807133)
+[](https://support.deribit.com/hc/article_attachments/28586558525853)[![image6.png](/hc/article_attachments/28586558525853)](/hc/article_attachments/28586558525853)
 
 Select the attachment and the subnets.
 
-[](https://support.deribit.com/hc/article_attachments/25944674494237)[![image9.png](/hc/article_attachments/25944674494237)](/hc/article_attachments/25944674494237)
+[](https://support.deribit.com/hc/article_attachments/28586558615965)[![image9.png](/hc/article_attachments/28586558615965)](/hc/article_attachments/28586558615965)
 
 ## Testing using Amazon Linux 2 instance[](#heading-3)
 
@@ -969,7 +986,7 @@ the security group:
 In the example below the test feed is allowed from the London region : Custom
 UDP ports 6200-6201 for source 172.20.13.0/24 and IGMPv2 from anywhere
 
-[](https://support.deribit.com/hc/article_attachments/25944674573213)[![image7.png](/hc/article_attachments/25944674573213)](/hc/article_attachments/25944674573213)
+[](https://support.deribit.com/hc/article_attachments/28586541566237)[![image7.png](/hc/article_attachments/28586541566237)](/hc/article_attachments/28586541566237)
 
 Socat is used to send a IGMP join command to the multicast address. Install
 using sudo yum install socat Tcpdump is used to receive the messages and screen
@@ -1059,11 +1076,11 @@ tcpdump command:
 When opened in Wireshark with the plugin enabled the Protocol should show:
 Deribit SBE as shown below
 
-[](https://support.deribit.com/hc/article_attachments/25944655166493)[![image11.png](/hc/article_attachments/25944655166493)](/hc/article_attachments/25944655166493)
+[](https://support.deribit.com/hc/article_attachments/28586554076189)[![image11.png](/hc/article_attachments/28586554076189)](/hc/article_attachments/28586554076189)
 
 Double click an item to retrieve the details :
 
-[](https://support.deribit.com/hc/article_attachments/25944689995549)[![image10.png](/hc/article_attachments/25944689995549)](/hc/article_attachments/25944689995549)
+[](https://support.deribit.com/hc/article_attachments/28586582250013)[![image10.png](/hc/article_attachments/28586582250013)](/hc/article_attachments/28586582250013)
 
 This should verify the multicast data has been received successfully.
 
@@ -1075,7 +1092,7 @@ downloading the MC Client Development Pack Zip from
 
 ## **Troubleshooting**[](#heading-6)
 
-**Transitgateway Attachment creation fails**
+**Transitgateway Attachment creation fails** 
 
 If a user has insufficient permissions, the transit gateway attachment created
 according to step 1.2 might enter a failed state.
@@ -1090,18 +1107,18 @@ need the following permissions:
 3.  ec2:DescribeTransitGateways permission to view the shared transit gateway.
 
 **No data received when issuing the socat command in one screen session and
-tcpdump in another screen session.**
+tcpdump in another screen session.** 
 
 If data fails to be received despite the execution of the socat command in one
 screen session and tcpdump in another, it may be necessary to verify the
 security group rules configured for the instance. Configure the SG as follows:
 
-[](https://support.deribit.com/hc/article_attachments/25944674573213)[![image7.png](/hc/article_attachments/25944674573213)](/hc/article_attachments/25944674573213)
+[](https://support.deribit.com/hc/article_attachments/28586541566237)[![image7.png](/hc/article_attachments/28586541566237)](/hc/article_attachments/28586541566237)
 
 Specifically the second line allowing IGMP traffic from any source might be
 necessary.
 
-**Why am I getting a response error 404 ?**
+**Why am I getting a response error 404 ?** 
 
 Verify the following:
 
@@ -1110,12 +1127,23 @@ Verify the following:
 2.  Confirm that step number 3 in the setup guide is correctly configured, and
     that the DNS point to gateway.deribit.com
 
-**IP whitelisting - i wish to whitelist my IP**
+**IP whitelisting - i wish to whitelist my IP** 
 
 This can be done via the API itself directly without our intervening, If you
 wish to be sure about the IP address? Simply send a request and let us know with
 your UID alongside the exact time window so we can trace it back from the logs
 for you.
+
+**Is IGMPv2 0.0.0.0/0 secure enough?**
+
+The rule for 0.0.0.0 in security groups is, in fact, secure. This is because it
+exclusively permits IGMP (Internet Group Management Protocol) traffic. IGMP is a
+local protocol, and it's designed not to ingress into your Virtual Private Cloud
+(VPC) from external sources, except through the shared transit gateway
+attachment, which is where you receive both test and production feeds.
+Therefore, implementing this rule should not introduce any additional security
+risks.Please note that this is crucial step of the setup process, and will
+trigger error’s if skipped.
 
 # Accessing historical trades and orders using API
 
