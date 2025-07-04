@@ -2,6 +2,14 @@
 
 ## Change Log
 
+### 2025-07-02
+
+USDⓈ-M Futures
+
+- REST API
+  - `GET /futures/data/openInterestHist`: add response field
+    `CMCCirculatingSupply`
+
 ### 2025-04-23
 
 USDⓈ-M Futures
