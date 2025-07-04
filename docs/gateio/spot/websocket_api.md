@@ -222,7 +222,7 @@ the examples with the tabs in the top right.
 Base URLs:
 
 - Real Trading: `wss://api.gateio.ws/ws/v4/`
-- TestNet: `wss://ws-testnet.gate.io/v4/ws/spot`
+- TestNet: `wss://ws-testnet.gate.com/v4/ws/spot`
 
 ### [#](#sdk) SDK
 
@@ -6191,4 +6191,4 @@ Result format:
 | »»`label`        | String  | denotes error type in string format                                                               |
 | »»`message`      | String  | detailed error message                                                                            |
 
-Last Updated: 6/24/2025, 8:35:16 AM
+Last Updated: 7/3/2025, 6:15:49 AM
