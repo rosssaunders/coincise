@@ -53,6 +53,14 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-07-04
+
+  - `private/create-order` exec_inst was added `SMART_POST_ONLY`
+  - `private/create-order-list (LIST)` exec_inst was added `SMART_POST_ONLY`
+  - `private/get-open-orders` exec_inst was added `SMART_POST_ONLY`
+  - `private/get-order-detail`was addedexec_inst was added `SMART_POST_ONLY`
+  - `private/get-order-history` exec_inst was added `SMART_POST_ONLY`
+
 - 2025-06-10
 
   - `private/amend-order` was added
@@ -1475,7 +1483,8 @@ successfully created.
 | notional                                                                              | [number](#request-format-2) | Depends  | For MARKET (BUY), STOP_LOSS (BUY), TAKE_PROFIT (BUY) orders only:                                   |
 | Amount to spend                                                                       |
 | client_oid                                                                            | string                      | N        | Client Order ID (Maximum 36 characters)                                                             |
-| exec_inst                                                                             | array of string             | N        | `POST_ONLY`                                                                                         |
+| exec_inst                                                                             | array of string             | N        | `POST_ONLY`,`SMART_POST_ONLY`                                                                       |
+| Remarks: `POST_ONLY` and `SMART_POST_ONLY` cannot be coexisted in exec_inst           |
 | time_in_force                                                                         | string                      | N        | `GOOD_TILL_CANCEL`, `IMMEDIATE_OR_CANCEL`, `FILL_OR_KILL`                                           |
 | When `exec_inst` contains `POST_ONLY`, `time_in_force` can only be `GOOD_TILL_CANCEL` |
 | ref_price                                                                             | string                      | N\*      | Trigger price required for `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` order type |
@@ -1896,6 +1905,7 @@ An array, consisting of:
 \- `IMMEDIATE_OR_CANCEL`  
 \- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
+\- `SMART_POST_ONLY`  
 \- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
 limit_price | string | Limit price specified in the order | | order_value |
 string | Order value | | maker_fee_rate | string | User's maker fee rate | |
@@ -1994,6 +2004,7 @@ An array, consisting of:
 \- `IMMEDIATE_OR_CANCEL`  
 \- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
+\- `SMART_POST_ONLY`  
 \- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
 limit_price | string | Limit price specified in the order | | order_value |
 string | Order value | | maker_fee_rate | string | User's maker fee rate | |
@@ -2312,83 +2323,79 @@ more information.
 
     // Create List of Orders example
     {
-      "id": 12,
+      "id": 6573,
       "method": "private/create-order-list",
+      "api_key": "xxxxxxxxxxx",
       "params": {
         "contingency_type": "LIST",
         "order_list": [
           {
-            "instrument_name": "ETH_CRO",
-            "side": "BUY",
+            "instrument_name": "CRO_USD",
+            "side": "SELL",
             "type": "LIMIT",
-            "price": "5799",
-            "quantity": "1",
-            "client_oid": "my_order_0001",
-            "time_in_force": "GOOD_TILL_CANCEL",
-            "exec_inst": "POST_ONLY"
+            "quantity": "10",
+            "price": "0.12",
+            "client_oid": "api_leg1"
           },
           {
-            "instrument_name": "ETH_CRO",
-            "side": "BUY",
+            "instrument_name": "CRO_USD",
+            "side": "SELL",
             "type": "LIMIT",
-            "price": "5780",
-            "quantity": "1",
-            "client_oid": "my_order_0002",
-            "time_in_force": "GOOD_TILL_CANCEL",
-            "exec_inst": ["POST_ONLY"]
+            "quantity": "20",
+            "price": "0.122",
+            "client_oid": "api_leg2"
           }
         ]
       },
-      "nonce": 1637891379231
+      "nonce": 1750385416548,
+      "sig": "xxxxxxxx"
     }
 
-    > Response Sample
+> Response Sample
 
-    ```json
     // Create List of Orders - All ok
     {
-      "id": 12,
+      "id": 6573,
       "method": "private/create-order-list",
       "code": 0,
-      "result": {
-        "result_list": [
-          {
-            "index": 0,
-            "code": 0,
-            "order_id": "2015106383706015873",
-            "client_oid": "my_order_0001"
-          },
-          {
-            "index": 1,
-            "code": 0,
-            "order_id": "2015119459882149857",
-            "client_oid": "my_order_0002"
-          }
-        ]
-      }
+      "result": [
+        {
+          "code": 0,
+          "index": 0,
+          "client_oid": "api_leg1",
+          "order_id": "5755600460443882762"
+        },
+        {
+          "code": 0,
+          "index": 1,
+          "client_oid": "api_leg2",
+          "order_id": "5755600460443882763"
+        }
+      ]
     }
+
 
     // Create List of Orders - Some rejected
     {
-      "id": 12,
+      "id": xxxxx,
       "method": "private/create-order-list",
-      "code": 10001,
-      "result": {
-        "result_list": [
-          {
-            "index": 0,
-            "code": 0,
-            "order_id": "2015106383706015873",
-            "client_oid": "my_order_0001"
-          },
-          {
-            "index": 1,
-            "code": 20007,
-            "message": "INVALID_REQUEST",
-            "client_oid": "my_order_0002"
-          }
-        ]
-      }
+      "code": 0,
+      "result": [
+        {
+          "code": 306,
+          "index": 0,
+          "client_oid": "api_leg_111",
+          "message": "INSUFFICIENT_AVAILABLE_BALANCE",
+          "order_id": "xxxx"
+        },
+        {
+          "code": 204,
+          "index": 1,
+          "client_oid": "api_leg_22",
+          "message": "DUPLICATE_CLORDID",
+          "order_id": "xxxx"
+        }
+      ]
     }
 
 Create a list of orders on the Exchange.
@@ -2430,8 +2437,11 @@ Options are:
 \- `IMMEDIATE_OR_CANCEL` | | exec_inst | array | N | (Limit Orders Only)  
 Options are:  
 \- `POST_ONLY`  
-\- Or leave empty | | trigger_price | number | N | Used with STOP_LOSS,
-STOP_LIMIT, TAKE_PROFIT, and TAKE_PROFIT_LIMIT orders.  
+\- Or leave empty  
+\- `SMART_POST_ONLY`  
+Remarks: `POST_ONLY`and `SMART_POST_ONLY` cannot be coexisted in exec_inst | |
+trigger_price | number | N | Used with STOP_LOSS, STOP_LIMIT, TAKE_PROFIT, and
+TAKE_PROFIT_LIMIT orders.  
 Dictates when order will be triggered | | stp_scope | string | N | Optional
 Field
 
@@ -2516,19 +2526,13 @@ POST
 
 ### Response Attributes
 
-| Name        | Type             | Description                   |
-| ----------- | ---------------- | ----------------------------- |
-| result_list | array of results | List of order creation result |
-
-Content of each order in `result_list`
-
 | Name       | Type   | Description                                                                          |
 | ---------- | ------ | ------------------------------------------------------------------------------------ |
-| index      | number | The index of corresponding order request (Start from 0)                              |
 | code       | number | 0 if success                                                                         |
+| index      | number | The index of corresponding order request (Start from 0)                              |
+| client_oid | string | (Optional) if a Client order ID was provided in the request. (Maximum 36 characters) |
 | message    | string | (Optional) For server or error messages                                              |
 | order_id   | number | Newly created order ID                                                               |
-| client_oid | string | (Optional) if a Client order ID was provided in the request. (Maximum 36 characters) |
 
 ## private/cancel-order-list (LIST)
 
@@ -2536,63 +2540,62 @@ Content of each order in `result_list`
 
     // Cancel List of Orders example
     {
-      "id": 13,
+      "id": 6575,
       "method": "private/cancel-order-list",
+      "api_key": "xxxxxxxxx",
       "params": {
         "contingency_type": "LIST",
         "order_list": [
           {
-            "instrument_name": "ETH_CRO",
-            "order_id": "2015106383706015873"
+            "instrument_name": "CRO_USD",
+            "client_oid": "api_leg1"
           },
           {
-            "instrument_name": "ETH_CRO",
-            "order_id": "2015119459882149857"
+            "instrument_name": "CRO_USD",
+            "client_oid": "api_leg2"
           }
         ]
       },
-      "nonce": 1587846358253
+      "nonce": 1750389124417,
+      "sig": "xxxxxxxx"
     }
 
 > Response Sample
 
     // Cancel List of Orders - All ok
     {
-      "id": 13,
+      "id": 6575,
       "method": "private/cancel-order-list",
-      "code":0,
-      "result": {
-        "result_list": [
-          {
-            "index": 0,
-            "code": 0,
-          },
-          {
-            "index": 1,
-            "code": 0,
-          }
-        ]
-      }
+      "code": 0,
+      "result": [
+        {
+          "code": 0,
+          "index": 0
+        },
+        {
+          "code": 0,
+          "index": 1
+        }
+      ]
     }
 
     // Cancel List of Orders - Error encountered
     {
-      "id": 13,
+      "id": 6576,
       "method": "private/cancel-order-list",
-      "code": 10001,
-      "result": {
-        "order_list": [
-          {
-            "index": 0,
-            "code": 0,
-          },
-          {
-            "index": 1,
-            "code": 20007,
-            "message": "INVALID_REQUEST"
-          }
-        ]
-      }
+      "code": 0,
+      "result": [
+        {
+          "code": 212,
+          "index": 0,
+          "message": "INVALID_ORDERID"
+        },
+        {
+          "code": 212,
+          "index": 1,
+          "message": "INVALID_ORDERID"
+        }
+      ]
     }
 
 Cancel a list of orders on the Exchange.
@@ -2613,10 +2616,11 @@ successfully cancelled.
 
 Content of each order in `order_list`
 
-| Name            | Type   | Required | Description                              |
-| --------------- | ------ | -------- | ---------------------------------------- |
-| instrument_name | string | Y        | instrument_name, e.g., ETH_CRO, BTC_USDT |
-| order_id        | string | Y        | Order ID                                 |
+| Name            | Type   | Required | Description                                      |
+| --------------- | ------ | -------- | ------------------------------------------------ |
+| instrument_name | string | N        | instrument_name, e.g., ETH_CRO, BTC_USDT         |
+| order_id        | string | Y        | Order ID                                         |
+| client_oid      | string | N        | Optional Client order ID (Maximum 36 characters) |
 
 ### Applies To
 
@@ -2626,20 +2630,12 @@ REST Websocket (User API)
 
 POST
 
-### Response Attributes (List of Orders)
-
-A `result_list` will be received:
-
-| Name        | Type             | Description                       |
-| ----------- | ---------------- | --------------------------------- |
-| result_list | array of results | List of order cancellation result |
-
-Content of each order in `result_list`
+### Response Attributes
 
 | Name    | Type   | Description                                             |
 | ------- | ------ | ------------------------------------------------------- |
-| index   | number | The index of corresponding order request (Start from 0) |
 | code    | number | 0 if success                                            |
+| index   | number | The index of corresponding order request (Start from 0) |
 | message | string | (Optional) For server or error messages                 |
 
 ## private/create-order-list (OCO)
@@ -3012,6 +3008,7 @@ An array, consisting of:
 \- `IMMEDIATE_OR_CANCEL`  
 \- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
+\- `SMART_POST_ONLY`  
 \- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
 limit_price | string | Limit price specified in the order | | order_value |
 string | Order value | | maker_fee_rate | string | User's maker fee rate | |
