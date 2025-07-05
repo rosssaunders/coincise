@@ -1601,6 +1601,9 @@ info
   for mainnet access
 - If your account is registered from [www.bybit.kz](http://www.bybit.kz), please
   use `stream.bybit.kz` for mainnet access
+- If your account is registered from
+  [www.bybitgeorgia.ge](http://www.bybitgeorgia.ge), please use
+  `stream.bybitgeorgia.ge` for mainnet access
 
 Customise Private Connection Alive Time
 
