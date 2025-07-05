@@ -5,7 +5,8 @@
   "type": "module",
   "main": "ai-pr-summary.js",
   "scripts": {
-    "generate-pr-summary": "node generate-pr-summary.js"
+    "generate-pr-summary": "node generate-pr-summary.js",
+    "generate-twitter-summary": "node generate-twitter-summary.js"
   },
   "dependencies": {
     "openai": "^4.103.0"
