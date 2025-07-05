@@ -198,6 +198,7 @@ Note that when X-BM-RateLimit-Remaining> X-BM-RateLimit-Limit, please do not con
 *   `bankruptcy`
 *   `adl`
 *   `trailing`
+*   `planorder`
 
 #### Open Type（Field:open\_type)
 

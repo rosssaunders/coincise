@@ -1,5 +1,16 @@
 # Change Log
 
+#### 2025-07-04
+
+###### REST API
+
+*   \[Update\] `/contract/private/order-history` Get Order History
+    *   Feat：Response field **type** add new value **planorder**
+*   \[Update\] `/contract/private/position-v2` Get Current Position V2
+    *   Feat：Add new response field： **position\_amount**
+
+* * *
+
 #### 2025-06-20
 
 ###### REST API
