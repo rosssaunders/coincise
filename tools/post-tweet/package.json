@@ -1,0 +1,13 @@
+{
+  "name": "post-tweet",
+  "version": "1.0.0",
+  "description": "Post tweets when Twitter summary PRs are merged",
+  "type": "module",
+  "main": "post-tweet.js",
+  "scripts": {
+    "post-tweet": "node post-tweet.js"
+  },
+  "dependencies": {
+    "twitter-api-v2": "^1.15.0"
+  }
+}

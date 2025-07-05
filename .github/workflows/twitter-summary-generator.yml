@@ -1,0 +1,50 @@
+name: Twitter Summary Generator
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  create-twitter-summary-pr:
+    if:
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.labels.*.name, 'auto-docs-update')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: tools/create-twitter-summary-pr/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd tools/create-twitter-summary-pr
+          npm install
+          cd ../ai-pr-summary
+          npm install
+
+      - name: Create Twitter Summary PR
+        run: |
+          cd tools/create-twitter-summary-pr
+          node create-twitter-summary-pr.js
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          MERGED_BY: ${{ github.event.pull_request.merged_by.login }}
+          MERGED_AT: ${{ github.event.pull_request.merged_at }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

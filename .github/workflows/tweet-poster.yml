@@ -1,0 +1,44 @@
+name: Tweet Poster
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  post-tweet:
+    if:
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.labels.*.name, 'twitter-summary')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: tools/post-tweet/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd tools/post-tweet
+          npm install
+
+      - name: Post Tweet
+        run: |
+          cd tools/post-tweet
+          node post-tweet.js
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
