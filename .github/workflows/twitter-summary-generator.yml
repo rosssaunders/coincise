@@ -25,7 +25,8 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
-          cache-dependency-path: tools/create-twitter-summary-pr/package-lock.json
+          cache-dependency-path: >-
+            tools/create-twitter-summary-pr/package-lock.json
 
       - name: Install dependencies
         run: |
