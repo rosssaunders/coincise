@@ -1,9 +1,9 @@
-# [#](#gate-api-v4-v4-75-0) Gate API v4 v4.75.0
+# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate.io API
+Welcome to Gate API
 
 APIv4 provides spot, margin and futures trading operations. There are public
 APIs to retrieve the real-time market statistics, and private APIs which needs
@@ -14,7 +14,7 @@ authentication to trade on user's behalf.
 **REST API BaseURL:**
 
 - Live trading: `https://api.gateio.ws/api/v4`
-- Futures TestNet trading: `https://fx-api-testnet.gateio.ws/api/v4`
+- TestNet trading: `https://api-testnet.gateapi.io/api/v4`
 - Futures live trading alternative (futures only):
   `https://fx-api.gateio.ws/api/v4`
 
@@ -83,11 +83,11 @@ provide a professional market maker's service rate scheme for professional
 institutional market makers according to their contribution to the platform's
 liquidity.
 
-1.  Provide Gateio UID
+1.  Provide Gate UID
 2.  Provide other transaction volume screenshot or VIP level
 3.  Brief introduction of market making method and scale
 
-Provide the above content and submit to [mm@gate.io](mailto:mm@gate.io) , we
+Provide the above content and submit to [mm@gate.com](mailto:mm@gate.com) , we
 will accept within 3 working days.
 
 TIP
@@ -102,14 +102,15 @@ any of the following ways:
 
 - Submit Work Order Feedback
 - Online Work Order Feedback
-- Send your contact information and questions to [mm@gate.io](mailto:mm@gate.io)
-  We will assign technical specialists to serve you.
+- Send your contact information and questions to
+  [mm@gate.com](mailto:mm@gate.com) We will assign technical specialists to
+  serve you.
 
 If you encounter API errors, it is recommended that you sort out the following
 content, so that we can quickly analyze the problem for you:
 
 1.  Problem Description
-2.  Gateio UID
+2.  Gate UID
 3.  Request URI and parameters
 4.  Error Code
 5.  Responses
@@ -126,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 ### [#](#matching-priority) Matching priority
 
-Gate.io Order matching follows Price Priority > Time priority principle.
+Gate Order matching follows Price Priority > Time priority principle.
 
 Suppose that the order book is as follows：
 
@@ -150,7 +151,7 @@ subsequent filling or being cancelled.
 
 ## [#](#data-center) Data Center
 
-Gate.io data center is located in AWS Japan's ap-northeast-1 region.
+Gate data center is located in AWS Japan's ap-northeast-1 region.
 
 ## [#](#api-overview) API Overview
 
@@ -382,11 +383,169 @@ Each request to the API response header will contain the following fields:：
 
 WebSocket:
 
-- Spot: The rate limit for batch/single order placement and amend an order are
-  total of 10r/s (Market)
-- Futures: The rate limit for batch/single order placement, amend an order and
-  order cancellation (batch/single) are total of 100r/s
-- Other: Unlimited
+- Spot: Bulk order/single order/single order modification, a total of 10
+  requests per second (10r/s).
+- Futures: Bulk order/single order/single order modification/single order
+  cancellation/bulk cancellation, a total of 100 requests per second (100r/s).
+- Others: No limit.
+- Number of connections per IP: ≤ 300
+
+## [#](#rate-limit-based-on-fill-ratio) Rate Limit Based On Fill Ratio
+
+In order to enhance trading efficiency, we have decided to implement more
+favorable sub-account rate limits for clients with a higher fill ratio. This
+assessment will be based on trading data from the past seven days and will be
+calculated daily at 00:00 UTC. Please note that this rule applies only to
+clients at **VIP level 14 and above**.
+
+### [#](#_1-introduction-of-terminology) 1. Introduction of Terminology
+
+#### [#](#_1-1-symbol-multiplier) 1.1 Symbol Multiplier
+
+To facilitate a more refined management of the impact of different trading
+products on the fill ratio, we have introduced the concept of the symbol
+multiplier. This multiplier allows us to adjust the influence of each product on
+the overall trading volume based on its characteristics. For products with a
+multiplier of less than 1, they typically involve smaller contract sizes and
+therefore require more trading orders to achieve the same trading volume.
+Generally, all trading products come with a default multiplier; however, certain
+products are assigned independent multipliers based on their specific
+characteristics. For detailed information regarding the multipliers of relevant
+products, please refer to the provided table.
+
+| Product Typee                    | Based On        | Independnet Symbol Multiplier | Default Symbol Multiplier |
+| -------------------------------- | --------------- | ----------------------------- | ------------------------- |
+| USDT-Margined Perpetural Futures | Contract Symbol | 1                             |
+
+Contract Symbol:  
+BTC-USDT  
+ETH-USDT | 0.4 | | Spot | Currency Pairst | 1  
+Currency Pairs:  
+BTC-USDT  
+ETH-USDT | 0.4 |
+
+> Please note: The spot trading rate limits will not be launched this time.
+
+#### [#](#_1-2-definition-of-trading-volume-weight) 1.2 Definition of Trading Volume Weight
+
+We will assess the behavior patterns of makers and takers based on market
+fluctuations and design the trading volume weight ratios accordingly.
+Additionally, we will regularly evaluate these weights and make synchronized
+adjustments when necessary.
+
+**Current weight of the maker trading volume: 100%, current weight of the taker
+trading volume: 90%.**
+
+#### [#](#_1-3-calculation-formula) 1.3 Calculation Formula
+
+The system will take a snapshot of the data at 00:00 UTC daily and, based on
+this information, will select the higher value between the fill ratio of the
+sub-account and the overall fill ratio of the main account to determine the
+future trading rate limit for the sub-account. For exchange brokers, the system
+will only consider the fill ratio of their sub-accounts. It is important to note
+that the main account is also considered a "sub-account."
+
+1.  Sub-account Fill Ratio: This ratio is calculated as follows: (Sub-account
+    Taker's USDT trading volume × 0.9 + Maker's USDT trading volume × 1) / (The
+    sum of (Number of new and modified requests for each contract × symbol
+    multipliers) for each subaccount).
+2.  Main-account Aggregated Fill Ratio: This ratio is calculated as follows:
+    (main account's Taker USDT trading volume × 0.9 + Maker USDT trading volume
+    × 1) / (The sum of (Number of new and modified requests for each contract ×
+    symbol multipliers) for all subaccounts).
+
+### [#](#_2-future-rate-limit-rule) 2. Future Rate Limit Rule
+
+| Contract Frequency Limitation Rules |
+| ----------------------------------- | -------- | ---------------- |
+| Tier                                | Ratio    | Rate Limit (uid) |
+| Tier 1                              | \[0,1)   | 100r/s           |
+| Tier 2                              | \[1,3)   | 150r/s           |
+| Tier 3                              | \[3,5)   | 200r/s           |
+| Tier 4                              | \[5,10)  | 250r/s           |
+| Tier 5                              | \[10,20) | 300r/s           |
+| Tier 6                              | \[20,50) | 350r/s           |
+| Tier 7                              | \>= 50   | 400r/s           |
+
+> > Please stay tuned for the rate limits for spot trading.
+
+### [#](#_3-detailed-rules-for-fill-ratio) 3. Detailed Rules for Fill Ratio
+
+1.  Target Client Group: VIP ≥ 14
+2.  Calculation Period: 7 days
+3.  Update Time: Daily at 08:00 (UTC). The system will update the fill ratio
+    data based on the data from 00:00 UTC.
+    1.  If the fill ratio and the pre-set rate limit improve, the increase will
+        take effect immediately at 08:00 (UTC).
+    2.  However, if the fill ratio declines, the rate limit will be reduced
+        immediately.
+    3.  If a client's VIP level drops below VIP 14, their rate limit will be
+        lowered to the minimum tier, taking effect immediately.
+    4.  If a client's VIP level rises above VIP 14, their rate limit will be
+        adjusted immediately based on their current level.
+    5.  If a sub-account's trading volume over the past 7 days is below
+        1,000,000 USDT, the rate limit will be implemented based on the
+        main-account aggregated fill ratio.
+    6.  For newly created sub-accounts, the minimum tier rate limit will be
+        applied at the time of creation, and the aforementioned rate limit rules
+        will begin to apply at T+1 08:00 (UTC).
+    7.  Both WebSocket and REST APIs are subject to these rules.
+
+### [#](#_4-example) 4. Example
+
+Assuming the client has three accounts, with the symbol multipliers for trading
+perpetual contract products BTC-USDT and SOL-USDT being 1 and 0.4, respectively.
+
+1.  Account A (Main Account):
+    - BTC-USDT perpetual futures Maker trading volume: 100 USDT, number of order
+      requests: 10; Perpetual futures Taker trading volume: 200 USDT, number of
+      order requests: 20.
+    - SOL-USDT perpetual futures Maker trading volume: 20 USDT, number of order
+      requests: 15; Perpetual futures Taker trading volume: 20 USDT, number of
+      order requests: 20.
+    - Sub-account Fill Ratio = ((100 + 20) \* 1 + (200 + 20) \* 0.9) /
+      ((10 + 20) \* 1 + (15 + 20) \* 0.4) = 7.23
+2.  Account B (Sub-account):
+    - BTC-USDT perpetual futures Maker trading volume: 200 USDT, number of order
+      requests: 20; Perpetual futures Taker trading volume: 200 USDT, number of
+      order requests: 30.
+    - SOL-USDT perpetual futures Maker trading volume: 20 USDT, number of order
+      requests: 5; Perpetual futures Taker trading volume: 30 USDT, number of
+      order requests: 5.
+    - Sub-account Fill Ratio = ((200 + 20) \* 1 + (200 + 30) \* 0.9) /
+      ((20 + 30) \* 1 + (5 + 5) \* 0.4) = 7.91
+3.  Account C (Sub-account):
+    - BTC-USDT perpetual futures Maker trading volume: 50 USDT, number of order
+      requests: 5; Perpetual futures Taker trading volume: 60 USDT, number of
+      order requests: 8.
+    - SOL-USDT perpetual futures Maker trading volume: 100 USDT, number of order
+      requests: 20; Perpetual futures Taker trading volume: 120 USDT, number of
+      order requests: 25.
+    - Sub-account Fill Ratio = ((50 + 100) \* 1 + (60 + 120) \* 0.9) /
+      ((5 + 8) \* 1 + (20 + 25) \* 0.4) = 10.06
+4.  Main Account Aggregated Fill Ratio = ((100 + 20 + 200 + 20 + 50 + 100) \*
+    1 + (200 + 20 + 200 + 30 + 60 + 120) \* 0.9) / ((10 + 20 + 20 + 30 +
+    5 + 8) \* 1 + (15 + 20 + 5 + 5 + 20 + 25) \* 0.4) = 8.19
+5.  Account Rate Limits:
+    - Account A = max(7.23, 8.19) = 8.19 -> 250 r/s
+    - Account B = max(7.91, 8.19) = 8.19 -> 250 r/s
+    - Account C = max(10.06, 8.19) = 10.06 -> 300 r/s
+
+### [#](#_5-remarks) 5. Remarks
+
+1.  The release date for the rate limit of perpetual contracts based on fill
+    ratio will be announced later. Please stay tuned.
+2.  The existing abuse rate limit rules for perpetual contracts will still
+    apply, namely:
+    1.  Fill Ratio = USDT Training Amount / (Total Number of Order,
+        Cancellation, and Modification Requests)
+    2.  If the number of requests exceeds 86,400 within 24 hours, with no order
+        fill in the same period. Then the order placement rate limit will be
+        restricted to 10r/10s for the next hour.
+    3.  If the number of requests exceeds 86,400 within 24 hours, with the fill
+        ratio below 1%. Then the order placement rate limit will be restricted
+        to 20r/10s for the next hour.
+3.  Please stay tuned for the fill ratio rate limit for spot trading.
 
 ## [#](#return-format) Return Format
 
@@ -431,8 +590,8 @@ TIP
 The Portfolio Margin Account is no longer maintained, please refer to the new
 version of the [Unified Account](#unified-account)
 
-Since version `4.25.0`, we start supporting portfolio margin account. Gate.io's
-Portfolio Margin Account is a new feature of Gate.io's trading system. Its main
+Since version `4.25.0`, we start supporting portfolio margin account. Gate's
+Portfolio Margin Account is a new feature of Gate's trading system. Its main
 function is to break the capital isolation between cross-margin leverage account
 and USD cross-margin perpetual contract account inside a Classic Account and
 achieve the multi-currency margin sharing among multi-product lines. Thanks to
@@ -522,12 +681,10 @@ portfolio margin account API Key for futures trading, assets are kept under
 addition, funds under `classic account-spot` cannot share margin with
 `classic account-futures`.
 
-## [#](#request-id) Request ID
+## [#](#trace-id) Trace ID
 
-It is allowed to set an X-Client-Request-Id header in the request, and the API
-will also carry this header in the response. You can use this field to locate
-the corresponding request that the API responds to, which is convenient for
-users to set the request id for tracking.
+The API response will carry the header: X-Gate-Trace-ID . This header is used
+for tracking.
 
 ## [#](#self-trade-prevention-stp) Self-Trade Prevention (STP)
 
@@ -962,6 +1119,438 @@ directly.
 - nft_ammw: Nft-Amm Withdraw
 - nft_ammdf: Nft-Amm Deal Fee
 - nft_ammd: Nft-Amm Deal
+
+## [#](#accountbook-code) AccountBook code
+
+- 1 : Order Placed Old
+- 2 : Order Cancelled old
+- 4 : Withdrawals
+- 9 : Cancel GateCode Withdrawal
+- 17 : GateCode Withdrawals
+- 18 : Fireblocks Withdrawals
+- 19 : copper withdraw
+- 20 : Face Recognition For Withdrawal
+- 101 : Order Placed
+- 102 : Order Filled
+- 103 : Order Cancelled
+- 104 : Cancel Onchain Withdrawal
+- 105 : Token Withdrawal From Startup
+- 106 : Donation
+- 107 : Startup Sale Participation
+- 108 : Startup Sale Refund
+- 109 : Referral Superior Rebate
+- 110 : Deposits
+- 111 : Interest
+- 112 : Deposit Rejected
+- 113 : Withdrawal Rejected
+- 114 : Fund Correction
+- 115 : Snapshot
+- 116 : Order Rejected
+- 117 : CNY1 Deposited
+- 118 : Rebasing
+- 120 : Transaction Rolled Back
+- 121 : GateCode Deposits
+- 122 : Fireblocks Deposits
+- 123 : Wrongdepo Fee
+- 124 : copper deposit
+- 131 : Call Auction- Locked
+- 132 : Call Auction- Unlocked
+- 141 : ETF Asset Consolidation - Debit
+- 142 : ETF Asset Consolidation - Credit
+- 151 : Trading Fees
+- 152 : Trading Fee System Account
+- 161 : Secondary Rebate Financial Account Transfer Out
+- 162 : Affiliate Indirect Superior Rebate Income
+- 164 : Affiliate Direct Superior Rebate Income
+- 166 : Affiliate User Rebate Income
+- 171 : Order Placed Frozen
+- 172 : Order Cancelled Unfrozen
+- 181 : ETH Swap
+- 182 : ETH2 Swap
+- 191 : Referral Rebate Income
+- 196 : Web3 Rebate Income
+- 301 : C2C Merchant Order Placed
+- 302 : C2C Merchant Order Canceled
+- 303 : P2P User Sell
+- 304 : C2C Retail Order Canceled
+- 305 : P2P User Buy
+- 306 : C2C Order Rejected
+- 307 : Payment Setup
+- 308 : C2C Fees
+- 309 : C2C Deposit Freeze
+- 310 : C2C Deposit Refund
+- 311 : C2C Deposit Forfeiture
+- 312 : P2P Shared Asset Order Refund
+- 313 : P2P Frozen Funds
+- 314 : P2P Unfrozen Funds
+- 319 : Crypto Conversion Fee
+- 322 : Buy Crypto Legend
+- 323 : Buy Crypto Cabital
+- 324 : Gate Connect-Buy
+- 325 : Gate Connect-Buy
+- 326 : Gate Connect-Buy
+- 327 : Gate Connect-Buy
+- 328 : Gate Connect-Sell
+- 329 : Gate Connect-Refund
+- 330 : Gate Connect-Buy
+- 331 : Gate Connect-Sell
+- 401 : Deposit Bonus
+- 402 : Trading Rewards
+- 403 : Purchase Bonus
+- 404 : Airdrop
+- 405 : Feedback Rewards
+- 501 : IFO Claimed
+- 502 : IFO Returned
+- 601 : Isolated Margin - Transfer In
+- 602 : Isolated Margin - Transfer Out
+- 603 : Lending-Transferred In
+- 604 : Lending-Transferred Out
+- 605 : Isolated Margin-Transferred In
+- 606 : Isolated Margin- Transferred Out
+- 607 : Liquidating-Unlocked
+- 608 : Liquidating-Locked
+- 609 : Interest Updated
+- 610 : Lending-Lent
+- 611 : Collected
+- 612 : Interest Income
+- 613 : Lending-Fees Deducted
+- 614 : Due Repayment-Unlocked
+- 615 : Due Repayment-Locked
+- 616 : Liquidation Fee
+- 621 : Staking-Locked
+- 622 : Staking-Unlocked
+- 623 : Staking Interest Income
+- 624 : Staking-Locked
+- 625 : Staking-Unlocked
+- 626 : Staking Interest Income
+- 627 : HODL Interest
+- 628 : HODL Interest Distribution
+- 629 : HODL Interest Rolled Back
+- 630 : Borrow
+- 631 : Repay
+- 632 : Pledge
+- 633 : Collateral Refund
+- 635 : Fixed Rate Loan - Interest
+- 640 : Flexible Rate Loan - Borrow
+- 641 : Flexible Rate Loan - Repay
+- 642 : Flexible Rate Loan - Liquidate to Repay Principal
+- 643 : Flexible Rate Loan - Liquidate to Repay Interest
+- 644 : Flexible Rate Loan - Interest
+- 645 : Pledge
+- 646 : Collateral Refund
+- 647 : Adjust Collateral
+- 648 : Refund after Liquidation
+- 649 : Liquidation Fee
+- 651 : Portfolio Margin Account Transfer In
+- 652 : Portfolio Margin Account Transfer Out
+- 655 : Fixed Rate Loan - Borrow
+- 656 : Fixed Rate Loan - Repay
+- 657 : Fixed Rate Loan - Liquidate to Repay Interest
+- 658 : Fixed Rate Loan - Liquidate to Repay Principal
+- 659 : Cross-Currency Repayment - Transfer Out
+- 660 : Cross-Currency Repayment - Transfer In
+- 661 : Redeem
+- 662 : Lend
+- 669 : Interest
+- 670 : MarginTradingBorrowed
+- 671 : MarginTradingRepaid
+- 672 : MarginTradingInterest
+- 673 : Isolated Margin-Transferred In
+- 674 : Isolated Margin- Transferred Out
+- 675 : Interest Updated
+- 676 : Isolated Margin-Interest Deduction
+- 677 : Borrow
+- 678 : Repay
+- 679 : Interest
+- 681 : Bonus
+- 682 : Contributing Insurance Funds
+- 683 : Consuming Insurance Funds
+- 685 : Interest - Platform Loans
+- 686 : Subscription - Fixed-term
+- 687 : Redemption - Fixed-term
+- 688 : Interest - Fixed-term
+- 689 : Bonus - Fixed-term
+- 696 : Early repayment penalty
+- 697 : Refund of early repayment penalty
+- 701 : Perps- Transferred In
+- 702 : Perps- Transferred Out
+- 703 : Delivery- Transferred In
+- 704 : Delivery- Transferred Out
+- 705 : Multi-currency Settlement Transfer In
+- 706 : Multi-currency Settlement Transfer Out
+- 721 : Stable Income - Lock
+- 722 : Stable Income - Unlock
+- 723 : Stable Income - Interest
+- 724 : Stable Income - Lock
+- 725 : Stable Income - Unlock
+- 726 : Stable Income - Interest
+- 727 : Structured Products - Lock
+- 728 : Structured Products - Lock
+- 729 : Structured Products - Unlock
+- 730 : Structured Products - Interest
+- 731 : Structured Products - Unlock
+- 732 : Structured Products - Interest
+- 733 : Hybrid Interest - Lock
+- 734 : Hybrid Interest - Lock
+- 735 : Hybrid Interest - Unlock
+- 736 : Hybrid Interest - Interest
+- 737 : Hybrid Interest - Unlock
+- 738 : Hybrid Interest - Interest
+- 739 : Wealth Referral Commission Rebate
+- 751 : Quant Fund - Lock
+- 753 : Quant Fund - Unlock
+- 754 : Quant Fund - Earnings
+- 761 : Lock & Earn Redeem Early
+- 801 : Gift Coins Sent
+- 802 : Gift Coins Received
+- 803 : Gift Coins Rejected
+- 804 : Live Stream-Reward Offered
+- 805 : Live Stream- Reward Received
+- 806 : Posts- Reward Offered
+- 807 : Posts- Reward Received
+- 901 : Buy Points
+- 902 : Buy Points Rollback
+- 903 : Time-Limited Points
+- 911 : Auto-Invest-Transferred Out
+- 912 : Auto-Invest-Transferred In
+- 913 : Redeem points for goods
+- 915 : Redeemed Points - Refund
+- 917 : Expired & Recycled
+- 1001 : C2C Loan Ad Posted
+- 1002 : C2C Loan Ad Canceled
+- 1003 : C2C Loan Order Placed
+- 1004 : C2C Loan Repaid
+- 1005 : C2C Loan Order Canceled
+- 1006 : C2C Loan Fees
+- 1007 : C2C Loan Liquidated
+- 1008 : C2C Loan- Margin Added
+- 1101 : Points Transfer
+- 1102 : Points Transfer Refund
+- 1171 : Bonus - Flexible
+- 1173 : Bonus - Flexible
+- 1174 : Bonus
+- 1181 : Staking
+- 1184 : Redemption
+- 1186 : Interest
+- 1191 : Staking
+- 1194 : Redemption
+- 1196 : Interest
+- 1201 : Startup Sale
+- 1202 : Startup Sale Rolled Back
+- 1251 : Stake
+- 1253 : Manually Redeem
+- 1255 : Reward
+- 1258 : Auto-Redeem
+- 1301 : Dust Swap-Small Balances Deducted
+- 1302 : Dust Swap-GT Added
+- 1303 : Dust Swap-Fees Deducted
+- 1307 : Dust Swap-Small Balances Deducted
+- 1310 : Dust Swap-Small Balances Deducted
+- 1311 : Dust Swap-Small Balances Deducted
+- 1312 : Small Balance Convert - USDT Added
+- 1322 : Convert Small Balance (USDT)
+- 1323 : Convert Small Balance - USDT Added
+- 1401 : Subaccount Transfer
+- 1501 : Subscription-Fees Deducted
+- 1502 : Subscription-Fees Received
+- 1503 : Subscription- Refund
+- 1504 : Subscription- Refunds Received
+- 1601 : Easy Options- Transferred In
+- 1602 : Easy Options- Transferred Out
+- 1603 : Options- Transferred In
+- 1604 : Options- Transferred Out
+- 1701 : Bots - Transfer In
+- 1702 : Bots - Transferred Out
+- 1703 : Bots - Refund
+- 1801 : CBBC- Transferred In
+- 1802 : CBBC- Transferred Out
+- 1811 : Warrant- Transferred In
+- 1812 : Warrant- Transferred Out
+- 1901 : Push- Deduction
+- 1903 : Push- Received-Deducted
+- 1905 : Push- Canceled
+- 1906 : Push- Rejected
+- 1907 : Push- Sent
+- 1908 : Push- Received
+- 2001 : Dual C-Purchased
+- 2004 : Dual C-Settled
+- 2011 : Subscription to Dip Sniper products
+- 2012 : Recouped from expired Dip Sniper products
+- 2021 : Subscription to Peak Sniper products
+- 2022 : Recouped from expired Peak Sniper products
+- 2202 : Lending Farm-Token Added
+- 2203 : Lending Farm-Token Removed
+- 2301 : Liquidity Added
+- 2302 : Liquidity Removed
+- 2303 : Liquidity Rebalanced
+- 2311 : Add Liquidity
+- 2312 : Remove Liquidity
+- 2314 : Mining Rewards
+- 2401 : Bots - Performance Fee Received
+- 2402 : Bots - Performance Fee Paid
+- 2403 : Bots - Performance Fee Refund
+- 2501 : NFT Auction-Margin Paid
+- 2502 : NFT Auction-Bid Made
+- 2503 : NFT Auction-Offer Made
+- 2504 : NFT Auction-Margin Returned
+- 2505 : Fixed Price-Bought
+- 2506 : Fixed Price-For Sale
+- 2512 : NFT Auction-Aborted-Margin Received
+- 2517 : NFT Auction-Order Canceled-Back
+- 2518 : NFT Make_Offer Bought
+- 2519 : Cancel offer refund
+- 2523 : Withdrawal service fee
+- 2524 : Withdrawal service fee
+- 2527 : Multi-copy creation service fee
+- 2528 : Multi-copy creation service fee refund
+- 2531 : Royalties
+- 2532 : NFT Auction-Order Canceled-Deducted
+- 2533 : Refund for invalid offer
+- 2536 : NFT Make_Offer Sale
+- 2538 : NFT Auction-Order Canceled-Rotalty-Deducted
+- 2539 : crowdfunding
+- 2540 : crowdfunding refund
+- 2541 : crowdfunding
+- 2542 : crowdfunding refund
+- 2551 : Nft-Amm Frozen
+- 2552 : Nft-Amm Withdraw
+- 2553 : Nft-Amm Deal Fee
+- 2554 : Nft-Amm Deal
+- 2601 : Quick Buy-Bought
+- 2602 : Quick Sell-Sold
+- 2603 : Repay All - Transfer Out
+- 2604 : Repay All - Transfer In
+- 2605 : Buy
+- 2606 : Sell
+- 2607 : Buy
+- 2608 : Sell
+- 2609 : Buy
+- 2610 : Sell
+- 2611 : Convert Refund
+- 2612 : Buy
+- 2613 : Sell
+- 2614 : HODLer Airdrop
+- 2701 : Mining Contract Purchased
+- 2702 : Mining Balance Added to System
+- 2703 : Mining Rewards Deducted From System
+- 2704 : Mining Rewards Claimed
+- 2706 : Mining Balance User Money Back
+- 2707 : Mining Balance deducted From System
+- 2801 : Slot Auction Staking-Locked
+- 2802 : Slot Auction Staking-Unlocked
+- 2803 : Slot Auction Staking Interest Income
+- 2804 : Slot Auction Staking-Locked
+- 2805 : Slot Auction Staking-Unlocked
+- 2806 : Slot Auction Staking Interest Income
+- 2807 : Structured Products Staking-Locked
+- 2808 : Structured Products Staking-Unlocked
+- 2809 : Structured Products Staking Interest Income
+- 2810 : Structured Products Financial Account Staking-Locked
+- 2811 : Structured Products Financial Account Staking-Unlocked
+- 2812 : Structured Products Financial Account Staking Interest Income
+- 2901 : Futures Competition Buy Gift Pack
+- 2902 : Futures Competition Dovote Reward
+- 2903 : Futures Competition Individual Ranking Reward
+- 2904 : Futures Competition Team Ranking Reward
+- 2905 : Futures Competition Early Bird Reward
+- 2906 : Futures Competition Early Bird Reward
+- 3001 : Payment Account- Transferred In
+- 3008 : Payment Account- Transferred Out
+- 3019 : Fiat Withdrawal
+- 3020 : Refund for Fiat Withdrawal
+- 3101 : Vouchers - Redeem Points
+- 3102 : Coupon Center Usdtest Exchange
+- 3103 : Activity Center Point Exchange
+- 3104 : Exclusive Benefits
+- 3105 : Vouchers - Trading Fee Rebate
+- 3150 : Error in event token release
+- 3151 : Paid by Loss Protection Voucher for Copier
+- 3201 : Futures Copy Trading - Funds Transfer In
+- 3202 : Futures Copy Trading - Funds Transfer Out
+- 3203 : Futures Copy Trading - Funds Auto Transfer Out
+- 3204 : Futures Lead Trading - Performance Fee Received
+- 3205 : Futures Copy Trading - Performance Fee Paid
+- 3206 : Futures Copy Trading - Performance Fee Refund
+- 3301 : Affiliate Ultra Direct Superior Rebate Income
+- 3302 : Gate.TR&Gate Transfer
+- 3321 : Affiliate Ultra Indirect Superior Rebate Income
+- 3341 : Affiliate Ultra User Rebate Income
+- 3390 : API Broker Rebate Income
+- 3401 : Block Trading Transfer In
+- 3402 : Block Trading Transfer Out
+- 3410 : Exchange Broker Rebate Income
+- 3501 : card top up
+- 3502 : Gate Card Cashback
+- 3503 : Return Top up
+- 3504 : Replace Card Fee
+- 3505 : Return Card Fee
+- 3506 : Card Inactivity Fee
+- 3507 : Authorization
+- 3508 : Reversal
+- 3509 : Clearing
+- 3510 : Refund
+- 3511 : Repayment
+- 3512 : Card Issuance Fee
+- 3513 : Return Card Fee
+- 3514 : Return Card Balance
+- 3515 : Tax Refund
+- 3516 : Points Redemption
+- 3517 : Withdraw from SGD Card
+- 3518 : Deposit to SGD Card
+- 3601 : Spot Lead Trading - Funds Transfer In
+- 3602 : Spot Lead Trading - Funds Transfer Out
+- 3603 : Spot Lead Trading - Funds Auto Transfer Out
+- 3604 : Spot Copy Trading - Funds Transfer In
+- 3605 : Spot Copy Trading - Funds Transfer Out
+- 3606 : Spot Copy Trading - Funds Auto Transfer Out
+- 3607 : Spot Lead Trading - Performance Fee Received
+- 3608 : Spot Copy Trading - Performance Fee Paid
+- 3609 : Spot Copy Trading - Performance Fee Refund
+- 3701 : OTC trade - buy
+- 3702 : OTC trade - sell
+- 3703 : OTC trade - cancel
+- 3801 : Futures Voucher Return Transfer
+- 3901 : Transfer to Pilot
+- 3902 : Transfer from Pilot
+- 3903 : Transfer to Spot
+- 3904 : Transfer from Spot
+- 3905 : Transfer to Spot
+- 3906 : Transfer from Pilot
+- 3920 : Event Rewards
+- 3922 : Pilot Token Airdrop
+- 3923 : Pilot Token Airdrop Failed
+- 4002 : Withdraw Commission
+- 4009 : Withdraw Rewards
+- 4011 : Deducted Negative Maker Fee
+- 5001 : Pre-Market OTC Trading Fee
+- 5002 : Pre-Market OTC Frozen Assets (Buy)
+- 5003 : Pre-Market OTC Frozen Assets (Sell)
+- 5004 : Pre-Market OTC Trading Fee Refund (Order Canceled)
+- 5005 : Pre-Market OTC Unfreeze Frozen Assets (Order Canceled)
+- 5006 : Pre-Market OTC Unfreeze Frozen Assets (Order Canceled)
+- 5007 : Pre-Market OTC Delivery Transfer Out
+- 5008 : Pre-Market OTC Delivery Transfer In
+- 5009 : Pre-Market OTC Unfreeze Frozen Assets (Delivery Success)
+- 5011 : Compensation to Buyer
+- 5012 : Pre-Market OTC Delivery Refund
+- 5013 : Pre-Market OTC Trading Fee Refund (Project Canceled)
+- 5014 : Pre-Market OTC Payment Refund Due to Project Cancellation (Buy)
+- 5015 : Pre-Market OTC Unfreeze Frozen Assets (Sell)
+- 5016 : Early Termination Fee
+- 5017 : Early Termination Indemnity
+- 5051 : Pre-Market - Mint - Deduct Staked Assets
+- 5052 : Pre-Market - Mint - PreToken Release
+- 5053 : Pre-Market - Take a Snapshot and Clear Balance Before Settlement
+- 5054 : Pre-Market - Delivery - Token Delivery
+- 5055 : Pre-Market - Delivery - Unstake Staked Assets
+- 5056 : Pre-Market - Settlement - Token Settlement
+- 5057 : Pre-Market - Settlement - Staked Assets Settlement
+- 5058 : Pre-Market - Project Canceled - Staked Assets Settlement
+- 5059 : Pre-Market-Unstake-Deduct PreToken
+- 5060 : Pre-Market -Unstake-Unstake Staked Assets
+- 5061 : Pre-Market - Increase Staked Assets
+- 5062 : Pre-Market - Decrease Staked Assets
+- 5104 : Fireblocks Fee Refund
 
 ## [#](#error-handling) Error Handling
 
@@ -1439,6 +2028,7 @@ You can refer to the [Formula](#portfolio-account) in the documentation
 | Name     | In    | Type   | Required | Description                             |
 | -------- | ----- | ------ | -------- | --------------------------------------- |
 | currency | query | string | false    | Retrieve data of the specified currency |
+| sub_uid  | query | string | false    | Sub account user ID                     |
 
 > Example responses
 
@@ -1510,139 +2100,49 @@ You can refer to the [Formula](#portfolio-account) in the documentation
 
 Status Code **200**
 
-| Name                             | Type           | Description                                                                                                                               |
-| -------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| » user_id                        | integer(int64) | User ID                                                                                                                                   |
-| » refresh_time                   | integer(int64) | Time of the most recent refresh                                                                                                           |
-| » locked                         | boolean        | Whether account is locked                                                                                                                 |
-| » balances                       | object         | none                                                                                                                                      |
-| »» UnifiedBalance                | object         | none                                                                                                                                      |
-| »»» available                    | string         | Available amount                                                                                                                          |
-| »»» freeze                       | string         | Locked amount                                                                                                                             |
-| »»» borrowed                     | string         | Borrowed amount                                                                                                                           |
-| »»» negative_liab                | string         | Negative Liabilities                                                                                                                      |
-| »»» futures_pos_liab             | string         | Borrowing to Open Positions in Futures                                                                                                    |
-| »»» equity                       | string         | Equity                                                                                                                                    |
-| »»» total_freeze                 | string         | Total freeze                                                                                                                              |
-| »»» total_liab                   | string         | Total liabilities                                                                                                                         |
-| »»» spot_in_use                  | string         | Spot hedging utilization                                                                                                                  |
-| »»» funding                      | string         | Quantity of funding                                                                                                                       |
-| »»» funding_version              | string         | Funding version                                                                                                                           |
-| »» total                         | string         | The total asset value in USD, calculated as the sum of the product of `(available + freeze) * price` for all currencies.                  |
-| »» borrowed                      | string         | The total borrowed amount in USD, calculated as the sum of the product of `borrowed * price` for all currencies (excluding points cards). |
-| »» total_initial_margin          | string         | Total initial margin                                                                                                                      |
-| »» total_margin_balance          | string         | Total margin balance                                                                                                                      |
-| »» total_maintenance_margin      | string         | Total maintenance margin                                                                                                                  |
-| »» total_initial_margin_rate     | string         | Total initial margin rate                                                                                                                 |
-| »» total_maintenance_margin_rate | string         | Total maintenance margin rate                                                                                                             |
-| »» total_available_margin        | string         | Total available margin                                                                                                                    |
-| »» unified_account_total         | string         | Total amount of the portfolio margin account                                                                                              |
-| »» unified_account_total_liab    | string         | Total liabilities of the portfolio margin account                                                                                         |
-| »» unified_account_total_equity  | string         | Total equity of the portfolio margin account                                                                                              |
-| »» leverage                      | string         | Leverage                                                                                                                                  |
-| »» spot_order_loss               | string         | Total order loss, in USDT                                                                                                                 |
-| »» spot_hedge                    | boolean        | Spot hedging status, true - enabled, false - not enabled.                                                                                 |
-| »» use_funding                   | boolean        | Whether to use funds as margin                                                                                                            |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#set-unified-account-mode-deprecated) Set unified account mode (deprecated)
-
-> Code samples
-
-`POST /unified/account_mode`
-
-_Set unified account mode (deprecated)_
-
-> Body parameter
-
-```
-{
-  "mode": "cross_margin",
-  "enabled": true
-}
-```
-
-### Parameters
-
-| Name      | In   | Type    | Required | Description    |
-| --------- | ---- | ------- | -------- | -------------- |
-| body      | body | object  | true     | none           |
-| » mode    | body | string  | true     | Portfolio mode |
-| » enabled | body | boolean | true     | Is it enabled? |
-
-#### [#](#detailed-descriptions-5) Detailed descriptions
-
-**» mode**: Portfolio mode
-
-- cross_margin : cross margin
-- usdt_futures : usdt futures
-
-> Example responses
-
-> 200 Response
-
-```
-{
-  "cross_margin": true,
-  "usdt_futures": true
-}
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description | Schema |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Success     | Inline |
-
-### Response Schema
-
-Status Code **200**
-
-| Name                       | Type    | Description |
-| -------------------------- | ------- | ----------- |
-| » **additionalProperties** | boolean | none        |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#inquire-about-unified-account-mode-deprecated) Inquire about unified account mode (deprecated)
-
-> Code samples
-
-`GET /unified/account_mode`
-
-_Inquire about unified account mode (deprecated)_
-
-cross_margin - Spot full-margin trading, usdt_futures - USDT perpetual futures
-
-> Example responses
-
-> 200 Response
-
-```
-{
-  "cross_margin": true,
-  "usdt_futures": true
-}
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
-
-### Response Schema
-
-Status Code **200**
-
-| Name                       | Type    | Description |
-| -------------------------- | ------- | ----------- |
-| » **additionalProperties** | boolean | none        |
+| Name                             | Type           | Description                                                                                                                                                                                                                                                        |
+| -------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » user_id                        | integer(int64) | User ID                                                                                                                                                                                                                                                            |
+| » refresh_time                   | integer(int64) | Time of the most recent refresh                                                                                                                                                                                                                                    |
+| » locked                         | boolean        | Whether the account is locked, valid in cross-currency margin/combined margin mode, false in other modes such as single-currency margin mode                                                                                                                       |
+| » balances                       | object         | none                                                                                                                                                                                                                                                               |
+| »» UnifiedBalance                | object         | none                                                                                                                                                                                                                                                               |
+| »»» available                    | string         | Available amount is valid in single currency margin/cross-currency margin/combined margin mode, and the calculation is different in different modes                                                                                                                |
+| »»» freeze                       | string         | The locked amount is valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                                                    |
+| »»» borrowed                     | string         | Borrow limit, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                            |
+| »»» negative_liab                | string         | Negative balance loan is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode                                                                                                                          |
+| »»» futures_pos_liab             | string         | Contract opening position borrowing currency (abandoned, to be offline field)                                                                                                                                                                                      |
+| »»» equity                       | string         | Equity, valid in single currency margin/cross currency margin/combined margin mode                                                                                                                                                                                 |
+| »»» total_freeze                 | string         | Total occupancy (discarded, to be offline field)                                                                                                                                                                                                                   |
+| »»» total_liab                   | string         | Total borrowing, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                         |
+| »»» spot_in_use                  | string         | The amount of spot hedging is valid in the combined margin mode, and is 0 in other margin modes such as single currency and cross-currency margin modes                                                                                                            |
+| »»» funding                      | string         | Uniloan financial management amount, effective when Uniloan financial management is turned on as a unified account margin switch                                                                                                                                   |
+| »»» funding_version              | string         | Funding version                                                                                                                                                                                                                                                    |
+| »»» cross_balance                | string         | Full margin balance is valid in single currency margin mode, and is 0 in other modes such as cross currency margin/combined margin mode                                                                                                                            |
+| »»» iso_balance                  | string         | Isolated margin balance is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                                         |
+| »»» im                           | string         | Full-position initial margin is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                                    |
+| »»» mm                           | string         | The full position maintains margin, which is valid in the single currency margin mode, and other cross-currency margin combination margin mode is 0.                                                                                                               |
+| »»» imr                          | string         | Full-position initial margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                               |
+| »»» mmr                          | string         | Full-position maintenance margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                           |
+| »»» margin_balance               | string         | Full margin balance is valid in single currency margin mode and is 0 in other modes such as cross currency margin/combined margin mode                                                                                                                             |
+| »»» available_margin             | string         | Full margin available for full position is valid in single currency margin mode, and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                        |
+| »»» enabled_collateral           | boolean        | 币种开启作为保证金，true - 启用，false - 未启用                                                                                                                                                                                                                    |
+| »» total                         | string         | Total account assets converted to USD, i.e. the sum of `(available + freeze) * price` in all currencies (deprecated, to be deprecated, replaced by unified_account_total)                                                                                          |
+| »» borrowed                      | string         | The total borrowed amount of the account converted into USD, i.e. the sum of `borrowed * price` of all currencies (excluding Point Cards). It is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode. |
+| »» total_initial_margin          | string         | Total initial margin, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                    |
+| »» total_margin_balance          | string         | Total margin balance, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                    |
+| »» total_maintenance_margin      | string         | Total maintenance margin is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode                                                                                                                       |
+| »» total_initial_margin_rate     | string         | Total initial margin rate, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                               |
+| »» total_maintenance_margin_rate | string         | Total maintenance margin rate, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                           |
+| »» total_available_margin        | string         | Available margin amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                 |
+| »» unified_account_total         | string         | Unify the total account assets, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                                         |
+| »» unified_account_total_liab    | string         | Unify the total loan of the account, valid in the cross-currency margin/combined margin mode, and 0 in other modes such as single-currency margin mode                                                                                                             |
+| »» unified_account_total_equity  | string         | Unify the total account equity, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                                         |
+| »» leverage                      | string         | Actual leverage, valid in cross-currency margin/combined margin mode                                                                                                                                                                                               |
+| »» spot_order_loss               | string         | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                       |
+| »» spot_hedge                    | boolean        | Spot hedging status, true - enabled, false - not enabled.                                                                                                                                                                                                          |
+| »» use_funding                   | boolean        | Whether to use funds as margin                                                                                                                                                                                                                                     |
+| »» is_all_collateral             | boolean        | 是否所有币种均作为保证金，true - 所有币种作为保证金，false - 否                                                                                                                                                                                                    |
 
 WARNING
 
@@ -1740,6 +2240,102 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
+## [#](#batch-query-can-be-transferred-out-at-most-for-unified-accounts-each-currency-is-the-maximum-value-after-the-user-withdraws-the-currency-the-amount-of-transferable-currency-will-be-changed) Batch query can be transferred out at most for unified accounts; each currency is the maximum value. After the user withdraws the currency, the amount of transferable currency will be changed.
+
+> Code samples
+
+`GET /unified/transferables`
+
+_Batch query can be transferred out at most for unified accounts; each currency
+is the maximum value. After the user withdraws the currency, the amount of
+transferable currency will be changed._
+
+### Parameters
+
+| Name       | In    | Type   | Required | Description                                                                                     |
+| ---------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
+| currencies | query | string | true     | Specify the currency name to query in batches, and support up to 100 pass parameters at a time. |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "currency": "BTC",
+    "amount": "123456"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description            | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                  | Type   | Description                                                               |
+| --------------------- | ------ | ------------------------------------------------------------------------- |
+| » TransferablesResult | object | Batch query unified account can be transferred up to a maximum of results |
+| »» currency           | string | Currency detail                                                           |
+| »» amount             | string | The maximum amount that can be transferred out                            |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#batch-query-unified-account-can-be-borrowed-up-to-a-maximum) Batch query unified account can be borrowed up to a maximum
+
+> Code samples
+
+`GET /unified/batch_borrowable`
+
+_Batch query unified account can be borrowed up to a maximum_
+
+### Parameters
+
+| Name       | In    | Type            | Required | Description                                                                                                |
+| ---------- | ----- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| currencies | query | array\[string\] | true     | Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies. |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "currency": "BTC",
+    "amount": "123456"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description            | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                | Type   | Description                                                            |
+| ------------------- | ------ | ---------------------------------------------------------------------- |
+| » UnifiedBorrowable | object | Batch query unified account can be borrowed up to a maximum of results |
+| »» currency         | string | Currency detail                                                        |
+| »» amount           | string | The maximum amount to borrow                                           |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
 ## [#](#borrow-or-repay) Borrow or repay
 
 > Code samples
@@ -1782,18 +2378,38 @@ setting the parameter `repaid_all=true`
 | » repaid_all | body | boolean | false    | Full repayment is solely for repayment operations. When set to 'true,' it overrides the 'amount,' allowing for direct full repayment. |
 | » text       | body | string  | false    | User defined custom ID                                                                                                                |
 
-#### [#](#enumerated-values-11) Enumerated Values
+#### [#](#enumerated-values-4) Enumerated Values
 
 | Parameter | Value  |
 | --------- | ------ |
 | » type    | borrow |
 | » type    | repay  |
 
+> Example responses
+
+> 200 Response
+
+```
+{
+  "tran_id": 9527
+}
+```
+
 ### Responses
 
-| Status | Meaning                                                                            | Description           | Schema |
-| ------ | ---------------------------------------------------------------------------------- | --------------------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Operated successfully | None   |
+| Status | Meaning                                                                    | Description           | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Operated successfully | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+_Unified account loan and repayment response results_
+
+| Name      | Type           | Description    |
+| --------- | -------------- | -------------- |
+| » tran_id | integer(int64) | Transaction id |
 
 WARNING
 
@@ -1904,16 +2520,17 @@ _Get load records_
 
 Status Code **200**
 
-| Name              | Type           | Description                                                                                                                                                             |
-| ----------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » _None_          | object         | Loan records                                                                                                                                                            |
-| »» id             | integer(int64) | id                                                                                                                                                                      |
-| »» type           | string         | type: borrow - borrow, repay - repay                                                                                                                                    |
-| »» repayment_type | string         | Repayment type: none - no repayment type, manual_repay - manual repayment, auto_repay - automatic repayment, cancel_auto_repay - automatic repayment after cancellation |
-| »» currency_pair  | string         | Currency pair                                                                                                                                                           |
-| »» currency       | string         | Currency                                                                                                                                                                |
-| »» amount         | string         | The amount of lending or repaying                                                                                                                                       |
-| »» create_time    | integer(int64) | Created time                                                                                                                                                            |
+| Name              | Type           | Description                                                                                                                                                                                                                          |
+| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » _None_          | object         | Loan records                                                                                                                                                                                                                         |
+| »» id             | integer(int64) | id                                                                                                                                                                                                                                   |
+| »» type           | string         | type: borrow - borrow, repay - repay                                                                                                                                                                                                 |
+| »» repayment_type | string         | Repayment type, none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after withdrawal, different_currencies_repayment - Different currency repayment |
+| »» borrow_type    | string         | Loan type, returned when querying loan records. manual_borrow - Manual repayment , auto_borrow - Automatic repayment                                                                                                                 |
+| »» currency_pair  | string         | Currency pair                                                                                                                                                                                                                        |
+| »» currency       | string         | Currency                                                                                                                                                                                                                             |
+| »» amount         | string         | The amount of lending or repaying                                                                                                                                                                                                    |
+| »» create_time    | integer(int64) | Created time                                                                                                                                                                                                                         |
 
 WARNING
 
@@ -1929,12 +2546,14 @@ _List interest records_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                    |
-| -------- | ----- | -------------- | -------- | -------------------------------------------------------------- |
-| currency | query | string         | false    | Retrieve data of the specified currency                        |
-| page     | query | integer(int32) | false    | Page number                                                    |
-| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100 |
-| type     | query | string         | false    | Loan type, platform - platform, margin - margin                |
+| Name     | In    | Type           | Required | Description                                                                                    |
+| -------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| currency | query | string         | false    | Retrieve data of the specified currency                                                        |
+| page     | query | integer(int32) | false    | Page number                                                                                    |
+| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100                                 |
+| from     | query | integer(int64) | false    | Start timestamp of the query                                                                   |
+| to       | query | integer(int64) | false    | Time range ending, default to current time                                                     |
+| type     | query | string         | false    | Loan type, platform loan - platform, leverage loan - margin, if not passed, defaults to margin |
 
 > Example responses
 
@@ -1980,13 +2599,15 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-user-risk-unit-details-only-valid-in-portfolio-margin-mode) Retrieve user risk unit details, only valid in portfolio margin mode
+## [#](#get-user-risk-unit-details) Get user risk unit details
 
 > Code samples
 
 `GET /unified/risk_units`
 
-_Retrieve user risk unit details, only valid in portfolio margin mode_
+_Get user risk unit details_
+
+Retrieve user risk unit details, only valid in portfolio margin mode
 
 > Example responses
 
@@ -2048,10 +2669,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Set mode of the unified account_
 
-Switching between different account modes requires only passing the parameters
-n\\corresponding to the target account mode. It also supports opening or closing
-configuration switches for the corresponding account mode when switching- When
-enabling classic account mode,mode=classic
+每种账户模式的切换只需要传对应账户模式的参数，同时支持在切换账户模式时打开或关闭对应账户模式下的配置开关
+
+- 开通经典账户模式时，mode=classic
 
 ```
     PUT /unified/unified_mode
@@ -2060,7 +2680,7 @@ enabling classic account mode,mode=classic
     }
 ```
 
-- When enabling multi-currency margin mode, mode=multi_currency
+- 开通跨币种保证金模式，mode=multi_currency
 
 ```
     PUT /unified/unified_mode
@@ -2072,7 +2692,7 @@ enabling classic account mode,mode=classic
     }
 ```
 
-- When enabling portfolio margin mode,mode=portfolio
+- 开通组合保证金模式时，mode=portfolio
 
 ```
     PUT /unified/unified_mode
@@ -2084,35 +2704,48 @@ enabling classic account mode,mode=classic
     }
 ```
 
+- 开通单币种保证金模式时，mode=single_currency
+
+```
+    PUT /unified/unified_mode
+    {
+      "mode": "single_currency"
+    }
+```
+
 > Body parameter
 
 ```
 {
   "mode": "portfolio",
   "settings": {
-    "spot_hedge": true
+    "spot_hedge": true,
+    "usdt_futures": true,
+    "options": true
   }
 }
 ```
 
 ### Parameters
 
-| Name            | In   | Type    | Required | Description                                                                                  |
-| --------------- | ---- | ------- | -------- | -------------------------------------------------------------------------------------------- |
-| body            | body | object  | true     | none                                                                                         |
-| » mode          | body | string  | true     | Unified account mode:                                                                        |
-| » settings      | body | object  | false    | none                                                                                         |
-| »» usdt_futures | body | boolean | false    | USDT contract switch. This parameter is required when the mode is multi-currency margin mode |
-| »» spot_hedge   | body | boolean | false    | Spot hedging switch. This parameter is required when the mode is portfolio margin mode       |
-| »» use_funding  | body | boolean | false    | When the mode is set to combined margin mode, will funds be used as margin                   |
+| Name            | In   | Type    | Required | Description                                                                                           |
+| --------------- | ---- | ------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| body            | body | object  | true     | none                                                                                                  |
+| » mode          | body | string  | true     | Unified account mode:                                                                                 |
+| » settings      | body | object  | false    | none                                                                                                  |
+| »» usdt_futures | body | boolean | false    | USDT contract switch. In cross-currency margin mode, it can only be turned on and not off             |
+| »» spot_hedge   | body | boolean | false    | Spot hedging switch.                                                                                  |
+| »» use_funding  | body | boolean | false    | switch, when the mode is cross-currency margin mode, whether to use Uniloan financial funds as margin |
+| »» options      | body | boolean | false    | Option switch. In cross-currency margin mode, it can only be turned on and not off                    |
 
-#### [#](#detailed-descriptions-6) Detailed descriptions
+#### [#](#detailed-descriptions-7) Detailed descriptions
 
 **» mode**: Unified account mode:
 
 - `classic`: Classic account mode
 - `multi_currency`: Multi-currency margin mode
 - `portfolio`: Portfolio margin mode
+- `single_currency`: Single Currency Margin Model
 
 ### Responses
 
@@ -2132,11 +2765,12 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Query mode of the unified account_
 
-Unified account mode：
+Unified account mode:
 
 - `classic`: Classic account mode
-- `multi_currency`: Multi-currency margin mode
+- `multi_currency`: Cross-currency margin mode
 - `portfolio`: Portfolio margin mode
+- `single_currency`: Single-currency margin mode
 
 > Example responses
 
@@ -2146,7 +2780,9 @@ Unified account mode：
 {
   "mode": "portfolio",
   "settings": {
-    "spot_hedge": true
+    "spot_hedge": true,
+    "usdt_futures": true,
+    "options": true
   }
 }
 ```
@@ -2167,12 +2803,14 @@ Status Code **200**
 
 \- `classic`: Classic account mode  
 \- `multi_currency`: Multi-currency margin mode  
-\- `portfolio`: Portfolio margin mode | | » settings | object | none | | »»
-usdt_futures | boolean | USDT contract switch. This parameter is required when
-the mode is multi-currency margin mode | | »» spot_hedge | boolean | Spot
-hedging switch. This parameter is required when the mode is portfolio margin
-mode | | »» use_funding | boolean | When the mode is set to combined margin
-mode, will funds be used as margin |
+\- `portfolio`: Portfolio margin mode  
+\- `single_currency`: Single Currency Margin Model | | » settings | object |
+none | | »» usdt_futures | boolean | USDT contract switch. In cross-currency
+margin mode, it can only be turned on and not off | | »» spot_hedge | boolean |
+Spot hedging switch. | | »» use_funding | boolean | switch, when the mode is
+cross-currency margin mode, whether to use Uniloan financial funds as margin | |
+»» options | boolean | Option switch. In cross-currency margin mode, it can only
+be turned on and not off |
 
 WARNING
 
@@ -2250,6 +2888,7 @@ _List currency discount tiers_
           "tier": "1",
           "discount": "1",
           "lower_limit": "0",
+          "leverage": "10",
           "upper_limit": "+"
         }
       ]
@@ -2261,36 +2900,42 @@ _List currency discount tiers_
           "tier": "1",
           "discount": "1",
           "lower_limit": "0",
+          "leverage": "10",
           "upper_limit": "10000000"
         },
         {
           "tier": "2",
           "discount": "0.98",
           "lower_limit": "10000000",
+          "leverage": "10",
           "upper_limit": "15000000"
         },
         {
           "tier": "3",
           "discount": "0.95",
           "lower_limit": "15000000",
+          "leverage": "10",
           "upper_limit": "20000000"
         },
         {
           "tier": "4",
           "discount": "0.925",
           "lower_limit": "20000000",
+          "leverage": "10",
           "upper_limit": "50000000"
         },
         {
           "tier": "5",
           "discount": "0.9",
           "lower_limit": "50000000",
+          "leverage": "10",
           "upper_limit": "100000000"
         },
         {
           "tier": "6",
           "discount": "0",
           "lower_limit": "100000000",
+          "leverage": "10",
           "upper_limit": "+"
         }
       ]
@@ -2302,24 +2947,28 @@ _List currency discount tiers_
           "tier": "1",
           "discount": "0.98",
           "lower_limit": "0",
+          "leverage": "10",
           "upper_limit": "1000"
         },
         {
           "tier": "2",
           "discount": "0.95",
           "lower_limit": "1000",
+          "leverage": "10",
           "upper_limit": "10000"
         },
         {
           "tier": "3",
           "discount": "0.9",
           "lower_limit": "10000",
+          "leverage": "10",
           "upper_limit": "50000"
         },
         {
           "tier": "4",
           "discount": "0.85",
           "lower_limit": "50000",
+          "leverage": "10",
           "upper_limit": "+"
         }
       ]
@@ -2331,24 +2980,28 @@ _List currency discount tiers_
           "tier": "1",
           "discount": "0.98",
           "lower_limit": "0",
+          "leverage": "10",
           "upper_limit": "1000"
         },
         {
           "tier": "2",
           "discount": "0.95",
           "lower_limit": "1000",
+          "leverage": "10",
           "upper_limit": "10000"
         },
         {
           "tier": "3",
           "discount": "0.9",
           "lower_limit": "10000",
+          "leverage": "10",
           "upper_limit": "50000"
         },
         {
           "tier": "4",
           "discount": "0.85",
           "lower_limit": "50000",
+          "leverage": "10",
           "upper_limit": "+"
         }
       ]
@@ -2376,6 +3029,7 @@ Status Code **200**
 | »»» discount      | string | Discount                                   |
 | »»» lower_limit   | string | Lower limit                                |
 | »»» upper_limit   | string | Upper limit,＋ indicates positive infinity |
+| »»» leverage      | string | Position leverage                          |
 
 This operation does not require authentication
 
@@ -2400,7 +3054,8 @@ _List loan margin tiers_
         "tier": "1",
         "margin_rate": "0.02",
         "lower_limit": "200000",
-        "upper_limit": "400000"
+        "upper_limit": "400000",
+        "leverage": "3"
       }
     ]
   }
@@ -2427,6 +3082,7 @@ Status Code **200**
 | »»»» margin_rate | string | Discount                                               |
 | »»»» lower_limit | string | Lower limit                                            |
 | »»»» upper_limit | string | Upper limit, "" indicates greater than (the last tier) |
+| »»»» leverage    | string | Position leverage                                      |
 
 This operation does not require authentication
 
@@ -2531,7 +3187,7 @@ perpetual contracts, options, and spot markets. Market orders are not included.
 | »»»»»»»» left           | body | string  | true     | Unfilled contract quantity, involved in actual calculation                                    |
 | »»»»»»» spot_hedge      | body | boolean | false    | Whether to enable spot hedging.                                                               |
 
-#### [#](#detailed-descriptions-7) Detailed descriptions
+#### [#](#detailed-descriptions-8) Detailed descriptions
 
 **»»» equity**: Currency equity, where equity = balance - borrowed, represents
 the net delta exposure of your spot positions, which can be negative. Currently
@@ -2677,3 +3333,322 @@ spread risk | | »»»»»» mr4 | string | Option short risk | | »»»»» del
 Total Vega of risk unit |
 
 This operation does not require authentication
+
+## [#](#minimum-currency-leverage-that-can-be-set) Minimum currency leverage that can be set
+
+> Code samples
+
+`GET /unified/leverage/user_currency_config`
+
+_Minimum currency leverage that can be set_
+
+### Parameters
+
+| Name     | In    | Type   | Required | Description |
+| -------- | ----- | ------ | -------- | ----------- |
+| currency | query | string | true     | Currency    |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "current_leverage": "2",
+  "min_leverage": "0",
+  "max_leverage": "0",
+  "debit": "0",
+  "available_margin": "0",
+  "borrowable": "0",
+  "except_leverage_borrowable": "0"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                         | Type   | Description                                                                                                                    |
+| ---------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| » current_leverage           | string | Current leverage ratio                                                                                                         |
+| » min_leverage               | string | Minimum adjustable leverage ratio                                                                                              |
+| » max_leverage               | string | Maximum adjustable leverage ratio                                                                                              |
+| » debit                      | string | Current liabilities                                                                                                            |
+| » available_margin           | string | Available Margin                                                                                                               |
+| » borrowable                 | string | The current leverage you can choose is                                                                                         |
+| » except_leverage_borrowable | string | The maximum amount of margin that can be borrowed and the maximum amount of Uniloan that can be borrowed, whichever is smaller |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#get-the-leverage-multiple-of-the-user-currency) Get the leverage multiple of the user currency
+
+> Code samples
+
+`GET /unified/leverage/user_currency_setting`
+
+_Get the leverage multiple of the user currency_
+
+Get the user's currency leverage. If currency is not passed, query all
+currencies.
+
+### Parameters
+
+| Name     | In    | Type   | Required | Description |
+| -------- | ----- | ------ | -------- | ----------- |
+| currency | query | string | false    | Currency    |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "currency": "BTC",
+  "leverage": "3"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+_Loan currency leverage_
+
+| Name       | Type   | Description   |
+| ---------- | ------ | ------------- |
+| » currency | string | Currency name |
+| » leverage | string | multiple      |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#set-the-loan-currency-leverage) Set the loan currency leverage
+
+> Code samples
+
+`POST /unified/leverage/user_currency_setting`
+
+_Set the loan currency leverage_
+
+> Body parameter
+
+```
+{
+  "currency": "BTC",
+  "leverage": "3"
+}
+```
+
+### Parameters
+
+| Name       | In   | Type   | Required | Description   |
+| ---------- | ---- | ------ | -------- | ------------- |
+| body       | body | object | true     | none          |
+| » currency | body | string | true     | Currency name |
+| » leverage | body | string | true     | multiple      |
+
+### Responses
+
+| Status | Meaning                                                                            | Description | Schema |
+| ------ | ---------------------------------------------------------------------------------- | ----------- | ------ |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Success     | None   |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#list-of-loan-currencies-supported-by-unified-account) List of loan currencies supported by unified account
+
+> Code samples
+
+`GET /unified/currencies`
+
+_List of loan currencies supported by unified account_
+
+### Parameters
+
+| Name     | In    | Type   | Required | Description |
+| -------- | ----- | ------ | -------- | ----------- |
+| currency | query | string | false    | Currency    |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "name": "BTC",
+    "prec": "0.000001",
+    "min_borrow_amount": "0.01",
+    "user_max_borrow_amount": "1000000",
+    "total_max_borrow_amount": "1000000",
+    "loan_status": "enable"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description    | Schema     |
+| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                      | Type   | Description                                      |
+| ------------------------- | ------ | ------------------------------------------------ |
+| » name                    | string | Currency name                                    |
+| » prec                    | string | Currency precision                               |
+| » min_borrow_amount       | string | The minimum debit limit is the unit of currency  |
+| » user_max_borrow_amount  | string | The minimum debit limit is the unit of currency  |
+| » total_max_borrow_amount | string | The maximum debit limit for the platform is USDT |
+| » loan_status             | string | Does the lending status                          |
+
+\- `disable` : Loans are prohibited  
+\- `enable`: Support lending |
+
+This operation does not require authentication
+
+## [#](#get-historical-lending-rates) get historical lending rates
+
+> Code samples
+
+`GET /unified/history_loan_rate`
+
+_get historical lending rates_
+
+### Parameters
+
+| Name     | In    | Type           | Required | Description                                                    |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------- |
+| tier     | query | string         | false    | The VIP level of the floating rate that needs to be queried    |
+| currency | query | string         | true     | Currency                                                       |
+| page     | query | integer(int32) | false    | Page number                                                    |
+| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100 |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "currency": "USDT",
+  "tier": "1",
+  "tier_up_rate": "1.18",
+  "rates": [
+    {
+      "time": 1729047616000,
+      "rate": "0.00010287"
+    }
+  ]
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+| Name           | Type           | Description                                                                                                                                                                                            |
+| -------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » currency     | string         | Currency name                                                                                                                                                                                          |
+| » tier         | string         | The VIP level of the floating rate required                                                                                                                                                            |
+| » tier_up_rate | string         | VIP level corresponding floating rate                                                                                                                                                                  |
+| » rates        | array          | Historical interest rate information, one data per hour, the array size is determined by the page and limit parameters provided by the interface request parameters, sorted from recent to far in time |
+| »» time        | integer(int64) | The hourly timestamp corresponding to the interest rate, in milliseconds                                                                                                                               |
+| »» rate        | string         | Historical interest rates for this hour                                                                                                                                                                |
+
+This operation does not require authentication
+
+## [#](#设置抵押币种) 设置抵押币种
+
+> Code samples
+
+`POST /unified/collateral_currencies`
+
+_设置抵押币种_
+
+> Body parameter
+
+```
+{
+  "collateral_type": 1,
+  "enable_list": [
+    "BTC",
+    "ETH"
+  ],
+  "disable_list": [
+    "SOL",
+    "GT"
+  ]
+}
+```
+
+### Parameters
+
+| Name              | In   | Type    | Required | Description                                                                                                                              |
+| ----------------- | ---- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| body              | body | object  | true     | none                                                                                                                                     |
+| » collateral_type | body | integer | false    | 用户设置抵押物模式 0(all)-全部币种作为抵押物,1(custom)-自定义币种作为抵押物,collateral_type为0(all)时，enable_list与disable_list参数无效 |
+| » enable_list     | body | array   | false    | 币种列表，collateral_type=1(custom)表示追加的逻辑                                                                                        |
+| » disable_list    | body | array   | false    | 取消列表，表示取消的逻辑                                                                                                                 |
+
+#### [#](#enumerated-values-5) Enumerated Values
+
+| Parameter         | Value |
+| ----------------- | ----- |
+| » collateral_type | 0     |
+| » collateral_type | 1     |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "is_success": true
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 更新成功    | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+_统一账户抵押模式设置返回_
+
+| Name         | Type    | Description  |
+| ------------ | ------- | ------------ |
+| » is_success | boolean | 是否设置成功 |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret

@@ -1,9 +1,9 @@
-# [#](#gate-api-v4-v4-75-0) Gate API v4 v4.75.0
+# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate.io API
+Welcome to Gate API
 
 APIv4 provides spot, margin and futures trading operations. There are public
 APIs to retrieve the real-time market statistics, and private APIs which needs
@@ -14,7 +14,7 @@ authentication to trade on user's behalf.
 **REST API BaseURL:**
 
 - Live trading: `https://api.gateio.ws/api/v4`
-- Futures TestNet trading: `https://fx-api-testnet.gateio.ws/api/v4`
+- TestNet trading: `https://api-testnet.gateapi.io/api/v4`
 - Futures live trading alternative (futures only):
   `https://fx-api.gateio.ws/api/v4`
 
@@ -83,11 +83,11 @@ provide a professional market maker's service rate scheme for professional
 institutional market makers according to their contribution to the platform's
 liquidity.
 
-1.  Provide Gateio UID
+1.  Provide Gate UID
 2.  Provide other transaction volume screenshot or VIP level
 3.  Brief introduction of market making method and scale
 
-Provide the above content and submit to [mm@gate.io](mailto:mm@gate.io) , we
+Provide the above content and submit to [mm@gate.com](mailto:mm@gate.com) , we
 will accept within 3 working days.
 
 TIP
@@ -102,14 +102,15 @@ any of the following ways:
 
 - Submit Work Order Feedback
 - Online Work Order Feedback
-- Send your contact information and questions to [mm@gate.io](mailto:mm@gate.io)
-  We will assign technical specialists to serve you.
+- Send your contact information and questions to
+  [mm@gate.com](mailto:mm@gate.com) We will assign technical specialists to
+  serve you.
 
 If you encounter API errors, it is recommended that you sort out the following
 content, so that we can quickly analyze the problem for you:
 
 1.  Problem Description
-2.  Gateio UID
+2.  Gate UID
 3.  Request URI and parameters
 4.  Error Code
 5.  Responses
@@ -126,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 ### [#](#matching-priority) Matching priority
 
-Gate.io Order matching follows Price Priority > Time priority principle.
+Gate Order matching follows Price Priority > Time priority principle.
 
 Suppose that the order book is as follows：
 
@@ -150,7 +151,7 @@ subsequent filling or being cancelled.
 
 ## [#](#data-center) Data Center
 
-Gate.io data center is located in AWS Japan's ap-northeast-1 region.
+Gate data center is located in AWS Japan's ap-northeast-1 region.
 
 ## [#](#api-overview) API Overview
 
@@ -382,11 +383,169 @@ Each request to the API response header will contain the following fields:：
 
 WebSocket:
 
-- Spot: The rate limit for batch/single order placement and amend an order are
-  total of 10r/s (Market)
-- Futures: The rate limit for batch/single order placement, amend an order and
-  order cancellation (batch/single) are total of 100r/s
-- Other: Unlimited
+- Spot: Bulk order/single order/single order modification, a total of 10
+  requests per second (10r/s).
+- Futures: Bulk order/single order/single order modification/single order
+  cancellation/bulk cancellation, a total of 100 requests per second (100r/s).
+- Others: No limit.
+- Number of connections per IP: ≤ 300
+
+## [#](#rate-limit-based-on-fill-ratio) Rate Limit Based On Fill Ratio
+
+In order to enhance trading efficiency, we have decided to implement more
+favorable sub-account rate limits for clients with a higher fill ratio. This
+assessment will be based on trading data from the past seven days and will be
+calculated daily at 00:00 UTC. Please note that this rule applies only to
+clients at **VIP level 14 and above**.
+
+### [#](#_1-introduction-of-terminology) 1. Introduction of Terminology
+
+#### [#](#_1-1-symbol-multiplier) 1.1 Symbol Multiplier
+
+To facilitate a more refined management of the impact of different trading
+products on the fill ratio, we have introduced the concept of the symbol
+multiplier. This multiplier allows us to adjust the influence of each product on
+the overall trading volume based on its characteristics. For products with a
+multiplier of less than 1, they typically involve smaller contract sizes and
+therefore require more trading orders to achieve the same trading volume.
+Generally, all trading products come with a default multiplier; however, certain
+products are assigned independent multipliers based on their specific
+characteristics. For detailed information regarding the multipliers of relevant
+products, please refer to the provided table.
+
+| Product Typee                    | Based On        | Independnet Symbol Multiplier | Default Symbol Multiplier |
+| -------------------------------- | --------------- | ----------------------------- | ------------------------- |
+| USDT-Margined Perpetural Futures | Contract Symbol | 1                             |
+
+Contract Symbol:  
+BTC-USDT  
+ETH-USDT | 0.4 | | Spot | Currency Pairst | 1  
+Currency Pairs:  
+BTC-USDT  
+ETH-USDT | 0.4 |
+
+> Please note: The spot trading rate limits will not be launched this time.
+
+#### [#](#_1-2-definition-of-trading-volume-weight) 1.2 Definition of Trading Volume Weight
+
+We will assess the behavior patterns of makers and takers based on market
+fluctuations and design the trading volume weight ratios accordingly.
+Additionally, we will regularly evaluate these weights and make synchronized
+adjustments when necessary.
+
+**Current weight of the maker trading volume: 100%, current weight of the taker
+trading volume: 90%.**
+
+#### [#](#_1-3-calculation-formula) 1.3 Calculation Formula
+
+The system will take a snapshot of the data at 00:00 UTC daily and, based on
+this information, will select the higher value between the fill ratio of the
+sub-account and the overall fill ratio of the main account to determine the
+future trading rate limit for the sub-account. For exchange brokers, the system
+will only consider the fill ratio of their sub-accounts. It is important to note
+that the main account is also considered a "sub-account."
+
+1.  Sub-account Fill Ratio: This ratio is calculated as follows: (Sub-account
+    Taker's USDT trading volume × 0.9 + Maker's USDT trading volume × 1) / (The
+    sum of (Number of new and modified requests for each contract × symbol
+    multipliers) for each subaccount).
+2.  Main-account Aggregated Fill Ratio: This ratio is calculated as follows:
+    (main account's Taker USDT trading volume × 0.9 + Maker USDT trading volume
+    × 1) / (The sum of (Number of new and modified requests for each contract ×
+    symbol multipliers) for all subaccounts).
+
+### [#](#_2-future-rate-limit-rule) 2. Future Rate Limit Rule
+
+| Contract Frequency Limitation Rules |
+| ----------------------------------- | -------- | ---------------- |
+| Tier                                | Ratio    | Rate Limit (uid) |
+| Tier 1                              | \[0,1)   | 100r/s           |
+| Tier 2                              | \[1,3)   | 150r/s           |
+| Tier 3                              | \[3,5)   | 200r/s           |
+| Tier 4                              | \[5,10)  | 250r/s           |
+| Tier 5                              | \[10,20) | 300r/s           |
+| Tier 6                              | \[20,50) | 350r/s           |
+| Tier 7                              | \>= 50   | 400r/s           |
+
+> > Please stay tuned for the rate limits for spot trading.
+
+### [#](#_3-detailed-rules-for-fill-ratio) 3. Detailed Rules for Fill Ratio
+
+1.  Target Client Group: VIP ≥ 14
+2.  Calculation Period: 7 days
+3.  Update Time: Daily at 08:00 (UTC). The system will update the fill ratio
+    data based on the data from 00:00 UTC.
+    1.  If the fill ratio and the pre-set rate limit improve, the increase will
+        take effect immediately at 08:00 (UTC).
+    2.  However, if the fill ratio declines, the rate limit will be reduced
+        immediately.
+    3.  If a client's VIP level drops below VIP 14, their rate limit will be
+        lowered to the minimum tier, taking effect immediately.
+    4.  If a client's VIP level rises above VIP 14, their rate limit will be
+        adjusted immediately based on their current level.
+    5.  If a sub-account's trading volume over the past 7 days is below
+        1,000,000 USDT, the rate limit will be implemented based on the
+        main-account aggregated fill ratio.
+    6.  For newly created sub-accounts, the minimum tier rate limit will be
+        applied at the time of creation, and the aforementioned rate limit rules
+        will begin to apply at T+1 08:00 (UTC).
+    7.  Both WebSocket and REST APIs are subject to these rules.
+
+### [#](#_4-example) 4. Example
+
+Assuming the client has three accounts, with the symbol multipliers for trading
+perpetual contract products BTC-USDT and SOL-USDT being 1 and 0.4, respectively.
+
+1.  Account A (Main Account):
+    - BTC-USDT perpetual futures Maker trading volume: 100 USDT, number of order
+      requests: 10; Perpetual futures Taker trading volume: 200 USDT, number of
+      order requests: 20.
+    - SOL-USDT perpetual futures Maker trading volume: 20 USDT, number of order
+      requests: 15; Perpetual futures Taker trading volume: 20 USDT, number of
+      order requests: 20.
+    - Sub-account Fill Ratio = ((100 + 20) \* 1 + (200 + 20) \* 0.9) /
+      ((10 + 20) \* 1 + (15 + 20) \* 0.4) = 7.23
+2.  Account B (Sub-account):
+    - BTC-USDT perpetual futures Maker trading volume: 200 USDT, number of order
+      requests: 20; Perpetual futures Taker trading volume: 200 USDT, number of
+      order requests: 30.
+    - SOL-USDT perpetual futures Maker trading volume: 20 USDT, number of order
+      requests: 5; Perpetual futures Taker trading volume: 30 USDT, number of
+      order requests: 5.
+    - Sub-account Fill Ratio = ((200 + 20) \* 1 + (200 + 30) \* 0.9) /
+      ((20 + 30) \* 1 + (5 + 5) \* 0.4) = 7.91
+3.  Account C (Sub-account):
+    - BTC-USDT perpetual futures Maker trading volume: 50 USDT, number of order
+      requests: 5; Perpetual futures Taker trading volume: 60 USDT, number of
+      order requests: 8.
+    - SOL-USDT perpetual futures Maker trading volume: 100 USDT, number of order
+      requests: 20; Perpetual futures Taker trading volume: 120 USDT, number of
+      order requests: 25.
+    - Sub-account Fill Ratio = ((50 + 100) \* 1 + (60 + 120) \* 0.9) /
+      ((5 + 8) \* 1 + (20 + 25) \* 0.4) = 10.06
+4.  Main Account Aggregated Fill Ratio = ((100 + 20 + 200 + 20 + 50 + 100) \*
+    1 + (200 + 20 + 200 + 30 + 60 + 120) \* 0.9) / ((10 + 20 + 20 + 30 +
+    5 + 8) \* 1 + (15 + 20 + 5 + 5 + 20 + 25) \* 0.4) = 8.19
+5.  Account Rate Limits:
+    - Account A = max(7.23, 8.19) = 8.19 -> 250 r/s
+    - Account B = max(7.91, 8.19) = 8.19 -> 250 r/s
+    - Account C = max(10.06, 8.19) = 10.06 -> 300 r/s
+
+### [#](#_5-remarks) 5. Remarks
+
+1.  The release date for the rate limit of perpetual contracts based on fill
+    ratio will be announced later. Please stay tuned.
+2.  The existing abuse rate limit rules for perpetual contracts will still
+    apply, namely:
+    1.  Fill Ratio = USDT Training Amount / (Total Number of Order,
+        Cancellation, and Modification Requests)
+    2.  If the number of requests exceeds 86,400 within 24 hours, with no order
+        fill in the same period. Then the order placement rate limit will be
+        restricted to 10r/10s for the next hour.
+    3.  If the number of requests exceeds 86,400 within 24 hours, with the fill
+        ratio below 1%. Then the order placement rate limit will be restricted
+        to 20r/10s for the next hour.
+3.  Please stay tuned for the fill ratio rate limit for spot trading.
 
 ## [#](#return-format) Return Format
 
@@ -431,8 +590,8 @@ TIP
 The Portfolio Margin Account is no longer maintained, please refer to the new
 version of the [Unified Account](#unified-account)
 
-Since version `4.25.0`, we start supporting portfolio margin account. Gate.io's
-Portfolio Margin Account is a new feature of Gate.io's trading system. Its main
+Since version `4.25.0`, we start supporting portfolio margin account. Gate's
+Portfolio Margin Account is a new feature of Gate's trading system. Its main
 function is to break the capital isolation between cross-margin leverage account
 and USD cross-margin perpetual contract account inside a Classic Account and
 achieve the multi-currency margin sharing among multi-product lines. Thanks to
@@ -522,12 +681,10 @@ portfolio margin account API Key for futures trading, assets are kept under
 addition, funds under `classic account-spot` cannot share margin with
 `classic account-futures`.
 
-## [#](#request-id) Request ID
+## [#](#trace-id) Trace ID
 
-It is allowed to set an X-Client-Request-Id header in the request, and the API
-will also carry this header in the response. You can use this field to locate
-the corresponding request that the API responds to, which is convenient for
-users to set the request id for tracking.
+The API response will carry the header: X-Gate-Trace-ID . This header is used
+for tracking.
 
 ## [#](#self-trade-prevention-stp) Self-Trade Prevention (STP)
 
@@ -962,6 +1119,438 @@ directly.
 - nft_ammw: Nft-Amm Withdraw
 - nft_ammdf: Nft-Amm Deal Fee
 - nft_ammd: Nft-Amm Deal
+
+## [#](#accountbook-code) AccountBook code
+
+- 1 : Order Placed Old
+- 2 : Order Cancelled old
+- 4 : Withdrawals
+- 9 : Cancel GateCode Withdrawal
+- 17 : GateCode Withdrawals
+- 18 : Fireblocks Withdrawals
+- 19 : copper withdraw
+- 20 : Face Recognition For Withdrawal
+- 101 : Order Placed
+- 102 : Order Filled
+- 103 : Order Cancelled
+- 104 : Cancel Onchain Withdrawal
+- 105 : Token Withdrawal From Startup
+- 106 : Donation
+- 107 : Startup Sale Participation
+- 108 : Startup Sale Refund
+- 109 : Referral Superior Rebate
+- 110 : Deposits
+- 111 : Interest
+- 112 : Deposit Rejected
+- 113 : Withdrawal Rejected
+- 114 : Fund Correction
+- 115 : Snapshot
+- 116 : Order Rejected
+- 117 : CNY1 Deposited
+- 118 : Rebasing
+- 120 : Transaction Rolled Back
+- 121 : GateCode Deposits
+- 122 : Fireblocks Deposits
+- 123 : Wrongdepo Fee
+- 124 : copper deposit
+- 131 : Call Auction- Locked
+- 132 : Call Auction- Unlocked
+- 141 : ETF Asset Consolidation - Debit
+- 142 : ETF Asset Consolidation - Credit
+- 151 : Trading Fees
+- 152 : Trading Fee System Account
+- 161 : Secondary Rebate Financial Account Transfer Out
+- 162 : Affiliate Indirect Superior Rebate Income
+- 164 : Affiliate Direct Superior Rebate Income
+- 166 : Affiliate User Rebate Income
+- 171 : Order Placed Frozen
+- 172 : Order Cancelled Unfrozen
+- 181 : ETH Swap
+- 182 : ETH2 Swap
+- 191 : Referral Rebate Income
+- 196 : Web3 Rebate Income
+- 301 : C2C Merchant Order Placed
+- 302 : C2C Merchant Order Canceled
+- 303 : P2P User Sell
+- 304 : C2C Retail Order Canceled
+- 305 : P2P User Buy
+- 306 : C2C Order Rejected
+- 307 : Payment Setup
+- 308 : C2C Fees
+- 309 : C2C Deposit Freeze
+- 310 : C2C Deposit Refund
+- 311 : C2C Deposit Forfeiture
+- 312 : P2P Shared Asset Order Refund
+- 313 : P2P Frozen Funds
+- 314 : P2P Unfrozen Funds
+- 319 : Crypto Conversion Fee
+- 322 : Buy Crypto Legend
+- 323 : Buy Crypto Cabital
+- 324 : Gate Connect-Buy
+- 325 : Gate Connect-Buy
+- 326 : Gate Connect-Buy
+- 327 : Gate Connect-Buy
+- 328 : Gate Connect-Sell
+- 329 : Gate Connect-Refund
+- 330 : Gate Connect-Buy
+- 331 : Gate Connect-Sell
+- 401 : Deposit Bonus
+- 402 : Trading Rewards
+- 403 : Purchase Bonus
+- 404 : Airdrop
+- 405 : Feedback Rewards
+- 501 : IFO Claimed
+- 502 : IFO Returned
+- 601 : Isolated Margin - Transfer In
+- 602 : Isolated Margin - Transfer Out
+- 603 : Lending-Transferred In
+- 604 : Lending-Transferred Out
+- 605 : Isolated Margin-Transferred In
+- 606 : Isolated Margin- Transferred Out
+- 607 : Liquidating-Unlocked
+- 608 : Liquidating-Locked
+- 609 : Interest Updated
+- 610 : Lending-Lent
+- 611 : Collected
+- 612 : Interest Income
+- 613 : Lending-Fees Deducted
+- 614 : Due Repayment-Unlocked
+- 615 : Due Repayment-Locked
+- 616 : Liquidation Fee
+- 621 : Staking-Locked
+- 622 : Staking-Unlocked
+- 623 : Staking Interest Income
+- 624 : Staking-Locked
+- 625 : Staking-Unlocked
+- 626 : Staking Interest Income
+- 627 : HODL Interest
+- 628 : HODL Interest Distribution
+- 629 : HODL Interest Rolled Back
+- 630 : Borrow
+- 631 : Repay
+- 632 : Pledge
+- 633 : Collateral Refund
+- 635 : Fixed Rate Loan - Interest
+- 640 : Flexible Rate Loan - Borrow
+- 641 : Flexible Rate Loan - Repay
+- 642 : Flexible Rate Loan - Liquidate to Repay Principal
+- 643 : Flexible Rate Loan - Liquidate to Repay Interest
+- 644 : Flexible Rate Loan - Interest
+- 645 : Pledge
+- 646 : Collateral Refund
+- 647 : Adjust Collateral
+- 648 : Refund after Liquidation
+- 649 : Liquidation Fee
+- 651 : Portfolio Margin Account Transfer In
+- 652 : Portfolio Margin Account Transfer Out
+- 655 : Fixed Rate Loan - Borrow
+- 656 : Fixed Rate Loan - Repay
+- 657 : Fixed Rate Loan - Liquidate to Repay Interest
+- 658 : Fixed Rate Loan - Liquidate to Repay Principal
+- 659 : Cross-Currency Repayment - Transfer Out
+- 660 : Cross-Currency Repayment - Transfer In
+- 661 : Redeem
+- 662 : Lend
+- 669 : Interest
+- 670 : MarginTradingBorrowed
+- 671 : MarginTradingRepaid
+- 672 : MarginTradingInterest
+- 673 : Isolated Margin-Transferred In
+- 674 : Isolated Margin- Transferred Out
+- 675 : Interest Updated
+- 676 : Isolated Margin-Interest Deduction
+- 677 : Borrow
+- 678 : Repay
+- 679 : Interest
+- 681 : Bonus
+- 682 : Contributing Insurance Funds
+- 683 : Consuming Insurance Funds
+- 685 : Interest - Platform Loans
+- 686 : Subscription - Fixed-term
+- 687 : Redemption - Fixed-term
+- 688 : Interest - Fixed-term
+- 689 : Bonus - Fixed-term
+- 696 : Early repayment penalty
+- 697 : Refund of early repayment penalty
+- 701 : Perps- Transferred In
+- 702 : Perps- Transferred Out
+- 703 : Delivery- Transferred In
+- 704 : Delivery- Transferred Out
+- 705 : Multi-currency Settlement Transfer In
+- 706 : Multi-currency Settlement Transfer Out
+- 721 : Stable Income - Lock
+- 722 : Stable Income - Unlock
+- 723 : Stable Income - Interest
+- 724 : Stable Income - Lock
+- 725 : Stable Income - Unlock
+- 726 : Stable Income - Interest
+- 727 : Structured Products - Lock
+- 728 : Structured Products - Lock
+- 729 : Structured Products - Unlock
+- 730 : Structured Products - Interest
+- 731 : Structured Products - Unlock
+- 732 : Structured Products - Interest
+- 733 : Hybrid Interest - Lock
+- 734 : Hybrid Interest - Lock
+- 735 : Hybrid Interest - Unlock
+- 736 : Hybrid Interest - Interest
+- 737 : Hybrid Interest - Unlock
+- 738 : Hybrid Interest - Interest
+- 739 : Wealth Referral Commission Rebate
+- 751 : Quant Fund - Lock
+- 753 : Quant Fund - Unlock
+- 754 : Quant Fund - Earnings
+- 761 : Lock & Earn Redeem Early
+- 801 : Gift Coins Sent
+- 802 : Gift Coins Received
+- 803 : Gift Coins Rejected
+- 804 : Live Stream-Reward Offered
+- 805 : Live Stream- Reward Received
+- 806 : Posts- Reward Offered
+- 807 : Posts- Reward Received
+- 901 : Buy Points
+- 902 : Buy Points Rollback
+- 903 : Time-Limited Points
+- 911 : Auto-Invest-Transferred Out
+- 912 : Auto-Invest-Transferred In
+- 913 : Redeem points for goods
+- 915 : Redeemed Points - Refund
+- 917 : Expired & Recycled
+- 1001 : C2C Loan Ad Posted
+- 1002 : C2C Loan Ad Canceled
+- 1003 : C2C Loan Order Placed
+- 1004 : C2C Loan Repaid
+- 1005 : C2C Loan Order Canceled
+- 1006 : C2C Loan Fees
+- 1007 : C2C Loan Liquidated
+- 1008 : C2C Loan- Margin Added
+- 1101 : Points Transfer
+- 1102 : Points Transfer Refund
+- 1171 : Bonus - Flexible
+- 1173 : Bonus - Flexible
+- 1174 : Bonus
+- 1181 : Staking
+- 1184 : Redemption
+- 1186 : Interest
+- 1191 : Staking
+- 1194 : Redemption
+- 1196 : Interest
+- 1201 : Startup Sale
+- 1202 : Startup Sale Rolled Back
+- 1251 : Stake
+- 1253 : Manually Redeem
+- 1255 : Reward
+- 1258 : Auto-Redeem
+- 1301 : Dust Swap-Small Balances Deducted
+- 1302 : Dust Swap-GT Added
+- 1303 : Dust Swap-Fees Deducted
+- 1307 : Dust Swap-Small Balances Deducted
+- 1310 : Dust Swap-Small Balances Deducted
+- 1311 : Dust Swap-Small Balances Deducted
+- 1312 : Small Balance Convert - USDT Added
+- 1322 : Convert Small Balance (USDT)
+- 1323 : Convert Small Balance - USDT Added
+- 1401 : Subaccount Transfer
+- 1501 : Subscription-Fees Deducted
+- 1502 : Subscription-Fees Received
+- 1503 : Subscription- Refund
+- 1504 : Subscription- Refunds Received
+- 1601 : Easy Options- Transferred In
+- 1602 : Easy Options- Transferred Out
+- 1603 : Options- Transferred In
+- 1604 : Options- Transferred Out
+- 1701 : Bots - Transfer In
+- 1702 : Bots - Transferred Out
+- 1703 : Bots - Refund
+- 1801 : CBBC- Transferred In
+- 1802 : CBBC- Transferred Out
+- 1811 : Warrant- Transferred In
+- 1812 : Warrant- Transferred Out
+- 1901 : Push- Deduction
+- 1903 : Push- Received-Deducted
+- 1905 : Push- Canceled
+- 1906 : Push- Rejected
+- 1907 : Push- Sent
+- 1908 : Push- Received
+- 2001 : Dual C-Purchased
+- 2004 : Dual C-Settled
+- 2011 : Subscription to Dip Sniper products
+- 2012 : Recouped from expired Dip Sniper products
+- 2021 : Subscription to Peak Sniper products
+- 2022 : Recouped from expired Peak Sniper products
+- 2202 : Lending Farm-Token Added
+- 2203 : Lending Farm-Token Removed
+- 2301 : Liquidity Added
+- 2302 : Liquidity Removed
+- 2303 : Liquidity Rebalanced
+- 2311 : Add Liquidity
+- 2312 : Remove Liquidity
+- 2314 : Mining Rewards
+- 2401 : Bots - Performance Fee Received
+- 2402 : Bots - Performance Fee Paid
+- 2403 : Bots - Performance Fee Refund
+- 2501 : NFT Auction-Margin Paid
+- 2502 : NFT Auction-Bid Made
+- 2503 : NFT Auction-Offer Made
+- 2504 : NFT Auction-Margin Returned
+- 2505 : Fixed Price-Bought
+- 2506 : Fixed Price-For Sale
+- 2512 : NFT Auction-Aborted-Margin Received
+- 2517 : NFT Auction-Order Canceled-Back
+- 2518 : NFT Make_Offer Bought
+- 2519 : Cancel offer refund
+- 2523 : Withdrawal service fee
+- 2524 : Withdrawal service fee
+- 2527 : Multi-copy creation service fee
+- 2528 : Multi-copy creation service fee refund
+- 2531 : Royalties
+- 2532 : NFT Auction-Order Canceled-Deducted
+- 2533 : Refund for invalid offer
+- 2536 : NFT Make_Offer Sale
+- 2538 : NFT Auction-Order Canceled-Rotalty-Deducted
+- 2539 : crowdfunding
+- 2540 : crowdfunding refund
+- 2541 : crowdfunding
+- 2542 : crowdfunding refund
+- 2551 : Nft-Amm Frozen
+- 2552 : Nft-Amm Withdraw
+- 2553 : Nft-Amm Deal Fee
+- 2554 : Nft-Amm Deal
+- 2601 : Quick Buy-Bought
+- 2602 : Quick Sell-Sold
+- 2603 : Repay All - Transfer Out
+- 2604 : Repay All - Transfer In
+- 2605 : Buy
+- 2606 : Sell
+- 2607 : Buy
+- 2608 : Sell
+- 2609 : Buy
+- 2610 : Sell
+- 2611 : Convert Refund
+- 2612 : Buy
+- 2613 : Sell
+- 2614 : HODLer Airdrop
+- 2701 : Mining Contract Purchased
+- 2702 : Mining Balance Added to System
+- 2703 : Mining Rewards Deducted From System
+- 2704 : Mining Rewards Claimed
+- 2706 : Mining Balance User Money Back
+- 2707 : Mining Balance deducted From System
+- 2801 : Slot Auction Staking-Locked
+- 2802 : Slot Auction Staking-Unlocked
+- 2803 : Slot Auction Staking Interest Income
+- 2804 : Slot Auction Staking-Locked
+- 2805 : Slot Auction Staking-Unlocked
+- 2806 : Slot Auction Staking Interest Income
+- 2807 : Structured Products Staking-Locked
+- 2808 : Structured Products Staking-Unlocked
+- 2809 : Structured Products Staking Interest Income
+- 2810 : Structured Products Financial Account Staking-Locked
+- 2811 : Structured Products Financial Account Staking-Unlocked
+- 2812 : Structured Products Financial Account Staking Interest Income
+- 2901 : Futures Competition Buy Gift Pack
+- 2902 : Futures Competition Dovote Reward
+- 2903 : Futures Competition Individual Ranking Reward
+- 2904 : Futures Competition Team Ranking Reward
+- 2905 : Futures Competition Early Bird Reward
+- 2906 : Futures Competition Early Bird Reward
+- 3001 : Payment Account- Transferred In
+- 3008 : Payment Account- Transferred Out
+- 3019 : Fiat Withdrawal
+- 3020 : Refund for Fiat Withdrawal
+- 3101 : Vouchers - Redeem Points
+- 3102 : Coupon Center Usdtest Exchange
+- 3103 : Activity Center Point Exchange
+- 3104 : Exclusive Benefits
+- 3105 : Vouchers - Trading Fee Rebate
+- 3150 : Error in event token release
+- 3151 : Paid by Loss Protection Voucher for Copier
+- 3201 : Futures Copy Trading - Funds Transfer In
+- 3202 : Futures Copy Trading - Funds Transfer Out
+- 3203 : Futures Copy Trading - Funds Auto Transfer Out
+- 3204 : Futures Lead Trading - Performance Fee Received
+- 3205 : Futures Copy Trading - Performance Fee Paid
+- 3206 : Futures Copy Trading - Performance Fee Refund
+- 3301 : Affiliate Ultra Direct Superior Rebate Income
+- 3302 : Gate.TR&Gate Transfer
+- 3321 : Affiliate Ultra Indirect Superior Rebate Income
+- 3341 : Affiliate Ultra User Rebate Income
+- 3390 : API Broker Rebate Income
+- 3401 : Block Trading Transfer In
+- 3402 : Block Trading Transfer Out
+- 3410 : Exchange Broker Rebate Income
+- 3501 : card top up
+- 3502 : Gate Card Cashback
+- 3503 : Return Top up
+- 3504 : Replace Card Fee
+- 3505 : Return Card Fee
+- 3506 : Card Inactivity Fee
+- 3507 : Authorization
+- 3508 : Reversal
+- 3509 : Clearing
+- 3510 : Refund
+- 3511 : Repayment
+- 3512 : Card Issuance Fee
+- 3513 : Return Card Fee
+- 3514 : Return Card Balance
+- 3515 : Tax Refund
+- 3516 : Points Redemption
+- 3517 : Withdraw from SGD Card
+- 3518 : Deposit to SGD Card
+- 3601 : Spot Lead Trading - Funds Transfer In
+- 3602 : Spot Lead Trading - Funds Transfer Out
+- 3603 : Spot Lead Trading - Funds Auto Transfer Out
+- 3604 : Spot Copy Trading - Funds Transfer In
+- 3605 : Spot Copy Trading - Funds Transfer Out
+- 3606 : Spot Copy Trading - Funds Auto Transfer Out
+- 3607 : Spot Lead Trading - Performance Fee Received
+- 3608 : Spot Copy Trading - Performance Fee Paid
+- 3609 : Spot Copy Trading - Performance Fee Refund
+- 3701 : OTC trade - buy
+- 3702 : OTC trade - sell
+- 3703 : OTC trade - cancel
+- 3801 : Futures Voucher Return Transfer
+- 3901 : Transfer to Pilot
+- 3902 : Transfer from Pilot
+- 3903 : Transfer to Spot
+- 3904 : Transfer from Spot
+- 3905 : Transfer to Spot
+- 3906 : Transfer from Pilot
+- 3920 : Event Rewards
+- 3922 : Pilot Token Airdrop
+- 3923 : Pilot Token Airdrop Failed
+- 4002 : Withdraw Commission
+- 4009 : Withdraw Rewards
+- 4011 : Deducted Negative Maker Fee
+- 5001 : Pre-Market OTC Trading Fee
+- 5002 : Pre-Market OTC Frozen Assets (Buy)
+- 5003 : Pre-Market OTC Frozen Assets (Sell)
+- 5004 : Pre-Market OTC Trading Fee Refund (Order Canceled)
+- 5005 : Pre-Market OTC Unfreeze Frozen Assets (Order Canceled)
+- 5006 : Pre-Market OTC Unfreeze Frozen Assets (Order Canceled)
+- 5007 : Pre-Market OTC Delivery Transfer Out
+- 5008 : Pre-Market OTC Delivery Transfer In
+- 5009 : Pre-Market OTC Unfreeze Frozen Assets (Delivery Success)
+- 5011 : Compensation to Buyer
+- 5012 : Pre-Market OTC Delivery Refund
+- 5013 : Pre-Market OTC Trading Fee Refund (Project Canceled)
+- 5014 : Pre-Market OTC Payment Refund Due to Project Cancellation (Buy)
+- 5015 : Pre-Market OTC Unfreeze Frozen Assets (Sell)
+- 5016 : Early Termination Fee
+- 5017 : Early Termination Indemnity
+- 5051 : Pre-Market - Mint - Deduct Staked Assets
+- 5052 : Pre-Market - Mint - PreToken Release
+- 5053 : Pre-Market - Take a Snapshot and Clear Balance Before Settlement
+- 5054 : Pre-Market - Delivery - Token Delivery
+- 5055 : Pre-Market - Delivery - Unstake Staked Assets
+- 5056 : Pre-Market - Settlement - Token Settlement
+- 5057 : Pre-Market - Settlement - Staked Assets Settlement
+- 5058 : Pre-Market - Project Canceled - Staked Assets Settlement
+- 5059 : Pre-Market-Unstake-Deduct PreToken
+- 5060 : Pre-Market -Unstake-Unstake Staked Assets
+- 5061 : Pre-Market - Increase Staked Assets
+- 5062 : Pre-Market - Decrease Staked Assets
+- 5104 : Fireblocks Fee Refund
 
 ## [#](#error-handling) Error Handling
 
@@ -1433,7 +2022,7 @@ _List all futures contracts_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-90) Enumerated Values
+#### [#](#enumerated-values-84) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1512,7 +2101,7 @@ _Get a single contract_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-91) Enumerated Values
+#### [#](#enumerated-values-85) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1594,7 +2183,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | limit    | query | integer | false    | Maximum number of order depth data in asks or bids                                                   |
 | with_id  | query | boolean | false    | Whether the order book update ID will be returned. This ID increases by 1 on every order book update |
 
-#### [#](#enumerated-values-92) Enumerated Values
+#### [#](#enumerated-values-86) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1691,7 +2280,7 @@ This parameter is deprecated. Use `from` and `to` instead to limit time range
 `limit` will be used to limit response items. If items between `from` and `to`
 are more than `limit`, only `limit` number will be returned.
 
-#### [#](#enumerated-values-93) Enumerated Values
+#### [#](#enumerated-values-87) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1762,7 +2351,7 @@ limit when specifying `from`, `to` and `interval`
 | limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
 | interval | query | string         | false    | Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0                               |
 
-#### [#](#enumerated-values-94) Enumerated Values
+#### [#](#enumerated-values-88) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1838,7 +2427,7 @@ _List futures tickers_
 | settle   | path  | string | true     | Settle currency  |
 | contract | query | string | false    | Futures contract |
 
-#### [#](#enumerated-values-95) Enumerated Values
+#### [#](#enumerated-values-89) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1868,7 +2457,9 @@ _List futures tickers_
     "funding_rate_indicative": "0.0001",
     "index_price": "6531",
     "highest_bid": "34089.7",
-    "lowest_ask": "34217.9"
+    "highest_size": "100",
+    "lowest_ask": "34217.9",
+    "lowest_size": "1000"
   }
 ]
 ```
@@ -1885,7 +2476,6 @@ Status Code **200**
 
 | Name                      | Type   | Description                                                                                                            |
 | ------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
-| _None_                    | array  | none                                                                                                                   |
 | » contract                | string | Futures contract                                                                                                       |
 | » last                    | string | Last trading price                                                                                                     |
 | » change_percentage       | string | Change percentage.                                                                                                     |
@@ -1900,13 +2490,15 @@ Status Code **200**
 | » volume_24h_settle       | string | Trade volume in recent 24h, in settle currency                                                                         |
 | » mark_price              | string | Recent mark price                                                                                                      |
 | » funding_rate            | string | Funding rate                                                                                                           |
-| » funding_rate_indicative | string | Indicative Funding rate in next period                                                                                 |
+| » funding_rate_indicative | string | Indicative Funding rate in next period. (deprecated. use `funding_rate`)                                               |
 | » index_price             | string | Index price                                                                                                            |
 | » quanto_base_rate        | string | Exchange rate of base currency and settlement currency in Quanto contract. Does not exists in contracts of other types |
 | » basis_rate              | string | Basis rate                                                                                                             |
 | » basis_value             | string | Basis value                                                                                                            |
 | » lowest_ask              | string | Recent lowest ask                                                                                                      |
+| » lowest_size             | string | The latest seller's lowest price order quantity                                                                        |
 | » highest_bid             | string | Recent highest bid                                                                                                     |
+| » highest_size            | string | The latest buyer's highest price order volume                                                                          |
 
 This operation does not require authentication
 
@@ -1925,7 +2517,7 @@ _Futures insurance balance history_
 | settle | path  | string  | true     | Settle currency                                           |
 | limit  | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-96) Enumerated Values
+#### [#](#enumerated-values-90) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1976,7 +2568,7 @@ _Query futures account_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-97) Enumerated Values
+#### [#](#enumerated-values-91) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1999,6 +2591,15 @@ _Query futures account_
   "bonus": "0",
   "in_dual_mode": false,
   "enable_evolved_classic": false,
+  "cross_initial_margin": "61855.56788525",
+  "cross_maintenance_margin": "682.04678105",
+  "cross_order_margin": "0",
+  "cross_unrealised_pnl": "1501.178222634128",
+  "cross_available": "27549.406108813951",
+  "cross_margin_balance": "10371.77306201952",
+  "cross_mmr": "797.2134",
+  "cross_imr": "116.6097",
+  "isolated_position_margin": "0",
   "history": {
     "dnw": "10000",
     "pnl": "68.3685",
@@ -2037,9 +2638,20 @@ Status Code **200**
 | » in_dual_mode                                                                 | boolean | Whether dual mode is enabled                                                                                                                                                                    |
 | » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
 | » position_initial_margin                                                      | string  | Initial margin position, applicable to the portfolio margin account model                                                                                                                       |
-| » maintenance_margin                                                           | string  | Maintenance margin position, applicable to the portfolio margin account model                                                                                                                   |
+| » maintenance_margin                                                           | string  | The maintenance deposit occupied by the position is suitable for the new classic account margin model and unified account model                                                                 |
 | » bonus                                                                        | string  | Perpetual Contract Bonus                                                                                                                                                                        |
-| » enable_evolved_classic                                                       | boolean | Classic account margin mode, true - enable new mode, false - revert to old mode.                                                                                                                |
+| » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
+| » cross_order_margin                                                           | string  | Full -warehouse hanging order deposit, suitable for the new classic account margin model                                                                                                        |
+| » cross_initial_margin                                                         | string  | The initial security deposit of the full warehouse is suitable for the new classic account margin model                                                                                         |
+| » cross_maintenance_margin                                                     | string  | Maintain deposit in full warehouse, suitable for new classic account margin models                                                                                                              |
+| » cross_unrealised_pnl                                                         | string  | The full warehouse does not achieve profit and loss, suitable for the new classic account margin model                                                                                          |
+| » cross_available                                                              | string  | Full warehouse available amount, suitable for the new classic account margin model                                                                                                              |
+| » cross_margin_balance                                                         | string  | Full margin balance, suitable for the new classic account margin model                                                                                                                          |
+| » cross_mmr                                                                    | string  | Maintain margin ratio for the full position, suitable for the new classic account margin model                                                                                                  |
+| » cross_imr                                                                    | string  | The initial margin rate of the full position is suitable for the new classic account margin model                                                                                               |
+| » isolated_position_margin                                                     | string  | Ware -position margin, suitable for the new classic account margin model                                                                                                                        |
+| » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
+| » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
 | » history                                                                      | object  | Statistical data                                                                                                                                                                                |
 | »» dnw                                                                         | string  | total amount of deposit and withdraw                                                                                                                                                            |
 | »» pnl                                                                         | string  | total amount of trading profit and loss                                                                                                                                                         |
@@ -2087,7 +2699,7 @@ _Query account book_
 - point_fee: POINT Trading fee
 - point_refr: POINT Referrer rebate
 
-#### [#](#enumerated-values-98) Enumerated Values
+#### [#](#enumerated-values-92) Enumerated Values
 
 | Parameter | Value      |
 | --------- | ---------- |
@@ -2114,7 +2726,8 @@ _Query account book_
     "text": "ETH_USD:6086261",
     "type": "fee",
     "contract": "ETH_USD",
-    "trade_id": "1"
+    "trade_id": "1",
+    "id": "1"
   }
 ]
 ```
@@ -2147,9 +2760,10 @@ Status Code **200**
 \- point_refr: POINT Referrer rebate  
 \- bonus_offset: bouns deduction | | » text | string | Comment | | » contract |
 string | Futures contract, the field is only available for data after
-2023-10-30. | | » trade_id | string | trade id |
+2023-10-30. | | » trade_id | string | trade id | | » id | string
+| 账户变更记录 id |
 
-#### [#](#enumerated-values-99) Enumerated Values
+#### [#](#enumerated-values-93) Enumerated Values
 
 | Property | Value        |
 | -------- | ------------ |
@@ -2181,7 +2795,7 @@ _List all positions of a user_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-100) Enumerated Values
+#### [#](#enumerated-values-94) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2224,6 +2838,7 @@ _List all positions of a user_
     },
     "mode": "single",
     "update_time": 1684994406,
+    "update_id": 1,
     "cross_leverage_limit": "0"
   }
 ]
@@ -2254,7 +2869,7 @@ _Get single position_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-101) Enumerated Values
+#### [#](#enumerated-values-95) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2296,6 +2911,7 @@ _Get single position_
   },
   "mode": "single",
   "update_time": 1684994406,
+  "update_id": 1,
   "cross_leverage_limit": "0"
 }
 ```
@@ -2326,7 +2942,7 @@ _Update position margin_
 | contract | path  | string | true     | Futures contract                                                                  |
 | change   | query | string | true     | Margin change. Use positive number to increase margin, negative number otherwise. |
 
-#### [#](#enumerated-values-102) Enumerated Values
+#### [#](#enumerated-values-96) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2368,6 +2984,7 @@ _Update position margin_
   },
   "mode": "single",
   "update_time": 1684994406,
+  "update_id": 1,
   "cross_leverage_limit": "0"
 }
 ```
@@ -2398,7 +3015,7 @@ _Update position leverage_
 | contract | path  | string | true     | Futures contract      |
 | leverage | query | string | true     | New position leverage |
 
-#### [#](#enumerated-values-103) Enumerated Values
+#### [#](#enumerated-values-97) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2440,6 +3057,7 @@ _Update position leverage_
   },
   "mode": "single",
   "update_time": 1684994406,
+  "update_id": 1,
   "cross_leverage_limit": "0"
 }
 ```
@@ -2470,7 +3088,7 @@ _Update position risk limit_
 | contract   | path  | string | true     | Futures contract        |
 | risk_limit | query | string | true     | New position risk limit |
 
-#### [#](#enumerated-values-104) Enumerated Values
+#### [#](#enumerated-values-98) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2512,6 +3130,7 @@ _Update position risk limit_
   },
   "mode": "single",
   "update_time": 1684994406,
+  "update_id": 1,
   "cross_leverage_limit": "0"
 }
 ```
@@ -2552,20 +3171,22 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
 
-| Name          | In   | Type                                | Required | Description                                                                                                                                       |
-| ------------- | ---- | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body          | body | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
-| » contract    | body | string                              | true     | Futures contract                                                                                                                                  |
-| » size        | body | integer(int64)                      | true     | Order size. Specify positive number to make a bid, and negative number to ask                                                                     |
-| » iceberg     | body | integer(int64)                      | false    | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                               |
-| » price       | body | string                              | false    | Order price. 0 for market order with `tif` set as `ioc`                                                                                           |
-| » close       | body | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
-| » reduce_only | body | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
-| » tif         | body | string                              | false    | Time in force                                                                                                                                     |
-| » text        | body | string                              | false    | User defined information. If not empty, must follow the rules below:                                                                              |
-| » auto_size   | body | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
-| » stp_act     | body | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                   |
-| settle        | path | string                              | true     | Settle currency                                                                                                                                   |
+| Name               | In   | Type                                | Required | Description                                                                                                                                       |
+| ------------------ | ---- | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body               | body | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
+| » contract         | body | string                              | true     | Futures contract                                                                                                                                  |
+| » size             | body | integer(int64)                      | true     | Order size. Specify positive number to make a bid, and negative number to ask                                                                     |
+| » iceberg          | body | integer(int64)                      | false    | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                               |
+| » price            | body | string                              | false    | Order price. 0 for market order with `tif` set as `ioc`                                                                                           |
+| » close            | body | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
+| » reduce_only      | body | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
+| » tif              | body | string                              | false    | Time in force                                                                                                                                     |
+| » text             | body | string                              | false    | Order custom information, users can use this field to set a custom ID, and the user-defined field must meet the following conditions:             |
+| » auto_size        | body | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
+| » stp_act          | body | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                   |
+| » bbo              | body | string                              | false    | Specify the price of the opponent                                                                                                                 |
+| » default_leverage | body | string                              | false    | Default leverage multiple                                                                                                                         |
+| settle             | path | string                              | true     | Settle currency                                                                                                                                   |
 
 #### [#](#detailed-descriptions-33) Detailed descriptions
 
@@ -2577,20 +3198,33 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
   fee
 - fok: FillOrKill, fill either completely or none
 
-**» text**: User defined information. If not empty, must follow the rules below:
+**» text**: Order custom information, users can use this field to set a custom
+ID, and the user-defined field must meet the following conditions:
 
-1.  prefixed with `t-`
-2.  no longer than 28 bytes without `t-` prefix
-3.  can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) Besides
-    user defined information, reserved contents are listed below, denoting how
-    the order is created:
+1.  Must start with `t-`
+2.  If `t-` is not calculated, the length cannot exceed 28 bytes
+3.  The input content can only contain numbers, letters, underscores (\_),
+    midscores (-) or dots (.)
 
-- web: from web
-- api: from API
-- app: from mobile phones
-- auto_deleveraging: from ADL
-- liquidation: from liquidation
-- insurance: from insurance
+In addition to user-defined information, the following are internal reserved
+fields that identifies the source of the order:
+
+- web: web page
+- api: API call
+- app: mobile terminal
+- auto_deleveraging: Automatic position reduction
+- liquidation: Liquidation under the classic account’s old liquidation mode
+- liq-xxx: a. Liquidation under the classic account’s new liquidation mode
+  (isolated, cross margin one-way mode, non-hedging part of cross margin hedge
+  mode) b. Liquidation under isolated margin in unified account single currency
+  margin mode
+- hedge-liq-xxx: Liquidation under the new liquidation mode of the classic
+  account hedge mode, the cross margin hedged part undergoes liquidation,
+  meaning both long and short positions are liquidated simultaneously.
+- pm_liquidate: Unified account multi-currency margin mode liquidation
+- comb_margin_liquidate: Unified account portfolio margin mode liquidation
+- scm_liquidate: Unified account single currency margin mode liquidation
+- insurance: insurance
 
 **» stp_act**: Self-Trading Prevention Action. Users can use this field to set
 self-trade prevetion strategies
@@ -2607,7 +3241,7 @@ self-trade prevetion strategies
 - co: Cancel oldest, Cancel old orders and keep new ones
 - cb: Cancel both, Both old and new orders will be cancelled
 
-#### [#](#enumerated-values-105) Enumerated Values
+#### [#](#enumerated-values-99) Enumerated Values
 
 | Parameter   | Value       |
 | ----------- | ----------- |
@@ -2687,7 +3321,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | count_total | query | integer | false    | Whether to return total number matched. Default to 0(no return)                         |
 | settle      | path  | string  | true     | Settle currency                                                                         |
 
-#### [#](#enumerated-values-106) Enumerated Values
+#### [#](#enumerated-values-100) Enumerated Values
 
 | Parameter   | Value    |
 | ----------- | -------- |
@@ -2767,7 +3401,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | side     | query | string | false    | All bids or asks. Both included if not specified |
 | settle   | path  | string | true     | Settle currency                                  |
 
-#### [#](#enumerated-values-107) Enumerated Values
+#### [#](#enumerated-values-101) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2836,7 +3470,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-108) Enumerated Values
+#### [#](#enumerated-values-102) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2899,7 +3533,7 @@ _Cancel a single order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-109) Enumerated Values
+#### [#](#enumerated-values-103) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2967,7 +3601,7 @@ _List personal trading history_
 | last_id     | query | string         | false    | Specify list staring point using the `id` of last record in previous list-query results |
 | count_total | query | integer        | false    | Whether to return total number matched. Default to 0(no return)                         |
 
-#### [#](#enumerated-values-110) Enumerated Values
+#### [#](#enumerated-values-104) Enumerated Values
 
 | Parameter   | Value |
 | ----------- | ----- |
@@ -2991,7 +3625,8 @@ _List personal trading history_
     "text": "t-123456",
     "fee": "0.01",
     "point_fee": "0",
-    "role": "taker"
+    "role": "taker",
+    "close_size": 0
   }
 ]
 ```
@@ -3006,21 +3641,29 @@ _List personal trading history_
 
 Status Code **200**
 
-| Name          | Type           | Description                                          |
-| ------------- | -------------- | ---------------------------------------------------- |
-| _None_        | array          | none                                                 |
-| » id          | integer(int64) | Trade ID                                             |
-| » create_time | number(double) | Trading time                                         |
-| » contract    | string         | Futures contract                                     |
-| » order_id    | string         | Order ID related                                     |
-| » size        | integer(int64) | Trading size                                         |
-| » price       | string         | Trading price                                        |
-| » role        | string         | Trade role. Available values are `taker` and `maker` |
-| » text        | string         | User defined information                             |
-| » fee         | string         | Fee deducted                                         |
-| » point_fee   | string         | Points used to deduct fee                            |
+| Name          | Type           | Description                 |
+| ------------- | -------------- | --------------------------- |
+| _None_        | array          | none                        |
+| » id          | integer(int64) | Trade ID                    |
+| » create_time | number(double) | Trading time                |
+| » contract    | string         | Futures contract            |
+| » order_id    | string         | Order ID related            |
+| » size        | integer(int64) | Trading size                |
+| » close_size  | integer(int64) | Number of closed positions: |
 
-#### [#](#enumerated-values-111) Enumerated Values
+close_size=0 && size＞0 Open long position  
+close_size=0 && size＜0 Open short position  
+close_size>0 && size>0 && size <= close_size Close short postion  
+close_size>0 && size>0 && size > close_size Close short position and open long
+position  
+close_size<0 && size<0 && size >= close_size Close long postion  
+close_size<0 && size<0 && size < close_size Close long position and open short
+position | | » price | string | Trading price | | » role | string | Trade role.
+Available values are `taker` and `maker` | | » text | string | User defined
+information | | » fee | string | Fee deducted | | » point_fee | string | Points
+used to deduct fee |
+
+#### [#](#enumerated-values-105) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3055,7 +3698,7 @@ _List position close history_
 | contract | query | string  | false    | Futures contract                                          |
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-112) Enumerated Values
+#### [#](#enumerated-values-106) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3077,6 +3720,7 @@ _List position close history_
     "contract": "BTC_USDT",
     "text": "web",
     "max_size": "100",
+    "accum_size": "100",
     "first_open_time": 1546487347,
     "long_price": "2026.87",
     "short_price": "2544.4"
@@ -3106,11 +3750,12 @@ Status Code **200**
 | » pnl_fee         | string         | PNL - Transaction Fees                                                                                                         |
 | » text            | string         | Text of close order                                                                                                            |
 | » max_size        | string         | Max Trade Size                                                                                                                 |
+| » accum_size      | string         | Cumulative closed position volume                                                                                              |
 | » first_open_time | integer(int64) | First Open Time                                                                                                                |
 | » long_price      | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price. |
 | » short_price     | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price  |
 
-#### [#](#enumerated-values-113) Enumerated Values
+#### [#](#enumerated-values-107) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3138,7 +3783,7 @@ _List liquidation history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a liquidation timestamp                           |
 
-#### [#](#enumerated-values-114) Enumerated Values
+#### [#](#enumerated-values-108) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3214,7 +3859,7 @@ _List settlement history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a settlement timestamp                            |
 
-#### [#](#enumerated-values-115) Enumerated Values
+#### [#](#enumerated-values-109) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3266,6 +3911,90 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
+## [#](#list-risk-limit-tiers-2) List risk limit tiers
+
+> Code samples
+
+`GET /delivery/{settle}/risk_limit_tiers`
+
+_List risk limit tiers_
+
+When the 'contract' parameter is not passed, the default is to query the risk
+limits for the top 100 markets.'Limit' and 'offset' correspond to pagination
+queries at the market level, not to the length of the returned array. This only
+takes effect when the 'contract' parameter is empty.
+
+### Parameters
+
+| Name     | In    | Type    | Required | Description                                               |
+| -------- | ----- | ------- | -------- | --------------------------------------------------------- |
+| settle   | path  | string  | true     | Settle currency                                           |
+| contract | query | string  | false    | Futures contract                                          |
+| limit    | query | integer | false    | Maximum number of records to be returned in a single list |
+| offset   | query | integer | false    | List offset, starting from 0                              |
+
+#### [#](#enumerated-values-110) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "maintenance_rate": "0.01",
+    "tier": 1,
+    "initial_rate": "0.02",
+    "leverage_max": "50",
+    "risk_limit": "500000",
+    "contract": "BTC_USDT"
+  },
+  {
+    "initial_rate": "0.03",
+    "maintenance_rate": "0.02",
+    "tier": 2,
+    "risk_limit": "1000000",
+    "leverage_max": "33.33",
+    "contract": "BTC_USDT"
+  },
+  {
+    "maintenance_rate": "0.01",
+    "tier": 1,
+    "initial_rate": "0.02",
+    "leverage_max": "50",
+    "risk_limit": "500000",
+    "contract": "ETH_USDT"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description            | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                | Type         | Description                                                                            |
+| ------------------- | ------------ | -------------------------------------------------------------------------------------- |
+| _None_              | array        | \[Retrieve risk limit configurations for different tiers under a specified contract.\] |
+| » _None_            | object       | Retrieve risk limit configurations for different tiers under a specified contract.     |
+| »» tier             | integer(int) | Tier                                                                                   |
+| »» risk_limit       | string       | Position risk limit                                                                    |
+| »» initial_rate     | string       | Initial margin rate                                                                    |
+| »» maintenance_rate | string       | Maintenance margin rate                                                                |
+| »» leverage_max     | string       | Maximum leverage                                                                       |
+| »» contract         | string       | Markets, visible only during market pagination requests                                |
+
+This operation does not require authentication
+
 ## [#](#create-a-price-triggered-order-3) Create a price-triggered order
 
 > Code samples
@@ -3296,30 +4025,39 @@ _Create a price-triggered order_
 
 ### Parameters
 
-| Name             | In   | Type                                                            | Required | Description                                                                                                                                       |
-| ---------------- | ---- | --------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body             | body | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) | true     | none                                                                                                                                              |
-| » initial        | body | object                                                          | true     | none                                                                                                                                              |
-| »» contract      | body | string                                                          | true     | Futures contract                                                                                                                                  |
-| »» size          | body | integer(int64)                                                  | false    | Order size. Positive size means to buy, while negative one means to sell. Set to 0 to close the position                                          |
-| »» price         | body | string                                                          | true     | Order price. Set to 0 to use market price                                                                                                         |
-| »» close         | body | boolean                                                         | false    | Set to true if trying to close the position                                                                                                       |
-| »» tif           | body | string                                                          | false    | Time in force. If using market price, only `ioc` is supported.                                                                                    |
-| »» text          | body | string                                                          | false    | The source of the order, including:                                                                                                               |
-| »» reduce_only   | body | boolean                                                         | false    | Set to true to create a reduce-only order                                                                                                         |
-| »» auto_size     | body | string                                                          | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
-| » trigger        | body | object                                                          | true     | none                                                                                                                                              |
-| »» strategy_type | body | integer(int32)                                                  | false    | How the order will be triggered                                                                                                                   |
-| »» price_type    | body | integer(int32)                                                  | false    | Price type. 0 - latest deal price, 1 - mark price, 2 - index price                                                                                |
-| »» price         | body | string                                                          | false    | Value of price on price triggered, or price gap on price gap triggered                                                                            |
-| »» rule          | body | integer(int32)                                                  | false    | Trigger condition type                                                                                                                            |
-| »» expiration    | body | integer                                                         | false    | How long (in seconds) to wait for the condition to be triggered before cancelling the order.                                                      |
-| » order_type     | body | string                                                          | false    | Take-profit/stop-loss types, which include:                                                                                                       |
-| settle           | path | string                                                          | true     | Settle currency                                                                                                                                   |
+| Name             | In   | Type                                                            | Required | Description                                                                                                                                                                        |
+| ---------------- | ---- | --------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body             | body | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) | true     | none                                                                                                                                                                               |
+| » initial        | body | object                                                          | true     | none                                                                                                                                                                               |
+| »» contract      | body | string                                                          | true     | Futures contract                                                                                                                                                                   |
+| »» size          | body | integer(int64)                                                  | false    | Represents the number of contracts that need to be closed, full closing: size=0                                                                                                    |
+| »» price         | body | string                                                          | true     | Order price. Set to 0 to use market price                                                                                                                                          |
+| »» close         | body | boolean                                                         | false    | When all positions are closed in a single position mode, it must be set to true to perform the closing operation                                                                   |
+| »» tif           | body | string                                                          | false    | Time in force strategy, default is gtc, market order currently only supports ioc mode Market order currently only supports ioc mode                                                |
+| »» text          | body | string                                                          | false    | The source of the order, including:                                                                                                                                                |
+| »» reduce_only   | body | boolean                                                         | false    | When set to true, perform automatic position reduction operation. Set to true to ensure that the order will not open a new position, and is only used to close or reduce positions |
+| »» auto_size     | body | string                                                          | false    | Do not set auto_size                                                                                                                                                               |
+| » trigger        | body | object                                                          | true     | none                                                                                                                                                                               |
+| »» strategy_type | body | integer(int32)                                                  | false    | Trigger Policy                                                                                                                                                                     |
+| »» price_type    | body | integer(int32)                                                  | false    | Price type. 0 - latest deal price, 1 - mark price, 2 - index price                                                                                                                 |
+| »» price         | body | string                                                          | false    | Value of price on price triggered, or price gap on price gap triggered                                                                                                             |
+| »» rule          | body | integer(int32)                                                  | false    | Price Condition Type                                                                                                                                                               |
+| »» expiration    | body | integer                                                         | false    | How long (in seconds) to wait for the condition to be triggered before cancelling the order.                                                                                       |
+| » order_type     | body | string                                                          | false    | Types of stop-profit and stop-loss, including:                                                                                                                                     |
+| settle           | path | string                                                          | true     | Settle currency                                                                                                                                                                    |
 
 #### [#](#detailed-descriptions-34) Detailed descriptions
 
-**»» tif**: Time in force. If using market price, only `ioc` is supported.
+**»» size**: Represents the number of contracts that need to be closed, full
+closing: size=0 Partial closing: plan-close-short-position size>0 Partial
+closing: plan-close-long-position size<0
+
+**»» close**: When all positions are closed in a single position mode, it must
+be set to true to perform the closing operation When partially closed positions
+in single-store mode/double-store mode, you can not set close, or close=false
+
+**»» tif**: Time in force strategy, default is gtc, market order currently only
+supports ioc mode Market order currently only supports ioc mode
 
 - gtc: GoodTillCancelled
 - ioc: ImmediateOrCancelled
@@ -3330,34 +4068,45 @@ _Create a price-triggered order_
 - api: api
 - app: app
 
-**»» strategy_type**: How the order will be triggered
+**»» auto_size**: Do not set auto_size When the dual-position mode is closed all
+positions (size=0), auto_size, close_long, close_short, short When the
+double-storey mode partially closes the position (size ≠ 0), there is no need to
+set auto_size
 
-- `0`: by price, which means the order will be triggered if price condition is
-  satisfied
-- `1`: by price gap, which means the order will be triggered if gap of recent
-  two prices of specified `price_type` are satisfied. Only `0` is supported
-  currently
+**»» strategy_type**: Trigger Policy
 
-**»» rule**: Trigger condition type
+- 0: Price trigger, that is, when the price meets the conditions
+- 1: Price spread trigger, i.e. the last price specified in `price_type` minus
+  the second-last price difference At present, only 0 is the latest transaction
+  price
 
-- `1`: calculated price based on `strategy_type` and `price_type` >= `price`
-- `2`: calculated price based on `strategy_type` and `price_type` <= `price`
+**»» rule**: Price Condition Type
 
-**» order_type**: Take-profit/stop-loss types, which include:
+- 1: Indicates that the price calculated based on `strategy_type` and
+  `price_type` is greater than or equal to `Trigger.Price` Trigger, while
+  Trigger.Price must > last_price
+- 2: Indicates that the price calculated based on `strategy_type` and
+  `price_type` is less than or equal to `Trigger.Price` Trigger, and
+  Trigger.Price must < last_price
 
-- `close-long-order`: order take-profit/stop-loss, close long position
-- `close-short-order`: order take-profit/stop-loss, close short position
-- `close-long-position`: position take-profit/stop-loss, close long position
-- `close-short-position`: position take-profit/stop-loss, close short position
-- `plan-close-long-position`: position planned take-profit/stop-loss, close long
+**» order_type**: Types of stop-profit and stop-loss, including:
+
+- `close-long-order`: Entrusting order stop profit and stop loss, flat long
   position
-- `plan-close-short-position`: position planned take-profit/stop-loss, close
-  short position
+- `close-short-order`: Entrusted order stop profit and stop loss, short position
+- `close-long-position`: Position stop-profit stop loss, used to close long
+  positions
+- `close-short-position`: Position stop-profit stop loss, used to close all
+  short positions
+- `plan-close-long-position`: Position plan take profit and stop loss, used to
+  close long positions in all or part of long positions
+- `plan-close-short-position`: Position plan stop-profit and stop loss, used to
+  close all short positions or partially close short positions
 
-The order take-profit/stop-loss can not be passed by request. These two types
-are read only.
+The two types of entrusted order stop-profit and stop-loss are read-only and
+cannot be passed in through requests
 
-#### [#](#enumerated-values-116) Enumerated Values
+#### [#](#enumerated-values-111) Enumerated Values
 
 | Parameter        | Value |
 | ---------------- | ----- |
@@ -3402,13 +4151,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-all-auto-orders-2) List all auto orders
+## [#](#list-all-price-triggered-orders-2) List All Price-triggered Orders
 
 > Code samples
 
 `GET /delivery/{settle}/price_orders`
 
-_List all auto orders_
+_List All Price-triggered Orders_
 
 ### Parameters
 
@@ -3420,7 +4169,7 @@ _List all auto orders_
 | offset   | query | integer | false    | List offset, starting from 0                              |
 | settle   | path  | string  | true     | Settle currency                                           |
 
-#### [#](#enumerated-values-117) Enumerated Values
+#### [#](#enumerated-values-112) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -3470,13 +4219,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-all-open-orders-3) Cancel all open orders
+## [#](#cancel-all-price-triggered-orders-3) Cancel All Price-triggered Orders
 
 > Code samples
 
 `DELETE /delivery/{settle}/price_orders`
 
-_Cancel all open orders_
+_Cancel All Price-triggered Orders_
 
 ### Parameters
 
@@ -3485,7 +4234,7 @@ _Cancel all open orders_
 | contract | query | string | true     | Futures contract |
 | settle   | path  | string | true     | Settle currency  |
 
-#### [#](#enumerated-values-118) Enumerated Values
+#### [#](#enumerated-values-113) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3548,7 +4297,7 @@ _Get a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-119) Enumerated Values
+#### [#](#enumerated-values-114) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3609,7 +4358,7 @@ _cancel a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-120) Enumerated Values
+#### [#](#enumerated-values-115) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |

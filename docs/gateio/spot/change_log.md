@@ -1,5 +1,254 @@
 # [#](#changelog) Changelog
 
+**v4.100.0**
+
+- Add alpha account query and account book query functionality
+- New feature `GET /earn/staking/coins` endpoint, Query on-chain staking coin
+  types
+- New feature `POST /earn/staking/swap` endpoint, On-chain staking coin swap
+- Add `sub_broker_info` object field in broker commission and transaction APIs
+
+**v4.99.0**
+
+- Add `refresh_time` field in `GET /spot/accounts`、`GET /spot/real_accounts`
+  endpoint response
+- Remove the `PUT /earn/uni/interest_reinvest` endpoint
+
+**v4.98.0**
+
+- New feature `/earn/uni/rate` endpoint, Currency estimate annualized interest
+  rate
+- Add `delisting_time`、`trade_url` field in
+  `GET /spot/currency_pairs`、`GET /spot/currency_pairs/{currency_pair}`
+  endpoint
+
+**v4.97.0**
+
+- New feature `GET /unified/batch_borrowable` endpoint, Batch query unified
+  account can be borrowed up to a maximum
+- `GET /spot/candlesticks` endpoint, `interval` supports `1s` granularity
+- New feature `GET /earn/uni/chart` endpoint, UniLoan currency annualized trend
+  chart
+- New feature `POST /futures/{settle}/positions/cross_mode` endpoint, Switch to
+  the full position-by-store mode
+
+**v4.96.0**
+
+- Add `cross_margin_balance`,`cross_mmr`,`cross_imr` field in
+  `GET /futures/{settle}/accounts` response
+
+**v4.95.0**
+
+- Add `code` field in `GET /spot/account_book` query & response
+- New feature `GET /unified/transferables` endpoint, Batch query unified account
+  can be transferred up to a maximum of
+- New feature `GET /margin/user/loan_margin_tiers` endpoint, Check the user's
+  own leverage lending gradient in the current market
+- New feature `GET /margin/loan_margin_tiers` endpoint, Query the current market
+  leverage lending gradient
+- New feature `POST /margin/leverage/user_market_setting` endpoint, Set the user
+  market leverage multiple
+- New feature `GET /margin/user/account` endpoint, Query the user's leverage
+  account list
+
+**v4.94.0**
+
+- New feature `GET /unified/currencies` endpoint, List of loan currencies
+  supported by unified account
+- Add `sub_uid` field in `GET /unified/accounts` query
+
+**v4.93.0**
+
+- Add `plan_id` field in `GET /earn/dual/investment_plan` query
+- Add `from`、`to`、`page`、`limit` field in `GET /earn/dual/orders` query
+- Add `text` field in `GET /earn/dual/orders` response
+- Add `text` field in `POST /earn/dual/orders` response
+- New feature `GET /earn/staking/eth2/rate_records` endpoint, Query historical
+  rate of ETH2
+
+**v4.92.0**
+
+2025-02-24
+
+- Add `name` field in `GET /spot/currencies` query
+- Add `base_name`、`quote_name` field in `GET /spot/currency_pairs` response
+- Add `unified` field in `GET /spot/price_orders` query
+- Add `sub_uid` field in `GET /unified/accounts` query
+
+**v4.91.0**
+
+2025-02-10
+
+`2025-04-01` After that, we will remove the following interface, please migrate
+to the new interface as soon as possible
+
+- `GET /margin/cross/borrowable` endpoint, deprecated
+- `GET /margin/cross/estimate_rate` endpoint, deprecated
+- `GET /margin/cross/transferable` endpoint, deprecated
+- `GET /margin/cross/interest_records` endpoint, deprecated
+- `GET /margin/cross/repayments` endpoint, deprecated
+- `POST /margin/cross/repayments` endpoint, deprecated
+- `GET /margin/cross/loans/{loan_id}` endpoint, deprecated
+- `POST /margin/cross/loans` endpoint, deprecated
+- `GET /margin/cross/account_book` endpoint, deprecated
+- `GET /margin/cross/accounts` endpoint, deprecated
+- `GET /margin/cross/currencies/{currency}` endpoint, deprecated
+- `GET /margin/cross/currencies` endpoint, deprecated
+
+**v4.90.0**
+
+2025-01-20
+
+- Add `transaction_type` field in `GET /wallet/push` query
+- New feature `GET /rebate/user/sub_relation` endpoint, Query whether the
+  specified user is in the system
+- Add `order_size` field in`GET /futures/{settle}/liq_orders` response
+- Add `type` field in `GET /spot/currency_pairs` response
+
+**v4.89.0**
+
+2025-01-08
+
+- Add `text` field in `DELETE /futures/{settle}/close_all_positions` query
+  string
+
+**v4.88.0**
+
+2024-12-24
+
+- New feature `GET /spot/insurance_history` endpoint, Query spot insurance fund
+  historical data
+- Add
+  `cross_balance`、`iso_balance`、`im`、`mm`、`imr`、`mmr`、`margin_balance`、`available_margin`
+  field in `GET /unified/accounts` response
+- `PUT /unified/unified_mode` endpoint，Added single-currency margin mode
+
+**v4.87.0**
+
+- New feature `GET /unified/history_loan_rate` endpoint, Get historical lending
+  rates
+
+**v4.86.0**
+
+2024-12-02
+
+- New feature `GET /wallet/order_status` endpoint. Transfer status query
+- Add `update_id` field in `GET /futures/{settle}/positions` response
+
+**v4.85.0**
+
+2024-11-11
+
+- Add `x-gate-exptime` field in
+  `POST /futures/{settle}/orders`、`POST /spot/batch_order` header.
+
+Add
+`cross_order_margin`、`cross_initial_margin`、`cross_maintenance_margin`、`cross_unrealised_pnl`、`cross_available`、`isolated_position_margin`
+field in `POST /futures/{settle}/dual_mode` response.
+
+**v4.84.0**
+
+2024-11-04
+
+- New feature `GET /loan/multi_collateral/current_rate` endpoint, Query the
+  current interest rate of the currency
+- Add `lowest_size`、`highest_size` field in `GET /spot/tickers` response
+- Add `amount` field in `POST /earn/dual/orders` request body
+
+**v4.83.0**
+
+2024-10-28
+
+- New feature `GET /unified/leverage/user_currency_config` endpoint, Query the
+  maximum and minimum leverage multiples that users can set for a currency
+- New feature `GET /unified/leverage/user_currency_setting` endpoint, Get the
+  user's currency leverage
+- New feature `POST /unified/leverage/user_currency_setting` endpoint, Set the
+  currency leverage ratio
+- Add `id` field in `GET /futures/{settle}/account_book` response
+- Add `leverage` field in `GET /unified/currency_discount_tiers` response
+
+**v4.82.0**
+
+2024-10-14
+
+- New feature `GET /account/rate_limit` endpoint, Get user flow limit
+  information. For details, please refer to
+  [Trade Ratio Rate Limiting](#trade-ratio-rate-limiting)
+- `GET /account/detail` 接口, 返回值增加 `copy_trading_role` 字段
+
+**v4.81.0**
+
+2024-09-30
+
+- New feature `POST /options/countdown_cancel_all` endpoint, Countdown to cancel
+  order
+- Add `message` field in `GET /wallet/push` response
+- Add `lowest_size`、`highest_size` in `GET /futures/{settle}/tickers` response
+- Add `from`、`to` in `GET /futures/{settle}/funding_rate` query
+- Add `is_max` field in `POST /earn/dual/orders` response
+
+**v4.80.0**
+
+2024-09-09
+
+- New feature `GET /options/mmp` endpoint, MMP Query
+- New feature `POST /options/mmp` endpoint, MMP Settings
+- New feature `POST /options/mmp/reset` endpoint, MMP Reset
+- Add `block_number` field in `GET /wallet/withdrawals` response
+
+**v4.79.0**
+
+2024-09-02
+
+- Add `from`、`to` field in `GET /unified/interest_records` query
+- Add `options` field in `GET /unified/unified_mode` response
+- Add `options` field in `PUT /unified/unified_mode` request body
+
+**v4.78.0**
+
+2024-08-19
+
+- New feature `GET /wallet/push` endpoint, Get Records
+- New feature `POST /withdrawals/push` endpoint, Transfer between spot main
+  accounts. Both parties cannot be sub-accounts.
+- New feature `GET /futures/{settle}/batch_amend_orders` endpoint, Batch modify
+  orders with specified IDs
+- Add `close_size` field in `GET /futures/{settle}/my_trades` response
+- Add `tx_id` field in `POST /wallet/transfers` response
+
+**v4.77.0**
+
+2024-08-05
+
+- New feature: add `GET /sub_accounts/unified_mode` endpoint，Get sub-account
+  mode
+- Add `from`、`to` field in `GET /rebate/broker/commission_history` query
+- Add `from`、`to` field in `GET /rebate/broker/transaction_history` query
+
+**v4.76.0**
+
+2024-07-22
+
+- New feature: add `GET /rebate/partner/sub_list` endpoint，Partner subordinate
+  list
+- Add `page`、`limit` field in `GET /flash_swap/currency_pairs` query
+- Add `order_id`、`currency_pair`、`account` field in
+  `PATCH /spot/orders/{order_id}`
+- Add `order_id`、`currency_pair`、`account` field in
+  `DELETE /spot/orders/{order_id}`
+
+**v4.75.1**
+
+2024-07-08
+
+- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint，querying
+  risk limit levels
+- New feature: add `GET /rebate/partner/transaction_history` endpoint，partners
+  to get the transaction history of recommended users
+- Add `borrow_type` field in `GET /unified/loan_records` response
+- Add `accum_size` field in `GET /futures/{settle}/position_close` response
+
 **v4.75.0**
 
 2024-06-24
@@ -337,9 +586,9 @@
 
 2023-03-03
 
-- Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`,
-  `total_liab`, `portfolio_margin_total_liab`, `portfolio_margin_total_equity`
-  fields in `GET /margin/cross/accounts` endpoint
+Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
+`portfolio_margin_total_liab`, `portfolio_margin_total_equity` fields in
+`GET /margin/cross/accounts` endpoint
 
 **v4.40.0**
 
