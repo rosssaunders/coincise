@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-0) Gate API v4 v4.100.0
+# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2022,7 +2022,7 @@ _List all futures contracts_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-83) Enumerated Values
+#### [#](#enumerated-values-84) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2101,7 +2101,7 @@ _Get a single contract_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-84) Enumerated Values
+#### [#](#enumerated-values-85) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2183,7 +2183,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | limit    | query | integer | false    | Maximum number of order depth data in asks or bids                                                   |
 | with_id  | query | boolean | false    | Whether the order book update ID will be returned. This ID increases by 1 on every order book update |
 
-#### [#](#enumerated-values-85) Enumerated Values
+#### [#](#enumerated-values-86) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2280,7 +2280,7 @@ This parameter is deprecated. Use `from` and `to` instead to limit time range
 `limit` will be used to limit response items. If items between `from` and `to`
 are more than `limit`, only `limit` number will be returned.
 
-#### [#](#enumerated-values-86) Enumerated Values
+#### [#](#enumerated-values-87) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2351,7 +2351,7 @@ limit when specifying `from`, `to` and `interval`
 | limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
 | interval | query | string         | false    | Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0                               |
 
-#### [#](#enumerated-values-87) Enumerated Values
+#### [#](#enumerated-values-88) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2427,7 +2427,7 @@ _List futures tickers_
 | settle   | path  | string | true     | Settle currency  |
 | contract | query | string | false    | Futures contract |
 
-#### [#](#enumerated-values-88) Enumerated Values
+#### [#](#enumerated-values-89) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2517,7 +2517,7 @@ _Futures insurance balance history_
 | settle | path  | string  | true     | Settle currency                                           |
 | limit  | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-89) Enumerated Values
+#### [#](#enumerated-values-90) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2568,7 +2568,7 @@ _Query futures account_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-90) Enumerated Values
+#### [#](#enumerated-values-91) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2699,7 +2699,7 @@ _Query account book_
 - point_fee: POINT Trading fee
 - point_refr: POINT Referrer rebate
 
-#### [#](#enumerated-values-91) Enumerated Values
+#### [#](#enumerated-values-92) Enumerated Values
 
 | Parameter | Value      |
 | --------- | ---------- |
@@ -2763,7 +2763,7 @@ string | Futures contract, the field is only available for data after
 2023-10-30. | | » trade_id | string | trade id | | » id | string
 | 账户变更记录 id |
 
-#### [#](#enumerated-values-92) Enumerated Values
+#### [#](#enumerated-values-93) Enumerated Values
 
 | Property | Value        |
 | -------- | ------------ |
@@ -2795,7 +2795,7 @@ _List all positions of a user_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-93) Enumerated Values
+#### [#](#enumerated-values-94) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2869,7 +2869,7 @@ _Get single position_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-94) Enumerated Values
+#### [#](#enumerated-values-95) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2942,7 +2942,7 @@ _Update position margin_
 | contract | path  | string | true     | Futures contract                                                                  |
 | change   | query | string | true     | Margin change. Use positive number to increase margin, negative number otherwise. |
 
-#### [#](#enumerated-values-95) Enumerated Values
+#### [#](#enumerated-values-96) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3015,7 +3015,7 @@ _Update position leverage_
 | contract | path  | string | true     | Futures contract      |
 | leverage | query | string | true     | New position leverage |
 
-#### [#](#enumerated-values-96) Enumerated Values
+#### [#](#enumerated-values-97) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3088,7 +3088,7 @@ _Update position risk limit_
 | contract   | path  | string | true     | Futures contract        |
 | risk_limit | query | string | true     | New position risk limit |
 
-#### [#](#enumerated-values-97) Enumerated Values
+#### [#](#enumerated-values-98) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3171,20 +3171,22 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
 
-| Name          | In   | Type                                | Required | Description                                                                                                                                       |
-| ------------- | ---- | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body          | body | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
-| » contract    | body | string                              | true     | Futures contract                                                                                                                                  |
-| » size        | body | integer(int64)                      | true     | Order size. Specify positive number to make a bid, and negative number to ask                                                                     |
-| » iceberg     | body | integer(int64)                      | false    | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                               |
-| » price       | body | string                              | false    | Order price. 0 for market order with `tif` set as `ioc`                                                                                           |
-| » close       | body | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
-| » reduce_only | body | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
-| » tif         | body | string                              | false    | Time in force                                                                                                                                     |
-| » text        | body | string                              | false    | Order custom information, users can use this field to set a custom ID, and the user-defined field must meet the following conditions:             |
-| » auto_size   | body | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
-| » stp_act     | body | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                   |
-| settle        | path | string                              | true     | Settle currency                                                                                                                                   |
+| Name               | In   | Type                                | Required | Description                                                                                                                                       |
+| ------------------ | ---- | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body               | body | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
+| » contract         | body | string                              | true     | Futures contract                                                                                                                                  |
+| » size             | body | integer(int64)                      | true     | Order size. Specify positive number to make a bid, and negative number to ask                                                                     |
+| » iceberg          | body | integer(int64)                      | false    | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                               |
+| » price            | body | string                              | false    | Order price. 0 for market order with `tif` set as `ioc`                                                                                           |
+| » close            | body | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
+| » reduce_only      | body | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
+| » tif              | body | string                              | false    | Time in force                                                                                                                                     |
+| » text             | body | string                              | false    | Order custom information, users can use this field to set a custom ID, and the user-defined field must meet the following conditions:             |
+| » auto_size        | body | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
+| » stp_act          | body | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                   |
+| » bbo              | body | string                              | false    | Specify the price of the opponent                                                                                                                 |
+| » default_leverage | body | string                              | false    | Default leverage multiple                                                                                                                         |
+| settle             | path | string                              | true     | Settle currency                                                                                                                                   |
 
 #### [#](#detailed-descriptions-33) Detailed descriptions
 
@@ -3239,7 +3241,7 @@ self-trade prevetion strategies
 - co: Cancel oldest, Cancel old orders and keep new ones
 - cb: Cancel both, Both old and new orders will be cancelled
 
-#### [#](#enumerated-values-98) Enumerated Values
+#### [#](#enumerated-values-99) Enumerated Values
 
 | Parameter   | Value       |
 | ----------- | ----------- |
@@ -3319,7 +3321,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | count_total | query | integer | false    | Whether to return total number matched. Default to 0(no return)                         |
 | settle      | path  | string  | true     | Settle currency                                                                         |
 
-#### [#](#enumerated-values-99) Enumerated Values
+#### [#](#enumerated-values-100) Enumerated Values
 
 | Parameter   | Value    |
 | ----------- | -------- |
@@ -3399,7 +3401,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | side     | query | string | false    | All bids or asks. Both included if not specified |
 | settle   | path  | string | true     | Settle currency                                  |
 
-#### [#](#enumerated-values-100) Enumerated Values
+#### [#](#enumerated-values-101) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3468,7 +3470,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-101) Enumerated Values
+#### [#](#enumerated-values-102) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3531,7 +3533,7 @@ _Cancel a single order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-102) Enumerated Values
+#### [#](#enumerated-values-103) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3599,7 +3601,7 @@ _List personal trading history_
 | last_id     | query | string         | false    | Specify list staring point using the `id` of last record in previous list-query results |
 | count_total | query | integer        | false    | Whether to return total number matched. Default to 0(no return)                         |
 
-#### [#](#enumerated-values-103) Enumerated Values
+#### [#](#enumerated-values-104) Enumerated Values
 
 | Parameter   | Value |
 | ----------- | ----- |
@@ -3661,7 +3663,7 @@ Available values are `taker` and `maker` | | » text | string | User defined
 information | | » fee | string | Fee deducted | | » point_fee | string | Points
 used to deduct fee |
 
-#### [#](#enumerated-values-104) Enumerated Values
+#### [#](#enumerated-values-105) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3696,7 +3698,7 @@ _List position close history_
 | contract | query | string  | false    | Futures contract                                          |
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-105) Enumerated Values
+#### [#](#enumerated-values-106) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3753,7 +3755,7 @@ Status Code **200**
 | » long_price      | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price. |
 | » short_price     | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price  |
 
-#### [#](#enumerated-values-106) Enumerated Values
+#### [#](#enumerated-values-107) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3781,7 +3783,7 @@ _List liquidation history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a liquidation timestamp                           |
 
-#### [#](#enumerated-values-107) Enumerated Values
+#### [#](#enumerated-values-108) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3857,7 +3859,7 @@ _List settlement history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a settlement timestamp                            |
 
-#### [#](#enumerated-values-108) Enumerated Values
+#### [#](#enumerated-values-109) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3931,7 +3933,7 @@ takes effect when the 'contract' parameter is empty.
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | offset   | query | integer | false    | List offset, starting from 0                              |
 
-#### [#](#enumerated-values-109) Enumerated Values
+#### [#](#enumerated-values-110) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4104,7 +4106,7 @@ set auto_size
 The two types of entrusted order stop-profit and stop-loss are read-only and
 cannot be passed in through requests
 
-#### [#](#enumerated-values-110) Enumerated Values
+#### [#](#enumerated-values-111) Enumerated Values
 
 | Parameter        | Value |
 | ---------------- | ----- |
@@ -4167,7 +4169,7 @@ _List All Price-triggered Orders_
 | offset   | query | integer | false    | List offset, starting from 0                              |
 | settle   | path  | string  | true     | Settle currency                                           |
 
-#### [#](#enumerated-values-111) Enumerated Values
+#### [#](#enumerated-values-112) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -4232,7 +4234,7 @@ _Cancel All Price-triggered Orders_
 | contract | query | string | true     | Futures contract |
 | settle   | path  | string | true     | Settle currency  |
 
-#### [#](#enumerated-values-112) Enumerated Values
+#### [#](#enumerated-values-113) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4295,7 +4297,7 @@ _Get a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-113) Enumerated Values
+#### [#](#enumerated-values-114) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4356,7 +4358,7 @@ _cancel a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-114) Enumerated Values
+#### [#](#enumerated-values-115) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |

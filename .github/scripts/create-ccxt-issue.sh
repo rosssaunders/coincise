@@ -14,7 +14,22 @@ REPO_NAME="$8"
 
 # Construct the issue body - use a here document to avoid escaping issues
 read -r -d '' ISSUE_BODY << 'EOF'
-## AutoDoc Update from %s/%s
+## 🔄 AutoDoc Update from %s/%s
+
+## 📋 Action Required
+
+**Please review the changes in the documentation and implement them in the CCXT codebase as necessary.**
+
+### Step-by-step instructions:
+
+1. **Review the Changes**: Examine the diff linked below to understand what documentation updates were made
+2. **Analyze Impact**: Determine if these changes affect any existing CCXT implementation
+3. **Code Review**: Check if the documented API changes require updates to CCXT's exchange integration
+4. **Implementation**: Make necessary code changes to align with the updated documentation
+5. **Testing**: Verify that any code changes work correctly with the exchange's API
+6. **Documentation**: Update CCXT's own documentation if needed
+
+### 📖 Change Details
 
 **PR Title:** %s
 **PR Number:** #%s
@@ -22,14 +37,21 @@ read -r -d '' ISSUE_BODY << 'EOF'
 **Merged by:** @%s
 **Merged at:** %s
 
-## PR Description
+### 📝 PR Description
 %s
 
-## Raw Diff
-View the complete diff changes: https://github.com/%s/%s/pull/%s.diff
+### 🔍 Review the Changes
+**Complete diff:** https://github.com/%s/%s/pull/%s.diff
+
+**Next Steps:**
+- Click the diff link above to see exactly what changed
+- Review each modified file to understand the scope of changes
+- Implement corresponding updates in CCXT if the changes affect API behavior
+- Test the implementation with the exchange's live or sandbox API
 
 ---
 *This issue was automatically created by the AutoDoc workflow when PR #%s was merged.*
+*Please review and close this issue once the changes have been properly implemented or determined to be unnecessary.*
 EOF
 
 # Create the issue using GitHub CLI with proper escaping

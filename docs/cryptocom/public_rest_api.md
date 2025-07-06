@@ -53,6 +53,14 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-07-04
+
+  - `private/create-order` exec_inst was added `SMART_POST_ONLY`
+  - `private/create-order-list (LIST)` exec_inst was added `SMART_POST_ONLY`
+  - `private/get-open-orders` exec_inst was added `SMART_POST_ONLY`
+  - `private/get-order-detail`was addedexec_inst was added `SMART_POST_ONLY`
+  - `private/get-order-history` exec_inst was added `SMART_POST_ONLY`
+
 - 2025-06-10
 
   - `private/amend-order` was added

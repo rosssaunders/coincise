@@ -24,7 +24,7 @@ Base URLs:
 Base URLs:
 
 - Real Trading: `wss://fx-ws.gateio.ws/v4/ws/usdt`
-- TestNet: `wss://ws-testnet.gate.io/v4/ws/futures/usdt`
+- TestNet: `wss://ws-testnet.gate.com/v4/ws/futures/usdt`
 
 WARNING
 
@@ -7556,4 +7556,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                             |
 | »»`message`      | String  | Detailed error message                                                                                          |
 
-Last Updated: 6/24/2025, 8:35:16 AM
+Last Updated: 7/3/2025, 6:15:49 AM

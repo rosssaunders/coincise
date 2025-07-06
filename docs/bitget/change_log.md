@@ -2,6 +2,14 @@
 
 ## Changelog
 
+### \[July 1, 2025\] WebSocket Adds Order Placement and Cancellation Channels[​](#july-1-2025-websocket-adds-order-placement-and-cancellation-channels "Direct link to july-1-2025-websocket-adds-order-placement-and-cancellation-channels")
+
+Channels: Place Order，Cancel Order
+
+Changes：
+
+- Adds Order Placement and Cancellation Channels
+
 ### \[Jun 17, 2025\]Spot merged trading depth, spot trading depth, futures merged depth interfaces: ts field adjustment[​](#jun-17-2025spot-merged-trading-depth-spot-trading-depth-futures-merged-depth-interfaces-ts-field-adjustment "Direct link to jun-17-2025spot-merged-trading-depth-spot-trading-depth-futures-merged-depth-interfaces-ts-field-adjustment")
 
 Interface：/api/v2/mix/market/merge-depth,/api/v2/spot/market/orderbook,/api/v2/spot/market/merge-depth

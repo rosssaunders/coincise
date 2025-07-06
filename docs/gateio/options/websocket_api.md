@@ -15,7 +15,7 @@ your condition.
 Base URLs:
 
 - Real Trading: `wss://op-ws.gateio.live/v4/ws`
-- TestNet: `wss://op-ws-testnet.gateio.live/v4/ws`
+- TestNet: `wss://ws-testnet.gate.com/v4/ws/options`
 
 ## [#](#api-overview) API Overview
 
@@ -2094,4 +2094,4 @@ Result format:
 | »`time_ms`      | Integer | Update unix timestamp in milliseconds |
 | »`user`         | String  | User id                               |
 
-Last Updated: 5/19/2025, 3:42:48 AM
+Last Updated: 7/3/2025, 6:15:49 AM

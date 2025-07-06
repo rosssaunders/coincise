@@ -125,7 +125,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Response
 
-`{   "code": 1000,   "message": "Ok",   "data": [     {       "order_id": "3000101684062644",       "client_order_id": "PLAN_3000097492004577",       "price": "0",       "size": "1",       "symbol": "BTCUSDT",       "state": 4,       "side": 2,       "type": "market",       "account": "futures",       "position_mode": "hedge_mode",       "leverage": "20",       "open_type": "cross",       "deal_avg_price": "84802",       "deal_size": "1",       "create_time": 1743160485193,       "update_time": 1743160485258,       "activation_price_type": 1,       "activation_price": "0",       "callback_rate": "0",       "preset_take_profit_price_type": 0,       "preset_stop_loss_price_type": 0,       "preset_take_profit_price": "",       "preset_stop_loss_price": ""     }   ],   "trace": "b15f261868b540889e57f826e0420621.80.17434162457898722" }`
+`{   "code": 1000,   "message": "Ok",   "data": [     {       "order_id": "3000101684062644",       "client_order_id": "PLAN_3000097492004577",       "price": "0",       "trigger_price": "0",       "execution_price": "0",       "size": "1",       "symbol": "BTCUSDT",       "state": 4,       "side": 2,       "type": "market",       "account": "futures",       "position_mode": "hedge_mode",       "leverage": "20",       "open_type": "cross",       "deal_avg_price": "84802",       "deal_size": "1",       "create_time": 1743160485193,       "update_time": 1743160485258,       "activation_price_type": 1,       "activation_price": "0",       "callback_rate": "0",       "preset_take_profit_price_type": 0,       "preset_stop_loss_price_type": 0,       "preset_take_profit_price": "",       "preset_stop_loss_price": ""     }   ],   "trace": "b15f261868b540889e57f826e0420621.80.17434162457898722" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -133,7 +133,7 @@ See [Detailed Rate Limit](#rate-limit)
 | order_id | String | Order ID 
 | client_order_id | String | Client-defined OrderId (If the field is not defined, a empty string is returned) 
 | side | Int | Order side<br>hedge mode<br>-<code>1</code>=buy_open_long<br>-<code>2</code>=buy_close_short<br>-<code>3</code>=sell_close_long<br>-<code>4</code>=sell_open_short<br>oneway mode<br>-<code>1</code>=buy<br>-<code>2</code>=buy(reduce only)<br>-<code>3</code>=sell(reduce only)<br>-<code>4</code>=sell 
-| type | String | Order type<br>-<code>limit</code><br>- <code>market</code><br>- <code>liquidate</code><br>- <code>bankruptcy</code><br>- <code>adl</code><br>- <code>trailing</code> 
+| type | String | Order type<br>-<code>limit</code><br>- <code>market</code><br>- <code>liquidate</code><br>- <code>bankruptcy</code><br>- <code>adl</code><br>- <code>trailing</code><br>- <code>planorder</code> 
 | account | String | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
 | position_mode | String | Position mode<br>-<code>hedge_mode</code><br>-<code>one_way_mode</code> 
 | leverage | String | Leverage order multipliers 
@@ -141,6 +141,8 @@ See [Detailed Rate Limit](#rate-limit)
 | deal_avg_price | String | Average deal price 
 | deal_size | String | Deal amount 
 | price | String | Consignment price 
+| trigger_price | String | Trigger price,returned at plan order 
+| execution_price | String | Executive price,returned at plan order only<br>-<code>Market price</code>=If the execution price is a market price, return to Market<br>-<code>Limit price</code>=If the execution price is a limit price, return the set limit price 
 | state | Int | Order status<br>-<code>2</code>=status_check<br>-<code>4</code>=status_finish 
 | activation_price | String | Activation price, returned at trailing order 
 | callback_rate | String | Callback rate, returned at trailing order 
@@ -352,11 +354,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 > For One-way position mode:
 
-`{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687390815,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98952",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "both",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     }   ],   "trace": "37ffeecd-3a6f-494a-8337-5c3a6012abfa" }`
+`{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687390815,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98952",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "position_amount": "5",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "both",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     }   ],   "trace": "37ffeecd-3a6f-494a-8337-5c3a6012abfa" }`
 
 > For Hedge position mode：
 
-`{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687096451,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98911.62032609",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "long",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     },     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687096451,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98911.62032609",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "short",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     }   ],   "trace": "ab2131db-5827-45ca-a1be-94522510e107" }`
+`{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687096451,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98911.62032609",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "position_amount": "5",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "long",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     },     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687096451,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98911.62032609",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "position_amount": "5",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "short",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     }   ],   "trace": "ab2131db-5827-45ca-a1be-94522510e107" }`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -379,6 +381,7 @@ See [Detailed Rate Limit](#rate-limit)
 | liquidation_price | String | Liquidation price 
 | max_notional_value | String | Maximum notional value currently allowed 
 | current_amount | String | Current position amount 
+| position_amount | String | Current position direction amount<br>-<code>Hedge mode</code>=always positive<br>-<code>One-way mode</code>=positive represent long, negative represent short 
 | unrealized_pnl | String | Unrealized PnL 
 | realized_value | String | Realized PnL 
 | initial_margin | String | Position margin 

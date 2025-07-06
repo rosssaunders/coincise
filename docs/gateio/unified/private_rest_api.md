@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-0) Gate API v4 v4.100.0
+# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2126,6 +2126,7 @@ Status Code **200**
 | »»» mmr                          | string         | Full-position maintenance margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                           |
 | »»» margin_balance               | string         | Full margin balance is valid in single currency margin mode and is 0 in other modes such as cross currency margin/combined margin mode                                                                                                                             |
 | »»» available_margin             | string         | Full margin available for full position is valid in single currency margin mode, and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                        |
+| »»» enabled_collateral           | boolean        | 币种开启作为保证金，true - 启用，false - 未启用                                                                                                                                                                                                                    |
 | »» total                         | string         | Total account assets converted to USD, i.e. the sum of `(available + freeze) * price` in all currencies (deprecated, to be deprecated, replaced by unified_account_total)                                                                                          |
 | »» borrowed                      | string         | The total borrowed amount of the account converted into USD, i.e. the sum of `borrowed * price` of all currencies (excluding Point Cards). It is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode. |
 | »» total_initial_margin          | string         | Total initial margin, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                    |
@@ -2141,6 +2142,7 @@ Status Code **200**
 | »» spot_order_loss               | string         | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                       |
 | »» spot_hedge                    | boolean        | Spot hedging status, true - enabled, false - not enabled.                                                                                                                                                                                                          |
 | »» use_funding                   | boolean        | Whether to use funds as margin                                                                                                                                                                                                                                     |
+| »» is_all_collateral             | boolean        | 是否所有币种均作为保证金，true - 所有币种作为保证金，false - 否                                                                                                                                                                                                    |
 
 WARNING
 
@@ -2667,50 +2669,48 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Set mode of the unified account_
 
-Switching each account mode only requires passing the parameters of the
-corresponding account mode, and supports turning on or off the configuration
-switch in the corresponding account mode when switching the account mode
+每种账户模式的切换只需要传对应账户模式的参数，同时支持在切换账户模式时打开或关闭对应账户模式下的配置开关
 
-- When opening the classic account mode, mode=classic
+- 开通经典账户模式时，mode=classic
 
 ```
- PUT /unified/unified_mode
- {
- "mode": "classic"
- }
+    PUT /unified/unified_mode
+    {
+      "mode": "classic"
+    }
 ```
 
-- Open the cross-currency margin mode, mode=multi_currency
+- 开通跨币种保证金模式，mode=multi_currency
 
 ```
- PUT /unified/unified_mode
- {
- "mode": "multi_currency",
- "settings": {
- "usdt_futures": true
- }
- }
+    PUT /unified/unified_mode
+    {
+      "mode": "multi_currency",
+      "settings": {
+         "usdt_futures": true
+      }
+    }
 ```
 
-- When the portfolio margin mode is enabled, mode=portfolio
+- 开通组合保证金模式时，mode=portfolio
 
 ```
- PUT /unified/unified_mode
- {
- "mode": "portfolio",
- "settings": {
- "spot_hedge": true
- }
- }
+    PUT /unified/unified_mode
+    {
+      "mode": "portfolio",
+      "settings": {
+         "spot_hedge": true
+      }
+    }
 ```
 
-- When opening a single currency margin mode, mode=single_currency
+- 开通单币种保证金模式时，mode=single_currency
 
 ```
- PUT /unified/unified_mode
- {
- "mode": "single_currency"
- }
+    PUT /unified/unified_mode
+    {
+      "mode": "single_currency"
+    }
 ```
 
 > Body parameter
@@ -3582,3 +3582,73 @@ Status Code **200**
 | »» rate        | string         | Historical interest rates for this hour                                                                                                                                                                |
 
 This operation does not require authentication
+
+## [#](#设置抵押币种) 设置抵押币种
+
+> Code samples
+
+`POST /unified/collateral_currencies`
+
+_设置抵押币种_
+
+> Body parameter
+
+```
+{
+  "collateral_type": 1,
+  "enable_list": [
+    "BTC",
+    "ETH"
+  ],
+  "disable_list": [
+    "SOL",
+    "GT"
+  ]
+}
+```
+
+### Parameters
+
+| Name              | In   | Type    | Required | Description                                                                                                                              |
+| ----------------- | ---- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| body              | body | object  | true     | none                                                                                                                                     |
+| » collateral_type | body | integer | false    | 用户设置抵押物模式 0(all)-全部币种作为抵押物,1(custom)-自定义币种作为抵押物,collateral_type为0(all)时，enable_list与disable_list参数无效 |
+| » enable_list     | body | array   | false    | 币种列表，collateral_type=1(custom)表示追加的逻辑                                                                                        |
+| » disable_list    | body | array   | false    | 取消列表，表示取消的逻辑                                                                                                                 |
+
+#### [#](#enumerated-values-5) Enumerated Values
+
+| Parameter         | Value |
+| ----------------- | ----- |
+| » collateral_type | 0     |
+| » collateral_type | 1     |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "is_success": true
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 更新成功    | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+_统一账户抵押模式设置返回_
+
+| Name         | Type    | Description  |
+| ------------ | ------- | ------------ |
+| » is_success | boolean | 是否设置成功 |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret

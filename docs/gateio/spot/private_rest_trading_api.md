@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-0) Gate API v4 v4.100.0
+# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -2084,6 +2084,7 @@ Status Code **200**
 | » trade_disabled      | boolean | Whether currency's trading is disabled                                          |
 | » fixed_rate          | string  | Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies |
 | » chain               | string  | The main chain corresponding to the coin                                        |
+| » is_private          | boolean | Is it a privacy currency?                                                       |
 | » chains              | array   | All links corresponding to coins                                                |
 | »» SpotCurrencyChain  | object  | none                                                                            |
 | »»» name              | string  | Chain name                                                                      |
@@ -2169,6 +2170,7 @@ Status Code **200**
 | » trade_disabled      | boolean | Whether currency's trading is disabled                                          |
 | » fixed_rate          | string  | Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies |
 | » chain               | string  | The main chain corresponding to the coin                                        |
+| » is_private          | boolean | Is it a privacy currency?                                                       |
 | » chains              | array   | All links corresponding to coins                                                |
 | »» SpotCurrencyChain  | object  | none                                                                            |
 | »»» name              | string  | Chain name                                                                      |
@@ -2253,7 +2255,7 @@ to remove the shelves, Unix timestamp in seconds | | »» type | string | Tradin
 pair type, normal: normal, premarket: pre-market | | »» trade_url | string |
 Transaction link |
 
-#### [#](#enumerated-values-9) Enumerated Values
+#### [#](#enumerated-values-10) Enumerated Values
 
 | Property     | Value      |
 | ------------ | ---------- |
@@ -2342,7 +2344,7 @@ to remove the shelves, Unix timestamp in seconds | | » type | string | Trading
 pair type, normal: normal, premarket: pre-market | | » trade_url | string |
 Transaction link |
 
-#### [#](#enumerated-values-10) Enumerated Values
+#### [#](#enumerated-values-11) Enumerated Values
 
 | Property     | Value      |
 | ------------ | ---------- |
@@ -2371,7 +2373,7 @@ of them
 | currency_pair | query | string | false    | Currency pair |
 | timezone      | query | string | false    | Timezone      |
 
-#### [#](#enumerated-values-11) Enumerated Values
+#### [#](#enumerated-values-12) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2605,7 +2607,7 @@ Status Code **200**
 | It is used to track and identify trades in the specific market |
 | » text                                                         | string | User defined information. No value in public endpoints               |
 
-#### [#](#enumerated-values-12) Enumerated Values
+#### [#](#enumerated-values-13) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -2637,7 +2639,7 @@ limit when specifying from, to and interval
 | to            | query | integer(int64) | false    | End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time                                                          |
 | interval      | query | string         | false    | Interval time between data points. Note that `30d` means 1 natual month, not 30 days                                                               |
 
-#### [#](#enumerated-values-13) Enumerated Values
+#### [#](#enumerated-values-14) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2879,8 +2881,7 @@ _List spot accounts_
     "currency": "ETH",
     "available": "968.8",
     "locked": "0",
-    "update_id": 98,
-    "refresh_time": 1749115677
+    "update_id": 98
   }
 ]
 ```
@@ -2895,13 +2896,12 @@ _List spot accounts_
 
 Status Code **200**
 
-| Name           | Type           | Description                    |
-| -------------- | -------------- | ------------------------------ |
-| » currency     | string         | Currency detail                |
-| » available    | string         | Available amount               |
-| » locked       | string         | Locked amount, used in trading |
-| » update_id    | integer(int64) | Version number                 |
-| » refresh_time | integer(int64) | Asset Refresh Time (ms)        |
+| Name        | Type           | Description                    |
+| ----------- | -------------- | ------------------------------ |
+| » currency  | string         | Currency detail                |
+| » available | string         | Available amount               |
+| » locked    | string         | Locked amount, used in trading |
+| » update_id | integer(int64) | Version number                 |
 
 WARNING
 
@@ -3151,7 +3151,7 @@ string | How the order was finished.
 \- ioc: time in force is `IOC`, finish immediately  
 \- stp: cancelled because self trade prevention |
 
-#### [#](#enumerated-values-14) Enumerated Values
+#### [#](#enumerated-values-15) Enumerated Values
 
 | Property      | Value        |
 | ------------- | ------------ |
@@ -3356,9 +3356,9 @@ return '-'
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown |
+\- unknown: Unknown | | »»» fee_discount | string | rate discount |
 
-#### [#](#enumerated-values-15) Enumerated Values
+#### [#](#enumerated-values-16) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -3594,9 +3594,9 @@ string | Order completion statuses include:
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown |
+\- unknown: Unknown | | » fee_discount | string | rate discount |
 
-#### [#](#enumerated-values-16) Enumerated Values
+#### [#](#enumerated-values-17) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -3720,6 +3720,7 @@ Set `stp_act` to decide to use strategies that limit user transactions
 | » auto_borrow   | body   | boolean | false    | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.                                  |
 | » auto_repay    | body   | boolean | false    | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:                 |
 | » stp_act       | body   | string  | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                  |
+| » fee_discount  | body   | string  | false    | rate discount                                                                                                                                    |
 | » action_mode   | body   | string  | false    | Processing Mode:                                                                                                                                 |
 
 #### [#](#detailed-descriptions-12) Detailed descriptions
@@ -3789,7 +3790,7 @@ returned based on action_mode. This field is only valid during the request and
 is not included in the response result ACK: Asynchronous mode, only returns key
 order fields RESULT: No clearing information FULL: Full mode (default)
 
-#### [#](#enumerated-values-17) Enumerated Values
+#### [#](#enumerated-values-18) Enumerated Values
 
 | Parameter       | Value  |
 | --------------- | ------ |
@@ -3998,7 +3999,8 @@ string | Order completion statuses include:
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » action_mode | string | Processing Mode:  
+\- unknown: Unknown | | » fee_discount | string | rate discount | | »
+action_mode | string | Processing Mode:  
 When placing an order, different fields are returned based on action_mode. This
 field is only valid during the request and is not included in the response
 result  
@@ -4006,7 +4008,7 @@ ACK: Asynchronous mode, only returns key order fields
 RESULT: No clearing information  
 FULL: Full mode (default) |
 
-#### [#](#enumerated-values-18) Enumerated Values
+#### [#](#enumerated-values-19) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -4239,9 +4241,9 @@ string | Order completion statuses include:
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown |
+\- unknown: Unknown | | »» fee_discount | string | rate discount |
 
-#### [#](#enumerated-values-19) Enumerated Values
+#### [#](#enumerated-values-20) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -4465,9 +4467,10 @@ string | How the order was finished.
 \- filled: filled totally  
 \- cancelled: manually cancelled  
 \- ioc: time in force is `IOC`, finish immediately  
-\- stp: cancelled because self trade prevention |
+\- stp: cancelled because self trade prevention | | »» fee_discount | string |
+rate discount |
 
-#### [#](#enumerated-values-20) Enumerated Values
+#### [#](#enumerated-values-21) Enumerated Values
 
 | Property      | Value     |
 | ------------- | --------- |
@@ -4744,9 +4747,9 @@ string | Order completion statuses include:
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown |
+\- unknown: Unknown | | » fee_discount | string | rate discount |
 
-#### [#](#enumerated-values-21) Enumerated Values
+#### [#](#enumerated-values-22) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -4998,9 +5001,9 @@ string | Order completion statuses include:
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown |
+\- unknown: Unknown | | » fee_discount | string | rate discount |
 
-#### [#](#enumerated-values-22) Enumerated Values
+#### [#](#enumerated-values-23) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -5223,9 +5226,9 @@ string | Order completion statuses include:
 \- poc: Not met the order strategy because tif is set to poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown |
+\- unknown: Unknown | | » fee_discount | string | rate discount |
 
-#### [#](#enumerated-values-23) Enumerated Values
+#### [#](#enumerated-values-24) Enumerated Values
 
 | Property      | Value               |
 | ------------- | ------------------- |
@@ -5355,7 +5358,7 @@ Status Code **200**
 | It is used to track and identify trades in the specific market |
 | » text                                                         | string | User defined information. No value in public endpoints               |
 
-#### [#](#enumerated-values-24) Enumerated Values
+#### [#](#enumerated-values-25) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5649,7 +5652,7 @@ string | How the order was finished.
 \- ioc: time in force is `IOC`, finish immediately  
 \- stp: cancelled because self trade prevention |
 
-#### [#](#enumerated-values-25) Enumerated Values
+#### [#](#enumerated-values-26) Enumerated Values
 
 | Property      | Value        |
 | ------------- | ------------ |
@@ -5826,7 +5829,7 @@ according to `side`
 - api: api
 - app: app
 
-#### [#](#enumerated-values-26) Enumerated Values
+#### [#](#enumerated-values-27) Enumerated Values
 
 | Parameter        | Value   |
 | ---------------- | ------- |
@@ -5890,7 +5893,7 @@ _Retrieve running auto order list_
 | limit   | query | integer | false    | Maximum number of records to be returned in a single list            |
 | offset  | query | integer | false    | List offset, starting from 0                                         |
 
-#### [#](#enumerated-values-27) Enumerated Values
+#### [#](#enumerated-values-28) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -5958,7 +5961,7 @@ _Cancel All Price-triggered Orders_
 | market  | query | string | false    | Currency pair                                                        |
 | account | query | string | false    | Trading account type. Portfolio margin account must set to `unified` |
 
-#### [#](#enumerated-values-28) Enumerated Values
+#### [#](#enumerated-values-29) Enumerated Values
 
 | Parameter | Value   |
 | --------- | ------- |

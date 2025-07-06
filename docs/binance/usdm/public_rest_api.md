@@ -845,6 +845,7 @@ Codes are universal,but messages can vary.
 | 1005 | NO_SUCH_IP​                                    | No such IP has been white listed                                                                                                                                                                                                                       |
 | 1006 | UNEXPECTED_RESP​                               | An unexpected response was received from the message bus. Execution status unknown.                                                                                                                                                                    |
 | 1007 | TIMEOUT​                                       | Timeout waiting for response from backend server. Send status unknown; execution status unknown.                                                                                                                                                       |
+| 1008 | Service Unavailable​                           | Server is currently overloaded with other requests. Please try again in a few minutes.                                                                                                                                                                 |
 | 1010 | ERROR_MSG_RECEIVED​                            | ERROR_MSG_RECEIVED.                                                                                                                                                                                                                                    |
 | 1011 | NON_WHITE_LIST​                                | This IP cannot access this route.                                                                                                                                                                                                                      |
 | 1013 | INVALID_MESSAGE​                               | INVALID_MESSAGE.                                                                                                                                                                                                                                       |
@@ -2219,12 +2220,14 @@ GET `/futures/data/openInterestHist`
     "symbol": "BTCUSDT",
     "sumOpenInterest": "20403.63700000", // total open interest
     "sumOpenInterestValue": "150570784.07809979", // total open interest value
+    "CMCCirculatingSupply": "165880.538", // circulating supply provided by CMC
     "timestamp": "1583127900000"
   },
   {
     "symbol": "BTCUSDT",
     "sumOpenInterest": "20401.36700000",
     "sumOpenInterestValue": "149940752.14464448",
+    "CMCCirculatingSupply": "165900.14853",
     "timestamp": "1583128200000"
   }
 ]
