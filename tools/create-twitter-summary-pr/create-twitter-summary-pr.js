@@ -21,7 +21,9 @@ async function createTwitterSummaryPr() {
     }
 
     if (!prTitle || !prNumber) {
-      throw new Error("PR_TITLE and PR_NUMBER environment variables are required")
+      throw new Error(
+        "PR_TITLE and PR_NUMBER environment variables are required"
+      )
     }
 
     console.log(`Generating Twitter summary for merged PR: ${prTitle}`)
@@ -58,7 +60,7 @@ When this PR is merged, the above Twitter/X update will be automatically posted 
 *This Twitter summary was automatically generated based on the merged documentation changes.*`
 
     // Write the Twitter summary to a file
-    const fs = await import('fs/promises')
+    const fs = await import("fs/promises")
     await fs.writeFile(twitterFileName, twitterFileContent)
 
     // Add the file to git
