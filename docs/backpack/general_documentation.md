@@ -540,7 +540,7 @@ Responses200 Success.
 
 503 System under maintenance.
 
-patch/api/v1/accounthttps://api.backpack.exchange/api/v1/account Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"autoBorrowSettlements": true,"autoLend": true,"autoRepayBorrows": true,"leverageLimit": "string"} Response samples 400401500503Content typeapplication/json; charset=utf-8Copy{"code": "FORBIDDEN","message": "string"}Convert a dust balance on an account. Converts a dust balance to USDC. The balance (including lend) must be
+patch/api/v1/accounthttps://api.backpack.exchange/api/v1/account Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"autoBorrowSettlements": true,"autoLend": true,"autoRepayBorrows": true,"leverageLimit": "string"} Response samples 400401500503Content typeapplication/json; charset=utf-8Copy{"code": "ACCOUNT_LIQUIDATING","message": "string"}Convert a dust balance on an account. Converts a dust balance to USDC. The balance (including lend) must be
 
 less than the minimum quantity tradable on the spot order book.
 
@@ -554,7 +554,7 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX"  The asset symbol to convert dust for.
+Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT"  The asset symbol to convert dust for.
 
 If omitted, all dust balances will be converted.
 
@@ -566,7 +566,7 @@ Responses200 Success.
 
 503 System under maintenance.
 
-post/api/v1/account/convertDusthttps://api.backpack.exchange/api/v1/account/convertDust Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"symbol": "BTC"} Response samples 400500503Content typeapplication/json; charset=utf-8Copy{"code": "FORBIDDEN","message": "string"}Get max borrow quantity. Retrieves the maxmimum quantity an account can borrow
+post/api/v1/account/convertDusthttps://api.backpack.exchange/api/v1/account/convertDust Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"symbol": "BTC"} Response samples 400500503Content typeapplication/json; charset=utf-8Copy{"code": "ACCOUNT_LIQUIDATING","message": "string"}Get max borrow quantity. Retrieves the maxmimum quantity an account can borrow
 
 for a given asset based on the accounts existing exposure
 
@@ -696,7 +696,7 @@ Request Body schema: application/json; charset=utf-8requiredquantityrequiredstri
 
 siderequiredstring Enum: "Borrow" "Lend"  Side of the borrow lend.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX"  The asset to repay.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT"  The asset to repay.
 
 Responses200 Success.
 
@@ -706,7 +706,7 @@ Responses200 Success.
 
 503 System under maintenance.
 
-post/api/v1/borrowLendhttps://api.backpack.exchange/api/v1/borrowLend Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"quantity": "string","side": "Borrow","symbol": "BTC"} Response samples 400500503Content typeapplication/json; charset=utf-8Copy{"code": "FORBIDDEN","message": "string"}CapitalCapital management.
+post/api/v1/borrowLendhttps://api.backpack.exchange/api/v1/borrowLend Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"quantity": "string","side": "Borrow","symbol": "BTC"} Response samples 400500503Content typeapplication/json; charset=utf-8Copy{"code": "ACCOUNT_LIQUIDATING","message": "string"}CapitalCapital management.
 
 Get balances. Retrieves account balances and the state of the balances (locked or
 
@@ -854,7 +854,7 @@ clientIdstring  <= 255 characters  Custom client id.
 
 quantityrequiredstring <decimal>  Quantity to withdraw.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX"  Symbol of the asset to withdraw.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT"  Symbol of the asset to withdraw.
 
 twoFactorTokenstring Issued two factor token.
 
