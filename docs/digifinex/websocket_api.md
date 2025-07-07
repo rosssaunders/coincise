@@ -3,8 +3,6 @@
 > **Note**: This documentation is automatically synchronized from the official DigiFinex GitHub repository.
 >
 > **Source**: https://raw.githubusercontent.com/DigiFinex/api/master/Websocket_API_en.md
->
-> **Last Updated**: 2025-07-07T17:35:25.792Z
 
 ---
 

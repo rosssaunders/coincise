@@ -94,7 +94,7 @@ Generate only the Twitter/X update text (no additional formatting or sections).`
     return twitterSummary
   } catch (error) {
     console.error("Error generating Twitter summary:", error.message)
-    
+
     // Fallback to basic Twitter summary if AI fails
     try {
       const gitDiff = execSync("git diff HEAD~1 --name-status", {
@@ -110,7 +110,10 @@ Generate only the Twitter/X update text (no additional formatting or sections).`
         }
       }
     } catch (fallbackError) {
-      console.error("Error generating fallback Twitter summary:", fallbackError.message)
+      console.error(
+        "Error generating fallback Twitter summary:",
+        fallbackError.message
+      )
     }
 
     return "📚 Updated cryptocurrency exchange API documentation! 🚀 #crypto #API #documentation"

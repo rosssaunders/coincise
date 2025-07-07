@@ -129,7 +129,6 @@ export async function scrapeRateLimitDocs(url, outputDir) {
     await fs.writeFile(outputPath, markdown, "utf8")
 
     console.log(`Rate limit documentation saved to: ${outputPath}`)
-
   } catch (error) {
     console.error("Error scraping rate limit documentation:", error)
     console.error("Stack trace:", error.stack)
@@ -151,7 +150,8 @@ export async function scrapeRateLimitDocs(url, outputDir) {
  * @returns {Promise<void>}
  */
 export async function scrapeRateLimit(config) {
-  const url = config.rateLimitUrl || "https://www.kucoin.com/docs-new/rate-limit"
+  const url =
+    config.rateLimitUrl || "https://www.kucoin.com/docs-new/rate-limit"
   const outputDir = config.outputDir || "../../docs/kucoin"
 
   await scrapeRateLimitDocs(url, outputDir)

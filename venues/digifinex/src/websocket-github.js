@@ -83,8 +83,6 @@ function enhanceWebSocketContent(content) {
 > **Note**: This documentation is automatically synchronized from the official DigiFinex GitHub repository.
 > 
 > **Source**: ${GITHUB_WEBSOCKET_URL}
-> 
-> **Last Updated**: ${new Date().toISOString()}
 
 ---
 
