@@ -1007,6 +1007,8 @@ This is a matching engine method.
 | jsonrpc                                                              | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                         |
 | result                                                               | <em>object</em>          |
 | &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                    | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                                 | string                   | Broker code associated with the broker block trade.                                                                                                                                                                                                |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                                 | string                   | Name of the broker associated with the block trade.                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;id                                          | string                   | Block trade id                                                                                                                                                                                                                                     |
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp                                   | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;trades                                      | array of <em>object</em> |
@@ -1070,6 +1072,8 @@ This is a private method; it can only be used after authentication.
 | jsonrpc                                                              | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                         |
 | result                                                               | <em>object</em>          |
 | &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                    | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                                 | string                   | Broker code associated with the broker block trade.                                                                                                                                                                                                |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                                 | string                   | Name of the broker associated with the block trade.                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;id                                          | string                   | Block trade id                                                                                                                                                                                                                                     |
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp                                   | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;trades                                      | array of <em>object</em> |
@@ -1111,6 +1115,59 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name    | string                   | Unique instrument identifier                                                                                                                                                                                                                       |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;legs               | array                    | Optional field containing leg trades if trade is a combo trade (present when querying for <strong>only</strong> combo trades and in <code>combo_trades</code> events)                                                                              |
 
+## /private/get_block_trade_requests
+
+Provides a list of block trade requests including pending approvals, declined
+trades, and expired trades. `timestamp` and `nonce` received in response can be
+used to approve or reject the pending block trade.
+
+To use a block trade approval feature the additional API key setting feature
+called: `enabled_features: block_trade_approval` is required. This key has to be
+given to broker/registered partner who performs the trades on behalf of the user
+for the feature to be active. If the user wants to approve the trade, he has to
+approve it from different API key with doesn't have this feature enabled.
+
+Only broker clients can use `broker_code` to query for their broker block trade
+requests.
+
+**Scope:** `block_trade:read`
+
+This is a private method; it can only be used after authentication.
+
+### Parameters
+
+| Parameter   | Required | Type   | Enum | Description                                                                                                                                              |
+| ----------- | -------- | ------ | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| broker_code | false    | string |      | Broker code to filter block trade requests. Only broker clients can use <code>broker_code</code> to query for their executed broker broker block trades. |
+
+### Response
+
+| Name                                                              | Type                     | Description                                                                                                                                             |
+| ----------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                                                | integer                  | The id that was sent in the request                                                                                                                     |
+| jsonrpc                                                           | string                   | The JSON-RPC version (2.0)                                                                                                                              |
+| result                                                            | array of <em>object</em> |
+| &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                 | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                             |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                              | string                   | Broker code associated with the broker block trade.                                                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                              | string                   | Name of the broker associated with the block trade.                                                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;combo_id                                 | string                   | Combo instrument identifier                                                                                                                             |
+| &nbsp;&nbsp;›&nbsp;&nbsp;counterparty_state                       | <em>object</em>          | State of the pending block trade for the other party (optional).                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;timestamp       | integer                  | State timestamp.                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;value           | string                   | State value.                                                                                                                                            |
+| &nbsp;&nbsp;›&nbsp;&nbsp;nonce                                    | string                   | Nonce that can be used to approve or reject pending block trade.                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;role                                     | string                   | Trade role of the user: <code>maker</code> or <code>taker</code>                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | <em>object</em>          | State of the pending block trade for current user.                                                                                                      |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;timestamp       | integer                  | State timestamp.                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;value           | string                   | State value.                                                                                                                                            |
+| &nbsp;&nbsp;›&nbsp;&nbsp;timestamp                                | integer                  | Timestamp that can be used to approve or reject pending block trade.                                                                                    |
+| &nbsp;&nbsp;›&nbsp;&nbsp;trades                                   | array of <em>object</em> |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount          | number                   | Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;direction       | string                   | Direction: <code>buy</code>, or <code>sell</code>                                                                                                       |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string                   | Unique instrument identifier                                                                                                                            |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price           | number                   | Price in base currency                                                                                                                                  |
+| &nbsp;&nbsp;›&nbsp;&nbsp;user_id                                  | integer                  | Unique user identifier                                                                                                                                  |
+| &nbsp;&nbsp;›&nbsp;&nbsp;username                                 | string                   | Username of the user who initiated the block trade.                                                                                                     |
+
 ## /private/get_block_trades
 
 Returns list of users block trades. If currency is not provided, returns block
@@ -1123,13 +1180,14 @@ This is a private method; it can only be used after authentication.
 
 ### Parameters
 
-| Parameter    | Required | Type    | Enum                                                                                                | Description                                                                                                 |
-| ------------ | -------- | ------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| currency     | false    | string  | <code>BTC</code><br><code>ETH</code><br><code>USDC</code><br><code>USDT</code><br><code>EURR</code> | The currency symbol                                                                                         |
-| count        | false    | integer |                                                                                                     | Number of requested items, default - <code>20</code>                                                        |
-| start_id     | false    | string  |                                                                                                     | Response will contain block trades older than the one provided in this field                                |
-| end_id       | false    | string  |                                                                                                     | The id of the oldest block trade to be returned, <code>start_id</code> is required with <code>end_id</code> |
-| block_rfq_id | false    | integer |                                                                                                     | ID of the Block RFQ                                                                                         |
+| Parameter    | Required | Type    | Enum                                                                                                | Description                                                                                                                                                        |
+| ------------ | -------- | ------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| currency     | false    | string  | <code>BTC</code><br><code>ETH</code><br><code>USDC</code><br><code>USDT</code><br><code>EURR</code> | The currency symbol                                                                                                                                                |
+| count        | false    | integer |                                                                                                     | Number of requested items, default - <code>20</code>                                                                                                               |
+| start_id     | false    | string  |                                                                                                     | Response will contain block trades older than the one provided in this field                                                                                       |
+| end_id       | false    | string  |                                                                                                     | The id of the oldest block trade to be returned, <code>start_id</code> is required with <code>end_id</code>                                                        |
+| block_rfq_id | false    | integer |                                                                                                     | ID of the Block RFQ                                                                                                                                                |
+| broker_code  | false    | string  |                                                                                                     | Broker code to filter block trades. Only broker clients can use <code>broker_code</code> to filter broker block trades. Use <code>any</code> for all block trades. |
 
 ### Response
 
@@ -1139,6 +1197,8 @@ This is a private method; it can only be used after authentication.
 | jsonrpc                                                              | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                         |
 | result                                                               | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                    | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                                 | string                   | Broker code associated with the broker block trade.                                                                                                                                                                                                |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                                 | string                   | Name of the broker associated with the block trade.                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;id                                          | string                   | Block trade id                                                                                                                                                                                                                                     |
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp                                   | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;trades                                      | array of <em>object</em> |
@@ -1182,6 +1242,9 @@ This is a private method; it can only be used after authentication.
 
 ## /private/get_pending_block_trades
 
+**DEPRECATED**: This method is deprecated. Please use
+`private/get_block_trade_requests` instead.
+
 Provides a list of pending block trade approvals. `timestamp` and `nonce`
 received in response can be used to approve or reject the pending block trade.
 
@@ -1207,6 +1270,9 @@ _This method takes no parameters_
 | jsonrpc                                                           | string                   | The JSON-RPC version (2.0)                                                                                                                              |
 | result                                                            | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                 | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                             |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                              | string                   | Broker code associated with the broker block trade.                                                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                              | string                   | Name of the broker associated with the block trade.                                                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;combo_id                                 | string                   | Combo instrument identifier                                                                                                                             |
 | &nbsp;&nbsp;›&nbsp;&nbsp;counterparty_state                       | <em>object</em>          | State of the pending block trade for the other party (optional).                                                                                        |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;timestamp       | integer                  | State timestamp.                                                                                                                                        |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;value           | string                   | State value.                                                                                                                                            |
@@ -1222,6 +1288,7 @@ _This method takes no parameters_
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string                   | Unique instrument identifier                                                                                                                            |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;price           | number                   | Price in base currency                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;user_id                                  | integer                  | Unique user identifier                                                                                                                                  |
+| &nbsp;&nbsp;›&nbsp;&nbsp;username                                 | string                   | Username of the user who initiated the block trade.                                                                                                     |
 
 ## /private/invalidate_block_trade_signature
 
@@ -1424,6 +1491,8 @@ This is a private method; it can only be used after authentication.
 | -------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | block_trades                                                         | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                    | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                                 | string                   | Broker code associated with the broker block trade.                                                                                                                                                                                                |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                                 | string                   | Name of the broker associated with the block trade.                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;id                                          | string                   | Block trade id                                                                                                                                                                                                                                     |
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp                                   | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;trades                                      | array of <em>object</em> |
@@ -2139,6 +2208,8 @@ This is a private method; it can only be used after authentication.
 | jsonrpc                                                              | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                         |
 | result                                                               | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;app_name                                    | string                   | The name of the application that executed the block trade on behalf of the user (optional).                                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_code                                 | string                   | Broker code associated with the broker block trade.                                                                                                                                                                                                |
+| &nbsp;&nbsp;›&nbsp;&nbsp;broker_name                                 | string                   | Name of the broker associated with the block trade.                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;id                                          | string                   | Block trade id                                                                                                                                                                                                                                     |
 | &nbsp;&nbsp;›&nbsp;&nbsp;timestamp                                   | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;trades                                      | array of <em>object</em> |
