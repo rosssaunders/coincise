@@ -1614,11 +1614,12 @@ performance, it is recommended to use `private/cancel-order`, and then
 
 ### Request Params
 
-| Name                                                   | Type             | Required | Description                       |
-| ------------------------------------------------------ | ---------------- | -------- | --------------------------------- |
-| Order_id                                               | string of number | Depends  | Optional Order ID                 |
+| Name                                                   | Type             | Required | Description                             |
+| ------------------------------------------------------ | ---------------- | -------- | --------------------------------------- |
+| client_oid                                             | string           | N        | Client Order ID (Maximum 36 characters) |
+| Order_id                                               | string of number | Depends  | Optional Order ID                       |
 | Either `order_id` or `orig_client_oid` must be present |
-| orig_client_oid                                        | string           | Depends  | Optional Original Client Order ID |
+| orig_client_oid                                        | string           | Depends  | Optional Original Client Order ID       |
 
 Either `order_id` or `orig_client_oid` must be present  
 If both exist together, `order_id` will have higher priority | | new_price |
@@ -2004,7 +2005,6 @@ An array, consisting of:
 \- `IMMEDIATE_OR_CANCEL`  
 \- `FILL_OR_KILL` | | side | string | `BUY` or `SELL` | | exec_inst | array |  
 \- `POST_ONLY`  
-\- `SMART_POST_ONLY`  
 \- `LIQUIDATION` | | quantity | string | Quantity specified in the order | |
 limit_price | string | Limit price specified in the order | | order_value |
 string | Order value | | maker_fee_rate | string | User's maker fee rate | |
@@ -2019,7 +2019,9 @@ string | Cumulative executed fee | | status | string | Order status:
 | Order creation date | | create_time | number | Order creation timestamp | |
 create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
 | number | Order update timestamp | | instrument_name | string | e.g.
-BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees |
+BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees | |
+reason | number | Rejection reason code. See
+[Order Rejection Reason](#response-and-reason-codes) |
 
 ## private/change-account-leverage
 
