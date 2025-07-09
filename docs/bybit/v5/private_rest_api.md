@@ -791,7 +791,7 @@ _Options:_
 - `PEF_TRANSFER_OUT`
 - `PEF_PROFIT_SHARE`
 - `ONCHAINEARN_SUBSCRIPTION` tranfer out for on chain earn
-- `ONCHAINEARN_REPEMPTION` tranfer in for on chain earn
+- `ONCHAINEARN_REDEMPTION` tranfer in for on chain earn
 - `ONCHAINEARN_REFUND` tranfer in for on chain earn failed
 - `STRUCTURE_PRODUCT_SUBSCRIPTION` tranfer out for structure product
 - `STRUCTURE_PRODUCT_REFUND` tranfer in for structure product
@@ -957,6 +957,39 @@ _Option_:
   site
 - `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
 - `IND_GST` Indian GST tax. Only for kyc=Indian users
+
+### state[​](#state "Direct link to heading")
+
+- `scheduled`
+- `ongoing`
+- `completed`
+- `canceled`
+
+### serviceTypes[​](#servicetypes "Direct link to heading")
+
+- `1` Trading service
+- `2` Http trading service
+- `3` Websocket trading service
+- `4` Private websocket data push service
+- `5` Market data service
+
+### product[​](#product "Direct link to heading")
+
+- `1` future
+- `2` spot
+- `3` option
+- `4` spread
+
+### maintainType[​](#maintaintype "Direct link to heading")
+
+- `1` Planned maintenance
+- `2` Temporary maintenance
+- `3` System failure
+
+### env[​](#env "Direct link to heading")
+
+- `1` mainnet
+- `2` mainnet demo
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -6514,9 +6547,14 @@ POST `/v5/asset/withdraw/create`
 | &gt; beneficiaryPoiType            | false                 | string  | Beneficiary ducument type<li><b>Required</b> param for TR, KZ users: ID card, Passport, driver license, residence permit, Business ID, etc</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | &gt; beneficiaryPoiIssuingCountry  | false                 | string  | Beneficiary ducument issuing country<li><b>Required</b> param for TR, KZ users: refer to <a href="https://www.iban.com/country-codes" target="_blank" rel="noopener noreferrer">Alpha-3 country code</a></li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                              |
 | &gt; beneficiaryPoiExpiredDate     | false                 | string  | Beneficiary ducument expiry date<li><b>Required</b> param for TR, KZ users: yyyy-mm-dd format, e.g., "1990-02-15"</li><li>Korean users can ignore</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| &gt; beneficiaryAddressCountry     | false                 | string  | Beneficiary country<li><b>Required</b> param for ID users only, e.g.,<code>IDN</code></li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| &gt; beneficiaryAddressState       | false                 | string  | Beneficiary state<li><b>Required</b> param for ID users only, e.g., "ABC"</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| &gt; beneficiaryAddressCity        | false                 | string  | Beneficiary city<li><b>Required</b> param for ID users only, e.g., "Jakarta"</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; beneficiaryAddressCountry     | false                 | string  | Beneficiary country<li><b>Required</b> param for UAE users only, e.g.,<code>IDN</code></li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; beneficiaryAddressState       | false                 | string  | Beneficiary state<li><b>Required</b> param for UAE users only, e.g., "ABC"</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; beneficiaryAddressCity        | false                 | string  | Beneficiary city<li><b>Required</b> param for UAE users only, e.g., "Jakarta"</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| &gt; beneficiaryAddressBuilding    | false                 | string  | Beneficiary building address<li><b>Required</b> param for UAE users only</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; beneficiaryAddressStreet      | false                 | string  | Beneficiary street address<li><b>Required</b> param for UAE users only</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; beneficiaryAddressPostalCode  | false                 | string  | Beneficiary address post code<li><b>Required</b> param for UAE users only</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; beneficiaryDateOfBirth        | false                 | string  | Beneficiary date of birth<li><b>Required</b> param for UAE users only</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; beneficiaryPlaceOfBirth       | false                 | string  | Beneficiary birth place<li><b>Required</b> param for UAE users onl</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
