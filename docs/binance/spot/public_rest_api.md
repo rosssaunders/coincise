@@ -738,6 +738,8 @@ following messages which will indicate the specific error:
   **milliseconds by default.** To receive the information in microseconds,
   please add the header `X-MBX-TIME-UNIT:MICROSECOND` or
   `X-MBX-TIME-UNIT:microsecond`.
+- We support HMAC, RSA, and Ed25519 keys. For more information, please see
+  [API Key types](/docs/binance-spot-api-docs/faqs/api_key_types).
 - Timestamp parameters (e.g. `startTime`, `endTime`, `timestamp`) can be passed
   in milliseconds or microseconds.
 - For APIs that only send public market data, please use the base endpoint
@@ -894,7 +896,7 @@ the value it's looking for it will check the next one.
 - Each endpoint has a security type that determines how you will interact with
   it. This is stated next to the NAME of the endpoint.
 - If no security type is stated, assume the security type is NONE.
-- API-keys are passed into the Rest API via the `X-MBX-APIKEY` header.
+- API-keys are passed into the REST API via the `X-MBX-APIKEY` header.
 - API-keys and secret-keys **are case sensitive**.
 - API-keys can be configured to only access certain types of secure endpoints.  
   For example, one API-key could be used for TRADE only,  
