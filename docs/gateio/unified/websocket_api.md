@@ -11,7 +11,7 @@ language of the examples with the tabs in the top right.
 
 **Base URLs:**
 
-`wss://ws.gate.io/v4/ws/unified`
+`wss://ws.gate.com/v4/ws/unified`
 
 ## [#](#api-overview) API Overview
 
@@ -122,7 +122,7 @@ layer ping message and receive pong message.**
 ```python
 from websocket import create_connection
 
-ws = create_connection("wss://ws.gate.io/v4/ws/unified")
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
 ws.send(json.dumps({
     "time": int(time.time()),
     "channel": "unified.ping",
@@ -163,7 +163,7 @@ Authentication required.
 import json
 from websocket import create_connection
 
-ws = create_connection("wss://ws.gate.io/v4/ws/unified")
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
 req = {
     "time": 1700625194,
     "channel": "unified.assets",
@@ -270,7 +270,7 @@ The above command returns JSON structured like this:
 import json
 from websocket import create_connection
 
-ws = create_connection("wss://ws.gate.io/v4/ws/unified")
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
 req = {
     "time": 123456,
     "channel": "unified.assets",
@@ -327,12 +327,33 @@ Authentication required.
 import json
 from websocket import create_connection
 
-ws = create_connection("wss://ws.gate.io/v4/ws/unified")
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
 req = {
     "time": 1716796362,
     "channel": "unified.asset_detail",
     "event": "subscribe",
     "payload": ["BTC","ETH"],
+    "auth": {
+        "method": "api_key",
+        "KEY": "xxxx",
+        "SIGN": "xxxx"
+    }
+}
+ws.send(json.dumps(req))
+print(ws.recv())
+```
+
+```python
+# Subscribe to all currencies
+import json
+from websocket import create_connection
+
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
+req = {
+    "time": 1716796362,
+    "channel": "unified.asset_detail",
+    "event": "subscribe",
+    "payload": ["!all"],
     "auth": {
         "method": "api_key",
         "KEY": "xxxx",
@@ -369,9 +390,9 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter    | type         | required | description      |
-  | ------------ | ------------ | -------- | ---------------- |
-  | `currencies` | array string | yes      | asset currencies |
+  | parameter    | type         | required | description                                                                                                                                                                                                     |
+  | ------------ | ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `currencies` | array string | yes      | asset currencies. You can specify individual currencies like `["BTC","ETH"]` or use `["!all"]` to subscribe to all currencies. Note: you cannot mix individual currencies with `!all` in the same subscription. |
 
 ## [#](#asset-detail-notification) asset detail notification
 
@@ -456,12 +477,33 @@ The above command returns JSON structured like this:
 import json
 from websocket import create_connection
 
-ws = create_connection("wss://ws.gate.io/v4/ws/unified")
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
 req = {
     "time": 1716796362,
     "channel": "unified.asset_detail",
     "event": "unsubscribe",
     "payload": ["BTC", "ETH"],
+    "auth": {
+        "method": "api_key",
+        "KEY": "xxxx",
+        "SIGN": "xxxx"
+    }
+}
+ws.send(json.dumps(req))
+print(ws.recv())
+```
+
+```python
+# Unsubscribe from all currencies
+import json
+from websocket import create_connection
+
+ws = create_connection("wss://ws.gate.com/v4/ws/unified")
+req = {
+    "time": 1716796362,
+    "channel": "unified.asset_detail",
+    "event": "unsubscribe",
+    "payload": ["!all"],
     "auth": {
         "method": "api_key",
         "KEY": "xxxx",
@@ -498,4 +540,4 @@ The above command returns JSON structured like this:
 
   `unsubscribe`
 
-Last Updated: 6/12/2025, 7:58:10 AM
+Last Updated: 7/8/2025, 1:29:05 PM

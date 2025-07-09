@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
+# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -838,7 +838,7 @@ account, you will be able to make use of these endpoints.
 
 Related endpoint can be found in the Unified Account API doc. After enabling the
 Unified Account, you can proceed to call them. For more detailed information,
-please refer to [here](https://www.gate.io/unified-trading-account)
+please refer to [here](https://www.gate.com/unified-trading-account)
 
 ### [#](#api-integration-process) API Integration Process
 
@@ -3976,17 +3976,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Countdown cancel orders_
 
-Option order heartbeat detection, when the `timeout` time set by the user is
-reached, if the existing countdown is not canceled or a new countdown is set,
-the related `option pending order` will be automatically canceled. This
-interface can be called repeatedly to set a new countdown or cancel the
-countdown. Usage example: Repeat this interface at intervals of 30 seconds, with
-each countdown `timeout` set to 30 (seconds). If this interface is not called
-again within 30 seconds, all pending orders on the `underlying` `contract` you
-specified will be automatically cancelled. If `underlying` `contract` is not
-specified, all pending orders of the user will be automatically cancelled If
-`timeout` is set to 0 within 30 seconds, the countdown timer will expire and the
-automatic order cancellation function will be cancelled.
+期权订单心跳检测，在到达用户设置的`timeout`时间时如果没有取消既有倒计时或设置新的倒计时将会自动取消相关的`期权挂单`。 该接口可重复调用，以便设置新的倒计时或取消倒计时。 用法示例： 以30s的间隔重复此接口，每次倒计时`timeout`设置为30(秒)。 如果在30秒内未再次调用此接口，则您指定的`underlying`
+`contract`上的所有挂单都会被自动撤销，若未指定`underlying`
+`contract`则会自动撤销用户的全部挂单 如果在30秒内以将`timeout`设置为0，则倒数计时器将终止，自动撤单功能取消。
 
 > Body parameter
 
@@ -4000,16 +3992,16 @@ automatic order cancellation function will be cancelled.
 
 ### Parameters
 
-| Name         | In   | Type           | Required | Description                |
-| ------------ | ---- | -------------- | -------- | -------------------------- |
-| body         | body | object         | true     | none                       |
-| » timeout    | body | integer(int32) | true     | Countdown time, in seconds |
-| » contract   | body | string         | false    | Options contract name      |
-| » underlying | body | string         | false    | Underlying                 |
+| Name         | In   | Type           | Required | Description               |
+| ------------ | ---- | -------------- | -------- | ------------------------- |
+| body         | body | object         | true     | none                      |
+| » timeout    | body | integer(int32) | true     | Countdown time in seconds |
+| » contract   | body | string         | false    | Options contract name     |
+| » underlying | body | string         | false    | Underlying                |
 
 #### [#](#detailed-descriptions-37) Detailed descriptions
 
-**» timeout**: Countdown time, in seconds At least 5 seconds, 0 means cancel the
+**» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
 
 > Example responses

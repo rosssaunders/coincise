@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
+# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -838,7 +838,7 @@ account, you will be able to make use of these endpoints.
 
 Related endpoint can be found in the Unified Account API doc. After enabling the
 Unified Account, you can proceed to call them. For more detailed information,
-please refer to [here](https://www.gate.io/unified-trading-account)
+please refer to [here](https://www.gate.com/unified-trading-account)
 
 ### [#](#api-integration-process) API Integration Process
 
@@ -2392,7 +2392,7 @@ Record time range cannot exceed 30 days
 | ----------------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | currency          | query | string         | false    | Filter by currency. Return all currency records if not specified                                                                                                            |
 | withdraw_id       | query | string         | false    | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| asset_class       | query | string         | false    | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
+| asset_class       | query | string         | false    | 提现记录币种类型，默认为空。即支持用户按需查询主区和创新区的提现记录。                                                                                                      |
 | withdraw_order_id | query | string         | false    | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
 | from              | query | integer(int64) | false    | Time range beginning, default to 7 days before current time                                                                                                                 |
 | to                | query | integer(int64) | false    | Time range ending, default to current time                                                                                                                                  |
@@ -2401,11 +2401,9 @@ Record time range cannot exceed 30 days
 
 #### [#](#detailed-descriptions-2) Detailed descriptions
 
-**asset_class**: The currency type of withdrawal record is empty by default. It
-supports users to query the withdrawal records in the main and innovation areas
-on demand. Value range: SPOT, PILOT
+**asset_class**: 提现记录币种类型，默认为空。即支持用户按需查询主区和创新区的提现记录。 取值范围：SPOT、PILOT
 
-SPOT: Main Zone PILOT: Innovation Zone
+SPOT ： 主区 PILOT： 创新区
 
 > Example responses
 
