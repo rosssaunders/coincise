@@ -791,7 +791,7 @@ _Options:_
 - `PEF_TRANSFER_OUT`
 - `PEF_PROFIT_SHARE`
 - `ONCHAINEARN_SUBSCRIPTION` tranfer out for on chain earn
-- `ONCHAINEARN_REPEMPTION` tranfer in for on chain earn
+- `ONCHAINEARN_REDEMPTION` tranfer in for on chain earn
 - `ONCHAINEARN_REFUND` tranfer in for on chain earn failed
 - `STRUCTURE_PRODUCT_SUBSCRIPTION` tranfer out for structure product
 - `STRUCTURE_PRODUCT_REFUND` tranfer in for structure product
@@ -957,6 +957,39 @@ _Option_:
   site
 - `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
 - `IND_GST` Indian GST tax. Only for kyc=Indian users
+
+### state[​](#state "Direct link to heading")
+
+- `scheduled`
+- `ongoing`
+- `completed`
+- `canceled`
+
+### serviceTypes[​](#servicetypes "Direct link to heading")
+
+- `1` Trading service
+- `2` Http trading service
+- `3` Websocket trading service
+- `4` Private websocket data push service
+- `5` Market data service
+
+### product[​](#product "Direct link to heading")
+
+- `1` future
+- `2` spot
+- `3` option
+- `4` spread
+
+### maintainType[​](#maintaintype "Direct link to heading")
+
+- `1` Planned maintenance
+- `2` Temporary maintenance
+- `3` System failure
+
+### env[​](#env "Direct link to heading")
+
+- `1` mainnet
+- `2` mainnet demo
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -1593,6 +1626,13 @@ with the example of BTCUSDT:
   `wss://stream.bybit.com/v5/trade` (Spread trading is not supported)
 - **Testnet:**  
   `wss://stream-testnet.bybit.com/v5/trade` (Spread trading is not supported)
+
+**[WebSocket GET System Status](/docs/v5/websocket/system/system-status):**
+
+- **Mainnet:**  
+  `wss://stream.bybit.com/v5/public/proxy`
+- **Testnet:**  
+  `wss://stream-testnet.bybit.com/v5/public/proxy`
 
 info
 
