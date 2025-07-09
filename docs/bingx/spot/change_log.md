@@ -2,6 +2,11 @@
 
 ## Change Log
 
+2025-07-09
+
+- USDT-M Perp Futures: Removed SNAPSHOT type from 'Account balance and position
+  update push'.
+
 2025-06-30
 
 - USDT-M Perp Futures: Added displayName field to 'USDT-M Perp Futures symbols'
