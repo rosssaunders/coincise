@@ -3780,9 +3780,9 @@ contains the following fields:
 
 Note that the type of `payload.req_param` is channel specific, Take
 `spot.order_place` for example, `payload.req_param` same as apiv4
-[/spot/orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-an-order)
+[/spot/orders (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#create-an-order)
 or
-[/spot/batch_orders (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-a-batch-of-orders).
+[/spot/batch_orders (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#create-a-batch-of-orders).
 You can place a limit order for GT_USDT with example.
 
 ### [#](#websocket-api-server-response) Websocket API Server Response
@@ -4439,12 +4439,12 @@ Request example
 
 Payload format:
 
-| Field                             | Type     | Required | Description                                                                                                                                                                                |
-| --------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,                                                                                |
+| Field                             | Type     | Required | Description                                                                                                                                                                                 |
+| --------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,                                                                                 |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | api order model's json byte data, could be an array with api order model; api order model detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#create-an-order) |
-| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                                                                                        |
+| `req_param`                       | `object` | Yes      | api order model's json byte data, could be an array with api order model; api order model detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#create-an-order) |
+| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                                                                                         |
 
 `req_param` JSON byte data of the API order model:
 
@@ -4921,12 +4921,12 @@ Order cancel request example
 
 Payload format:
 
-| Field                             | Type     | Required | Description                                                                                                              |
-| --------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,              |
+| Field                             | Type     | Required | Description                                                                                                               |
+| --------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,               |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | api cancel order, detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#cancel-a-single-order) |
-| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                      |
+| `req_param`                       | `object` | Yes      | api cancel order, detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#cancel-a-single-order) |
+| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                       |
 
 `req_param` JSON byte data of the API order model:
 
@@ -5001,24 +5001,24 @@ Order cancel notification example
 
 Result format:
 
-| Field            | Type    | Description                                                                                                                          |
-| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `request_id`     | String  | Unique identifier of the message                                                                                                     |
-| `header`         | Map     | response meta info                                                                                                                   |
-| »`response_time` | String  | response send time in mill                                                                                                           |
-| »`channel`       | String  | request channel                                                                                                                      |
-| »`event`         | String  | request event                                                                                                                        |
-| »`client_id`     | String  | Unique client id                                                                                                                     |
-| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                                        |
-| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                                            |
-| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                                               |
-| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                                          |
-| »`trace_id`      | String  | TraceId for executing order operation                                                                                                |
-| `data`           | Object  | Response data of the request                                                                                                         |
-| »`result`        | Object  | single order cancel response, detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#cancel-a-single-order) |
-| »`errs`          | Object  | It is only available when the request fails                                                                                          |
-| »»`label`        | String  | denotes error type in string format                                                                                                  |
-| »»`message`      | String  | detailed error message                                                                                                               |
+| Field            | Type    | Description                                                                                                                           |
+| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `request_id`     | String  | Unique identifier of the message                                                                                                      |
+| `header`         | Map     | response meta info                                                                                                                    |
+| »`response_time` | String  | response send time in mill                                                                                                            |
+| »`channel`       | String  | request channel                                                                                                                       |
+| »`event`         | String  | request event                                                                                                                         |
+| »`client_id`     | String  | Unique client id                                                                                                                      |
+| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                                         |
+| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                                             |
+| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                                                |
+| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                                           |
+| »`trace_id`      | String  | TraceId for executing order operation                                                                                                 |
+| `data`           | Object  | Response data of the request                                                                                                          |
+| »`result`        | Object  | single order cancel response, detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#cancel-a-single-order) |
+| »`errs`          | Object  | It is only available when the request fails                                                                                           |
+| »»`label`        | String  | denotes error type in string format                                                                                                   |
+| »»`message`      | String  | detailed error message                                                                                                                |
 
 ## [#](#order-cancel-all-with-id-list) Order Cancel All With Id List
 
@@ -5146,12 +5146,12 @@ Client request example
 
 Payload format:
 
-| Field                             | Type     | Required | Description                                                                                                               |
-| --------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,               |
+| Field                             | Type     | Required | Description                                                                                                                |
+| --------------------------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,                |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#cancel-a-batch-of-orders-with-an-id-list) |
-| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                       |
+| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#cancel-a-batch-of-orders-with-an-id-list) |
+| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                        |
 
 `req_param` JSON byte data of the API order model:
 
@@ -5200,24 +5200,24 @@ Order cancel notification example
 
 Result format:
 
-| Field            | Type    | Description                                                                                                                        |
-| ---------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `request_id`     | String  | Unique identifier of the message                                                                                                   |
-| `header`         | Map     | response meta info                                                                                                                 |
-| »`response_time` | String  | response send time in mill                                                                                                         |
-| »`channel`       | String  | request channel                                                                                                                    |
-| »`event`         | String  | request event                                                                                                                      |
-| »`client_id`     | String  | Unique client id                                                                                                                   |
-| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                                      |
-| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                                          |
-| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                                             |
-| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                                        |
-| »`trace_id`      | String  | TraceId for executing order operation                                                                                              |
-| `data`           | Object  | Response data of the request                                                                                                       |
-| »`result`        | Object  | response detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#cancel-a-batch-of-orders-with-an-id-list) |
-| »`errs`          | Object  | It is only available when the request fails                                                                                        |
-| »»`label`        | String  | denotes error type in string format                                                                                                |
-| »»`message`      | String  | detailed error message                                                                                                             |
+| Field            | Type    | Description                                                                                                                         |
+| ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `request_id`     | String  | Unique identifier of the message                                                                                                    |
+| `header`         | Map     | response meta info                                                                                                                  |
+| »`response_time` | String  | response send time in mill                                                                                                          |
+| »`channel`       | String  | request channel                                                                                                                     |
+| »`event`         | String  | request event                                                                                                                       |
+| »`client_id`     | String  | Unique client id                                                                                                                    |
+| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                                       |
+| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                                           |
+| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                                              |
+| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                                         |
+| »`trace_id`      | String  | TraceId for executing order operation                                                                                               |
+| `data`           | Object  | Response data of the request                                                                                                        |
+| »`result`        | Object  | response detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#cancel-a-batch-of-orders-with-an-id-list) |
+| »`errs`          | Object  | It is only available when the request fails                                                                                         |
+| »»`label`        | String  | denotes error type in string format                                                                                                 |
+| »»`message`      | String  | detailed error message                                                                                                              |
 
 ## [#](#order-cancel-all-with-specified-currency-pair) Order Cancel All With Specified Currency Pair
 
@@ -5339,12 +5339,12 @@ func main() {
 
 Payload format:
 
-| Field                             | Type     | Required | Description                                                                                                                        |
-| --------------------------------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,                        |
+| Field                             | Type     | Required | Description                                                                                                                         |
+| --------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,                         |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-open-orders-in-specified-currency-pair) |
-| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                                |
+| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#cancel-all-open-orders-in-specified-currency-pair) |
+| `req_header`                      | `object` | No       | apiv4 custom header                                                                                                                 |
 
 `req_param` JSON byte data of the API order model:
 
@@ -5421,24 +5421,24 @@ Order cancel notification example
 
 Result format:
 
-| Field            | Type    | Description                                                                                                                                 |
-| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `request_id`     | String  | Unique identifier of the message                                                                                                            |
-| `header`         | Map     | response meta info                                                                                                                          |
-| »`response_time` | String  | response send time in mill                                                                                                                  |
-| »`channel`       | String  | request channel                                                                                                                             |
-| »`event`         | String  | request event                                                                                                                               |
-| »`client_id`     | String  | Unique client id                                                                                                                            |
-| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                                               |
-| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                                                   |
-| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                                                      |
-| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                                                 |
-| »`trace_id`      | String  | TraceId for executing order operation                                                                                                       |
-| `data`           | Object  | Response data of the request                                                                                                                |
-| »`result`        | Object  | response detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-open-orders-in-specified-currency-pair) |
-| »`errs`          | Object  | It is only available when the request fails                                                                                                 |
-| »»`label`        | String  | denotes error type in string format                                                                                                         |
-| »»`message`      | String  | detailed error message                                                                                                                      |
+| Field            | Type    | Description                                                                                                                                  |
+| ---------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request_id`     | String  | Unique identifier of the message                                                                                                             |
+| `header`         | Map     | response meta info                                                                                                                           |
+| »`response_time` | String  | response send time in mill                                                                                                                   |
+| »`channel`       | String  | request channel                                                                                                                              |
+| »`event`         | String  | request event                                                                                                                                |
+| »`client_id`     | String  | Unique client id                                                                                                                             |
+| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                                                |
+| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                                                    |
+| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                                                       |
+| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                                                  |
+| »`trace_id`      | String  | TraceId for executing order operation                                                                                                        |
+| `data`           | Object  | Response data of the request                                                                                                                 |
+| »`result`        | Object  | response detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#cancel-all-open-orders-in-specified-currency-pair) |
+| »`errs`          | Object  | It is only available when the request fails                                                                                                  |
+| »»`label`        | String  | denotes error type in string format                                                                                                          |
+| »»`message`      | String  | detailed error message                                                                                                                       |
 
 ## [#](#order-amend) Order Amend
 
@@ -5564,12 +5564,12 @@ Client request example
 
 Payload format:
 
-| Field                             | Type     | Required | Description                                                                                                      |
-| --------------------------------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,      |
+| Field                             | Type     | Required | Description                                                                                                       |
+| --------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to,       |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | api amend order, detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#amend-an-order) |
-| `req_header`                      | `object` | No       | apiv4 custom header                                                                                              |
+| `req_param`                       | `object` | Yes      | api amend order, detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#amend-an-order) |
+| `req_header`                      | `object` | No       | apiv4 custom header                                                                                               |
 
 `req_param` JSON byte data of the API order model:
 
@@ -5667,7 +5667,7 @@ Result format:
 | »`x_gat_ratelimit_reset_timestamp`  | Integer | If the current rate limit has been exceeded, this indicates the timestamp (in milliseconds) of the next available time window when access can be resumed. If the limit has not been exceeded, the response returns the current server time (in milliseconds) |
 | »`conn_id`                          | String  | Connection ID established with the client (remains consistent for the same connection)                                                                                                                                                                       |
 | `data`                              | Object  | Response data of the request                                                                                                                                                                                                                                 |
-| »`result`                           | Object  | response detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#amend-an-order)                                                                                                                                                     |
+| »`result`                           | Object  | response detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#amend-an-order)                                                                                                                                                    |
 | »`errs`                             | Object  | It is only available when the request fails                                                                                                                                                                                                                  |
 | »»`label`                           | String  | denotes error type in string format                                                                                                                                                                                                                          |
 | »»`message`                         | String  | detailed error message                                                                                                                                                                                                                                       |
@@ -5798,7 +5798,7 @@ Payload format:
 | --------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------- |
 | `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to, |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#get-a-single-order)         |
+| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#get-a-single-order)        |
 
 `req_param` JSON byte data of the API order model:
 
@@ -5870,24 +5870,24 @@ will be updated in one notification.
 
 Result format:
 
-| Field            | Type    | Description                                                                                                  |
-| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------ |
-| `request_id`     | String  | Unique identifier of the message                                                                             |
-| `header`         | Map     | response meta info                                                                                           |
-| »`response_time` | String  | response send time in mill                                                                                   |
-| »`channel`       | String  | request channel                                                                                              |
-| »`event`         | String  | request event                                                                                                |
-| »`client_id`     | String  | Unique client id                                                                                             |
-| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                |
-| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                    |
-| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                       |
-| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                  |
-| »`trace_id`      | String  | TraceId for executing order operation                                                                        |
-| `data`           | Object  | Response data of the request                                                                                 |
-| »`result`        | Object  | response detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#get-a-single-order) |
-| »`errs`          | Object  | It is only available when the request fails                                                                  |
-| »»`label`        | String  | denotes error type in string format                                                                          |
-| »»`message`      | String  | detailed error message                                                                                       |
+| Field            | Type    | Description                                                                                                   |
+| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| `request_id`     | String  | Unique identifier of the message                                                                              |
+| `header`         | Map     | response meta info                                                                                            |
+| »`response_time` | String  | response send time in mill                                                                                    |
+| »`channel`       | String  | request channel                                                                                               |
+| »`event`         | String  | request event                                                                                                 |
+| »`client_id`     | String  | Unique client id                                                                                              |
+| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                                 |
+| »`x_out_time`    | Integer | time to return response (in microseconds)                                                                     |
+| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)                        |
+| »`conn_trace_id` | String  | TraceId to establish connection with client                                                                   |
+| »`trace_id`      | String  | TraceId for executing order operation                                                                         |
+| `data`           | Object  | Response data of the request                                                                                  |
+| »`result`        | Object  | response detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#get-a-single-order) |
+| »`errs`          | Object  | It is only available when the request fails                                                                   |
+| »»`label`        | String  | denotes error type in string format                                                                           |
+| »»`message`      | String  | detailed error message                                                                                        |
 
 ## [#](#list-orders) List orders
 
@@ -6021,7 +6021,7 @@ Payload:
 | --------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------- |
 | `req_id`                          | `string` | Yes      | request id which will be sent back by the server to help you identify which request the server responds to, |
 | it's different from outside's`id` |
-| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#list-orders)                |
+| `req_param`                       | `object` | Yes      | detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#list-orders)               |
 
 `req_param` JSON byte data of the API order model:
 
@@ -6172,23 +6172,23 @@ Responses example
 
 Result format:
 
-| Field            | Type    | Description                                                                                       |
-| ---------------- | ------- | ------------------------------------------------------------------------------------------------- |
-| `request_id`     | String  | Unique identifier of the message                                                                  |
-| `header`         | Map     | response meta info                                                                                |
-| »`response_time` | String  | response send time in mill                                                                        |
-| »`channel`       | String  | request channel                                                                                   |
-| »`event`         | String  | request event                                                                                     |
-| »`client_id`     | String  | Unique client id                                                                                  |
-| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                     |
-| »`x_out_time`    | Integer | time to return response (in microseconds)                                                         |
-| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)            |
-| »`conn_trace_id` | String  | TraceId to establish connection with client                                                       |
-| »`trace_id`      | String  | TraceId for executing order operation                                                             |
-| `data`           | Object  | Response data of the request                                                                      |
-| »`result`        | Array   | response detail to[api (opens new window)](https://www.gate.io/docs/developers/apiv4/en/#order-2) |
-| »`errs`          | Object  | It is only available when the request fails                                                       |
-| »»`label`        | String  | denotes error type in string format                                                               |
-| »»`message`      | String  | detailed error message                                                                            |
+| Field            | Type    | Description                                                                                        |
+| ---------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `request_id`     | String  | Unique identifier of the message                                                                   |
+| `header`         | Map     | response meta info                                                                                 |
+| »`response_time` | String  | response send time in mill                                                                         |
+| »`channel`       | String  | request channel                                                                                    |
+| »`event`         | String  | request event                                                                                      |
+| »`client_id`     | String  | Unique client id                                                                                   |
+| »`x_in_time`     | Integer | time to receive the request (in microseconds)                                                      |
+| »`x_out_time`    | Integer | time to return response (in microseconds)                                                          |
+| »`conn_id`       | String  | Connection ID established with the client (remains consistent for the same connection)             |
+| »`conn_trace_id` | String  | TraceId to establish connection with client                                                        |
+| »`trace_id`      | String  | TraceId for executing order operation                                                              |
+| `data`           | Object  | Response data of the request                                                                       |
+| »`result`        | Array   | response detail to[api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#order-2) |
+| »`errs`          | Object  | It is only available when the request fails                                                        |
+| »»`label`        | String  | denotes error type in string format                                                                |
+| »»`message`      | String  | detailed error message                                                                             |
 
-Last Updated: 7/3/2025, 6:15:49 AM
+Last Updated: 7/8/2025, 1:29:05 PM

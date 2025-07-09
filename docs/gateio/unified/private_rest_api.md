@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
+# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -838,7 +838,7 @@ account, you will be able to make use of these endpoints.
 
 Related endpoint can be found in the Unified Account API doc. After enabling the
 Unified Account, you can proceed to call them. For more detailed information,
-please refer to [here](https://www.gate.io/unified-trading-account)
+please refer to [here](https://www.gate.com/unified-trading-account)
 
 ### [#](#api-integration-process) API Integration Process
 
