@@ -612,21 +612,21 @@ provide different /24 subnets from the 172.16.0.0/12 block to establish the
 connection to third parties. Details of the BGP peering will be provided once a
 cross-connect is requested.
 
-**IP & Ports:** 
+**IP & Ports:**  
 
 - www.deribit.com (load balancer)
 - 443 - HTTPS
 - 9881-FIX
 - 9883-FIX SSL
 
-**Colo connection:**
+**Colo connection:** 
 
 - 8020 - HTTP
 - 8021 - API
 - 8022 - WS
 - 8025 - FIX
 
-[](https://support.deribit.com/hc/article_attachments/28584430759709)[![Deribit Global System Structure](/hc/article_attachments/28584430759709)](/hc/article_attachments/28584430759709)
+[](https://support.deribit.com/hc/article_attachments/28669620439453)[![Deribit Global System Structure](/hc/article_attachments/28669620439453)](/hc/article_attachments/28669620439453)
 
 #### Hosting in the Client Rack
 
@@ -651,7 +651,7 @@ internet handoff). This service requires the signing of a hosting agreement.
 Therefore, if interested, don't hesitate to get in touch with
 [support@deribit.com](mailto:support@deribit.com) for more information.
 
-**Server requirements:**
+**Server requirements:** 
 
 - 2U Maximum
 - The server must be of proper quality (not self assembled, no loose parts, etc)
@@ -683,29 +683,56 @@ Equinix fees. If you would like to cross-connect, please get in touch with your
 Equinix manager to request the service, and please write at systems@deribit.com
 to receive the LOA (valid for both the primary/secondary connection).
 
-#### Q&A
+#### FAQ
 
-**What is the speed difference between the cross-connect and the hosted
-solution?**
+**Q: What is the speed difference between the cross-connect and the hosted
+solution?** 
 
-Cross-connect from the client rack links to the Equinix meet me room (MMR) and
-the Deribit matching engine. Therefore, the distance using the hosted solution
-to our platform is shorter as no MMR is involved.
+**A:** Cross-connect from the client rack links to the Equinix meet me room
+(MMR) and the Deribit matching engine. Therefore, the distance using the hosted
+solution to our platform is shorter as no MMR is involved.
 
-**Is there any equalization/harmonization/normalization of the cross-connect and
-the hosted solution?**
+**Q: Is there any equalization/harmonization/normalization of the cross-connect
+and the hosted solution?** 
 
-No, latency depends on the distance to the MMR.
+**A:** No, latency depends on the distance to the MMR.
 
-**Can the hosted solution also have cross-connects to other locations within
-LD4?**
+**Q: Can the hosted solution also have cross-connects to other locations within
+LD4?** 
 
-Yes, but the patches to other destinations need to land directly into your
-server (no switch).
+**A:** Yes, but the patches to other destinations need to land directly into
+your server (no switch).
 
-**What is the location of the Deribit Matching Engine in LD4?**
+**Q: What is the location of the Deribit Matching Engine in LD4?** 
 
-LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
+**A:** LD4:01:00S14 – Equinix LD4, 2 Buckingham Avenue, Slough, SL1 4NB, UK
+
+**Q: Do I need to provide the SFPs for the colo connection?** 
+
+**A:** No, you do not need to provide the SFPs for the trading connections
+**colo1** and **colo2** when using the colocation service. However, if you wish
+to cross connect your server to your own infrastructure, you will need to
+provide the SFP and ensure a port is available on your NIC.
+
+**Q: Are you using NTP or PTP to sync master servers to the pool?** 
+
+**A:** We are currently using open-source **NTP** to synchronize our production
+master to the pool. **PTP** is under development for production use and is
+expected to offer higher accuracy and precision, but there is no confirmed
+rollout date yet.
+
+**Q: Besides C13 power cables, do I need to provide any other cables or
+fibres?** 
+
+**A:** No, all other cables and fibres required for colocation and cross-connect
+services are provided as part of the service.
+
+**Q: Will the cross connect from my server to my infrastructure also be 10
+Gbit?** 
+
+**A:** This connection does not pass through our network, so the speed is your
+choice. Just make sure the SFPs are compatible on both ends and the connection
+is configured accordingly.
 
 # Asia Gateway
 

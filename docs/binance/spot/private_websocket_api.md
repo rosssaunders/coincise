@@ -1658,6 +1658,8 @@ To apply an event to your local order book, follow this update procedure:
     `wss://ws-api.testnet.binance.vision/ws-api/v3`
 - A single connection to the API is only valid for 24 hours; expect to be
   disconnected after the 24-hour mark.
+- We support HMAC, RSA, and Ed25519 keys. For more information, please see
+  [API Key types](/docs/binance-spot-api-docs/faqs/api_key_types).
 - Responses are in JSON by default. To receive responses in SBE, refer to the
   [SBE FAQ](/docs/binance-spot-api-docs/faqs/sbe_faq) page.
 - The WebSocket server will send a `ping frame` every 20 seconds.

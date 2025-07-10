@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-v4-100-3) Gate API v4 v4.100.3
+# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -838,7 +838,7 @@ account, you will be able to make use of these endpoints.
 
 Related endpoint can be found in the Unified Account API doc. After enabling the
 Unified Account, you can proceed to call them. For more detailed information,
-please refer to [here](https://www.gate.io/unified-trading-account)
+please refer to [here](https://www.gate.com/unified-trading-account)
 
 ### [#](#api-integration-process) API Integration Process
 
@@ -2212,7 +2212,7 @@ _List all currency pairs supported_
     "sell_start": 1516378650,
     "buy_start": 1516378650,
     "delisting_time": 0,
-    "trade_url": "https://www.gate.io/trade/ETH_USDT"
+    "trade_url": "https://www.gate.com/trade/ETH_USDT"
   }
 ]
 ```
@@ -2302,7 +2302,7 @@ _Get details of a specifc currency pair_
   "sell_start": 1516378650,
   "buy_start": 1516378650,
   "delisting_time": 0,
-  "trade_url": "https://www.gate.io/trade/ETH_USDT"
+  "trade_url": "https://www.gate.com/trade/ETH_USDT"
 }
 ```
 
@@ -4299,16 +4299,16 @@ account
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | currency_pair  | query  | string | false    | Currency pair                                                                                                                                    |
 | side           | query  | string | false    | All bids or asks. Both included if not specified                                                                                                 |
-| account        | query  | string | false    | Specify Account Type                                                                                                                             |
+| account        | query  | string | false    | 指定账户类型                                                                                                                                     |
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
 | x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 
 #### [#](#detailed-descriptions-14) Detailed descriptions
 
-**account**: Specify Account Type
+**account**: 指定账户类型
 
-- Classic Account: If not specified, all include
-- Unified Account: Specify `unified`
+- 经典账户：不指定则全部包含
+- 统一账户：指定`unified`
 
 **action_mode**: Processing Mode
 
@@ -4793,24 +4793,38 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Amend an order_
 
-By default modify orders for spot, unified account and leverage account.
+Modify orders in spot, unified account and isolated margin account by default.
 
-At present, both the request body and query support currency_pair and account
-parameters, but the request body has higher priority
+Currently both request body and query support currency_pair and account
+parameters, but request body has higher priority.
 
-currency_pair must be filled in the request body or query
+currency_pair must be filled in one of the request body or query parameters.
 
-Currently, it supports modifying the price or quantity (choose one of two), and
-also supports modifying the price and quantity at the same time
+About rate limit: Order modification and order creation share the same rate
+limit rules.
 
-About speed limit: Modify orders and create orders to share speed limit rules
+About matching priority: Only reducing the quantity does not affect the matching
+priority. Modifying the price or increasing the quantity will adjust the
+priority to the end of the new price level.
 
-About matching priority: Only modifying the quantity will become smaller and
-will not affect the priority of matching. If the price is modified or the
-quantity is modified, the priority will be adjusted to the end of the new price
+Note: Modifying the quantity to be less than the filled quantity will trigger a
+cancellation operation.Modify orders in spot, unified account and isolated
+margin account by default.
 
-Precautions: Modification quantity is less than the transaction quantity will
-trigger the order cancellation operation
+Currently both request body and query support currency_pair and account
+parameters, but request body has higher priority.
+
+currency_pair must be filled in one of the request body or query parameters.
+
+About rate limit: Order modification and order creation share the same rate
+limit rules.
+
+About matching priority: Only reducing the quantity does not affect the matching
+priority. Modifying the price or increasing the quantity will adjust the
+priority to the end of the new price level.
+
+Note: Modifying the quantity to be less than the filled quantity will trigger a
+cancellation operation.
 
 > Body parameter
 
@@ -4833,8 +4847,8 @@ trigger the order cancellation operation
 | body            | body   | object | true     | none                                                                                                                                             |
 | » currency_pair | body   | string | false    | Currency pair                                                                                                                                    |
 | » account       | body   | string | false    | Specify query account.                                                                                                                           |
-| » amount        | body   | string | false    | New order amount. `amount` and `price` must specify one of them                                                                                  |
-| » price         | body   | string | false    | New order price. `amount` and `Price` must specify one of them"                                                                                  |
+| » amount        | body   | string | false    | 交易数量，`amount`和`price`必须指定其中一个                                                                                                      |
+| » price         | body   | string | false    | 交易价，`amount`和`price`必须指定其中一个                                                                                                        |
 | » amend_text    | body   | string | false    | Custom info during amending order                                                                                                                |
 | » action_mode   | body   | string | false    | Processing Mode:                                                                                                                                 |
 
@@ -5415,15 +5429,17 @@ This operation does not require authentication
 
 _Countdown cancel orders_
 
-When the timeout set by the user is reached, if there is no cancel or set a new
-countdown, the related pending orders will be automatically cancelled. This
-endpoint can be called repeatedly to set a new countdown or cancel the
-countdown. For example, call this endpoint at 30s intervals, each
-countdown`timeout` is set to 30s. If this endpoint is not called again within 30
-seconds, all pending orders on the specified `market` will be automatically
-cancelled, if no `market` is specified, all market pending orders will be
+Spot order heartbeat detection. If there is no "cancel existing countdown" or
+"set new countdown" when the user-set `timeout` time is reached, the related
+`spot pending orders` will be automatically cancelled. This interface can be
+called repeatedly to set a new countdown or cancel the countdown. Usage example:
+Repeat this interface at 30s intervals, setting the countdown `timeout` to
+`30 (seconds)` each time. If this interface is not called again within 30
+seconds, all pending orders on the `market` you specified will be automatically
+cancelled. If no `market` is specified, all market pending orders will be
 cancelled. If the `timeout` is set to 0 within 30 seconds, the countdown timer
-will expire and the cacnel function will be cancelled.
+will be terminated and the automatic order cancellation function will be
+cancelled.
 
 > Body parameter
 
@@ -5436,15 +5452,15 @@ will expire and the cacnel function will be cancelled.
 
 ### Parameters
 
-| Name            | In   | Type           | Required | Description                |
-| --------------- | ---- | -------------- | -------- | -------------------------- |
-| body            | body | object         | true     | none                       |
-| » timeout       | body | integer(int32) | true     | Countdown time, in seconds |
-| » currency_pair | body | string         | false    | Currency pair              |
+| Name            | In   | Type           | Required | Description               |
+| --------------- | ---- | -------------- | -------- | ------------------------- |
+| body            | body | object         | true     | none                      |
+| » timeout       | body | integer(int32) | true     | Countdown time in seconds |
+| » currency_pair | body | string         | false    | Currency pair             |
 
 #### [#](#detailed-descriptions-18) Detailed descriptions
 
-**» timeout**: Countdown time, in seconds At least 5 seconds, 0 means cancel the
+**» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
 
 > Example responses
@@ -5485,15 +5501,14 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Batch modification of orders_
 
-By default modify orders for spot, unified account and leverage account.
-Currently, only the price or quantity modification (choose one of two) Modify
-unfinished orders, up to 5 orders can be modified in batches at a time. The
-request parameters should be passed in array format. When the order modification
-fails during batch modification, the modification of the order will continue to
-be executed. After execution, the failure information of the corresponding order
-will be carried The order of calling the batch modification order is consistent
-with the order list The order of return content of batch modification orders is
-consistent with the order list
+Modify orders in spot, unified account and isolated margin account by default.
+Modify uncompleted orders, up to 5 orders can be modified at a time. Request
+parameters should be passed in array format. If there are order modification
+failures during the batch modification process, the modification of the next
+order will continue to be executed, and the execution will return with the
+corresponding order failure information. The call order of batch modification
+orders is consistent with the order list order. The return content order of
+batch modification orders is consistent with the order list order.
 
 > Body parameter
 
