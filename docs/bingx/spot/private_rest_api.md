@@ -391,6 +391,7 @@ Content-Type:request body(application/json)
 | endTime        | LONG   | no       | End Time 1658748648396                              |
 | offset         | int    | no       | offset default0                                     |
 | limit          | int    | no       | Page size default 1000 cannot exceed 1000           |
+| txId           | LONG   |          | transaction id                                      |
 | recvWindow     | LONG   | no       | Execution window time, cannot be greater than 60000 |
 | timestamp      | LONG   | yes      | current timestamp 1658748648396                     |
 
@@ -445,6 +446,7 @@ Content-Type:request body(application/json)
 | endTime         | LONG   | no       | End Time 1658748648396                                                                                                                                                            |
 | offset          | int    | no       | offset default0                                                                                                                                                                   |
 | limit           | int    | no       | Page size default 1000 cannot exceed 1000                                                                                                                                         |
+| txId            | String |          | Withdrawal transaction id                                                                                                                                                         |
 | recvWindow      | LONG   | no       | Execution window time, cannot be greater than 60000                                                                                                                               |
 | timestamp       | LONG   | yes      | current timestamp e.g.1658748648396                                                                                                                                               |
 
@@ -494,19 +496,21 @@ Get information of coins,And query the limit corresponding to the coins
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Description                                             |
-| -------------- | ------ | -------- | ------------------------------------------------------- |
-| coin           | string | no       | Coin identification                                     |
-| recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds |
-| timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds     |
+| Parameter Name | Type   | Required | Description                                                                                                                     |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| coin           | string | no       | Coin identification                                                                                                             |
+| displayName    | string | 否       | The platform displays the currency pair name for display only. Unlike coins, coins need to be used for withdrawal and recharge. |
+| recvWindow     | int64  | no       | Timestamp of initiating the request, Unit: milliseconds                                                                         |
+| timestamp      | int64  | yes      | Request valid time window value, Unit: milliseconds                                                                             |
 
 #### Response Parameters
 
-| Parameter Name | Type    | Description         |
-| -------------- | ------- | ------------------- |
-| coin           | string  | Coin identification |
-| name           | string  | Coin name           |
-| networkList    | Network | Network information |
+| Parameter Name | Type    | Description                                                                                                                     |
+| -------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| coin           | string  | Coin identification                                                                                                             |
+| displayName    | string  | The platform displays the currency pair name for display only. Unlike coins, coins need to be used for withdrawal and recharge. |
+| name           | string  | Coin name                                                                                                                       |
+| networkList    | Network | Network information                                                                                                             |
 
 #### Data Parameters
 
@@ -615,16 +619,17 @@ accounts.
 
 #### Response Parameters
 
-| Parameter Name    | Type   | Description                                       |
-| ----------------- | ------ | ------------------------------------------------- |
-| data              | object | List of deposit addresses                         |
-| total             | int    | Total number of addresses                         |
-| coin              | string | Name of the coin                                  |
-| network           | string | Name of the network                               |
-| address           | string | Deposit address                                   |
-| addressWithPrefix | string | Deposit address with prefix                       |
-| tag               | string | Address tag                                       |
-| status            | int    | 0 for activated, 1 for applied, 2 for not applied |
+| Parameter Name    | Type   | Description                                                                              |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------- |
+| data              | object | List of deposit addresses                                                                |
+| total             | int    | Total number of addresses                                                                |
+| coin              | string | Name of the coin                                                                         |
+| network           | string | Name of the network                                                                      |
+| address           | string | Deposit address                                                                          |
+| addressWithPrefix | string | Deposit address with prefix                                                              |
+| tag               | string | Address tag                                                                              |
+| status            | int    | 0 for activated, 1 for applied, 2 for not applied                                        |
+| walletType        | int    | 1 for Fund Account, 2 for Standard Account, 3 for Perpetual Account, 15 for Spot Account |
 
 #### Errors
 
@@ -2749,15 +2754,16 @@ account.
 
 #### Response Parameters
 
-| Parameter Name    | Type    | Description                                                                |
-| ----------------- | ------- | -------------------------------------------------------------------------- |
-| address           | string  | Address                                                                    |
-| addressTag        | string  | Address tag                                                                |
-| addressWithPrefix | string  | Deposit address with prefix                                                |
-| coin              | string  | Currency name                                                              |
-| network           | string  | Network name                                                               |
-| status            | decimal | Address status: 0 for activated, 1 for pending, 2 for not applied          |
-| ts                | long    | Creation time in Unix timestamp format in milliseconds, e.g. 1597026383085 |
+| Parameter Name    | Type    | Description                                                                              |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------- |
+| address           | string  | Address                                                                                  |
+| addressTag        | string  | Address tag                                                                              |
+| addressWithPrefix | string  | Deposit address with prefix                                                              |
+| coin              | string  | Currency name                                                                            |
+| network           | string  | Network name                                                                             |
+| status            | decimal | Address status: 0 for activated, 1 for pending, 2 for not applied                        |
+| ts                | long    | Creation time in Unix timestamp format in milliseconds, e.g. 1597026383085               |
+| walletType        | int     | 1 for Fund Account, 2 for Standard Account, 3 for Perpetual Account, 15 for Spot Account |
 
 #### Errors
 
@@ -2798,16 +2804,17 @@ located. The user who verifies the signature of this API must be main account.
 
 #### Response Parameters
 
-| Parameter Name    | Type   | Description                              |
-| ----------------- | ------ | ---------------------------------------- |
-| data              | object | List of deposit addresses                |
-| total             | int    | Total number of addresses                |
-| coin              | string | Coin name                                |
-| network           | string | Network name                             |
-| address           | string | Deposit address                          |
-| addressWithPrefix | string | Deposit address with prefix              |
-| tag               | string | Address tag                              |
-| status            | int    | 0: Activated, 1: Applied, 2: Not applied |
+| Parameter Name    | Type   | Description                                                                              |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------- |
+| data              | object | List of deposit addresses                                                                |
+| total             | int    | Total number of addresses                                                                |
+| coin              | string | Coin name                                                                                |
+| network           | string | Network name                                                                             |
+| address           | string | Deposit address                                                                          |
+| addressWithPrefix | string | Deposit address with prefix                                                              |
+| tag               | string | Address tag                                                                              |
+| status            | int    | 0: Activated, 1: Applied, 2: Not applied                                                 |
+| walletType        | int    | 1 for Fund Account, 2 for Standard Account, 3 for Perpetual Account, 15 for Spot Account |
 
 #### Errors
 
@@ -2845,6 +2852,7 @@ sub-user. The user who verifies the signature of this API must be main account.
 | endTime        | long   | no       | End time                                                                                               |
 | offset         | int    | no       | Starting record number, default is 0                                                                   |
 | limit          | int    | no       | Page size, default is 100, maximum is 1000                                                             |
+| txId           | string |          | Transaction ID                                                                                         |
 | timestamp      | int64  | yes      | Request timestamp in milliseconds                                                                      |
 | recvWindow     | int64  | no       | Request valid time window, in milliseconds                                                             |
 

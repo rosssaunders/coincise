@@ -2,6 +2,16 @@
 
 ## Change Log
 
+2025-07-11
+
+- Accounts & Wallets: Added wallType field to responses for 'Main Account
+  Deposit Address', 'Create Sub-Account Deposit Address', and 'Query Sub-Account
+  Deposit Address'.
+- Accounts & Wallets: Added txId field to input parameters for 'Withdrawal
+  Records', 'Deposit Records', and 'Sub-Account Deposit Records Query'.
+- Accounts & Wallets: Added displayName field to input parameters and responses
+  for 'Query Coin Deposit/Withdrawal Data'.
+
 2025-07-09
 
 - USDT-M Perp Futures: Removed SNAPSHOT type from 'Account balance and position
