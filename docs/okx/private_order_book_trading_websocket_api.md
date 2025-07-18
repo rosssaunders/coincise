@@ -1123,7 +1123,7 @@ You can place an order only if you have sufficient funds.
 
 #### Rate Limit: 60 requests per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 requests per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 requests per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
@@ -1360,7 +1360,7 @@ Place orders in a batch. Maximum 20 orders can be placed per request
 
 #### Rate Limit: 300 orders per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 orders per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 orders per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
@@ -1547,7 +1547,7 @@ Amend an incomplete order.
 
 #### Rate Limit: 60 requests per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 requests per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 requests per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
@@ -1619,7 +1619,7 @@ request.
 
 #### Rate Limit: 300 orders per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 orders per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 orders per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 

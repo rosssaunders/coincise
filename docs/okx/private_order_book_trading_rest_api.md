@@ -769,6 +769,8 @@ The following endpoints are supported:
 - [Place multiple orders](/docs-v5/en/#order-book-trading-trade-post-place-multiple-orders)
 - [Amend order](/docs-v5/en/#order-book-trading-trade-post-amend-order)
 - [Amend multiple orders](/docs-v5/en/#order-book-trading-trade-post-amend-multiple-orders)
+- [POST / Place sub order](/docs-v5/en/#order-book-trading-signal-bot-trading-post-place-sub-order)
+  under signal bot trading
 
 ---
 
@@ -1794,13 +1796,13 @@ Please refer to the request examples on the right for each case.
 
 #### Request Parameters
 
-| Parameter | Type   | Required    | Description                                                                                                                                                                                                                                                                                                              |
-| --------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| instId    | String | Conditional | Instrument ID<br>Under cross mode, either <code>instId</code> or <code>ccy</code> is required; if both are passed, <code>instId</code> will be used by default.                                                                                                                                                          |
-| ccy       | String | Conditional | Currency used for margin, used for the leverage setting for the currency in auto borrow.<br>Only applicable to <code>cross</code> <code>MARGIN</code> of <code>Spot mode</code>/<code>Multi-currency margin</code>/<code>Portfolio margin</code><br>Required when setting the leverage for automatically borrowing coin. |
-| lever     | String | Yes         | Leverage                                                                                                                                                                                                                                                                                                                 |
-| mgnMode   | String | Yes         | Margin mode<br><code>isolated</code> <code>cross</code><br>Can only be <code>cross</code> if <code>ccy</code> is passed.                                                                                                                                                                                                 |
-| posSide   | String | Conditional | Position side<br><code>long</code> <code>short</code><br>Only required when margin mode is <code>isolated</code> in <code>long/short</code> mode for <code>FUTURES</code>/<code>SWAP</code>.                                                                                                                             |
+| Parameter | Type   | Required    | Description                                                                                                                                                                                                                                                                                                                                        |
+| --------- | ------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| instId    | String | Conditional | Instrument ID<br>Only applicable to <code>cross</code> <code>FUTURES</code> <code>SWAP</code> of <code>Spot mode</code>/<code>Multi-currency margin</code>/<code>Portfolio margin</code>, <code>cross</code> <code>MARGIN</code><code>FUTURES</code><code>SWAP</code> and <code>isolated</code> position.<br>And required in applicable scenarios. |
+| ccy       | String | Conditional | Currency used for margin, used for the leverage setting for the currency in auto borrow.<br>Only applicable to <code>cross</code> <code>MARGIN</code> of <code>Spot mode</code>/<code>Multi-currency margin</code>/<code>Portfolio margin</code>.<br>And required in applicable scenarios.                                                         |
+| lever     | String | Yes         | Leverage                                                                                                                                                                                                                                                                                                                                           |
+| mgnMode   | String | Yes         | Margin mode<br><code>isolated</code> <code>cross</code><br>Can only be <code>cross</code> if <code>ccy</code> is passed.                                                                                                                                                                                                                           |
+| posSide   | String | Conditional | Position side<br><code>long</code> <code>short</code><br>Only required when margin mode is <code>isolated</code> in <code>long/short</code> mode for <code>FUTURES</code>/<code>SWAP</code>.                                                                                                                                                       |
 
 #### Response Parameters
 
@@ -2298,81 +2300,6 @@ Only applicable to Portfolio margin account
 | atRiskIdx      | Array of strings | derivatives risk unit list                                                                                                                                         |
 | atRiskMgn      | Array of strings | margin risk unit list                                                                                                                                              |
 | ts             | String           | Unix timestamp format in milliseconds, e.g.<code>1597026383085</code>                                                                                              |
-
----
-
-### Manual borrow and repay in Quick Margin Mode
-
-Please note that this endpoint will be deprecated soon.
-
-#### Rate Limit: 5 requests per 2 seconds
-
-#### Rate limit rule: User ID
-
-#### Permission: Trade
-
-#### HTTP Request
-
-`POST /api/v5/account/quick-margin-borrow-repay`
-
-#### Request Parameters
-
-| Parameter | Type   | Required | Description                            |
-| --------- | ------ | -------- | -------------------------------------- |
-| instId    | String | Yes      | Instrument ID, e.g. BTC-USDT           |
-| ccy       | String | Yes      | Loan currency, e.g. <code>BTC</code>   |
-| side      | String | Yes      | <code>borrow</code> <code>repay</code> |
-| amt       | String | Yes      | borrow/repay amount                    |
-
-#### Response Parameters
-
-| Parameter | Type   | Description                            |
-| --------- | ------ | -------------------------------------- |
-| instId    | String | Instrument ID, e.g. BTC-USDT           |
-| ccy       | String | Loan currency, e.g. <code>BTC</code>   |
-| side      | String | <code>borrow</code> <code>repay</code> |
-| amt       | String | borrow/repay amount                    |
-
----
-
-### Get borrow and repay history in Quick Margin Mode
-
-Get record in the past 3 months.
-
-#### Rate Limit: 5 requests per 2 seconds
-
-#### Rate limit rule: User ID
-
-#### Permission: Read
-
-#### HTTP Request
-
-`GET /api/v5/account/quick-margin-borrow-repay-history`
-
-#### Request Parameters
-
-| Parameter | Type   | Required | Description                                                                                     |
-| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
-| instId    | String | No       | Instrument ID, e.g. BTC-USDT                                                                    |
-| ccy       | String | No       | Loan currency, e.g. <code>BTC</code>                                                            |
-| side      | String | No       | <code>borrow</code> <code>repay</code>                                                          |
-| after     | String | No       | Pagination of data to return records earlier than the requested <code>refId</code>              |
-| before    | String | No       | Pagination of data to return records newer than the requested <code>refId</code>                |
-| begin     | String | No       | Filter with a begin timestamp. Unix timestamp format in milliseconds, e.g. 1597026383085        |
-| end       | String | No       | Filter with an end timestamp. Unix timestamp format in milliseconds, e.g. 1597026383085         |
-| limit     | String | No       | Number of results per request. The maximum is <code>100</code>; The default is <code>100</code> |
-
-#### Response Parameters
-
-| Parameter   | Type   | Description                            |
-| ----------- | ------ | -------------------------------------- |
-| instId      | String | Instrument ID, e.g. BTC-USDT           |
-| ccy         | String | Loan currency, e.g. <code>BTC</code>   |
-| side        | String | <code>borrow</code> <code>repay</code> |
-| accBorrowed | String | Accumulate borrow amount               |
-| amt         | String | borrow/repay amount                    |
-| refId       | String | The ID of borrowing or repayment       |
-| ts          | String | Timestamp for Borrow/Repay             |
 
 ---
 
@@ -3275,7 +3202,7 @@ You can place an order only if you have sufficient funds.
 
 #### Rate Limit: 60 requests per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 requests per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 requests per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
@@ -3547,6 +3474,14 @@ the taker order is partially filled. Then, the remaining quantity of the taker
 order and the first maker order are canceled. FOK orders are not supported in
 this mode.
 
+tradeQuoteCcy  
+For users in specific countries and regions, this parameter must be filled out
+for a successful order. Otherwise, the system will use the quote currency of
+instId as the default value, then error code 51000 will occur.  
+The value provided must be one of the enumerated values from tradeQuoteCcyList,
+which can be obtained from the endpoint Get instruments (GET
+/api/v5/account/instruments).
+
 ---
 
 ### POST / Place multiple orders
@@ -3557,7 +3492,7 @@ placed in turn
 
 #### Rate Limit: 300 orders per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 orders per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 orders per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
@@ -3739,7 +3674,7 @@ Amend an incomplete order.
 
 #### Rate Limit: 60 requests per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 requests per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 requests per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
@@ -3817,7 +3752,7 @@ request. Request parameters should be passed in the form of an array.
 
 #### Rate Limit: 300 orders per 2 seconds
 
-#### Rate Limit of lead instruments for Copy Trading: 4 orders per 2 seconds
+#### Rate Limit of lead trader lead instruments for Copy Trading: 4 orders per 2 seconds
 
 #### Rate limit rule (except Options): User ID + Instrument ID
 
