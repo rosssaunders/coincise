@@ -720,6 +720,7 @@ NONE
       "unit": 1, // Contract unit, the quantity of the underlying asset represented by a single contract.
       "makerFeeRate": "0.0002", // maker commission rate
       "takerFeeRate": "0.0002", // taker commission rate
+      "liquidationFeeRate": "0.0019000", // liquidation fee rate
       "minQty": "0.01", // Minimum order quantity
       "maxQty": "100", // Maximum order quantity
       "initialMargin": "0.15", // Initial Magin Ratio
