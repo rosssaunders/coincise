@@ -805,6 +805,9 @@ _Options:_
 - `LIQUIDITY_MINING_REFUND` tranfer in for liquidity mining
 - `PWM_SUBSCRIPTION` tranfer out for PWM
 - `PWM_REFUND` tranfer in for PWM
+- `DEFI_INVESTMENT_SUBSCRIPTION` tranfer out for DEFI subscription
+- `DEFI_INVESTMENT_REFUND` transfer in for DEFI refund
+- `DEFI_INVESTMENT_REDEMPTION` tranfer in for DEFI redemption
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -968,28 +971,28 @@ _Option_:
 ### serviceTypes[​](#servicetypes "Direct link to heading")
 
 - `1` Trading service
-- `2` Http trading service
-- `3` Websocket trading service
-- `4` Private websocket data push service
+- `2` Trading service via http request
+- `3` Trading service via websocket
+- `4` Private websocket stream
 - `5` Market data service
 
 ### product[​](#product "Direct link to heading")
 
-- `1` future
-- `2` spot
-- `3` option
-- `4` spread
+- `1` Futures
+- `2` Spot
+- `3` Option
+- `4` Spread
 
 ### maintainType[​](#maintaintype "Direct link to heading")
 
 - `1` Planned maintenance
 - `2` Temporary maintenance
-- `3` System failure
+- `3` Incident
 
 ### env[​](#env "Direct link to heading")
 
-- `1` mainnet
-- `2` mainnet demo
+- `1` Production
+- `2` Production Demo service
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -1497,7 +1500,51 @@ with the example of BTCUSDT:
 |      700007       | Large Amount Limit                                                                                                                                           |
 |      700012       | UTA upgrading, don't allow to apply for quote                                                                                                                |
 
-## Crypto Loan[​](#crypto-loan "Direct link to heading")
+## Crypto Loan (New)[​](#crypto-loan-new "Direct link to heading")
+
+|  Code  | Description                                                                                    |
+| :----: | :--------------------------------------------------------------------------------------------- |
+| 148001 | This currency is not supported for flexible savings.                                           |
+| 148002 | The entered amount is below the minimum borrowable amount.                                     |
+| 148003 | Exceeds the allowed decimal precision for this currency.                                       |
+| 148004 | This currency cannot be used as collateral.                                                    |
+| 148005 | Exceeds the allowed decimal precision for this collateral currency.                            |
+| 148006 | The amount of collateral exceeds the upper limit of the platform.                              |
+| 148007 | Borrow amount cannot be negative.                                                              |
+| 148008 | Collateral amount cannot be negative.                                                          |
+| 148009 | LTV exceeds the risk threshold.                                                                |
+| 148010 | Insufficient available quota.                                                                  |
+| 148011 | Insufficient balance in the funding pool .                                                     |
+| 148012 | Insufficient collateral amount.                                                                |
+| 148013 | Non-borrowing users cannot adjust collateral.                                                  |
+| 148014 | This currency is not supported.                                                                |
+| 148015 | Loan term exceeds the allowed range.                                                           |
+| 148016 | The specified lending rate is not supported.                                                   |
+| 148017 | The interest rate exceeds the allowed decimal precision.                                       |
+| 148018 | Exceeded the maximum number of open orders.                                                    |
+| 148019 | The system is busy, please try again later.                                                    |
+| 148020 | Insufficient platform lending quota.                                                           |
+| 148021 | Operation conflict detected. Please try again later.                                           |
+| 148022 | Insufficient assets for lending.                                                               |
+| 148023 | Loan order not found.                                                                          |
+| 148024 | Loan cancellation failed: the order may have been completed or has an invalid amount.          |
+| 148025 | Lending order cancellation failed: the order may have been completed or has an invalid amount. |
+| 148026 | Failed to create repayment. Please try again later.                                            |
+| 148027 | No active loan found for this account. Operation not allowed.                                  |
+| 148028 | Repayment amount exceeds the supported precision for the currency.                             |
+| 148029 | Insufficient balance in the repayment account.                                                 |
+| 148030 | Deposit order not found.                                                                       |
+| 148031 | Operation not allowed during liquidation.                                                      |
+| 148032 | No outstanding debt. Repayment is not allowed.                                                 |
+| 148033 | This loan order cannot be repaid.                                                              |
+| 148034 | Please wait and try again later.                                                               |
+| 148035 | Please wait and try again later.                                                               |
+| 148036 | Failed to adjust collateral amount. Please try again later.                                    |
+| 148037 | Insufficient assets or adjustment amount exceeds the maximum allowed.                          |
+| 148038 | Repayment amount cannot exceed the debt amount of the position.                                |
+| 148039 | Duplicate collateral assets detected. Please review and resubmit.                              |
+
+## Crypto Loan (legacy)[​](#crypto-loan-legacy "Direct link to heading")
 
 |  Code  | Description                                                                                                 |
 | :----: | :---------------------------------------------------------------------------------------------------------- |
@@ -1630,9 +1677,9 @@ with the example of BTCUSDT:
 **[WebSocket GET System Status](/docs/v5/websocket/system/system-status):**
 
 - **Mainnet:**  
-  `wss://stream.bybit.com/v5/public/proxy`
+  `wss://stream.bybit.com/v5/public/misc/status`
 - **Testnet:**  
-  `wss://stream-testnet.bybit.com/v5/public/proxy`
+  `wss://stream-testnet.bybit.com/v5/public/misc/status`
 
 info
 
