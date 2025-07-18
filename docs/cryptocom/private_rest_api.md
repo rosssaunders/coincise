@@ -3559,9 +3559,8 @@ When currency = CRO, network = ETH, it is an ERC20 address. | | address | string
       }
     }
 
-Fetches deposit history. Withdrawal setting must be enabled for your API Key. If
-you do not see the option when viewing your API Keys, this feature is not yet
-available for you.
+Fetches deposit history. If you do not see the option when viewing your API
+Keys, this feature is not yet available for you.
 
 Note: It works for master account only, not for sub-accounts.
 
@@ -3651,9 +3650,8 @@ An array of `deposit_list`, consisting of:
       }
     }
 
-Fetches withdrawal history. Withdrawal setting must be enabled for your API Key.
-If you do not see the option when viewing your API Keys, this feature is not yet
-available for you.
+Fetches withdrawal history. If you do not see the option when viewing your API
+Keys, this feature is not yet available for you.
 
 Note: It works for master account only, not for sub-accounts.
 
