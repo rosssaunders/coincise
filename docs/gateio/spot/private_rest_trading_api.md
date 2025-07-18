@@ -1,13 +1,11 @@
-# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
+# [#](#gate-api-v4-102-1) Gate API v4.102.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate API
-
-APIv4 provides spot, margin and futures trading operations. There are public
-APIs to retrieve the real-time market statistics, and private APIs which needs
-authentication to trade on user's behalf.
+Welcome to Gate API APIv4 provides operations related to spot, margin, and
+contract trading, including public interfaces for querying market data and
+authenticated private interfaces for implementing API-based automated trading.
 
 ## [#](#access-url) Access URL
 
@@ -2212,7 +2210,8 @@ _List all currency pairs supported_
     "sell_start": 1516378650,
     "buy_start": 1516378650,
     "delisting_time": 0,
-    "trade_url": "https://www.gate.com/trade/ETH_USDT"
+    "trade_url": "https://www.gate.io/trade/ETH_USDT",
+    "st_tag": false
   }
 ]
 ```
@@ -2253,7 +2252,8 @@ start unix timestamp in seconds | | »» buy_start | integer(int64) | Buy start
 unix timestamp in seconds | | »» delisting_time | integer(int64) | Expected time
 to remove the shelves, Unix timestamp in seconds | | »» type | string | Trading
 pair type, normal: normal, premarket: pre-market | | »» trade_url | string |
-Transaction link |
+Transaction link | | »» st_tag | boolean | Whether the trading pair is in ST
+risk assessment, false - No, true - Yes |
 
 #### [#](#enumerated-values-10) Enumerated Values
 
@@ -2302,7 +2302,8 @@ _Get details of a specifc currency pair_
   "sell_start": 1516378650,
   "buy_start": 1516378650,
   "delisting_time": 0,
-  "trade_url": "https://www.gate.com/trade/ETH_USDT"
+  "trade_url": "https://www.gate.io/trade/ETH_USDT",
+  "st_tag": false
 }
 ```
 
@@ -2342,7 +2343,8 @@ start unix timestamp in seconds | | » buy_start | integer(int64) | Buy start
 unix timestamp in seconds | | » delisting_time | integer(int64) | Expected time
 to remove the shelves, Unix timestamp in seconds | | » type | string | Trading
 pair type, normal: normal, premarket: pre-market | | » trade_url | string |
-Transaction link |
+Transaction link | | » st_tag | boolean | Whether the trading pair is in ST risk
+assessment, false - No, true - Yes |
 
 #### [#](#enumerated-values-11) Enumerated Values
 
@@ -2447,7 +2449,8 @@ This operation does not require authentication
 
 _Retrieve order book_
 
-Order book will be sorted by price from high to low on bids; low to high on asks
+Market depth buy orders are sorted by price from high to low, sell orders are
+reversed are reversed
 
 ### Parameters
 
@@ -2535,13 +2538,13 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 | ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------ |
 | currency_pair | query | string         | true     | Currency pair                                                                                          |
 | limit         | query | integer(int32) | false    | Maximum number of records to be returned in a single list. Default: 100, Minimum: 1, Maximum: 1000     |
-| last_id       | query | string         | false    | Specify list staring point using the `id` of last record in previous list-query results                |
+| last_id       | query | string         | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time.        |
 | reverse       | query | boolean        | false    | Whether the id of records to be retrieved should be less than the last_id specified. Default to false. |
 | from          | query | integer(int64) | false    | Start timestamp of the query                                                                           |
 | to            | query | integer(int64) | false    | Time range ending, default to current time                                                             |
 | page          | query | integer(int32) | false    | Page number                                                                                            |
 
-#### [#](#detailed-descriptions-9) Detailed descriptions
+#### [#](#detailed-descriptions-11) Detailed descriptions
 
 **reverse**: Whether the id of records to be retrieved should be less than the
 last_id specified. Default to false.
@@ -2593,7 +2596,7 @@ Status Code **200**
 | » create_time                                                  | string | Trading time                                                         |
 | » create_time_ms                                               | string | Trading time, with millisecond precision                             |
 | » currency_pair                                                | string | Currency pair                                                        |
-| » side                                                         | string | Order side                                                           |
+| » side                                                         | string | Buy or sell order                                                    |
 | » role                                                         | string | Trade role. No value in public endpoints                             |
 | » amount                                                       | string | Trade amount                                                         |
 | » price                                                        | string | Order price                                                          |
@@ -2636,7 +2639,7 @@ limit when specifying from, to and interval
 | currency_pair | query | string         | true     | Currency pair                                                                                                                                      |
 | limit         | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
 | from          | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                               |
-| to            | query | integer(int64) | false    | End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time                                                          |
+| to            | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second       |
 | interval      | query | string         | false    | Interval time between data points. Note that `30d` means 1 natual month, not 30 days                                                               |
 
 #### [#](#enumerated-values-14) Enumerated Values
@@ -2717,7 +2720,7 @@ This API is deprecated in favour of new fee retrieving API `/wallet/fee`.
 | ------------- | ----- | ------ | -------- | ---------------------------------------------------- |
 | currency_pair | query | string | false    | Specify a currency pair to retrieve precise fee rate |
 
-#### [#](#detailed-descriptions-10) Detailed descriptions
+#### [#](#detailed-descriptions-12) Detailed descriptions
 
 **currency_pair**: Specify a currency pair to retrieve precise fee rate
 
@@ -3098,8 +3101,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »» side |
-string | Order side | | »» amount | string | Trade amount | | »» price | string
-| Order price | | »» time_in_force | string | Time in force
+string | Buy or sell order | | »» amount | string | Trade amount | | »» price |
+string | Order price | | »» time_in_force | string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -3290,8 +3293,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »»» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »»» side |
-string | Order side | | »»» amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | »»» amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | »»» price |
@@ -3428,7 +3431,7 @@ currency balance - the amount of the currency in the order book) / 0.998
 | » price         | body | string | true     | Order price                                                          |
 | » action_mode   | body | string | false    | Processing Mode:                                                     |
 
-#### [#](#detailed-descriptions-11) Detailed descriptions
+#### [#](#detailed-descriptions-13) Detailed descriptions
 
 **» text**: User defined information. If not empty, must follow the rules below:
 
@@ -3528,8 +3531,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Order side | | » amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | » amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
@@ -3712,7 +3715,7 @@ Set `stp_act` to decide to use strategies that limit user transactions
 | » currency_pair | body   | string  | true     | Currency pair                                                                                                                                    |
 | » type          | body   | string  | false    | Order Type                                                                                                                                       |
 | » account       | body   | string  | false    | Account type, spot - spot account, margin - leveraged account, unified - unified account                                                         |
-| » side          | body   | string  | true     | Order side                                                                                                                                       |
+| » side          | body   | string  | true     | Buy or sell order                                                                                                                                |
 | » amount        | body   | string  | true     | When `type` is limit, it refers to base currency. For instance, `BTC_USDT` means `BTC`                                                           |
 | » price         | body   | string  | false    | Price can't be empty when `type`\= `limit`                                                                                                       |
 | » time_in_force | body   | string  | false    | Time in force                                                                                                                                    |
@@ -3723,7 +3726,7 @@ Set `stp_act` to decide to use strategies that limit user transactions
 | » fee_discount  | body   | string  | false    | rate discount                                                                                                                                    |
 | » action_mode   | body   | string  | false    | Processing Mode:                                                                                                                                 |
 
-#### [#](#detailed-descriptions-12) Detailed descriptions
+#### [#](#detailed-descriptions-14) Detailed descriptions
 
 **» text**: User defined information. If not empty, must follow the rules below:
 
@@ -3931,8 +3934,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Order side | | » amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | » amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
@@ -4081,7 +4084,7 @@ end time.
 | to            | query | integer(int64) | false    | Time range ending, default to current time                                                                     |
 | side          | query | string         | false    | All bids or asks. Both included if not specified                                                               |
 
-#### [#](#detailed-descriptions-13) Detailed descriptions
+#### [#](#detailed-descriptions-15) Detailed descriptions
 
 **status**: List orders based on status
 
@@ -4175,8 +4178,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »» side |
-string | Order side | | »» amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | »» amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | »» price |
@@ -4299,16 +4302,16 @@ account
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | currency_pair  | query  | string | false    | Currency pair                                                                                                                                    |
 | side           | query  | string | false    | All bids or asks. Both included if not specified                                                                                                 |
-| account        | query  | string | false    | 指定账户类型                                                                                                                                     |
+| account        | query  | string | false    | Specify account type                                                                                                                             |
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
 | x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 
-#### [#](#detailed-descriptions-14) Detailed descriptions
+#### [#](#detailed-descriptions-16) Detailed descriptions
 
-**account**: 指定账户类型
+**account**: Specify account type
 
-- 经典账户：不指定则全部包含
-- 统一账户：指定`unified`
+Classic account: All are included if not specified Unified account: Specify
+unified
 
 **action_mode**: Processing Mode
 
@@ -4408,8 +4411,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »» side |
-string | Order side | | »» amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | »» amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | »» price |
@@ -4589,7 +4592,7 @@ account are checked.
 | currency_pair | query | string | true     | Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank. |
 | account       | query | string | false    | Specify query account.                                                                                                                                                      |
 
-#### [#](#detailed-descriptions-15) Detailed descriptions
+#### [#](#detailed-descriptions-17) Detailed descriptions
 
 **order_id**: The order ID returned when the order was successfully created or
 the custom ID specified by the user's creation (i.e. the `text` field).
@@ -4681,8 +4684,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Order side | | » amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | » amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
@@ -4847,12 +4850,12 @@ cancellation operation.
 | body            | body   | object | true     | none                                                                                                                                             |
 | » currency_pair | body   | string | false    | Currency pair                                                                                                                                    |
 | » account       | body   | string | false    | Specify query account.                                                                                                                           |
-| » amount        | body   | string | false    | 交易数量，`amount`和`price`必须指定其中一个                                                                                                      |
-| » price         | body   | string | false    | 交易价，`amount`和`price`必须指定其中一个                                                                                                        |
+| » amount        | body   | string | false    | Trading Quantity. Either amountor pricemust be specified                                                                                         |
+| » price         | body   | string | false    | Trading Price. Either amountor pricemust be specified                                                                                            |
 | » amend_text    | body   | string | false    | Custom info during amending order                                                                                                                |
 | » action_mode   | body   | string | false    | Processing Mode:                                                                                                                                 |
 
-#### [#](#detailed-descriptions-16) Detailed descriptions
+#### [#](#detailed-descriptions-18) Detailed descriptions
 
 **order_id**: The order ID returned when the order was successfully created or
 the custom ID specified by the user's creation (i.e. the `text` field).
@@ -4949,8 +4952,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Order side | | » amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | » amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
@@ -5074,7 +5077,7 @@ revoked.
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
 | x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 
-#### [#](#detailed-descriptions-17) Detailed descriptions
+#### [#](#detailed-descriptions-19) Detailed descriptions
 
 **order_id**: The order ID returned when the order was successfully created or
 the custom ID specified by the user's creation (i.e. the `text` field).
@@ -5174,8 +5177,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Order side | | » amount | string | When `type` is limit, it refers to
-base currency. For instance, `BTC_USDT` means `BTC`  
+string | Buy or sell order | | » amount | string | When `type` is limit, it
+refers to base currency. For instance, `BTC_USDT` means `BTC`  
 When `type` is `market`, it refers to different currency according to `side`  
 \- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
 \- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
@@ -5358,7 +5361,7 @@ Status Code **200**
 | » create_time                                                  | string | Trading time                                                         |
 | » create_time_ms                                               | string | Trading time, with millisecond precision                             |
 | » currency_pair                                                | string | Currency pair                                                        |
-| » side                                                         | string | Order side                                                           |
+| » side                                                         | string | Buy or sell order                                                    |
 | » role                                                         | string | Trade role. No value in public endpoints                             |
 | » amount                                                       | string | Trade amount                                                         |
 | » price                                                        | string | Order price                                                          |
@@ -5458,7 +5461,7 @@ cancelled.
 | » timeout       | body | integer(int32) | true     | Countdown time in seconds |
 | » currency_pair | body | string         | false    | Currency pair             |
 
-#### [#](#detailed-descriptions-18) Detailed descriptions
+#### [#](#detailed-descriptions-20) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
@@ -5614,8 +5617,8 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »» side |
-string | Order side | | »» amount | string | Trade amount | | »» price | string
-| Order price | | »» time_in_force | string | Time in force
+string | Buy or sell order | | »» amount | string | Trade amount | | »» price |
+string | Order price | | »» time_in_force | string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -5802,12 +5805,12 @@ _Create a price-triggered order_
 | »» text          | body | string                                                    | false    | The source of the order, including:                                                          |
 | » market         | body | string                                                    | true     | Currency pair                                                                                |
 
-#### [#](#detailed-descriptions-19) Detailed descriptions
+#### [#](#detailed-descriptions-21) Detailed descriptions
 
 **»» rule**: Price trigger condition
 
-- > \=: triggered when market price larger than or equal to `price` field
-- <=: triggered when market price less than or equal to `price` field
+- `>=`: triggered when market price larger than or equal to `price` field
+- `<=`: triggered when market price less than or equal to `price` field
 
 **»» type**: Order type，default to `limit`
 
@@ -5829,7 +5832,8 @@ according to `side`
 **»» account**: Trading account type. Portfolio margin account must set to
 `unified`
 
-- normal: spot trading
+\-normal: spot trading
+
 - margin: margin trading
 - unified: unified trading
 

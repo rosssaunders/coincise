@@ -1,13 +1,11 @@
-# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
+# [#](#gate-api-v4-102-1) Gate API v4.102.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate API
-
-APIv4 provides spot, margin and futures trading operations. There are public
-APIs to retrieve the real-time market statistics, and private APIs which needs
-authentication to trade on user's behalf.
+Welcome to Gate API APIv4 provides operations related to spot, margin, and
+contract trading, including public interfaces for querying market data and
+authenticated private interfaces for implementing API-based automated trading.
 
 ## [#](#access-url) Access URL
 
@@ -2022,7 +2020,7 @@ _List all futures contracts_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-84) Enumerated Values
+#### [#](#enumerated-values-85) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2101,7 +2099,7 @@ _Get a single contract_
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
 
-#### [#](#enumerated-values-85) Enumerated Values
+#### [#](#enumerated-values-86) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2175,15 +2173,15 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                                                                          |
-| -------- | ----- | ------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| settle   | path  | string  | true     | Settle currency                                                                                      |
-| contract | query | string  | true     | Futures contract                                                                                     |
-| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0                                         |
-| limit    | query | integer | false    | Maximum number of order depth data in asks or bids                                                   |
-| with_id  | query | boolean | false    | Whether the order book update ID will be returned. This ID increases by 1 on every order book update |
+| Name     | In    | Type    | Required | Description                                                           |
+| -------- | ----- | ------- | -------- | --------------------------------------------------------------------- |
+| settle   | path  | string  | true     | Settle currency                                                       |
+| contract | query | string  | true     | Futures contract                                                      |
+| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0          |
+| limit    | query | integer | false    | Maximum number of order depth data in asks or bids                    |
+| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time. |
 
-#### [#](#enumerated-values-86) Enumerated Values
+#### [#](#enumerated-values-87) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2226,9 +2224,9 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Responses
 
-| Status | Meaning                                                                    | Description          | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order book retrieved | Inline |
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Depth query successful | Inline |
 
 ### Response Schema
 
@@ -2265,22 +2263,20 @@ _Futures trading history_
 | settle   | path  | string         | true     | Settle currency                                                                                                 |
 | contract | query | string         | true     | Futures contract                                                                                                |
 | limit    | query | integer        | false    | Maximum number of records to be returned in a single list                                                       |
-| last_id  | query | string         | false    | Specify the starting point for this list based on a previously retrieved id                                     |
+| last_id  | query | string         | false    | 以上个列表的最后一条记录的 ID 作为下个列表的起点。                                                              |
 | from     | query | integer(int64) | false    | Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. |
 | to       | query | integer(int64) | false    | Specify end time in Unix seconds, default to current time                                                       |
 
-#### [#](#detailed-descriptions-31) Detailed descriptions
+#### [#](#detailed-descriptions-38) Detailed descriptions
 
-**last_id**: Specify the starting point for this list based on a previously
-retrieved id
-
-This parameter is deprecated. Use `from` and `to` instead to limit time range
+**last_id**: 以上个列表的最后一条记录的 ID 作为下个列表的起点。 该字段不再继续支持，新的请求请使用
+`from` 和 `to` 字段来限定时间范围
 
 **from**: Specify starting time in Unix seconds. If not specified, `to` and
 `limit` will be used to limit response items. If items between `from` and `to`
 are more than `limit`, only `limit` number will be returned.
 
-#### [#](#enumerated-values-87) Enumerated Values
+#### [#](#enumerated-values-88) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2347,11 +2343,11 @@ limit when specifying `from`, `to` and `interval`
 | settle   | path  | string         | true     | Settle currency                                                                                                                                    |
 | contract | query | string         | true     | Futures contract                                                                                                                                   |
 | from     | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                               |
-| to       | query | integer(int64) | false    | End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time                                                          |
+| to       | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second       |
 | limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
-| interval | query | string         | false    | Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0                               |
+| interval | query | string         | false    | Time interval between data points, note that 1w represents a natural week, 7d time is aligned with Unix initial timeweek                           |
 
-#### [#](#enumerated-values-88) Enumerated Values
+#### [#](#enumerated-values-89) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2427,7 +2423,7 @@ _List futures tickers_
 | settle   | path  | string | true     | Settle currency  |
 | contract | query | string | false    | Futures contract |
 
-#### [#](#enumerated-values-89) Enumerated Values
+#### [#](#enumerated-values-90) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2517,7 +2513,7 @@ _Futures insurance balance history_
 | settle | path  | string  | true     | Settle currency                                           |
 | limit  | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-90) Enumerated Values
+#### [#](#enumerated-values-91) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2568,7 +2564,7 @@ _Query futures account_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-91) Enumerated Values
+#### [#](#enumerated-values-92) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2611,7 +2607,8 @@ _Query futures account_
     "point_refr": "0",
     "bonus_dnw": "0",
     "bonus_offset": "0"
-  }
+  },
+  "enable_tiered_mm": true
 }
 ```
 
@@ -2652,6 +2649,8 @@ Status Code **200**
 | » isolated_position_margin                                                     | string  | Ware -position margin, suitable for the new classic account margin model                                                                                                                        |
 | » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
 | » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
+| » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
+| » position_voucher_total                                                       | string  | Total Position Experience Coupon Amount in Account                                                                                                                                              |
 | » history                                                                      | object  | Statistical data                                                                                                                                                                                |
 | »» dnw                                                                         | string  | total amount of deposit and withdraw                                                                                                                                                            |
 | »» pnl                                                                         | string  | total amount of trading profit and loss                                                                                                                                                         |
@@ -2683,10 +2682,20 @@ _Query account book_
 | settle | path  | string         | true     | Settle currency                                           |
 | limit  | query | integer        | false    | Maximum number of records to be returned in a single list |
 | from   | query | integer(int64) | false    | Start timestamp                                           |
-| to     | query | integer(int64) | false    | End timestamp                                             |
+| to     | query | integer(int64) | false    | Termination Timestamp                                     |
 | type   | query | string         | false    | Changing Type:                                            |
 
-#### [#](#detailed-descriptions-32) Detailed descriptions
+#### [#](#detailed-descriptions-39) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
 
 **type**: Changing Type:
 
@@ -2699,7 +2708,7 @@ _Query account book_
 - point_fee: POINT Trading fee
 - point_refr: POINT Referrer rebate
 
-#### [#](#enumerated-values-92) Enumerated Values
+#### [#](#enumerated-values-93) Enumerated Values
 
 | Parameter | Value      |
 | --------- | ---------- |
@@ -2760,10 +2769,10 @@ Status Code **200**
 \- point_refr: POINT Referrer rebate  
 \- bonus_offset: bouns deduction | | » text | string | Comment | | » contract |
 string | Futures contract, the field is only available for data after
-2023-10-30. | | » trade_id | string | trade id | | » id | string
-| 账户变更记录 id |
+2023-10-30. | | » trade_id | string | trade id | | » id | string | Account
+change record ID |
 
-#### [#](#enumerated-values-93) Enumerated Values
+#### [#](#enumerated-values-94) Enumerated Values
 
 | Property | Value        |
 | -------- | ------------ |
@@ -2795,7 +2804,7 @@ _List all positions of a user_
 | ------ | ---- | ------ | -------- | --------------- |
 | settle | path | string | true     | Settle currency |
 
-#### [#](#enumerated-values-94) Enumerated Values
+#### [#](#enumerated-values-95) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2839,7 +2848,9 @@ _List all positions of a user_
     "mode": "single",
     "update_time": 1684994406,
     "update_id": 1,
-    "cross_leverage_limit": "0"
+    "cross_leverage_limit": "0",
+    "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+    "average_maintenance_rate": "0.005"
   }
 ]
 ```
@@ -2868,79 +2879,6 @@ _Get single position_
 | -------- | ---- | ------ | -------- | ---------------- |
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
-
-#### [#](#enumerated-values-95) Enumerated Values
-
-| Parameter | Value |
-| --------- | ----- |
-| settle    | usdt  |
-
-> Example responses
-
-> 200 Response
-
-```
-{
-  "user": 10000,
-  "contract": "BTC_USDT",
-  "size": -9440,
-  "leverage": "0",
-  "risk_limit": "100",
-  "leverage_max": "100",
-  "maintenance_rate": "0.005",
-  "value": "3568.62",
-  "margin": "4.431548146258",
-  "entry_price": "3779.55",
-  "liq_price": "99999999",
-  "mark_price": "3780.32",
-  "unrealised_pnl": "-0.000507486844",
-  "realised_pnl": "0.045543982432",
-  "pnl_pnl": "0.045543982432",
-  "pnl_fund": "0",
-  "pnl_fee": "0",
-  "history_pnl": "0",
-  "last_close_pnl": "0",
-  "realised_point": "0",
-  "history_point": "0",
-  "adl_ranking": 5,
-  "pending_orders": 16,
-  "close_order": {
-    "id": 232323,
-    "price": "3779",
-    "is_liq": false
-  },
-  "mode": "single",
-  "update_time": 1684994406,
-  "update_id": 1,
-  "cross_leverage_limit": "0"
-}
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description          | Schema                      |
-| ------ | -------------------------------------------------------------------------- | -------------------- | --------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Position information | [Position](#schemaposition) |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#update-position-margin-2) Update position margin
-
-> Code samples
-
-`POST /delivery/{settle}/positions/{contract}/margin`
-
-_Update position margin_
-
-### Parameters
-
-| Name     | In    | Type   | Required | Description                                                                       |
-| -------- | ----- | ------ | -------- | --------------------------------------------------------------------------------- |
-| settle   | path  | string | true     | Settle currency                                                                   |
-| contract | path  | string | true     | Futures contract                                                                  |
-| change   | query | string | true     | Margin change. Use positive number to increase margin, negative number otherwise. |
 
 #### [#](#enumerated-values-96) Enumerated Values
 
@@ -2985,7 +2923,9 @@ _Update position margin_
   "mode": "single",
   "update_time": 1684994406,
   "update_id": 1,
-  "cross_leverage_limit": "0"
+  "cross_leverage_limit": "0",
+  "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+  "average_maintenance_rate": "0.005"
 }
 ```
 
@@ -2999,21 +2939,21 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-leverage-2) Update position leverage
+## [#](#update-position-margin-2) Update position margin
 
 > Code samples
 
-`POST /delivery/{settle}/positions/{contract}/leverage`
+`POST /delivery/{settle}/positions/{contract}/margin`
 
-_Update position leverage_
+_Update position margin_
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description           |
-| -------- | ----- | ------ | -------- | --------------------- |
-| settle   | path  | string | true     | Settle currency       |
-| contract | path  | string | true     | Futures contract      |
-| leverage | query | string | true     | New position leverage |
+| Name     | In    | Type   | Required | Description                                                      |
+| -------- | ----- | ------ | -------- | ---------------------------------------------------------------- |
+| settle   | path  | string | true     | Settle currency                                                  |
+| contract | path  | string | true     | Futures contract                                                 |
+| change   | query | string | true     | Margin change amount, positive number increases, negative number |
 
 #### [#](#enumerated-values-97) Enumerated Values
 
@@ -3058,7 +2998,9 @@ _Update position leverage_
   "mode": "single",
   "update_time": 1684994406,
   "update_id": 1,
-  "cross_leverage_limit": "0"
+  "cross_leverage_limit": "0",
+  "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+  "average_maintenance_rate": "0.005"
 }
 ```
 
@@ -3072,21 +3014,21 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-risk-limit-2) Update position risk limit
+## [#](#update-position-leverage-2) Update position leverage
 
 > Code samples
 
-`POST /delivery/{settle}/positions/{contract}/risk_limit`
+`POST /delivery/{settle}/positions/{contract}/leverage`
 
-_Update position risk limit_
+_Update position leverage_
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description             |
-| ---------- | ----- | ------ | -------- | ----------------------- |
-| settle     | path  | string | true     | Settle currency         |
-| contract   | path  | string | true     | Futures contract        |
-| risk_limit | query | string | true     | New position risk limit |
+| Name     | In    | Type   | Required | Description           |
+| -------- | ----- | ------ | -------- | --------------------- |
+| settle   | path  | string | true     | Settle currency       |
+| contract | path  | string | true     | Futures contract      |
+| leverage | query | string | true     | New position leverage |
 
 #### [#](#enumerated-values-98) Enumerated Values
 
@@ -3131,7 +3073,84 @@ _Update position risk limit_
   "mode": "single",
   "update_time": 1684994406,
   "update_id": 1,
-  "cross_leverage_limit": "0"
+  "cross_leverage_limit": "0",
+  "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+  "average_maintenance_rate": "0.005"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description          | Schema                      |
+| ------ | -------------------------------------------------------------------------- | -------------------- | --------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Position information | [Position](#schemaposition) |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#update-position-risk-limit-2) Update position risk limit
+
+> Code samples
+
+`POST /delivery/{settle}/positions/{contract}/risk_limit`
+
+_Update position risk limit_
+
+### Parameters
+
+| Name       | In    | Type   | Required | Description             |
+| ---------- | ----- | ------ | -------- | ----------------------- |
+| settle     | path  | string | true     | Settle currency         |
+| contract   | path  | string | true     | Futures contract        |
+| risk_limit | query | string | true     | New position risk limit |
+
+#### [#](#enumerated-values-99) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "user": 10000,
+  "contract": "BTC_USDT",
+  "size": -9440,
+  "leverage": "0",
+  "risk_limit": "100",
+  "leverage_max": "100",
+  "maintenance_rate": "0.005",
+  "value": "3568.62",
+  "margin": "4.431548146258",
+  "entry_price": "3779.55",
+  "liq_price": "99999999",
+  "mark_price": "3780.32",
+  "unrealised_pnl": "-0.000507486844",
+  "realised_pnl": "0.045543982432",
+  "pnl_pnl": "0.045543982432",
+  "pnl_fund": "0",
+  "pnl_fee": "0",
+  "history_pnl": "0",
+  "last_close_pnl": "0",
+  "realised_point": "0",
+  "history_point": "0",
+  "adl_ranking": 5,
+  "pending_orders": 16,
+  "close_order": {
+    "id": 232323,
+    "price": "3779",
+    "is_liq": false
+  },
+  "mode": "single",
+  "update_time": 1684994406,
+  "update_id": 1,
+  "cross_leverage_limit": "0",
+  "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+  "average_maintenance_rate": "0.005"
 }
 ```
 
@@ -3188,7 +3207,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | » default_leverage | body | string                              | false    | Default leverage multiple                                                                                                                         |
 | settle             | path | string                              | true     | Settle currency                                                                                                                                   |
 
-#### [#](#detailed-descriptions-33) Detailed descriptions
+#### [#](#detailed-descriptions-40) Detailed descriptions
 
 **» tif**: Time in force
 
@@ -3241,7 +3260,7 @@ self-trade prevetion strategies
 - co: Cancel oldest, Cancel old orders and keep new ones
 - cb: Cancel both, Both old and new orders will be cancelled
 
-#### [#](#enumerated-values-99) Enumerated Values
+#### [#](#enumerated-values-100) Enumerated Values
 
 | Parameter   | Value       |
 | ----------- | ----------- |
@@ -3311,17 +3330,17 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
 
-| Name        | In    | Type    | Required | Description                                                                             |
-| ----------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------- |
-| contract    | query | string  | false    | Futures contract                                                                        |
-| status      | query | string  | true     | Only list the orders with this status                                                   |
-| limit       | query | integer | false    | Maximum number of records to be returned in a single list                               |
-| offset      | query | integer | false    | List offset, starting from 0                                                            |
-| last_id     | query | string  | false    | Specify list staring point using the `id` of last record in previous list-query results |
-| count_total | query | integer | false    | Whether to return total number matched. Default to 0(no return)                         |
-| settle      | path  | string  | true     | Settle currency                                                                         |
+| Name        | In    | Type    | Required | Description                                                                                     |
+| ----------- | ----- | ------- | -------- | ----------------------------------------------------------------------------------------------- |
+| contract    | query | string  | false    | Futures contract                                                                                |
+| status      | query | string  | true     | Only list the orders with this status                                                           |
+| limit       | query | integer | false    | Maximum number of records to be returned in a single list                                       |
+| offset      | query | integer | false    | List offset, starting from 0                                                                    |
+| last_id     | query | string  | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time. |
+| count_total | query | integer | false    | Whether to return total number matched. Default to 0(no return)                                 |
+| settle      | path  | string  | true     | Settle currency                                                                                 |
 
-#### [#](#enumerated-values-100) Enumerated Values
+#### [#](#enumerated-values-101) Enumerated Values
 
 | Parameter   | Value    |
 | ----------- | -------- |
@@ -3401,7 +3420,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | side     | query | string | false    | All bids or asks. Both included if not specified |
 | settle   | path  | string | true     | Settle currency                                  |
 
-#### [#](#enumerated-values-101) Enumerated Values
+#### [#](#enumerated-values-102) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3470,7 +3489,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-102) Enumerated Values
+#### [#](#enumerated-values-103) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3533,7 +3552,7 @@ _Cancel a single order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-103) Enumerated Values
+#### [#](#enumerated-values-104) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3591,17 +3610,17 @@ _List personal trading history_
 
 ### Parameters
 
-| Name        | In    | Type           | Required | Description                                                                             |
-| ----------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------- |
-| settle      | path  | string         | true     | Settle currency                                                                         |
-| contract    | query | string         | false    | Futures contract                                                                        |
-| order       | query | integer(int64) | false    | Futures order ID, return related data only if specified                                 |
-| limit       | query | integer        | false    | Maximum number of records to be returned in a single list                               |
-| offset      | query | integer        | false    | List offset, starting from 0                                                            |
-| last_id     | query | string         | false    | Specify list staring point using the `id` of last record in previous list-query results |
-| count_total | query | integer        | false    | Whether to return total number matched. Default to 0(no return)                         |
+| Name        | In    | Type           | Required | Description                                                                                     |
+| ----------- | ----- | -------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| settle      | path  | string         | true     | Settle currency                                                                                 |
+| contract    | query | string         | false    | Futures contract                                                                                |
+| order       | query | integer(int64) | false    | Futures order ID, return related data only if specified                                         |
+| limit       | query | integer        | false    | Maximum number of records to be returned in a single list                                       |
+| offset      | query | integer        | false    | List offset, starting from 0                                                                    |
+| last_id     | query | string         | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time. |
+| count_total | query | integer        | false    | Whether to return total number matched. Default to 0(no return)                                 |
 
-#### [#](#enumerated-values-104) Enumerated Values
+#### [#](#enumerated-values-105) Enumerated Values
 
 | Parameter   | Value |
 | ----------- | ----- |
@@ -3663,7 +3682,7 @@ Available values are `taker` and `maker` | | » text | string | User defined
 information | | » fee | string | Fee deducted | | » point_fee | string | Points
 used to deduct fee |
 
-#### [#](#enumerated-values-105) Enumerated Values
+#### [#](#enumerated-values-106) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3698,7 +3717,7 @@ _List position close history_
 | contract | query | string  | false    | Futures contract                                          |
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 
-#### [#](#enumerated-values-106) Enumerated Values
+#### [#](#enumerated-values-107) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3755,7 +3774,7 @@ Status Code **200**
 | » long_price      | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price. |
 | » short_price     | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price  |
 
-#### [#](#enumerated-values-107) Enumerated Values
+#### [#](#enumerated-values-108) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3783,7 +3802,7 @@ _List liquidation history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a liquidation timestamp                           |
 
-#### [#](#enumerated-values-108) Enumerated Values
+#### [#](#enumerated-values-109) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3859,7 +3878,7 @@ _List settlement history_
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | at       | query | integer | false    | Specify a settlement timestamp                            |
 
-#### [#](#enumerated-values-109) Enumerated Values
+#### [#](#enumerated-values-110) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3933,7 +3952,7 @@ takes effect when the 'contract' parameter is empty.
 | limit    | query | integer | false    | Maximum number of records to be returned in a single list |
 | offset   | query | integer | false    | List offset, starting from 0                              |
 
-#### [#](#enumerated-values-110) Enumerated Values
+#### [#](#enumerated-values-111) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3950,24 +3969,45 @@ takes effect when the 'contract' parameter is empty.
     "tier": 1,
     "initial_rate": "0.02",
     "leverage_max": "50",
-    "risk_limit": "500000",
-    "contract": "BTC_USDT"
+    "risk_limit": "20000",
+    "contract": "ZTX_USDT",
+    "deduction": "0"
   },
   {
-    "initial_rate": "0.03",
-    "maintenance_rate": "0.02",
+    "maintenance_rate": "0.013",
     "tier": 2,
-    "risk_limit": "1000000",
-    "leverage_max": "33.33",
-    "contract": "BTC_USDT"
+    "initial_rate": "0.025",
+    "leverage_max": "40",
+    "risk_limit": "30000",
+    "contract": "ZTX_USDT",
+    "deduction": "60"
   },
   {
-    "maintenance_rate": "0.01",
-    "tier": 1,
-    "initial_rate": "0.02",
-    "leverage_max": "50",
-    "risk_limit": "500000",
-    "contract": "ETH_USDT"
+    "maintenance_rate": "0.015",
+    "tier": 3,
+    "initial_rate": "0.02857",
+    "leverage_max": "35",
+    "risk_limit": "50000",
+    "contract": "ZTX_USDT",
+    "deduction": "120"
+  },
+  {
+    "maintenance_rate": "0.02",
+    "tier": 4,
+    "initial_rate": "0.03333",
+    "leverage_max": "30",
+    "risk_limit": "70000",
+    "contract": "ZTX_USDT",
+    "deduction": "370"
+  },
+  {
+    "maintenance_rate": "0.025",
+    "tier": 5,
+    "initial_rate": "0.04",
+    "leverage_max": "25",
+    "risk_limit": "100000",
+    "contract": "ZTX_USDT",
+    "deduction": "720"
   }
 ]
 ```
@@ -3992,6 +4032,7 @@ Status Code **200**
 | »» maintenance_rate | string       | Maintenance margin rate                                                                |
 | »» leverage_max     | string       | Maximum leverage                                                                       |
 | »» contract         | string       | Markets, visible only during market pagination requests                                |
+| »» deduction        | string       | Maintenance margin quick calculation deduction                                         |
 
 This operation does not require authentication
 
@@ -4046,7 +4087,7 @@ _Create a price-triggered order_
 | » order_type     | body | string                                                          | false    | Types of stop-profit and stop-loss, including:                                                                                                                                     |
 | settle           | path | string                                                          | true     | Settle currency                                                                                                                                                                    |
 
-#### [#](#detailed-descriptions-34) Detailed descriptions
+#### [#](#detailed-descriptions-41) Detailed descriptions
 
 **»» size**: Represents the number of contracts that need to be closed, full
 closing: size=0 Partial closing: plan-close-short-position size>0 Partial
@@ -4106,7 +4147,7 @@ set auto_size
 The two types of entrusted order stop-profit and stop-loss are read-only and
 cannot be passed in through requests
 
-#### [#](#enumerated-values-111) Enumerated Values
+#### [#](#enumerated-values-112) Enumerated Values
 
 | Parameter        | Value |
 | ---------------- | ----- |
@@ -4169,7 +4210,7 @@ _List All Price-triggered Orders_
 | offset   | query | integer | false    | List offset, starting from 0                              |
 | settle   | path  | string  | true     | Settle currency                                           |
 
-#### [#](#enumerated-values-112) Enumerated Values
+#### [#](#enumerated-values-113) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -4234,7 +4275,7 @@ _Cancel All Price-triggered Orders_
 | contract | query | string | true     | Futures contract |
 | settle   | path  | string | true     | Settle currency  |
 
-#### [#](#enumerated-values-113) Enumerated Values
+#### [#](#enumerated-values-114) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4297,7 +4338,7 @@ _Get a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-114) Enumerated Values
+#### [#](#enumerated-values-115) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4358,7 +4399,7 @@ _cancel a price-triggered order_
 | settle   | path | string | true     | Settle currency                                      |
 | order_id | path | string | true     | Retrieve the data of the order with the specified ID |
 
-#### [#](#enumerated-values-115) Enumerated Values
+#### [#](#enumerated-values-116) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |

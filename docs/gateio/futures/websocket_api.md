@@ -2436,10 +2436,10 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter  | type   | required | description                                                                    |
-  | ---------- | ------ | -------- | ------------------------------------------------------------------------------ |
-  | `contract` | String | Yes      | Futures contract name                                                          |
-  | `interval` | String | Yes      | Interval : "1s", "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
+  | parameter  | type   | required | description                                                       |
+  | ---------- | ------ | -------- | ----------------------------------------------------------------- |
+  | `contract` | String | Yes      | Futures contract name                                             |
+  | `interval` | String | Yes      | Interval : "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
 
 **Note: `contract` is `unsub_all`, which means cancel all**
 
@@ -7114,6 +7114,18 @@ Payload format:
 | ---------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `x-gate-exptime` | `string` | false    | Specifies the expiration timestamp (in milliseconds). If the request time received by the WebSocket is later than the expiration time, the request will be rejected |
 
+#### [#](#detail-descriptions) Detail descriptions
+
+**size**: New order size, including filled part.
+
+- If new size is less than or equal to filled size, the order will be cancelled.
+- Order side must be identical to the original one.
+- Close order size cannot be changed.
+- For reduce only orders, increasing size may leads to other reduce only orders
+  being cancelled.
+- If price is not changed, decreasing size will not change its precedence in
+  order book, while increasing will move it to the last at current price.
+
 ### [#](#order-amend-notification) Order Amend Notification
 
 Order amend notification example
@@ -7499,9 +7511,15 @@ Payload format:
 | it's different from outside's`id` |
 | `req_param`                       | `object` | Yes      | Detail to [api (opens new window)](https://www.gate.com/docs/developers/apiv4/en/#get-a-single-order-2)     |
 
-### [#](#order-cancel-notification) Order Cancel Notification
+`req_param` API order model JSON data:
 
-Order cancel notification example
+| Field      | Type     | Required | Description                                                                                                 |
+| ---------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `order_id` | `string` | Yes      | Order ID returned when the order was successfully created, or user specified custom ID (i.e. `text` field). |
+
+### [#](#order-status-notification-2) Order Status Notification
+
+Order status notification example
 
 ```json
 {
@@ -7562,4 +7580,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                              |
 | »»`message`      | String  | Detailed error message                                                                                           |
 
-Last Updated: 7/8/2025, 1:29:05 PM
+Last Updated: 7/13/2025, 3:05:10 AM
