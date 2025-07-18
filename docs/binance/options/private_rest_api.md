@@ -1474,54 +1474,40 @@ Get trades for a specific account and symbol.
 > Source:
 > [https://developers.binance.com/docs/derivatives/option/trade/Account-Trade-List](https://developers.binance.com/docs/derivatives/option/trade/Account-Trade-List)
 
-## Option Margin Account Information (USER_DATA)
+## Get Market Maker Protection Config (TRADE)
 
 ### API Description
 
-Get current account information.
+Get config for MMP.
 
 ### HTTP Request
 
-GET `/eapi/v1/marginAccount`
+GET `/eapi/v1/mmp (HMAC SHA256)`
 
 ### Request Weight
 
-**3**
+**1**
 
 ### Request Parameters
 
-| Name       | Type | Mandatory | Description |
-| ---------- | ---- | --------- | ----------- |
-| recvWindow | LONG | NO        |             |
-| timestamp  | LONG | YES       |             |
+| Name       | Type   | Mandatory | Description             |
+| ---------- | ------ | --------- | ----------------------- |
+| underlying | STRING | TRUE      | underlying, e.g BTCUSDT |
+| recvWindow | LONG   | NO        |                         |
+| timestamp  | LONG   | YES       |                         |
 
 ### Response Example
 
 ```json
 {
-  "asset": [
-    {
-      "asset": "USDT",                  // Asset type
-      "marginBalance": "10099.448"      // Account balance
-      "equity": "10094.44662",          // Account equity
-      "available": "8725.92524",        // Available funds
-      "initialMargin": "1084.52138",    // Initial margin
-      "maintMargin": "151.00138",       // Maintenance margin
-      "unrealizedPNL": "-5.00138",      // Unrealized profit/loss
-      "lpProfit": "-5.00138",           // Unrealized profit for long position
-     }
-  ],
-  "greek": [
-    {
-      "underlying":"BTCUSDT"            // Option Underlying
-      "delta": "-0.05"                  // Account delta
-      "gamma": "-0.002"                 // Account gamma
-      "theta": "-0.05"                  // Account theta
-      "vega": "-0.002"                  // Account vega
-    }
-  ],
-  "time": 1592449455993                 // Time
-}   
+  "underlyingId": 2,
+  "underlying": "BTCUSDT",
+  "windowTimeInMilliseconds": 3000,
+  "frozenTimeInMilliseconds": 300000,
+  "qtyLimit": "2",
+  "deltaLimit": "2.3",
+  "lastTriggerTime": 0
+}
 ```
 
 > Source:
