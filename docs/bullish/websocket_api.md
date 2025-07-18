@@ -1352,6 +1352,107 @@ Sample:
 }
 ```
 
+## Unified Anonymous Tick WebSocket (unauthenticated)
+
+**Route**
+
+- `/trading-api/v1/market-data/tick`
+
+This allows simultaneous tick subscriptions to multiple markets.
+
+Upon subscribing to a market, the client will first receive a snapshot of latest
+ticker, followed by updates.
+
+### Unified Anonymous Tick Subscription
+
+Tick of different markets to be subscribed to, are controlled by parameters in
+the subscription message listed below: | Parameters | Type | Description |
+|:----------------------|:-------|:--------------------------------------------------------------------------------|
+| topic | String | `tick` | | symbol | String | market symbol such as `BTCUSDC`
+|
+
+### Tick Subscription Message Sample:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "type": "command",
+  "method": "subscribe",
+  "params": {
+    "topic": "tick",
+    "symbol": "BTCUSD"
+  },
+  "id": "1611082473000"
+}
+```
+
+### Keepalive Message Sample:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "type": "command",
+  "method": "keepalivePing",
+  "params": {},
+  "id": "1611082473001"
+}
+```
+
+### Tick response example
+
+```json
+{
+  "type": "snapshot",
+  "dataType": "V1TATickerResponse",
+  "data": {
+    "askVolume": "3.56000000",
+    "average": "5200.0400",
+    "baseVolume": "1.00000000",
+    "bestAsk": "6543.0000",
+    "bestBid": "2345.0000",
+    "bidVolume": "2.00000000",
+    "change": "0.0000",
+    "close": "5200.0400",
+    "createdAtTimestamp": "1591058897000",
+    "publishedAtTimestamp": "1591058898000",
+    "high": "5200.0400",
+    "last": "5200.0400",
+    "lastTradeDatetime": "2020-06-02T00:40:39.500Z",
+    "lastTradeSize": "1.00000000",
+    "low": "5200.0400",
+    "open": "5200.0400",
+    "percentage": "0.00",
+    "quoteVolume": "5200.0400",
+    "symbol": "BTC-USDC-PERP",
+    "type": "ticker",
+    "vwap": "5200.0400",
+    "currentPrice": "0.0007",
+    "ammData": [
+      {
+        "feeTierId": "1",
+        "currentPrice": "0.0007",
+        "baseReservesQuantity": "96153.00000000",
+        "quoteReservesQuantity": "500005200.0400",
+        "bidSpreadFee": "0.00000005",
+        "askSpreadFee": "0.00000006"
+      },
+      {
+        "feeTierId": "2",
+        "currentPrice": "0.0017",
+        "baseReservesQuantity": "96153.00000000",
+        "quoteReservesQuantity": "500005200.0400",
+        "bidSpreadFee": "0.00000015",
+        "askSpreadFee": "0.00000016"
+      }
+    ],
+    "createdAtDatetime": "2020-06-02T00:48:17.000Z",
+    "markPrice": "26000.0000",
+    "fundingRate": "0.114100",
+    "openInterest": "9.00000000"
+  }
+}
+```
+
 ## Anonymous Market Data Price Tick (unauthenticated)
 
 **Route**
@@ -2047,6 +2148,8 @@ Bullish currently has 2 test assets.
 
 ## 2025 Changes
 
+- new Websocket API -
+  [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
 - June
   - new REST API - [Get Historical Trades](#get-/v1/history/trades)
   - new REST API - [Get Historical Orders](#get-/v2/history/orders)
@@ -2901,6 +3004,107 @@ Sample:
     "createdAtTimestamp": "1722408780786",
     "publishedAtTimestamp": "1722408780790",
     "symbol": "BTCUSDC"
+  }
+}
+```
+
+## Unified Anonymous Tick WebSocket (unauthenticated)
+
+**Route**
+
+- `/trading-api/v1/market-data/tick`
+
+This allows simultaneous tick subscriptions to multiple markets.
+
+Upon subscribing to a market, the client will first receive a snapshot of latest
+ticker, followed by updates.
+
+### Unified Anonymous Tick Subscription
+
+Tick of different markets to be subscribed to, are controlled by parameters in
+the subscription message listed below: | Parameters | Type | Description |
+|:----------------------|:-------|:--------------------------------------------------------------------------------|
+| topic | String | `tick` | | symbol | String | market symbol such as `BTCUSDC`
+|
+
+### Tick Subscription Message Sample:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "type": "command",
+  "method": "subscribe",
+  "params": {
+    "topic": "tick",
+    "symbol": "BTCUSD"
+  },
+  "id": "1611082473000"
+}
+```
+
+### Keepalive Message Sample:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "type": "command",
+  "method": "keepalivePing",
+  "params": {},
+  "id": "1611082473001"
+}
+```
+
+### Tick response example
+
+```json
+{
+  "type": "snapshot",
+  "dataType": "V1TATickerResponse",
+  "data": {
+    "askVolume": "3.56000000",
+    "average": "5200.0400",
+    "baseVolume": "1.00000000",
+    "bestAsk": "6543.0000",
+    "bestBid": "2345.0000",
+    "bidVolume": "2.00000000",
+    "change": "0.0000",
+    "close": "5200.0400",
+    "createdAtTimestamp": "1591058897000",
+    "publishedAtTimestamp": "1591058898000",
+    "high": "5200.0400",
+    "last": "5200.0400",
+    "lastTradeDatetime": "2020-06-02T00:40:39.500Z",
+    "lastTradeSize": "1.00000000",
+    "low": "5200.0400",
+    "open": "5200.0400",
+    "percentage": "0.00",
+    "quoteVolume": "5200.0400",
+    "symbol": "BTC-USDC-PERP",
+    "type": "ticker",
+    "vwap": "5200.0400",
+    "currentPrice": "0.0007",
+    "ammData": [
+      {
+        "feeTierId": "1",
+        "currentPrice": "0.0007",
+        "baseReservesQuantity": "96153.00000000",
+        "quoteReservesQuantity": "500005200.0400",
+        "bidSpreadFee": "0.00000005",
+        "askSpreadFee": "0.00000006"
+      },
+      {
+        "feeTierId": "2",
+        "currentPrice": "0.0017",
+        "baseReservesQuantity": "96153.00000000",
+        "quoteReservesQuantity": "500005200.0400",
+        "bidSpreadFee": "0.00000015",
+        "askSpreadFee": "0.00000016"
+      }
+    ],
+    "createdAtDatetime": "2020-06-02T00:48:17.000Z",
+    "markPrice": "26000.0000",
+    "fundingRate": "0.114100",
+    "openInterest": "9.00000000"
   }
 }
 ```
