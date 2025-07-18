@@ -1363,7 +1363,7 @@ curl "https://api.bitget.com/api/v2/spot/trade/current-plan-order?symbol=BTCUSDT
 
 | Parameter  | Type   | Required | Description                                                                                                                                                                 |
 | :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol     | String | Yes      | Trading pair, e.g. BTCUSDT                                                                                                                                                  |
+| symbol     | String | No       | Trading pair, e.g. BTCUSDT                                                                                                                                                  |
 | limit      | String | No       | Default is 20 Max is 100                                                                                                                                                    |
 | idLessThan | String | No       | Requests the content on the page before this ID (older data), the value input should be the orderId of the corresponding interface.                                         |
 | startTime  | String | No       | The start time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868<br>The <code>startTime</code> and <code>endTime</code> should be within 90 days. |
@@ -1556,7 +1556,7 @@ Frequency limit: 1 time/1s (User ID)
 
 #### Description[​](#description "Direct link to Description")
 
-Get account information(SPOT read or SPOT read/write permission needed)
+Get account information
 
 #### HTTP Request[​](#http-request "Direct link to HTTP Request")
 

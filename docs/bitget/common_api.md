@@ -549,8 +549,7 @@ To keep the connection stable:
 
 **passphrase**: APIKey password
 
-**timestamp**: the Unix Epoch time, the unit is seconds(--different from the
-signature timestamp of restAPI--)
+**timestamp**: Unix timestamp in milliseconds, which will expire in 30 seconds.
 
 **secretKey**: The security key generated when the user applies for APIKey, e.g.
 : 22582BD0CFF14C41EDBF1AB98506286D
@@ -558,7 +557,7 @@ signature timestamp of restAPI--)
 Example of timestamp
 
 ```
-const timestamp ='' + Date.now() / 1000
+const timestamp ='' + Date.now()
 ```
 
 "Sign
@@ -1236,7 +1235,7 @@ Response example
 
 ---
 
-## Demo Trading
+## RestAPI Demo Trading
 
 Demo trading allows you to practice trading and test strategies in a real-market
 environment using virtual funds, helping you improve your skills and reduce the
@@ -1255,85 +1254,12 @@ trading.
 Please use the created Demo API Key for API calls, and add `paptrading` in the
 request header, with the value set to `1`.
 
----
-
-## RestAPI Demo coin
-
-We suggest users to use demo coin trading
-
-### Demo Coin Testing[​](#demo-coin-testing "Direct link to Demo Coin Testing")
-
-Demo coins include ：SUSDT, SBTC, SETH, SEOS, SUSDC, demo Coin does not have
-actual value it is only for users to do the simulated trading, demo coin will be
-in your account after account registeration : Futures Account - USDT_M Futures
-Demo
-
-Demo symbol name pattern is: SBTCSUSDT
-
-Please use a real trading API key to make calls for demo symbol
-
-Simulated trading does not support to use sub-account in most of interfaces,
-please use main account
-
-### Get Demo Trading Symbol Config[​](#get-demo-trading-symbol-config "Direct link to Get Demo Trading Symbol Config")
-
-#### Request Sample[​](#request-sample "Direct link to Request Sample")
-
-```
-curl "https://api.bitget.com/api/v2/mix/market/contracts?productType=susdt-futures"
-```
-
-method:GET
-
-#### productType[​](#producttype "Direct link to productType")
-
-- susdt-futures `USDT simulation perpetual contract`
-- scoin-futures `Universal margin simulation perpetual contract`
-- susdc-futures `USDC simulation perpetual contract`
-
-#### Response Body[​](#response-body "Direct link to Response Body")
-
-```
-{    "code": "00000",    "data": [        {            "baseCoin": "SBTC",            "buyLimitPriceRatio": "0.01",            "feeRateUpRatio": "0.005",            "limitOpenTime": "-1",            "maintainTime": "",            "makerFeeRate": "0.0002",            "minTradeNum": "0.001",            "offTime": "-1",            "openCostUpRatio": "0.01",            "priceEndStep": "5",            "pricePlace": "1",            "quoteCoin": "SUSDT",            "sellLimitPriceRatio": "0.01",            "sizeMultiplier": "0.001",            "supportMarginCoins": [                "SUSDT"            ],            "symbol": "SBTCSUSDT",            "symbolStatus": "normal",            "symbolType": "perpetual",            "takerFeeRate": "0.0006",            "volumePlace": "3",            "deliveryTime": "",            "deliveryStartTime": "",            "launchTime": "",            "fundInterval": "",            "minLever": "",            "maxLever": "",            "posLimit": ""        }    ],    "msg": "success",    "requestTime": 1690313813709}
-```
-
-As we can see from the example, values of symbol and coin are demo symbol/demo
-coin
-
-Demo symbol and demo coin must be shown in pairs, a wrong pair will result to an
-interface error
-
-### Future Place Order Demo Trading[​](#future-place-order-demo-trading "Direct link to Future Place Order Demo Trading")
-
-#### Request sample[​](#request-sample-1 "Direct link to Request sample")
-
-```
-curl -X POST "https://api.bitget.com/api/v2/mix/order/place-order" \-H "ACCESS-KEY:*******" \-H "ACCESS-SIGN:*******" \-H "ACCESS-PASSPHRASE:*****" \-H "ACCESS-TIMESTAMP:1659076670000" \-H "locale:en-US" \-H "Content-Type: application/json" \-d '{    "symbol": "SETHSUSDT",    "productType": "susdt-futures",    "marginMode": "isolated",    "marginCoin": "SUSDT",    "size": "1.5",    "price": "2000",    "side": "buy",    "tradeSide": "open",    "orderType": "limit",    "force": "gtc",    "clientOid": "12121212122",    "reduceOnly": "NO",    "presetStopSurplusPrice": "2300",    "presetStopLossPrice": "1800"}'
-```
-
-**Request URI**
-
-- /api/v2/mix/order/place-order
-
-**Method**
-
-- POST
-
-A demo trade order ID will be return when input parameter symbol and marginCoin
-are demo symbol/demo coin
-
-#### Response Body[​](#response-body-1 "Direct link to Response Body")
-
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1627293504612,    "data": {        "orderId": "121211212122",        "clientOid": "121211212122"    }}
-```
-
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/common/demotrading/restapi)
 
 ---
 
-## Demo Trading
+## Websocket Demo Trading
 
 Demo trading allows you to practice trading and test strategies in a real-market
 environment using virtual funds, helping you improve your skills and reduce the
@@ -1353,37 +1279,6 @@ Please use the created Demo API Key for WebSocket connections and request the
 demo trading service address:  
 Public: wss://wspap.bitget.com/v2/ws/public  
 Private: wss://wspap.bitget.com/v2/ws/private
-
----
-
-## Websocket Demo Coin Trading
-
-Bitget websocket also supports the demo coin trading,please use a real trading
-API key to make calls for demo symbol  
-Public channel: wss://ws.bitget.com/v2/ws/public  
-Private channel: wss://ws.bitget.com/v2/ws/private
-
-### Tickers Channel[​](#tickers-channel "Direct link to Tickers Channel")
-
-In websocket subscribe, simply use the demo symbol and demo coin if any
-
-#### Request Example[​](#request-example "Direct link to Request Example")
-
-```
-{  "op":"subscribe",  "args":[    {        "instType": "SUSDT-FUTURES",        "channel": "ticker",        "instId": "SBTCSUSDT"    }  ]}
-```
-
-#### Successful Response Example[​](#successful-response-example "Direct link to Successful Response Example")
-
-```
-{  "event":"subscribe",  "arg":{        "instType": "SUSDT-FUTURES",        "channel": "ticker",        "instId": "SBTCSUSDT"  }}
-```
-
-#### Push Data Example[​](#push-data-example "Direct link to Push Data Example")
-
-```
-{    "action": "snapshot",    "arg": {        "instType": "SUSDT-FUTURES",        "channel": "ticker",        "instId": "SBTCSUSDT"    },    "data": [        {            "instId": "SBTCSUSDT",            "last": "27000.5",            "bidPr": "27000",            "askPr": "27000.5",            "bidSz": "2.71",            "askSz": "8.76",            "open24h": "27000.5",            "high24h": "30668.5",            "low24h": "26999.0",            "priceChangePercent": "-0.00002",            "fundingRate": "0.000010",            "nextFundingTime": 1695722400000,            "markPrice": "27000.0",            "indexPrice": "25702.4",            "quantity": "929.502",            "baseVolume": "368.900",            "quoteVolume": "10152429.961",            "openUtc": "27000.5",            "symbolType": 1,            "symbol": "SBTCSUSDT",            "deliveryPrice": "0",            "ts": 1695715383021        }    ],    "ts": 1695715383039}
-```
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/common/demotrading/websocket)
