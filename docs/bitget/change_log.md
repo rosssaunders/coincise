@@ -2,6 +2,44 @@
 
 ## Changelog
 
+### \[July 16, 2025\] Add New Account Mode Switching API[​](#july-16-2025-add-new-account-mode-switching-api "Direct link to july-16-2025-add-new-account-mode-switching-api")
+
+Interface：/api/v2/spot/account/upgrade, /api/v2/spot/account/upgrade-status
+Adjustment:
+
+- Add New Account Mode Switching API
+
+### \[July 14, 2025\] Futures leverage adjustment API supports setting long/short leverage ratios separately.[​](#july-14-2025--futures-leverage-adjustment-api-supports-setting-longshort-leverage-ratios-separately "Direct link to july-14-2025--futures-leverage-adjustment-api-supports-setting-longshort-leverage-ratios-separately")
+
+Interface： /api/v2/mix/account/set-leverage  
+Changes：
+
+- Futures leverage adjustment API supports setting long/short leverage ratios
+  separately.
+
+### \[July 14, 2025\] Position take-profit/stop-loss API supports setting custom IDs for take-profit and stop-loss orders separately.[​](#july-14-2025--position-take-profitstop-loss-api-supports-setting-custom-ids-for-take-profit-and-stop-loss-orders-separately "Direct link to july-14-2025--position-take-profitstop-loss-api-supports-setting-custom-ids-for-take-profit-and-stop-loss-orders-separately")
+
+Interface： /api/v2/mix/order/place-pos-tpsl  
+Changes：
+
+- Position take-profit/stop-loss API supports setting custom IDs for take-profit
+  and stop-loss orders separately.
+
+### \[July 14, 2025\] The interface for obtaining the list of historical contract positions has added a position mode field.[​](#july-14-2025--the-interface-for-obtaining-the-list-of-historical-contract-positions-has-added-a-position-mode-field "Direct link to july-14-2025--the-interface-for-obtaining-the-list-of-historical-contract-positions-has-added-a-position-mode-field")
+
+Interface： /api/v2/mix/position/history-position  
+Changes：
+
+- The interface return parameters have added `posMode` (position mode), with
+  enumeration values including `one_way_mode` (one-way position) and
+  `hedge_mode` (hedge mode/two-way position).
+
+### \[July 8, 2025\] WebSocket futures position channel adds mark price parameter[​](#july-8-2025-websocket-futures-position-channel-adds-mark-price-parameter "Direct link to july-8-2025-websocket-futures-position-channel-adds-mark-price-parameter")
+
+Channels: futures position channel Changes：
+
+- WebSocket futures position channel adds mark price parameter
+
 ### \[July 1, 2025\] WebSocket Adds Order Placement and Cancellation Channels[​](#july-1-2025-websocket-adds-order-placement-and-cancellation-channels "Direct link to july-1-2025-websocket-adds-order-placement-and-cancellation-channels")
 
 Channels: Place Order，Cancel Order
