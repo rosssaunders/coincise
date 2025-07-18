@@ -1,13 +1,11 @@
-# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
+# [#](#gate-api-v4-102-1) Gate API v4.102.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate API
-
-APIv4 provides spot, margin and futures trading operations. There are public
-APIs to retrieve the real-time market statistics, and private APIs which needs
-authentication to trade on user's behalf.
+Welcome to Gate API APIv4 provides operations related to spot, margin, and
+contract trading, including public interfaces for querying market data and
+authenticated private interfaces for implementing API-based automated trading.
 
 ## [#](#access-url) Access URL
 
@@ -2392,7 +2390,7 @@ Record time range cannot exceed 30 days
 | ----------------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | currency          | query | string         | false    | Filter by currency. Return all currency records if not specified                                                                                                            |
 | withdraw_id       | query | string         | false    | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| asset_class       | query | string         | false    | 提现记录币种类型，默认为空。即支持用户按需查询主区和创新区的提现记录。                                                                                                      |
+| asset_class       | query | string         | false    | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
 | withdraw_order_id | query | string         | false    | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
 | from              | query | integer(int64) | false    | Time range beginning, default to 7 days before current time                                                                                                                 |
 | to                | query | integer(int64) | false    | Time range ending, default to current time                                                                                                                                  |
@@ -2401,9 +2399,11 @@ Record time range cannot exceed 30 days
 
 #### [#](#detailed-descriptions-2) Detailed descriptions
 
-**asset_class**: 提现记录币种类型，默认为空。即支持用户按需查询主区和创新区的提现记录。 取值范围：SPOT、PILOT
+**asset_class**: The currency type of withdrawal record is empty by default. It
+supports users to query the withdrawal records in the main and innovation areas
+on demand. Value range: SPOT, PILOT
 
-SPOT ： 主区 PILOT： 创新区
+SPOT: Main Zone PILOT: Innovation Zone
 
 > Example responses
 
@@ -2447,7 +2447,7 @@ Status Code **200**
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
 | » id                | string | Record ID                                                                                                           |
 | » txid              | string | Hash record of the withdrawal                                                                                       |
-| » block_number      | string | 区块编号                                                                                                            |
+| » block_number      | string | Block Number                                                                                                        |
 | » withdraw_order_id | string | Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)            |
 | » timestamp         | string | Operation time                                                                                                      |
 | » amount            | string | Currency amount                                                                                                     |
@@ -2674,7 +2674,7 @@ main user's spot account is used no matter which sub user's account is operated.
 | ------------------ | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | body               | body | object | true     | none                                                                                                                                                                                                                                      |
 | » sub_account      | body | string | true     | Sub account user ID                                                                                                                                                                                                                       |
-| » sub_account_type | body | string | false    | 操作的子账号交易账户， spot - 现货账户， futures - 永续合约账户， delivery - 交割合约账户, options - 期权账户                                                                                                                             |
+| » sub_account_type | body | string | false    | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
 | » currency         | body | string | true     | Transfer currency name                                                                                                                                                                                                                    |
 | » amount           | body | string | true     | Transfer amount                                                                                                                                                                                                                           |
 | » direction        | body | string | true     | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
@@ -2720,7 +2720,7 @@ _Retrieve transfer records between main and sub accounts_
 
 Record time range cannot exceed 30 days
 
-> Note: only records after 2020-04-10 can be retrieved
+> Note: only records after 20-04-10can be retrieved
 
 ### Parameters
 
@@ -2768,7 +2768,7 @@ Status Code **200**
 | » timest           | string | Transfer timestamp                                                                                                                                                                                                                        |
 | » uid              | string | Main account user ID                                                                                                                                                                                                                      |
 | » sub_account      | string | Sub account user ID                                                                                                                                                                                                                       |
-| » sub_account_type | string | 操作的子账号交易账户， spot - 现货账户， futures - 永续合约账户， delivery - 交割合约账户, options - 期权账户                                                                                                                             |
+| » sub_account_type | string | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
 | » currency         | string | Transfer currency name                                                                                                                                                                                                                    |
 | » amount           | string | Transfer amount                                                                                                                                                                                                                           |
 | » direction        | string | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
@@ -2815,7 +2815,7 @@ Key of the sub-account to initiate the transfer.
 | » sub_account_from      | body | string | true     | Transfer from the user id of the sub-account                                                                                                 |
 | » sub_account_from_type | body | string | true     | The sub-account's outgoing trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account. |
 | » sub_account_to        | body | string | true     | Transfer to the user id of the sub-account                                                                                                   |
-| » sub_account_to_type   | body | string | true     | The sub-account's incoming trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account  |
+| » sub_account_to_type   | body | string | true     | Transferred sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account     |
 | » amount                | body | string | true     | Transfer amount                                                                                                                              |
 
 > Example responses
@@ -3262,6 +3262,8 @@ Status Code **200**
 | »»» isolated_position_margin                                                   | string  | Ware -position margin, suitable for the new classic account margin model                                                                                                                        |
 | »»» enable_new_dual_mode                                                       | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
 | »»» margin_mode                                                                | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
+| »»» enable_tiered_mm                                                           | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
+| »»» position_voucher_total                                                     | string  | Total Position Experience Coupon Amount in Account                                                                                                                                              |
 | »»» history                                                                    | object  | Statistical data                                                                                                                                                                                |
 | »»»» dnw                                                                       | string  | total amount of deposit and withdraw                                                                                                                                                            |
 | »»»» pnl                                                                       | string  | total amount of trading profit and loss                                                                                                                                                         |
@@ -4573,15 +4575,15 @@ Status Code **200**
 
 _AccountDetail_
 
-| Name                | Type           | Description                                                                              |
-| ------------------- | -------------- | ---------------------------------------------------------------------------------------- |
-| » ip_whitelist      | array          | IP whitelist                                                                             |
-| » currency_pairs    | array          | CurrencyPair whitelisting                                                                |
-| » user_id           | integer(int64) | User ID                                                                                  |
-| » tier              | integer(int64) | User VIP level                                                                           |
-| » key               | object         | API Key detail                                                                           |
-| »» mode             | integer(int32) | mode: 1 - classic account 2 - portfolio margin account                                   |
-| » copy_trading_role | integer(int32) | User role: 0 - Ordinary user 1 - Order leader 2 - Follower 3 - Order leader and follower |
+| Name                | Type           | Description                                                                                               |
+| ------------------- | -------------- | --------------------------------------------------------------------------------------------------------- |
+| » ip_whitelist      | array          | IP whitelist                                                                                              |
+| » currency_pairs    | array          | CurrencyPair whitelisting                                                                                 |
+| » user_id           | integer(int64) | User ID                                                                                                   |
+| » tier              | integer(int64) | User VIP level                                                                                            |
+| » key               | object         | API Key detail                                                                                            |
+| »» mode             | integer(int32) | mode: 1 - classic account 2 - portfolio margin account                                                    |
+| » copy_trading_role | integer(int32) | User role: 0 - Normal user 1 - Copy trading leader 2 - Copy trading follower 3 - Both leader and follower |
 
 WARNING
 
@@ -4765,8 +4767,7 @@ To perform this operation, you must be authenticated by API key and secret
 
 _List users of the STP group_
 
-Only the main account that created this STP group is allowed to list the user ID
-of the STP group
+Only the main account that created this STP group can query the account
 
 ### Parameters
 

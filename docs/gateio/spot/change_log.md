@@ -1,5 +1,34 @@
 # [#](#changelog) Changelog
 
+**v4.102.0**
+
+- Add `is_all_collateral` field in `GET /unified/accounts` endpoint response to
+  indicate if all currencies are used as collateral
+- Add `enabled_collateral` field in balances array of unified accounts to show
+  currency collateral status
+- New feature `POST /unified/collateral_currencies` endpoint, Set collateral
+  currencies for cross-currency margin mode
+
+**v4.101.9**
+
+- Add voucher-related fields to futures position model: `voucher_size`,
+  `voucher_margin`, `voucher_id`
+- Introduce voucher timerange functionality for enhanced position management
+- New feature `GET /futures/{settle}/risk_limit_table` endpoint, Query risk
+  limit tier table by table_id
+- New feature `GET /futures/{settle}/risk_limit_table/list` endpoint, Query all
+  risk limit tier tables
+- Add `enable_tiered_mm` field in futures account model for tiered maintenance
+  margin calculation
+- Add `risk_limit_table` and `average_maintenance_rate` fields in position model
+  for enhanced risk management
+- Add `deduction` field in futures limit risk tiers for maintenance margin quick
+  calculation
+- Introduce new models: `FuturesRiskLimitTier` and `FuturesRiskLimitTierList`
+  for risk management
+- Enhance `POST /earn/staking/swap` endpoint response structure with improved
+  swap order details
+
 **v4.100.0**
 
 - Add alpha account query and account book query functionality
@@ -1144,7 +1173,7 @@ _Futures_
 - `currency` field in `/futures/{settle}/accounts` response adds new value:
   `USDT`
 - Add `volume_24h_base`, `volume_24h_quote` and `volume_24h_settle` in
-  `/futures/{setttle}/tickers` response to replace `volume_24h_btc` and
+  `/futures/{settle}/tickers` response to replace `volume_24h_btc` and
   `volume_24h_usd`. The latter two are still preserved for compatibility usage,
   but are NOT recommended for any futures operations.
 

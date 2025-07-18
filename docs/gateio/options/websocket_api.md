@@ -454,9 +454,9 @@ Result format:
 `options.ul_trades`
 
 This channel sends all trades message under underlying whenever a trade occurs
-at Gate. It includes details of the trade, such as price, amount, time.\*\*Not a
-underlying trade data, it's all contracts trades data which contract under
-underlying \*\*
+at Gate. It includes details of the trade, such as price, amount, time. **This
+channel doesn't push underlying trade data, but all contract trade data under
+the specified underlying**
 
 **push type**: `continuous`
 
@@ -2094,4 +2094,4 @@ Result format:
 | »`time_ms`      | Integer | Update unix timestamp in milliseconds |
 | »`user`         | String  | User id                               |
 
-Last Updated: 7/8/2025, 1:29:05 PM
+Last Updated: 7/9/2025, 2:07:42 PM

@@ -1,13 +1,11 @@
-# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
+# [#](#gate-api-v4-102-1) Gate API v4.102.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate API
-
-APIv4 provides spot, margin and futures trading operations. There are public
-APIs to retrieve the real-time market statistics, and private APIs which needs
-authentication to trade on user's behalf.
+Welcome to Gate API APIv4 provides operations related to spot, margin, and
+contract trading, including public interfaces for querying market data and
+authenticated private interfaces for implementing API-based automated trading.
 
 ## [#](#access-url) Access URL
 
@@ -2291,7 +2289,19 @@ _List settlement history_
 | limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset     | query | integer        | false    | List offset, starting from 0                              |
 | from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | End timestamp                                             |
+| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+
+#### [#](#detailed-descriptions-42) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
 
 > Example responses
 
@@ -2401,7 +2411,19 @@ _List my options settlements_
 | limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset     | query | integer        | false    | List offset, starting from 0                              |
 | from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | End timestamp                                             |
+| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+
+#### [#](#detailed-descriptions-43) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
 
 > Example responses
 
@@ -2461,14 +2483,14 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                                                                          |
-| -------- | ----- | ------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| contract | query | string  | true     | Options contract name                                                                                |
-| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0                                         |
-| limit    | query | integer | false    | Maximum number of order depth data in asks or bids                                                   |
-| with_id  | query | boolean | false    | Whether the order book update ID will be returned. This ID increases by 1 on every order book update |
+| Name     | In    | Type    | Required | Description                                                           |
+| -------- | ----- | ------- | -------- | --------------------------------------------------------------------- |
+| contract | query | string  | true     | Options contract name                                                 |
+| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0          |
+| limit    | query | integer | false    | Maximum number of order depth data in asks or bids                    |
+| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time. |
 
-#### [#](#enumerated-values-116) Enumerated Values
+#### [#](#enumerated-values-117) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2510,9 +2532,9 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Responses
 
-| Status | Meaning                                                                    | Description          | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order book retrieved | Inline |
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Depth query successful | Inline |
 
 ### Response Schema
 
@@ -2671,10 +2693,22 @@ _Get options candlesticks_
 | contract | query | string         | true     | Options contract name                                     |
 | limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
 | from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | End timestamp                                             |
+| to       | query | integer(int64) | false    | Termination Timestamp                                     |
 | interval | query | string         | false    | Interval time between data points                         |
 
-#### [#](#enumerated-values-117) Enumerated Values
+#### [#](#detailed-descriptions-44) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-118) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2738,10 +2772,22 @@ _Mark price candlesticks of an underlying_
 | underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint)      |
 | limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
 | from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | End timestamp                                             |
+| to         | query | integer(int64) | false    | Termination Timestamp                                     |
 | interval   | query | string         | false    | Interval time between data points                         |
 
-#### [#](#enumerated-values-118) Enumerated Values
+#### [#](#detailed-descriptions-45) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-119) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2810,7 +2856,19 @@ _Options trade history_
 | limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset   | query | integer        | false    | List offset, starting from 0                              |
 | from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | End timestamp                                             |
+| to       | query | integer(int64) | false    | Termination Timestamp                                     |
+
+#### [#](#detailed-descriptions-46) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
 
 > Example responses
 
@@ -2920,7 +2978,7 @@ Status Code **200**
 | » orders_limit                                                     | integer(int32) | Maximum number of outstanding orders                                                        |
 | » position_notional_limit                                          | integer(int64) | Notional value upper limit, including the nominal value of positions and outstanding orders |
 
-#### [#](#enumerated-values-119) Enumerated Values
+#### [#](#enumerated-values-120) Enumerated Values
 
 | Property    | Value |
 | ----------- | ----- |
@@ -2947,10 +3005,20 @@ _List account changing history_
 | limit  | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset | query | integer        | false    | List offset, starting from 0                              |
 | from   | query | integer(int64) | false    | Start timestamp                                           |
-| to     | query | integer(int64) | false    | End timestamp                                             |
+| to     | query | integer(int64) | false    | Termination Timestamp                                     |
 | type   | query | string         | false    | Changing Type:                                            |
 
-#### [#](#detailed-descriptions-35) Detailed descriptions
+#### [#](#detailed-descriptions-47) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
 
 **type**: Changing Type:
 
@@ -2960,7 +3028,7 @@ _List account changing history_
 - refr: Referrer rebate
 - set: settlement PNL
 
-#### [#](#enumerated-values-120) Enumerated Values
+#### [#](#enumerated-values-121) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3230,7 +3298,7 @@ Status Code **200**
 | » text        | string         | Text of close order          |
 | » settle_size | string         | settlement size              |
 
-#### [#](#enumerated-values-121) Enumerated Values
+#### [#](#enumerated-values-122) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3277,7 +3345,7 @@ _Create an options order_
 | » tif         | body | string         | false    | Time in force                                                                                                       |
 | » text        | body | string         | false    | User defined information. If not empty, must follow the rules below:                                                |
 
-#### [#](#detailed-descriptions-36) Detailed descriptions
+#### [#](#detailed-descriptions-48) Detailed descriptions
 
 **» tif**: Time in force
 
@@ -3301,7 +3369,7 @@ _Create an options order_
 - liquidation: from liquidation
 - insurance: from insurance
 
-#### [#](#enumerated-values-122) Enumerated Values
+#### [#](#enumerated-values-123) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3401,7 +3469,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Reference user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-123) Enumerated Values
+#### [#](#enumerated-values-124) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3442,9 +3510,21 @@ _List options orders_
 | limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset     | query | integer        | false    | List offset, starting from 0                              |
 | from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | End timestamp                                             |
+| to         | query | integer(int64) | false    | Termination Timestamp                                     |
 
-#### [#](#enumerated-values-124) Enumerated Values
+#### [#](#detailed-descriptions-49) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-125) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -3546,7 +3626,7 @@ how the order is created:
 string | Maker fee | | »» refu | integer | Reference user ID | | »» refr |
 string | Referrer rebate |
 
-#### [#](#enumerated-values-125) Enumerated Values
+#### [#](#enumerated-values-126) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3585,7 +3665,7 @@ _Cancel all `open` orders matched_
 | underlying | query | string | false    | Underlying                                       |
 | side       | query | string | false    | All bids or asks. Both included if not specified |
 
-#### [#](#enumerated-values-126) Enumerated Values
+#### [#](#enumerated-values-127) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3687,7 +3767,7 @@ how the order is created:
 string | Maker fee | | »» refu | integer | Reference user ID | | »» refr |
 string | Referrer rebate |
 
-#### [#](#enumerated-values-127) Enumerated Values
+#### [#](#enumerated-values-128) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3816,7 +3896,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Reference user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-128) Enumerated Values
+#### [#](#enumerated-values-129) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3945,7 +4025,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Reference user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-129) Enumerated Values
+#### [#](#enumerated-values-130) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3976,9 +4056,17 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Countdown cancel orders_
 
-期权订单心跳检测，在到达用户设置的`timeout`时间时如果没有取消既有倒计时或设置新的倒计时将会自动取消相关的`期权挂单`。 该接口可重复调用，以便设置新的倒计时或取消倒计时。 用法示例： 以30s的间隔重复此接口，每次倒计时`timeout`设置为30(秒)。 如果在30秒内未再次调用此接口，则您指定的`underlying`
-`contract`上的所有挂单都会被自动撤销，若未指定`underlying`
-`contract`则会自动撤销用户的全部挂单 如果在30秒内以将`timeout`设置为0，则倒数计时器将终止，自动撤单功能取消。
+Option order heartbeat detection, when the `timeout` time set by the user is
+reached, if the existing countdown is not canceled or a new countdown is set,
+the related `option pending order` will be automatically canceled. This
+interface can be called repeatedly to set a new countdown or cancel the
+countdown. Usage example: Repeat this interface at intervals of 30 seconds, with
+each countdown `timeout` set to 30 (seconds). If this interface is not called
+again within 30 seconds, all pending orders on the `underlying` `contract` you
+specified will be automatically cancelled. If `underlying` `contract` is not
+specified, all pending orders of the user will be automatically cancelled If
+`timeout` is set to 0 within 30 seconds, the countdown timer will expire and the
+automatic order cancellation function will be cancelled.
 
 > Body parameter
 
@@ -3999,7 +4087,7 @@ _Countdown cancel orders_
 | » contract   | body | string         | false    | Options contract name     |
 | » underlying | body | string         | false    | Underlying                |
 
-#### [#](#detailed-descriptions-37) Detailed descriptions
+#### [#](#detailed-descriptions-50) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
@@ -4051,7 +4139,19 @@ _List personal trading history_
 | limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
 | offset     | query | integer        | false    | List offset, starting from 0                              |
 | from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | End timestamp                                             |
+| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+
+#### [#](#detailed-descriptions-51) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
 
 > Example responses
 
@@ -4093,7 +4193,7 @@ Status Code **200**
 | » underlying_price | string         | Underlying price (quote currency)                    |
 | » role             | string         | Trade role. Available values are `taker` and `maker` |
 
-#### [#](#enumerated-values-130) Enumerated Values
+#### [#](#enumerated-values-131) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |

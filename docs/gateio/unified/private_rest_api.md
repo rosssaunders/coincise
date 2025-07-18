@@ -1,13 +1,11 @@
-# [#](#gate-api-v4-v4-101-1) Gate API v4 v4.101.1
+# [#](#gate-api-v4-102-1) Gate API v4.102.1
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
 
-Welcome to Gate API
-
-APIv4 provides spot, margin and futures trading operations. There are public
-APIs to retrieve the real-time market statistics, and private APIs which needs
-authentication to trade on user's behalf.
+Welcome to Gate API APIv4 provides operations related to spot, margin, and
+contract trading, including public interfaces for querying market data and
+authenticated private interfaces for implementing API-based automated trading.
 
 ## [#](#access-url) Access URL
 
@@ -2126,7 +2124,7 @@ Status Code **200**
 | »»» mmr                          | string         | Full-position maintenance margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                           |
 | »»» margin_balance               | string         | Full margin balance is valid in single currency margin mode and is 0 in other modes such as cross currency margin/combined margin mode                                                                                                                             |
 | »»» available_margin             | string         | Full margin available for full position is valid in single currency margin mode, and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                        |
-| »»» enabled_collateral           | boolean        | 币种开启作为保证金，true - 启用，false - 未启用                                                                                                                                                                                                                    |
+| »»» enabled_collateral           | boolean        | Currency enabled as margin: true - Enabled, false - Disabled                                                                                                                                                                                                       |
 | »» total                         | string         | Total account assets converted to USD, i.e. the sum of `(available + freeze) * price` in all currencies (deprecated, to be deprecated, replaced by unified_account_total)                                                                                          |
 | »» borrowed                      | string         | The total borrowed amount of the account converted into USD, i.e. the sum of `borrowed * price` of all currencies (excluding Point Cards). It is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode. |
 | »» total_initial_margin          | string         | Total initial margin, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                    |
@@ -2142,7 +2140,7 @@ Status Code **200**
 | »» spot_order_loss               | string         | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                       |
 | »» spot_hedge                    | boolean        | Spot hedging status, true - enabled, false - not enabled.                                                                                                                                                                                                          |
 | »» use_funding                   | boolean        | Whether to use funds as margin                                                                                                                                                                                                                                     |
-| »» is_all_collateral             | boolean        | 是否所有币种均作为保证金，true - 所有币种作为保证金，false - 否                                                                                                                                                                                                    |
+| »» is_all_collateral             | boolean        | Whether all currencies are used as margin, true - All currencies are used as margin, false - No                                                                                                                                                                    |
 
 WARNING
 
@@ -2523,7 +2521,7 @@ Status Code **200**
 | Name              | Type           | Description                                                                                                                                                                                                                          |
 | ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | » _None_          | object         | Loan records                                                                                                                                                                                                                         |
-| »» id             | integer(int64) | id                                                                                                                                                                                                                                   |
+| »» id             | integer(int64) | ID                                                                                                                                                                                                                                   |
 | »» type           | string         | type: borrow - borrow, repay - repay                                                                                                                                                                                                 |
 | »» repayment_type | string         | Repayment type, none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after withdrawal, different_currencies_repayment - Different currency repayment |
 | »» borrow_type    | string         | Loan type, returned when querying loan records. manual_borrow - Manual repayment , auto_borrow - Automatic repayment                                                                                                                 |
@@ -2669,9 +2667,11 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Set mode of the unified account_
 
-每种账户模式的切换只需要传对应账户模式的参数，同时支持在切换账户模式时打开或关闭对应账户模式下的配置开关
+Each account mode switch only requires passing the corresponding account mode
+parameter, and also supports turning on or off the configuration switches under
+the corresponding account mode during the switch.
 
-- 开通经典账户模式时，mode=classic
+- When enabling the classic account mode, mode=classic
 
 ```
     PUT /unified/unified_mode
@@ -2680,7 +2680,7 @@ _Set mode of the unified account_
     }
 ```
 
-- 开通跨币种保证金模式，mode=multi_currency
+- When enabling the cross-currency margin mode, mode=multi_currency
 
 ```
     PUT /unified/unified_mode
@@ -2692,7 +2692,7 @@ _Set mode of the unified account_
     }
 ```
 
-- 开通组合保证金模式时，mode=portfolio
+- When enabling the portfolio margin mode, mode=portfolio
 
 ```
     PUT /unified/unified_mode
@@ -2704,7 +2704,7 @@ _Set mode of the unified account_
     }
 ```
 
-- 开通单币种保证金模式时，mode=single_currency
+- When enabling the single-currency margin mode, mode=single_currency
 
 ```
     PUT /unified/unified_mode
@@ -3583,13 +3583,13 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#设置抵押币种) 设置抵押币种
+## [#](#set-collateral-currency) Set Collateral Currency
 
 > Code samples
 
 `POST /unified/collateral_currencies`
 
-_设置抵押币种_
+_Set Collateral Currency_
 
 > Body parameter
 
@@ -3609,12 +3609,12 @@ _设置抵押币种_
 
 ### Parameters
 
-| Name              | In   | Type    | Required | Description                                                                                                                              |
-| ----------------- | ---- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| body              | body | object  | true     | none                                                                                                                                     |
-| » collateral_type | body | integer | false    | 用户设置抵押物模式 0(all)-全部币种作为抵押物,1(custom)-自定义币种作为抵押物,collateral_type为0(all)时，enable_list与disable_list参数无效 |
-| » enable_list     | body | array   | false    | 币种列表，collateral_type=1(custom)表示追加的逻辑                                                                                        |
-| » disable_list    | body | array   | false    | 取消列表，表示取消的逻辑                                                                                                                 |
+| Name              | In   | Type    | Required | Description                                                                                                                                                                                               |
+| ----------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body              | body | object  | true     | none                                                                                                                                                                                                      |
+| » collateral_type | body | integer | false    | User-set collateral mode0(all)-All currencies used as collateral, 1(custom)-Custom currencies used as collateral; when collateral_type is 0(all), the enable_list and disable_list parameters are invalid |
+| » enable_list     | body | array   | false    | Currency list, where collateral_type=1(custom) indicates the logic of addition                                                                                                                            |
+| » disable_list    | body | array   | false    | Cancellation list, indicating the logic of cancellation                                                                                                                                                   |
 
 #### [#](#enumerated-values-5) Enumerated Values
 
@@ -3635,19 +3635,19 @@ _设置抵押币种_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 更新成功    | Inline |
+| Status | Meaning                                                                    | Description   | Schema |
+| ------ | -------------------------------------------------------------------------- | ------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | UpdateSuccess | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_统一账户抵押模式设置返回_
+_Return of unified account collateral mode settings_
 
-| Name         | Type    | Description  |
-| ------------ | ------- | ------------ |
-| » is_success | boolean | 是否设置成功 |
+| Name         | Type    | Description                        |
+| ------------ | ------- | ---------------------------------- |
+| » is_success | boolean | Whether the setting was successful |
 
 WARNING
 
