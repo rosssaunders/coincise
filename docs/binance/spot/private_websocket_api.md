@@ -74,9 +74,6 @@ Balance Update occurs during the following:
 
 Orders are updated with the `executionReport` event.
 
-We recommend using the [FIX API](/docs/binance-spot-api-docs/fix-api) for better
-performance compared to using the User Data Streams.
-
 **Payload:**
 
 ```json
