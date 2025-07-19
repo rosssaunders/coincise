@@ -1,4 +1,4 @@
-IntroductionAuthenticationSigning requestsChangelog2025-06-082025-04-222025-04-082025-03-262025-03-192025-02-282025-02-112025-02-072025-02-032025-01-092024-12-032024-12-022024-11-102024-10-152024-05-142024-05-032024-05-022024-05-012024-03-142024-02-282024-02-242024-01-162024-01-11Public EndpointsAssetsgetGet assets.getGet collateral.Borrow Lend MarketsgetGet borrow lend markets.getGet borrow lend market history.MarketsgetGet markets.getGet market.getGet ticker.getGet tickers.getGet depth.getGet K-lines.getGet all mark prices.getGet open interest.getGet funding interval rates.SystemgetStatus.getPing.getGet system time.TradesgetGet recent trades.getGet historical trades.Authenticated EndpointsAccountgetGet account.patchUpdate account.postConvert a dust balance on an account.getGet max borrow quantity.getGet max order quantity.getGet max withdrawal quantity.Borrow LendgetGet borrow lend positions.postExecute borrow lend.CapitalgetGet balances.getGet collateral.getGet deposits.getGet deposit address.getGet withdrawals.postRequest withdrawal.FuturesgetGet open positions.HistorygetGet borrow history.getGet interest history.getGet borrow position history.getGet dust conversion history.getGet fill history.getGet funding payments.getGet order history.getGet profit and loss history.getGet rfq history.getGet quote history.getGet settlement history.getGet strategy history.OrdergetGet open order.postExecute order.delCancel open order.postExecute orders.getGet open orders.delCancel open orders.Request For QuotepostSubmit RFQ.postAccept quote.postRefresh RFQ.postCancel RFQ.postSubmit quote.WebsocketStreamsUsageSubscribingTimingKeeping the connection alivePrivateOrder updatePosition updateRFQ UpdatePublicBook tickerDepthK-LineLiquidationMark priceTickerOpen interestTradeAPI docs by RedoclyBackpack Exchange API (1.0)Download OpenAPI specification:DownloadIntroductionWelcome to the Backpack Exchange API. This API is for programmatic trade execution. All of the endpoints require requests to be signed with an ED25519 keypair for authentication.
+IntroductionAuthenticationSigning requestsChangelog2025-06-082025-04-222025-04-082025-03-262025-03-192025-02-282025-02-112025-02-072025-02-032025-01-092024-12-032024-12-022024-11-102024-10-152024-05-142024-05-032024-05-022024-05-012024-03-142024-02-282024-02-242024-01-162024-01-11Public EndpointsAssetsgetGet assets.getGet collateral.Borrow Lend MarketsgetGet borrow lend markets.getGet borrow lend market history.MarketsgetGet markets.getGet market.getGet ticker.getGet tickers.getGet depth.getGet K-lines.getGet all mark prices.getGet open interest.getGet funding interval rates.SystemgetStatus.getPing.getGet system time.getGet wallets.TradesgetGet recent trades.getGet historical trades.Authenticated EndpointsAccountgetGet account.patchUpdate account.postConvert a dust balance on an account.getGet max borrow quantity.getGet max order quantity.getGet max withdrawal quantity.Borrow LendgetGet borrow lend positions.postExecute borrow lend.CapitalgetGet balances.getGet collateral.getGet deposits.getGet deposit address.getGet withdrawals.postRequest withdrawal.FuturesgetGet open positions.HistorygetGet borrow history.getGet interest history.getGet borrow position history.getGet dust conversion history.getGet fill history.getGet funding payments.getGet order history.getGet profit and loss history.getGet rfq history.getGet quote history.getGet settlement history.getGet strategy history.OrdergetGet open order.postExecute order.delCancel open order.postExecute orders.getGet open orders.delCancel open orders.Request For QuotepostSubmit RFQ.postAccept quote.postRefresh RFQ.postCancel RFQ.postSubmit quote.WebsocketStreamsUsageSubscribingTimingKeeping the connection alivePrivateOrder updatePosition updateRFQ UpdatePublicBook tickerDepthK-LineLiquidationMark priceTickerOpen interestTradeAPI docs by RedoclyBackpack Exchange API (1.0)Download OpenAPI specification:DownloadIntroductionWelcome to the Backpack Exchange API. This API is for programmatic trade execution. All of the endpoints require requests to be signed with an ED25519 keypair for authentication.
 
 The API is hosted at https://api.backpack.exchange/ and the WS API is hosted at wss://ws.backpack.exchange/.
 
@@ -450,7 +450,11 @@ get/api/v1/statushttps://api.backpack.exchange/api/v1/status Response samples 20
 
 Responses200 get/api/v1/pinghttps://api.backpack.exchange/api/v1/pingGet system time. Retrieves the current system time.
 
-Responses200 get/api/v1/timehttps://api.backpack.exchange/api/v1/timeTradesPublic trade data.
+Responses200 get/api/v1/timehttps://api.backpack.exchange/api/v1/timeGet wallets. Returns all configured blockchain wallets and their addresses.
+
+Responses200 Success.
+
+get/api/v1/walletshttps://api.backpack.exchange/api/v1/wallets Response samples 200Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"blockchain": "string","address": "string"}]TradesPublic trade data.
 
 Get recent trades. Retrieve the most recent trades for a symbol. This is public data and
 
@@ -554,7 +558,7 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT"  The asset symbol to convert dust for.
+Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  The asset symbol to convert dust for.
 
 If omitted, all dust balances will be converted.
 
@@ -696,7 +700,7 @@ Request Body schema: application/json; charset=utf-8requiredquantityrequiredstri
 
 siderequiredstring Enum: "Borrow" "Lend"  Side of the borrow lend.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT"  The asset to repay.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  The asset to repay.
 
 Responses200 Success.
 
@@ -776,13 +780,13 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/wapi/v1/capital/depositshttps://api.backpack.exchange/wapi/v1/capital/deposits Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": 0,"toAddress": "string","fromAddress": "string","confirmationBlockNumber": 0,"source": "administrator","status": "cancelled","transactionHash": "string","symbol": "BTC","quantity": "string","createdAt": "string","fiatAmount": 0.1,"fiatCurrency": "AED","institutionBic": "string","platformMemo": "string"}]Get deposit address. Retrieves the user specific deposit address if the user were to deposit
+get/wapi/v1/capital/depositshttps://api.backpack.exchange/wapi/v1/capital/deposits Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": 0,"toAddress": "string","fromAddress": "string","source": "administrator","status": "cancelled","transactionHash": "string","symbol": "BTC","quantity": "string","createdAt": "string","fiatAmount": 0.1,"fiatCurrency": "AED","institutionBic": "string","platformMemo": "string"}]Get deposit address. Retrieves the user specific deposit address if the user were to deposit
 
 on the specified blockchain.
 
 ## Instruction: depositAddressQuery
 
-query Parametersblockchainrequiredstring (Blockchain)  Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
+query Parametersblockchainrequiredstring (Blockchain)  Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
 
 ## header ParametersX-API-KEYstring API key
 
@@ -848,13 +852,13 @@ X-SIGNATURErequiredstring Signature of the request
 
 Request Body schema: application/json; charset=utf-8requiredaddressrequiredstring Address to withdraw to.
 
-blockchainrequiredstring Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
+blockchainrequiredstring Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
 
 clientIdstring  <= 255 characters  Custom client id.
 
 quantityrequiredstring <decimal>  Quantity to withdraw.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT"  Symbol of the asset to withdraw.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  Symbol of the asset to withdraw.
 
 twoFactorTokenstring Issued two factor token.
 
