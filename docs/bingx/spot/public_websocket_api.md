@@ -10,14 +10,23 @@ return error code 100416.
 A single IP is limited to a maximum of 60 websockets; exceeding this will return
 error code 100419.
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits)
+
 ### Access
 
 Market Websocket access URL: wss://open-api-ws.bingx.com/market
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits)
 
 ### Data Compression
 
 All response data from Websocket server are compressed into GZIP format. Clients
 have to decompress them for further use.
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits)
 
 ### Heartbeats
 
@@ -30,6 +39,9 @@ When the Websocket Client receives this heartbeat message, it should return pong
 message.
 
 {"pong":"2177c68e4d0e45679965f482929b59c2","time":"2022-06-07T16:27:36.323+0800"}
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits)
 
 ### Unsubscribe
 
@@ -44,6 +56,9 @@ Confirmation of Unsubscription:
 #### Symbol Description
 
 Symbol must be fully capitalized
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection%20Limits)
 
 ### Subscriptions
 
@@ -164,6 +179,9 @@ response
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html)
+
 ### extend Listen Key Validity period
 
 rate limitation by UID: 2/s & rate limitation by IP in group Number: 2
@@ -218,6 +236,9 @@ PUT /openApi/user/auth/userDataStream
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html)
 
 ### delete Listen Key
 
@@ -317,6 +338,9 @@ Subscription Parameters
 | T   | transaction time                                                                                                             |
 | m   | Whether the buyer is a market maker. If true, this transaction is an active sell order, otherwise it is an active buy order. |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
+
 ### K-line Streams
 
 Subscribe to market k-line data of one trading pair
@@ -364,6 +388,9 @@ Subscription Parameters
 | t   | The starting time of this K-line                        |
 | v   | Trading volume during this K-line period                |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
+
 ### Subscribe Market Depth Data
 
 Push limited file depth information every 300ms .default level 20
@@ -395,6 +422,9 @@ Subscription Parameters
 | level50  | level 50    |
 | level100 | level 100   |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
+
 ### Subscribe to 24-hour Price Change
 
 Pushes data of 24-hour price change every 1000ms
@@ -415,6 +445,9 @@ Subscription Parameters
 | Parameter Name | Type   | Required | Field Description            |
 | -------------- | ------ | -------- | ---------------------------- |
 | symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
 
 ### Spot Latest Trade Price
 
@@ -437,6 +470,9 @@ Subscription Parameters
 | -------------- | ------ | -------- | ---------------------------- |
 | symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
+
 ### Spot Best Order Book
 
 Real-time Push
@@ -457,6 +493,9 @@ Subscription Parameters
 | Parameter Name | Type   | Required | Field Description            |
 | -------------- | ------ | -------- | ---------------------------- |
 | symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html)
 
 ### Incremental and Full Depth Information
 
