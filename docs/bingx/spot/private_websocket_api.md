@@ -10,14 +10,25 @@ return error code 100416.
 A single IP is limited to a maximum of 60 websockets; exceeding this will return
 error code 100419.
 
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection
+> Limits](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Connection
+> Limits)
+
 ### Access
 
 Market Websocket access URL: wss://open-api-ws.bingx.com/market
+
+> **Source:**
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/#Access](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Access)
 
 ### Data Compression
 
 All response data from Websocket server are compressed into GZIP format. Clients
 have to decompress them for further use.
+
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/spot/socket/#Data
+> Compression](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Data
+> Compression)
 
 ### Heartbeats
 
@@ -30,6 +41,9 @@ When the Websocket Client receives this heartbeat message, it should return pong
 message.
 
 {"pong":"2177c68e4d0e45679965f482929b59c2","time":"2022-06-07T16:27:36.323+0800"}
+
+> **Source:**
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/#Heartbeats](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Heartbeats)
 
 ### Unsubscribe
 
@@ -44,6 +58,9 @@ Confirmation of Unsubscription:
 #### Symbol Description
 
 Symbol must be fully capitalized
+
+> **Source:**
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/#Unsubscribe](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Unsubscribe)
 
 ### Subscriptions
 
@@ -106,7 +123,7 @@ receive the update message pushed by the server.
 100503:"SERVER_BUSY"
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/)
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/#Subscriptions](https://bingx-api.github.io/docs/#/en-us/spot/socket/#Subscriptions)
 
 ---
 
@@ -164,6 +181,12 @@ response
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html#generate
+> Listen
+> Key](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html#generate
+> Listen Key)
+
 ### extend Listen Key Validity period
 
 rate limitation by UID: 2/s & rate limitation by IP in group Number: 2
@@ -218,6 +241,12 @@ PUT /openApi/user/auth/userDataStream
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html#extend
+> Listen Key Validity
+> period](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html#extend
+> Listen Key Validity period)
 
 ### delete Listen Key
 
@@ -274,7 +303,10 @@ DELETE /openApi/user/auth/userDataStream
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html#delete
+> Listen
+> Key](https://bingx-api.github.io/docs/#/en-us/spot/socket/listenKey.html#delete
+> Listen Key)
 
 ---
 
@@ -331,6 +363,12 @@ Push data
 | Z   | Accumulated transaction amount of orders |
 | Y   | Last transaction amount of the order     |
 | Q   | Original order amount                    |
+
+> **Source:**
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription
+> order update
+> data](https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription
+> order update data)
 
 ### Subscription account balance push
 
@@ -406,6 +444,9 @@ Push data
 | lk  | Locked Asset                                                          |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription%20order%20update%20data)
+> [https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription
+> account balance
+> push](https://bingx-api.github.io/docs/#/en-us/spot/socket/account.html#Subscription
+> account balance push)
 
 ---
