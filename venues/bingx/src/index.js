@@ -49,7 +49,7 @@ async function getPageHTML(pageURL, browser) {
 
   await page.goto(pageURL)
   await page.waitForSelector(".app-content")
-  const html = await page.evaluate(async () => {
+  const html = await page.evaluate(async (sourceUrl) => {
     async function processH2(sectionElement) {
       console.log(
         "Processing",
@@ -427,6 +427,11 @@ async function getPageHTML(pageURL, browser) {
         console.log("Moving all remaining content to the catch all div")
         emptyDiv.appendChild(div)
       })
+
+      // Add source link at the end of each endpoint section
+      const sourceDiv = document.createElement("div")
+      sourceDiv.innerHTML = `<blockquote><p><strong>Source:</strong> <a href="${sourceUrl}">original URL</a></p></blockquote>`
+      detailDiv.appendChild(sourceDiv)
     }
 
     const body = document.querySelector(".app-content")
@@ -466,7 +471,7 @@ async function getPageHTML(pageURL, browser) {
     }
 
     return body.innerHTML
-  })
+  }, pageURL)
 
   await page.close()
   return html
@@ -573,7 +578,7 @@ async function main() {
       const markdown = await convertToMarkdown(
         dom.window.document.body.innerHTML
       )
-      combinedMarkdown += `${markdown}\n\n> **Source:** [original URL](${url})\n\n---\n\n`
+      combinedMarkdown += `${markdown}\n\n---\n\n`
     }
 
     // Save the combined markdown to a single file

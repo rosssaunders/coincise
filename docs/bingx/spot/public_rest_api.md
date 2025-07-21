@@ -19,9 +19,6 @@ experience.
 
 [Fill in the questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSd0yjx5okwQG1D7tf4pBAcf4WbMW8zE-Ew01ardWGCwoIZoMg/viewform)
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/introduce)
-
 ---
 
 ## Frequently Asked Questions
@@ -125,9 +122,6 @@ Q: How many channels can be subscribed per IP address on BingX?
 A: Currently, there is no limit, but there is a subscription rate limit. Please
 do not exceed 10/s.
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/swapV2/q&a)
-
 ---
 
 ## General Info
@@ -142,6 +136,9 @@ with the primary domain name open-api.bingx.com
 
 HTTP 200 status code indicates a successful response. The response body might
 contain a message which will be displayed accordingly.
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
 
 ### Common Error Codes
 
@@ -200,6 +197,9 @@ contain a message which will be displayed accordingly.
 
 - Errors may be thrown from every interface.
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
+
 ### Rate limit
 
 If the request is too frequent, the system will automatically restrict the
@@ -229,6 +229,9 @@ limits are based on the following grouping rules:
 - Account API Group \[3\]: The total IP rate limit for all interfaces within the
   group is 1000 requests per 10 seconds, with an individual IP rate limit of 200
   requests per 10 seconds for each interface.
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
 
 ### Server time
 
@@ -313,6 +316,9 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
+
 ### Recent Trades List
 
 GET /openApi/spot/v1/market/trades
@@ -354,6 +360,9 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
+
 ### Order Book
 
 GET /openApi/spot/v1/market/depth
@@ -392,6 +401,9 @@ rate limitation by IP in group Number: 1
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
 
 ### Kline/Candlestick Data
 
@@ -461,6 +473,9 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
+
 ### 24hr Ticker Price Change Statistics
 
 GET /openApi/spot/v1/ticker/24hr
@@ -525,6 +540,9 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
+
 ### Order Book aggregation
 
 GET /openApi/spot/v2/market/depth
@@ -565,6 +583,9 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
+
 ### Symbol Price Ticker
 
 GET /openApi/spot/v1/ticker/price
@@ -602,6 +623,9 @@ rate limitation by IP in group Number: 1
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
 
 ### Symbol Order Book Ticker
 
@@ -643,6 +667,9 @@ rate limitation by IP in group Number: 1
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
 
 ### Historical K-line
 
@@ -697,6 +724,9 @@ rate limitation by IP in group Number: 1
 | 100410     | rate limited                                                                                                                                                 |
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
+
+> **Source:**
+> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/market-api.html)
 
 ### Old Trade Lookup
 
