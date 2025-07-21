@@ -3,68 +3,133 @@
  */
 
 /**
- * Extract article content from the page
+ * Extract content from the page (updated for new Coinbase docs structure)
  * @param {Page} page - Puppeteer page object
  * @param {Object} options - Options for extraction
  * @param {boolean} options.html - Whether to return HTML instead of text
- * @returns {Promise<string>} - Article content as text or HTML
+ * @returns {Promise<string>} - Content as text or HTML
  */
 export const extractArticleContent = async (page, options = {}) => {
   return await page.evaluate(returnHtml => {
-    const article = document.querySelector("article")
-    if (!article) return "Article content not available"
+    // The new Coinbase docs structure doesn't use article tags
+    // We need to find the main content area, not the sidebar
+    
+    // First, try to find the main content area by excluding sidebars and navigation
+    let contentElement = null
+    
+    // Look for main content selectors, excluding sidebar elements
+    const mainSelectors = [
+      'main',
+      '.content',
+      '.api-content',
+      '.docs-content',
+      '.page-content',
+      '[role="main"]'
+    ]
+    
+    for (const selector of mainSelectors) {
+      const element = document.querySelector(selector)
+      if (element && !element.id.includes('sidebar') && !element.className.includes('sidebar')) {
+        contentElement = element
+        break
+      }
+    }
+    
+    // If no main content found, look for divs with substantial content but exclude sidebars/navigation
+    if (!contentElement) {
+      const allDivs = Array.from(document.querySelectorAll('div'))
+      const contentDivs = allDivs.filter(div => {
+        // Exclude sidebar, navigation, and header elements
+        if (div.id.includes('sidebar') || div.className.includes('sidebar') ||
+            div.id.includes('nav') || div.className.includes('nav') ||
+            div.className.includes('hidden') || div.className.includes('sticky')) {
+          return false
+        }
+        
+        const text = div.textContent.toLowerCase()
+        // Look for main content indicators, not just navigation keywords
+        return (text.includes('post') || text.includes('get') || text.includes('endpoint')) && 
+               (text.includes('parameters') || text.includes('response') || text.includes('example')) &&
+               text.length > 500 // Require substantial content
+      })
+      
+      if (contentDivs.length > 0) {
+        // Use the div with the most content that's not hidden/sidebar
+        contentElement = contentDivs.reduce((longest, current) => 
+          current.textContent.length > longest.textContent.length ? current : longest
+        )
+      }
+    }
+    
+    // Final fallback: get body content but try to filter out navigation
+    if (!contentElement) {
+      // Create a clone of body and remove navigation elements
+      const bodyClone = document.body.cloneNode(true)
+      
+      // Remove known navigation/sidebar elements
+      const elementsToRemove = [
+        '#sidebar-content',
+        '#navigation-items',
+        '.sidebar',
+        '.navigation',
+        '[class*="sidebar"]',
+        '[class*="nav"]',
+        'nav'
+      ]
+      
+      elementsToRemove.forEach(selector => {
+        const elements = bodyClone.querySelectorAll(selector)
+        elements.forEach(el => el.remove())
+      })
+      
+      // Look for the remaining content with API information
+      const remainingDivs = Array.from(bodyClone.querySelectorAll('div'))
+      const apiContentDivs = remainingDivs.filter(div => {
+        const text = div.textContent.toLowerCase()
+        return (text.includes('create order') || text.includes('post') && text.includes('order')) &&
+               text.length > 200
+      })
+      
+      if (apiContentDivs.length > 0) {
+        contentElement = apiContentDivs.reduce((longest, current) => 
+          current.textContent.length > longest.textContent.length ? current : longest
+        )
+      } else {
+        contentElement = bodyClone
+      }
+    }
+
+    if (!contentElement) {
+      return "Content not available - new structure not detected"
+    }
 
     if (returnHtml) {
       // Create a clone to avoid modifying the actual DOM
-      const clone = article.cloneNode(true)
+      const clone = contentElement.cloneNode(true)
 
-      // Remove all hash links
-      const hashLinks = clone.querySelectorAll(".hashLink_R2Yq")
-      hashLinks.forEach(link => link.remove())
+      // Remove common navigation and non-content elements
+      const elementsToRemove = [
+        '.hashLink_R2Yq',
+        'nav',
+        '.nav',
+        '.sidebar',
+        '.navigation',
+        '[class*="nav"]',
+        '[class*="sidebar"]',
+        'script',
+        'style',
+        '#sidebar-content',
+        '#navigation-items'
+      ]
 
-      // Remove authentication section (already extracted by extractAuthSection)
-      const authSection = clone.querySelector("#authorization")
-      if (authSection) {
-        authSection.remove()
-      }
-
-      // Remove query parameters section (already extracted by extractQueryParams)
-      const pathParamsSections = clone.querySelectorAll("#path-params")
-      pathParamsSections.forEach(section => {
-        section.remove()
+      elementsToRemove.forEach(selector => {
+        const elements = clone.querySelectorAll(selector)
+        elements.forEach(el => el.remove())
       })
-
-      // Remove request parameters section (already extracted by extractRequestParams)
-      const bodyParamsHeadings = Array.from(
-        clone.querySelectorAll("h3")
-      ).filter(h => h.textContent.trim() === "Body params")
-
-      if (bodyParamsHeadings.length > 0) {
-        const section = bodyParamsHeadings[0].closest(
-          '[data-testid="content-section"]'
-        )
-        if (section) {
-          section.remove()
-        }
-      }
-
-      // Remove responses section
-      const responseHeadings = Array.from(clone.querySelectorAll("h3")).filter(
-        h => h.textContent.trim() === "Responses"
-      )
-
-      if (responseHeadings.length > 0) {
-        const section = responseHeadings[0].closest(
-          '[data-testid="content-section"]'
-        )
-        if (section) {
-          section.remove()
-        }
-      }
 
       return clone.outerHTML
     } else {
-      return article.innerText
+      return contentElement.innerText
     }
   }, options.html)
 }

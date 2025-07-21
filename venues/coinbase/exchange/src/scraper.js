@@ -150,8 +150,9 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       timeout: 60000
     })
 
-    // Wait for article element
-    await page.waitForSelector("article", { timeout: 60000 })
+    // Wait for content to be dynamically loaded (Next.js takes time)
+    console.log("Waiting for dynamic content to load...")
+    await new Promise(resolve => setTimeout(resolve, 8000))
     console.log("Page loaded successfully")
 
     page.evaluate(() => {
@@ -169,11 +170,11 @@ const scrapeApiDocumentation = async (url, outputPath) => {
       }
     })
 
-    // Extract content from the <article> tag
-    console.log("Extracting article content...")
+    // Extract content from the entire page body since the new structure doesn't use article tags
+    console.log("Extracting content from page body...")
     const articleHtml = await extractArticleContent(page, { html: true })
     const articleContent = convertHtmlToMarkdown(articleHtml)
-    console.log("Article content converted to markdown")
+    console.log("Content converted to markdown")
 
     // Extract authentication section if it exists
     console.log("Extracting authentication section...")
