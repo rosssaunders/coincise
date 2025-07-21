@@ -138,7 +138,9 @@ HTTP 200 status code indicates a successful response. The response body might
 contain a message which will be displayed accordingly.
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Service
+> Address](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Service
+> Address)
 
 ### Common Error Codes
 
@@ -198,7 +200,9 @@ contain a message which will be displayed accordingly.
 - Errors may be thrown from every interface.
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Common Error
+> Codes](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Common
+> Error Codes)
 
 ### Rate limit
 
@@ -230,15 +234,18 @@ limits are based on the following grouping rules:
   group is 1000 requests per 10 seconds, with an individual IP rate limit of 200
   requests per 10 seconds for each interface.
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Rate
+> limit](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Rate
+> limit)
 
 ### Server time
 
 https://open-api.bingx.com/openApi/spot/v1/server/time
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Server
+> time](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html#Server
+> time)
 
 ---
 
@@ -257,7 +264,10 @@ If the API key is accidentally leaked, please delete it immediately and produce
 a new API key
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Generate an
+> API
+> Key](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Generate
+> an API Key)
 
 ### Permission Settings
 
@@ -266,7 +276,9 @@ a new API key
   API, you need to modify it to the corresponding permission on the UI.
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Permission
+> Settings](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Permission
+> Settings)
 
 ### Make Requests
 
@@ -281,7 +293,9 @@ All private REST requests must contain the following parameters:
   time window value can be defined by sending the optional parameter recvWindow.
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Make
+> Requests](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Make
+> Requests)
 
 ### Signature Description
 
@@ -349,7 +363,9 @@ openssl dgst -sha256 -hmac
 {"recvWindow":0,"subAccountString":"abc12345","timestamp":1696751141337,"signature":"1e63e8cfd1c04919881e60cf369e404b9b7c87d3a09bc300f1abfdcce7da57e8"}
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Signature
+> Description](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Signature
+> Description)
 
 ### Requests
 
@@ -380,7 +396,7 @@ Success
   resource below.
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Requests](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html#Requests)
 
 ---
 
@@ -440,7 +456,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Deposit
+> records](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Deposit
+> records)
 
 ### Withdraw records
 
@@ -501,7 +519,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Withdraw
+> records](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Withdraw
+> records)
 
 ### Query currency deposit and withdrawal data
 
@@ -566,7 +586,10 @@ Get information of coins,And query the limit corresponding to the coins
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Query currency
+> deposit and withdrawal
+> data](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Query
+> currency deposit and withdrawal data)
 
 ### Withdraw
 
@@ -618,7 +641,7 @@ Specify user account to initiate coin withdrawal
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Withdraw](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Withdraw)
 
 ### Main Account Deposit Address
 
@@ -671,7 +694,10 @@ accounts.
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Main Account
+> Deposit
+> Address](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Main
+> Account Deposit Address)
 
 ### Deposit risk control records
 
@@ -715,7 +741,10 @@ sub-accounts
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Deposit risk
+> control
+> records](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html#Deposit
+> risk control records)
 
 ---
 
@@ -766,7 +795,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query
+> Assets](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query
+> Assets)
 
 ### Asset Transfer
 
@@ -832,7 +863,9 @@ request parameters https://open-api.bingx.com
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> Transfer](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> Transfer)
 
 ### Asset transfer records
 
@@ -902,7 +935,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset transfer
+> records](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> transfer records)
 
 ### Main Accoun internal transfer
 
@@ -954,7 +989,10 @@ For internal transfers within sub-accounts, please use the dedicated interface:
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Main Accoun
+> internal
+> transfer](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Main
+> Accoun internal transfer)
 
 ### Asset Transfer New
 
@@ -1010,7 +1048,9 @@ request parameters https://open-api.bingx.com
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset Transfer
+> New](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> Transfer New)
 
 ### Query transferable currency
 
@@ -1057,7 +1097,10 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query
+> transferable
+> currency](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query
+> transferable currency)
 
 ### Asset transfer records new
 
@@ -1107,7 +1150,10 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset transfer
+> records
+> new](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> transfer records new)
 
 ### Query Fund Account Assets
 
@@ -1155,7 +1201,10 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query Fund
+> Account
+> Assets](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Query
+> Fund Account Assets)
 
 ### Main account internal transfer records
 
@@ -1212,7 +1261,10 @@ records. Only available for parent users.
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Main account
+> internal transfer
+> records](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Main
+> account internal transfer records)
 
 ### Asset overview
 
@@ -1252,7 +1304,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> overview](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html#Asset
+> overview)
 
 ---
 
@@ -1377,7 +1431,9 @@ TRIGGER\_ Market: Market price plan commission
 | 100400     | the order you want to cancel is FILLED or CANCELLED already, or is not a valid order id ,please verify                                                                                                                                           |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Place
+> order](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Place
+> order)
 
 ### Place multiple orders
 
@@ -1484,7 +1540,9 @@ Trading Rules:
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Place multiple
+> orders](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Place
+> multiple orders)
 
 ### Cancel Order
 
@@ -1536,7 +1594,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel
+> Order](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel
+> Order)
 
 ### Cancel multiple orders
 
@@ -1588,7 +1648,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel multiple
+> orders](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel
+> multiple orders)
 
 ### Cancel all Open Orders on a Symbol
 
@@ -1637,7 +1699,10 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel all Open
+> Orders on a
+> Symbol](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel
+> all Open Orders on a Symbol)
 
 ### Cancel an Existing Order and Send a New Orde
 
@@ -1699,7 +1764,10 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel an
+> Existing Order and Send a New
+> Orde](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel an
+> Existing Order and Send a New Orde)
 
 ### Query Order details
 
@@ -1756,7 +1824,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query Order
+> details](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> Order details)
 
 ### Current Open Orders
 
@@ -1813,7 +1883,9 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Current Open
+> Orders](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Current
+> Open Orders)
 
 ### Query Order history
 
@@ -1885,7 +1957,9 @@ Notice:
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query Order
+> history](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> Order history)
 
 ### Query transaction details
 
@@ -1948,7 +2022,10 @@ Content-Type:request body(application/json)
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> transaction
+> details](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> transaction details)
 
 ### Query Trading Commission Rate
 
@@ -1990,7 +2067,10 @@ Used to query the current trading commission rate for spot trading.
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query Trading
+> Commission
+> Rate](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> Trading Commission Rate)
 
 ### Cancel All After
 
@@ -2045,7 +2125,9 @@ Interface parameters
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel All
+> After](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel All
+> After)
 
 ### Create an OCO Order
 
@@ -2103,7 +2185,9 @@ immediately cancels the other order
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Create an OCO
+> Order](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Create an
+> OCO Order)
 
 ### Cancel an OCO Order List
 
@@ -2146,7 +2230,10 @@ Used to cancel the entire OCOC order
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel an OCO
+> Order
+> List](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Cancel an
+> OCO Order List)
 
 ### Query an OCO Order List
 
@@ -2197,7 +2284,9 @@ Query the OCO order list
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query an OCO
+> Order List](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> an OCO Order List)
 
 ### Query All Open OCO Orders
 
@@ -2248,7 +2337,9 @@ Query the list of orders that are currently in the pending order state
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query All Open
+> OCO Orders](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query
+> All Open OCO Orders)
 
 ### Query OCO Historical Order List
 
@@ -2301,7 +2392,10 @@ Query OCO historical order list
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query OCO
+> Historical Order
+> List](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html#Query OCO
+> Historical Order List)
 
 ---
 
@@ -2339,7 +2433,9 @@ API must be main account.
 | note             | string | Sub account note information |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Create
+> sub-account](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Create
+> sub-account)
 
 ### Query user API Key permissions
 
@@ -2382,8 +2478,10 @@ account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> user API Key
+> permissions](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> user API Key permissions)
 
 ### Query account uid
 
@@ -2422,8 +2520,9 @@ Query account uid,which can be used by both main and sub account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> account uid](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> account uid)
 
 ### Get sub-account list
 
@@ -2474,8 +2573,10 @@ account
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Get
+> sub-account
+> list](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Get
+> sub-account list)
 
 ### Query sub-account Fund Account
 
@@ -2518,8 +2619,10 @@ The user who verifies the signature of this API must be main account
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> sub-account Fund
+> Account](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> sub-account Fund Account)
 
 ### Create an API Key for a sub-account
 
@@ -2556,7 +2659,10 @@ user who verifies the signature of this API must be main account
 | note           | string | notes                                                                                                                             |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Create an API Key
+> for a
+> sub-account](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Create
+> an API Key for a sub-account)
 
 ### Query the API Key of a sub-account
 
@@ -2604,8 +2710,10 @@ verifies the signature of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> the API Key of a
+> sub-account](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> the API Key of a sub-account)
 
 ### Reset the API Key of a sub-account
 
@@ -2641,8 +2749,10 @@ API must be main account
 | ipAddresses    | Array  | IP whitelist                                                                                                                      |
 | note           | string | notes                                                                                                                             |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Reset
+> the API Key of a
+> sub-account](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Reset
+> the API Key of a sub-account)
 
 ### Delete the API Key of sub-accounts
 
@@ -2672,7 +2782,10 @@ user who verifies the signature of this API must be main account
 | -------------- | ---- | ----------------- |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Delete the API
+> Key of
+> sub-accounts](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Delete
+> the API Key of sub-accounts)
 
 ### Freeze and unfreeze sub-accounts
 
@@ -2706,7 +2819,10 @@ main account
 | freeze         | bool | Has it been frozen |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Freeze and
+> unfreeze
+> sub-accounts](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Freeze
+> and unfreeze sub-accounts)
 
 ### Authorize sub-account internal transfers
 
@@ -2757,7 +2873,10 @@ API must be main account
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Authorize
+> sub-account internal
+> transfers](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Authorize
+> sub-account internal transfers)
 
 ### Sub-account internal transfer
 
@@ -2816,7 +2935,10 @@ sub-account has been authorized for internal transfers. You can use the api
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Sub-account
+> internal
+> transfer](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Sub-account
+> internal transfer)
 
 ### Main Accoun internal transfer
 
@@ -2867,8 +2989,10 @@ For internal transfers within sub-accounts, please use the dedicated interface:
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Main
+> Accoun internal
+> transfer](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Main
+> Accoun internal transfer)
 
 ### Create deposit address for sub-account
 
@@ -2922,7 +3046,10 @@ account.
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Create deposit
+> address for
+> sub-account](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Create
+> deposit address for sub-account)
 
 ### Get sub-account deposit address
 
@@ -2975,8 +3102,10 @@ located. The user who verifies the signature of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Get
+> sub-account deposit
+> address](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Get
+> sub-account deposit address)
 
 ### Get sub-account deposit records
 
@@ -3037,8 +3166,10 @@ sub-user. The user who verifies the signature of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Get
+> sub-account deposit
+> records](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Get
+> sub-account deposit records)
 
 ### Query sub-account internal transfer records
 
@@ -3094,8 +3225,10 @@ records,The user who verifies the signature of this API must be sub-account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> sub-account internal transfer
+> records](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> sub-account internal transfer records)
 
 ### Query Sub-Account Transfer History (For Master Account Operations Only)
 
@@ -3174,8 +3307,10 @@ rate limitation by IP in group Number: 1
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> Sub-Account Transfer History (For Master Account Operations
+> Only)](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> Sub-Account Transfer History \(For Master Account Operations Only\))
 
 ### Query the transferable amount of funds in the parent-child account (only for parent account operations).
 
@@ -3212,8 +3347,12 @@ rate limitation by IP in group Number: 1
 | name            | STRING  | Coin name, e.g., USDT     |
 | availableAmount | DECIMAL | Available transfer amount |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> the transferable amount of funds in the parent-child account (only for parent
+> account
+> operations).](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Query
+> the transferable amount of funds in the parent-child account \(only for parent
+> account operations\).)
 
 ### Sub-Account Asset Transfer Interface (For Master Account Operations Only)
 
@@ -3253,7 +3392,10 @@ rate limitation by IP in group Number: 1
 | tranId         | STRING | Transfer record ID |
 
 > **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Sub-Account Asset
+> Transfer Interface (For Master Account Operations
+> Only)](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Sub-Account
+> Asset Transfer Interface \(For Master Account Operations Only\))
 
 ### Batch inquiry of sub account asset overview
 
@@ -3299,7 +3441,9 @@ of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
-> [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
+> **Source:** [https://bingx-api.github.io/docs/#/en-us/common/sub-account#Batch
+> inquiry of sub account asset
+> overview](https://bingx-api.github.io/docs/#/en-us/common/sub-account#Batch
+> inquiry of sub account asset overview)
 
 ---
