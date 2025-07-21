@@ -51,35 +51,35 @@
       "filename": "types.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproducts",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-products.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductsvolume",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-products-volume.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproduct",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-product.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductbook",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-product-book.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductcandles",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-product-candles.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductstats",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-product-stats.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductticker",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-product-ticker.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproducttrades",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products",
       "filename": "get-product-trades.md"
     }
   ]

@@ -51,27 +51,27 @@
       "filename": "types.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
       "filename": "post-orders.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfills",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/fills",
       "filename": "get-fills.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
       "filename": "get-orders.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorders",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
       "filename": "delete-orders.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorder",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
       "filename": "get-order.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorder",
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
       "filename": "delete-order.md"
     }
   ]
