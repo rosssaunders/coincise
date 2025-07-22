@@ -1,0 +1,38 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "public_products.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-known-trading-pairs",
+      "filename": "get-all-known-trading-pairs.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-product-volume",
+      "filename": "get-all-product-volume.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-book",
+      "filename": "get-product-book.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles",
+      "filename": "get-product-candles.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-stats",
+      "filename": "get-product-stats.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-ticker",
+      "filename": "get-product-ticker.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades",
+      "filename": "get-product-trades.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-single-product",
+      "filename": "get-single-product.md"
+    }
+  ]
+}

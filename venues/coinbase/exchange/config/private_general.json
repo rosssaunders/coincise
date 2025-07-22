@@ -1,0 +1,34 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_general.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/introduction",
+      "filename": "introduction.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/requests",
+      "filename": "requests.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/authentication",
+      "filename": "authentication.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits",
+      "filename": "rate-limits.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/pagination",
+      "filename": "pagination.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/profiles",
+      "filename": "profiles.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/types",
+      "filename": "types.md"
+    }
+  ]
+}

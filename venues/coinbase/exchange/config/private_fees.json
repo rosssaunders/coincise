@@ -1,0 +1,10 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_fees.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/fees/get-fee",
+      "filename": "get-fee.md"
+    }
+  ]
+}

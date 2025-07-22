@@ -1,0 +1,54 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_loan.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-lending-overview",
+      "filename": "get-lending-overview.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-new-loan-preview",
+      "filename": "get-new-loan-preview.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-principal-repayment-preview",
+      "filename": "get-principal-repayment-preview.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-charges",
+      "filename": "list-interest-charges.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-rate-history",
+      "filename": "list-interest-rate-history.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-summaries",
+      "filename": "list-interest-summaries.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loan-assets",
+      "filename": "list-loan-assets.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loans",
+      "filename": "list-loans.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-new-loan-options",
+      "filename": "list-new-loan-options.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/open-new-loan",
+      "filename": "open-new-loan.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-interest",
+      "filename": "repay-loan-interest.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-principal",
+      "filename": "repay-loan-principal.md"
+    }
+  ]
+}

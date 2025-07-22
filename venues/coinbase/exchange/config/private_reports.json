@@ -1,0 +1,18 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_reports.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/create-report",
+      "filename": "create-report.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-report",
+      "filename": "get-report.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-all-reports",
+      "filename": "get-all-reports.md"
+    }
+  ]
+}

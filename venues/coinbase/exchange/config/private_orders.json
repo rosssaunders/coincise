@@ -1,0 +1,30 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_orders.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-all-orders",
+      "filename": "cancel-all-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-an-order",
+      "filename": "cancel-an-order.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/create-new-order",
+      "filename": "create-new-order.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-fills",
+      "filename": "get-all-fills.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-orders",
+      "filename": "get-all-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-single-order",
+      "filename": "get-single-order.md"
+    }
+  ]
+}

@@ -41,14 +41,71 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Private REST API scraper
-        run: npm run privaterestapi
-
-      - name: Run Public REST API scraper
-        run: npm run publicrestapi
-
-      - name: Run WebSocket API scraper
-        run: npm run websocketapi
+      # Private API endpoints
+      - name: Extract Private General docs
+        run: npm run extract:private:general
+      
+      - name: Extract Private Accounts
+        run: npm run extract:private:accounts
+      
+      - name: Extract Private Address Book
+        run: npm run extract:private:address_book
+      
+      - name: Extract Private Coinbase Accounts
+        run: npm run extract:private:coinbase_accounts
+      
+      - name: Extract Private Conversions
+        run: npm run extract:private:conversions
+      
+      - name: Extract Private Currencies
+        run: npm run extract:private:currencies
+      
+      - name: Extract Private Fees
+        run: npm run extract:private:fees
+      
+      - name: Extract Private Futures
+        run: npm run extract:private:futures
+      
+      - name: Extract Private Loan
+        run: npm run extract:private:loan
+      
+      - name: Extract Private Orders
+        run: npm run extract:private:orders
+      
+      - name: Extract Private Products
+        run: npm run extract:private:products
+      
+      - name: Extract Private Profiles
+        run: npm run extract:private:profiles
+      
+      - name: Extract Private Reports
+        run: npm run extract:private:reports
+      
+      - name: Extract Private Transfers
+        run: npm run extract:private:transfers
+      
+      - name: Extract Private Travel Rules
+        run: npm run extract:private:travel_rules
+      
+      - name: Extract Private Users
+        run: npm run extract:private:users
+      
+      - name: Extract Private Wrapped Assets
+        run: npm run extract:private:wrapped_assets
+      
+      # Public API endpoints
+      - name: Extract Public General docs
+        run: npm run extract:public:general
+      
+      - name: Extract Public Currencies
+        run: npm run extract:public:currencies
+      
+      - name: Extract Public Products
+        run: npm run extract:public:products
+      
+      # WebSocket API
+      - name: Extract WebSocket API
+        run: npm run extract:websocket
 
       - name: Check for changes
         id: git-check
