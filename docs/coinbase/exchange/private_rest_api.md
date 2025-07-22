@@ -2,607 +2,143 @@
 
 ## Table of Contents
 
-- [Welcome to Exchange APIs](#welcome-to-exchange-apis)
-- [Quickstart: Making Your First REST API Call](#quickstart-making-your-first-rest-api-call)
-- [Exchange Sandbox](#exchange-sandbox)
-- [Exchange Matching Engine](#exchange-matching-engine)
-- [Exchange Rate Limits Overview](#exchange-rate-limits-overview)
-- [Exchange Systems & Operations](#exchange-systems-operations)
-- [Exchange REST API Requests](#exchange-rest-api-requests)
-- [Exchange REST API Authentication](#exchange-rest-api-authentication)
-- [Exchange REST API Rate Limits](#exchange-rest-api-rate-limits)
-- [Exchange REST API Pagination](#exchange-rest-api-pagination)
-- [Exchange Profiles](#exchange-profiles)
-- [Exchange Types](#exchange-types)
-- [Create a new order](#create-a-new-order)
-- [Get all fills](#get-all-fills)
-- [Get all orders](#get-all-orders)
-- [Cancel all orders](#cancel-all-orders)
-- [Get single order](#get-single-order)
-- [Cancel an order](#cancel-an-order)
+- [Welcome to Coinbase Exchange API - Coinbase](#welcome-to-coinbase-exchange-api-coinbase)
+- [Exchange REST API Requests - Coinbase](#exchange-rest-api-requests-coinbase)
+- [Exchange REST API Authentication - Coinbase](#exchange-rest-api-authentication-coinbase)
+- [Exchange REST API Rate Limits - Coinbase](#exchange-rest-api-rate-limits-coinbase)
+- [Exchange REST API Pagination - Coinbase](#exchange-rest-api-pagination-coinbase)
+- [Exchange Profiles - Coinbase](#exchange-profiles-coinbase)
+- [Exchange Types - Coinbase](#exchange-types-coinbase)
+- [Get a single account by id - Coinbase](#get-a-single-account-by-id-coinbase)
+- [Get a single account's holds - Coinbase](#get-a-single-account-s-holds-coinbase)
+- [Get a single account's ledger - Coinbase](#get-a-single-account-s-ledger-coinbase)
+- [Get a single account's transfers - Coinbase](#get-a-single-account-s-transfers-coinbase)
+- [Get all accounts for a profile - Coinbase](#get-all-accounts-for-a-profile-coinbase)
+- [Add addresses - Coinbase](#add-addresses-coinbase)
+- [Delete address - Coinbase](#delete-address-coinbase)
+- [Get address book - Coinbase](#get-address-book-coinbase)
+- [Generate crypto address - Coinbase](#generate-crypto-address-coinbase)
+- [Get all Coinbase wallets - Coinbase](#get-all-coinbase-wallets-coinbase)
+- [Convert currency - Coinbase](#convert-currency-coinbase)
+- [Get a conversion - Coinbase](#get-a-conversion-coinbase)
+- [Get all conversions - Coinbase](#get-all-conversions-coinbase)
+- [Get conversion fee rates - Coinbase](#get-conversion-fee-rates-coinbase)
+- [Get all known currencies - Coinbase](#get-all-known-currencies-coinbase)
+- [Get a currency - Coinbase](#get-a-currency-coinbase)
+- [Get fees - Coinbase](#get-fees-coinbase)
+- [Get auto loan setting - Coinbase](#get-auto-loan-setting-coinbase)
+- [Get USDC conversion - Coinbase](#get-usdc-conversion-coinbase)
+- [Set auto loan - Coinbase](#set-auto-loan-coinbase)
+- [Set USDC conversion - Coinbase](#set-usdc-conversion-coinbase)
+- [Get lending overview - Coinbase](#get-lending-overview-coinbase)
+- [Get new loan preview - Coinbase](#get-new-loan-preview-coinbase)
+- [Get principal repayment preview - Coinbase](#get-principal-repayment-preview-coinbase)
+- [List interest charges - Coinbase](#list-interest-charges-coinbase)
+- [List interest rate history - Coinbase](#list-interest-rate-history-coinbase)
+- [List interest summaries - Coinbase](#list-interest-summaries-coinbase)
+- [List loan assets - Coinbase](#list-loan-assets-coinbase)
+- [List loans - Coinbase](#list-loans-coinbase)
+- [List new loan options - Coinbase](#list-new-loan-options-coinbase)
+- [Open new loan - Coinbase](#open-new-loan-coinbase)
+- [Repay loan interest - Coinbase](#repay-loan-interest-coinbase)
+- [Repay loan principal - Coinbase](#repay-loan-principal-coinbase)
+- [Cancel all orders - Coinbase](#cancel-all-orders-coinbase)
+- [Cancel an order - Coinbase](#cancel-an-order-coinbase)
+- [Create a new order - Coinbase](#create-a-new-order-coinbase)
+- [Get all fills - Coinbase](#get-all-fills-coinbase)
+- [Get all orders - Coinbase](#get-all-orders-coinbase)
+- [Get single order - Coinbase](#get-single-order-coinbase)
+- [Get all known trading pairs - Coinbase](#get-all-known-trading-pairs-coinbase)
+- [Get all product volume - Coinbase](#get-all-product-volume-coinbase)
+- [Get product book - Coinbase](#get-product-book-coinbase)
+- [Get product candles - Coinbase](#get-product-candles-coinbase)
+- [Get product stats - Coinbase](#get-product-stats-coinbase)
+- [Get product ticker - Coinbase](#get-product-ticker-coinbase)
+- [Get product trades - Coinbase](#get-product-trades-coinbase)
+- [Get single product - Coinbase](#get-single-product-coinbase)
+- [Create a profile - Coinbase](#create-a-profile-coinbase)
+- [Delete a profile - Coinbase](#delete-a-profile-coinbase)
+- [Get profile by id - Coinbase](#get-profile-by-id-coinbase)
+- [Get profiles - Coinbase](#get-profiles-coinbase)
+- [Rename a profile - Coinbase](#rename-a-profile-coinbase)
+- [Transfer funds between profiles - Coinbase](#transfer-funds-between-profiles-coinbase)
+- [Create a report - Coinbase](#create-a-report-coinbase)
+- [Get a report - Coinbase](#get-a-report-coinbase)
+- [Get all reports - Coinbase](#get-all-reports-coinbase)
+- [Deposit from Coinbase account - Coinbase](#deposit-from-coinbase-account-coinbase)
+- [Deposit from payment method - Coinbase](#deposit-from-payment-method-coinbase)
+- [Get a single transfer - Coinbase](#get-a-single-transfer-coinbase)
+- [Get all payment methods - Coinbase](#get-all-payment-methods-coinbase)
+- [Get all transfers - Coinbase](#get-all-transfers-coinbase)
+- [Get fee estimate for crypto withdrawal - Coinbase](#get-fee-estimate-for-crypto-withdrawal-coinbase)
+- [Submit travel information for a transfer - Coinbase](#submit-travel-information-for-a-transfer-coinbase)
+- [Withdraw to Coinbase account - Coinbase](#withdraw-to-coinbase-account-coinbase)
+- [Withdraw to crypto address - Coinbase](#withdraw-to-crypto-address-coinbase)
+- [Withdraw to payment method - Coinbase](#withdraw-to-payment-method-coinbase)
+- [Create travel rule entry - Coinbase](#create-travel-rule-entry-coinbase)
+- [Delete existing travel rule entry - Coinbase](#delete-existing-travel-rule-entry-coinbase)
+- [Get all travel rule information - Coinbase](#get-all-travel-rule-information-coinbase)
+- [Get user exchange limits - Coinbase](#get-user-exchange-limits-coinbase)
+- [Get user trading volume - Coinbase](#get-user-trading-volume-coinbase)
+- [Update settlement preference - Coinbase](#update-settlement-preference-coinbase)
+- [Create a new redeem - Coinbase](#create-a-new-redeem-coinbase)
+- [Create a new stake-wrap - Coinbase](#create-a-new-stake-wrap-coinbase)
+- [Get a single redeem - Coinbase](#get-a-single-redeem-coinbase)
+- [Get a single stake-wrap - Coinbase](#get-a-single-stake-wrap-coinbase)
+- [Get all redeems - Coinbase](#get-all-redeems-coinbase)
+- [Get all stake-wraps - Coinbase](#get-all-stake-wraps-coinbase)
+- [Get all wrapped assets - Coinbase](#get-all-wrapped-assets-coinbase)
+- [Get wrapped asset conversion rate - Coinbase](#get-wrapped-asset-conversion-rate-coinbase)
+- [Get wrapped asset details - Coinbase](#get-wrapped-asset-details-coinbase)
 
 ---
 
-# Welcome to Exchange APIs
+# Welcome to Coinbase Exchange API - Coinbase
 
-
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/introduction](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/introduction)
 
-FIX 4.2 Order Entry Gateway Deprecation
+## ​Getting Started
 
-FIX 4.2 Order Entry Gateway will be deprecated on **June 3rd, 2025**. For FIX
-based order entry, **leverage the newer, more performant**
-[FIX 5 Order Entry Gateway](/exchange/docs/fix-msg-order-entry-50).
+- [Authentication](/exchange/rest-api/authentication)
+- [Rate Limits](/exchange/rest-api/rate-limits)
+- [Pagination](/exchange/rest-api/pagination)
+- [Status Codes](/exchange/rest-api/requests)
+- [Quickstart](/exchange/introduction/rest-quickstart)
 
-Welcome to Coinbase Exchange API documentation for traders and developers! The
-APIs are separated into two categories, trading and market data:
+## ​FIX API
 
-- **Trading APIs** require authentication and let you place orders and access
-  account information.
-- **Market Data APIs** provide market data and are public.
+- [FIX API reference](/exchange/fix-api/connectivity)
 
-Coinbase Exchange offers multiple connectivity options tailored to your trading
-and data needs:
+## ​WebSocket API
 
-- [REST API](/exchange/docs/rest-requests) for lower-frequency trading and
-  general requests.
-- [FIX Order Entry API](/exchange/docs/fix-msg-order-entry-50) for
-  higher-frequency trading.
-- [WebSocket Feed](/exchange/docs/websocket-overview) for market data.
-- [FIX Market Data API](/exchange/docs/fix-msg-market-data) for latency
-  sensitive market data feeds.
-
-Exchange's developer docs are part of [Coinbase Developer Platform](/), the
-single portal from which to access Coinbase's full suite of APIs and blockchain
-infrastructure products.
-
-
-
-Info
-
-By accessing the Exchange Market Data API, you agree to be bound by the
-[Market Data Terms of Use](https://www.coinbase.com/legal/market_data).
-
-Last updated on **Apr 2, 2025**
+- [WebSocket API reference](/exchange/websocket-feed/overview)
 
 ---
 
-# Quickstart: Making Your First REST API Call
+# Exchange REST API Requests - Coinbase
 
-This quickstart walks through creating an API key, setting up the Exchange Go
-SDK, and making your first few REST API calls.
+**Source:**
+[https://docs.cdp.coinbase.com/exchange/rest-api/requests](https://docs.cdp.coinbase.com/exchange/rest-api/requests)
 
-## Initial Setup
+### ​Common Error Codes
 
-1.  **Create a Coinbase Exchange Account:** Sign up at
-    [Coinbase Exchange](https://exchange.coinbase.com/).
-2.  **Generate an API Key:** From the web UI, navigate to
-    [API](https://exchange.coinbase.com/apikeys).
-3.  **Authenticate:** Ensure you authenticate all API requests. Detailed
-    guidance is available at [API Authentication](/exchange/docs/rest-auth).
-
-
-
-REST API URL
-
-`https://api.exchange.coinbase.com`
-
-## Using the Exchange Go SDK
-
-### Setting up the SDK
-
-First, initialize a new Go module, install the Exchange Go SDK, and tidy
-dependencies. Run the following commands in your project directory, replacing
-example.com/test with your desired project path:
-
-```
-go mod init example.com/testgo get github.com/coinbase-samples/exchange-sdk-gogo mod tidygo build
-```
-
-Next, initialize the `Credentials` struct and create a new client. The
-Credentials struct is JSON enabled. Ensure that Exchange API credentials are
-stored in a secure manner.
-
-```
-credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CREDENTIALS")if err != nil {    panic(fmt.Sprintf("unable to read exchange credentials: %v", err))}httpClient, err := core.DefaultHttpClient()if err != nil {    panic(fmt.Sprintf("unable to load default http client: %v", err))}client := client.NewRestClient(credentials, httpClient)
-```
-
-There are convenience functions to read the credentials as an environment
-variable (credentials.ReadEnvCredentials) and to deserialize the JSON structure
-(credentials.UnmarshalCredentials) if pulled from a different source.
-
-To set up your credentials, add the `EXCHANGE_CREDENTIALS` environment variable
-to your `~/.zshrc` file:
-
-```
-export EXCHANGE_CREDENTIALS='{    "apiKey":"YOUR_API_KEY",    "passphrase":"YOUR_PASSPHRASE",    "signingKey":"YOUR_SIGNING_KEY"}'
-```
-
-After adding this line, run source ~/.zshrc to load the environment variable
-into your current shell session.
-
-## Making your first API call
-
-After initializing the client, you need to set up the appropriate service to
-access specific API endpoints. Specific examples are provided below.
-
-### Listing Accounts
-
-Account IDs are needed in order to track asset-level events, e.g. transfers and
-ledger. To list all accounts, initialize the accounts service, pass in the
-request object, check for an error, and, if nil, process the response.
-
-```
-func main() {    credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CREDENTIALS")    if err != nil {        panic(fmt.Sprintf("unable to read exchange credentials: %v", err))    }    httpClient, err := core.DefaultHttpClient()    if err != nil {        panic(fmt.Sprintf("unable to load default http client: %v", err))    }    client := client.NewRestClient(credentials, httpClient)    accountsSvc := accounts.NewAccountsService(client)    request := &accounts.ListAccountsRequest{}    response, err := accountsSvc.ListAccounts(context.Background(), request)    if err != nil {        panic(fmt.Sprintf("unable to list accounts: %v", err))    }    jsonResponse, err := json.MarshalIndent(response, "", "  ")    if err != nil {        panic(fmt.Sprintf("error marshaling response to JSON: %v", err))    }    fmt.Println(string(jsonResponse))}
-```
-
-### Get Account Transfers
-
-You can use account IDs to track historical transfers. To get a specific
-account's transfer history, initialize the accounts service if you haven't
-already, pass in the request object with account ID, check for an error, and, if
-nil, process the response.
-
-```
-func main() {    credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CREDENTIALS")    if err != nil {        panic(fmt.Sprintf("unable to read exchange credentials: %v", err))    }    httpClient, err := core.DefaultHttpClient()    if err != nil {        panic(fmt.Sprintf("unable to load default http client: %v", err))    }    client := client.NewRestClient(credentials, httpClient)    accountsSvc := accounts.NewAccountsService(client)    request := &accounts.GetAccountTransfersRequest{        AccountId: "account_id_here",    }    response, err := accountsSvc.GetAccountTransfers(context.Background(), request)    if err != nil {        panic(fmt.Sprintf("unable to get account transfers: %v", err))    }    jsonResponse, err := json.MarshalIndent(response, "", "  ")    if err != nil {        panic(fmt.Sprintf("error marshaling response to JSON: %v", err))    }    fmt.Println(string(jsonResponse))}
-```
-
-### Listing Profiles
-
-Certain requests require that you know your Profile ID. To list all profile IDs
-associated with your Exchange account, initialize the profiles service, pass in
-the request object, check for an error, and, if nil, process the response.
-
-```
-func main() {    credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CREDENTIALS")    if err != nil {        panic(fmt.Sprintf("unable to read exchange credentials: %v", err))    }    httpClient, err := core.DefaultHttpClient()    if err != nil {        panic(fmt.Sprintf("unable to load default http client: %v", err))    }    client := client.NewRestClient(credentials, httpClient)    profilesSvc := profiles.NewProfilesService(client)    request := &profiles.ListProfilesRequest{}    response, err := profilesSvc.ListProfiles(context.Background(), request)    if err != nil {        panic(fmt.Sprintf("unable to list profiles: %v", err))    }    jsonResponse, err := json.MarshalIndent(response, "", "  ")    if err != nil {        panic(fmt.Sprintf("error marshaling response to JSON: %v", err))    }    fmt.Println(string(jsonResponse))}
-```
-
-### Get Product Details
-
-To get product details, initialize the products service, pass in the request
-object with the Product ID (e.g. `BTC-USD`) you want data for, check for an
-error, and if nil, process the response.
-
-```
-func main() {    credentials, err := credentials.ReadEnvCredentials("EXCHANGE_CREDENTIALS")    if err != nil {        panic(fmt.Sprintf("unable to read exchange credentials: %v", err))    }    httpClient, err := core.DefaultHttpClient()    if err != nil {        panic(fmt.Sprintf("unable to load default http client: %v", err))    }    client := client.NewRestClient(credentials, httpClient)    productsSvc := products.NewProductsService(client)    request := &products.GetProductRequest{        ProductId: "BTC-USD",    }    response, err := productsSvc.GetProduct(context.Background(), request)    if err != nil {        panic(fmt.Sprintf("unable to get product: %v", err))    }    jsonResponse, err := json.MarshalIndent(response, "", "  ")    if err != nil {        panic(fmt.Sprintf("error marshaling response to JSON: %v", err))    }    fmt.Println(string(jsonResponse))}
-```
-
-Last updated on **Dec 17, 2024**
+| Status Code | Reason                                                       |
+| ----------- | ------------------------------------------------------------ |
+| 400         | Bad Request — Invalid request format                         |
+| 401         | Unauthorized — Invalid API Key                               |
+| 403         | Forbidden — You do not have access to the requested resource |
+| 404         | Not Found                                                    |
+| 500         | Internal Server Error — We had a problem with our server     |
 
 ---
 
-# Exchange Sandbox
+# Exchange REST API Authentication - Coinbase
 
-A public sandbox is available for testing API connectivity and web trading.
+**Source:**
+[https://docs.cdp.coinbase.com/exchange/rest-api/authentication](https://docs.cdp.coinbase.com/exchange/rest-api/authentication)
 
-
-
-Sandbox is subset
-
-The sandbox hosts a _subset_ of the production order books and supports all
-exchange functionality _except_
-[Transfers](/exchange/docs/sandbox#unsupported-features). You can add unlimited
-fake funds for testing.
-
-
-
-Info
-
-Login sessions and API keys are separate from production. Log into the
-[sandbox web interface](https://public.sandbox.exchange.coinbase.com) to create
-an API key, deposit/withdraw funds, etc.
-
-## Sandbox URLs
-
-Use the following URLs to test your API connectivity. See the
-[Runbook](/exchange/docs/runbook#production-urls) for Production URLs.
-
-| API                           | URL                                                       |
-| ----------------------------- | --------------------------------------------------------- |
-| REST API                      | `https://api-public.sandbox.exchange.coinbase.com`        |
-| Websocket Feed                | `wss://ws-feed-public.sandbox.exchange.coinbase.com`      |
-| Websocket Direct Feed         | `wss://ws-direct.sandbox.exchange.coinbase.com`           |
-| FIX API - Order Entry 4.2     | `tcp+ssl://fix-public.sandbox.exchange.coinbase.com:4198` |
-| FIX API - Order Entry 5.0 SP2 | `tcp+ssl://fix-ord.sandbox.exchange.coinbase.com:6121`    |
-| FIX API - Market Data 5.0 SP2 | `tcp+ssl://fix-md.sandbox.exchange.coinbase.com:6121`     |
-
-## Sandbox SSL Certificate
-
-Your FIX SSL client must validate the following sandbox FIX server SSL
-certificate:
-
-```
------BEGIN CERTIFICATE-----MIIEdDCCA1ygAwIBAgIQD03L1cHVypYSDFuvcnpAHzANBgkqhkiG9w0BAQsFADBGMQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRUwEwYDVQQLEwxTZXJ2ZXIgQ0EgMUIxDzANBgNVBAMTBkFtYXpvbjAeFw0yMjAzMjcwMDAwMDBaFw0yMzA0MjUyMzU5NTlaMCoxKDAmBgNVBAMMHyouc2FuZGJveC5leGNoYW5nZS5jb2luYmFzZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC8LYRdqMoVNa/0M4MF+Wkr8SiybZ95JycTE+0ZVmf92DKo4I8m/8fBtOrH0jgrhvamVSJ0lI6VFiAzlTd1doUbliQ9Xm1aE/YHQO9J64AIP97peysgHBd+g3/Vhz33aaaU2vyHH5kPHiekU8n/ObXPPoFd/Awul8uxxlXsVFx8oBWL2MeMjLNLLWNiGWq+lQloGKsQYVR/fQZizvpPvyZO6pCLRId6+Wq3Tcb7NHQZc6+tePVi+5fovE+lm/yQrhjGqDzI7P4rWjJqCPrAsYJeYFcVJhdSuFY2Ngm8eKeDP14TVEs9pkIWvyMGmB17QBPbRJipdoKu1N6fsx54N9JDAgMBAAGjggF4MIIBdDAfBgNVHSMEGDAWgBRZpGYGUqB7lZI8o5QHJ5Z0W/k90DAdBgNVHQ4EFgQUa5RZ0yvv71YteSuqO1VRvmGGKv0wKgYDVR0RBCMwIYIfKi5zYW5kYm94LmV4Y2hhbmdlLmNvaW5iYXNlLmNvbTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMD0GA1UdHwQ2MDQwMqAwoC6GLGh0dHA6Ly9jcmwuc2NhMWIuYW1hem9udHJ1c3QuY29tL3NjYTFiLTEuY3JsMBMGA1UdIAQMMAowCAYGZ4EMAQIBMHUGCCsGAQUFBwEBBGkwZzAtBggrBgEFBQcwAYYhaHR0cDovL29jc3Auc2NhMWIuYW1hem9udHJ1c3QuY29tMDYGCCsGAQUFBzAChipodHRwOi8vY3J0LnNjYTFiLmFtYXpvbnRydXN0LmNvbS9zY2ExYi5jcnQwDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAQEATpjyCMwAOSFKFTA67UaVkDCjz/ULBY6PL4JwTJ+7kmT+HMvGimx15CsVjne64bT5twWlzqA/l4h25HGj0hD0TU2ktqmFhfAmDpjGVp4KgIcZpvv7oRIU4e5I422Y++2UVuATwLWdELgpnm4AVq1aqI10XrQlJeHLgRVfV5qkr9Vsc+fk7HY7YwbNQk2jXbRaj22f6GxiJ/6VmUcCD7zZ1GZtUipv0JEyPtWD/BbSKNx1GJnLZ6L+QytPs+MW+FEetlU/oqPuyYRhmJUBUiwKkm6yKWRj9tQfsq0a4uLI3SUgsBv/CQ/Qa9LnRdNjvlWSKLzeIX2LU9rE/3F3oQh7HQ==-----END CERTIFICATE-----
-```
-
-## Unsupported Features
-
-The Transfer endpoints are _not_ available for testing in the Sandbox:
-
-- [Withdraw to payment](/exchange/reference/exchangerestapi_postwithdrawpaymentmethod)
-- [Deposit from payment](/exchange/reference/exchangerestapi_postdepositpaymentmethod)
-- [Deposit from Coinbase account](/exchange/reference/exchangerestapi_postdepositcoinbaseaccount)
-- [Withdraw to crypto address](/exchange/reference/exchangerestapi_postwithdrawcrypto)
-- [Withdraw to Coinbase Account](/exchange/reference/exchangerestapi_postwithdrawcoinbaseaccount)
-
-## Creating API Keys
-
-To create an API key in the sandbox web interface:
-
-1.  Go to the
-    [sandbox web interface](https://public.sandbox.exchange.coinbase.com)
-2.  Create an account or sign in.
-3.  Go to **API** in your profile dropdown menu.
-4.  Click **New API Key**.
-
-## Managing Funds
-
-To add or remove funds in the sandbox web interface:
-
-1.  Go to the **Portfolios** tab.
-2.  Click the **Deposit** and **Withdraw** buttons as you would on the
-    production web interface.
-
-Last updated on **Aug 27, 2024**
-
----
-
-# Exchange Matching Engine
-
-Coinbase Exchange operates a continuous first-come, first-serve order book.
-Orders are executed in price-time priority as received by the matching engine.
-
-## Self-Trade Prevention
-
-Self-trading is not allowed on Coinbase Exchange. When two orders from the same
-user cross, they do not fill one another.
-
-
-
-Caution
-
-The STP instruction on the taker order (latest order) takes precedence over the
-older/resting order.
-
-You can define your self-trade prevention behavior when
-[placing an order](/exchange/reference/exchangerestapi_postorders#self-trade-prevention)
-with the STP flag:
-
-| Self-Trade Prevention Option     | STP Flag | Description                                                                                         |
-| -------------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
-| Decrement &amp; cancel (default) | `dc`     | Cancel smaller order and decrement larger order by the smaller size. If the same size, cancel both. |
-| Cancel oldest                    | `co`     | Cancel older (resting) order in full. Continue to execute the newer taking order.                   |
-| Cancel newest                    | `cn`     | Cancel newer (taking) order in full. Let the old resting order remain on the order book.            |
-| Cancel both                      | `cb`     | Cancel both orders immediately.                                                                     |
-
-## Market Orders
-
-When a `market` order using decrement and cancel (`dc` ) self-trade prevention
-encounters an open limit order, the behavior depends on which fields were
-specified for the market order.
-
-- If `funds` and `size` are specified:
-
-  - For a market buy order, size is decremented internally within the matching
-    engine and funds remain unchanged. The intent is to offset your target size
-    without limiting your buying power.
-
-- If `funds` is specified (and not `size`):
-
-  - For a market buy order, funds are decremented.
-  - For a market sell order, size is decremented when encountering existing
-    limit orders.
-
-## Price Improvement
-
-Orders are matched against existing order book orders at the price of the order
-_on the book_, not at the price of the taker order.
-
-**Example**
-
-User A places a buy order for 1 BTC at 100 USD. Then User B places a sell order
-for 1 BTC at 80 USD. The result is that the trade occurs at 100 USD because User
-A's order was first to the trading engine and User A has price priority.
-
-## Order Lifecycle
-
-| Order State | Description                                                                                                                        |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `received`  | Valid orders that are sent to the matching engine and confirmed immediately.                                                       |
-| `open`      | Any part of the order not filled immediately. Orders stay open until canceled or filled by new orders.                             |
-| `done`      | An full order executed against another order immediately. A partial order filled or canceled (and no longer eligible for matching) |
-
-Last updated on **Feb 25, 2025**
-
----
-
-# Exchange Rate Limits Overview
-
-## Summary
-
-
-
-Info
-
-Private endpoints are authenticated.
-
-### [REST API Rate Limits](/exchange/docs/rest-rate-limits)
-
-#### Public Endpoints
-
-- Requests per second per IP: 10
-- Requests per second per IP in bursts: Up to 15
-
-#### Private Endpoints
-
-- Requests per second per profile: 15
-- Requests per second per profile in bursts: Up to 30
-
-#### Private `/fills` Endpoint
-
-- Requests per second per profile: 10
-- Requests per second per profile in bursts: Up to 20
-
-#### Private `/loans` Endpoint
-
-- Requests per second per profile: 10
-
-
-
-Info
-
-Rate limits do not apply to
-[List loan assets](/exchange/reference/exchangerestapi_getloanassets)
-(`/loans/assets`) which is not private.
-
-### [FIX API Rate Limits](/exchange/docs/fix-rate-limits)
-
-#### FIX 4.2 Rate Limits
-
-- Requests per rolling second per session: 50
-- Messages per second in bursts: 100
-
-#### FIX 5.0 Rate Limits
-
-- 2 logons per second per API key
-- 100 requests per second
-
-
-
-Caution
-
-Your FIX 5 session is disconnected if your messages exceed 200 messages per
-second
-
-#### FIX Maximums
-
-- Maximum API keys per session/connection: 1
-- Maximum connections per profile: 75 . See
-  [FIX Best Practices](/exchange/docs/fix-best-practices).
-- Maximum connections per user across all profiles: 175
-- Maximum profiles per user: 100
-- Maximum orders per batch message message (new and cancelled): 15
-
-### [Websocket Rate Limits](/exchange/docs/websocket-rate-limits)
-
-- Requests per second per IP: 8
-- Requests per second per IP in bursts: Up to 20
-- Messages sent by the client every second per IP: 100
-
-### Other
-
-- Maximum open orders: 500
-
-## How Rate Limits Work
-
-Rate-limiting for both the Exchange REST API and the FIX API use a **lazy-fill
-token bucket** implementation.
-
-A TokenBucket stores a maximum amount of tokens, which is the **burst size**,
-and fills at a given rate called the **refresh rate**. The bucket starts full,
-and as requests are received, a token is removed for each request. Tokens are
-continuously added to the bucket at the refresh rate until full.
-
-When a user sends a request, the TokenBucket calculates whether or not to rate
-limit the user as follows:
-
-1.  Fill the user's TokenBucket to a token size based on the following formula:
-    `token_amount = min(burst, previous_token_amount + (current_time - previous_request_time) * refresh_rate)`
-2.  Remove 1 token if possible, otherwise rate limit the request.
-3.  Repeat Steps 1 and 2 for each subsequent request.
-
-### TokenBucket Example
-
-Let's say you have a TokenBucket with burst = 3 and refresh_rate = 1. The table
-below represents the state of your token bucket after a series of requests:
-
-| Action        | Time | Tokens | Notes                                                                                                                                             |
-| ------------- | ---- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Initial State | 0.0  | 3.0    | New TokenBucket is initialized to max capacity (burst)                                                                                            |
-| Request 1     | 0.5  | 2.0    | Fill TokenBucket, then remove a token, because we are at max capacity, and subtract 1 token from 3                                                |
-| Request 2     | 0.8  | 1.3    | Fill TokenBucket to 2.3 (`min(3, (2 + (.8 - .5) * 1.0)) = min(3, 2.3) = 2.3`), then subtract 1                                                    |
-| Request 3     | 0.9  | 0.4    | Fill TokenBucket to 1.4 (`min(3, (1.3 + (.9 - .8) * 1.0)) = min(3, 1.4) = 1.4`), then subtract 1                                                  |
-| Request 4     | 1.0  | 0.5    | Fill TokenBucket to 0.5 (`min(3, (.4 + (1.0 - .9) * 1.0)) = min(3, 0.5) = 0.5`). Ratelimit because we don't have enough tokens available          |
-| Request 5     | 1.4  | 0.9    | Fill TokenBucket to 0.9 (`min(3, (0.5 + (1.4 - 1.0) * 1.0)) = min(3, 0.9) = 0.9`). Ratelimit because we don't have enough tokens available        |
-| Request 6     | 1.8  | 0.3    | Fill TokenBucket to 1.3 (`min(3, (0.9 + (1.8 - 1.4) * 1.0)) = min(3, 1.3) = 1.3`), then remove 1                                                  |
-| Request 7     | 5.0  | 2.0    | Fill TokenBucket to 3.0 (`min(3, (0.3 + (5.0 - 1.8) * 1.0)) = min(3, 3.5) = 3`), since we would "overflow" with our calculations, then subtract 1 |
-
-Last updated on **Feb 25, 2025**
-
----
-
-# Exchange Systems & Operations
-
-## Deployment
-
-The deployment schedules for different components vary and may change without
-notice.
-
-| API       | Schedule                              |
-| --------- | ------------------------------------- |
-| FIX       | Monday, Thursday at 2PM ET            |
-| WebSocket | Monday, Wednesday, Thursday at 2PM ET |
-| REST      | Monday, Wednesday, Thursday at 2PM ET |
-
-## Production URLs
-
-Use the following URLs to connect to Coinbase Exchange production APIs. See
-[Sandbox URLs](/exchange/docs/sandbox) for testing.
-
-| API                           | URL                                            |
-| ----------------------------- | ---------------------------------------------- |
-| REST API                      | `https://api.exchange.coinbase.com`            |
-| Websocket Feed                | `wss://ws-feed.exchange.coinbase.com`          |
-| Websocket Direct Feed         | `wss://ws-direct.exchange.coinbase.com`        |
-| FIX API - Order Entry 4.2     | `tcp+ssl://fix.exchange.coinbase.com:4198`     |
-| FIX API - Order Entry 5.0 SP2 | `tcp+ssl://fix-ord.exchange.coinbase.com:6121` |
-| FIX API - Market Data 5.0 SP2 | `tcp+ssl://fix-md.exchange.coinbase.com:6121`  |
-
-## Availability Zones
-
-The infrastructure for the US Spot Exchange is hosted in **US-EAST-1 (AWS)**
-within multiple availability zones.
-
-
-
-Caution
-
-The following information is subject to change without notification, and there
-is no guarantee that it will remain static over time.
-
-| Product                | Availability Zone ID |
-| ---------------------- | -------------------- |
-| FIX Order Gateways     | use1-az4             |
-| Order Entry Gateway    | use1-az4             |
-| Trade Engine           | use1-az4             |
-| Web Socket Market Data | use1-az4             |
-| FIX Market Data        | use1-az4             |
-
-## System Components
-
-### REST Entry Gateways
-
-- Requests are routed through Cloudflare.
-- Requests are processed on a FIFO basis with no queuing.
-- REST requires additional authentication because it's stateless (as opposed to
-  FIX order gateways, which authenticate during login).
-
-### FIX Order Gateways
-
-- Each instance contains a per-user product based queue.
-- Each per-user product-based queue can hold a maximum of 50 queued requests
-  before requests are rejected.
-- Each per-user product-based queue is processed on a FIFO basis.
-
-### Order Entry Gateway (Risk System)
-
-- Each instance processes requests from FIX Order Gateways and REST in real time
-  with no queuing.
-- System performs real-time risk checks and account collateralization.
-
-### Trade Engine
-
-- Clustered service that guarantees FIFO sequencing at a product level.
-- Processes all requests from Order Entry Gateway.
-- Publishes market data to WebSocket / FIX Market Data.
-
-### Market Data (Websocket & FIX)
-
-- Each instance can process all market data requests across all products.
-- Messages are distributed to customers randomly, and there is no intended
-  benefit to being “first to subscribe”.
-
-Last updated on **Feb 25, 2025**
-
----
-
-# Exchange REST API Requests
-
-All requests and responses are `application/json` content type and follow
-typical HTTP response status codes for success and failure.
-
-Note: Request URLs must be lowercase as URLs are
-[case-sensitive](https://www.w3.org/TR/WD-html40-970708/htmlweb.html).
-
-## Errors
-
-```
-{  "message": "Invalid Price"}
-```
-
-Unless otherwise stated, errors to bad requests respond with HTTP 4xx or status
-codes. The body also contains a `message` parameter indicating the cause. Your
-language's http library should be configured to provide message bodies for
-non-2xx requests so that you can read the message field from the body.
-
-### Common Error Codes
-
-| Status Code | Reason                                                        |
-| ----------- | ------------------------------------------------------------- |
-| 400         | Bad Request -- Invalid request format                         |
-| 401         | Unauthorized -- Invalid API Key                               |
-| 403         | Forbidden -- You do not have access to the requested resource |
-| 404         | Not Found                                                     |
-| 500         | Internal Server Error -- We had a problem with our server     |
-
-## Success
-
-A successful response is indicated by HTTP status code 200 and may contain an
-optional body. If the response has a body it is documented under each resource
-below.
-
-Last updated on **Feb 25, 2025**
-
----
-
-# Exchange REST API Authentication
-
-This page explains how to sign and authenticate REST API endpoints with API keys
-that let you control authorization.
-
-
-
-Note
-
-See [FIX API Connectivity](/exchange/docs/fix-connectivity) for FIX API
-authentication.
-
-## Private Endpoints
-
-Private endpoints are available for order management and account management.
-Every private request must be signed using the described authentication scheme.
-
-
-
-Info
-
-Private endpoints require authentication using your Coinbase Exchange API key.
-You can generate API keys [here](https://exchange.coinbase.com/profile/api).
-
-## API Keys
-
-To sign a request, you must create an API key via the Coinbase Exchange website.
-The API key is scoped to a specific profile. Each user can generate a max of 300
-API keys.
-
-### Generating an API Key
-
-When creating a key, you must remember (and should write down) your (1) key, (2)
-secret, and (3) passphrase. The key and secret are randomly generated and
-provided by Coinbase Exchange -- you choose a passphrase to further secure your
-API access.
-
-
-
-Warning
-
-Coinbase Exchange stores the salted hash of your passphrase for verification and
-cannot be recovered if you forget it.
-
-### API Key Permissions
-
-You can control access by restricting the functionality of API keys. Before
-creating the key, you must choose what permissions you would like the key to
-have:
+### ​API Key Permissions
 
 | Permission | Description                                                                            |
 | ---------- | -------------------------------------------------------------------------------------- |
@@ -611,12 +147,7 @@ have:
 | Trade      | Key can post orders and get data                                                       |
 | Manage     | Key can manage user settings and preferences such as address books entries             |
 
-Refer to the documentation below to see what API key permissions are required
-for a specific route.
-
-## Signing Requests
-
-All REST requests must contain the following headers:
+## ​Signing Requests
 
 | Header                 | Description                                                            |
 | ---------------------- | ---------------------------------------------------------------------- |
@@ -625,35 +156,7 @@ All REST requests must contain the following headers:
 | `CB-ACCESS-TIMESTAMP`  | Timestamp for your request                                             |
 | `CB-ACCESS-PASSPHRASE` | Passphrase you specified when creating the API key                     |
 
-All request bodies should have content type `application/json` and be valid
-JSON.
-
-### Selecting a Timestamp
-
-The `CB-ACCESS-TIMESTAMP` header MUST be number of seconds since
-[Unix Epoch](http://en.wikipedia.org/wiki/Unix_time) in UTC. Decimal values are
-allowed.
-
-Your timestamp must be within 30 seconds of the API service time or your request
-is considered expired and rejected. We recommend using the
-[time](https://api.exchange.coinbase.com/time) endpoint to query for the API
-server time if you believe there is a time difference between your server and
-the API servers.
-
-### Signing a Message
-
-The `CB-ACCESS-SIGN` header is generated by creating a sha256 HMAC using the
-base64-decoded secret key on the prehash string
-`timestamp + method + requestPath + body` (where `+` represents string
-concatenation) and base64-encode the output.
-
-
-
-Info
-
-Remember to base64-decode the alphanumeric secret string (resulting in 64 bytes)
-before using it as the key for HMAC. Also, base64-encode the digest output
-before sending in the header.
+### ​Signing a Message
 
 - `timestamp` is the same as the `CB-ACCESS-TIMESTAMP` header.
 - `method` should be UPPER CASE e.g., `GET` or `POST`.
@@ -661,75 +164,40 @@ before sending in the header.
 - `body` is the request body string or omitted if there is no request body
   (typically for `GET` requests).
 
-### Signature Example
-
-The following example demonstrates how to generate a signature in Javascript:
-
-```
-// import crypto libraryvar crypto = require("crypto");// create the json request objectvar cb_access_timestamp = Date.now() / 1000; // in msvar cb_access_passphrase = "...";var secret = "PYPd1Hv4J6/7x...";var requestPath = "/orders";var body = JSON.stringify({  price: "1.0",  size: "1.0",  side: "buy",  product_id: "BTC-USD",});var method = "POST";// create the prehash string by concatenating required partsvar message = cb_access_timestamp + method + requestPath + body;// decode the base64 secretvar key = Buffer.from(secret, "base64");// create a sha256 hmac with the secretvar hmac = crypto.createHmac("sha256", key);// sign the require message with the hmac and base64 encode the resultvar cb_access_sign = hmac.update(message).digest("base64");
-```
-
-Last updated on **May 20, 2024**
-
 ---
 
-# Exchange REST API Rate Limits
+# Exchange REST API Rate Limits - Coinbase
 
-Public endpoints are throttled by IP and private endpoints by profile ID. Some
-endpoints (like `/fills`) may have custom rate limits.
+**Source:**
+[https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits](https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits)
 
-When a REST API rate limit is exceeded, a status of `429 Too Many Requests` is
-returned.
-
-#### Public Endpoints
+### ​Public Endpoints
 
 - Requests per second per IP: 10
 - Requests per second per IP in bursts: Up to 15
 
-#### Private Endpoints
-
-Private endpoints are authenticated.
+### ​Private Endpoints
 
 - Requests per second per profile: 15
 - Requests per second per profile in bursts: Up to 30
 
-#### Private `/fills` Endpoint
+### ​Private /fills Endpoint
 
 - Requests per second per profile: 10
 - Requests per second per profile in bursts: Up to 20
 
-#### Private `/loans` Endpoint
+### ​Private /loans Endpoint
 
 - Requests per second per profile: 10
 
-
-
-Info
-
-Rate limits do not apply to
-[List loan assets](/exchange/reference/exchangerestapi_getloanassets)
-(`/loans/assets`) which is not private.
-
-Last updated on **Dec 7, 2024**
-
 ---
 
-# Exchange REST API Pagination
+# Exchange REST API Pagination - Coinbase
 
-Coinbase Exchange uses cursor pagination for all REST requests which return
-arrays.
+**Source:**
+[https://docs.cdp.coinbase.com/exchange/rest-api/pagination](https://docs.cdp.coinbase.com/exchange/rest-api/pagination)
 
-Cursor pagination allows for fetching results before and after the current page
-of results and is well suited for realtime data. Endpoints like `/trades`,
-`/fills`, `/orders`, return the latest items by default. To retrieve more
-results subsequent requests should specify which direction to paginate based on
-the data previously returned.
-
-`before` and `after` cursors are available via response headers `CB-BEFORE` and
-`CB-AFTER`. Your requests should use these cursor values when making requests
-for pages after the initial request.
-
-### Parameters
+### ​Parameters
 
 | Parameter | Default | Description                                                |
 | --------- | ------- | ---------------------------------------------------------- |
@@ -737,856 +205,5129 @@ for pages after the initial request.
 | `after`   |         | Request page after (older) this pagination id              |
 | `limit`   | 1000    | Number of results per request. Maximum 1000 (default 1000) |
 
-### Example
+---
 
-`GET /orders?before=2&limit=30`
+# Exchange Profiles - Coinbase
 
-### Before and After cursors
-
-The `before` cursor references the first item in a results page and the `after`
-cursor references the last item in a set of results.
-
-#### Before Cursor
-
-To request a page of records before the current one, use the `before` query
-parameter. Your initial request can omit this parameter to get the default first
-page.
-
-The response contains a `CB-BEFORE` header which returns the cursor id to use in
-your next request for the page before the current one. **The page before is a
-newer page and not one that happened before in chronological time.**
-
-#### After Cursor
-
-The response also contains a `CB-AFTER` header which returns the cursor id to
-use in your next request for the page after this one. **The page after is an
-older page and not one that happened after this one in chronological time.**
-
-Cursor pagination can be unintuitive at first. `before` and `after` cursor
-arguments should not be confused with before and after in chronological time.
-Most paginated requests return the latest information (newest) as the first page
-sorted by newest (in chronological time) first. To get older information you
-would request pages `after` the initial page. To get information newer, you
-would request pages `before` the first page.
-
-Last updated on **Feb 25, 2025**
+**Source:**
+[https://docs.cdp.coinbase.com/exchange/rest-api/profiles](https://docs.cdp.coinbase.com/exchange/rest-api/profiles)
 
 ---
 
-# Exchange Profiles
+# Exchange Types - Coinbase
 
-Profiles are the equivalent of portfolios on the
-[Coinbase Exchange](https://exchange.coinbase.com/portfolios) website. The
-maximum number of profiles is 100 .
-
-## API Keys
-
-An API key is scoped to a specific profile. An API key can only view and create
-data that belongs to its own profile, unless otherwise noted. This is true for
-the REST API, FIX API and Websocket Feed.
-
-To access data or actions on a different profile, create a new API key on the
-Coinbase Exchange website.
-
-## Deleted Profiles
-
-Profiles can be deleted on the Coinbase Exchange website. The permissions of an
-API key associatd with a deleted profile are automatically set to "View."
-
-Last updated on **May 9, 2024**
-
----
-
-# Exchange Types
-
-## Timestamps
+**Source:**
+[https://docs.cdp.coinbase.com/exchange/rest-api/types](https://docs.cdp.coinbase.com/exchange/rest-api/types)
 
 ```
 2014-11-06T10:34:47.123456Z
 ```
 
-Unless otherwise specified, all timestamps from API are returned in
-[ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) with microseconds. Make sure
-you can parse the following ISO 8601 format. Most modern languages and libraries
-handle this without issues.
+---
 
-## Numbers
+# Get a single account by id - Coinbase
 
-Decimal numbers are returned as strings to preserve full precision across
-platforms. When making a request, it is recommended that you also convert your
-numbers to strings to avoid truncation and precision errors.
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-by-id](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-by-id)
 
-Integer numbers (such as trade id and sequence) are unquoted.
+## Endpoint
 
-## IDs
+`GET /accounts/%7Baccount_id%7D`
 
-Most identifiers are UUID unless otherwise specified. When making a request
-which requires a UUID, both forms (with and without dashes) are accepted.
+## Permissions
 
-`132fb6ae-456b-4654-b4e0-d681ac05cea1` or `132fb6ae456b4654b4e0d681ac05cea1`
+This endpoint requires either the “view” or “trade” permission.
 
-Last updated on **May 8, 2024**
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| account_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+Amount in pending deposits transfers.
+
+#### Response Fields
+
+| Field           | Type    | Required | Description                           |
+| --------------- | ------- | -------- | ------------------------------------- |
+| id              | string  | Yes      |                                       |
+| currency        | string  | Yes      |                                       |
+| balance         | string  | Yes      |                                       |
+| hold            | string  | Yes      |                                       |
+| available       | string  | Yes      |                                       |
+| profile_id      | string  | Yes      |                                       |
+| trading_enabled | boolean | Yes      |                                       |
+| pending_deposit | string  | No       | Amount in pending deposits transfers. |
+| display_name    | string  | No       |                                       |
+
+#### Example Response
+
+```json
+{
+  "id": "7fd0abc0-e5ad-4cbb-8d54-f2b3f43364da",
+  "currency": "USD",
+  "balance": "0.0000000000000000",
+  "hold": "0.0000000000000000",
+  "available": "0",
+  "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "trading_enabled": true
+}
+```
 
 ---
 
-# Create a new order
+# Get a single account's holds - Coinbase
 
-POST
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-hold](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-hold)
 
-https://api.exchange.coinbase.com/orders
+## Endpoint
 
-Create an order. You can place two types of orders: limit and market. Orders can
-only be placed if your account has sufficient funds. Once an order is placed,
-your account funds will be put on hold for the duration of the order. How much
-and which funds are put on hold depends on the order type and parameters
-specified.
+`GET /accounts/%7Baccount_id%7D/holds`
 
-
+## Description
 
-Caution
+List the holds of an account that belong to the same profile as the API key.
+Holds are placed on an account for any active orders or pending withdraw
+requests. As an order is filled, the hold amount is updated. If an order is
+canceled, any remaining hold is removed. For withdrawals, the hold is removed
+after it is completed.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| account_id | string | Yes      |             |
+
+## Query Parameters
+
+| Parameter | Type    | Description                                            |
+| --------- | ------- | ------------------------------------------------------ |
+| before    | string  | Used for pagination. Sets start cursor to before date. |
+| after     | string  | Used for pagination. Sets end cursor to after date.    |
+| limit     | integer | Limit on number of results to return.                  |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field      | Type         | Required | Description |
+| ---------- | ------------ | -------- | ----------- |
+| id         | string       | Yes      |             |
+| created_at | string       | Yes      |             |
+| updated_at | string       | Yes      |             |
+| type       | enum<string> | Yes      |             |
+| ref        | string       | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "created_at": "2020-03-11T20:48:46.622Z",
+    "id": "c5cdd687-2d03-4a87-8dd7-c693a4bb766f",
+    "amount": "10.0500000000000000",
+    "type": "order",
+    "ref": "a9625b04-fc66-4999-a876-543c3684d702"
+  }
+]
+```
+
+---
+
+# Get a single account's ledger - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-ledger](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-ledger)
+
+## Endpoint
+
+`GET /accounts/%7Baccount_id%7D/ledger`
+
+## Description
+
+If neither start_date nor end_date is set, the endpoint will return ledger
+activity for the past 1 day only.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description                                          |
+| ---------- | ------ | -------- | ---------------------------------------------------- |
+| account_id | string | Yes      | Returns list of ledger entries from this account id. |
+
+## Query Parameters
+
+| Parameter  | Type    | Description                                                                                                                                                  |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| start_date | string  | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| end_date   | string  | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| before     | string  | Used for pagination. Sets start cursor to before id.                                                                                                         |
+| after      | string  | Used for pagination. Sets end cursor to after id.                                                                                                            |
+| limit      | integer | Limit on number of results to return.                                                                                                                        |
+| profile_id | string  |                                                                                                                                                              |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field      | Type         | Required | Description |
+| ---------- | ------------ | -------- | ----------- |
+| id         | string       | Yes      |             |
+| amount     | string       | Yes      |             |
+| created_at | string       | Yes      |             |
+| balance    | string       | Yes      |             |
+| type       | enum<string> | Yes      |             |
+| details    | object       | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "created_at": "2019-06-11T22:11:56.382Z",
+    "id": "1444415179",
+    "amount": "3.2200000000000000",
+    "balance": "3.2200000000000000",
+    "type": "transfer",
+    "details": {
+      "to": "6d326768-71f2-4068-99dc-7075c78f6402",
+      "from": "20640810-6219-4d3b-95f4-5e1741dd6ea4",
+      "profile_transfer_id": "1f854356-4923-4b10-8db1-d82f7fae8eda"
+    }
+  }
+]
+```
+
+---
+
+# Get a single account's transfers - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-transfer](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-transfer)
+
+## Endpoint
+
+`GET /accounts/%7Baccount_id%7D/transfers`
+
+## Description
+
+Lists past withdrawals and deposits for an account.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description                                     |
+| ---------- | ------ | -------- | ----------------------------------------------- |
+| account_id | string | Yes      | Returns list of transfers from this account id. |
+
+## Query Parameters
+
+| Parameter | Type    | Description                                            |
+| --------- | ------- | ------------------------------------------------------ |
+| before    | string  | Used for pagination. Sets start cursor to before date. |
+| after     | string  | Used for pagination. Sets end cursor to after date.    |
+| limit     | integer | Limit on number of results to return.                  |
+| type      | string  |                                                        |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field        | Type         | Required | Description |
+| ------------ | ------------ | -------- | ----------- |
+| id           | string       | Yes      |             |
+| type         | enum<string> | Yes      |             |
+| created_at   | string       | Yes      |             |
+| completed_at | string       | Yes      |             |
+| canceled_at  | string       | Yes      |             |
+| processed_at | string       | Yes      |             |
+| amount       | string       | Yes      |             |
+| details      | object       | Yes      |             |
+| user_nonce   | string       | Yes      |             |
+| currency     | string       | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "19ac524d-8827-4246-a1b2-18dc5ca9472c",
+    "type": "withdraw",
+    "created_at": "2020-03-12T00:14:12.397Z",
+    "completed_at": "2020-03-12T00:14:13.021Z",
+    "amount": "1.00000000",
+    "details": {
+      "coinbase_account_id": "2b760113-fbba-5600-ac74-36482c130768",
+      "coinbase_transaction_id": "5e697ed49f8417148f3366ea",
+      "coinbase_payment_method_id": ""
+    },
+    "currency": "USD"
+  }
+]
+```
+
+---
+
+# Get all accounts for a profile - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-all-account-profile](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-all-account-profile)
+
+## Endpoint
+
+`GET /accounts/%7Baccount_id%7D`
+
+## Description
+
+Your trading accounts are separate from your Coinbase accounts. See Deposit from
+Coinbase account for documentation on how to deposit funds to begin trading.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| account_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+Amount in pending deposits transfers.
+
+#### Response Fields
+
+| Field           | Type    | Required | Description                           |
+| --------------- | ------- | -------- | ------------------------------------- |
+| id              | string  | Yes      |                                       |
+| currency        | string  | Yes      |                                       |
+| balance         | string  | Yes      |                                       |
+| hold            | string  | Yes      |                                       |
+| available       | string  | Yes      |                                       |
+| profile_id      | string  | Yes      |                                       |
+| trading_enabled | boolean | Yes      |                                       |
+| pending_deposit | string  | No       | Amount in pending deposits transfers. |
+| display_name    | string  | No       |                                       |
+
+#### Example Response
+
+```json
+{
+  "id": "7fd0abc0-e5ad-4cbb-8d54-f2b3f43364da",
+  "currency": "USD",
+  "balance": "0.0000000000000000",
+  "hold": "0.0000000000000000",
+  "available": "0",
+  "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "trading_enabled": true
+}
+```
+
+---
+
+# Add addresses - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/add-addresses](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/add-addresses)
+
+## Endpoint
+
+`POST /address-book`
+
+## Description
+
+List of addresses to add to the address book
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field | Type     | Required | Description |
+| ----- | -------- | -------- | ----------- |
+| body  | object[] | No       |             |
+
+#### Example Response
+
+```json
+{
+  "body": [
+    {
+      "id": "1",
+      "address": "1JmYrFBLMSCLBwoL87gdQ5Qc9MLvb2egKk",
+      "display_address": "1JmYrFBLMSCLBwoL87gdQ5Qc9MLvb2egKk",
+      "address_info": {
+        "address": "1JmYrFBLMSCLBwoL87gdQ5Qc9MLvb2egKk",
+        "display_address": "1JmYrFBLMSCLBwoL87gdQ5Qc9MLvb2egKk"
+      },
+      "currency": "BTC",
+      "label": "my wallet",
+      "address_booked": true,
+      "address_book_added_at": "2019-02-06T22:27:50.221Z"
+    }
+  ]
+}
+```
+
+---
+
+# Delete address - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/delete-address](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/delete-address)
+
+## Endpoint
+
+`DELETE /address-book/%7Bid%7D`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description             |
+| --------- | ------ | -------- | ----------------------- |
+| id        | string | Yes      | Address book identifier |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Example Response
+
+```json
+{}
+```
+
+---
+
+# Get address book - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/get-address-book](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/get-address-book)
+
+## Endpoint
+
+`GET /address-book`
+
+## Description
+
+Get all addresses stored in the address book.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+Flag to indicate if the crypto addresses has previously been digitally signed
+and verified when added in the Address Book UI tab
+
+#### Response Fields
+
+| Field                          | Type    | Required | Description                                                                                                                      |
+| ------------------------------ | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| id                             | string  | Yes      |                                                                                                                                  |
+| address                        | string  | Yes      |                                                                                                                                  |
+| currency                       | string  | Yes      |                                                                                                                                  |
+| label                          | string  | Yes      |                                                                                                                                  |
+| address_book_added_at          | string  | Yes      |                                                                                                                                  |
+| destination_tag                | string  | No       |                                                                                                                                  |
+| is_verified_self_hosted_wallet | boolean | No       | Flag to indicate if the crypto addresses has previously been digitally signed and verified when added in the Address Book UI tab |
+| vasp_id                        | string  | No       | The VASP identifier if the address is owned by one of the supported Virtual Asset Service Providers                              |
+| business_name                  | string  | No       | Business name of the originator's account - only populated for travel rules regions                                              |
+| business_country_code          | string  | No       | The country code (ISO 3166-1 alpha-2) of the originator's account location - only populated for travel rules regions             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "e9c483b8-c502-11ec-9d64-0242ac120002",
+    "address": "1JmYrFBLMSCLBwoL87gdQ5Qc9MLvb2egKk",
+    "currency": "ETH",
+    "label": "my wallet",
+    "address_book_added_at": "2019-02-06T22:27:50.221Z",
+    "is_verified_self_hosted_wallet": false,
+    "business_name": "Example Business",
+    "business_country_code": "US"
+  }
+]
+```
+
+---
+
+# Generate crypto address - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/generate-crypto-address](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/generate-crypto-address)
+
+## Endpoint
+
+`POST /coinbase-accounts/%7Baccount_id%7D/addresses`
+
+## Description
+
+You can generate an address for crypto deposits. See the Coinbase Accounts
+section for information on how to retrieve your coinbase account ID.
+
+## Permissions
+
+This endpoint requires the “transfer” permission. API key must belong to default
+profile.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| account_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                    | Type     | Required | Description |
+| ------------------------ | -------- | -------- | ----------- |
+| id                       | string   | Yes      |             |
+| address                  | string   | Yes      |             |
+| address_info             | object   | Yes      |             |
+| name                     | string   | Yes      |             |
+| created_at               | string   | Yes      |             |
+| updated_at               | string   | Yes      |             |
+| network                  | string   | Yes      |             |
+| uri_scheme               | string   | Yes      |             |
+| resource                 | string   | Yes      |             |
+| resource_path            | string   | Yes      |             |
+| warnings                 | object[] | Yes      |             |
+| legacy_address           | string   | No       |             |
+| destination_tag          | string   | No       |             |
+| deposit_uri              | string   | No       |             |
+| callback_url             | string   | No       |             |
+| qr_code_image_url        | string   | No       |             |
+| address_label            | string   | No       |             |
+| share_address_copy       | object   | No       |             |
+| exchange_deposit_address | boolean  | No       |             |
+| inline_warning           | object   | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "fc9fed1e-d25b-54d8-b52b-7fa250c9ae2d",
+  "address": 1.2165647733617772e48,
+  "address_info": {
+    "address": 1.2165647733617772e48
+  },
+  "name": "New exchange deposit address",
+  "created_at": "2020-03-31T02:38:44.000Z",
+  "updated_at": "2020-03-31T02:38:44.000Z",
+  "network": "ethereum",
+  "uri_scheme": "ethereum",
+  "resource": "address",
+  "resource_path": "/v2/accounts/faf4b657-a48c-56b2-bec2-77567e3f4f97/addresses/fc9fed1e-d25b-54d8-b52b-7fa250c9ae2d",
+  "warnings": [
+    {
+      "title": "Only send Orchid (OXT) to this address",
+      "details": "Sending any other digital asset, including Ethereum (ETH), will result in permanent loss.",
+      "image_url": "https://dynamic-assets.coinbase.com/22b24ad9886150535671f158ccb0dd9d12089803728551c998e17e0f503484e9c38f3e8735354b5e622753684f040488b08d55b8ef5fef51592680f0c572bdfe/asset_icons/023010d790b9b1f47bc285802eafeab3d83c4de2029fe808d59935fbc54cdd7c.png"
+    }
+  ],
+  "deposit_uri": "ethereum:0x4575f41308ec1483f3d399aa9a2826d74da13deb/transfer?address=0xd518A6B23D8bCA15B9cC46a00Be8a818E34Ca79E",
+  "exchange_deposit_address": true
+}
+```
+
+---
+
+# Get all Coinbase wallets - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/get-all-coinbase-wallets](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/get-all-coinbase-wallets)
+
+## Endpoint
+
+`GET /coinbase-accounts`
+
+## Description
+
+Gets all the user’s available Coinbase wallets (These are the wallets/accounts
+that are used for buying and selling on www.coinbase.com)
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                 | Type         | Required | Description |
+| --------------------- | ------------ | -------- | ----------- |
+| id                    | string       | Yes      |             |
+| name                  | string       | Yes      |             |
+| balance               | string       | Yes      |             |
+| currency              | string       | Yes      |             |
+| type                  | enum<string> | Yes      |             |
+| primary               | boolean      | Yes      |             |
+| active                | boolean      | Yes      |             |
+| hold_balance          | string       | Yes      |             |
+| hold_currency         | string       | Yes      |             |
+| destination_tag_name  | string       | No       |             |
+| destination_tag_regex | string       | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "available_on_consumer": true,
+    "hold_balance": "0.00",
+    "id": "OXT",
+    "hold_currency": "USD",
+    "balance": "0.00000000",
+    "currency": "OXT",
+    "primary": false,
+    "name": "OXT Wallet",
+    "type": "wallet",
+    "active": true
+  }
+]
+```
+
+---
+
+# Convert currency - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/convert-currency](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/convert-currency)
+
+## Endpoint
+
+`POST /conversions`
+
+## Description
+
+Users whose USD and USDC accounts are unified do not have access to the
+conversion endpoint, and conversions from USDC to USD are automatic upon
+deposit.
+
+## Permissions
+
+This endpoint requires the “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| amount          | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from            | string | Yes      |             |
+| to              | string | Yes      |             |
+| fee_amount      | string | Yes      |             |
+| created_at      | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+  "amount": "11.00000000",
+  "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+  "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+  "from": "USDC",
+  "to": "USD",
+  "fee_amount": "0.0000000000000000"
+}
+```
+
+---
+
+# Get a conversion - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-a-conversion](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-a-conversion)
+
+## Endpoint
+
+`GET /conversions/%7Bconversion_id%7D`
+
+## Description
+
+Gets a currency conversion by id (i.e. USD -> USDC).
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter     | Type   | Required | Description |
+| ------------- | ------ | -------- | ----------- |
+| conversion_id | string | Yes      |             |
+
+## Query Parameters
+
+| Parameter  | Type   | Description |
+| ---------- | ------ | ----------- |
+| profile_id | string |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| amount          | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from            | string | Yes      |             |
+| to              | string | Yes      |             |
+| fee_amount      | string | Yes      |             |
+| created_at      | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+  "amount": "11.00000000",
+  "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+  "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+  "from": "USDC",
+  "to": "USD",
+  "fee_amount": "0.0000000000000000"
+}
+```
+
+---
+
+# Get all conversions - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-all-conversions](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-all-conversions)
+
+## Endpoint
+
+`GET /conversions`
+
+## Description
+
+Gets all currency conversions (i.e. USD -> USDC) for a given profile
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter  | Type    | Description |
+| ---------- | ------- | ----------- |
+| profile_id | string  |             |
+| before     | string  |             |
+| after      | string  |             |
+| limit      | integer |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| amount          | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from            | string | Yes      |             |
+| to              | string | Yes      |             |
+| fee_amount      | string | Yes      |             |
+| created_at      | string | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+    "amount": "11.00000000",
+    "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+    "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+    "from": "USDC",
+    "to": "USD",
+    "fee_amount": "0.0000000000000000"
+  }
+]
+```
+
+---
+
+# Get conversion fee rates - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-conversion-fee-rates](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-conversion-fee-rates)
+
+## Endpoint
+
+`GET /conversions/fees`
+
+## Description
+
+Gets a list of current conversion fee rates and trailing 30 day volume by
+currency pair
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                 | Type     | Required | Description |
+| --------------------- | -------- | -------- | ----------- |
+| from_currency         | string   | Yes      |             |
+| to_currency           | string   | Yes      |             |
+| available_credit      | string   | Yes      |             |
+| min_fee_rate          | string   | No       |             |
+| thirty_day_net_volume | string   | No       |             |
+| fee_tiers             | object[] | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "fee_rate": "0.001",
+    "thirty_day_volume": "1000000.00000000",
+    "available_credit": "1000000.00000000"
+  }
+]
+```
+
+---
+
+# Get all known currencies - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-a-currency](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-a-currency)
+
+## Endpoint
+
+`GET /currencies`
+
+## Description
+
+Not all currencies may be currently in use for trading.
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field              | Type     | Required | Description |
+| ------------------ | -------- | -------- | ----------- |
+| id                 | string   | Yes      |             |
+| name               | string   | Yes      |             |
+| min_size           | string   | Yes      |             |
+| status             | string   | Yes      |             |
+| max_precision      | string   | Yes      |             |
+| details            | object   | Yes      |             |
+| message            | string   | No       |             |
+| convertible_to     | string[] | No       |             |
+| default_network    | string   | No       |             |
+| supported_networks | object[] | No       |             |
+| display_name       | string   | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "USD",
+    "name": "United States Dollar",
+    "min_size": "0.01",
+    "max_precision": "0.01",
+    "status": "online",
+    "details": {
+      "type": "fiat",
+      "symbol": "$",
+      "sort_order": 1,
+      "push_payment_methods": [
+        "bank_wire",
+        "fedwire",
+        "swift_bank_account",
+        "intra_bank_account"
+      ],
+      "display_name": "US Dollar",
+      "group_types": ["fiat", "usd"]
+    }
+  }
+]
+```
+
+---
+
+# Get a currency - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-all-known-currencies](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-all-known-currencies)
+
+## Endpoint
+
+`GET /currencies/%7Bcurrency_id%7D`
+
+## Description
+
+Currency codes conform to the ISO 4217 standard where possible. Currencies that
+have no representation in ISO 4217 can use a custom code.
+
+## Path Parameters
+
+| Parameter   | Type   | Required | Description |
+| ----------- | ------ | -------- | ----------- |
+| currency_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field              | Type     | Required | Description |
+| ------------------ | -------- | -------- | ----------- |
+| id                 | string   | Yes      |             |
+| name               | string   | Yes      |             |
+| min_size           | string   | Yes      |             |
+| status             | string   | Yes      |             |
+| max_precision      | string   | Yes      |             |
+| details            | object   | Yes      |             |
+| message            | string   | No       |             |
+| convertible_to     | string[] | No       |             |
+| default_network    | string   | No       |             |
+| supported_networks | object[] | No       |             |
+| display_name       | string   | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "USD",
+  "name": "United States Dollar",
+  "min_size": "0.01",
+  "max_precision": "0.01",
+  "status": "online",
+  "details": {
+    "type": "fiat",
+    "symbol": "$",
+    "sort_order": 1,
+    "push_payment_methods": [
+      "bank_wire",
+      "fedwire",
+      "swift_bank_account",
+      "intra_bank_account"
+    ],
+    "display_name": "US Dollar",
+    "group_types": ["fiat", "usd"]
+  }
+}
+```
+
+---
+
+# Get fees - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/fees/get-fee](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/fees/get-fee)
+
+## Endpoint
+
+`GET /fees`
+
+## Description
+
+Get fees rates and 30 days trailing volume.
+
+## Permissions
+
+This endpoint requires the “view” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+Fees defines taker and maker fees for a given user including the volume in USD.
+
+#### Response Fields
+
+| Field          | Type   | Required | Description                         |
+| -------------- | ------ | -------- | ----------------------------------- |
+| taker_fee_rate | string | Yes      | Taker fee rate.                     |
+| maker_fee_rate | string | Yes      | Maker fee rate.                     |
+| usd_volume     | string | No       | The 30 days trailing volume in USD. |
+
+#### Example Response
+
+```json
+{
+  "maker_fee_rate": "0.0050",
+  "taker_fee_rate": "0.0050",
+  "usd_volume": "43806.92"
+}
+```
+
+---
+
+# Get auto loan setting - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-auto-loan-setting](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-auto-loan-setting)
+
+## Endpoint
+
+`GET /margin/auto-loan`
+
+## Description
+
+Get the setting to automatically initiate loans to meet margin calls with
+Coinbase affiliates in accordance with the Lending Agreement and Side Letter
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field     | Type    | Required | Description |
+| --------- | ------- | -------- | ----------- |
+| auto_loan | boolean | No       |             |
+
+#### Example Response
+
+```json
+{
+  "auto_loan": true
+}
+```
+
+---
+
+# Get USDC conversion - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-usdc-conversion](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-usdc-conversion)
+
+## Endpoint
+
+`GET /margin/usdc`
+
+## Description
+
+Get the USDC to USD auto conversion setting to meet margin calls with eligible
+Coinbase Affiliate
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field   | Type    | Required | Description |
+| ------- | ------- | -------- | ----------- |
+| enabled | boolean | No       |             |
+
+#### Example Response
+
+```json
+{
+  "enabled": true
+}
+```
+
+---
+
+# Set auto loan - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-auto-loan](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-auto-loan)
+
+## Endpoint
+
+`POST /margin/auto-loan`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field     | Type    | Required | Description |
+| --------- | ------- | -------- | ----------- |
+| auto_loan | boolean | No       |             |
+
+#### Example Response
+
+```json
+{
+  "auto_loan": true
+}
+```
+
+---
+
+# Set USDC conversion - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-usdc-conversion](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-usdc-conversion)
+
+## Endpoint
+
+`POST /margin/usdc`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field   | Type    | Required | Description |
+| ------- | ------- | -------- | ----------- |
+| enabled | boolean | No       |             |
+
+#### Example Response
+
+```json
+{
+  "enabled": true
+}
+```
+
+---
+
+# Get lending overview - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-lending-overview](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-lending-overview)
+
+## Endpoint
+
+`GET /loans/lending-overview`
+
+## Description
+
+Get lending overview returns all amounts in USD notional values, except
+available_per_asset mappings which are returned in both notional and native
+values.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field    | Type     | Required | Description |
+| -------- | -------- | -------- | ----------- |
+| overview | object   | No       |             |
+| loans    | object[] | No       |             |
+
+#### Example Response
+
+```json
+{
+  "overview": {
+    "open_loan_value": "<string>",
+    "collateral_value": "<string>",
+    "collateralization_percentage": "<string>",
+    "available_to_borrow": "<string>",
+    "available_per_asset": {},
+    "withdrawal_restricted": true,
+    "credit_limit_value": "<string>",
+    "available_credit_value": "<string>",
+    "collateralization_percentage_open_only": "<string>",
+    "pending_loan_value": "<string>",
+    "initial_margin_percentage": "<string>",
+    "minimum_margin_percentage": "<string>",
+    "unlock_margin_percentage": "<string>"
+  },
+  "loans": [
+    {
+      "id": "<string>",
+      "currency": "<string>",
+      "principal_amount": "<string>",
+      "outstanding_principal_amount": "<string>",
+      "interest_rate": "<string>",
+      "interest_currency": "<string>",
+      "status": "loan_pending",
+      "effective_at": "2023-11-07T05:31:56Z",
+      "closed_at": "2023-11-07T05:31:56Z",
+      "term_start_date": "2023-11-07T05:31:56Z",
+      "term_end_date": "2023-11-07T05:31:56Z"
+    }
+  ]
+}
+```
+
+---
+
+# Get new loan preview - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-new-loan-preview](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-new-loan-preview)
+
+## Endpoint
+
+`GET /loans/loan-preview`
+
+## Description
+
+Coinbase Exchange Loans Program
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter     | Type   | Description |
+| ------------- | ------ | ----------- |
+| currency      | string |             |
+| native_amount | string |             |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field  | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| before | object | No       |             |
+| after  | object | No       |             |
+
+#### Example Response
+
+```json
+{
+  "before": {
+    "open_loan_value": "<string>",
+    "collateral_value": "<string>",
+    "collateralization_percentage": "<string>",
+    "available_to_borrow": "<string>",
+    "available_per_asset": {},
+    "withdrawal_restricted": true,
+    "credit_limit_value": "<string>",
+    "available_credit_value": "<string>",
+    "collateralization_percentage_open_only": "<string>",
+    "pending_loan_value": "<string>",
+    "initial_margin_percentage": "<string>",
+    "minimum_margin_percentage": "<string>",
+    "unlock_margin_percentage": "<string>"
+  },
+  "after": {
+    "open_loan_value": "<string>",
+    "collateral_value": "<string>",
+    "collateralization_percentage": "<string>",
+    "available_to_borrow": "<string>",
+    "available_per_asset": {},
+    "withdrawal_restricted": true,
+    "credit_limit_value": "<string>",
+    "available_credit_value": "<string>",
+    "collateralization_percentage_open_only": "<string>",
+    "pending_loan_value": "<string>",
+    "initial_margin_percentage": "<string>",
+    "minimum_margin_percentage": "<string>",
+    "unlock_margin_percentage": "<string>"
+  }
+}
+```
+
+---
+
+# Get principal repayment preview - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-principal-repayment-preview](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-principal-repayment-preview)
+
+## Endpoint
+
+`GET /loans/repayment-preview`
+
+## Description
+
+Like the Get lending overview API, all values are notional except
+available_per_asset which returns both notional and native values per currency.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter     | Type   | Description |
+| ------------- | ------ | ----------- |
+| loan_id       | string |             |
+| currency      | string |             |
+| native_amount | string |             |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field  | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| before | object | No       |             |
+| after  | object | No       |             |
+
+#### Example Response
+
+```json
+{
+  "before": {
+    "open_loan_value": "<string>",
+    "collateral_value": "<string>",
+    "collateralization_percentage": "<string>",
+    "available_to_borrow": "<string>",
+    "available_per_asset": {},
+    "withdrawal_restricted": true,
+    "credit_limit_value": "<string>",
+    "available_credit_value": "<string>",
+    "collateralization_percentage_open_only": "<string>",
+    "pending_loan_value": "<string>",
+    "initial_margin_percentage": "<string>",
+    "minimum_margin_percentage": "<string>",
+    "unlock_margin_percentage": "<string>"
+  },
+  "after": {
+    "open_loan_value": "<string>",
+    "collateral_value": "<string>",
+    "collateralization_percentage": "<string>",
+    "available_to_borrow": "<string>",
+    "available_per_asset": {},
+    "withdrawal_restricted": true,
+    "credit_limit_value": "<string>",
+    "available_credit_value": "<string>",
+    "collateralization_percentage_open_only": "<string>",
+    "pending_loan_value": "<string>",
+    "initial_margin_percentage": "<string>",
+    "minimum_margin_percentage": "<string>",
+    "unlock_margin_percentage": "<string>"
+  }
+}
+```
+
+---
+
+# List interest charges - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-charges](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-charges)
+
+## Endpoint
+
+`GET /loans/interest/%7Bloan_id%7D`
+
+## Description
+
+List interest charges for a loan
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| loan_id   | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field            | Type   | Required | Description |
+| ---------------- | ------ | -------- | ----------- |
+| date             | string | No       |             |
+| currency         | string | No       |             |
+| principal_amount | string | No       |             |
+| interest_rate    | string | No       |             |
+| interest_accrued | string | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "date": "2023-11-07T05:31:56Z",
+    "currency": "<string>",
+    "principal_amount": "<string>",
+    "interest_rate": "<string>",
+    "interest_accrued": "<string>"
+  }
+]
+```
+
+---
+
+# List interest rate history - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-rate-history](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-rate-history)
+
+## Endpoint
+
+`GET /loans/interest/history/%7Bloan_id%7D`
+
+## Description
+
+List interest rate history for a loan
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| loan_id   | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field         | Type   | Required | Description |
+| ------------- | ------ | -------- | ----------- |
+| interest_rate | string | No       |             |
+| effective_at  | string | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "interest_rate": "<string>",
+    "effective_at": "2023-11-07T05:31:56Z"
+  }
+]
+```
+
+---
+
+# List interest summaries - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-summaries](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-summaries)
+
+## Endpoint
+
+`GET /loans/interest`
+
+## Description
+
+List summaries of interest owed by asset
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+amount accrued in current month and not yet due
+
+#### Response Fields
+
+| Field                     | Type         | Required | Description                                                     |
+| ------------------------- | ------------ | -------- | --------------------------------------------------------------- |
+| currency                  | string       | No       |                                                                 |
+| current_owed              | string       | No       | amount accrued in current month and not yet due                 |
+| last_payment_date         | string       | No       |                                                                 |
+| payment_status            | enum<string> | No       |                                                                 |
+| last_payment_amount       | string       | No       |                                                                 |
+| prior_period_overdue      | string       | No       | interest payable that accrued in previous months and is now due |
+| current_interest_due_date | string       | No       |                                                                 |
+
+#### Example Response
+
+```json
+[
+  {
+    "currency": "<string>",
+    "current_owed": "<string>",
+    "last_payment_date": "2023-11-07T05:31:56Z",
+    "payment_status": "STATUS_UNSPECIFIED",
+    "last_payment_amount": "<string>",
+    "prior_period_overdue": "<string>",
+    "current_interest_due_date": "2023-11-07T05:31:56Z"
+  }
+]
+```
+
+---
+
+# List loan assets - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loan-assets](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loan-assets)
+
+## Endpoint
+
+`GET /loans/assets`
+
+## Description
+
+Coinbase Exchange Loans Program
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field                 | Type     | Required | Description |
+| --------------------- | -------- | -------- | ----------- |
+| collateral_assets     | object   | No       |             |
+| diversification_ratio | string   | No       |             |
+| borrowable_assets     | string[] | No       |             |
+
+#### Example Response
+
+```json
+{
+  "collateral_assets": {},
+  "diversification_ratio": "<string>",
+  "borrowable_assets": ["<string>"]
+}
+```
+
+---
+
+# List loans - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loans](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loans)
+
+## Endpoint
+
+`GET /loans`
+
+## Description
+
+Coinbase Exchange Loans Program
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter | Type   | Description |
+| --------- | ------ | ----------- |
+| ids       | string |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                        | Type         | Required | Description |
+| ---------------------------- | ------------ | -------- | ----------- |
+| id                           | string       | No       |             |
+| currency                     | string       | No       |             |
+| principal_amount             | string       | No       |             |
+| outstanding_principal_amount | string       | No       |             |
+| interest_rate                | string       | No       |             |
+| interest_currency            | string       | No       |             |
+| status                       | enum<string> | No       |             |
+| effective_at                 | string       | No       |             |
+| closed_at                    | string       | No       |             |
+| term_start_date              | string       | No       |             |
+| term_end_date                | string       | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "<string>",
+    "currency": "<string>",
+    "principal_amount": "<string>",
+    "outstanding_principal_amount": "<string>",
+    "interest_rate": "<string>",
+    "interest_currency": "<string>",
+    "status": "loan_pending",
+    "effective_at": "2023-11-07T05:31:56Z",
+    "closed_at": "2023-11-07T05:31:56Z",
+    "term_start_date": "2023-11-07T05:31:56Z",
+    "term_end_date": "2023-11-07T05:31:56Z"
+  }
+]
+```
+
+---
+
+# List new loan options - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-new-loan-options](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-new-loan-options)
+
+## Endpoint
+
+`GET /loans`
+
+## Description
+
+Coinbase Exchange Loans Program
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter | Type   | Description |
+| --------- | ------ | ----------- |
+| ids       | string |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                        | Type         | Required | Description |
+| ---------------------------- | ------------ | -------- | ----------- |
+| id                           | string       | No       |             |
+| currency                     | string       | No       |             |
+| principal_amount             | string       | No       |             |
+| outstanding_principal_amount | string       | No       |             |
+| interest_rate                | string       | No       |             |
+| interest_currency            | string       | No       |             |
+| status                       | enum<string> | No       |             |
+| effective_at                 | string       | No       |             |
+| closed_at                    | string       | No       |             |
+| term_start_date              | string       | No       |             |
+| term_end_date                | string       | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "<string>",
+    "currency": "<string>",
+    "principal_amount": "<string>",
+    "outstanding_principal_amount": "<string>",
+    "interest_rate": "<string>",
+    "interest_currency": "<string>",
+    "status": "loan_pending",
+    "effective_at": "2023-11-07T05:31:56Z",
+    "closed_at": "2023-11-07T05:31:56Z",
+    "term_start_date": "2023-11-07T05:31:56Z",
+    "term_end_date": "2023-11-07T05:31:56Z"
+  }
+]
+```
+
+---
+
+# Open new loan - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/open-new-loan](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/open-new-loan)
+
+## Endpoint
+
+`POST /loans/open`
+
+## Description
+
+Coinbase Exchange Loans Program
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field | Type   | Required | Description |
+| ----- | ------ | -------- | ----------- |
+| loan  | object | No       |             |
+
+#### Example Response
+
+```json
+{
+  "loan": {
+    "id": "<string>",
+    "currency": "<string>",
+    "principal_amount": "<string>",
+    "outstanding_principal_amount": "<string>",
+    "interest_rate": "<string>",
+    "interest_currency": "<string>",
+    "status": "loan_pending",
+    "effective_at": "2023-11-07T05:31:56Z",
+    "closed_at": "2023-11-07T05:31:56Z",
+    "term_start_date": "2023-11-07T05:31:56Z",
+    "term_end_date": "2023-11-07T05:31:56Z"
+  }
+}
+```
+
+---
+
+# Repay loan interest - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-interest](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-interest)
+
+## Endpoint
+
+`POST /loans/repay-interest`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field     | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| repayment | object | No       |             |
+
+#### Example Response
+
+```json
+{
+  "repayment": {
+    "id": "<string>",
+    "native_amount": "<string>",
+    "status": "REPAYMENT_UNSET",
+    "type": "REPAYMENT_TYPE_UNSET"
+  }
+}
+```
+
+---
+
+# Repay loan principal - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-principal](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-principal)
+
+## Endpoint
+
+`POST /loans/repay-principal`
+
+## Description
+
+Coinbase Exchange Loans Program
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field     | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| repayment | object | No       |             |
+
+#### Example Response
+
+```json
+{
+  "repayment": {
+    "id": "<string>",
+    "loan_id": "<string>",
+    "native_amount": "<string>",
+    "initial_native_amount": "<string>",
+    "status": "REPAYMENT_UNSET",
+    "type": "REPAYMENT_TYPE_UNSET"
+  }
+}
+```
+
+---
+
+# Cancel all orders - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-all-orders](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-all-orders)
+
+## Endpoint
+
+`DELETE /orders`
+
+## Description
+
+With best effort, cancel all open orders. This may require you to make the
+request multiple times until all of the open orders are deleted.
+
+## Permissions
+
+This endpoint requires the “trade” permission.
+
+## Examples
+
+| Example                    | Response                                 |
+| -------------------------- | ---------------------------------------- |
+| /orders?product_id=FOO-BAR | (404) ProductNotFound                    |
+| /orders?product_id=BtC-uSd | (200) Cancel all orders for BTC-USD      |
+| /orders?Product_id=BTC-USD | (400) Return BadRequest Error            |
+| /orders                    | (200) Cancel all orders for all products |
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter  | Type   | Description                               |
+| ---------- | ------ | ----------------------------------------- |
+| profile_id | string | Cancels orders on a specific profile      |
+| product_id | string | Cancels orders on a specific product only |
+
+## Response
+
+### 200 Success
+
+A list of the ids of open orders that were successfully cancelled
+
+#### Example Response
+
+```json
+["<string>"]
+```
+
+---
+
+# Cancel an order - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-an-order](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-an-order)
+
+## Endpoint
+
+`DELETE /orders/%7Border_id%7D`
+
+## Description
+
+Cancel a previously placed order
+
+## Permissions
+
+This endpoint requires the “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description                                                                                                                                                         |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id  | string | Yes      | Orders may be canceled using either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the client: namespace. |
+
+## Query Parameters
+
+| Parameter  | Type   | Description                          |
+| ---------- | ------ | ------------------------------------ |
+| profile_id | string | Cancels orders on a specific profile |
+| product_id | string | Optional product id of order         |
+
+## Response
+
+### 200 Success
+
+the id of the order that was cancelled`
+
+---
+
+# Create a new order - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/create-new-order](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/create-new-order)
+
+## Endpoint
+
+`POST /orders`
+
+## Description
 
 Each profile can place a maximum of 500 open orders on a product. Once reached,
 the profile cannot place any new orders until the total number of open orders is
 below 500.
 
-## API Key Permissions
+## Permissions
 
-This endpoint requires the "trade" permission.
+This endpoint requires the “trade” permission.
 
-### Limit Order Parameters
+## Authorization
 
-| Parameter     | Description                                                                                                                     |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| price         | Price per bitcoin                                                                                                               |
-| size          | [optional]\* Amount of BTC to buy or sell                                                                                       |
-| funds         | [optional]\* Desired amount of quote currency to use (See [Limit Order With Funds](/exchange/docs/fix-msg-oe-lwf/) for details) |
-| time_in_force | [optional] `GTC`, `GTT`, `IOC`, or `FOK` (default is `GTC`)                                                                     |
-| cancel_after  | [optional]\*\* `min`, `hour`, `day`                                                                                             |
-| post_only     | [optional]\*\*\* Post only flag                                                                                                 |
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
 
-\* One of size or funds is required. Only one may be specified  
-\*\* Requires `time_in_force` to be `GTT`  
-\*\*\* Invalid when time_in_force is `IOC` or `FOK`
+## Response
 
-### Market Order Parameters
+### 200 Success
 
-| Parameter | Description                                          |
-| --------- | ---------------------------------------------------- |
-| size      | [optional]\* Desired amount in BTC                   |
-| funds     | [optional]\* Desired amount of quote currency to use |
+The new order that was successfully created
 
-\* One of `size` or `funds` is required.
+#### Response Fields
 
-## Product ID
+| Field              | Type         | Required | Description                                                 |
+| ------------------ | ------------ | -------- | ----------------------------------------------------------- |
+| id                 | string       | Yes      | uuid                                                        |
+| product_id         | string       | Yes      | book the order was placed on                                |
+| side               | enum<string> | Yes      |                                                             |
+| type               | enum<string> | Yes      |                                                             |
+| post_only          | boolean      | Yes      | if true, forces order to be maker only                      |
+| created_at         | string       | Yes      | timestamp at which order was placed                         |
+| fill_fees          | string       | Yes      | fees paid on current filled amount                          |
+| filled_size        | string       | Yes      | amount (in base currency) of the order that has been filled |
+| status             | enum<string> | Yes      |                                                             |
+| settled            | boolean      | Yes      | true if funds have been exchanged and settled               |
+| price              | string       | No       | price per unit of base currency                             |
+| size               | string       | No       | amount of base currency to buy/sell                         |
+| profile_id         | string       | No       | profile_id that placed the order                            |
+| funds              | string       | No       | amount of quote currency to spend (for market orders)       |
+| specified_funds    | string       | No       | funds with fees                                             |
+| time_in_force      | enum<string> | No       |                                                             |
+| expire_time        | string       | No       | timestamp at which order expires                            |
+| done_at            | string       | No       | timestamp at which order was done                           |
+| done_reason        | string       | No       | reason order was done (filled, rejected, or otherwise)      |
+| reject_reason      | string       | No       | reason order was rejected by engine                         |
+| executed_value     | string       | No       |                                                             |
+| stop               | enum<string> | No       |                                                             |
+| stop_price         | string       | No       | price (in quote currency) at which to execute the order     |
+| funding_amount     | string       | No       |                                                             |
+| client_oid         | string       | No       | client order id                                             |
+| market_type        | string       | No       | market type where order was traded                          |
+| max_floor          | string       | No       | maximum visible quantity for iceberg order                  |
+| secondary_order_id | string       | No       | order id for the visible order for iceberg order            |
+| stop_limit_price   | string       | No       | stop limit price for TPSL order                             |
 
-The `product_id` must match a valid product. The products list is available via
-the [/products](/exchange/reference/exchangerestapi_getproducts) endpoint.
+#### Example Response
 
-## Client Order ID
+```json
+{
+  "id": "a9625b04-fc66-4999-a876-543c3684d702",
+  "price": "10.00000000",
+  "size": "1.00000000",
+  "product_id": "BTC-USD",
+  "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "side": "buy",
+  "type": "limit",
+  "time_in_force": "GTC",
+  "post_only": true,
+  "max_floor": "4",
+  "created_at": "2020-03-11T20:48:46.622Z",
+  "fill_fees": "0.0000000000000000",
+  "filled_size": "0.00000000",
+  "executed_value": "0.0000000000000000",
+  "status": "open",
+  "settled": false
+}
+```
 
-The optional `client_oid` field must be a variant 1 UUIDv4 that follows the
-standard format. This means all lowercase and hyphens that group the characters
-in sequences of 8, 4, 4, 4, 12 (e.g. 1985ca2d-61ef-49f1-bfce-6c39d8462914)
-generated by your trading application. This field value is broadcast in the
-public feed for `received` messages. You can use this field to identify your
-orders in the public feed.
+---
 
-The `client_oid` is different than the server-assigned order ID. If you are
-consuming the public feed and see a `received` message with your `client_oid`,
-you should record the server-assigned `order_id` as it is used for future order
-status updates. The `client_oid` is NOT used after the `received` message is
-sent.
+# Get all fills - Coinbase
 
-The server-assigned order id is also returned as the `id` field to this HTTP
-POST request.
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-fills](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-fills)
 
-If the `client_oid` is not in the correct UUIDv4 format it will be accepted via
-REST but NOT processed and will not be visible in future REST calls.
+## Endpoint
 
-## Type
+`GET /fills`
 
-When placing an order, you can specify the order type. The order type you
-specify influences which other order parameters are required as well as how your
-order is executed by the matching engine. If `type` is not specified, the order
-defaults to a `limit` order.
+## Description
 
-**Limit** orders are both the default and basic order type. A limit order
-requires that you specify a `price` and one of either `size` or `funds`. The
-`size` parameter denotes the amount in fiat, and `funds` denotes the number of
-bitcoin to buy or sell. The `price` is the price per bitcoin. Limit orders are
-filled at the price specified or better. A sell order can be filled at the
-specified price per bitcoin or a higher price per bitcoin, and a buy order can
-be filled at the specified price or a lower price depending on market
-conditions. If market conditions cannot fill the limit order immediately, then
-the limit order becomes part of the open order book until filled by another
-incoming order or canceled by the user.
+Get a list of recent fills of the API key’s profile.
 
-**Market** orders differ from limit orders in that they provide no pricing
-guarantees. They however do provide a way to buy or sell specific amounts of
-bitcoin or fiat without having to specify the price. Market orders execute
-immediately and no part of the market order goes on the open order book. Market
-orders are always considered `takers` and incur taker fees. When placing a
-market order you can specify `funds` and/or `size`. Funds limit how much of your
-quote currency account balance is used and size limits the bitcoin amount
-transacted.
+## Permissions
 
-## Stop Orders
+This endpoint requires either the “view” or “trade” permission.
 
-Stop orders become active and wait to trigger based on the movement of the last
-trade price. There are two types of stop orders, `stop loss` and `stop entry`:
+## Authorization
 
-`stop: 'loss'`: Triggers when the last trade price changes to a value at or
-below the `stop_price`.
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
 
-`stop: 'entry'`: Triggers when the last trade price changes to a value at or
-above the `stop_price`.
+## Query Parameters
 
-The last trade price is the last price at which an order was filled. This price
-can be found in the latest
-[match message](/exchange/docs/websocket-channels#matches-channel). Not all
-match messages may be received due to
-[dropped messages](/exchange/docs/websocket-overview#sequence-numbers).
+| Parameter   | Type         | Description                                                                                                                                                  |
+| ----------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| order_id    | string       | limit to fills on a specific order. Either order_id or product_id is required.                                                                               |
+| product_id  | string       | limit to fills on a specific product. Either order_id or product_id is required.                                                                             |
+| limit       | integer      | Limit on number of results to return.                                                                                                                        |
+| before      | string       | Used for pagination. Sets start cursor to before id.                                                                                                         |
+| after       | string       | Used for pagination. Sets end cursor to after id.                                                                                                            |
+| market_type | enum<string> | Market type which the order was filled in.                                                                                                                   |
+| start_date  | string       | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| end_date    | string       | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
 
-When stop orders are triggered, they execute as limit orders and are therefore
-subject to [holds](#holds).
+## Response
 
-## Price
+### 200 Success
 
-The price must be specified in `quote_increment` product units. The quote
-increment is the smallest unit of price. For the BTC-USD product, the quote
-increment is `0.01` or 1 penny. Prices less than 1 penny are not accepted, and
-no fractional penny prices are accepted. Not required for `market` orders.
+id of trade that created the fill
 
-## Size
+#### Response Fields
 
-
+| Field            | Type         | Required | Description                                    |
+| ---------------- | ------------ | -------- | ---------------------------------------------- |
+| trade_id         | integer      | Yes      | id of trade that created the fill              |
+| product_id       | string       | Yes      | book the order was placed on                   |
+| order_id         | string       | Yes      | uuid                                           |
+| user_id          | string       | Yes      | id of user's account                           |
+| profile_id       | string       | Yes      | profile_id that placed the order               |
+| liquidity        | enum<string> | Yes      |                                                |
+| price            | string       | Yes      | price per unit of base currency                |
+| size             | string       | Yes      | amount of base currency to buy/sell            |
+| fee              | string       | Yes      | fees paid on current filled amount             |
+| created_at       | string       | Yes      | timestamp of fill                              |
+| side             | enum<string> | Yes      |                                                |
+| settled          | boolean      | Yes      | true if funds have been exchanged and settled  |
+| usd_volume       | string       | Yes      | true if funds have been exchanged and settled  |
+| funding_currency | string       | Yes      | funding currency which the order was filled in |
+| market_type      | string       | No       | market type which the order was filled in      |
+
+#### Example Response
+
+```json
+[
+  {
+    "created_at": "2019-11-21T01:38:23.878Z",
+    "trade_id": 78098253,
+    "product_id": "BTC-USD",
+    "order_id": "41473628-db2c-464e-b9f4-82df7e4fb4f4",
+    "user_id": "5cf6e115aaf44503db300f1e",
+    "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+    "liquidity": "T",
+    "price": "8087.38000000",
+    "size": "0.00601800",
+    "fee": "0.2433492642000000",
+    "side": "sell",
+    "settled": true,
+    "usd_volume": "48.6698528400000000",
+    "funding_currency": "USDC"
+  }
+]
+```
+
+---
+
+# Get all orders - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-orders](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-orders)
+
+## Endpoint
+
+`GET /orders`
+
+## Description
+
+Orders with a “pending” status have fewer fields in the response.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter   | Type           | Description                                            |
+| ----------- | -------------- | ------------------------------------------------------ |
+| profile_id  | string         | Filter results by a specific profile_id                |
+| product_id  | string         | Filter results by a specific product_id                |
+| sortedBy    | enum<string>   | Sort criteria for results.                             |
+| sorting     | enum<string>   | Ascending or descending order, by sortedBy             |
+| start_date  | string         | Filter results by minimum posted date                  |
+| end_date    | string         | Filter results by maximum posted date                  |
+| before      | string         | Used for pagination. Sets start cursor to before date. |
+| after       | string         | Used for pagination. Sets end cursor to after date.    |
+| limit       | integer        | Limit on number of results to return.                  |
+| status      | enum<string>[] | Array with order statuses to filter by.                |
+| market_type | string         | Market type which the order was traded in.             |
+
+## Response
+
+### 200 Success
+
+uuid
+
+#### Response Fields
+
+| Field              | Type         | Required | Description                                                 |
+| ------------------ | ------------ | -------- | ----------------------------------------------------------- |
+| id                 | string       | Yes      | uuid                                                        |
+| product_id         | string       | Yes      | book the order was placed on                                |
+| side               | enum<string> | Yes      |                                                             |
+| type               | enum<string> | Yes      |                                                             |
+| post_only          | boolean      | Yes      | if true, forces order to be maker only                      |
+| created_at         | string       | Yes      | timestamp at which order was placed                         |
+| fill_fees          | string       | Yes      | fees paid on current filled amount                          |
+| filled_size        | string       | Yes      | amount (in base currency) of the order that has been filled |
+| status             | enum<string> | Yes      |                                                             |
+| settled            | boolean      | Yes      | true if funds have been exchanged and settled               |
+| price              | string       | No       | price per unit of base currency                             |
+| size               | string       | No       | amount of base currency to buy/sell                         |
+| profile_id         | string       | No       | profile_id that placed the order                            |
+| funds              | string       | No       | amount of quote currency to spend (for market orders)       |
+| specified_funds    | string       | No       | funds with fees                                             |
+| time_in_force      | enum<string> | No       |                                                             |
+| expire_time        | string       | No       | timestamp at which order expires                            |
+| done_at            | string       | No       | timestamp at which order was done                           |
+| done_reason        | string       | No       | reason order was done (filled, rejected, or otherwise)      |
+| reject_reason      | string       | No       | reason order was rejected by engine                         |
+| executed_value     | string       | No       |                                                             |
+| stop               | enum<string> | No       |                                                             |
+| stop_price         | string       | No       | price (in quote currency) at which to execute the order     |
+| funding_amount     | string       | No       |                                                             |
+| client_oid         | string       | No       | client order id                                             |
+| market_type        | string       | No       | market type where order was traded                          |
+| max_floor          | string       | No       | maximum visible quantity for iceberg order                  |
+| secondary_order_id | string       | No       | order id for the visible order for iceberg order            |
+| stop_limit_price   | string       | No       | stop limit price for TPSL order                             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "a9625b04-fc66-4999-a876-543c3684d702",
+    "price": "10.00000000",
+    "size": "1.00000000",
+    "product_id": "BTC-USD",
+    "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+    "side": "buy",
+    "type": "limit",
+    "time_in_force": "GTC",
+    "post_only": true,
+    "max_floor": "4",
+    "created_at": "2020-03-11T20:48:46.622Z",
+    "fill_fees": "0.0000000000000000",
+    "filled_size": "0.00000000",
+    "executed_value": "0.0000000000000000",
+    "status": "open",
+    "settled": false
+  }
+]
+```
+
+---
+
+# Get single order - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-single-order](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-single-order)
+
+## Endpoint
+
+`GET /orders/%7Border_id%7D`
+
+## Description
+
+Orders can be queried using either the exchange assigned id or the client
+assigned client_oid. When using client_oid it must be preceded by the client:
+namespace.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description                                                                                                                                        |
+| --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| order_id  | string | Yes      | order_id is either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the client: namespace. |
+
+## Query Parameters
+
+| Parameter   | Type   | Description                                |
+| ----------- | ------ | ------------------------------------------ |
+| market_type | string | Market type which the order was traded in. |
+
+## Response
+
+### 200 Success
+
+uuid
+
+#### Response Fields
+
+| Field              | Type         | Required | Description                                                 |
+| ------------------ | ------------ | -------- | ----------------------------------------------------------- |
+| id                 | string       | Yes      | uuid                                                        |
+| product_id         | string       | Yes      | book the order was placed on                                |
+| side               | enum<string> | Yes      |                                                             |
+| type               | enum<string> | Yes      |                                                             |
+| post_only          | boolean      | Yes      | if true, forces order to be maker only                      |
+| created_at         | string       | Yes      | timestamp at which order was placed                         |
+| fill_fees          | string       | Yes      | fees paid on current filled amount                          |
+| filled_size        | string       | Yes      | amount (in base currency) of the order that has been filled |
+| status             | enum<string> | Yes      |                                                             |
+| settled            | boolean      | Yes      | true if funds have been exchanged and settled               |
+| price              | string       | No       | price per unit of base currency                             |
+| size               | string       | No       | amount of base currency to buy/sell                         |
+| profile_id         | string       | No       | profile_id that placed the order                            |
+| funds              | string       | No       | amount of quote currency to spend (for market orders)       |
+| specified_funds    | string       | No       | funds with fees                                             |
+| time_in_force      | enum<string> | No       |                                                             |
+| expire_time        | string       | No       | timestamp at which order expires                            |
+| done_at            | string       | No       | timestamp at which order was done                           |
+| done_reason        | string       | No       | reason order was done (filled, rejected, or otherwise)      |
+| reject_reason      | string       | No       | reason order was rejected by engine                         |
+| executed_value     | string       | No       |                                                             |
+| stop               | enum<string> | No       |                                                             |
+| stop_price         | string       | No       | price (in quote currency) at which to execute the order     |
+| funding_amount     | string       | No       |                                                             |
+| client_oid         | string       | No       | client order id                                             |
+| market_type        | string       | No       | market type where order was traded                          |
+| max_floor          | string       | No       | maximum visible quantity for iceberg order                  |
+| secondary_order_id | string       | No       | order id for the visible order for iceberg order            |
+| stop_limit_price   | string       | No       | stop limit price for TPSL order                             |
+
+#### Example Response
+
+```json
+{
+  "id": "a9625b04-fc66-4999-a876-543c3684d702",
+  "price": "10.00000000",
+  "size": "1.00000000",
+  "product_id": "BTC-USD",
+  "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "side": "buy",
+  "type": "limit",
+  "time_in_force": "GTC",
+  "post_only": true,
+  "max_floor": "4",
+  "created_at": "2020-03-11T20:48:46.622Z",
+  "fill_fees": "0.0000000000000000",
+  "filled_size": "0.00000000",
+  "executed_value": "0.0000000000000000",
+  "status": "open",
+  "settled": false
+}
+```
+
+---
+
+# Get all known trading pairs - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-known-trading-pairs](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-known-trading-pairs)
+
+## Endpoint
+
+`GET /products`
+
+## Description
 
 Order Size Limits Removed
 
-The properties `base_max_size`, `base_min_size`, `max_market_funds` were
-[removed on June 30, 2022](/exchange/docs/changelog#2022-jun-30).
+## Query Parameters
 
-The property, `min_market_funds`, has been repurposed as the notional minimum
-size for limit orders.
-
-The size must be greater than the `base_min_size` for the product and no larger
-than the `base_max_size`. The size can be in incremented in units of
-`base_increment`. `size` indicates the amount of BTC (or base currency) to buy
-or sell.
-
-`size` indicates the amount of base currency to buy or sell. The size must be no
-less than the `base_min_size` and no larger than the `base_max_size` for the
-product. However, for post-only limit orders, there is no enforced
-`base_max_size`. The size can be in any increment of the base currency (e.g. BTC
-for the BTC-USD product).
-
-
-
-Info
-
-There is no max size restriction for `post_only` limit orders.
-
-## Funds
-
-The funds field is optionally used for `market` or `limit` orders. When
-specified it indicates how much of the product quote currency to buy or sell.
-For example, a market buy for `BTC-USD` with `funds` specified as `150.00` will
-spend `150 USD` to buy BTC (including any fees). If the funds field is not
-specified for a market buy order, `size` must be specified and Coinbase Exchange
-uses available funds in your account to buy bitcoin.
-
-A market sell order can also specify the `funds`. If `funds` is specified, it
-limits the sell to the amount of `funds` specified. You can use `funds` with
-sell orders to limit the amount of quote currency funds received.
-
-A `limit` order that specifies `funds` functions similarly to a `market` order
-but provides more control in its ability to specify `price`. See
-[Limit Order With Funds](/exchange/docs/fix-msg-oe-lwf/) for more information on
-how this order works.
-
-## Time In Force
-
-Time in force policies provide guarantees about the lifetime of an order. There
-are four policies: good till canceled `GTC`, good till date `GTD`, immediate or
-cancel `IOC`, and fill or kill `FOK`.
-
-`GTC` Good till canceled orders remain open on the book until canceled. This is
-the default behavior if no policy is specified.
-
-`GTD` Good till date orders are valid till a specified date or time (within a
-90-day hard limit) unless it has been already fulfilled or cancelled.
-
-`IOC` Immediate or cancel orders instantly cancel the remaining size of the
-limit order instead of opening it on the book.
-
-`FOK` Fill or kill orders are rejected if the entire size cannot be matched.
-
-
-
-Info
-
-Match also refers to self trades.
-
-## Post Only
-
-The post-only flag indicates that the order should only make liquidity. If any
-part of the order results in taking liquidity, the order will be rejected and no
-part of it will execute.
-
-## Holds
-
-For `limit` `buy` orders, we hold `price x size x (1 + fee-percent)` USD. For
-`sell` orders, we hold the number of Bitcoin you wish to sell. Actual fees are
-assessed at time of trade. If you cancel a partially filled or unfilled order,
-any remaining funds are released from hold.
-
-For `market` `buy` orders where `funds` is specified, the `funds` amount is put
-on hold. If only `size` is specified, all of your account balance (in the quote
-account) is put on hold for the duration of the market order (usually a
-trivially short time). For a `sell` order, the `size` in BTC is put on hold. If
-`size` is not specified (and only `funds` is specified), your entire BTC balance
-is put on hold for the duration of the market order.
-
-## Self-Trade Prevention
-
-Self-trading is not allowed on the exchange. Two orders from the same user are
-not allowed to match with one another. To change the self-trade behavior,
-specify the `stp` flag.
-
-| Flag | Name                          |
-| ---- | ----------------------------- |
-| dc   | Decrease and Cancel (default) |
-| co   | Cancel oldest                 |
-| cn   | Cancel newest                 |
-| cb   | Cancel both                   |
-
-See the
-[self-trade prevention](/exchange/docs/matching-engine#self-trade-prevention)
-documentation for details about these fields.
-
-## Order Lifecycle
-
-The HTTP Request responds when an order is either rejected (insufficient funds,
-invalid parameters, etc) or received (accepted by the matching engine). A `200`
-response indicates that the order was received and is active. Active orders may
-execute immediately (depending on price and market conditions) either partially
-or fully. A partial execution puts the remaining size of the order in the `open`
-state. An order that is filled completely, goes into the `done` state.
-
-Users listening to streaming market data are encouraged to use the `client_oid`
-field to identify their `received` messages in the feed. The REST response with
-a server `order_id` may come after the `received` message in the public data
-feed.
+| Parameter | Type   | Description |
+| --------- | ------ | ----------- |
+| type      | string |             |
 
 ## Response
 
-A successful order is assigned an order id. A successful order is defined as one
-that has been accepted by the matching engine.
+### 200 Success
 
-
+Min order price (a.k.a. price increment
 
-Info
+#### Response Fields
 
-Open orders do not expire and remain open until they are either filled or
-canceled.
+| Field                     | Type         | Required | Description                                                                               |
+| ------------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------- |
+| id                        | string       | Yes      |                                                                                           |
+| base_currency             | string       | Yes      |                                                                                           |
+| quote_currency            | string       | Yes      |                                                                                           |
+| quote_increment           | string       | Yes      | Min order price (a.k.a. price increment                                                   |
+| base_increment            | string       | Yes      |                                                                                           |
+| display_name              | string       | Yes      |                                                                                           |
+| min_market_funds          | string       | Yes      |                                                                                           |
+| margin_enabled            | boolean      | Yes      |                                                                                           |
+| post_only                 | boolean      | Yes      |                                                                                           |
+| limit_only                | boolean      | Yes      |                                                                                           |
+| cancel_only               | boolean      | Yes      |                                                                                           |
+| status                    | enum<string> | Yes      |                                                                                           |
+| status_message            | string       | Yes      |                                                                                           |
+| auction_mode              | boolean      | Yes      |                                                                                           |
+| trading_disabled          | boolean      | No       |                                                                                           |
+| fx_stablecoin             | boolean      | No       |                                                                                           |
+| max_slippage_percentage   | string       | No       |                                                                                           |
+| high_bid_limit_percentage | string       | No       | Percentage to calculate highest price for limit buy order (Stable coin trading pair only) |
 
-## Request Parameters
+#### Example Response
 
-| Parameter        | Type    | Description                                                                                                             |
-| ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
-| profile_id       | string  | Create order on a specific `profile_id`. If none is passed, defaults to `default` profile.                              |
-| type             | string  | Possible values: [limit, market, stop]                                                                                  |
-| side             | string  | Possible values: [buy, sell]                                                                                            |
-| product_id       | string  | Book on which to place an order                                                                                         |
-| stp              | string  | Possible values: [dc, co, cn, cb]                                                                                       |
-| stop             | string  | Possible values: [loss, entry]                                                                                          |
-| stop_price       | string  | Price threshold at which a `stop` order will be placed on the book                                                      |
-| price            | string  | Price per unit of cryptocurrency - required for `limit`/`stop` orders                                                   |
-| size             | string  | Amount of base currency to buy or sell - required for `limit`/`stop` orders and `market` `sell`s                        |
-| funds            | string  | Amount of quote currency to buy - required for `market` `buy`s                                                          |
-| time_in_force    | string  | Possible values: [GTC, GTT, IOC, FOK]                                                                                   |
-| cancel_after     | string  | Possible values: [min, hour, day]                                                                                       |
-| post_only        | boolean | If true, order will only execute as a `maker` order                                                                     |
-| client_oid       | string  | Optional Order ID selected by the user or the frontend client to identify their order                                   |
-| max_floor        | string  | Placing an iceberg order. Use this to specify how much to show                                                          |
-| stop_limit_price | string  | Required for take profit/stop loss orders. Denotes the updated limit price upon the activation of the stop loss trigger |
-
-## API Response Details
-
-### Response: 200 The new order that was successfully created
-
-| Property         | Type      | Description                                                             |
-| ---------------- | --------- | ----------------------------------------------------------------------- |
-| id               | string    | uuid                                                                    |
-| price            | string    | price per unit of base currency                                         |
-| size             | string    | amount of base currency to buy/sell                                     |
-| product_id       | string    | book the order was placed on                                            |
-| profile_id       | string    | profile_id that placed the order                                        |
-| side             | string    | Possible values: [buy, sell]                                            |
-| funds            | string    | amount of quote currency to spend (for market orders)                   |
-| specified_funds  | string    | funds with fees                                                         |
-| type             | string    | Possible values: [limit, market, stop]                                  |
-| time_in_force    | string    | Possible values: [GTC, GTT, IOC, FOK]                                   |
-| expire_time      | date-time | timestamp at which order expires                                        |
-| post_only        | boolean   | if true, forces order to be `maker` only                                |
-| created_at       | date-time | timestamp at which order was placed                                     |
-| done_at          | date-time | timestamp at which order was done                                       |
-| done_reason      | string    | reason order was done (filled, rejected, or otherwise)                  |
-| reject_reason    | string    | reason order was rejected by engine                                     |
-| fill_fees        | string    | fees paid on current filled amount                                      |
-| filled_size      | string    | amount (in base currency) of the order that has been filled             |
-| executed_value   | string    |                                                                         |
-| status           | string    | Possible values: [open, pending, rejected, done, active, received, all] |
-| settled          | boolean   | true if funds have been exchanged and settled                           |
-| stop             | string    | Possible values: [loss, entry]                                          |
-| stop_price       | string    | price (in quote currency) at which to execute the order                 |
-| funding_amount   | string    |                                                                         |
-| client_oid       | string    | client order id                                                         |
-| market_type      | string    | market type where order was traded                                      |
-| stop_limit_price | string    | stop limit price for TPSL order                                         |
-
-### Response: 401 Unauthorized.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
-### Response: 500 An unexpected error response.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
+```json
+[
+  {
+    "id": "BTC-USD",
+    "base_currency": "BTC",
+    "quote_currency": "USD",
+    "quote_increment": "0.01000000",
+    "base_increment": "0.00000001",
+    "display_name": "BTC/USD",
+    "min_market_funds": "10",
+    "margin_enabled": false,
+    "post_only": false,
+    "limit_only": false,
+    "cancel_only": false,
+    "status": "online",
+    "status_message": "",
+    "auction_mode": true
+  }
+]
+```
 
 ---
 
-# Get all fills
+# Get all product volume - Coinbase
 
-GET
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-product-volume](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-product-volume)
 
-https://api.exchange.coinbase.com/fills
+## Endpoint
 
-Get a list of fills. A fill is a partial or complete match on a specific order.
+`GET /products/volume-summary`
 
-Get a list of recent fills of the API key's profile.
+## Description
 
-## API Key Permissions
-
-This endpoint requires either the "view" or "trade" permission.
-
-## Settlement and Fees
-
-Fees are recorded in two stages. Immediately after the matching engine completes
-a match, the fill is inserted into our datastore. Once the fill is recorded, a
-settlement process settles the fill and credit both trading counterparties.
-
-The `fee` field indicates the fees charged for this individual fill.
-
-### Liquidity
-
-The `liquidity` field indicates if the fill was the result of a liquidity
-provider or liquidity taker. `M` indicates Maker and `T` indicates Taker.
-
-### Pagination
-
-Fills are returned sorted by descending `trade_id` from the largest `trade_id`
-to the smallest `trade_id`. The `CB-BEFORE` header has this first trade ID so
-that future requests using the `cb-before` parameter fetch fills with a greater
-trade ID (newer fills).
-
-See [Pagination](/exchange/docs/rest-pagination) for more information.
-
-## Query Parameters
-
-| Parameter   | Type   | Required | Description                                                                                                                                                  |
-| ----------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| order_id    | string | No       | limit to fills on a specific order. Either `order_id` or `product_id` is required.                                                                           |
-| product_id  | string | No       | limit to fills on a specific product. Either `order_id` or `product_id` is required.                                                                         |
-| limit       | int64  | No       | Limit on number of results to return.                                                                                                                        |
-| before      | string | No       | Used for pagination. Sets start cursor to `before` id.                                                                                                       |
-| after       | string | No       | Used for pagination. Sets end cursor to `after` id.                                                                                                          |
-| market_type | string | No       | Market type which the order was filled in.                                                                                                                   |
-| start_date  | string | No       | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
-| end_date    | string | No       | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
-
-## API Response Details
-
-### Response: 200
-
-| Property         | Type      | Description                                    |
-| ---------------- | --------- | ---------------------------------------------- |
-| trade_id         | int32     | id of trade that created the fill              |
-| product_id       | string    | book the order was placed on                   |
-| order_id         | string    | uuid                                           |
-| user_id          | string    | id of user's account                           |
-| profile_id       | string    | profile_id that placed the order               |
-| liquidity        | string    | Possible values: [M, T, O]                     |
-| price            | string    | price per unit of base currency                |
-| size             | string    | amount of base currency to buy/sell            |
-| fee              | string    | fees paid on current filled amount             |
-| created_at       | date-time | timestamp of fill                              |
-| side             | string    | Possible values: [buy, sell]                   |
-| settled          | boolean   | true if funds have been exchanged and settled  |
-| usd_volume       | string    | true if funds have been exchanged and settled  |
-| market_type      | string    | market type which the order was filled in      |
-| funding_currency | string    | funding currency which the order was filled in |
-
-### Response: 401 Unauthorized.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
-### Response: 500 An unexpected error response.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
----
-
-# Get all orders
-
-GET
-
-https://api.exchange.coinbase.com/orders
-
-List your current open orders. Only open or un-settled orders are returned by
-default. As soon as an order is no longer open and settled, it will no longer
-appear in the default request. Open orders may change state between the request
-and the response depending on market conditions.
-
-## Pending Orders
-
-Orders with a "pending" status have fewer fields in the response.
-
-- Pending limit orders do not have `stp`, `time_in_force`, `expire_time`, and
-  `post_only`.
-- Pending market orders have the same fields as a pending limit order minus
-  `price` and `size`, and no market specific fields (`funds`,
-  `specified_funds`).
-- Pending stop orders have the same fields as a pending limit order and no stop
-  specific fields (`stop`, `stop_price`).
-
-| Order Type           | Does Not Have These Fields                                                                      |
-| -------------------- | ----------------------------------------------------------------------------------------------- |
-| Pending Limit Order  | `stp`, `time_in_force`, `expire_time`, `post_only`                                              |
-| Pending Market Order | `stp`, `time_in_force`, `expire_time`, `post_only`, `price`, `size`, `funds`, `specified_funds` |
-| Pending Stop Order   | `stp`, `time_in_force`, `expire_time`, `post_only`, `stop`, `stop_price`                        |
-
-## API Key Permissions
-
-This endpoint requires either the "view" or "trade" permission.
-
-
-
-Tip
-
-To specify multiple statuses, use the status query argument multiple times:
-`/orders?status=done&status=pending`.
-
-## Order Status and Settlement
-
-Orders which are no longer resting on the order book, are marked with the `done`
-status. There is a small window between an order being `done` and `settled`. An
-order is settled when all of the fills have settled and the remaining holds (if
-any) have been removed.
-
-## Polling
-
-For high-volume trading it is strongly recommended that you maintain your own
-list of open orders and use one of the streaming market data feeds to keep it
-updated. You should poll the open orders endpoint once when you start trading to
-obtain the current state of any open orders.
-
-`executed_value` is the cumulative match `size` \* `price` and is only present
-for orders placed after 2016-05-20.
-
-
-
-Info
-
-Open orders can change state between the request and the response depending on
-market conditions.
-
-## Pagination
-
-This request is paginated. See [Pagination](/exchange/docs/rest-pagination) for
-more information.
-
-## Query Parameters
-
-| Parameter   | Type      | Required | Description                                              |
-| ----------- | --------- | -------- | -------------------------------------------------------- |
-| profile_id  | string    | No       | Filter results by a specific profile_id                  |
-| product_id  | string    | No       | Filter results by a specific product_id                  |
-| sortedBy    | string    | No       | Sort criteria for results.                               |
-| sorting     | string    | No       | Ascending or descending order, by `sortedBy`             |
-| start_date  | date-time | No       | Filter results by minimum posted date                    |
-| end_date    | date-time | No       | Filter results by maximum posted date                    |
-| before      | string    | No       | Used for pagination. Sets start cursor to `before` date. |
-| after       | string    | No       | Used for pagination. Sets end cursor to `after` date.    |
-| limit       | int64     | Yes      | Limit on number of results to return.                    |
-| status      | string[]  | Yes      | Array with order statuses to filter by.                  |
-| market_type | string    | No       | Market type which the order was traded in.               |
-
-## API Response Details
-
-### Response: 200
-
-| Property         | Type      | Description                                                             |
-| ---------------- | --------- | ----------------------------------------------------------------------- |
-| id               | string    | uuid                                                                    |
-| price            | string    | price per unit of base currency                                         |
-| size             | string    | amount of base currency to buy/sell                                     |
-| product_id       | string    | book the order was placed on                                            |
-| profile_id       | string    | profile_id that placed the order                                        |
-| side             | string    | Possible values: [buy, sell]                                            |
-| funds            | string    | amount of quote currency to spend (for market orders)                   |
-| specified_funds  | string    | funds with fees                                                         |
-| type             | string    | Possible values: [limit, market, stop]                                  |
-| time_in_force    | string    | Possible values: [GTC, GTT, IOC, FOK]                                   |
-| expire_time      | date-time | timestamp at which order expires                                        |
-| post_only        | boolean   | if true, forces order to be `maker` only                                |
-| created_at       | date-time | timestamp at which order was placed                                     |
-| done_at          | date-time | timestamp at which order was done                                       |
-| done_reason      | string    | reason order was done (filled, rejected, or otherwise)                  |
-| reject_reason    | string    | reason order was rejected by engine                                     |
-| fill_fees        | string    | fees paid on current filled amount                                      |
-| filled_size      | string    | amount (in base currency) of the order that has been filled             |
-| executed_value   | string    |                                                                         |
-| status           | string    | Possible values: [open, pending, rejected, done, active, received, all] |
-| settled          | boolean   | true if funds have been exchanged and settled                           |
-| stop             | string    | Possible values: [loss, entry]                                          |
-| stop_price       | string    | price (in quote currency) at which to execute the order                 |
-| funding_amount   | string    |                                                                         |
-| client_oid       | string    | client order id                                                         |
-| market_type      | string    | market type where order was traded                                      |
-| stop_limit_price | string    | stop limit price for TPSL order                                         |
-
-### Response: 401 Unauthorized.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
-### Response: 500 An unexpected error response.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
----
-
-# Cancel all orders
-
-DELETE
-
-https://api.exchange.coinbase.com/orders
-
-With best effort, cancel all open orders. This may require you to make the
-request multiple times until all of the open orders are deleted.
-
-## API Key Permissions
-
-This endpoint requires the "trade" permission.
-
-## Examples
-
-| Example                      | Response                                 |
-| ---------------------------- | ---------------------------------------- |
-| `/orders?product_id=FOO-BAR` | (404) ProductNotFound                    |
-| `/orders?product_id=BtC-uSd` | (200) Cancel all orders for BTC-USD      |
-| `/orders?Product_id=BTC-USD` | (400) Return BadRequest Error            |
-| `/orders`                    | (200) Cancel all orders for all products |
-
-## Query Parameters
-
-| Parameter  | Type   | Required | Description                               |
-| ---------- | ------ | -------- | ----------------------------------------- |
-| profile_id | string | No       | Cancels orders on a specific profile      |
-| product_id | string | No       | Cancels orders on a specific product only |
-
-## API Response Details
-
-### Response: 200 A list of the ids of open orders that were successfully cancelled
-
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-
-### Response: 401 Unauthorized.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
-### Response: 500 An unexpected error response.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
----
-
-# Get single order
-
-GET
-
-https://api.exchange.coinbase.com/orders/{order\_id}
-
-Get a single order by `id`.
-
-## API Key Permissions
-
-This endpoint requires either the "view" or "trade" permission.
-
-Orders can be queried using either the exchange assigned `id` or the client
-assigned `client_oid`. When using `client_oid` it must be preceded by the
-`client:` namespace.
-
-If the order is canceled, and if the order had no matches, the response might
-return the status code `404`.
-
-
-
-Info
-
-Open orders can change state between the request and the response depending on
-market conditions.
-
-## Path Parameters
-
-| Parameter | Type   | Required | Description                                                                                                                                          |
-| --------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| order_id  | string | Yes      | `order_id` is either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the client: namespace. |
-
-## Query Parameters
-
-| Parameter   | Type   | Required | Description                                |
-| ----------- | ------ | -------- | ------------------------------------------ |
-| market_type | string | No       | Market type which the order was traded in. |
-
-## API Response Details
-
-### Response: 200
-
-| Property         | Type      | Description                                                             |
-| ---------------- | --------- | ----------------------------------------------------------------------- |
-| id               | string    | uuid                                                                    |
-| price            | string    | price per unit of base currency                                         |
-| size             | string    | amount of base currency to buy/sell                                     |
-| product_id       | string    | book the order was placed on                                            |
-| profile_id       | string    | profile_id that placed the order                                        |
-| side             | string    | Possible values: [buy, sell]                                            |
-| funds            | string    | amount of quote currency to spend (for market orders)                   |
-| specified_funds  | string    | funds with fees                                                         |
-| type             | string    | Possible values: [limit, market, stop]                                  |
-| time_in_force    | string    | Possible values: [GTC, GTT, IOC, FOK]                                   |
-| expire_time      | date-time | timestamp at which order expires                                        |
-| post_only        | boolean   | if true, forces order to be `maker` only                                |
-| created_at       | date-time | timestamp at which order was placed                                     |
-| done_at          | date-time | timestamp at which order was done                                       |
-| done_reason      | string    | reason order was done (filled, rejected, or otherwise)                  |
-| reject_reason    | string    | reason order was rejected by engine                                     |
-| fill_fees        | string    | fees paid on current filled amount                                      |
-| filled_size      | string    | amount (in base currency) of the order that has been filled             |
-| executed_value   | string    |                                                                         |
-| status           | string    | Possible values: [open, pending, rejected, done, active, received, all] |
-| settled          | boolean   | true if funds have been exchanged and settled                           |
-| stop             | string    | Possible values: [loss, entry]                                          |
-| stop_price       | string    | price (in quote currency) at which to execute the order                 |
-| funding_amount   | string    |                                                                         |
-| client_oid       | string    | client order id                                                         |
-| market_type      | string    | market type where order was traded                                      |
-| stop_limit_price | string    | stop limit price for TPSL order                                         |
-
-### Response: 401 Unauthorized.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
-### Response: 500 An unexpected error response.
-
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
-
----
-
-# Cancel an order
-
-DELETE
-
-https://api.exchange.coinbase.com/orders/{order\_id}
-
-Cancel a single open order by `{id}`.
-
-
-
-Cancel a previously placed order
-
-The order must belong to the profile that the API key belongs to. If the order
-had no matches during its lifetime, its record may be purged. This means the
-order details is not available with `GET /orders/<id>`.
-
-
-
-Caution
-
-To prevent a race condition when canceling an order, it is highly recommended
-that you specify the product id as a query string.
-
-## API Key Permissions
-
-This endpoint requires the "trade" permission.
-
-Orders can be canceled using either the exchange assigned `id` or the client
-assigned `client_oid`. When using `client_oid` it must be preceded by the
-`client:` namespace.
+Gets 30day and 24hour volume for all products and market types
 
 ## Response
 
-A successfully cancelled order response includes:
+### 200 Success
 
-- the order ID if the order is cancelled with the exchange assigned `id`,
-- the client assigned `client_oid` if the order is cancelled with client order
-  ID.
+#### Response Fields
 
-## Cancel Reject
+| Field                    | Type     | Required | Description |
+| ------------------------ | -------- | -------- | ----------- |
+| id                       | string   | Yes      |             |
+| base_currency            | string   | Yes      |             |
+| quote_currency           | string   | Yes      |             |
+| display_name             | string   | Yes      |             |
+| market_types             | object[] | Yes      |             |
+| spot_volume_24hour       | string   | Yes      |             |
+| spot_volume_30day        | string   | Yes      |             |
+| rfq_volume_24hour        | string   | Yes      |             |
+| rfq_volume_30day         | string   | Yes      |             |
+| conversion_volume_24hour | string   | Yes      |             |
+| conversion_volume_30day  | string   | Yes      |             |
 
-If the order could not be canceled (already filled or previously canceled,
-etc.), then an error response indicates the reason in the `message` field.
+#### Example Response
+
+```json
+[
+  [
+    {
+      "id": "GALA-XYO",
+      "base_currency": "GALA",
+      "quote_currency": "XYO",
+      "display_name": "GALA-XYO",
+      "market_types": ["rfq"],
+      "spot_volume_24hour": "",
+      "spot_volume_30day": "",
+      "rfq_volume_24hour": "1232.2342",
+      "rfq_volume_30day": "2453232.2342",
+      "conversion_volume_24hour": "0",
+      "conversion_volume_30day": "0"
+    }
+  ]
+]
+```
+
+---
+
+# Get product book - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-book](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-book)
+
+## Endpoint
+
+`GET /products/%7Bproduct_id%7D/book`
+
+## Description
+
+By default, only the inside (i.e., the best) bid and ask are returned. This is
+equivalent to a book depth of 1 level. To see a larger order book, specify the
+level query parameter.
 
 ## Path Parameters
 
-| Parameter | Type   | Required | Description                                                                                                                                                           |
-| --------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| order_id  | string | Yes      | Orders may be canceled using either the exchange assigned id or the client assigned client_oid. When using client_oid it must be preceded by the `client:` namespace. |
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| product_id | string | Yes      |             |
 
 ## Query Parameters
 
-| Parameter  | Type   | Required | Description                          |
-| ---------- | ------ | -------- | ------------------------------------ |
-| profile_id | string | No       | Cancels orders on a specific profile |
-| product_id | string | No       | Optional product id of order         |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| level     | integer |             |
 
-## API Response Details
+## Response
 
-### Response: 200 the id of the order that was cancelled`
+### 200 Success
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
+#### Response Fields
 
-### Response: 401 Unauthorized.
+| Field        | Type     | Required | Description |
+| ------------ | -------- | -------- | ----------- |
+| bids         | object[] | Yes      |             |
+| asks         | object[] | Yes      |             |
+| sequence     | number   | Yes      |             |
+| time         | string   | Yes      |             |
+| auction_mode | boolean  | No       |             |
+| auction      | object   | No       |             |
 
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
+#### Example Response
 
-### Response: 500 An unexpected error response.
+```json
+{
+  "indicative_open_price": "333.99",
+  "indicative_open_size": "0.193",
+  "indicative_bid_price": "333.98",
+  "indicative_bid_size": "4.39088265",
+  "indicative_ask_price": "333.99",
+  "indicative_ask_size": "25.23542881",
+  "auction_status": "CAN_OPEN"
+}
+```
 
-| Property | Type   | Description |
-| -------- | ------ | ----------- |
-| message  | string |             |
+---
+
+# Get product candles - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles)
+
+## Endpoint
+
+`GET /products/%7Bproduct_id%7D/candles`
+
+## Description
+
+If the start or end fields are not provided, both fields are ignored. If a
+custom time range is not declared, then one ending now is selected.
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| product_id | string | Yes      |             |
+
+## Query Parameters
+
+| Parameter   | Type   | Description                                  |
+| ----------- | ------ | -------------------------------------------- |
+| granularity | string |                                              |
+| start       | string | Timestamp for starting range of aggregations |
+| end         | string | Timestamp for ending range of aggregations   |
+
+## Response
+
+### 200 Success
+
+The response is of type object[].
+
+#### Example Response
+
+```json
+[{}]
+```
+
+---
+
+# Get product stats - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-stats](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-stats)
+
+## Endpoint
+
+`GET /products/%7Bproduct_id%7D/stats`
+
+## Description
+
+Thevolume property is in base currency units. Properties open, high, low are in
+quote currency units.
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| product_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                     | Type   | Required | Description |
+| ------------------------- | ------ | -------- | ----------- |
+| open                      | string | Yes      |             |
+| high                      | string | Yes      |             |
+| low                       | string | Yes      |             |
+| last                      | string | Yes      |             |
+| volume                    | string | Yes      |             |
+| volume_30day              | string | No       |             |
+| rfq_volume_24hour         | string | No       |             |
+| rfq_volume_30day          | string | No       |             |
+| conversions_volume_24hour | string | No       |             |
+| conversions_volume_30day  | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "open": "5414.18000000",
+  "high": "6441.37000000",
+  "low": "5261.69000000",
+  "volume": "53687.76764233",
+  "last": "6250.02000000",
+  "volume_30day": "786763.72930864",
+  "rfq_volume_24hour": "78.23",
+  "conversions_volume_24hour": "0.000000",
+  "rfq_volume_30day": "0.000000",
+  "conversions_volume_30day": "0.000000"
+}
+```
+
+---
+
+# Get product ticker - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-ticker](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-ticker)
+
+## Endpoint
+
+`GET /products/%7Bproduct_id%7D/ticker`
+
+## Description
+
+Coinbase recommends that you get real-time updates by connecting with the
+WebSocket stream and listening for match messages, rather than polling.
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| product_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field              | Type    | Required | Description |
+| ------------------ | ------- | -------- | ----------- |
+| ask                | string  | Yes      |             |
+| bid                | string  | Yes      |             |
+| volume             | string  | Yes      |             |
+| trade_id           | integer | Yes      |             |
+| price              | string  | Yes      |             |
+| size               | string  | Yes      |             |
+| time               | string  | Yes      |             |
+| rfq_volume         | string  | No       |             |
+| conversions_volume | string  | No       |             |
+
+#### Example Response
+
+```json
+{
+  "trade_id": 86326522,
+  "price": "6268.48",
+  "size": "0.00698254",
+  "time": "2020-03-20T00:22:57.833Z",
+  "bid": "6265.15",
+  "ask": "6267.71",
+  "volume": "53602.03940154",
+  "rfq_volume": "123.122",
+  "conversions_volume": "0.00"
+}
+```
+
+---
+
+# Get product trades - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades)
+
+## Endpoint
+
+`GET /products/%7Bproduct_id%7D/trades`
+
+## Description
+
+The side of a trade indicates the maker order side. The maker order is the order
+that was open on the order book.
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description                       |
+| ---------- | ------ | -------- | --------------------------------- |
+| product_id | string | Yes      | list trades for specific product. |
+
+## Query Parameters
+
+| Parameter | Type    | Description                                          |
+| --------- | ------- | ---------------------------------------------------- |
+| limit     | integer | Limit on number of results to return.                |
+| before    | string  | Used for pagination. Sets start cursor to before id. |
+| after     | string  | Used for pagination. Sets end cursor to after id.    |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field    | Type         | Required | Description |
+| -------- | ------------ | -------- | ----------- |
+| trade_id | integer      | Yes      |             |
+| side     | enum<string> | Yes      |             |
+| size     | string       | Yes      |             |
+| price    | string       | Yes      |             |
+| time     | string       | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "time": "2020-03-20T00:36:59.860Z",
+    "trade_id": 86327327,
+    "price": "6225.32000000",
+    "size": "0.06469797",
+    "side": "sell"
+  }
+]
+```
+
+---
+
+# Get single product - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-single-product](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-single-product)
+
+## Endpoint
+
+`GET /products/%7Bproduct_id%7D`
+
+## Description
+
+Get information on a single product.
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| product_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+Min order price (a.k.a. price increment
+
+#### Response Fields
+
+| Field                     | Type         | Required | Description                                                                               |
+| ------------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------- |
+| id                        | string       | Yes      |                                                                                           |
+| base_currency             | string       | Yes      |                                                                                           |
+| quote_currency            | string       | Yes      |                                                                                           |
+| quote_increment           | string       | Yes      | Min order price (a.k.a. price increment                                                   |
+| base_increment            | string       | Yes      |                                                                                           |
+| display_name              | string       | Yes      |                                                                                           |
+| min_market_funds          | string       | Yes      |                                                                                           |
+| margin_enabled            | boolean      | Yes      |                                                                                           |
+| post_only                 | boolean      | Yes      |                                                                                           |
+| limit_only                | boolean      | Yes      |                                                                                           |
+| cancel_only               | boolean      | Yes      |                                                                                           |
+| status                    | enum<string> | Yes      |                                                                                           |
+| status_message            | string       | Yes      |                                                                                           |
+| auction_mode              | boolean      | Yes      |                                                                                           |
+| trading_disabled          | boolean      | No       |                                                                                           |
+| fx_stablecoin             | boolean      | No       |                                                                                           |
+| max_slippage_percentage   | string       | No       |                                                                                           |
+| high_bid_limit_percentage | string       | No       | Percentage to calculate highest price for limit buy order (Stable coin trading pair only) |
+
+#### Example Response
+
+```json
+{
+  "id": "BTC-USD",
+  "base_currency": "BTC",
+  "quote_currency": "USD",
+  "quote_increment": "0.01000000",
+  "base_increment": "0.00000001",
+  "display_name": "BTC/USD",
+  "min_market_funds": "10",
+  "margin_enabled": false,
+  "post_only": false,
+  "limit_only": false,
+  "cancel_only": false,
+  "status": "online",
+  "status_message": "",
+  "auction_mode": true
+}
+```
+
+---
+
+# Create a profile - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/create-profile](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/create-profile)
+
+## Endpoint
+
+`POST /profiles`
+
+## Description
+
+Create a new profile. Will fail if no name is provided or if user already has
+max number of profiles.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field      | Type    | Required | Description |
+| ---------- | ------- | -------- | ----------- |
+| id         | string  | Yes      |             |
+| user_id    | string  | Yes      |             |
+| name       | string  | Yes      |             |
+| active     | boolean | Yes      |             |
+| is_default | boolean | Yes      |             |
+| created_at | string  | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "user_id": "5cf6e115aaf44503db300f1e",
+  "name": "default",
+  "active": true,
+  "is_default": true,
+  "created_at": "2019-06-04T21:22:32.226Z"
+}
+```
+
+---
+
+# Delete a profile - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/delete-profile](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/delete-profile)
+
+## Endpoint
+
+`PUT /profiles/%7Bprofile_id%7D/deactivate`
+
+## Description
+
+Deletes the profile specified by profile_id and transfers all funds to the
+profile specified by to. Fails if there are any open orders on the profile to be
+deleted.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| profile_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Example Response
+
+```json
+{}
+```
+
+---
+
+# Get profile by id - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profile-by-id](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profile-by-id)
+
+## Endpoint
+
+`GET /profiles/%7Bprofile_id%7D`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| profile_id | string | Yes      |             |
+
+## Query Parameters
+
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| active    | boolean |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field      | Type    | Required | Description |
+| ---------- | ------- | -------- | ----------- |
+| id         | string  | Yes      |             |
+| user_id    | string  | Yes      |             |
+| name       | string  | Yes      |             |
+| active     | boolean | Yes      |             |
+| is_default | boolean | Yes      |             |
+| created_at | string  | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "user_id": "5cf6e115aaf44503db300f1e",
+  "name": "default",
+  "active": true,
+  "is_default": true,
+  "created_at": "2019-06-04T21:22:32.226Z"
+}
+```
+
+---
+
+# Get profiles - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profiles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profiles)
+
+## Endpoint
+
+`GET /profiles`
+
+## Description
+
+Gets a list of all of the current user’s profiles.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| active    | boolean |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field      | Type    | Required | Description |
+| ---------- | ------- | -------- | ----------- |
+| id         | string  | Yes      |             |
+| user_id    | string  | Yes      |             |
+| name       | string  | Yes      |             |
+| active     | boolean | Yes      |             |
+| is_default | boolean | Yes      |             |
+| created_at | string  | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+    "user_id": "5cf6e115aaf44503db300f1e",
+    "name": "default",
+    "active": true,
+    "is_default": true,
+    "created_at": "2019-06-04T21:22:32.226Z"
+  }
+]
+```
+
+---
+
+# Rename a profile - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/rename-profile](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/rename-profile)
+
+## Endpoint
+
+`PUT /profiles/%7Bprofile_id%7D`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description |
+| ---------- | ------ | -------- | ----------- |
+| profile_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field      | Type    | Required | Description |
+| ---------- | ------- | -------- | ----------- |
+| id         | string  | Yes      |             |
+| user_id    | string  | Yes      |             |
+| name       | string  | Yes      |             |
+| active     | boolean | Yes      |             |
+| is_default | boolean | Yes      |             |
+| created_at | string  | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "user_id": "5cf6e115aaf44503db300f1e",
+  "name": "default",
+  "active": true,
+  "is_default": true,
+  "created_at": "2019-06-04T21:22:32.226Z"
+}
+```
+
+---
+
+# Transfer funds between profiles - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/transfer-funds-profile](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/transfer-funds-profile)
+
+## Endpoint
+
+`POST /profiles/transfer`
+
+## Permissions
+
+This endpoint requires the “transfer” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Example Response
+
+```json
+{}
+```
+
+---
+
+# Create a report - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/create-report](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/create-report)
+
+## Endpoint
+
+`POST /reports`
+
+## Description
+
+Reports provide batches of historic information about your profile in various
+human and machine readable forms.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field  | Type         | Required | Description |
+| ------ | ------------ | -------- | ----------- |
+| id     | string       | Yes      |             |
+| type   | string       | Yes      |             |
+| status | enum<string> | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "type": "<string>",
+  "status": "pending"
+}
+```
+
+---
+
+# Get a report - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-report](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-report)
+
+## Endpoint
+
+`GET /reports/%7Breport_id%7D`
+
+## Description
+
+Once a report request has been accepted for processing, you can poll the report
+resource endpoint at /reports/{report_id} for its status. When status is ready,
+the final report is uploaded and available at {file_url}.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| report_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field        | Type         | Required | Description |
+| ------------ | ------------ | -------- | ----------- |
+| id           | string       | Yes      |             |
+| type         | string       | Yes      |             |
+| created_at   | string       | Yes      |             |
+| completed_at | string       | Yes      |             |
+| expires_at   | string       | Yes      |             |
+| status       | enum<string> | Yes      |             |
+| user_id      | string       | Yes      |             |
+| file_url     | string       | Yes      |             |
+| params       | object       | Yes      |             |
+| file_count   | string       | No       |             |
+
+#### Example Response
+
+```json
+{
+  "start_date": "2019-06-25T22:13:48.592Z",
+  "end_date": "2019-07-25T22:13:48.592Z",
+  "format": "pdf",
+  "product_id": "ALL",
+  "account_id": "ALL",
+  "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "email": "user1@example.com",
+  "user": {
+    "created_at": "2019-06-04T21:22:32.226Z",
+    "active_at": "2019-06-04T21:27:49.250Z",
+    "id": "5cf6e115aaf44503db300f1e",
+    "name": "User One",
+    "email": "user1@example.com",
+    "is_banned": false,
+    "user_type": "individual",
+    "fulfills_new_requirements": true,
+    "oauth_client": "pro",
+    "preferences": {
+      "preferred_market": "BTC-USD",
+      "margin_terms_completed_in_utc": "2019-06-13T23:40:17.752Z",
+      "margin_tutorial_completed_in_utc": "2019-06-19T23:56:59.411Z"
+    },
+    "has_default": false
+  },
+  "new_york_state": false
+}
+```
+
+---
+
+# Get all reports - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-all-reports](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-all-reports)
+
+## Endpoint
+
+`GET /reports`
+
+## Description
+
+Once a report request has been accepted for processing, you can poll the report
+resource endpoint at /reports/{report_id} for its status. When status is ready,
+the final report is uploaded and available at {file_url}.
+
+## Permissions
+
+This endpoint requires either the “view” or “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter      | Type    | Description                                                                                                                                |
+| -------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| profile_id     | string  | Filter results by a specific profile_id                                                                                                    |
+| after          | string  | Filter results after a specific date                                                                                                       |
+| limit          | integer | Limit results to a specific number                                                                                                         |
+| type           | string  | Filter results by type of report. Possible values: [account, balance, fills, otc-fills, rfq-fills, tax-invoice, 1099k-transaction-history] |
+| ignore_expired | boolean | Ignore expired results                                                                                                                     |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field        | Type         | Required | Description |
+| ------------ | ------------ | -------- | ----------- |
+| id           | string       | Yes      |             |
+| type         | string       | Yes      |             |
+| created_at   | string       | Yes      |             |
+| completed_at | string       | Yes      |             |
+| expires_at   | string       | Yes      |             |
+| status       | enum<string> | Yes      |             |
+| user_id      | string       | Yes      |             |
+| file_url     | string       | Yes      |             |
+| params       | object       | Yes      |             |
+| file_count   | string       | No       |             |
+
+#### Example Response
+
+```json
+{
+  "start_date": "2019-06-25T22:13:48.592Z",
+  "end_date": "2019-07-25T22:13:48.592Z",
+  "format": "pdf",
+  "product_id": "ALL",
+  "account_id": "ALL",
+  "profile_id": "8058d771-2d88-4f0f-ab6e-299c153d4308",
+  "email": "user1@example.com",
+  "user": {
+    "created_at": "2019-06-04T21:22:32.226Z",
+    "active_at": "2019-06-04T21:27:49.250Z",
+    "id": "5cf6e115aaf44503db300f1e",
+    "name": "User One",
+    "email": "user1@example.com",
+    "is_banned": false,
+    "user_type": "individual",
+    "fulfills_new_requirements": true,
+    "oauth_client": "pro",
+    "preferences": {
+      "preferred_market": "BTC-USD",
+      "margin_terms_completed_in_utc": "2019-06-13T23:40:17.752Z",
+      "margin_tutorial_completed_in_utc": "2019-06-19T23:56:59.411Z"
+    },
+    "has_default": false
+  },
+  "new_york_state": false
+}
+```
+
+---
+
+# Deposit from Coinbase account - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-coinbase-account](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-coinbase-account)
+
+## Endpoint
+
+`POST /deposits/coinbase-account`
+
+## Description
+
+Deposit funds from a Coinbase account
+
+## Permissions
+
+This endpoint requires the “transfer” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field    | Type   | Required | Description |
+| -------- | ------ | -------- | ----------- |
+| id       | string | No       |             |
+| amount   | string | No       |             |
+| currency | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "amount": "<string>",
+  "currency": "<string>"
+}
+```
+
+---
+
+# Deposit from payment method - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-payment-method](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-payment-method)
+
+## Endpoint
+
+`POST /deposits/payment-method`
+
+## Description
+
+Deposit funds from a payment method
+
+## Permissions
+
+This endpoint requires the “transfer” permission. API key must belong to default
+profile.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field     | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| id        | string | No       |             |
+| amount    | string | No       |             |
+| currency  | string | No       |             |
+| payout_at | string | No       |             |
+| fee       | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "amount": "<string>",
+  "currency": "<string>",
+  "payout_at": "<string>",
+  "fee": "<string>"
+}
+```
+
+---
+
+# Get a single transfer - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-single-transfer](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-single-transfer)
+
+## Endpoint
+
+`GET /transfers/%7Btransfer_id%7D`
+
+## Description
+
+Get information on a single transfer.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter   | Type   | Required | Description |
+| ----------- | ------ | -------- | ----------- |
+| transfer_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field        | Type         | Required | Description |
+| ------------ | ------------ | -------- | ----------- |
+| id           | string       | Yes      |             |
+| type         | enum<string> | Yes      |             |
+| created_at   | string       | Yes      |             |
+| completed_at | string       | Yes      |             |
+| canceled_at  | string       | Yes      |             |
+| processed_at | string       | Yes      |             |
+| amount       | string       | Yes      |             |
+| details      | object       | Yes      |             |
+| user_nonce   | string       | Yes      |             |
+| currency     | string       | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "19ac524d-8827-4246-a1b2-18dc5ca9472c",
+  "type": "withdraw",
+  "created_at": "2020-03-12T00:14:12.397Z",
+  "completed_at": "2020-03-12T00:14:13.021Z",
+  "amount": "1.00000000",
+  "details": {
+    "coinbase_account_id": "2b760113-fbba-5600-ac74-36482c130768",
+    "coinbase_transaction_id": "5e697ed49f8417148f3366ea",
+    "coinbase_payment_method_id": ""
+  },
+  "currency": "USD"
+}
+```
+
+---
+
+# Get all payment methods - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-payment-methods](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-payment-methods)
+
+## Endpoint
+
+`GET /payment-methods`
+
+## Description
+
+Gets a list of the user’s linked payment methods.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field              | Type     | Required | Description |
+| ------------------ | -------- | -------- | ----------- |
+| id                 | string   | Yes      |             |
+| type               | string   | Yes      |             |
+| name               | string   | Yes      |             |
+| currency           | string   | Yes      |             |
+| primary_buy        | boolean  | Yes      |             |
+| primary_sell       | boolean  | Yes      |             |
+| instant_buy        | boolean  | Yes      |             |
+| instant_sell       | boolean  | Yes      |             |
+| created_at         | string   | Yes      |             |
+| updated_at         | string   | Yes      |             |
+| resource           | string   | Yes      |             |
+| resource_path      | string   | Yes      |             |
+| verified           | boolean  | No       |             |
+| limits             | object   | No       |             |
+| allow_buy          | boolean  | No       |             |
+| allow_sell         | boolean  | No       |             |
+| allow_deposit      | boolean  | No       |             |
+| allow_withdraw     | boolean  | No       |             |
+| fiat_account       | object   | No       |             |
+| crypto_account     | object   | No       |             |
+| recurring_options  | object[] | No       |             |
+| available_balance  | object   | No       |             |
+| picker_data        | object   | No       |             |
+| hold_business_days | integer  | No       |             |
+| hold_days          | integer  | No       |             |
+| verificationMethod | string   | No       |             |
+| cdvStatus          | string   | No       |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "cbdd9f28-34e7-5152-b1dc-d657bf8df858",
+    "type": "fiat_account",
+    "name": "Cash (USD)",
+    "currency": "USD",
+    "primary_buy": true,
+    "primary_sell": true,
+    "instant_buy": true,
+    "instant_sell": true,
+    "created_at": "2019-06-04T21:24:32.000Z",
+    "updated_at": "2019-06-04T21:24:32.000Z",
+    "resource": "payment_method",
+    "resource_path": "/v2/payment-methods/cbdd9f28-34e7-5152-b1dc-d657bf8df858",
+    "limits": {
+      "type": "fiat_account",
+      "name": "Coinbase Account"
+    },
+    "allow_buy": true,
+    "allow_sell": true,
+    "allow_deposit": false,
+    "allow_withdraw": false,
+    "fiat_account": {
+      "id": "2b760113-fbba-5600-ac74-36482c130768",
+      "resource": "account",
+      "resource_path": "/v2/accounts/2b760113-fbba-5600-ac74-36482c130768"
+    },
+    "verified": true,
+    "picker_data": {
+      "symbol": "fiat_account",
+      "balance": {
+        "amount": "1.00",
+        "currency": "USD"
+      }
+    },
+    "hold_business_days": 0,
+    "hold_days": 0
+  }
+]
+```
+
+---
+
+# Get all transfers - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-transfers](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-transfers)
+
+## Endpoint
+
+`GET /transfers`
+
+## Description
+
+Gets a list of in-progress and completed transfers of funds in/out of any of the
+user’s accounts.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter       | Type         | Description                                                                                                                                             |
+| --------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| profile_id      | string       | Returns list of transfers from this portfolio id.                                                                                                       |
+| before          | string       | Used for pagination. Sets start cursor to before date.                                                                                                  |
+| after           | string       | Used for pagination. Sets end cursor to after date.                                                                                                     |
+| limit           | integer      | Limit on number of results to return.                                                                                                                   |
+| type            | enum<string> | Specifies deposit and withdrawal transfer types. Internal transfers represent the transfers of a user depositing/withdrawing across their own profiles. |
+| currency_type   | string       | Filter results by type of currency. Possible values: [crypto, fiat]                                                                                     |
+| transfer_reason | string       | Filter results by reason of transfer. Possible values: [usdc_reward]                                                                                    |
+| currency        | string       | Filter results by currency.                                                                                                                             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field        | Type         | Required | Description |
+| ------------ | ------------ | -------- | ----------- |
+| id           | string       | Yes      |             |
+| type         | enum<string> | Yes      |             |
+| created_at   | string       | Yes      |             |
+| completed_at | string       | Yes      |             |
+| canceled_at  | string       | Yes      |             |
+| processed_at | string       | Yes      |             |
+| amount       | string       | Yes      |             |
+| details      | object       | Yes      |             |
+| user_nonce   | string       | Yes      |             |
+| currency     | string       | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "19ac524d-8827-4246-a1b2-18dc5ca9472c",
+    "type": "withdraw",
+    "created_at": "2020-03-12T00:14:12.397Z",
+    "completed_at": "2020-03-12T00:14:13.021Z",
+    "amount": "1.00000000",
+    "details": {
+      "coinbase_account_id": "2b760113-fbba-5600-ac74-36482c130768",
+      "coinbase_transaction_id": "5e697ed49f8417148f3366ea",
+      "coinbase_payment_method_id": ""
+    },
+    "currency": "USD"
+  }
+]
+```
+
+---
+
+# Get fee estimate for crypto withdrawal - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-fee-estimate](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-fee-estimate)
+
+## Endpoint
+
+`GET /withdrawals/fee-estimate`
+
+## Description
+
+Gets the fee estimate for the crypto withdrawal to crypto address
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter      | Type   | Description |
+| -------------- | ------ | ----------- |
+| currency       | string |             |
+| crypto_address | string |             |
+| network        | string |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field              | Type   | Required | Description |
+| ------------------ | ------ | -------- | ----------- |
+| fee                | string | No       |             |
+| fee_before_subsidy | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "fee": "<string>",
+  "fee_before_subsidy": "<string>"
+}
+```
+
+---
+
+# Submit travel information for a transfer - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/submit-travel-info](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/submit-travel-info)
+
+## Endpoint
+
+`POST /transfers/%7Btransfer_id%7D/travel-rules`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter   | Type   | Required | Description |
+| ----------- | ------ | -------- | ----------- |
+| transfer_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field   | Type   | Required | Description |
+| ------- | ------ | -------- | ----------- |
+| message | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "message": "<string>"
+}
+```
+
+---
+
+# Withdraw to Coinbase account - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-coinbase-account](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-coinbase-account)
+
+## Endpoint
+
+`POST /withdrawals/coinbase-account`
+
+## Description
+
+Withdraw funds to a Coinbase account
+
+## Permissions
+
+This endpoint requires the “transfer” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field    | Type   | Required | Description |
+| -------- | ------ | -------- | ----------- |
+| id       | string | No       |             |
+| amount   | string | No       |             |
+| currency | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "amount": "<string>",
+  "currency": "<string>"
+}
+```
+
+---
+
+# Withdraw to crypto address - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-crypto-address](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-crypto-address)
+
+## Endpoint
+
+`POST /withdrawals/crypto`
+
+## Description
+
+The Travel Rule requires financial institutions, including custodial
+cryptocurrency exchanges, to share basic information about their customers when
+sending funds over a certain amount. VASPs that are part of the TRUST consortium
+use the TRUST solution when sharing PII to satisfy the Travel Rule data
+requirements.
+
+## Permissions
+
+This endpoint requires the “transfer” permission. API key must belong to default
+profile.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field     | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| id        | string | No       |             |
+| amount    | string | No       |             |
+| currency  | string | No       |             |
+| payout_at | string | No       |             |
+| fee       | string | No       |             |
+| subtotal  | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "amount": "<string>",
+  "currency": "<string>",
+  "payout_at": "<string>",
+  "fee": "<string>",
+  "subtotal": "<string>"
+}
+```
+
+---
+
+# Withdraw to payment method - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-payment-method](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-payment-method)
+
+## Endpoint
+
+`POST /withdrawals/payment-method`
+
+## Description
+
+Withdraw funds to a payment method
+
+## Permissions
+
+This endpoint requires the “transfer” permission. API key is restricted to the
+default profile.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field     | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| id        | string | No       |             |
+| amount    | string | No       |             |
+| currency  | string | No       |             |
+| payout_at | string | No       |             |
+| fee       | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "amount": "<string>",
+  "currency": "<string>",
+  "payout_at": "<string>",
+  "fee": "<string>"
+}
+```
+
+---
+
+# Create travel rule entry - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/create-travel-rule](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/create-travel-rule)
+
+## Endpoint
+
+`POST /travel-rules`
+
+## Description
+
+Create travel rule entry for sending address
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+Travel rule identifier
+
+#### Response Fields
+
+| Field              | Type   | Required | Description                                                      |
+| ------------------ | ------ | -------- | ---------------------------------------------------------------- |
+| id                 | string | No       | Travel rule identifier                                           |
+| created_at         | string | No       | Timestamp of when entry was added                                |
+| address            | string | No       | Crypto address where funds will be deposited from                |
+| originator_name    | string | No       | Name of the originator of the funds                              |
+| originator_country | string | No       | country code (ISO 3166-1 alpha-2) of the originator of the funds |
+| vasp_id            | string | No       | VASP-uuid                                                        |
+| vasp_country       | string | No       | ISO 3166-1 alpha-2 formatted country code of the VASP            |
+| lei_number         | string | No       | Legal Entity Identifier (LEI) of the VASP                        |
+| originator_address | object | No       |                                                                  |
+
+#### Example Response
+
+```json
+{
+  "id": "<string>",
+  "created_at": "2023-11-07T05:31:56Z",
+  "address": "<string>",
+  "originator_name": "<string>",
+  "originator_country": "<string>",
+  "vasp_id": "<string>",
+  "vasp_country": "<string>",
+  "lei_number": "<string>",
+  "originator_address": {
+    "address_1": "<string>",
+    "address_2": "<string>",
+    "address_3": "<string>",
+    "city": "<string>",
+    "state": "<string>",
+    "country": "<string>",
+    "postal_code": "<string>"
+  }
+}
+```
+
+---
+
+# Delete existing travel rule entry - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/delete-existing-travel-rule](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/delete-existing-travel-rule)
+
+## Endpoint
+
+`DELETE /travel-rules/%7Bid%7D`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description            |
+| --------- | ------ | -------- | ---------------------- |
+| id        | string | Yes      | Travel rule identifier |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Example Response
+
+```json
+{}
+```
+
+---
+
+# Get all travel rule information - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/get-all-travel-rule](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/get-all-travel-rule)
+
+## Endpoint
+
+`GET /travel-rules`
+
+## Description
+
+Return a list of all stored travel rule information
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter | Type    | Description                                          |
+| --------- | ------- | ---------------------------------------------------- |
+| before    | string  | Used for pagination. Sets start cursor to before id. |
+| after     | string  | Used for pagination. Sets end cursor to after id.    |
+| limit     | integer | Limit on number of results to return.                |
+| address   | string  | Optional filter by address                           |
+
+## Response
+
+### 200 Success
+
+Travel rule identifier
+
+#### Response Fields
+
+| Field              | Type   | Required | Description                                                      |
+| ------------------ | ------ | -------- | ---------------------------------------------------------------- |
+| id                 | string | No       | Travel rule identifier                                           |
+| created_at         | string | No       | Timestamp of when entry was added                                |
+| address            | string | No       | Crypto address where funds will be deposited from                |
+| originator_name    | string | No       | Name of the originator of the funds                              |
+| originator_country | string | No       | country code (ISO 3166-1 alpha-2) of the originator of the funds |
+| vasp_id            | string | No       | VASP-uuid                                                        |
+| vasp_country       | string | No       | ISO 3166-1 alpha-2 formatted country code of the VASP            |
+| lei_number         | string | No       | Legal Entity Identifier (LEI) of the VASP                        |
+| originator_address | object | No       |                                                                  |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "<string>",
+    "created_at": "2023-11-07T05:31:56Z",
+    "address": "<string>",
+    "originator_name": "<string>",
+    "originator_country": "<string>",
+    "vasp_id": "<string>",
+    "vasp_country": "<string>",
+    "lei_number": "<string>",
+    "originator_address": {
+      "address_1": "<string>",
+      "address_2": "<string>",
+      "address_3": "<string>",
+      "city": "<string>",
+      "state": "<string>",
+      "country": "<string>",
+      "postal_code": "<string>"
+    }
+  }
+]
+```
+
+---
+
+# Get user exchange limits - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-exchange-limits](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-exchange-limits)
+
+## Endpoint
+
+`GET /users/%7Buser_id%7D/exchange-limits`
+
+## Description
+
+This request returns information on your payment method transfer limits, as well
+as buy/sell limits per currency.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| user_id   | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| transfer_limits | object | Yes      |             |
+| limit_currency  | string | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "exchange_withdraw": {
+    "MANA": {
+      "max": "391282.23187385",
+      "remaining": "391282.23187385",
+      "period_in_days": 7
+    },
+    "ALGO": {
+      "max": "59844.404548",
+      "remaining": "59844.404548",
+      "period_in_days": 7
+    },
+    "ATOM": {
+      "max": "4624.277457",
+      "remaining": "4624.277457",
+      "period_in_days": 7
+    },
+    "KNC": {
+      "max": "21584.28663933",
+      "remaining": "21584.28663933",
+      "period_in_days": 7
+    }
+  }
+}
+```
+
+---
+
+# Get user trading volume - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-trading-volume](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-trading-volume)
+
+## Endpoint
+
+`GET /users/%7Buser_id%7D/trading-volumes`
+
+## Description
+
+Gets aggregated and individual trading volumes for users.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| user_id   | string | Yes      | The ID of the user who owns the account |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field           | Type     | Required | Description |
+| --------------- | -------- | -------- | ----------- |
+| aggregated_data | object   | No       |             |
+| individual_data | object[] | No       |             |
+
+#### Example Response
+
+```json
+{
+  "aggregated_data": {
+    "activity_metrics": {
+      "start_date": "<string>",
+      "end_date": "<string>",
+      "maker_volume_notional_usd": "<string>",
+      "maker_volume_relative_percentage": "<string>",
+      "taker_volume_notional_usd": "<string>",
+      "taker_volume_relative_percentage": "<string>",
+      "total_exchange_volume_notional_usd": "<string>",
+      "total_exchange_volume_relative_percentage": "<string>",
+      "maker_rank": "<string>",
+      "taker_rank": "<string>",
+      "total_exchange_volume_rank": "<string>",
+      "adjusted_maker_volume_notional_usd": "<string>",
+      "adjusted_maker_volume_relative_percentage": "<string>",
+      "adjusted_total_exchange_volume_notional_usd": "<string>",
+      "adjusted_total_exchange_volume_relative_percentage": "<string>",
+      "adjusted_maker_volume_rank": "<string>",
+      "adjusted_total_exchange_volume_rank": "<string>",
+      "liquidity_program_tier": "<string>",
+      "next_liquidity_program_tier": "<string>"
+    }
+  },
+  "individual_data": [
+    {
+      "email": "<string>",
+      "activity_metrics": {
+        "start_date": "<string>",
+        "end_date": "<string>",
+        "maker_volume_notional_usd": "<string>",
+        "maker_volume_relative_percentage": "<string>",
+        "taker_volume_notional_usd": "<string>",
+        "taker_volume_relative_percentage": "<string>",
+        "total_exchange_volume_notional_usd": "<string>",
+        "total_exchange_volume_relative_percentage": "<string>",
+        "maker_rank": "<string>",
+        "taker_rank": "<string>",
+        "total_exchange_volume_rank": "<string>",
+        "adjusted_maker_volume_notional_usd": "<string>",
+        "adjusted_maker_volume_relative_percentage": "<string>",
+        "adjusted_total_exchange_volume_notional_usd": "<string>",
+        "adjusted_total_exchange_volume_relative_percentage": "<string>",
+        "adjusted_maker_volume_rank": "<string>",
+        "adjusted_total_exchange_volume_rank": "<string>"
+      }
+    }
+  ]
+}
+```
+
+---
+
+# Update settlement preference - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/update-settlement-preference](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/update-settlement-preference)
+
+## Endpoint
+
+`POST /users/%7Buser_id%7D/settlement-preferences`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| user_id   | string | Yes      | The ID of the user who owns the account |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field                 | Type   | Required | Description |
+| --------------------- | ------ | -------- | ----------- |
+| settlement_preference | string | No       |             |
+
+#### Example Response
+
+```json
+{
+  "settlement_preference": "<string>"
+}
+```
+
+---
+
+# Create a new redeem - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-redeem](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-redeem)
+
+## Endpoint
+
+`POST /wrapped-assets/redeem`
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+A successful response.
+
+#### Response Fields
+
+| Field  | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| redeem | object | No       |             |
+
+#### Example Response
+
+```json
+{
+  "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+  "from_amount": "11.00000000",
+  "to_amount": "11.00000000",
+  "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+  "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+  "from_currency": "USDC",
+  "to_currency": "USD",
+  "status": "completed",
+  "conversion_rate": "1.006",
+  "created_at": "2019-06-11T22:11:56.382Z",
+  "completed_at": "2019-06-11T22:11:56.382Z",
+  "canceled_at": "2019-06-11T22:11:56.382Z",
+  "idem": "1c23a08a-8d09-4b6f-b549-985997bb5990"
+}
+```
+
+---
+
+# Create a new stake-wrap - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-stake-wrap](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-stake-wrap)
+
+## Endpoint
+
+`POST /wrapped-assets/stake-wrap`
+
+## Description
+
+A successful stake-wrap is assigned a stake-wrap ID. The corresponding ledger
+entries for a stake-wrap reference this stake-wrap ID.
+
+## Permissions
+
+This endpoint requires the “trade” permission.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| from_amount     | string | Yes      |             |
+| to_amount       | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from_currency   | string | Yes      |             |
+| to_currency     | string | Yes      |             |
+| status          | string | Yes      |             |
+| conversion_rate | string | Yes      |             |
+| created_at      | string | Yes      |             |
+| completed_at    | string | Yes      |             |
+| canceled_at     | string | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+  "from_amount": "11.00000000",
+  "to_amount": "11.00000000",
+  "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+  "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+  "from_currency": "USDC",
+  "to_currency": "USD",
+  "status": "pending",
+  "conversion_rate": "1.006",
+  "created_at": "2019-06-11T22:11:56.382Z",
+  "completed_at": "2019-06-11T22:11:56.382Z",
+  "canceled_at": "2019-06-11T22:11:56.382Z"
+}
+```
+
+---
+
+# Get a single redeem - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-single-redeem](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-single-redeem)
+
+## Endpoint
+
+`GET /wrapped-assets/redeem/%7Bredeem_id%7D`
+
+## Description
+
+Get details for a specific redeem in the profile associated with the API key.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| redeem_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| from_amount     | string | Yes      |             |
+| to_amount       | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from_currency   | string | Yes      |             |
+| to_currency     | string | Yes      |             |
+| status          | string | Yes      |             |
+| conversion_rate | string | Yes      |             |
+| created_at      | string | Yes      |             |
+| completed_at    | string | Yes      |             |
+| canceled_at     | string | Yes      |             |
+| idem            | string | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+  "from_amount": "11.00000000",
+  "to_amount": "11.00000000",
+  "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+  "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+  "from_currency": "USDC",
+  "to_currency": "USD",
+  "status": "completed",
+  "conversion_rate": "1.006",
+  "created_at": "2019-06-11T22:11:56.382Z",
+  "completed_at": "2019-06-11T22:11:56.382Z",
+  "canceled_at": "2019-06-11T22:11:56.382Z",
+  "idem": "1c23a08a-8d09-4b6f-b549-985997bb5990"
+}
+```
+
+---
+
+# Get a single stake-wrap - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-a-single-stake-wrap](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-a-single-stake-wrap)
+
+## Endpoint
+
+`GET /wrapped-assets/stake-wrap/%7Bstake_wrap_id%7D`
+
+## Description
+
+Get details for a specific stake-wrap in the profile associated with the API
+key.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Path Parameters
+
+| Parameter     | Type   | Required | Description |
+| ------------- | ------ | -------- | ----------- |
+| stake_wrap_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| from_amount     | string | Yes      |             |
+| to_amount       | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from_currency   | string | Yes      |             |
+| to_currency     | string | Yes      |             |
+| status          | string | Yes      |             |
+| conversion_rate | string | Yes      |             |
+| created_at      | string | Yes      |             |
+| completed_at    | string | Yes      |             |
+| canceled_at     | string | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+  "from_amount": "11.00000000",
+  "to_amount": "11.00000000",
+  "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+  "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+  "from_currency": "USDC",
+  "to_currency": "USD",
+  "status": "pending",
+  "conversion_rate": "1.006",
+  "created_at": "2019-06-11T22:11:56.382Z",
+  "completed_at": "2019-06-11T22:11:56.382Z",
+  "canceled_at": "2019-06-11T22:11:56.382Z"
+}
+```
+
+---
+
+# Get all redeems - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-redeems](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-redeems)
+
+## Endpoint
+
+`GET /wrapped-assets/redeem`
+
+## Description
+
+Get details for all redeems in the profile associated with the API key.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter     | Type    | Description                                                                                                                               |
+| ------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| before        | string  | Used for pagination, returns stake-wraps with created_at timestamps newer than before date. Example date format 2023-03-15T23:40:04.505Z. |
+| after         | string  | Used for pagination, returns stake-wraps with created_at timestamps older than after date. Example date format 2023-03-15T23:40:04.505Z.  |
+| limit         | integer | Limit on number of results to return.                                                                                                     |
+| from_currency | string  | from_currency, i.e. CBETH.                                                                                                                |
+| to_currency   | string  | to_currency, i.e. ETH.                                                                                                                    |
+| status        | string  |                                                                                                                                           |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| from_amount     | string | Yes      |             |
+| to_amount       | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from_currency   | string | Yes      |             |
+| to_currency     | string | Yes      |             |
+| status          | string | Yes      |             |
+| conversion_rate | string | Yes      |             |
+| created_at      | string | Yes      |             |
+| completed_at    | string | Yes      |             |
+| canceled_at     | string | Yes      |             |
+| idem            | string | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+    "from_amount": "11.00000000",
+    "to_amount": "11.00000000",
+    "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+    "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "status": "completed",
+    "conversion_rate": "1.006",
+    "created_at": "2019-06-11T22:11:56.382Z",
+    "completed_at": "2019-06-11T22:11:56.382Z",
+    "canceled_at": "2019-06-11T22:11:56.382Z",
+    "idem": "1c23a08a-8d09-4b6f-b549-985997bb5990"
+  }
+]
+```
+
+---
+
+# Get all stake-wraps - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-stake-wraps](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-stake-wraps)
+
+## Endpoint
+
+`GET /wrapped-assets/stake-wrap`
+
+## Description
+
+Get details for all stake-wraps in the profile associated with the API key.
+
+## Authorization
+
+| Header               | Type   | Required |
+| -------------------- | ------ | -------- |
+| cb-access-key        | string | Yes      |
+| cb-access-passphrase | string | Yes      |
+| cb-access-sign       | string | Yes      |
+| cb-access-timestamp  | string | Yes      |
+
+## Query Parameters
+
+| Parameter | Type    | Description                                                                                                                               |
+| --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| before    | string  | Used for pagination, returns stake-wraps with created_at timestamps newer than before date. Example date format 2023-03-15T23:40:04.505Z. |
+| after     | string  | Used for pagination, returns stake-wraps with created_at timestamps older than after date. Example date format 2023-03-15T23:40:04.505Z.  |
+| limit     | integer | Limit on number of results to return.                                                                                                     |
+| from      | string  | from_currency, i.e. ETH.                                                                                                                  |
+| to        | string  | to_currency, i.e. CBETH.                                                                                                                  |
+| status    | string  |                                                                                                                                           |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field           | Type   | Required | Description |
+| --------------- | ------ | -------- | ----------- |
+| id              | string | Yes      |             |
+| from_amount     | string | Yes      |             |
+| to_amount       | string | Yes      |             |
+| from_account_id | string | Yes      |             |
+| to_account_id   | string | Yes      |             |
+| from_currency   | string | Yes      |             |
+| to_currency     | string | Yes      |             |
+| status          | string | Yes      |             |
+| conversion_rate | string | Yes      |             |
+| created_at      | string | Yes      |             |
+| completed_at    | string | Yes      |             |
+| canceled_at     | string | Yes      |             |
+
+#### Example Response
+
+```json
+[
+  {
+    "id": "c5aaf125-d99e-41fe-82ea-ad068038b278",
+    "from_amount": "11.00000000",
+    "to_amount": "11.00000000",
+    "from_account_id": "5dcc143c-fb96-4f72-aebf-a165e3d29b53",
+    "to_account_id": "6100247f-90fc-4335-ac17-d99839f0c909",
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "status": "pending",
+    "conversion_rate": "1.006",
+    "created_at": "2019-06-11T22:11:56.382Z",
+    "completed_at": "2019-06-11T22:11:56.382Z",
+    "canceled_at": "2019-06-11T22:11:56.382Z"
+  }
+]
+```
+
+---
+
+# Get all wrapped assets - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-wrapped-assets](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-wrapped-assets)
+
+## Endpoint
+
+`GET /wrapped-assets`
+
+## Description
+
+Returns a list of all supported wrapped assets details objects
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field          | Type     | Required | Description |
+| -------------- | -------- | -------- | ----------- |
+| wrapped_assets | object[] | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "wrapped_assets": [
+    {
+      "id": "CBETH",
+      "circulating_supply": "221127.7137774658",
+      "total_supply": "926714.1251656958084",
+      "conversion_rate": "1.006081377449935752",
+      "apy": "0.0384"
+    }
+  ]
+}
+```
+
+---
+
+# Get wrapped asset conversion rate - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-conversion-rate](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-conversion-rate)
+
+## Endpoint
+
+`GET /wrapped-assets/%7Bwrapped_asset_id%7D/conversion-rate`
+
+## Description
+
+You can test the cbETH conversion rate by sending an HTTP GET request to the
+following URL:
+
+## Path Parameters
+
+| Parameter        | Type   | Required | Description |
+| ---------------- | ------ | -------- | ----------- |
+| wrapped_asset_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+#### Response Fields
+
+| Field  | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| amount | string | Yes      |             |
+
+#### Example Response
+
+```json
+{
+  "amount": "1.006081377449935752"
+}
+```
+
+---
+
+# Get wrapped asset details - Coinbase
+
+**Source:**
+[https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-details](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-details)
+
+## Endpoint
+
+`GET /wrapped-assets/%7Bwrapped_asset_id%7D`
+
+## Description
+
+The number of wrapped asset units in possession of customers. It excludes units
+pre-minted and held in abeyance to quickly serve wrapping customers.
+
+## Path Parameters
+
+| Parameter        | Type   | Required | Description |
+| ---------------- | ------ | -------- | ----------- |
+| wrapped_asset_id | string | Yes      |             |
+
+## Response
+
+### 200 Success
+
+The symbol of the wrapped asset
+
+#### Response Fields
+
+| Field                     | Type   | Required | Description                                                                                                           |
+| ------------------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| id                        | string | Yes      | The symbol of the wrapped asset                                                                                       |
+| circulating_supply        | string | Yes      | The assets wrapped by customers less the assets unwrapped by customers existing outside of Coinbase's premint account |
+| total_supply              | string | Yes      | The total token supply of the asset matching that on Etherscan                                                        |
+| conversion_rate           | string | Yes      | The conversion rate between the wrapped asset and the underlying asset                                                |
+| apy                       | string | Yes      | The APY earned by the supply of the underlying asset                                                                  |
+| redeem_time_estimate_days | string | Yes      | The estimated time to redeem the wrapped asset in days                                                                |
+
+#### Example Response
+
+```json
+{
+  "id": "CBETH",
+  "circulating_supply": "221127.7137774658",
+  "total_supply": "926714.1251656958084",
+  "conversion_rate": "1.006081377449935752",
+  "apy": "0.0384",
+  "redeem_time_estimate_days": "12.34"
+}
+```
 
 ---
