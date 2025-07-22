@@ -3888,6 +3888,13 @@ Get custody transaction history, requires
 [bearer token](#overview--add-authenticated-request-header) in authorization
 header
 
+Please note that Custody endpoints utilize a non-multiplied asset format for
+long decimal assets like SHIB and PEPE, ensuring consistency with real-world
+asset representation. This differs from Trading endpoints, which use a
+multiplied asset format, such as SHIB1M and PEPE1M. For more information, please
+see
+[help centre](https://bullishexchange.atlassian.net/wiki/spaces/BHC/pages/20807684/Understanding+Multiplied+Assets+PEPE1M+and+SHIB1M)
+
 - [supports pagination](#overview--pagination-support)
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
@@ -5124,7 +5131,7 @@ API Key as follows:
 > Settings, then the withdrawal attempt will fail.**
 
 For a full example of using the withdrawal endpoint please see the
-[Custody Withdrawal Example](https://github.com/bullish-exchange/api-examples/blob/master/ecdsa/rest/custody_withdrawal.py)
+[Custody Withdrawal Example](https://github.com/bullish-exchange/api-examples/blob/master/custody/custody_withdrawal_ecdsa.py)
 
 Please note that Custody endpoints utilize a non-multiplied asset format for
 long decimal assets like SHIB and PEPE, ensuring consistency with real-world
@@ -5137,26 +5144,27 @@ The currently supported precisions for withdrawal quantities are as follows.
 Please note that fees are always specified in units of the symbol itself, not in
 smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
 
-| Symbol | Precision | Remarks                                                                                                                                                            |
-| ------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| USD    | 2dp       |                                                                                                                                                                    |
-| BTC    | 8dp       |                                                                                                                                                                    |
-| DOGE   | 8dp       |                                                                                                                                                                    |
-| EOS    | 4dp       |                                                                                                                                                                    |
-| ETH    | 8dp       |                                                                                                                                                                    |
-| LTC    | 8dp       |                                                                                                                                                                    |
-| XRP    | 6dp       |                                                                                                                                                                    |
-| AAVE   | 8dp       |                                                                                                                                                                    |
-| CRV    | 8dp       |                                                                                                                                                                    |
-| LINK   | 8dp       |                                                                                                                                                                    |
-| MANA   | 8dp       |                                                                                                                                                                    |
-| MATIC  | 8dp       |                                                                                                                                                                    |
-| SUSHI  | 8dp       |                                                                                                                                                                    |
-| UNI    | 8dp       |                                                                                                                                                                    |
-| USDC   | 6dp       |                                                                                                                                                                    |
-| USDT   | 6dp       |                                                                                                                                                                    |
-| SHIB   | 2dp       | Please ensure to use the non-multiplied asset format (e.g., SHIB, PEPE) when creating withdrawals, as Custody endpoints align with real-world asset representation |
-| PEPE   | 2dp       | Please ensure to use the non-multiplied asset format (e.g., SHIB, PEPE) when creating withdrawals, as Custody endpoints align with real-world asset representation |
+| Symbol | Precision                                             | Remarks                                                                                                                                                                  |
+| ------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| USD    | 2dp                                                   |                                                                                                                                                                          |
+| BTC    | 8dp                                                   |                                                                                                                                                                          |
+| DOGE   | 8dp                                                   |                                                                                                                                                                          |
+| EOS    | 4dp                                                   |                                                                                                                                                                          |
+| ETH    | 8dp                                                   |                                                                                                                                                                          |
+| LTC    | 8dp                                                   |                                                                                                                                                                          |
+| XRP    | 6dp                                                   |                                                                                                                                                                          |
+| AAVE   | 8dp                                                   |                                                                                                                                                                          |
+| CRV    | 8dp                                                   |                                                                                                                                                                          |
+| LINK   | 8dp                                                   |                                                                                                                                                                          |
+| MANA   | 8dp                                                   |                                                                                                                                                                          |
+| MATIC  | 8dp                                                   |                                                                                                                                                                          |
+| SUSHI  | 8dp                                                   |                                                                                                                                                                          |
+| UNI    | 8dp                                                   |                                                                                                                                                                          |
+| USDC   | 6dp                                                   |                                                                                                                                                                          |
+| USDT   | 6dp                                                   |                                                                                                                                                                          |
+| SHIB   | 2dp                                                   | Please ensure to use the non-multiplied asset format (e.g., SHIB, PEPE, BONK) when creating withdrawals, as Custody endpoints align with real-world asset representation |
+| PEPE   | 2dp                                                   | Please ensure to use the non-multiplied asset format (e.g., SHIB, PEPE, BONK) when creating withdrawals, as Custody endpoints align with real-world asset representation |
+| BONK   | Round to the nearest ten (e.g., 120 or 130, not 125). | Please ensure to use the non-multiplied asset format (e.g., SHIB, PEPE, BONK) when creating withdrawals, as Custody endpoints align with real-world asset representation |
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
