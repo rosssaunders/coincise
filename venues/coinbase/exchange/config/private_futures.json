@@ -1,0 +1,22 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_futures.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-auto-loan-setting",
+      "filename": "get-auto-loan-setting.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-usdc-conversion",
+      "filename": "get-usdc-conversion.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-auto-loan",
+      "filename": "set-auto-loan.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-usdc-conversion",
+      "filename": "set-usdc-conversion.md"
+    }
+  ]
+}

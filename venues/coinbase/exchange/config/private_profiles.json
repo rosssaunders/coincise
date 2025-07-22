@@ -1,0 +1,30 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_profiles.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/create-profile",
+      "filename": "create-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/delete-profile",
+      "filename": "delete-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profile-by-id",
+      "filename": "get-profile-by-id.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profiles",
+      "filename": "get-profiles.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/rename-profile",
+      "filename": "rename-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/transfer-funds-profile",
+      "filename": "transfer-funds-profile.md"
+    }
+  ]
+}

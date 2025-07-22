@@ -1,0 +1,18 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_travel-rules.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/create-travel-rule",
+      "filename": "create-travel-rule.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/delete-existing-travel-rule",
+      "filename": "delete-existing-travel-rule.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/get-all-travel-rule",
+      "filename": "get-all-travel-rule.md"
+    }
+  ]
+}

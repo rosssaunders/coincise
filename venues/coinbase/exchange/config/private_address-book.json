@@ -1,0 +1,18 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_address-book.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/add-addresses",
+      "filename": "add-addresses.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/delete-address",
+      "filename": "delete-address.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/get-address-book",
+      "filename": "get-address-book.md"
+    }
+  ]
+}

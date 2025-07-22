@@ -1,0 +1,22 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_conversions.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/convert-currency",
+      "filename": "convert-currency.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-a-conversion",
+      "filename": "get-a-conversion.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-all-conversions",
+      "filename": "get-all-conversions.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-conversion-fee-rates",
+      "filename": "get-conversion-fee-rates.md"
+    }
+  ]
+}

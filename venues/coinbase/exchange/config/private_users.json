@@ -1,0 +1,18 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_users.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-exchange-limits",
+      "filename": "get-user-exchange-limits.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-trading-volume",
+      "filename": "get-user-trading-volume.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/update-settlement-preference",
+      "filename": "update-settlement-preference.md"
+    }
+  ]
+}

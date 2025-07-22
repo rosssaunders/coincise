@@ -1,0 +1,46 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_transfers.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-coinbase-account",
+      "filename": "deposit-from-coinbase-account.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-payment-method",
+      "filename": "deposit-from-payment-method.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-single-transfer",
+      "filename": "get-single-transfer.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-payment-methods",
+      "filename": "get-all-payment-methods.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-transfers",
+      "filename": "get-all-transfers.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-fee-estimate",
+      "filename": "get-fee-estimate.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/submit-travel-info",
+      "filename": "submit-travel-info.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-coinbase-account",
+      "filename": "withdraw-to-coinbase-account.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-crypto-address",
+      "filename": "withdraw-to-crypto-address.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-payment-method",
+      "filename": "withdraw-to-payment-method.md"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_coinbase-accounts.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/generate-crypto-address",
+      "filename": "generate-crypto-address.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/get-all-coinbase-wallets",
+      "filename": "get-all-coinbase-wallets.md"
+    }
+  ]
+}

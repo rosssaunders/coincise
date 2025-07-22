@@ -1,0 +1,26 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_accounts.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-by-id",
+      "filename": "get-single-account-by-id.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-hold",
+      "filename": "get-single-account-hold.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-ledger",
+      "filename": "get-single-account-ledger.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-transfer",
+      "filename": "get-single-account-transfer.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-all-account-profile",
+      "filename": "get-all-account-profile.md"
+    }
+  ]
+}

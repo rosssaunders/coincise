@@ -1,0 +1,14 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "public_currencies.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-a-currency",
+      "filename": "get-a-currency.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-all-known-currencies",
+      "filename": "get-all-known-currencies.md"
+    }
+  ]
+}

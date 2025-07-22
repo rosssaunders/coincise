@@ -1,0 +1,42 @@
+{
+  "output_directory": "../../../docs/coinbase/exchange",
+  "combined_filename": "private_wrapped-assets.md",
+  "urls": [
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-redeem",
+      "filename": "create-new-redeem.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-stake-wrap",
+      "filename": "create-new-stake-wrap.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-single-redeem",
+      "filename": "get-single-redeem.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-a-single-stake-wrap",
+      "filename": "get-a-single-stake-wrap.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-redeems",
+      "filename": "get-all-redeems.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-stake-wraps",
+      "filename": "get-all-stake-wraps.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-wrapped-assets",
+      "filename": "get-all-wrapped-assets.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-conversion-rate",
+      "filename": "get-wrapped-asset-conversion-rate.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-details",
+      "filename": "get-wrapped-asset-details.md"
+    }
+  ]
+}
