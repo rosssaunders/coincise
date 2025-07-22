@@ -1,7 +1,7 @@
 {
   "name": "coinbase-exchange-api-scraper",
-  "version": "1.0.0",
-  "description": "Scraper for Coinbase Exchange API documentation with markdown output",
+  "version": "2.0.0",
+  "description": "Scraper for the new Coinbase Exchange API documentation format with structured markdown output",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
@@ -13,7 +13,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "jsdom": "26.1.0",
     "puppeteer": "24.8.2",
     "turndown": "7.2.0",
     "turndown-plugin-gfm": "1.0.2"

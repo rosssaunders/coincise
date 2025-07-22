@@ -1,258 +1,554 @@
 /**
- * Functions to extract data from Coinbase API documentation pages
+ * Extractors for Coinbase API documentation
  */
 
 /**
- * Extract content from the page (updated for new Coinbase docs structure)
+ * Detect the type of documentation page
  * @param {Page} page - Puppeteer page object
- * @param {Object} options - Options for extraction
- * @param {boolean} options.html - Whether to return HTML instead of text
- * @returns {Promise<string>} - Content as text or HTML
+ * @returns {Promise<string>} - 'api' or 'general'
  */
-export const extractArticleContent = async (page, options = {}) => {
-  return await page.evaluate(returnHtml => {
-    // The new Coinbase docs structure doesn't use article tags
-    // We need to find the main content area, not the sidebar
-    
-    // First, try to find the main content area by excluding sidebars and navigation
-    let contentElement = null
-    
-    // Look for main content selectors, excluding sidebar elements
-    const mainSelectors = [
-      'main',
-      '.content',
-      '.api-content',
-      '.docs-content',
-      '.page-content',
-      '[role="main"]'
-    ]
-    
-    for (const selector of mainSelectors) {
-      const element = document.querySelector(selector)
-      if (element && !element.id.includes('sidebar') && !element.className.includes('sidebar')) {
-        contentElement = element
-        break
-      }
-    }
-    
-    // If no main content found, look for divs with substantial content but exclude sidebars/navigation
-    if (!contentElement) {
-      const allDivs = Array.from(document.querySelectorAll('div'))
-      const contentDivs = allDivs.filter(div => {
-        // Exclude sidebar, navigation, and header elements
-        if (div.id.includes('sidebar') || div.className.includes('sidebar') ||
-            div.id.includes('nav') || div.className.includes('nav') ||
-            div.className.includes('hidden') || div.className.includes('sticky')) {
-          return false
-        }
-        
-        const text = div.textContent.toLowerCase()
-        // Look for main content indicators, not just navigation keywords
-        return (text.includes('post') || text.includes('get') || text.includes('endpoint')) && 
-               (text.includes('parameters') || text.includes('response') || text.includes('example')) &&
-               text.length > 500 // Require substantial content
-      })
-      
-      if (contentDivs.length > 0) {
-        // Use the div with the most content that's not hidden/sidebar
-        contentElement = contentDivs.reduce((longest, current) => 
-          current.textContent.length > longest.textContent.length ? current : longest
-        )
-      }
-    }
-    
-    // Final fallback: get body content but try to filter out navigation
-    if (!contentElement) {
-      // Create a clone of body and remove navigation elements
-      const bodyClone = document.body.cloneNode(true)
-      
-      // Remove known navigation/sidebar elements
-      const elementsToRemove = [
-        '#sidebar-content',
-        '#navigation-items',
-        '.sidebar',
-        '.navigation',
-        '[class*="sidebar"]',
-        '[class*="nav"]',
-        'nav'
-      ]
-      
-      elementsToRemove.forEach(selector => {
-        const elements = bodyClone.querySelectorAll(selector)
-        elements.forEach(el => el.remove())
-      })
-      
-      // Look for the remaining content with API information
-      const remainingDivs = Array.from(bodyClone.querySelectorAll('div'))
-      const apiContentDivs = remainingDivs.filter(div => {
-        const text = div.textContent.toLowerCase()
-        return (text.includes('create order') || text.includes('post') && text.includes('order')) &&
-               text.length > 200
-      })
-      
-      if (apiContentDivs.length > 0) {
-        contentElement = apiContentDivs.reduce((longest, current) => 
-          current.textContent.length > longest.textContent.length ? current : longest
-        )
-      } else {
-        contentElement = bodyClone
-      }
-    }
-
-    if (!contentElement) {
-      return "Content not available - new structure not detected"
-    }
-
-    if (returnHtml) {
-      // Create a clone to avoid modifying the actual DOM
-      const clone = contentElement.cloneNode(true)
-
-      // Remove common navigation and non-content elements
-      const elementsToRemove = [
-        '.hashLink_R2Yq',
-        'nav',
-        '.nav',
-        '.sidebar',
-        '.navigation',
-        '[class*="nav"]',
-        '[class*="sidebar"]',
-        'script',
-        'style',
-        '#sidebar-content',
-        '#navigation-items'
-      ]
-
-      elementsToRemove.forEach(selector => {
-        const elements = clone.querySelectorAll(selector)
-        elements.forEach(el => el.remove())
-      })
-
-      return clone.outerHTML
-    } else {
-      return contentElement.innerText
-    }
-  }, options.html)
-}
-
-/**
- * Extract authentication section HTML
- * @param {Page} page - Puppeteer page object
- * @returns {Promise<string|null>} - HTML content or null
- */
-export const extractAuthSection = async page => {
+export const detectPageType = async (page) => {
   return await page.evaluate(() => {
-    const authSection = document.querySelector("#authorization")
-    return authSection ? authSection.outerHTML : null
-  })
-}
-
-/**
- * Extract request parameters section HTML
- * @param {Page} page - Puppeteer page object
- * @returns {Promise<string|null>} - HTML content or null
- */
-export const extractRequestParams = async page => {
-  return await page.evaluate(() => {
-    // Look for the section with "Body params" heading
-    const bodyParamsHeadings = Array.from(
-      document.querySelectorAll("h3")
-    ).filter(h => h.textContent.trim() === "Body params")
-
-    if (bodyParamsHeadings.length > 0) {
-      // Get the parent section that contains the params
-      const section = bodyParamsHeadings[0].closest(
-        '[data-testid="content-section"]'
-      )
-      return section ? section.outerHTML : null
+    // Check for API endpoint indicators
+    const hasAuthSection = document.querySelector('.api-section h4')?.textContent?.includes('Authorization');
+    const hasCurlExample = Array.from(document.querySelectorAll('pre')).some(pre => 
+      pre.textContent.includes('curl --request')
+    );
+    const hasResponseSection = document.querySelector('.api-section h4')?.textContent?.includes('Response');
+    
+    // If any API indicators are present, it's an API page
+    if (hasAuthSection || hasCurlExample || hasResponseSection) {
+      return 'api';
     }
-    return null
-  })
-}
+    
+    return 'general';
+  });
+};
 
 /**
- * Extract path and query parameters sections HTML
+ * Extract general documentation content
  * @param {Page} page - Puppeteer page object
- * @returns {Promise<Object>} - Object with pathParams and queryParams HTML
+ * @returns {Promise<Object>} - Structured documentation
  */
-export const extractPathAndQueryParams = async page => {
+export const extractGeneralDocumentation = async (page) => {
   return await page.evaluate(() => {
     const result = {
-      pathParams: null,
-      queryParams: null
+      title: '',
+      content: '',
+      sections: []
+    };
+
+    // Extract title - try to get the page-specific title, not the site header
+    // First try meta title
+    let pageTitle = document.querySelector('meta[property="og:title"]')?.content ||
+                    document.querySelector('title')?.textContent ||
+                    '';
+    
+    // Clean up the title - remove site name suffix
+    if (pageTitle) {
+      pageTitle = pageTitle.replace(' | Coinbase Exchange API', '').trim();
+      pageTitle = pageTitle.replace(' | Coinbase', '').trim();
     }
+    
+    // If no good title from meta, try to find the main h1 (excluding navigation)
+    if (!pageTitle || pageTitle === 'Coinbase Exchange API') {
+      const h1s = Array.from(document.querySelectorAll('h1'));
+      const contentH1 = h1s.find(h1 => {
+        // Skip if it's in navigation or header
+        const parent = h1.closest('nav, header, [role="navigation"]');
+        return !parent;
+      });
+      
+      if (contentH1) {
+        pageTitle = contentH1.textContent.trim();
+      }
+    }
+    
+    result.title = pageTitle || 'Untitled';
 
-    // Look for all path-params sections
-    const paramSections = document.querySelectorAll("#path-params")
-
-    paramSections.forEach(section => {
-      // Check the heading to determine if it's path params or query params
-      const heading = section.querySelector("h3")
-      if (heading) {
-        const headingText = heading.textContent.trim()
-
-        if (headingText === "Path Params") {
-          result.pathParams = section.outerHTML
-        } else if (headingText === "Query Params") {
-          result.queryParams = section.outerHTML
+    // Extract main content - try specific selectors for Coinbase docs
+    let mainContent = document.querySelector('.theme-doc-markdown') ||
+                     document.querySelector('[class*="docMainContainer"]') ||
+                     document.querySelector('[class*="docItemContainer"]') ||
+                     document.querySelector('article') ||
+                     document.querySelector('main') || 
+                     document.querySelector('[role="main"]');
+    
+    // If no main content, look for content divs
+    if (!mainContent) {
+      mainContent = document.querySelector('.content') ||
+                   document.querySelector('[class*="content"]');
+    }
+    
+    // If still no content, use body but we'll filter more aggressively
+    if (!mainContent) {
+      mainContent = document.body;
+    }
+    
+    // Create a clone to avoid modifying the actual DOM
+    const contentClone = mainContent.cloneNode(true);
+    
+    // Remove navigation, sidebar, and other non-content elements
+    const elementsToRemove = [
+      'nav',
+      'aside',
+      '[role="navigation"]',
+      '[class*="sidebar"]',
+      '[class*="navigation"]',
+      '[class*="menu"]',
+      'header',
+      'footer',
+      '.nav',
+      '#nav',
+      'button',
+      '[class*="breadcrumb"]',
+      '[aria-label*="Show"]',
+      '[aria-label*="Hide"]'
+    ];
+    
+    elementsToRemove.forEach(selector => {
+      const elements = contentClone.querySelectorAll(selector);
+      elements.forEach(el => el.remove());
+    });
+    
+    // Remove text nodes containing common UI patterns
+    const textNodesToClean = ['Show child attributes', 'Hide child attributes', 'Show more', 'Show less'];
+    textNodesToClean.forEach(pattern => {
+      const walker = document.createTreeWalker(
+        contentClone,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        if (node.textContent.trim() === pattern) {
+          textNodes.push(node);
         }
       }
-    })
-
-    return result
-  })
-}
+      
+      textNodes.forEach(textNode => {
+        if (textNode.parentNode) {
+          textNode.parentNode.removeChild(textNode);
+        }
+      });
+    });
+    
+    // First, get any introductory content before the first heading
+    const firstHeading = contentClone.querySelector('h2, h3, h4');
+    if (firstHeading) {
+      const introContent = [];
+      let node = contentClone.firstElementChild;
+      
+      while (node && node !== firstHeading) {
+        if (node.tagName === 'P' || node.tagName === 'UL' || node.tagName === 'OL' || 
+            node.tagName === 'TABLE' || node.tagName === 'PRE' || node.tagName === 'BLOCKQUOTE') {
+          introContent.push(node.outerHTML);
+        }
+        node = node.nextElementSibling;
+      }
+      
+      if (introContent.length > 0) {
+        result.sections.push({
+          level: 0,
+          title: '',
+          content: introContent.join('\n')
+        });
+      }
+    }
+    
+    // Get all headings and their content
+    const headings = Array.from(contentClone.querySelectorAll('h2, h3, h4'));
+    
+    headings.forEach(heading => {
+      const section = {
+        level: parseInt(heading.tagName.substring(1)),
+        title: heading.textContent.trim(),
+        content: ''
+      };
+      
+      // Get content between this heading and the next
+      let sibling = heading.nextElementSibling;
+      const contentParts = [];
+      
+      while (sibling && !sibling.matches('h1, h2, h3, h4')) {
+        if (sibling.tagName === 'P' || sibling.tagName === 'UL' || sibling.tagName === 'OL' || 
+            sibling.tagName === 'TABLE' || sibling.tagName === 'PRE' || sibling.tagName === 'BLOCKQUOTE') {
+          contentParts.push(sibling.outerHTML);
+        }
+        sibling = sibling.nextElementSibling;
+      }
+      
+      section.content = contentParts.join('\n');
+      if (section.content) {
+        result.sections.push(section);
+      }
+    });
+    
+    // If no sections found, just get all paragraph content
+    if (result.sections.length === 0) {
+      const paragraphs = Array.from(contentClone.querySelectorAll('p, ul, ol, table, pre, blockquote'));
+      result.content = paragraphs.map(p => p.outerHTML).join('\n');
+    }
+    
+    return result;
+  });
+};
 
 /**
- * Extract modal content for a specific response button
+ * Extract comprehensive API documentation from the new format
  * @param {Page} page - Puppeteer page object
- * @returns {Promise<Object>} - Structured modal content
+ * @returns {Promise<Object>} - Structured API documentation
  */
-export const extractModalContent = async page => {
+export const extractApiDocumentation = async (page) => {
   return await page.evaluate(() => {
-    // Try to extract structured data from the Mui paper component
-    const muiPaper = document.querySelector(".MuiPaper-root")
+    const result = {
+      title: '',
+      endpoint: '',
+      method: '',
+      description: '',
+      permissions: '',
+      examples: [],
+      authorizations: [],
+      queryParams: [],
+      pathParams: [],
+      bodyParams: [],
+      responses: []
+    };
 
-    if (muiPaper) {
-      // Get the schema type from the header
-      const schemaType =
-        muiPaper.querySelector(
-          ".MuiCardHeader-content .MuiTypography-root span"
-        )?.textContent || ""
+    // Extract title - try to get the page-specific title
+    // First try meta title
+    let pageTitle = document.querySelector('meta[property="og:title"]')?.content ||
+                    document.querySelector('title')?.textContent ||
+                    '';
+    
+    // Clean up the title - remove site name suffix
+    if (pageTitle) {
+      pageTitle = pageTitle.replace(' | Coinbase Exchange API', '').trim();
+      pageTitle = pageTitle.replace(' | Coinbase', '').trim();
+    }
+    
+    // If no good title from meta, try to find the main h1
+    if (!pageTitle || pageTitle === 'Coinbase Exchange API') {
+      const h1 = document.querySelector('h1');
+      if (h1) {
+        pageTitle = h1.textContent.trim();
+      }
+    }
+    
+    result.title = pageTitle || 'Untitled';
 
-      // Extract all properties
-      const properties = []
-      const listItems = muiPaper.querySelectorAll(".listItem_mkJa")
+    // Extract API permissions
+    const permissionsSection = Array.from(document.querySelectorAll('h2')).find(h => 
+      h.textContent.includes('API Key Permissions')
+    );
+    if (permissionsSection) {
+      const permText = permissionsSection.nextElementSibling?.textContent || '';
+      result.permissions = permText.trim();
+    }
 
-      listItems.forEach(item => {
-        const nameElement = item.querySelector(".paramName__NgG")
-        const typeElement = item.querySelector(".paramType_KuQf")
-        const descriptionElement = item.querySelector(".propertyContent_FDlX")
-
-        // Get property description (text that's not in the header)
-        let description = ""
-        if (descriptionElement) {
-          const descText = descriptionElement.textContent
-          const headerText =
-            descriptionElement.querySelector(".paramHeader_i_6k")
-              ?.textContent || ""
-          description = descText.replace(headerText, "").trim()
+    // Extract examples - look for actual example sections, not parameter tables
+    const exampleSections = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).filter(h => 
+      h.textContent.toLowerCase().includes('example') && !h.textContent.toLowerCase().includes('parameter')
+    );
+    
+    // If we find example headings, extract the content after them
+    if (exampleSections.length > 0) {
+      exampleSections.forEach(heading => {
+        let sibling = heading.nextElementSibling;
+        while (sibling) {
+          if (sibling.matches('table')) {
+            // This is an examples table
+            const rows = sibling.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+              const cells = row.querySelectorAll('td');
+              if (cells.length >= 2) {
+                result.examples.push({
+                  example: cells[0].textContent.trim(),
+                  response: cells[1].textContent.trim()
+                });
+              }
+            });
+            break;
+          } else if (sibling.matches('pre')) {
+            // This is a code example
+            const text = sibling.textContent.trim();
+            if (text.includes('curl')) {
+              // Extract URL path from curl example
+              const urlMatch = text.match(/--url\s+https?:\/\/[^\/]+(\/.+?)(?:\s|\\|$)/);
+              if (urlMatch) {
+                result.examples.push({
+                  example: urlMatch[1],
+                  response: 'cURL request example'
+                });
+              }
+            }
+            break;
+          } else if (sibling.matches('h1, h2, h3, h4, h5, h6')) {
+            // Hit another heading, stop looking
+            break;
+          }
+          sibling = sibling.nextElementSibling;
         }
+      });
+    }
+    
+    // If no examples found through headings, don't extract any (avoid parameter tables)
+    // The old logic was incorrectly treating parameter tables as examples
 
-        if (nameElement && typeElement) {
-          properties.push({
-            name: nameElement.textContent,
-            type: typeElement.textContent,
-            description: description
-          })
+    // Extract authorization headers
+    const authSection = Array.from(document.querySelectorAll('.api-section')).find(section => 
+      section.querySelector('h4')?.textContent.includes('Authorizations')
+    );
+    if (authSection) {
+      const authItems = authSection.querySelectorAll('[id^="authorization-"]');
+      authItems.forEach(item => {
+        const name = item.querySelector('[data-component-part="field-name"]')?.textContent || '';
+        const type = item.querySelector('[data-component-part="field-info-pill"] span')?.textContent || '';
+        const required = item.querySelector('[data-component-part="field-required-pill"]') !== null;
+        
+        if (name) {
+          result.authorizations.push({
+            name: name.trim(),
+            type: type.trim(),
+            in: 'header',
+            required: required
+          });
         }
-      })
+      });
+    }
 
-      return {
-        schemaType,
-        properties
+    // Extract query parameters
+    const querySection = Array.from(document.querySelectorAll('.api-section')).find(section => 
+      section.querySelector('h4')?.textContent.includes('Query Parameters')
+    );
+    if (querySection) {
+      const paramItems = querySection.querySelectorAll('[id^="parameter-"]');
+      paramItems.forEach(item => {
+        const name = item.querySelector('[data-component-part="field-name"]')?.textContent || '';
+        const type = item.querySelector('[data-component-part="field-info-pill"] span')?.textContent || '';
+        let description = item.parentElement.querySelector('.prose p')?.textContent || '';
+        
+        // Filter out UI text
+        if (description === 'Show child attributes' || description === 'Hide child attributes') {
+          description = '';
+        }
+        
+        if (name) {
+          result.queryParams.push({
+            name: name.trim(),
+            type: type.trim(),
+            description: description.trim(),
+            required: false
+          });
+        }
+      });
+    }
+
+    // Extract path parameters
+    const pathSection = Array.from(document.querySelectorAll('.api-section')).find(section => 
+      section.querySelector('h4')?.textContent.includes('Path Parameters')
+    );
+    if (pathSection) {
+      const paramItems = pathSection.querySelectorAll('[id^="parameter-"]');
+      paramItems.forEach(item => {
+        const name = item.querySelector('[data-component-part="field-name"]')?.textContent || '';
+        const type = item.querySelector('[data-component-part="field-info-pill"] span')?.textContent || '';
+        let description = item.parentElement.querySelector('.prose p')?.textContent || '';
+        const required = item.querySelector('[data-component-part="field-required-pill"]') !== null;
+        
+        // Filter out UI text
+        if (description === 'Show child attributes' || description === 'Hide child attributes') {
+          description = '';
+        }
+        
+        if (name) {
+          result.pathParams.push({
+            name: name.trim(),
+            type: type.trim(),
+            description: description.trim(),
+            required: required
+          });
+        }
+      });
+    }
+
+    // Extract body parameters
+    const bodySection = Array.from(document.querySelectorAll('.api-section')).find(section => 
+      section.querySelector('h4')?.textContent.includes('Body')
+    );
+    if (bodySection) {
+      const paramItems = bodySection.querySelectorAll('[id^="parameter-"]');
+      paramItems.forEach(item => {
+        const name = item.querySelector('[data-component-part="field-name"]')?.textContent || '';
+        const type = item.querySelector('[data-component-part="field-info-pill"] span')?.textContent || '';
+        let description = item.parentElement.querySelector('.prose p')?.textContent || '';
+        const required = item.querySelector('[data-component-part="field-required-pill"]') !== null;
+        
+        // Filter out UI text
+        if (description === 'Show child attributes' || description === 'Hide child attributes') {
+          description = '';
+        }
+        
+        if (name) {
+          result.bodyParams.push({
+            name: name.trim(),
+            type: type.trim(),
+            description: description.trim(),
+            required: required
+          });
+        }
+      });
+    }
+
+    // Extract endpoint from curl example
+    const curlBlock = Array.from(document.querySelectorAll('pre')).find(pre => 
+      pre.textContent.includes('curl')
+    );
+    if (curlBlock) {
+      const curlText = curlBlock.textContent;
+      const urlMatch = curlText.match(/--url\s+(https?:\/\/[^\s]+)/);
+      if (urlMatch) {
+        const url = new URL(urlMatch[1]);
+        result.endpoint = url.pathname;
+      }
+      const methodMatch = curlText.match(/--request\s+(\w+)/);
+      if (methodMatch) {
+        result.method = methodMatch[1];
       }
     }
 
-    return { error: "Modal content not found" }
-  })
-}
+    // Extract response information
+    const responseSection = Array.from(document.querySelectorAll('.api-section')).find(section => 
+      section.querySelector('h4')?.textContent === 'Response'
+    );
+    if (responseSection) {
+      // Get response description
+      let responseDesc = responseSection.querySelector('.prose p')?.textContent || '';
+      
+      // Filter out UI text
+      if (responseDesc.trim() === 'Show child attributes' || 
+          responseDesc.trim() === 'Hide child attributes') {
+        responseDesc = '';
+      }
+      
+      // Extract response field definitions
+      const responseFields = [];
+      const fieldDivs = responseSection.querySelectorAll('[id^="response-"]');
+      fieldDivs.forEach(div => {
+        const fieldName = div.querySelector('[data-component-part="field-name"]')?.textContent;
+        const fieldType = div.querySelector('[data-component-part="field-info-pill"] span')?.textContent;
+        const fieldRequired = div.querySelector('[data-component-part="field-required-pill"]') !== null;
+        
+        // Description is in a sibling div with prose class
+        let fieldDesc = '';
+        const parent = div.parentElement;
+        if (parent) {
+          const proseDiv = parent.querySelector('.prose');
+          if (proseDiv) {
+            fieldDesc = proseDiv.querySelector('p')?.textContent || '';
+          }
+        }
+        
+        if (fieldName) {
+          // Filter out UI text from descriptions
+          if (fieldDesc === 'Show child attributes' || fieldDesc === 'Hide child attributes') {
+            fieldDesc = '';
+          }
+          
+          responseFields.push({
+            name: fieldName.trim(),
+            type: fieldType?.trim() || '',
+            required: fieldRequired,
+            description: fieldDesc.trim()
+          });
+        }
+      });
+      
+      // Get response example - look specifically within the response section
+      let responseExample = null;
+      
+      // First try to find pre elements within the response section
+      const responsePres = responseSection.querySelectorAll('pre');
+      if (responsePres.length > 0) {
+        // Look for JSON-like content (starts with [ or {)
+        responseExample = Array.from(responsePres).find(pre => {
+          const text = pre.textContent.trim();
+          return (text.startsWith('[') || text.startsWith('{')) && !text.includes('curl');
+        });
+      }
+      
+      // If not found in response section, look globally for JSON response examples
+      if (!responseExample) {
+        // Look for all pre elements on the page that contain JSON and not curl
+        const allPres = Array.from(document.querySelectorAll('pre'));
+        const jsonPres = allPres.filter(pre => {
+          const text = pre.textContent.trim();
+          return (text.startsWith('[') || text.startsWith('{')) && !text.includes('curl');
+        });
+        
+        // If we found JSON examples, use the first one (they're often duplicated)
+        if (jsonPres.length > 0) {
+          responseExample = jsonPres[0];
+        }
+      }
+      
+      result.responses.push({
+        status: '200',
+        description: responseDesc.trim(),
+        fields: responseFields,
+        example: responseExample ? responseExample.textContent.trim() : ''
+      });
+    }
+
+    // Clean up any UI text that shouldn't be in documentation
+    const textNodesToClean = ['Show child attributes', 'Hide child attributes', 'Show more', 'Show less'];
+    textNodesToClean.forEach(pattern => {
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(element => {
+        if (element.textContent.trim() === pattern) {
+          element.remove();
+        }
+      });
+    });
+
+    // Extract description - look for spans with data-as="p" that contain description
+    const descriptionSpans = Array.from(document.querySelectorAll('span[data-as="p"]'));
+    if (descriptionSpans.length > 0) {
+      // Get the first span that looks like a description (not permissions)
+      const descSpan = descriptionSpans.find(span => {
+        const text = span.textContent.trim().toLowerCase();
+        return text.length > 20 && 
+               !text.includes('permission') && 
+               !text.includes('fee') &&
+               !text.includes('liquidity') &&
+               !text.includes('pagination');
+      });
+      
+      if (descSpan) {
+        result.description = descSpan.textContent.trim();
+      }
+    }
+    
+    // Fallback: Look for description in paragraphs throughout the page
+    if (!result.description) {
+      const allParagraphs = Array.from(document.querySelectorAll('p'));
+      const descParagraph = allParagraphs.find(p => {
+        const text = p.textContent.trim().toLowerCase();
+        return text.length > 30 && 
+               !text.includes('coinbase exchange api') &&
+               !text.includes('was this page helpful') &&
+               !text.includes('cancels orders on a specific') && // Skip parameter descriptions
+               (text.includes('cancel') || text.includes('create') || text.includes('get') || text.includes('list') || text.includes('order'));
+      });
+      
+      if (descParagraph) {
+        result.description = descParagraph.textContent.trim();
+      }
+    }
+
+    return result;
+  });
+};

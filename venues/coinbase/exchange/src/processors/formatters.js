@@ -1,214 +1,183 @@
 /**
- * Functions to format extracted data to markdown
+ * Formatters for Coinbase API documentation
  */
 
-import { JSDOM } from "jsdom"
+import TurndownService from "turndown";
+import * as turndownPluginGfm from "turndown-plugin-gfm";
 
 /**
- * Process authentication HTML to markdown table
- * @param {string} authHtml - HTML content of auth section
- * @returns {string|null} - Markdown table or null
+ * Convert general documentation to markdown
+ * @param {Object} doc - Structured general documentation
+ * @param {string} sourceUrl - Source URL of the documentation
+ * @returns {string} - Markdown formatted documentation
  */
-export const processAuthSection = authHtml => {
-  if (!authHtml) return null
-
-  const dom = new JSDOM(authHtml)
-  const document = dom.window.document
-
-  // Find all auth items
-  const authItems = document.querySelectorAll(".authItem_haxh")
-
-  if (authItems.length === 0) return null
-
-  // Create the markdown table
-  let markdownTable = `
-## Authentication
-
-| Parameter | Type | Required |
-| --------- | ---- | -------- |
-`
-
-  // Process each auth item
-  authItems.forEach(item => {
-    const paramName = item.querySelector("label")?.textContent.trim() || ""
-    const paramType =
-      item.querySelector(".authType_Ecpv")?.textContent.trim() || ""
-    const required =
-      item.querySelector(".authRequired_AspY")?.textContent.trim() || ""
-
-    markdownTable += `| ${paramName} | ${paramType} | ${required} |\n`
-  })
-
-  return markdownTable
-}
+export const convertGeneralDocToMarkdown = (doc, sourceUrl) => {
+  // Initialize Turndown for HTML to Markdown conversion
+  const turndownService = new TurndownService({
+    headingStyle: "atx",
+    codeBlockStyle: "fenced"
+  });
+  
+  // Add GFM plugin for better table support
+  turndownService.use(turndownPluginGfm.gfm);
+  
+  let markdown = '';
+  
+  // Title
+  if (doc.title) {
+    markdown += `# ${doc.title}\n\n`;
+  }
+  
+  // Add source link
+  if (sourceUrl) {
+    markdown += `**Source:** [${sourceUrl}](${sourceUrl})\n\n`;
+  }
+  
+  // If we have sections, process them
+  if (doc.sections && doc.sections.length > 0) {
+    doc.sections.forEach(section => {
+      // Handle intro content (no title)
+      if (section.level === 0 && !section.title) {
+        if (section.content) {
+          markdown += turndownService.turndown(section.content) + '\n\n';
+        }
+      } else {
+        // Add appropriate heading level
+        const heading = '#'.repeat(section.level);
+        markdown += `${heading} ${section.title}\n\n`;
+        
+        // Convert HTML content to markdown
+        if (section.content) {
+          markdown += turndownService.turndown(section.content) + '\n\n';
+        }
+      }
+    });
+  } else if (doc.content) {
+    // If no sections, just convert the content
+    markdown += turndownService.turndown(doc.content) + '\n\n';
+  }
+  
+  return markdown;
+};
 
 /**
- * Process request parameters HTML to markdown table
- * @param {string} paramsHtml - HTML content of request params section
- * @returns {string|null} - Markdown table or null
+ * Convert structured API documentation to markdown
+ * @param {Object} apiDoc - Structured API documentation
+ * @param {string} sourceUrl - Source URL of the documentation
+ * @returns {string} - Markdown formatted documentation
  */
-export const processRequestParams = paramsHtml => {
-  if (!paramsHtml) return null
+export const convertToMarkdown = (apiDoc, sourceUrl) => {
+  let markdown = '';
 
-  const dom = new JSDOM(paramsHtml)
-  const document = dom.window.document
-
-  // First determine if this is for query params or body params or path params
-  const sectionTitle = document.querySelector("h3")?.textContent.trim()
-  const isQueryParams = sectionTitle === "Query Params"
-  const isPathParams = sectionTitle === "Path Params"
-
-  // Find all param items
-  // Support both paramItem_Izrs (newer UI) and listItem_mkJa (older UI)
-  const paramItems = document.querySelectorAll(
-    ".paramItem_Izrs, .listItem_mkJa"
-  )
-
-  if (paramItems.length === 0) return null
-
-  // Create the markdown table with appropriate title
-  let markdownTable = `
-## ${isPathParams ? "Path Parameters" : isQueryParams ? "Query Parameters" : "Request Parameters"}
-
-| Parameter | Type | ${isQueryParams || isPathParams ? "Required | " : ""}Description |
-| --------- | ---- | ${isQueryParams || isPathParams ? "-------- | " : ""}----------- |
-`
-
-  // Process each param item
-  paramItems.forEach(item => {
-    // Support both newer and older UI class names
-    const paramName =
-      item
-        .querySelector(".paramName_MlmJ, .paramName__NgG")
-        ?.textContent.trim() || ""
-    const paramType =
-      item
-        .querySelector(".paramType_HWMI, .paramType_KuQf")
-        ?.textContent.trim() || ""
-    const isRequired =
-      item.querySelector(".paramRequired_Dtof") !== null ? "Yes" : "No"
-
-    // Get description from paragraph
-    let description = ""
-    const paragraph = item.querySelector(".paragraph_nrmP")
-    const possibleValues = item.querySelector(".possibleValues_iyE0")
-
-    if (paragraph) {
-      // Extract description and handle code tags
-      description = paragraph.innerHTML
-        .replace(/<code>(.*?)<\/code>/g, "`$1`")
-        .replace(/<\/?[^>]+(>|$)/g, "") // Remove other HTML tags
-    } else if (possibleValues) {
-      description = possibleValues.textContent.trim()
-    }
-
-    // Escape pipe characters in markdown table
-    const escapedName = paramName.replace(/\|/g, "\\|")
-    const escapedType = paramType.replace(/\|/g, "\\|")
-    const escapedDesc = description.replace(/\|/g, "\\|")
-
-    if (isQueryParams || isPathParams) {
-      markdownTable += `| ${escapedName} | ${escapedType} | ${isRequired} | ${escapedDesc} |\n`
-    } else {
-      markdownTable += `| ${escapedName} | ${escapedType} | ${escapedDesc} |\n`
-    }
-  })
-
-  return markdownTable
-}
-
-/**
- * Generate markdown for API response details
- * @param {Array} modalResults - Array of response modal results
- * @returns {string} - Markdown content
- */
-export const generateResponseMarkdown = modalResults => {
-  if (!modalResults || modalResults.length === 0) {
-    return ""
+  // Title
+  if (apiDoc.title) {
+    markdown += `# ${apiDoc.title}\n\n`;
   }
 
-  let markdown = "## API Response Details\n\n"
+  // Add source link
+  if (sourceUrl) {
+    markdown += `**Source:** [${sourceUrl}](${sourceUrl})\n\n`;
+  }
 
-  modalResults.forEach(result => {
-    if (
-      !result.buttonText ||
-      !result.modalContent ||
-      !result.modalContent.properties
-    ) {
-      return
-    }
+  // Endpoint
+  if (apiDoc.method && apiDoc.endpoint) {
+    markdown += `## Endpoint\n\n`;
+    markdown += `\`${apiDoc.method} ${apiDoc.endpoint}\`\n\n`;
+  }
 
-    // Ensure proper spacing between HTTP status code and description
-    // Extract and format HTTP status code and description
-    // This handles cases like "401Unauthorized" or "200OK" and formats to "401 Unauthorized"
-    let formattedButtonText = result.buttonText
+  // Description
+  if (apiDoc.description) {
+    markdown += `## Description\n\n`;
+    markdown += `${apiDoc.description}\n\n`;
+  }
 
-    // First clean up the text (remove any extraneous content)
-    formattedButtonText = formattedButtonText
-      .replace(/OpenInFull|[\r\n]+/g, "")
-      .trim()
+  // Permissions
+  if (apiDoc.permissions) {
+    markdown += `## Permissions\n\n`;
+    markdown += `${apiDoc.permissions}\n\n`;
+  }
 
-    // Format HTTP status codes - handle various patterns
-    // 1. Match digit sequence followed by uppercase letter and insert space
-    formattedButtonText = formattedButtonText.replace(
-      /(\d+)([A-Z][a-z])/g,
-      "$1 $2"
-    )
+  // Examples
+  if (apiDoc.examples && apiDoc.examples.length > 0) {
+    markdown += `## Examples\n\n`;
+    markdown += `| Example | Response |\n`;
+    markdown += `| ------- | -------- |\n`;
+    apiDoc.examples.forEach(ex => {
+      markdown += `| ${ex.example} | ${ex.response} |\n`;
+    });
+    markdown += `\n`;
+  }
 
-    // 2. Match digit sequence followed immediately by any letter (catches additional cases)
-    formattedButtonText = formattedButtonText.replace(
-      /(\d+)([a-zA-Z])/g,
-      "$1 $2"
-    )
+  // Authorization
+  if (apiDoc.authorizations && apiDoc.authorizations.length > 0) {
+    markdown += `## Authorization\n\n`;
+    markdown += `| Header | Type | Required |\n`;
+    markdown += `| ------ | ---- | -------- |\n`;
+    apiDoc.authorizations.forEach(auth => {
+      markdown += `| ${auth.name} | ${auth.type} | ${auth.required ? 'Yes' : 'No'} |\n`;
+    });
+    markdown += `\n`;
+  }
 
-    markdown += `### Response: ${formattedButtonText}\n\n`
-    markdown += "| Property | Type | Description |\n"
-    markdown += "| -------- | ---- | ----------- |\n"
+  // Path Parameters
+  if (apiDoc.pathParams && apiDoc.pathParams.length > 0) {
+    markdown += `## Path Parameters\n\n`;
+    markdown += `| Parameter | Type | Required | Description |\n`;
+    markdown += `| --------- | ---- | -------- | ----------- |\n`;
+    apiDoc.pathParams.forEach(param => {
+      markdown += `| ${param.name} | ${param.type} | ${param.required ? 'Yes' : 'No'} | ${param.description} |\n`;
+    });
+    markdown += `\n`;
+  }
 
-    result.modalContent.properties.forEach(prop => {
-      // Escape pipe characters in markdown table
-      const escapedName = prop.name.replace(/\|/g, "\\|")
-      const escapedType = prop.type.replace(/\|/g, "\\|")
-      const escapedDesc = prop.description.replace(/\|/g, "\\|")
+  // Query Parameters
+  if (apiDoc.queryParams && apiDoc.queryParams.length > 0) {
+    markdown += `## Query Parameters\n\n`;
+    markdown += `| Parameter | Type | Description |\n`;
+    markdown += `| --------- | ---- | ----------- |\n`;
+    apiDoc.queryParams.forEach(param => {
+      markdown += `| ${param.name} | ${param.type} | ${param.description} |\n`;
+    });
+    markdown += `\n`;
+  }
 
-      markdown += `| ${escapedName} | ${escapedType} | ${escapedDesc} |\n`
-    })
+  // Body Parameters
+  if (apiDoc.bodyParams && apiDoc.bodyParams.length > 0) {
+    markdown += `## Request Body\n\n`;
+    markdown += `| Parameter | Type | Required | Description |\n`;
+    markdown += `| --------- | ---- | -------- | ----------- |\n`;
+    apiDoc.bodyParams.forEach(param => {
+      markdown += `| ${param.name} | ${param.type} | ${param.required ? 'Yes' : 'No'} | ${param.description} |\n`;
+    });
+    markdown += `\n`;
+  }
 
-    markdown += "\n"
-  })
+  // Response
+  if (apiDoc.responses && apiDoc.responses.length > 0) {
+    markdown += `## Response\n\n`;
+    apiDoc.responses.forEach(resp => {
+      markdown += `### ${resp.status} Success\n\n`;
+      if (resp.description) {
+        markdown += `${resp.description}\n\n`;
+      }
+      
+      // Response fields table
+      if (resp.fields && resp.fields.length > 0) {
+        markdown += `#### Response Fields\n\n`;
+        markdown += `| Field | Type | Required | Description |\n`;
+        markdown += `| ----- | ---- | -------- | ----------- |\n`;
+        resp.fields.forEach(field => {
+          markdown += `| ${field.name} | ${field.type} | ${field.required ? 'Yes' : 'No'} | ${field.description} |\n`;
+        });
+        markdown += `\n`;
+      }
+      
+      if (resp.example) {
+        markdown += `#### Example Response\n\n`;
+        markdown += `\`\`\`json\n${resp.example}\n\`\`\`\n\n`;
+      }
+    });
+  }
 
-  return markdown
-}
-
-/**
- * Generate the complete markdown document
- * @param {string} articleContent - Content from the article section
- * @param {Array} modalResults - Array of response modal results
- * @param {string} authMarkdown - Authentication markdown
- * @param {string} requestParamsMarkdown - Request parameters markdown
- * @param {string} pathParamsMarkdown - Path parameters markdown
- * @param {string} queryParamsMarkdown - Query parameters markdown
- * @returns {string} - Complete markdown document
- */
-export const generateMarkdownDocument = (
-  articleContent,
-  modalResults,
-  authMarkdown = "",
-  requestParamsMarkdown = "",
-  pathParamsMarkdown = "",
-  queryParamsMarkdown = ""
-) => {
-  return `
-${articleContent}
-
-${authMarkdown || ""}
-
-${pathParamsMarkdown || ""}
-
-${queryParamsMarkdown || ""}
-
-${requestParamsMarkdown || ""}
-
-${generateResponseMarkdown(modalResults)}
-`.trim()
-}
+  return markdown;
+};

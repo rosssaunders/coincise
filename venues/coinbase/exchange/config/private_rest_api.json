@@ -3,76 +3,356 @@
   "combined_filename": "private_rest_api.md",
   "urls": [
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/welcome",
-      "filename": "welcome.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/introduction",
+      "filename": "introduction.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/getting-started",
-      "filename": "getting-started.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/requests",
+      "filename": "requests.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/sandbox",
-      "filename": "sandbox.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/authentication",
+      "filename": "authentication.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/matching-engine",
-      "filename": "matching-engine.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rate-limits",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits",
       "filename": "rate-limits.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/runbook",
-      "filename": "runbook.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/pagination",
+      "filename": "pagination.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-requests",
-      "filename": "rest-requests.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-auth",
-      "filename": "rest-auth.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-rate-limits",
-      "filename": "rest-rate-limits.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-pagination",
-      "filename": "rest-pagination.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/profiles",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/profiles",
       "filename": "profiles.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/types",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/types",
       "filename": "types.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
-      "filename": "post-orders.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-by-id",
+      "filename": "get-single-account-by-id.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/fills",
-      "filename": "get-fills.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-hold",
+      "filename": "get-single-account-hold.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
-      "filename": "get-orders.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-ledger",
+      "filename": "get-single-account-ledger.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
-      "filename": "delete-orders.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-single-account-transfer",
+      "filename": "get-single-account-transfer.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
-      "filename": "get-order.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/accounts/get-all-account-profile",
+      "filename": "get-all-account-profile.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders",
-      "filename": "delete-order.md"
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/add-addresses",
+      "filename": "add-addresses.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/delete-address",
+      "filename": "delete-address.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/address-book/get-address-book",
+      "filename": "get-address-book.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/generate-crypto-address",
+      "filename": "generate-crypto-address.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/coinbase-accounts/get-all-coinbase-wallets",
+      "filename": "get-all-coinbase-wallets.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/convert-currency",
+      "filename": "convert-currency.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-a-conversion",
+      "filename": "get-a-conversion.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-all-conversions",
+      "filename": "get-all-conversions.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/conversions/get-conversion-fee-rates",
+      "filename": "get-conversion-fee-rates.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-a-currency",
+      "filename": "get-a-currency.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-all-known-currencies",
+      "filename": "get-all-known-currencies.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/fees/get-fee",
+      "filename": "get-fee.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-auto-loan-setting",
+      "filename": "get-auto-loan-setting.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/get-usdc-conversion",
+      "filename": "get-usdc-conversion.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-auto-loan",
+      "filename": "set-auto-loan.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/futures/set-usdc-conversion",
+      "filename": "set-usdc-conversion.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-lending-overview",
+      "filename": "get-lending-overview.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-new-loan-preview",
+      "filename": "get-new-loan-preview.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/get-principal-repayment-preview",
+      "filename": "get-principal-repayment-preview.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-charges",
+      "filename": "list-interest-charges.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-rate-history",
+      "filename": "list-interest-rate-history.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-interest-summaries",
+      "filename": "list-interest-summaries.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loan-assets",
+      "filename": "list-loan-assets.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-loans",
+      "filename": "list-loans.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/list-new-loan-options",
+      "filename": "list-new-loan-options.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/open-new-loan",
+      "filename": "open-new-loan.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-interest",
+      "filename": "repay-loan-interest.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/loan/repay-loan-principal",
+      "filename": "repay-loan-principal.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-all-orders",
+      "filename": "cancel-all-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/cancel-an-order",
+      "filename": "cancel-an-order.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/create-new-order",
+      "filename": "create-new-order.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-fills",
+      "filename": "get-all-fills.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-all-orders",
+      "filename": "get-all-orders.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/orders/get-single-order",
+      "filename": "get-single-order.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-known-trading-pairs",
+      "filename": "get-all-known-trading-pairs.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-product-volume",
+      "filename": "get-all-product-volume.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-book",
+      "filename": "get-product-book.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles",
+      "filename": "get-product-candles.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-stats",
+      "filename": "get-product-stats.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-ticker",
+      "filename": "get-product-ticker.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades",
+      "filename": "get-product-trades.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-single-product",
+      "filename": "get-single-product.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/create-profile",
+      "filename": "create-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/delete-profile",
+      "filename": "delete-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profile-by-id",
+      "filename": "get-profile-by-id.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/get-profiles",
+      "filename": "get-profiles.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/rename-profile",
+      "filename": "rename-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/profiles/transfer-funds-profile",
+      "filename": "transfer-funds-profile.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/create-report",
+      "filename": "create-report.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-report",
+      "filename": "get-report.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/reports/get-all-reports",
+      "filename": "get-all-reports.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-coinbase-account",
+      "filename": "deposit-from-coinbase-account.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/deposit-from-payment-method",
+      "filename": "deposit-from-payment-method.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-single-transfer",
+      "filename": "get-single-transfer.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-payment-methods",
+      "filename": "get-all-payment-methods.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-all-transfers",
+      "filename": "get-all-transfers.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/get-fee-estimate",
+      "filename": "get-fee-estimate.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/submit-travel-info",
+      "filename": "submit-travel-info.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-coinbase-account",
+      "filename": "withdraw-to-coinbase-account.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-crypto-address",
+      "filename": "withdraw-to-crypto-address.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/transfers/withdraw-to-payment-method",
+      "filename": "withdraw-to-payment-method.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/create-travel-rule",
+      "filename": "create-travel-rule.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/delete-existing-travel-rule",
+      "filename": "delete-existing-travel-rule.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/travel-rules/get-all-travel-rule",
+      "filename": "get-all-travel-rule.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-exchange-limits",
+      "filename": "get-user-exchange-limits.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/get-user-trading-volume",
+      "filename": "get-user-trading-volume.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/users/update-settlement-preference",
+      "filename": "update-settlement-preference.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-redeem",
+      "filename": "create-new-redeem.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/create-new-stake-wrap",
+      "filename": "create-new-stake-wrap.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-single-redeem",
+      "filename": "get-single-redeem.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-a-single-stake-wrap",
+      "filename": "get-a-single-stake-wrap.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-redeems",
+      "filename": "get-all-redeems.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-stake-wraps",
+      "filename": "get-all-stake-wraps.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-all-wrapped-assets",
+      "filename": "get-all-wrapped-assets.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-conversion-rate",
+      "filename": "get-wrapped-asset-conversion-rate.md"
+    },
+    {
+      "url": "https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/wrapped-assets/get-wrapped-asset-details",
+      "filename": "get-wrapped-asset-details.md"
     }
   ]
 }
