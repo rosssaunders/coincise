@@ -5126,13 +5126,13 @@ data entries. Charts are returned in groups based on the requested bar.
 
 #### Request Parameters
 
-| Parameter | Type   | Required | Description                                                                                                                                                                                                                           |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instId    | String | Yes      | Instrument ID, e.g. <code>BTC-USDT</code>                                                                                                                                                                                             |
-| bar       | String | No       | Bar size, the default is <code>1m</code><br>e.g. [1m/3m/5m/15m/30m/1H/2H/4H]<br>Hong Kong time opening price k-line: [6H/12H/1D/2D/3D/1W/1M/3M]<br>UTC time opening price k-line: [/6Hutc/12Hutc/1Dutc/2Dutc/3Dutc/1Wutc/1Mutc/3Mutc] |
-| after     | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                                       |
-| before    | String | No       | Pagination of data to return records newer than the requested <code>ts</code>. The latest data will be returned when using <code>before</code> individually                                                                           |
-| limit     | String | No       | Number of results per request. The maximum is <code>300</code>. The default is <code>100</code>.                                                                                                                                      |
+| Parameter | Type   | Required | Description                                                                                                                                                                                                              |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| instId    | String | Yes      | Instrument ID, e.g. <code>BTC-USDT</code>                                                                                                                                                                                |
+| bar       | String | No       | Bar size, the default is <code>1m</code><br>e.g. [1m/3m/5m/15m/30m/1H/2H/4H]<br>UTC+8 opening price k-line: [6H/12H/1D/2D/3D/1W/1M/3M]<br>UTC+0 opening price k-line: [6Hutc/12Hutc/1Dutc/2Dutc/3Dutc/1Wutc/1Mutc/3Mutc] |
+| after     | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                          |
+| before    | String | No       | Pagination of data to return records newer than the requested <code>ts</code>. The latest data will be returned when using <code>before</code> individually                                                              |
+| limit     | String | No       | Number of results per request. The maximum is <code>300</code>. The default is <code>100</code>.                                                                                                                         |
 
 #### Response Parameters
 
@@ -5174,13 +5174,13 @@ supported for 1s candlestick).
 
 #### Request Parameters
 
-| Parameter | Type   | Required | Description                                                                                                                                                                                                                             |
-| --------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instId    | String | Yes      | Instrument ID, e.g. <code>BTC-USDT</code>                                                                                                                                                                                               |
-| after     | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                                         |
-| before    | String | No       | Pagination of data to return records newer than the requested <code>ts</code>. The latest data will be returned when using <code>before</code> individually                                                                             |
-| bar       | String | No       | Bar size, the default is <code>1m</code><br>e.g. [1s/1m/3m/5m/15m/30m/1H/2H/4H]<br>Hong Kong time opening price k-line: [6H/12H/1D/2D/3D/1W/1M/3M]<br>UTC time opening price k-line: [6Hutc/12Hutc/1Dutc/2Dutc/3Dutc/1Wutc/1Mutc/3Mutc] |
-| limit     | String | No       | Number of results per request. The maximum is <code>300</code>. The default is <code>100</code>.                                                                                                                                        |
+| Parameter | Type   | Required | Description                                                                                                                                                                                                                 |
+| --------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| instId    | String | Yes      | Instrument ID, e.g. <code>BTC-USDT</code>                                                                                                                                                                                   |
+| after     | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                             |
+| before    | String | No       | Pagination of data to return records newer than the requested <code>ts</code>. The latest data will be returned when using <code>before</code> individually                                                                 |
+| bar       | String | No       | Bar size, the default is <code>1m</code><br>e.g. [1s/1m/3m/5m/15m/30m/1H/2H/4H]<br>UTC+8 opening price k-line: [6H/12H/1D/2D/3D/1W/1M/3M]<br>UTC+0 opening price k-line: [6Hutc/12Hutc/1Dutc/2Dutc/3Dutc/1Wutc/1Mutc/3Mutc] |
+| limit     | String | No       | Number of results per request. The maximum is <code>300</code>. The default is <code>100</code>.                                                                                                                            |
 
 #### Response Parameters
 
