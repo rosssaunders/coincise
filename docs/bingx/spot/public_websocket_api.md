@@ -332,9 +332,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description                                                    |
-| -------------- | ------ | -------- | -------------------------------------------------------------------- |
-| symbol         | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
+| Parameter Name | Type   | Required | Field Description                                                   |
+| -------------- | ------ | -------- | ------------------------------------------------------------------- |
+| id             | string | yes      | Subscription ID                                                     |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                  |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD |
 
 #### Data Parameters
 
@@ -372,10 +374,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description                                                    |
-| -------------- | ------ | -------- | -------------------------------------------------------------------- |
-| symbol         | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
-| interval       | string | yes      | Reference field description, K-line type                             |
+| Parameter Name | Type   | Required | Field Description                                                                                            |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------ |
+| id             | string | yes      | Subscription ID                                                                                              |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                                                           |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD.Reference field description, K-line type |
 
 #### Data Parameters
 
@@ -424,9 +427,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description                                                    |
-| -------------- | ------ | -------- | -------------------------------------------------------------------- |
-| symbol         | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USDT |
+| Parameter Name | Type   | Required | Field Description                                                                                            |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------ |
+| id             | string | yes      | Subscription ID                                                                                              |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                                                           |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD.Reference field description, K-line type |
 
 #### Order Parameters
 
@@ -461,9 +466,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description            |
-| -------------- | ------ | -------- | ---------------------------- |
-| symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
+| Parameter Name | Type   | Required | Field Description                                                   |
+| -------------- | ------ | -------- | ------------------------------------------------------------------- |
+| id             | string | yes      | Subscription ID                                                     |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                  |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD |
 
 > **Source:**
 > [https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html#Subscribe to
@@ -488,9 +495,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description            |
-| -------------- | ------ | -------- | ---------------------------- |
-| symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
+| Parameter Name | Type   | Required | Field Description                                                   |
+| -------------- | ------ | -------- | ------------------------------------------------------------------- |
+| id             | string | yes      | Subscription ID                                                     |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                  |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD |
 
 > **Source:**
 > [https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html#Spot Latest
@@ -515,9 +524,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description            |
-| -------------- | ------ | -------- | ---------------------------- |
-| symbol         | string | Yes      | Trading pair, e.g., BTC-USDT |
+| Parameter Name | Type   | Required | Field Description                                                   |
+| -------------- | ------ | -------- | ------------------------------------------------------------------- |
+| id             | string | yes      | Subscription ID                                                     |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                  |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD |
 
 > **Source:**
 > [https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html#Spot Best
@@ -575,9 +586,11 @@ Subscription Parameters
 
 #### Request Parameters
 
-| Parameter Name | Type   | Required | Field Description                                        |
-| -------------- | ------ | -------- | -------------------------------------------------------- |
-| symbol         | string | Yes      | Symbol name, the symbol must include a '-' like BTC-USDT |
+| Parameter Name | Type   | Required | Field Description                                                   |
+| -------------- | ------ | -------- | ------------------------------------------------------------------- |
+| id             | string | yes      | Subscription ID                                                     |
+| reqType        | string | yes      | Request type: Subscribe - sub; Unsubscribe - unsub                  |
+| dataType       | string | yes      | There must be a hyphen/ "-" in the trading pair symbol. eg: BTC-USD |
 
 > **Source:**
 > [https://bingx-api.github.io/docs/#/en-us/spot/socket/market.html#Incremental
