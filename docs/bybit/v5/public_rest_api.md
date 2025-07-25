@@ -243,22 +243,31 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-|               | Classic account & UTA | UTA Pro       |
-| ------------- | :-------------------: | ------------- | ----------- | -------------- | ------------- | ----------- |
-| Level\Product |    <b>Futures</b>     | <b>Option</b> | <b>Spot</b> | <b>Futures</b> | <b>Option</b> | <b>Spot</b> |
-| Default       |         10/s          | 10/s          | 20/s        | 10/s           | 10/s          | 20/s        |
-| VIP 1         |         20/s          | 20/s          | 25/s        | 20/s           | 20/s          | 25/s        |
-| VIP 2         |         40/s          | 40/s          | 30/s        | 40/s           | 40/s          | 30/s        |
-| VIP 3         |         60/s          | 60/s          | 40/s        | 60/s           | 60/s          | 40/s        |
-| VIP 4         |         60/s          | 60/s          | 40/s        | 60/s           | 60/s          | 40/s        |
-| VIP 5         |         60/s          | 60/s          | 40/s        | 60/s           | 60/s          | 40/s        |
-| VIP Supreme   |         60/s          | 60/s          | 40/s        | 60/s           | 60/s          | 40/s        |
-| PRO1          |         100/s         | 100/s         | 50/s        | 150/s          | 150/s         | 150/s       |
-| PRO2          |         150/s         | 150/s         | 75/s        | 200/s          | 200/s         | 200/s       |
-| PRO3          |         200/s         | 200/s         | 100/s       | 250/s          | 250/s         | 250/s       |
-| PRO4          |         200/s         | 200/s         | 100/s       | 300/s          | 300/s         | 300/s       |
-| PRO5          |         200/s         | 200/s         | 100/s       | 300/s          | 300/s         | 300/s       |
-| PRO6          |         200/s         | 200/s         | 100/s       | 300/s          | 300/s         | 300/s       |
+UPCOMING CHANGES FOR PRO ACCOUNT
+
+Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
+limit framework designed to enhance performance for high-frequency trading
+clients. The new system introduces a centralized institution-level rate cap with
+flexible per-UID configurations, enabling greater efficiency and scalability.
+Refer to
+[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| Default       |      10/s       | 10/s          | 20/s        |
+| VIP 1         |      20/s       | 20/s          | 25/s        |
+| VIP 2         |      40/s       | 40/s          | 30/s        |
+| VIP 3         |      60/s       | 60/s          | 40/s        |
+| VIP 4         |      60/s       | 60/s          | 40/s        |
+| VIP 5         |      60/s       | 60/s          | 40/s        |
+| VIP Supreme   |      60/s       | 60/s          | 40/s        |
+| PRO1          |      150/s      | 150/s         | 150/s       |
+| PRO2          |      200/s      | 200/s         | 200/s       |
+| PRO3          |      250/s      | 250/s         | 250/s       |
+| PRO4          |      300/s      | 300/s         | 300/s       |
+| PRO5          |      300/s      | 300/s         | 300/s       |
+| PRO6          |      300/s      | 300/s         | 300/s       |
 
 # Enums Definitions
 
@@ -950,6 +959,7 @@ _Option_:
 - `CFX` Indonesian foreign exchange tax. Only for Indonesian site
 - `WHT` EU withholding tax. Only for EU site
 - `GST` Indian GST tax. Only for kyc=Indian users
+- `VAT` ARE VAT tax. Only for kyc=ARE users
 
 ### extraFees.subFeeType[​](#extrafeessubfeetype "Direct link to heading")
 
@@ -960,6 +970,7 @@ _Option_:
   site
 - `AUT_WITHHOLDING_TAX` EU site withholding tax. Only for EU site
 - `IND_GST` Indian GST tax. Only for kyc=Indian users
+- `ARE_VAT` ARE VAT tax. Only for kyc=ARE users
 
 ### state[​](#state "Direct link to heading")
 
