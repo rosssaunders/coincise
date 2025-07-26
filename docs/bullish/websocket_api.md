@@ -328,7 +328,6 @@ To send an authenticated request, you must follow these steps:
 7. [Fetch Trading Account Ids](#overview--fetch-trading-account-ids)
 8. [Send The HTTP Authenticated Request](#overview--send-the-http-authenticated-request)
 9. [How To Ensure The Order Of _Create Order_ or _Cancel Order_ Requests](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests)
-10. [How do EMS/Brokers Flag Their Executions Sent To Bullish](#overview--how-do-emsbrokers-flag-their-executions-sent-to-bullish)
 
 ## Generate An API Key
 
