@@ -2,6 +2,13 @@
 
 ## Change Log
 
+### 2025-07-25
+
+- Added new error code in fapi:
+  - `-4109`: _This account is inactive. Please activate it before trading._  
+    This indicates the account has been archived due to inactivity. To activate
+    it, transfer any amount of asset to the USDM Futures account.
+
 ### 2025-07-02
 
 USDⓈ-M Futures
