@@ -6,19 +6,19 @@ improved
 
 ## [\[Notice\] New WebSocket LIST Format Types Supported (7/7 KST)](/changelog/websocket_list_format)
 
-12 days ago
+19 days ago
 
 added
 
 ## [\[Notice\] 'count' Parameter Added to Order Book List API](/changelog/rest_orderbook_unit_options)
 
-18 days ago
+25 days ago
 
 improved
 
 ## [\[Notice\] New Response Fields Added to Allowlisted Withdrawal Address API (7/7 estimated)](/changelog/allowlisted_withdrawal_address_update)
 
-about 1 month ago
+about 2 months ago
 
 ## [\[Important\] BingX vasp_uuid Update & Withdrawal Wallet Re-registration Required (June 5, 2025)](/changelog/vasp_uuid_change_bingx)
 
@@ -44,7 +44,7 @@ added
 
 ## [\[Notice\] Addition of 'Candle Data' Minute Intervals to WebSocket](/changelog/websocket_candles_miniutes)
 
-2 months ago
+3 months ago
 
 added
 
