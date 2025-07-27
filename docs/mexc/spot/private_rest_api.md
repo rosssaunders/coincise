@@ -837,7 +837,7 @@ Parameters:
 
 | Name              | Type   | Mandatory | Description |
 | ----------------- | ------ | --------- | ----------- |
-| symbol            | String | YES       |             |
+| symbol            | String | No        |             |
 | origClientOrderId | String | NO        |             |
 | orderId           | String | NO        |             |
 | recvWindow        | long   | NO        |             |
