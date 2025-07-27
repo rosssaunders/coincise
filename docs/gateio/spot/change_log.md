@@ -1,5 +1,22 @@
 # [#](#changelog) Changelog
 
+**v4.103.0**
+
+- Add `code` field in `GET /spot/account_book` query parameter and response to
+  filter account book entries by specific code
+- Add `threshold` parameter to `enable_evolved_classic` configuration for
+  setting position upgrade threshold in classic account margin mode
+- Add `text` parameter to `closeAllPositions` operation for order remarks when
+  closing all positions
+- New comprehensive AccountBook code documentation with detailed explanations
+  for over 300 transaction codes
+
+**v4.102.6**
+
+- Enhance staking swap response structure `SwapCoinStruct` with additional
+  fields: `pid`, `subtype`, `exchange_amount`, `updateStamp`, `protocol_type`,
+  `client_order_id`, `source`
+
 **v4.102.0**
 
 - Add `is_all_collateral` field in `GET /unified/accounts` endpoint response to
@@ -150,7 +167,7 @@ to the new interface as soon as possible
 - Add
   `cross_balance`、`iso_balance`、`im`、`mm`、`imr`、`mmr`、`margin_balance`、`available_margin`
   field in `GET /unified/accounts` response
-- `PUT /unified/unified_mode` endpoint，Added single-currency margin mode
+- `PUT /unified/unified_mode` endpoint, Added single-currency margin mode
 
 **v4.87.0**
 
@@ -204,7 +221,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 - New feature `GET /account/rate_limit` endpoint, Get user flow limit
   information. For details, please refer to
   [Trade Ratio Rate Limiting](#trade-ratio-rate-limiting)
-- `GET /account/detail` 接口, 返回值增加 `copy_trading_role` 字段
+- `GET /account/detail` 接口, 返回值增加 `copy_trading_role` field
 
 **v4.81.0**
 
@@ -250,7 +267,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-08-05
 
-- New feature: add `GET /sub_accounts/unified_mode` endpoint，Get sub-account
+- New feature: add `GET /sub_accounts/unified_mode` endpoint, Get sub-account
   mode
 - Add `from`、`to` field in `GET /rebate/broker/commission_history` query
 - Add `from`、`to` field in `GET /rebate/broker/transaction_history` query
@@ -259,7 +276,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-07-22
 
-- New feature: add `GET /rebate/partner/sub_list` endpoint，Partner subordinate
+- New feature: add `GET /rebate/partner/sub_list` endpoint, Partner subordinate
   list
 - Add `page`、`limit` field in `GET /flash_swap/currency_pairs` query
 - Add `order_id`、`currency_pair`、`account` field in
@@ -271,9 +288,9 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-07-08
 
-- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint，querying
+- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint, querying
   risk limit levels
-- New feature: add `GET /rebate/partner/transaction_history` endpoint，partners
+- New feature: add `GET /rebate/partner/transaction_history` endpoint, partners
   to get the transaction history of recommended users
 - Add `borrow_type` field in `GET /unified/loan_records` response
 - Add `accum_size` field in `GET /futures/{settle}/position_close` response
@@ -282,7 +299,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-06-24
 
-- New feature: add `GET /account/debit_fee` endpoint，query GT deduction
+- New feature: add `GET /account/debit_fee` endpoint, query GT deduction
   configuration.
 - New feature: add `POST /account/debit_fee` endpoint, to enable or disable GT
   deduction for the current account.
@@ -447,7 +464,6 @@ field in `POST /futures/{settle}/dual_mode` response.
 2023-11-03
 
 - Add `loanable` field in `GET /margin/cross/currencies` response
-- Add `biz_info` field in `GET /futures/{settle}/orders/{order_id}` response
 - Add `tier` field in `GET /account/detail` response
 - Add `max_base_amount`、`max_quote_amount` field in `GET /spot/currency_pairs`
   response
@@ -534,7 +550,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2023-07-03
 
-- Add new [frequency limit rule](#frequency-limit-rule)，the new rule is
+- Add new [frequency limit rule](#frequency-limit-rule), the new rule is
   expected to take effect on 2023-07-10 (UTC+8)
 - In the `GET /futures/{settle}/orders` API endpoint, the request field
   `contract` has been modified to be optional instead of mandatory.
