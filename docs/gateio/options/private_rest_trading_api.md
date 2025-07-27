@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-102-1) Gate API v4.102.1
+# [#](#gate-api-v4-103-0) Gate API v4.103.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -127,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows：
+Suppose that the order book is as follows:
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -177,7 +177,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints：
+Margin account related endpoints:
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -189,7 +189,7 @@ Margin account related endpoints：
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group：
+`/margin/uni` API group:
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -370,7 +370,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields:：
+Each request to the API response header will contain the following fields::
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -554,7 +554,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible。
+feedback as soon as possible.
 
 **Return Status**
 
@@ -574,12 +574,12 @@ feedback as soon as possible。
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object，Contains a child object{}                                                            |
-| `array`          | List，Includes multiple groups of content                                                    |
-| `boolean`        | true is true，false is false                                                                 |
+| `object`         | Object, Contains a child object{}                                                            |
+| `array`          | List, Includes multiple groups of content                                                    |
+| `boolean`        | true is true, false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -731,9 +731,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                 |
-| ------- | ------ | -------- | ----------- | --------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including： |
+| Name    | Type   | Required | Restriction | Description                |
+| ------- | ------ | -------- | ----------- | -------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including: |
 
 \- cn  
 \- co  
@@ -1750,7 +1750,7 @@ or with
 
 - Earn related
 
-| `label`                  | 含义                                                                        |
+| `label`                  | Meaning                                                                     |
 | ------------------------ | --------------------------------------------------------------------------- |
 | ERR_BALANCE_NOT_ENOUGH   | balance not enough                                                          |
 | ERR_PRODUCT_SELL_OUT     | Target quota reached                                                        |
@@ -1897,7 +1897,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string：
+Signature string:
 
 ```
 	GET\n
@@ -1907,7 +1907,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -1927,7 +1927,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string：
+Signature string:
 
 ```
 	POST\n
@@ -1937,7 +1937,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -2004,15 +2004,15 @@ Signature generated
 
 # [#](#options) Options
 
-Options API
+Options API.
 
-## [#](#list-all-underlyings) List all underlyings
+## [#](#list-all-underlyings) List all underlyings.
 
 > Code samples
 
 `GET /options/underlyings`
 
-_List all underlyings_
+_List all underlyings._
 
 > Example responses
 
@@ -2029,34 +2029,34 @@ _List all underlyings_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type   | Description                       |
-| ------------- | ------ | --------------------------------- |
-| » name        | string | Underlying name                   |
-| » index_price | string | Spot index price (quote currency) |
+| Name          | Type   | Description                        |
+| ------------- | ------ | ---------------------------------- |
+| » name        | string | Underlying name.                   |
+| » index_price | string | Spot index price (quote currency). |
 
 This operation does not require authentication
 
-## [#](#list-all-expiration-times) List all expiration times
+## [#](#list-all-expiration-times) List all expiration times.
 
 > Code samples
 
 `GET /options/expirations`
 
-_List all expiration times_
+_List all expiration times._
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description                                          |
-| ---------- | ----- | ------ | -------- | ---------------------------------------------------- |
-| underlying | query | string | true     | Underlying (Obtained by listing underlying endpoint) |
+| Name       | In    | Type   | Required | Description                                           |
+| ---------- | ----- | ------ | -------- | ----------------------------------------------------- |
+| underlying | query | string | true     | Underlying (Obtained by listing underlying endpoint). |
 
 > Example responses
 
@@ -2070,34 +2070,34 @@ _List all expiration times_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                   | Schema      |
-| ------ | -------------------------------------------------------------------------- | --------------------------------------------- | ----------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List expiration times of specified underlying | \[integer\] |
+| Status | Meaning                                                                    | Description                                    | Schema      |
+| ------ | -------------------------------------------------------------------------- | ---------------------------------------------- | ----------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List expiration times of specified underlying. | \[integer\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name     | Type           | Description                           |
-| -------- | -------------- | ------------------------------------- |
-| » _None_ | integer(int64) | Unix timestamp of the expiration time |
+| Name     | Type           | Description                            |
+| -------- | -------------- | -------------------------------------- |
+| » _None_ | integer(int64) | Unix timestamp of the expiration time. |
 
 This operation does not require authentication
 
-## [#](#list-all-the-contracts-with-specified-underlying-and-expiration-time) List all the contracts with specified underlying and expiration time
+## [#](#list-all-the-contracts-with-specified-underlying-and-expiration-time) List all the contracts with specified underlying and expiration time.
 
 > Code samples
 
 `GET /options/contracts`
 
-_List all the contracts with specified underlying and expiration time_
+_List all the contracts with specified underlying and expiration time._
 
 ### Parameters
 
-| Name       | In    | Type           | Required | Description                                          |
-| ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
-| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint) |
-| expiration | query | integer(int64) | false    | Unix timestamp of the expiration time                |
+| Name       | In    | Type           | Required | Description                                           |
+| ---------- | ----- | -------------- | -------- | ----------------------------------------------------- |
+| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint). |
+| expiration | query | integer(int64) | false    | Unix timestamp of the expiration time.                |
 
 > Example responses
 
@@ -2138,55 +2138,55 @@ _List all the contracts with specified underlying and expiration time_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                   | Type           | Description                                                                                                                                                             |
-| ---------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _None_                 | array          | \[Options contract detail\]                                                                                                                                             |
-| » _None_               | object         | Options contract detail                                                                                                                                                 |
-| »» name                | string         | Options contract name                                                                                                                                                   |
-| »» tag                 | string         | tag                                                                                                                                                                     |
-| »» create_time         | number(double) | Creation time                                                                                                                                                           |
-| »» expiration_time     | number(double) | Expiration time                                                                                                                                                         |
-| »» is_call             | boolean        | `true` means call options, while `false` is put options                                                                                                                 |
-| »» multiplier          | string         | Multiplier used in converting from invoicing to settlement currency                                                                                                     |
-| »» underlying          | string         | Underlying                                                                                                                                                              |
-| »» underlying_price    | string         | Underlying price (quote currency)                                                                                                                                       |
-| »» last_price          | string         | Last trading price                                                                                                                                                      |
-| »» mark_price          | string         | Current mark price (quote currency)                                                                                                                                     |
-| »» index_price         | string         | Current index price (quote currency)                                                                                                                                    |
-| »» maker_fee_rate      | string         | Maker fee rate, where negative means rebate                                                                                                                             |
-| »» taker_fee_rate      | string         | Taker fee rate                                                                                                                                                          |
-| »» order_price_round   | string         | Minimum order price increment                                                                                                                                           |
-| »» mark_price_round    | string         | Minimum mark price increment                                                                                                                                            |
-| »» order_size_min      | integer(int64) | Minimum order size the contract allowed                                                                                                                                 |
-| »» order_size_max      | integer(int64) | Maximum order size the contract allowed                                                                                                                                 |
-| »» order_price_deviate | string         | The positive and negative offset allowed between the order price and the current mark price, that is, the order price `order_price` must meet the following conditions: |
+| Name                   | Type           | Description                                                                                                                                         |
+| ---------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _None_                 | array          | \[Options contract detail.\]                                                                                                                        |
+| » _None_               | object         | Options contract detail.                                                                                                                            |
+| »» name                | string         | Options contract name.                                                                                                                              |
+| »» tag                 | string         | tag.                                                                                                                                                |
+| »» create_time         | number(double) | Creation time.                                                                                                                                      |
+| »» expiration_time     | number(double) | Expiration time.                                                                                                                                    |
+| »» is_call             | boolean        | `true` means call options, while `false` is put options.                                                                                            |
+| »» multiplier          | string         | Multiplier used in converting from invoicing to settlement currency.                                                                                |
+| »» underlying          | string         | Underlying.                                                                                                                                         |
+| »» underlying_price    | string         | Underlying price (quote currency).                                                                                                                  |
+| »» last_price          | string         | Last trading price.                                                                                                                                 |
+| »» mark_price          | string         | Current mark price (quote currency).                                                                                                                |
+| »» index_price         | string         | Current index price (quote currency).                                                                                                               |
+| »» maker_fee_rate      | string         | Maker fee rate, where negative means rebate.                                                                                                        |
+| »» taker_fee_rate      | string         | Taker fee rate.                                                                                                                                     |
+| »» order_price_round   | string         | Minimum order price increment.                                                                                                                      |
+| »» mark_price_round    | string         | Minimum mark price increment.                                                                                                                       |
+| »» order_size_min      | integer(int64) | Minimum order size the contract allowed.                                                                                                            |
+| »» order_size_max      | integer(int64) | Maximum order size the contract allowed.                                                                                                            |
+| »» order_price_deviate | string         | The positive and negative offset allowed between the order price and the current mark price, that `order_price` must meet the following conditions: |
 
 order_price is within the range of mark_price +/- order_price_deviate \*
 underlying_price and does not distinguish between buy and sell orders | | »»
-ref_discount_rate | string | Referral fee rate discount | | »» ref_rebate_rate |
-string | Referrer commission rate | | »» orderbook_id | integer(int64) | Current
-orderbook ID | | »» trade_id | integer(int64) | Current trade ID | | »»
-trade_size | integer(int64) | Historical accumulated trade size | | »»
-position_size | integer(int64) | Current total long position size | | »»
-orders_limit | integer | Maximum number of open orders |
+ref_discount_rate | string | Referral fee rate discount. | | »» ref_rebate_rate
+| string | Referrer commission rate. | | »» orderbook_id | integer(int64) |
+Current orderbook ID. | | »» trade_id | integer(int64) | Current trade ID. | |
+»» trade_size | integer(int64) | Historical accumulated trade size. | | »»
+position_size | integer(int64) | Current total long position size. | | »»
+orders_limit | integer | Maximum number of open orders. |
 
 This operation does not require authentication
 
-## [#](#query-specified-contract-detail) Query specified contract detail
+## [#](#query-specified-contract-detail) Query specified contract detail.
 
 > Code samples
 
 `GET /options/contracts/{contract}`
 
-_Query specified contract detail_
+_Query specified contract detail._
 
 ### Parameters
 
@@ -2231,67 +2231,67 @@ _Query specified contract detail_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description             | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Options contract detail_
+_Options contract detail._
 
-| Name                  | Type           | Description                                                                                                                                                             |
-| --------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » name                | string         | Options contract name                                                                                                                                                   |
-| » tag                 | string         | tag                                                                                                                                                                     |
-| » create_time         | number(double) | Creation time                                                                                                                                                           |
-| » expiration_time     | number(double) | Expiration time                                                                                                                                                         |
-| » is_call             | boolean        | `true` means call options, while `false` is put options                                                                                                                 |
-| » multiplier          | string         | Multiplier used in converting from invoicing to settlement currency                                                                                                     |
-| » underlying          | string         | Underlying                                                                                                                                                              |
-| » underlying_price    | string         | Underlying price (quote currency)                                                                                                                                       |
-| » last_price          | string         | Last trading price                                                                                                                                                      |
-| » mark_price          | string         | Current mark price (quote currency)                                                                                                                                     |
-| » index_price         | string         | Current index price (quote currency)                                                                                                                                    |
-| » maker_fee_rate      | string         | Maker fee rate, where negative means rebate                                                                                                                             |
-| » taker_fee_rate      | string         | Taker fee rate                                                                                                                                                          |
-| » order_price_round   | string         | Minimum order price increment                                                                                                                                           |
-| » mark_price_round    | string         | Minimum mark price increment                                                                                                                                            |
-| » order_size_min      | integer(int64) | Minimum order size the contract allowed                                                                                                                                 |
-| » order_size_max      | integer(int64) | Maximum order size the contract allowed                                                                                                                                 |
-| » order_price_deviate | string         | The positive and negative offset allowed between the order price and the current mark price, that is, the order price `order_price` must meet the following conditions: |
+| Name                  | Type           | Description                                                                                                                                         |
+| --------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » name                | string         | Options contract name.                                                                                                                              |
+| » tag                 | string         | tag.                                                                                                                                                |
+| » create_time         | number(double) | Creation time.                                                                                                                                      |
+| » expiration_time     | number(double) | Expiration time.                                                                                                                                    |
+| » is_call             | boolean        | `true` means call options, while `false` is put options.                                                                                            |
+| » multiplier          | string         | Multiplier used in converting from invoicing to settlement currency.                                                                                |
+| » underlying          | string         | Underlying.                                                                                                                                         |
+| » underlying_price    | string         | Underlying price (quote currency).                                                                                                                  |
+| » last_price          | string         | Last trading price.                                                                                                                                 |
+| » mark_price          | string         | Current mark price (quote currency).                                                                                                                |
+| » index_price         | string         | Current index price (quote currency).                                                                                                               |
+| » maker_fee_rate      | string         | Maker fee rate, where negative means rebate.                                                                                                        |
+| » taker_fee_rate      | string         | Taker fee rate.                                                                                                                                     |
+| » order_price_round   | string         | Minimum order price increment.                                                                                                                      |
+| » mark_price_round    | string         | Minimum mark price increment.                                                                                                                       |
+| » order_size_min      | integer(int64) | Minimum order size the contract allowed.                                                                                                            |
+| » order_size_max      | integer(int64) | Maximum order size the contract allowed.                                                                                                            |
+| » order_price_deviate | string         | The positive and negative offset allowed between the order price and the current mark price, that `order_price` must meet the following conditions: |
 
 order_price is within the range of mark_price +/- order_price_deviate \*
 underlying_price and does not distinguish between buy and sell orders | | »
-ref_discount_rate | string | Referral fee rate discount | | » ref_rebate_rate |
-string | Referrer commission rate | | » orderbook_id | integer(int64) | Current
-orderbook ID | | » trade_id | integer(int64) | Current trade ID | | » trade_size
-| integer(int64) | Historical accumulated trade size | | » position_size |
-integer(int64) | Current total long position size | | » orders_limit | integer |
-Maximum number of open orders |
+ref_discount_rate | string | Referral fee rate discount. | | » ref_rebate_rate |
+string | Referrer commission rate. | | » orderbook_id | integer(int64) | Current
+orderbook ID. | | » trade_id | integer(int64) | Current trade ID. | | »
+trade_size | integer(int64) | Historical accumulated trade size. | | »
+position_size | integer(int64) | Current total long position size. | | »
+orders_limit | integer | Maximum number of open orders. |
 
 This operation does not require authentication
 
-## [#](#list-settlement-history-2) List settlement history
+## [#](#list-settlement-history-2) List settlement history.
 
 > Code samples
 
 `GET /options/settlements`
 
-_List settlement history_
+_List settlement history._
 
 ### Parameters
 
-| Name       | In    | Type           | Required | Description                                               |
-| ---------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint)      |
-| limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset     | query | integer        | false    | List offset, starting from 0                              |
-| from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+| Name       | In    | Type           | Required | Description                                                |
+| ---------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint).      |
+| limit      | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| offset     | query | integer        | false    | List offset, starting from 0.                              |
+| from       | query | integer(int64) | false    | Start timestamp                                            |
+| to         | query | integer(int64) | false    | Termination Timestamp                                      |
 
-#### [#](#detailed-descriptions-42) Detailed descriptions
+#### [#](#detailed-descriptions-43) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -2322,41 +2322,41 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name           | Type           | Description                                 |
-| -------------- | -------------- | ------------------------------------------- |
-| _None_         | array          | none                                        |
-| » time         | number(double) | Last changed time of configuration          |
-| » contract     | string         | Options contract name                       |
-| » profit       | string         | Settlement profit per size (quote currency) |
-| » fee          | string         | Settlement fee per size (quote currency)    |
-| » strike_price | string         | Strike price (quote currency)               |
-| » settle_price | string         | Settlement price (quote currency)           |
+| Name           | Type           | Description                                  |
+| -------------- | -------------- | -------------------------------------------- |
+| _None_         | array          | none                                         |
+| » time         | number(double) | Last changed time of configuration.          |
+| » contract     | string         | Options contract name.                       |
+| » profit       | string         | Settlement profit per size (quote currency). |
+| » fee          | string         | Settlement fee per size (quote currency).    |
+| » strike_price | string         | Strike price (quote currency).               |
+| » settle_price | string         | Settlement price (quote currency).           |
 
 This operation does not require authentication
 
-## [#](#get-specified-contract-s-settlement) Get specified contract's settlement
+## [#](#get-specified-contract-s-settlement) Get specified contract's settlement.
 
 > Code samples
 
 `GET /options/settlements/{contract}`
 
-_Get specified contract's settlement_
+_Get specified contract's settlement._
 
 ### Parameters
 
-| Name       | In    | Type           | Required | Description                                          |
-| ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
-| contract   | path  | string         | true     | none                                                 |
-| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint) |
-| at         | query | integer(int64) | true     | none                                                 |
+| Name       | In    | Type           | Required | Description                                           |
+| ---------- | ----- | -------------- | -------- | ----------------------------------------------------- |
+| contract   | path  | string         | true     | none                                                  |
+| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint). |
+| at         | query | integer(int64) | true     | none                                                  |
 
 > Example responses
 
@@ -2375,45 +2375,45 @@ _Get specified contract's settlement_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description             | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name           | Type           | Description                                 |
-| -------------- | -------------- | ------------------------------------------- |
-| » time         | number(double) | Last changed time of configuration          |
-| » contract     | string         | Options contract name                       |
-| » profit       | string         | Settlement profit per size (quote currency) |
-| » fee          | string         | Settlement fee per size (quote currency)    |
-| » strike_price | string         | Strike price (quote currency)               |
-| » settle_price | string         | Settlement price (quote currency)           |
+| Name           | Type           | Description                                  |
+| -------------- | -------------- | -------------------------------------------- |
+| » time         | number(double) | Last changed time of configuration.          |
+| » contract     | string         | Options contract name.                       |
+| » profit       | string         | Settlement profit per size (quote currency). |
+| » fee          | string         | Settlement fee per size (quote currency).    |
+| » strike_price | string         | Strike price (quote currency).               |
+| » settle_price | string         | Settlement price (quote currency).           |
 
 This operation does not require authentication
 
-## [#](#list-my-options-settlements) List my options settlements
+## [#](#list-my-options-settlements) List my options settlements.
 
 > Code samples
 
 `GET /options/my_settlements`
 
-_List my options settlements_
+_List my options settlements._
 
 ### Parameters
 
-| Name       | In    | Type           | Required | Description                                               |
-| ---------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint)      |
-| contract   | query | string         | false    | Options contract name                                     |
-| limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset     | query | integer        | false    | List offset, starting from 0                              |
-| from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+| Name       | In    | Type           | Required | Description                                                |
+| ---------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint).      |
+| contract   | query | string         | false    | Options contract name.                                     |
+| limit      | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| offset     | query | integer        | false    | List offset, starting from 0.                              |
+| from       | query | integer(int64) | false    | Start timestamp                                            |
+| to         | query | integer(int64) | false    | Termination Timestamp                                      |
 
-#### [#](#detailed-descriptions-43) Detailed descriptions
+#### [#](#detailed-descriptions-44) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -2447,9 +2447,9 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
@@ -2457,40 +2457,40 @@ Status Code **200**
 
 | Name            | Type           | Description                                                                                                             |
 | --------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| » time          | number(double) | Settlement time                                                                                                         |
-| » underlying    | string         | Underlying                                                                                                              |
-| » contract      | string         | Options contract name                                                                                                   |
-| » strike_price  | string         | Strike price (quote currency)                                                                                           |
-| » settle_price  | string         | Settlement price (quote currency)                                                                                       |
-| » size          | integer(int64) | Size                                                                                                                    |
-| » settle_profit | string         | Settlement profit (quote currency)                                                                                      |
-| » fee           | string         | Fee (quote currency)                                                                                                    |
+| » time          | number(double) | Settlement time.                                                                                                        |
+| » underlying    | string         | Underlying.                                                                                                             |
+| » contract      | string         | Options contract name.                                                                                                  |
+| » strike_price  | string         | Strike price (quote currency).                                                                                          |
+| » settle_price  | string         | Settlement price (quote currency).                                                                                      |
+| » size          | integer(int64) | Size.                                                                                                                   |
+| » settle_profit | string         | Settlement profit (quote currency).                                                                                     |
+| » fee           | string         | Fee (quote currency).                                                                                                   |
 | » realised_pnl  | string         | The accumulated profit and loss of opening a position, including premium, fee, settlement profit, etc. (quote currency) |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#options-order-book) Options order book
+## [#](#options-order-book) Options order book.
 
 > Code samples
 
 `GET /options/order_book`
 
-_Options order book_
+_Options order book._
 
-Bids will be sorted by price from high to low, while asks sorted reversely
+Bids will be sorted by price from high to low, while asks sorted reversely.
 
 ### Parameters
 
 | Name     | In    | Type    | Required | Description                                                           |
 | -------- | ----- | ------- | -------- | --------------------------------------------------------------------- |
-| contract | query | string  | true     | Options contract name                                                 |
-| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0          |
-| limit    | query | integer | false    | Maximum number of order depth data in asks or bids                    |
+| contract | query | string  | true     | Options contract name.                                                |
+| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0.         |
+| limit    | query | integer | false    | Maximum number of order depth data in asks or bids.                   |
 | with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time. |
 
-#### [#](#enumerated-values-117) Enumerated Values
+#### [#](#enumerated-values-118) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2532,9 +2532,9 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Depth query successful | Inline |
+| Status | Meaning                                                                    | Description             | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Depth query successful. | Inline |
 
 ### Response Schema
 
@@ -2543,32 +2543,32 @@ Status Code **200**
 | Name                        | Type           | Description                                                                                                    |
 | --------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------- |
 | » id                        | integer(int64) | Order Book ID. Increases by 1 on every order book change. Set `with_id=true` to include this field in response |
-| » current                   | number(double) | Response data generation timestamp                                                                             |
-| » update                    | number(double) | Order book changed timestamp                                                                                   |
-| » asks                      | array          | Asks order depth                                                                                               |
+| » current                   | number(double) | Response data generation timestamp.                                                                            |
+| » update                    | number(double) | Order book changed timestamp.                                                                                  |
+| » asks                      | array          | Asks order depth.                                                                                              |
 | »» futures_order_book_item  | object         | none                                                                                                           |
-| »»» p                       | string         | Price (quote currency)                                                                                         |
-| »»» s                       | integer(int64) | Size                                                                                                           |
-| »» bids                     | array          | Bids order depth                                                                                               |
+| »»» p                       | string         | Price (quote currency).                                                                                        |
+| »»» s                       | integer(int64) | Size.                                                                                                          |
+| »» bids                     | array          | Bids order depth.                                                                                              |
 | »»» futures_order_book_item | object         | none                                                                                                           |
-| »»»» p                      | string         | Price (quote currency)                                                                                         |
-| »»»» s                      | integer(int64) | Size                                                                                                           |
+| »»»» p                      | string         | Price (quote currency).                                                                                        |
+| »»»» s                      | integer(int64) | Size.                                                                                                          |
 
 This operation does not require authentication
 
-## [#](#list-tickers-of-options-contracts) List tickers of options contracts
+## [#](#list-tickers-of-options-contracts) List tickers of options contracts.
 
 > Code samples
 
 `GET /options/tickers`
 
-_List tickers of options contracts_
+_List tickers of options contracts._
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description                                          |
-| ---------- | ----- | ------ | -------- | ---------------------------------------------------- |
-| underlying | query | string | true     | Underlying (Obtained by listing underlying endpoint) |
+| Name       | In    | Type   | Required | Description                                           |
+| ---------- | ----- | ------ | -------- | ----------------------------------------------------- |
+| underlying | query | string | true     | Underlying (Obtained by listing underlying endpoint). |
 
 > Example responses
 
@@ -2600,51 +2600,51 @@ _List tickers of options contracts_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description             | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name             | Type           | Description                                                       |
-| ---------------- | -------------- | ----------------------------------------------------------------- |
-| » _None_         | object         | Options contract detail                                           |
-| »» name          | string         | Options contract name                                             |
-| »» last_price    | string         | Last trading price (quote currency)                               |
-| »» mark_price    | string         | Current mark price (quote currency)                               |
-| »» index_price   | string         | Current index price (quote currency)                              |
-| »» ask1_size     | integer(int64) | Best ask size                                                     |
-| »» ask1_price    | string         | Best ask price                                                    |
-| »» bid1_size     | integer(int64) | Best bid size                                                     |
-| »» bid1_price    | string         | Best bid price                                                    |
-| »» position_size | integer(int64) | Current total long position size                                  |
-| »» mark_iv       | string         | Implied volatility                                                |
-| »» bid_iv        | string         | Bid side implied volatility                                       |
-| »» ask_iv        | string         | Ask side implied volatility                                       |
-| »» leverage      | string         | Current leverage. Formula: underlying_price / mark_price \* delta |
-| »» delta         | string         | Delta                                                             |
-| »» gamma         | string         | Gamma                                                             |
-| »» vega          | string         | Vega                                                              |
-| »» theta         | string         | Theta                                                             |
-| »» rho           | string         | Rho                                                               |
+| Name             | Type           | Description                                                        |
+| ---------------- | -------------- | ------------------------------------------------------------------ |
+| » _None_         | object         | Options contract detail.                                           |
+| »» name          | string         | Options contract name.                                             |
+| »» last_price    | string         | Last trading price (quote currency).                               |
+| »» mark_price    | string         | Current mark price (quote currency).                               |
+| »» index_price   | string         | Current index price (quote currency).                              |
+| »» ask1_size     | integer(int64) | Best ask size.                                                     |
+| »» ask1_price    | string         | Best ask price.                                                    |
+| »» bid1_size     | integer(int64) | Best bid size.                                                     |
+| »» bid1_price    | string         | Best bid price.                                                    |
+| »» position_size | integer(int64) | Current total long position size.                                  |
+| »» mark_iv       | string         | Implied volatility.                                                |
+| »» bid_iv        | string         | Bid side implied volatility.                                       |
+| »» ask_iv        | string         | Ask side implied volatility.                                       |
+| »» leverage      | string         | Current leverage. Formula: underlying_price / mark_price \* delta. |
+| »» delta         | string         | Delta.                                                             |
+| »» gamma         | string         | Gamma.                                                             |
+| »» vega          | string         | Vega.                                                              |
+| »» theta         | string         | Theta.                                                             |
+| »» rho           | string         | Rho.                                                               |
 
 This operation does not require authentication
 
-## [#](#get-underlying-ticker) Get underlying ticker
+## [#](#get-underlying-ticker) Get underlying ticker.
 
 > Code samples
 
 `GET /options/underlying/tickers/{underlying}`
 
-_Get underlying ticker_
+_Get underlying ticker._
 
 ### Parameters
 
 | Name       | In   | Type   | Required | Description |
 | ---------- | ---- | ------ | -------- | ----------- |
-| underlying | path | string | true     | Underlying  |
+| underlying | path | string | true     | Underlying. |
 
 > Example responses
 
@@ -2660,120 +2660,41 @@ _Get underlying ticker_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description             | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Options underlying detail_
+_Options underlying detail._
 
-| Name          | Type           | Description                                  |
-| ------------- | -------------- | -------------------------------------------- |
-| » trade_put   | integer(int64) | Total put options trades amount in last 24h  |
-| » trade_call  | integer(int64) | Total call options trades amount in last 24h |
-| » index_price | string         | Index price (quote currency)                 |
+| Name          | Type           | Description                                   |
+| ------------- | -------------- | --------------------------------------------- |
+| » trade_put   | integer(int64) | Total put options trades amount in last 24h.  |
+| » trade_call  | integer(int64) | Total call options trades amount in last 24h. |
+| » index_price | string         | Index price (quote currency).                 |
 
 This operation does not require authentication
 
-## [#](#get-options-candlesticks) Get options candlesticks
+## [#](#get-options-candlesticks) Get options candlesticks.
 
 > Code samples
 
 `GET /options/candlesticks`
 
-_Get options candlesticks_
+_Get options candlesticks._
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| contract | query | string         | true     | Options contract name                                     |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
-| interval | query | string         | false    | Interval time between data points                         |
-
-#### [#](#detailed-descriptions-44) Detailed descriptions
-
-**from**: Start timestamp
-
-Specify start time, time format is Unix timestamp. If not specified, it defaults
-to (the data start time of the time range actually returned by to and limit)
-
-**to**: Termination Timestamp
-
-Specify the end time. If not specified, it defaults to the current time, and the
-time format is a Unix timestamp
-
-#### [#](#enumerated-values-118) Enumerated Values
-
-| Parameter | Value |
-| --------- | ----- |
-| interval  | 1m    |
-| interval  | 5m    |
-| interval  | 15m   |
-| interval  | 30m   |
-| interval  | 1h    |
-
-> Example responses
-
-> 200 Response
-
-```
-[
-  {
-    "t": 1539852480,
-    "v": 97151,
-    "c": "1.032",
-    "h": "1.032",
-    "l": "1.032",
-    "o": "1.032"
-  }
-]
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
-
-### Response Schema
-
-Status Code **200**
-
-| Name     | Type           | Description                                                                 |
-| -------- | -------------- | --------------------------------------------------------------------------- |
-| » _None_ | object         | data point in every timestamp                                               |
-| »» t     | number(double) | Unix timestamp in seconds                                                   |
-| »» v     | integer(int64) | size volume (contract size). Only returned if `contract` is not prefixed    |
-| »» c     | string         | Close price (quote currency, unit: underlying corresponding option price)   |
-| »» h     | string         | Highest price (quote currency, unit: underlying corresponding option price) |
-| »» l     | string         | Lowest price (quote currency, unit: underlying corresponding option price)  |
-| »» o     | string         | Open price (quote currency, unit: underlying corresponding option price)    |
-
-This operation does not require authentication
-
-## [#](#mark-price-candlesticks-of-an-underlying) Mark price candlesticks of an underlying
-
-> Code samples
-
-`GET /options/underlying/candlesticks`
-
-_Mark price candlesticks of an underlying_
-
-### Parameters
-
-| Name       | In    | Type           | Required | Description                                               |
-| ---------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint)      |
-| limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
-| from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | Termination Timestamp                                     |
-| interval   | query | string         | false    | Interval time between data points                         |
+| Name     | In    | Type           | Required | Description                                                |
+| -------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| contract | query | string         | true     | Options contract name.                                     |
+| limit    | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| from     | query | integer(int64) | false    | Start timestamp                                            |
+| to       | query | integer(int64) | false    | Termination Timestamp                                      |
+| interval | query | string         | false    | Interval time between data points.                         |
 
 #### [#](#detailed-descriptions-45) Detailed descriptions
 
@@ -2809,6 +2730,85 @@ time format is a Unix timestamp
     "c": "1.032",
     "h": "1.032",
     "l": "1.032",
+    "o": "1.032"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description             | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | \[Inline\] |
+
+### Response Schema
+
+Status Code **200**
+
+| Name     | Type           | Description                                                                 |
+| -------- | -------------- | --------------------------------------------------------------------------- |
+| » _None_ | object         | data point in every timestamp.                                              |
+| »» t     | number(double) | Unix timestamp in seconds.                                                  |
+| »» v     | integer(int64) | size volume (contract size). Only returned if `contract` is not prefixed.   |
+| »» c     | string         | Close price (quote currency, unit: underlying corresponding option price).  |
+| »» h     | string         | Highest price (quote currency, unit: underlying corresponding option price) |
+| »» l     | string         | Lowest price (quote currency, unit: underlying corresponding option price). |
+| »» o     | string         | Open price (quote currency, unit: underlying corresponding option price).   |
+
+This operation does not require authentication
+
+## [#](#mark-price-candlesticks-of-an-underlying) Mark price candlesticks of an underlying.
+
+> Code samples
+
+`GET /options/underlying/candlesticks`
+
+_Mark price candlesticks of an underlying._
+
+### Parameters
+
+| Name       | In    | Type           | Required | Description                                                |
+| ---------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint).      |
+| limit      | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| from       | query | integer(int64) | false    | Start timestamp                                            |
+| to         | query | integer(int64) | false    | Termination Timestamp                                      |
+| interval   | query | string         | false    | Interval time between data points.                         |
+
+#### [#](#detailed-descriptions-46) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-120) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| interval  | 1m    |
+| interval  | 5m    |
+| interval  | 15m   |
+| interval  | 30m   |
+| interval  | 1h    |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "t": 1539852480,
+    "v": 97151,
+    "c": "1.032",
+    "h": "1.032",
+    "l": "1.032",
     "o": "1.032",
     "sum": "3580"
   }
@@ -2817,48 +2817,48 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description             | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name     | Type           | Description                                                              |
-| -------- | -------------- | ------------------------------------------------------------------------ |
-| _None_   | array          | \[data point in every timestamp\]                                        |
-| » _None_ | object         | data point in every timestamp                                            |
-| »» t     | number(double) | Unix timestamp in seconds                                                |
-| »» v     | integer(int64) | size volume (contract size). Only returned if `contract` is not prefixed |
-| »» c     | string         | Close price (quote currency)                                             |
-| »» h     | string         | Highest price (quote currency)                                           |
-| »» l     | string         | Lowest price (quote currency)                                            |
-| »» o     | string         | Open price (quote currency)                                              |
-| »» sum   | string         | Trading volume (unit: Quote currency)                                    |
+| Name     | Type           | Description                                                               |
+| -------- | -------------- | ------------------------------------------------------------------------- |
+| _None_   | array          | \[data point in every timestamp.\]                                        |
+| » _None_ | object         | data point in every timestamp.                                            |
+| »» t     | number(double) | Unix timestamp in seconds.                                                |
+| »» v     | integer(int64) | size volume (contract size). Only returned if `contract` is not prefixed. |
+| »» c     | string         | Close price (quote currency).                                             |
+| »» h     | string         | Highest price (quote currency).                                           |
+| »» l     | string         | Lowest price (quote currency).                                            |
+| »» o     | string         | Open price (quote currency).                                              |
+| »» sum   | string         | Trading volume (unit: Quote currency).                                    |
 
 This operation does not require authentication
 
-## [#](#options-trade-history) Options trade history
+## [#](#options-trade-history) Options trade history.
 
 > Code samples
 
 `GET /options/trades`
 
-_Options trade history_
+_Options trade history._
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| contract | query | string         | false    | Options contract name                                     |
-| type     | query | string(P)      | false    | `C` is call, while `P` is put                             |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer        | false    | List offset, starting from 0                              |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
+| Name     | In    | Type           | Required | Description                                                |
+| -------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| contract | query | string         | false    | Options contract name.                                     |
+| type     | query | string(P)      | false    | `C` is call, while `P` is put.                             |
+| limit    | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| offset   | query | integer        | false    | List offset, starting from 0.                              |
+| from     | query | integer(int64) | false    | Start timestamp                                            |
+| to       | query | integer(int64) | false    | Termination Timestamp                                      |
 
-#### [#](#detailed-descriptions-46) Detailed descriptions
+#### [#](#detailed-descriptions-47) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -2888,34 +2888,34 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name             | Type           | Description                                                                                                                                                                                                                                                                                                                    |
-| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| _None_           | array          | none                                                                                                                                                                                                                                                                                                                           |
-| » id             | integer(int64) | Trade ID                                                                                                                                                                                                                                                                                                                       |
-| » create_time    | number(double) | Trading time                                                                                                                                                                                                                                                                                                                   |
-| » create_time_ms | number(double) | Trading time, with milliseconds set to 3 decimal places.                                                                                                                                                                                                                                                                       |
-| » contract       | string         | Futures contract                                                                                                                                                                                                                                                                                                               |
-| » size           | integer(int64) | Trading size                                                                                                                                                                                                                                                                                                                   |
-| » price          | string         | Trading price (quote currency)                                                                                                                                                                                                                                                                                                 |
-| » is_internal    | boolean        | Whether internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the transaction price may deviate, and it will not be recorded in the K-line. If it is not an internal trade, this field will not be returned. |
+| Name             | Type           | Description                                                                                                                                                                                                                                                                                                       |
+| ---------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _None_           | array          | none                                                                                                                                                                                                                                                                                                              |
+| » id             | integer(int64) | Trade ID.                                                                                                                                                                                                                                                                                                         |
+| » create_time    | number(double) | Trading time.                                                                                                                                                                                                                                                                                                     |
+| » create_time_ms | number(double) | Trading time, with milliseconds set to 3 decimal places.                                                                                                                                                                                                                                                          |
+| » contract       | string         | Futures contract.                                                                                                                                                                                                                                                                                                 |
+| » size           | integer(int64) | Trading size.                                                                                                                                                                                                                                                                                                     |
+| » price          | string         | Trading price (quote currency).                                                                                                                                                                                                                                                                                   |
+| » is_internal    | boolean        | Whether internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the transaction price may deviate, and it will not be recorded in the K-line. an internal trade, this field will not be returned. |
 
 This operation does not require authentication
 
-## [#](#list-options-account) List options account
+## [#](#list-options-account) List options account.
 
 > Code samples
 
 `GET /options/accounts`
 
-_List options account_
+_List options account._
 
 > Example responses
 
@@ -2947,38 +2947,38 @@ _List options account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description             | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                                                               | Type           | Description                                                                                 |
-| ------------------------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------- |
-| » user                                                             | integer(int64) | User ID                                                                                     |
-| » total                                                            | string         | Account balance                                                                             |
-| » position_value                                                   | string         | Position value, long position value is positive, short position value is negative           |
-| » equity                                                           | string         | Account equity, the sum of account balance and position value                               |
-| » short_enabled                                                    | boolean        | If the account is allowed to short                                                          |
-| » mmp_enabled                                                      | boolean        | Whether to enable MMP                                                                       |
-| » liq_triggered                                                    | boolean        | Whether to trigger position liquidation                                                     |
-| » margin_mode                                                      | integer(int32) | ｜ 保证金模式：                                                                             |
-| \- 0：经典现货保证金模式 - 1：跨币种保证金模式 - 2：组合保证金模式 |
-| » unrealised_pnl                                                   | string         | Unrealized PNL                                                                              |
-| » init_margin                                                      | string         | Initial position margin                                                                     |
-| » maint_margin                                                     | string         | Position maintenance margin                                                                 |
-| » order_margin                                                     | string         | Order margin of unfinished orders                                                           |
-| » ask_order_margin                                                 | string         | Margin for outstanding sell orders                                                          |
-| » bid_order_margin                                                 | string         | Margin for outstanding buy orders                                                           |
-| » available                                                        | string         | Available balance to transfer out or trade                                                  |
-| » point                                                            | string         | POINT amount                                                                                |
-| » currency                                                         | string         | Settle currency                                                                             |
-| » orders_limit                                                     | integer(int32) | Maximum number of outstanding orders                                                        |
-| » position_notional_limit                                          | integer(int64) | Notional value upper limit, including the nominal value of positions and outstanding orders |
+| Name                                                                   | Type           | Description                                                                                 |
+| ---------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------- |
+| » user                                                                 | integer(int64) | User ID.                                                                                    |
+| » total                                                                | string         | Account balance.                                                                            |
+| » position_value                                                       | string         | Position value, long position value is positive, short position value is negative           |
+| » equity                                                               | string         | Account equity, the sum of account balance and position value.                              |
+| » short_enabled                                                        | boolean        | If the account is allowed to short.                                                         |
+| » mmp_enabled                                                          | boolean        | Whether to enable MMP.                                                                      |
+| » liq_triggered                                                        | boolean        | Whether to trigger position liquidation.                                                    |
+| » margin_mode                                                          | integer(int32) | ｜ Margin模式:                                                                              |
+| \- 0: 经典SpotMargin模式 - 1: 跨CurrencyMargin模式 - 2: 组合Margin模式 |
+| » unrealised_pnl                                                       | string         | Unrealized PNL.                                                                             |
+| » init_margin                                                          | string         | Initial position margin.                                                                    |
+| » maint_margin                                                         | string         | Position maintenance margin.                                                                |
+| » order_margin                                                         | string         | Order margin of unfinished orders.                                                          |
+| » ask_order_margin                                                     | string         | Margin for outstanding sell orders.                                                         |
+| » bid_order_margin                                                     | string         | Margin for outstanding buy orders.                                                          |
+| » available                                                            | string         | Available balance to transfer out or trade.                                                 |
+| » point                                                                | string         | POINT amount.                                                                               |
+| » currency                                                             | string         | Settle currency.                                                                            |
+| » orders_limit                                                         | integer(int32) | Maximum number of outstanding orders.                                                       |
+| » position_notional_limit                                              | integer(int64) | Notional value upper limit, including the nominal value of positions and outstanding orders |
 
-#### [#](#enumerated-values-120) Enumerated Values
+#### [#](#enumerated-values-121) Enumerated Values
 
 | Property    | Value |
 | ----------- | ----- |
@@ -2990,25 +2990,25 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-account-changing-history) List account changing history
+## [#](#list-account-changing-history) List account changing history.
 
 > Code samples
 
 `GET /options/account_book`
 
-_List account changing history_
+_List account changing history._
 
 ### Parameters
 
-| Name   | In    | Type           | Required | Description                                               |
-| ------ | ----- | -------------- | -------- | --------------------------------------------------------- |
-| limit  | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset | query | integer        | false    | List offset, starting from 0                              |
-| from   | query | integer(int64) | false    | Start timestamp                                           |
-| to     | query | integer(int64) | false    | Termination Timestamp                                     |
-| type   | query | string         | false    | Changing Type:                                            |
+| Name   | In    | Type           | Required | Description                                                |
+| ------ | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| limit  | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| offset | query | integer        | false    | List offset, starting from 0.                              |
+| from   | query | integer(int64) | false    | Start timestamp                                            |
+| to     | query | integer(int64) | false    | Termination Timestamp                                      |
+| type   | query | string         | false    | Changing Type:                                             |
 
-#### [#](#detailed-descriptions-47) Detailed descriptions
+#### [#](#detailed-descriptions-48) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -3028,7 +3028,7 @@ time format is a Unix timestamp
 - refr: Referrer rebate
 - set: settlement PNL
 
-#### [#](#enumerated-values-121) Enumerated Values
+#### [#](#enumerated-values-122) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3056,46 +3056,45 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name      | Type           | Description                               |
-| --------- | -------------- | ----------------------------------------- |
-| » time    | number(double) | Change time                               |
-| » change  | string         | Amount changed (USDT)                     |
-| » balance | string         | Account total balance after change (USDT) |
-| » type    | string         | Changing Type:                            |
+| Name      | Type           | Description                                |
+| --------- | -------------- | ------------------------------------------ |
+| » time    | number(double) | Change time.                               |
+| » change  | string         | Amount changed (USDT).                     |
+| » balance | string         | Account total balance after change (USDT). |
+| » type    | string         | Changing Type:                             |
 
 \- dnw: Deposit & Withdraw  
 \- prem: Trading premium  
 \- fee: Trading fee  
 \- refr: Referrer rebate  
-\- point_dnw: POINT Deposit & Withdraw  
-\- point_fee: POINT Trading fee  
-\- point_refr: POINT Referrer rebate | | » text | string | custom text |
+\- point_dnw: point_fee: POINT Trading fee  
+\- point_refr: POINT Referrer rebate | | » text | string | custom text. |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-user-s-positions-of-specified-underlying) List user's positions of specified underlying
+## [#](#list-user-s-positions-of-specified-underlying) List user's positions of specified underlying.
 
 > Code samples
 
 `GET /options/positions`
 
-_List user's positions of specified underlying_
+_List user's positions of specified underlying._
 
 ### Parameters
 
 | Name       | In    | Type   | Required | Description |
 | ---------- | ----- | ------ | -------- | ----------- |
-| underlying | query | string | false    | Underlying  |
+| underlying | query | string | false    | Underlying. |
 
 > Example responses
 
@@ -3130,49 +3129,49 @@ _List user's positions of specified underlying_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type           | Description                         |
-| ------------------- | -------------- | ----------------------------------- | ------------------------------------- |
-| _None_              | array          | \[Options position information\]    |
-| » _None_            | object         | Options position information        |
-| »» user             | integer        | User ID                             |
-| »» underlying       | string         | Underlying                          |
-| »» underlying_price | string         | Underlying price (quote currency)   |
-| »» contract         | string         | Options contract name               |
-| »» size             | integer(int64) | Position size (contract size)       |
-| »» entry_price      | string         | Entry size (quote currency)         |
-| »» mark_price       | string         | Current mark price (quote currency) |
-| »» mark_iv          | string         | Implied volatility                  |
-| »» realised_pnl     | string         | Realized PNL                        |
-| »» unrealised_pnl   | string         | Unrealized PNL                      |
-| »» pending_orders   | integer        | Current open orders                 |
-| »» close_order      | object         | null                                | Current close order if any, or `null` |
-| »»» id              | integer(int64) | Close order ID                      |
-| »»» price           | string         | Close order price （quote currency) |
-| »»» is_liq          | boolean        | Is the close order from liquidation |
-| »» delta            | string         | Delta                               |
-| »» gamma            | string         | Gamma                               |
-| »» vega             | string         | Vega                                |
-| »» theta            | string         | Theta                               |
+| Name                | Type           | Description                          |
+| ------------------- | -------------- | ------------------------------------ | -------------------------------------- |
+| _None_              | array          | \[Options position information.\]    |
+| » _None_            | object         | Options position information.        |
+| »» user             | integer        | User ID.                             |
+| »» underlying       | string         | Underlying.                          |
+| »» underlying_price | string         | Underlying price (quote currency).   |
+| »» contract         | string         | Options contract name.               |
+| »» size             | integer(int64) | Position size (contract size).       |
+| »» entry_price      | string         | Entry size (quote currency).         |
+| »» mark_price       | string         | Current mark price (quote currency). |
+| »» mark_iv          | string         | Implied volatility.                  |
+| »» realised_pnl     | string         | Realized PNL.                        |
+| »» unrealised_pnl   | string         | Unrealized PNL.                      |
+| »» pending_orders   | integer        | Current open orders.                 |
+| »» close_order      | object         | null                                 | Current close order if any, or `null`. |
+| »»» id              | integer(int64) | Close order ID.                      |
+| »»» price           | string         | Close order price (quote currency).  |
+| »»» is_liq          | boolean        | Is the close order from liquidation. |
+| »» delta            | string         | Delta.                               |
+| »» gamma            | string         | Gamma.                               |
+| »» vega             | string         | Vega.                                |
+| »» theta            | string         | Theta.                               |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-specified-contract-position) Get specified contract position
+## [#](#get-specified-contract-position) Get specified contract position.
 
 > Code samples
 
 `GET /options/positions/{contract}`
 
-_Get specified contract position_
+_Get specified contract position._
 
 ### Parameters
 
@@ -3211,56 +3210,56 @@ _Get specified contract position_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description             | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Options position information_
+_Options position information._
 
-| Name               | Type           | Description                         |
-| ------------------ | -------------- | ----------------------------------- | ------------------------------------- |
-| » user             | integer        | User ID                             |
-| » underlying       | string         | Underlying                          |
-| » underlying_price | string         | Underlying price (quote currency)   |
-| » contract         | string         | Options contract name               |
-| » size             | integer(int64) | Position size (contract size)       |
-| » entry_price      | string         | Entry size (quote currency)         |
-| » mark_price       | string         | Current mark price (quote currency) |
-| » mark_iv          | string         | Implied volatility                  |
-| » realised_pnl     | string         | Realized PNL                        |
-| » unrealised_pnl   | string         | Unrealized PNL                      |
-| » pending_orders   | integer        | Current open orders                 |
-| » close_order      | object         | null                                | Current close order if any, or `null` |
-| »» id              | integer(int64) | Close order ID                      |
-| »» price           | string         | Close order price （quote currency) |
-| »» is_liq          | boolean        | Is the close order from liquidation |
-| » delta            | string         | Delta                               |
-| » gamma            | string         | Gamma                               |
-| » vega             | string         | Vega                                |
-| » theta            | string         | Theta                               |
+| Name               | Type           | Description                          |
+| ------------------ | -------------- | ------------------------------------ | -------------------------------------- |
+| » user             | integer        | User ID.                             |
+| » underlying       | string         | Underlying.                          |
+| » underlying_price | string         | Underlying price (quote currency).   |
+| » contract         | string         | Options contract name.               |
+| » size             | integer(int64) | Position size (contract size).       |
+| » entry_price      | string         | Entry size (quote currency).         |
+| » mark_price       | string         | Current mark price (quote currency). |
+| » mark_iv          | string         | Implied volatility.                  |
+| » realised_pnl     | string         | Realized PNL.                        |
+| » unrealised_pnl   | string         | Unrealized PNL.                      |
+| » pending_orders   | integer        | Current open orders.                 |
+| » close_order      | object         | null                                 | Current close order if any, or `null`. |
+| »» id              | integer(int64) | Close order ID.                      |
+| »» price           | string         | Close order price （quote currency). |
+| »» is_liq          | boolean        | Is the close order from liquidation. |
+| » delta            | string         | Delta.                               |
+| » gamma            | string         | Gamma.                               |
+| » vega             | string         | Vega.                                |
+| » theta            | string         | Theta.                               |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-user-s-liquidation-history-of-specified-underlying) List user's liquidation history of specified underlying
+## [#](#list-user-s-liquidation-history-of-specified-underlying) List user's liquidation history of specified underlying.
 
 > Code samples
 
 `GET /options/position_close`
 
-_List user's liquidation history of specified underlying_
+_List user's liquidation history of specified underlying._
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description                                          |
-| ---------- | ----- | ------ | -------- | ---------------------------------------------------- |
-| underlying | query | string | true     | Underlying (Obtained by listing underlying endpoint) |
-| contract   | query | string | false    | Options contract name                                |
+| Name       | In    | Type   | Required | Description                                           |
+| ---------- | ----- | ------ | -------- | ----------------------------------------------------- |
+| underlying | query | string | true     | Underlying (Obtained by listing underlying endpoint). |
+| contract   | query | string | false    | Options contract name.                                |
 
 > Example responses
 
@@ -3281,24 +3280,24 @@ _List user's liquidation history of specified underlying_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description                  |
-| ------------- | -------------- | ---------------------------- |
-| » time        | number(double) | Position close time          |
-| » contract    | string         | Options contract name        |
-| » side        | string         | Position side, long or short |
-| » pnl         | string         | PNL                          |
-| » text        | string         | Text of close order          |
-| » settle_size | string         | settlement size              |
+| Name          | Type           | Description                   |
+| ------------- | -------------- | ----------------------------- |
+| » time        | number(double) | Position close time.          |
+| » contract    | string         | Options contract name.        |
+| » side        | string         | Position side, long or short. |
+| » pnl         | string         | PNL.                          |
+| » text        | string         | Text of close order.          |
+| » settle_size | string         | settlement size.              |
 
-#### [#](#enumerated-values-122) Enumerated Values
+#### [#](#enumerated-values-123) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -3309,13 +3308,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#create-an-options-order) Create an options order
+## [#](#create-an-options-order) Create an options order.
 
 > Code samples
 
 `POST /options/orders`
 
-_Create an options order_
+_Create an options order._
 
 > Body parameter
 
@@ -3335,17 +3334,17 @@ _Create an options order_
 | Name          | In   | Type           | Required | Description                                                                                                         |
 | ------------- | ---- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
 | body          | body | object         | true     | none                                                                                                                |
-| » contract    | body | string         | true     | Contract name                                                                                                       |
+| » contract    | body | string         | true     | Contract name.                                                                                                      |
 | » size        | body | integer(int64) | true     | Order size. Specify positive number to make a bid, and negative number to ask                                       |
 | » iceberg     | body | integer(int64) | false    | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size |
-| » price       | body | string         | false    | Order price. 0 for market order with `tif` set as `ioc` (USDT)                                                      |
-| » close       | body | boolean        | false    | Set as `true` to close the position, with `size` set to 0                                                           |
-| » reduce_only | body | boolean        | false    | Set as `true` to be reduce-only order                                                                               |
-| » mmp         | body | boolean        | false    | When set to true, delegate to MMP                                                                                   |
+| » price       | body | string         | false    | Order price. 0 for market order with `tif` set as `ioc` (USDT).                                                     |
+| » close       | body | boolean        | false    | Set as `true` to close the position, with `size` set to 0.                                                          |
+| » reduce_only | body | boolean        | false    | Set as `true` to be reduce-only order.                                                                              |
+| » mmp         | body | boolean        | false    | When set to true, delegate to MMP.                                                                                  |
 | » tif         | body | string         | false    | Time in force                                                                                                       |
 | » text        | body | string         | false    | User defined information. If not empty, must follow the rules below:                                                |
 
-#### [#](#detailed-descriptions-48) Detailed descriptions
+#### [#](#detailed-descriptions-49) Detailed descriptions
 
 **» tif**: Time in force
 
@@ -3369,7 +3368,7 @@ _Create an options order_
 - liquidation: from liquidation
 - insurance: from insurance
 
-#### [#](#enumerated-values-123) Enumerated Values
+#### [#](#enumerated-values-124) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3405,31 +3404,30 @@ _Create an options order_
 
 ### Responses
 
-| Status | Meaning                                                                         | Description  | Schema |
-| ------ | ------------------------------------------------------------------------------- | ------------ | ------ |
-| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order detail | Inline |
+| Status | Meaning                                                                         | Description   | Schema |
+| ------ | ------------------------------------------------------------------------------- | ------------- | ------ |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order detail. | Inline |
 
 ### Response Schema
 
 Status Code **201**
 
-_Options order detail_
+_Options order detail._
 
-| Name          | Type           | Description                                        |
-| ------------- | -------------- | -------------------------------------------------- |
-| » id          | integer(int64) | Options order ID                                   |
-| » user        | integer        | User ID                                            |
-| » create_time | number(double) | Creation time of order                             |
-| » finish_time | number(double) | Order finished time. Not returned if order is open |
-| » finish_as   | string         | Ending method, including:                          |
+| Name          | Type           | Description                                         |
+| ------------- | -------------- | --------------------------------------------------- |
+| » id          | integer(int64) | Options order ID.                                   |
+| » user        | integer        | User ID.                                            |
+| » create_time | number(double) | Creation time of order.                             |
+| » finish_time | number(double) | Order finished time. Not returned if order is open. |
+| » finish_as   | string         | Ending method, including:                           |
 
 \- filled: fully completed  
 \- canceled: user canceled  
 \- liquidated: forced liquidation cancellation  
 \- ioc: Not fully filled immediately because tif is set to ioc  
 \- auto_deleveraged: automatic deleveraging cancel  
-\- reduce_only: Increased position is cancelled, because reduce_only is set or
-the position is closed  
+\- reduce_only: Increased position is cancelled, or the position is closed  
 \- position_closed: Because the position was closed, the pending order was
 canceled  
 \- reduce_out: Only reduce the excluded pending orders that are not easy to be
@@ -3437,22 +3435,23 @@ filled
 \- mmp_cancelled: MMP canceled | | » status | string | Order status
 
 \- `open`: waiting to be traded  
-\- `finished`: finished | | » contract | string | Contract name | | » size |
+\- `finished`: finished | | » contract | string | Contract name. | | » size |
 integer(int64) | Order size. Specify positive number to make a bid, and negative
 number to ask | | » iceberg | integer(int64) | Display size for iceberg order. 0
 for non-iceberg. Note that you will have to pay the taker fee for the hidden
 size | | » price | string | Order price. 0 for market order with `tif` set as
-`ioc` (USDT) | | » is_close | boolean | Is the order to close position | | »
-is_reduce_only | boolean | Is the order reduce-only | | » is_liq | boolean | Is
-the order for liquidation | | » is_mmp | boolean | Whether it is MMP delegation.
-Corresponds to `mmp` in the request. | | » tif | string | Time in force
+`ioc` (USDT). | | » is_close | boolean | Is the order to close position. | | »
+is_reduce_only | boolean | Is the order reduce-only. | | » is_liq | boolean | Is
+the order for liquidation. | | » is_mmp | boolean | Whether it is MMP
+delegation. Corresponds to `mmp` in the request. | | » tif | string | Time in
+force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
 \- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
-fee | | » left | integer(int64) | Size left to be traded | | » fill_price |
-string | Fill price of the order | | » text | string | User defined information.
-If not empty, must follow the rules below:
+fee | | » left | integer(int64) | Size left to be traded. | | » fill_price |
+string | Fill price of the order. | | » text | string | User defined
+information. If not empty, must follow the rules below:
 
 1\. prefixed with `t-`  
 2\. no longer than 28 bytes without `t-` prefix  
@@ -3465,11 +3464,11 @@ how the order is created:
 \- app: from mobile phones  
 \- auto_deleveraging: from ADL  
 \- liquidation: from liquidation  
-\- insurance: from insurance | | » tkfr | string | Taker fee | | » mkfr | string
-| Maker fee | | » refu | integer | Reference user ID | | » refr | string |
-Referrer rebate |
+\- insurance: from insurance | | » tkfr | string | Taker fee. | | » mkfr |
+string | Maker fee. | | » refu | integer | Reference user ID. | | » refr |
+string | Referrer rebate. |
 
-#### [#](#enumerated-values-124) Enumerated Values
+#### [#](#enumerated-values-125) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3492,27 +3491,27 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-options-orders) List options orders
+## [#](#list-options-orders) List options orders.
 
 > Code samples
 
 `GET /options/orders`
 
-_List options orders_
+_List options orders._
 
 ### Parameters
 
-| Name       | In    | Type           | Required | Description                                               |
-| ---------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| contract   | query | string         | false    | Options contract name                                     |
-| underlying | query | string         | false    | Underlying                                                |
-| status     | query | string         | true     | Only list the orders with this status                     |
-| limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset     | query | integer        | false    | List offset, starting from 0                              |
-| from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+| Name       | In    | Type           | Required | Description                                                |
+| ---------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| contract   | query | string         | false    | Options contract name.                                     |
+| underlying | query | string         | false    | Underlying.                                                |
+| status     | query | string         | true     | Only list the orders with this status.                     |
+| limit      | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| offset     | query | integer        | false    | List offset, starting from 0.                              |
+| from       | query | integer(int64) | false    | Start timestamp                                            |
+| to         | query | integer(int64) | false    | Termination Timestamp                                      |
 
-#### [#](#detailed-descriptions-49) Detailed descriptions
+#### [#](#detailed-descriptions-50) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -3524,7 +3523,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-125) Enumerated Values
+#### [#](#enumerated-values-126) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -3561,31 +3560,30 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name           | Type           | Description                                        |
-| -------------- | -------------- | -------------------------------------------------- |
-| _None_         | array          | \[Options order detail\]                           |
-| » _None_       | object         | Options order detail                               |
-| »» id          | integer(int64) | Options order ID                                   |
-| »» user        | integer        | User ID                                            |
-| »» create_time | number(double) | Creation time of order                             |
-| »» finish_time | number(double) | Order finished time. Not returned if order is open |
-| »» finish_as   | string         | Ending method, including:                          |
+| Name           | Type           | Description                                         |
+| -------------- | -------------- | --------------------------------------------------- |
+| _None_         | array          | \[Options order detail.\]                           |
+| » _None_       | object         | Options order detail.                               |
+| »» id          | integer(int64) | Options order ID.                                   |
+| »» user        | integer        | User ID.                                            |
+| »» create_time | number(double) | Creation time of order.                             |
+| »» finish_time | number(double) | Order finished time. Not returned if order is open. |
+| »» finish_as   | string         | Ending method, including:                           |
 
 \- filled: fully completed  
 \- canceled: user canceled  
 \- liquidated: forced liquidation cancellation  
 \- ioc: Not fully filled immediately because tif is set to ioc  
 \- auto_deleveraged: automatic deleveraging cancel  
-\- reduce_only: Increased position is cancelled, because reduce_only is set or
-the position is closed  
+\- reduce_only: Increased position is cancelled, or the position is closed  
 \- position_closed: Because the position was closed, the pending order was
 canceled  
 \- reduce_out: Only reduce the excluded pending orders that are not easy to be
@@ -3593,22 +3591,22 @@ filled
 \- mmp_cancelled: MMP canceled | | »» status | string | Order status
 
 \- `open`: waiting to be traded  
-\- `finished`: finished | | »» contract | string | Contract name | | »» size |
+\- `finished`: finished | | »» contract | string | Contract name. | | »» size |
 integer(int64) | Order size. Specify positive number to make a bid, and negative
 number to ask | | »» iceberg | integer(int64) | Display size for iceberg order.
 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden
 size | | »» price | string | Order price. 0 for market order with `tif` set as
-`ioc` (USDT) | | »» is_close | boolean | Is the order to close position | | »»
-is_reduce_only | boolean | Is the order reduce-only | | »» is_liq | boolean | Is
-the order for liquidation | | »» is_mmp | boolean | Whether it is MMP
+`ioc` (USDT). | | »» is_close | boolean | Is the order to close position. | | »»
+is_reduce_only | boolean | Is the order reduce-only. | | »» is_liq | boolean |
+Is the order for liquidation. | | »» is_mmp | boolean | Whether it is MMP
 delegation. Corresponds to `mmp` in the request. | | »» tif | string | Time in
 force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
 \- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
-fee | | »» left | integer(int64) | Size left to be traded | | »» fill_price |
-string | Fill price of the order | | »» text | string | User defined
+fee | | »» left | integer(int64) | Size left to be traded. | | »» fill_price |
+string | Fill price of the order. | | »» text | string | User defined
 information. If not empty, must follow the rules below:
 
 1\. prefixed with `t-`  
@@ -3622,11 +3620,11 @@ how the order is created:
 \- app: from mobile phones  
 \- auto_deleveraging: from ADL  
 \- liquidation: from liquidation  
-\- insurance: from insurance | | »» tkfr | string | Taker fee | | »» mkfr |
-string | Maker fee | | »» refu | integer | Reference user ID | | »» refr |
-string | Referrer rebate |
+\- insurance: from insurance | | »» tkfr | string | Taker fee. | | »» mkfr |
+string | Maker fee. | | »» refu | integer | Reference user ID. | | »» refr |
+string | Referrer rebate. |
 
-#### [#](#enumerated-values-126) Enumerated Values
+#### [#](#enumerated-values-127) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -3649,23 +3647,23 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-all-open-orders-matched-3) Cancel all `open` orders matched
+## [#](#cancel-all-open-orders-matched-3) Cancel all `open` orders matched.
 
 > Code samples
 
 `DELETE /options/orders`
 
-_Cancel all `open` orders matched_
+_Cancel all `open` orders matched._
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description                                      |
-| ---------- | ----- | ------ | -------- | ------------------------------------------------ |
-| contract   | query | string | false    | Options contract name                            |
-| underlying | query | string | false    | Underlying                                       |
-| side       | query | string | false    | All bids or asks. Both included if not specified |
+| Name       | In    | Type   | Required | Description                                       |
+| ---------- | ----- | ------ | -------- | ------------------------------------------------- |
+| contract   | query | string | false    | Options contract name.                            |
+| underlying | query | string | false    | Underlying.                                       |
+| side       | query | string | false    | All bids or asks. Both included if not specified. |
 
-#### [#](#enumerated-values-127) Enumerated Values
+#### [#](#enumerated-values-128) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3702,31 +3700,30 @@ _Cancel all `open` orders matched_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                  | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | All orders matched cancelled | \[Inline\] |
+| Status | Meaning                                                                    | Description                   | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | All orders matched cancelled. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name           | Type           | Description                                        |
-| -------------- | -------------- | -------------------------------------------------- |
-| _None_         | array          | \[Options order detail\]                           |
-| » _None_       | object         | Options order detail                               |
-| »» id          | integer(int64) | Options order ID                                   |
-| »» user        | integer        | User ID                                            |
-| »» create_time | number(double) | Creation time of order                             |
-| »» finish_time | number(double) | Order finished time. Not returned if order is open |
-| »» finish_as   | string         | Ending method, including:                          |
+| Name           | Type           | Description                                         |
+| -------------- | -------------- | --------------------------------------------------- |
+| _None_         | array          | \[Options order detail.\]                           |
+| » _None_       | object         | Options order detail.                               |
+| »» id          | integer(int64) | Options order ID.                                   |
+| »» user        | integer        | User ID.                                            |
+| »» create_time | number(double) | Creation time of order.                             |
+| »» finish_time | number(double) | Order finished time. Not returned if order is open. |
+| »» finish_as   | string         | Ending method, including:                           |
 
 \- filled: fully completed  
 \- canceled: user canceled  
 \- liquidated: forced liquidation cancellation  
 \- ioc: Not fully filled immediately because tif is set to ioc  
 \- auto_deleveraged: automatic deleveraging cancel  
-\- reduce_only: Increased position is cancelled, because reduce_only is set or
-the position is closed  
+\- reduce_only: Increased position is cancelled, or the position is closed  
 \- position_closed: Because the position was closed, the pending order was
 canceled  
 \- reduce_out: Only reduce the excluded pending orders that are not easy to be
@@ -3734,22 +3731,22 @@ filled
 \- mmp_cancelled: MMP canceled | | »» status | string | Order status
 
 \- `open`: waiting to be traded  
-\- `finished`: finished | | »» contract | string | Contract name | | »» size |
+\- `finished`: finished | | »» contract | string | Contract name. | | »» size |
 integer(int64) | Order size. Specify positive number to make a bid, and negative
 number to ask | | »» iceberg | integer(int64) | Display size for iceberg order.
 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden
 size | | »» price | string | Order price. 0 for market order with `tif` set as
-`ioc` (USDT) | | »» is_close | boolean | Is the order to close position | | »»
-is_reduce_only | boolean | Is the order reduce-only | | »» is_liq | boolean | Is
-the order for liquidation | | »» is_mmp | boolean | Whether it is MMP
+`ioc` (USDT). | | »» is_close | boolean | Is the order to close position. | | »»
+is_reduce_only | boolean | Is the order reduce-only. | | »» is_liq | boolean |
+Is the order for liquidation. | | »» is_mmp | boolean | Whether it is MMP
 delegation. Corresponds to `mmp` in the request. | | »» tif | string | Time in
 force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
 \- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
-fee | | »» left | integer(int64) | Size left to be traded | | »» fill_price |
-string | Fill price of the order | | »» text | string | User defined
+fee | | »» left | integer(int64) | Size left to be traded. | | »» fill_price |
+string | Fill price of the order. | | »» text | string | User defined
 information. If not empty, must follow the rules below:
 
 1\. prefixed with `t-`  
@@ -3763,138 +3760,9 @@ how the order is created:
 \- app: from mobile phones  
 \- auto_deleveraging: from ADL  
 \- liquidation: from liquidation  
-\- insurance: from insurance | | »» tkfr | string | Taker fee | | »» mkfr |
-string | Maker fee | | »» refu | integer | Reference user ID | | »» refr |
-string | Referrer rebate |
-
-#### [#](#enumerated-values-128) Enumerated Values
-
-| Property  | Value            |
-| --------- | ---------------- |
-| finish_as | filled           |
-| finish_as | cancelled        |
-| finish_as | liquidated       |
-| finish_as | ioc              |
-| finish_as | auto_deleveraged |
-| finish_as | reduce_only      |
-| finish_as | position_closed  |
-| finish_as | reduce_out       |
-| finish_as | mmp_cancelled    |
-| status    | open             |
-| status    | finished         |
-| tif       | gtc              |
-| tif       | ioc              |
-| tif       | poc              |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#get-a-single-order-4) Get a single order
-
-> Code samples
-
-`GET /options/orders/{order_id}`
-
-_Get a single order_
-
-### Parameters
-
-| Name     | In   | Type           | Required | Description                                    |
-| -------- | ---- | -------------- | -------- | ---------------------------------------------- |
-| order_id | path | integer(int64) | true     | Order ID returned on successful order creation |
-
-> Example responses
-
-> 200 Response
-
-```
-{
-  "status": "finished",
-  "size": -1,
-  "id": 2,
-  "iceberg": 0,
-  "is_liq": false,
-  "is_close": false,
-  "is_mmp": false,
-  "contract": "BTC_USDT-20210916-5000-C",
-  "text": "-",
-  "fill_price": "100",
-  "finish_as": "filled",
-  "left": 0,
-  "tif": "gtc",
-  "is_reduce_only": false,
-  "create_time": 1631763361,
-  "finish_time": 1631763397,
-  "price": "100"
-}
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description  | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------ | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order detail | Inline |
-
-### Response Schema
-
-Status Code **200**
-
-_Options order detail_
-
-| Name          | Type           | Description                                        |
-| ------------- | -------------- | -------------------------------------------------- |
-| » id          | integer(int64) | Options order ID                                   |
-| » user        | integer        | User ID                                            |
-| » create_time | number(double) | Creation time of order                             |
-| » finish_time | number(double) | Order finished time. Not returned if order is open |
-| » finish_as   | string         | Ending method, including:                          |
-
-\- filled: fully completed  
-\- canceled: user canceled  
-\- liquidated: forced liquidation cancellation  
-\- ioc: Not fully filled immediately because tif is set to ioc  
-\- auto_deleveraged: automatic deleveraging cancel  
-\- reduce_only: Increased position is cancelled, because reduce_only is set or
-the position is closed  
-\- position_closed: Because the position was closed, the pending order was
-canceled  
-\- reduce_out: Only reduce the excluded pending orders that are not easy to be
-filled  
-\- mmp_cancelled: MMP canceled | | » status | string | Order status
-
-\- `open`: waiting to be traded  
-\- `finished`: finished | | » contract | string | Contract name | | » size |
-integer(int64) | Order size. Specify positive number to make a bid, and negative
-number to ask | | » iceberg | integer(int64) | Display size for iceberg order. 0
-for non-iceberg. Note that you will have to pay the taker fee for the hidden
-size | | » price | string | Order price. 0 for market order with `tif` set as
-`ioc` (USDT) | | » is_close | boolean | Is the order to close position | | »
-is_reduce_only | boolean | Is the order reduce-only | | » is_liq | boolean | Is
-the order for liquidation | | » is_mmp | boolean | Whether it is MMP delegation.
-Corresponds to `mmp` in the request. | | » tif | string | Time in force
-
-\- gtc: GoodTillCancelled  
-\- ioc: ImmediateOrCancelled, taker only  
-\- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
-fee | | » left | integer(int64) | Size left to be traded | | » fill_price |
-string | Fill price of the order | | » text | string | User defined information.
-If not empty, must follow the rules below:
-
-1\. prefixed with `t-`  
-2\. no longer than 28 bytes without `t-` prefix  
-3\. can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)  
-Besides user defined information, reserved contents are listed below, denoting
-how the order is created:
-
-\- web: from web  
-\- api: from API  
-\- app: from mobile phones  
-\- auto_deleveraging: from ADL  
-\- liquidation: from liquidation  
-\- insurance: from insurance | | » tkfr | string | Taker fee | | » mkfr | string
-| Maker fee | | » refu | integer | Reference user ID | | » refr | string |
-Referrer rebate |
+\- insurance: from insurance | | »» tkfr | string | Taker fee. | | »» mkfr |
+string | Maker fee. | | »» refu | integer | Reference user ID. | | »» refr |
+string | Referrer rebate. |
 
 #### [#](#enumerated-values-129) Enumerated Values
 
@@ -3919,19 +3787,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-a-single-order-4) Cancel a single order
+## [#](#get-a-single-order-4) Get a single order.
 
 > Code samples
 
-`DELETE /options/orders/{order_id}`
+`GET /options/orders/{order_id}`
 
-_Cancel a single order_
+_Get a single order._
 
 ### Parameters
 
-| Name     | In   | Type           | Required | Description                                    |
-| -------- | ---- | -------------- | -------- | ---------------------------------------------- |
-| order_id | path | integer(int64) | true     | Order ID returned on successful order creation |
+| Name     | In   | Type           | Required | Description                                     |
+| -------- | ---- | -------------- | -------- | ----------------------------------------------- |
+| order_id | path | integer(int64) | true     | Order ID returned on successful order creation. |
 
 > Example responses
 
@@ -3961,31 +3829,30 @@ _Cancel a single order_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description  | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------ | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order detail | Inline |
+| Status | Meaning                                                                    | Description   | Schema |
+| ------ | -------------------------------------------------------------------------- | ------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order detail. | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Options order detail_
+_Options order detail._
 
-| Name          | Type           | Description                                        |
-| ------------- | -------------- | -------------------------------------------------- |
-| » id          | integer(int64) | Options order ID                                   |
-| » user        | integer        | User ID                                            |
-| » create_time | number(double) | Creation time of order                             |
-| » finish_time | number(double) | Order finished time. Not returned if order is open |
-| » finish_as   | string         | Ending method, including:                          |
+| Name          | Type           | Description                                         |
+| ------------- | -------------- | --------------------------------------------------- |
+| » id          | integer(int64) | Options order ID.                                   |
+| » user        | integer        | User ID.                                            |
+| » create_time | number(double) | Creation time of order.                             |
+| » finish_time | number(double) | Order finished time. Not returned if order is open. |
+| » finish_as   | string         | Ending method, including:                           |
 
 \- filled: fully completed  
 \- canceled: user canceled  
 \- liquidated: forced liquidation cancellation  
 \- ioc: Not fully filled immediately because tif is set to ioc  
 \- auto_deleveraged: automatic deleveraging cancel  
-\- reduce_only: Increased position is cancelled, because reduce_only is set or
-the position is closed  
+\- reduce_only: Increased position is cancelled, or the position is closed  
 \- position_closed: Because the position was closed, the pending order was
 canceled  
 \- reduce_out: Only reduce the excluded pending orders that are not easy to be
@@ -3993,22 +3860,23 @@ filled
 \- mmp_cancelled: MMP canceled | | » status | string | Order status
 
 \- `open`: waiting to be traded  
-\- `finished`: finished | | » contract | string | Contract name | | » size |
+\- `finished`: finished | | » contract | string | Contract name. | | » size |
 integer(int64) | Order size. Specify positive number to make a bid, and negative
 number to ask | | » iceberg | integer(int64) | Display size for iceberg order. 0
 for non-iceberg. Note that you will have to pay the taker fee for the hidden
 size | | » price | string | Order price. 0 for market order with `tif` set as
-`ioc` (USDT) | | » is_close | boolean | Is the order to close position | | »
-is_reduce_only | boolean | Is the order reduce-only | | » is_liq | boolean | Is
-the order for liquidation | | » is_mmp | boolean | Whether it is MMP delegation.
-Corresponds to `mmp` in the request. | | » tif | string | Time in force
+`ioc` (USDT). | | » is_close | boolean | Is the order to close position. | | »
+is_reduce_only | boolean | Is the order reduce-only. | | » is_liq | boolean | Is
+the order for liquidation. | | » is_mmp | boolean | Whether it is MMP
+delegation. Corresponds to `mmp` in the request. | | » tif | string | Time in
+force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
 \- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
-fee | | » left | integer(int64) | Size left to be traded | | » fill_price |
-string | Fill price of the order | | » text | string | User defined information.
-If not empty, must follow the rules below:
+fee | | » left | integer(int64) | Size left to be traded. | | » fill_price |
+string | Fill price of the order. | | » text | string | User defined
+information. If not empty, must follow the rules below:
 
 1\. prefixed with `t-`  
 2\. no longer than 28 bytes without `t-` prefix  
@@ -4021,9 +3889,9 @@ how the order is created:
 \- app: from mobile phones  
 \- auto_deleveraging: from ADL  
 \- liquidation: from liquidation  
-\- insurance: from insurance | | » tkfr | string | Taker fee | | » mkfr | string
-| Maker fee | | » refu | integer | Reference user ID | | » refr | string |
-Referrer rebate |
+\- insurance: from insurance | | » tkfr | string | Taker fee. | | » mkfr |
+string | Maker fee. | | » refu | integer | Reference user ID. | | » refr |
+string | Referrer rebate. |
 
 #### [#](#enumerated-values-130) Enumerated Values
 
@@ -4048,13 +3916,142 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#countdown-cancel-orders-3) Countdown cancel orders
+## [#](#cancel-a-single-order-4) Cancel a single order.
+
+> Code samples
+
+`DELETE /options/orders/{order_id}`
+
+_Cancel a single order._
+
+### Parameters
+
+| Name     | In   | Type           | Required | Description                                     |
+| -------- | ---- | -------------- | -------- | ----------------------------------------------- |
+| order_id | path | integer(int64) | true     | Order ID returned on successful order creation. |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "status": "finished",
+  "size": -1,
+  "id": 2,
+  "iceberg": 0,
+  "is_liq": false,
+  "is_close": false,
+  "is_mmp": false,
+  "contract": "BTC_USDT-20210916-5000-C",
+  "text": "-",
+  "fill_price": "100",
+  "finish_as": "filled",
+  "left": 0,
+  "tif": "gtc",
+  "is_reduce_only": false,
+  "create_time": 1631763361,
+  "finish_time": 1631763397,
+  "price": "100"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description   | Schema |
+| ------ | -------------------------------------------------------------------------- | ------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order detail. | Inline |
+
+### Response Schema
+
+Status Code **200**
+
+_Options order detail._
+
+| Name          | Type           | Description                                         |
+| ------------- | -------------- | --------------------------------------------------- |
+| » id          | integer(int64) | Options order ID.                                   |
+| » user        | integer        | User ID.                                            |
+| » create_time | number(double) | Creation time of order.                             |
+| » finish_time | number(double) | Order finished time. Not returned if order is open. |
+| » finish_as   | string         | Ending method, including:                           |
+
+\- filled: fully completed  
+\- canceled: user canceled  
+\- liquidated: forced liquidation cancellation  
+\- ioc: Not fully filled immediately because tif is set to ioc  
+\- auto_deleveraged: automatic deleveraging cancel  
+\- reduce_only: Increased position is cancelled, or the position is closed  
+\- position_closed: Because the position was closed, the pending order was
+canceled  
+\- reduce_out: Only reduce the excluded pending orders that are not easy to be
+filled  
+\- mmp_cancelled: MMP canceled | | » status | string | Order status
+
+\- `open`: waiting to be traded  
+\- `finished`: finished | | » contract | string | Contract name. | | » size |
+integer(int64) | Order size. Specify positive number to make a bid, and negative
+number to ask | | » iceberg | integer(int64) | Display size for iceberg order. 0
+for non-iceberg. Note that you will have to pay the taker fee for the hidden
+size | | » price | string | Order price. 0 for market order with `tif` set as
+`ioc` (USDT). | | » is_close | boolean | Is the order to close position. | | »
+is_reduce_only | boolean | Is the order reduce-only. | | » is_liq | boolean | Is
+the order for liquidation. | | » is_mmp | boolean | Whether it is MMP
+delegation. Corresponds to `mmp` in the request. | | » tif | string | Time in
+force
+
+\- gtc: GoodTillCancelled  
+\- ioc: ImmediateOrCancelled, taker only  
+\- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
+fee | | » left | integer(int64) | Size left to be traded. | | » fill_price |
+string | Fill price of the order. | | » text | string | User defined
+information. If not empty, must follow the rules below:
+
+1\. prefixed with `t-`  
+2\. no longer than 28 bytes without `t-` prefix  
+3\. can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)  
+Besides user defined information, reserved contents are listed below, denoting
+how the order is created:
+
+\- web: from web  
+\- api: from API  
+\- app: from mobile phones  
+\- auto_deleveraging: from ADL  
+\- liquidation: from liquidation  
+\- insurance: from insurance | | » tkfr | string | Taker fee. | | » mkfr |
+string | Maker fee. | | » refu | integer | Reference user ID. | | » refr |
+string | Referrer rebate. |
+
+#### [#](#enumerated-values-131) Enumerated Values
+
+| Property  | Value            |
+| --------- | ---------------- |
+| finish_as | filled           |
+| finish_as | cancelled        |
+| finish_as | liquidated       |
+| finish_as | ioc              |
+| finish_as | auto_deleveraged |
+| finish_as | reduce_only      |
+| finish_as | position_closed  |
+| finish_as | reduce_out       |
+| finish_as | mmp_cancelled    |
+| status    | open             |
+| status    | finished         |
+| tif       | gtc              |
+| tif       | ioc              |
+| tif       | poc              |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#countdown-cancel-orders-3) Countdown cancel orders.
 
 > Code samples
 
 `POST /options/countdown_cancel_all`
 
-_Countdown cancel orders_
+_Countdown cancel orders._
 
 Option order heartbeat detection, when the `timeout` time set by the user is
 reached, if the existing countdown is not canceled or a new countdown is set,
@@ -4064,9 +4061,9 @@ countdown. Usage example: Repeat this interface at intervals of 30 seconds, with
 each countdown `timeout` set to 30 (seconds). If this interface is not called
 again within 30 seconds, all pending orders on the `underlying` `contract` you
 specified will be automatically cancelled. If `underlying` `contract` is not
-specified, all pending orders of the user will be automatically cancelled If
-`timeout` is set to 0 within 30 seconds, the countdown timer will expire and the
-automatic order cancellation function will be cancelled.
+specified, user will be automatically cancelled If `timeout` is set to 0 within
+30 seconds, the countdown timer will expire and the automatic order cancellation
+function will be cancelled.
 
 > Body parameter
 
@@ -4084,10 +4081,10 @@ automatic order cancellation function will be cancelled.
 | ------------ | ---- | -------------- | -------- | ------------------------- |
 | body         | body | object         | true     | none                      |
 | » timeout    | body | integer(int32) | true     | Countdown time in seconds |
-| » contract   | body | string         | false    | Options contract name     |
-| » underlying | body | string         | false    | Underlying                |
+| » contract   | body | string         | false    | Options contract name.    |
+| » underlying | body | string         | false    | Underlying.               |
 
-#### [#](#detailed-descriptions-50) Detailed descriptions
+#### [#](#detailed-descriptions-51) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
@@ -4104,9 +4101,9 @@ countdown
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Set countdown successfully | Inline |
+| Status | Meaning                                                                    | Description                 | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Set countdown successfully. | Inline |
 
 ### Response Schema
 
@@ -4114,34 +4111,34 @@ Status Code **200**
 
 _triggerTime_
 
-| Name          | Type           | Description                                            |
-| ------------- | -------------- | ------------------------------------------------------ |
-| » triggerTime | integer(int64) | Timestamp of the end of the countdown, in milliseconds |
+| Name          | Type           | Description                                             |
+| ------------- | -------------- | ------------------------------------------------------- |
+| » triggerTime | integer(int64) | Timestamp of the end of the countdown, in milliseconds. |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-personal-trading-history-4) List personal trading history
+## [#](#list-personal-trading-history-4) List personal trading history.
 
 > Code samples
 
 `GET /options/my_trades`
 
-_List personal trading history_
+_List personal trading history._
 
 ### Parameters
 
-| Name       | In    | Type           | Required | Description                                               |
-| ---------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint)      |
-| contract   | query | string         | false    | Options contract name                                     |
-| limit      | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset     | query | integer        | false    | List offset, starting from 0                              |
-| from       | query | integer(int64) | false    | Start timestamp                                           |
-| to         | query | integer(int64) | false    | Termination Timestamp                                     |
+| Name       | In    | Type           | Required | Description                                                |
+| ---------- | ----- | -------------- | -------- | ---------------------------------------------------------- |
+| underlying | query | string         | true     | Underlying (Obtained by listing underlying endpoint).      |
+| contract   | query | string         | false    | Options contract name.                                     |
+| limit      | query | integer        | false    | Maximum number of records to be returned in a single list. |
+| offset     | query | integer        | false    | List offset, starting from 0.                              |
+| from       | query | integer(int64) | false    | Start timestamp                                            |
+| to         | query | integer(int64) | false    | Termination Timestamp                                      |
 
-#### [#](#detailed-descriptions-51) Detailed descriptions
+#### [#](#detailed-descriptions-52) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -4174,26 +4171,26 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description     | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved. | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name               | Type           | Description                                          |
-| ------------------ | -------------- | ---------------------------------------------------- |
-| » id               | integer(int64) | Trade ID                                             |
-| » create_time      | number(double) | Trading time                                         |
-| » contract         | string         | Options contract name                                |
-| » order_id         | integer        | Order ID related                                     |
-| » size             | integer(int64) | Trading size                                         |
-| » price            | string         | Trading price (quote currency)                       |
-| » underlying_price | string         | Underlying price (quote currency)                    |
-| » role             | string         | Trade role. Available values are `taker` and `maker` |
+| Name               | Type           | Description                                           |
+| ------------------ | -------------- | ----------------------------------------------------- |
+| » id               | integer(int64) | Trade ID.                                             |
+| » create_time      | number(double) | Trading time.                                         |
+| » contract         | string         | Options contract name.                                |
+| » order_id         | integer        | Order ID related.                                     |
+| » size             | integer(int64) | Trading size.                                         |
+| » price            | string         | Trading price (quote currency).                       |
+| » underlying_price | string         | Underlying price (quote currency).                    |
+| » role             | string         | Trade role. Available values are `taker` and `maker`. |
 
-#### [#](#enumerated-values-131) Enumerated Values
+#### [#](#enumerated-values-132) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -4229,11 +4226,11 @@ _MMP Settings_
 | Name            | In   | Type           | Required | Description                                                                               |
 | --------------- | ---- | -------------- | -------- | ----------------------------------------------------------------------------------------- |
 | body            | body | object         | true     | none                                                                                      |
-| » underlying    | body | string         | true     | Underlying                                                                                |
-| » window        | body | integer(int32) | true     | Time window (milliseconds), between 1-5000, 0 means disabling MMP                         |
+| » underlying    | body | string         | true     | Underlying.                                                                               |
+| » window        | body | integer(int32) | true     | Time window (milliseconds), between 1-5000, 0 means disabling MMP.                        |
 | » frozen_period | body | integer(int32) | true     | Freeze duration (milliseconds), 0 means always frozen, need to call reset API to unfreeze |
-| » qty_limit     | body | string         | true     | Trading volume upper limit (positive number, up to 2 decimal places)                      |
-| » delta_limit   | body | string         | true     | Upper limit of net delta value (positive number, up to 2 decimal places)                  |
+| » qty_limit     | body | string         | true     | Trading volume upper limit (positive number, up to 2 decimal places).                     |
+| » delta_limit   | body | string         | true     | Upper limit of net delta value (positive number, up to 2 decimal places).                 |
 
 > Example responses
 
@@ -4253,9 +4250,9 @@ _MMP Settings_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description     | Schema |
-| ------ | -------------------------------------------------------------------------- | --------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | MMP Information | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | MMP Information. | Inline |
 
 ### Response Schema
 
@@ -4265,31 +4262,31 @@ _MMP Settings_
 
 | Name              | Type           | Description                                                                                                                           |
 | ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| » underlying      | string         | Underlying                                                                                                                            |
-| » window          | integer(int32) | Time window (milliseconds), between 1-5000, 0 means disabling MMP                                                                     |
+| » underlying      | string         | Underlying.                                                                                                                           |
+| » window          | integer(int32) | Time window (milliseconds), between 1-5000, 0 means disabling MMP.                                                                    |
 | » frozen_period   | integer(int32) | Freeze duration (milliseconds), 0 means always frozen, need to call reset API to unfreeze                                             |
-| » qty_limit       | string         | Trading volume upper limit (positive number, up to 2 decimal places)                                                                  |
-| » delta_limit     | string         | Upper limit of net delta value (positive number, up to 2 decimal places)                                                              |
-| » trigger_time_ms | integer(int64) | Trigger freeze time (milliseconds), 0 means no freeze is triggered                                                                    |
+| » qty_limit       | string         | Trading volume upper limit (positive number, up to 2 decimal places).                                                                 |
+| » delta_limit     | string         | Upper limit of net delta value (positive number, up to 2 decimal places).                                                             |
+| » trigger_time_ms | integer(int64) | Trigger freeze time (milliseconds), 0 means no freeze is triggered.                                                                   |
 | » frozen_until_ms | integer(int64) | Unfreeze time (milliseconds). If the freeze duration is not configured, there will be no unfreeze time after the freeze is triggered. |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#mmp-query) MMP Query
+## [#](#mmp-query) MMP Query.
 
 > Code samples
 
 `GET /options/mmp`
 
-_MMP Query_
+_MMP Query._
 
 ### Parameters
 
 | Name       | In    | Type   | Required | Description |
 | ---------- | ----- | ------ | -------- | ----------- |
-| underlying | query | string | false    | Underlying  |
+| underlying | query | string | false    | Underlying. |
 
 > Example responses
 
@@ -4311,9 +4308,9 @@ _MMP Query_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description             | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved. | \[Inline\] |
 
 ### Response Schema
 
@@ -4323,12 +4320,12 @@ Status Code **200**
 | ------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | _None_             | array          | \[MMP Settings\]                                                                                                                      |
 | » _None_           | object         | MMP Settings                                                                                                                          |
-| »» underlying      | string         | Underlying                                                                                                                            |
-| »» window          | integer(int32) | Time window (milliseconds), between 1-5000, 0 means disabling MMP                                                                     |
+| »» underlying      | string         | Underlying.                                                                                                                           |
+| »» window          | integer(int32) | Time window (milliseconds), between 1-5000, 0 means disabling MMP.                                                                    |
 | »» frozen_period   | integer(int32) | Freeze duration (milliseconds), 0 means always frozen, need to call reset API to unfreeze                                             |
-| »» qty_limit       | string         | Trading volume upper limit (positive number, up to 2 decimal places)                                                                  |
-| »» delta_limit     | string         | Upper limit of net delta value (positive number, up to 2 decimal places)                                                              |
-| »» trigger_time_ms | integer(int64) | Trigger freeze time (milliseconds), 0 means no freeze is triggered                                                                    |
+| »» qty_limit       | string         | Trading volume upper limit (positive number, up to 2 decimal places).                                                                 |
+| »» delta_limit     | string         | Upper limit of net delta value (positive number, up to 2 decimal places).                                                             |
+| »» trigger_time_ms | integer(int64) | Trigger freeze time (milliseconds), 0 means no freeze is triggered.                                                                   |
 | »» frozen_until_ms | integer(int64) | Unfreeze time (milliseconds). If the freeze duration is not configured, there will be no unfreeze time after the freeze is triggered. |
 
 WARNING
@@ -4356,7 +4353,7 @@ _MMP Reset_
 | Name         | In   | Type   | Required | Description |
 | ------------ | ---- | ------ | -------- | ----------- |
 | body         | body | object | true     | none        |
-| » underlying | body | string | true     | Underlying  |
+| » underlying | body | string | true     | Underlying. |
 
 > Example responses
 
@@ -4376,9 +4373,9 @@ _MMP Reset_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description     | Schema |
-| ------ | -------------------------------------------------------------------------- | --------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | MMP Information | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | MMP Information. | Inline |
 
 ### Response Schema
 
@@ -4388,12 +4385,12 @@ _MMP Settings_
 
 | Name              | Type           | Description                                                                                                                           |
 | ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| » underlying      | string         | Underlying                                                                                                                            |
-| » window          | integer(int32) | Time window (milliseconds), between 1-5000, 0 means disabling MMP                                                                     |
+| » underlying      | string         | Underlying.                                                                                                                           |
+| » window          | integer(int32) | Time window (milliseconds), between 1-5000, 0 means disabling MMP.                                                                    |
 | » frozen_period   | integer(int32) | Freeze duration (milliseconds), 0 means always frozen, need to call reset API to unfreeze                                             |
-| » qty_limit       | string         | Trading volume upper limit (positive number, up to 2 decimal places)                                                                  |
-| » delta_limit     | string         | Upper limit of net delta value (positive number, up to 2 decimal places)                                                              |
-| » trigger_time_ms | integer(int64) | Trigger freeze time (milliseconds), 0 means no freeze is triggered                                                                    |
+| » qty_limit       | string         | Trading volume upper limit (positive number, up to 2 decimal places).                                                                 |
+| » delta_limit     | string         | Upper limit of net delta value (positive number, up to 2 decimal places).                                                             |
+| » trigger_time_ms | integer(int64) | Trigger freeze time (milliseconds), 0 means no freeze is triggered.                                                                   |
 | » frozen_until_ms | integer(int64) | Unfreeze time (milliseconds). If the freeze duration is not configured, there will be no unfreeze time after the freeze is triggered. |
 
 WARNING
