@@ -1882,7 +1882,7 @@ is used to represent the number of aggregated matches.
 | &gt; tradeId  | String           | The last trade ID in the trades aggregation                                                                                                            |
 | &gt; px       | String           | Trade price                                                                                                                                            |
 | &gt; sz       | String           | Trade quantity<br>For spot trading, the unit is base currency<br>For <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>, the unit is contract. |
-| &gt; side     | String           | Trade direction<br><code>buy</code><br><code>sell</code>                                                                                               |
+| &gt; side     | String           | Trade side of taker<br><code>buy</code><br><code>sell</code>                                                                                           |
 | &gt; ts       | String           | Filled time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                    |
 | &gt; count    | String           | The count of trades aggregated                                                                                                                         |
 | &gt; seqId    | Integer          | Sequence ID of the current message.                                                                                                                    |
