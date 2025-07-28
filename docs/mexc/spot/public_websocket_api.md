@@ -378,7 +378,8 @@ Available intervals:
       }
     ],
     "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", // Event type
-    "version": "36913293511" // Version number
+    "fromVersion" : "10589632359", // from Version number
+    "toVersion" : "10589632359" // to Version number
   },
   "symbol": "BTCUSDT", // Trading pair
   "sendtime": 1736411507002 // Event time
@@ -393,101 +394,15 @@ be removed.
 
 **Response Parameters:**
 
-| Parameter | Data Type | Description           |
-| --------- | --------- | --------------------- |
-| price     | string    | Price level of change |
-| quantity  | string    | Quantity              |
-| eventtype | string    | Event type            |
-| version   | string    | Version number        |
-| symbol    | string    | Trading pair          |
-| sendtime  | long      | Event time            |
-
----
-
-## Diff.Depth Stream(Batch Aggregation)
-
-> **Request:**
-
-```
-{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"
-    ]
-}
-```
-
-> **Response:**
-
-```
-{
-  "channel" : "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT",
-  "symbol" : "BTCUSDT",
-  "sendTime" : "1739502064578",
-  "publicIncreaseDepthsBatch" : {
-    "items" : [ {
-      "asks" : [ ],
-      "bids" : [ {
-        "price" : "96578.48",
-        "quantity" : "0.00000000"
-      } ],
-      "eventType" : "",
-      "version" : "39003145507"
-    }, {
-      "asks" : [ ],
-      "bids" : [ {
-        "price" : "96578.90",
-        "quantity" : "0.00000000"
-      } ],
-      "eventType" : "",
-      "version" : "39003145508"
-    }, {
-      "asks" : [ ],
-      "bids" : [ {
-        "price" : "96579.31",
-        "quantity" : "0.00000000"
-      } ],
-      "eventType" : "",
-      "version" : "39003145509"
-    }, {
-      "asks" : [ ],
-      "bids" : [ {
-        "price" : "96579.84",
-        "quantity" : "0.00000000"
-      } ],
-      "eventType" : "",
-      "version" : "39003145510"
-    }, {
-      "asks" : [ ],
-      "bids" : [ {
-        "price" : "96576.69",
-        "quantity" : "4.88725694"
-      } ],
-      "eventType" : "",
-      "version" : "39003145511"
-    } ],
-    "eventType" : "spot@public.increase.depth.batch.v3.api.pb"
-  }
-}
-```
-
-In the batch aggregation version, if the number of entries exceeds 5 or the time
-interval exceeds 5ms, the data is pushed once. If the order quantity for a price
-level is 0, it indicates that the order at that price has been canceled or
-executed, and that price level should be removed.
-
-**Request Parameter:** `spot@public.increase.depth.batch.v3.api.pb@<symbol>`
-
-**Response Parameters:**
-
-| Parameter | Data Type | Description           |
-| --------- | --------- | --------------------- |
-| price     | string    | Price level of change |
-| quantity  | string    | Quantity              |
-| eventtype | string    | Event type            |
-| version   | string    | Version number        |
-| symbol    | string    | Trading pair          |
-| sendtime  | long      | Event time            |
+| Parameter   | Data Type | Description           |
+| ----------- | --------- | --------------------- |
+| price       | string    | Price level of change |
+| quantity    | string    | Quantity              |
+| eventtype   | string    | Event type            |
+| fromversion | string    | From Version number   |
+| toversion   | string    | To Version number     |
+| symbol      | string    | Trading pair          |
+| sendtime    | long      | Event time            |
 
 ---
 
