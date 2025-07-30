@@ -817,6 +817,18 @@ _Options:_
 - `DEFI_INVESTMENT_SUBSCRIPTION` tranfer out for DEFI subscription
 - `DEFI_INVESTMENT_REFUND` transfer in for DEFI refund
 - `DEFI_INVESTMENT_REDEMPTION` tranfer in for DEFI redemption
+- `INSTITUTION_LOAN_IN` Borrowed Amount (INS Loan)
+- `INSTITUTION_PAYBACK_PRINCIPAL_OUT` Principal Repayment (INS Loan)
+- `INSTITUTION_PAYBACK_INTEREST_OUT` Interest Repayment (INS Loan)
+- `INSTITUTION_EXCHANGE_SELL` Auto Sold Collateral (INS Loan)
+- `INSTITUTION_EXCHANGE_BUY` Auto Buy Liability (INS Loan)
+- `INSTITUTION_LIQ_PRINCIPAL_OUT` Auto Principal Repayment (INS Loan)
+- `INSTITUTION_LIQ_INTEREST_OUT` Auto Interest Repayment (INS Loan)
+- `INSTITUTION_LOAN_TRANSFER_IN` Transfer in (INS Loan)
+- `INSTITUTION_LOAN_TRANSFER_OUT` Transfer out (INS Loan)
+- `INSTITUTION_LOAN_WITHOUT_WITHDRAW` Transfer out (INS Loan)
+- `INSTITUTION_LOAN_RESERVE_IN` Reserve Fund In (INS Loan)
+- `INSTITUTION_LOAN_RESERVE_OUT` Reserve Fund Out (INS Loan)
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
