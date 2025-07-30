@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### \[July 29, 2025\] Optimize ADL API ranking logic.[​](#july-29-2025-optimize-adl-api-ranking-logic "Direct link to july-29-2025-optimize-adl-api-ranking-logic")
+
+Interface：/api/v2/mix/position/adlRank Changes：
+
+- Optimize the ranking logic of the ADL API on the server side.Add a new field
+  "rank" and deprecated the field "adlRank".
+
 ### \[July 16, 2025\] Add New Account Mode Switching API[​](#july-16-2025-add-new-account-mode-switching-api "Direct link to july-16-2025-add-new-account-mode-switching-api")
 
 Interface：/api/v2/spot/account/upgrade, /api/v2/spot/account/upgrade-status
